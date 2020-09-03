@@ -109,7 +109,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="Base.ascx" />
     <Content Include="Resources\Images\align-around.png" />
     <Content Include="Resources\Images\align-between.png" />
