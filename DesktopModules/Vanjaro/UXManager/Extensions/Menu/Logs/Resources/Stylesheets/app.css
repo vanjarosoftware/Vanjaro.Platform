@@ -1,0 +1,175 @@
+﻿.vjlogs [ng-class*="Exception"],
+.vjlogs .Exception {
+    border-left: 5px solid #ff1414;
+}
+
+.vjlogs [ng-class*="ItemDeleted"],
+.vjlogs .ItemDeleted {
+    border-left: 5px solid #14ffff;
+}
+
+.vjlogs [ng-class*="GeneralAdminOperation"],
+.vjlogs .GeneralAdminOperation {
+    border-left: 5px solid #4d0099;
+}
+
+.vjlogs [ng-class*="SecurityException"],
+.vjlogs .SecurityException {
+    border-left: 5px solid #000;
+}
+
+.vjlogs [ng-class*="ItemCreated"],
+.vjlogs .ItemCreated {
+    border-left: 5px solid #090;
+}
+
+.vjlogs [ng-class*="OperationSuccess"],
+.vjlogs .OperationSuccess {
+    border-left: 5px solid #990;
+}
+
+.vjlogs [ng-class*="AdminAlert"],
+.vjlogs .AdminAlert {
+    border-left: 5px solid #148aff;
+}
+
+.vjlogs [ng-class*="ItemUpdated"],
+.vjlogs .ItemUpdated {
+    border-left: 5px solid #099;
+}
+
+.vjlogs [ng-class*="OperationFailure"],
+.vjlogs .OperationFailure {
+    border-left: 5px solid #900;
+}
+
+.vjlogs [ng-class*="HostAlert"],
+.vjlogs .HostAlert {
+    border-left: 5px solid #ff8a14;
+}
+
+.vjlogs .validationGroup > ul > li {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.vjlogs .userimage {
+    width: 54px;
+    height: 54px;
+}
+
+.vjlogs .date,
+.vjlogs .username {
+    display: block;
+    text-align: right;
+}
+
+.vjlogs .date {
+    font-size: 12px;
+    color: #999;
+}
+
+.vjlogs .username {
+    font-size: 14px;
+    color: #999;
+    padding: 0px 5px 0px 0px;
+}
+
+.vjlogs p {
+    font-size: 14px;
+    margin: 0;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.vjlogs [ng-class*="logtype"] {
+    padding: 0;
+    margin: 0;
+}
+
+.vjlogs pre {
+    word-break: break-word;
+    white-space: normal;
+}
+
+.vjlogs .open > .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+.vjlogs .log-item {
+    padding-left: 5px;
+    font-size: 12px;
+}
+
+.vjlogs .table-grid table tbody tr {
+    height: 54px;
+}
+
+    .vjlogs .table-grid table tbody tr > td:nth-of-type(2) {
+        padding: 0 !important;
+    }
+
+.vj-ux-manager .table-grid .table > tbody > tr td:last-child {
+    padding: 8px;
+}
+
+.log-table table {
+    border-collapse: separate;
+    border-spacing: 0 4px;
+}
+
+    .log-table table thead {
+        display: none;
+    }
+
+/*Remove after updating bootstrap*/
+.border-0 {
+    border: 0;
+}
+
+.logs_detail {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.log-table ul.pagination {
+    position: fixed;
+    bottom: 148px;
+    left: 315px;
+}
+
+.vj-ux-manager .menuextension .content {
+    height: calc(100vh - 298px);
+}
+
+
+/*.vj-ux-manager .table-grid .table td {
+    vertical-align: middle;
+}*/
+
+.vj-ux-manager .table-grid .table td p,
+.vj-ux-manager .table-grid .table td span {
+    font-size: 12px;
+}
+
+.vj-ux-manager .pagination > li.active > a:hover,
+.vj-ux-manager .pagination > li.active > span:hover {
+    background: #ccc !important;
+    border: 1px solid #ccc !important;
+}
+
+
+.vj-ux-manager .menuextension .ux-btn {
+    box-shadow: none !important;
+}
+
+.vjlogs .dropdown-item.active {
+    font-weight: bold !important;
+}

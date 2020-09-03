@@ -1,0 +1,37 @@
+﻿<div ng-controller="notification_notifications" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="notification_notifications" layout="admin">
+        <uilayout name="default">
+            <uielement name="Notifications" control="grid" label="false" attr-ng-hide="Notifications.length <= 0" attr-class="table-grid Notifications GrayTh" ngoptions="Notifications" pagesize="10" paged="true" displayedpages="5" attr-st-pipe="Pipe_NotificationsPages">
+                <column name="UserName" width="100" attr-style="padding:0;">
+                    <uitemplate>
+                        <div class="senderdetail">
+                            <div class="row m-none">
+                                <div class="senderavatar">
+                                    <img class="img-responsive " src="{{row.SenderAvatar}}">
+                                </div>
+                                <div class="senderinfo">
+                                    <span class="author_name author_sub pt-sm"><strong>{{row.Subject}}</strong></span>
+                                    <span class="author_name pt-sm">{{row.SenderDisplayName}} </span>
+                                    <span class="author_name pt-sm">{{row.DisplayDate}}</span>
+                                </div>
+                            </div>
+                            <div class="row m-none">
+                                <div class="col-12 p-0 userinfo">
+                                    <div class="vanjaro-users">
+                                        <span>{{row.Body}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+            <uitemplate>
+                <div class="search-info-msg" mn-ng-show="Notifications.length <= 0">[LS:NotificationNotFound]</div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>
+
+
+

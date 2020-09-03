@@ -1,0 +1,70 @@
+﻿.Workflow .ToggleRight div.btn-group {
+    float: right;
+}
+
+.Workflow .ToggleRight br {
+    display: none;
+}
+
+.Workflow .paddingtop {
+    padding-top: 30px;
+}
+
+.Workflow .profileInput {
+    width: calc(100% - 119px) !important;
+    background: #fff;
+    border-radius: 4px 0 0 4px !important;
+}
+
+.Workflow .workflowState {
+    margin-bottom: 10px;
+}
+
+
+.Workflow .profilechange {
+    height: 34px;
+    border-radius: 0 4px 4px 0;
+    padding: 7px 10px;
+    font-size: 14px;
+    margin-top: 25px !important;
+    float: right;
+}
+
+.vj-ux-manager .dropdown.dropbtn .dropdownmenu {
+    position: relative;
+    top: 0px;
+    padding: 12px 18px;
+    right: -15px;
+    border-left: 1px solid #eee;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.vj-ux-manager a.ux-btn {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.vj-ux-manager .addworkflowbtn {
+    margin-top: 15px;
+    margin-right: 25px;
+}
+
+.vj-ux-manager .profilechange {
+    margin-right: 0 !important;
+}
+
+
+.vj-ux-manager .well {
+    background: #fafafa;
+}
+
+.workflow-table ul.pagination {
+    position: fixed;
+    bottom: 148px;
+    left: 315px;
+}
+
+.vj-ux-manager .card {
+    margin-top: 5px;
+}

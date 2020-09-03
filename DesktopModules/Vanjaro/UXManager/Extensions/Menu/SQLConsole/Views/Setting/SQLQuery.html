@@ -1,0 +1,59 @@
+﻿<div ng-controller="setting_sqlquery" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_sqlquery" layout="SQLQuery" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uitemplate>
+                <div class="form-group" mn-ng-show="ui.data.Connections.Options.length>1">
+                    <label>[L:Connection]</label>
+                    <div class="input-group">
+                        <select class="form-control ng-pristine ng-valid ng-touched" mn-ng-model="ui.data.Connections.Value" mn-ng-options="option for option in ui.data.Connections.Options"></select>
+                    </div>
+                </div>
+            </uitemplate>
+            <uitemplate>
+                <div class="form-group sqlscript" data-datatype="textarea" data-label="" data-name="Script">
+                    <textarea class="form-control sqlscript ng-pristine ng-untouched ng-valid" placeholder="Your SQL Query..." id="setting_sqlquery0textarea0" ng-model="ui.data.Script.Value" style="display: none;"></textarea>
+                </div>
+            </uitemplate>
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" ng-click="Click_Run()" class="btn btn-sm btn-primary">
+                        [L:Run]
+                    </button>
+                </div>
+                <div ng-show="ShowTableResult">
+                    <hr />
+                    <div class="form-group table-responsive ux-gridcolumnhide table-grid SQLResult scrollbar">
+                        <table st-table="Results" st-safe-src="stResult" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="hdtableth" mn-ng-repeat="head in Heading">{{head}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr mn-ng-repeat="result in Results">
+                                    <td mn-ng-repeat="head in Heading">{{result[head]}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group table-responsive ux-gridcolumnhide table-grid SQLPagination">
+                        <table st-table="Results" st-safe-src="stResult" class="table table-striped">
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" class="text-center stfooter">
+                                        <div st-pagination="" st-items-by-page="10" st-displayed-pages="5" class="ng-isolate-scope">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div ng-show="ShowMessage">
+                    <hr />
+                    [L:Message]
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

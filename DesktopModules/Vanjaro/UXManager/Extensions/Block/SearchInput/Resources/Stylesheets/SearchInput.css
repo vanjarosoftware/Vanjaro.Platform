@@ -1,0 +1,8 @@
+﻿.Search_result .search_des {
+    font-size: small;
+    color: #4c4848;
+}
+
+.autocomplete-suggestions .nosearchresultfound {
+    cursor: pointer;
+}

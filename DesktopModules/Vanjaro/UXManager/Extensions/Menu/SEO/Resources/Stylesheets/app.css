@@ -1,0 +1,31 @@
+﻿.vj-ux-manager.seo-settings {
+    margin-top: 15px;
+}
+
+.vj-ux-manager .uiengine-wrapper {
+    padding: 0px 15px 20px;
+}
+
+.vj-ux-manager .urltotest {
+    margin-bottom: 15px;
+}
+
+.vj-ux-manager .input-group-append {
+    margin-left: 5px;
+}
+
+.vj-ux-manager .buttontesturl {
+    margin-bottom: 40px;
+}
+
+.vj-ux-manager tags-input .host {
+    height: auto !important;
+    margin: 0px;
+    padding: 4px 0px 2px 0px !important;
+}
+
+.vj-ux-manager.seo-settings a.btn.width-200 {
+    width: 200px;
+    text-align: center !important;
+    font-size: 13px;
+}

@@ -1,0 +1,167 @@
+﻿<div ng-controller="setting_setting" class="vj-ux-manager" access-roles="user">
+    <uiengine provider="AngularBootstrap" identifier="setting_setting" class="uiengine-wrapper scrollbar">
+        <uilayout name="default" attr-class="tab-pane active">
+            <uitemplate>
+            </uitemplate>
+        </uilayout>
+
+        <uilayout name="default">
+            <uitemplate>
+                <div class="row mainLogo" mn-ng-hide="ShowFileManager">
+                    <div class="col-md-3">
+                        [uilayout:TabsNavigation]
+                    </div>
+                    <div class="col-md-9 left_border">
+                        [uilayout:TabsContentLogo]
+                        [uilayout:TabsContentIcon]
+                    </div>
+                </div>
+                <div class="row selectLogo" mn-ng-show="ShowFileManager">
+                    <div class="col-md-12 file-manager-12">
+                        [uilayout:LogoandTitle]
+                    </div>
+                </div>
+                <!--<div class="ms-row" mn-ng-show="ShowFileManager">
+                    <div class="ms-col-md-12">
+                        [uilayout:Icon]
+                    </div>
+                </div>-->
+            </uitemplate>
+        </uilayout>
+        <uilayout name="TabsNavigation" attr-class="tab-pane active">
+            <uitemplate>
+                <ul class="nav nav-pills nav-stacked tab-line">
+                    <li id="Logo_Title" class="nav-item"><a class="nav-link active" mn-ng-click="Click_ShowTab('Logo_Title')">[LS:LogoAndFavicon]</a></li>
+                    <li id="Icon" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('Icon')">[LS:Icon]</a></li>
+                </ul>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="TabsContentLogo" attr-ng-show="ShowLogo_TitleTab">
+            <uitemplate>
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseOne">
+                                [L:LogoandTitle]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                            <div class="card-body">
+                                [uilayout:LogoandTitle]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="TabsContentIcon" attr-ng-show="ShowIconTab">
+            <uitemplate>
+                <div id="accordion1">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseTwo">
+                                [L:Icon]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="collapse show" data-parent="#accordion1">
+                            <div class="card-body">
+                                [uilayout:Icon]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+
+        <uilayout name="LogoandTitle" attr-class="file-manager-6">
+            <uitemplate>
+                <div id="logomanager" mn-ng-hide="ShowFileManager">
+                    <div class="row">
+                        <div class="col-8">
+                            <i class="fas fa-heading"></i>
+                            <label>[L:LogoFile]</label>
+                            <br />
+                            <span class="label">[L:LogoDescription]</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="img-responsive logoBox">
+                                <img id="uploaded_image" src="{{ui.data.LogoFile.Value}}">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-8">
+                            <i class="fas fa-heart"></i>
+                            <label>[L:Favicon]</label>
+                            <br />
+                            <span class="label">[L:FaviconDescription]</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="img-responsive FaviconBox">
+                                <img id="uploaded_image" src="{{ui.data.FavIcon.Value}}">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-8">
+                            <i class="fas fa-share-alt"></i>
+                            <label>[L:SocialSharingLogo]</label>
+                            <br />
+                            <span class="label">[L:SocialSharingDescription]</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="img-responsive SocialSharingBox">
+                                <img id="uploaded_image" src="{{ui.data.SocialSharingLogo.Value}}">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-8">
+                            <i class="fas fa-home icon"></i>
+                            <label>[L:Homescreenicon]</label>
+                            <br />
+                            <span class="label">[L:HomescreenDescription]</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="img-responsive HomeScreenBox">
+                                <img id="uploaded_image" src="{{ui.data.HomeScreenIcon.Value}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+            <uielement name="LogoFileUpload" control="upload" mode="file" attr-class="uploadbtn uploadicon" autoupload="true" label="false" container-attr-ng-show="ShowFileManager && ActiveUpload=='Uploader_One'" maxsize="$scope.ui.data.MaxFileSize.Value*1000000" filetypes="$scope.ui.data.AllowedAttachmentFileExtensions.Value" attr-multiple="true"></uielement>
+            <uielement name="LogoFile" attr-class="uploadbtn uploaderone" folders="$scope.ui.data.Folders.Options" files="$scope.ui.data.Files.Options" control="upload" mode="advance" maxsize="$scope.ui.data.MaxFileSize.Value" filetypes="$scope.ui.data.AllowedAttachmentFileExtensions.Value" autoupload="true" removedelete="true" container="true" label="false" attr-multiple="true" attr-controlmodes="browse" required></uielement>
+            <uielement name="FavIconUpload" control="upload" mode="file" attr-class="uploadbtn uploadicon" autoupload="true" label="false" container-attr-ng-show="ShowFileManager && ActiveUpload=='Uploader_Two'" maxsize="$scope.ui.data.MaxFileSize.Value*1000000" filetypes="ico" attr-multiple="true"></uielement>
+            <uielement name="FavIcon" attr-class="uploadbtn uploadertwo" folders="$scope.ui.data.Folders.Options" files="$scope.ui.data.Files.Options" control="upload" mode="advance" maxsize="$scope.ui.data.MaxFileSize.Value" filetypes="ico" autoupload="true" removedelete="true" container="true" label="false" attr-multiple="true" attr-controlmodes="browse" required></uielement>
+            <uielement name="SocialSharingLogoUpload" control="upload" mode="file" attr-class="uploadbtn uploadicon" autoupload="true" label="false" container-attr-ng-show="ShowFileManager && ActiveUpload=='Uploader_Three'" maxsize="$scope.ui.data.MaxFileSize.Value*1000000" filetypes="$scope.ui.data.AllowedAttachmentFileExtensions.Value" attr-multiple="true"></uielement>
+            <uielement name="SocialSharingLogo" attr-class="uploadbtn uploaderthree" folders="$scope.ui.data.Folders.Options" files="$scope.ui.data.Files.Options" control="upload" mode="advance" maxsize="$scope.ui.data.MaxFileSize.Value" filetypes="$scope.ui.data.AllowedAttachmentFileExtensions.Value" autoupload="true" removedelete="true" container="true" label="false" attr-multiple="true" attr-controlmodes="browse" required></uielement>
+            <uielement name="HomeScreenIconUpload" control="upload" mode="file" attr-class="uploadbtn uploadicon" autoupload="true" label="false" container-attr-ng-show="ShowFileManager && ActiveUpload=='Uploader_Four'" maxsize="$scope.ui.data.MaxFileSize.Value*1000000" filetypes="$scope.ui.data.AllowedAttachmentFileExtensions.Value" attr-multiple="true"></uielement>
+            <uielement name="HomeScreenIcon" attr-class="uploadbtn uploaderfour" folders="$scope.ui.data.Folders.Options" files="$scope.ui.data.Files.Options" control="upload" mode="advance" maxsize="$scope.ui.data.MaxFileSize.Value" filetypes="$scope.ui.data.AllowedAttachmentFileExtensions.Value" autoupload="true" removedelete="true" container="true" label="false" attr-multiple="true" attr-controlmodes="browse" required></uielement>
+        </uilayout>
+        <uilayout name="Icon">
+            <!--<uielement name="IconSet" control="dropdownlist" attr-ng-model="ui.data.IconFolders.Value"></uielement>-->
+            <uitemplate>
+                <label>[L:IconSet]</label>
+                <div class="input-group-append">
+                    <select class="form-control" ng-model="ui.data.IconFolders.Value">
+                        <option value="{{option.Value}}" mn-ng-repeat="option in ui.data.IconFolders.Options">{{option.Value}}</option>
+                    </select>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" class="btn btn-sm btn-primary " id="Update" ng-click="Click_Save('Update')">[L:Update]</button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>
+

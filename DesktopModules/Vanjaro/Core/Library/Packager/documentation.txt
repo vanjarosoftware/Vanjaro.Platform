@@ -1,0 +1,2 @@
+Create a new folder here named "DNN"
+Extract DNN Platform files in DNN folder and execute Vanjaro_Clean_Builder.bat file to build platform package.

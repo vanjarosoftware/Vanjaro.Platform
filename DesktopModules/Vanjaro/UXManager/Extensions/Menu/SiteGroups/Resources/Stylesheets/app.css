@@ -1,0 +1,54 @@
+﻿.vj-ux-manager .uiengine-wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 68px) !important;
+    padding: 15px 0px;
+}
+
+body {
+    background: #e6e9ec;
+}
+
+
+.vj-ux-manager ul.name-list {
+    min-height: 100px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.vj-ux-manager .name-list li {
+    list-style: none;
+}
+
+
+    .vj-ux-manager .name-list li input {
+        margin-right: 10px;
+        vertical-align: top;
+        margin-top: 4px;
+    }
+
+
+.scrollbar::-webkit-scrollbar {
+    margin-top: 10px;
+    height: 10px;
+    width: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(170, 170, 170, 0.3);
+    outline: slategrey solid 1px;
+    transition: background-color 0.2s linear 0s, width 0.2s ease-in-out 0s;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    opacity: 0.8;
+    border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-track-piece {
+    background: rgba(255, 255, 255, 0);
+}
+
+

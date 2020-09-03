@@ -1,0 +1,46 @@
+﻿<div class="uilayout">
+    <div class="scheduler-info">
+        <div class="alertbox">
+            <div class="vj-alert alert alert-warning" ng-hide="ui.data.ScheduleStatus.Options.Data.Status == 'RUNNING_TIMER_SCHEDULE'">
+                <strong><em class="fas fa-exclamation-triangle"></em> <em>[LS:Status]</em></strong> <em>{{ui.data.ScheduleStatus.Options.Data.Status}}</em>
+            </div>
+            <div class="vj-alert alert alert-success" ng-show="ui.data.ScheduleStatus.Options.Data.Status == 'RUNNING_TIMER_SCHEDULE'">
+                <strong><em class="fas fa-check-circle"></em> <em>[LS:Status]</em></strong> <em>{{ui.data.ScheduleStatus.Options.Data.Status}}</em>
+            </div>
+        </div>
+        <div class="scheduler-btn text-right">
+            <em ng-show="ui.data.ScheduleStatus.Options.Data.Status == 'RUNNING_TIMER_SCHEDULE'">
+                <a control="button" ng-click="StopSchedule()" label="false" ng-hide="ui.data.ScheduleStatus.Options.Data.ScheduleMode == 0" class="fa fa-stop" aria-hidden="true" title="[LS:StopSchedule]">
+                </a>
+            </em>
+            <em ng-hide="ui.data.ScheduleStatus.Options.Data.Status == 'RUNNING_TIMER_SCHEDULE'">
+                <a control="button" ng-click="StartSchedule()" aria-hidden="true" ng-hide="ui.data.ScheduleStatus.Options.Data.ScheduleMode == 0" label="false" class="fa fa-play mode" title="[LS:StartSchedule]">
+                </a>
+            </em>
+            <em ng-hide="!ShowAddTask || AddTaskSchedule || ShowHistoryTask">
+                <a control="button" ng-click="Click_AddTask()" label="false" ng-disabled="ui.data.ScheduleStatus.Options.Data.ScheduleMode == 0" class="fa fa-plus" aria-hidden="true" title="[LS:AddTask]">
+                </a>
+            </em>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <div class="tab-pane active  pl-none">
+                <ul class="nav nav-pills nav-stacked tab-line">
+                    <li class="nav-item task"><a class="nav-link active" id="taskqueue" href="#/taskqueue" data-target="#TaskQueue" hash-start="#/TaskQueue">[LS:TaskQueue]</a></li>
+                    <li class="nav-item"><a class="nav-link" id="scheduler" href="#/scheduler" data-target="#scheduler" hash-start="#/scheduler">[LS:Tasks]</a></li>
+                    <li class="nav-item"><a class="nav-link" id="history" href="#/history" data-target="#history" hash-start="#/history">[LS:History]</a></li>
+                    <li class="nav-item">
+                        <hr class="m-none">
+                        <a class="nav-link" id="settings" href="#/settings" data-target="#settings" hash-start="#/settings">[LS:Settings]</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9 fix-height uiengine-wrapper scrollbar">
+            [uilayout:default]
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+﻿.vj-ux-manager .buttonalign {
+    float: right;
+}
+
+    .vj-ux-manager .buttonalign .active {
+        color: #fff;
+        background-color: #a4afb7;
+        border-color: #a4afb7;
+    }
+
+.vj-ux-manager .ResetPassword {
+    display: none;
+}
+
+.vj-ux-manager label.error {
+    margin: 4px 0 0 3px;
+    font-size: small !important;
+    font-weight: normal !important;
+    color: #f33a07 !important;
+    font-style: italic;
+    cursor: text;
+}
+
+.vj-ux-manager .global > .btn-group {
+    display: flex;
+}
+
+.vj-ux-manager .alert {
+    margin-bottom: 15px;
+}
+
+.Vj-Login .spinner-border {
+    vertical-align: middle;
+}
+
+    .consentbutton .btn-primary,
+    .consentbutton .btn-primary.disabled,
+    .consentbutton .btn-primary:disabled {
+        color: #fff !important;
+        background: #444;
+        border-color: #444;
+        min-width: 100px !important;
+    }
+
+    .consentbutton .btn-primary:hover {
+        background: #000;
+        border-color: #000;
+    }
+
+.cancelbtn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.submit, .delete {
+    margin-right: 8px;
+}
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}

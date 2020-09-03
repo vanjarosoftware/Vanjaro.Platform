@@ -1,0 +1,32 @@
+﻿@inherits System.Web.WebPages.WebPage
+
+
+<div class="cookieconsent" style="">
+    <span class="cookiemessage">
+        [LS:Data.Block.Cookie.cc_message]
+        @if (!string.IsNullOrEmpty(Model.CookieConsentUrl))
+        {
+            <a class="cookieurl" href="@Model.CookieConsentUrl" target="_blank">[LS:Data.Block.Cookie.cc_link]</a>
+        }
+        else
+        {
+            <a class="cookieurl" href="https://cookiesandyou.com" target="_blank">[LS:Data.Block.Cookie.cc_link]</a>
+        }
+
+    </span>
+    <div class="cookiestatus">
+        <a class="btn" onclick="createCookie('cookieconsent_status','dismiss');" href='#'>[LS:Data.Block.Cookie.cc_dismiss]</a>
+    </div>
+
+    <script>
+        function createCookie(cookieName, cookieValue) {
+            $('#dnn_CookieConsentPane').remove();
+            document.cookie = cookieName + "=" + cookieValue + ";path=/; expires = 0;"
+            if (getCookie('InitGrapejs')) {
+                $('body, form').css('height', '100vh');
+            }
+        }
+    </script>
+</div>
+
+

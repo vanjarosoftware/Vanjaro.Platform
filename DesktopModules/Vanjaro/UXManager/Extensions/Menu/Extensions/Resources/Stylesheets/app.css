@@ -1,0 +1,315 @@
+﻿uiengine.installextension, uiengine.deleteextension {
+    margin-top: 15px;
+    /*height: calc(100% - 30px);
+    height: -moz-calc(100% - 30px);
+    height: -webkit-calc(100% - 30px);
+    overflow: auto;
+    overflow-x: hidden;*/
+}
+
+.errorlog {
+    height: 532px;
+    overflow: hidden;
+    overflow-y: auto;
+    word-break: break-word;
+}
+
+    .errorlog p {
+        margin-bottom: 0;
+        word-break: break-word;
+    }
+
+        .errorlog p.Failure,
+        .errorlog p.Error {
+            color: #EA2134;
+            font-weight: bold;
+        }
+
+        .errorlog p.StartJob, .errorlog p.EndJob {
+            color: #000;
+            font-weight: bold;
+        }
+
+.releaselog {
+    height: 330px;
+    overflow-y: scroll;
+}
+
+.ux-gridcolumnhide thead tr:first-of-type th {
+    display: none;
+}
+
+.ux-gridcolumnhide thead tr:nth-child(even) {
+    background: transparent !important;
+}
+
+.ux-gridcolumnhide img {
+    width: 26px !important;
+}
+
+.displayprop {
+    display: inline-block;
+}
+
+.textright {
+    text-align: right;
+}
+
+.extImage {
+    vertical-align: top;
+}
+
+.Extensions .extImage img {
+    width: 30px;
+    margin-right: 15px;
+    margin-top: 3px;
+}
+
+
+.ux-btn {
+    margin-left: 10px;
+    color: #5e5e5e !important;
+    padding: 2px;
+    font-size: 15px;
+    text-decoration: none !important;
+}
+
+.ux-btn-hover:hover {
+    color: #000;
+    cursor: pointer;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+.productinfo {
+    max-width: 400px;
+}
+
+    .productinfo .pname {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .productinfo .pdescription {
+        font-size: 12px;
+        color: #888;
+        display: -webkit-box;
+        max-width: 400px;
+        height: 56px;
+        margin: 0 auto;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+
+/*Scrollbar*/
+
+.installextension::-webkit-scrollbar {
+    margin-top: 10px;
+    height: 10px;
+    width: 8px;
+}
+
+.installextension::-webkit-scrollbar-track {
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+    border-radius: 10px;
+    opacity: 0.8;
+}
+
+.installextension::-webkit-scrollbar-track-piece {
+    background: rgba(255, 255, 255, 0);
+}
+
+.installextension::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(170, 170, 170, 0.3);
+    outline: 1px solid slategrey;
+    -webkit-transition: background-color .2s linear,width .2s ease-in-out;
+    -o-transition: background-color .2s linear,width .2s ease-in-out;
+    transition: background-color .2s linear,width .2s ease-in-out;
+}
+
+.vj-ux-manager .table-grid .table .friendlyname {
+    width: 130px !important;
+}
+
+.vj-ux-manager .textinfo {
+    margin-top: -30px;
+}
+
+.vj-ux-manager .termsinfo {
+    font-size: 12px;
+    margin: 0 0 10px 0;
+    color: #999;
+}
+
+    .vj-ux-manager .termsinfo a,
+    .vj-ux-manager .termsinfo a:hover {
+        cursor: pointer !important;
+        text-decoration: underline !important;
+    }
+
+        .vj-ux-manager .termsinfo a:hover {
+            color: #aaa;
+        }
+
+.vj-ux-manager .cursorpointer {
+    cursor: pointer;
+}
+
+.sweet-alert h2 {
+    font-size: 12px !important;
+    line-height: 20px !important;
+}
+
+.uiengine-wrapper h4.panel-title {
+    margin: 0;
+    font-size: 16px;
+}
+
+    .uiengine-wrapper h4.panel-title a {
+        text-decoration: none;
+    }
+
+
+.accordion-toggle .glyphicon-triangle-right,
+.accordion-toggle .glyphicon-triangle-bottom {
+    transform: rotate(0deg);
+    transition: .5s transform ease-in-out;
+}
+
+.accordion-toggle.collapsed .glyphicon-triangle-right {
+    transform: rotate(0deg);
+    transition: .5s transform ease-in-out;
+}
+
+.accordion-toggle[aria-expanded="true"] .glyphicon-triangle-right {
+    transform: rotate(90deg);
+    transition: .5s transform ease-in-out;
+}
+
+.accordion-toggle[aria-expanded="true"] .glyphicon-triangle-bottom {
+    transform: rotate(0deg);
+    transition: .5s transform ease-in-out;
+}
+
+.accordion-toggle.collapsed .glyphicon-triangle-bottom {
+    transform: rotate(-90deg);
+    transition: .5s transform ease-in-out;
+}
+
+.vj-ux-manager ul.name-list {
+    min-height: 100px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.vj-ux-manager .name-list li {
+    list-style: none;
+}
+
+
+    .vj-ux-manager .name-list li input {
+        margin-right: 10px;
+        vertical-align: top;
+    }
+
+
+.vj-ux-manager .table-grid .table > tbody > tr td:last-child {
+    vertical-align: middle;
+}
+
+.vj-ux-manager .actionbtn a {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.vj-ux-manager .addmodulebtn a {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.friendlynametooltip {
+    cursor: default;
+}
+
+.inusetooltip,
+.friendlynametooltip {
+    display: none;
+    text-decoration: none;
+    padding: 5px;
+    z-index: 999;
+}
+
+.inuse em {
+    margin-top: 10px !important;
+}
+
+.inuse:hover .inusetooltip,
+.friendlyname:hover .friendlynametooltip {
+    display: block;
+    position: absolute;
+    background-color: #151515;
+    margin-top: 2px;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.dropbtn .ux-btn-hover:hover {
+    background: #eee;
+}
+
+table img.img-responsive {
+    height: 25px;
+    width: 25px;
+}
+
+ul.pagination {
+    margin-bottom: 0;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 0;
+}
+
+.pagination a.page-link.active, .pagination > li > a.page-link:focus, .pagination > li > a.page-link:hover {
+    background: #eee !important;
+    border: 1px solid #eee !important;
+}
+
+.pagination a.page-link {
+    background: #fff !important;
+    border: 1px solid #eee !important;
+}
+
+.tooltip-inner {
+    max-width: 400px !important;
+    text-align: left;
+}
+
+
+.inusegrid td {
+    padding: 13px !important;
+}
+
+.spinner-grow-sm {
+    vertical-align: middle;
+    margin-top: -2px;
+    width: 1rem;
+    height: 1rem;
+}
+
+.spinner-grow {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: text-bottom;
+    background-color: currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    animation: spinner-grow .75s linear infinite;
+}

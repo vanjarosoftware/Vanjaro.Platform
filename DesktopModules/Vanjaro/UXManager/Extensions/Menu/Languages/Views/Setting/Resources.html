@@ -1,0 +1,79 @@
+﻿<div ng-controller="setting_resources" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_resources" class="uiengine-wrapper resourcebox">
+        <uilayout name="default" attr-class="col-md-12">
+            <uitemplate>
+                <div ng-show="ui.data.IsSuperUser.Options">
+                    <div class="form-group toggle_right">
+                        <label>[L:ResourceMode]</label>
+                        <div class="btn-group float-right" role="group">
+                            <button type="button" mn-ng-click="Click_ResourceMode('Host')" mn-ng-class="ResourceMode == 'Host'? 'btn btn-primary active' :'btn btn-default'">[L:Host]</button>
+                            <button type="button" mn-ng-click="Click_ResourceMode('Portal')" mn-ng-class="ResourceMode == 'Portal' ? 'btn btn-primary active' :'btn btn-default'">{{ui.data.PortalName.Options}}</button>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-class="col-md-12">
+            <uitemplate>
+                <div class="row resourcefiles">
+                    <div class="col-sm-4 scrollbar">
+                        [uilayout:ResourcesTree]
+                    </div>
+                    <div class="col-sm-8 scrollbar">
+                        [uilayout:ResourceFile]
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="ResourcesTree">
+            <uitemplate>
+                <div class="form-group">
+                    <script type="text/ng-template" id="folders_renderer.html">
+                        <div mn-ng-if="folder.childrenCount>0" class="foldername">
+                            <span mn-ng-click="Click_GetFoldersFils($event,folder)" class="dropicon" mn-ng-class="{'fas fa-caret-down': ui.data.ResourcesFolders.Options.Value==folder.Value,'fas fa-caret-right': ui.data.ResourcesFolders.Options.Value!=folder.Value}" style="visibility: inherit"> <span class="folders" id="{{folder.Value}}">{{folder.Name}}</span></span>
+                        </div>
+                        <div mn-ng-if="folder.childrenCount<1" class="foldername">
+                            <span class="indentspace"></span>
+                            <span mn-ng-if="folder.Type =='file'" class="files" id="{{folder.Value}}" mn-ng-click="Click_GetFileFields(folder.Name,folder.Value)">{{folder.Name}}</span>
+                            <span mn-ng-if="folder.Type =='folder'" class="folders" id="{{folder.Value}}">{{folder.Name}}</span>
+                        </div>
+                        <ul class="rootfolder">
+                            <li mn-ng-repeat="folder in folder.children" mn-ng-include="'folders_renderer.html'">
+                            </li>
+                        </ul>
+                    </script>
+                    <div class="foldersdiv">
+                        <ul>
+                            <li class="l_folder" mn-ng-repeat="folder in ui.data.ResourcesFolders.Options" mn-ng-include="'folders_renderer.html'"></li>
+                        </ul>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="ResourceFile">
+            <uielement name="Entries" ngoptions="ui.data.UpdateTransaltionsRequest.Options.Entries" control="grid" label="false" pagesize="100000" paged="false" attr-ng-show="ui.data.UpdateTransaltionsRequest.Options.Entries.length>0" attr-class="ux-gridcolumnhide table-grid">
+                <column name="ResourceName" data="ResourceName" width="30">
+                </column>
+                <column name="DefaultValue" data="DefaultValue" width="35">
+                </column>
+                <column name="LocalizedValue" width="35">
+                    <uitemplate>
+                        <div class="inputbox">
+                            <input type="text" mn-ng-model="row.LocalizedValue" class="form-control">
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+        <uilayout name="default" attr-class="col-md-12">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" ng-click="Click_Update()" class="btn btn-sm btn-primary">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

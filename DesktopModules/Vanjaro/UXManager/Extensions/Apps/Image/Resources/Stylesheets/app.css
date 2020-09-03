@@ -1,0 +1,194 @@
+﻿
+.vj-image-wrapper {
+    height: calc(100vh - 200px);
+    overflow-y: overlay;
+    overflow-x: hidden;
+}
+
+.form-group.url-add {
+    margin-bottom: 5px;
+}
+
+.vj-ux-manager .uiengine-wrapper {
+    height: 100% !important;
+}
+
+    .vj-ux-manager .uiengine-wrapper.ImageBox {
+        height: 100% !important;
+    }
+
+    .vj-ux-manager .uiengine-wrapper.Imagewrapper {
+        height: calc(100vh - 90px) !important;
+        overflow: hidden;
+    }
+
+.vj-image-wrapper {
+    height: calc(100vh - 210px) !important;
+}
+
+.expandbtn {
+    position: fixed;
+    width: 97%;
+    bottom: 10px;
+}
+
+.uploaderui table {
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+
+.uploaddefault .table thead th {
+    padding-top: 0;
+}
+
+/*.ms-uploaddefault .ovrflow .ms-col-sm-4, .ms-uploaddefault .ovrflow .ms-col-sm-8 {
+    max-height: calc(100% - 60px);
+}*/
+
+.AllImages {
+    height: calc(100vh - 240px);
+    overflow-y: auto !important;
+}
+
+    .AllImages table {
+        line-height: 0;
+        -webkit-column-count: 5;
+        -webkit-column-gap: 0px;
+        -moz-column-count: 6;
+        -moz-column-gap: 0px;
+        column-count: 6;
+        column-gap: 0px;
+        width: 100%;
+        display: inline-block;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 10px;
+        overflow: auto;
+    }
+
+        .AllImages table th {
+            display: none;
+        }
+
+    .AllImages tr {
+        width: 100% !important;
+        height: auto !important;
+        background: #fff !important;
+    }
+
+    .AllImages img {
+        width: 138px;
+        height: auto;
+        margin-bottom: 6px;
+    }
+
+    .AllImages .stfooter {
+        position: fixed;
+        padding: 15px;
+        right: 0;
+        bottom: 5px;
+        justify-content: center;
+        display: block;
+        width: 868px;
+        display: flex;
+        margin-right: 15px;
+    }
+
+
+.pagedir span.fas.fa-folder,
+span.arrowicon.fas.fa-caret-down,
+span.arrowicon.fas.fa-caret-right {
+    vertical-align: super;
+}
+
+.col-sm-4.scrollbar,
+.uploaddefault .images-container {
+    height: calc(100vh - 110px) !important;
+    overflow-y: auto !important;
+}
+
+.uploaddefault .images-container {
+    height: calc(100vh - 134px) !important;
+}
+
+    .uploaddefault .images-container th {
+        padding-top: 0;
+        padding-bottom: 3px;
+    }
+
+.vj-ux-manager .uiengine-wrapper.ImageBox {
+    padding-top: 10px;
+}
+
+
+.uploadinput-button input {
+    z-index: 10 !important;
+}
+
+.empty_msg {
+    margin-top: 0;
+}
+
+.vj-ux-manager .ud_stfooter ul.pagination {
+    margin-bottom: 0;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 0;
+    background: #fff;
+}
+
+.paginationdiv {
+    width: 100%;
+}
+
+.vj-ux-manager td.ud_stfooter {
+    position: fixed;
+    bottom: 0;
+    width: 65%;
+    justify-content: center;
+    padding: 0;
+    right: 0;
+}
+
+.vj-ux-manager .ImageBox .uploadinput-button {
+    position: relative;
+}
+
+    .vj-ux-manager .ImageBox .uploadinput-button span.btn.btn-primary {
+        padding: 10px;
+        right: 0px;
+        position: absolute !important;
+    }
+
+.vj-ux-manager .search-info-msg {
+    margin-top: 0 !important;
+}
+
+.global > i,
+.assetIsList i {
+    color: #ccc;
+}
+
+.global.active > i,
+.assetIsList.active > i {
+    color: #444;
+}
+
+a.assetIsList {
+    margin: 0 5px;
+}
+
+
+.vj-ux-manager .Imageview {
+    top: -35px;
+    right: 100px;
+    position: absolute !important;
+}
+
+
+.vj-ux-manager .ImageBox .uploadinput-button span.btn.btn-primary {
+    top: -55px;
+    right: 0px;
+    position: absolute !important;
+}

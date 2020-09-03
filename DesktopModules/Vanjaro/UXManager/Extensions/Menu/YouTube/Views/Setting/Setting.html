@@ -1,0 +1,17 @@
+﻿<div ng-controller="setting_setting" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_setting" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uielement name="ApiKey" control="textbox" attr-required="true"></uielement>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div class="fixed-footer">
+                    <div class="text-right">
+                        <button class="btn btn-sm btn-primary button-left mr-xs" type="button" ng-click="Click_Update()">[L:Update]</button>
+                        <button class="btn btn-sm btn-default button-left" type="button" mn-ng-show="ui.data.HasApiKey.Options" ng-click="Click_Delete()">[L:Delete]</button>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

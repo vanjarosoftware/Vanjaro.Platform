@@ -1,0 +1,103 @@
+
+/****** Object:  Table {databaseOwner}[VJ_Common_HTMLEditor]    Script Date: 4/2/2020 5:08:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_HTMLEditor]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Common_HTMLEditor](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[UID] [nvarchar](max) NOT NULL,
+	[ProfileID] [int] NOT NULL,
+	[Settings] [nvarchar](max) NOT NULL,
+	[PortalID] [int] NULL,
+	[TabID] [int] NULL,
+ CONSTRAINT [PK_VJ_Common_HTMLEditor] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+/****** Object:  Table {databaseOwner}[VJ_Common_HTMLEditor_Profile]    Script Date: 4/2/2020 5:08:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_HTMLEditor_Profile]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Common_HTMLEditor_Profile](
+	[ProfileID] [int] IDENTITY(1,1) NOT NULL,
+	[PortalID] [int] NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[Value] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_VJ_Common_HTMLEditor_Profile] PRIMARY KEY CLUSTERED 
+(
+	[ProfileID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+/****** Object:  Table {databaseOwner}[VJ_Common_MailQueue]    Script Date: 4/2/2020 5:08:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_MailQueue]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Common_MailQueue](
+	[MailQueueID] [int] IDENTITY(1,1) NOT NULL,
+	[ToEmail] [nvarchar](255) NOT NULL,
+	[Subject] [nvarchar](255) NOT NULL,
+	[Content] [nvarchar](max) NOT NULL,
+	[FromName] [nvarchar](255) NOT NULL,
+	[FromEmail] [nvarchar](255) NOT NULL,
+	[ReplyEmail] [nvarchar](255) NULL,
+	[SmtpUniqueId] [int] NULL,
+	[ModuleID] [int] NOT NULL,
+	[Attachment] [nvarchar](max) NULL,
+	[Status] [nvarchar](255) NOT NULL,
+	[RetryDateTime] [datetime] NULL,
+	[RetryAttempt] [int] NOT NULL,
+ CONSTRAINT [PK_VJ_Common_MailQueue] PRIMARY KEY CLUSTERED 
+(
+	[MailQueueID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+
+/****** Object:  Table {databaseOwner}[VJ_Common_Setting]    Script Date: 4/2/2020 5:08:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_Setting]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Common_Setting](
+	[SettingID] [int] IDENTITY(1,1) NOT NULL,
+	[ModuleID] [int] NOT NULL,
+	[Identifier] [nvarchar](50) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Value] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_VJ_Common_Setting] PRIMARY KEY CLUSTERED 
+(
+	[SettingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[DF_VJ_Common_MailQueue_Status]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[VJ_Common_MailQueue] ADD  CONSTRAINT [DF_VJ_Common_MailQueue_Status]  DEFAULT ('Queue') FOR [Status]
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[DF_VJ_Common_MailQueue_RetryAttempt]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[VJ_Common_MailQueue] ADD  CONSTRAINT [DF_VJ_Common_MailQueue_RetryAttempt]  DEFAULT ((0)) FOR [RetryAttempt]
+END
+GO

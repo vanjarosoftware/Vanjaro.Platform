@@ -1,0 +1,41 @@
+﻿<div ng-controller="settings_installpackage" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="settings_installpackage">
+        <uilayout name="default">
+            <uitemplate>
+                <div ng-repeat="package in ui.data.PackageList.Options">
+                    <div class="float-right textright">
+                        <div class="displayprop">
+                            <a class="ux-btn ux-btn-hover" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:Email]" ng-click="Click_Email(package.email)">
+                                <em class="fas fa-envelope"></em>
+                            </a>
+                            <a class="ux-btn ux-btn-hover" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:URL]" href="{{package.url}}" target="_blank">
+                                <em class="fas fa-link"></em>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="displayprop productinfo">
+                            <span class="pname">{{package.friendlyName}} v{{package.version}}</span>
+                            <br />
+                            <span>{{package.organization}}</span>
+                            <br />
+                            <span class="pdescription">{{Description(package.description)}}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="termsinfo"><input type="checkbox" /><span>[L:TermsLeft] </span><a ng-click="Click_ShowLicense(package.license)">[L:TermsCenter]</a><span> [L:TermsRight]</span></div>
+                    <hr />
+                </div>
+            
+                <div class="text-right fixed-footer">
+                    <button type="button" ng-click="Click_Download()" class="btn btn-sm btn-primary">
+                        Download
+                    </button>
+                    <button type="button" ng-click="Click_Install()" class="btn btn-sm btn-primary">
+                        [L:Finish]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

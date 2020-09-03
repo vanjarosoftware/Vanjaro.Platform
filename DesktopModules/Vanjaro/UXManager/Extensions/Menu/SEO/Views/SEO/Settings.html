@@ -1,0 +1,321 @@
+﻿<div ng-controller="seo_settings" class="vj-ux-manager seo-settings">
+    <uiengine provider="AngularBootstrap" identifier="seo_settings" layout="admin">
+        <uilayout name="Default">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-md-3">
+                        [uilayout:TabsNavigation]
+                    </div>
+                    <div class="col-md-9 left_border scrollbar uiengine-wrapper">
+                        [uilayout:TabsContentSite]
+                        [uilayout:TabsContentURLs]
+                        [uilayout:TabsContentSitemap]
+                        [uilayout:TabsContentSiteSearch]
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="TabsNavigation" attr-class="tab-pane active">
+            <uitemplate>
+                <ul class="nav nav-pills nav-stacked tab-line">
+                    <li id="Site" class="nav-item"><a class="nav-link active" mn-ng-click="Click_ShowTab('Site')">[L:Site]</a></li>
+                    <li id="URLs" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('URLs')">[L:URLs]</a></li>
+                    <li id="Sitemap" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('Sitemap')">[L:Sitemap]</a></li>
+                    <li id="SiteSearch" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('SiteSearch')">[L:SiteSearch]</a></li>
+                </ul>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="TabsContentSite" attr-ng-show="ShowSiteTab">
+            <uitemplate>
+                <div id="accordionSite">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionSite" data-target="#SiteSettings">
+                                [L:SiteSetting]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="SiteSettings" class="collapse show" data-parent="#accordionSite">
+                            <div class="card-body">
+                                [uilayout:Site]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionSite" data-target="#AdvanceSetting">
+                                [L:AdvanceSetting]
+                                <em class="fas fa-caret-right float-right"></em>
+                            </a>
+                        </div>
+                        <div id="AdvanceSetting" class="collapse" data-parent="#accordionSite">
+                            <div class="card-body">
+                                [uilayout:Advanced]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="TabsContentURLs" attr-ng-show="ShowURLsTab">
+            <uitemplate>
+                <div id="accordionurls">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionurls" data-target="#urlredirects">
+                                [L:URLRedirects]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="urlredirects" class="collapse show" data-parent="#accordionurls">
+                            <div class="card-body">
+                                [uilayout:URLRedirects]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" access-roles="host">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionurls" data-target="#expressions">
+                                [L:Expressions]
+                                <em class="fas fa-caret-right float-right"></em>
+                            </a>
+                        </div>
+                        <div id="expressions" class="collapse" data-parent="#accordionurls">
+                            <div class="card-body">
+                                [uilayout:Expressions]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionurls" data-target="#testurl">
+                                [L:TestURL]
+                                <em class="fas fa-caret-right float-right"></em>
+                            </a>
+                        </div>
+                        <div id="testurl" class="collapse" data-parent="#accordionurls">
+                            <div class="card-body">
+                                [uilayout:TestURL]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionurls" data-target="#testurlRewriting">
+                                [L:TestURLRewriting]
+                                <em class="fas fa-caret-right float-right"></em>
+                            </a>
+                        </div>
+                        <div id="testurlRewriting" class="collapse" data-parent="#accordionurls">
+                            <div class="card-body">
+                                [uilayout:TestURLRewriting]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="TabsContentSitemap" attr-ng-show="ShowSitemapTab">
+            <uitemplate>
+                <div id="accordionSitemap">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionSitemap" data-target="#SitemapSettings">
+                                [L:Sitemap]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="SitemapSettings" class="collapse show" data-parent="#accordionSitemap">
+                            <div class="card-body">
+                                [uilayout:Sitemap]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="TabsContentSiteSearch" attr-ng-show="SiteSearchTab">
+            <uitemplate>
+                <div id="accordionSiteSearch">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionSiteSearch" data-target="#BasicSettings">
+                                [L:Basic]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="BasicSettings" class="collapse show" data-parent="#accordionSiteSearch">
+                            <div class="card-body">
+                                [uilayout:Basic]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionSiteSearch" data-target="#SynonymsSettings">
+                                [L:Synonyms]
+                                <em class="fas fa-caret-right float-right"></em>
+                            </a>
+                        </div>
+                        <div id="SynonymsSettings" class="collapse" data-parent="#accordionSiteSearch">
+                            <div class="card-body">
+                                [uilayout:Synonyms]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionSiteSearch" data-target="#IgnoreWordsSettings">
+                                [L:IgnoreWords]
+                                <em class="fas fa-caret-right float-right"></em>
+                            </a>
+                        </div>
+                        <div id="IgnoreWordsSettings" class="collapse" data-parent="#accordionSiteSearch">
+                            <div class="card-body">
+                                [uilayout:IgnoreWords]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="Default">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" class="btn btn-sm btn-primary float-right" id="Update" mn-ng-click="Click_Save('update')">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+
+        <uilayout name="Site" attr-class="tab-pane active">
+            <uielement name="SiteTitle" attr-ng-model="ui.data.SiteTitle.Value" control="textbox" attr-required="true"></uielement>
+        </uilayout>
+        <uilayout name="Advanced" attr-class="tab-pane active">
+            <uielement name="HTMLPageHeader" attr-ng-model="ui.data.HTMLPageHeader.Value" control="textarea" attr-rows="5"></uielement>
+        </uilayout>
+
+        <uilayout name="URLRedirects" attr-class="tab-pane active">
+            <uielement name="DeletedPageHandling" control="checkboxtoggle" attr-class="toggle_right"></uielement>
+        </uilayout>
+        <uilayout name="Expressions" attr-class="tab-pane active">
+            <uielement name="IgnoreRegex" attr-ng-model="ui.data.RegexSettings.Options.IgnoreRegex" control="textbox" tooltip="false"></uielement>
+            <uielement name="DoNotRewriteRegex" attr-ng-model="ui.data.RegexSettings.Options.DoNotRewriteRegex" control="textbox" tooltip="false"></uielement>
+            <uielement name="UseSiteUrlsRegex" attr-ng-model="ui.data.RegexSettings.Options.UseSiteUrlsRegex" control="textbox" tooltip="false"></uielement>
+            <uielement name="DoNotRedirectRegex" attr-ng-model="ui.data.RegexSettings.Options.DoNotRedirectRegex" control="textbox" tooltip="false"></uielement>
+            <uielement name="DoNotRedirectSecureRegex" attr-ng-model="ui.data.RegexSettings.Options.DoNotRedirectSecureRegex" control="textbox" tooltip="false"></uielement>
+            <uielement name="ForceLowerCaseRegex" attr-ng-model="ui.data.RegexSettings.Options.ForceLowerCaseRegex" control="textbox" tooltip="false"></uielement>
+            <uielement name="NoFriendlyUrlRegex" attr-ng-model="ui.data.RegexSettings.Options.NoFriendlyUrlRegex" control="textbox" tooltip="false"></uielement>
+            <uielement name="DoNotIncludeInPathRegex" attr-ng-model="ui.data.RegexSettings.Options.DoNotIncludeInPathRegex" control="textbox" tooltip="false"></uielement>
+            <uielement name="ValidExtensionlessUrlsRegex" attr-ng-model="ui.data.RegexSettings.Options.ValidExtensionlessUrlsRegex" control="textbox" tooltip="false"></uielement>
+            <uielement name="RegexMatch" attr-ng-model="ui.data.RegexSettings.Options.RegexMatch" control="textbox" tooltip="false"></uielement>
+        </uilayout>
+        <uilayout name="TestURL" attr-class="tab-pane active">
+            <uitemplate>
+                <div class="form-group">
+                    <label>[L:PageToTest]</label>
+                    <div class="input-group">
+                        <select class="form-control" mn-ng-model="ui.data.PageToTest.Value">
+                            <option value="-1">[L:SelectOption]</option>
+                            <option value="{{option.TabID}}" mn-ng-repeat="option in ui.data.PageToTest.Options">{{option.TabName}}</option>
+                        </select>
+                    </div>
+                </div>
+            </uitemplate>
+            <uielement name="AddQueryString" control="textbox" tooltip="false"></uielement>
+            <uielement name="CustomPageName" control="textbox" tooltip="false"></uielement>
+            <uielement name="ResultingURLs" attr-rows="4" control="textarea" attr-disabled="true" attr-class="maxwidth"></uielement>
+            <uitemplate>
+                <div class="text-right buttontesturl">
+                    <button type="button" class="btn btn-sm btn-default float-right" id="buttonTesturl" mn-ng-click="Click_TestUrl()" ng-disabled="ui.data.PageToTest.Value=='-1'">
+                        [L:ButtonTestURL]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="TestURLRewriting" attr-class="tab-pane active">
+            <!--<uitemplate>
+                <div class="columnTitleTwo">[L:TestURLRewriting]</div>
+                <hr />
+            </uitemplate>-->
+            <uitemplate>
+                <label>[L:URLToTest]</label>
+                <div class="input-group urltotest">
+                    <input type="text" class="form-control" mn-ng-model="ui.data.URLToTest.Value" value="{{ui.data.URLToTest.Value}}">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-sm btn-default float-right" id="URLToTest" mn-ng-click="Click_URLToTest()" ng-disabled="!ui.data.URLToTest.Value">
+                            [L:URLRewriting]
+                        </button>
+                    </div>
+                </div>
+            </uitemplate>
+            <uielement name="RewritingResult" control="textbox" tooltip="false" attr-disabled="true" attr-ng-model="ui.data.UrlRewritingResult.Options.rewritingResult"></uielement>
+            <uielement name="Culture" control="textbox" tooltip="false" attr-disabled="true" attr-ng-model="ui.data.UrlRewritingResult.Options.culture"></uielement>
+            <uielement name="IdentifiedPage" control="textbox" tooltip="false" attr-disabled="true" attr-ng-model="ui.data.UrlRewritingResult.Options.identifiedPage"></uielement>
+            <uielement name="RedirectionResult" control="textbox" tooltip="false" attr-disabled="true" attr-ng-model="ui.data.UrlRewritingResult.Options.redirectionResult"></uielement>
+            <uielement name="RedirectionReason" control="textbox" tooltip="false" attr-disabled="true" attr-ng-model="ui.data.UrlRewritingResult.Options.redirectionReason"></uielement>
+            <uielement name="OperationMessages" control="textbox" tooltip="false" attr-disabled="true" attr-ng-model="ui.data.UrlRewritingResult.Options.operationMessages"></uielement>
+        </uilayout>
+
+        <uilayout name="Sitemap" attr-class="tab-pane active">
+            <uielement name="SitemapUrl" attr-ng-model="ui.data.SitemapSettings.Options.SitemapUrl" control="textbox" tooltip="false" attr-ng-disabled="true"></uielement>
+            <uielement name="SitemapExcludePriority" attr-required="true" control="dropdownlist"></uielement>
+            <uielement name="SitemapMinPriority" attr-required="true" control="dropdownlist"></uielement>
+            <uitemplate>
+                <label>[L:SitemapCacheDays]</label>
+                <div class="input-group urltotest">
+                    <select class="form-control" mn-ng-model="ui.data.SitemapSettings.Options.SitemapCacheDays">
+                        <option value="{{option.Key}}" mn-ng-repeat="option in ui.data.SitemapCacheDays.Options">{{option.Value}}</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-sm btn-default float-right" id="ClearCache" mn-ng-click="Click_Clearcache()">
+                            [L:ClearCache]
+                        </button>
+                    </div>
+                </div>
+            </uitemplate>
+            <uielement name="SitemapIncludeHidden" ngmodel="ui.data.SitemapSettings.Options.SitemapIncludeHidden" control="checkboxtoggle" attr-class="toggle_right"></uielement>
+            <uielement name="SitemapLevelMode" ngmodel="ui.data.SitemapSettings.Options.SitemapLevelMode" control="checkboxtoggle" attr-class="toggle_right"></uielement>
+        </uilayout>
+        <uilayout name="Basic">
+            <uielement name="MinimumLength" control="textbox" attr-ng-model="ui.data.BasicSettings.Options.MinWordLength" container-attr-access-roles="host" attr-required="true"></uielement>
+            <uielement name="MaximumLength" control="textbox" attr-ng-model="ui.data.BasicSettings.Options.MaxWordLength" container-attr-access-roles="host" attr-required="true"></uielement>
+            <uielement name="CustomAnalyzer" control="dropdownlist" attr-ng-model="ui.data.BasicSettings.Options.SearchCustomAnalyzer" container-attr-access-roles="host" attr-required="true"></uielement>
+            <uielement name="PartialWord" attr-class="toggle_right" ngmodel="ui.data.BasicSettings.Options.AllowLeadingWildcard" container-attr-access-roles="host" control="checkboxtoggle"></uielement>
+            <uielement name="line" control="line" label="false" container-attr-access-roles="host"></uielement>
+            <uielement name="SearchPriorities" control="label" container-attr-access-roles="host" label="false"></uielement>
+            <uielement name="TitleBoost" control="textbox" attr-ng-model="ui.data.BasicSettings.Options.TitleBoost" container-attr-access-roles="host" attr-required="true" attr-numeric="true"></uielement>
+            <uielement name="TagBoost" control="textbox" attr-ng-model="ui.data.BasicSettings.Options.TagBoost" container-attr-access-roles="host" attr-numeric="true"></uielement>
+            <uielement name="ContentBoost" control="textbox" attr-ng-model="ui.data.BasicSettings.Options.ContentBoost" container-attr-access-roles="host" attr-numeric="true"></uielement>
+            <uielement name="DescriptionBoost" control="textbox" attr-ng-model="ui.data.BasicSettings.Options.DescriptionBoost" container-attr-access-roles="host" attr-numeric="true"></uielement>
+            <uielement name="AuthorBoost" control="textbox" attr-ng-model="ui.data.BasicSettings.Options.AuthorBoost" container-attr-access-roles="host" attr-numeric="true"></uielement>
+            <uielement name="line" control="line" label="false" container-attr-access-roles="host"></uielement>
+            <uielement name="SearchIndex" control="label" label="false"></uielement>
+            <uielement name="HostSearchIndex" control="button" attr-ng-click="Click_HostSearchIndex()" attr-access-roles="host" label="false" attr-class="text-right button-left width-200"></uielement>
+            <uielement name="ReIndex" control="button" attr-ng-click="Click_ReIndex()" attr-access-roles="host,admin" label="false" attr-class="text-right button-left width-200"></uielement>
+            <uielement name="CompactIndex" control="button" attr-ng-click="Click_CompactIndex()" attr-access-roles="host" label="false" attr-class="text-right button-left width-200"></uielement>
+        </uilayout>
+        <uilayout name="Synonyms">
+            <uitemplate>
+                <a title="[L:AddGroup]" mn-ng-click="Click_Add()" class="addGroup ux-btn ux-btn-hover float-right">
+                    <em class="fas fa-plus"></em>
+                </a>
+            </uitemplate>
+            <uielement name="AllSynonymsGroups" control="grid" paged="false" search="false" label="false" pagesize="20" attr-class="table-responsive table-grid synonymsGroups">
+                <column name="SynonymsTags">
+                    <uitemplate>
+                        <tags-input mn-ng-model="row.SynonymsTags"></tags-input>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+        <uilayout name="IgnoreWords">
+            <uitemplate>
+                <div>
+                    <tags-input mn-ng-model="Ignoretags" class="tags" data="ui.data.IgnoreWord.Options.StopWords"></tags-input>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

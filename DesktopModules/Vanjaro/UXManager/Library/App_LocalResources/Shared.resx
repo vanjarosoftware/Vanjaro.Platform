@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AlreadyExist.Text" xml:space="preserve">
+    <value>Already Exist!</value>
+  </data>
+  <data name="AreYouSure.Text" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="AreYouSureText.Text" xml:space="preserve">
+    <value>You will not be able to recover this anymore.</value>
+  </data>
+  <data name="Basic.Text" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+  <data name="Blocks.Text" xml:space="preserve">
+    <value>Blocks</value>
+  </data>
+  <data name="Button.Text" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Category.Text" xml:space="preserve">
+    <value>Design</value>
+  </data>
+  <data name="Commentisrequired.Text" xml:space="preserve">
+    <value>Comment is required</value>
+  </data>
+  <data name="CustomCode.Text" xml:space="preserve">
+    <value>Custom Code</value>
+  </data>
+  <data name="Delete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Divider.Text" xml:space="preserve">
+    <value>Divider</value>
+  </data>
+  <data name="EnterComment.Text" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="GlobalBlockUnlink.Text" xml:space="preserve">
+    <value>Unlinking this block from global will let you edit content for this block only, without affecting all other linked blocks.</value>
+  </data>
+  <data name="GlobalBlockUnlocking.Text" xml:space="preserve">
+    <value>Changes to global content apply across entire site.</value>
+  </data>
+  <data name="GlobalBlockUnlockingError.Text" xml:space="preserve">
+    <value>You don't have permissions to edit this content</value>
+  </data>
+  <data name="Global.Text" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="Grid.Text" xml:space="preserve">
+    <value>Grid</value>
+  </data>
+  <data name="Heading.Text" xml:space="preserve">
+    <value>Heading</value>
+  </data>
+  <data name="Icon.Text" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="Image.Text" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="MigrateAreyousure.Text" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="MigrateAreYouSureText.Text" xml:space="preserve">
+    <value>You cannot reverse or revert the migrate changes</value>
+  </data>
+  <data name="MigrateNo.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="MigrateOverridePageNoBtn.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="MigrateOverridePageText.Text" xml:space="preserve">
+    <value>Re-Import to overwrite this page Publish to go live.</value>
+  </data>
+  <data name="MigrateOverridePageYesBtn.Text" xml:space="preserve">
+    <value>Re-Import</value>
+  </data>
+  <data name="MigrateToastTitle.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MigrateYes.Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ImageGallery.Text" xml:space="preserve">
+    <value>Image Gallery</value>
+  </data>
+  <data name="Link.Text" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="List.Text" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="Map.Text" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="NoBlockFound.Text" xml:space="preserve">
+    <value>There are no global blocks.</value>
+  </data>
+  <data name="NoCustomBlockFound.Text" xml:space="preserve">
+    <value>There are no custom blocks.</value>
+  </data>
+  <data name="NoOptionsMsg.Text" xml:space="preserve">
+    <value>There are no options.</value>
+  </data>
+  <data name="NoResultsFound.Text" xml:space="preserve">
+    <value>There are no extensions</value>
+  </data>
+  <data name="OK.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="PagePublished.Text" xml:space="preserve">
+    <value>Page published successfully</value>
+  </data>
+  <data name="Publish.Text" xml:space="preserve">
+    <value>Publish</value>
+  </data>
+  <data name="PublishAreyousure.Text" xml:space="preserve">
+    <value>Publish Changes?</value>
+  </data>
+  <data name="PublishCommentlable.Text" xml:space="preserve">
+    <value>Next State:</value>
+  </data>
+  <data name="ReviewAreYouSure.Text" xml:space="preserve">
+    <value>Are You Sure?</value>
+  </data>
+  <data name="ReviewNO.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ReviewUnlockingThePage.Text" xml:space="preserve">
+    <value>Unlocking the page would revert its state to:</value>
+  </data>
+  <data name="ReviewYES.Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Section.Text" xml:space="preserve">
+    <value>Section</value>
+  </data>
+  <data name="Setting.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Spacer.Text" xml:space="preserve">
+    <value>Spacer</value>
+  </data>
+  <data name="Submit.Text" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Text.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Video.Text" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="Carousel.Text" xml:space="preserve">
+    <value>Carousel</value>
+  </data>
+  <data name="Custom.Text" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="Library.Text" xml:space="preserve">
+    <value>Library</value>
+  </data>
+  <data name="TemplateLibrary.Text" xml:space="preserve">
+    <value>Template Library</value>
+  </data>
+  <data name="Apps.Text" xml:space="preserve">
+    <value>Apps</value>
+  </data>
+  <data name="Background&amp;Shadow.Text" xml:space="preserve">
+    <value>Background &amp; Shadow</value>
+  </data>
+  <data name="Borders.Text" xml:space="preserve">
+    <value>Borders</value>
+  </data>
+  <data name="CSS.Text" xml:space="preserve">
+    <value>CSS</value>
+  </data>
+  <data name="CustomBlock.Text" xml:space="preserve">
+    <value>Custom Block</value>
+  </data>
+  <data name="DefaultPreview.Text" xml:space="preserve">
+    <value>Default Preview</value>
+  </data>
+  <data name="Desktop.Text" xml:space="preserve">
+    <value>Desktop</value>
+  </data>
+  <data name="Filters.Text" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="HTML.Text" xml:space="preserve">
+    <value>HTML</value>
+  </data>
+  <data name="Layout&amp;Dimensions.Text" xml:space="preserve">
+    <value>Layout &amp; Dimensions</value>
+  </data>
+  <data name="Local.Text" xml:space="preserve">
+    <value>Local</value>
+  </data>
+  <data name="Mobile.Text" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="ModalCategory.Text" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Name.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Navigator.Text" xml:space="preserve">
+    <value>Navigator</value>
+  </data>
+  <data name="NoOptions.Text" xml:space="preserve">
+    <value>There are no options.</value>
+  </data>
+  <data name="Options.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="Positioning.Text" xml:space="preserve">
+    <value>Positioning</value>
+  </data>
+  <data name="Preview360px.Text" xml:space="preserve">
+    <value>Preview for 360px</value>
+  </data>
+  <data name="Preview768px.Text" xml:space="preserve">
+    <value>Preview for 768px</value>
+  </data>
+  <data name="Responsive.Text" xml:space="preserve">
+    <value>Responsive</value>
+  </data>
+  <data name="ShowHiddenIcons.Text" xml:space="preserve">
+    <value>Show Hidden Icons</value>
+  </data>
+  <data name="Styling.Text" xml:space="preserve">
+    <value>Styling</value>
+  </data>
+  <data name="Tablet.Text" xml:space="preserve">
+    <value>Tablet</value>
+  </data>
+  <data name="Transform.Text" xml:space="preserve">
+    <value>Transform</value>
+  </data>
+  <data name="Transitions.Text" xml:space="preserve">
+    <value>Transitions</value>
+  </data>
+  <data name="Update.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="PrefixAppName.Text" xml:space="preserve">
+    <value>App: </value>
+  </data>
+  <data name="ReImportContent_Button.Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ReImportContent_CancelButton.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ReImportContent_Text.Text" xml:space="preserve">
+    <value>Would you like to re-import content and overwrite this page? </value>
+  </data>
+  <data name="ReImportContent_Title.Text" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="MigratePublishBtn.Text" xml:space="preserve">
+    <value>Publish</value>
+  </data>
+</root>

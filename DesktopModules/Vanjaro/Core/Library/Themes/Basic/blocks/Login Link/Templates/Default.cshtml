@@ -1,0 +1,12 @@
+@inherits System.Web.WebPages.WebPage
+
+<a href="@Model.LoginLink.Url" class="loginuser">
+    @if (Model.LoginLink.IsAuthenticated)
+    {
+        <span>[LS:Data.Block.LoginLink.LogoutText]</span>
+    }
+    else
+    {
+        <span>[LS:Data.Block.LoginLink.LoginText]</span>
+    }
+</a>

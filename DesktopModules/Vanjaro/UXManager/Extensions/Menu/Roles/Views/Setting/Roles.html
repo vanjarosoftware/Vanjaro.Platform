@@ -1,0 +1,76 @@
+﻿<div ng-controller="setting_roles" class="vj-ux-manager Menu-Roles">
+    <uiengine provider="AngularBootstrap" identifier="setting_roles" layout="Roles">
+        <uilayout name="Heading">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-8 extback pr-none">
+                        <a ng-click="Click_Back()" title="[L:Back]" class="ux-backbtn">
+                            <span class="extbackicon">
+                                <em class="fas fa-chevron-left"></em>
+                            </span>
+                            <span class="extname">{{HeaderText}}</span>
+                        </a>
+                    </div>
+                    <div class="col-4 pl-none">
+                        <a href="#" onclick="parent.OpenPopUp(event, 700,'right', '[LS:Shortcut_Title]', '#add')" class="ux-btn ux-btn-hover float-right" role="button" title="[L:AddRole]" id="Submit">
+                            <em class="fas fa-plus"></em>
+                        </a>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-ng-hide="ShowGroup_Roles">
+            <uitemplate>
+                <div class="clearfix"></div>
+                <ul class="role-group">
+                    <li mn-ng-repeat="option in ui.data.RoleGroup.Options" class="list-group-item">
+                        <a href="#" mn-ng-click="filterGroup(option)">{{option.Name}}</a>
+                        <div class="dropdown float-right dropbtn" mn-ng-if="option.GroupId != -1 && option.GroupId != -2">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v"></em>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item box-icon" ng-click="Click_EditGroup(option)"><em class="fas fa-cog"></em><span>[L:Edit]</span></a>
+                                <a mn-ng-if="option.RolesCount==0" class="dropdown-item box-icon" mn-ng-click="Click_DeleteGroup(option,'update')"><em class="fas fa-trash mr-xs"></em><span>[L:Delete]</span></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ShowGroup_Roles">
+            <uielement name="Roles" control="grid" ngoptions="Roles" pagesize="25" paged="true" displayedpages="5" search="true" label="false" attr-class="table-responsive table-grid" attr-st-pipe="Pipe_RolesPaging">
+                <column name="Name" width="85">
+                    <uitemplate>
+                        <div> {{ row.Name }} </div>
+                        <div ng-show="ui.data.GroupName.Value==-2" class="fontsmall">({{row.GroupName}})</div>
+                    </uitemplate>
+                </column>
+                <column name="Actions" width="15">
+                    <uitemplate>
+                        <div class="dropdown float-right dropbtn" mn-ng-if="row.id != 0">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v"></em>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item box-icon" ng-click="Click_EditRole(row)"><em class="fas fa-cog"></em><span>[L:Edit]</span></a>
+                                <a class="dropdown-item box-icon" ng-click="Click_AddUser(row)"><em class="fas fa-users mr-xs"></em><span>[L:AddUser]</span></a>
+                                <hr class="m-none" mn-ng-hide="row.IsSystem" />
+                                <a mn-ng-hide="row.IsSystem" class="dropdown-item box-icon" ng-click="Click_DeleteRole(row,'update')"><em class="fas fa-trash mr-xs"></em><span>[L:Delete]</span></a>
+                            </div>
+                        </div>
+
+                    </uitemplate>
+                </column>
+            </uielement>
+            <uitemplate>
+                <div class="search-info-msg" mn-ng-show="!(Roles.length>0)">[LS:RoleNotAvailable]</div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>
+<style>
+    body {
+        background: #e6e9ec;
+    }
+</style>

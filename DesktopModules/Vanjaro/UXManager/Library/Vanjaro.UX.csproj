@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{203151E8-6239-447C-8BF3-41F864A35B23}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Vanjaro.UXManager.Library</RootNamespace>
+    <AssemblyName>Vanjaro.UXManager.Library</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Core\Library\Properties\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Base.ascx.cs">
+      <DependentUpon>Base.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base.ascx.designer.cs">
+      <DependentUpon>Base.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ActionResult.cs" />
+    <Compile Include="Common\ExceptionDictionary.cs" />
+    <Compile Include="Common\VerboseLevels.cs" />
+    <Compile Include="Controllers\UXManagerController.cs" />
+    <Compile Include="Controllers\BlockController.cs" />
+    <Compile Include="Controllers\ServiceRouteMapper.cs" />
+    <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Editor.cs" />
+    <Compile Include="Entities\BaseModel.cs" />
+    <Compile Include="Entities\DnnAdminAttribute.cs" />
+    <Compile Include="Entities\ImageEntity.cs" />
+    <Compile Include="Entities\Interface\IShortcut.cs" />
+    <Compile Include="Entities\Language.cs" />
+    <Compile Include="Entities\SelectListItem.cs" />
+    <Compile Include="Entities\Enum\AppType.cs" />
+    <Compile Include="Entities\Interface\IAppExtension.cs" />
+    <Compile Include="Entities\Interface\IExtension.cs" />
+    <Compile Include="Entities\Interface\IMenuItem.cs" />
+    <Compile Include="Entities\Interface\IModuleExtension.cs" />
+    <Compile Include="Entities\Interface\IToolbarItem.cs" />
+    <Compile Include="Entities\Menu\AppExtension.cs" />
+    <Compile Include="Entities\Menu\MenuItem.cs" />
+    <Compile Include="Entities\Menu\CategoryTree.cs" />
+    <Compile Include="Entities\Menu\ToolbarItem.cs" />
+    <Compile Include="Entities\ModuleDefDTO.cs" />
+    <Compile Include="Entities\Shortcut\ShortcutItem.cs" />
+    <Compile Include="Factories\AppExtensionFactory.cs" />
+    <Compile Include="Factories\CacheFactory.cs" />
+    <Compile Include="Factories\ShortcutFactory.cs" />
+    <Compile Include="Factories\MenuFactory.cs" />
+    <Compile Include="Managers\ShortcutManager.cs" />
+    <Compile Include="Factories\ToolbarFactory.cs" />
+    <Compile Include="Managers\AppManager.cs" />
+    <Compile Include="Managers\BlockManager.cs" />
+    <Compile Include="Managers\ImageManager.cs" />
+    <Compile Include="Managers\LanguageManager.cs" />
+    <Compile Include="Managers\MenuManager.cs" />
+    <Compile Include="Managers\PageManager.cs" />
+    <Compile Include="Managers\ToolbarManager.cs" />
+    <Compile Include="Managers\ThemeManager.cs" />
+    <Compile Include="Managers\VideoManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Extension.ascx.cs">
+      <DependentUpon>Extension.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extension.ascx.designer.cs">
+      <DependentUpon>Extension.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="Base.ascx" />
+    <Content Include="Resources\Images\align-around.png" />
+    <Content Include="Resources\Images\align-between.png" />
+    <Content Include="Resources\Images\align-bottom.png" />
+    <Content Include="Resources\Images\align-center.png" />
+    <Content Include="Resources\Images\align-justify.png" />
+    <Content Include="Resources\Images\align-left.png" />
+    <Content Include="Resources\Images\align-middle.png" />
+    <Content Include="Resources\Images\align-right.png" />
+    <Content Include="Release.txt" />
+    <Content Include="Resources\Images\align-top.png" />
+    <Content Include="Resources\Images\border-dashed.png" />
+    <Content Include="Resources\Images\border-dotted.png" />
+    <Content Include="Resources\Images\border-double.png" />
+    <Content Include="Resources\Images\border-solid.png" />
+    <Content Include="Resources\Images\col-12.png" />
+    <Content Include="Resources\Images\col-2.png" />
+    <Content Include="Resources\Images\col-3.6.3.png" />
+    <Content Include="Resources\Images\col-3.9.png" />
+    <Content Include="Resources\Images\col-3.png" />
+    <Content Include="Resources\Images\col-4.8.png" />
+    <Content Include="Resources\Images\col-4.png" />
+    <Content Include="Resources\Images\col-6.png" />
+    <Content Include="Resources\Images\col-8.4.png" />
+    <Content Include="Resources\Images\col-9.3.png" />
+    <Content Include="Resources\Images\Flower.mp4" />
+    <Content Include="Resources\Images\image.png" />
+    <Content Include="Resources\Images\loading.gif" />
+    <Content Include="Resources\Images\svg\icon-a.svg" />
+    <Content Include="Resources\Images\svg\icon-b.svg" />
+    <Content Include="Resources\Images\svg\icon-c.svg" />
+    <Content Include="Resources\Images\svg\icon-d.svg" />
+    <Content Include="Resources\Images\thumbnail-video.jpg" />
+    <Content Include="Resources\extension.html" />
+    <Content Include="Resources\node_modules\.bin\webpack.config.js" />
+    <Content Include="Resources\Scripts\Blocks\carousel.js" />
+    <Content Include="Resources\Scripts\Blocks\config.js" />
+    <Content Include="Resources\library.html" />
+    <Content Include="Resources\Scripts\Blocks\map.js" />
+    <Content Include="Resources\Scripts\Blocks\heading.js" />
+    <Content Include="Resources\Scripts\Blocks\icon.js" />
+    <Content Include="Resources\Scripts\Blocks\image-gallery.js" />
+    <Content Include="Resources\Scripts\Blocks\components.js" />
+    <Content Include="Resources\Scripts\Blocks\grid.js" />
+    <Content Include="Resources\Scripts\Blocks\image.js" />
+    <Content Include="Resources\Scripts\Blocks\link.js" />
+    <Content Include="Resources\Scripts\Blocks\list.js" />
+    <Content Include="Resources\Scripts\Blocks\section.js" />
+    <Content Include="Resources\Scripts\Blocks\button.js" />
+    <Content Include="Resources\Scripts\Blocks\divider.js" />
+    <Content Include="Resources\Scripts\Blocks\spacer.js" />
+    <Content Include="Resources\Scripts\Blocks\index.js" />
+    <Content Include="Resources\Scripts\Blocks\custom-code.js" />
+    <Content Include="Resources\Scripts\Blocks\style-manager.js" />
+    <Content Include="Resources\Scripts\Blocks\video.js" />
+    <Content Include="Resources\Scripts\Blocks\text.js" />
+    <Content Include="Resources\Scripts\Blocks\traits.js" />
+    <Content Include="Resources\Scripts\GrapesJsManagers\interaction.js" />
+    <Content Include="Resources\Scripts\GrapesJsManagers\Plugins\blockwrapper.js" />
+    <Content Include="Resources\Scripts\index.js" />
+    <Content Include="Resources\Scripts\Localization\Localization.js" />
+    <Content Include="Resources\Scripts\uxmanager.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PackageList.txt" />
+    <Content Include="Resources.txt" />
+    <Content Include="Resources\Images\Vanjaro.png" />
+    <Content Include="Resources\Scripts\GrapesJsManagers\css\uxmanager.css" />
+    <Content Include="Resources\Scripts\GrapesJsManagers\desktopmodulesApps.js" />
+    <Content Include="Resources\Scripts\GrapesJsManagers\img\dark.mp4" />
+    <Content Include="Resources\Scripts\GrapesJsManagers\Plugins\modulewrapper.js" />
+    <Content Include="Resources\Scripts\GrapesJsManagers\scriptandstyle.js" />
+    <Content Include="Resources\Scripts\GrapesJs\css\grapes.min.css" />
+    <Content Include="Resources\Scripts\GrapesJs\css\fontawesome\v4.css" />
+    <Content Include="Resources\Scripts\GrapesJs\css\grapick.min.css" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-brands-400.svg" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-regular-400.svg" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-solid-900.svg" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fontawesome-webfont.svg" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\main-fonts.svg" />
+    <Content Include="Resources\Scripts\GrapesJsManagers\editor.js" />
+    <Content Include="Resources\Scripts\jsPanel\jspanel.min.css" />
+    <Content Include="Resources\StyleSheets\app.css" />
+    <Content Include="Extension.ascx" />
+    <Content Include="Resources\StyleSheets\common.css" />
+    <Content Include="Resources\tui\fabric.min.js" />
+    <Content Include="Resources\tui\tui-code-snippet.min.js" />
+    <Content Include="Resources\tui\tui-color-picker.min.css" />
+    <Content Include="Resources\tui\tui-color-picker.min.js" />
+    <Content Include="Resources\tui\tui-image-editor.min.css" />
+    <Content Include="Resources\tui\tui-image-editor.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Scripts\GrapesJs\fonts\main-fonts.eot" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\main-fonts.ttf" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\main-fonts.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Install\01.00.00.SqlDataProvider" />
+    <Content Include="Install\Uninstall.SqlDataProvider" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Shared.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="DotNetNuke, Version=9.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\DotNetNuke.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Abstractions, Version=9.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\DotNetNuke.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web, Version=9.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\DotNetNuke.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Client, Version=9.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\DotNetNuke.Web.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.5.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="LibSassHost, Version=1.2.10.0, Culture=neutral, PublicKeyToken=3e24e88796a38e46, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\LibSassHost.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\..\Common\Vanjaro.Common.csproj">
+      <Project>{82603eb3-cfec-4101-837a-7581d3300540}</Project>
+      <Name>Vanjaro.Common</Name>
+    </ProjectReference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\..\..\..\bin\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <ProjectReference Include="..\..\Core\Library\Vanjaro.Core.csproj">
+      <Project>{3ed0d4a5-e2da-4dd9-ab64-9e0a2b6b4305}</Project>
+      <Name>Vanjaro.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-brands-400.eot" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-brands-400.ttf" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-brands-400.woff" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-brands-400.woff2" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-regular-400.eot" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-regular-400.ttf" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-regular-400.woff" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-regular-400.woff2" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-solid-900.eot" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-solid-900.ttf" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-solid-900.woff" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fa-solid-900.woff2" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fontawesome-webfont.eot" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fontawesome-webfont.woff" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Resources\Scripts\GrapesJs\fonts\FontAwesome.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Base.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Images\image.webp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DoPackages\VanjaroUXManagerLibrary.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DoPackages\bin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53473</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53473/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>if $(ConfigurationName) == Release cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\ &amp;&amp; npm install &amp;&amp; cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\node_modules\.bin\ &amp;&amp; webpack</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Release start ..\DesktopModules\Vanjaro\UXManager\Library\DoPackages\VanjaroUXManagerLibrary.bat"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

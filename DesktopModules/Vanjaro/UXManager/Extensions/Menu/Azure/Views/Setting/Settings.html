@@ -1,0 +1,51 @@
+﻿<div ng-controller="setting_settings" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_settings" layout="setting">
+        <uilayout name="Heading">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-8 pr-none extback">
+                        <a onclick="parent.Click_Back()" title="[L:Back]" class="ux-backbtn">
+                            <span class="extbackicon">
+                                <em class="fas fa-chevron-left"></em>
+                            </span>
+                            <span class="extname">[LS:Azure]</span>
+                        </a>
+                    </div>
+                    <div class="col-4 pl-none">
+                        <a ng-click="Click_New()" data-toggle="tooltip" data-placement="bottom" class="ux-btn ux-btn-hover float-right">
+                            <em class="fas fa-plus"></em>
+                        </a>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uielement name="Connectors" control="grid" displayedpages="5" pagesize="25" paged="true" label="false" attr-class="ux-gridcolumnhide table-grid">
+                <column name="DisplayName" width="85">
+                    <uitemplate>
+                        <div class="icon"><em class="fab fa-microsoft {{row.Connected?'active':''}}"></em><span>{{row.DisplayName}}</span></div>
+                    </uitemplate>
+                </column>
+                <column name="Actions" width="15">
+                    <uitemplate>
+                        <div class="dropdown show pull-right dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v"></em>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item ux-btn-hover" style="display: block;padding: 10px;" ng-click="Click_Edit(row)"><em class="fas fa-cog" style="margin-right: 5px;"></em><span>[L:Settings]</span></a>
+                                <hr class="m-none" />
+                                <a class="dropdown-item ux-btn-hover" style="display: block;padding: 10px;" ng-click="Click_Delete(row)"><em class="fas fa-trash" style="margin-right: 5px;"></em><span>Delete</span></a>
+                            </div>
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+    </uiengine>
+</div>
+<style>
+    body {
+        background: #e6e9ec;
+    }
+</style>

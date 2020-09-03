@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PasswordReset.ascx.cs" Inherits="Vanjaro.Core.Providers.Authentication.PasswordReset" %>
+<asp:Literal ID="VJ_PasswordReset" runat="server"></asp:Literal>

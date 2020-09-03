@@ -1,0 +1,284 @@
+﻿.uploadinput-button ul {
+    padding: 0;
+}
+
+.vj-ux-manager .uiengine-wrapper {
+    overflow: unset;
+}
+
+.vj-ux-manager .fix-height.uiengine-wrapper.scrollbar {
+    padding: 0px 15px;
+    height: calc(100vh - 140px) !important;
+}
+
+/*uiengine {
+    margin-top: 15px;
+}*/
+
+.url-add {
+    display: inline-block;
+    float: right;
+    margin-top: 20px;
+    margin: 0;
+}
+
+    .url-add span.choosefile {
+        display: none;
+    }
+
+    .url-add span.btn:before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f093";
+    }
+
+.assettype button:first-of-type:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f108";
+}
+
+.assettype button:last-of-type:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f57d";
+}
+
+.vj-ux-manager .syncdropdown {
+    top: 30px;
+    left: -70px;
+    min-width: 220px;
+}
+
+.dropdownbtn {
+    display: inline-block;
+    float: right;
+}
+
+.dropdown-item {
+    display: block;
+}
+
+.folderdropdown {
+    left: unset;
+    right: 0;
+}
+
+.displayprop {
+    display: inline-block;
+}
+
+.context-menu-icon.context-menu-icon--fa5 i {
+    color: #2f2f2f;
+}
+
+.vj-ux-manager .assettype {
+    display: inline-block;
+    position: relative;
+    left: 200px;
+    top: 40px;
+    z-index: 999;
+    margin-bottom: 0;
+}
+
+    .vj-ux-manager .assettype button {
+        padding: 2px 12px;
+    }
+
+.vj-ux-manager .container a.btn-primary.run {
+    margin-right: 5px;
+}
+
+.container.uilayout.ng-scope .row.head {
+    margin-left: 0px;
+}
+
+.bold-red {
+    color: red;
+    font-weight: bold;
+}
+
+.bold-sky {
+    color: #1E88C3;
+    font-weight: bold;
+}
+
+.btn.btn-default.pull-right.red {
+    color: red;
+    border-color: red;
+}
+
+a.fa.fa-play {
+    color: #28a745;
+}
+
+a.fa.fa-stop {
+    color: #dc3545;
+}
+
+.revision_block {
+    background-color: #fff;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: 1px solid #eee;
+}
+
+    .revision_block:nth-of-type(even) {
+        background-color: #f9f9f9;
+    }
+
+    .revision_block.active {
+        background-color: #ddd;
+    }
+
+    .revision_block .author_name,
+    .revision_block .date {
+        font-size: 11px;
+        display: inline-block;
+    }
+
+    .revision_block .badge-success {
+        background-color: #47a447;
+    }
+
+    .revision_block .badge-light {
+        background-color: #cdcfd1;
+    }
+
+    .revision_block .preview_pic {
+        width: 61px;
+        height: 61px;
+        z-index: 100;
+        margin-right: 5px;
+        border-right: 1px solid #e3e3e3;
+    }
+
+.revision_name .badge {
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vj-ux-manager .table-grid .table thead th {
+    padding: 8px !important;
+}
+
+element.style {
+    position: fixed;
+    bottom: 25px;
+    right: 30px;
+}
+
+.vj-ux-manager .fix-height {
+    height: calc(100% - 75px);
+    overflow: overlay;
+    border-left: 1px solid #ddd;
+}
+
+.far.fa-clock {
+    font-size: 30px;
+    padding: 10px;
+    color: #888;
+    border-right: 1px solid #eee;
+    margin-right: 10px;
+}
+
+img.loading {
+    height: 50px;
+    padding: 10px;
+}
+
+.vj-ux-manager .stfooter ul.pagination {
+    margin-bottom: 0;
+    justify-content: center;
+    /*border-top: 1px solid #ccc;*/
+    padding: 12px;
+}
+
+.revision_name p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.scheduler-info {
+    display: flex;
+}
+
+.alertbox {
+    width: 100%;
+    margin-right: 15px;
+    margin-bottom: 0;
+    height: 30px;
+}
+
+.scheduler-btn {
+    margin-top: 5px;
+    display: inline-flex;
+}
+
+    .scheduler-btn em {
+        margin: 0 5px;
+    }
+
+.table-striped > tbody > tr {
+    border: 1px solid #ccc;
+    height: 50px;
+}
+
+/*.vj-ux-manager .table-grid .table > tbody > tr td {
+    vertical-align: middle;
+}*/
+
+.vj-ux-manager .table-grid .table > tbody > tr td:last-child {
+    padding: 8px !important;
+}
+
+.vj-ux-manager span.username {
+    font-size: 11px;
+}
+
+.schedulerrow .row:not(.scheduletask) {
+    height: 100%;
+}
+
+.vj-ux-manager .tab-pane .nav .nav-item .nav-link {
+    color: #212529;
+}
+
+.vj-ux-manager .scheduletask .form-group label {
+    height: 20px;
+}
+
+
+.schedulerdetail {
+    font-size: 12px;
+}
+
+/*.vj-ux-manager .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fff;
+}*/
+
+.vj-ux-manager .table-grid .table td p {
+    line-height: 16px;
+    margin-bottom: 0;
+}
+
+.vj-ux-manager p.desciption {
+    font-weight: 100;
+}
+
+.vj-ux-manager .schedulerrow td.stfooter {
+    position: fixed;
+    bottom: 0;
+    width: 72%;
+    justify-content: center;
+    padding: 0;
+}
+
+
+.settinginfo {
+    height: 50px !important;
+    margin-left: 0;
+    margin-right: 0;
+}

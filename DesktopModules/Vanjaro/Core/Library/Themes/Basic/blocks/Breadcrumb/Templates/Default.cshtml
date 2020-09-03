@@ -1,0 +1,46 @@
+@using DotNetNuke.Common;
+@using DotNetNuke.Common.Utilities;
+@inherits System.Web.WebPages.WebPage
+@{
+    var tabName = string.Empty;
+    var tabUrl = string.Empty;
+    var position = 1;
+    var lastItem = Model.ActiveTab.BreadCrumbs[Model.ActiveTab.BreadCrumbs.Count - 1];
+    int ProfileUserId = string.IsNullOrEmpty(Model.Request.Params["UserId"]) ? Null.NullInteger : int.Parse(Model.Request.Params["UserId"]);
+    int GroupId = string.IsNullOrEmpty(Model.Request.Params["GroupId"]) ? Null.NullInteger : int.Parse(Model.Request.Params["GroupId"]);
+}
+<div class="vj-breadcrumb">
+    <nav aria-label="breadcrumb" class="nav-breadcrumb">
+        <ol class="breadcrumb">
+            @foreach (var tab in Model.ActiveTab.BreadCrumbs)
+            {
+                tabName = tab.LocalizedTabName;
+                tabUrl = tab.FullUrl;
+                if (ProfileUserId > -1)
+                {
+                    tabUrl = Vanjaro.Common.Utilities.ServiceProvider.NavigationManager.NavigateURL(tab.TabID, "", "UserId=" + ProfileUserId);
+                }
+                if (GroupId > -1)
+                {
+                    tabUrl = Vanjaro.Common.Utilities.ServiceProvider.NavigationManager.NavigateURL(tab.TabID, "", "GroupId=" + GroupId);
+                }
+                @*// Is this tab disabled? If so, only render the text*@
+                if (tab.DisableLink)
+                {
+                    <li class="breadcrumb-item" itemprop="name">@tabName</li>
+                }
+                else if (tab.TabID == lastItem.TabID)
+                {
+                    <li class="breadcrumb-item active" itemprop="name">@tabName</li>
+                }
+                else
+                {
+                    <li class="breadcrumb-item" itemprop="name">
+                        <a href="@tabUrl" itemprop="item"><span itemprop="name">@tabName</span></a>
+                    </li>
+                }
+
+            }
+        </ol>
+    </nav>
+</div>

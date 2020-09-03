@@ -1,0 +1,34 @@
+﻿<div ng-controller="setting_categories" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_categories" layout="category">
+        <uilayout name="Heading">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-12 extback pr-none">
+                        <a ng-click="BackTo_Theme()" class="ux-backbtn">
+                            <span class="extbackicon">
+                                <em class="fas fa-chevron-left"></em>
+                            </span>
+                            <span class="extname">{{ui.data.Theme.Value}} [L:Theme]</span>
+                        </a>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div class="clearfix"></div>
+                <ul class="role-group">
+                    <li mn-ng-repeat="option in ui.data.Categories.Options" class="list-group-item">
+                        <a href="#" mn-ng-click="OpenSettings(option)">{{option.Name}}</a>
+                    </li>
+                </ul>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>
+<style>
+    body {
+        background: #e6e9ec;
+    }
+</style>
+

@@ -1,0 +1,11 @@
+﻿.vj-ux-manager .uiengine-wrapper {
+    height: calc(100vh - 50px) !important;
+}
+
+.vj-ux-manager .harddeletedelay, .buttonconsent {
+    margin-top: 15px;
+}
+
+    .vj-ux-manager .harddeletedelay label {
+        margin-bottom: 0px !important;
+    }

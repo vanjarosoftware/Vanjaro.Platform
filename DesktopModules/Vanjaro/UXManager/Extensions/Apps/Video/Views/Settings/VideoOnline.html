@@ -1,0 +1,41 @@
+﻿<div ng-controller="settings_videoonline" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="settings_videoonline" layout="Admin" class="uiengine-wrapper videowrapper scrollbar">
+        <uilayout name="default">
+            <uitemplate>
+                <div>
+                    <!--<div class="alert alert-info" role="alert">
+                        [L:AlertMsg]
+                    </div>-->
+                    <a ng-show="VideoProvidersLink!=''" ng-href="{{VideoProvidersLink}}" target="_blank"><img class="extimgbox" ng-src="{{VideoProvidersImage}}" /></a>
+                    <label style="text-align: left;display: block;">[L:keyword]</label>
+                    <div class="form-group">
+                        <input id="VjVideoKeyword" type="text" name="keyword" placeholder="[L:SearchKeyword]" value="ui.data.keyword.Value" class="form-control control-background searchinput" ng-model="ui.data.keyword.Value" ng-keyup="DebounceSearch()" />
+                        <select class="form-control searchselect" ng-model="ui.data.VideoProviders.Value" ng-options="option.Value as option.Text for option in ui.data.VideoProviders.Options" ng-change="ChangeVideoProviders()"></select>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                </div>
+            </uitemplate>
+            <uitemplate>
+                <div class="vj-image-wrapper scrollbar">
+                    <div class="row text-center">
+                        <div class="svg-container">
+                            <div class="videoOnline" mn-ng-repeat="x in Videos">
+                                <div class="Videothumbbox">
+                                    <img src="{{x.Thumbnail}}" class="img-rounded" mn-ng-click="SelectVideo(x)" width="460" height="345" mn-ng-dblclick="SaveOndblClick()">
+                                </div>
+                                <div class="videoDuration"><span class="badge">{{x.Duration}}</span></div>
+                                <div class="videoTitle">{{x.Title}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary btn-block" mn-ng-show="Videos.length>0" id="more" mn-ng-click="ExpandMoreVideo()">
+                        [L:ExpandMore]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

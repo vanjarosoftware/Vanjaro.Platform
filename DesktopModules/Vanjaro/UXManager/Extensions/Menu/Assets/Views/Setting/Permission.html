@@ -1,0 +1,15 @@
+﻿<div ng-controller="setting_permission" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_permission" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uielement name="Permissions" label="false" control="Permissiongrid"></uielement>
+            <uielement name="CopyPermission" ngmodel="CopyPermissionSubfolder" attr-class="toggle_right  fixed-togglebtn" control="checkboxtoggle"></uielement>
+            <uitemplate>
+                <div class="fixed-footer">
+                    <div class="text-right">
+                        <button class="btn btn-sm btn-primary button-left mr-xs" type="button" id="save" ng-click="Click_Save('update')">[LS:Update]</button>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

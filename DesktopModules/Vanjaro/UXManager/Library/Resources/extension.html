@@ -1,0 +1,715 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../../../../../Resources/libraries/jQuery/03_05_01/jquery.js" type="text/javascript"></script>
+    <script src="../../../../../js/dnn.servicesframework.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../../../Common/Frameworks/Bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="../../../Common/Frameworks/Bootstrap/4.5.0/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            height: 100vh;
+        }
+         .plugincards{
+             padding: 15px;
+             height: calc(100vh - 106px);
+                overflow: auto;
+         }
+        .addbutton{
+            display:flex;
+            padding:10px 0px;
+            margin-left: 30px;
+        }
+        .pluginbtn{
+               margin: auto 8px;
+               font-size: 12px;
+              
+        }
+
+        .plugintext{
+            margin:auto; 
+        }
+        .plugintext h3{
+            font-weight: normal;
+        }
+        .nav-tabs {
+    border-bottom: 0px ;
+}
+            .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+                border-bottom: 2px solid #333;
+            }
+            .nav-tabs .nav-link {
+    border: 0px ;
+ 
+}
+            .searchplugins{
+                position:relative;
+                    margin: 5px 15px auto auto;
+            }
+
+            .categories{
+              margin-left:15px;
+            }
+            .searchinput{
+               font-size:12px;
+               font-style:italic;
+                   border-radius: 3px;
+    border-color: #ced4da;
+    box-shadow: none !important;
+        padding-left: 28px;
+            }
+
+           .searchplugins .fa {
+                position: absolute;
+                top: 0;
+                color: #999;
+                padding: 9px;
+            }
+           .wrap {
+    display: flex;
+    background: white;
+    padding: 12px;
+        border-radius: 0.2rem 0.2rem 0 0;
+    box-shadow: 7px 7px 30px -5px rgba(0,0,0,0.1);
+        border: 1px solid #b2b2b2;
+}
+
+    .plugincard-bottom{
+        display: flex;
+    background: white;
+    padding: 12px;
+     border-radius: 0 0  0.2rem 0.2rem;
+    box-shadow: 7px 7px 30px -5px rgba(0,0,0,0.1);
+        border: 1px solid #b2b2b2;
+        margin-top: -1px;
+    }
+
+.vcenter {
+    margin: auto;
+    width: 56%
+}
+.vcenter p {
+    padding-top: 0.5rem;
+
+   line-height: 20px;
+    font-size: 14px;
+}
+
+
+.mbr-iconfont {
+    font-size: 3.5rem !important;
+    color: #313131;
+    
+}
+
+.btn-wrap span{
+    font-size:12px;
+    display: block;
+}
+
+.btn-wrap a{
+    font-size:12px;
+    display: block;
+    padding: 8px;
+}
+
+.updated-comment,.card-compatibility{
+    text-align: right;
+    float: right;
+    font-size: 12px;
+}
+.mbr-iconfont img{
+        height: 52px;
+    vertical-align:top;
+}
+
+.cardwraper{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.authors{
+    margin-bottom: 0px;
+    padding-top: 0px !important;
+}
+
+.pluginscrollbar::-webkit-scrollbar {
+margin-top: 10px;
+height: 10px;
+width: 8px; }
+.pluginscrollbar::-webkit-scrollbar-track {
+border-radius: 10px;
+opacity: 0.8; }
+.pluginscrollbar::-webkit-scrollbar-track-piece {
+background: rgba(255, 255, 255, 0); }
+.pluginscrollbar::-webkit-scrollbar-thumb {
+border-radius: 10px;
+background: rgba(170, 170, 170, 0.3);
+outline: 1px solid slategrey;
+-webkit-transition: background-color .2s linear,width .2s ease-in-out;
+-o-transition: background-color .2s linear,width .2s ease-in-out;
+transition: background-color .2s linear,width .2s ease-in-out; }
+
+.plugintabs{
+    margin-bottom:10px;
+}
+
+    </style>
+</head>
+<body>
+    <!--<section class="addplugin">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="addbutton">
+                    <div class="plugintext"><h3>Add Plugins</h3></div>
+                    <div class="pluginbtn btn btn-primary">Upload Plugin</div>
+                </div>
+            </div>
+        </div>
+    </section>-->
+
+
+    <br />
+    <h3 style="text-align: center; text-transform: uppercase; color: #999;">Upcoming Feature in Release Candidate</h3>
+
+    <section class="plugintabs">
+        <div class="container-fluid">
+            <div class="row">
+
+                <nav class="categories">
+                    <div class="nav nav-tabs justify-content-center" role="tablist">
+                        <a class="nav-item nav-link active" data-toggle="tab" href="#navFeatured">Featured</a>
+                        <a class="nav-item nav-link" data-toggle="tab" href="#navPopular">Popular</a>
+                        <a class="nav-item nav-link" data-toggle="tab" href="#navRecommended">Recommended</a>
+                        <a class="nav-item nav-link" data-toggle="tab" href="#navFavorites">Favorites</a>
+
+                    </div>
+                </nav>
+
+
+                <form class="searchplugins " method="get">
+                    <label>
+                        <span class="searchtext d-none">Search Extensions</span>
+                        <input value="" class="searchinput form-control" placeholder="Search extensions..." aria-describedby="live-search-desc">
+                        <i class="fa fa-search"></i>
+                    </label>
+                    <input type="submit" id="searchsubmit" class="button d-none" value="Search Plugins">
+                </form>             
+
+            </div>
+        </div>
+    </section>
+
+    <section class="plugincards pluginscrollbar">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="navFeatured" role="tabpanel">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/contact.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Contact Form </h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Just another contact form plugin. Simple but flexible.</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/editor.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Classic Editor</h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Lorem Ipsum is simply dummy text of the pIpsum</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont"><img src="Images/extensions/stay.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Stay <span>Successful</span></h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Copy posts of any type with a click!</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/compress.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Smush – Compress,</h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Lorem Ipsum is simply dummy text of the pIpsum</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/stay.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Stay <span>Successful</span></h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Lorem Ipsum is simply dummy text of the pIpsum</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/seo.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"> SEO </h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Lorem Ipsum is simply dummy text of the pIpsum</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+             </div>
+            <div class="tab-pane fade " id="navPopular" role="tabpanel">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/compress.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Smush – Compress,</h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Lorem Ipsum is simply dummy text of the pIpsum</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/seo.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"> SEO </h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Lorem Ipsum is simply dummy text</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/stay.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Stay <span>Successful</span></h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Lorem Ipsum is simply dummy text of the pIpsum</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade " id="navRecommended" role="tabpanel">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/contact.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Contact Form </h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Just another contact form plugin. Simple but flexible.</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/compress.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Smush – Compress,</h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Lorem Ipsum is simply dummy text of the pIpsum</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/editor.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Classic Editor</h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Lorem Ipsum is simply dummy text of the pIpsum</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/stay.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Stay <span>Successful</span></h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Lorem Ipsum is simply dummy text of the pIpsum</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="navFavorites" role="tabpanel">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/stay.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Stay <span>Successful</span></h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Lorem Ipsum is simply dummy text of the pIpsum</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/contact.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Contact Form </h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Just another contact form plugin. Simple but flexible.</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 cardwraper">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont "><img src="Images/extensions/editor.png" class="plugin-icon" alt=""></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h5 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Classic Editor</h5>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">Lorem Ipsum is simply dummy text of the pIpsum</p>
+                                    <p class="authors"> <span>By <a href="#">Vanjao</a></span></p>
+                                </div>
+                                <div class="btn-wrap">
+                                    <span class="btn btn-outline-dark">Install Now</span>
+                                    <span class="btn btn-outline-dark d-none">Update Now</span>
+                                    <a href="#">More Details</a>
+                                </div>
+                            </div>
+                            <div class="plugincard-bottom">
+
+                                <div class="text-wrap vright">
+                                    <div class="updated-comment">
+                                        <strong>Last Updated:</strong>
+                                        2 months ago
+                                    </div>
+                                    <div class="card-compatibility">
+                                        <span class="text-compatibility"><strong>Compatible</strong> with your version of Vanjao</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+</div>
+    </section>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+﻿.vj-ux-manager .alert {
+    margin-bottom: 15px;
+}
+
+.vj-ux-manager .global > .btn-group {
+    display: flex;
+}
+
+    /*.vj-ux-manager .global > .btn-group > button {
+        width: 50%
+    }
+
+        .vj-ux-manager .global > .btn-group > button:last-child {
+            float: none;
+        }*/

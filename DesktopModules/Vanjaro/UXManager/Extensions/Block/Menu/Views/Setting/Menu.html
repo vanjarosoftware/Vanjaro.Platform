@@ -1,0 +1,28 @@
+﻿<div ng-controller="setting_menu" class="vj-ux-manager" ng-show="loaded">
+    <uiengine provider="AngularBootstrap" identifier="setting_menu" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uielement name="Global" label="false" control="checkboxtoggle" attr-class="global text-center"></uielement>
+            <uitemplate>
+                <div access-roles="admin" mn-ng-show="ui.data.IsAdmin.Value && ui.data.Global.Value" class="vj-alert alert alert-warning" role="alert">
+                    [L:IsAdminAlert]
+                </div>
+                <div access-roles="editpage" mn-ng-show="!ui.data.IsAdmin.Value && ui.data.Global.Value" class="vj-alert alert alert-info" role="alert">
+                    [L:IsPageAdminAlert]
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="(ui.data.IsAdmin.Value||!ui.data.IsAdmin.Value && !ui.data.Global.Value)">
+            <uielement name="DisplayAllPages" control="toggle" attr-class="toggle_right"></uielement>
+            <uielement name="line" container-attr-ng-if="!ui.data.DisplayAllPages.Value" control="line"></uielement>
+            <uielement name="RootPages" container-attr-ng-if="!ui.data.DisplayAllPages.Value" control="dropdownlist"></uielement>
+            <uielement name="Pages" container-attr-ng-if="!ui.data.DisplayAllPages.Value && ui.data.RootPages.Value=='3'" control="dropdownlist"></uielement>
+            <uielement name="SkipPages" container-attr-ng-if="!ui.data.DisplayAllPages.Value" control="toggle" attr-class="toggle_right"></uielement>
+            <uielement name="line" container-attr-ng-if="!ui.data.DisplayAllPages.Value" control="line"></uielement>
+            <uielement name="NoOfPagesSkip" attr-placeholder="Number" container-attr-ng-if="!ui.data.DisplayAllPages.Value && ui.data.SkipPages.Value" control="integer"></uielement>
+            <uielement name="LimitDepth" container-attr-ng-if="!ui.data.DisplayAllPages.Value" control="toggle" attr-class="toggle_right"></uielement>
+            <uielement name="line" container-attr-ng-if="!ui.data.DisplayAllPages.Value" control="line"></uielement>
+            <uielement name="NoOfDepth" attr-placeholder="Number" container-attr-ng-if="!ui.data.DisplayAllPages.Value && ui.data.LimitDepth.Value" control="integer"></uielement>
+            <uielement name="IncludeHiddenPageNo" control="toggle" attr-class="toggle_right"></uielement>
+        </uilayout>
+    </uiengine>
+</div>

@@ -1,0 +1,40 @@
+ALTER TABLE {databaseOwner}[VJ_Core_WorkflowContentReview] DROP CONSTRAINT [FK_VJ_Core_WorkflowContentReview_VJ_Core_WorkflowState]
+GO
+ALTER TABLE {databaseOwner}[VJ_Core_WorkflowContentReview] DROP CONSTRAINT [FK_VJ_Core_WorkflowContentReview_VJ_Core_Workflow]
+GO
+/****** Object:  Table {databaseOwner}[VJ_Core_WorkflowStatePermission]    Script Date: 9/4/2019 4:14:01 PM ******/
+DROP TABLE {databaseOwner}[VJ_Core_WorkflowStatePermission]
+GO
+/****** Object:  Table {databaseOwner}[VJ_Core_WorkflowState]    Script Date: 9/4/2019 4:14:01 PM ******/
+DROP TABLE {databaseOwner}[VJ_Core_WorkflowState]
+GO
+/****** Object:  Table {databaseOwner}[VJ_Core_WorkflowNotification]    Script Date: 9/4/2019 4:14:01 PM ******/
+DROP TABLE {databaseOwner}[VJ_Core_WorkflowNotification]
+GO
+/****** Object:  Table {databaseOwner}[VJ_Core_WorkflowContentReview]    Script Date: 9/4/2019 4:14:01 PM ******/
+DROP TABLE {databaseOwner}[VJ_Core_WorkflowContentReview]
+GO
+/****** Object:  Table {databaseOwner}[VJ_Core_Workflow]    Script Date: 9/4/2019 4:14:01 PM ******/
+DROP TABLE {databaseOwner}[VJ_Core_Workflow]
+GO
+/****** Object:  Table {databaseOwner}[VJ_Core_Setting]    Script Date: 9/4/2019 4:14:01 PM ******/
+DROP TABLE {databaseOwner}[VJ_Core_Setting]
+GO
+/****** Object:  Table {databaseOwner}[VJ_Core_Pages]    Script Date: 9/4/2019 4:14:01 PM ******/
+DROP TABLE {databaseOwner}[VJ_Core_Pages]
+GO
+/****** Object:  Table {databaseOwner}[VJ_Core_CustomBlock]    Script Date: 9/4/2019 4:14:01 PM ******/
+DROP TABLE {databaseOwner}[VJ_Core_CustomBlock]
+GO
+/****** Object:  Table {databaseOwner}[VJ_Core_Localization]    Script Date: 30-Jan-20 4:14:08 PM ******/
+DROP TABLE {databaseOwner}[VJ_Core_Localization]
+GO
+/****** Object:  Table {databaseOwner}[PortalLocalization]    Script Date: 30-Jan-20 4:14:08 PM ******/
+Update {databaseOwner}[{objectQualifier}PortalLocalization] set LoginTabId=null
+GO
+/****** Object:  Table dbo.[VJ_Core_CustomBlock]    Script Date: 9/4/2019 4:14:01 PM ******/
+DROP TABLE {databaseOwner}[VJ_Core_WorkflowPermission]
+GO
+/****** Object:  Table dbo.[VJ_Core_CustomBlock]    Script Date: 9/4/2019 4:14:01 PM ******/
+DROP TABLE {databaseOwner}[VJ_Core_WorkflowLog]
+GO

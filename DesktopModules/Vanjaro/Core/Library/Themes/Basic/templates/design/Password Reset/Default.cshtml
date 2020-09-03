@@ -1,0 +1,36 @@
+﻿@inherits System.Web.WebPages.WebPage
+
+<div class="resetpasslogo">
+    <a href="@Model.ResetPassword.NavigateURL">
+        <img class="img-fluid" alt="@Model.ResetPassword.SiteName" title="@Model.ResetPassword.SiteName" src="@Model.ResetPassword.Path">
+    </a>
+</div>
+<div class="ResetPassword-container validationGroup">
+    <div class="ResetPassword" id="ResetPassword">
+        <h4 class="Resethead">[LS:Data.Block.Login.ChangePasswordText]</h4>
+        <div class="changepassword">
+            <div>
+                <span class="registerlabel">[LS:Data.Block.ResetPassword.UsermailText]</span>
+                <span><input type="text" placeholder="[LS:Data.Block.ResetPassword.UsermailPlaceholderText]" class="Username" disabled="true" value="[Token_Username]"></span>
+            </div>
+            <div>
+                <span class="registerlabel">[LS:Data.Block.ResetPassword.NewPasswordText]</span>
+                <span><input type="password" placeholder="[LS:Data.Block.ResetPassword.NewPasswordPlaceholderText]" class="newPassword" id="newpassword" required></span>
+            </div>
+            <div>
+                <span class="registerlabel">[LS:Data.Block.ResetPassword.ConfirmPasswordText]</span>
+                <span>
+                    <input type="password" placeholder="[LS:Data.Block.ResetPassword.ConfirmPasswordPlaceholderText]" class="confirmPassword" id="confirmpassword" required>
+                </span>
+            </div>
+            <div class="text-justify">
+                <a id="btnChangePassword" onclick="ResetPassword.User('ResetPassword',this)" attr-localize-resetPassword-text="[LS:Data.Block.ResetPassword.ResetText]" class="btn btn-primary justify">
+                    [LS:Data.Block.ResetPassword.ResetText]
+                </a>
+            </div>
+        </div>
+        <div class="text-justify">
+            <a href="@Model.ResetPassword.LoginURL" class="btn btn-default loginbtn" style="display:none">[LS:Data.Block.Login.SigninText]</a>
+        </div>
+    </div>
+</div>

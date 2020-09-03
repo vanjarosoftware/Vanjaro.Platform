@@ -1,0 +1,3 @@
+﻿IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_URL_URLEntity]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[VJ_URL_URLEntity]
+GO

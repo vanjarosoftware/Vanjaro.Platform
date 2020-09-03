@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Save.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="BusinessControllerClass.Text" xml:space="preserve">
+    <value>Business Controller Class</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Dependencies.Text" xml:space="preserve">
+    <value>Dependencies</value>
+  </data>
+  <data name="Description.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="EmailAddress.Text" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="FolderName.Text" xml:space="preserve">
+    <value>Folder Name</value>
+  </data>
+  <data name="FriendlyName.Text" xml:space="preserve">
+    <value>Friendly Name</value>
+  </data>
+  <data name="IsPortable.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="IsPortable.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="IsPortable.Text" xml:space="preserve">
+    <value>Is Portable</value>
+  </data>
+  <data name="IsPremiumModule.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="IsPremiumModule.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="IsPremiumModule.Text" xml:space="preserve">
+    <value>Is Premium App</value>
+  </data>
+  <data name="IsSearchable.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="IsSearchable.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="IsSearchable.Text" xml:space="preserve">
+    <value>Is Searchable</value>
+  </data>
+  <data name="IsUpgradable.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="IsUpgradable.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="IsUpgradable.Text" xml:space="preserve">
+    <value>Is Upgradable</value>
+  </data>
+  <data name="ModuleCategory.Text" xml:space="preserve">
+    <value>App Category</value>
+  </data>
+  <data name="ModuleSharing.Text" xml:space="preserve">
+    <value>App Sharing</value>
+  </data>
+  <data name="Name.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Organization.Text" xml:space="preserve">
+    <value>Organization</value>
+  </data>
+  <data name="Owner.Text" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Permissions.Text" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="Types.Text" xml:space="preserve">
+    <value>Extension Type</value>
+  </data>
+  <data name="Update.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="URL.Text" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="Version.Text" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="EmptyFriendlyName.Text" xml:space="preserve">
+    <value>Please Specify Friendly Name !</value>
+  </data>
+  <data name="OwnerDetails.Text" xml:space="preserve">
+    <value>Owner Details</value>
+  </data>
+  <data name="AdvanceTab.Text" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="Assigned.Text" xml:space="preserve">
+    <value>Assigned</value>
+  </data>
+  <data name="BasicTab.Text" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+  <data name="ControlHelpURL.Text" xml:space="preserve">
+    <value>Help URL</value>
+  </data>
+  <data name="ControlIcon.Text" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="ControlKey.Text" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="ControlSourceFile.Text" xml:space="preserve">
+    <value>Source File</value>
+  </data>
+  <data name="ControlSourceFolder.Text" xml:space="preserve">
+    <value>Source Folder</value>
+  </data>
+  <data name="ControlSupportsPartialRendering.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ControlSupportsPartialRendering.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ControlSupportsPartialRendering.Text" xml:space="preserve">
+    <value>Supports Partial Rendering?</value>
+  </data>
+  <data name="ControlSupportsPopups.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ControlSupportsPopups.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ControlSupportsPopups.Text" xml:space="preserve">
+    <value>Supports Popups?</value>
+  </data>
+  <data name="ControlTitle.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="ControlType.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ControlViewOrder.Text" xml:space="preserve">
+    <value>View Order</value>
+  </data>
+  <data name="DefaultCacheTime.Text" xml:space="preserve">
+    <value>DefaultCacheTime</value>
+  </data>
+  <data name="DefinitionName.Text" xml:space="preserve">
+    <value>Definition Name</value>
+  </data>
+  <data name="Icon.Text" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="LicenseTab.Text" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="License.Text" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="MDef_FriendlyName.Text" xml:space="preserve">
+    <value>Friendly Name</value>
+  </data>
+  <data name="ModuleControls.Text" xml:space="preserve">
+    <value>App Controls</value>
+  </data>
+  <data name="ModuleDefinitions.Text" xml:space="preserve">
+    <value>App Definitions</value>
+  </data>
+  <data name="ModuleDefinitions_Columns_Name.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="ModuleName.Text" xml:space="preserve">
+    <value>App Name</value>
+  </data>
+  <data name="PermissionTab.Text" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="PremiumModule.Text" xml:space="preserve">
+    <value>Premium App Assignment</value>
+  </data>
+  <data name="ReleaseNotes.Text" xml:space="preserve">
+    <value>Release Notes</value>
+  </data>
+  <data name="ReleaseTab.Text" xml:space="preserve">
+    <value>Release Notes</value>
+  </data>
+  <data name="AuthenticationType.Text" xml:space="preserve">
+    <value>Authentication Type</value>
+  </data>
+  <data name="CustomCDN.Text" xml:space="preserve">
+    <value>Custom CDN</value>
+  </data>
+  <data name="DefaultCDN.Text" xml:space="preserve">
+    <value>Default CDN</value>
+  </data>
+  <data name="Enabled.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Enabled.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Enabled.Text" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="FileName.Text" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="LibraryName.Text" xml:space="preserve">
+    <value>Library Name</value>
+  </data>
+  <data name="LibraryVersion.Text" xml:space="preserve">
+    <value>Library Version</value>
+  </data>
+  <data name="LoginControlSource.Text" xml:space="preserve">
+    <value>Login Control Source</value>
+  </data>
+  <data name="LogoffControlSource.Text" xml:space="preserve">
+    <value>Logoff Control Source</value>
+  </data>
+  <data name="ObjectName.Text" xml:space="preserve">
+    <value>Object Name</value>
+  </data>
+  <data name="PreferredLocation.Text" xml:space="preserve">
+    <value>Preferred Location</value>
+  </data>
+  <data name="SettingsControlSource.Text" xml:space="preserve">
+    <value>Settings Control Source</value>
+  </data>
+  <data name="ThemePackageName.Text" xml:space="preserve">
+    <value>Theme Package Name</value>
+  </data>
+  <data name="ModuleControls_Columns_Actions.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="ModuleControls_Columns_SourceFile.Text" xml:space="preserve">
+    <value>Source File</value>
+  </data>
+  <data name="ModuleControls_Columns_Title.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="OwnerInformation.Text" xml:space="preserve">
+    <value>Owner Information</value>
+  </data>
+  <data name="PackageInformation.Text" xml:space="preserve">
+    <value>Package Information</value>
+  </data>
+  <data name="ExtensionSettings.Text" xml:space="preserve">
+    <value>Extension Settings</value>
+  </data>
+  <data name="ModuleDefinitions_Columns_Actions.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="ErrorControlSourceFile.Text" xml:space="preserve">
+    <value>Please specify Source File</value>
+  </data>
+  <data name="ErrorDefinitionName.Text" xml:space="preserve">
+    <value>Please specify Definition Name</value>
+  </data>
+  <data name="ErrorfriendlyName.Text" xml:space="preserve">
+    <value>Please specify Basic &gt; Friendly Name</value>
+  </data>
+  <data name="ErrorMDef_FriendlyName.Text" xml:space="preserve">
+    <value>Please specify Friendly Name</value>
+  </data>
+  <data name="AddRole.Text" xml:space="preserve">
+    <value>Add Role</value>
+  </data>
+  <data name="AddUser.Text" xml:space="preserve">
+    <value>Add User</value>
+  </data>
+  <data name="PermissionsRole.Text" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="PermissionsUser.Text" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="SearchByRole.Text" xml:space="preserve">
+    <value>Begin typing to add a role</value>
+  </data>
+  <data name="SearchByUser.Text" xml:space="preserve">
+    <value>Begin typing to add a user</value>
+  </data>
+  <data name="PermissionsUsersEmpty.Text" xml:space="preserve">
+    <value>There are no users with explicit permissions</value>
+  </data>
+  <data name="AppControls.Text" xml:space="preserve">
+    <value>App Controls</value>
+  </data>
+  <data name="Delete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Settings.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="DeleteAppControl.Text" xml:space="preserve">
+    <value>You want to delete this app control</value>
+  </data>
+  <data name="DeleteAppDefinition.Text" xml:space="preserve">
+    <value>You want to delete this app definition</value>
+  </data>
+  <data name="AppEnabled.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="AppEnabled.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="AppEnabled.Text" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="AppId.Text" xml:space="preserve">
+    <value>App ID</value>
+  </data>
+  <data name="AppSecret.Text" xml:space="preserve">
+    <value>App Secret</value>
+  </data>
+  <data name="SiteSettings.Text" xml:space="preserve">
+    <value>Site Settings</value>
+  </data>
+</root>

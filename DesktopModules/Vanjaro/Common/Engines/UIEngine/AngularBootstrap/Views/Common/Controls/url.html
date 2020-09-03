@@ -1,0 +1,53 @@
+﻿<div ng-controller="common_controls_url" style="padding:50px;">
+    <uiengine provider="AngularBootstrap" identifier="common_controls_url" layout="default">
+        <uilayout name="default" attr-ng-show="ui.data.FilebrowserBrowseUrl.Value">
+            <uitemplate>
+                <ul class="nav nav-tabs">
+                    <li class="FileLink Url_link"><a id="Visualizerstab" data-toggle="tab" mn-ng-click="FileLink()">[L:FileLink]</a></li>
+                    <li class="PageLink Url_link"><a id="Screenstab" data-toggle="tab" mn-ng-click="PageLink()">[L:PageLink]</a></li>
+                </ul>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ShowLink==true">
+            <uielement name="UploadFile" control="upload" mode="file" attr-class="url-add" autoupload="true" label="false" container-attr-ng-show="(ui.data.FilebrowserBrowseUrl.Value && ui.data.Settings.Options.UploadFiles)||(!ui.data.FilebrowserBrowseUrl.Value && ui.data.Settings.Options.UploadImages)" maxsize="$scope.ui.data.FilebrowserBrowseUrl.Value?$scope.ui.data.Settings.Options.UploadFilesMaxFileSize* 1000000:$scope.ui.data.Settings.Options.UploadImagesMaxFileSize* 1000000" filetypes="$scope.ui.data.FilebrowserBrowseUrl.Value?$scope.ui.data.Settings.Options.UploadFilesAllowedAttachmentFileExtensions:$scope.ui.data.Settings.Options.UploadImagesAllowedAttachmentFileExtensions"></uielement>
+            <uielement name="Attachment" control="upload" mode="advance" autoupload="true" label="false" attr-controlmodes="browse" folders="$scope.ui.data.Folders.Options" files="$scope.ui.data.Files.Options"></uielement>
+            <uielement name="Types" control="checkboxtoggle" attr-class="commonurltype"></uielement>
+            <uielement name="line" control="line"></uielement>
+            <uielement name="Cancel" control="button" label="false" attr-ng-click="CancelBrowser()" attr-class="btn-link pull-right" container="false"></uielement>
+            <uielement name="Update" attr-id="Update" control="button" attr-class="pull-right" attr-ng-click="UpdateBrowser('Update')" label="false"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ShowLink==false">
+            <uitemplate>
+                <div class="uploaddefault uploadinput-button" data-name="DnnPagesDiv">
+                    <div class="col-sm-12 well ovrflow">
+                        <div class="col-sm-12">
+                            <span><strong>[L:SelectPage]</strong></span>
+                        </div>
+                        <script type="text/ng-template" id="DnnPages_renderer.html">
+                            <span mn-ng-if="page.childrenCount>0" mn-ng-class="{'fas fa-caret-down': ui.data.DnnPages.Value==page.Value,'fas fa-caret-right': ui.data.DnnPages.Value!=page.Value}" style="visibility: inherit" mn-ng-click="Click_GetSubPages($event,page)"></span>
+                            <span mn-ng-if="page.childrenCount<1" mn-ng-class="{'fas fa-caret-down': ui.data.DnnPages.Value==page.Value,'fas fa-caret-right': ui.data.DnnPages.Value!=page.Value}" style="visibility: hidden" mn-ng-click="Click_GetSubPages($event,page)"></span>
+                            <span class="glyphicon glyphicon-folder-close" id="pages{{page.Value}}" mn-ng-click="Click_GetPageId($event)"></span>
+                            <span class="folders" style="font-weight: bold;" mn-ng-if="ui.data.DnnPages.Value==page.Value" id="pages{{page.Value}}" mn-ng-click="Click_GetPageId($event)">{{page.Text}}</span>
+                            <span class="folders" mn-ng-if="ui.data.DnnPages.Value!=page.Value" id="pages{{page.Value}}" mn-ng-click="Click_GetPageId($event)">{{page.Text}}</span>
+                            <ul class="rootfolder" mn-ng-class="{show: ui.data.DnnPages.Value===page.Value}">
+                                <li mn-ng-repeat="page in page.children" mn-ng-include="'DnnPages_renderer.html'">
+                                </li>
+                            </ul>
+                        </script>
+                        <div class="col-sm-12">
+                            <ul>
+                                <li class="l_folder" mn-ng-repeat="page in ui.data.DnnPages.Options" mn-ng-include="'DnnPages_renderer.html'"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+            <uielement name="PageAnchors" control="dropdownlist"></uielement>
+            <uielement name="Languages" control="dropdownlist"></uielement>
+            <uielement name="TypesPages" control="checkboxtoggle" attr-class="commonurltype"></uielement>
+            <uielement name="line" control="line"></uielement>
+            <uielement name="Cancel" control="button" label="false" attr-ng-click="CancelBrowser()" attr-class="btn-link pull-right" container="false"></uielement>
+            <uielement name="Update" attr-id="UpdatePageLink" control="button" attr-class="pull-right" attr-ng-click="UpdatePageLink('UpdatePageLink')" label="false"></uielement>
+        </uilayout>
+    </uiengine>
+</div>

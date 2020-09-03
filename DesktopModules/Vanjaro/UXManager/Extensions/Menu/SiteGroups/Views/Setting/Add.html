@@ -1,0 +1,41 @@
+﻿<div ng-controller="setting_add" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_add" class="uiengine-wrapper scrollbar">
+        <uilayout name="default" attr-ng-show="ui.data.PortalGroupInfo.Options[0].PortalGroupId==-1">
+            <uielement name="AvailablePortals" control="dropdownlist" attr-ng-change="ChooseSite()"></uielement>
+        </uilayout>
+    <uilayout name="default" attr-ng-show="ui.data.AvailablePortals.Value!=-1 || ui.data.PortalGroupInfo.Options[0].PortalGroupId != -1">
+        <uitemplate>
+            <div class="row">
+                <div class="col-sm-6">
+                    [uilayout:left]
+                </div>
+                <div class="col-sm-6">
+                    [uilayout:right]
+                </div>
+            </div>
+        </uitemplate>
+        <uitemplate>
+            <div class="text-right fixed-footer">
+                <button type="button" ng-click="Click_Update()" class="btn btn-sm btn-primary">
+                    [L:Update]
+                </button>
+            </div>
+        </uitemplate>   
+        </uilayout>
+        <uilayout name="left">
+            <uielement name="GroupName" control="textbox" attr-required="true" attr-ng-model="ui.data.PortalGroupInfo.Options[0].PortalGroupName"></uielement>
+            <uielement name="AuthenticationDomain" control="textbox" attr-ng-model="ui.data.PortalGroupInfo.Options[0].AuthenticationDomain"></uielement>
+            <uielement name="Description" control="textarea" attr-ng-model="ui.data.PortalGroupInfo.Options[0].Description"></uielement>
+        </uilayout>
+        <uilayout name="right">
+            <uitemplate>
+                <div class="form-group">
+                    <label>[L:Sites]</label>
+                    <ul class="name-list">
+                        <li mn-ng-repeat="portal in Portals"><input type="checkbox" id="{{portal.PortalID}}" value="{{portal.PortalName}}" ng-checked="portal.IsChecked"><label>{{portal.PortalName}}</label></li>
+                    </ul>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

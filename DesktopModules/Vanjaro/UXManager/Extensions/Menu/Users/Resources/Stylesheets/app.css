@@ -1,0 +1,246 @@
+﻿.vj-ux-manager .extn-users .boxcontrols {
+    display: block;
+    background: #e6e9ec;
+    padding: 10px;
+}
+
+.vj-ux-manager .badge-button {
+    background-color: #999;
+    color: #fff !important;
+    font-weight: normal;
+    width: 115px;
+    margin-bottom: 5px;
+    padding: 5px 11px;
+    opacity: 0.5;
+    transition: .3s all;
+    border-radius: 8px;
+}
+
+.vj-ux-manager .deletedusers .dropdown-menu {
+    top: 55px !important;
+}
+
+.vj-ux-manager .badge-button .title {
+    padding: 2px 0;
+    float: left;
+}
+
+.vj-ux-manager table .deleteuserimg {
+    width: 60px;
+    height: 60px;
+}
+
+.vanjaro-users .dateinfo {
+    margin-top: 8px;
+}
+
+.vj-ux-manager .badge-button-inverse {
+    background-color: #f9f9f9;
+    color: #777;
+    font-size: 10px;
+    border-radius: 10px;
+}
+
+.vj-ux-manager .extn-users .user-profile {
+    color: #999;
+    font-size: 12px;
+}
+
+.vj-ux-manager .angucomplete-holder {
+    width: 100%;
+    display: inline-block;
+}
+
+.vj-ux-manager .addrolebtn {
+    border-radius: 0 4px 4px 0;
+    margin-top: -2px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.vj-ux-manager .extn-users {
+    font-size: 13px;
+}
+
+.vj-ux-manager .vanjaro-users {
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: normal;
+}
+
+.vj-ux-manager .extn-users .small-text {
+    font-size: 11px;
+    color: #999;
+}
+
+.vj-ux-manager .small-text {
+    font-size: 10px;
+    color: #ccc;
+}
+
+.vj-ux-manager .users {
+    font-size: 13px;
+}
+
+.vj-ux-manager .badge-notify {
+    background: #999;
+    position: absolute;
+    top: -15px;
+    left: 8px;
+}
+
+.vj-ux-manager ul li.list-group-item:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.vj-ux-manager input[type=date],
+.vj-ux-manager input[type=datetime-local],
+.vj-ux-manager input[type=month],
+.vj-ux-manager input[type=time] {
+    line-height: 17px !important;
+}
+
+.vj-ux-manager .date_picker input,
+.vj-ux-manager .date_picker input:focus,
+.vj-ux-manager .date_picker input:active {
+    border: none;
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+    padding: 1px;
+    height: auto;
+    font-family: 'Helvetica Neue', 'Font Awesome 5 Free', Helvetica, Arial, sans-serif;
+    cursor: pointer;
+    line-height: 30px;
+}
+
+
+.vj-ux-manager .usertable table {
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+.vj-ux-manager .dropdown-menu a:hover,
+.vj-ux-manager .dropdown-menu a:focus,
+.vj-ux-manager .dropdown-menu a:active,
+.vj-ux-manager .dropdown-menu a.active {
+    background: #ececec;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.vj-ux-manager table img {
+    height: 42px;
+    width: 42px;
+}
+
+.vj-ux-manager .rvwarning {
+    font-size: 11px;
+    padding: 10px;
+}
+
+.vj-ux-manager .revision_block {
+    background-color: #fff;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+    .vj-ux-manager .revision_block:nth-of-type(even) {
+        background-color: #f9f9f9;
+    }
+
+    .vj-ux-manager .revision_block.active {
+        background-color: #ddd;
+    }
+
+    .vj-ux-manager .revision_block .author_name,
+    .vj-ux-manager .revision_block .date {
+        font-size: 11px;
+        display: inline-block;
+    }
+
+    .vj-ux-manager .revision_block .badge-success {
+        background-color: #47a447;
+    }
+
+    .vj-ux-manager .revision_block .badge-light {
+        background-color: #cdcfd1;
+    }
+
+
+.vj-ux-manager .revision_name .badge {
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vj-ux-manager .vanjaro-users .username {
+    display: inline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.vj-ux-manager .permission-icon {
+    margin-bottom: 10px;
+}
+
+.vj-ux-manager .ui-inlineblock {
+    margin-bottom: 15px;
+}
+
+.vj-ux-manager .search-info-msg {
+    margin-top: 0px;
+}
+
+.vj-ux-manager .active span {
+    font-weight: bold;
+}
+
+.vj-ux-manager .m-none {
+    padding: 2px;
+}
+
+.vj-ux-manager .table-grid .table td {
+    vertical-align: middle;
+}
+
+.vj-ux-manager .datetime-range {
+    color: #ccc;
+    font-weight: normal;
+}
+
+.vj-ux-manager .stfooter .pagination {
+    justify-content: center;
+}
+
+.vj-ux-manager .font-datetime input {
+    font-size: 12px;
+}
+
+.vj-ux-manager .uiengine-wrapper {
+    padding: 0px 15px 20px;
+}
+
+    .vj-ux-manager .uiengine-wrapper.adduser {
+        padding: 15px 0;
+    }
+
+.vj-ux-manager.user-info {
+    margin-top: 15px;
+}
+
+
+.vj-ux-manager .deletedUser {
+    text-decoration: line-through;
+}
+
+.vj-ux-manager .btn-group.truefalse {
+    float: right;
+}
+
+/*.vj-ux-manager .rolename {
+    padding-top: 16px;
+}*/

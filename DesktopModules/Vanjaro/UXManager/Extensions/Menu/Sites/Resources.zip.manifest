@@ -1,0 +1,36 @@
+﻿<dotnetnuke type="ResourceFile" version="5.0">
+  <files>
+    <file>
+      <path>Resources/UIEngine/AngularBootstrap/Layouts/</path>
+      <name>Sites.htm</name>
+    </file>
+    <file>
+      <path>Views/App_LocalResources/</path>
+      <name>Shared.resx</name>
+    </file>
+    <file>
+      <path>Views/Setting/</path>
+      <name>Add.html</name>
+    </file>
+    <file>
+      <path>Views/Setting/</path>
+      <name>Add.js</name>
+    </file>
+    <file>
+      <path>Views/Setting/App_LocalResources/</path>
+      <name>Add.resx</name>
+    </file>
+    <file>
+      <path>Views/Setting/App_LocalResources/</path>
+      <name>Sites.resx</name>
+    </file>
+    <file>
+      <path>Views/Setting/</path>
+      <name>Sites.html</name>
+    </file>
+    <file>
+      <path>Views/Setting/</path>
+      <name>Sites.js</name>
+    </file>
+  </files>
+</dotnetnuke>

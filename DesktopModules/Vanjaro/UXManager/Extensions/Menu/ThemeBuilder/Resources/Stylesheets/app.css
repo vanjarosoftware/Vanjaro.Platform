@@ -1,0 +1,524 @@
+﻿.addmodulebtn {
+    margin-top: 30px;
+}
+
+.units {
+    position: absolute;
+    margin: auto;
+    right: 0px;
+    bottom: 0;
+    color: #999;
+}
+
+.input-wrapper input::-webkit-outer-spin-button,
+.input-wrapper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.input-wrapper input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.input-wrapper input[type="number"] {
+    width: 64px;
+    /*margin-left: 10px;*/
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: right;
+    border: none;
+    padding-right: 18px;
+    color: #999;
+}
+
+    .input-wrapper input[type="number"]:focus {
+        outline: none;
+    }
+
+.field .input-wrapper .sp-replacer {
+    cursor: pointer;
+    padding: 0px;
+    border: 0px;
+    background: none;
+    vertical-align: middle;
+        padding-right: 14px;
+}
+
+
+.unit {
+    background-color: transparent;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    padding: 2px;
+    z-index: 1;
+    color: #495157;
+    border: 0 !important;
+    border-radius: 0 !important;
+    margin-top: 1px;
+    -webkit-appearance: none;
+}
+
+.input-wrapper {
+    position: relative;
+    float: right;
+    display: flex;
+    width: 100%;
+    right: 18px;
+    padding-left: 38px;
+}
+
+.fieldcolor .input-wrapper {
+    position: relative;
+    float: right;
+    display: flex;
+    width: auto;
+}
+
+.field {
+    /* margin: 10px 0; */
+    /* padding-left: 10px !important; */
+}
+
+.mainblocks {
+    border-bottom: 1px solid #b2b2b2;
+    padding: 9px 10px 9px 20px;
+    border-top: 1px solid #b2b2b2;
+    margin-top: -1px;
+}
+
+.optiontheme {
+    padding: 9px 9px 9px 13px;
+    cursor: pointer;
+    color: #495157;
+}
+
+.optioncontrol {
+    padding: 8px !important;
+    white-space: nowrap;
+    position: relative;
+}
+
+#dvMarkUp {
+    background: #fff;
+}
+
+    #dvMarkUp .field {
+        /*line-height: 2;*/
+    }
+
+.sp-dd {
+    display: none;
+}
+
+.sp-preview {
+    border-radius: 50%;
+    border: 0px;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.sp-preview-inner {
+    border-radius: 50%;
+}
+
+.dvManage .units {
+    right: 65px;
+}
+
+.ThemeBuilder .heading {
+    margin-top: 0;
+}
+
+.menuextension .content {
+    background-color: white;
+    margin-top: -20px;
+    height: calc(100vh - 60px) !important;
+    padding: 0px;
+}
+
+.sp-palette-container {
+    width: 100%;
+    background: #fff;
+}
+
+.grptitle {
+    float: right;
+    border: 0px !important;
+    padding: 0px !important;
+    border-radius: 0px !important;
+    border-left: 0px !important;
+    right: 3px !important;
+}
+
+.subtMenu {
+    width: 100%;
+    padding: 8px !important;
+}
+
+.dropdownselect select {
+    width: 100%;
+    border: none;
+    text-transform: capitalize;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.dropdownselect .dropdownOption {
+    position: relative;
+    width: 100%;
+    padding-right: 32px;
+}
+    .dropdownselect .dropdownOption .units{
+        right:16px;
+    }
+
+    .dropdownselect {
+        width: 100%;
+        display: flex;
+    }
+
+.dropdownlabel {
+    flex: none;
+}
+
+.dropdownselect select:focus {
+    outline: none;
+}
+
+.grptitle:hover {
+    background: none !important;
+}
+
+
+.input-wrapper input[type="range"] {
+    margin: 0;
+    border: none;
+    -webkit-appearance: none;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.csslider .input-wrapper {
+    margin-top: -8%;
+}
+
+
+
+.input-wrapper:hover input[type="range"] {
+    opacity: 1;
+}
+
+.input-wrapper input[type="range"]:focus {
+    outline: none;
+}
+
+.input-wrapper input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    margin-top: -4px;
+    height: 10px;
+    width: 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 100%;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.input-wrapper input[type="range"]::-moz-range-thumb {
+    height: 10px;
+    width: 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 100%;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.input-wrapper input[type="range"]::-ms-thumb {
+    height: 10px;
+    width: 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 100%;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.input-wrapper input[type="range"]::-webkit-slider-runnable-track {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 1px;
+    margin-top: 3px;
+    height: 3px;
+}
+
+.sp-palette .sp-thumb-inner {
+    border-radius: 50%;
+}
+
+.sp-palette .sp-thumb-el {
+    border-radius: 50%;
+}
+
+.container-fluid select {
+    outline: none;
+    color: #999;
+}
+
+.fieldcolor {
+    line-height: unset !important;
+}
+
+.vj-ux-manager .dropdown-menu {
+    top: 30px !important;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,.22), 0 0 0 1px rgba(0,0,0,.04);
+    width: 96%;
+    left: 6px !important;
+}
+
+.grptitle .fa-chevron-down:before {
+    position: absolute;
+    top: 2px;
+    right: 32px;
+    color: #999;
+}
+
+.mainblocks i {
+    padding: 0px 8px;
+    font-size: 13px;
+    padding-left: 0;
+    width: 15px;
+}
+
+.vj-ux-manager.manage-settings {
+    margin-top: 15px;
+}
+
+.theme-builder-accordion .card .collapse {
+    height: calc(100vh - 100px);
+    overflow: auto;
+}
+
+.optiontheme label {
+    display: inline;
+    font-size: 16px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.optioncontrol label {
+    display: inline;
+    font-size: 12px;
+    font-weight: normal;
+    margin-left: 20px;
+    color: #999;
+    text-transform: capitalize;
+}
+
+.subtMenu .optioncontrol label {
+    margin-left: 0px;
+}
+
+.optioncontrol .sp-preview {
+    border: 1px solid #b3b3b3;
+}
+
+/*.firstblock .input-wrapper input[type="range"] {
+    margin-left: 14px;
+}*/
+
+.subtMenu .optioncontrol .input-wrapper input[type="range"] {
+    margin-left: -20px;
+}
+
+.dropdownOption select option {
+    font-size: 12px;
+}
+
+.optioncontrol + .optioncontrol {
+    padding-top: 0px !important;
+}
+
+.child-wrapper {
+    position: relative;
+}
+
+.RightSideMenu .dropdown-menu,
+.addmodulebtn .dropdown .dropdown-menu {
+    left: auto !important;
+    right: 0 !important;
+}
+
+.RightSideMenu .dropdown-menu {
+    left: auto !important;
+    right: 0 !important;
+}
+
+.validationGroup .dropdown .dropdown-menu {
+    left: auto !important;
+    right: 0 !important;
+}
+
+.CodeMirror {
+    width: 100% !important;
+}
+
+.ui-sortable tr td {
+    vertical-align: middle !important;
+}
+
+.optiontheme span {
+    font-size: 12px;
+}
+
+.RightSideMenu .optiontheme label {
+    display: inline-block;
+    /*width: 150px;*/
+    margin-bottom: 0px;
+    color: #000;
+    margin-left: 0px;
+    cursor: default;
+}
+
+.RightSideMenu .child-wrapper {
+    margin-right: 0px;
+    /*border-bottom: 1px solid #999;*/
+}
+
+.vj-ux-manager .RightSideMenu .child-wrapper .dropdownmenu {
+    /*border: 1px solid #eee;*/
+    /*border-right: 1px solid #eee;*/
+    right: 3px !important;
+    padding: 10px 18px !important;
+    top: 8px;
+}
+
+.RightSideMenu .firstblock:first-child .mainblocks {
+    border-top: 0px;
+}
+
+.RightSideMenu .firstblock:last-child .mainblocks {
+    border-bottom: 0px;
+}
+
+.RightSideMenu .firstblock:last-child .child-wrapper {
+    border-top: 1px solid #b2b2b2;
+}
+
+.RightSideMenu #dvMarkUp {
+    margin-top: -16px;
+}
+
+.RightSideMenu .optiontheme {
+    cursor: default;
+}
+
+.scrollbar::-webkit-scrollbar {
+    margin-top: 10px;
+    height: 10px;
+    width: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    border-radius: 10px;
+    opacity: 0.8;
+}
+
+.scrollbar::-webkit-scrollbar-track-piece {
+    background: rgba(255, 255, 255, 0);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(170, 170, 170, 0.3);
+    outline: 1px solid slategrey;
+    -webkit-transition: background-color .2s linear,width .2s ease-in-out;
+    -o-transition: background-color .2s linear,width .2s ease-in-out;
+    transition: background-color .2s linear,width .2s ease-in-out;
+}
+
+.RightSideMenu .fieldcolor:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.vj-ux-manager .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.child-wrapper .dropdown .subtMenu {
+    left: 6px !important;
+}
+
+.RightSideMenu .card .firstblock .child-wrapper .optioncontrol {
+    padding: 0px !important;
+    border-bottom: 1px solid #ccc;
+}
+
+.RightSideMenu .firstblock .dropbtn > label {
+    font-size: 14px;
+    color: #000;
+    margin-left: 0;
+    font-weight: 600 !important;
+    margin: 8px 0 !important;
+    display: inline-block;
+    padding-left: 28px;
+}
+
+.togglelabel {
+    cursor: pointer;
+}
+
+    .togglelabel label {
+        cursor: pointer;
+    }
+
+.PvNotAvailable {
+    cursor: pointer;
+    position: absolute;
+    right: 8px;
+    font-size: 8px;
+    margin-top: 4px;
+}
+
+.subtMenu .PvNotAvailable {
+    right: 10px;
+}
+
+.subtMenu .input-wrapper {
+    right: 14px;
+    padding-left: 35px;
+}
+
+.subtMenu .dropdownselect .dropdownOption {
+    padding-right: 15px;
+}
+
+.vj-ux-manager ul.role-group {
+    padding: 0;
+}
+
+    .vj-ux-manager ul.role-group li {
+        background-color: #f9f9f9;
+        list-style: none;
+        border: none;
+        border-radius: 0;
+        margin-bottom: 5px;
+        border: 1px solid #ccc;
+    }
+
+.contentdefault {
+    background-color: #e6e9ec!important;
+    margin: 0!important;
+    padding-right: 15px!important;
+    padding-left: 15px!important;
+}
+
+.vj-ux-manager ul.role-group li a {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #313131;
+    display: block;
+    text-decoration: none !important;
+}

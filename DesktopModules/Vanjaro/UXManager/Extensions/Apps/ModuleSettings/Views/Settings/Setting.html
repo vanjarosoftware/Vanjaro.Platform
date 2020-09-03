@@ -1,0 +1,25 @@
+﻿<div ng-controller="settings_setting" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="settings_setting" layout="dashboard">
+        <uilayout name="default" attr-ng-show="ShowPermissionTab">
+            <uielement name="Permissions" control="Permissiongrid" label="false"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ShowSchedulingTab">
+            <uielement name="EnableScheduling" ngmodel="EnableScheduling" control="toggle" attr-class="toggle_right">></uielement>
+            <uielement name="StartDate" container-attr-ng-show="EnableScheduling" attr-ng-model="ui.data.StartDate.Options" control="bootstrapdatepicker"></uielement>
+            <uielement name="EndDate" container-attr-ng-show="EnableScheduling" attr-ng-model="ui.data.EndDate.Options" control="bootstrapdatepicker"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ShowAdvanceTab">
+            <uielement name="chkAllTabs" ngmodel="ui.data.chkAllTabs.Options" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uielement name="chkNewTabs" ngmodel="chkNewTabs" container-attr-ng-show="ui.data.chkAllTabs.Options" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" ng-click="Click_Save()" class="btn btn-sm btn-primary">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

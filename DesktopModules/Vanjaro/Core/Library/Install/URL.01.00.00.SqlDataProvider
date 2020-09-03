@@ -1,0 +1,42 @@
+﻿/****** Object:  Table {databaseOwner}[VJ_URL_URLEntity]    Script Date: 4/16/2020 10:00:00 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_URL_URLEntity]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_URL_URLEntity](
+	[URLID] [int] IDENTITY(1,1) NOT NULL,
+	[ModuleID] [int] NOT NULL,
+	[EntityID] [int] NOT NULL,
+	[Entity] [nvarchar](max) NOT NULL,
+	[Language] [nvarchar](max) NULL,
+	[Slug] [nvarchar](255) NULL,
+	[IsDefault] [bit] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NOT NULL,
+	[UpdatedOn] [datetime] NOT NULL,
+	[Updatedby] [int] NOT NULL,
+	[PageName] [bit] NOT NULL,
+	[IgnorePageName] [bit] NOT NULL,
+ CONSTRAINT [PK_VJ_URL_URLEntity] PRIMARY KEY CLUSTERED 
+(
+	[URLID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [VJ_Slug] UNIQUE NONCLUSTERED 
+(
+	[Slug] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[DF_VJ_URL_URLEntity_PageName]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[VJ_URL_URLEntity] ADD  CONSTRAINT [DF_VJ_URL_URLEntity_PageName]  DEFAULT ((1)) FOR [PageName]
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[DF_VJ_URL_URLEntity_IgnorePageName]') AND type = 'D')
+BEGIN
+ALTER TABLE {databaseOwner}[VJ_URL_URLEntity] ADD  CONSTRAINT [DF_VJ_URL_URLEntity_IgnorePageName]  DEFAULT ((0)) FOR [IgnorePageName]
+END
+GO

@@ -1,0 +1,10 @@
+﻿.actionmenu-wrapper {
+    width: 1140px;
+    padding: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 2rem !important;
+    border: 1px solid #dcdcdc;
+    background: #fff;
+    border-radius: 5px;
+}

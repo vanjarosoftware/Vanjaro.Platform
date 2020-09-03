@@ -1,0 +1,39 @@
+﻿<div ng-controller="setting_adduser" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_adduser" class="uiengine-wrapper adduser scrollbar">
+        <uilayout name="default">
+            <uitemplate>
+                <div class="row">
+                    <!--<div class="form-group search-name col-sm-6" data-datatype="textbox" data-label="Name" data-name="Name">
+                        <label data-toggle="tooltip" title="" data-original-title="">Name</label>
+                        <div class="input-group col-sm-12">
+                            <input type="text" class="form-control control-background" container="true" ng-model="ui.data.UserTemplate.Options.firstName">
+                        </div>
+                    </div>-->
+                    <!--<div class="form-group search-name col-sm-6" data-datatype="textbox" data-label="Last Name" data-name="LastName">
+                        <label class="" for="setting_adduser0textbox1" data-toggle="tooltip" title="" data-original-title="">Last Name</label>
+                        <div class="input-group col-sm-12">
+                            <input type="text" class="form-control control-background ng-pristine" container="true" ng-model="ui.data.UserTemplate.Options.lastName">
+                        </div>
+                    </div>-->
+                </div>
+            </uitemplate>
+            <uielement name="Name" control="textbox" attr-required="true" attr-ng-model="ui.data.UserTemplate.Options.firstName"></uielement>
+            <uielement name="UserName" control="textbox" container-attr-ng-show="!ui.data.UseEmailAsUsername.Options" attr-required="true" attr-ng-model="ui.data.UserTemplate.Options.userName"></uielement>
+            <uielement name="Email" control="textbox" attr-required="true" attr-ng-model="ui.data.UserTemplate.Options.email"></uielement>
+            <uielement name="Authorized" label="false" attr-ng-show="false" control="checkboxtoggle" attr-class="toggle_right" ngmodel="ui.data.UserTemplate.Options.authorize"></uielement>
+            <uielement name="RandomPassword" control="toggle" ngmodel="ui.data.UserTemplate.Options.randomPassword" attr-class="toggle_right"></uielement>
+            <uielement name="line" control="line" container-attr-ng-if="!ui.data.UserTemplate.Options.randomPassword"></uielement>
+            <uielement name="Password" container-attr-ng-if="!ui.data.UserTemplate.Options.randomPassword" control="password" attr-required="true" attr-ng-model="ui.data.UserTemplate.Options.password"></uielement>
+            <uielement name="ConfirmPassword" container-attr-ng-if="!ui.data.UserTemplate.Options.randomPassword" control="password" attr-required="true" attr-ng-model="ui.data.UserTemplate.Options.confirmPassword"></uielement>
+            <uielement name="line" control="line" container-attr-ng-if="!ui.data.UserTemplate.Options.randomPassword" label="false"></uielement>
+            <uielement name="SendEmailToNewUser" attr-class="toggle_right" control="toggle" ngmodel="ui.data.UserTemplate.Options.notify"></uielement>
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button attr-id="update" type="button" mn-ng-click="Click_Save('update')" class="btn btn-sm btn-primary">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

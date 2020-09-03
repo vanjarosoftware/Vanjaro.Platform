@@ -1,0 +1,47 @@
+﻿<div ng-controller="review_review" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="review_review" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uitemplate>
+                <!--<a class="ux-btn ux-btn-hover float-right" data-toggle="dropdown" ng-click="ClickShowStateDDL(true)">
+                    <em class="fas fa-filter "></em>
+                </a>-->
+                <a class="ux-btn ux-btn-hover dropdown-toggle  float-right" role="button" data-toggle="dropdown" title="[L:Types]"><em class="fas fa-filter"></em></a>
+                <div id="vjStatesTypes" class="dropdown-menu">
+                    <a class="dropdown-item" style="cursor: pointer;" mn-ng-repeat="x in ui.data.States.Options"  mn-ng-click="BindReviewPages($event,x.Value)"  id="{{x.Value}}">{{x.Text}}</a>
+                </div>
+            </uitemplate>
+            <!--<uielement name="States" control="dropdownlist" tooltip="false" container-attr-ng-show="ShowStateDDL" ngmodel="StateID" attr-ng-change="BindReviewPages()"></uielement>-->
+
+
+
+            <uielement name="ReviewPages" control="grid" label="false" attr-class="table-grid ReviewPages GrayTh" ngoptions="ReviewPages" pagesize="10" paged="true" displayedpages="5" attr-st-pipe="Pipe_ReviewPages">
+                <column name="TabName" width="33">
+                    <uitemplate>
+                        <a title="{{row.TabName}}" class="reviewpagename" style="cursor:pointer;" ng-click="OpenModelPopup(row)">
+                            <span>{{row.TabName}}</span>
+                        </a>
+                    </uitemplate>
+                </column>
+                <column name="Workflow" data="Workflow" width="30">
+                </column>
+                <column name="State" data="State" width="30">
+                </column>
+                <column name="Action" width="7">
+                    <uitemplate>
+                        <div class="dropdown pull-right dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v"></em>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item box-icon" ng-click="OpenModelPopup(row)"><em class="fas fa-file-alt mr-xs "></em><span>[L:Review]</span></a></li>
+                            </ul>
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+    </uiengine>
+</div>
+
+
+

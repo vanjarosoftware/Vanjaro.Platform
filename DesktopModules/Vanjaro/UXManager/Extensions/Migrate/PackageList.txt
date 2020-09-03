@@ -1,0 +1,5 @@
+﻿bin\*
+VanjaroMigrate.dnn
+Resources.zip
+EULA.txt
+Release.txt

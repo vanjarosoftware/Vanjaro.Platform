@@ -1,0 +1,189 @@
+.dnnWizardTab.ui-tabs .ui-tabs-panel {
+    padding: 10px;
+}
+
+body {
+    background: #f4f4f4;
+}
+
+.dnnInstall hr {
+    display: none;
+}
+
+.dnnLabel {
+    text-align: left;
+}
+
+    .dnnLabel label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-size: 16px !important;
+        font-weight: 400 !important;
+        margin-right: 25px;
+    }
+
+.dnnLabel {
+    width: 96%;
+}
+
+.dnnFormItem.information-checkbox .dnnLabel {
+    margin-left: 0;
+}
+
+.dnnFormItem .information {
+    width: auto;
+    margin-left: 0;
+}
+
+.dnnFormItem input, .dnnFormItem select, .dnnFormItem textarea {
+    display: block !important;
+    height: 46px !important;
+    font-weight: 400 !important;
+    line-height: 24px !important;
+    color: #495057 !important;
+    box-sizing: border-box !important;
+    width: 550px;
+    border: 1px solid #ccc !important;
+    padding: 10px !important;
+    margin-bottom: 10px !important;
+    font-size: 16px !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+span#lblDotNetNukeInstalltion {
+    font-size: 26px !important;
+    color: #444 !important;
+}
+
+
+div#tabs .tabSubTitle {
+    color: #ccc;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+    font-weight: normal;
+}
+
+.dnnActions li {
+    float: right;
+}
+
+.dnnPrimaryAction, .dnnFormItem input[type="submit"], a.dnnPrimaryAction,
+#visitSite {
+    box-shadow: none;
+    text-shadow: none;
+    color: #fff !important;
+    background-color: #444 !important;
+    background: #444 !important;
+    border-color: #444 !important;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    font-weight: normal;
+    box-shadow: none !important;
+    opacity: 1 !important;
+}
+
+    .dnnPrimaryAction:hover, .dnnFormItem input[type="submit"]:hover, a.dnnPrimaryAction:hover,
+    #visitSite:hover {
+        background-color: #000 !important;
+        background: #000 !important;
+        border-color: #000 !important;
+    }
+
+.install {
+    border-radius: 8px;
+}
+
+
+.dnnFormHelp, #installation-steps {
+    display: none !important;
+}
+
+.dnnLabel:hover .dnnTooltip .dnnFormHelpContent {
+    visibility: visible !important;
+}
+
+.dnnTooltip {
+    right: 44% !important;
+    top: -15px;
+}
+
+.logoimg {
+    text-align: center;
+    margin: 50px;
+}
+
+h2.dnnForm.dnnInstall.dnnClear {
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+#lblAccountInfoIntro, #lblIntroDetail {
+    display: none;
+}
+
+.dnnTooltip .dnnFormHelpContent, .dnnHelperTip .dnnFormHelpContent {
+    width: fit-content;
+    padding-left: 10px;
+    color: #fff;
+}
+
+.dnnFormItem span.dnnFormMessage.dnnFormError {
+    right: unset !important;
+}
+
+
+a.pinHelp {
+    display: none;
+}
+
+
+.dnnSecondaryAction, a.dnnSecondaryAction,
+.dnnSecondaryAction:hover, a.dnnSecondaryAction:hover {
+    background: #fff !important;
+    box-shadow: none;
+}
+
+
+div#installation-progress {
+    width: 100% !important;
+}
+
+div#installation-log-container {
+    width: 100% !important;
+    margin-top: 5px;
+}
+
+
+.dnnProgressbar {
+    border: 1px solid #ccc !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}
+
+.jspContainer, .jspPane {
+    width: 100% !important;
+}
+
+.jspPane {
+    width: 98% !important;
+}
+
+.ui-progressbar .ui-progressbar-value {
+    background-color: #444;
+    background: -moz-linear-gradient(left, #777 0%, #444 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#777), color-stop(100%,#444));
+    background: -webkit-linear-gradient(left, #777 0%, #444 100%);
+    background: linear-gradient(left, #777 0%, #444 100%);
+}
+
+.dnnDisabledAction {
+    display: none;
+}
+
+a#continueLink {
+    display: block;
+}

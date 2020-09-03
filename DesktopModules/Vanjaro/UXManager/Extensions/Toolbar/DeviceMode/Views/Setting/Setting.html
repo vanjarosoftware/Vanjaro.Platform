@@ -1,0 +1,13 @@
+﻿<div ng-controller="setting_setting">
+    <uiengine provider="AngularBootstrap" identifier="setting_setting">
+        <uilayout name="default">
+            <uitemplate>
+                <div class="float-right">
+                  Hello
+                </div>
+            </uitemplate>
+            <uitemplate><hr class="hr_bottom" /></uitemplate>
+            <uielement name="PagesTree" ngoptions="PagesTree" control="treeview" collapsed="true" editnode="Edit_PagesTreeNode(node,$event)" removenode="Remove_PagesTreeNode(node,$event)" label="false"></uielement>
+        </uilayout>
+    </uiengine>
+</div>

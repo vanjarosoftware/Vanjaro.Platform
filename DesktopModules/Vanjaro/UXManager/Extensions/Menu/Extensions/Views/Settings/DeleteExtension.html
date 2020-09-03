@@ -1,0 +1,36 @@
+﻿<div ng-controller="settings_deleteextension" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="settings_deleteextension" class="deleteextension">
+        <uilayout name="default" attr-class="col-md-12">            
+            <uitemplate>
+                <div class="float-right textright">
+                    <div class="displayprop">
+                        <a class="ux-btn ux-btn-hover" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:Email]" ng-click="Click_Email()">
+                            <em class="fas fa-envelope"></em>
+                        </a>
+                        <a class="ux-btn ux-btn-hover" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:URL]" href="{{SiteURL}}" target="_blank">
+                            <em class="fas fa-link"></em>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="displayprop productinfo">
+                        <span class="pname">{{ui.data.packageDetail.Options.friendlyName}} v{{ui.data.packageDetail.Options.version}}</span>
+                        <br />
+                        <span>{{ui.data.packageDetail.Options.organization}}</span>
+                        <br />
+                        <span class="pdescription" data-toggle="tooltip" data-placement="top" data-original-title="{{DescriptionTitle}}">{{ui.data.packageDetail.Options.description}}</span>
+                    </div>
+                </div>
+            </uitemplate>
+            <uielement name="DeleteFiles" ngmodel="DeleteFiles" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uitemplate>
+                <hr />
+                <div class="float-right">
+                    <button type="button" ng-click="Click_Delete()" class="btn btn-sm btn-primary">
+                        [L:Delete]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

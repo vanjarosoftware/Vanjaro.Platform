@@ -1,0 +1,17 @@
+﻿<div ng-controller="url_manage">
+    <uiengine provider="AngularBootstrap" identifier="url_manage" layout="Default">
+        <uilayout name="default">
+            <uielement name="UrlHistory" control="grid" pagesize="25" displayedpages="10" paged="true" search="false" label="false">
+               <column name="Slug" data="Slug">
+                </column>
+                <!--<column name="Language" data="Language">
+                </column>-->
+                <column name="IsDefault">
+                    <uitemplate>
+                            <i class="far {{row.IsDefault ? 'fa-check-square':'fa-square'}}"></i>                 
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+    </uiengine>
+</div>

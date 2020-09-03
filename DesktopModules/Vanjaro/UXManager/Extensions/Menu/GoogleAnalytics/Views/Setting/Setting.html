@@ -1,0 +1,21 @@
+﻿<div ng-controller="setting_setting" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_setting" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uielement name="TrackingID" control="textbox" attr-ng-model="ui.data.Settings.Options.TrackingID"></uielement>
+            <uielement name="UrlParameter" control="textarea" attr-ng-model="ui.data.Settings.Options.UrlParameter"></uielement>
+            <uielement name="TrackforAdministrators" control="checkboxtoggle" ngmodel="ui.data.Settings.Options.TrackAdministrators" attr-class="toggle_right"></uielement>
+            <uielement name="AnonymizeIp" control="checkboxtoggle" ngmodel="ui.data.Settings.Options.AnonymizeIp" attr-class="toggle_right"></uielement>
+            <uielement name="TrackUserId" control="checkboxtoggle" ngmodel="ui.data.Settings.Options.TrackUserId" attr-class="toggle_right"></uielement>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div class="fixed-footer">
+                    <div class="text-right">
+						<button type="button" class="btn btn-sm btn-default mr-sm" mn-ng-show="ui.data.HasConfig.Options" ng-click="Click_Delete()"><span>[L:Delete]</span></button>
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="Click_Update()"><span>[L:Update]</span></button>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

@@ -1,0 +1,17 @@
+﻿<div ng-controller="notification_tasks" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="notification_tasks" layout="admin">
+        <uilayout name="default">
+            <uitemplate>
+                <div>
+                    <p mn-ng-bind-html="ui.data.Notifications.Options.NotificationMarkUp | unsafe"></p>
+                </div>
+            </uitemplate>
+            <uitemplate>
+                <div class="search-info-msg" mn-ng-show="ui.data.Notifications.Options.NotificationCount <= 0">[LS:TasksNotFound]</div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>
+
+
+

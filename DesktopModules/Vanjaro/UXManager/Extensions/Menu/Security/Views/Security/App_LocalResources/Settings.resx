@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DefaultAuthProvider.Text" xml:space="preserve">
+    <value>Default Authentication Provider</value>
+  </data>
+  <data name="Picture_DefaultFolder.Text" xml:space="preserve">
+    <value>Default Folder</value>
+  </data>
+  <data name="EmailAddressValidation.Text" xml:space="preserve">
+    <value>Email Address Validation</value>
+  </data>
+  <data name="EnableRegisterNotification.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="EnableRegisterNotification.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="EnableRegisterNotification.Text" xml:space="preserve">
+    <value>Enable Register Notifications</value>
+  </data>
+  <data name="General.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="HideLoginControl.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="HideLoginControl.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="HideLoginControl.Text" xml:space="preserve">
+    <value>Hide Login Control</value>
+  </data>
+  <data name="Login.Text" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginSettings.Text" xml:space="preserve">
+    <value>Login Setting</value>
+  </data>
+  <data name="Media.Text" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="Pictures.Text" xml:space="preserve">
+    <value>Pictures</value>
+  </data>
+  <data name="Videos.Text" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="RedirectAfterLogin.Text" xml:space="preserve">
+    <value>Redirect After Login</value>
+  </data>
+  <data name="RedirectAfterLogout.Text" xml:space="preserve">
+    <value>Redirect After Logout</value>
+  </data>
+  <data name="RedirectAfterRegistration.Text" xml:space="preserve">
+    <value>Redirect After Registration</value>
+  </data>
+  <data name="Registeration.Text" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="RequireValidProfileAtLogin.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="RequireValidProfileAtLogin.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="RequireValidProfileAtLogin.Text" xml:space="preserve">
+    <value>Require a valid Profile for Login</value>
+  </data>
+  <data name="SelectOption.Text" xml:space="preserve">
+    <value>None Specified</value>
+  </data>
+  <data name="SSL.Text" xml:space="preserve">
+    <value>SSL</value>
+  </data>
+  <data name="SSLEnabled.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="SSLEnabled.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="SSLEnabled.Text" xml:space="preserve">
+    <value>SSL Enabled</value>
+  </data>
+  <data name="SSLEnforced.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="SSLEnforced.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="SSLEnforced.Text" xml:space="preserve">
+    <value>SSL Enforced</value>
+  </data>
+  <data name="SSLOffloadHeaderValue.Text" xml:space="preserve">
+    <value>SSL Offload Header Value</value>
+  </data>
+  <data name="SSLSettings.Text" xml:space="preserve">
+    <value>SSL Settings</value>
+  </data>
+  <data name="SSLURL.Text" xml:space="preserve">
+    <value>SSL URL</value>
+  </data>
+  <data name="StandardURL.Text" xml:space="preserve">
+    <value>Standard URL</value>
+  </data>
+  <data name="SuccessfullyUpdated.Text" xml:space="preserve">
+    <value>Successfully updated</value>
+  </data>
+  <data name="Update.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Update.Text1" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="UseEmailAsUsername.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="UseEmailAsUsername.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="UseEmailAsUsername.Text" xml:space="preserve">
+    <value>Use Email As Username</value>
+  </data>
+  <data name="UseRandomPassword.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="UseRandomPassword.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="UseRandomPassword.Text" xml:space="preserve">
+    <value>Use Random Password</value>
+  </data>
+  <data name="UserRegistration.Text" xml:space="preserve">
+    <value>User Registration</value>
+  </data>
+  <data name="Picture_AllowableFileExtensions.Text" xml:space="preserve">
+    <value>Allowable File Extensions</value>
+  </data>
+  <data name="Picture_MaxUploadSize.Text" xml:space="preserve">
+    <value>Max Upload Size (MB)</value>
+  </data>
+  <data name="Video_AllowableFileExtensions.Text" xml:space="preserve">
+    <value>Allowable File Extensions</value>
+  </data>
+  <data name="Video_MaxUploadSize.Text" xml:space="preserve">
+    <value>Max Upload Size (MB)</value>
+  </data>
+  <data name="Video_DefaultFolder.Text" xml:space="preserve">
+    <value>Default Folder</value>
+  </data>
+  <data name="AsyncTimeout.Text" xml:space="preserve">
+    <value>Time Before Timeout (Seconds)</value>
+  </data>
+  <data name="AutoAccountUnlockDuration.Text" xml:space="preserve">
+    <value>Auto-Unlock Accounts After (Minutes)</value>
+  </data>
+  <data name="RememberCheckbox.Text" xml:space="preserve">
+    <value>Enable Remember Me on Login Control</value>
+  </data>
+  <data name="RememberCheckbox.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="RememberCheckbox.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="FileExtensions.Text" xml:space="preserve">
+    <value>Allowable File Extensions</value>
+  </data>
+  <data name="MaxUploadSize.Text" xml:space="preserve">
+    <value>Max Upload Size (MB)</value>
+  </data>
+  <data name="Advance.Text" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="HTMLPageHeader.Text" xml:space="preserve">
+    <value>HTML Page Header</value>
+  </data>
+</root>

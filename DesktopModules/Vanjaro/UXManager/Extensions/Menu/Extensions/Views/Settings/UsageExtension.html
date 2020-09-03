@@ -1,0 +1,15 @@
+﻿<div ng-controller="settings_usageextension" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="settings_usageextension" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uielement name="Portals" control="dropdownlist" attr-ng-change="Change_Portals()"></uielement>
+            <hr />
+            <uielement name="Pages" ngoptions="Pages" control="grid" displayedpages="5" pagesize="25" paged="true" label="false" attr-class="ux-gridcolumnhide table-grid inusegrid">
+                <column name="page">
+                    <uitemplate>
+                        <div ng-bind-html="row"></div>
+                    </uitemplate>
+                </column>
+            </uielement>            
+        </uilayout>
+    </uiengine>
+</div>

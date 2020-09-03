@@ -1,0 +1,94 @@
+﻿.vj-ux-manager .empty_msg {
+    height: 120px !important;
+    text-align: center;
+    margin-top: 50px;
+    padding: 50px;
+    border: 1px solid #ccc;
+    color: #aaa;
+}
+
+.vj-ux-manager #more {
+    position: fixed;
+    width: 97%;
+    bottom: 10px;
+}
+
+
+.vj-ux-manager .folder-dropdown {
+    border-radius: 0 4px 4px 0;
+    height: 35px;
+    width: 142px;
+}
+
+    .vj-ux-manager .folder-dropdown option {
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+.vj-ux-manager .svg-container > div {
+    min-height: 55px;
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+
+.vj-ux-manager .svg-container .svg-icon {
+    height: 30px;
+    vertical-align: middle;
+    display: flex;
+}
+
+.vj-ux-manager .icon-text {
+    font-size: 12px;
+    text-transform: capitalize;
+    color: #ccc;
+    padding-top: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.vj-ux-manager .svg-container .svg-icon svg {
+    width: 100%;
+    fill: #555;
+}
+
+.vj-ux-manager .svg-container .selected-icon {
+    border-color: dimgrey;
+}
+
+.vj-ux-manager .vj-icon-wrapper {
+    height: calc(100vh - 92px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: 5px;
+    margin-top: 5px;
+}
+
+.vj-ux-manager .icon-search-block {
+    margin-top: 10px;
+}
+
+    .vj-ux-manager .icon-search-block em {
+        position: absolute;
+        font-size: 14px;
+        z-index: 9;
+        color: #a4afb7;
+        padding: 11px;
+    }
+
+        .vj-ux-manager .icon-search-block em.fa-times {
+            display: none;
+            right: 138px;
+            top: 1px;
+        }
+
+    .vj-ux-manager .icon-search-block input {
+        font-size: 14px;
+        padding-left: 32px;
+    }
+
+    .vj-ux-manager .icon-search-block select {
+        font-size: 14px;
+        background-color: transparent;
+    }

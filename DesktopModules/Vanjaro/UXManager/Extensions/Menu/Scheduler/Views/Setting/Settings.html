@@ -1,0 +1,31 @@
+﻿<div ng-controller="setting_settings" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_settings" layout="Admin" class="uiengine-wrapper schedulerrow scrollbar">
+        <uilayout name="default">
+            <uielement name="SchedulerMode" ngmodel="ScheduleMode" ngchange="UpdateSchedulerMode()" attr-class="toggle_right" control="toggle"></uielement>
+            <uitemplate>
+                <div class="head">
+                    <div class="row settinginfo">
+                        <label class="col-6 pl-none">[LS:ScheduleStartDelay]</label>
+                        <input type="number" mn-ng-change="UpdateSchedulerMode()" class="form-control control-background col-6 ng-pristine ng-invalid ng-invalid-required ng-touched" id="VJDelayAtAppStartTxt" mn-ng-model="ui.data.ScheduleStatus.Options.Data.DelayAtAppStart" aria-describedby="VJDelayAtAppStartTxt-addon">
+                    </div>
+                    <div class="row settinginfo">
+                        <label class="col-6 pl-none">[LS:ServerTime]</label>
+                        <span class="col-6 pl-none">{{ui.data.ScheduleStatus.Options.Data.ServerTime}}</span>
+                    </div>
+                    <div class="row settinginfo">
+                        <label class="col-6 pl-none">[LS:MaxThreads]</label>
+                        <span class="col-6 pl-none">{{ui.data.ScheduleStatus.Options.Data.MaxThreadCount}}</span>
+                    </div>
+                    <div class="row settinginfo">
+                        <label class="col-6 pl-none">[LS:ActiveThreads]</label>
+                        <span class="col-6 pl-none">{{ui.data.ScheduleStatus.Options.Data.ActiveThreadCount}}</span>
+                    </div>
+                    <div class="row settinginfo">
+                        <label class="col-6 pl-none">[LS:FreeThreads]</label>
+                        <span class="col-6 pl-none">{{ui.data.ScheduleStatus.Options.Data.FreeThreadCount}}</span>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

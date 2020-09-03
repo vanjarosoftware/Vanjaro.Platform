@@ -1,0 +1,43 @@
+﻿<div ng-controller="setting_help" class="vj-ux-manager">
+	<uiengine provider="AngularBootstrap" identifier="setting_help" layout="Help">
+		<uilayout name="Heading">
+			<uitemplate>
+				<div class="row">
+					<div class="col-12 pr-none extback">
+						<a ng-click="Click_Back()" title="[L:Back]" class="ux-backbtn">
+							<span class="extbackicon">
+								<em class="fas fa-chevron-left"></em>
+							</span>
+							<span class="extname">{{HeaderText}}</span>
+						</a>
+					</div>
+				</div>
+			</uitemplate>
+		</uilayout>
+		<uilayout name="default">
+			<uitemplate>
+				<a target="_blank" href="http://www.vanjaro.com/">
+					<span class="summary-container">
+						<em class="fas fa-chevron-right"></em>
+						<span class="summary-title">KNOWLEDGE BASE</span>
+						<span class="summary-content">Read our documentation and get answers to your questions</span>
+					</span>
+				</a>
+				<a target="_blank" href="http://www.vanjaro.com/">
+					<span class="summary-container">
+						<em class="fas fa-chevron-right"></em>
+						<span class="summary-title">VIDEOS</span>
+						<span class="summary-content">Use our guided videos to get started</span>
+					</span>
+				</a>
+				<a target="_blank" href="http://www.vanjaro.com/">
+					<span class="summary-container">
+						<em class="fas fa-chevron-right"></em>
+						<span class="summary-title">SUPPORT</span>
+						<span class="summary-content">Connect with our community for assistance</span>
+					</span>
+				</a>
+			</uitemplate>
+		</uilayout>
+	</uiengine>
+</div>

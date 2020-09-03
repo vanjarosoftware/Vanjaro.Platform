@@ -1,0 +1,85 @@
+﻿@inherits System.Web.WebPages.WebPage
+
+<div class="Register-container validationGroup">
+    @if (Model.Register.RegistrationMode > 1)
+    {
+        <div class="">
+            <div class="Vj-Register Register" id="Register">
+                <h4 class="Registerhead">[LS:Data.Block.Login.RegisterText]</h4>
+                <div>
+                    @if (Model.Register.ShowLabel)
+                    {
+                        <label class="registerlabel" for="displayname">[LS:Data.Block.Register.DisplayNameText]</label>
+                    }
+                    else
+                    {
+                        <label class="registerlabel sr-only" for="displayname">[LS:Data.Block.Register.DisplayNameText]</label>
+                    }
+                    <input type="text" placeholder="[LS:Data.Block.Register.DisplayNamePlaceholderText]" class="displayname" name="displayname" id="displayname" required>
+                </div>
+                @if (!Model.RegistrationSettings.UseEmailAsUserName)
+                {
+                    <div>
+                        @if (Model.Register.ShowLabel)
+                        {
+                            <label class="registerlabel" for="username">[LS:Data.Block.Register.UsernameText]</label>
+                        }
+                        else
+                        {
+                            <label class="registerlabel sr-only" for="username">[LS:Data.Block.Register.UsernameText]</label>
+                        }
+                        <input type="text" placeholder="[LS:Data.Block.Register.UsernamePlaceholderText]" name="username" class="username" id="username" required>
+                    </div>
+                }
+                <div>
+                    @if (Model.Register.ShowLabel)
+                    {
+                        <label class="registerlabel" for="email">[LS:Data.Block.Register.EmailAddressText]</label>
+                    }
+                    else
+                    {
+                        <label class="registerlabel sr-only" for="email">[LS:Data.Block.Register.EmailAddressText]</label>
+                    }
+
+                    <input type="email" placeholder="[LS:Data.Block.Register.EmailAddressPlaceholderText]" name="email" class="email" id="email" emailrequired="emailrequired" required>
+
+                </div>
+                @if (!Model.RegistrationSettings.RandomPassword)
+                {
+                    <div>
+                        @if (Model.Register.ShowLabel)
+                        {
+                            <label class="registerlabel" for="password">[LS:Data.Block.Register.PasswordText]</label>
+                        }
+                        else
+                        {
+                            <label class="registerlabel sr-only" for="password">[LS:Data.Block.Register.PasswordText]</label>
+                        }
+                        <input type="password" placeholder="[LS:Data.Block.Register.PasswordPlaceholderText]" name="password" class="password" id="password" required>
+                    </div>
+                }
+                @if (Model.Register.TermsPrivacy)
+                {
+                    <div class="registerterms form-group">
+                        <label class="sr-only" for="checktermcondition"></label>
+                        <input type="checkbox" id="checktermcondition" name="checktermcondition" class="checktermcondition termsofuse" cbrequired="true"><span>[LS:Data.Block.Login.RegisterTermsText] <a href="Terms" target="_blank">[LS:TermsofUse]</a> & <a href="Privacy" target="_blank">[LS:PrivacyPolicy]</a></span>
+                    </div>
+                }
+                <div class="registered text-@Model.Register.ButtonAlign">
+                    <a id="submit" onclick="Register.User('Register')" attr-localize-register-text="[LS:Data.Block.Register.RegisterText]" class="btn btn-primary @Model.Register.ButtonAlign">
+                        [LS:Data.Block.Register.RegisterText]
+                    </a>
+                </div>
+            </div>
+            <div class="text-center already-registerd">
+                <span>[LS:SigninPage]</span> <a class="loginlink" href="@Model.Register.LoginURL">[LS:Data.Block.Login.SigninText]</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center alert alert-danger">
+            [LS:Data.Block.Login.RegistrationMode_None]
+        </div>
+    }
+</div>

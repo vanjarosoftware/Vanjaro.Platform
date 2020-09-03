@@ -1,0 +1,63 @@
+﻿<div ng-controller="setting_languages" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_languages" layout="languages">
+        <uilayout name="Heading">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-8 extback pr-none">
+                        <a onclick="parent.Click_Back()" class="ux-backbtn">
+                            <span class="extbackicon">
+                                <em class="fas fa-chevron-left"></em>
+                            </span>
+                            <span class="extname">[LS:Languages]</span>
+                        </a>
+                    </div>
+                    <div class="col-4 pl-none" ng-show="ui.data.IsSuperUser.Value=='True'">
+                        <a ng-click="Click_New()" class="ux-btn ux-btn-hover float-right">
+                            <em class="fas fa-plus"></em>
+                        </a>
+                        <a ng-show="ui.data.Languages.Options.length>1" ng-click="IsNativeName = !IsNativeName" class="ux-btn ux-btn-hover Languagebtn float-right" mn-ng-class="!IsNativeName ? 'active' : ''">
+                            <em class="fas fa-globe-asia"></em>
+                        </a>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div class="text-right">
+                    <a class="Languagebtn" mn-ng-click="IsNativeName = !IsNativeName" mn-ng-class="!IsNativeName ? 'active' : ''"></a>
+                </div>
+            </uitemplate>
+            <uielement name="Languages" control="grid" label="false" pagesize="500" paged="true" displayedpages="5" attr-class="ux-gridcolumnhide table-grid">
+                <column name="Name" width="80">
+                    <uitemplate>
+                        <div>
+                            <div ng-show="IsNativeName">{{row.NativeName}}</div>
+                            <div ng-hide="IsNativeName">{{row.EnglishName}}</div>
+                        </div>
+                    </uitemplate>
+                </column>
+                <column name="Setting" attr-style="text-align: right" width="15">
+                    <uitemplate>
+                        <div class="dropdown float-right dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v"></em>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item box-icon" access-roles="host"  mn-ng-hide="row.IsDefault" ng-click="Click_Translator(row)"><em class="fas fa-users"></em><span>[L:Translator]</span></a>
+                                <a class="dropdown-item box-icon" ng-click="Click_Resources(row)"><em class="fas fa-language"></em><span>[L:Resources]</span></a>
+                                <hr class="m-none" mn-ng-hide="row.IsDefault" />
+                                <a class="dropdown-item box-icon" mn-ng-hide="row.IsDefault" ng-click="Click_Enabled(row)"><em class="fas fa-{{row.Enabled?'eye-slash':'eye'}}"></em><span mn-ng-hide="row.Enabled">[L:Enabled]</span><span mn-ng-hide="!row.Enabled">[L:Disabled]</span></a>
+                            </div>
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+    </uiengine>
+</div>
+<style>
+    body {
+        background: #e6e9ec;
+    }
+</style>

@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:data="urn:schemas-microsoft-com:xml-data">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" data:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" data:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" data:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" data:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" data:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" data:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" data:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Advanced.Text" xml:space="preserve">
+    <value>SEO</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Detail.Text" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+  <data name="PageNotFound.Text" xml:space="preserve">
+    <value>Page doesn't exists.</value>
+  </data>
+  <data name="Permissions.Text" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="Restore.Text" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Scheduled.Text" xml:space="preserve">
+    <value>Scheduling</value>
+  </data>
+  <data name="UserAuthorizationForbidden.Text" xml:space="preserve">
+    <value>The user is not allowed to access this method.</value>
+  </data>
+  <data name="RecycleBin.Text" xml:space="preserve">
+    <value>Deleted Pages</value>
+  </data>
+  <data name="AddPages.Text" xml:space="preserve">
+    <value>Add Pages</value>
+  </data>
+  <data name="Pages.Text" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="Site.Text" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="Active.Text" xml:space="preserve">
+    <value>Active (200)</value>
+  </data>
+  <data name="Redirect.Text" xml:space="preserve">
+    <value>Redirect (301)</value>
+  </data>
+  <data name="DeletedModule.Text" xml:space="preserve">
+    <value>Deleted Apps</value>
+  </data>
+  <data name="FolderPage.Text" xml:space="preserve">
+    <value>Folder Page</value>
+  </data>
+  <data name="PageDisplayInMenu.Text" xml:space="preserve">
+    <value>Page hidden from menu.</value>
+  </data>
+  <data name="SetAs_404errorpage.Text" xml:space="preserve">
+    <value>Set as 404 Error Page</value>
+  </data>
+  <data name="SetAs_500errorpage.Text" xml:space="preserve">
+    <value>Set as 500 Error Page</value>
+  </data>
+  <data name="SetAs_homepage.Text" xml:space="preserve">
+    <value>Set as Home Page</value>
+  </data>
+  <data name="SetAs_loginpage.Text" xml:space="preserve">
+    <value>Set as Login Page</value>
+  </data>
+  <data name="SetAs_registrationpage.Text" xml:space="preserve">
+    <value>Set as Registration Page</value>
+  </data>
+  <data name="SetAs_searchresultspage.Text" xml:space="preserve">
+    <value>Set as Search Results Page</value>
+  </data>
+  <data name="SetAs_splashpage.Text" xml:space="preserve">
+    <value>Set as Splash Page</value>
+  </data>
+  <data name="SetAs_userprofilepage.Text" xml:space="preserve">
+    <value>Set as User Profile Page</value>
+  </data>
+  <data name="HasBeenPublishedFalse.Text" xml:space="preserve">
+    <value>Visible to Administrators Only.</value>
+  </data>
+  <data name="HasBeenPublishedTrue.Text" xml:space="preserve">
+    <value>Visible to everyone.</value>
+  </data>
+  <data name="PrivatePage.Text" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="RedirectPage.Text" xml:space="preserve">
+    <value>Redirect Page</value>
+  </data>
+  <data name="IsVisibleFalse.Text" xml:space="preserve">
+    <value>Hidden from Nav Menu.</value>
+  </data>
+  <data name="IsVisibleTrue.Text" xml:space="preserve">
+    <value>Showing in Nav Menu.</value>
+  </data>
+  <data name="Delete.Text" xml:space="preserve">
+    <value>Delete Permanently</value>
+  </data>
+  <data name="Error.Text" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="RemoveFrom_404errorpage.Text" xml:space="preserve">
+    <value>Remove from 404 Error Page</value>
+  </data>
+  <data name="RemoveFrom_500errorpage.Text" xml:space="preserve">
+    <value>Remove from 500 Error Page</value>
+  </data>
+  <data name="RemoveFrom_homepage.Text" xml:space="preserve">
+    <value>Remove from Home Page</value>
+  </data>
+  <data name="RemoveFrom_loginpage.Text" xml:space="preserve">
+    <value>Remove from Login Page</value>
+  </data>
+  <data name="RemoveFrom_registrationpage.Text" xml:space="preserve">
+    <value>Remove from Registration Page</value>
+  </data>
+  <data name="RemoveFrom_searchresultspage.Text" xml:space="preserve">
+    <value>Remove from Search Results Page</value>
+  </data>
+  <data name="RemoveFrom_splashpage.Text" xml:space="preserve">
+    <value>Remove from Splash Page</value>
+  </data>
+  <data name="RemoveFrom_userprofilepage.Text" xml:space="preserve">
+    <value>Remove from User Profile Page</value>
+  </data>
+  <data name="DeleteAllPages.Text" xml:space="preserve">
+    <value>Delete All Pages</value>
+  </data>
+  <data name="DeleteAllApps.Text" xml:space="preserve">
+    <value>Delete All Apps</value>
+  </data>
+  <data name="SearchKeywords.Text" xml:space="preserve">
+    <value>page,pages,folder,folders,redirect,redirects,link,links,layout,layouts,page permission,page permissions,permissions,change homepage,change home page,change login page,homepage,home page,login page,hide page,show page,private page,public page,page revision,page revisions,page workflow,seo,page seo,page title,page description,page metadata,page url, page slug,page priority,scheduling,page order,move page</value>
+  </data>
+  <data name="Shortcut_Text.Text" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Shortcut_Title.Text" xml:space="preserve">
+    <value>Create New Page</value>
+  </data>
+  <data name="DonotHaveEditPermission_Message.Text" xml:space="preserve">
+    <value>You don\'t have permission to edit this page</value>
+  </data>
+  <data name="PageNotAvailable.Text" xml:space="preserve">
+    <value>There are no pages</value>
+  </data>
+  <data name="SearchResultsPreview.Text" xml:space="preserve">
+    <value>Search Results Preview</value>
+  </data>
+  <data name="SEOPreviewDescription.Text" xml:space="preserve">
+    <value>This description will be automatically generated by search engines. To override that description, enter one above.</value>
+  </data>
+</root>

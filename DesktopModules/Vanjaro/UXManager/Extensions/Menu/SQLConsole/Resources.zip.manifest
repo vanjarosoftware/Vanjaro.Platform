@@ -1,0 +1,28 @@
+﻿<dotnetnuke type="ResourceFile" version="5.0">
+  <files>
+    <file>
+      <path>Resources/Stylesheets/</path>
+      <name>app.css</name>
+    </file>
+    <file>
+      <path>Resources/UIEngine/AngularBootstrap/Layouts/</path>
+      <name>SQLQuery.htm</name>
+    </file>
+    <file>
+      <path>Views/App_LocalResources/</path>
+      <name>Shared.resx</name>
+    </file>
+    <file>
+      <path>Views/Setting/App_LocalResources/</path>
+      <name>SQLQuery.resx</name>
+    </file>
+    <file>
+      <path>Views/Setting/</path>
+      <name>SQLQuery.html</name>
+    </file>
+    <file>
+      <path>Views/Setting/</path>
+      <name>SQLQuery.js</name>
+    </file>
+  </files>
+</dotnetnuke>

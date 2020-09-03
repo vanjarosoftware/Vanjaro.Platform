@@ -1,0 +1,28 @@
+﻿
+.vj-ux-manager .uiengine-wrapper {
+    height: calc(100vh - 96px) !important;
+}
+
+.vj-ux-manager .menuextension .content {
+    height: calc(100vh - 127px);
+}
+
+.vj-ux-manager .stfooter ul.pagination {
+    margin-bottom: 0;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 0;
+}
+
+.paginationdiv {
+    width: 100%;
+}
+
+.vj-ux-manager td.stfooter {
+    position: fixed;
+    bottom: 56px;
+    width: 100%;
+    justify-content: center;
+    padding: 0;
+    right: 0;
+}

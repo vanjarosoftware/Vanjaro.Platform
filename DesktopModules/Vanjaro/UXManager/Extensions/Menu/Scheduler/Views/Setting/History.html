@@ -1,0 +1,36 @@
+﻿<div ng-controller="setting_history" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_history" layout="Admin" class="uiengine-wrapper schedulerrow scrollbar">
+        <uilayout name="default">
+            <uielement name="ScheduleHistoryItem" control="grid" label="false" style="overflow-x:unset;" ngoptions="ScheduleHistoryItem" pagesize="10" paged="true" displayedpages="5" attr-st-pipe="Pipe_ScheduleHistoryItemPagging" attr-class="table-grid">
+                <column name="Desciption" width="40">
+                    <uitemplate>
+                        <p class="m-none">{{row.FriendlyName}}</p>
+                        <p mn-ng-bind-html="row.LogNotes | unsafe"></p>
+                    </uitemplate>
+                </column>
+                <column name="Server" width="8">
+                    <uitemplate>
+                        <span class="username">{{row.Server}}</span>
+                    </uitemplate>
+                </column>
+                <column name="ElapsedTime" width="13">
+                    <uitemplate>
+                        <span class="username">{{row.ElapsedTime}}</span>
+                    </uitemplate>
+                </column>
+                <column name="Succeeded" width="10">
+                    <uitemplate>
+                        <input type="checkbox" mn-ng-disabled="true" mn-ng-checked="row.Succeeded">
+                    </uitemplate>
+                </column>
+                <column name="StartEnd" width="30">
+                    <uitemplate>
+                        <span>S: </span><span class="username">{{row.StartDate}}</span><br />
+                        <span>E: </span><span class="username">{{row.EndDate}}</span><br />
+                        <span>N: </span><span class="username">{{row.NextStart}}</span>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+    </uiengine>
+</div>

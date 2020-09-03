@@ -1,0 +1,76 @@
+<p><strong>Common-3.3.7</strong></p>
+<strong>Fixed:</strong>
+<ul>
+	<li>BrowseUrl issue</li>
+	<li>Razor parser for dynamic template</li>
+	<li>Licensing switching from domain to standard</li>
+</ul>
+<p><strong>Common-3.3.4</strong></p>
+<ul>
+	<li>Mail issue</li>
+</ul>
+<p><strong>Common-3.3.3</strong></p>
+<ul>
+	<li>Handle Portal based SMTP settings</li>
+</ul>
+<p><strong>Common-3.3.2</strong></p>
+<strong>Improve:</strong>
+<ul>
+	<li>Improved package for azure  </li>
+	
+</ul>
+<p><strong>Common-3.2.8</strong></p>
+<strong>Improve:</strong>
+<ul>
+	<li>Improve Licensing </li>
+	<li>Implement Razor</li>
+</ul>
+<p><strong>Common-3.2.0</strong></p>
+<strong>New:</strong>
+<ul>
+	<li>Ability to link to a page in editor</li>
+	<li>The ability to specify default options for built-in profiles such as Standard, Full,Basic and Minimal</li>
+</ul>
+<strong>Fixed:</strong>
+<ul>
+	<li>Show the greyed dotted outline for tables table cells when table border set to 0</li>
+	<li>The CK Editor content only saves until design mode is selected (not working with View Source)</li>
+	<li>Browser cache issue with html and js in Common Library</li>
+	<li>Editor config url querystring value from UrlReferrer is not working</li>
+	<li>Browse button missing in link/image in case of ckeditor in razor</li>
+	<li>Custom editor options allowed extension textarea is not visible in case of Link and image unless allow upload is true</li>
+</ul>
+<p><strong>Common-3.1.2</strong></p>
+<strong>New:</strong>
+<ul>
+	<li>Identify the request coming from any crawler</li>
+	<li>Show licensing expired message to admin only</li>
+</ul>
+<p><strong>Common-3.0.8</strong></p>
+<strong>Improved:</strong>
+<ul>
+	<li>Profile photo size</li>
+	<li>Multiple tree view control</li>
+</ul>
+<strong>New:</strong>
+<ul>
+	<li>Allow full page mode (Enables HTML tags in HTML Editor)</li>
+	<li>Ability to save HTML Editor settings for all similar modules on the page or site</li>
+</ul>
+<p><strong>Common-3.0.7</strong></p>
+<strong>New:</strong>
+<ul>
+	<li>validation for number which is starting from  +1 format</li>
+	<li>Canvas.js version updated</li>
+</ul>
+<p><strong>Common-3.0.5</strong></p>
+<strong>New:</strong>
+<ul>
+	<li>Set default root folder of links and images in ckeditor config</li>
+</ul>
+<strong>Fixed:</strong>
+<ul>
+	<li>Button tag inside anchor is removed</li>
+</ul>
+
+

@@ -1,0 +1,237 @@
+﻿.uploadinput-button ul {
+    padding: 0;
+}
+
+.url-add {
+    margin: 0;
+}
+
+    .url-add span.choosefile {
+        display: none;
+    }
+
+    .url-add span.btn:before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f067";
+    }
+
+.assettype button:first-of-type:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f108";
+}
+
+.assettype button:last-of-type:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f57d";
+}
+
+.vj-ux-manager .syncdropdown {
+    top: 30px;
+    left: -70px;
+    min-width: 220px;
+}
+
+.dropdownbtn {
+    display: inline-block;
+    float: right;
+}
+
+.dropdown-item {
+    display: block;
+}
+
+.folderdropdown {
+    left: unset;
+    right: 0;
+}
+
+.displayprop {
+    display: inline-block;
+}
+
+.context-menu-icon.context-menu-icon--fa5 i {
+    color: #2f2f2f;
+}
+
+.vj-ux-manager .assettype {
+    display: inline-block;
+    position: relative;
+    left: 190px;
+    top: -15px;
+    z-index: 999;
+    margin-bottom: 0;
+}
+
+    .vj-ux-manager .assettype button {
+        padding: 2px 12px;
+    }
+
+.uploaddefault .l_folder .folders {
+    width: calc(100% - 118px);
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: top;
+}
+
+.Basefoldersdiv ul {
+    padding-left: 0;
+}
+
+.modal-body .Basefoldersdiv .l_folder .folders {
+    overflow: visible;
+    /*position: relative;*/
+}
+
+.assetui table {
+    border: 1px solid #eee;
+}
+
+.fixed-togglebtn {
+    position: fixed;
+    left: 0;
+    right: 0px;
+    bottom: 50px;
+    padding: 10px;
+}
+
+/*.modal-body .Basefoldersdiv .l_folder .folders:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 0.5em;
+        border-top: 1px solid black;
+        z-index: -1;
+    }*/
+
+.permissionaction {
+    text-align: center !important;
+}
+
+.global > i,
+.assetIsList i {
+    color: #ccc;
+}
+
+.global.active > i,
+.assetIsList.active > i {
+    color: #444;
+}
+
+.url-add .uploadinput-button input {
+    top: 12px !important;
+    width: 30px;
+}
+
+a.assetIsList {
+    margin: 0 5px;
+}
+
+.uiengine-ignorepadding {
+    padding: 0px !important;
+}
+
+.action-icon em.fas.fa-lock {
+    margin-right: 5px;
+}
+
+.buttondiv {
+    margin-top: 20px;
+    /*padding-bottom: 15px;*/
+    margin-bottom: 15px;
+    /*border-bottom: 1px solid #ccc;*/
+}
+
+.uploaddefault .table thead th {
+    padding-top: 0;
+}
+
+.uploadinput-button span.btn.btn-primary {
+    top: -25px;
+    background: transparent !important;
+    color: #000 !important;
+}
+
+.vj-ux-manager .dropdown-menu {
+    top: 32px !important;
+}
+
+
+.vj-ux-manager .Imagetable .dropdown-menu {
+    top: 34px !important;
+    min-width: 145px;
+}
+
+.vj-ux-manager .dropdown.dropbtn .dropdownmenu {
+    right: 0px;
+    border-radius: 0;
+}
+
+.col-sm-4.scrollbar {
+    height: calc(100vh - 68px) !important;
+    overflow-y: auto !important;
+    padding-right: 0;
+}
+
+.col-sm-8.scrollbar {
+    height: calc(100vh - 110px) !important;
+    overflow-y: auto !important;
+}
+
+.uploaddefault .images-container {
+    height: unset !important;
+    min-height: 100%;
+}
+
+
+td.dropdownimgicon {
+    margin-top: -136px;
+}
+
+.imagesrow .dropdown.dropbtn .dropdownmenu {
+    top: -28px !important;
+}
+
+.imagesrow:hover .dropdown.dropbtn .dropdownmenu {
+    top: -1px !important;
+}
+
+.thumb-info .thumb-info-action-icon {
+    bottom: 0;
+    left: 10px;
+    top: 10px;
+    width: 125px;
+    height: 125px;
+}
+
+.vj-ux-manager .ud_stfooter ul.pagination {
+    margin-bottom: 0;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 0;
+    background: #fff;
+}
+
+.paginationdiv {
+    width: 100%;
+}
+
+.vj-ux-manager td.ud_stfooter {
+    position: fixed;
+    bottom: 0;
+    width: 65%;
+    justify-content: center;
+    padding: 0;
+    right: 0;
+}
+
+
+.Iconsfilesdiv .empty_msg {
+    margin-top: 0;
+}

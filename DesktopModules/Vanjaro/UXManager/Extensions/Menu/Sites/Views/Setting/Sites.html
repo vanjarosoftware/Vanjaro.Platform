@@ -1,0 +1,57 @@
+﻿<div ng-controller="setting_sites" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_sites" layout="sites">
+        <uilayout name="Heading">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-8 extback pr-none">
+                        <a onclick="parent.Click_Back()" class="ux-backbtn">
+                            <span class="extbackicon">
+                                <em class="fas fa-chevron-left"></em>
+                            </span>
+                            <span class="extname">[LS:Sites]</span>
+                        </a>
+                    </div>
+                    <div class="col-4 pl-none">
+                        <a access-roles="host" ng-click="Click_New()" class="ux-btn ux-btn-hover float-right">
+                            <em class="fas fa-plus"></em>
+                        </a>
+                        <a access-roles="host" ng-click="Click_SiteGroup()" class="ux-btn ux-btn-hover float-right" title="[L:SiteGroup]">
+                            <em class="fas fa-layer-group"></em>
+                        </a>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uielement name="Portals" control="grid" label="false" ngoptions="Portals" pagesize="20" paged="true" displayedpages="5" attr-st-pipe="Pipe_PortalsPagging" attr-class="ux-gridcolumnhide table-grid">
+                <column name="PortalName" width="85">
+                    <uitemplate>
+                        <div>
+                            <div class="portalname">{{row.PortalName}}</div>
+                            <div class="portallink"><a href="{{row.PortalAliases[0].link}}" target="_blank">{{row.PortalAliases[0].url}}</a></div>
+                        </div>
+                    </uitemplate>
+                </column>
+                <column name="Setting" attr-style="text-align: right" width="15">
+                    <uitemplate>
+                        <div class="dropdown float-right dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v"></em>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item box-icon" href="{{row.PortalAliases[0].link}}" target="_blank"><em class="fa fa-eye"></em><span>[L:View]</span></a>
+                                <a class="dropdown-item box-icon" ng-click="Click_Export(row)"><em class="fas fa-file-export"></em><span>[L:Export]</span></a>
+                                <hr class="m-none" mn-ng-show="row.allowDelete" />
+                                <a mn-ng-show="row.allowDelete" class="dropdown-item box-icon" ng-click="Click_Delete(row)"><em class="fas fa-trash"></em><span>[L:Delete]</span></a>
+                            </div>
+                        </div>
+                    </uitemplate>
+                </column>
+        </uilayout>
+    </uiengine>
+</div>
+<style>
+    body {
+        background: #e6e9ec;
+    }
+</style>

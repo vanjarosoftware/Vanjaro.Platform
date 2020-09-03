@@ -1,0 +1,38 @@
+﻿<div ng-controller="setting_add" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_add" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uielement name="Title" control="textbox" attr-required="true" attr-ng-model="ui.data.CreatePortalRequest.Options.SiteName"></uielement>
+            <uielement name="SiteURL" control="textbox" attr-required="true" attr-ng-model="ui.data.CreatePortalRequest.Options.SiteAlias"></uielement>
+            <uielement name="UseCurrentUserAsAdmin" control="toggle" ngmodel="ui.data.CreatePortalRequest.Options.UseCurrentUserAsAdmin" attr-class="toggle_right"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="!ui.data.CreatePortalRequest.Options.UseCurrentUserAsAdmin">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-sm-6">
+                        [uilayout:left]
+                    </div>
+                    <div class="col-sm-6">
+                        [uilayout:right]
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="left">
+            <uielement name="Name" control="textbox" attr-required="true" attr-ng-model="ui.data.CreatePortalRequest.Options.Firstname"></uielement>
+            <uielement name="Email" control="email" attr-required="true" attr-ng-model="ui.data.CreatePortalRequest.Options.Email"></uielement>
+        </uilayout>
+        <uilayout name="right">
+            <uielement name="Password" control="password" attr-required="true" attr-ng-model="ui.data.CreatePortalRequest.Options.Password"></uielement>
+            <uielement name="ConfirmPassword" control="password" attr-required="true" attr-ng-model="ui.data.CreatePortalRequest.Options.PasswordConfirm"></uielement>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" ng-click="Click_Update()" class="btn btn-sm btn-primary">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

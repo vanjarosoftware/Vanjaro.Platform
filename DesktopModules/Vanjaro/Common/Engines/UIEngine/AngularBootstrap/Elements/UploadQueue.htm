@@ -1,0 +1,54 @@
+﻿<div class="table-responsive" ng-show="[name].queue.length">
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="50%">[LS:UploadName]</th>
+                <th ng-show="[name].isHTML5">[LS:UploadSize]</th>
+                <th ng-show="[name].isHTML5">[LS:UploadProgress]</th>
+                <!--<th>[LS:UploadStatus]</th>-->
+                <th>[LS:UploadActions]</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in [name].queue">
+                <td><strong>{{item.file.name.includes('fileid') ? item.file.name.split('fileid')[0] : item.file.name}}</strong></td>
+                <td ng-show="[name].isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                <td ng-show="[name].isHTML5">
+                    <div ng-if="item.progress != 100" class="progress" style="margin-bottom: 0;width: 75%;">
+                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                    </div>
+                    <span ng-if="item.progress == 100" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    <span ng-if="item.progress == 100">Processing...</span>
+                </td>
+                <!--<td ng-show="[name].isHTML5">
+                    <span ng-show="item.isSuccess"><i class="fas fa-check"></i></span>
+                    <span ng-show="item.isCancel"><i class="fas fa-ban"></i></span>
+                    <span ng-show="item.isError"><i class="fas fa-exclamation-circle"></i></span>
+                </td>-->
+                <td nowrap>
+                    <!--<button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                        <span class="fas fa-upload"></span>
+                    </button>-->
+                    <button type="button" class="btn btn-danger btn-xs" ng-if="item.progress < 100" ng-click="item.remove()" [removedelete]>
+                        <span class="fas fa-trash"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!--<div>
+        <div>
+            [LS:QueueProgress]
+            <div class="progress" style="">
+                <div class="progress-bar" role="progressbar" ng-style="{ 'width': [name].progress + '%' }"></div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-success btn-s" ng-click="[name].uploadAll()" ng-disabled="![name].getNotUploadedItems().length">
+            <span class="glyphicon glyphicon-upload"></span> [LS:UploadAll]
+        </button>
+        <button type="button" class="btn btn-danger btn-s" ng-click="[name].clearQueue()" ng-disabled="![name].queue.length">
+            <span class="glyphicon glyphicon-trash"></span> [LS:RemoveAll]
+        </button>
+    </div>-->
+</div>

@@ -1,0 +1,274 @@
+﻿.vj-ux-manager .uiengine-wrapper {
+    height: 100vh !important;
+}
+
+.extn-users .boxcontrols {
+    display: block;
+    background: #e6e9ec;
+    padding: 10px;
+}
+
+.extn-users .user-profile {
+    color: #999;
+    font-size: 12px;
+}
+
+.extn-users .dropdown-menu {
+    min-width: 220px !important;
+}
+
+
+.angucomplete-holder {
+    width: calc(100% - 76px);
+}
+
+.extn-users {
+    font-size: 13px;
+}
+
+    .extn-users .small-text {
+        font-size: 11px;
+        color: #999;
+    }
+
+.Menu-User .users {
+    font-size: 13px;
+}
+
+
+.Menu-User .badge-notify {
+    background: #999;
+    position: absolute;
+    top: -15px;
+    left: 8px;
+}
+
+.container ol, .container ul {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.uploaddefault.uploadinput-button .upld span {
+    position: unset;
+}
+
+.form-group.uploadbtn {
+    position: relative;
+    margin-bottom: 0;
+}
+
+
+.logoBox, .FaviconBox, .HomeScreenBox, .SocialSharingBox {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    max-height: 120px;
+    max-width: 300px;
+    border: 1px dashed #ccc;
+    border-radius: 3px;
+    position: relative;
+    float: right;
+    z-index: 999;
+    cursor: pointer;
+}
+
+/*.uploadbtn.uploadicon .table-responsive {
+    display:none;
+}*/
+
+.tooltip.fade.top {
+    display: none !important;
+}
+
+.uploaderbox {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#uploaded_image {
+    width: 100px;
+    max-height: 100px;
+    max-width: 280px;
+    margin: auto;
+    vertical-align: middle;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 10px;
+}
+
+
+.uploaddefault.uploadinput-button .upld .fas {
+    padding: 5px;
+    margin-top: 45px;
+    color: #000 !important;
+}
+
+.uploaddefault .upld .buttons {
+    position: absolute;
+    background: rgba(255, 255, 255,0);
+    width: 115px;
+    height: 115px;
+    max-width: 280px;
+    display: block;
+    color: #000;
+    right: 2px;
+    border-radius: 5px;
+}
+
+    .uploaddefault .upld .buttons span {
+        /*opacity: 0;
+        font-size: 20px;*/
+        display: none;
+    }
+
+/*.uploaddefault .upld .buttons:hover {
+        background: rgba(255, 255, 255,0.7);
+        transition: opacity .25s;
+        -moz-transition: opacity .25s;
+        -webkit-transition: opacity .25s;
+    }
+
+        .uploaddefault .upld .buttons:hover .fas {
+            opacity: 1;
+            transition: opacity .25s;
+            -moz-transition: opacity .25s;
+            -webkit-transition: opacity .25s;
+        }*/
+
+.uploaderone .uploaddefault .upld .buttons {
+    bottom: 462px;
+}
+
+.uploadertwo .uploaddefault .upld .buttons {
+    bottom: 309px;
+}
+
+.uploaderthree .uploaddefault .upld .buttons {
+    bottom: 156px;
+}
+
+.uploaderfour .uploaddefault .upld .buttons {
+    bottom: 3px;
+}
+
+.uploaddefault.uploadinput-button .upld {
+    min-height: 0 !important;
+    padding: 0;
+    height: 0;
+    margin: 0;
+    border: 0;
+}
+
+    .uploaddefault.uploadinput-button .upld text {
+        display: none !important;
+    }
+
+/*.uploaddefault .upld:hover .buttons:hover .fas {
+    color: #777;
+    cursor: pointer;
+}*/
+
+.uploaddefault .upld:hover .buttons,
+.uploaddefault .upld:hover .buttons:hover,
+.uploaddefault .upld:hover .buttons:hover .fas:hover,
+.uploaddefault .upld:hover .f_clr {
+    color: #444;
+}
+
+
+.LogoFilefoldersdiv ul,
+.FavIconfoldersdiv ul,
+.SocialSharingLogofoldersdiv ul {
+    padding-left: 0 !important;
+    margin-top: 15px;
+}
+
+.rootfolder {
+    margin-top: 0 !important;
+}
+
+
+.logotabs {
+    margin-top: 0 !important;
+}
+
+.vj-ux-manager .form-group.uploadbtn.uploaderone .table-responsive {
+    display: none !important;
+}
+
+
+.pagedir span.fas.fa-folder,
+span.arrowicon.fas.fa-caret-down,
+span.arrowicon.fas.fa-caret-right {
+    vertical-align: super;
+}
+
+.Label-module-main-2go {
+    flex: 1 1 auto;
+    cursor: inherit;
+    display: block;
+    color: #313131;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+span.label {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+    display: block;
+}
+
+.row.esc.d-none {
+    display: inline !important;
+    position: relative;
+    bottom: 60px;
+}
+
+
+#logomanager i {
+    margin-right: 8px;
+}
+
+.uploaddefault .ud_stfooter {
+    bottom: 65px;
+}
+
+.uploaddefault .images-container {
+    height: calc(100vh - 180px) !important;
+}
+
+.col-sm-4.scrollbar {
+    height: calc(100vh - 110px) !important;
+    overflow-y: auto !important;
+}
+
+
+.card-body .uploadicon {
+    display: none;
+}
+
+.uploadinput-button span.btn.btn-primary .choosefile {
+    z-index: 1;
+    cursor: pointer;
+}
+
+.uploadinput-button span.btn.btn-primary {
+    top: -15px;
+    right: 0px;
+}

@@ -1,0 +1,27 @@
+﻿<div ng-controller="domain_settings" class="vj-ux-manager domain-settings">
+    <uiengine provider="AngularBootstrap" identifier="domain_settings" layout="Setting">
+        <uilayout name="Default" attr-class="tab-pane active">
+            <uitemplate>
+                <div class="form-group">
+                    <label>[L:Language]</label>
+                    <div class="input-group">
+                        <select class="form-control" mn-ng-model="ui.data.Languages.Value">
+                            <option value="Default" mn-ng-selected="{{'Default' == ui.data.Languages.Value}}">[L:SelectOption]</option>
+                            <option value="{{option.Value}}" mn-ng-selected="{{option.Value == ui.data.Languages.Value}}" mn-ng-repeat="option in ui.data.Languages.Options">{{option.Key}}</option>
+                        </select>
+                    </div>
+                </div>
+            </uitemplate>
+            <uielement name="DomainName" control="textbox" tooltip="false" attr-ng-model="ui.data.UpdateSiteAliasRequest.Options.HTTPAlias" attr-required="true"></uielement>
+        </uilayout>
+        <uilayout name="Default">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" class="btn btn-sm btn-primary float-right" id="Update" mn-ng-click="Click_Save('update')">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

@@ -1,0 +1,114 @@
+﻿.toggle_right div {
+    float: right;
+}
+
+.toggle_right br {
+    display: none;
+}
+
+
+.toggle_right label {
+    margin-bottom: 10px !important;
+}
+
+.button-icon {
+    float: left;
+    margin-right: 5px;
+    margin-top: 4px;
+}
+
+a.btn.button-left {
+    white-space: normal;
+}
+
+ul.UlVersion {
+    list-style-type: none;
+}
+
+
+
+
+/*.active {
+	padding-top: 5px;
+	font-size: 10px;
+	font-weight: 700;
+}*/
+
+.selected {
+    background-color: #b5b5b5;
+}
+
+.revision_block {
+    background-color: #fff;
+    padding-right: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    line-height: normal;
+}
+
+    .revision_block:nth-of-type(even) {
+        background-color: #f9f9f9;
+    }
+
+    .revision_block.active {
+        background-color: #ddd;
+    }
+
+    .revision_block .author_name,
+    .revision_block .date {
+        font-size: 11px;
+        display: inline-block;
+    }
+
+
+    .revision_block .date {
+        font-size: 10px;
+        color: #ccc;
+    }
+
+    .revision_block .author_name {
+        padding-top: 5px;
+    }
+
+
+
+    .revision_block .badge-success {
+        background-color: #47a447;
+    }
+
+    .revision_block .badge-light {
+        background-color: #999;
+    }
+
+    .revision_block .preview_pic {
+        width: 44px;
+        height: 44px;
+        z-index: 100;
+        margin-right: 5px;
+        border-right: 1px solid #e3e3e3;
+    }
+
+.revision_name p {
+    margin-bottom: 5px;
+}
+
+.revision_name .badge {
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.user_imgname {
+    display: inline-flex;
+}
+
+/*Revison changes*/
+.chaticon {
+    float: left;
+    margin-right:4px;
+}
+
+.badge-light{
+    color:#fff;
+}

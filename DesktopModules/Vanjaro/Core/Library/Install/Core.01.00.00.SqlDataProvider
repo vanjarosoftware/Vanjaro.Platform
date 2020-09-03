@@ -1,0 +1,228 @@
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_Pages]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Core_Pages](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[PortalID] [int] NOT NULL,
+	[TabID] [int] NOT NULL,
+	[Content] [nvarchar](max) NULL,
+	[Style] [nvarchar](max) NULL,
+	[ContentJSON] [nvarchar](max) NULL,
+	[StyleJSON] [nvarchar](max) NULL,
+	[Version] [int] NOT NULL,
+	[CreatedBy] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[UpdatedBy] [int] NULL,
+	[UpdatedOn] [datetime] NULL,
+	[IsPublished] [bit] NOT NULL,
+	[PublishedBy] [int] NULL,
+	[PublishedOn] [datetime] NULL,
+	[Locale] [nvarchar](50) NULL,
+	[StateID] [int] NULL
+ CONSTRAINT [PK_VJ_Core_Pages] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_CustomBlock]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Core_CustomBlock](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Guid] [nvarchar](255) NOT NULL,
+	[PortalID] [int] NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[Category] [nvarchar](255) NOT NULL,
+	[Html] [nvarchar](max) NOT NULL,
+	[Css] [nvarchar](max) NULL,
+	[IsGlobal] [bit] NOT NULL,
+	[Locale] [nvarchar](50) NULL,
+	[CreatedBy] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[UpdatedBy] [int] NOT NULL,
+	[UpdatedOn] [datetime] NOT NULL,
+CONSTRAINT [PK_VJ_Core_CustomBlocks] PRIMARY KEY CLUSTERED 
+(
+[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_Setting]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Core_Setting](
+	[SettingID] [int] IDENTITY(1,1) NOT NULL,
+	[TabID] [int] NOT NULL,
+	[PortalID] [int] NOT NULL,
+	[Identifier] [nvarchar](50) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Value] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_VJ_Core_Setting] PRIMARY KEY CLUSTERED 
+(
+	[SettingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+ENd
+GO
+/****** Object:  Table {databaseOwner}[VJ_Core_Workflow]    Script Date: 8/29/2019 5:36:40 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_Workflow]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Core_Workflow](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[PortalID] [int] NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Description] [nvarchar](max) NULL,
+	[Revisions] [int] NOT NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[DeletedOn] [datetime] NULL,
+	[DeletedBy] [int] NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NOT NULL,
+ CONSTRAINT [PK_VJ_Core_Workflow] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+
+/****** Object:  Table {databaseOwner}[VJ_Core_WorkflowState]    Script Date: 8/29/2019 5:36:40 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_WorkflowState]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Core_WorkflowState](
+	[StateID] [int] IDENTITY(1,1) NOT NULL,
+	[WorkflowID] [int] NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Order] [int] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[Notify] [bit] NOT NULL,
+ CONSTRAINT [PK_VJ_Core_Workflow_State] PRIMARY KEY CLUSTERED 
+(
+	[StateID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+/****** Object:  Table {databaseOwner}[VJ_Core_WorkflowStatePermission]    Script Date: 8/29/2019 5:36:40 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_WorkflowStatePermission]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Core_WorkflowStatePermission](
+	[StatePermissionID] [int] IDENTITY(1,1) NOT NULL,
+	[StateID] [int] NOT NULL,
+	[PermissionID] [int] NOT NULL,
+	[AllowAccess] [bit] NOT NULL,
+	[RoleID] [int] NULL,
+	[UserID] [int] NULL,
+	[CreatedBy] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[UpdatedBy] [int] NULL,
+	[UpdatedOn] [datetime] NULL,
+ CONSTRAINT [PK_VJ_Core_WorkflowStatePermission] PRIMARY KEY CLUSTERED 
+(
+	[StatePermissionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+GO
+
+
+IF NOT EXISTS (select 1 from {databaseOwner}[VJ_Core_Workflow])
+BEGIN
+DECLARE @ScopeValue as int
+INSERT INTO {databaseOwner}[VJ_Core_Workflow](PortalID,Name,Description,Revisions,IsDeleted,DeletedOn,DeletedBy,CreatedOn,CreatedBy)
+VALUES(null,'Content Staging','Allows an author to manage content in a staging area before publishing it to the site',5,0,null,null,GETDATE(),-1)
+SELECT @ScopeValue=scope_identity();
+INSERT INTO {databaseOwner}[VJ_Core_WorkflowState](WorkflowID,Name,[Order],IsActive,Notify)
+VALUES(@ScopeValue,'Draft',1,1,0)
+INSERT INTO {databaseOwner}[VJ_Core_WorkflowState](WorkflowID,Name,[Order],IsActive,Notify)
+VALUES(@ScopeValue,'Published',2,1,0)
+END
+GO
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_WorkflowLog]') AND type in (N'U'))
+BEGIN
+
+CREATE TABLE {databaseOwner}[VJ_Core_WorkflowLog](
+	[WorkflowLogID] [int] IDENTITY(1,1) NOT NULL,
+	[PortalID] [int] NOT NULL,
+	[ModuleID] [int] NOT NULL,
+	[TabID] [int] NOT NULL,
+	[Version] [int] NOT NULL,
+	[StateID] [int] NOT NULL,
+	[Comment] [nvarchar](max) NULL,
+	[Approved] [bit] NOT NULL,
+	[ReviewedBy] [int] NOT NULL,
+	[ReviewedOn] [datetime] NOT NULL,
+ CONSTRAINT [PK_VJ_Core_PagesWorkflowLog] PRIMARY KEY CLUSTERED 
+(
+	[WorkflowLogID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+
+
+/****** Object:  Table {databaseOwner}[VJ_Core_Localization]    Script Date: 30-Jan-20 4:09:25 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_Localization]') AND type in (N'U'))
+BEGIN
+
+CREATE TABLE {databaseOwner}[VJ_Core_Localization](
+	[LocalizationID] [int] IDENTITY(1,1) NOT NULL,
+	[Language] [nvarchar](50) NOT NULL,
+	[EntityName] [nvarchar](255) NOT NULL,
+	[EntityID] [int] NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[Value] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_VJ_Core_Localization] PRIMARY KEY CLUSTERED 
+(
+	[LocalizationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+END
+GO
+
+/****** Object:  Table {databaseOwner}[VJ_Core_WorkflowPermission]    Script Date: 3/3/2020 10:40:00 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_WorkflowPermission]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Core_WorkflowPermission](
+	[WorkflowPermissionID] [int] IDENTITY(1,1) NOT NULL,
+	[WorkflowID] [int] NOT NULL,
+	[PermissionID] [int] NOT NULL,
+	[AllowAccess] [bit] NOT NULL,
+	[RoleID] [int] NULL,
+	[UserID] [int] NULL,
+	[CreatedBy] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[UpdatedBy] [int] NULL,
+	[UpdatedOn] [datetime] NULL,
+ CONSTRAINT [PK_VJ_Core_WorkflowPermission] PRIMARY KEY CLUSTERED 
+(
+	[WorkflowPermissionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO

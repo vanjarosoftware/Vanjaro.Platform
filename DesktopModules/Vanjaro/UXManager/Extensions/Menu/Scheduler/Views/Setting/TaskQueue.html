@@ -1,0 +1,33 @@
+﻿<div ng-controller="setting_taskqueue" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_taskqueue" layout="Admin" class="uiengine-wrapper schedulerrow scrollbar">
+        <uilayout name="default">
+            <uitemplate>
+                <div mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleMode == 0 || ui.data.ScheduleStatus.Options.Data.ScheduleQueue.length == 0">
+                    <div><em><strong>[L:TaskQueueMessageTitle]</strong></em></div>
+                    <div><em>[L:TaskQueueMessageDescription]</em></div>
+                </div>
+                <div mn-ng-repeat="version in ui.data.ScheduleStatus.Options.Data.ScheduleQueue" class="revision_block">
+                    <div class="row scheduletask m-none">
+                        <div class="col-xs-2 p-none">
+                            <div class="pull-left">
+                                <em class="far fa-clock" mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing.length == 0"></em>
+                                <em class="far fa-clock" mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing.length != 0  && ui.data.ScheduleStatus.Options.Data.ScheduleProcessing[0].ScheduleID != version.ScheduleID"></em>
+                                <img class="loading" src="{{ui.data.LoadingImage.Value}}" mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing.length != 0 && ui.data.ScheduleStatus.Options.Data.ScheduleProcessing[0].ScheduleID == version.ScheduleID" />
+                            </div>
+                        </div>
+                        <div class="col-xs-10 p-none pt-xs revision_name">
+                            <p class="active">
+                                <span mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing.length == 0"><strong> {{version.FriendlyName}}</strong></span>
+                                <span mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing.length != 0  && ui.data.ScheduleStatus.Options.Data.ScheduleProcessing[0].ScheduleID != version.ScheduleID"><strong> {{version.FriendlyName}}</strong></span>
+                                <span mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing.length != 0 && ui.data.ScheduleStatus.Options.Data.ScheduleProcessing[0].ScheduleID == version.ScheduleID"><strong> {{version.FriendlyName}}</strong></span>
+                                <!--<div class="col-md-6" mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing[0].ScheduleID != version.ScheduleID"><strong>[L:Overdue]</strong></div>-->
+                            </p>
+                            <p class="schedulerdetail" mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing[0].ScheduleID != version.ScheduleID">[L:StartsIn] <em>{{version.RemainingTime}}</em></p>
+                            <p class="schedulerdetail" mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing[0].ScheduleID == version.ScheduleID">[L:RunningSince]<em> {{ui.data.ScheduleStatus.Options.Data.ScheduleProcessing[0].ElapsedTime}}</em><em>[L:SecondTail]</em></p>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

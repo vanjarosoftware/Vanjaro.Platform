@@ -1,0 +1,384 @@
+﻿<div ng-controller="settings_editextension" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="settings_editextension" class="uiengine-wrapper scrollbar">
+        <uilayout name="default" attr-ng-show="!ShowModuleDefinition">
+            <uitemplate>
+                <ul class="nav nav-tabs">
+                    <li class="basic nav-item"><a class="nav-link active" ng-click="Click_Extensions('basic')">[L:BasicTab]</a></li>
+                    <li class="advance nav-item" mn-ng-show="ShowAdvanceTab"><a class="nav-link" ng-click="Click_Extensions('advance')">[L:AdvanceTab]</a></li>
+                    <li class="permission nav-item" mn-ng-show="ShowPermissionTab"><a class="nav-link" ng-click="Click_Extensions('permission')">[L:PermissionTab]</a></li>
+                </ul>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ShowBasic&&!ShowModuleDefinition">
+            <uitemplate>
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseOne">
+                                [L:PackageInformation]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                            <div class="card-body">
+                                [uilayout:PackageInformation]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseTwo">
+                                [L:OwnerInformation]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                [uilayout:OwnerInformation]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseThree">
+                                [L:License]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseThree" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                [uilayout:License]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseFour">
+                                [L:ReleaseNotes]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseFour" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                [uilayout:ReleaseNotes]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="PackageInformation" attr-ng-show="!ShowModuleDefinition">
+            <uitemplate>
+                <div class="form-group">
+                    <label>[L:Types]</label>
+                    <div>{{ui.data.packageDetail.Options.packageType}}</div>
+                </div>
+                <div class="form-group">
+                    <label>[L:Name]</label>
+                    <div>{{ui.data.packageDetail.Options.name}}</div>
+                </div>
+            </uitemplate>
+            <uielement name="Description" attr-rows="5" attr-ng-model="ui.data.packageDetail.Options.description" control="textarea"></uielement>
+            <uielement name="FriendlyName" attr-ng-model="ui.data.packageDetail.Options.friendlyName" control="textbox"></uielement>
+            <uielement name="Icon" attr-ng-model="ui.data.packageDetail.Options.packageIcon" control="textbox"></uielement>
+            <uitemplate>
+                <div class="form-group">
+                    <label>[L:Version]</label>
+                    <div class="input-group">
+                        <select class="form-control ng-pristine ng-valid ng-touched" style="width:100px;" mn-ng-model="MajorVersion" mn-ng-options="option for option in Versions"></select>
+                        <select class="form-control ng-pristine ng-valid ng-touched" style="width:100px;" mn-ng-model="MinorVersion" mn-ng-options="option for option in Versions"></select>
+                        <select class="form-control ng-pristine ng-valid ng-touched" style="width:100px;" mn-ng-model="BuildVersion" mn-ng-options="option for option in Versions"></select>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="OwnerInformation" attr-ng-show="!ShowModuleDefinition">
+            <uielement name="Owner" attr-ng-model="ui.data.packageDetail.Options.owner" control="textbox"></uielement>
+            <uielement name="URL" attr-ng-model="ui.data.packageDetail.Options.url" control="textbox"></uielement>
+            <uielement name="Organization" attr-ng-model="ui.data.packageDetail.Options.organization" control="textbox"></uielement>
+            <uielement name="EmailAddress" attr-ng-model="ui.data.packageDetail.Options.email" control="Email"></uielement>
+        </uilayout>
+        <uilayout name="License" attr-ng-show="!ShowModuleDefinition">
+            <uielement name="License" attr-rows="10" attr-ng-model="ui.data.packageDetail.Options.license" control="textarea"></uielement>
+        </uilayout>
+        <uilayout name="ReleaseNotes" attr-ng-show="!ShowModuleDefinition">
+            <uielement name="ReleaseNotes" attr-rows="10" attr-ng-model="ui.data.packageDetail.Options.releaseNotes" control="textarea"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ShowAdvance&&Auth_SystemType">
+            <uitemplate>
+                <div id="accordionAuthsetting">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseAuthSettingOne">
+                                [L:ExtensionSettings]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseAuthSettingOne" class="collapse show" data-parent="#accordionAuthsetting">
+                            <div class="card-body">
+                                [uilayout:ExtensionAuthSettings]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseAuthSettingTwo">
+                                [L:SiteSettings]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseAuthSettingTwo" class="collapse" data-parent="#accordionAuthsetting">
+                            <div class="card-body">
+                                [uilayout:SiteAuthSettings]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="ExtensionAuthSettings" attr-ng-show="ShowAdvance&&Auth_SystemType">
+            <uielement name="AuthenticationType" attr-ng-model="ui.data.packageDetail.Options.authenticationType" control="textbox"></uielement>
+            <uielement name="LogoffControlSource" attr-ng-model="ui.data.packageDetail.Options.logoffControlSource" control="textbox"></uielement>
+            <uielement name="LoginControlSource" attr-ng-model="ui.data.packageDetail.Options.loginControlSource" control="textbox"></uielement>
+            <uielement name="SettingsControlSource" attr-ng-model="ui.data.packageDetail.Options.settingsControlSource" control="textbox"></uielement>
+            <uielement name="Enabled" attr-class="toggle_right" ngmodel="ui.data.packageDetail.Options.enabled" control="checkboxtoggle"></uielement>
+        </uilayout>
+        <uilayout name="SiteAuthSettings" attr-ng-show="ShowAdvance&&Auth_SystemType">
+            <uielement name="AppId" attr-ng-model="ui.data.packageDetail.Options.appId" control="textbox"></uielement>
+            <uielement name="AppSecret" attr-ng-model="ui.data.packageDetail.Options.appSecret" control="textbox"></uielement>
+            <uielement name="AppEnabled" attr-class="toggle_right" ngmodel="ui.data.packageDetail.Options.appEnabled" control="checkboxtoggle"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ShowAdvance&&ContainerType">
+            <uielement name="ThemePackageName" attr-ng-model="ui.data.packageDetail.Options.themePackageName" control="textbox"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ShowAdvance&&JavaScript_LibraryType">
+            <uitemplate>
+                <div class="form-group">
+                    <label>[L:LibraryName]</label>
+                    <div>{{ui.data.packageDetail.Options.name}}</div>
+                </div>
+                <div class="form-group">
+                    <label>[L:LibraryVersion]</label>
+                    <div>{{ui.data.packageDetail.Options.version}}</div>
+                </div>
+                <div class="form-group">
+                    <label>[L:FileName]</label>
+                    <div>{{ui.data.packageDetail.Options.fileName}}</div>
+                </div>
+                <div class="form-group">
+                    <label>[L:ObjectName]</label>
+                    <div>{{ui.data.packageDetail.Options.objectName}}</div>
+                </div>
+                <div class="form-group">
+                    <label>[L:PreferredLocation]</label>
+                    <div>{{ui.data.packageDetail.Options.location}}</div>
+                </div>
+                <div class="form-group">
+                    <label>[L:DefaultCDN]</label>
+                    <div>{{ui.data.packageDetail.Options.defaultCdn}}</div>
+                </div>
+            </uitemplate>
+            <uielement name="CustomCDN" attr-ng-model="ui.data.packageDetail.Options.customCdn" control="textbox"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ShowAdvance&&ModuleType&&!ShowModuleDefinition">
+            <uitemplate>
+                <div id="accordionsetting">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseSettingOne">
+                                [L:ExtensionSettings]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseSettingOne" class="collapse show" data-parent="#accordionsetting">
+                            <div class="card-body">
+                                [uilayout:ExtensionSettings]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseSettingTwo">
+                                [L:PremiumModule]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseSettingTwo" class="collapse" data-parent="#accordionsetting">
+                            <div class="card-body">
+                                [uilayout:PremiumModule]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseSettingThree">
+                                [L:ModuleDefinitions]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseSettingThree" class="collapse" data-parent="#accordionsetting">
+                            <div class="card-body">
+                                [uilayout:ModuleDefinitions]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="ExtensionSettings" attr-ng-show="!ShowModuleDefinition">
+            <uitemplate>
+                <div class="form-group">
+                    <label>[L:ModuleName]</label>
+                    <div>{{ui.data.packageDetail.Options.moduleName}}</div>
+                </div>
+            </uitemplate>
+            <uielement name="FolderName" attr-ng-model="ui.data.packageDetail.Options.folderName" control="textbox"></uielement>
+            <uielement name="ModuleCategory" attr-ng-model="ui.data.packageDetail.Options.category" control="dropdownlist"></uielement>
+            <uielement name="BusinessControllerClass" attr-ng-model="ui.data.packageDetail.Options.businessController" control="textbox"></uielement>
+            <uielement name="Dependencies" attr-ng-model="ui.data.packageDetail.Options.dependencies" control="textbox"></uielement>
+            <uielement name="Permissions" attr-ng-model="ui.data.packageDetail.Options.hostPermissions" control="textbox"></uielement>
+            <uitemplate>
+                <div class="form-group">
+                    <label>[L:IsPortable]</label>
+                    <div class="float-right">
+                        <em class="far fa-{{ui.data.packageDetail.Options.portable?'check-square':'square'}}"></em>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>[L:IsSearchable]</label>
+                    <div class="float-right">
+                        <em class="far fa-{{ui.data.packageDetail.Options.searchable?'check-square':'square'}}"></em>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>[L:IsUpgradable]</label>
+                    <div class="float-right">
+                        <em class="far fa-{{ui.data.packageDetail.Options.upgradeable?'check-square':'square'}}"></em>
+                    </div>
+                </div>
+            </uitemplate>
+            <uielement name="ModuleSharing" attr-ng-model="ui.data.packageDetail.Options.shareable" control="dropdownlist"></uielement>
+        </uilayout>
+        <uilayout name="PremiumModule" attr-ng-show="!ShowModuleDefinition">
+            <uielement name="IsPremiumModule" ngmodel="ui.data.packageDetail.Options.premiumModule" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uitemplate>
+                <div class="form-group">
+                    <label>[L:Assigned]</label>
+                    <ul class="name-list">
+                        <li mn-ng-repeat="assign in Assigns"><input type="checkbox" id="assign_{{assign.Id}}" ng-checked="assign.Value"><label>{{assign.Name}}</label></li>
+                    </ul>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="ModuleDefinitions" attr-ng-show="!ShowModuleDefinition">
+            <uitemplate>
+                <div class="addmodulebtn">
+                    <a ng-click="Click_AddModuleDef()" data-toggle="tooltip" data-placement="left" data-original-title="[L:Addmodule]" class="ux-btn ux-btn-hover float-right">
+                        <em class="fas fa-plus"></em>
+                    </a>
+                </div>
+            </uitemplate>
+            <uielement name="ModuleDefinitions" ngoptions="ModuleDefinitions" control="grid" paged="false" label="false" attr-class="ux-gridcolumnhide table-grid">
+                <column name="Name" width="94">
+                    <uitemplate>
+                        <div>
+                            <span>{{row.name}}</span>
+                        </div>
+                    </uitemplate>
+                </column>
+                <column name="Actions" attr-style="text-align: right" width="6">
+                    <uitemplate>
+                        <div class="dropdown float-right dropbtn">
+                            <a id="dropdownMenuLinkDef" class="dropdownmenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v "></em>
+                            </a>
+                            <div class="dropdown-menu " aria-labelledby="dropdownMenuLinkDef">
+                                <a class="dropdown-item box-icon" ng-click="Click_EditModuleDef(row)"><em class="fas fa-cog"></em><span>[L:Settings]</span></a>
+                                <a class="dropdown-item box-icon" ng-click="Click_DeleteModuleDef(row)"><em class="fas fa-trash"></em><span>[L:Delete]</span></a>
+                            </div>
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ShowModuleDefinition">
+            <uielement name="DefinitionName" attr-ng-disabled="ShowDefinitionName()" attr-ng-model="DefinitionName" control="textbox" container-attr-ng-show="!ShowModuleControl"></uielement>
+            <uielement name="MDef_FriendlyName" attr-ng-model="FriendlyName" control="textbox" container-attr-ng-show="!ShowModuleControl"></uielement>
+            <uielement name="DefaultCacheTime" attr-ng-model="DefaultCacheTime" control="integer" container-attr-ng-show="!ShowModuleControl"></uielement>
+            <uitemplate>
+                <div mn-ng-show="DefinitionId!=-1&&!ShowModuleControl" class="addmodulebtn">
+                    <a ng-click="Click_AddModuleControl()" class="ux-btn ux-btn-hover float-right">
+                        <em class="fas fa-plus"></em>
+                    </a>
+                    <div>[L:AppControls]</div>
+                </div>
+            </uitemplate>
+            <uielement name="ModuleControls" ngoptions="ModuleControls" control="grid" container-attr-ng-show="DefinitionId!=-1&&!ShowModuleControl" paged="false" label="false" attr-class="ux-gridcolumnhide table-grid">
+                <column name="Title" data="title" width="14">
+                </column>
+                <column name="SourceFile" data="source" width="80">
+                </column>
+                <column name="Actions" attr-style="text-align: right" width="6">
+                    <uitemplate>
+                        <div class="dropdown float-right dropbtn">
+                            <a id="dropdownMenuLinkControl" class="dropdownmenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v "></em>
+                            </a>
+                            <div class="dropdown-menu " aria-labelledby="dropdownMenuLinkControl">
+                                <a class="dropdown-item box-icon" ng-click="Click_EditModuleControl(row)"><em class="fas fa-cog"></em><span>[L:Settings]</span></a>
+                                <a class="dropdown-item box-icon" ng-click="Click_DeleteModuleControl(row)"><em class="fas fa-trash"></em><span>[L:Delete]</span></a>
+                            </div>
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+            <uitemplate>
+                <div mn-ng-show="ShowModuleControl">[uilayout:ModuleControl]</div>
+                <div mn-ng-show="!ShowModuleControl" class="text-right fixed-footer">
+                    <button type="button" ng-click="Click_SaveModuleDef()" class="btn btn-sm btn-primary">
+                        [L:Update]
+                    </button>
+                    <span>&nbsp;</span>
+                    <button type="button" ng-click="Click_CancelModuleDef()" class="btn btn-sm btn-default">
+                        [L:Cancel]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="ModuleControl">
+            <uielement name="ControlKey" attr-ng-model="ControlKey" control="textbox"></uielement>
+            <uielement name="ControlTitle" attr-ng-model="ControlTitle" control="textbox"></uielement>
+            <uielement name="ControlSourceFolder" attr-ng-model="ControlSourceFolder" control="dropdownlist" attr-ng-change="Change_ControlSourceFolder()"></uielement>
+            <uielement name="ControlSourceFile" attr-ng-model="ControlSourceFile" control="dropdownlist"></uielement>
+            <uielement name="ControlType" attr-ng-model="ControlType" control="dropdownlist"></uielement>
+            <uielement name="ControlViewOrder" attr-ng-model="ControlViewOrder" control="integer"></uielement>
+            <uielement name="ControlIcon" attr-ng-model="ControlIcon" control="dropdownlist"></uielement>
+            <uielement name="ControlHelpURL" attr-ng-model="ControlHelpURL" control="textbox"></uielement>
+            <uielement name="ControlSupportsPopups" ngmodel="ControlSupportsPopups" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uielement name="ControlSupportsPartialRendering" ngmodel="ControlSupportsPartialRendering" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" ng-click="Click_SaveModuleControl()" class="btn btn-sm btn-primary">
+                        [L:Update]
+                    </button>
+                    <span>&nbsp;</span>
+                    <button type="button" ng-click="Click_CancelModuleControl()" class="btn btn-sm btn-default">
+                        [L:Cancel]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ShowPermission&&!ShowModuleDefinition&&ModuleType">
+            <uielement name="Permissions" control="Permissiongrid" label="false"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="!ShowModuleDefinition">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" ng-click="Click_Save()" class="btn btn-sm btn-primary">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

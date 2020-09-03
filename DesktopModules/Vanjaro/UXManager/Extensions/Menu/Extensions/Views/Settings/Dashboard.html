@@ -1,0 +1,82 @@
+﻿<div ng-controller="settings_dashboard" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="settings_dashboard" layout="dashboard">
+        <uilayout name="Heading">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-6 extback pr-none">
+                        <a onclick="parent.Click_Back()" class="ux-backbtn">
+                            <span class="extbackicon">
+                                <em class="fas fa-chevron-left"></em>
+                            </span>
+                            <span class="extname">[L:Extensions]</span>
+                        </a>
+                    </div>
+                    <div class="col-6 pl-none">
+                        <a access-roles="host" ng-click="Click_InstallPackage()" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:Install]" class="ux-btn ux-btn-hover float-right">
+                            <em class="fas fa-plus"></em>
+                        </a>
+                        <a access-roles="host" ng-click="Click_InstallExtension()" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:InstallExtension]" class="ux-btn ux-btn-hover float-right">
+                            <em class="fas fa-upload"></em>
+                        </a>
+                        <div access-roles="host" class="dropdown show float-right">
+                            <a id="dropdownLink" class="dropdownmenu ux-btn ux-btn-hover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-filter"></em>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownLink">
+                                <li>
+                                    <a class="dropdown-item {{avlinstall?'':'active'}}" ng-click="Click_IsInstall(true)"><span>[L:Installed]</span></a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{avlinstall?'active':''}}" ng-click="Click_IsInstall(false)"><span>[L:Available]</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uielement name="Extensions" ngoptions="Extensions" attr-st-safe-src="Search_Extensions" control="grid" displayedpages="5" pagesize="25" paged="true" search="true" label="false" attr-class="ux-gridcolumnhide table-grid">
+                <column name="Icon" attr-ng-show="row.PackageId>0" width="15">
+                    <uitemplate>
+                        <img class="img-responsive" src="{{row.PackageIcon}}" />
+                    </uitemplate>
+                </column>
+                <column name="Name" width="70">
+                    <uitemplate>
+                        <div data-toggle="tooltip" data-placement="bottom" data-original-title="{{row.FriendlyName}}">
+                            <div class="friendlyname">{{row.FriendlyName}}<span class="friendlynametooltip">{{row.FriendlyName}}</span></div>
+                            <div class="fontsmall" style="color:#ccc;font-size:smaller">v{{row.Version}} - {{row.Type}}</div>
+
+                        </div>
+                        <div mn-ng-show="row.PackageId>0" class="float-right textinfo">
+                            <a mn-ng-show="row.IsInUse=='Yes'" class="fontsmall inuse cursorpointer" ng-click="Click_IsInUse(row)"><em class="fa fa-retweet" aria-hidden="true"></em><span class="inusetooltip">in use</span></a>
+
+                        </div>
+                    </uitemplate>
+                </column>
+                <column name="Actions" attr-style="text-align: right" width="15">
+                    <uitemplate>
+                        <div access-roles="host" class="dropdown float-right dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v"></em>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item box-icon" mn-ng-show="row.PackageId>0" ng-click="Click_Edit(row)"><em class="fas fa-cog"></em><span>[L:Settings]</span></a>
+                                <hr class="m-none" mn-ng-show="row.PackageId>0&&row.CanDelete" />
+                                <a class="dropdown-item box-icon" mn-ng-show="row.PackageId>0&&row.CanDelete" ng-click="Click_Delete(row)"><em class="fas fa-trash"></em><span>[L:Delete]</span></a>
+                                <a class="dropdown-item box-icon" mn-ng-show="row.PackageId<0" ng-click="Click_Install(row)"><em class="fas fa-upload"></em><span mn-ng-show="showInstall(row)">[L:Install]</span><span mn-ng-hide="showInstall(row)">[L:Deploy]</span></a>
+                                <a class="dropdown-item box-icon" mn-ng-show="row.PackageId<0" ng-click="Click_Download(row)"><em class="fas fa-download"></em><span>[L:Download]</span></a>
+                            </div>
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+    </uiengine>
+</div>
+<style>
+    body {
+        background: #e6e9ec;
+    }
+</style>

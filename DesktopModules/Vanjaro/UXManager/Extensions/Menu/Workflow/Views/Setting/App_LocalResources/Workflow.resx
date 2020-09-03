@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ddlWorkFlows.Text" xml:space="preserve">
+    <value>Default Workflow</value>
+  </data>
+  <data name="ManageWorkflow.Text" xml:space="preserve">
+    <value>Manage Workflow</value>
+  </data>
+  <data name="Submit.Text" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Advanced.Text" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="Workflow.Text" xml:space="preserve">
+    <value>Workflow</value>
+  </data>
+  <data name="Active.OFF" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="Active.ON" xml:space="preserve">
+    <value>YES</value>
+  </data>
+  <data name="Active.Text" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Add.Text" xml:space="preserve">
+    <value>Add New Workflow</value>
+  </data>
+  <data name="AddRole.Text" xml:space="preserve">
+    <value>Add Role</value>
+  </data>
+  <data name="AddState.Text" xml:space="preserve">
+    <value>Add New State</value>
+  </data>
+  <data name="AddUser.Text" xml:space="preserve">
+    <value>Add User</value>
+  </data>
+  <data name="AllRoles.Text" xml:space="preserve">
+    <value> All Roles </value>
+  </data>
+  <data name="Back.Text" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="ddlModuleText.Text" xml:space="preserve">
+    <value>Module: This</value>
+  </data>
+  <data name="ddlPortalText.Text" xml:space="preserve">
+    <value>Portal:</value>
+  </data>
+  <data name="Deleted.OFF" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="Deleted.ON" xml:space="preserve">
+    <value>YES</value>
+  </data>
+  <data name="DeleteStateTitle.Text" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Description.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Global.Text" xml:space="preserve">
+    <value>Host: Global</value>
+  </data>
+  <data name="GlobalRoles.Text" xml:space="preserve">
+    <value> Global Roles </value>
+  </data>
+  <data name="Group.Text" xml:space="preserve">
+    <value>Filter By Group:</value>
+  </data>
+  <data name="IsValDescription.Text" xml:space="preserve">
+    <value>You must provide workflow description.</value>
+  </data>
+  <data name="IsValName.Text" xml:space="preserve">
+    <value>You must provide workflow name.</value>
+  </data>
+  <data name="IsValStateExitName.Text" xml:space="preserve">
+    <value>State already exists</value>
+  </data>
+  <data name="IsValStateName.Text" xml:space="preserve">
+    <value>You must provide state name.</value>
+  </data>
+  <data name="ManageStates.Text" xml:space="preserve">
+    <value>Manage States</value>
+  </data>
+  <data name="ManageWorkflows.Text" xml:space="preserve">
+    <value>Manage Workflows</value>
+  </data>
+  <data name="MessageStateText.Text" xml:space="preserve">
+    <value>Are you sure you want to delete this State?</value>
+  </data>
+  <data name="NewWorkflow.Text" xml:space="preserve">
+    <value>New Workflow</value>
+  </data>
+  <data name="Notify.OFF" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="Notify.ON" xml:space="preserve">
+    <value>YES</value>
+  </data>
+  <data name="Notify.Text" xml:space="preserve">
+    <value>Notify</value>
+  </data>
+  <data name="PermissionRole.Text" xml:space="preserve">
+    <value>PERMISSIONS BY ROLE</value>
+  </data>
+  <data name="PermissionUser.Text" xml:space="preserve">
+    <value>PERMISSIONS BY USER</value>
+  </data>
+  <data name="RolePermisssions_Columns_Actions.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="RolePermisssions_Columns_Name.Text" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="RolePermisssions_Columns_ReviewContent.Text" xml:space="preserve">
+    <value>Review Content</value>
+  </data>
+  <data name="ScopeAllModule.Text" xml:space="preserve">
+    <value>Portal: All Workflow Modules</value>
+  </data>
+  <data name="ScopeOneType.Text" xml:space="preserve">
+    <value>Modules Only</value>
+  </data>
+  <data name="ScopeThisModuleOnly.Text" xml:space="preserve">
+    <value>Module Only</value>
+  </data>
+  <data name="SearchBy.Text" xml:space="preserve">
+    <value>Begin typing to add a role</value>
+  </data>
+  <data name="SearchByRole.Text" xml:space="preserve">
+    <value>Search By Role</value>
+  </data>
+  <data name="SearchByUser.Text" xml:space="preserve">
+    <value>Search By User</value>
+  </data>
+  <data name="Section.Text" xml:space="preserve">
+    <value>In this section you can manage the workflow states. Note that once a workflow is being used you cannot delete any of the workflow states associated with the workflow. Also the first and last workflow states of a workflow cannot be deleted.</value>
+  </data>
+  <data name="State.Text" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="Title.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Update.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="UpdatedSuccessfully.Text" xml:space="preserve">
+    <value>Updated Successfully</value>
+  </data>
+  <data name="UserPermisssions_Columns_Actions.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="UserPermisssions_Columns_Name.Text" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="UserPermisssions_Columns_ReviewContent.Text" xml:space="preserve">
+    <value>Review Content</value>
+  </data>
+  <data name="Workflows.Text" xml:space="preserve">
+    <value>Workflow</value>
+  </data>
+  <data name="WorkflowScope.Text" xml:space="preserve">
+    <value>Workflow Scope</value>
+  </data>
+  <data name="WorkflowStates_Columns_Actions.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="WorkflowStates_Columns_Active.Text" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="WorkflowStates_Columns_Notify.Text" xml:space="preserve">
+    <value>Notify</value>
+  </data>
+  <data name="WorkflowStates_Columns_State.Text" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="WorkflowStates_Search.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Workflows_Columns_Action.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="Workflows_Columns_Name.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DeleteWorkflowTitle.Text" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="MaxRevisions.Text" xml:space="preserve">
+    <value>Maximum Number of Revisions</value>
+  </data>
+  <data name="MessageWorkflowText.Text" xml:space="preserve">
+    <value>Are you sure you want to delete this Workflow?</value>
+  </data>
+  <data name="Success.Text" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Warning.Text" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="WorkflowUsing.Text" xml:space="preserve">
+    <value>Cannot delete a workflow because it is currently in used.</value>
+  </data>
+  <data name="ChangeProfile.Text" xml:space="preserve">
+    <value>Change Profile</value>
+  </data>
+  <data name="CKEditorProfile.Text" xml:space="preserve">
+    <value>CKEditor Profile</value>
+  </data>
+  <data name="Setting.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="workflowPermissionRole.Text" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="workflowPermissionUser.Text" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="workflowPermissionUsersEmpty.Text" xml:space="preserve">
+    <value>There are no users with explicit permissions</value>
+  </data>
+  <data name="DefaultFolder.Text" xml:space="preserve">
+    <value>Default Folder</value>
+  </data>
+  <data name="MenuAdvanced.Text" xml:space="preserve">
+    <value>Revisions</value>
+  </data>
+  <data name="MenuWorkflow.Text" xml:space="preserve">
+    <value>Workflows</value>
+  </data>
+  <data name="WorkflowTable.Text" xml:space="preserve">
+    <value>Workflows</value>
+  </data>
+  <data name="Settings.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="AdvancedTab.Text" xml:space="preserve">
+    <value>Revisions</value>
+  </data>
+  <data name="StateUsing.Text" xml:space="preserve">
+    <value>Cannot delete a state because it is currently in used.</value>
+  </data>
+  <data name="ManageState.Text" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="PagePermissions.Text" xml:space="preserve">
+    <value>Page Permissions</value>
+  </data>
+  <data name="Revisions.Text" xml:space="preserve">
+    <value>Revisions</value>
+  </data>
+  <data name="PermissionsRole.Text" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="PermissionsUser.Text" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="PermissionsUsersEmpty.Text" xml:space="preserve">
+    <value>There are no users with explicit permissions</value>
+  </data>
+</root>

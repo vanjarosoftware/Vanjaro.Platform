@@ -1,0 +1,400 @@
+﻿<div ng-controller="setting_setting" class="vj-ux-manager user-info">
+    <uiengine provider="AngularBootstrap" identifier="setting_setting" layout="usersdetail">
+        <uilayout name="default" attr-ng-show="ShowUser_profileTab" attr-class="Gravitar">
+            <uitemplate>
+                <div class="logoBox">
+                    <img id="uploaded_image" src="{{ui.data.UserDetails.Options.avatar}}">
+                    <span class="user_name">{{ui.data.UserDetails.Options.displayName}}</span>
+                </div>
+            </uitemplate>
+            <uielement name="UserImage" control="upload" mode="both" maxsize="$scope.ui.data.MaxFileSize.Value*1000000" filetypes="$scope.ui.data.AllowedAttachmentFileExtensions.Value" autoupload="true" removedelete="true" container="true" label="false" attr-class="uploadbtn" required></uielement>
+        </uilayout>
+
+        <uilayout name="default">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-md-3">
+                        [uilayout:TabsNavigation]
+                    </div>
+                    <div class="col-md-9 left_border uiengine-wrapper scrollbar">
+                        [uilayout:TabsContentBasic]
+                        [uilayout:TabsContentProfile]
+                        [uilayout:TabsContentPermission]
+                        [uilayout:TabsContentAudit]
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+
+        <uilayout name="TabsNavigation" attr-class="tab-pane">
+            <uitemplate>
+                <ul class="nav nav-pills nav-stacked tab-line">
+                    <li id="User_account" access-roles="admin,user" class="nav-item"><a class="nav-link active" mn-ng-click="Click_ShowTab('User_account')">[L:Account]</a></li>
+                    <li id="User_profile" mn-ng-show="ui.data.ProfilePropertiesByCategories.Options.length>0" access-roles="admin,user" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('User_profile')">[L:Profile]</a></li>
+                    <li id="Permissions" access-roles="admin" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('Permissions')" mn-ng-show="!ui.data.UserDetails.Options.isSuperUser">[L:Permissions]</a></li>
+                    <li id="Audit" access-roles="admin" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('Audit')">[L:Audit]</a></li>
+                </ul>
+            </uitemplate>
+        </uilayout>
+
+        <!--Basic-->
+        <uilayout name="TabsContentBasic" attr-access-roles="admin,user" attr-ng-show="ShowUser_accountTab">
+            <uitemplate>
+                <div id="accordion2">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#BasicSetting">
+                                [L:BasicSetting]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="BasicSetting" class="collapse show" data-parent="#accordion2">
+                            <div class="card-body">
+                                [uilayout:BasicSetting]
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="BasicSetting" attr-ng-show="ShowUser_accountTab">
+            <uielement name="UserName" control="textbox" container-attr-ng-if="Show_UserName" attr-required="true" attr-ng-model="ui.data.UserDetails.Options.userName"></uielement>
+            <uielement name="DisplayName" control="textbox" attr-required="true" attr-ng-model="ui.data.UserDetails.Options.displayName"></uielement>
+            <uielement name="Email" control="email" attr-required="true" attr-ng-model="ui.data.UserDetails.Options.email"></uielement>
+        </uilayout>
+        <!--Profile-->
+        <uilayout name="TabsContentProfile" attr-ng-show="ShowUser_profileTab">
+            <uitemplate>
+                <div id="accordion">
+                    <div mn-ng-repeat="cname in ui.data.ProfilePropertiesByCategories.Options" class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapse_{{cname.Key| removeSpacesThenLowercase}}">
+                                {{cname.Value}}
+                                <em mn-ng-class="$index != 0  ? 'fa fa-caret-right float-right' : 'fa fa-caret-down float-right'"></em>
+                            </a>
+                        </div>
+                        <div id="collapse_{{cname.Key| removeSpacesThenLowercase}}" mn-ng-class="$index != 0 ? 'collapse':'collapse show'" data-parent="#accordion">
+                            <div class="card-body">
+                                <div mn-ng-repeat="option in ui.data.ProfileProperties.Options">
+                                    <div class="form-group" data-datatype="textbox" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&(option.ControlType== 'Text'|| option.ControlType== 'Unknown')&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
+                                        <label class="" for="setting_setting1textbox1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control control-background ng-pristine ng-untouched ng-valid ng-valid-required" id="setting_setting1textbox1_{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue" aria-describedby="setting_setting1textbox1_{{option.ProfilePropertyDefinition.PropertyName}}-addon" maxlength="{{option.ProfilePropertyDefinition.Length}}">
+                                        </div>
+                                        <span id="setting_setting1textbox1_{{option.ProfilePropertyDefinition.PropertyName}}-addon" class="help-block"></span>
+                                    </div>
+
+                                    <div class="form-group" data-datatype="dropdownlist" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&option.ControlType== 'Country'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
+                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <div class="input-group">
+                                            <select class="form-control ng-pristine ng-valid ng-touched" mn-ng-options="country.Id as country.FullName for country in ui.data.Countries.Options" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue" mn-ng-change="Change_Country(option.ProfilePropertyDefinition,'true')"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" data-datatype="dropdownlist" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&option.ControlType == 'Region'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
+                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <div class="input-group">
+                                            <select class="form-control ng-pristine ng-valid ng-touched {{option.ControlType}}" mn-ng-options="region.Value as region.Text for region in Regions" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" data-datatype="dropdownlist" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&(option.ControlType == 'TimeZoneInfo'||option.ControlType=='TimeZone')&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
+                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <div class="input-group">
+                                            <select class="form-control ng-pristine ng-valid ng-touched" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue">
+                                                <option mn-ng-repeat="x in ui.data.Time_Zones.Options" value="{{x.Id}}">{{x.DisplayName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" data-datatype="dropdownlist" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&option.ControlType == 'Locale'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
+                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <div class="input-group">
+                                            <select class="form-control ng-pristine ng-valid ng-touched" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue">
+                                                <option mn-ng-repeat="x in ui.data.Active_Locales.Options" value="{{x.Code}}">{{x.Text}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" data-datatype="textarea" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&option.ControlType == 'Multi-line Text'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
+                                        <label class="" for="setting_setting1textarea2_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <textarea class="form-control ng-pristine ng-untouched ng-valid" id="setting_setting1textarea2_{{option.ProfilePropertyDefinition.PropertyName}}" rows="4" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue" maxlength="{{option.ProfilePropertyDefinition.Length}}"></textarea>
+                                    </div>
+
+                                    <!--Start Checkbox and TrueFalse-->
+                                    <div class="form-group" data-datatype="toggle" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&(option.ControlType == 'TrueFalse'||option.ControlType == 'Checkbox')&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
+                                        <label class="" for="setting_setting1toggle1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <div class="btn-group truefalse" role="group" aria-label="...">
+                                            <button type="button" class="btn " ng-click="option.ProfilePropertyDefinition.PropertyValue = !option.ProfilePropertyDefinition.PropertyValue" ng-class="option.ProfilePropertyDefinition.PropertyValue ? 'btn-primary active' : 'btn-default'">[L:ToggleYes]</button>
+                                            <button type="button" class="btn " ng-click="option.ProfilePropertyDefinition.PropertyValue = !option.ProfilePropertyDefinition.PropertyValue" ng-class="!option.ProfilePropertyDefinition.PropertyValue ? 'btn-primary disabled' : 'btn-default'">[L:ToggleNo]</button>
+                                        </div>
+                                    </div>
+                                    <!--End Checkbox and TrueFalse-->
+                                    <!--Start List-->
+                                    <div class="form-group" data-datatype="dropdownlist" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&option.ControlType == 'List'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
+                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <div class="input-group">
+                                            <select class="form-control ng-pristine ng-valid ng-touched" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue">
+                                                <option mn-ng-repeat="x in option.ListEntries" ng-selected="option.ProfilePropertyDefinition.PropertyValue==x.Value" value="{{x.Value}}">{{x.Text}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--End List-->
+                                    <!--Start Integer-->
+                                    <div class="form-group" data-datatype="integer" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&option.ControlType == 'Integer'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
+                                        <label class="" for="setting_setting1integer1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control ng-pristine ng-invalid ng-valid-min ng-invalid-required ng-touched" id="setting_setting1integer1_{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue">
+                                        </div>
+                                    </div>
+                                    <!--End Integer-->
+                                    <!--Start Date-->
+                                    <div class="form-group {{option.ControlType}}" data-datatype="date" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&(option.ControlType == 'Date' || option.ControlType == 'DateTime')&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
+                                        <label class="" for="setting_setting1date1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <div class="input-group date_picker font-datetime">
+                                            <input type="text" class="form-control {{option.ControlType}}" placeholder="&#xf073;" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue" value="{{row.startTime}}">
+                                        </div>
+                                    </div>
+                                    <!--End Date-->
+                                    <!--Start RichText-->
+                                    <div class="form-group {{option.ControlType}}" data-datatype="{{option.ControlType}}" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&(option.ControlType == 'RichText'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key)">
+                                        [uilayout:ControlRichText]
+                                    </div>
+                                    <!--End RichText-->
+                                    <!--Start label control-->
+                                    <div class="form-group {{option.ControlType}}" data-datatype="label" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(option.ProfilePropertyDefinition.ReadOnly)&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
+                                        <label class="" for="setting_setting1label1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <div class="input-group date_picker font-datetime">
+                                            <div mn-ng-bind-html="Parse(option)"></div>
+                                        </div>
+                                    </div>
+                                    <!--End label control-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+            <!--<uielement name="FirstName" control="textbox" attr-ng-model="ui.data.UserDetails.Options.firstName"></uielement>
+            <uielement name="LastName" control="textbox" attr-ng-model="ui.data.UserDetails.Options.lastName"></uielement>-->
+        </uilayout>
+        <!--Permisssion-->
+        <uilayout name="ControlRichText">
+            <uitemplate>
+                <label class="richtextlabel" for="setting_setting1RichText1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+            </uitemplate>
+            <uielement name="RichText" attr-class="editorcontrol" attr-ng-model="option.ProfilePropertyDefinition.PropertyValue" control="texteditor" profile="Minimal"></uielement>
+        </uilayout>
+        <uilayout name="TabsContentPermission" attr-access-roles="admin" attr-class="user-roles" attr-ng-show="ShowPermissionsTab">
+            <uitemplate>
+                <div id="accordion3">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#PermissionSetting">
+                                [L:PermissionSetting]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="PermissionSetting" class="collapse show" data-parent="#accordion3">
+                            <div class="card-body">
+                                [uilayout:PermissionSetting]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="PermissionSetting" attr-ng-show="ShowPermissionsTab">
+            <uielement name="SendEmail" control="checkboxtoggle" container-attr-ng-show="false" attr-class="toggle_right" ngmodel="notifyUser"></uielement>
+            <uitemplate>
+                <div ng-show="!ShowSearchByRole">
+                    <a ng-click="Click_ShowSearchByRole()" class="float-right permission-icon">
+                        <em class="fas fa-plus"></em>
+                    </a>
+                </div>
+                <div class="ui-inlineblock" ng-show="ShowSearchByRole">
+                    <angucomplete-alt id="Role"
+                                      placeholder="[L:SearchByRole]"
+                                      pause="400"
+                                      selected-object="Click_UserRoleAdd"
+                                      remote-api-handler="RoleremoteAPI"
+                                      title-field="Label"
+                                      minlength="1"
+                                      input-class="form-control"
+                                      override-suggestions="true"
+                                      ng-click="Click_Clear()" />
+                </div>
+            </uitemplate>
+            <uielement name="UserRoles" control="grid" pagesize="20" paged="true" displayedpages="5" search="true" label="false" attr-class="table-responsive table-grid UserRole" attr-st-pipe="Pipe_UserRolePagging">
+                <column name="RoleName" width="43">
+                    <uitemplate>
+                        <div class="rolename">{{row.roleName}}</div>
+                    </uitemplate>
+                </column>
+                <column name="StartTime" attr-class="datetime-range" width="25">
+                    <uitemplate>
+                        <div class="input-group date_picker font-datetime" mn-ng-if="row.allowExpired">
+                            <input type="text" class="form-control start-date" placeholder="&#xf073;" mn-ng-click="Click_SetUserRoleDate(row)" mn-ng-model="row.startTime" value="{{row.startTime}}">
+                        </div>
+                    </uitemplate>
+                </column>
+                <column name="ExpiresTime" attr-class="datetime-range" width="25">
+                    <uitemplate>
+                        <div class="input-group date_picker font-datetime" mn-ng-if="row.allowExpired">
+                            <input type="text" class="form-control end-date" placeholder="&#xf073;" mn-ng-click="Click_SetUserRoleDate(row)" mn-ng-model="row.expiresTime" value="{{row.expiresTime}}">
+                        </div>
+                    </uitemplate>
+                </column>
+                <column name="Actions" width="7">
+                    <uitemplate>
+                        <div class="dropdown show float-right dropbtn" mn-ng-show="row.allowDelete">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v"></em>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a ng-click="Click_RemoveRole(row)" class="dropdown-item box-icon " mn-ng-show="row.allowDelete">
+                                    <em class="fas fa-trash"></em><span>[LS:Delete]</span>
+                                </a>
+                            </div>
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+            <uitemplate>
+                <div class="search-info-msg" mn-ng-show="ui.data.UserRoles.Options.length<=0">[L:RolesNotAvailable]</div>
+                <p ng-bind-html="InjectDatetTimePicker()"></p>
+            </uitemplate>
+        </uilayout>
+        <!--Audit-->
+        <uilayout name="TabsContentAudit" attr-access-roles="admin" attr-ng-show="ShowAuditTab">
+            <uitemplate>
+                <div id="accordion4">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#AuditSetting">
+                                [L:AuditSetting]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="AuditSetting" class="collapse show" data-parent="#accordion4">
+                            <div class="card-body">
+                                [uilayout:AuditSetting]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="AuditSetting" attr-ng-show="ShowAuditTab">
+            <uitemplate>
+                <div class="user-info">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6"><strong>[L:CreatedDate]</strong></div>
+                                <div class="col-sm-6">
+                                    <div class="user-profile">{{ui.data.UserDetails.Options.createdOnDate | date:'MMMM d, y h:mm a'}}</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6"><strong>[L:LastLoginDate]</strong></div>
+                                <div class="col-sm-6">
+                                    <div class="user-profile">{{ui.data.UserDetails.Options.lastLogin | date:'MMMM d, y h:mm a'}}</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6"><strong>[L:LastActivityDate]</strong></div>
+                                <div class="col-sm-6">
+                                    <div class="user-profile">{{ui.data.UserDetails.Options.lastActivity | date:'MMMM d, y h:mm a'}}</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6"><strong>[L:LastPasswordChange]</strong></div>
+                                <div class="col-sm-6">
+                                    <div class="user-profile">{{ui.data.UserDetails.Options.lastPasswordChange | date:'MMMM d, y h:mm a'}}</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6"><strong>[L:LastLock_OutDate]</strong></div>
+                                <div class="col-sm-6">
+                                    <div class="user-profile">{{ui.data.UserDetails.Options.lastLockout | date:'MMMM d, y h:mm a'}}</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6"><strong>[L:LockedOut]</strong></div>
+                                <div class="col-sm-6">
+                                    <div class="user-profile">
+                                        <em mn-ng-show="ui.data.UserDetails.Options.isLocked" class="far fa-check-square"></em>
+                                        <em mn-ng-show="!ui.data.UserDetails.Options.isLocked" class="far fa-square"></em>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6"><strong>[L:Authorized]</strong></div>
+                                <div class="col-sm-6">
+                                    <div class="user-profile">
+                                        <em mn-ng-show="ui.data.UserDetails.Options.authorized" class="far fa-check-square"></em>
+                                        <em mn-ng-show="!ui.data.UserDetails.Options.authorized" class="far fa-square"></em>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6"><strong>[L:UpdatePassword]</strong></div>
+                                <div class="col-sm-6">
+                                    <div class="user-profile">
+                                        <em mn-ng-show="ui.data.UserDetails.Options.needUpdatePassword" class="far fa-check-square"></em>
+                                        <em mn-ng-show="!ui.data.UserDetails.Options.needUpdatePassword" class="far fa-square"></em>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6"><strong>[L:Deleted]</strong></div>
+                                <div class="col-sm-6">
+                                    <div class="user-profile">
+                                        <em mn-ng-show="ui.data.UserDetails.Options.isDeleted" class="far fa-check-square"></em>
+                                        <em mn-ng-show="!ui.data.UserDetails.Options.isDeleted" class="far fa-square"></em>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6"><strong>[L:UserFolder]</strong></div>
+                                <div class="col-sm-6">
+                                    <div class="user-profile">{{ui.data.UserDetails.Options.userFolder}}</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+        </uilayout>
+
+        <uilayout name="default">
+            <uitemplate>
+                <div mn-ng-bind-html="OnLoaded()"></div>
+                <div class="text-right fixed-footer">
+                    <button attr-id="update" type="button" mn-ng-click="Click_Update('update',ui.data.UserDetails.Options)" class="btn btn-sm btn-primary">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

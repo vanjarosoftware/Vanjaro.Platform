@@ -1,0 +1,40 @@
+﻿<div ng-controller="setting_settings" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_settings" layout="admin">
+        <uilayout name="Heading">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-7 pr-none extback">
+                        <a ng-click="BackTo_Theme()" class="ux-backbtn">
+                            <span class="extbackicon">
+                                <em class="fas fa-chevron-left"></em>
+                            </span>
+                            <span class="extname">{{ui.data.Category.Value}}</span>
+                        </a>
+                    </div>
+                    <div class="col-5 pl-none">
+                        <a href="#" mn-ng-click="SaveTheme()" class="ux-btn ux-btn-hover float-right" title="[L:SaveTheme]">
+                            <em class="fas fa-save"></em>
+                        </a>
+                        <a href="#" mn-ng-click="OpenPopUp()" class="ux-btn ux-btn-hover float-right" title="[L:AddEdit]">
+                            <em class="fas fa-cog"></em>
+                        </a>
+                        <a href="#" mn-ng-click="ResetTheme()" class="ux-btn ux-btn-hover float-right" title="[L:Reset]">
+                            <em class="fas fa-sync-alt"></em>
+                        </a>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div id="dvMarkUp" mn-ng-bind-html="ui.data.MarkUp.Value | unsafe"></div>
+                <div class='empty_msg' mn-ng-if="ui.data.MarkUp.Value==''">[L:NoSettings]</div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>
+<style>
+    body {
+        background: #e6e9ec;
+    }
+</style>

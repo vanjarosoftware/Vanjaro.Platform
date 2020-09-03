@@ -1,0 +1,46 @@
+﻿<div ng-controller="setting_setting" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_setting" layout="admin">
+        <uilayout name="Heading">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-12 extback pr-none">
+                        <a onclick="parent.Click_Back()" class="ux-backbtn">
+                            <span class="extbackicon">
+                                <em class="fas fa-chevron-left"></em>
+                            </span>
+                            <span class="extname">[LS:Theme]</span>
+                        </a>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div mn-ng-repeat="option in ui.data.Theme.Options" class="theme">
+                    <div class="row m-none theme-image selected-theme" style="background-image: url('{{option.Thumbnail}}');" mn-ng-if="option.Value == ui.data.Theme.Options[0].Value">
+                        <div class="pr-none">
+                            <span class="author_name">{{option.Value}} </span>
+                        </div>
+                        <div class="theme-settings pl-none text-right" ng-click="Open_ThemeBuilder()">
+                            <p class="date m-none">
+                                <em class="fas fa-cog"></em>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row m-none theme-image normal-theme" style="background-image: url('{{option.Thumbnail}}');" ng-click="ChangeTheme(option.Value)" mn-ng-if="option.Value != ui.data.Theme.Options[0].Value">
+                        <div class="pr-none">
+                            <span class="author_name">{{option.Value}} </span>
+                        </div>
+                    </div>
+                </div>
+                <div mn-ng-if="ui.data.Theme.Options.length==0">[L:NoThemes]</div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>
+<style>
+    body {
+        background: #e6e9ec;
+    }
+</style>
+

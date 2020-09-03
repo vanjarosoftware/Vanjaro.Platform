@@ -1,0 +1,35 @@
+﻿.vj-ux-manager .summary-container {
+	position: relative;
+	display: block;
+	background: #fff;
+	margin-top: 15px;
+	padding: 15px 40px 15px 15px;
+}
+
+	.vj-ux-manager .summary-container em {
+		position: absolute;
+		right: 20px;
+		top: 50%;
+		color: #000;
+		font-size: 12px;
+		margin-top: -6px;
+	}
+
+	.vj-ux-manager .summary-container .summary-title {
+		display: block;
+		font-size: 12px;
+		font-weight: 600;
+		letter-spacing: 0.5px;
+		text-transform: uppercase;
+		line-height: 22px;
+		color: #3e3e3e;
+	}
+
+	.vj-ux-manager .summary-container .summary-content {
+		display: block;
+		font-size: 12px;
+		font-weight: 400;
+		letter-spacing: 0.5px;
+		line-height: 22px;
+		color: #797979;
+	}

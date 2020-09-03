@@ -1,0 +1,32 @@
+﻿<div ng-controller="setting_translator" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_translator" class="uiengine-wrapper scrollbar">
+        <uilayout name="default" attr-class="col-md-12">
+            <uielement name="RoleGroups" control="dropdownlist" attr-ng-model="RoleGroup" attr-ng-change="Change_RoleGroup()"></uielement>
+            <uielement name="Roles" control="grid" label="false" pagesize="500" paged="true" displayedpages="5" attr-class="ux-gridcolumnhide table-grid">
+                <column name="Name" width="90">
+                    <uitemplate>
+                        <div>
+                            <div>{{row.RoleName}}</div>
+                        </div>
+                    </uitemplate>
+                </column>
+                <column name="Setting" width="10">
+                    <uitemplate>
+                        <div class="pull-right">
+                            <input type="checkbox" ng-click="Click_Selected(row)" mn-ng-model="row.Selected" />
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+        <uilayout name="default" attr-class="col-md-12">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" ng-click="Click_Update()" class="btn btn-sm btn-primary">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

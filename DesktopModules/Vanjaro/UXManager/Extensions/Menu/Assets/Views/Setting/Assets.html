@@ -1,0 +1,125 @@
+﻿<div ng-controller="setting_assets" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_assets">
+        <uilayout name="default" attr-class="buttondiv">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a class="global" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:GlobalAssetsTitle]" access-roles="host" mn-ng-click="ChangeAssetMode()" mn-ng-class="!ui.data.AssetType.Value ? 'active' : ''"><i class="fas fa-globe-asia"></i></a>
+                    </div>
+                    <div class="col-sm-4" style="text-align:center;">
+                        <a class="assetIsList" data-toggle="tooltip" data-placement="bottom" data-original-title="List" mn-ng-click="IconsIsList = !IconsIsList" mn-ng-class="IconsIsList ? 'active' : ''"><i class="fas fa-th-list"></i></a>
+                        <a class="assetIsList" data-toggle="tooltip" data-placement="bottom" data-original-title="Grid" mn-ng-click="IconsIsList = !IconsIsList" mn-ng-class="!IconsIsList ? 'active' : ''"><i class="fas fa-th"></i></a>
+                    </div>
+                    <div class="cool-sm-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 uploaderui">
+                        <input type="checkbox" class="chkfidall" ng-click="ShowHideMenuItem(true)" ng-hide="IconsFiles.length<=0" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:ToggleAll]" />
+                        <span class="checkmark" ng-hide="IconsFiles.length<=0"></span>
+                        [uilayout:AssetUpload]
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uielement name="Icons" control="upload" mode="advance" attr-controlmodes="browse" maxsize="$scope.ui.data.MaxFileSize.Value" filetypes="$scope.ui.data.AllowedAttachmentFileExtensions.Value" folders="$scope.ui.data.Folders.Options" files="$scope.ui.data.Files.Options" autoupload="true" attr-multiple="false" container="true" disableselectfile="true" label="false"></uielement>
+            <uitemplate>
+                <div class="modal fade" id="CreateFolder" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <strong class="modal-title">[L:CreateNewFolder]</strong>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="alert alert-danger ShowErrorMessage" ng-show="ShowErrorMessage">
+                                        {{ErrorMessage}}
+                                    </div>
+                                    <label>[L:FolderName]</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control NewFolderName" ng-model="NewFolderName">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>[L:FolderType]</label>
+                                    <div class="input-group">
+                                        <select class="form-control FolderType" ng-model="FolderTypes.Value" ng-options="option.Value as option.Text for option in FolderTypes.Options"></select>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary float-right" id="Update" mn-ng-click="CreateFolder()">
+                                    [LS:Update]
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+            <uitemplate>
+                <div class="modal fade" id="movefolder" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 800px;height:550px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <strong class="modal-title">[L:DestinationFolderTo]</strong>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="alert alert-danger" ng-show="ShowErrorMessage">
+                                        {{ErrorMessage}}
+                                    </div>
+                                </div>
+                                <script type="text/ng-template" id="Basefolders_renderer.html">
+                                    <span mn-ng-if="folder.childrenCount>0" mn-ng-class="{'fas fa-caret-down': IconsFolders.Value==folder.Value,'fas fa-caret-right': IconsFolders.Value!=folder.Value}" style="visibility: inherit" mn-ng-click="BaseFolderClick_GetSubFolders($event,folder)"></span>
+                                    <span mn-ng-if="folder.childrenCount<1" mn-ng-class="{'fas fa-caret-down': IconsFolders.Value==folder.Value,'fas fa-caret-right': IconsFolders.Value!=folder.Value}" style="visibility: hidden" mn-ng-click="BaseFolderClick_GetSubFolders($event,folder)"></span>
+                                    <div class="basedir">
+                                        <span class="fas fa-folder" mn-ng-click="MoveCopyToFolder(folder.Value)"></span>
+                                        <span class="folders" style="font-weight: bold;" mn-ng-if="IconsFolders.Value==folder.Value" id="folders{{folder.Value}}" mn-ng-click="MoveCopyToFolder(folder.Value)">{{folder.Text}}</span>
+                                        <span class="folders" mn-ng-if="IconsFolders.Value!=folder.Value" id="folders{{folder.Value}}" mn-ng-click="MoveCopyToFolder(folder.Value)">{{folder.Text}}</span>
+                                        <span class="action-icon pull-right arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='DatabaseFolderProvider'"><em class="fas fa-database"></em></span>
+                                        <span class="action-icon pull-right arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='AzureFolderProvider'"><em class="fab fa-microsoft"></em></span>
+                                        <span class="action-icon pull-right arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Type=='secure'"><em class="fas fa-shield-alt"></em></span>
+                                        <span class="action-icon pull-right arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Lock"><em class="fas fa-lock"></em></span>
+                                    </div>
+                                    <ul class="rootfolder" mn-ng-class="{show: IconsFolders.Value==folder.Value}">
+                                        <li mn-ng-repeat="folder in folder.children" mn-ng-include="'Basefolders_renderer.html'">
+                                        </li>
+                                    </ul>
+                                </script>
+                                <div class="Basefoldersdiv uploaddefault">
+                                    <ul>
+                                        <li class="l_folder" mn-ng-repeat="folder in IconsFolders" mn-ng-include="'Basefolders_renderer.html'"></li>
+                                    </ul>
+                                </div>
+                                <div class="fixed-footer">
+                                    <div class="text-right">
+                                        <button class="btn btn-sm btn-primary button-left mr-xs cpymv" type="button" id="save" ng-click="SelectUpdateFolder()">[LS:Update]</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="permDiv" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 800px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <strong class="modal-title"></strong>
+                                <button type="button" class="close" data-dismiss="modal" style="font-size: 1.5rem;">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <iframe class="PermissionFrame" id="" frameborder="0" height="600px" width="100%"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="AssetUpload">
+            <uielement name="UploadFile" control="upload" mode="file" attr-class="url-add assetui" autoupload="true" label="false" container-attr-ng-show="true" maxsize="$scope.ui.data.MaxFileSize.Value" filetypes="$scope.ui.data.AllowedAttachmentFileExtensions.Value" attr-multiple="true"></uielement>
+        </uilayout>
+    </uiengine>
+</div>

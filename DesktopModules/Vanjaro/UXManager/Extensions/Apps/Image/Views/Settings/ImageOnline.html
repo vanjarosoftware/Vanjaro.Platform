@@ -1,0 +1,27 @@
+﻿<div ng-controller="settings_imageonline" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="settings_imageonline" layout="Admin" class="uiengine-wrapper Imagewrapper scrollbar">
+        <uilayout name="default">
+            <uitemplate>
+                <div>
+                    <a ng-show="ImageProvidersLink!=''" ng-href="{{ImageProvidersLink}}" target="_blank"><img class="extimgbox" ng-src="{{ImageProvidersImage}}" /></a>
+                    <label style="text-align: left;display: block;">[L:keyword]</label>
+                    <div class="form-group">
+                        <input type="text" id="VjImageKeyword" name="keyword" placeholder="[L:SearchKeyword]" value="ui.data.keyword.Value" class="form-control control-background searchinput" ng-model="ui.data.keyword.Value" ng-keyup="DebounceSearch()" />
+                        <select class="form-control searchselect" ng-model="ui.data.ImageProviders.Value" ng-options="option.Value as option.Text for option in ui.data.ImageProviders.Options" ng-change="ChangeImageProviders()"></select>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                </div>
+            </uitemplate>
+            <uielement name="AllImages" ngoptions="Images" control="grid" style="overflow-x:unset;" paged="true" search="false" label="false" pagesize="35" attr-pagesize="35" attr-class="table-responsive table-grid AllImages scrollbar" attr-st-pipe="Pipe_ImagePagging">
+                <column name="Name" width="18" attr-style="padding:0;">
+                    <uitemplate>
+                        <div class="imageOnline">
+                            <img src="{{row.previewURL}}" class="img-rounded" mn-ng-click="SelectImage(row)" mn-ng-dblclick="SaveOndblClick()">
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+    </uiengine>
+</div>

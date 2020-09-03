@@ -1,0 +1,112 @@
+﻿<div class="permission_grid">
+    <div ng-if="[name]IsInheritedCheckBoxShow">
+        <div class="form-group toggle_right">
+            <label>[L:[name]InheritPermission]</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn" ng-click="Click_[name]InheritCheck()" ng-class="[name]Inherit ? 'btn-success' : 'btn-default'">[L:[name]InheritPermissionON]</button>
+                <button type="button" class="btn" ng-click="Click_[name]InheritCheck()" ng-class="![name]Inherit ? 'btn-danger' : 'btn-default'">[L:[name]InheritPermissionOFF]</button>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <div class="addroles">
+        <div ng-show="Show[name]Role" class="filter_role">
+            <div class="float-right">
+                <select class="form-control" id="FilterByGroup" ng-model="[name]RoleGroupsValue">
+                    <option ng-repeat="option in [name]RoleGroupsOptions" value="{{option.Id}}">{{option.Name}}</option>
+                </select>
+            </div>
+            <div class="roleDropdown ui-inlineblock">
+                <angucomplete-alt id="Role"
+                                  placeholder="[L:SearchByRole]"
+                                  pause="400"
+                                  selected-object="Click_[name]AddRole"
+                                  remote-api-handler="[name]RoleremoteAPI"
+                                  title-field="Label"
+                                  minlength="1"
+                                  input-class="form-control"
+                                  override-suggestions="true"
+                                  ng-click="Click_Clear()" />
+            </div>
+        </div>
+        <div class="" ng-show="!Show[name]Role">
+            <a ng-click="Click_[name]NewRole()" class="float-right permission-icon">
+                <em class="fas fa-plus"></em>
+            </a>
+        </div>
+    </div>
+    <div class="rolesdiv scrollbar">
+        <table st-table="[name]Roles" class="table table-striped rolestable" id="[id]" [attributes]>
+            <thead>
+                <tr>
+                    <th class="displayname">[L:[name]Role]</th>
+                    <th class="permissionaction" ng-repeat="pname in [name]Definitions"> {{pname.PermissionName}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in [name]Roles" class="ng-scope">
+                    <td class="displayname">{{row.RoleName}}</td>
+                    <td class="permissionaction" ng-repeat="pdefinition in [name]Definitions">
+                        <button type="button" ng-disabled="Click_[name]CheckDisabled(pdefinition.PermissionId,row)" ng-click="Click_[name]CheckIsReview(row,pdefinition)" class="actionbtn">
+                            <em class="far fa-{{Click_[name]ReviewContent(row,pdefinition.PermissionId)}}"></em>
+                        </button>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="addusers">
+        <hr />
+        <div ng-show="Show[name]User">
+            <angucomplete-alt id="User"
+                              placeholder="[L:SearchByUser]"
+                              pause="400"
+                              selected-object="Click_[name]AddUser"
+                              remote-api-handler="UserremoteAPI"
+                              title-field="Label"
+                              minlength="1"
+                              input-class="form-control"
+                              override-suggestions="true"
+                              ng-click="Click_Clear()" />
+
+        </div>
+        <div class="" ng-show="!Show[name]User">
+            <a ng-click="Click_[name]NewUser()" class="float-right permission-icon">
+                <em class="fas fa-plus"></em>
+            </a>
+        </div>
+    </div>
+    <div class="usersdiv scrollbar">
+        <table st-table="[name]Users" ng-show="[name]Users.length>0" class="table table-striped userstable" id="[id]" [attributes]>
+            <thead>
+                <tr>
+                    <th class="displayname">[L:[name]User]</th>
+                    <th class="permissionaction" ng-repeat="pname in [name]Definitions"> {{pname.PermissionName}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in [name]Users" class="ng-scope">
+                    <td class="displayname displayinfo">
+                        <div class="users">
+                            <img class="img-responsive" src="{{row.AvatarUrl}}">
+                            <div class="user_info">
+                                <span>{{row.DisplayName}}</span>
+                                <strong ng-hide="row.UserName==row.Email"> ({{row.UserName}})</strong><br />
+                                <span class="user_email">{{row.Email}}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="permissionaction" ng-repeat="pdefinition in [name]Definitions">
+                        <button type="button" ng-disabled="Click_[name]CheckDisabled(pdefinition.PermissionId)" ng-click="Click_[name]CheckIsReview(row,pdefinition)" class="actionbtn">
+                            <em class="far fa-{{Click_[name]ReviewContent(row,pdefinition.PermissionId)}}"></em>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="empty_msg" ng-hide="[name]Users.length>0">[L:[name]UsersEmpty]</div>
+</div>
+
+

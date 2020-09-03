@@ -1,0 +1,76 @@
+﻿<div ng-controller="settings_installextension" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="settings_installextension" class="installextension">
+        <uilayout name="default" attr-ng-show="showupload" >
+            <uitemplate>
+                <div class="vj-alert alert alert-info mt-sm mb-sm ">
+                    <strong><em class="fa fa-info-circle"></em><span>&nbsp;[L:Info]</span></strong><span>[L:InfoMessage]</span>
+                </div>
+            </uitemplate>
+            <uielement name="UploadExtension" control="upload" label="false" mode="advance" attr-multiple="single" autoupload="true" attr-controlmodes="upload" filetypes="$scope.ui.data.AllowedAttachmentFileExtensions.Value" maxsize="$scope.ui.data.MaxFileSize.Value"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="showerrorlog" >
+            <uitemplate>
+                <div class="errorlog scrollbar">
+                    <div mn-ng-repeat="log in Logs">
+                        <p class="{{log.Type}}">{{log.Type}} {{log.Description}}</p>
+                    </div>
+                </div>
+                <div class="text-right fixed-footer">
+                    <button type="button" ng-click="Click_ErrorCancel()" class="btn btn-sm btn-default">
+                        [L:Cancel]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="showpackagelog" >
+            <uitemplate>
+                <div class="float-right textright">
+                    <div class="displayprop">
+                        <a class="ux-btn ux-btn-hover" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:Email]" ng-click="Click_Email()">
+                            <em class="fas fa-envelope"></em>
+                        </a>
+                        <a class="ux-btn ux-btn-hover" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:URL]" href="{{SiteURL}}" target="_blank">
+                            <em class="fas fa-link"></em>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="displayprop productinfo">
+                        <span class="pname">{{Name}} v{{Version}}</span>
+                        <br />
+                        <span>{{Organization}}</span>
+                        <br />
+                        <span class="pdescription" data-toggle="tooltip" data-placement="top" data-original-title="{{DescriptionTitle}}" ng-bind-html="Description"></span>
+                    </div>
+                </div>
+                <hr />
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseOne">
+                                [L:ReleaseLog]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse show releaselog scrollbar" data-parent="#accordion">
+                            <div class="card-body">
+                                <div ng-bind-html="ReleaseLog"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right fixed-footer">
+                    <div class="termsinfo"><input id="extensionCheckbox" type="checkbox" ng-model="CheckLicence"><span>  [L:TermsLeft] </span><a ng-click="Click_ShowLicense()">[L:TermsCenter]</a><span> [L:TermsRight]</span></div>
+                    <button id="extentionInstall" type="button" ng-disabled="DisableFinish" ng-click="Click_Finish()" class="btn btn-sm btn-primary">
+                        {{Finish}}
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>
+<style>
+    .sweet-customwidth {
+        width: 700px !important;
+    }
+</style>

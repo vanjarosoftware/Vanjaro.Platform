@@ -1,0 +1,180 @@
+﻿.vj-ux-manager ul.role-group {
+    padding: 0;
+}
+
+.vj-ux-manager .dropdownbtn {
+    height: 34px;
+    border-radius: 0 4px 4px 0;
+    padding: 7px 10px;
+    font-size: 14px;
+}
+
+.vj-ux-manager .displayinb {
+    display: inline-block;
+}
+
+.vj-ux-manager .datetime-range {
+    color: #ccc;
+    font-weight: normal;
+}
+
+.vj-ux-manager .usersavebtn {
+    margin-bottom: -12px;
+}
+
+    .vj-ux-manager .usersavebtn a {
+        border-radius: 0 4px 4px 0;
+    }
+
+.vj-ux-manager .saveBtn {
+    margin-bottom: -12px;
+    border-radius: 0 4px 4px 0;
+}
+
+.vj-ux-manager ul.role-group li {
+    background-color: #f9f9f9;
+    list-style: none;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 5px;
+}
+
+.vj-ux-manager .role-list {
+    background: #e6e9ec;
+}
+
+.vj-ux-manager .role-group .dropdown.dropbtn .dropdownmenu {
+    padding: 12px 16px;
+    top: -32px;
+    right: -20px;
+}
+
+.vj-ux-manager .role-group .dropdown-menu {
+    top: 5px;
+    right: -14px;
+}
+
+.vj-ux-manager .role-list a {
+    color: #000;
+}
+
+.vj-ux-manager ul.role-group li a {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #313131;
+    display: block;
+    text-decoration: none !important;
+}
+
+
+.vj-ux-manager #setting_adduserautocomplete1_value {
+    border-radius: 4px 0 0 4px;
+}
+
+.vj-ux-manager .table-grid .table td {
+    vertical-align: middle;
+}
+
+.vj-ux-manager .table-grid .table > tbody > tr td:last-child {
+    padding: 8px !important;
+}
+
+.vj-ux-manager .dropdown-menu a:hover,
+.vj-ux-manager .dropdown-menu a:focus,
+.vj-ux-manager .dropdown-menu a:active,
+.vj-ux-manager .dropdown-menu a.active {
+    background: #ececec;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.vj-ux-manager .date_picker input,
+.vj-ux-manager .date_picker input:focus,
+.vj-ux-manager .date_picker input:active {
+    border: none;
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+    font-family: 'Helvetica Neue', 'Font Awesome 5 Free', Helvetica, Arial, sans-serif;
+    cursor: pointer;
+}
+
+.vj-ux-manager .addrolebtn {
+    border-radius: 0 4px 4px 0;
+    margin-top: -2px;
+    border: 1px solid #ccc;
+}
+
+    .vj-ux-manager .addrolebtn:hover {
+        background-color: #e6e6e6;
+    }
+
+.vj-ux-manager .adduserbtn #User {
+    display: inline-block;
+    width: 100%;
+}
+
+.vj-ux-manager .adduserbtn input#User_value {
+    margin-top: -2px;
+}
+
+.vj-ux-manager .adduserbtn #save {
+    border-radius: 0 4px 4px 0;
+    margin-top: -2px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.vj-ux-manager .searchbyuser-container {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.vj-ux-manager .permission-icon {
+    margin-bottom: 10px;
+}
+
+
+.vj-ux-manager .search-info-msg {
+    margin-top: -15px;
+    padding: 50px 20px;
+}
+
+
+.vj-ux-manager .role-group .dropdown-menu {
+    top: 12px !important;
+    right: -20px !important;
+}
+
+.vj-ux-manager table tbody tr {
+    height: 42px !important;
+}
+
+.vj-ux-manager table img {
+    height: 42px;
+    width: 42px;
+}
+
+.vj-ux-manager .font-datetime input {
+    font-size: 12px;
+}
+
+.vj-ux-manager .UserRole table {
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+.vj-ux-manager .ux-backbtn span.extname {
+    display: inline-block;
+    width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;
+    vertical-align: bottom;
+}
+
+.vj-ux-manager .stfooter .pagination {
+    justify-content: center;
+}

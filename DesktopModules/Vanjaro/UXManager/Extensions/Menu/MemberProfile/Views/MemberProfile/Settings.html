@@ -1,0 +1,61 @@
+﻿<div ng-controller="memberprofile_settings" class="vj-ux-manager memberprofile-settings">
+    <uiengine provider="AngularBootstrap" identifier="memberprofile_settings" layout="admin">
+        <uilayout name="Default">
+            <uitemplate>
+                <uilayout name="default">
+                    <uitemplate>
+                        <div class="row">
+                            <!--<div class="col-md-3">
+                                <ul class="nav nav-pills nav-stacked tab-line">
+                                    <li id="UserProfileSettings" class="nav-item" access-roles="host"><a class="nav-link active" mn-ng-click="Click_ShowTab('UserProfileSettings')">[L:UserProfileSettings]</a></li>
+                                </ul>
+                            </div>-->
+                            <div class="col-md-12 left_border">
+                                <uilayout name="TabsContentUserProfileSettings" access-roles="admin">
+                                    <uitemplate>
+                                        <div id="accordion2" mn-ng-if="ShowUserProfileSettingsTab">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseone">
+                                                        [L:UserProfileSettings]
+                                                        <em class="fas fa-caret-down float-right"></em>
+                                                    </a>
+                                                </div>
+                                                <div id="collapseone" class="collapse show" data-parent="#accordion2">
+                                                    <div class="card-body">
+                                                        [uilayout:UserProfileSettings]
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </uitemplate>
+                                </uilayout>
+                            </div>
+                        </div>
+                    </uitemplate>
+                </uilayout>
+            </uitemplate>
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" class="btn btn-sm btn-primary float-right" id="Update" mn-ng-click="Click_Save('update')">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="UserProfileSettings" attr-class="tab-pane active">
+            <uielement name="ProfileDefaultVisibility" ngmodel="ui.data.ProfileSettings.Options.ProfileDefaultVisibility" tooltip="false" control="dropdownlist"></uielement>
+            <uitemplate>
+                <label>[L:VanityUrlPrefix]</label>
+                <div class="input-group profilesettings">
+                    <input type="text" class="form-control" mn-ng-model="ui.data.ProfileSettings.Options.VanityUrlPrefix" />
+                    <div class="input-group-append">
+                        <strong>/[L:VanityUrlExample]</strong>
+                    </div>
+                </div>
+            </uitemplate>
+            <!--<uielement name="RedirectOldProfileUrl" tooltip="false" control="toggle" ngmodel="ui.data.ProfileSettings.Options.RedirectOldProfileUrl" attr-class="toggle_right"></uielement>
+            <uielement name="ProfileDisplayVisibility" tooltip="false" control="toggle" ngmodel="ui.data.ProfileSettings.Options.ProfileDisplayVisibility" attr-class="toggle_right"></uielement>-->
+        </uilayout>
+    </uiengine>
+</div>

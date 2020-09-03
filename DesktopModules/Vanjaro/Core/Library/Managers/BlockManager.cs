@@ -1,0 +1,399 @@
+﻿using DotNetNuke.Common;
+using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Portals;
+using DotNetNuke.Entities.Tabs;
+using HtmlAgilityPack;
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Web;
+using Vanjaro.Core.Data.Entities;
+using Vanjaro.Core.Entities.Interface;
+using Vanjaro.Core.Entities.Menu;
+using static Vanjaro.Core.Factories;
+
+namespace Vanjaro.Core
+{
+    public static partial class Managers
+    {
+        public class BlockManager
+        {
+            public static List<IBlock> GetExtentions()
+            {
+                return Extentions.ToList();
+            }
+
+            internal static List<IBlock> Extentions
+            {
+                get
+                {
+                    string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Block_Extension);
+                    List<IBlock> Items = CacheFactory.Get(CacheKey);
+                    if (Items == null)
+                    {
+                        List<IBlock> ServiceInterfaceAssemblies = new List<IBlock>();
+                        string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll")).ToArray();
+                        foreach (string Path in binAssemblies)
+                        {
+                            try
+                            {
+                                //get all assemblies 
+                                IEnumerable<IBlock> AssembliesToAdd = from t in System.Reflection.Assembly.LoadFrom(Path).GetTypes()
+                                                                      where t != (typeof(IBlock)) && (typeof(IBlock).IsAssignableFrom(t))
+                                                                      select Activator.CreateInstance(t) as IBlock;
+
+                                ServiceInterfaceAssemblies.AddRange(AssembliesToAdd.ToList<IBlock>());
+                            }
+                            catch { continue; }
+                        }
+                        Items = ServiceInterfaceAssemblies;
+                        CacheFactory.Set(CacheKey, ServiceInterfaceAssemblies);
+                    }
+                    return Items;
+                }
+            }
+
+            public static List<Block> GetAll()
+            {
+                return Extentions.Where(e => e.Name != "Custom").Select(s => new Block()
+                {
+                    Category = s.Category,
+                    Guid = s.Guid,
+                    Name = s.Name,
+                    DisplayName = s.DisplayName,
+                    Icon = s.Icon,
+                    Attributes = (s.Attributes.ContainsKey("data-block-global") && s.Attributes["data-block-global"] == "true") ? GetGlobalConfigs(PortalSettings.Current, s.Name) : GetGlobalConfigs(PortalSettings.Current, s.Name, false)
+                }).ToList();
+            }
+
+            public static ThemeTemplateResponse Render(Dictionary<string, string> Attributes)
+            {
+                ThemeTemplateResponse result = null;
+                if (Attributes.ContainsKey("data-block-guid") && !string.IsNullOrEmpty(Attributes["data-block-guid"]))
+                {
+                    dynamic ext = Extentions.Where(s => s.Guid == Guid.Parse(Attributes["data-block-guid"])).FirstOrDefault();
+                    if (ext != null)
+                    {
+                        foreach (dynamic checkAttr in ext.Attributes)
+                        {
+                            if (!Attributes.ContainsKey(checkAttr.Key))
+                            {
+                                Attributes.Add(checkAttr.Key, checkAttr.Value);
+                            }
+                        }
+                        result = ext.Render(Attributes);
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("<div");
+                        foreach (KeyValuePair<string, string> item in Attributes)
+                        {
+                            sb.Append(" ").Append(item.Key).Append("=\"" + item.Value + "\"");
+                        }
+
+                        sb.Append(">" + result.Markup + "</div>");
+                        result.Markup = sb.ToString();
+                    }
+                }
+                return result;
+            }
+
+            public static Dictionary<string, string> GetGlobalConfigs(PortalSettings PortalSettings, string Block, bool IsGlobal = true, string BlockDirectory = "Blocks")
+            {
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.GlobalConfig, PortalSettings.PortalId, Block);
+                Dictionary<string, string> result = CacheFactory.Get(CacheKey);
+                if (result == null)
+                {
+                    result = new Dictionary<string, string>();
+                    string FolderPath = Globals.ApplicationMapPath + @"\portals\_default\" + GetTheme() + BlockDirectory + "\\" + Block + "\\";
+                    if (Directory.Exists(FolderPath))
+                    {
+                        string markup = string.Empty;
+                        if (File.Exists(FolderPath + Block + ".html"))
+                        {
+                            markup += File.ReadAllText(FolderPath + Block + ".html");
+                        }
+
+                        if (IsGlobal && File.Exists(FolderPath + Block + ".config.html"))
+                        {
+                            markup += File.ReadAllText(FolderPath + Block + ".config.html");
+                        }
+
+                        if (!string.IsNullOrEmpty(markup))
+                        {
+                            HtmlDocument html = new HtmlDocument();
+                            html.LoadHtml(markup);
+                            IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
+                            foreach (HtmlNode item in query.ToList())
+                            {
+                                if (item.Attributes.Where(a => a.Name == "data-block-guid").FirstOrDefault() != null)
+                                {
+                                    foreach (HtmlAttribute attr in item.Attributes)
+                                    {
+                                        if (result.ContainsKey(attr.Name))
+                                        {
+                                            result[attr.Name] = attr.Value;
+                                        }
+                                        else
+                                        {
+                                            result.Add(attr.Name, attr.Value);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    CacheFactory.Set(CacheKey, result);
+                }
+                return result;
+            }
+
+            public static string GetTheme(string ThemeName = "Basic")
+            {
+                return "vThemes\\" + ThemeName + "\\";
+            }
+            public static string GetVirtualPath()
+            {
+                return Globals.ApplicationPath + VirtualPathUtility.ToAppRelative(@"\portals\_default\");
+            }
+
+            public static string GetTemplateDir(PortalSettings PortalSettings, string Block)
+            {
+                return GetVirtualPath() + GetTheme() + "Blocks\\" + Block + "\\Templates\\";
+            }
+
+            public static void UpdateDesignElement(PortalSettings PortalSettings, Dictionary<string, string> Attributes)
+            {
+                if (Attributes.ContainsKey("data-block-global") && Attributes["data-block-global"] == "true")
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("<div");
+                    foreach (KeyValuePair<string, string> item in Attributes)
+                    {
+                        if (item.Key.StartsWith("data-block"))
+                        {
+                            sb.Append(" ").Append(item.Key).Append("=\"" + item.Value + "\"");
+                        }
+                    }
+                    sb.Append("></div>"); 
+                    string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrentThemeName() + "/Blocks/" + Attributes["data-block-type"] + "/");
+                    if (Directory.Exists(FolderPath))
+                    {
+                        if (!File.Exists(FolderPath + Attributes["data-block-type"] + ".config.html"))
+                        {
+                            File.Create(FolderPath + Attributes["data-block-type"].ToLower() + ".config.html").Dispose();
+                        }
+
+                        if (File.Exists(FolderPath + Attributes["data-block-type"] + ".config.html"))
+                        {
+                            File.WriteAllText(FolderPath + Attributes["data-block-type"] + ".config.html", sb.ToString());
+                            CacheFactory.Clear(CacheFactory.Keys.GlobalConfig);
+                        }
+                    }
+                }
+            }
+
+            public static dynamic Add(PortalSettings PortalSettings, CustomBlock CustomBlock, int ForceCount = 0)
+            {
+                dynamic Result = new ExpandoObject();
+                try
+                {
+                    if (BlockFactory.Get(PortalSettings.PortalId, CustomBlock.Name) == null)
+                    {
+                        if (ForceCount == 0)
+                        {
+                            CustomBlock.Guid = Guid.NewGuid().ToString().ToLower();
+                        }
+
+                        CustomBlock.PortalID = PortalSettings.PortalId;
+                        CustomBlock.CreatedBy = PortalSettings.UserId;
+                        CustomBlock.UpdatedBy = PortalSettings.UserId;
+                        CustomBlock.CreatedOn = DateTime.UtcNow;
+                        CustomBlock.UpdatedOn = DateTime.UtcNow;
+                        CustomBlock.Locale = PageManager.GetCultureCode(PortalSettings);
+                        BlockFactory.AddUpdate(CustomBlock);
+                        CustomBlock cb = BlockFactory.GetAll(PortalSettings.PortalId).Where(b => b.Guid.ToLower() == CustomBlock.Guid.ToLower() && b.Locale == null).FirstOrDefault();
+                        if (cb == null)
+                        {
+                            cb = CustomBlock;
+                            cb.Locale = null;
+                            cb.ID = 0;
+                            BlockFactory.AddUpdate(cb);
+                        }
+                        Result.Status = "Success";
+                        Result.Guid = CustomBlock.Guid;
+                    }
+                    else
+                    {
+                        if (ForceCount > 0)
+                        {
+                            CustomBlock.Name = CustomBlock.Name + ForceCount;
+                            ForceCount++;
+                            Result = Add(PortalSettings, CustomBlock, ForceCount);
+                        }
+                        else
+                        {
+                            Result.Status = "Exist";
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Result.Status = ex.Message.ToString();
+                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                }
+                return Result;
+            }
+
+            public static dynamic Edit(PortalSettings PortalSettings, CustomBlock CustomBlock)
+            {
+                dynamic Result = new ExpandoObject();
+                try
+                {
+                    CustomBlock cb = BlockFactory.GetAll(PortalSettings.PortalId).Where(b => b.Guid.ToLower() == CustomBlock.Guid.ToLower() && b.Locale == PageManager.GetCultureCode(PortalSettings)).FirstOrDefault();
+                    if (cb == null)
+                    {
+                        cb = BlockFactory.GetAll(PortalSettings.PortalId).Where(b => b.Guid.ToLower() == CustomBlock.Guid.ToLower() && b.Locale == null).FirstOrDefault();
+                        if (cb != null)
+                        {
+                            cb.Locale = PageManager.GetCultureCode(PortalSettings);
+                            cb.ID = 0;
+                            BlockFactory.AddUpdate(cb);
+                        }
+                    }
+                    if (cb != null)
+                    {
+                        cb.Name = CustomBlock.Name;
+                        cb.Category = CustomBlock.Category;
+
+                        if (CustomBlock.IsGlobal && !string.IsNullOrEmpty(CustomBlock.Html))
+                        {
+                            HtmlDocument html = new HtmlDocument();
+                            html.LoadHtml(CustomBlock.Html);
+                            IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
+                            foreach (HtmlNode item in query.ToList())
+                            {
+                                if (item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "mid").FirstOrDefault() != null && !string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value))
+                                {
+                                    int mid = int.Parse(item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value);
+                                    ModuleInfo minfo = ModuleController.Instance.GetModule(mid, Null.NullInteger, false);
+                                    if (minfo != null && !minfo.AllTabs)
+                                    {
+                                        minfo.AllTabs = true;
+                                        ModuleController.Instance.UpdateModule(minfo);
+                                        List<TabInfo> listTabs = TabController.GetPortalTabs(minfo.PortalID, Null.NullInteger, false, true);
+                                        foreach (TabInfo destinationTab in listTabs)
+                                        {
+                                            ModuleInfo module = ModuleController.Instance.GetModule(minfo.ModuleID, destinationTab.TabID, false);
+                                            if (module != null)
+                                            {
+                                                if (module.IsDeleted)
+                                                {
+                                                    ModuleController.Instance.RestoreModule(module);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (!PortalSettings.Current.ContentLocalizationEnabled || (minfo.CultureCode == destinationTab.CultureCode))
+                                                {
+                                                    ModuleController.Instance.CopyModule(minfo, destinationTab, minfo.PaneName, true);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    item.InnerHtml = "<div vjmod=\"true\"><app id=\"" + mid + "\"></app>";
+                                }
+                                else if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault() != null)
+                                {
+                                    if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value.ToLower() != "global")
+                                    {
+                                        item.InnerHtml = item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value;
+                                    }
+                                }
+                            }
+                            CustomBlock.Html = html.DocumentNode.OuterHtml;
+                        }
+
+                        cb.Html = CustomBlock.Html;
+                        cb.Css = CustomBlock.Css;
+                        cb.IsGlobal = CustomBlock.IsGlobal;
+                        cb.UpdatedBy = PortalSettings.Current.UserId;
+                        cb.UpdatedOn = DateTime.UtcNow;
+                        BlockFactory.AddUpdate(cb);
+                        Result.Status = "Success";
+                        Result.Guid = cb.Guid;
+                        Result.CustomBlock = cb;
+                    }
+                    else
+                    {
+                        Result.Status = "Not exist";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Result.Status = ex.Message.ToString();
+                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                }
+                return Result;
+            }
+
+            public static dynamic Delete(int PortalID, string GUID)
+            {
+                dynamic Result = new ExpandoObject();
+                try
+                {
+                    BlockFactory.Delete(PortalID, GUID);
+                    Result.Status = "Success";
+                }
+                catch (Exception ex)
+                {
+                    Result.Status = ex.Message.ToString();
+                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                }
+                return Result;
+            }
+
+            public static CustomBlock GetByLocale(int PortalID, string GUID, string Locale)
+            {
+                CustomBlock cb = BlockFactory.GetAll(PortalID).Where(b => b.Guid.ToLower() == GUID.ToLower() && b.Locale == Locale).FirstOrDefault();
+                if (cb == null)
+                {
+                    cb = BlockFactory.GetAll(PortalID).Where(b => b.Guid.ToLower() == GUID.ToLower() && b.Locale == null).FirstOrDefault();
+                }
+
+                return cb;
+            }
+
+            public static List<CustomBlock> GetAll(PortalSettings PortalSettings)
+            {
+                List<CustomBlock> CustomBlocks = BlockFactory.GetAll(PortalSettings.PortalId).Where(c => c.Locale == null).ToList();
+                string Locale = PageManager.GetCultureCode(PortalSettings);
+                if (!string.IsNullOrEmpty(Locale))
+                {
+                    List<CustomBlock> CustomBlocksByLocale = BlockFactory.GetAll(PortalSettings.PortalId).Where(c => c.Locale == Locale).ToList();
+                    if (CustomBlocksByLocale == null || CustomBlocksByLocale.Count <= 0)
+                    {
+                        return CustomBlocks;
+                    }
+                    else
+                    {
+                        foreach (CustomBlock item in CustomBlocks)
+                        {
+                            if (CustomBlocksByLocale.Where(c => c.Guid.ToLower() == item.Guid.ToLower()).FirstOrDefault() == null)
+                            {
+                                CustomBlocksByLocale.Add(item);
+                            }
+                        }
+                        return CustomBlocksByLocale;
+                    }
+                }
+                else
+                {
+                    return CustomBlocks;
+                }
+            }
+        }
+    }
+}

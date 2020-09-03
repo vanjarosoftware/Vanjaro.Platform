@@ -1,0 +1,117 @@
+﻿<div ng-controller="setting_setting" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_setting" class="uiengine-wrapper scrollbar" layout="Privacy">
+        <uilayout name="Default">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-md-3">
+                        [uilayout:TabsNavigation]
+                    </div>
+                    <div class="col-md-9 left_border">
+                        [uilayout:TabsCookieConsent]
+                        [uilayout:TabsDataConsent]
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="TabsNavigation" attr-class="tab-pane active">
+            <uitemplate>
+                <ul class="nav nav-pills nav-stacked tab-line">
+                    <li id="CookieConsent" class="nav-item"><a class="nav-link active" mn-ng-click="Click_ShowTab('CookieConsent')">[L:CookieConsent]</a></li>
+                    <li id="DataConsent" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('DataConsent')">[L:DataConsent]</a></li>
+                </ul>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="TabsCookieConsent" attr-ng-show="ShowCookieConsentTab">
+            <uitemplate>
+                <div id="accordionCookieConsent">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionCookieConsent" data-target="#CookieSettings">
+                                [L:CookieSetting]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="CookieSettings" class="collapse show" data-parent="#accordionCookieConsent">
+                            <div class="card-body">
+                                [uilayout:Cookie]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="TabsDataConsent" attr-ng-show="ShowDataConsentTab">
+            <uitemplate>
+                <div id="accordionDataConsent">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionDataConsent" data-target="#DataConsentSettings">
+                                [L:DataConsent]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="DataConsentSettings" class="collapse show" data-parent="#accordionDataConsent">
+                            <div class="card-body">
+                                [uilayout:Data]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <!--<uilayout name="default">
+            <uielement name="CommunicationSettings" control="label" label="false"></uielement>
+            <uielement name="line" control="line" label="false"></uielement>
+            <uielement name="CheckforSoftwareUpgrades" attr-class="toggle_right" ngmodel="ui.data.GetPrivacy.Options.Settings.CheckUpgrade" control="checkboxtoggle"></uielement>
+            <uielement name="DisplayCopyright" attr-class="toggle_right" ngmodel="ui.data.GetPrivacy.Options.Settings.DisplayCopyright" control="checkboxtoggle"></uielement>
+            <uielement name="DNNImprovementProgram" attr-class="toggle_right" ngmodel="ui.data.GetPrivacy.Options.Settings.DnnImprovementProgram" control="checkboxtoggle"></uielement>
+            <uielement name="CookieConsentSettings" control="label" label="false"></uielement>
+            <uielement name="line" control="line" label="false"></uielement>
+            <uielement name="CookieConsentUrl" control="textbox" attr-ng-disabled="!ui.data.GetPrivacy.Options.Settings.ShowCookieConsent" ngmodel="ui.data.GetPrivacy.Options.Settings.CookieMoreLink"></uielement>
+        </uilayout>-->
+        <uilayout name="Default">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button class="btn btn-sm btn-primary" type="button" id="Update" ng-click="Click_Save('Update')">[L:Update]</button>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="Cookie" attr-class="tab-pane active">
+            <uielement name="ShowCookieConsent" attr-class="toggle_right" ngmodel="ui.data.GetPrivacy.Options.Settings.ShowCookieConsent" control="checkboxtoggle"></uielement>
+            <uielement name="CookieConsentUrl" control="textbox" attr-ng-disabled="!ui.data.GetPrivacy.Options.Settings.ShowCookieConsent" ngmodel="ui.data.GetPrivacy.Options.Settings.CookieMoreLink"></uielement>
+        </uilayout>
+        <uilayout name="Data" attr-class="tab-pane active">
+            <uielement name="DataConsentActive" attr-class="toggle_right" ngmodel="ui.data.GetPrivacy.Options.Settings.DataConsentActive" control="checkboxtoggle"></uielement>
+            <!--<uielement name="ConsentRedirect" control="dropdownlist" attr-ng-model="ui.data.PageRedirect.Options"></uielement>-->
+            <uitemplate>
+                <div class="form-group">
+                    <label>[L:ConsentRedirect]</label>
+                    <div class="input-group col-sm-12">
+                        <select class="form-control" mn-ng-model="ui.data.PageRedirect.Value">
+                            <option value="-1">[L:SelectOption]</option>
+                            <option value="{{option.TabID}}" mn-ng-selected="{{option.TabID==ui.data.PageRedirect.Value}}" mn-ng-repeat="option in ui.data.PageRedirect.Options">{{option.TabName}}</option>
+                        </select>
+                    </div>
+                </div>
+            </uitemplate>
+            <uitemplate>
+                <div>
+                    <label>[L:UserDeleteAction]</label>
+                    <select class="form-control" ng-model="ui.data.UserDelete.Value">
+                        <option value="{{option.Key}}" mn-ng-selected="{{option.Key==ui.data.UserDelete.Value}}" mn-ng-repeat="option in ui.data.UserDelete.Options">{{option.Value}}</option>
+                    </select>
+                </div>
+            </uitemplate>
+            <uielement name="HardDeleteDelay" ngmodel="ui.data.GetPrivacy.Options.Settings.DataConsentDelay" attr-class="harddeletedelay" container-attr-ng-show="ui.data.UserDelete.Value == 2" control="textbox"></uielement>
+            <uitemplate>
+                <div>
+                    <select class="form-control" ng-model="ui.data.HardDelete.Value" mn-ng-show="ui.data.UserDelete.Value == 2">
+                        <option value="{{option.Key}}" mn-ng-selected="{{option.Key==ui.data.HardDelete.Value}}" mn-ng-repeat="option in ui.data.HardDelete.Options">{{option.Value}}</option>
+                    </select>
+                </div>
+            </uitemplate>
+            <uielement name="ButtonConsent" attr-class="buttonconsent" control="label" label="false"></uielement>
+            <uielement name="ResetTerms" control="button" attr-ng-click="Click_ResetTerms()" attr-access-roles="host" label="false" attr-class="text-right button-left width-200"></uielement>
+        </uilayout>
+    </uiengine>
+</div>

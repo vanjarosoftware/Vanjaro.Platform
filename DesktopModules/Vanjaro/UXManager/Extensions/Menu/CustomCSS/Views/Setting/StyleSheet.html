@@ -1,0 +1,18 @@
+﻿<div ng-controller="setting_stylesheet" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_stylesheet" layout="stylesheet" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uitemplate>
+                <div class="form-group stylesheet " data-datatype="textarea" data-label="[L] StyleSheet.Text" data-name="StyleSheet">
+                    <textarea class="form-control stylesheet ng-pristine ng-untouched ng-valid" id="setting_stylesheet0textarea0" placeholder="Custom CSS..." ng-model="ui.data.StyleSheet.Value" style="display: none;"></textarea>
+                </div>
+            </uitemplate>
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="Click_Update()">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

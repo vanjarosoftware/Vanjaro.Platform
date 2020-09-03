@@ -1,0 +1,25 @@
+﻿<div ng-controller="settings_image" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="settings_image" layout="Admin" class="uiengine-wrapper ImageBox scrollbar">
+        <uilayout name="default">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="Imageview">
+                            <a class="assetIsList" data-toggle="tooltip" data-placement="bottom" data-original-title="List" mn-ng-click="FileAttachmentsIsList = !FileAttachmentsIsList" mn-ng-class="FileAttachmentsIsList ? 'active' : ''"><i class="fas fa-th-list"></i></a>
+                            <a class="assetIsList" data-toggle="tooltip" data-placement="bottom" data-original-title="Grid" mn-ng-click="FileAttachmentsIsList = !FileAttachmentsIsList" mn-ng-class="!FileAttachmentsIsList ? 'active' : ''"><i class="fas fa-th"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 uploaderui">[uilayout:AssetUpload]</div>
+                </div>
+            </uitemplate>
+            <uielement name="FileAttachments" control="upload" mode="advance" attr-controlmodes="browse" maxsize="$scope.ui.data.MaxFileSize.Value" filetypes="$scope.ui.data.AllowedAttachmentFileExtensions.Value" folders="$scope.ui.data.Folders.Options" files="$scope.ui.data.Files.Options" autoupload="true" attr-multiple="false" container="true" label="false"></uielement>
+        </uilayout>
+        <uilayout name="AssetUpload">
+            <uielement name="UploadFile" control="upload" mode="file" attr-class="url-add" autoupload="true" label="false" container-attr-ng-show="true" maxsize="$scope.ui.data.MaxFileSize.Value*1000000" filetypes="$scope.ui.data.AllowedAttachmentFileExtensions.Value" attr-multiple="true"></uielement>
+        </uilayout>
+    </uiengine>
+</div>

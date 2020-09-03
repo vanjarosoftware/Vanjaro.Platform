@@ -1,0 +1,223 @@
+﻿<div ng-controller="setting_workflow" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_workflow" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-md-3">
+                        <ul class="nav nav-pills nav-stacked tab-line">
+                            <li id="workflow" class="nav-item" role="presentation"><a class="nav-link active" mn-ng-click="Click_ShowTab('workflow')">[L:MenuWorkflow]</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9 left_border">
+                        <div id="accordion">
+                            <div class="card" mn-ng-if="ShowAccordion">
+                                <div class="card-header">
+                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseFour">
+                                        [L:Settings]
+                                        <em class="fas fa-caret-down float-right"></em>
+                                    </a>
+                                </div>
+                                <div id="collapseFour" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                        [uilayout:WorkflowTab]
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="accordion">
+                            <div class="card" mn-ng-if="ShowAccordion">
+                                <div class="card-header">
+                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseFive">
+                                        [L:WorkflowTable]
+                                        <em class="fas fa-caret-right float-right"></em>
+                                    </a>
+                                </div>
+                                <div id="collapseFive" class="collapse" data-parent="#accordion">
+                                    <a role="button" mn-ng-show="ShowWorkflowTab" class="float-right addworkflowbtn" ng-click="Change_Workflow(-1)"><em class="fas fa-plus"></em></a>
+                                    <div class="card-body">
+                                        [uilayout:WorkflowTable]
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        [uilayout:EditWorkflow]
+                        [uilayout:EditWorkflowId]
+                        [uilayout:State]
+                        [uilayout:Permission]
+
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="WorkflowTable" attr-ng-show="ShowWorkflowTab">
+            <uielement name="Workflows" control="grid" label="false" style="overflow-x:unset;" ngoptions="ui.data.Workflows.Options" pagesize="15" paged="true" displayedpages="10" attr-class="table-grid workflow-table" search="false">
+                <column name="Name" width="92">
+                    <uitemplate>
+                        <span mn-ng-bind-html="row.Name | unsafe"></span>
+                    </uitemplate>
+                </column>
+                <column name="Action" width="8">
+                    <uitemplate>
+                        <div class="dropdown float-right dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v"></em>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item box-icon" ng-click="Change_Workflow(row.ID)"><em class="fas fa-cog mr-xs"></em><span>[L:Setting]</span></a></li>
+                                <li><a class="dropdown-item box-icon" ng-hide="row.ID==1" ng-click="DeleteWorkflow(row)"><em class="fas fa-trash mr-xs"></em><span>[L:Delete]</span></a></li>
+                            </ul>
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+        <uilayout name="WorkflowTab" attr-ng-show="ShowWorkflowTab">
+            <uielement name="ddlWorkFlows" control="dropdownlist" tooltip="false" attr-class="ddlworkflow" attr-ng-change="Change_WorkflowStateInfo()"></uielement>
+            <uitemplate>
+                <div class="card card-body card-light  workflowState">
+                    <span ng-bind-html="ui.data.WorkflowStateInfo.Value | unsafe"></span>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="EditWorkflow" attr-ng-show="ShowEditWorkflow">
+            <uielement name="Title" container-attr-ng-show="WorkflowID=='-1'" attr-required="true" tooltip="false" ngmodel="ui.data.Workflow.Options.Name" control="textbox"></uielement>
+            <uielement name="Description" control="textarea" tooltip="false" attr-required="true" ngmodel="ui.data.Workflow.Options.Description"></uielement>
+            <uielement name="line" control="line" label="false" container-attr-ng-hide="WorkflowID=='-1'"></uielement>
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button id="submit" class="btn btn-sm btn-primary button-left " type="button" ng-click="Click_Add('submit')">[L:Update]</button>
+
+                    <a class="btn btn-link button-left" ng-click="Click_Cancel()"><span>[L:Cancel]</span></a>
+                </div>
+                <div style="clear:both;"></div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="EditWorkflowId" attr-ng-show="WorkflowID!='-1' && ShowEditWorkflow">
+            <uitemplate>
+                <div id="waccordion">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#waccordion" data-target="#collapseone" aria-expanded="true">
+                                [L:ManageState]
+                                <em class="fas fa-caret-right float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseone" class="collapse show" data-parent="#waccordion">
+                            <div class="card-body">
+                                [uilayout:ManageState]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#waccordion" data-target="#collapsethree">
+                                [L:PagePermissions]
+                                <em class="fas fa-caret-right float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapsethree" class="collapse" data-parent="#waccordion">
+                            <div class="card-body">
+                                [uilayout:PermissionSetting]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#waccordion" data-target="#collapsetwo">
+                                [L:Revisions]
+                                <em class="fas fa-caret-right float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapsetwo" class="collapse" data-parent="#waccordion">
+                            <div class="card-body">
+                                [uilayout:RevisionsTab]
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </uitemplate>
+
+        </uilayout>
+        <uilayout name="State" attr-ng-show="ShowState">
+            <uielement name="Active" tooltip="false" ngmodel="IsActive" attr-class="ToggleRight Active" control="toggle"></uielement>
+            <uielement name="State" tooltip="false" ngmodel="Name" control="textbox"></uielement>
+            <uielement name="Notify" tooltip="false" ngmodel="Notify" attr-class="ToggleRight" control="toggle"></uielement>
+            <uielement name="line" control="line" label="false"></uielement>
+            <uitemplate>
+                <div class="float-right text-right fixed-footer">
+                    <button class="btn btn-sm btn-primary button-left" type="button" ng-click="Click_UpdateState()">[L:Update]</button>
+                    <a class="btn btn-link button-left" ng-click="Click_CancleState()">[L:Cancel]</a>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="Permission" attr-ng-show="ShowState && ShowPermission">
+            <uielement name="workflowPermission" tooltip="false" label="false" control="Permissiongrid"></uielement>
+        </uilayout>
+        <uilayout name="RevisionsTab">
+            <uielement name="MaxRevisions" ngmodel="ui.data.Workflow.Options.Revisions" tooltip="false" attr-required="true" control="textbox"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-hide="ShowEditWorkflow || ShowState || ShowAdvancedTab">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button class="btn btn-sm btn-primary button-left " type="button" ng-click="Change_UpdateWorkID()">[L:Update]</button>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="ManageState">
+            <!--<uielement name="ManageStates" tooltip="false" control="label" label="false"></uielement>-->
+            <uitemplate>
+                <div class="form-group float-right " data-datatype="button" data-label="Add New State" data-name="AddState" ng-hide="WorkflowID=='1'">
+                    <a class="float-right " role="button" ng-click="Click_NewState()">
+                        <em class="fas fa-plus"></em>
+                    </a>
+                </div>
+            </uitemplate>
+            <uitemplate>
+                <label style="font-weight: normal;" class="alert alert-info">[L:Section]</label>
+            </uitemplate>
+
+            <uitemplate>
+                <div class="form-group"></div>
+            </uitemplate>
+            <uielement name="WorkflowStates" tooltip="false" control="grid" label="false" attr-class="table-grid" sortable="true" sortableupdate="onGridSorted" sortablekey="SortOrder" sortablehandle="drag">
+                <column name="State" data="Name" width="70">
+                </column>
+                <column name="Active" width="10">
+                    <uitemplate>
+                        <div>
+                            <i class="glyphicon {{row.IsActive ?'far fa-check-square':'far fa-square'}}"></i>
+                        </div>
+                    </uitemplate>
+                </column>
+                <column name="Notify" width="10">
+                    <uitemplate>
+                        <div>
+                            <i class="glyphicon {{row.Notify ?'far fa-check-square':'far fa-square'}}"></i>
+                        </div>
+                    </uitemplate>
+                </column>
+                <column name="Actions" width="5">
+                    <uitemplate>
+                        <div class="dropdown float-right dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v"></em>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item box-icon" ng-click="Click_EditState(row)"><em class="fas fa-cog mr-xs"></em><span>[L:Setting]</span></a></li>
+                                <li><a class="dropdown-item box-icon" ng-hide="row.IsFirst==true||row.IsLast==true" ng-click="Click_DeleteState(row)"><em class="fas fa-trash mr-xs"></em><span>[L:Delete]</span></a></li>
+                            </ul>
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+        <uilayout name="PermissionSetting">
+            <uielement name="Permissions" label="false" control="Permissiongrid"></uielement>
+        </uilayout>
+    </uiengine>
+</div>
+
+
+

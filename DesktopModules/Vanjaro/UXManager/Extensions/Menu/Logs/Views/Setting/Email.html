@@ -1,0 +1,20 @@
+﻿<div ng-controller="setting_email" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_email">
+        <uilayout name="default">
+            <uielement name="Email" control="email" attr-required="true" container-attr-style="margin-top:20px;"></uielement>
+            <uielement name="Subject" control="textbox" attr-required="true"></uielement>
+            <uielement name="Message" control="textarea" attr-rows="4"></uielement> 
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" class="btn btn-sm btn-primary" id="Send" mn-ng-click="Click_Send('Send')">
+                        [L:Send]
+                    </button>
+                    <span>&nbsp;</span>
+                    <button type="button" ng-click="Click_Cancel()" class="btn btn-sm btn-default">
+                        [L:Cancel]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

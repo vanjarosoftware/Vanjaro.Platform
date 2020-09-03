@@ -1,0 +1,21 @@
+﻿<div ng-controller="setting_add" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_add" class="uiengine-wrapper scrollbar uiengine-padding">
+        <uilayout name="default">
+            <uitemplate>
+                <div class="text-right">
+                    <a class="Languagebtn" mn-ng-click="Click_GeAll()" mn-ng-class="!IsNativeName ? 'active' : ''"><em class="fas fa-globe-asia"></em></a>
+                </div>
+            </uitemplate>
+            <uielement name="Languages" control="dropdownlist"></uielement>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" ng-click="Click_Update()" class="btn btn-sm btn-primary">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

@@ -1,0 +1,18 @@
+﻿<div ng-controller="setting_searchresult" class="vj-ux-manager" ng-show="Loaded">
+    <uiengine provider="AngularBootstrap" identifier="setting_searchresult" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uielement name="Global" label="false" control="checkboxtoggle" attr-class="global text-center"></uielement>
+            <uitemplate>
+                <div access-roles="admin" mn-ng-show="ui.data.IsAdmin.Value && ui.data.Global.Value" class="vj-alert alert alert-warning" role="alert">
+                    [L:IsAdminAlert]
+                </div>
+                <div access-roles="editpage" mn-ng-show="!ui.data.IsAdmin.Value && ui.data.Global.Value" class="vj-alert alert alert-info" role="alert">
+                    [L:IsPageAdminAlert]
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uielement name="LinkTarget" attr-class="toggle_right" control="toggle"></uielement>
+        </uilayout>
+    </uiengine>
+</div>

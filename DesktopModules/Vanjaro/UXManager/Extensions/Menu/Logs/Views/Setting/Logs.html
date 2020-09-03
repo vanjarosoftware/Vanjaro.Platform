@@ -1,0 +1,92 @@
+﻿<div ng-controller="setting_logs" class="vj-ux-manager vjlogs">
+    <uiengine provider="AngularBootstrap" identifier="setting_logs" layout="Admin" class="uiengine-wrapper scrollbar">
+        <uilayout name="heading">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12 text-right">
+                        <div class="btn-group">
+                            <a class="ux-btn ux-btn-hover dropdown-toggle" role="button" data-toggle="dropdown" title="[L:Types]"><em class="fas fa-filter"></em></a>
+                            <div id="vjLogTypes" style="height: auto;overflow:auto;" class="dropdown-menu">
+                                <a class="dropdown-item" style="cursor: pointer;" mn-ng-repeat="x in ui.data.GetLogTypes.Options" mn-ng-click="ChangeGetLogTypes($event,x.LogTypeKey)" id="{{x.LogTypeKey}}">{{x.LogTypeFriendlyName}}</a>
+                            </div>
+                        </div>
+                        <a class="ux-btn ux-btn-hover" role="button" ng-click="EmailSelected($event)" id="SubmitEmailLog" title="[L:EmailSelected]"><em class="fas fa-envelope"></em></a>
+                        <a class="ux-btn ux-btn-hover" role="button" ng-click="Click_ClearLog()" access-roles="host" title="[L:ClearLogs]"><em class="fas fa-eraser"></em></a>
+                        <a class="ux-btn ux-btn-hover" role="button" ng-click="Click_DeleteSelected()" access-roles="host" title="[L:DeleteSelected]"><em class="fas fa-trash"></em></a>
+                        <a class="ux-btn ux-btn-hover" role="button" ng-click="Click_ShowSiteLogs()" access-roles="host" title="[L:SiteLogs]"><em class="fas fa-cog"></em></a>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uielement name="Logs" control="grid" label="false" style="overflow-x:unset;" ngoptions="LogItems" pagesize="9" paged="true" displayedpages="5" attr-st-pipe="Pipe_LogItemsPagging" attr-class="table-grid log-table">
+                <column name="LogType" width="1" attr-ng-class="{{row.LogTypeCSSClass}}">
+                    <uitemplate>
+                        <input type="checkbox" class="select-log" id="{{row.LogGUID}}" ng-click="Click_SelectLog(row.LogGUID)" />
+                    </uitemplate>
+                </column>
+                <column name="Image" width="9" attr-class="imagecolumn">
+                    <uitemplate>
+                        <img class="img-responsive userimage" src="{{row.UserImage}}" title="{{row.LogUserName}}">
+                    </uitemplate>
+                </column>
+                <column name="Summary" width="70">
+                    <uitemplate>
+                        <p mn-ng-bind-html="row.LogTypeFriendlyName | unsafe" mn-ng-click="ShowLogProperties(row)"></p>
+                        <p mn-ng-bind-html="row.Summary | unsafe" mn-ng-click="ShowLogProperties(row)" style="cursor:pointer;max-height:24px;overflow:hidden;line-height:24px;"></p>
+                        <p id="p{{row.LogGUID}}" mn-ng-bind-html="row.LogProperties | unsafe" style="display:none;"></p>
+                    </uitemplate>
+                </column>
+                <column name="SummaryExtra" width="20">
+                    <uitemplate>
+                        <span class="date">{{row.LogCreateDate | date:'MM/dd/yyyy'}}</span>
+                    </uitemplate>
+                </column>
+            </uielement>
+            <uitemplate>
+                <div class="logs_detail">
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="log-item Exception">[LS:Exception]</div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="log-item ItemCreated">[LS:ItemCreated]</div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="log-item ItemUpdated">[LS:ItemUpdated]</div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="log-item ItemDeleted">[LS:ItemDeleted]</div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="log-item OperationSuccess">[LS:OperationSuccess]</div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="log-item OperationFailure">[LS:OperationFailure]</div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="log-item GeneralAdminOperation">[LS:GeneralAdminOperation]</div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="log-item AdminAlert">[LS:AdminAlert]</div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="log-item SecurityException">[LS:SecurityException]</div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="log-item HostAlert">[LS:HostAlert]</div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

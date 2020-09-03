@@ -1,0 +1,29 @@
+﻿<div ng-controller="setting_add" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_add" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uielement name="Name" control="textbox" attr-required="true" attr-ng-model="ui.data.Connector.Options.DisplayName"></uielement>
+            <uielement name="line" control="line"></uielement>
+            <uielement name="AccountName" control="textbox" attr-required="true" attr-ng-model="ui.data.Connector.Options.Configurations.AccountName"></uielement>
+            <uielement name="AccountKey" control="password" attr-required="true" attr-ng-model="ui.data.Connector.Options.Configurations.AccountKey"></uielement>
+            <uielement name="line" control="line"></uielement>
+            <uielement name="UseHTTPS" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uielement name="UseDirectLink" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uielement name="SyncBatchSize" control="textbox"></uielement>
+            <uitemplate>
+                <div>
+                    <a ng-click="Click_AddContainer()" class="ux-btn ux-btn-hover float-right ">
+                        <em class="fas fa-plus"></em>
+                    </a>
+                </div>
+            </uitemplate>
+            <uielement name="Containers" control="dropdownlist" attr-required="true"></uielement>
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" ng-click="Click_Update()" class="btn btn-sm btn-primary">
+                        {{loadcontainer?'[L:Update]':'[L:SelectContainer]'}}
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

@@ -1,0 +1,60 @@
+﻿[data-gjs-type='modulewrapper'] > [vjmod] {
+    pointer-events: none;
+}
+
+.cell {
+    vertical-align: top;
+}
+
+#wrapper.gjs-comp-selected,
+#wrapper .gjs-comp-selected {
+    outline: 1px solid #ccc !important;
+    outline-offset: -1px !important;
+}
+
+.sweetheight {
+    max-height: 500px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+
+.sweet-customwidth {
+    width: 700px !important;
+    margin-left: -350px !important;
+}
+
+
+.lockcanvas {
+    pointer-events: none;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    opacity: 0.2;
+}
+
+
+    .lockcanvas:before {
+        content: "\f023";
+        z-index: 99999;
+        color: black;
+        position: relative;
+        font-size: 200px;
+        left: calc(50% - 100px);
+        top: calc(50% - 150px);
+        opacity: 0.9;
+    }
+
+.swal-wide {
+    width: 900px !important;
+}
+
+
+.empty_msg {
+    text-align: center;
+    padding: 50px 15px;
+    border: 1px solid #ccc;
+    color: #aaa;
+    margin: 10px;
+    font-size: 12px;
+    font-style: italic;
+}

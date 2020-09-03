@@ -1,0 +1,110 @@
+﻿@using System.Web
+@inherits System.Web.WebPages.WebPage
+
+@using Vanjaro.UXManager.Extensions.Block.Menu.Entities;
+@{
+    var root = Model.Menu.RootNode;
+    var stamp = DateTime.Now.ToFileTime();
+}
+@helper RenderNodes(IList<MenuNode> nodes)
+{
+    if (nodes.Count > 0)
+    {
+        <ul class="navbar-nav">
+            @foreach (var node in nodes)
+            {
+                var cssClasses = new List<string>();
+                if (node.First) { cssClasses.Add("first"); }
+                if (node.Last) { cssClasses.Add("last"); }
+                if (node.Selected) { cssClasses.Add("selected"); }
+                if (node.Children != null && node.Children.Count > 0)
+                {
+                    <li class="@String.Join(" ",cssClasses.ToArray()) nav-item dropdown">
+                        @if (node.Enabled)
+                        {
+                            <a class="nav-link dropdown-toggle" href="@node.Url" target="@node.Target">
+                                @node.Text
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" width="22" height="22"><path d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" /></svg>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)">
+                                @node.Text
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" width="22" height="22"><path d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" /></svg>
+                            </a>
+                        }
+                        @RenderChildren(node.Children)
+                    </li>
+                }
+                else
+                {
+                    <li class="@String.Join(" ",cssClasses.ToArray()) nav-item">
+                        @if (node.Enabled)
+                        {
+                            <a class="nav-link" target="@node.Target" href="@node.Url">@node.Text</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link" href="javascript:void(0)">@node.Text</a>
+
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    }
+}
+@helper RenderChildren(IList<MenuNode> nodes)
+{
+    if (nodes.Count > 0)
+    {
+        <ul class="dropdown-menu menulist">
+            @foreach (var node in nodes)
+            {
+                if (node.Children != null && node.Children.Count > 0)
+                {
+                    <li class="dropdown-submenu">
+                        @if (node.Enabled)
+                        {
+                            <a class="dropdown-item menu-item" target="@node.Target" href="@node.Url">
+                                @node.Text
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" width="22" height="22"><path d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" /></svg>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="dropdown-item menu-item" href="javascript:void(0)">
+                                @node.Text
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" width="22" height="22"><path d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" /></svg>
+                            </a>
+                        }
+                        @RenderChildren(node.Children)
+                    </li>
+                }
+                else
+                {
+                    <li class="dropdown-item">
+                        @if (node.Enabled)
+                        {
+                            <a class="menu-item" href="@node.Url" target="@node.Target">@node.Text</a>
+                        }
+                        else
+                        {
+                            <a class="menu-item" href="javascript:void(0)">@node.Text</a>
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    }
+}
+<nav class="navbar navbar-expand-lg">
+    <button class="navbar-toggler collapsed" type="button" onclick="InitHamburgerMenu($(this))" data-toggle="collapse" data-target="#DefaultMenu_@stamp" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <svg class="opennav" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z" /></svg>
+        <svg class="closenav" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" width="16" height="16"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" /></svg>
+    </button>
+    <div class="collapse navbar-collapse DefaultMenu scrollbar" id="DefaultMenu_@stamp">
+        @RenderNodes(root.Children)
+    </div>
+</nav>

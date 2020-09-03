@@ -1,0 +1,21 @@
+﻿<div ng-controller="setting_editlogsetting" class="vj-ux-manager vjlogs">
+	<uiengine provider="AngularBootstrap" identifier="setting_editlogsetting" class="uiengine-wrapper scrollbar">
+		<uilayout name="default">
+			<uielement name="LoggingIsActive" control="toggle" attr-ng-click="ChangeLoggingIsActive()" attr-class="toggle_right"></uielement>
+			<uielement name="GetKeepMostRecentOptions" control="dropdownlist" container-attr-ng-hide="LoggingIsActiveDisabled" attr-ng-change="ChangeGetLogTypes()"></uielement>
+			<uielement name="EmailNotificationIsActive" control="toggle" attr-ng-click="ChangeEmailNotificationIsActive()" container-attr-style="margin-top:30px;" attr-style="float:right"></uielement>
+			<uielement name="NotificationThreshold" container-attr-ng-hide="EmailNotificationDisabled" control="dropdownlist" attr-ng-change="ChangeGetLogTypes()"></uielement>
+			<uielement name="NotificationTimes" container-attr-ng-hide="EmailNotificationDisabled" control="dropdownlist" attr-ng-change="ChangeGetLogTypes()"></uielement>
+			<uielement name="NotificationTimeType" container-attr-ng-hide="EmailNotificationDisabled" control="dropdownlist" attr-ng-change="ChangeGetLogTypes()"></uielement>
+			<uielement name="Email" control="email" container-attr-ng-hide="EmailNotificationDisabled" attr-required="true"></uielement>
+			<uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" class="btn btn-sm btn-primary" id="Update" mn-ng-click="Click_Save('Update')">
+                        [L:Update]
+                    </button>
+                    <a class="btn btn-link button-left" ng-click="Click_Cancel()"><span>[L:Cancel]</span></a>
+                </div>
+			</uitemplate>
+		</uilayout>
+	</uiengine>
+</div>

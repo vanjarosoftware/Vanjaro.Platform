@@ -1,0 +1,6 @@
+﻿.portalname, .portallink {
+    max-width: 214px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre;
+}

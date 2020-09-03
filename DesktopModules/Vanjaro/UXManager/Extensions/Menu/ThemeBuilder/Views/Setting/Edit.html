@@ -1,0 +1,180 @@
+﻿<div ng-controller="setting_edit" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_edit" class="uiengine-wrapper scrollbar uiengine-padding">
+        <uilayout name="default">
+            <uitemplate>
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseOne">
+                                [L:Basic]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                            <div class="card-body">
+                                [uilayout:Basic]
+                                [uilayout:Footer]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" mn-ng-show="!EditControl">
+                        <div class="card-header" mn-ng-click="InitEditors()">
+                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseTwo">
+                                [L:Sass]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                [uilayout:Sass]
+                                [uilayout:Footer]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="Basic" attr-ng-show="!EditControl">
+            <uielement name="Category" control="textbox" attr-required="true" ngmodel="ui.data.ThemeEditor.Options.Category" container-attr-ng-hide="HideCategory"></uielement>
+            <uielement name="Title" control="textbox" ngmodel="ui.data.ThemeEditor.Options.Title" attr-required="true" container-attr-ng-show="HideCategory"></uielement>
+            <uitemplate>
+                <div class="dropdown show float-right dropbtn" mn-ng-if="ui.data.DeveloperMode.Value">
+                    <a id="dropdownMenuControlDef" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <em class="fas fa-plus"></em>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuControlDef">
+                        <a mn-ng-repeat="row in ui.data.ControlTypes.Options" class="dropdown-item ux-btn-hover" style="display: block;padding: 10px;" ng-click="Click_AddControl(row)"><span>{{row}}</span></a>
+                    </div>
+                </div>
+            </uitemplate>
+            <uielement name="Controls" control="grid" pagesize="20" paged="true" displayedpages="5" container-attr-ng-show="ui.data.ThemeEditor.Options.Controls.length>0" sortable="true" sortablekey="SortOrder" sortablehandle="drag"  ngoptions="ui.data.ThemeEditor.Options.Controls" attr-class="ux-gridcolumnhide table-grid addmodulebtn">
+                <column name="Image" width="90">
+                    <uitemplate>
+                        <span class="sortguid" guid="{{row.Guid}}">{{row.Title}}</span>
+                    </uitemplate>
+                </column>
+                <column name="Sort" width="4">
+                    <uitemplate>
+                        <button type="button" class="drag btn btn-sm" ng-mouseup="dragdone()" mn-ng-if="ui.data.DeveloperMode.Value">
+                            <i class="fas fa-arrows-alt"></i>
+                        </button>
+                    </uitemplate>
+                        
+                </column>
+                <column name="Actions" width="6">
+                    <uitemplate>
+                        <div class="dropdown show float-right dropbtn">
+                            <a id="dropdownMenuLinkDef" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="fas fa-ellipsis-v "></em>
+                            </a>
+                            <div class="dropdown-menu " aria-labelledby="dropdownMenuLinkDef">
+                                <a class="dropdown-item ux-btn-hover" style="display: block;padding: 10px;" ng-click="Click_Edit(row)"><em class="fas fa-cog" style="margin-right: 5px;"></em><span>[L:Settings]</span></a>
+                                <a class="dropdown-item ux-btn-hover" style="display: block;padding: 10px;" ng-click="Click_Delete(row)" mn-ng-if="ui.data.DeveloperMode.Value"><em class="fas fa-trash" style="margin-right: 5px;"></em><span>[L:Delete]</span></a>
+                            </div>
+                        </div>
+                    </uitemplate>
+                </column>
+            </uielement>
+            <uitemplate>
+                <div class="empty_msg" mn-ng-show="ui.data.ThemeEditor.Options.Controls.length==0">[L:NoControls]</div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="Basic" attr-ng-show="EditControl">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-sm-6">
+                        [uilayout:Title]
+                    </div>
+                    <div class="col-sm-6">
+                        [uilayout:LessVariable]
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        [uilayout:DefaultValue]
+                    </div>
+                    <div class="col-sm-6">
+                        [uilayout:Suffix]
+                    </div>
+                </div>
+            </uitemplate>
+            <uitemplate>
+                <div>[uilayout:Slider]</div>
+                <div>[uilayout:Dropdown]</div>
+            </uitemplate>
+            <uielement name="CustomCSS" control="textarea" attr-class="CustomCSS" attr-placeholder=".myCustomClass { background: red; }"></uielement>
+            <uielement name="PreviewCSS" control="textarea" attr-class="PreviewCSS" attr-placeholder=".myCustomClass { background: red; }"></uielement>
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" id="UpdateControl" ng-click="Click_SaveControl('UpdateControl')" class="btn btn-sm btn-primary" mn-ng-if="ui.data.DeveloperMode.Value">
+                        [L:Update]
+                    </button>
+                    <span>&nbsp;</span>
+                    <button type="button" ng-click="Click_Cancel()" class="btn btn-link">
+                        [L:Cancel]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="Title" attr-ng-show="EditControl">
+            <uielement name="ControlTitle" control="textbox" attr-required="true" attr-class="Title" ngmodel="ui.data.Title.Value"></uielement>
+        </uilayout>
+        <uilayout name="LessVariable" attr-ng-show="EditControl">
+            <uielement name="LessVariable" control="textbox" attr-class="LessVariable"></uielement>
+        </uilayout>
+        <uilayout name="DefaultValue" attr-ng-show="EditControl">
+            <uielement name="DefaultValue" control="textbox" attr-required="true" attr-class="DefaultValue" container-attr-ng-hide="EditControltype=='Fonts'"></uielement>
+            <uitemplate>
+                <div class="form-group" ng-show="EditControltype=='Fonts'">
+                    <label>[L:DefaultValue]</label>
+                    <div class="input-group">
+                        <select class="form-control DefaultValue">
+                            <option value="{{item.Value}}" mn-ng-repeat="item in ui.data.Fonts.Options">{{item.Name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="Suffix" attr-ng-show="EditControl">
+            <uielement name="Suffix" control="textbox" attr-class="Suffix"></uielement>
+        </uilayout>
+        <uilayout name="Slider" attr-ng-show="EditControl && EditControltype=='Slider'">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-sm-6">
+                        [uilayout:RangeMin]
+                    </div>
+                    <div class="col-sm-6">
+                        [uilayout:RangeMax]
+                    </div>
+                </div>
+            </uitemplate>
+            <uielement name="Increment" control="integer" attr-required="true" attr-class="Increment"></uielement>
+        </uilayout>
+        <uilayout name="RangeMin" attr-ng-show="EditControl">
+            <uielement name="RangeMin" control="integer" attr-required="true" attr-class="RangeMin"></uielement>
+        </uilayout>
+        <uilayout name="RangeMax" attr-ng-show="EditControl">
+            <uielement name="RangeMax" control="integer" attr-required="true" attr-class="RangeMax"></uielement>
+        </uilayout>
+        <uilayout name="Dropdown" attr-ng-show="EditControl && EditControltype=='Dropdown'">
+            <uielement name="Options" control="textarea" attr-required="true" attr-class="Options" attr-rows="5"></uielement>
+        </uilayout>
+        <uilayout name="Sass" attr-ng-show="!EditControl">
+            <uielement name="SassInput" control="textarea" attr-class="Sass" attr-ng-model="ui.data.ThemeEditor.Options.Sass" attr-placeholder=".myCustomClass { background: red; }"></uielement>
+        </uilayout>
+        <uilayout name="Footer" attr-ng-show="!EditControl">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" id="Update" ng-click="Click_Save('Update')" class="btn btn-sm btn-primary" mn-ng-if="ui.data.DeveloperMode.Value">
+                        [L:Update]
+                    </button>
+                    <span>&nbsp;</span>
+                    <button type="button" ng-click="Click_CancelEdit()" class="btn btn-link">
+                        [L:Cancel]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

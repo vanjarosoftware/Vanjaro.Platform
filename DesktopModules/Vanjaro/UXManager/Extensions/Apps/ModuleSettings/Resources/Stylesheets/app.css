@@ -1,0 +1,7 @@
+﻿.toggle_right div {
+    float: right;
+}
+
+.toggle_right br {
+    display: none;
+}

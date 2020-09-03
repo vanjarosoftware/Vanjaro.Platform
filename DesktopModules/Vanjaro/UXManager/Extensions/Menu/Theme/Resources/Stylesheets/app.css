@@ -1,0 +1,83 @@
+﻿.theme {
+    background-color: #fff;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+}
+
+.theme.active {
+    background-color: #ddd;
+}
+
+.theme .author_name,
+.theme .date {
+    font-size: 11px;
+    display: inline-block;
+}
+
+.theme .author_name {
+    background: transparent;
+    opacity: 0.9;
+    border-radius: 4px;
+    color:#333;
+    font-size:15px;
+}
+
+.theme .badge-success {
+    background-color: #47a447;
+}
+
+.theme .badge-light {
+    background-color: #cdcfd1;
+}
+
+.theme .preview_pic {
+    width: 61px;
+    height: 61px;
+    z-index: 100;
+    margin-right: 5px;
+    border-right: 1px solid #e3e3e3;
+}
+
+.theme.active.btn .custom {
+    font-size: .6rem;
+    line-height: .1;
+}
+
+.theme-image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: .75rem 1.25rem;
+    background-color: #f9f9f9;
+    position: relative;
+}
+.theme-image .pr-none {
+    padding: 0px;
+}
+
+.theme .selected-theme .fas {
+    color: #fff;
+    font-size: 14px !important;
+}
+
+.theme .selected-theme {
+    background: #495157;
+}
+
+.theme .selected-theme .author_name {
+    color: #fff;
+}
+
+.theme .normal-theme {
+    cursor: pointer;
+}
+
+.theme-settings {
+    right: 0;
+    position: absolute;
+    padding: 15px !important;
+    top: 0;
+    background: #999;
+    cursor: pointer;
+    line-height: normal;
+}

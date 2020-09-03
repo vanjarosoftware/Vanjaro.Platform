@@ -1,0 +1,40 @@
+﻿<div class="input-group">
+    <script type="text/ng-template" id="[name]nodes_renderer.html">
+        <div ui-tree-handle ng-class="angular-ui-tree-handle" style="cursor: default;" ng-if="[enableselect]==true">
+            <button class="btn btn-xs btn_triangle" ng-if="node.children && node.children.length > 0" data-nodrag="" ng-click="toggle(this)" onclick="return false;">
+                <span class="fas fa-caret-right" ng-class="{'fas fa-caret-right': collapsed,'fas fa-caret-down': !collapsed}" ></span>
+            </button>
+
+            <input type="checkbox" ng-if="[enableselect]" ng-model="node.selected" ng-click="Click_SelectParent(node,ui.data.[name].Options)" />
+            <span>{{node.label}}</span>
+            <button class="pull-right btn btn-default btn-xs" data-nodrag="" ng-click="[removenode]" ng-if="[enableselect]==false && node.usedbyCount==0" onclick="return false;">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+            <button class="pull-right btn btn-default btn-xs treeedit" data-nodrag="" ng-click="[editnode] " ng-if="[enableselect]==false" onclick="return false;">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+        </div>
+        <div ui-tree-handle ng-class="angular-ui-tree-handle" style="cursor: default;"  ng-if="[enableselect]==false">
+            <button class="btn btn-xs  btn_triangle" ng-if="node.children && node.children.length > 0" data-nodrag="" ng-click="toggle(this)" onclick="return false;">
+                <span class="fas fa-caret-right" ng-class="{'fas fa-caret-right': collapsed,'fas fa-caret-right': !collapsed}"></span>
+            </button>
+            <input type="checkbox" ng-if="[enableselect]" ng-model="node.selected" ng-click="Click_SelectParent(node,ui.data.[name].Options)" />
+            <span>{{node.label}}</span>
+            <button class="pull-right btn btn-default btn-xs" data-nodrag="" ng-click="[removenode]" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+            <button class="pull-right btn btn-default btn-xs treeedit" data-nodrag="" ng-click="[editnode] " ng-if="[enableselect]==false" onclick="return false;">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+        </div>
+        <ol ui-tree-nodes="" ng-model="node.children" ng-class="{hidden: collapsed}" class="angular-ui-tree-nodes">
+            <li ng-repeat="node in node.children" ui-tree-node ng-include="'[name]nodes_renderer.html'">
+            </li>
+        </ol>
+    </script>
+    <div ui-tree="[name]treeOptions" [attributes]>
+        <ol ui-tree-nodes="" ng-model="ui.data.[name].Options" class="treeview angular-ui-tree-nodes">
+            <li ng-repeat="node in ui.data.[name].Options" collapsed="[collapsed]" ui-tree-node ng-include="'[name]nodes_renderer.html'" class="angular-ui-tree-nodes"></li>
+        </ol>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿.vj-ux-manager .registerlink {
+    margin-top: 15px;
+}
+.vj-ux-manager .buttonalign {
+	float: right;
+}
+
+	.vj-ux-manager .buttonalign .active {
+		color: #fff;
+		background-color: #a4afb7;
+		border-color: #a4afb7;
+	}
+
+.vj-ux-manager label.error {
+	margin: 4px 0 0 3px;
+	font-size: small !important;
+	font-weight: normal !important;
+	color: #f33a07 !important;
+	font-style: italic;
+	cursor: text;
+}
+
+.vj-ux-manager .showglobal > .btn-group {
+	display: flex;
+}
+
+.vj-ux-manager .alert {
+	margin-bottom: 15px;
+}

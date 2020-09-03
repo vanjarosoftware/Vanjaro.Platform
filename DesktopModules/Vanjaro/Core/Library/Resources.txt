@@ -1,0 +1,7 @@
+﻿Resources\
+App_LocalResources\*.resx
+Themes\Basic\
+Images\
+..\..\..\..\Icons\Font Awesome\
+..\..\..\..\favicon.ico
+Vanjaro.dnn

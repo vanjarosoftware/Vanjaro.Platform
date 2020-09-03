@@ -1,0 +1,127 @@
+﻿.foldersdiv ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+    .foldersdiv ul.rootfolder {
+        padding-left: 12px !important;
+        list-style: none;
+    }
+
+.resourcebox {
+    overflow: hidden !important;
+}
+
+    .resourcebox .row {
+        height: 100%;
+    }
+
+.foldername .folders,
+.foldername .files {
+    cursor: pointer;
+}
+
+.resourcefiles {
+    margin-top: 30px;
+}
+
+    .resourcefiles .col-sm-4 {
+        padding-left: 0;
+        border-right: 1px solid #ccc;
+    }
+
+    .resourcefiles .col-sm-8 {
+        padding-right: 0;
+        border-left: 1px solid #ccc;
+        margin-left: -1px;
+    }
+
+span.indentspace {
+    width: 14px;
+    display: inline-block;
+}
+
+.foldersdiv .l_folder .glyphicon-triangle-bottom,
+.foldersdiv .l_folder .glyphicon-triangle-right {
+    font-size: 12px;
+    color: #999;
+}
+
+
+.foldername {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    cursor: pointer;
+    min-width: 200px;
+}
+
+.resourcefiles .table-grid .table td {
+    font-size: 12px;
+    border-top: 0 !important;
+    padding: 15px 8px;
+    word-break: break-word;
+}
+
+
+.resourcefiles .table-grid .table > tbody > tr td:last-child {
+    vertical-align: middle;
+}
+
+
+.resourcefiles .l_folder .rootfolder:not(.show) {
+    display: none;
+    transition-duration: 5s;
+}
+
+.files.active {
+    font-weight: bold;
+}
+
+
+.resourcefiles .col-sm-4, .resourcefiles .col-sm-8 {
+    max-height: calc(100vh - 170px);
+    overflow: auto;
+}
+
+
+.vj-ux-manager .table-grid .table td {
+    vertical-align: middle;
+}
+
+.Languagebtn em {
+    color: #ccc !important;
+}
+
+
+.Languagebtn.active em {
+    color: #212529 !important;
+}
+
+.vj-ux-manager .table-grid .table > tbody > tr td:last-child {
+    padding: 0 8px;
+}
+
+.vj-ux-manager table tbody tr {
+    height: 42px !important;
+}
+
+.l_folder .fa-caret-down, .l_folder .fa-caret-right {
+    color: #181818;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-weight: normal;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+    .l_folder .fa-caret-down:before, .l_folder .fa-caret-right:before {
+        width: 8px;
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        color: #ccc;
+        display: inherit;
+    }
+
+.foldersdiv {
+    width: 100%;
+    overflow-x: auto;
+}

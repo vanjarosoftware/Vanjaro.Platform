@@ -1,0 +1,6 @@
+﻿Vanjaro.dnn
+..\..\UXManager\Extensions\Migrate\migrate-vanjaro.zip
+..\..\UXManager\Library\bin\Vanjaro.Migrate.dll
+..\..\..\..\DesktopModules\Vanjaro\Core\Library\Install\Migrate.01.00.00.SqlDataProvider
+..\..\..\..\DesktopModules\Vanjaro\Core\Library\Install\Migrate.Uninstall.SqlDataProvider
+

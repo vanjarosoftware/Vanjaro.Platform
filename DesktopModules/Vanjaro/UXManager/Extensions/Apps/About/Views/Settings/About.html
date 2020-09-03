@@ -1,0 +1,36 @@
+﻿<div ng-controller="settings_about" class="vj-ux-manager AboutVanjaro">
+    <uiengine provider="AngularBootstrap" identifier="settings_about">
+        <uilayout name="default">
+            <uitemplate>
+                <div class="vj-about" access-roles="user">
+                    <div>
+                        <ul class="About">
+                            <li access-roles="host">
+                                <a class="" href="" mn-ng-click="ClearCache()">[L:ClearCache]</a>
+                            </li>
+                            <li access-roles="admin">
+                                <a class="" href="" mn-ng-click="IncrementCRMVersion()">[L:IncrementCRMVersion]</a>
+                            </li>
+                            <li access-roles="host">
+                                <a class="" href="" mn-ng-click="RestartApp()">[L:RestartApplication]</a>
+                            </li>
+                            <hr access-roles="admin" />
+                            <li access-roles="admin">
+                                <a class="" href="" mn-ng-click="EnableMode()"><span ng-show="ui.data.EnableMode.Options">[L:EnableMode]</span><span ng-show="!ui.data.EnableMode.Options" class="font-weight-bold text-danger">[L:DisableMode]</span></a>
+                            </li>
+                            <hr access-roles="admin" />
+                            <li>
+                                <a id="signingOut" class="" href="" mn-ng-click="Logout()">[L:Logout]</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="version">
+                        <span class="vanjarover">[L:Vanjaro] {{ui.data.VanjaroVersion.Value}} [L:ReleaseSuffix]</span>
+                        <br />
+                        <span>[L:DNNPlatform] {{ui.data.ProductVersion.Value}}</span>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

@@ -1,0 +1,29 @@
+﻿.vj-ux-manager .stfooter .pagination {
+    justify-content: center;
+}
+
+.vj-ux-manager table tbody tr {
+    height: 42px !important;
+}
+
+    .vj-ux-manager table tbody tr td {
+        vertical-align: middle;
+    }
+
+.vj-ux-manager.domain-settings {
+    padding: 15px 0 !important;
+}
+
+
+.vj-ux-manager .aliasname {
+    display: block;
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;
+}
+
+.vj-ux-manager .textinfo {
+    margin-top: -30px;
+    margin-right: 5px;
+}

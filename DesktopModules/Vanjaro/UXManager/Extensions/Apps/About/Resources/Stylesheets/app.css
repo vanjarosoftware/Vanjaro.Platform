@@ -1,0 +1,71 @@
+﻿/*About*/
+.AboutVanjaro uiengine,
+.AboutVanjaro .row {
+    height: 100vh;
+}
+
+.vj-about span {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 11px;
+}
+
+ul.About {
+    margin: 0;
+    padding: 10px 0;
+    transition: all .6s ease;
+    width: 100%;
+    list-style: none;
+}
+
+.vj-about .version {
+    bottom: 0;
+    position: absolute;
+    color: #777;
+}
+
+ul.About li {
+    padding: 8px 0;
+}
+
+    ul.About li a, ul.About li a span {
+        display: block;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: normal;
+        color: #313131;
+        text-decoration: none;
+    }
+
+
+.vj-about .About .badge {
+    padding: 5px;
+    margin-left: 5px;
+    background: #777;
+    color: #fff;
+    float: right;
+    border-radius: 0;
+}
+
+ul.About li:hover a {
+    color: #313131;
+}
+
+
+ul.About hr {
+    margin: 5px 0;
+}
+
+
+.vanjarover {
+    color: #3a3a3a;
+}
+
+#signingOut{
+    display:flex;
+}
+
+#signingOut .spinner-grow {
+    margin-right: 4px;
+    margin-top: 2px;
+}

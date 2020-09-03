@@ -1,0 +1,108 @@
+﻿@inherits System.Web.WebPages.WebPage
+
+<div id="vLoginControls" runat="server"></div>
+<div class="login-container validationGroup" id="LoginControl" runat="server">
+    <div class="form-Login">
+        <div class="Login Vj-Login" id="Login">
+            <h4 class="loginhead">[LS:Data.Block.Login.LoginText]</h4>
+            <div class="login-control">
+                <div>
+                    @if (Model.Login.ShowLabel)
+                    {
+                        <label class="loginlabel" for="UserId">[LS:Data.Block.Login.UsernameText]</label>
+                    }
+                    else
+                    {
+                        <label class="loginlabel sr-only" for="UserId">[LS:Data.Block.Login.UsernameText]</label>
+                    }
+                    <input type="text" name="UserId" placeholder="[LS:Data.Block.Login.EmailAddressOrUsernamePlaceholderText]" id="UserId" required />
+                </div>
+                <div>
+                    @if (Model.Login.ShowLabel)
+                    {
+                        <label class="loginlabel" for="Password">[LS:Data.Block.Login.PasswordText]</label>
+                    }
+                    else
+                    {
+                        <label class="loginlabel sr-only" for="Password">[LS:Data.Block.Login.PasswordText]</label>
+                    }
+                    <input type="password" name="Password" placeholder="[LS:Data.Block.Login.PasswordPlaceholderText]" id="Password" required />
+                </div>
+                @if (Model.Login.ShowRememberPassword)
+                {
+                    <div class="rememberlogin">
+                        <label class="sr-only" for="rememberpassword"></label>
+                        <input type="checkbox" id="rememberpassword" name="rememberpassword" class="rememberme" /><span>[LS:Data.Block.Login.RememberLoginText]</span>
+                    </div>
+                }
+                <div class="text-@Model.Login.ButtonAlign">
+                    <a id="loginbtn" onclick="Login.User('Login',this)" attr-localize-signIn-text="[LS:Data.Block.Login.LoginText]" attr-localize-loading-text="[LS:Data.Block.Login.LoadingText]" class="btn btn-primary @Model.Login.ButtonAlign">
+                        [LS:Data.Block.Login.LoginText]
+                    </a>
+                </div>
+                @if (Model.Login.ShowResetPassword)
+                {
+                    <div class="text-center resetpass">
+                        <a href="#" class="loginlink" onclick="Login.ShowResetPassword(this)">[LS:Data.Block.Login.ResetPasswordText]</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    @if (Model.Login.DataConsent.DataConsentActive)
+    {
+        <div class="dataconsent" style="display:none">
+            <h4 class="loginhead">[LS:Data.Block.Login.LoginText]</h4>
+            <div class="registerterms form-group">
+                <input type="checkbox" id="checktermcondition" name="checktermcondition" onclick="Login.DataConsentcheck()" class="checktermcondition termsofuse" cbrequired="true"><span>[LS:Data.Block.Login.RegisterTermsText] <a href="Terms" target="_blank">[LS:TermsofUse]</a> & <a href="Privacy" target="_blank">[LS:PrivacyPolicy]</a></span>
+            </div>
+            <div class="consentbutton">
+                <div class="text-@Model.Login.ButtonAlign submit">
+                    <a class="btn btn-primary disabled signbtn" attr-localize-reset-text="[LS:Data.Block.Login.LoginText]" attr-localize-loading-text="[LS:Data.Block.Login.LoadingText]" onclick="Login.DataConsentSubmit('dataconsent',this)">[LS:Data.Block.Login.LoginText]</a>
+                </div>
+                @if (Model.Login.DataConsent.DeleteMe)
+                {
+                    <div class="text-@Model.Login.ButtonAlign delete">
+                        <a class="deleteMebtn btn" attr-localize-reset-text="[LS:Data.Block.Login.DeleteMeText]" onclick="Login.DataConsentDeleteMe(this)">[LS:Data.Block.Login.DeleteMeText]</a>
+                    </div>
+                }
+                @*<div class="text-@Model.Login.ButtonAlign cancel">
+                        <a class="cancelbtn" attr-localize-reset-text="[LS:Data.Block.Login.CancelText]" onclick="Login.DataConsentCancel(this)">[LS:Data.Block.Login.CancelText]</a>
+                    </div>*@
+            </div>
+        </div>
+    }
+    <div class="form-ResetPassword">
+        <div class="ResetPassword" id="ResetPassword" style="display:none">
+            <h4 class="Resethead">[LS:Data.Block.Login.ForgotPassword]</h4>
+            <div class="reset-control">
+                <div>
+                    @if (Model.Login.ShowLabel)
+                    {
+                        <label class="loginlabel" for="loginemail">[LS:Data.Block.Login.EmailText]</label>
+                    }
+                    else
+                    {
+                        <label class="loginlabel sr-only" for="loginemail">[LS:Data.Block.Login.EmailText]</label>
+                    }
+                    <input type="email" id="loginemail" name="loginemail" placeholder="[LS:Data.Block.Login.EmailAddressPlaceholderText]" class="Email" emailrequired="emailrequired" required />
+                </div>
+                <div class="text-justify">
+                    <a href="#" id="btnReset" class="btn btn-primary resetbtn @Model.Login.ButtonAlign" attr-localize-reset-text="[LS:Data.Block.Login.ResetText]" onclick="Login.ResetPassword(this)">[LS:Data.Block.Login.ResetText]</a>
+                </div>
+            </div>
+            <div class="text-justify">
+                <a href="#" class="btn btn-default" onclick="Login.HideResetPassword(this)">[LS:Data.Block.Login.SigninText]</a>
+            </div>
+        </div>
+        @if (Model.Login.ShowRegister && Model.Login.RegistrationMode > 1)
+        {
+            <div>
+                <div class="text-center not-registerd">
+                    <span>[LS:Signupmessage]</span> <a class="Register-link" href="@Model.Login.RegisterUrl">[LS:Data.Block.Login.RegisterText]</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,17 @@
+﻿.ux-gridcolumnhide tr .icon em {
+     font-size: 12px;
+    margin-right: 8px;
+}
+
+    .ux-gridcolumnhide tr .icon em.active {
+        color: #28a745;
+    }
+
+
+.vj-ux-manager table tbody tr {
+    height: 42px !important;
+}
+
+.ux-gridcolumnhide td {
+    vertical-align: middle;
+}

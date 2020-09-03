@@ -1,0 +1,43 @@
+﻿.vj-ux-manager .menuextension .content {
+    height: 100%;
+    overflow: hidden;
+}
+
+.vj-ux-manager .uiengine-wrapper {
+    height: calc(100vh - 120px) !important;
+}
+
+.vj-ux-manager .SQLResult.table-responsive {
+    overflow: auto;
+    margin: 0;
+}
+
+.vj-ux-manager .SQLResult table {
+    margin: 0;
+}
+
+.vj-ux-manager .SQLResult .table tr td {
+    white-space: nowrap;
+    padding: 10px 12px !important;
+}
+
+.vj-ux-manager .SQLResult .table thead th {
+    font-size: 13px;
+    padding: 8px !important;
+}
+
+.vj-ux-manager .SQLPagination {
+    position: fixed;
+    bottom: 63px;
+    width: 100%;
+    margin: 0;
+}
+
+    .vj-ux-manager .SQLPagination table,
+    .vj-ux-manager .SQLPagination .stfooter .pagination {
+        margin: 0;
+    }
+
+    .vj-ux-manager .SQLPagination .pagination {
+        justify-content: center !important;
+    }

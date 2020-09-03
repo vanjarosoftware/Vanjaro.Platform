@@ -1,0 +1,162 @@
+﻿.Review .ToggleRight div.btn-group {
+    float: right;
+}
+
+.Review .ToggleRight br {
+    display: none;
+}
+
+.Review .paddingtop {
+    padding-top: 30px;
+}
+
+.Review .preview_pic {
+    width: 46px;
+    height: 46px;
+    margin-right: 5px;
+    border-right: 1px solid #e3e3e3;
+}
+
+.vj-ux-manager .dropdown.dropbtn .dropdownmenu {
+    position: relative;
+    top: 0px;
+    padding: 12px 18px;
+    right: -15px;
+    border-left: 1px solid #eee;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.Review .revision_info {
+    padding: 5px;
+    font-size: 12px;
+}
+
+.user_imgname {
+    display: inline-flex;
+}
+
+
+
+.Review .revision_info span.badge {
+    margin-bottom: 8px;
+}
+
+.Review .revision_block {
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    line-height: normal;
+}
+
+    .Review .revision_block .badge-success {
+        background-color: #47a447;
+    }
+
+    .Review .revision_block .badge-error {
+        background-color: #f00;
+        color: #fff;
+    }
+
+span.author_name {
+    padding-top: 5px;
+    display: block;
+    padding-left: 4px;
+    font-size: 12px;
+}
+
+.Review .commentInfo {
+    padding: 5px;
+    background: #fff;
+    border-top: 1px solid #eee;
+}
+
+    .Review .commentInfo p {
+        margin: 0;
+        font-size: 11px;
+        color: #666;
+    }
+
+.Review .revision_info p.date {
+    font-size: 10px;
+    color: #ccc;
+}
+
+.Review .StatusBadge {
+    margin-bottom: 15px;
+    padding: 15px 0;
+    padding-top: 0;
+}
+
+.Review a#approve {
+    background: green;
+}
+
+.vj-ux-manager .uiengine-wrapper {
+    padding: 15px 0;
+}
+
+.ReviewPages table {
+    width: 567px;
+}
+/*Notification*/
+.Notification ul.Notifications {
+    list-style: none;
+    padding: 0 10px;
+}
+
+    .Notification ul.Notifications li {
+        padding: 8px 0;
+        cursor: pointer;
+    }
+
+        .Notification ul.Notifications li a {
+            display: block;
+        }
+
+.Notification span.errorcount {
+    background: #bbbaba;
+    border-radius: 20px;
+    margin-left: 5px;
+    float: right;
+    margin-top: 2px;
+    color: #fff;
+}
+
+span.notificationname {
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+
+
+.Review .ReviewPages table tbody tr {
+    height: 40px;
+}
+
+.Review .ReviewPages table tbody td {
+    vertical-align: middle;
+}
+
+.backbutton {
+    display: inline-flex;
+    font-weight: bold;
+}
+
+    .backbutton .back-icon em {
+        position: relative;
+        left: 0;
+        transition: all .3s;
+    }
+
+    .backbutton .back-icon em {
+        font-size: 14px;
+        color: #5d5d5d;
+        width: 25px;
+        text-align: center;
+    }
+
+    .backbutton:hover .back-icon em {
+        left: -7px;
+    }

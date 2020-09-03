@@ -1,0 +1,19 @@
+﻿<div ng-controller="setting_setting" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_setting" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uielement name="Server" control="textbox"></uielement>
+            <uielement name="Username" control="textbox"></uielement>
+            <uielement name="Password" control="password"></uielement>
+            <uielement name="EnableSSL" attr-class="toggle_right" ngmodel="ui.data.EnableSSL.Options" control="checkboxtoggle"></uielement>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div class="text-right fixed-footer">
+                    <button type="button" class="btn btn-sm btn-default mr-sm" ng-click="Click_TestSMTP()">[L:TestSMTP]</button>
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="Click_Update()">[L:Update]</button>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>
+

@@ -1,0 +1,693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3ED0D4A5-E2DA-4DD9-AB64-9E0A2B6B4305}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Vanjaro.Core</RootNamespace>
+    <AssemblyName>Vanjaro.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Components\Constants.cs" />
+    <Compile Include="Components\NotificationItem.cs" />
+    <Compile Include="Components\ReviewSettings.cs" />
+    <Compile Include="Components\StringText.cs" />
+    <Compile Include="Components\StringValue.cs" />
+    <Compile Include="Components\Enum.cs" />
+    <Compile Include="Data\Entities\Pages.cs" />
+    <Compile Include="Data\Entities\PropertyLocalization.cs" />
+    <Compile Include="Data\Entities\WorkflowPage.cs" />
+    <Compile Include="Data\Entities\WorkflowPermissionInfo.cs" />
+    <Compile Include="Components\PageWorkflowPermission.cs" />
+    <Compile Include="Data\Entities\Setting.cs" />
+    <Compile Include="Data\Entities\WorkflowState.cs" />
+    <Compile Include="Data\Scripts\CommonScript.cs" />
+    <Compile Include="Components\BusinessController.cs" />
+    <Compile Include="Data\Scripts\PortalScript.cs" />
+    <Compile Include="Data\Scripts\PageScript.cs" />
+    <Compile Include="Data\Scripts\WorkflowScript.cs" />
+    <Compile Include="Entities\ExportTemplate.cs" />
+    <Compile Include="Entities\Interface\IBlock.cs" />
+    <Compile Include="Entities\Interface\IThemeEditor.cs" />
+    <Compile Include="Entities\Layout.cs" />
+    <Compile Include="Entities\Menu\Block.cs" />
+    <Compile Include="Entities\Menu\BlockResponse.cs" />
+    <Compile Include="Entities\NotificationActionViewModel.cs" />
+    <Compile Include="Entities\NotificationViewModel.cs" />
+    <Compile Include="Entities\NotificationsViewModel.cs" />
+    <Compile Include="Entities\BaseModel.cs" />
+    <Compile Include="Entities\PixabayVideo.cs" />
+    <Compile Include="Entities\Theme\ThemeEditor.cs" />
+    <Compile Include="Entities\Theme\ThemeEditorControl.cs" />
+    <Compile Include="Entities\Theme\ThemeEditorData.cs" />
+    <Compile Include="Entities\Theme\ThemeEditorValue.cs" />
+    <Compile Include="Entities\Theme\ThemeEditorWrapper.cs" />
+    <Compile Include="Entities\Theme\ThemeFont.cs" />
+    <Compile Include="Entities\VideoInfo.cs" />
+    <Compile Include="Entities\YoutubeVideo.cs" />
+    <Compile Include="Entities\Interface\ICoreExtension.cs" />
+    <Compile Include="Entities\Interface\IExtension.cs" />
+    <Compile Include="Entities\Interface\IImageProvider.cs" />
+    <Compile Include="Entities\Interface\INotificationTask.cs" />
+    <Compile Include="Entities\Interface\IVideoProvider.cs" />
+    <Compile Include="Factories\CacheFactory.cs" />
+    <Compile Include="Factories\BlockFactory.cs" />
+    <Compile Include="Factories\LocalizationFactory.cs" />
+    <Compile Include="Factories\NotificationTaskFactory.cs" />
+    <Compile Include="Factories\PageFactory.cs" />
+    <Compile Include="Factories\PortalFactory.cs" />
+    <Compile Include="Factories\SettingFactory.cs" />
+    <Compile Include="Factories\WorkflowFactory.cs" />
+    <Compile Include="Managers\CookieManager.cs" />
+    <Compile Include="Properties\GlobalAssemblyInfo.cs" />
+    <Compile Include="Managers\BlockManager.cs" />
+    <Compile Include="Managers\ILocalizationService.cs" />
+    <Compile Include="Managers\LocalizationManager.cs" />
+    <Compile Include="Managers\ThemeManager.cs" />
+    <Compile Include="Managers\NotificationManager.cs" />
+    <Compile Include="Providers\Youtube.cs" />
+    <Compile Include="Providers\Pixabay.cs" />
+    <Compile Include="Managers\ExtensionManager.cs" />
+    <Compile Include="Managers\LoginManager.cs" />
+    <Compile Include="Managers\PageManager.cs" />
+    <Compile Include="Managers\SettingManager.cs" />
+    <Compile Include="Managers\WorkflowManager.cs" />
+    <Compile Include="Models\Generated\Database.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VanjaroRepo.cs" />
+    <Compile Include="Models\PetaPoco.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PageContext\PageContext.cs" />
+    <Compile Include="Services\Search\SearchEngine.cs" />
+    <Compile Include="Services\Search\SearchEngineScheduler.cs" />
+    <Compile Include="Services\Search\TabIndexer.cs" />
+    <Compile Include="UserControls\Login.ascx.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Login.ascx.designer.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DistrubtionAddList.txt" />
+    <Content Include="EULA.txt" />
+    <Content Include="Images\1209008.jpg" />
+    <Content Include="Images\Greynob.png" />
+    <Content Include="Images\img-1.jpg" />
+    <Content Include="Images\img-2.jpg" />
+    <Content Include="Images\img-3.jpg" />
+    <Content Include="Images\img-4.jpg" />
+    <Content Include="Images\img-5.jpg" />
+    <Content Include="Images\office-865091_640.jpg" />
+    <Content Include="Images\vanjaro_home.png" />
+    <Content Include="Images\vanjaro_logo.png" />
+    <Content Include="Images\vanjaro_social.png" />
+    <Content Include="Models\Generated\Database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </Content>
+    <Content Include="DistrubtionRemoveList.txt" />
+    <Content Include="PackageList.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\Generated\PetaPoco.Core.ttinclude" />
+    <Content Include="Models\Generated\PetaPoco.Generator.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Dnn.PersonaBar.Extensions, Version=9.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\Dnn.PersonaBar.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke, Version=9.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\DotNetNuke.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Abstractions, Version=9.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\DotNetNuke.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Instrumentation, Version=9.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\DotNetNuke.Instrumentation.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web, Version=9.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\DotNetNuke.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Client, Version=9.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\DotNetNuke.Web.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.5.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="LibSassHost, Version=1.2.10.0, Culture=neutral, PublicKeyToken=3e24e88796a38e46, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\LibSassHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanjaro.Common, Version=3.3.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\Vanjaro.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Packager\DNN Install\placeholder.txt" />
+    <Content Include="Packager\DNN Upgrade\placeholder.txt" />
+    <Content Include="Packager\documentation.txt" />
+    <Content Include="Packager\Licenses\Resources.txt" />
+    <Content Include="Packager\Releases\placeholder.txt" />
+    <Content Include="Packager\Vanjaro\bin\x86\libsass.dll" />
+    <Content Include="Packager\Vanjaro\Images\Branding\Vanjaro_logo.png" />
+    <Content Include="Packager\Vanjaro\Images\checkbox.png" />
+    <Content Include="Packager\Vanjaro\Images\favicon.ico" />
+    <Content Include="Packager\Vanjaro\Images\icon_library.png" />
+    <Content Include="Packager\Vanjaro\Images\radiobutton.png" />
+    <Content Include="Packager\Vanjaro\bin\AdvancedStringBuilder.dll" />
+    <Content Include="Packager\Vanjaro\bin\HtmlAgilityPack.dll" />
+    <Content Include="Packager\Vanjaro\bin\ImageProcessor.dll" />
+    <Content Include="Packager\Vanjaro\bin\ImageProcessor.Plugins.WebP.dll" />
+    <Content Include="Packager\Vanjaro\bin\x64\libsass.dll" />
+    <Content Include="Packager\Vanjaro\bin\LibSassHost.dll" />
+    <Content Include="Packager\Vanjaro\bin\System.Buffers.dll" />
+    <Content Include="Packager\Vanjaro\vcustom.css" />
+    <Content Include="License.txt" />
+    <Content Include="Release.txt" />
+    <Content Include="Resources.txt" />
+    <Content Include="Resources\Images\pixabay.svg" />
+    <Content Include="Resources\Images\youtube.png" />
+    <Content Include="Themes\Basic\Blocks\Breadcrumb\breadcrumb.html" />
+    <Content Include="Themes\Basic\Blocks\Language\language.html" />
+    <Content Include="Themes\Basic\Blocks\Login Link\login link.html" />
+    <Content Include="Themes\Basic\Blocks\Login\login.html" />
+    <Content Include="Themes\Basic\Blocks\Logo\logo.html" />
+    <Content Include="Themes\Basic\Blocks\Menu\menu.html" />
+    <Content Include="Themes\Basic\Blocks\Profile\Profile.html" />
+    <Content Include="Themes\Basic\Blocks\Register Link\register link.html" />
+    <Content Include="Themes\Basic\Blocks\Register\register.html" />
+    <Content Include="Themes\Basic\Blocks\Search Input\search input.html" />
+    <Content Include="Themes\Basic\Blocks\Search Result\search result.html" />
+    <Content Include="Themes\Basic\Layout.Edit.html" />
+    <Content Include="Themes\Basic\Theme.css" />
+    <Content Include="Themes\Premium\assets\shapes\arrow-negative.svg" />
+    <Content Include="Themes\Premium\assets\shapes\arrow.svg" />
+    <Content Include="Themes\Premium\assets\shapes\book-negative.svg" />
+    <Content Include="Themes\Premium\assets\shapes\book.svg" />
+    <Content Include="Themes\Premium\assets\shapes\clouds-negative.svg" />
+    <Content Include="Themes\Premium\assets\shapes\clouds.svg" />
+    <Content Include="Themes\Premium\assets\shapes\curve-asymmetrical-negative.svg" />
+    <Content Include="Themes\Premium\assets\shapes\curve-asymmetrical.svg" />
+    <Content Include="Themes\Premium\assets\shapes\curve-negative.svg" />
+    <Content Include="Themes\Premium\assets\shapes\curve.svg" />
+    <Content Include="Themes\Premium\assets\shapes\drops-negative.svg" />
+    <Content Include="Themes\Premium\assets\shapes\drops.svg" />
+    <Content Include="Themes\Premium\assets\shapes\mountains.svg" />
+    <Content Include="Themes\Premium\assets\shapes\opacity-fan.svg" />
+    <Content Include="Themes\Premium\assets\shapes\opacity-tilt.svg" />
+    <Content Include="Themes\Premium\assets\shapes\pyramids-negative.svg" />
+    <Content Include="Themes\Premium\assets\shapes\pyramids.svg" />
+    <Content Include="Themes\Premium\assets\shapes\split-negative.svg" />
+    <Content Include="Themes\Premium\assets\shapes\split.svg" />
+    <Content Include="Themes\Premium\assets\shapes\tilt.svg" />
+    <Content Include="Themes\Premium\assets\shapes\triangle-asymmetrical-negative.svg" />
+    <Content Include="Themes\Premium\assets\shapes\triangle-asymmetrical.svg" />
+    <Content Include="Themes\Premium\assets\shapes\triangle-negative.svg" />
+    <Content Include="Themes\Premium\assets\shapes\triangle.svg" />
+    <Content Include="Themes\Premium\assets\shapes\wave-brush.svg" />
+    <Content Include="Themes\Premium\assets\shapes\waves-negative.svg" />
+    <Content Include="Themes\Premium\assets\shapes\waves-pattern.svg" />
+    <Content Include="Themes\Premium\assets\shapes\waves.svg" />
+    <Content Include="Themes\Premium\assets\shapes\zigzag.svg" />
+    <Content Include="Themes\Premium\blocks\Breadcrumb\breadcrumb.html" />
+    <Content Include="Themes\Premium\blocks\Language\language.html" />
+    <Content Include="Themes\Premium\blocks\Login Link\login link.html" />
+    <Content Include="Themes\Premium\blocks\Login\login.html" />
+    <Content Include="Themes\Premium\blocks\Logo\logo.html" />
+    <Content Include="Themes\Premium\blocks\Menu\menu.html" />
+    <Content Include="Themes\Premium\blocks\Profile\Profile.html" />
+    <Content Include="Themes\Premium\blocks\Register Link\register link.html" />
+    <Content Include="Themes\Premium\blocks\Register\register.html" />
+    <Content Include="Themes\Premium\blocks\Search Input\search input.html" />
+    <Content Include="Themes\Premium\blocks\Search Result\search result.html" />
+    <Content Include="Themes\Premium\css\animate.min.css" />
+    <Content Include="Themes\Premium\js\accordion.js" />
+    <Content Include="Themes\Premium\js\animation.js" />
+    <Content Include="Themes\Premium\js\counter.js" />
+    <Content Include="Themes\Premium\js\shapedivider.js" />
+    <Content Include="Themes\Premium\js\tabs.js" />
+    <Content Include="Themes\Premium\theme.js" />
+    <Content Include="Themes\Premium\Layout.Edit.html" />
+    <Content Include="Themes\Premium\Theme.css" />
+    <Content Include="Themes\Resources.txt" />
+    <Content Include="UserControls\Login.ascx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Shared.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Install\Core.01.00.00.SqlDataProvider" />
+    <Content Include="Install\Uninstall.Core.SqlDataProvider" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\Basic\css\" />
+    <Folder Include="Themes\Premium\bin\" />
+    <Folder Include="Themes\Premium\blocks\Reset Password\Templates\" />
+    <Folder Include="Themes\Premium\editor\be134fd2-3a3d-4460-8ee9-2953722a5ab2\" />
+    <Folder Include="Themes\Premium\obj\Debug\" />
+    <Folder Include="Themes\Premium\obj\Release\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Themes\Basic\Blocks\Breadcrumb\Templates\Default.cshtml" />
+    <Content Include="Themes\Basic\Blocks\Language\Templates\Default.cshtml" />
+    <Content Include="Themes\Basic\Blocks\Login Link\Templates\Default.cshtml" />
+    <Content Include="Themes\Basic\Blocks\Login\Templates\Default.cshtml" />
+    <Content Include="Themes\Basic\Blocks\Logo\Templates\Default.cshtml" />
+    <Content Include="Themes\Basic\Blocks\Menu\Templates\Default.cshtml" />
+    <Content Include="Themes\Basic\Blocks\Profile\Templates\Default.cshtml" />
+    <Content Include="Themes\Basic\Blocks\Register Link\Templates\Default.cshtml" />
+    <Content Include="Themes\Basic\Blocks\Register\Templates\Default.cshtml" />
+    <Content Include="Themes\Basic\Blocks\Search Input\Templates\Default.cshtml" />
+    <Content Include="Themes\Basic\Blocks\Search Result\Templates\Default.cshtml" />
+    <Content Include="Themes\Basic\fonts\pxiByp8kv8JHgFVrLCz7Z11lFc-K.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiByp8kv8JHgFVrLCz7Z1JlFc-K.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiByp8kv8JHgFVrLDz8Z11lFc-K.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiByp8kv8JHgFVrLDz8Z1JlFc-K.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiByp8kv8JHgFVrLEj6Z11lFc-K.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiByp8kv8JHgFVrLEj6Z1JlFc-K.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiByp8kv8JHgFVrLGT9Z11lFc-K.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiByp8kv8JHgFVrLGT9Z1JlFc-K.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiEyp8kv8JHgFVrJJbecmNE.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiEyp8kv8JHgFVrJJfecg.woff2" />
+    <Content Include="Themes\Basic\fonts\pxiEyp8kv8JHgFVrJJnecmNE.woff2" />
+    <Content Include="Themes\Basic\scss\After.scss" />
+    <Content Include="Themes\Basic\scss\Before.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\bootstrap-grid.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\bootstrap-reboot.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\bootstrap.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_alert.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_background-variant.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_badge.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_border-radius.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_box-shadow.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_breakpoints.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_buttons.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_caret.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_clearfix.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_deprecate.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_float.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_forms.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_gradients.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_grid.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_hover.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_image.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_list-group.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_lists.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_pagination.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_reset-text.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_resize.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_screen-reader.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_size.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_table-row.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_text-hide.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_text-truncate.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_transition.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_visibility.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_align.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_background.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_borders.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_clearfix.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_display.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_embed.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_flex.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_float.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_overflow.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_position.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_screenreaders.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_shadows.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_sizing.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_spacing.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_stretched-link.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_text.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_visibility.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\vendor\_rfs.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_alert.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_badge.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_breadcrumb.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_button-group.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_buttons.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_card.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_carousel.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_close.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_code.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_custom-forms.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_dropdown.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_forms.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_functions.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_grid.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_images.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_input-group.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_jumbotron.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_list-group.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_media.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_mixins.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_modal.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_nav.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_navbar.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_pagination.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_popover.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_print.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_progress.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_reboot.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_root.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_spinners.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_tables.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_toasts.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_tooltip.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_transitions.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_type.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_utilities.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\_variables.scss" />
+    <Content Include="Themes\Basic\templates\design\Password Reset\Default.cshtml" />
+    <Content Include="Themes\Basic\templates\pages\Default.json" />
+    <Content Include="Themes\Basic\templates\pages\Home.json" />
+    <Content Include="Themes\Basic\theme.editor.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Themes\Basic\App_LocalResources\Shared.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Themes\Basic\templates\design\Cookie Consent\Default.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Vanjaro.dnn" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Themes\Basic\editor\921af5fa-3030-4bae-aaec-0e353b9489ff\theme.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="VanjaroDistrubtion.dnn" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Themes\Premium\blocks\Breadcrumb\Templates\Default.cshtml" />
+    <Content Include="Themes\Premium\blocks\Language\Templates\Default.cshtml" />
+    <Content Include="Themes\Premium\blocks\Login Link\Templates\Default.cshtml" />
+    <Content Include="Themes\Premium\blocks\Login\Templates\Default.cshtml" />
+    <Content Include="Themes\Premium\blocks\Logo\Templates\Default.cshtml" />
+    <Content Include="Themes\Premium\blocks\Menu\Templates\Default.cshtml" />
+    <Content Include="Themes\Premium\blocks\Profile\Templates\Default.cshtml" />
+    <Content Include="Themes\Premium\blocks\Register Link\Templates\Default.cshtml" />
+    <Content Include="Themes\Premium\blocks\Register\Templates\Default.cshtml" />
+    <Content Include="Themes\Premium\blocks\Search Input\Templates\Default.cshtml" />
+    <Content Include="Themes\Premium\blocks\Search Result\Templates\Default.cshtml" />
+    <Content Include="Themes\Premium\editor\921af5fa-3030-4bae-aaec-0e353b9489ff\theme.json" />
+    <Content Include="Themes\Premium\fonts\pxiByp8kv8JHgFVrLCz7Z11lFc-K.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiByp8kv8JHgFVrLCz7Z1JlFc-K.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiByp8kv8JHgFVrLDz8Z11lFc-K.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiByp8kv8JHgFVrLDz8Z1JlFc-K.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiByp8kv8JHgFVrLEj6Z11lFc-K.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiByp8kv8JHgFVrLEj6Z1JlFc-K.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiByp8kv8JHgFVrLGT9Z11lFc-K.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiByp8kv8JHgFVrLGT9Z1JlFc-K.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiEyp8kv8JHgFVrJJbecmNE.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiEyp8kv8JHgFVrJJfecg.woff2" />
+    <Content Include="Themes\Premium\fonts\pxiEyp8kv8JHgFVrJJnecmNE.woff2" />
+    <Content Include="Themes\Premium\scss\After.scss" />
+    <Content Include="Themes\Premium\scss\Before.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\bootstrap-grid.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\bootstrap-reboot.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\bootstrap.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_alert.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_background-variant.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_badge.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_border-radius.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_box-shadow.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_breakpoints.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_buttons.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_caret.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_clearfix.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_deprecate.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_float.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_forms.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_gradients.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_grid.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_hover.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_image.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_list-group.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_lists.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_pagination.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_reset-text.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_resize.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_screen-reader.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_size.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_table-row.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_text-hide.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_text-truncate.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_transition.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\mixins\_visibility.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_align.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_background.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_borders.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_clearfix.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_display.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_embed.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_flex.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_float.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_overflow.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_position.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_screenreaders.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_shadows.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_sizing.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_spacing.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_stretched-link.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_text.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_visibility.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\vendor\_rfs.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_alert.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_badge.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_breadcrumb.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_button-group.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_buttons.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_card.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_carousel.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_close.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_code.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_custom-forms.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_dropdown.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_forms.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_functions.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_grid.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_images.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_input-group.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_jumbotron.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_list-group.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_media.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_mixins.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_modal.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_nav.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_navbar.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_pagination.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_popover.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_print.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_progress.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_reboot.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_root.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_spinners.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_tables.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_toasts.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_tooltip.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_transitions.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_type.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_utilities.scss" />
+    <Content Include="Themes\Premium\scss\Bootstrap\_variables.scss" />
+    <Content Include="Themes\Premium\templates\design\Cookie Consent\Default.cshtml" />
+    <Content Include="Themes\Premium\templates\design\Password Reset\Default.cshtml" />
+    <Content Include="Themes\Premium\templates\pages\Default.json" />
+    <Content Include="Themes\Premium\templates\pages\Home.json" />
+    <Content Include="Themes\Premium\templates\pages\Signin.json" />
+    <Content Include="Themes\Premium\templates\pages\Signup.json" />
+    <Content Include="Themes\Premium\theme.editor.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Themes\Premium\App_LocalResources\Shared.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Themes\Premium\scss\Bootstrap\utilities\_interactions.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Themes\Basic\scss\Bootstrap\utilities\_interactions.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
+    <Content Include="Packager\Vanjaro\Blank Website.template" />
+    <Content Include="Packager\Vanjaro\Default Website.template" />
+    <Content Include="Packager\Vanjaro_Clean_Builder.bat" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Packager\Licenses\AdvancedStringBuilder%28Apache%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\AngularCsvImport %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Autocomplete %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Barcode %28GPL%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Bootstrap %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\BootstrapDatepicker %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Ckeditor %28GPL%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\CodeMirror %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\ColorPicker %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\ContextMenu %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Cookie %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Dialog %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Fabric %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\FileUpload %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\HtmlAgilityPack %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\ImageProcessor %28Apache%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\JQuery Autocomplete %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\JQuery SweetAlert %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\JsonViewer %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\libsass.txt %28SOS%29.resources" />
+    <EmbeddedResource Include="Packager\Licenses\LibSassHost %28Apache%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Loading-Bar %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Mark %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Moment %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Notify %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Numeral %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\SmartTable %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Spectrum %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\SVGxuse  %28MIT%29.resources" />
+    <EmbeddedResource Include="Packager\Licenses\SweetAlert %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\System Buffers %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\TagsInput %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Toastr %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\TreeView %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Tui Code Snippet %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Tui Color Picker %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Tui-Image Editor %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\ValidationJS %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\X-Editable %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Vanjaro\Default Website.template.resources" />
+    <EmbeddedResource Include="Packager\Vanjaro\DotNetNuke.install.config.resources" />
+    <EmbeddedResource Include="Packager\Vanjaro\InstallWizard.aspx.cs.resources" />
+    <EmbeddedResource Include="Packager\Vanjaro\InstallWizard.aspx.resources" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52919</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52919/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

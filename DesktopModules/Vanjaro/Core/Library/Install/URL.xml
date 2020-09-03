@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-16"?>
+<PackageManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ExtensionName>URL</ExtensionName>
+  <RemoveInstallFile>
+    <string>*.cs</string>
+    <string>version.txt</string>
+    <string>_translationstatus.txt</string>
+  </RemoveInstallFile>
+  <RemoveAssemblyFile>
+    <string>Mandeeps.DNN.Libraries.Common.dll</string>
+  </RemoveAssemblyFile>
+  <RemoveSourceFile>
+    <string>\obj</string>
+    <string>\bin</string>
+    <string>\.git</string>
+    <string>\.vs</string>
+    <string>.gitignore</string>
+    <string>.gitattributes</string>
+    <string>License.lic</string>
+    <string>*.txt</string>
+    <string>Edition.ed</string>
+    <string>*.user</string>
+    <string>Resources.zip</string>
+    <string>*.suo</string>
+    <string>*.sln</string>
+    <string>*.dnn</string>
+    <string>*.SqlDataProvider</string>
+    <string>\Install</string>
+  </RemoveSourceFile>
+  <IncludeProject />
+  <Dependencies>
+    <Dependency>
+      <type>managedPackage</type>
+      <name>Mandeeps Common Library</name>
+    </Dependency>
+  </Dependencies>
+  <Permissions />
+  <Config />
+  <UrlProvider>&lt;component type="UrlProvider"&gt;
+          &lt;urlProvider&gt;
+            &lt;name&gt;Mandeeps URL Provider&lt;/name&gt;
+            &lt;type&gt;Mandeeps.DNN.Libraries.URL.Providers.URLProvider&lt;/type&gt;
+            &lt;settingsControlSrc&gt;DesktopModules/Mandeeps/Libraries/URL/Views/Settings.ascx&lt;/settingsControlSrc&gt;
+            &lt;redirectAllUrls&gt;false&lt;/redirectAllUrls&gt;
+            &lt;replaceAllUrls&gt;true&lt;/replaceAllUrls&gt;
+            &lt;rewriteAllUrls&gt;true&lt;/rewriteAllUrls&gt;
+            &lt;desktopModule&gt;Mandeeps Url Library&lt;/desktopModule&gt;
+          &lt;/urlProvider&gt;
+        &lt;/component&gt;</UrlProvider>
+  <ObfuscationScript />
+  <UploadFTPHost>ftp://mandeeps.com/</UploadFTPHost>
+  <UploadUserName>release</UploadUserName>
+  <PublicInstallPath>Latest/Libraries/Install/</PublicInstallPath>
+  <PublicSourcePath>Latest/Libraries/Source/</PublicSourcePath>
+  <PrivateInstallPath>Private/Libraries/Install/</PrivateInstallPath>
+  <UploadUrl>http://www.mandeeps.com/downloads.aspx?refreshdownloads=true</UploadUrl>
+  <InstallFTPHost>ftp://mandeeps.com/</InstallFTPHost>
+  <InstallUserName>install</InstallUserName>
+  <InstallPath>/Module/</InstallPath>
+  <InstallUrl>http://www.mandeeps.com/Install/install.aspx?mode=InstallResources</InstallUrl>
+  <SubmanifestId />
+  <DocumentationFiles>
+    <string>C:\devsites\Documentation\Read Me.pdf</string>
+  </DocumentationFiles>
+  <InstallFiles>
+    <string>Y:\Packages\URL Library_vV_Extract Me\Mandeeps URL Library_[mandeeps.dnn.libraries.url.dll]_DNN73_Install.zip</string>
+  </InstallFiles>
+  <ReleaseDirectory>Y:\Packages\URL Library_vV_Extract Me</ReleaseDirectory>
+</PackageManifest>

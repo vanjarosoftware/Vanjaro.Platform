@@ -1,0 +1,49 @@
+﻿<div ng-controller="history_revisions" class="vj-ux-manager vjlogs">
+    <uiengine provider="AngularBootstrap" identifier="history_revisions" layout="Admin">
+        <uilayout name="heading">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-12 extback">
+                        <span class="extname">[L:Revisions]</span>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div class="vj-alert alert alert-warning">[L:Warning]</div>
+                <div mn-ng-repeat="version in ui.data.Versions.Options" class="revision_block">
+                    <div ng-click="Click_SelectVersion($event,version.Version, version.State.Name)">
+                        <div class="row m-none">
+                            <div class="col-8 user_imgname p-none">
+                                <div class="float-left"><img class="preview_pic" src="{{version.PhotoURL}}" /></div>
+                                <span class="author_name pt-sm">{{version.DisplayName}} </span>
+                            </div>
+                            <div class="col-4 text-right p-none pt-xs revision_name">
+                                <div ng-click="Click_ViewLogs(version)">
+                                    <p class="active" ng-show="version.IsLogsExist">
+                                        <span class="badge font-sm badge-success " data-toggle="tooltip" data-placement="bottom" data-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==true && ui.data.PublicVersion.Value==version.Version}}"><span class="chaticon"><em class="fas fa-comment-dots"></em></span> <span>{{version.State.Name}} </span></span>
+                                        <span class="badge font-sm badge-light" data-toggle="tooltip" data-placement="bottom" data-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==true && ui.data.PublicVersion.Value!=version.Version}}"><span class="chaticon"><em class="fas fa-comment-dots"></em></span><span>{{version.State.Name}}</span></span>
+                                        <span class="badge font-sm badge-primary" data-toggle="tooltip" data-placement="bottom" data-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==false}}"><span class="chaticon"><em class="fas fa-comment-dots"></em></span><span> {{version.State.Name}}</span></span>
+                                    </p>
+                                    <p class="active" ng-hide="version.IsLogsExist">
+                                        <span class="badge font-sm badge-success " data-toggle="tooltip" data-placement="bottom" data-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==true && ui.data.PublicVersion.Value==version.Version}}"><span>{{version.State.Name}} </span></span>
+                                        <span class="badge font-sm badge-light" data-toggle="tooltip" data-placement="bottom" data-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==true && ui.data.PublicVersion.Value!=version.Version}}"><span>{{version.State.Name}}</span></span>
+                                        <span class="badge font-sm badge-primary" data-toggle="tooltip" data-placement="bottom" data-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==false}}"><span> {{version.State.Name}}</span></span>
+                                    </p>
+                                </div>
+                                <p class="date m-none"><span>{{version.CreatedOn | date:'MMM dd hh:mm a'}} </span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-info-msg" mn-ng-if="ui.data.Versions.Options.length==0">[L:NoRevisions]</div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>
+<style>
+    body {
+        background: #e6e9ec;
+    }
+</style>

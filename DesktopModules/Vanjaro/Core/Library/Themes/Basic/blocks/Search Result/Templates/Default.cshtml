@@ -1,0 +1,55 @@
+@inherits System.Web.WebPages.WebPage
+
+<div class="Searchresultpage">
+    <h4 class="searchhead">[LS:SearchResults]</h4>
+    <div class="searchresultsmarkup CurrentPageIndex" attr-searchresult-pageindex="@Model.SearchResult.CurrentPageIndex" attr-searchresult-more="@(Model.SearchResult.More.ToString())">
+        @foreach (var item in Model.SearchResult.Results)
+        {
+            <div class="conatiner searchbox">
+                @*<div class="searchurl">
+                        <a href="@item.DocumentUrl">@item.DocumentUrl</a>
+                    </div>*@
+                @foreach (var s in item.Results)
+                {
+                    <div class="row">
+                        <div class="searchtitle col-8">
+                            <a href="@item.DocumentUrl" target="@(Model.SearchResult.LinkTargetOpenInNewTab ? "_blank":"")" searchlink class="searchpagetitle">@item.Title</a>
+                            @if (!string.IsNullOrEmpty(s.Description))
+                            {
+                                <p class="searchdesription">@s.Description</p>
+                            }
+                        <p class="searchdesription">@Html.Raw(s.Snippet)</p>
+                        </div>
+                        <div class="searchinfo col-4">
+                            <p><span>[LS:updated]</span> @s.DisplayModifiedTime </p>
+                            @*<p>[LS:Source] @s.DocumentTypeName</p>*@
+                        </div>
+                    </div>
+                    @*<div>
+                            @s.DisplayModifiedTime <br />
+                            @s.AuthorProfileUrl <br />
+                            @s.AuthorName <br />
+                            @s.Likes <br />
+                            @s.Comments <br />
+                            @s.Views <br />
+                            @s.Title <br />
+                            @s.Snippet <br />
+                            @s.Description <br />
+                            @s.DocumentUrl <br />
+                            @s.DocumentTypeName <br />
+                        </div>*@
+                }
+            </div>
+        }
+    </div>
+    @if (Model.SearchResult.More)
+    {
+        <a class="btn btn-primary btn-sm showMore" id="showMore" onclick="SearchResult.Search(this)">[LS:ShowMore]</a>
+    }
+    @if (Model.SearchResult.Results.Count <= 0)
+    {
+        <div class="Searchresultempty">
+            <div class="no-search-result-found empty_msg">[LS:Data.Block.SearchResult.NoSearchResultFound]</div>
+        </div>
+    }
+</div>
