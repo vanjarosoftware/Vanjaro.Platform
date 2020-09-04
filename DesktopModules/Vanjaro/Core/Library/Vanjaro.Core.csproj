@@ -625,6 +625,7 @@
     <EmbeddedResource Include="Packager\Licenses\ColorPicker %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\ContextMenu %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Cookie %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Grapesjs %28BSD 3%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Dialog %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Fabric %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\FileUpload %28MIT%29.txt.resources" />
