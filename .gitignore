@@ -444,3 +444,5 @@ healthchecksdb
 /DesktopModules/Vanjaro/Core/Library/Packager/DNN Install
 /DesktopModules/Vanjaro/Core/Library/Packager/DNN Upgrade
 /DesktopModules/Vanjaro/Core/Library/Packager/Releases
+/DesktopModules/Vanjaro/UXManager/Library/Resources/package-lock.json
+/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/uxmanager.min.js
