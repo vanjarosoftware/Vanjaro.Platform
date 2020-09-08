@@ -46,6 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\Core\Library\Properties\GlobalAssemblyInfo.cs">
@@ -134,8 +135,26 @@
     <Content Include="Resources\Images\col-6.png" />
     <Content Include="Resources\Images\col-8.4.png" />
     <Content Include="Resources\Images\col-9.3.png" />
+    <Content Include="Resources\Images\extensions\compress.jpg" />
+    <Content Include="Resources\Images\extensions\contact.jpg" />
+    <Content Include="Resources\Images\extensions\editor.jpg" />
+    <Content Include="Resources\Images\extensions\seo.jpg" />
+    <Content Include="Resources\Images\extensions\stay.jpg" />
     <Content Include="Resources\Images\Flower.mp4" />
     <Content Include="Resources\Images\image.png" />
+    <Content Include="Resources\Images\librarytemplates\blogpost.jpg" />
+    <Content Include="Resources\Images\librarytemplates\Church.jpg" />
+    <Content Include="Resources\Images\librarytemplates\contactus.jpg" />
+    <Content Include="Resources\Images\librarytemplates\Event.jpg" />
+    <Content Include="Resources\Images\librarytemplates\footer.jpg" />
+    <Content Include="Resources\Images\librarytemplates\Home - Full Screen Video.jpg" />
+    <Content Include="Resources\Images\librarytemplates\Home.jpg" />
+    <Content Include="Resources\Images\librarytemplates\Law.jpg" />
+    <Content Include="Resources\Images\librarytemplates\maps.jpg" />
+    <Content Include="Resources\Images\librarytemplates\Restaurant.jpg" />
+    <Content Include="Resources\Images\librarytemplates\slider.jpg" />
+    <Content Include="Resources\Images\librarytemplates\team.jpg" />
+    <Content Include="Resources\Images\librarytemplates\team3.jpg" />
     <Content Include="Resources\Images\loading.gif" />
     <Content Include="Resources\Images\svg\icon-a.svg" />
     <Content Include="Resources\Images\svg\icon-b.svg" />
@@ -178,7 +197,6 @@
     <Content Include="Resources\Images\Vanjaro.png" />
     <Content Include="Resources\Scripts\GrapesJsManagers\css\uxmanager.css" />
     <Content Include="Resources\Scripts\GrapesJsManagers\desktopmodulesApps.js" />
-    <Content Include="Resources\Scripts\GrapesJsManagers\img\dark.mp4" />
     <Content Include="Resources\Scripts\GrapesJsManagers\Plugins\modulewrapper.js" />
     <Content Include="Resources\Scripts\GrapesJsManagers\scriptandstyle.js" />
     <Content Include="Resources\Scripts\GrapesJs\css\grapes.min.css" />
@@ -307,6 +325,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DoPackages\bin\" />
+    <Folder Include="Resources\Scripts\GrapesJsManagers\img\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
