@@ -15,7 +15,7 @@ namespace Vanjaro.Core
                 internal static TimeSpan Cache_Time_Heavy = new TimeSpan(0, 10, 0);
                 internal const string Prefix = "Vanjaro-Core-";
                 internal const string Page = Prefix + "Page";
-                internal const string CustomBlock = Prefix + "CustomBlock";
+                public const string CustomBlock = Prefix + "CustomBlock";
                 internal const string Settings = Prefix + "Settings";
                 internal const string Extensions = Prefix + "Extensions";
                 internal const string Workflow = Prefix + "Workflow";
@@ -31,12 +31,12 @@ namespace Vanjaro.Core
                 throw new NotImplementedException();
             }
 
-            internal static void Clear()
+            public static void Clear()
             {
                 DataCache.ClearCache(Keys.Prefix);
             }
 
-            internal static void Clear(string Prefix)
+            public static void Clear(string Prefix)
             {
                 DataCache.ClearCache(Prefix);
             }

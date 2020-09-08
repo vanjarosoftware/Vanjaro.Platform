@@ -362,14 +362,17 @@ namespace Vanjaro.Core
                     };
                     Dictionary<string, string> Assets = new Dictionary<string, string>();
                     Layout layout = new Layout();
-                    layout.Blocks = new List<CustomBlock>();
-                    layout.Blocks.Add(customBlock);
-                    foreach (CustomBlock block in layout.Blocks)
+                    layout.Blocks = new List<CustomBlock>() { customBlock };
+                    if (layout.Blocks != null)
                     {
-                        if (!string.IsNullOrEmpty(block.Html))
-                            block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
-                        if (!string.IsNullOrEmpty(block.Css))
-                            block.Css = PageManager.DeTokenizeLinks(block.Css, PortalID);
+                        foreach (CustomBlock block in layout.Blocks)
+                        {
+                            if (!string.IsNullOrEmpty(block.Html))
+                                block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
+                            if (!string.IsNullOrEmpty(block.Css))
+                                block.Css = PageManager.DeTokenizeLinks(block.Css, PortalID);
+                        }
+                        CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
                     }
                     layout.Name = customBlock.Name;
                     layout.Content = "";

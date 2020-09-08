@@ -560,6 +560,17 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                             }
                         }
                     }
+                    if (layout.Blocks != null)
+                    {
+                        foreach (CustomBlock block in layout.Blocks)
+                        {
+                            if (!string.IsNullOrEmpty(block.Html))
+                                block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, portalID), false, Assets);
+                            if (!string.IsNullOrEmpty(block.Css))
+                                block.Css = PageManager.DeTokenizeLinks(block.Css, portalID);
+                        }
+                        Core.Factories.CacheFactory.Clear(Core.Factories.CacheFactory.GetCacheKey(Core.Factories.CacheFactory.Keys.CustomBlock + "ALL", portalID));
+                    }
                     layout.Name = name;
                     layout.Content = html.DocumentNode.OuterHtml;
                     layout.SVG = "";

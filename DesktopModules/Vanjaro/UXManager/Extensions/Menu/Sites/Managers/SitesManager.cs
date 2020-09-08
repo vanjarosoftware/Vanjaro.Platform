@@ -28,6 +28,7 @@ using Vanjaro.Common.Factories;
 using Vanjaro.Core.Entities;
 using Vanjaro.UXManager.Extensions.Menu.Azure.Entities;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Factories;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
 {
@@ -115,6 +116,17 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                             layout.Blocks.Add(Block);
                         }
                     }
+                }
+                if (layout.Blocks != null)
+                {
+                    foreach (Core.Data.Entities.CustomBlock block in layout.Blocks)
+                    {
+                        if (!string.IsNullOrEmpty(block.Html))
+                            block.Html = Core.Managers.PageManager.TokenizeTemplateLinks(Core.Managers.PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
+                        if (!string.IsNullOrEmpty(block.Css))
+                            block.Css = Core.Managers.PageManager.DeTokenizeLinks(block.Css, PortalID);
+                    }
+                    CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
                 }
                 layout.Name = pageSettings.Name;
                 layout.Content = html.DocumentNode.OuterHtml;
