@@ -68,7 +68,7 @@ global.LoadCustomBlocks = function () {
                         const updateblock = document.createElement("span");
                         updateblock.className = "update-custom-block";
                         if (IsAdmin)
-                            updateblock.innerHTML = "<a class='edit-block' onclick='VjEditor.runCommand(\"edit-custom-block\", { name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-pencil-alt'></em></a><a class='delete-block' onclick='VjEditor.runCommand(\"delete-custom-block\",{ name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-trash-alt'></em></a>"
+                            updateblock.innerHTML = "<div class='addpage-blocks dropdown pull-right dropbtn'><a id='dropdownMenuLink' class='dropdownmenu Customblockdropdown' data-toggle='dropdown' aria-haspopup='true'  aria-expanded='false'><em class='fas fa-ellipsis-v'></em></a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'><li><a class='edit-block' onclick='VjEditor.runCommand(\"edit-custom-block\", { name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-pencil-alt'></em><span>Edit</span></a></li><li><a class='delete-block' onclick='VjEditor.runCommand(\"delete-custom-block\",{ name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-trash-alt'></em><span>Delete</span></a></li><li><a class='export-block' onclick='VjEditor.runCommand(\"export-custom-block\",{ name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-file-export'></em><span>Export</span></a></li></ul></div>";
                         el.appendChild(updateblock);
                     }
                 });
@@ -79,7 +79,7 @@ global.LoadCustomBlocks = function () {
 }
 
 global.LoadDesignBlocks = function () {
-   
+
     var sf = $.ServicesFramework(-1);
 
     $.ajax({
@@ -154,7 +154,7 @@ var AddCustom_Block = function (CustomBlock, ID, Guid) {
             const updateblock = document.createElement("span");
             updateblock.className = "update-custom-block";
             if (IsAdmin)
-                updateblock.innerHTML = "<a class='edit-block' onclick='VjEditor.runCommand(\"edit-custom-block\", { name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\" })'><em class='fas fa-pencil-alt'></em></a><a class='delete-block' onclick='VjEditor.runCommand(\"delete-custom-block\",{ name: \"" + CustomBlock.Name + "\" ,id: \"" + Guid + "\" })'><em class='fas fa-trash-alt'></em></a>"
+                updateblock.innerHTML = "<div class='addpage-blocks dropdown pull-right dropbtn'><a id='dropdownMenuLink' class='dropdownmenu Customblockdropdown' data-toggle='dropdown' aria-haspopup='true'  aria-expanded='false'><em class='fas fa-ellipsis-v'></em></a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'><li><a class='edit-block' onclick='VjEditor.runCommand(\"edit-custom-block\", { name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\" })'><em class='fas fa-pencil-alt'></em><span>Edit</span></a></li><li><a class='delete-block' onclick='VjEditor.runCommand(\"delete-custom-block\",{ name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\"  })'><em class='fas fa-trash-alt'></em><span>Delete</span></a></li><li><a class='export-block' onclick='VjEditor.runCommand(\"export-custom-block\",{ name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\"  })'><em class='fas fa-file-export'></em><span>Export</span></a></li></ul></div>";
             el.appendChild(updateblock);
         }
     });
@@ -219,6 +219,50 @@ global.DeleteCustomBlock = function (CustomBlockGuid) {
         }
     });
 }
+
+global.ExportCustomBlock = function (CustomBlockGuid) {
+    $.ajax({
+        type: 'GET',
+        url: window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + "Block/ExportCustomBlock?CustomBlockGuid=" + CustomBlockGuid,
+        dataType: 'binary',
+        xhrFields: {
+            responseType: 'arraybuffer'
+        },
+        headers: {
+            'ModuleId': -1,
+            'TabId': parseInt($.ServicesFramework(-1).getTabId()),
+            'RequestVerificationToken': $.ServicesFramework(-1).getAntiForgeryValue()
+        },
+        success: function (data, status, headers) {
+            var arr = headers.getAllResponseHeaders().split('\r\n');
+            var headerslist = arr.reduce(function (acc, current, i) {
+                var parts = current.split(': ');
+                acc[parts[0]] = parts[1];
+                return acc;
+            }, {});
+            var filename = headerslist['x-filename'];
+            var contentType = headerslist['content-type'];
+            var linkElement = document.createElement('a');
+            try {
+                var blob = new Blob([data], { type: contentType });
+                var url = window.URL.createObjectURL(blob);
+                linkElement.setAttribute('href', url);
+                linkElement.setAttribute("download", filename);
+                var clickEvent = new MouseEvent("click", {
+                    "view": window,
+                    "bubbles": true,
+                    "cancelable": false
+                });
+                linkElement.dispatchEvent(clickEvent);
+            } catch (ex) {
+                alert(ex);
+            }
+        },
+        error: function (data) {
+            alert(data);
+        }
+    });
+};
 
 global.GetGlobalBlockName = function (guid) {
     var result = '';

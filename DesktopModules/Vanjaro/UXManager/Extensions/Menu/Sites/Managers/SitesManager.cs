@@ -78,12 +78,15 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
         internal static HttpResponseMessage Export(int PortalID, string Name)
         {
             HttpResponseMessage Response = new HttpResponseMessage();
+            string Theme = Core.Managers.ThemeManager.GetCurrentThemeName();
             ExportTemplate exportTemplate = new ExportTemplate
             {
                 Guid = Guid.NewGuid().ToString(),
                 Type = TemplateType.SiteTemplate.ToString(),
                 UpdatedOn = DateTime.UtcNow,
-                Templates = new List<Layout>()
+                Templates = new List<Layout>(),
+                ThemeName = Theme,
+                ThemeGuid = "49A70BA1-206B-471F-800A-679799FF09DF"
             };
             Dictionary<string, string> Assets = new Dictionary<string, string>();
             foreach (Core.Data.Entities.Pages page in Core.Managers.PageManager.GetAllPublishedPages(PortalID, null))
@@ -147,30 +150,16 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                                 AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
                             }
                         }
-
-                        string Theme = Core.Managers.ThemeManager.GetCurrentThemeName();
                         if (!string.IsNullOrEmpty(Theme))
                         {
-                            PortalInfo portalInfo = PortalController.Instance.GetPortal(PortalID);
-                            string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Theme + "/editor");
+                            string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + Theme);
                             if (Directory.Exists(FolderPath))
                             {
                                 foreach (string file in Directory.EnumerateFiles(FolderPath, "*", SearchOption.AllDirectories))
                                 {
-                                    AddZipItem("Theme/editor" + file.Replace(FolderPath, "").Replace("\\", "/"), File.ReadAllBytes(file), zip);
+                                    if (!file.ToLower().Contains("theme.backup.css"))
+                                        AddZipItem("Theme" + file.Replace(FolderPath, "").Replace("\\", "/"), File.ReadAllBytes(file), zip);
                                 }
-                            }
-                            FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Theme + "/scss");
-                            if (Directory.Exists(FolderPath))
-                            {
-                                foreach (string file in Directory.EnumerateFiles(FolderPath))
-                                {
-                                    AddZipItem("Theme/scss" + file.Replace(FolderPath, "").Replace("\\", "/"), File.ReadAllBytes(file), zip);
-                                }
-                            }
-                            if (File.Exists(HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Theme + "/theme.editor.custom.json")))
-                            {
-                                AddZipItem("Theme/theme.editor.custom.json", File.ReadAllBytes(HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Theme + "/theme.editor.custom.json")), zip);
                             }
                         }
                     }
