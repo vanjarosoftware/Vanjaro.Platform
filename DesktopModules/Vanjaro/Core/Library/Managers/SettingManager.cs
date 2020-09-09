@@ -160,7 +160,7 @@ namespace Vanjaro.Core
                 UserInfo uInfo = UserController.Instance.GetCurrentUserInfo();
 
                 IFolderInfo fi = FolderManager.Instance.GetFolder(pinfo.PortalID, "Images/");
-                
+
                 #region Copy Vthemes in portal folder
 
                 string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrentThemeName(pinfo.PortalID) + "/editor");
@@ -592,12 +592,22 @@ namespace Vanjaro.Core
                 }
                 #endregion
 
-                
+
                 if (IsDistribution(pinfo.PortalID))
                     SoftDeleteModule(pinfo.PortalID, Components.Constants.SearchResult);
 
                 if (!IsVanjaroInstalled)
                     PortalController.UpdatePortalSetting(pinfo.PortalID, "IsVanjaroInstalled", "-1");
+
+                #region Add webp extension
+                string fileExtension = HostController.Instance.GetString("FileExtensions");
+                if (!string.IsNullOrEmpty(fileExtension) && !fileExtension.ToLower().Split(',').Contains("webp"))
+                {
+                    var fextn = fileExtension.Split(',').ToList();
+                    fextn.Add("webp");
+                    HostController.Instance.Update("FileExtensions", string.Join(",", fextn));
+                }
+                #endregion
             }
 
             private static void UpdatePortalSettings(List<StringValue> SettingNameValue, int PortalID, int UserID)

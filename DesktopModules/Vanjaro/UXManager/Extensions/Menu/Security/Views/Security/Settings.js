@@ -102,6 +102,9 @@
 
     $scope.Click_Save = function (type) {
         if (mnValidationService.DoValidationAndSubmit('', 'security_settings')) {
+            if ($scope.ui.data.MaxUploadSize.Value == undefined)
+                $scope.ui.data.MaxUploadSize.Value = $scope.InputMaxUploadSize;
+
             if ($scope.ui.data.MaxUploadSize.Value != undefined && $scope.ui.data.MaxUploadSize.Value > $scope.InputMaxUploadSize) {
                 window.parent.swal('[L:maxUploadSizeValidation]' + $scope.InputMaxUploadSize);
             }
