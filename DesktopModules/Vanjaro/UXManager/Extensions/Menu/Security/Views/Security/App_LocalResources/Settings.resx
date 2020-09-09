@@ -291,4 +291,7 @@
   <data name="HTMLPageHeader.Text" xml:space="preserve">
     <value>HTML Page Header</value>
   </data>
+  <data name="maxUploadSizeValidation.Text" xml:space="preserve">
+    <value>Maximum upload size must be between 12 and </value>
+  </data>
 </root>

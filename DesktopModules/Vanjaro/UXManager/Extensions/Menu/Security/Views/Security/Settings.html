@@ -154,7 +154,7 @@
         <uilayout name="General" attr-class="tab-pane active">
             <uielement name="AutoAccountUnlockDuration" attr-required="true" tooltip="false" attr-min="0" attr-max="1000" control="integer" container-attr-access-roles="host"></uielement>
             <uielement name="AsyncTimeout" attr-required="true" attr-min="90" attr-max="10000" tooltip="false" control="integer" container-attr-access-roles="host"></uielement>
-            <uielement name="MaxUploadSize" attr-required="true" attr-min="12" attr-max="28" tooltip="false" control="integer" container-attr-access-roles="host"></uielement>
+            <uielement name="MaxUploadSize" attr-required="true" attr-min="12" attr-max="{{InputMaxUploadSize}}" tooltip="false" control="integer" container-attr-access-roles="host"></uielement>
             <uielement name="FileExtensions" tooltip="false" control="textarea" attr-rows="6" container-attr-access-roles="host"></uielement>
         </uilayout>
 
