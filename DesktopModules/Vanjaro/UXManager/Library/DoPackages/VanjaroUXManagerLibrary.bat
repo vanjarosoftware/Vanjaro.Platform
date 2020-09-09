@@ -100,7 +100,9 @@ copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\System
 copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\ImageProcessor.dll bin\ >NUL
 copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\ImageProcessor.Plugins.WebP.dll bin\ >NUL
 
+del library-uxmanager-resources.zip >NUL
 "C:\Program Files\7-Zip\7z.exe" a library-uxmanager-resources.zip @Resources.txt -xr!?svn\ >NUL
+
 cd ..\Extensions\Apps\About\ >NUL
 del apps-about-resources.zip >NUL
 "C:\Program Files\7-Zip\7z.exe" a apps-about-resources.zip @Resources.txt -xr!?svn\ >NUL
