@@ -1,11 +1,0 @@
-using DotNetNuke.Common.Utilities;using System;using System.Collections.Generic;using System.IO;using System.Linq;using Vanjaro.Core.Entities.Menu;using Vanjaro.Core.Entities.Toolbar;namespace Vanjaro.Core{    public static partial class Factories    {        public class ToolbarFactory        {
-
-
-            #region Sync Extensions Methods                        internal static List<IToolbarItem> Extentions            {                get                {                    List<IToolbarItem> toolbarItem = DataCache.GetCache<List<IToolbarItem>>(CacheFactory.GetCacheKey(CacheFactory.Keys.Toolbar_Extension));                    if (toolbarItem == null)                    {                        List<IToolbarItem> ServiceInterfaceAssemblies = new List<IToolbarItem>();                        string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll")).ToArray();                        foreach (string Path in binAssemblies)                        {                            try                            {
-                                //get all assemblies 
-                                IEnumerable<IToolbarItem> AssembliesToAdd = from t in System.Reflection.Assembly.LoadFrom(Path).GetTypes()
-                                                                            where t != (typeof(IToolbarItem)) && (typeof(IToolbarItem).IsAssignableFrom(t))
-                                                                            select Activator.CreateInstance(t) as IToolbarItem;                                ServiceInterfaceAssemblies.AddRange(AssembliesToAdd.ToList<IToolbarItem>());                            }                            catch { continue; }                        }                        toolbarItem = ServiceInterfaceAssemblies;                        CacheFactory.Set(CacheFactory.Keys.Menu_Extension, ServiceInterfaceAssemblies, CacheFactory.Keys.Toolbar_Extension);                    }                    return toolbarItem;                }            }
-
-
-            #endregion        }    }}
