@@ -160,7 +160,7 @@ namespace Vanjaro.Core
                 UserInfo uInfo = UserController.Instance.GetCurrentUserInfo();
 
                 IFolderInfo fi = FolderManager.Instance.GetFolder(pinfo.PortalID, "Images/");
-                
+
                 #region Copy Vthemes in portal folder
 
                 string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrentThemeName(pinfo.PortalID) + "/editor");
@@ -592,7 +592,7 @@ namespace Vanjaro.Core
                 }
                 #endregion
 
-                
+
                 if (IsDistribution(pinfo.PortalID))
                     SoftDeleteModule(pinfo.PortalID, Components.Constants.SearchResult);
 
@@ -635,24 +635,19 @@ namespace Vanjaro.Core
             private static List<Layout> GetLayouts(PortalInfo pinfo)
             {
                 List<Layout> layouts = new List<Layout>();
-                List<string> FolderPaths = new List<string>();
-                FolderPaths.Add(HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrentThemeName(pinfo.PortalID) + "/templates/pages/"));
-                FolderPaths.Add(HttpContext.Current.Server.MapPath("~/Portals/" + pinfo.PortalID + "/vThemes/" + ThemeManager.GetCurrentThemeName(pinfo.PortalID) + "/templates/pages/"));
-                foreach (string FolderPath in FolderPaths)
+                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrentThemeName(pinfo.PortalID) + "/templates/website/");
+                if (Directory.Exists(FolderPath))
                 {
-                    if (Directory.Exists(FolderPath))
+                    foreach (string layout in Directory.GetFiles(FolderPath, "*.json"))
                     {
-                        foreach (string layout in Directory.GetFiles(FolderPath, "*.json"))
+                        string stringJson = File.ReadAllText(layout);
+                        if (!string.IsNullOrEmpty(stringJson))
                         {
-                            string stringJson = File.ReadAllText(layout);
-                            if (!string.IsNullOrEmpty(stringJson))
+                            Layout lay = JsonConvert.DeserializeObject<Layout>(stringJson);
+                            if (lay != null)
                             {
-                                Layout lay = JsonConvert.DeserializeObject<Layout>(stringJson);
-                                if (lay != null)
-                                {
-                                    lay.Name = Path.GetFileNameWithoutExtension(layout);
-                                    layouts.Add(lay);
-                                }
+                                lay.Name = Path.GetFileNameWithoutExtension(layout);
+                                layouts.Add(lay);
                             }
                         }
                     }
