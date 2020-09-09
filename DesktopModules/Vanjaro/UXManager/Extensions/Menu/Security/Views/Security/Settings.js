@@ -1,5 +1,6 @@
 ﻿app.controller('security_settings', function ($scope, $attrs, $http, CommonSvc, SweetAlert) {
     var common = CommonSvc.getData($scope);
+    $scope.InputMaxUploadSize = 28;
     //Init Scope
     $scope.onInit = function () {
         $scope.ui.data.Picture_DefaultFolder.Value = parseInt($scope.ui.data.Picture_DefaultFolder.Value);
@@ -17,6 +18,7 @@
             $scope.ui.data.AutoAccountUnlockDuration.Value = parseInt($scope.ui.data.AutoAccountUnlockDuration.Value);
             $scope.ui.data.AsyncTimeout.Value = parseInt($scope.ui.data.AsyncTimeout.Value);
             $scope.ui.data.MaxUploadSize.Value = parseInt($scope.ui.data.MaxUploadSize.Value);
+            $scope.InputMaxUploadSize = parseInt($scope.ui.data.MaxUploadSize.Value);
         }
         if (!$scope.ui.data.IsSuperUser.Value) {
             $scope.Click_ShowTab('SecurityLogin');
@@ -100,33 +102,38 @@
 
     $scope.Click_Save = function (type) {
         if (mnValidationService.DoValidationAndSubmit('', 'security_settings')) {
-            var settingData = {
-                UpdateSslSettingsRequest: $scope.ui.data.UpdateSslSettingsRequest.Options,
-                UpdateRegistrationSettingsRequest: $scope.ui.data.UserRegistration.Options.Settings,
-                UpdateBasicLoginSettingsRequest: $scope.ui.data.UpdateBasicLoginSettingsRequest.Options,
-                Picture_DefaultFolder: $scope.ui.data.Picture_DefaultFolder.Value,
-                Picture_MaxUploadSize: $scope.ui.data.Picture_MaxUploadSize.Value,
-                Picture_AllowableFileExtensions: $scope.ui.data.Picture_AllowableFileExtensions.Value,
-                Video_DefaultFolder: $scope.ui.data.Video_DefaultFolder.Value,
-                Video_MaxUploadSize: $scope.ui.data.Video_MaxUploadSize.Value,
-                Video_AllowableFileExtensions: $scope.ui.data.Video_AllowableFileExtensions.Value,
-                AutoAccountUnlockDuration: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.AutoAccountUnlockDuration.Value : null,
-                AsyncTimeout: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.AsyncTimeout.Value : null,
-                MaxUploadSize: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.MaxUploadSize.Value : null,
-                FileExtensions: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.FileExtensions.Value : null
-            };
-            $scope.ui.data.UpdateSslSettingsRequest.Options.SSLEnforced = $scope.ui.data.UpdateSslSettingsRequest.Options.SSLEnabled;
-            common.webApi.post('security/UpdateSettings', '', settingData).success(function (Response) {
-                if (Response.IsSuccess) {
-                    if (Response.IsRedirect) {
-                        window.parent.location.href = Response.RedirectURL;
+            if ($scope.ui.data.MaxUploadSize.Value != undefined && $scope.ui.data.MaxUploadSize.Value > $scope.InputMaxUploadSize) {
+                window.parent.swal('[L:maxUploadSizeValidation]' + $scope.InputMaxUploadSize);
+            }
+            else {
+                var settingData = {
+                    UpdateSslSettingsRequest: $scope.ui.data.UpdateSslSettingsRequest.Options,
+                    UpdateRegistrationSettingsRequest: $scope.ui.data.UserRegistration.Options.Settings,
+                    UpdateBasicLoginSettingsRequest: $scope.ui.data.UpdateBasicLoginSettingsRequest.Options,
+                    Picture_DefaultFolder: $scope.ui.data.Picture_DefaultFolder.Value,
+                    Picture_MaxUploadSize: $scope.ui.data.Picture_MaxUploadSize.Value,
+                    Picture_AllowableFileExtensions: $scope.ui.data.Picture_AllowableFileExtensions.Value,
+                    Video_DefaultFolder: $scope.ui.data.Video_DefaultFolder.Value,
+                    Video_MaxUploadSize: $scope.ui.data.Video_MaxUploadSize.Value,
+                    Video_AllowableFileExtensions: $scope.ui.data.Video_AllowableFileExtensions.Value,
+                    AutoAccountUnlockDuration: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.AutoAccountUnlockDuration.Value : null,
+                    AsyncTimeout: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.AsyncTimeout.Value : null,
+                    MaxUploadSize: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.MaxUploadSize.Value : null,
+                    FileExtensions: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.FileExtensions.Value : null
+                };
+                $scope.ui.data.UpdateSslSettingsRequest.Options.SSLEnforced = $scope.ui.data.UpdateSslSettingsRequest.Options.SSLEnabled;
+                common.webApi.post('security/UpdateSettings', '', settingData).success(function (Response) {
+                    if (Response.IsSuccess) {
+                        if (Response.IsRedirect) {
+                            window.parent.location.href = Response.RedirectURL;
+                        }
+                        $(window.parent.document.body).find('[data-dismiss="modal"]').click();
                     }
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
-                }
-                else {
-                    window.parent.ShowNotification('[LS:SecuritySettings]', Response.Message, 'error');
-                }
-            });
+                    else {
+                        window.parent.ShowNotification('[LS:SecuritySettings]', Response.Message, 'error');
+                    }
+                });
+            }
         };
     }
 });
