@@ -390,7 +390,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         };
 
                         rolepermission.Permissions.Clear();
-                        foreach (Permission item in RolePerm.Permissions)
+                        foreach (Permission item in RolePerm.Permissions.Where(x => x.AllowAccess))
                         {
                             Dnn.PersonaBar.Library.DTO.Permission permission = new Dnn.PersonaBar.Library.DTO.Permission
                             {
@@ -399,7 +399,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                                 View = item.View,
                                 AllowAccess = item.AllowAccess
                             };
-
                             rolepermission.Permissions.Add(permission);
                         }
 
