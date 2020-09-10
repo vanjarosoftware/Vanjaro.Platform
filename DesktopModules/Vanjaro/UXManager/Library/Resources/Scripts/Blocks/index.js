@@ -585,6 +585,29 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
         }
     });
 
+    //Export Custom Block
+    editor.Commands.add('export-custom-block', {
+        run: function (editor, sender, block) {
+            var BlockIDExport = block.id;
+            swal({
+                title: VjLocalized.AreYouSure,
+                text: VjLocalized.ExportMessage + block.name,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#8CD4F5",
+                confirmButtonText: VjLocalized.Yes,
+                cancelButtonText: VjLocalized.Cancel,
+                closeOnConfirm: true,
+                closeOnCancel: true
+            },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        ExportCustomBlock(BlockIDExport);
+                    }
+                });
+        }
+    });
+
     //global to local Custom Block
     editor.Commands.add('custom-block-globaltolocal', {
         run: function (editor, sender, block) {

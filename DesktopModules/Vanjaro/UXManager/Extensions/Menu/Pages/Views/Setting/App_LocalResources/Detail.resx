@@ -465,4 +465,10 @@
   <data name="WorkflowMessageStateText.Text" xml:space="preserve">
     <value>Permissions and Revisions will automatically update</value>
   </data>
+  <data name="ExportMessage.Text" xml:space="preserve">
+    <value>You want to export template of </value>
+  </data>
+  <data name="ExportLayout.Text" xml:space="preserve">
+    <value>Export</value>
+  </data>
 </root>

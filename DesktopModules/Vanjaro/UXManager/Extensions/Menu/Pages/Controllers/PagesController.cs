@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Http;
@@ -258,6 +259,14 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
             ActionResult ActionResult = new ActionResult();
             Managers.PagesManager.DeleteLayout(Name);
             return ActionResult;
+        }
+
+        [HttpGet]
+        [ValidateAntiForgeryToken]
+        [AuthorizeAccessRoles(AccessRoles = "admin")]
+        public HttpResponseMessage ExportLayout(string Name, bool IsSystem)
+        {
+            return Managers.PagesManager.ExportLayout(PortalSettings.Current.PortalId, Name, IsSystem);
         }
 
         [HttpPost]
