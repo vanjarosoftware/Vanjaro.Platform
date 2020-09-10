@@ -1,5 +1,4 @@
 import grapesjs from 'grapesjs';
-//import pluginstylegradient from 'grapesjs-style-gradient';
 import pluginstylefilter from 'grapesjs-style-filter';
 import customcode from './custom-code';
 import plugintuiimageeditor from 'grapesjs-tui-image-editor';
