@@ -444,6 +444,10 @@ namespace Vanjaro.Core
                     UpdatePortalSettings(SeoSettings, pinfo.PortalID, uInfo.UserID);
                     #endregion
                 }
+                else
+                {
+                    HostController.Instance.Update("DisableEditBar", "False");
+                }
                 if (!IsVanjaroInstalled)
                 {
                     #region Signin Tab
