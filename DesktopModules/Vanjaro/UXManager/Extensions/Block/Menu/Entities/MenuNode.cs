@@ -1,6 +1,7 @@
 ﻿using DotNetNuke.UI.WebControls;
 using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Xml.Serialization;
 
 namespace Vanjaro.UXManager.Extensions.Block.Menu.Entities
@@ -35,6 +36,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Menu.Entities
         public bool First => (Parent == null) || (Parent.Children[0] == this);
         public bool Last => (Parent == null) || (Parent.Children[Parent.Children.Count - 1] == this);
         public string Target { get; set; }
+        public bool IsRedirect { get; set; }
 
         public int Depth
         {
@@ -93,6 +95,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Menu.Entities
             Parent = parent;
             CommandName = dnnNode.get_CustomAttribute("CommandName");
             CommandArgument = dnnNode.get_CustomAttribute("CommandArgument");
+            IsRedirect = dnnNode.NavigateURL.StartsWith(string.Format("{0}://{1}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority)) ? false : true;
 
             DNNNodeToMenuNode(dnnNode, this);
 

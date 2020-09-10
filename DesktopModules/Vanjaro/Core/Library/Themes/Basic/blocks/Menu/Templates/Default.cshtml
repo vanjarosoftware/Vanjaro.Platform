@@ -13,6 +13,7 @@
         <ul class="navbar-nav">
             @foreach (var node in nodes)
             {
+                var relAttr = node.IsRedirect ? "rel=\"noopener\"" : "";
                 var cssClasses = new List<string>();
                 if (node.First) { cssClasses.Add("first"); }
                 if (node.Last) { cssClasses.Add("last"); }
@@ -22,7 +23,7 @@
                     <li class="@String.Join(" ",cssClasses.ToArray()) nav-item dropdown">
                         @if (node.Enabled)
                         {
-                            <a class="nav-link dropdown-toggle" href="@node.Url" target="@node.Target">
+                            <a class="nav-link dropdown-toggle" href="@node.Url" target="@node.Target" @relAttr>
                                 @node.Text
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" width="22" height="22"><path d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" /></svg>
                             </a>
@@ -42,7 +43,7 @@
                     <li class="@String.Join(" ",cssClasses.ToArray()) nav-item">
                         @if (node.Enabled)
                         {
-                            <a class="nav-link" target="@node.Target" href="@node.Url">@node.Text</a>
+                            <a class="nav-link" target="@node.Target" href="@node.Url" @relAttr>@node.Text</a>
                         }
                         else
                         {
@@ -62,12 +63,13 @@
         <ul class="dropdown-menu menulist">
             @foreach (var node in nodes)
             {
+                var relAttr = node.IsRedirect ? "rel=\"noopener\"" : "";
                 if (node.Children != null && node.Children.Count > 0)
                 {
                     <li class="dropdown-submenu">
                         @if (node.Enabled)
                         {
-                            <a class="dropdown-item menu-item" target="@node.Target" href="@node.Url">
+                            <a class="dropdown-item menu-item" target="@node.Target" href="@node.Url" @relAttr>
                                 @node.Text
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" width="22" height="22"><path d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" /></svg>
                             </a>
@@ -87,7 +89,7 @@
                     <li class="dropdown-item">
                         @if (node.Enabled)
                         {
-                            <a class="menu-item" href="@node.Url" target="@node.Target">@node.Text</a>
+                            <a class="menu-item" href="@node.Url" target="@node.Target" @relAttr>@node.Text</a>
                         }
                         else
                         {
