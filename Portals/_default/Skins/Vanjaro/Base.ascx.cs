@@ -102,10 +102,6 @@ namespace Vanjaro.Skin
 
         private void HandleEditMode()
         {
-            ///Forcing View Mode Until we can find a solution to prevent Edit Bar from appearing. 
-            //ToggleUserMode("VIEW");
-            //return;
-
             ///Code to support IsEditable pending a solution to prevent Edit Bar from appearing. 
 #pragma warning disable CS0162 // Unreachable code detected
             if (HttpContext.Current != null && HttpContext.Current.Request.Cookies["PageIsEdit"] != null && HttpContext.Current.Request.Cookies["PageIsEdit"].Value == "true")
