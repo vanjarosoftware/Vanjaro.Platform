@@ -13,7 +13,7 @@
         <ul class="navbar-nav">
             @foreach (var node in nodes)
             {
-                var relAttr = node.IsRedirectPage ? "rel=\"noopener\"" : "";
+                var relAttr = node.IsRedirect ? "rel=\"noopener\"" : "";
                 var cssClasses = new List<string>();
                 if (node.First) { cssClasses.Add("first"); }
                 if (node.Last) { cssClasses.Add("last"); }
@@ -63,7 +63,7 @@
         <ul class="dropdown-menu menulist">
             @foreach (var node in nodes)
             {
-                var relAttr = node.IsRedirectPage ? "rel=\"noopener\"" : "";
+                var relAttr = node.IsRedirect ? "rel=\"noopener\"" : "";
                 if (node.Children != null && node.Children.Count > 0)
                 {
                     <li class="dropdown-submenu">
