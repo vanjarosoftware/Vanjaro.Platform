@@ -251,7 +251,7 @@
     <Content Include="Packager\Vanjaro\bin\LibSassHost.dll" />
     <Content Include="Packager\Vanjaro\bin\System.Buffers.dll" />
     <Content Include="Packager\Vanjaro\Install\Install.aspx" />
-    <Content Include="Packager\Vanjaro\Install\Install.html" />
+    <Content Include="Packager\Vanjaro\Install\Install.htm" />
     <Content Include="Packager\Vanjaro\vcustom.css" />
     <Content Include="License.txt" />
     <Content Include="Release.txt" />
