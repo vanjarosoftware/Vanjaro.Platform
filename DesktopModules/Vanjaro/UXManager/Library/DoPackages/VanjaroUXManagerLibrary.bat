@@ -379,6 +379,8 @@ del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Fo
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Install.zip >NUL
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip >NUL
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Install.zip >NUL
+del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip >NUL
+del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip >NUL
 
 echo Creating New Packages...
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip @PackageList.txt
@@ -512,13 +514,16 @@ copy "Default Website.template.resources" ..\Temp_DNN\Portals\_default\ >NUL
 copy "DotNetNuke.install.config.resources" ..\Temp_DNN\Install\ >NUL
 copy "InstallWizard.aspx.cs.resources" ..\Temp_DNN\Install\InstallWizard.aspx.cs >NUL
 copy "InstallWizard.aspx.resources" ..\Temp_DNN\Install\InstallWizard.aspx >NUL
+copy Install\Install.aspx.cs ..\Temp_DNN\Install\Install.aspx.cs >NUL
+copy Install\Install.aspx.designer.cs ..\Temp_DNN\Install\Install.aspx.designer.cs
+copy Install\Install.htm ..\Temp_DNN\Install\Install.htm >NUL
 copy "vcustom.css" ..\Temp_DNN\Resources\Shared\stylesheets\ >NUL
 copy Images\*.* ..\Temp_DNN\Images >NUL
 copy "Images\Branding\Vanjaro_logo.png" ..\Temp_DNN\Images\Branding\ >NUL
 
 cd ..\Releases >NUL
-move Vanjaro_Platform_"%Version%"_x64_Install.zip ..\Temp_DNN\Install\Module\ >NUL
-move Vanjaro_Platform_"%Version%"_x86_Install.zip ..\Temp_DNN\Install\Module\ >NUL
+copy Vanjaro_Platform_"%Version%"_x64_Install.zip ..\Temp_DNN\Install\Module\ >NUL
+copy Vanjaro_Platform_"%Version%"_x86_Install.zip ..\Temp_DNN\Install\Module\ >NUL
 
 cd ..\Temp_DNN 
 del Vanjaro_Platform_"%Version%"_x64_Install.zip
@@ -535,10 +540,139 @@ echo "preparing zip file."
 move Vanjaro_Platform_"%Version%"_x64_Install.zip ..\Releases\ 
 move Vanjaro_Platform_"%Version%"_x86_Install.zip ..\Releases\ 
 
-echo All Done
+
+
+cd ..\..\Packager\
+
+del UpgradeTemp_DNN 
+mkdir UpgradeTemp_DNN 
+xcopy /e /i "DNN Upgrade"\* UpgradeTemp_DNN\*  /Y 
+cd UpgradeTemp_DNN\
+@echo on
+echo Cleaning DNN Platform - Please Wait...
+del Documentation.txt >NUL
+del DNN.ico /Q >NUL
+del favicon.ico /Q >NUL
+del compilerconfig.json /Q >NUL
+
+del documentation\telerik* /S/Q >NUL
+
+move Licenses Documentation\ >NUL
+
+rmdir documentation\StarterKit\ /S/Q >NUL
+rmdir admin\Containers /S/Q >NUL
+rmdir admin\Sales /S/Q >NUL
+
+mkdir admin\SecurityTemp >NUL
+move admin\Security\App_LocalResources\PasswordReset.ascx.resx admin\SecurityTemp
+del admin\Security\* /S/Q >NUL
+mkdir admin\Security\App_LocalResources >NUL
+move admin\SecurityTemp\PasswordReset.ascx.resx admin\Security\App_LocalResources\
+rmdir admin\SecurityTemp >NUL
+
+
+
+mkdir admin\MenusTemp >NUL
+move admin\Menus\ModuleActions\ModuleActions.ascx admin\MenusTemp
+del admin\Menus\* /S/Q >NUL
+mkdir admin\Menus\ModuleActions >NUL
+move admin\MenusTemp\ModuleActions.ascx admin\Menus\ModuleActions
+rmdir admin\MenusTemp
+rmdir admin\Menus\DNNActions
+rmdir admin\Menus\DNNAdmin
+rmdir admin\Menus\ModuleActions\images
+
+
+
+mkdir admin\SkinsTemp >NUL
+move admin\Skins\modulemessage.ascx admin\SkinsTemp >NUL
+del admin\Skins\* /S/Q >NUL
+rmdir admin\Skins\App_LocalResources /S/Q >NUL
+move admin\SkinsTemp\modulemessage.ascx admin\Skins\ >NUL
+rmdir admin\SkinsTemp /S/Q >NUL
+rmdir admin\App_LocalResources >NUL
+rmdir admin\Tabs /S/Q >NUL
+rmdir admin\Users /S/Q >NUL
+rmdir icons\sigma /S/Q >NUL
+rmdir images /S/Q >NUL
+mkdir images\Branding >NUL
+del Install\AuthSystem\* /S/Q >NUL
+
+
+mkdir Install\JavaScriptLibraryTEMP >NUL
+move Install\JavaScriptLibrary\jQuery_* Install\JavaScriptLibraryTEMP\ >NUL
+move Install\JavaScriptLibrary\jQueryMigrate_* Install\JavaScriptLibraryTEMP\ >NUL
+del Install\JavaScriptLibrary\* /S/Q >NUL
+move Install\JavaScriptLibraryTEMP\jQuery_* Install\JavaScriptLibrary\ >NUL
+move Install\JavaScriptLibraryTEMP\jQueryMigrate_* Install\JavaScriptLibrary\ >NUL
+rmdir Install\JavaScriptLibraryTEMP /S/Q >NUL
+
+del Install\Library\* /S/Q >NUL
+
+mkdir Install\ModuleTEMP >NUL
+move Install\Module\Newtonsoft* Install\ModuleTEMP\ >NUL
+move Install\Module\DNN.Persona* Install\ModuleTEMP\ >NUL
+del Install\Module\* /S/Q >NUL
+move Install\ModuleTemp\* Install\Module\ >NUL
+rmdir Install\ModuleTemp /S/Q >NUL
+
+
+mkdir Install\ProviderTEMP >NUL
+move Install\Provider\DNNCE_* Install\ProviderTEMP\ >NUL
+del Install\Provider\* /S/Q >NUL
+move Install\ProviderTEMP\* Install\Provider\ >NUL
+rmdir Install\ProviderTEMP /S/Q >NUL
+
+del Install\Skin\* /S/Q >NUL
+del Install\Template\* /S/Q >NUL
+del Install\InstallWizard.aspx.cs >NUL
+del Install\InstallWizard.aspx >NUL
+
+echo Merging Vanjaro - Please Wait...
+cd ..\vanjaro\ 
+copy "Blank Website.template" ..\UpgradeTemp_DNN\Portals\_default\ >NUL
+copy "Default Website.template" ..\UpgradeTemp_DNN\Portals\_default\ >NUL
+copy "Default Website.template.resources" ..\UpgradeTemp_DNN\Portals\_default\ >NUL
+copy "DotNetNuke.install.config.resources" ..\UpgradeTemp_DNN\Install\ >NUL
+copy "InstallWizard.aspx.cs.resources" ..\UpgradeTemp_DNN\Install\InstallWizard.aspx.cs >NUL
+copy "InstallWizard.aspx.resources" ..\UpgradeTemp_DNN\Install\InstallWizard.aspx >NUL
+copy Install\Install.aspx.cs ..\UpgradeTemp_DNN\Install\Install.aspx.cs >NUL
+copy Install\Install.aspx.designer.cs ..\UpgradeTemp_DNN\Install\Install.aspx.designer.cs
+copy Install\Install.htm ..\UpgradeTemp_DNN\Install\Install.htm >NUL
+copy "vcustom.css" ..\UpgradeTemp_DNN\Resources\Shared\stylesheets\ >NUL
+copy Images\*.* ..\UpgradeTemp_DNN\Images >NUL
+copy "Images\Branding\Vanjaro_logo.png" ..\UpgradeTemp_DNN\Images\Branding\ >NUL
+
+cd ..\Temp_DNN\
+copy Install\Module\Vanjaro_Platform_"%Version%"_x64_Install.zip ..\UpgradeTemp_DNN\Install\Module\ >NUL
+copy Install\Module\Vanjaro_Platform_"%Version%"_x86_Install.zip ..\UpgradeTemp_DNN\Install\Module\ >NUL
+
+cd ..\UpgradeTemp_DNN\
+
+echo "preparing zip file."
+"C:\Program Files\7-Zip\7z.exe" a Vanjaro_Platform_"%Version%"_x64_Upgrade.zip -xr!?svn
+"C:\Program Files\7-Zip\7z.exe" a Vanjaro_Platform_"%Version%"_x86_Upgrade.zip -xr!?svn
+
+"C:\Program Files\7-Zip\7z.exe" d -r Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro_Platform_"%Version%"_x64_Upgrade.zip
+
+"C:\Program Files\7-Zip\7z.exe" d -r Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Install\Module\Vanjaro_Platform_"%Version%"_x86_Install.zip
+"C:\Program Files\7-Zip\7z.exe" d -r Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Install\Module\Vanjaro_Platform_"%Version%"_x64_Install.zip
+
+move Vanjaro_Platform_"%Version%"_x64_Upgrade.zip ..\Releases\ 
+move Vanjaro_Platform_"%Version%"_x86_Upgrade.zip ..\Releases\
+
+SET /P HasDNNChanged=Has DNN Version Changed (Y/[N])?
+IF /I "%HasDNNChanged%" NEQ "Y" GOTO :CopyInstall
+
+:CopyInstall
+"C:\Program Files\7-Zip\7z.exe" rn ..\Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Packager\Vanjaro\install\Install.aspx Install/Install.aspx
+"C:\Program Files\7-Zip\7z.exe" rn ..\Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Packager\Vanjaro\install\Install.aspx Install/Install.aspx
+
 cd ..\
+rmdir UpgradeTemp_DNN /s /q 
 rmdir Temp_DNN /s /q 
 exit echo All Done!
 :END
 endlocal
 exit
+
