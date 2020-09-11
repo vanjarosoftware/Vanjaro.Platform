@@ -76,6 +76,35 @@ namespace Vanjaro.Core
                 }
             }
 
+            public static void ApplyingSettings(string Version)
+            {
+
+                switch (Version)
+                {
+                    case "01.00.01":
+                        #region Add webp extension
+                        string fileExtension = HostController.Instance.GetString("FileExtensions");
+                        if (!string.IsNullOrEmpty(fileExtension) && !fileExtension.ToLower().Split(',').Contains("webp"))
+                        {
+                            var fextn = fileExtension.Split(',').ToList();
+                            fextn.Add("webp");
+                            HostController.Instance.Update("FileExtensions", string.Join(",", fextn));
+                        }
+
+                        //Default End UserExtension Whitelist
+                        string defaultEndUserExtensionWhitelist = HostController.Instance.GetString("DefaultEndUserExtensionWhitelist");
+                        if (!string.IsNullOrEmpty(defaultEndUserExtensionWhitelist) && !defaultEndUserExtensionWhitelist.ToLower().Split(',').Contains("webp"))
+                        {
+                            var fextn = defaultEndUserExtensionWhitelist.Split(',').ToList();
+                            fextn.Add("webp");
+                            HostController.Instance.Update("DefaultEndUserExtensionWhitelist", string.Join(",", fextn));
+                        }
+                        #endregion
+                        break;
+                }
+
+            }
+
             private static void MoveFavicon()
             {
                 #region Copy favicon
@@ -597,16 +626,6 @@ namespace Vanjaro.Core
 
                 if (!IsVanjaroInstalled)
                     PortalController.UpdatePortalSetting(pinfo.PortalID, "IsVanjaroInstalled", "-1");
-
-                #region Add webp extension
-                string fileExtension = HostController.Instance.GetString("FileExtensions");
-                if (!string.IsNullOrEmpty(fileExtension) && !fileExtension.ToLower().Split(',').Contains("webp"))
-                {
-                    var fextn = fileExtension.Split(',').ToList();
-                    fextn.Add("webp");
-                    HostController.Instance.Update("FileExtensions", string.Join(",", fextn));
-                }
-                #endregion
             }
 
             private static void UpdatePortalSettings(List<StringValue> SettingNameValue, int PortalID, int UserID)
