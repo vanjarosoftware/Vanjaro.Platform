@@ -383,7 +383,6 @@ namespace Vanjaro.Core
                     if (SearchResultTab != null && SearchResultlayout != null && portalSettings != null)
                     {
                         ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
-                        pinfo.UserTabId = SearchResultTab.TabID;
                         if (portalSettings.ActiveTab == null)
                         {
                             portalSettings.ActiveTab = new TabInfo();
