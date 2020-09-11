@@ -172,7 +172,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
                                 memoryStream.Seek(0, SeekOrigin.Begin);
                             }
 
-                            if (FileManager.Instance.IsImageFile(fileInfo))
+                            if (Utils.IsImageVersionable(fileInfo))
                             {
                                 BrowseUploadFactory.CropImage(FileName, FileExtension, folderInfo, memoryStream);
                             }
