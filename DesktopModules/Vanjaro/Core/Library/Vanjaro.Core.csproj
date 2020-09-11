@@ -97,6 +97,13 @@
     <Compile Include="Factories\SettingFactory.cs" />
     <Compile Include="Factories\WorkflowFactory.cs" />
     <Compile Include="Managers\CookieManager.cs" />
+    <Compile Include="Packager\Vanjaro\Install\Install.aspx.cs">
+      <DependentUpon>Install.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Packager\Vanjaro\Install\Install.aspx.designer.cs">
+      <DependentUpon>Install.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\GlobalAssemblyInfo.cs" />
     <Compile Include="Managers\BlockManager.cs" />
     <Compile Include="Managers\ILocalizationService.cs" />
@@ -194,6 +201,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\bin\LibSassHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="Vanjaro.Common, Version=3.3.8.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -242,6 +250,8 @@
     <Content Include="Packager\Vanjaro\bin\x64\libsass.dll" />
     <Content Include="Packager\Vanjaro\bin\LibSassHost.dll" />
     <Content Include="Packager\Vanjaro\bin\System.Buffers.dll" />
+    <Content Include="Packager\Vanjaro\Install\Install.aspx" />
+    <Content Include="Packager\Vanjaro\Install\Install.html" />
     <Content Include="Packager\Vanjaro\vcustom.css" />
     <Content Include="License.txt" />
     <Content Include="Release.txt" />
