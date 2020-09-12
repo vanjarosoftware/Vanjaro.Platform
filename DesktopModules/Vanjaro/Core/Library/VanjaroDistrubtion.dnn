@@ -2,9 +2,9 @@
 	<packages>
 		<package name="Vanjaro" type="Library" version="00.05.01">
 			<friendlyName>Vanjaro</friendlyName>
-			<description></description>
+			<description>Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN.</description>
 			<dependencies>
-				<dependency type="CoreVersion">09.05.00</dependency>
+				<dependency type="CoreVersion">09.07.00</dependency>
 				<dependency type="ManagedPackage" version="01.00.00">Dnn.PersonaBar.UI</dependency>
 			</dependencies>
 			<owner>
