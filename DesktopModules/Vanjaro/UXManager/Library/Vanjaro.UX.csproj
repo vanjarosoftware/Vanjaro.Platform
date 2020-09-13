@@ -317,10 +317,6 @@
     <Content Include="Resources\Images\image.webp" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DoPackages\VanjaroUXManagerLibrary.bat" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DoPackages\bin\" />
     <Folder Include="Resources\Scripts\GrapesJsManagers\img\" />
   </ItemGroup>
   <ItemGroup>
@@ -362,7 +358,7 @@
     <PreBuildEvent>if $(ConfigurationName) == Release cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\ &amp;&amp; npm install &amp;&amp; cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\node_modules\.bin\ &amp;&amp; webpack</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release start ..\DesktopModules\Vanjaro\UXManager\Library\DoPackages\VanjaroUXManagerLibrary.bat"</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release start ..\DesktopModules\Vanjaro\Core\Library\Packager\Packager.bat"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -429,7 +429,6 @@
     <Content Include="web.config" />
     <Content Include="Packager\Vanjaro\Blank Website.template" />
     <Content Include="Packager\Vanjaro\Default Website.template" />
-    <Content Include="Packager\Vanjaro_Clean_Builder.bat" />
     <Content Include="Themes\Basic\templates\website\Default.json" />
     <Content Include="Themes\Basic\templates\website\Home.json" />
     <Content Include="Themes\Basic\templates\website\NotFoundPage.json" />
@@ -438,6 +437,7 @@
     <Content Include="Themes\Basic\templates\website\Signin.json" />
     <Content Include="Themes\Basic\templates\website\Signup.json" />
     <Content Include="Install\Core.01.00.01.SqlDataProvider" />
+    <Content Include="Packager\Packager.bat" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

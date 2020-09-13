@@ -15,6 +15,7 @@ using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
 {
@@ -110,6 +111,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
         [HttpPost]
         public ActionResult InstallPackage()
         {
+            ThemeManager.UnloadSassCompiler();
+
             string legacySkin = null;
             bool isPortalPackage = false;
             ActionResult actionResult = new ActionResult();
