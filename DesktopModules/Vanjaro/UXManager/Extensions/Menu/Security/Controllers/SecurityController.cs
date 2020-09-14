@@ -53,7 +53,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
             {
                 new TreeView() { Text = "Default", Value = -1 }
             };
-            DefaultFolders.AddRange(BrowseUploadFactory.GetFolders(portalSettings.PortalId));
+            DefaultFolders.AddRange(BrowseUploadFactory.GetFolders(portalSettings.PortalId).Where(f => !f.Text.Contains(".versions")));
             Settings.Add("Picture_DefaultFolder", new UIData { Name = "Picture_DefaultFolder", Options = DefaultFolders, Value = Core.Managers.SettingManager.GetValue(portalSettings.PortalId, 0, Identifier.security_settings.ToString(), "Picture_DefaultFolder", AppFactory.GetViews()) });
             Settings.Add("Video_DefaultFolder", new UIData { Name = "Video_DefaultFolder", Options = DefaultFolders, Value = Core.Managers.SettingManager.GetValue(portalSettings.PortalId, 0, Identifier.security_settings.ToString(), "Video_DefaultFolder", AppFactory.GetViews()) });
             Settings.Add("Picture_MaxUploadSize", new UIData { Name = "Picture_MaxUploadSize", Value = Core.Managers.SettingManager.GetValue(portalSettings.PortalId, 0, Identifier.security_settings.ToString(), "Picture_MaxUploadSize", AppFactory.GetViews()) });
