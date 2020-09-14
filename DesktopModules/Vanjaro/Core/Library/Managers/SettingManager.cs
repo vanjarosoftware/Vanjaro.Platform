@@ -626,6 +626,9 @@ namespace Vanjaro.Core
 
                 if (!IsVanjaroInstalled)
                     PortalController.UpdatePortalSetting(pinfo.PortalID, "IsVanjaroInstalled", "-1");
+
+                if (fi != null)
+                    UpdateValue(pinfo.PortalID, 0, "security_settings", "Picture_DefaultFolder", fi.FolderID.ToString());
             }
 
             private static void UpdatePortalSettings(List<StringValue> SettingNameValue, int PortalID, int UserID)
