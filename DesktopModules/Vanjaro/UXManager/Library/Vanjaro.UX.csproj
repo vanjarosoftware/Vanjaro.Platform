@@ -355,7 +355,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PreBuildEvent>if $(ConfigurationName) == Release cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\ &amp;&amp; npm install &amp;&amp; cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\node_modules\.bin\ &amp;&amp; webpack</PreBuildEvent>
+    <PreBuildEvent>cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\ &amp;&amp; npm install &amp;&amp; cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\node_modules\.bin\ &amp;&amp; webpack</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release start ..\DesktopModules\Vanjaro\Core\Library\Packager\Packager.bat"</PostBuildEvent>
