@@ -2,6 +2,7 @@
     Delete: '[LS:Delete]',
     Cancel: '[LS:Cancel]',
     OK: '[LS:OK]',
+    Yes: '[LS:Yes]',
     AreYouSure: '[LS:AreYouSure]',
     AreYouSureText: '[LS:AreYouSureText]',
     AlreadyExist: '[LS:AlreadyExist]',
@@ -55,7 +56,8 @@
     Navigator: "[LS:Navigator]",
     Library: "[LS:Library]",
     TemplateLibrary: "[LS:TemplateLibrary]",
-    PrefixAppName: "[LS:PrefixAppName]"
+    PrefixAppName: "[LS:PrefixAppName]",
+    ExportMessage: "[LS:ExportMessage]"
 };
 
 $.fn.dnnModuleDragDrop = function (options) {

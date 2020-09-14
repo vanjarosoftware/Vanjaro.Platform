@@ -3,6 +3,7 @@ using DotNetNuke.Web.Api.Internal;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using Vanjaro.Core.Data.Entities;
@@ -35,6 +36,13 @@ namespace Vanjaro.UXManager.Library.Controllers
         public dynamic DeleteCustomBlock(string CustomBlockGuid)
         {
             return Core.Managers.BlockManager.Delete(PortalSettings.ActiveTab.PortalID, CustomBlockGuid);
+        }
+
+        [HttpGet]
+        [DnnAdmin]
+        public HttpResponseMessage ExportCustomBlock(string CustomBlockGuid)
+        {
+            return Core.Managers.BlockManager.ExportCustomBlock(PortalSettings.ActiveTab.PortalID, CustomBlockGuid);
         }
 
         [HttpGet]

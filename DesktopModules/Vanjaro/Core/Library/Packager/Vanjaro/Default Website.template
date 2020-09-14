@@ -363,7 +363,7 @@
           <permissioncode>SYSTEM_TAB</permissioncode>
           <permissionkey>VIEW</permissionkey>
           <allowaccess>true</allowaccess>
-          <rolename>All Users</rolename>
+          <rolename>Registered Users</rolename>
         </permission>
       </tabpermissions>
       <tabsettings />
