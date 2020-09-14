@@ -714,11 +714,14 @@ namespace Vanjaro.Core
                 if (IsJson)
                 {
                     dynamic deserializeObject = JsonConvert.DeserializeObject(content);
-                    foreach (dynamic arr in deserializeObject)
+                    if (deserializeObject != null)
                     {
-                        ProcessJsonObject(arr, Assets);
+                        foreach (dynamic arr in deserializeObject)
+                        {
+                            ProcessJsonObject(arr, Assets);
+                        }
+                        content = JsonConvert.SerializeObject(deserializeObject);
                     }
-                    content = JsonConvert.SerializeObject(deserializeObject);
                 }
                 else
                 {
@@ -764,7 +767,7 @@ namespace Vanjaro.Core
                         string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
                         string tempNewUrl = newurl;
                         int count = 1;
-                    Find:
+                        Find:
                         if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
                         {
                             tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;
@@ -825,13 +828,13 @@ namespace Vanjaro.Core
                 content = content.Replace(PortalRootToken, portalRoot);
                 return content;
             }
-            
+
             public static string GetPortalRoot(int portalId)
             {
 
                 PortalInfo portal = PortalController.Instance.GetPortal(portalId);
 
-                string portalRoot =  UrlUtils.Combine(DotNetNuke.Common.Globals.ApplicationPath, portal.HomeDirectory);
+                string portalRoot = UrlUtils.Combine(DotNetNuke.Common.Globals.ApplicationPath, portal.HomeDirectory);
 
                 if (!portalRoot.StartsWith("/"))
                 {

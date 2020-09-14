@@ -16,6 +16,7 @@ using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.Common.Factories;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core;
+using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.UXManager.Extensions.Apps.Image.Entities;
 using Vanjaro.UXManager.Library.Entities;
@@ -80,7 +81,9 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
                 if (HttpContext.Current != null && HttpContext.Current.Request != null && HttpContext.Current.Request.Form != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Form["ImageByte"]) && !string.IsNullOrEmpty(HttpContext.Current.Request.Form["PreviousFileName"]))
                 {
                     byte[] ByteImage = System.Convert.FromBase64String(HttpContext.Current.Request.Form["ImageByte"].Split(',')[1]);
+                    
                     string PreviousFile = HttpContext.Current.Request.Form["PreviousFileName"];
+                    
                     using (MemoryStream stream = new MemoryStream(ByteImage))
                     {
                         Random random = new Random();
@@ -101,97 +104,127 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
         #region Folder and File
         public dynamic ConvertSave(string FilePath, int Id, Stream stream, string Suffix = null)
         {
-            MemoryStream memoryStream = new MemoryStream();
             dynamic result = "failed";
-            if (stream != null)
-            {
-                List<Setting> settings = Managers.SettingManager.GetSettings(PortalSettings.PortalId, 0, "security_settings");
-                string Picture_DefaultFolder = "-1";
-                if (settings != null && settings.Count > 0 && settings.Where(s => s.Name == "Picture_DefaultFolder").FirstOrDefault() != null)
-                {
-                    Picture_DefaultFolder = settings.Where(s => s.Name == "Picture_DefaultFolder").FirstOrDefault().Value;
-                }
 
-                IFolderInfo folderInfo = FolderManager.Instance.GetFolder(Picture_DefaultFolder == "-1" ? BrowseUploadFactory.GetRootFolder(PortalSettings.PortalId).FolderID : int.Parse(Picture_DefaultFolder));
-                if (folderInfo != null && BrowseUploadFactory.HasPermission(folderInfo, "WRITE"))
+            using (MemoryStream memoryStream = new MemoryStream())
+            { 
+                if (stream != null)
                 {
-                    string FileName = Security.ReplaceIllegalCharacters(Path.GetFileName(FilePath));
-                    if (Id > -1)
+                    List<Setting> settings = Managers.SettingManager.GetSettings(PortalSettings.PortalId, 0, "security_settings");
+                    string Picture_DefaultFolder = "-1";
+                    if (settings != null && settings.Count > 0 && settings.Where(s => s.Name == "Picture_DefaultFolder").FirstOrDefault() != null)
                     {
-                        FileName = Id + FileName.Substring(FileName.LastIndexOf('.'));
+                        Picture_DefaultFolder = settings.Where(s => s.Name == "Picture_DefaultFolder").FirstOrDefault().Value;
                     }
 
-                    string TempFileName = FileName;
-                    string FileExtension = FileName.Substring(FileName.LastIndexOf('.'));
-                    if (Security.IsAllowedExtension(FileExtension, FileSetting.FileType.Split(',')))
+                    IFolderInfo folderInfo = FolderManager.Instance.GetFolder(Picture_DefaultFolder == "-1" ? BrowseUploadFactory.GetRootFolder(PortalSettings.PortalId).FolderID : int.Parse(Picture_DefaultFolder));
+                    if (folderInfo != null && BrowseUploadFactory.HasPermission(folderInfo, "WRITE"))
                     {
-                        int count = 1;
-
-                    Find:
-                        if (FileManager.Instance.FileExists(folderInfo, TempFileName))
+                        string FileName = Security.ReplaceIllegalCharacters(Path.GetFileName(FilePath));
+                        if (Id > -1)
                         {
-                            string FName = FileName.Remove(FileName.Length - FileExtension.Length);
-                            if (!string.IsNullOrEmpty(Suffix))
+                            FileName = Id + FileName.Substring(FileName.LastIndexOf('.'));
+                        }
+
+                        string FileExtension = FileName.Substring(FileName.LastIndexOf('.'));
+                        
+                        //Force extention to be .png to maintain transparency
+                        FileName = FileName.Remove(FileName.Length - FileExtension.Length) + ".png";
+                        FileExtension = ".png";
+
+                        string TempFileName = FileName;
+
+                        if (Security.IsAllowedExtension(FileExtension, FileSetting.FileType.Split(',')))
+                        {
+                            int count = 1;
+
+                        Find:
+                            if (FileManager.Instance.FileExists(folderInfo, TempFileName))
                             {
-                                if (FileName.Contains(Suffix))
+                                string FName = FileName.Remove(FileName.Length - FileExtension.Length);
+                                if (!string.IsNullOrEmpty(Suffix))
                                 {
-                                    string[] FInfo = FileName.Split(new string[] { Suffix }, StringSplitOptions.None);
-                                    if (FInfo.Length > 1)
+                                    if (FileName.Contains(Suffix))
                                     {
-                                        FName = FInfo[0];
+                                        string[] FInfo = FileName.Split(new string[] { Suffix }, StringSplitOptions.None);
+                                        if (FInfo.Length > 1)
+                                        {
+                                            FName = FInfo[0];
+                                        }
                                     }
                                 }
-                            }
-                            TempFileName = FName + (!string.IsNullOrEmpty(Suffix) ? Suffix : string.Empty) + count + FileExtension;
-                            count++;
-                            goto Find;
-                        }
-                        else
-                        {
-                            FileName = TempFileName;
-                            IFileInfo fileInfo;
-                            if (!string.IsNullOrEmpty(Suffix))
-                            {
-                                using (ImageFactory imageFactory = new ImageFactory(preserveExifData: false))
-                                {
-                                    ISupportedImageFormat format = new JpegFormat { Quality = 70 };
-
-                                    // Load, resize, set the format and quality and save an image.
-                                    imageFactory.Load(stream)
-                                                .Format(format)
-                                                .Save(stream);
-                                    stream.CopyTo(memoryStream);
-                                    fileInfo = FileManager.Instance.AddFile(folderInfo, FileName, memoryStream);
-                                    memoryStream.Seek(0, SeekOrigin.Begin);
-                                }
+                                TempFileName = FName + (!string.IsNullOrEmpty(Suffix) ? Suffix : string.Empty) + count + FileExtension;
+                                count++;
+                                goto Find;
                             }
                             else
                             {
-                                stream.CopyTo(memoryStream);
-                                fileInfo = FileManager.Instance.AddFile(folderInfo, FileName, memoryStream);
-                                memoryStream.Seek(0, SeekOrigin.Begin);
-                            }
+                                byte[] photoBytes = ToByteArray(stream);
 
-                            if (FileManager.Instance.IsImageFile(fileInfo))
-                            {
-                                BrowseUploadFactory.CropImage(FileName, FileExtension, folderInfo, memoryStream);
-                            }
+                                System.Drawing.Image SrcImage = System.Drawing.Image.FromStream(stream);
+                                int Width = SrcImage.Width;
+                                SrcImage.Dispose();
 
-                            if (fileInfo != null)
-                            {
-                                result = BrowseUploadFactory.GetUrl(fileInfo.FileId);
+                                using (MemoryStream inStream = new MemoryStream(photoBytes))
+                                {
+                                    FileName = TempFileName;
+                                    IFileInfo fileInfo;
+                                    if (!string.IsNullOrEmpty(Suffix))
+                                    {
+                                        using (ImageFactory imageFactory = new ImageFactory(preserveExifData: false))
+                                        {
+                                            //Convert to png
+                                            ISupportedImageFormat format = new PngFormat();
+
+                                            System.Drawing.Size size = new System.Drawing.Size(Width, 0);
+
+                                            // Load, resize, set the format and quality and save an image.
+                                            imageFactory.Load(inStream)
+                                                        .Format(format)
+                                                        .Save(memoryStream);
+                                            fileInfo = FileManager.Instance.AddFile(folderInfo, FileName, memoryStream);
+                                            memoryStream.Seek(0, SeekOrigin.Begin);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        stream.CopyTo(memoryStream);
+                                        fileInfo = FileManager.Instance.AddFile(folderInfo, FileName, memoryStream);
+                                        memoryStream.Seek(0, SeekOrigin.Begin);
+                                    }
+
+                                    if (Utils.IsImageVersionable(fileInfo))
+                                    {
+                                        BrowseUploadFactory.CropImage(FileName, FileExtension, folderInfo, memoryStream);
+                                    }
+
+                                    if (fileInfo != null)
+                                    {
+                                        result = BrowseUploadFactory.GetUrl(fileInfo.FileId);
+                                    }
+                                }
+
+                                
                             }
                         }
                     }
-                }
-                else
-                {
-                    throw new Exception("Error: You do not have write permission for folder " + (folderInfo != null ? folderInfo.FolderPath.TrimEnd('/') : string.Empty));
+
+                    else
+                    {
+                        throw new Exception("Error: You do not have write permission for folder " + (folderInfo != null ? folderInfo.FolderPath.TrimEnd('/') : string.Empty));
+                    }
                 }
             }
             return result;
         }
-
+        private static byte[] ToByteArray(Stream inputStream)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                inputStream.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
         #endregion
 
         public override string AccessRoles()

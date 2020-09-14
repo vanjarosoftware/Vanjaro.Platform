@@ -46,6 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\Core\Library\Properties\GlobalAssemblyInfo.cs">
@@ -134,8 +135,26 @@
     <Content Include="Resources\Images\col-6.png" />
     <Content Include="Resources\Images\col-8.4.png" />
     <Content Include="Resources\Images\col-9.3.png" />
+    <Content Include="Resources\Images\extensions\compress.jpg" />
+    <Content Include="Resources\Images\extensions\contact.jpg" />
+    <Content Include="Resources\Images\extensions\editor.jpg" />
+    <Content Include="Resources\Images\extensions\seo.jpg" />
+    <Content Include="Resources\Images\extensions\stay.jpg" />
     <Content Include="Resources\Images\Flower.mp4" />
     <Content Include="Resources\Images\image.png" />
+    <Content Include="Resources\Images\librarytemplates\blogpost.jpg" />
+    <Content Include="Resources\Images\librarytemplates\Church.jpg" />
+    <Content Include="Resources\Images\librarytemplates\contactus.jpg" />
+    <Content Include="Resources\Images\librarytemplates\Event.jpg" />
+    <Content Include="Resources\Images\librarytemplates\footer.jpg" />
+    <Content Include="Resources\Images\librarytemplates\Home - Full Screen Video.jpg" />
+    <Content Include="Resources\Images\librarytemplates\Home.jpg" />
+    <Content Include="Resources\Images\librarytemplates\Law.jpg" />
+    <Content Include="Resources\Images\librarytemplates\maps.jpg" />
+    <Content Include="Resources\Images\librarytemplates\Restaurant.jpg" />
+    <Content Include="Resources\Images\librarytemplates\slider.jpg" />
+    <Content Include="Resources\Images\librarytemplates\team.jpg" />
+    <Content Include="Resources\Images\librarytemplates\team3.jpg" />
     <Content Include="Resources\Images\loading.gif" />
     <Content Include="Resources\Images\svg\icon-a.svg" />
     <Content Include="Resources\Images\svg\icon-b.svg" />
@@ -170,7 +189,6 @@
     <Content Include="Resources\Scripts\GrapesJsManagers\Plugins\blockwrapper.js" />
     <Content Include="Resources\Scripts\index.js" />
     <Content Include="Resources\Scripts\Localization\Localization.js" />
-    <Content Include="Resources\Scripts\uxmanager.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="PackageList.txt" />
@@ -178,7 +196,6 @@
     <Content Include="Resources\Images\Vanjaro.png" />
     <Content Include="Resources\Scripts\GrapesJsManagers\css\uxmanager.css" />
     <Content Include="Resources\Scripts\GrapesJsManagers\desktopmodulesApps.js" />
-    <Content Include="Resources\Scripts\GrapesJsManagers\img\dark.mp4" />
     <Content Include="Resources\Scripts\GrapesJsManagers\Plugins\modulewrapper.js" />
     <Content Include="Resources\Scripts\GrapesJsManagers\scriptandstyle.js" />
     <Content Include="Resources\Scripts\GrapesJs\css\grapes.min.css" />
@@ -191,6 +208,7 @@
     <Content Include="Resources\Scripts\GrapesJs\fonts\main-fonts.svg" />
     <Content Include="Resources\Scripts\GrapesJsManagers\editor.js" />
     <Content Include="Resources\Scripts\jsPanel\jspanel.min.css" />
+    <Content Include="Resources\Scripts\uxmanager.min.js" />
     <Content Include="Resources\StyleSheets\app.css" />
     <Content Include="Extension.ascx" />
     <Content Include="Resources\StyleSheets\common.css" />
@@ -235,10 +253,6 @@
     <Reference Include="HtmlAgilityPack, Version=1.5.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\bin\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="LibSassHost, Version=1.2.10.0, Culture=neutral, PublicKeyToken=3e24e88796a38e46, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\bin\LibSassHost.dll</HintPath>
     </Reference>
     <ProjectReference Include="..\..\Common\Vanjaro.Common.csproj">
       <Project>{82603eb3-cfec-4101-837a-7581d3300540}</Project>
@@ -303,13 +317,11 @@
     <Content Include="Resources\Images\image.webp" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DoPackages\VanjaroUXManagerLibrary.bat" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DoPackages\bin\" />
+    <Folder Include="Resources\Scripts\GrapesJsManagers\img\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
+    <Content Include="Resources\Scripts\uxmanager.min.js.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -346,7 +358,7 @@
     <PreBuildEvent>if $(ConfigurationName) == Release cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\ &amp;&amp; npm install &amp;&amp; cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\node_modules\.bin\ &amp;&amp; webpack</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release start ..\DesktopModules\Vanjaro\UXManager\Library\DoPackages\VanjaroUXManagerLibrary.bat"</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release start ..\DesktopModules\Vanjaro\Core\Library\Packager\Packager.bat"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

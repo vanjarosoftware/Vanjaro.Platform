@@ -1,4 +1,4 @@
-﻿using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Security.Permissions;
@@ -69,16 +69,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.LogoAndTitle.Controllers
                     ControlName = HttpContext.Current.Request.Form.Get("logotype");
                 }
 
-                IFolderInfo fi = FolderManager.Instance.GetFolder(PortalSettings.Current.PortalId, "Images/");
-                
-                int FolderID = fi.FolderID;
                 if (ControlName == "FavIcon")
-                {
-                    result = BrowseUploadFactory.UploadFile(Identifier, HttpContext.Current, PortalSettings, new ModuleInfo(), UserInfo, isUploadAllowed(ActiveModule, UserInfo), "ico", 100, AppFactory.GetAppInformation().Name, uid, FolderID);
-                }
+                    result = BrowseUploadFactory.UploadFile(Identifier, HttpContext.Current, PortalSettings, new ModuleInfo(), UserInfo, isUploadAllowed(ActiveModule, UserInfo), "ico", 100, AppFactory.GetAppInformation().Name, uid);
+
                 else
                 {
-                    result = BrowseUploadFactory.UploadFile(Identifier, HttpContext.Current, PortalSettings, new ModuleInfo(), UserInfo, isUploadAllowed(ActiveModule, UserInfo), getFileTypes(settings), getMaxSize(Identifier, settings), AppFactory.GetAppInformation().Name, uid, FolderID);
+                    result = BrowseUploadFactory.UploadFile(Identifier, HttpContext.Current, PortalSettings, new ModuleInfo(), UserInfo, isUploadAllowed(ActiveModule, UserInfo), getFileTypes(settings), getMaxSize(Identifier, settings), AppFactory.GetAppInformation().Name, uid);
                 }
             }
             return result;
