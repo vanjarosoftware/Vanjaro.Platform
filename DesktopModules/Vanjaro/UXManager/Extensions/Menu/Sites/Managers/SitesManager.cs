@@ -82,8 +82,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             string Theme = Core.Managers.ThemeManager.GetCurrentThemeName();
             ExportTemplate exportTemplate = new ExportTemplate
             {
-                Guid = Guid.NewGuid().ToString(),
-                Type = TemplateType.SiteTemplate.ToString(),
+                Name = Name,
+                Type = TemplateType.Site.ToString(),
                 UpdatedOn = DateTime.UtcNow,
                 Templates = new List<Layout>(),
                 ThemeName = Theme,
@@ -145,7 +145,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 {
                     using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                     {
-                        AddZipItem("ExportTemplate.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
+                        AddZipItem("Template.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
 
                         //AddZipItem(ScreenShotFileInfo.FileName, ToByteArray(FileManager.Instance.GetFileContent(ScreenShotFileInfo)), zip);
 
@@ -177,7 +177,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                     }
                     fileBytes = memoryStream.ToArray();
                 }
-                string fileName = Name + "_SiteTemplate.zip";
+                string fileName = Name + "_Site.zip";
                 Response.Content = new ByteArrayContent(fileBytes.ToArray());
                 Response.Content.Headers.Add("x-filename", fileName);
                 Response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
