@@ -1,0 +1,23 @@
+name: Auto Assign to Project(s)
+
+on:
+  issues:
+    types: [labeled]
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  assign_one_project:
+    runs-on: ubuntu-latest
+    name: Assign to One Project
+    steps:
+    - name: Mark issues labeled Release as completed in triage project
+      uses: srggrs/assign-one-project-github-action@1.2.0
+      if: |
+        contains(github.event.issue.labels.*.name, 'Release: Major') ||
+        contains(github.event.issue.labels.*.name, 'Release: Minor') ||
+        contains(github.event.issue.labels.*.name, 'Release: Patch') ||
+        
+      with:
+        project: 'https://github.com/vanjarosoftware/Vanjaro.Platform/projects/3'
+        column_name: 'Completed'
