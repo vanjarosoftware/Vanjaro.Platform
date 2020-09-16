@@ -530,7 +530,7 @@ namespace Vanjaro.Core
                                 if (slider != null)
                                 {
                                     string value = GetGuidValue(themeEditorValues, slider);
-                                    sb.Append("<div class=\"field csslider optioncontrol \" id=" + item.Guid + "><label>" + slider.Title + "</label>  <span class=\"input-wrapper\"><input type=\"range\" value=" + value + " guid=" + slider.Guid + " name=" + slider.Title + " value=" + value + " min=" + slider.RangeMin + " max=" + slider.RangeMax + " /><input type=\"number\" guid=" + slider.Guid + " name=" + slider.Title + " value=" + value + " min=" + slider.RangeMin + " max=" + slider.RangeMax + "><span class=\"units\">" + slider.Suffix + "</span></span> " + GetCssMarkup(slider.Guid, slider.CustomCSS, slider.PreviewCSS, slider.LessVariable, item.Sass) + GetPvNotAvailableMarkup(slider.PreviewCSS) + "</div>");
+                                    sb.Append("<div class=\"field csslider optioncontrol\" id=" + item.Guid + "><label>" + slider.Title + "</label>  <span class=\"input-wrapper\"><input type=\"range\" value=" + value + " guid=" + slider.Guid + " name=" + slider.Title + " value=" + value + " min=" + slider.RangeMin + " max=" + slider.RangeMax + " /><input type=\"number\" guid=" + slider.Guid + " name=" + slider.Title + " value=" + value + " min=" + slider.RangeMin + " max=" + slider.RangeMax + "><span class=\"units\">" + slider.Suffix + "</span></span> " + GetCssMarkup(slider.Guid, slider.CustomCSS, slider.PreviewCSS, slider.LessVariable, item.Sass) + GetPvNotAvailableMarkup(slider.PreviewCSS) + "</div>");
                                 }
                             }
                             else if (ctl.Type == "Dropdown")
