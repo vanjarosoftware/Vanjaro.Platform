@@ -16,7 +16,7 @@ jobs:
       if: |
         contains(github.event.issue.labels.*.name, 'Release: Major') ||
         contains(github.event.issue.labels.*.name, 'Release: Minor') ||
-        contains(github.event.issue.labels.*.name, 'Release: Patch') ||
+        contains(github.event.issue.labels.*.name, 'Release: Patch')
         
       with:
         project: 'https://github.com/vanjarosoftware/Vanjaro.Platform/projects/3'
