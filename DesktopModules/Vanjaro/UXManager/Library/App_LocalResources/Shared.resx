@@ -199,7 +199,7 @@
     <value>Re-Import</value>
   </data>
   <data name="MigrateToastTitle.Text" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="MigrateYes.Text" xml:space="preserve">
     <value>Yes</value>
@@ -383,5 +383,14 @@
   </data>
   <data name="MigratePublishBtn.Text" xml:space="preserve">
     <value>Publish</value>
+  </data>
+  <data name="ExportMessage.Text" xml:space="preserve">
+    <value>You want to export template of </value>
+  </data>
+  <data name="Typography.Text" xml:space="preserve">
+    <value>Typography</value>
+  </data>
+  <data name="Yes.Text" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

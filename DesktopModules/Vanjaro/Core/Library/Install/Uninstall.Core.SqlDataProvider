@@ -38,3 +38,7 @@ GO
 /****** Object:  Table dbo.[VJ_Core_CustomBlock]    Script Date: 9/4/2019 4:14:01 PM ******/
 DROP TABLE {databaseOwner}[VJ_Core_WorkflowLog]
 GO
+/****** Object:  Table {databaseOwner}[PortalLocalization]    Script Date: 09/11/20 4:14:08 PM ******/
+Delete from {databaseOwner}[{objectQualifier}PortalSettings] where SettingName='IsVanjaroInstalled'
+GO
+

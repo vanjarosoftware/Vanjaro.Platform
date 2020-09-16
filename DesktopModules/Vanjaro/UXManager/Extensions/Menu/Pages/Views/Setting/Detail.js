@@ -68,7 +68,7 @@
     };
 });
 
-app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, SweetAlert, FileUploader, LocalizationServices) {
+app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, SweetAlert, FileUploader, LocalizationServices, $http) {
     $scope.pid = $routeParams["pid"] ? $routeParams["pid"] : 0;
     if ($scope.pid == 0) {
         $('.CreateNewPage').css('display', 'block');
@@ -133,6 +133,56 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
         if ($scope.Show_Tab) {
             $scope.Show_Tab = false;
         }
+    };
+
+    $scope.ExportLayout = function (option) {
+        event.preventDefault();
+        swal({
+            title: "[LS:Confirm]",
+            text: "[L:ExportMessage]" + option.Name,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#8CD4F5", confirmButtonText: "[LS:Yes]",
+            cancelButtonText: "[LS:Cancel]",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+            function (IsConfirm) {
+                if (IsConfirm) {
+                    $http({
+                        method: 'GET',
+                        url: window.location.origin + jQuery.ServicesFramework(-1).getServiceRoot('Pages') + "Pages/ExportLayout?Name=" + option.Name + "&IsSystem=" + option.IsSystem,
+                        responseType: 'arraybuffer',
+                        headers: {
+                            'ModuleId': -1,
+                            'TabId': parseInt($.ServicesFramework(-1).getTabId()),
+                            'RequestVerificationToken': $.ServicesFramework(-1).getAntiForgeryValue()
+                        }
+                    }).success(function (data, status, headers) {
+                        headers = headers();
+                        var filename = headers['x-filename'];
+                        var contentType = headers['content-type'];
+                        var linkElement = document.createElement('a');
+                        try {
+                            var blob = new Blob([data], { type: contentType });
+                            var url = window.URL.createObjectURL(blob);
+                            linkElement.setAttribute('href', url);
+                            linkElement.setAttribute("download", filename);
+                            var clickEvent = new MouseEvent("click", {
+                                "view": window,
+                                "bubbles": true,
+                                "cancelable": false
+                            });
+                            linkElement.dispatchEvent(clickEvent);
+                        } catch (ex) {
+                            alert(ex);
+                        }
+                    }).error(function (data) {
+                        alert(data);
+                    });
+                }
+            });
+        return false;
     };
 
     $scope.Click_ShowTab = function (type) {

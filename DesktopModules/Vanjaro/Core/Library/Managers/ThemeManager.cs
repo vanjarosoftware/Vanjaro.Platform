@@ -4,8 +4,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Web;
 using Vanjaro.Core.Components;
@@ -198,8 +200,31 @@ namespace Vanjaro.Core
                     CompilationResult result = SassCompiler.Compile(sb.ToString(), HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/"));
                     File.WriteAllText(ThemeCss, result.CompiledContent);
                     PortalController.IncrementCrmVersion(PortalID);
+
+                    UnloadSassCompiler();
                 }
             }
+
+            [DllImport("kernel32")]
+            private static extern bool FreeLibrary(IntPtr hModule);
+            /// <summary>
+            /// Frees libsass.dll so it can be replaced in Vanjaro Package Update. 
+            /// </summary>
+            public static void UnloadSassCompiler()
+            {
+                foreach (var p in Process.GetProcesses().Where(p => p.ProcessName.ToLower() == "w3wp"))
+                {
+                    foreach (ProcessModule mod in p.Modules)
+                    {
+                        if (mod.ModuleName.ToLower() == "libsass.dll")
+                        {
+                            FreeLibrary(mod.BaseAddress);
+                            break;
+                        }
+                    }
+                }
+            }
+
             public static void Save(string CategoryGuid, List<ThemeEditorValue> ThemeEditorValues)
             {
                 File.WriteAllText(GetThemeEditorValueJsonPath(PortalSettings.Current.PortalId, CategoryGuid), JsonConvert.SerializeObject(ThemeEditorValues));

@@ -4,14 +4,20 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using HtmlAgilityPack;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
 using Vanjaro.Core.Data.Entities;
+using Vanjaro.Core.Entities;
 using Vanjaro.Core.Entities.Interface;
 using Vanjaro.Core.Entities.Menu;
 using static Vanjaro.Core.Factories;
@@ -177,7 +183,7 @@ namespace Vanjaro.Core
                             sb.Append(" ").Append(item.Key).Append("=\"" + item.Value + "\"");
                         }
                     }
-                    sb.Append("></div>"); 
+                    sb.Append("></div>");
                     string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrentThemeName() + "/Blocks/" + Attributes["data-block-type"] + "/");
                     if (Directory.Exists(FolderPath))
                     {
@@ -338,7 +344,94 @@ namespace Vanjaro.Core
                 }
                 return Result;
             }
+            public static HttpResponseMessage ExportCustomBlock(int PortalID, string GUID)
+            {
+                HttpResponseMessage Response = new HttpResponseMessage();
+                CustomBlock customBlock = BlockManager.GetByLocale(PortalID, GUID, null);
+                if (customBlock != null)
+                {
+                    string Theme = Core.Managers.ThemeManager.GetCurrentThemeName();
+                    ExportTemplate exportTemplate = new ExportTemplate
+                    {
+                        Name = customBlock.Name,
+                        Type = TemplateType.Block.ToString(),
+                        UpdatedOn = DateTime.UtcNow,
+                        Templates = new List<Layout>(),
+                        ThemeName = Theme,
+                        ThemeGuid = "49A70BA1-206B-471F-800A-679799FF09DF"
+                    };
+                    Dictionary<string, string> Assets = new Dictionary<string, string>();
+                    Layout layout = new Layout();
+                    layout.Blocks = new List<CustomBlock>() { customBlock };
+                    if (layout.Blocks != null)
+                    {
+                        foreach (CustomBlock block in layout.Blocks)
+                        {
+                            if (!string.IsNullOrEmpty(block.Html))
+                                block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
+                            if (!string.IsNullOrEmpty(block.Css))
+                                block.Css = PageManager.DeTokenizeLinks(block.Css, PortalID);
+                        }
+                        CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
+                    }
+                    layout.Name = customBlock.Name;
+                    layout.Content = "";
+                    layout.SVG = "";
+                    layout.ContentJSON = "";
+                    layout.Style = "";
+                    layout.StyleJSON = "";
+                    layout.Type = "";
+                    exportTemplate.Templates.Add(layout);
+                    string serializedExportTemplate = JsonConvert.SerializeObject(exportTemplate);
+                    if (!string.IsNullOrEmpty(serializedExportTemplate))
+                    {
+                        byte[] fileBytes = null;
+                        using (MemoryStream memoryStream = new MemoryStream())
+                        {
+                            using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                            {
+                                AddZipItem("Template.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
 
+                                if (Assets != null && Assets.Count > 0)
+                                {
+                                    foreach (KeyValuePair<string, string> asset in Assets)
+                                    {
+                                        string FileName = asset.Key.Replace(PageManager.ExportTemplateRootToken, "");
+                                        string FileUrl = asset.Value;
+                                        if (FileUrl.StartsWith("/"))
+                                        {
+                                            FileUrl = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, FileUrl);
+                                        }
+                                        AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                    }
+                                }
+                            }
+                            fileBytes = memoryStream.ToArray();
+                        }
+                        string fileName = customBlock.Name + "_Block.zip";
+                        Response.Content = new ByteArrayContent(fileBytes.ToArray());
+                        Response.Content.Headers.Add("x-filename", fileName);
+                        Response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                        Response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                        {
+                            FileName = fileName
+                        };
+                        Response.StatusCode = HttpStatusCode.OK;
+                    }
+                }
+                return Response;
+            }
+            private static void AddZipItem(string zipItemName, byte[] zipData, ZipArchive zip)
+            {
+                ZipArchiveEntry zipItem = zip.CreateEntry(zipItemName);
+                using (MemoryStream originalFileMemoryStream = new MemoryStream(zipData))
+                {
+                    using (Stream entryStream = zipItem.Open())
+                    {
+                        originalFileMemoryStream.CopyTo(entryStream);
+                    }
+                }
+            }
             public static dynamic Delete(int PortalID, string GUID)
             {
                 dynamic Result = new ExpandoObject();

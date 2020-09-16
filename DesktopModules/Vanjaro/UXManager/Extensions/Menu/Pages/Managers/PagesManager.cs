@@ -18,7 +18,11 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
 using System.Web.Http;
@@ -390,7 +394,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         };
 
                         rolepermission.Permissions.Clear();
-                        foreach (Permission item in RolePerm.Permissions)
+                        foreach (Permission item in RolePerm.Permissions.Where(x => x.AllowAccess))
                         {
                             Dnn.PersonaBar.Library.DTO.Permission permission = new Dnn.PersonaBar.Library.DTO.Permission
                             {
@@ -399,7 +403,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                                 View = item.View,
                                 AllowAccess = item.AllowAccess
                             };
-
                             rolepermission.Permissions.Add(permission);
                         }
 
@@ -516,11 +519,115 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
 
                 }
             }
+            internal static HttpResponseMessage ExportLayout(int portalID, string name, bool isSystem)
+            {
+                HttpResponseMessage Response = new HttpResponseMessage();
+                Layout baseLayout = GetLayouts().Where(l => l.IsSystem == isSystem && l.Name.ToLower() == name.ToLower()).FirstOrDefault();
+                if (baseLayout != null)
+                {
+                    string Theme = Core.Managers.ThemeManager.GetCurrentThemeName();
+                    ExportTemplate exportTemplate = new ExportTemplate
+                    {
+                        Name = name,
+                        Type = TemplateType.Page.ToString(),
+                        UpdatedOn = DateTime.UtcNow,
+                        Templates = new List<Layout>(),
+                        ThemeName = Theme,
+                        ThemeGuid = "49A70BA1-206B-471F-800A-679799FF09DF"
+                    };
+                    Dictionary<string, string> Assets = new Dictionary<string, string>();
+                    Layout layout = new Layout
+                    {
+                        Content = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.Content, portalID), false, Assets)
+                    };
+                    HtmlDocument html = new HtmlDocument();
+                    html.LoadHtml(layout.Content);
+                    IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
+                    foreach (HtmlNode item in query.ToList())
+                    {
+                        if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault() != null && !string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value) && item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value.ToLower() == "global")
+                        {
+                            string guid = item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value.ToLower();
+                            CustomBlock Block = BlockManager.GetByLocale(portalID, guid, null);
+                            if (Block != null)
+                            {
+                                if (layout.Blocks == null)
+                                {
+                                    layout.Blocks = new List<CustomBlock>();
+                                }
+                                layout.Blocks.Add(Block);
+                            }
+                        }
+                    }
+                    if (layout.Blocks != null)
+                    {
+                        foreach (CustomBlock block in layout.Blocks)
+                        {
+                            if (!string.IsNullOrEmpty(block.Html))
+                                block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, portalID), false, Assets);
+                            if (!string.IsNullOrEmpty(block.Css))
+                                block.Css = PageManager.DeTokenizeLinks(block.Css, portalID);
+                        }
+                        Core.Factories.CacheFactory.Clear(Core.Factories.CacheFactory.GetCacheKey(Core.Factories.CacheFactory.Keys.CustomBlock + "ALL", portalID));
+                    }
+                    layout.Name = name;
+                    layout.Content = html.DocumentNode.OuterHtml;
+                    layout.SVG = "";
+                    layout.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.ContentJSON, portalID), true, Assets);
+                    layout.Style = PageManager.DeTokenizeLinks(baseLayout.Style.ToString(), portalID);
+                    layout.StyleJSON = PageManager.DeTokenizeLinks(baseLayout.StyleJSON.ToString(), portalID);
+                    layout.Type = baseLayout.Type;
+                    exportTemplate.Templates.Add(layout);
+                    string serializedExportTemplate = JsonConvert.SerializeObject(exportTemplate);
+                    if (!string.IsNullOrEmpty(serializedExportTemplate))
+                    {
+                        byte[] fileBytes = null;
+                        using (MemoryStream memoryStream = new MemoryStream())
+                        {
+                            using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                            {
+                                AddZipItem("Template.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
 
-
-
-
-
+                                if (Assets != null && Assets.Count > 0)
+                                {
+                                    foreach (KeyValuePair<string, string> asset in Assets)
+                                    {
+                                        string FileName = asset.Key.Replace(PageManager.ExportTemplateRootToken, "");
+                                        string FileUrl = asset.Value;
+                                        if (FileUrl.StartsWith("/"))
+                                        {
+                                            FileUrl = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, FileUrl);
+                                        }
+                                        AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                    }
+                                }
+                            }
+                            fileBytes = memoryStream.ToArray();
+                        }
+                        string fileName = name + "_Page.zip";
+                        Response.Content = new ByteArrayContent(fileBytes.ToArray());
+                        Response.Content.Headers.Add("x-filename", fileName);
+                        Response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                        Response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                        {
+                            FileName = fileName
+                        };
+                        Response.StatusCode = HttpStatusCode.OK;
+                    }
+                }
+                return Response;
+            }
+            private static void AddZipItem(string zipItemName, byte[] zipData, ZipArchive zip)
+            {
+                ZipArchiveEntry zipItem = zip.CreateEntry(zipItemName);
+                using (MemoryStream originalFileMemoryStream = new MemoryStream(zipData))
+                {
+                    using (Stream entryStream = zipItem.Open())
+                    {
+                        originalFileMemoryStream.CopyTo(entryStream);
+                    }
+                }
+            }
             private static void ProcessBlocks(int PortalId, List<CustomBlock> Blocks)
             {
                 if (Blocks != null)

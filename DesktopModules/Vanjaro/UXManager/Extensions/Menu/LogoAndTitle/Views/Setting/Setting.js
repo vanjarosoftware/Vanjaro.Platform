@@ -1,4 +1,4 @@
-﻿app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http, CommonSvc, SweetAlert, FileUploader) {
+app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http, CommonSvc, SweetAlert, FileUploader) {
     var common = CommonSvc.getData($scope);
     $scope.LogoFile = new FileUploader();
     $scope.FavIcon = new FileUploader();
@@ -122,7 +122,7 @@
                 }, 100);
             });
 
-            $('[ng-click="LogoFileClick_FileUpoad(\'upload\')"]').on("click", function () {
+            $('[ng-click="LogoFileClick_FileUpoad(\'upload\')"]').on("click", function () {                
                 $scope.ui.data.Uid.Value = "LogoFile";
                 $scope.LogoFile.url = $scope.LogoFile.url + '&uid=' + $scope.ui.data.Uid.Value;
             });
@@ -230,18 +230,22 @@
 
     $scope.LogoFileUpload.onBeforeUploadItem = function (item) {
         item.formData[0].logotype = $scope.ui.data.Uid.Value;
+        item.formData[0].folder = $('[identifier="setting_setting"]').find('[data-name="LogoFile"]').find('.folders[style="font-weight: bold;"]').attr('id').replace('folders', '');
     };
 
     $scope.SocialSharingLogoUpload.onBeforeUploadItem = function (item) {
         item.formData[0].logotype = $scope.ui.data.Uid.Value;
+        item.formData[0].folder = $('[identifier="setting_setting"]').find('[data-name="SocialSharingLogo"]').find('.folders[style="font-weight: bold;"]').attr('id').replace('folders', '');
     };
 
     $scope.HomeScreenIconUpload.onBeforeUploadItem = function (item) {
         item.formData[0].logotype = $scope.ui.data.Uid.Value;
+        item.formData[0].folder = $('[identifier="setting_setting"]').find('[data-name="HomeScreenIcon"]').find('.folders[style="font-weight: bold;"]').attr('id').replace('folders', '');
     };
 
     $scope.FavIconUpload.onBeforeUploadItem = function (item) {
         item.formData[0].logotype = $scope.ui.data.Uid.Value;
+        item.formData[0].folder = $('[identifier="setting_setting"]').find('[data-name="FavIcon"]').find('.folders[style="font-weight: bold;"]').attr('id').replace('folders', '');       
     };
 
     $scope.Click_ShowTab = function (type) {
@@ -332,6 +336,7 @@
                 });
             }
         }
+        $('[identifier="setting_setting"]').find('[data-name="LogoFile"]').find('.folders[style="font-weight: bold;"]').click();
     };
 
     $scope.$watch('LogoFile.selectqueue', function (newValue, oldValue) {
@@ -392,6 +397,7 @@
                 });
             }
         }
+        $('[identifier="setting_setting"]').find('[data-name="FavIcon"]').find('.folders[style="font-weight: bold;"]').click();
     };
 
     $scope.$watch('FavIcon.selectqueue', function (newValue, oldValue) {
@@ -452,6 +458,7 @@
                 });
             }
         }
+        $('[identifier="setting_setting"]').find('[data-name="SocialSharingLogo"]').find('.folders[style="font-weight: bold;"]').click();
     };
 
     $scope.$watch('SocialSharingLogo.selectqueue', function (newValue, oldValue) {
@@ -513,6 +520,7 @@
                 });
             }
         }
+        $('[identifier="setting_setting"]').find('[data-name="HomeScreenIcon"]').find('.folders[style="font-weight: bold;"]').click();
     };
 
     $scope.$watch('HomeScreenIcon.selectqueue', function (newValue, oldValue) {

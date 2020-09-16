@@ -226,7 +226,7 @@
                                       ng-click="Click_Clear()" />
                 </div>
             </uitemplate>
-            <uielement name="UserRoles" control="grid" pagesize="20" paged="true" displayedpages="5" search="true" label="false" attr-class="table-responsive table-grid UserRole" attr-st-pipe="Pipe_UserRolePagging">
+            <uielement name="UserRoles" control="grid" pagesize="20" paged="true" displayedpages="5" attr-access-roles="admin" search="true" label="false" attr-class="table-responsive table-grid UserRole" attr-st-pipe="Pipe_UserRolePagging">
                 <column name="RoleName" width="43">
                     <uitemplate>
                         <div class="rolename">{{row.roleName}}</div>
