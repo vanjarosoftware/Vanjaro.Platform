@@ -10,6 +10,7 @@ using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 using static Vanjaro.UXManager.Library.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Theme.Controllers
@@ -23,7 +24,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Theme.Controllers
             {
                 { "Theme", new UIData { Name = "Theme", Options = GetAllThemes(PortalSettings) } }
             };
-            string ThemeBuilderUrl = PageManager.GetCurrentTabUrl(PortalSettings) + "?mid=0&icp=true&guid=726c5619-e193-4605-acaf-828576ba095a";
+            string ThemeBuilderUrl = Library.Managers.PageManager.GetCurrentTabUrl(PortalSettings) + "?mid=0&icp=true&guid=726c5619-e193-4605-acaf-828576ba095a";
             Settings.Add("ThemeBuilderUrl", new UIData { Name = "ThemeBuilderUrl", Value = ThemeBuilderUrl });
             return Settings.Values.ToList();
         }
@@ -68,7 +69,17 @@ namespace Vanjaro.UXManager.Extensions.Menu.Theme.Controllers
         [ValidateAntiForgeryToken]
         public void Update(string Theme)
         {
-            Core.Managers.SettingManager.UpdateValue(PortalSettings.PortalId, -1, "setting_theme", "Theme", Theme);
+            if (!string.IsNullOrEmpty(Theme))
+            {
+                string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Theme + "/editor");
+                Core.Managers.SettingManager.Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", PortalSettings.PortalId.ToString()));
+                try
+                {
+                    ThemeManager.ProcessScss(PortalSettings.PortalId);
+                }
+                catch (System.Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
+                Core.Managers.SettingManager.UpdateValue(PortalSettings.PortalId, -1, "setting_theme", "Theme", Theme);
+            }
         }
 
         public override string AccessRoles()

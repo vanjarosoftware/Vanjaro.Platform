@@ -148,7 +148,7 @@ namespace Vanjaro.Core
                 return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
 
-            internal static void Copy(string sourceDirectory, string targetDirectory)
+            public static void Copy(string sourceDirectory, string targetDirectory)
             {
                 DirectoryInfo diSource = new DirectoryInfo(sourceDirectory);
                 DirectoryInfo diTarget = new DirectoryInfo(targetDirectory);
