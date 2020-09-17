@@ -212,9 +212,9 @@ namespace Vanjaro.Core
             /// </summary>
             public static void UnloadSassCompiler()
             {
-                foreach (var p in Process.GetProcesses().Where(p => p.ProcessName.ToLower() == "w3wp"))
+                try
                 {
-                    foreach (ProcessModule mod in p.Modules)
+                    foreach (ProcessModule mod in Process.GetCurrentProcess().Modules)
                     {
                         if (mod.ModuleName.ToLower() == "libsass.dll")
                         {
@@ -223,6 +223,8 @@ namespace Vanjaro.Core
                         }
                     }
                 }
+                catch { }
+
             }
 
             public static void Save(string CategoryGuid, List<ThemeEditorValue> ThemeEditorValues)
