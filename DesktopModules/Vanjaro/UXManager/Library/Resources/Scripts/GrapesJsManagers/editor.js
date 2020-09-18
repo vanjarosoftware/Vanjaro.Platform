@@ -855,9 +855,13 @@ $(document).ready(function () {
                             });
 
                             VjEditor.on('load', function () {
-                                LoadApps();
+
+                                if (data.InitTabGrapesjs) {
+                                    LoadApps();
+                                    LoadDesignBlocks();
+                                }
+
                                 LoadCustomBlocks();
-                                LoadDesignBlocks();
                                 VjEditor.UndoManager.start();
                                 if (VJIsPageDraft == "False" || VJIsLocked == "True")
                                     $('#VJBtnPublish').addClass('disabled');

@@ -7,41 +7,38 @@
         <em class='fa fa-chevron-right'></em>
     </a>
     <div class='panel'>
-        @if (Model.Setting.ShowUXManagerToolbar)
-        {
-            <div class='panelheader'>
-                <div class='row m-0'>
-                    <div class='col-4' style='padding-left: 0;'>
-                        <a class='btn blockItem settings' href='#MenuSettings' onclick="document.getElementById('uxm-search').value = ''">
-                            <em class='fa fa-bars'></em>
+        <div class='panelheader'>
+            <div class='row m-0'>
+                <div class='col-4' style='padding-left: 0;'>
+                    <a class='btn blockItem settings' href='#MenuSettings' onclick="document.getElementById('uxm-search').value = ''">
+                        <em class='fa fa-bars'></em>
+                    </a>
+                    @if (Model.Setting.HasTabEditPermission)
+                    {
+                        <a class='btn blockItem active' href='#ContentBlocks'>
+                            <em class='fas fa-cubes'></em>
                         </a>
-                        @if (Model.Setting.HasTabEditPermission)
-                        {
-                            <a class='btn blockItem active' href='#ContentBlocks'>
-                                <em class='fas fa-cubes'></em>
-                            </a>
-                        }
-                    </div>
-                    <div class='col-4' style='padding: 0;text-align:center;'>
-                        <a class="About" onclick="@Model.Setting.AboutUrl" href="#About">
-                            <img class='logoimg' src='@Model.Setting.Logo' alt='vanjaro'>
+                    }
+                </div>
+                <div class='col-4' style='padding: 0;text-align:center;'>
+                    <a class="About" onclick="@Model.Setting.AboutUrl" href="#About">
+                        <img class='logoimg' src='@Model.Setting.Logo' alt='vanjaro'>
+                    </a>
+                </div>
+                <div class='col-4 block-elements text-left' style='padding-right: 0;padding-left: 0;'>
+                    <a class='btn blockItem Messages' guid='CD8C127F-DA66-4036-B107-90061361CF87'>
+                        <em class='fas fa-bell'></em>
+                        <sup class='notifycount' id="VJnotifycount">@Model.Setting.NotificationCount</sup>
+                    </a>
+                    @if (Model.Setting.HasTabEditPermission && Model.Setting.HasShortcut)
+                    {
+                        <a class='btn Shortcut' href='#Shortcuts'>
+                            <em class='fa fa-plus'></em>
                         </a>
-                    </div>
-                    <div class='col-4 block-elements text-left' style='padding-right: 0;padding-left: 0;'>
-                        <a class='btn blockItem Messages' guid='CD8C127F-DA66-4036-B107-90061361CF87'>
-                            <em class='fas fa-bell'></em>
-                            <sup class='notifycount' id="VJnotifycount">@Model.Setting.NotificationCount</sup>
-                        </a>
-                        @if (Model.Setting.HasTabEditPermission && Model.Setting.HasShortcut)
-                        {
-                            <a class='btn Shortcut' href='#Shortcuts'>
-                                <em class='fa fa-plus'></em>
-                            </a>
-                        }
-                    </div>
+                    }
                 </div>
             </div>
-        }
+        </div>
         <div class='styletool-manager' id='StyleToolManager'>
             <div class='managetab'>
                 <div class='traitstab uitab traitmanage active'>
@@ -70,7 +67,7 @@
                     <div class='blockstabview'>
                         <div class='elementtab uitab blockstab active'><a><em class='fas fa-cube'></em><br />[LS:Blocks]</a></div>
                         <div class='customtab uitab blockstab'><a><em class='fas fa-box'></em><br />[LS:Custom]</a></div>
-                        @if (Model.Setting.ShowUXManagerToolbar)
+                        @if (Model.Setting.InitTabGrapesjs)
                         {
                             <div class='globaltab uitab blockstab'><a><em class='fas fa-globe'></em><br />[LS:Global]</a></div>
                         }
@@ -114,18 +111,17 @@
         </div>
 
         @Html.Raw(Model.Setting.LanguageMarkUp)
-
-        <div class='panelfooter'>
-            @if (Model.Setting.HasTabEditPermission)
-            {
+        @if (Model.Setting.HasTabEditPermission)
+        {
+            <div class='panelfooter'>
                 @Html.Raw(Model.Setting.ToolbarMarkUp)
                 <ul class='toolmanager'>
                     <li class='publish'>
                         <a id='VJBtnPublish' class='btn btn disabled pubish-btn'>[LS:Publish]</a>
                     </li>
                 </ul>
-            }
-        </div>
+            </div>
+        }
     </div>
     @if (Model.Setting.HasShortcut)
     {

@@ -18,12 +18,12 @@ namespace Vanjaro.UXManager.Library
                 VjObjects.SetURL = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/save'";
                 VjObjects.GetURL = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/get'";
                 VjObjects.Container = "#VjContentPane";
-                VjObjects.ShowUXManagerToolbar = true;
+                VjObjects.InitTabGrapesjs = true;
                 VjObjects.ModuleId = -1;
             }
             else
             {
-                NewVjObjects.ShowUXManagerToolbar = false;
+                NewVjObjects.InitTabGrapesjs = false;
                 VjObjects = NewVjObjects;
             }
         }
