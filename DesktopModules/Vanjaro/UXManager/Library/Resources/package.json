@@ -36,7 +36,7 @@
     "webpack-dev-server": "3.11.0"
   },
   "dependencies": {
-    "grapesjs": "^0.15.9",
+    "grapesjs": "^0.16.22",
     "grapesjs-plugin-export": "^0.1.5",
     "grapesjs-style-filter": "^0.1.1",
     "grapesjs-style-gradient": "^1.0.5",

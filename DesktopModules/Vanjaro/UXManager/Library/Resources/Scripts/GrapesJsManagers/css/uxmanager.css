@@ -3144,3 +3144,12 @@ div#gjs-sm-top, div#gjs-sm-right, div#gjs-sm-left, div#gjs-sm-bottom {
     -o-animation: driftBlock 4s linear infinite;
     animation: driftBlock 4s linear infinite;
 }
+
+.gjs-frame-wrapper {
+    position: relative;
+    height: 100%;
+    margin: auto;
+}
+.gjs-frames {
+    height: 100%;
+}
