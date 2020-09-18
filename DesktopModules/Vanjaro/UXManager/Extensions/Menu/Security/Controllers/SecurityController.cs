@@ -53,7 +53,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
             {
                 new TreeView() { Text = "Default", Value = -1 }
             };
-            DefaultFolders.AddRange(BrowseUploadFactory.GetFolders(portalSettings.PortalId));
+            DefaultFolders.AddRange(BrowseUploadFactory.GetFolders(portalSettings.PortalId).Where(f => !f.Text.Contains(".versions")));
             Settings.Add("Picture_DefaultFolder", new UIData { Name = "Picture_DefaultFolder", Options = DefaultFolders, Value = Core.Managers.SettingManager.GetValue(portalSettings.PortalId, 0, Identifier.security_settings.ToString(), "Picture_DefaultFolder", AppFactory.GetViews()) });
             Settings.Add("Video_DefaultFolder", new UIData { Name = "Video_DefaultFolder", Options = DefaultFolders, Value = Core.Managers.SettingManager.GetValue(portalSettings.PortalId, 0, Identifier.security_settings.ToString(), "Video_DefaultFolder", AppFactory.GetViews()) });
             Settings.Add("Picture_MaxUploadSize", new UIData { Name = "Picture_MaxUploadSize", Value = Core.Managers.SettingManager.GetValue(portalSettings.PortalId, 0, Identifier.security_settings.ToString(), "Picture_MaxUploadSize", AppFactory.GetViews()) });
@@ -66,6 +66,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
                 Settings.Add("AsyncTimeout", new UIData { Name = "AsyncTimeout", Value = Host.AsyncTimeout.ToString() });
                 Settings.Add("FileExtensions", new UIData { Name = "FileExtensions", Value = Host.AllowedExtensionWhitelist.ToStorageString() });
                 Settings.Add("MaxUploadSize", new UIData { Name = "MaxUploadSize", Value = (Config.GetMaxUploadSize() / (1024 * 1024)).ToString() });
+                Settings.Add("DefaultEndUserExtensionWhitelist", new UIData { Name = "DefaultEndUserExtensionWhitelist", Value = Host.DefaultEndUserExtensionWhitelist.ToStorageString() });
             }
             Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Value = userInfo.IsSuperUser.ToString() });
             return Settings.Values.ToList();
@@ -165,6 +166,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
                 HostController.Instance.Update("AutoAccountUnlockDuration", request.AutoAccountUnlockDuration.Value.ToString(), false);
                 HostController.Instance.Update("AsyncTimeout", request.AsyncTimeout.Value.ToString(), false);
                 HostController.Instance.Update("FileExtensions", SecurityManager.ValidateFileExtension(request.FileExtensions.Value.ToString()), false);
+                HostController.Instance.Update("DefaultEndUserExtensionWhitelist", SecurityManager.ValidateFileExtension(request.DefaultEndUserExtensionWhitelist.Value.ToString()), false);
 
                 long maxCurrentRequest = Config.GetMaxUploadSize();
                 dynamic maxUploadByMb = request.MaxUploadSize.Value * 1024 * 1024;

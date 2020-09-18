@@ -4,8 +4,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Web;
 using Vanjaro.Core.Components;
@@ -198,8 +200,33 @@ namespace Vanjaro.Core
                     CompilationResult result = SassCompiler.Compile(sb.ToString(), HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/"));
                     File.WriteAllText(ThemeCss, result.CompiledContent);
                     PortalController.IncrementCrmVersion(PortalID);
+
+                    UnloadSassCompiler();
                 }
             }
+
+            [DllImport("kernel32")]
+            private static extern bool FreeLibrary(IntPtr hModule);
+            /// <summary>
+            /// Frees libsass.dll so it can be replaced in Vanjaro Package Update. 
+            /// </summary>
+            public static void UnloadSassCompiler()
+            {
+                try
+                {
+                    foreach (ProcessModule mod in Process.GetCurrentProcess().Modules)
+                    {
+                        if (mod.ModuleName.ToLower() == "libsass.dll")
+                        {
+                            FreeLibrary(mod.BaseAddress);
+                            break;
+                        }
+                    }
+                }
+                catch { }
+
+            }
+
             public static void Save(string CategoryGuid, List<ThemeEditorValue> ThemeEditorValues)
             {
                 File.WriteAllText(GetThemeEditorValueJsonPath(PortalSettings.Current.PortalId, CategoryGuid), JsonConvert.SerializeObject(ThemeEditorValues));
@@ -505,7 +532,7 @@ namespace Vanjaro.Core
                                 if (slider != null)
                                 {
                                     string value = GetGuidValue(themeEditorValues, slider);
-                                    sb.Append("<div class=\"field csslider optioncontrol \" id=" + item.Guid + "><label>" + slider.Title + "</label>  <span class=\"input-wrapper\"><input type=\"range\" value=" + value + " guid=" + slider.Guid + " name=" + slider.Title + " value=" + value + " min=" + slider.RangeMin + " max=" + slider.RangeMax + " /><input type=\"number\" guid=" + slider.Guid + " name=" + slider.Title + " value=" + value + " min=" + slider.RangeMin + " max=" + slider.RangeMax + "><span class=\"units\">" + slider.Suffix + "</span></span> " + GetCssMarkup(slider.Guid, slider.CustomCSS, slider.PreviewCSS, slider.LessVariable, item.Sass) + GetPvNotAvailableMarkup(slider.PreviewCSS) + "</div>");
+                                    sb.Append("<div class=\"field csslider optioncontrol\" id=" + item.Guid + "><label>" + slider.Title + "</label>  <span class=\"input-wrapper\"><input type=\"range\" value=" + value + " guid=" + slider.Guid + " name=" + slider.Title + " value=" + value + " min=" + slider.RangeMin + " max=" + slider.RangeMax + " /><input type=\"number\" guid=" + slider.Guid + " name=" + slider.Title + " value=" + value + " min=" + slider.RangeMin + " max=" + slider.RangeMax + "><span class=\"units\">" + slider.Suffix + "</span></span> " + GetCssMarkup(slider.Guid, slider.CustomCSS, slider.PreviewCSS, slider.LessVariable, item.Sass) + GetPvNotAvailableMarkup(slider.PreviewCSS) + "</div>");
                                 }
                             }
                             else if (ctl.Type == "Dropdown")

@@ -1245,7 +1245,7 @@ namespace Vanjaro.Common.Factories
                     FileName = TempFileName;
                     IFileInfo fileInfo = FileManager.Instance.AddFile(folderInfo, FileName, file.InputStream);
 
-                    if (FileManager.Instance.IsImageFile(fileInfo))
+                    if (Utils.IsImageVersionable(fileInfo))
                     {
                         file.InputStream.Seek(0, SeekOrigin.Begin);
                         CropImage(FileName, FileExtension, folderInfo, file.InputStream);

@@ -106,6 +106,7 @@
 					input.setAttribute('type', 'number');
 					input.setAttribute('class', 'custominput');
 					input.setAttribute('changeProperty', value.CSS);
+					input.setAttribute('value', 0);
 
 					const selectunit = document.createElement('select');
 					selectunit.setAttribute('class', 'unitselect');
