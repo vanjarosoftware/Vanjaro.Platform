@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="6.0">
 	<packages>
-		<package name="Vanjaro" type="Library" version="00.05.01">
+		<package name="Vanjaro" type="Library" version="00.05.02">
 			<friendlyName>Vanjaro</friendlyName>
 			<description>Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN.</description>
 			<dependencies>

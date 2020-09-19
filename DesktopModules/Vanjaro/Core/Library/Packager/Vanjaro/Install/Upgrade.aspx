@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Upgrade.aspx.cs" Inherits="Vanjaro.Core.Packager.Vanjaro.Upgrade" %>

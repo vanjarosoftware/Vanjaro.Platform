@@ -537,7 +537,7 @@ del UpgradeTemp_DNN /Q >NUL 2>&1
 mkdir UpgradeTemp_DNN >NUL
 xcopy /e /i "DNN Upgrade"\* UpgradeTemp_DNN\*  /Y >NUL
 
-::Need to copy the Core DLL to Upgrade Package for Upgrade Page (Install.aspx) to kick off
+::Need to copy the Core DLL to Upgrade Package for Upgrade Page (Upgrade.aspx) to kick off
 copy ..\..\..\..\..\bin\Vanjaro.Core.dll UpgradeTemp_DNN\bin >NUL
 
 cd UpgradeTemp_DNN\
@@ -652,34 +652,21 @@ cd ..\
 rmdir UpgradeTemp_DNN /s /q >NUL 2>&1
 rmdir Temp_DNN /s /q >NUL 2>&1
 
+
+"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\Install\Upgrade.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\install\Upgrade.aspx Install/Upgrade.aspx >NUL
+
+"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\Install\Upgrade.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\install\Upgrade.aspx Install/Upgrade.aspx >NUL
+
+
 echo.
 echo.
-SET /P HasDNNChanged=Has DNN Version Changed (Y/[N])? 
-IF /I "%HasDNNChanged%" NEQ "Y" GOTO :CopyInstall
-cls
 echo. 
-echo All Packages Created w/ DNN Upgrade
+echo All Packages Created!
 echo. 
 SET /P AnyKeyExit=Please any key to terminate
 
 :END
 endlocal
-exit
-
-:CopyInstall
-@echo off
-
-"C:\Program Files\7-Zip\7z.exe" d Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Install/Install.aspx >NUL
-"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\Install\Install.aspx >NUL
-"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\install\Install.aspx Install/Install.aspx >NUL
-
-"C:\Program Files\7-Zip\7z.exe" d Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Install/Install.aspx >NUL
-"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\Install\Install.aspx >NUL
-"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\install\Install.aspx Install/Install.aspx >NUL
-
-cls
-echo. 
-echo All Packages Created w/out DNN Upgrade
-echo. 
-SET /P AnyKeyExit=Please any key to terminate
 exit
