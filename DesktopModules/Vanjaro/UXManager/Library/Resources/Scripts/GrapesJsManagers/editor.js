@@ -8,7 +8,7 @@ global.VJIsSaveCall = true;
 global.VJLocalBlocksMarkup = '';
 global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
-global.GrapesjsInitData;
+global.vjEditorSettings;
 global.IsVJEditorSaveCall;
 
 $(document).ready(function () {
@@ -156,7 +156,7 @@ $(document).ready(function () {
 
     global.GrapesjsInit = function (data) {
 
-        global.GrapesjsInitData = data;
+        global.vjEditorSettings = data;
 
         if (getCookie("InitGrapejs") == "" || getCookie("InitGrapejs") == "true") {
             if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
@@ -855,9 +855,13 @@ $(document).ready(function () {
                             });
 
                             VjEditor.on('load', function () {
-                                LoadApps();
+
+                                if (data.EditPage) {
+                                    LoadApps();
+                                    LoadDesignBlocks();
+                                }
+
                                 LoadCustomBlocks();
-                                LoadDesignBlocks();
                                 VjEditor.UndoManager.start();
                                 if (VJIsPageDraft == "False" || VJIsLocked == "True")
                                     $('#VJBtnPublish').addClass('disabled');
@@ -2213,7 +2217,7 @@ $(document).ready(function () {
             $('#dnn_ContentPane').addClass("sidebar-open").removeClass('sidebar-close');
             $('.sidebar').animate({ "left": "0" }, "fast").removeClass('settingclosebtn');
             $('.panel-top, .add-custom , #ContentBlocks').show();
-            window.GrapesjsInit(global.GrapesjsInitData);
+            window.GrapesjsInit(global.vjEditorSettings);
             DestroyAppActionMenu();
         });
     };

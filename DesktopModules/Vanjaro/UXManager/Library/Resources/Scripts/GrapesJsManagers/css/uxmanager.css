@@ -73,7 +73,7 @@ li.openbtn {
 
 /*Content Pane*/
 
-.gjs-editor-cont {
+#vjEditor {
     position: absolute;
     top: 0;
     bottom: 0;
