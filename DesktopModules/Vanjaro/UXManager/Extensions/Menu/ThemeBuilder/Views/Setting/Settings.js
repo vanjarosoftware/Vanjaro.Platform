@@ -4,7 +4,15 @@
 
     $scope.HasChanges = false;
 
+    function sliderInputChange(){
+        $('#dvMarkUp').find('[guid]').on("change", function () {
+            $(this).siblings("input[type='range']").val(this.value);
+            $scope.ApplyChanges(this);
+        });
+    }
+
     $scope.onInit = function () {
+        sliderInputChange();
         $scope.ApplyColorPicker();
         setTimeout(function () {
             $compile($('#dvMarkUp'))($scope);
@@ -12,7 +20,7 @@
                 $scope.ApplyChanges(this);
             });
             $('#dvMarkUp').find('[guid]').on("input", function () {
-                $(this).siblings("input[type='number']").val(this.value);
+                $(this).siblings("input[type='number']").val(this.value);            
                 $scope.ApplyChanges(this);
             });
         }, 500);
@@ -157,6 +165,7 @@
                     $('[guid="' + v.Guid + '"]').val(v.Value);
                 });
             }
+            sliderInputChange();
         }, 100);
     };
 

@@ -287,7 +287,7 @@ namespace Vanjaro.Skin
                 {
                     ClassName += " m2vDisplayNone";
                 }
-                ContentPane.Controls.Add(ParseControl("<div class=\"" + ClassName + "\"><div id=\"VjContentPane\">" + InjectModules(html.DocumentNode.OuterHtml) + "</div></div>"));
+                ContentPane.Controls.Add(ParseControl("<div class=\"" + ClassName + "\"><div id=\"vjEditor\">" + InjectModules(html.DocumentNode.OuterHtml) + "</div></div>"));
                 InjectLoginAuthentication();
             }
             else

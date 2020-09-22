@@ -5,7 +5,7 @@ namespace Vanjaro.Core.Entities
 {
     public class ExportTemplate
     {
-        public string Guid { get; set; }
+        public string Name { get; set; }
         public string Type { get; set; }
         public string ThemeGuid { get; set; }
         public string ThemeName { get; set; }
@@ -14,8 +14,8 @@ namespace Vanjaro.Core.Entities
     }
     public enum TemplateType
     {
-        SiteTemplate,
-        PageTemplate,
-        BlockTemplate
+        Site,
+        Page,
+        Block
     }
 }

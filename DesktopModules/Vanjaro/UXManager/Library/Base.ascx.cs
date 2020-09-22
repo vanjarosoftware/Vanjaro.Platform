@@ -39,7 +39,7 @@ namespace Vanjaro.UXManager.Library
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            if (IsAllowed())
+            if (CanShowUXManager())
             {
                 ServicesFramework.Instance.RequestAjaxScriptSupport();
                 ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
@@ -58,7 +58,7 @@ namespace Vanjaro.UXManager.Library
                 m2v = Convert.ToBoolean(Request.QueryString["m2v"]);
             }
 
-            if (IsAllowed())
+            if (CanShowUXManager())
             {
                 if (string.IsNullOrEmpty(Request.QueryString["ctl"]) && (string.IsNullOrEmpty(Request.QueryString["icp"]) || Convert.ToBoolean(Request.QueryString["icp"]) == false))
                 {
@@ -94,14 +94,19 @@ namespace Vanjaro.UXManager.Library
                     }
 
                     WebForms.LinkCSS(Page, "UXManagerAppCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/StyleSheets/app.css"));
-                    WebForms.LinkCSS(Page, "GrapesJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapes.min.css"));
-                    WebForms.LinkCSS(Page, "GrapickJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapick.min.css"));
+
+                    if (InjectEditor())
+                    {
+                        WebForms.LinkCSS(Page, "GrapesJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapes.min.css"));
+                        WebForms.LinkCSS(Page, "GrapickJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapick.min.css"));
+                        WebForms.LinkCSS(Page, "GrapesJsPanelCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/jsPanel/jspanel.min.css"));
+                    }
+
                     WebForms.RegisterClientScriptInclude(Page, "GrapesJsJs", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/uxmanager.min.js"), false);
-                    WebForms.LinkCSS(Page, "GrapesJsPanelCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/jsPanel/jspanel.min.css"));
                     WebForms.LinkCSS(Page, "GrapesJspluginCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJsManagers/css/uxmanager.css"));
                     WebForms.LinkCSS(Page, "FontawesomeV4Css", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/fontawesome/v4.css"));
 
-                    if (!IsAllowed())
+                    if (!CanShowUXManager())
                     {
                         WebForms.RegisterClientScriptBlock(Page, "MenuSettingsBlocks", "$(document).ready(function(){$('[href=\"#MenuSettings\"]').click();$('#mode-switcher').remove();setTimeout(function(){$('.gjs-cv-canvas__frames').css('pointer-events','none');}, 100); });", true);
                     }
@@ -139,8 +144,8 @@ namespace Vanjaro.UXManager.Library
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            if (IsAllowed())
-                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "$(document).ready(function(){ if(typeof GrapesjsInit !='undefined') GrapesjsInit(" + JsonConvert.SerializeObject(Editor.VjObjects) + "); });", true);
+            if (InjectEditor())
+                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "$(document).ready(function(){ if(typeof GrapesjsInit !='undefined') GrapesjsInit(" + JsonConvert.SerializeObject(Editor.Settings) + "); });", true);
         }
 
         private BaseModel GetBaseModel()
@@ -157,8 +162,13 @@ namespace Vanjaro.UXManager.Library
                 HasShortcut = (ShortcutManager.GetShortcut().Where(x => x.Shortcut.Visibility).Count() > 0)
             };
             item.ShortcutMarkUp = item.HasShortcut ? ShortcutManager.RenderShortcut() : string.Empty;
-            item.HasTabEditPermission = TabPermissionController.HasTabPermission("EDIT");
-            item.ShowUXManagerToolbar = Editor.VjObjects.ShowUXManagerToolbar;
+
+            if (!Editor.Settings.EditPage)
+                item.HasTabEditPermission = true;
+            else
+                item.HasTabEditPermission = TabPermissionController.HasTabPermission("EDIT");
+
+            item.EditPage = Editor.Settings.EditPage;
             item.ShowUXManager = string.IsNullOrEmpty(Core.Managers.CookieManager.GetValue("InitGrapejs")) ? false : Convert.ToBoolean(Core.Managers.CookieManager.GetValue("InitGrapejs"));
             return item;
         }
@@ -187,9 +197,21 @@ namespace Vanjaro.UXManager.Library
             return sb.ToString();
         }
 
-        private bool IsAllowed()
+        private bool CanShowUXManager()
         {
             if (PortalSettings.UserId > 0 && TabPermissionController.CanViewPage() && (TabPermissionController.HasTabPermission("EDIT") || MenuManager.GetExtentions().Count > 0))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool InjectEditor()
+        {
+            if (PortalSettings.UserId > 0 && TabPermissionController.CanViewPage() && (TabPermissionController.HasTabPermission("EDIT") || !Editor.Settings.EditPage))
             {
                 return true;
             }
