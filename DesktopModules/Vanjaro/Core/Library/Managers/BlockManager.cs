@@ -167,7 +167,7 @@ namespace Vanjaro.Core
 
             public static string GetTemplateDir(PortalSettings PortalSettings, string Block)
             {
-                return GetVirtualPath() + GetTheme() + "Blocks\\" + Block + "\\Templates\\";
+                return GetVirtualPath() + GetTheme(ThemeManager.GetCurrentThemeName()) + "Blocks\\" + Block + "\\Templates\\";
             }
 
             public static void UpdateDesignElement(PortalSettings PortalSettings, Dictionary<string, string> Attributes)
