@@ -156,7 +156,7 @@ $(document).ready(function () {
 
     global.GrapesjsInit = function (data) {
 
-        vjEditorSettings = data;
+        global.vjEditorSettings = data;
 
         if (getCookie("InitGrapejs") == "" || getCookie("InitGrapejs") == "true") {
             if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
