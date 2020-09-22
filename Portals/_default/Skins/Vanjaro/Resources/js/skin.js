@@ -64,7 +64,7 @@ InitAppActionMenu = function () {
     if (typeof getCookie != 'undefined')
         grapesjsCookie = getCookie('InitGrapejs');
 
-    if (((grapesjsCookie == null || grapesjsCookie == '' || grapesjsCookie == 'false') || (typeof GrapesjsInitData != 'undefined' && !GrapesjsInitData.InitTabGrapesjs)) && AppMenusScript.length > 0) {
+    if (((grapesjsCookie == null || grapesjsCookie == '' || grapesjsCookie == 'false') || (typeof GrapesjsInitData != 'undefined' && !GrapesjsInitData.EditPage)) && AppMenusScript.length > 0) {
         AppMenusScript.each(function () {
             var mid = $(this).data('actionmid');
             $('.DnnModule-' + mid).vjModuleActions({

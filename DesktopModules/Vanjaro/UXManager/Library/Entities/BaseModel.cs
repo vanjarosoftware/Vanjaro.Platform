@@ -13,7 +13,7 @@
         public bool HasShortcut { get; set; }
         public int NotificationCount { get; set; }
         public object LanguageMarkUp { get; internal set; }
-        public bool InitTabGrapesjs { get;  set; }
+        public bool EditPage { get;  set; }
         public bool ShowUXManager { get; set; }
     }
 }

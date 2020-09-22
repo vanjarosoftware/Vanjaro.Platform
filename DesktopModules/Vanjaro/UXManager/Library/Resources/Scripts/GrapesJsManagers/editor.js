@@ -856,7 +856,7 @@ $(document).ready(function () {
 
                             VjEditor.on('load', function () {
 
-                                if (data.InitTabGrapesjs) {
+                                if (data.EditPage) {
                                     LoadApps();
                                     LoadDesignBlocks();
                                 }

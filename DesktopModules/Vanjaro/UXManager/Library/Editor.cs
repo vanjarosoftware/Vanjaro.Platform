@@ -9,22 +9,22 @@ namespace Vanjaro.UXManager.Library
 {
     public class Editor
     {
-        internal static dynamic VjObjects = new ExpandoObject();
+        public static dynamic Settings = new ExpandoObject();
 
-        public static void RequestRegistration(dynamic NewVjObjects)
+        public static void RequestRegistration(dynamic settings)
         {
-            if (NewVjObjects == null)
+            if (settings == null)
             {
-                VjObjects.SetURL = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/save'";
-                VjObjects.GetURL = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/get'";
-                VjObjects.Container = "#VjContentPane";
-                VjObjects.InitTabGrapesjs = true;
-                VjObjects.ModuleId = -1;
+                Settings.SetURL = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/save'";
+                Settings.GetURL = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/get'";
+                Settings.Container = "#vjEditor";
+                Settings.EditPage = true;
+                Settings.ModuleId = -1;
             }
             else
             {
-                NewVjObjects.InitTabGrapesjs = false;
-                VjObjects = NewVjObjects;
+                settings.EditPage = false;
+                Settings = settings;
             }
         }
     }
