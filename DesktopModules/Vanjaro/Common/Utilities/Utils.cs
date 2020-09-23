@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.Abstractions;
+using DotNetNuke.Services.FileSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -168,6 +169,17 @@ namespace Vanjaro.Common.Utilities
             Array.Copy(buffer, i, result, 0, 32 - i);
 
             return TotalWidth > 0 ? new string(result).PadLeft(TotalWidth, PaddingChar) : new string(result);
+        }
+        
+
+        /// <summary>
+        /// Gets a flag that dertermines if the file is an image of type jpg,jpeg,jpe,png.
+        /// </summary>
+        /// <param name="file">The file to test.</param>
+        /// <returns>The flag as a boolean value.</returns>
+        public static bool IsImageVersionable(IFileInfo file)
+        {
+            return ("jpg,jpeg,jpe,png" + ",").IndexOf(file.Extension.ToLowerInvariant().Replace(".", string.Empty) + ",") > -1;
         }
     }
 }

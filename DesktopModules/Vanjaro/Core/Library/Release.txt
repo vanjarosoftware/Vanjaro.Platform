@@ -1,3 +1,3 @@
 <p style="text-align: center;">&nbsp;</p>
 <p style="text-align: center;">This is a beta release.</p>
-<p style="text-align: center;"><span style="color: #FF0000;"><strong>DO NOT INSTALL ON YOUR PRODUCTION SITE</strong></span></p>
+<p style="text-align: center;"><span style="color: #ff0000;"><strong>DO NOT INSTALL ON YOUR PRODUCTION SITE</strong></span></p>

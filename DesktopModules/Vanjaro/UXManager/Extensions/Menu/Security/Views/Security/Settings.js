@@ -122,7 +122,8 @@
                     AutoAccountUnlockDuration: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.AutoAccountUnlockDuration.Value : null,
                     AsyncTimeout: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.AsyncTimeout.Value : null,
                     MaxUploadSize: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.MaxUploadSize.Value : null,
-                    FileExtensions: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.FileExtensions.Value : null
+                    FileExtensions: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.FileExtensions.Value : null,
+                    DefaultEndUserExtensionWhitelist: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.DefaultEndUserExtensionWhitelist.Value : null
                 };
                 $scope.ui.data.UpdateSslSettingsRequest.Options.SSLEnforced = $scope.ui.data.UpdateSslSettingsRequest.Options.SSLEnabled;
                 common.webApi.post('security/UpdateSettings', '', settingData).success(function (Response) {

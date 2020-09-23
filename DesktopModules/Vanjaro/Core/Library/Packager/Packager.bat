@@ -372,7 +372,7 @@ del url-resources.zip >NUL 2>&1
 
 cd ..\Core\Library\ >NUL
 
-echo Deleting Existing Packages... >NUL
+
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip >NUL 2>&1
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Install.zip >NUL 2>&1
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip >NUL 2>&1
@@ -416,44 +416,44 @@ mkdir Temp_DNN >NUL
 xcopy /e /i "DNN Install"\* Temp_DNN\*  /Y >NUL
 cd Temp_DNN\
 
-echo Optimizing DNN Platform...
+echo Optimizing DNN Install...
 
 del DNN.ico /Q >NUL 2>&1
 del favicon.ico /Q >NUL 2>&1
 del compilerconfig.json /Q >NUL 2>&1
 
-rmdir admin\Containers /S/Q >NUL
-rmdir admin\Sales /S/Q >NUL
+rmdir admin\Containers /S/Q >NUL 2>&1
+rmdir admin\Sales /S/Q >NUL 2>&1
 
 mkdir admin\SecurityTemp >NUL
 move admin\Security\App_LocalResources\PasswordReset.ascx.resx admin\SecurityTemp >NUL
 del admin\Security\* /S/Q >NUL 2>&1
 mkdir admin\Security\App_LocalResources >NUL 2>&1
 move admin\SecurityTemp\PasswordReset.ascx.resx admin\Security\App_LocalResources\ >NUL
-rmdir admin\SecurityTemp >NUL
+rmdir admin\SecurityTemp >NUL 2>&1
 
 mkdir admin\MenusTemp >NUL
 move admin\Menus\ModuleActions\ModuleActions.ascx admin\MenusTemp >NUL
 del admin\Menus\* /S/Q >NUL 2>&1
 mkdir admin\Menus\ModuleActions >NUL 2>&1
 move admin\MenusTemp\ModuleActions.ascx admin\Menus\ModuleActions >NUL
-rmdir admin\MenusTemp >NUL
-rmdir admin\Menus\DNNActions >NUL
-rmdir admin\Menus\DNNAdmin >NUL
-rmdir admin\Menus\ModuleActions\images >NUL
+rmdir admin\MenusTemp >NUL 2>&1
+rmdir admin\Menus\DNNActions >NUL 2>&1
+rmdir admin\Menus\DNNAdmin >NUL 2>&1
+rmdir admin\Menus\ModuleActions\images >NUL 2>&1
 
 mkdir admin\SkinsTemp >NUL
 move admin\Skins\modulemessage.ascx admin\SkinsTemp >NUL
 del admin\Skins\* /S/Q >NUL 2>&1
-rmdir admin\Skins\App_LocalResources /S/Q >NUL
+rmdir admin\Skins\App_LocalResources /S/Q >NUL 2>&1
 move admin\SkinsTemp\modulemessage.ascx admin\Skins\ >NUL
-rmdir admin\SkinsTemp /S/Q >NUL
-rmdir admin\App_LocalResources >NUL
-rmdir admin\Tabs /S/Q >NUL
-rmdir admin\Users /S/Q >NUL
+rmdir admin\SkinsTemp /S/Q >NUL 2>&1
+rmdir admin\App_LocalResources /S/Q >NUL 2>&1
+rmdir admin\Tabs /S/Q >NUL 2>&1
+rmdir admin\Users /S/Q >NUL 2>&1
 :: rmdir controls /S/Q
-rmdir icons\sigma /S/Q >NUL
-rmdir images /S/Q >NUL
+rmdir icons\sigma /S/Q >NUL 2>&1
+rmdir images /S/Q >NUL 2>&1
 mkdir images\Branding >NUL
 del Install\AuthSystem\* /S/Q >NUL 2>&1
 
@@ -464,7 +464,7 @@ move Install\JavaScriptLibrary\jQueryMigrate_* Install\JavaScriptLibraryTEMP\ >N
 del Install\JavaScriptLibrary\* /S/Q >NUL 2>&1
 move Install\JavaScriptLibraryTEMP\jQuery_* Install\JavaScriptLibrary\ >NUL
 move Install\JavaScriptLibraryTEMP\jQueryMigrate_* Install\JavaScriptLibrary\ >NUL
-rmdir Install\JavaScriptLibraryTEMP /S/Q >NUL
+rmdir Install\JavaScriptLibraryTEMP /S/Q >NUL 2>&1
 
 del Install\Library\* /S/Q >NUL 2>&1
 
@@ -475,14 +475,14 @@ move Install\Module\DNN.Persona* Install\ModuleTEMP\ >NUL
 :: move Install\Module\GoogleAnalytics* Install\ModuleTEMP\
 del Install\Module\* /S/Q >NUL 2>&1
 move Install\ModuleTemp\* Install\Module\ >NUL
-rmdir Install\ModuleTemp /S/Q >NUL
+rmdir Install\ModuleTemp /S/Q >NUL 2>&1
 
 
 mkdir Install\ProviderTEMP >NUL
 move Install\Provider\DNNCE_* Install\ProviderTEMP\ >NUL
 del Install\Provider\* /S/Q >NUL 2>&1
 move Install\ProviderTEMP\* Install\Provider\ >NUL
-rmdir Install\ProviderTEMP /S/Q >NUL
+rmdir Install\ProviderTEMP /S/Q >NUL 2>&1
 
 del Install\Skin\* /S/Q >NUL 2>&1
 del Install\Template\* /S/Q >NUL 2>&1
@@ -536,23 +536,27 @@ cd ..\..\Packager\
 del UpgradeTemp_DNN /Q >NUL 2>&1
 mkdir UpgradeTemp_DNN >NUL
 xcopy /e /i "DNN Upgrade"\* UpgradeTemp_DNN\*  /Y >NUL
+
+::Need to copy the Core DLL to Upgrade Package for Upgrade Page (Install.aspx) to kick off
+copy ..\..\..\..\..\bin\Vanjaro.Core.dll UpgradeTemp_DNN\bin >NUL
+
 cd UpgradeTemp_DNN\
 
-echo Creating Platform Upgrade Packages...
+echo Optimizing DNN Upgrade...
 del DNN.ico /Q >NUL 2>&1
 del compilerconfig.json /Q >NUL 2>&1
 
 
 
-rmdir admin\Containers /S/Q >NUL
-rmdir admin\Sales /S/Q >NUL
+rmdir admin\Containers /S/Q >NUL 2>&1
+rmdir admin\Sales /S/Q >NUL 2>&1
 
 mkdir admin\SecurityTemp >NUL
 move admin\Security\App_LocalResources\PasswordReset.ascx.resx admin\SecurityTemp >NUL
 del admin\Security\* /S/Q >NUL 2>&1
 mkdir admin\Security\App_LocalResources >NUL 2>&1
 move admin\SecurityTemp\PasswordReset.ascx.resx admin\Security\App_LocalResources\ >NUL
-rmdir admin\SecurityTemp >NUL
+rmdir admin\SecurityTemp >NUL 2>&1
 
 
 
@@ -561,24 +565,24 @@ move admin\Menus\ModuleActions\ModuleActions.ascx admin\MenusTemp >NUL
 del admin\Menus\* /S/Q >NUL 2>&1
 mkdir admin\Menus\ModuleActions >NUL 2>&1
 move admin\MenusTemp\ModuleActions.ascx admin\Menus\ModuleActions >NUL
-rmdir admin\MenusTemp >NUL
-rmdir admin\Menus\DNNActions >NUL
-rmdir admin\Menus\DNNAdmin >NUL
-rmdir admin\Menus\ModuleActions\images >NUL
+rmdir admin\MenusTemp >NUL 2>&1
+rmdir admin\Menus\DNNActions >NUL 2>&1
+rmdir admin\Menus\DNNAdmin >NUL 2>&1
+rmdir admin\Menus\ModuleActions\images >NUL 2>&1
 
 
 
 mkdir admin\SkinsTemp >NUL
 move admin\Skins\modulemessage.ascx admin\SkinsTemp >NUL
 del admin\Skins\* /S/Q >NUL 2>&1
-rmdir admin\Skins\App_LocalResources /S/Q >NUL
+rmdir admin\Skins\App_LocalResources /S/Q >NUL 2>&1
 move admin\SkinsTemp\modulemessage.ascx admin\Skins\ >NUL
-rmdir admin\SkinsTemp /S/Q >NUL
-rmdir admin\App_LocalResources >NUL
-rmdir admin\Tabs /S/Q >NUL
-rmdir admin\Users /S/Q >NUL
-rmdir icons\sigma /S/Q >NUL
-rmdir images /S/Q >NUL
+rmdir admin\SkinsTemp /S/Q >NUL 2>&1
+rmdir admin\App_LocalResources /S/Q >NUL 2>&1
+rmdir admin\Tabs /S/Q >NUL 2>&1
+rmdir admin\Users /S/Q >NUL 2>&1
+rmdir icons\sigma /S/Q >NUL 2>&1
+rmdir images /S/Q >NUL 2>&1
 mkdir images\Branding >NUL
 del Install\AuthSystem\* /S/Q >NUL 2>&1
 
@@ -589,7 +593,7 @@ move Install\JavaScriptLibrary\jQueryMigrate_* Install\JavaScriptLibraryTEMP\ >N
 del Install\JavaScriptLibrary\* /S/Q >NUL 2>&1
 move Install\JavaScriptLibraryTEMP\jQuery_* Install\JavaScriptLibrary\ >NUL
 move Install\JavaScriptLibraryTEMP\jQueryMigrate_* Install\JavaScriptLibrary\ >NUL
-rmdir Install\JavaScriptLibraryTEMP /S/Q >NUL
+rmdir Install\JavaScriptLibraryTEMP /S/Q >NUL 2>&1
 
 del Install\Library\* /S/Q >NUL 2>&1
 
@@ -598,20 +602,21 @@ move Install\Module\Newtonsoft* Install\ModuleTEMP\ >NUL
 move Install\Module\DNN.Persona* Install\ModuleTEMP\ >NUL
 del Install\Module\* /S/Q >NUL 2>&1
 move Install\ModuleTemp\* Install\Module\ >NUL
-rmdir Install\ModuleTemp /S/Q >NUL
+rmdir Install\ModuleTemp /S/Q >NUL 2>&1
 
 
 mkdir Install\ProviderTEMP >NUL
 move Install\Provider\DNNCE_* Install\ProviderTEMP\ >NUL
 del Install\Provider\* /S/Q >NUL 2>&1
 move Install\ProviderTEMP\* Install\Provider\ >NUL
-rmdir Install\ProviderTEMP /S/Q >NUL
+rmdir Install\ProviderTEMP /S/Q >NUL 2>&1
 
 del Install\Skin\* /S/Q >NUL 2>&1
 del Install\Template\* /S/Q >NUL 2>&1
 del Install\InstallWizard.aspx.cs >NUL 2>&1
 del Install\InstallWizard.aspx >NUL 2>&1
 
+echo Creating Platform Upgrade Packages...
 cd ..\vanjaro\ 
 copy "Blank Website.template" ..\UpgradeTemp_DNN\Portals\_default\ >NUL
 copy "Default Website.template" ..\UpgradeTemp_DNN\Portals\_default\ >NUL
@@ -644,25 +649,37 @@ move Vanjaro_Platform_"%Version%"_x64_Upgrade.zip ..\Releases\ >NUL
 move Vanjaro_Platform_"%Version%"_x86_Upgrade.zip ..\Releases\ >NUL
 
 cd ..\
-rmdir UpgradeTemp_DNN /s /q >NUL
-rmdir Temp_DNN /s /q >NUL
+rmdir UpgradeTemp_DNN /s /q >NUL 2>&1
+rmdir Temp_DNN /s /q >NUL 2>&1
 
+echo.
+echo.
 SET /P HasDNNChanged=Has DNN Version Changed (Y/[N])? 
 IF /I "%HasDNNChanged%" NEQ "Y" GOTO :CopyInstall
-
-echo All Done!
-
-SET /P AnyKeyExit=Please any key to terminate:
+cls
+echo. 
+echo All Packages Created w/ DNN Upgrade
+echo. 
+SET /P AnyKeyExit=Please any key to terminate
 
 :END
 endlocal
 exit
 
 :CopyInstall
-"C:\Program Files\7-Zip\7z.exe" rn ..\Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Packager\Vanjaro\install\Install.aspx Install/Install.aspx >NUL
-"C:\Program Files\7-Zip\7z.exe" rn ..\Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Packager\Vanjaro\install\Install.aspx Install/Install.aspx >NUL
+@echo off
 
-echo All Done!
+"C:\Program Files\7-Zip\7z.exe" d Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Install/Install.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\Install\Install.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\install\Install.aspx Install/Install.aspx >NUL
 
-SET /P AnyKeyExit=Please any key to terminate:
+"C:\Program Files\7-Zip\7z.exe" d Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Install/Install.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\Install\Install.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\install\Install.aspx Install/Install.aspx >NUL
+
+cls
+echo. 
+echo All Packages Created w/out DNN Upgrade
+echo. 
+SET /P AnyKeyExit=Please any key to terminate
 exit

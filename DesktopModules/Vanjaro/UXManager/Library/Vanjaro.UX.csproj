@@ -46,7 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\Core\Library\Properties\GlobalAssemblyInfo.cs">
@@ -189,7 +189,6 @@
     <Content Include="Resources\Scripts\GrapesJsManagers\Plugins\blockwrapper.js" />
     <Content Include="Resources\Scripts\index.js" />
     <Content Include="Resources\Scripts\Localization\Localization.js" />
-    <Content Include="Resources\Scripts\uxmanager.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="PackageList.txt" />
@@ -209,6 +208,7 @@
     <Content Include="Resources\Scripts\GrapesJs\fonts\main-fonts.svg" />
     <Content Include="Resources\Scripts\GrapesJsManagers\editor.js" />
     <Content Include="Resources\Scripts\jsPanel\jspanel.min.css" />
+    <Content Include="Resources\Scripts\uxmanager.min.js" />
     <Content Include="Resources\StyleSheets\app.css" />
     <Content Include="Extension.ascx" />
     <Content Include="Resources\StyleSheets\common.css" />
@@ -253,10 +253,6 @@
     <Reference Include="HtmlAgilityPack, Version=1.5.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\bin\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="LibSassHost, Version=1.2.10.0, Culture=neutral, PublicKeyToken=3e24e88796a38e46, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\bin\LibSassHost.dll</HintPath>
     </Reference>
     <ProjectReference Include="..\..\Common\Vanjaro.Common.csproj">
       <Project>{82603eb3-cfec-4101-837a-7581d3300540}</Project>
@@ -321,14 +317,11 @@
     <Content Include="Resources\Images\image.webp" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DoPackages\VanjaroUXManagerLibrary.bat" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DoPackages\bin\" />
     <Folder Include="Resources\Scripts\GrapesJsManagers\img\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
+    <Content Include="Resources\Scripts\uxmanager.min.js.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -362,10 +355,10 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PreBuildEvent>if $(ConfigurationName) == Release cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\ &amp;&amp; npm install &amp;&amp; cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\node_modules\.bin\ &amp;&amp; webpack</PreBuildEvent>
+    <PreBuildEvent>cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\ &amp;&amp; npm install &amp;&amp; cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\node_modules\.bin\ &amp;&amp; webpack</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release start ..\DesktopModules\Vanjaro\UXManager\Library\DoPackages\VanjaroUXManagerLibrary.bat"</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release start ..\DesktopModules\Vanjaro\Core\Library\Packager\Packager.bat"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

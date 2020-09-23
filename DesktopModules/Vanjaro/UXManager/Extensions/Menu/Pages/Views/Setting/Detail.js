@@ -68,7 +68,7 @@
     };
 });
 
-app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, SweetAlert, FileUploader, LocalizationServices) {
+app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, SweetAlert, FileUploader, LocalizationServices, $http) {
     $scope.pid = $routeParams["pid"] ? $routeParams["pid"] : 0;
     if ($scope.pid == 0) {
         $('.CreateNewPage').css('display', 'block');
@@ -83,6 +83,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
     $scope.EnableScheduling = false;
     $scope.ShowSEOTab = false;
     $scope.ShowUrlEdit = false;
+    $scope.ParentPageValue = -1;
     $scope.ShowDeletedModule = false;
     $scope.PageFile = new FileUploader();
     $scope.PageFileDetails = [];
@@ -104,6 +105,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                 }
                 $scope.Click_ShowPageType($scope.PageTypes);
                 $scope.EnableScheduling = ($scope.ui.data.PagesTemplate.Options.startDate != null || $scope.ui.data.PagesTemplate.Options.endDate != null);
+                $scope.ParentPageValue = parseInt($scope.ui.data.ParentPage.Value);
             }
 
             if (!$scope.EnableScheduling) {
@@ -133,6 +135,56 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
         if ($scope.Show_Tab) {
             $scope.Show_Tab = false;
         }
+    };
+
+    $scope.ExportLayout = function (option) {
+        event.preventDefault();
+        swal({
+            title: "[LS:Confirm]",
+            text: "[L:ExportMessage]" + option.Name,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#8CD4F5", confirmButtonText: "[LS:Yes]",
+            cancelButtonText: "[LS:Cancel]",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+            function (IsConfirm) {
+                if (IsConfirm) {
+                    $http({
+                        method: 'GET',
+                        url: window.location.origin + jQuery.ServicesFramework(-1).getServiceRoot('Pages') + "Pages/ExportLayout?Name=" + option.Name + "&IsSystem=" + option.IsSystem,
+                        responseType: 'arraybuffer',
+                        headers: {
+                            'ModuleId': -1,
+                            'TabId': parseInt($.ServicesFramework(-1).getTabId()),
+                            'RequestVerificationToken': $.ServicesFramework(-1).getAntiForgeryValue()
+                        }
+                    }).success(function (data, status, headers) {
+                        headers = headers();
+                        var filename = headers['x-filename'];
+                        var contentType = headers['content-type'];
+                        var linkElement = document.createElement('a');
+                        try {
+                            var blob = new Blob([data], { type: contentType });
+                            var url = window.URL.createObjectURL(blob);
+                            linkElement.setAttribute('href', url);
+                            linkElement.setAttribute("download", filename);
+                            var clickEvent = new MouseEvent("click", {
+                                "view": window,
+                                "bubbles": true,
+                                "cancelable": false
+                            });
+                            linkElement.dispatchEvent(clickEvent);
+                        } catch (ex) {
+                            alert(ex);
+                        }
+                    }).error(function (data) {
+                        alert(data);
+                    });
+                }
+            });
+        return false;
     };
 
     $scope.Click_ShowTab = function (type) {
@@ -332,36 +384,71 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         if (ParentScope != null && ParentScope != undefined) {
                             var Menuextension = ParentScope.element(".menuextension");
                             if (ParentScope != undefined && Menuextension != undefined && Menuextension.scope() != undefined && Menuextension.scope().FetchPages != undefined) {
-                                Menuextension.scope().FetchPages();
-                                Menuextension.scope().$apply();
-                                Menuextension.scope().init();
-                            }
-                        }
-                        $scope.RenderMarkup();
-                        if (parent.GetParameterByName('m2vsetup', parent.window.location) != null && typeof parent.GetParameterByName('m2vsetup', parent.window.location) != undefined && data.Data.url != null) {
-                            parent.window.location.href = data.Data.url + "?migrate=true";
-                        }
-                        else {
-                            if (TabID == 0 || IsCopy) {
-                                if (IsCopy) {
-                                    window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageCreatedSuccess]', 'success', data.Data.url);
+                                if ($scope.pid > 0 && $scope.ParentPageValue != parseInt($scope.ui.data.ParentPage.Value)) {
+                                    Menuextension.scope().FetchPages();
                                 }
+                                else if (!IsCopy && $scope.pid > 0)
+                                    Menuextension.scope().Findnode(data.Data.PagesTree, Menuextension.scope().ui.data.PagesTree.Options, $scope.pid);
                                 else {
-                                    window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageCreatedSuccess]', 'success', data.Data.url);
+                                    //if copy or adding new page has parent
+                                    if (parseInt($scope.ui.data.ParentPage.Value) > 0) {
+                                        $scope.Findnode(data.Data.PagesTree, Menuextension.scope().ui.data.PagesTree.Options, parseInt($scope.ui.data.ParentPage.Value))
+                                    }
+                                    else {
+                                        $.each(data.Data.PagesTree, function (key, value) {
+                                            if (Menuextension.scope().ui.data.PagesTree.Options[key] == undefined) {
+                                                Menuextension.scope().ui.data.PagesTree.Options.push(value);
+                                                return false;
+                                            }
+                                        });
+                                    }
                                 }
+                            }
+                            Menuextension.scope().$apply();
+                            Menuextension.scope().init();
+                        }
+                    }
+                    $scope.RenderMarkup();
+                    if (parent.GetParameterByName('m2vsetup', parent.window.location) != null && typeof parent.GetParameterByName('m2vsetup', parent.window.location) != undefined && data.Data.url != null) {
+                        parent.window.location.href = data.Data.url + "?migrate=true";
+                    }
+                    else {
+                        if (TabID == 0 || IsCopy) {
+                            if (IsCopy) {
+                                window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageCreatedSuccess]', 'success', data.Data.url);
                             }
                             else {
-                                window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageUpdatedSuccess]', 'success');
+                                window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageCreatedSuccess]', 'success', data.Data.url);
                             }
                         }
-                        $(window.parent.document.body).find('[data-dismiss="modal"]').click();
-
+                        else {
+                            window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageUpdatedSuccess]', 'success');
+                        }
                     }
+                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
                 });
             }
             else {
                 window.parent.ShowNotification('[L:InvalidDateTitle]', '[L:InvalidDateText]', 'error');
             }
+        }
+    };
+
+    $scope.Findnode = function (newPages, oldPages, parentnodeId) {
+        if (newPages != null) {
+            $.each(newPages, function (key, v) {
+                if (parentnodeId == v.Value) {
+                    $.each(v.children, function (ckey, cvalue) {
+                        if (oldPages[key].children[ckey] == undefined) {
+                            oldPages[key].children.push(cvalue);
+                            return false;
+                        }
+                    });
+                    return false;
+                }
+                if (v.children)
+                    $scope.Findnode(v.children, oldPages[key].children, parentnodeId);
+            });
         }
     };
 

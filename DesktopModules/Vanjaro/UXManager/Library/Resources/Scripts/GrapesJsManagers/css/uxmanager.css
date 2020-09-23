@@ -73,7 +73,7 @@ li.openbtn {
 
 /*Content Pane*/
 
-.gjs-editor-cont {
+#vjEditor {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -599,7 +599,67 @@ div#MenuSettings .parent-menu-hide {
     font-size: 22px;
     margin-bottom: 10px;
 }
+.sidebar .block-manager .gjs-blocks-cs .gjs-block:hover .Customblockdropdown {
+    top: 10px;
+    right: -5px;
+    opacity: 1;
+}
 
+.sidebar .block-manager .gjs-blocks-cs .gjs-block .Customblockdropdown {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #eee;
+    border: 0;
+    padding: 10px;
+    opacity: 0;
+    transition: all .3s;
+}
+
+.sidebar .addpage-blocks .dropdown-menu {
+    min-width: 100px;
+}
+
+.sidebar .addpage-blocks .dropdown-menu {
+    transition: .3s all;
+}
+
+.sidebar .dropdown-menu > li {
+    background-color: #fff;
+    padding: 2px;
+}
+
+.sidebar .addpage-blocks .dropdown-menu {
+    min-width: 120px;
+    font-size: 12px;
+    padding: 2px;
+    top: 40px !important;
+    right: -5px !important;
+    left: auto !important;
+    transform: none !important;
+}
+
+.sidebar .addpage-blocks ul li a {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px !important;
+    width: 100%;
+    font-weight: normal;
+}
+
+    .sidebar .addpage-blocks ul li a:hover {
+        background: #ececec;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    .sidebar .addpage-blocks ul li a > em {
+        width: 25px;
+        padding: 5px;
+        text-align: center;
+        color: #76838c;
+        font-size: 12px;
+        border-radius: 2px;
+        margin-right: 10px;
+    }
 .sidebar .block-manager .gjs-block svg {
     height: 28px;
     margin-bottom: 10px;
@@ -3143,4 +3203,13 @@ div#gjs-sm-top, div#gjs-sm-right, div#gjs-sm-left, div#gjs-sm-bottom {
     -ms-animation: driftBlock 4s linear infinite;
     -o-animation: driftBlock 4s linear infinite;
     animation: driftBlock 4s linear infinite;
+}
+
+.gjs-frame-wrapper {
+    position: relative;
+    height: 100%;
+    margin: auto;
+}
+.gjs-frames {
+    height: 100%;
 }
