@@ -97,6 +97,7 @@
     <Compile Include="Factories\SettingFactory.cs" />
     <Compile Include="Factories\WorkflowFactory.cs" />
     <Compile Include="Managers\CookieManager.cs" />
+    <Compile Include="Managers\SignatureManager.cs" />
     <Compile Include="Packager\Vanjaro\Install\Install.aspx.cs">
       <DependentUpon>Install.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
