@@ -166,6 +166,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vanjaro.URL", "DesktopModul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteGroups", "DesktopModules\Vanjaro\UXManager\Extensions\Menu\SiteGroups\SiteGroups.csproj", "{54E19754-D7BA-41E1-831D-5C31DC976AF9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{47C5CBBB-6ABB-48D7-8D15-123BF28B2BD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "DesktopModules\Vanjaro\Installer\Installer.csproj", "{94BE8ADC-CB86-477A-A734-0BB7A70DBA9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -436,6 +440,10 @@ Global
 		{54E19754-D7BA-41E1-831D-5C31DC976AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54E19754-D7BA-41E1-831D-5C31DC976AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54E19754-D7BA-41E1-831D-5C31DC976AF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94BE8ADC-CB86-477A-A734-0BB7A70DBA9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94BE8ADC-CB86-477A-A734-0BB7A70DBA9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94BE8ADC-CB86-477A-A734-0BB7A70DBA9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94BE8ADC-CB86-477A-A734-0BB7A70DBA9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -515,6 +523,7 @@ Global
 		{9708D33F-4C35-4076-BD11-34844B74B596} = {06B95082-4710-4862-BB7A-80A5C0F56B03}
 		{850F7BD6-346A-4E09-AB09-9E1329FFD138} = {4E3F7CF8-9178-4C95-8662-A221E237C05A}
 		{54E19754-D7BA-41E1-831D-5C31DC976AF9} = {E801F63F-A7CB-4367-A310-BC2D89D4D027}
+		{94BE8ADC-CB86-477A-A734-0BB7A70DBA9F} = {47C5CBBB-6ABB-48D7-8D15-123BF28B2BD7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {54A96059-6996-42FC-B348-4E326F62E67A}
