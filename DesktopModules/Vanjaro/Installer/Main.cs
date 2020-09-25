@@ -50,6 +50,8 @@ namespace Vanjaro.Installer
             tbSiteTLD.Text = Properties.Settings.Default.SiteTLD;
             tbPhysicalPath.Text = Properties.Settings.Default.PhysicalPath;
             tbDatabaseServer.Text = Properties.Settings.Default.DatabaseServer;
+
+            BindUpgradeList();
         }
 
         public static IEnumerable<Release> GetReleases()
@@ -64,6 +66,10 @@ namespace Vanjaro.Installer
                 cbVersion.DataSource = GetReleases();
                 cbVersion.DisplayMember = "Name";
                 cbVersion.ValueMember = "Id";
+
+                cbUpgradeVersion.DataSource = GetReleases();
+                cbUpgradeVersion.DisplayMember = "Name";
+                cbUpgradeVersion.ValueMember = "Id";
             }
             catch 
             {
@@ -516,6 +522,148 @@ namespace Vanjaro.Installer
         {
             Settings form = new Settings();
             form.ShowDialog();
+        }
+
+        private void BindUpgradeList()
+        {
+            lbVanjaroSites.DataSource = GetVanjaroSites();
+            lbVanjaroSites.ClearSelected();
+        }
+
+        private List<VanjaroSite> GetVanjaroSites()
+        {
+            List<VanjaroSite> sites = new List<VanjaroSite>();
+
+            ServerManager server = new ServerManager();
+
+            foreach (var site in server.Sites.OrderBy(s => s.Name))
+            {
+                var version = GetVanjaroSiteVersion(site);
+
+                if (version != null)
+                    sites.Add(new VanjaroSite(site.Name, version));
+            }
+
+            return sites;
+        }
+
+        private string GetVanjaroSiteVersion(Site site)
+        {
+            var SiteDirectory = site.Applications.FirstOrDefault().VirtualDirectories.FirstOrDefault().PhysicalPath;
+
+            try
+            {
+                FileVersionInfo vanjaroCore = FileVersionInfo.GetVersionInfo(SiteDirectory + "\\bin\\Vanjaro.Core.dll");
+
+                if (vanjaroCore != null)
+                    return vanjaroCore.ProductMajorPart + "." + vanjaroCore.ProductMinorPart + "." + vanjaroCore.ProductBuildPart;
+            }
+            catch { }
+
+            return null;
+        }
+
+        private void bDeleteSite_Click(object sender, EventArgs e)
+        {
+            if (lbVanjaroSites.SelectedItems.Count > 0)
+            {
+                DialogResult dR = MessageBox.Show("Delete Selected Sites?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dR == DialogResult.Yes)
+                {
+                    foreach (var site in lbVanjaroSites.SelectedItems)
+                        DeleteSite(site as VanjaroSite);
+
+                    lProgressBar.Visible = false;
+
+                    BindUpgradeList();
+                }
+            }
+        }
+
+        private void DeleteSite(VanjaroSite site)
+        {
+            lProgressBar.Visible = true;
+            lProgressBar.Text = "Deleting: " + site.Name;
+            lProgressBar.Refresh();
+
+            RemoveSiteDirectories(site.Name);
+            RemoveDNS(site.Name);
+            RemoveSite(site.Name);
+            RemoveDatabase(site.Name);
+            
+        }
+
+        private void RemoveDatabase(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RemoveSiteDirectories(string siteName)
+        {
+            ServerManager server = new ServerManager();
+            var site = server.Sites.Where(s => s.Name == siteName).SingleOrDefault();
+
+            if (site != null)
+            {
+                var SiteDirectory = site.Applications.FirstOrDefault().VirtualDirectories.FirstOrDefault().PhysicalPath;
+
+                var dir = new DirectoryInfo(SiteDirectory);
+
+                if (dir != null && dir.Parent.Exists)
+                    Directory.Delete(dir.Parent.FullName, true);
+            }
+        }
+
+        private void RemoveSite(string siteName)
+        {
+            ServerManager server = new ServerManager();
+            var app = server.ApplicationPools.Where(a => a.Name == siteName).SingleOrDefault();
+            var site = server.Sites.Where(s => s.Name == siteName).SingleOrDefault();
+
+            if (app != null)
+                server.ApplicationPools.Remove(app);
+
+            if (site != null)
+                server.Sites.Remove(site);
+
+            server.CommitChanges();
+        }
+
+        private void RemoveDNS(string siteName)
+        {
+            try
+            {
+                string dnsEntry = "\t127.0.0.1 \t" + siteName;
+                string filePath = Environment.GetFolderPath(Environment.SpecialFolder.System) + @"\drivers\etc\hosts";
+                string dnsEntries = File.ReadAllText(filePath);
+
+                if (dnsEntries.Contains(dnsEntry))
+                {
+                    dnsEntries = dnsEntries.Replace(dnsEntry, string.Empty);
+                    File.WriteAllText(filePath,dnsEntries);                    
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Adding DNS Entry to Hosts File");
+            }
+        }
+    }
+    public class VanjaroSite
+    {
+        public VanjaroSite(string Name, string Version)
+        {
+            this.Name = Name;
+            this.Version = Version;
+        }
+
+        public string Name { get; set; }
+        public string Version { get; set; }
+        public override string ToString()
+        {
+            return Name + " (v" + Version + ")";
         }
     }
 }

@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.tabs = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.bOtherSettings = new MetroFramework.Controls.MetroLink();
             this.lProgressBar = new MetroFramework.Controls.MetroLabel();
             this.tbPhysicalPath = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
@@ -45,25 +46,34 @@
             this.cbVersion = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
-            this.bOtherSettings = new MetroFramework.Controls.MetroLink();
-            this.metroTabControl1.SuspendLayout();
+            this.bDeleteSite = new MetroFramework.Controls.MetroButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbVanjaroSites = new System.Windows.Forms.ListBox();
+            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
+            this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
+            this.bUpgradeSite = new MetroFramework.Controls.MetroButton();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.cbUpgradeVersion = new MetroFramework.Controls.MetroComboBox();
+            this.tabs.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
+            this.metroTabPage2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // metroTabControl1
+            // tabs
             // 
-            this.metroTabControl1.Controls.Add(this.metroTabPage1);
-            this.metroTabControl1.Controls.Add(this.metroTabPage2);
-            this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroTabControl1.ItemSize = new System.Drawing.Size(185, 31);
-            this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
-            this.metroTabControl1.Multiline = true;
-            this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
-            this.metroTabControl1.Size = new System.Drawing.Size(383, 390);
-            this.metroTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.metroTabControl1.TabIndex = 0;
-            this.metroTabControl1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tabs.Controls.Add(this.metroTabPage1);
+            this.tabs.Controls.Add(this.metroTabPage2);
+            this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabs.ItemSize = new System.Drawing.Size(185, 31);
+            this.tabs.Location = new System.Drawing.Point(20, 60);
+            this.tabs.Multiline = true;
+            this.tabs.Name = "tabs";
+            this.tabs.SelectedIndex = 1;
+            this.tabs.Size = new System.Drawing.Size(383, 390);
+            this.tabs.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabs.TabIndex = 0;
+            this.tabs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // metroTabPage1
             // 
@@ -90,6 +100,16 @@
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "New Installation";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
+            // 
+            // bOtherSettings
+            // 
+            this.bOtherSettings.FontWeight = MetroFramework.MetroLinkWeight.Light;
+            this.bOtherSettings.Location = new System.Drawing.Point(281, 10);
+            this.bOtherSettings.Name = "bOtherSettings";
+            this.bOtherSettings.Size = new System.Drawing.Size(89, 23);
+            this.bOtherSettings.TabIndex = 16;
+            this.bOtherSettings.Text = "Other Settings";
+            this.bOtherSettings.Click += new System.EventHandler(this.bOtherSettings_Click);
             // 
             // lProgressBar
             // 
@@ -168,7 +188,7 @@
             this.bCreateSite.Size = new System.Drawing.Size(374, 43);
             this.bCreateSite.Style = MetroFramework.MetroColorStyle.Red;
             this.bCreateSite.TabIndex = 7;
-            this.bCreateSite.Text = "Create Site";
+            this.bCreateSite.Text = "Create New Site";
             this.bCreateSite.Click += new System.EventHandler(this.bCreateSite_Click);
             // 
             // tbSiteTLD
@@ -219,30 +239,119 @@
             // 
             // metroTabPage2
             // 
+            this.metroTabPage2.Controls.Add(this.bDeleteSite);
+            this.metroTabPage2.Controls.Add(this.groupBox1);
+            this.metroTabPage2.Controls.Add(this.metroLabel7);
+            this.metroTabPage2.Controls.Add(this.metroProgressBar1);
+            this.metroTabPage2.Controls.Add(this.bUpgradeSite);
+            this.metroTabPage2.Controls.Add(this.metroLabel6);
+            this.metroTabPage2.Controls.Add(this.cbUpgradeVersion);
             this.metroTabPage2.HorizontalScrollbarBarColor = true;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 35);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(375, 343);
+            this.metroTabPage2.Size = new System.Drawing.Size(375, 351);
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "Upgrade";
             this.metroTabPage2.VerticalScrollbarBarColor = true;
             // 
-            // bOtherSettings
+            // bDeleteSite
             // 
-            this.bOtherSettings.FontWeight = MetroFramework.MetroLinkWeight.Light;
-            this.bOtherSettings.Location = new System.Drawing.Point(281, 10);
-            this.bOtherSettings.Name = "bOtherSettings";
-            this.bOtherSettings.Size = new System.Drawing.Size(89, 23);
-            this.bOtherSettings.TabIndex = 16;
-            this.bOtherSettings.Text = "Other Settings";
-            this.bOtherSettings.Click += new System.EventHandler(this.bOtherSettings_Click);
+            this.bDeleteSite.Highlight = true;
+            this.bDeleteSite.Location = new System.Drawing.Point(0, 251);
+            this.bDeleteSite.Name = "bDeleteSite";
+            this.bDeleteSite.Size = new System.Drawing.Size(109, 43);
+            this.bDeleteSite.Style = MetroFramework.MetroColorStyle.Red;
+            this.bDeleteSite.TabIndex = 20;
+            this.bDeleteSite.Text = "Delete";
+            this.bDeleteSite.Click += new System.EventHandler(this.bDeleteSite_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.lbVanjaroSites);
+            this.groupBox1.Location = new System.Drawing.Point(0, 70);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(370, 160);
+            this.groupBox1.TabIndex = 19;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Vanjaro Sites";
+            // 
+            // lbVanjaroSites
+            // 
+            this.lbVanjaroSites.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbVanjaroSites.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbVanjaroSites.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbVanjaroSites.ForeColor = System.Drawing.Color.Gray;
+            this.lbVanjaroSites.FormattingEnabled = true;
+            this.lbVanjaroSites.ItemHeight = 20;
+            this.lbVanjaroSites.Items.AddRange(new object[] {
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven"});
+            this.lbVanjaroSites.Location = new System.Drawing.Point(3, 16);
+            this.lbVanjaroSites.Name = "lbVanjaroSites";
+            this.lbVanjaroSites.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbVanjaroSites.Size = new System.Drawing.Size(364, 141);
+            this.lbVanjaroSites.TabIndex = 2;
+            // 
+            // metroLabel7
+            // 
+            this.metroLabel7.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel7.Location = new System.Drawing.Point(0, 326);
+            this.metroLabel7.Name = "metroLabel7";
+            this.metroLabel7.Size = new System.Drawing.Size(370, 23);
+            this.metroLabel7.TabIndex = 18;
+            this.metroLabel7.Text = "Downloading Release...";
+            this.metroLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.metroLabel7.Visible = false;
+            // 
+            // metroProgressBar1
+            // 
+            this.metroProgressBar1.Location = new System.Drawing.Point(-4, 300);
+            this.metroProgressBar1.Name = "metroProgressBar1";
+            this.metroProgressBar1.Size = new System.Drawing.Size(374, 23);
+            this.metroProgressBar1.TabIndex = 17;
+            this.metroProgressBar1.Visible = false;
+            // 
+            // bUpgradeSite
+            // 
+            this.bUpgradeSite.Highlight = true;
+            this.bUpgradeSite.Location = new System.Drawing.Point(116, 251);
+            this.bUpgradeSite.Name = "bUpgradeSite";
+            this.bUpgradeSite.Size = new System.Drawing.Size(255, 43);
+            this.bUpgradeSite.Style = MetroFramework.MetroColorStyle.Green;
+            this.bUpgradeSite.TabIndex = 16;
+            this.bUpgradeSite.Text = "Upgrade";
+            // 
+            // metroLabel6
+            // 
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.Location = new System.Drawing.Point(0, 14);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(51, 19);
+            this.metroLabel6.TabIndex = 4;
+            this.metroLabel6.Text = "Version";
+            this.metroLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cbUpgradeVersion
+            // 
+            this.cbUpgradeVersion.FormattingEnabled = true;
+            this.cbUpgradeVersion.ItemHeight = 23;
+            this.cbUpgradeVersion.Location = new System.Drawing.Point(0, 35);
+            this.cbUpgradeVersion.Name = "cbUpgradeVersion";
+            this.cbUpgradeVersion.Size = new System.Drawing.Size(370, 29);
+            this.cbUpgradeVersion.TabIndex = 5;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(423, 470);
-            this.Controls.Add(this.metroTabControl1);
+            this.Controls.Add(this.tabs);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";
@@ -250,16 +359,19 @@
             this.Text = "Vanjaro";
             this.TextAlign = System.Windows.Forms.VisualStyles.HorizontalAlign.Center;
             this.Load += new System.EventHandler(this.Main_Load);
-            this.metroTabControl1.ResumeLayout(false);
+            this.tabs.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage1.PerformLayout();
+            this.metroTabPage2.ResumeLayout(false);
+            this.metroTabPage2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private MetroFramework.Controls.MetroTabControl metroTabControl1;
+        private MetroFramework.Controls.MetroTabControl tabs;
         private MetroFramework.Controls.MetroTabPage metroTabPage1;
         private MetroFramework.Controls.MetroComboBox cbVersion;
         private MetroFramework.Controls.MetroLabel metroLabel1;
@@ -277,5 +389,13 @@
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroLabel lProgressBar;
         private MetroFramework.Controls.MetroLink bOtherSettings;
+        private System.Windows.Forms.ListBox lbVanjaroSites;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private MetroFramework.Controls.MetroLabel metroLabel7;
+        private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
+        private MetroFramework.Controls.MetroButton bUpgradeSite;
+        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroComboBox cbUpgradeVersion;
+        private MetroFramework.Controls.MetroButton bDeleteSite;
     }
 }
