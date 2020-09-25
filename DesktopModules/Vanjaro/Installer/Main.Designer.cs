@@ -49,8 +49,8 @@
             this.bDeleteSite = new MetroFramework.Controls.MetroButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbVanjaroSites = new System.Windows.Forms.ListBox();
-            this.lDeleteProgressBar = new MetroFramework.Controls.MetroLabel();
-            this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
+            this.lUpgradeProgressBar = new MetroFramework.Controls.MetroLabel();
+            this.pbUpgradeSite = new MetroFramework.Controls.MetroProgressBar();
             this.bUpgradeSite = new MetroFramework.Controls.MetroButton();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.cbUpgradeVersion = new MetroFramework.Controls.MetroComboBox();
@@ -69,7 +69,7 @@
             this.tabs.Location = new System.Drawing.Point(20, 60);
             this.tabs.Multiline = true;
             this.tabs.Name = "tabs";
-            this.tabs.SelectedIndex = 0;
+            this.tabs.SelectedIndex = 1;
             this.tabs.Size = new System.Drawing.Size(383, 390);
             this.tabs.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabs.TabIndex = 0;
@@ -241,8 +241,8 @@
             // 
             this.metroTabPage2.Controls.Add(this.bDeleteSite);
             this.metroTabPage2.Controls.Add(this.groupBox1);
-            this.metroTabPage2.Controls.Add(this.lDeleteProgressBar);
-            this.metroTabPage2.Controls.Add(this.metroProgressBar1);
+            this.metroTabPage2.Controls.Add(this.lUpgradeProgressBar);
+            this.metroTabPage2.Controls.Add(this.pbUpgradeSite);
             this.metroTabPage2.Controls.Add(this.bUpgradeSite);
             this.metroTabPage2.Controls.Add(this.metroLabel6);
             this.metroTabPage2.Controls.Add(this.cbUpgradeVersion);
@@ -274,7 +274,7 @@
             this.groupBox1.Size = new System.Drawing.Size(370, 160);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Vanjaro Sites";
+            this.groupBox1.Text = "Sites";
             // 
             // lbVanjaroSites
             // 
@@ -298,23 +298,23 @@
             this.lbVanjaroSites.Size = new System.Drawing.Size(364, 141);
             this.lbVanjaroSites.TabIndex = 2;
             // 
-            // lDeleteProgressBar
+            // lUpgradeProgressBar
             // 
-            this.lDeleteProgressBar.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lDeleteProgressBar.Location = new System.Drawing.Point(0, 326);
-            this.lDeleteProgressBar.Name = "lDeleteProgressBar";
-            this.lDeleteProgressBar.Size = new System.Drawing.Size(370, 23);
-            this.lDeleteProgressBar.TabIndex = 18;
-            this.lDeleteProgressBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lDeleteProgressBar.Visible = false;
+            this.lUpgradeProgressBar.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lUpgradeProgressBar.Location = new System.Drawing.Point(0, 326);
+            this.lUpgradeProgressBar.Name = "lUpgradeProgressBar";
+            this.lUpgradeProgressBar.Size = new System.Drawing.Size(370, 23);
+            this.lUpgradeProgressBar.TabIndex = 18;
+            this.lUpgradeProgressBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lUpgradeProgressBar.Visible = false;
             // 
-            // metroProgressBar1
+            // pbUpgradeSite
             // 
-            this.metroProgressBar1.Location = new System.Drawing.Point(-4, 300);
-            this.metroProgressBar1.Name = "metroProgressBar1";
-            this.metroProgressBar1.Size = new System.Drawing.Size(374, 23);
-            this.metroProgressBar1.TabIndex = 17;
-            this.metroProgressBar1.Visible = false;
+            this.pbUpgradeSite.Location = new System.Drawing.Point(-4, 300);
+            this.pbUpgradeSite.Name = "pbUpgradeSite";
+            this.pbUpgradeSite.Size = new System.Drawing.Size(374, 23);
+            this.pbUpgradeSite.TabIndex = 17;
+            this.pbUpgradeSite.Visible = false;
             // 
             // bUpgradeSite
             // 
@@ -325,6 +325,7 @@
             this.bUpgradeSite.Style = MetroFramework.MetroColorStyle.Green;
             this.bUpgradeSite.TabIndex = 16;
             this.bUpgradeSite.Text = "Upgrade";
+            this.bUpgradeSite.Click += new System.EventHandler(this.bUpgradeSite_Click);
             // 
             // metroLabel6
             // 
@@ -390,8 +391,8 @@
         private MetroFramework.Controls.MetroLink bOtherSettings;
         private System.Windows.Forms.ListBox lbVanjaroSites;
         private System.Windows.Forms.GroupBox groupBox1;
-        private MetroFramework.Controls.MetroLabel lDeleteProgressBar;
-        private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
+        private MetroFramework.Controls.MetroLabel lUpgradeProgressBar;
+        private MetroFramework.Controls.MetroProgressBar pbUpgradeSite;
         private MetroFramework.Controls.MetroButton bUpgradeSite;
         private MetroFramework.Controls.MetroLabel metroLabel6;
         private MetroFramework.Controls.MetroComboBox cbUpgradeVersion;

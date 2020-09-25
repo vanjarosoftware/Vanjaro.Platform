@@ -96,12 +96,11 @@ namespace Vanjaro.Installer
                     {
                         if (CreateDatabase())
                         {
-                            if (ExtractRelease("install", SiteDirectory))
+                            if (ExtractRelease("install", PlatformArchitecture, SiteDirectory + "\\Website\\"))
                             {
                                 if (UpdateConfig())
                                 {
                                     LaunchSite();
-                                    System.Windows.Forms.Application.Exit();
                                 }
                             }
                         }
@@ -137,21 +136,36 @@ namespace Vanjaro.Installer
             return false;
         }
 
-        private bool ExtractRelease(string ReleaseType, string SiteDirectory)
+        private bool ExtractRelease(string ReleaseType, string Architecture, string SiteDirectory)
         {
             try
             {
-                var package = ZipFile.Read(GetReleasePackagePath(ReleaseType));
+                var package = ZipFile.Read(GetReleasePackagePath(ReleaseType, Architecture));
 
-                pbCreateSite.Maximum = package.Entries.Count();
-                pbCreateSite.Visible = true;
-                lProgressBar.Visible = true;
+                if (ReleaseType == "install")
+                {
+                    pbCreateSite.Visible = true;
+                    lProgressBar.Visible = true;
+                    pbCreateSite.Maximum = package.Count();
 
-                package.ExtractProgress += Package_ExtractProgress;
-                package.ExtractAll(SiteDirectory + "\\Website\\", ExtractExistingFileAction.OverwriteSilently);
+                    package.ExtractProgress += PackageInstall_ExtractProgress;
+                    package.ExtractAll(SiteDirectory, ExtractExistingFileAction.OverwriteSilently);
 
-                pbCreateSite.Visible = false;
-                lProgressBar.Visible = false;
+                    pbCreateSite.Visible = false;
+                    lProgressBar.Visible = false;
+                }
+                else
+                {
+                    pbUpgradeSite.Visible = true;
+                    lUpgradeProgressBar.Visible = true;
+                    pbUpgradeSite.Maximum = package.Count();
+
+                    package.ExtractProgress += PackageUpgrade_ExtractProgress;
+                    package.ExtractAll(SiteDirectory, ExtractExistingFileAction.OverwriteSilently);
+
+                    pbUpgradeSite.Visible = false;
+                    lUpgradeProgressBar.Visible = false;
+                }
 
                 return true;
             }
@@ -163,17 +177,26 @@ namespace Vanjaro.Installer
             return false;
         }
 
-        private void Package_ExtractProgress(object sender, ExtractProgressEventArgs e)
+        private void PackageInstall_ExtractProgress(object sender, ExtractProgressEventArgs e)
         {
-            pbCreateSite.Value = e.EntriesExtracted;
-
-            if (e.CurrentEntry != null)
+            
+            if (e.EventType == ZipProgressEventType.Extracting_BeforeExtractEntry)
             {
+                pbCreateSite.Value = e.EntriesExtracted;
                 lProgressBar.Text = "Copying: " + e.CurrentEntry.FileName;
                 lProgressBar.Refresh();
             }
         }
 
+        private void PackageUpgrade_ExtractProgress(object sender, ExtractProgressEventArgs e)
+        {
+            if (e.EventType == ZipProgressEventType.Extracting_BeforeExtractEntry)
+            {
+                pbUpgradeSite.Value = e.EntriesExtracted;
+                lUpgradeProgressBar.Text = "Copying: " + e.CurrentEntry.FileName;
+                lUpgradeProgressBar.Refresh();
+            }
+        }
         private bool CreateDatabase()
         {
             string dbQuery = "USE master" + Environment.NewLine + "CREATE DATABASE [" + DatabaseName + "]";
@@ -207,31 +230,33 @@ namespace Vanjaro.Installer
         {
             try
             {
-                ServerManager server = new ServerManager();
-                string siteName = tbSiteURL.Text + tbSiteTLD.Text;
-                var bindingInfo = "*:80:" + siteName;
-               
-                Site site = server.Sites.Add(siteName, "http", bindingInfo, SiteDirectory + "\\Website");
-                site.TraceFailedRequestsLogging.Enabled = true;
-                site.TraceFailedRequestsLogging.Directory = SiteDirectory + "\\Logs";
-                site.LogFile.Directory = SiteDirectory + "\\Logs" + "\\W3svc" + site.Id.ToString();
+                using (ServerManager server = new ServerManager())
+                {
+                    string siteName = tbSiteURL.Text + tbSiteTLD.Text;
+                    var bindingInfo = "*:80:" + siteName;
 
-                ApplicationPool appPool = server.ApplicationPools.Add(siteName);
-                appPool.ManagedRuntimeVersion = "v4.0";
-                appPool.Enable32BitAppOnWin64 = Properties.Settings.Default.Use32Bit;
-                site.ApplicationDefaults.ApplicationPoolName = siteName;
-                    
-                server.CommitChanges();
+                    Site site = server.Sites.Add(siteName, "http", bindingInfo, SiteDirectory + "\\Website");
+                    site.TraceFailedRequestsLogging.Enabled = true;
+                    site.TraceFailedRequestsLogging.Directory = SiteDirectory + "\\Logs";
+                    site.LogFile.Directory = SiteDirectory + "\\Logs" + "\\W3svc" + site.Id.ToString();
 
-                Directory.CreateDirectory(SiteDirectory + "\\Website");
-                SetFolderPermission(@"IIS APPPOOL\" + siteName, SiteDirectory + "\\Website");
-                SetFolderPermission(GetAuthAccounts(), SiteDirectory + "\\Website");
+                    ApplicationPool appPool = server.ApplicationPools.Add(siteName);
+                    appPool.ManagedRuntimeVersion = "v4.0";
+                    appPool.Enable32BitAppOnWin64 = Properties.Settings.Default.Use32Bit;
+                    site.ApplicationDefaults.ApplicationPoolName = siteName;
 
-                Directory.CreateDirectory(SiteDirectory + "\\Logs");
-                SetFolderPermission(GetDBAccount(), SiteDirectory + "\\Logs");
-                SetFolderPermission(GetAuthAccounts(), SiteDirectory + "\\Logs");
+                    server.CommitChanges();
 
-                return true;
+                    Directory.CreateDirectory(SiteDirectory + "\\Website");
+                    SetFolderPermission(@"IIS APPPOOL\" + siteName, SiteDirectory + "\\Website");
+                    SetFolderPermission(GetAuthAccounts(), SiteDirectory + "\\Website");
+
+                    Directory.CreateDirectory(SiteDirectory + "\\Logs");
+                    SetFolderPermission(GetDBAccount(), SiteDirectory + "\\Logs");
+                    SetFolderPermission(GetAuthAccounts(), SiteDirectory + "\\Logs");
+
+                    return true;
+                }
             }
             catch (Exception ex)
             {
@@ -276,12 +301,14 @@ namespace Vanjaro.Installer
         private bool SiteExists(string siteName)
         {
 
-            ServerManager server = new ServerManager();
-
-            foreach (var site in server.Sites)
+            using (ServerManager server = new ServerManager())
             {
-                if (site.Name.ToLower() == siteName.ToLower())
-                    return true;
+
+                foreach (var site in server.Sites)
+                {
+                    if (site.Name.ToLower() == siteName.ToLower())
+                        return true;
+                }
             }
 
             return false;
@@ -291,8 +318,11 @@ namespace Vanjaro.Installer
         {
             try
             {
-                var sites = new ServerManager().Sites;
-                return true;
+                using (ServerManager server = new ServerManager())
+                {
+                    var sites = server.Sites;
+                    return true;
+                }
             }
             catch { }
 
@@ -385,33 +415,55 @@ namespace Vanjaro.Installer
             return true;
         }
 
-        private string GetReleasePackagePath(string ReleaseType)
+        private string GetReleasePackagePath(string ReleaseType, string Architecture = null)
         {
+            if (Architecture == null)
+                Architecture = PlatformArchitecture;
+
             var ReleaseDir = Directory.GetCurrentDirectory() + @"\Releases\";
             Release rel = cbVersion.SelectedItem as Release;
-            var asset = rel.Assets.Where(r => r.Name.ToLower().Contains("platform") && r.Name.ToLower().Contains(ReleaseType.ToLower()) && r.Name.ToLower().Contains(PlatformArchitecture)).FirstOrDefault();
+            var asset = rel.Assets.Where(r => r.Name.ToLower().Contains("platform") && r.Name.ToLower().Contains(ReleaseType.ToLower()) && r.Name.ToLower().Contains(Architecture)).FirstOrDefault();
             
             return ReleaseDir + asset.Name;
         }
-        private bool ReleaseExists(string ReleaseType)
+        private bool ReleaseExists(string ReleaseType, string Architecture = null)
         {
+            if (Architecture == null)
+                Architecture = PlatformArchitecture;
+
             var ReleaseDir = Directory.GetCurrentDirectory() + @"\Releases\";
             Release rel = cbVersion.SelectedItem as Release;
-            var asset = rel.Assets.Where(r => r.Name.ToLower().Contains("platform") && r.Name.ToLower().Contains(ReleaseType.ToLower()) && r.Name.ToLower().Contains(PlatformArchitecture)).FirstOrDefault();
+            var asset = rel.Assets.Where(r => r.Name.ToLower().Contains("platform") && r.Name.ToLower().Contains(ReleaseType.ToLower()) && r.Name.ToLower().Contains(Architecture)).FirstOrDefault();
 
             if (asset != null)
             {
-                if (!File.Exists(GetReleasePackagePath(ReleaseType)))
+                if (!File.Exists(GetReleasePackagePath(ReleaseType, Architecture)))
                 {
                     if (!File.Exists(ReleaseDir))
                         Directory.CreateDirectory(ReleaseDir);
 
-                    WebClient client = new WebClient();
-                    client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
-                    client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
-                    client.DownloadFileAsync(new Uri(asset.BrowserDownloadUrl), ReleaseDir + asset.Name);
-                    pbCreateSite.Visible = true;
-                    lProgressBar.Visible = true;
+                    if (ReleaseType == "install")
+                    {
+                        WebClient client = new WebClient();
+                        client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_InstallDownloadProgressChanged);
+                        client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_InstallDownloadFileCompleted);
+                        client.DownloadFileAsync(new Uri(asset.BrowserDownloadUrl), ReleaseDir + asset.Name);
+                        pbCreateSite.Visible = true;
+                        lProgressBar.Text = "Downloading " + asset.Name;
+                        lProgressBar.Visible = true;
+                        lProgressBar.Refresh();
+                    }
+                    else
+                    {
+                        WebClient client = new WebClient();
+                        client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_UpgradeDownloadProgressChanged);
+                        client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_UpgradeDownloadFileCompleted);
+                        client.DownloadFileAsync(new Uri(asset.BrowserDownloadUrl), ReleaseDir + asset.Name);
+                        pbUpgradeSite.Visible = true;
+                        lUpgradeProgressBar.Text = "Downloading " + asset.Name;
+                        lUpgradeProgressBar.Visible = true;
+                        lUpgradeProgressBar.Refresh();
+                    }
                 }
                 else
                     return true;
@@ -420,7 +472,7 @@ namespace Vanjaro.Installer
             return false;
         }
 
-        private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        private void client_InstallDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             pbCreateSite.Visible = false;
             lProgressBar.Visible = false;
@@ -430,14 +482,30 @@ namespace Vanjaro.Installer
             bCreateSite_Click(this, null);
         }
 
-        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        private void client_InstallDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             double bytesIn = double.Parse(e.BytesReceived.ToString());
             double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
             double percentage = bytesIn / totalBytes * 100;
             pbCreateSite.Value = int.Parse(Math.Truncate(percentage).ToString());
         }
+        private void client_UpgradeDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            pbUpgradeSite.Visible = false;
+            lUpgradeProgressBar.Visible = false;
+            pbUpgradeSite.Refresh();
+            lUpgradeProgressBar.Refresh();
 
+            bUpgradeSite_Click(this, null);
+        }
+
+        private void client_UpgradeDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            double bytesIn = double.Parse(e.BytesReceived.ToString());
+            double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
+            double percentage = bytesIn / totalBytes * 100;
+            pbUpgradeSite.Value = int.Parse(Math.Truncate(percentage).ToString());
+        }
         private bool DatabaseOnline()
         {
             SqlConnection con = new SqlConnection(GetConnectionString("master"));
@@ -537,33 +605,34 @@ namespace Vanjaro.Installer
         {
             List<VanjaroSite> sites = new List<VanjaroSite>();
 
-            ServerManager server = new ServerManager();
-
-            foreach (var site in server.Sites.OrderBy(s => s.Name))
+            using (ServerManager server = new ServerManager())
             {
-                var version = GetVanjaroSiteVersion(site);
 
-                if (version != null)
-                    sites.Add(new VanjaroSite(site.Name, version));
+                foreach (var site in server.Sites.OrderBy(s => s.Name))
+                {
+                    var PhysicalPath = site.Applications.FirstOrDefault().VirtualDirectories.FirstOrDefault().PhysicalPath;
+
+                    string version = null;
+                    try
+                    {
+                        FileVersionInfo vanjaroCore = FileVersionInfo.GetVersionInfo(PhysicalPath + "\\bin\\Vanjaro.Core.dll");
+
+                        if (vanjaroCore != null)
+                            version = vanjaroCore.ProductMajorPart + "." + vanjaroCore.ProductMinorPart + "." + vanjaroCore.ProductBuildPart;
+                    }
+                    catch { }
+                    
+                    if (version != null)
+                    {
+                        var app = server.ApplicationPools.Where(a => a.Name == site.Name).SingleOrDefault();
+
+                        if (app != null)
+                            sites.Add(new VanjaroSite(site.Name, version, PhysicalPath, app.Enable32BitAppOnWin64));
+                    }
+                }
             }
 
             return sites;
-        }
-
-        private string GetVanjaroSiteVersion(Site site)
-        {
-            var SiteDirectory = site.Applications.FirstOrDefault().VirtualDirectories.FirstOrDefault().PhysicalPath;
-
-            try
-            {
-                FileVersionInfo vanjaroCore = FileVersionInfo.GetVersionInfo(SiteDirectory + "\\bin\\Vanjaro.Core.dll");
-
-                if (vanjaroCore != null)
-                    return vanjaroCore.ProductMajorPart + "." + vanjaroCore.ProductMinorPart + "." + vanjaroCore.ProductBuildPart;
-            }
-            catch { }
-
-            return null;
         }
 
         private void bDeleteSite_Click(object sender, EventArgs e)
@@ -581,7 +650,7 @@ namespace Vanjaro.Installer
                     foreach (var site in lbVanjaroSites.SelectedItems)
                         DeleteSite(site as VanjaroSite);
 
-                    lDeleteProgressBar.Visible = false;
+                    lUpgradeProgressBar.Visible = false;
 
                     bDeleteSite.Enabled = true;
                     bDeleteSite.Text = "Delete";
@@ -595,9 +664,9 @@ namespace Vanjaro.Installer
 
         private void DeleteSite(VanjaroSite site)
         {
-            lDeleteProgressBar.Visible = true;
-            lDeleteProgressBar.Text = "Deleting: " + site.Name;
-            lDeleteProgressBar.Refresh();
+            lUpgradeProgressBar.Visible = true;
+            lUpgradeProgressBar.Text = "Deleting: " + site.Name;
+            lUpgradeProgressBar.Refresh();
 
             var removeDir = RemoveSite(site.Name);
             RemoveSiteDirectories(removeDir);
@@ -650,29 +719,38 @@ namespace Vanjaro.Installer
             string removeDir = null;
             try
             {
-                ServerManager server = new ServerManager();
-               
-                var app = server.ApplicationPools.Where(a => a.Name == siteName).SingleOrDefault();
-                app.Stop();
-                server.CommitChanges();
-
-                //Give IIS time to stop app pool
-                Thread.Sleep(2500);
-
-                var site = server.Sites.Where(s => s.Name == siteName).SingleOrDefault();
-
-                if (app != null)
-                    server.ApplicationPools.Remove(app);
-
-                if (site != null)
+                using (ServerManager server = new ServerManager())
                 {
-                    removeDir = site.Applications.FirstOrDefault().VirtualDirectories.FirstOrDefault().PhysicalPath;
-                    server.Sites.Remove(site);
+                    var site = server.Sites.Where(s => s.Name == siteName).SingleOrDefault();
+                    var app = server.ApplicationPools.Where(a => a.Name == siteName).SingleOrDefault();
+
+                    //Changing the log directory releases the log files and allows directories to be removed
+                    site.LogFile.Directory = System.IO.Path.GetTempPath();
+
+                    if (app.State == ObjectState.Started || app.State == ObjectState.Starting)
+                        try { app.Stop(); } catch { }
+
+                    server.CommitChanges();
                 }
 
-                server.CommitChanges();
+                using (ServerManager server = new ServerManager())
+                {
+                    var app = server.ApplicationPools.Where(a => a.Name == siteName).SingleOrDefault();
+                    var site = server.Sites.Where(s => s.Name == siteName).SingleOrDefault();
+                    
+                    if (app != null)
+                        server.ApplicationPools.Remove(app);
+
+                    if (site != null)
+                    {
+                        removeDir = site.Applications.FirstOrDefault().VirtualDirectories.FirstOrDefault().PhysicalPath;
+                        server.Sites.Remove(site);
+                    }
+
+                    server.CommitChanges();
+                }
             }
-            catch { }
+            catch (Exception ex) { }
             return removeDir;
         }
 
@@ -696,17 +774,81 @@ namespace Vanjaro.Installer
                 MessageBox.Show(ex.Message, "Adding DNS Entry to Hosts File");
             }
         }
+
+        private void bUpgradeSite_Click(object sender, EventArgs e)
+        {
+            if (lbVanjaroSites.SelectedItems.Count > 0)
+            {
+                if (!ReleaseExists("upgrade", "x86"))
+                {
+                    return;
+                }
+                if (!ReleaseExists("upgrade", "x64"))
+                {
+                    return;
+                }
+
+                DialogResult dR = MessageBox.Show("This action cannot be done. Proceed with caution!", "Upgrade Selected Sites?", MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2);
+
+                if (dR == DialogResult.Yes)
+                {
+                    bUpgradeSite.Enabled = false;
+                    bUpgradeSite.Refresh();
+
+                    foreach (var site in lbVanjaroSites.SelectedItems)
+                        UpgradeSite(site as VanjaroSite);
+
+                    lUpgradeProgressBar.Visible = false;
+
+                    bUpgradeSite.Enabled = true;
+                    bUpgradeSite.Text = "Upgrade";
+
+                    MessageBox.Show("Selected sites upgraded", "Sites Upgraded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    BindUpgradeList();
+                }
+            }
+        }
+
+        private void UpgradeSite(VanjaroSite vanjaroSite)
+        {
+
+            var Architecture = vanjaroSite.Enable32Bit ? "x86" : "x64";
+
+            bUpgradeSite.Text = "Upgrading " + vanjaroSite.Name;
+            bUpgradeSite.Refresh();
+
+            //Copy app_offline
+            File.Copy(Directory.GetCurrentDirectory() + "\\app_offline.htm", vanjaroSite.PhysicalPath + "\\app_offline.htm");
+
+            //Extract Files
+            ExtractRelease("upgrade", Architecture, vanjaroSite.PhysicalPath);
+
+            //Remove app_offline
+            File.Delete(vanjaroSite.PhysicalPath + "\\app_offline.htm");
+
+            //Initialize Upgrade
+            Process.Start("http://" + vanjaroSite.Name.TrimEnd('/') + "/install/upgrade.aspx");
+
+        }
+
+
     }
     public class VanjaroSite
     {
-        public VanjaroSite(string Name, string Version)
+        public VanjaroSite(string Name, string Version, string PhysicalPath, bool Enable32Bit)
         {
             this.Name = Name;
             this.Version = Version;
+            this.PhysicalPath = PhysicalPath;
+            this.Enable32Bit = Enable32Bit;
         }
 
         public string Name { get; set; }
         public string Version { get; set; }
+
+        public string PhysicalPath { get; set; }
+        public bool Enable32Bit { get; set; }
         public override string ToString()
         {
             return Name + " (v" + Version + ")";
