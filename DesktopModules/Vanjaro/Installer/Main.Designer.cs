@@ -49,7 +49,7 @@
             this.bDeleteSite = new MetroFramework.Controls.MetroButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbVanjaroSites = new System.Windows.Forms.ListBox();
-            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
+            this.lDeleteProgressBar = new MetroFramework.Controls.MetroLabel();
             this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
             this.bUpgradeSite = new MetroFramework.Controls.MetroButton();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
@@ -69,7 +69,7 @@
             this.tabs.Location = new System.Drawing.Point(20, 60);
             this.tabs.Multiline = true;
             this.tabs.Name = "tabs";
-            this.tabs.SelectedIndex = 1;
+            this.tabs.SelectedIndex = 0;
             this.tabs.Size = new System.Drawing.Size(383, 390);
             this.tabs.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabs.TabIndex = 0;
@@ -241,7 +241,7 @@
             // 
             this.metroTabPage2.Controls.Add(this.bDeleteSite);
             this.metroTabPage2.Controls.Add(this.groupBox1);
-            this.metroTabPage2.Controls.Add(this.metroLabel7);
+            this.metroTabPage2.Controls.Add(this.lDeleteProgressBar);
             this.metroTabPage2.Controls.Add(this.metroProgressBar1);
             this.metroTabPage2.Controls.Add(this.bUpgradeSite);
             this.metroTabPage2.Controls.Add(this.metroLabel6);
@@ -298,16 +298,15 @@
             this.lbVanjaroSites.Size = new System.Drawing.Size(364, 141);
             this.lbVanjaroSites.TabIndex = 2;
             // 
-            // metroLabel7
+            // lDeleteProgressBar
             // 
-            this.metroLabel7.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel7.Location = new System.Drawing.Point(0, 326);
-            this.metroLabel7.Name = "metroLabel7";
-            this.metroLabel7.Size = new System.Drawing.Size(370, 23);
-            this.metroLabel7.TabIndex = 18;
-            this.metroLabel7.Text = "Downloading Release...";
-            this.metroLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.metroLabel7.Visible = false;
+            this.lDeleteProgressBar.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lDeleteProgressBar.Location = new System.Drawing.Point(0, 326);
+            this.lDeleteProgressBar.Name = "lDeleteProgressBar";
+            this.lDeleteProgressBar.Size = new System.Drawing.Size(370, 23);
+            this.lDeleteProgressBar.TabIndex = 18;
+            this.lDeleteProgressBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lDeleteProgressBar.Visible = false;
             // 
             // metroProgressBar1
             // 
@@ -391,7 +390,7 @@
         private MetroFramework.Controls.MetroLink bOtherSettings;
         private System.Windows.Forms.ListBox lbVanjaroSites;
         private System.Windows.Forms.GroupBox groupBox1;
-        private MetroFramework.Controls.MetroLabel metroLabel7;
+        private MetroFramework.Controls.MetroLabel lDeleteProgressBar;
         private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
         private MetroFramework.Controls.MetroButton bUpgradeSite;
         private MetroFramework.Controls.MetroLabel metroLabel6;

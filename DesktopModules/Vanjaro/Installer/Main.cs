@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.AccessControl;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -46,6 +47,8 @@ namespace Vanjaro.Installer
         }
         private void LoadForm()
         {
+            tabs.SelectedIndex = 0;
+
             tbSiteURL.Text = Properties.Settings.Default.SiteURL;
             tbSiteTLD.Text = Properties.Settings.Default.SiteTLD;
             tbPhysicalPath.Text = Properties.Settings.Default.PhysicalPath;
@@ -567,14 +570,23 @@ namespace Vanjaro.Installer
         {
             if (lbVanjaroSites.SelectedItems.Count > 0)
             {
-                DialogResult dR = MessageBox.Show("Delete Selected Sites?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dR = MessageBox.Show("This action cannot be done. It will remove site from IIS, delete all files, and delete database. Proceed with caution!","Delete Selected Sites?", MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2);
 
                 if (dR == DialogResult.Yes)
                 {
+                    bDeleteSite.Enabled = false;
+                    bDeleteSite.Text = "Deleting...";
+                    bDeleteSite.Refresh();
+
                     foreach (var site in lbVanjaroSites.SelectedItems)
                         DeleteSite(site as VanjaroSite);
 
-                    lProgressBar.Visible = false;
+                    lDeleteProgressBar.Visible = false;
+
+                    bDeleteSite.Enabled = true;
+                    bDeleteSite.Text = "Delete";
+
+                    MessageBox.Show("Selected sites deleted", "Sites Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     BindUpgradeList();
                 }
@@ -583,51 +595,85 @@ namespace Vanjaro.Installer
 
         private void DeleteSite(VanjaroSite site)
         {
-            lProgressBar.Visible = true;
-            lProgressBar.Text = "Deleting: " + site.Name;
-            lProgressBar.Refresh();
+            lDeleteProgressBar.Visible = true;
+            lDeleteProgressBar.Text = "Deleting: " + site.Name;
+            lDeleteProgressBar.Refresh();
 
-            RemoveSiteDirectories(site.Name);
+            var removeDir = RemoveSite(site.Name);
+            RemoveSiteDirectories(removeDir);
             RemoveDNS(site.Name);
-            RemoveSite(site.Name);
             RemoveDatabase(site.Name);
-            
         }
 
-        private void RemoveDatabase(string name)
+        private void RemoveDatabase(string siteName)
         {
-            throw new NotImplementedException();
-        }
+            string dbQuery = "USE master" + Environment.NewLine + "DROP DATABASE [" + siteName.Replace(".","_") + "]";
 
-        private void RemoveSiteDirectories(string siteName)
-        {
-            ServerManager server = new ServerManager();
-            var site = server.Sites.Where(s => s.Name == siteName).SingleOrDefault();
+            string dbPermission = "USE master" + Environment.NewLine +
+                "exec sp_revokelogin '" + "IIS APPPOOL\\" + siteName + "'";
 
-            if (site != null)
+            SqlConnection con = new SqlConnection(GetConnectionString("master"));
+            SqlCommand dbCmd = new SqlCommand(dbQuery, con);
+            SqlCommand dbPermCmd = new SqlCommand(dbPermission, con);
+
+            try
             {
-                var SiteDirectory = site.Applications.FirstOrDefault().VirtualDirectories.FirstOrDefault().PhysicalPath;
-
-                var dir = new DirectoryInfo(SiteDirectory);
-
-                if (dir != null && dir.Parent.Exists)
-                    Directory.Delete(dir.Parent.FullName, true);
+                con.Open();
+                dbCmd.ExecuteNonQuery();
+                dbPermCmd.ExecuteNonQuery();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Create Database", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            finally
+            {
+                con.Close();
             }
         }
 
-        private void RemoveSite(string siteName)
+        private void RemoveSiteDirectories(string removeDir)
         {
-            ServerManager server = new ServerManager();
-            var app = server.ApplicationPools.Where(a => a.Name == siteName).SingleOrDefault();
-            var site = server.Sites.Where(s => s.Name == siteName).SingleOrDefault();
+            try
+            {
+                if (removeDir != null)
+                {
+                    var dir = new DirectoryInfo(removeDir);
 
-            if (app != null)
-                server.ApplicationPools.Remove(app);
+                    if (dir != null && dir.Parent.Exists)
+                        Directory.Delete(dir.Parent.FullName, true);
+                }
+            }
+            catch { }
+        }
 
-            if (site != null)
-                server.Sites.Remove(site);
+        private string RemoveSite(string siteName)
+        {
+            
+            string removeDir = null;
+            try
+            {
+                ServerManager server = new ServerManager();
+               
+                var app = server.ApplicationPools.Where(a => a.Name == siteName).SingleOrDefault();
+                app.Stop();
+                server.CommitChanges();
 
-            server.CommitChanges();
+                //Give IIS time to stop app pool
+                Thread.Sleep(2500);
+
+                var site = server.Sites.Where(s => s.Name == siteName).SingleOrDefault();
+
+                if (app != null)
+                    server.ApplicationPools.Remove(app);
+
+                if (site != null)
+                {
+                    removeDir = site.Applications.FirstOrDefault().VirtualDirectories.FirstOrDefault().PhysicalPath;
+                    server.Sites.Remove(site);
+                }
+
+                server.CommitChanges();
+            }
+            catch { }
+            return removeDir;
         }
 
         private void RemoveDNS(string siteName)
