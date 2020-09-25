@@ -22,5 +22,101 @@ namespace Vanjaro.Installer.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("mysite")]
+        public string SiteURL {
+            get {
+                return ((string)(this["SiteURL"]));
+            }
+            set {
+                this["SiteURL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".vanjaro.local")]
+        public string SiteTLD {
+            get {
+                return ((string)(this["SiteTLD"]));
+            }
+            set {
+                this["SiteTLD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Sites")]
+        public string PhysicalPath {
+            get {
+                return ((string)(this["PhysicalPath"]));
+            }
+            set {
+                this["PhysicalPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(local)")]
+        public string DatabaseServer {
+            get {
+                return ((string)(this["DatabaseServer"]));
+            }
+            set {
+                this["DatabaseServer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Use32Bit {
+            get {
+                return ((bool)(this["Use32Bit"]));
+            }
+            set {
+                this["Use32Bit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SQLUsername {
+            get {
+                return ((string)(this["SQLUsername"]));
+            }
+            set {
+                this["SQLUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SQLPassword {
+            get {
+                return ((string)(this["SQLPassword"]));
+            }
+            set {
+                this["SQLPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseWindowsAuth {
+            get {
+                return ((bool)(this["UseWindowsAuth"]));
+            }
+            set {
+                this["UseWindowsAuth"] = value;
+            }
+        }
     }
 }

@@ -30,6 +30,9 @@
         {
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.lProgressBar = new MetroFramework.Controls.MetroLabel();
+            this.tbPhysicalPath = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.tbDatabaseName = new MetroFramework.Controls.MetroTextBox();
             this.tbDatabaseServer = new MetroFramework.Controls.MetroTextBox();
@@ -42,9 +45,7 @@
             this.cbVersion = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
-            this.tbPhysicalPath = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
-            this.lProgressBar = new MetroFramework.Controls.MetroLabel();
+            this.bOtherSettings = new MetroFramework.Controls.MetroLink();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -54,14 +55,19 @@
             this.metroTabControl1.Controls.Add(this.metroTabPage1);
             this.metroTabControl1.Controls.Add(this.metroTabPage2);
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.metroTabControl1.ItemSize = new System.Drawing.Size(185, 31);
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
+            this.metroTabControl1.Multiline = true;
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 0;
-            this.metroTabControl1.Size = new System.Drawing.Size(383, 406);
+            this.metroTabControl1.Size = new System.Drawing.Size(383, 390);
+            this.metroTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.metroTabControl1.TabIndex = 0;
+            this.metroTabControl1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // metroTabPage1
             // 
+            this.metroTabPage1.Controls.Add(this.bOtherSettings);
             this.metroTabPage1.Controls.Add(this.lProgressBar);
             this.metroTabPage1.Controls.Add(this.tbPhysicalPath);
             this.metroTabPage1.Controls.Add(this.metroLabel5);
@@ -76,13 +82,42 @@
             this.metroTabPage1.Controls.Add(this.tbSiteURL);
             this.metroTabPage1.Controls.Add(this.cbVersion);
             this.metroTabPage1.Controls.Add(this.metroLabel3);
+            this.metroTabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.metroTabPage1.HorizontalScrollbarBarColor = true;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 35);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(375, 367);
+            this.metroTabPage1.Size = new System.Drawing.Size(375, 351);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "New Installation";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
+            // 
+            // lProgressBar
+            // 
+            this.lProgressBar.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lProgressBar.Location = new System.Drawing.Point(0, 326);
+            this.lProgressBar.Name = "lProgressBar";
+            this.lProgressBar.Size = new System.Drawing.Size(370, 23);
+            this.lProgressBar.TabIndex = 15;
+            this.lProgressBar.Text = "Downloading Release...";
+            this.lProgressBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lProgressBar.Visible = false;
+            // 
+            // tbPhysicalPath
+            // 
+            this.tbPhysicalPath.Location = new System.Drawing.Point(0, 156);
+            this.tbPhysicalPath.Name = "tbPhysicalPath";
+            this.tbPhysicalPath.Size = new System.Drawing.Size(371, 23);
+            this.tbPhysicalPath.TabIndex = 14;
+            this.tbPhysicalPath.Text = "C:\\Sites";
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(0, 134);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(83, 19);
+            this.metroLabel5.TabIndex = 13;
+            this.metroLabel5.Text = "Physical Path";
             // 
             // metroLabel4
             // 
@@ -187,50 +222,33 @@
             this.metroTabPage2.HorizontalScrollbarBarColor = true;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 35);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(375, 286);
+            this.metroTabPage2.Size = new System.Drawing.Size(375, 343);
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "Upgrade";
             this.metroTabPage2.VerticalScrollbarBarColor = true;
             // 
-            // tbPhysicalPath
+            // bOtherSettings
             // 
-            this.tbPhysicalPath.Location = new System.Drawing.Point(0, 156);
-            this.tbPhysicalPath.Name = "tbPhysicalPath";
-            this.tbPhysicalPath.Size = new System.Drawing.Size(371, 23);
-            this.tbPhysicalPath.TabIndex = 14;
-            this.tbPhysicalPath.Text = "C:\\Sites";
-            // 
-            // metroLabel5
-            // 
-            this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(0, 134);
-            this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(83, 19);
-            this.metroLabel5.TabIndex = 13;
-            this.metroLabel5.Text = "Physical Path";
-            // 
-            // lProgressBar
-            // 
-            this.lProgressBar.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lProgressBar.Location = new System.Drawing.Point(0, 326);
-            this.lProgressBar.Name = "lProgressBar";
-            this.lProgressBar.Size = new System.Drawing.Size(370, 23);
-            this.lProgressBar.TabIndex = 15;
-            this.lProgressBar.Text = "Downloading Release...";
-            this.lProgressBar.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lProgressBar.Visible = false;
+            this.bOtherSettings.FontWeight = MetroFramework.MetroLinkWeight.Light;
+            this.bOtherSettings.Location = new System.Drawing.Point(281, 10);
+            this.bOtherSettings.Name = "bOtherSettings";
+            this.bOtherSettings.Size = new System.Drawing.Size(89, 23);
+            this.bOtherSettings.TabIndex = 16;
+            this.bOtherSettings.Text = "Other Settings";
+            this.bOtherSettings.Click += new System.EventHandler(this.bOtherSettings_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(423, 486);
+            this.ClientSize = new System.Drawing.Size(423, 470);
             this.Controls.Add(this.metroTabControl1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";
             this.Resizable = false;
             this.Text = "Vanjaro";
+            this.TextAlign = System.Windows.Forms.VisualStyles.HorizontalAlign.Center;
             this.Load += new System.EventHandler(this.Main_Load);
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
@@ -258,5 +276,6 @@
         private MetroFramework.Controls.MetroTextBox tbPhysicalPath;
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroLabel lProgressBar;
+        private MetroFramework.Controls.MetroLink bOtherSettings;
     }
 }
