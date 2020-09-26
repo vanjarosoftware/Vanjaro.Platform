@@ -118,5 +118,41 @@ namespace Vanjaro.Installer.Properties {
                 this["UseWindowsAuth"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseLocalPackages {
+            get {
+                return ((bool)(this["UseLocalPackages"]));
+            }
+            set {
+                this["UseLocalPackages"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LocalInstallPackage {
+            get {
+                return ((string)(this["LocalInstallPackage"]));
+            }
+            set {
+                this["LocalInstallPackage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LocalUpgradePackage {
+            get {
+                return ((string)(this["LocalUpgradePackage"]));
+            }
+            set {
+                this["LocalUpgradePackage"] = value;
+            }
+        }
     }
 }

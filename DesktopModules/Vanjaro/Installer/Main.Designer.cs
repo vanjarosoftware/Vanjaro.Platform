@@ -41,7 +41,7 @@
             this.pbCreateSite = new MetroFramework.Controls.MetroProgressBar();
             this.bCreateSite = new MetroFramework.Controls.MetroButton();
             this.tbSiteTLD = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.lVersion = new MetroFramework.Controls.MetroLabel();
             this.tbSiteURL = new MetroFramework.Controls.MetroTextBox();
             this.cbVersion = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
@@ -52,7 +52,7 @@
             this.lUpgradeProgressBar = new MetroFramework.Controls.MetroLabel();
             this.pbUpgradeSite = new MetroFramework.Controls.MetroProgressBar();
             this.bUpgradeSite = new MetroFramework.Controls.MetroButton();
-            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.lUpgradeVersion = new MetroFramework.Controls.MetroLabel();
             this.cbUpgradeVersion = new MetroFramework.Controls.MetroComboBox();
             this.tabs.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
@@ -69,7 +69,7 @@
             this.tabs.Location = new System.Drawing.Point(20, 60);
             this.tabs.Multiline = true;
             this.tabs.Name = "tabs";
-            this.tabs.SelectedIndex = 1;
+            this.tabs.SelectedIndex = 0;
             this.tabs.Size = new System.Drawing.Size(383, 390);
             this.tabs.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabs.TabIndex = 0;
@@ -88,7 +88,7 @@
             this.metroTabPage1.Controls.Add(this.pbCreateSite);
             this.metroTabPage1.Controls.Add(this.bCreateSite);
             this.metroTabPage1.Controls.Add(this.tbSiteTLD);
-            this.metroTabPage1.Controls.Add(this.metroLabel1);
+            this.metroTabPage1.Controls.Add(this.lVersion);
             this.metroTabPage1.Controls.Add(this.tbSiteURL);
             this.metroTabPage1.Controls.Add(this.cbVersion);
             this.metroTabPage1.Controls.Add(this.metroLabel3);
@@ -200,15 +200,15 @@
             this.tbSiteTLD.Text = ".vanjaro.local";
             this.tbSiteTLD.TextChanged += new System.EventHandler(this.tbSiteTLD_TextChanged);
             // 
-            // metroLabel1
+            // lVersion
             // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(0, 14);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(51, 19);
-            this.metroLabel1.TabIndex = 2;
-            this.metroLabel1.Text = "Version";
-            this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lVersion.AutoSize = true;
+            this.lVersion.Location = new System.Drawing.Point(0, 14);
+            this.lVersion.Name = "lVersion";
+            this.lVersion.Size = new System.Drawing.Size(51, 19);
+            this.lVersion.TabIndex = 2;
+            this.lVersion.Text = "Version";
+            this.lVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbSiteURL
             // 
@@ -244,7 +244,7 @@
             this.metroTabPage2.Controls.Add(this.lUpgradeProgressBar);
             this.metroTabPage2.Controls.Add(this.pbUpgradeSite);
             this.metroTabPage2.Controls.Add(this.bUpgradeSite);
-            this.metroTabPage2.Controls.Add(this.metroLabel6);
+            this.metroTabPage2.Controls.Add(this.lUpgradeVersion);
             this.metroTabPage2.Controls.Add(this.cbUpgradeVersion);
             this.metroTabPage2.HorizontalScrollbarBarColor = true;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 35);
@@ -327,15 +327,15 @@
             this.bUpgradeSite.Text = "Upgrade";
             this.bUpgradeSite.Click += new System.EventHandler(this.bUpgradeSite_Click);
             // 
-            // metroLabel6
+            // lUpgradeVersion
             // 
-            this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(0, 14);
-            this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(51, 19);
-            this.metroLabel6.TabIndex = 4;
-            this.metroLabel6.Text = "Version";
-            this.metroLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lUpgradeVersion.AutoSize = true;
+            this.lUpgradeVersion.Location = new System.Drawing.Point(0, 14);
+            this.lUpgradeVersion.Name = "lUpgradeVersion";
+            this.lUpgradeVersion.Size = new System.Drawing.Size(51, 19);
+            this.lUpgradeVersion.TabIndex = 4;
+            this.lUpgradeVersion.Text = "Version";
+            this.lUpgradeVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbUpgradeVersion
             // 
@@ -374,7 +374,7 @@
         private MetroFramework.Controls.MetroTabControl tabs;
         private MetroFramework.Controls.MetroTabPage metroTabPage1;
         private MetroFramework.Controls.MetroComboBox cbVersion;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroLabel lVersion;
         private MetroFramework.Controls.MetroTabPage metroTabPage2;
         private MetroFramework.Controls.MetroProgressBar pbCreateSite;
         private MetroFramework.Controls.MetroButton bCreateSite;
@@ -394,7 +394,7 @@
         private MetroFramework.Controls.MetroLabel lUpgradeProgressBar;
         private MetroFramework.Controls.MetroProgressBar pbUpgradeSite;
         private MetroFramework.Controls.MetroButton bUpgradeSite;
-        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroLabel lUpgradeVersion;
         private MetroFramework.Controls.MetroComboBox cbUpgradeVersion;
         private MetroFramework.Controls.MetroButton bDeleteSite;
     }
