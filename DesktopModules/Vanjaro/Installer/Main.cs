@@ -38,7 +38,7 @@ namespace Vanjaro.Installer
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.SiteURL = tbSiteURL.Text;
+            Properties.Settings.Default.SiteURL = string.Empty;
             Properties.Settings.Default.SiteTLD = tbSiteTLD.Text;
             Properties.Settings.Default.PhysicalPath = tbPhysicalPath.Text;
             Properties.Settings.Default.DatabaseServer = tbDatabaseServer.Text;
@@ -78,7 +78,12 @@ namespace Vanjaro.Installer
             {
                 MessageBox.Show("Unable to fetch latest Vanjaro Releases. Make sure you're connected to internet and restart application.", "Network Offline",MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                System.Windows.Forms.Application.Exit();
+                cbVersion.Visible = false;
+                cbUpgradeVersion.Visible = false;
+
+                lVersion.Visible = false;
+                lUpgradeVersion.Visible = false;
+
             }
         }
 
@@ -140,7 +145,17 @@ namespace Vanjaro.Installer
         {
             try
             {
-                var package = ZipFile.Read(GetReleasePackagePath(ReleaseType, Architecture));
+                ZipFile package = null;
+
+                if (Properties.Settings.Default.UseLocalPackages)
+                {
+                    if (ReleaseType == "install")
+                        package = ZipFile.Read(Properties.Settings.Default.LocalInstallPackage);
+                    else
+                        package = ZipFile.Read(Properties.Settings.Default.LocalUpgradePackage);
+                }
+                else
+                    package = ZipFile.Read(GetReleasePackagePath(ReleaseType, Architecture));
 
                 if (ReleaseType == "install")
                 {
@@ -357,6 +372,14 @@ namespace Vanjaro.Installer
 
         private bool ValidateSite()
         {
+            if (Properties.Settings.Default.UseLocalPackages)
+            {
+                DialogResult dR = MessageBox.Show("Are you sure you want to install: " + Properties.Settings.Default.LocalInstallPackage, "Install Local Package?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dR == DialogResult.No)
+                    return false;
+            }
+
             if (Properties.Settings.Default.Use32Bit)
             {
                 DialogResult dR = MessageBox.Show("Are you sure you want to install the 32 Bit (x86) Package? Click No to install 64 bit (x64) package", "Install 32 bit", MessageBoxButtons.YesNo);
@@ -428,6 +451,27 @@ namespace Vanjaro.Installer
         }
         private bool ReleaseExists(string ReleaseType, string Architecture = null)
         {
+            if (Properties.Settings.Default.UseLocalPackages)
+            {
+                if (ReleaseType == "install" && !File.Exists(Properties.Settings.Default.LocalInstallPackage))
+                {
+                    MessageBox.Show("Local Install Package does not exist", "Local Package", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                else if (!File.Exists(Properties.Settings.Default.LocalUpgradePackage))
+                {
+                    MessageBox.Show("Local Upgrade Package does not exist", "Local Package", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                return true;
+            }
+            else if (!cbVersion.Visible && !cbUpgradeVersion.Visible)
+            {
+                MessageBox.Show("Unable to fetch latest Vanjaro Releases. Make sure you're connected to internet and restart application.", "Network Offline", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
             if (Architecture == null)
                 Architecture = PlatformArchitecture;
 
@@ -779,6 +823,19 @@ namespace Vanjaro.Installer
         {
             if (lbVanjaroSites.SelectedItems.Count > 0)
             {
+                if (Properties.Settings.Default.UseLocalPackages)
+                {
+                    DialogResult dRR = MessageBox.Show("Are you sure you want to upgrade: " + Properties.Settings.Default.LocalUpgradePackage, "Upgrade Local Package?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (dRR == DialogResult.No)
+                        return;
+                }
+                else if (!cbVersion.Visible && !cbUpgradeVersion.Visible)
+                {
+                    MessageBox.Show("Unable to fetch latest Vanjaro Releases. Make sure you're connected to internet and restart application.", "Network Offline", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 if (!ReleaseExists("upgrade", "x86"))
                 {
                     return;
