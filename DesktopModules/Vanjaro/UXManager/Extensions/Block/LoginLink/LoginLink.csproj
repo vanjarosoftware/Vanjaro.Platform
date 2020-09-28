@@ -100,10 +100,6 @@
       <Project>{82603eb3-cfec-4101-837a-7581d3300540}</Project>
       <Name>Vanjaro.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Core\Library\Vanjaro.Core.csproj">
-      <Project>{3ed0d4a5-e2da-4dd9-ab64-9e0a2b6b4305}</Project>
-      <Name>Vanjaro.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Library\Vanjaro.UX.csproj">
       <Project>{203151e8-6239-447c-8bf3-41f864a35b23}</Project>
       <Name>Vanjaro.UX</Name>

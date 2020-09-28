@@ -83,10 +83,6 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <ProjectReference Include="..\..\..\..\Core\Library\Vanjaro.Core.csproj">
-      <Project>{3ed0d4a5-e2da-4dd9-ab64-9e0a2b6b4305}</Project>
-      <Name>Vanjaro.Core</Name>
-    </ProjectReference>
     <Reference Include="Vanjaro.UXManager.Library">
       <HintPath>..\..\..\..\..\..\..\bin\Vanjaro.UXManager.Library.dll</HintPath>
     </Reference>
