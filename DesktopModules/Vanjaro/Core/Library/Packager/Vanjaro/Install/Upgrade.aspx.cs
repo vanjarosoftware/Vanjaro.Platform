@@ -1,7 +1,10 @@
-﻿using DotNetNuke.Common.Utilities;
+﻿using DotNetNuke.Common;
+using DotNetNuke.Common.Utilities;
+using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Upgrade;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,24 +12,27 @@ using System.Web.UI.WebControls;
 
 namespace Vanjaro.Core.Packager.Vanjaro
 {
-    public partial class Install : System.Web.UI.Page
+    public partial class Upgrade : System.Web.UI.Page
     {
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Upgrade));
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            string mode = string.Empty;
-
-            if (this.Request.QueryString["mode"] != null)
+            switch (Globals.Status)
             {
-                mode = this.Request.QueryString["mode"].ToLowerInvariant();
-            }
-
-            if (mode == "upgrade")
-            {
-                Upgrade();
+                case Globals.UpgradeStatus.Upgrade:
+                    {
+                        DeleteUpgradeFile();
+                        Response.Redirect(Page.ResolveUrl("Install/Install.aspx?mode=upgrade"));
+                        break;
+                    }
+                default:
+                    UpgradePlatform();
+                    break;
             }
         }
 
-        private void Upgrade()
+        private void UpgradePlatform()
         {
             // Start Timer
             DotNetNuke.Services.Upgrade.Upgrade.StartTimer();
@@ -52,6 +58,21 @@ namespace Vanjaro.Core.Packager.Vanjaro
             HtmlUtils.WriteFooter(this.Response);
 
             DotNetNuke.Services.Upgrade.Upgrade.DeleteInstallerFiles();
+            
+            DeleteUpgradeFile();
+        }
+
+        private static void DeleteUpgradeFile()
+        {
+            // Delete Upgrade.aspx
+            try
+            {
+                FileSystemUtils.DeleteFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Install", "Upgrade.aspx"));
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("File deletion failed for [Install\\" + "Upgrade.aspx" + "]. PLEASE REMOVE THIS MANUALLY." + ex);
+            }
         }
     }
 }

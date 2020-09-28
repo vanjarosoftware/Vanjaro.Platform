@@ -11,7 +11,7 @@ namespace Vanjaro.Core.Packager.Vanjaro
 {
 
 
-    public partial class Install
+    public partial class Upgrade
     {
     }
 }
