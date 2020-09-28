@@ -416,6 +416,9 @@ mkdir Temp_DNN >NUL
 xcopy /e /i "DNN Install"\* Temp_DNN\*  /Y >NUL
 cd Temp_DNN\
 
+::Need to copy the Core DLL for Vanjaro Installer
+copy ..\..\..\..\..\bin\Vanjaro.Core.dll Temp_DNN\bin >NUL
+
 echo Optimizing DNN Install...
 
 del DNN.ico /Q >NUL 2>&1
@@ -537,7 +540,7 @@ del UpgradeTemp_DNN /Q >NUL 2>&1
 mkdir UpgradeTemp_DNN >NUL
 xcopy /e /i "DNN Upgrade"\* UpgradeTemp_DNN\*  /Y >NUL
 
-::Need to copy the Core DLL to Upgrade Package for Upgrade Page (Install.aspx) to kick off
+::Need to copy the Core DLL to Upgrade Package for Upgrade Page (Install.aspx) to kick off & for Vanjaro Installer
 copy ..\..\..\..\..\bin\Vanjaro.Core.dll UpgradeTemp_DNN\bin >NUL
 
 cd UpgradeTemp_DNN\

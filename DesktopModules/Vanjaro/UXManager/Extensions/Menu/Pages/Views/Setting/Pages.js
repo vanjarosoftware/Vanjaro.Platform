@@ -166,12 +166,7 @@
                             if (Response.IsRedirect) {
                                 window.parent.location.href = Response.RedirectURL;
                             }
-                            if ($scope.SearchKey.length > 0)
-                                $scope.FetchPages();
-                            else {
-                                $scope.ui.data.PagesTree.Options = [];
-                                $scope.ui.data.PagesTree.Options = Response.Data.PagesTree;
-                            }
+                            $scope.RemovenodeFind($scope.ui.data.PagesTree.Options, node.Value);
 
                             $scope.ui.data.DeletedPages.Options = [];
                             $scope.ui.data.DeletedPages.Options = Response.Data.DeletedPages;
@@ -465,7 +460,10 @@
                 if (isConfirm) {
                     common.webApi.post('pages/removeallpages', '', '').success(function (Response) {
                         if (Response.IsSuccess) {
-                            window.location.href = "#Pages";
+                            $scope.ui.data.DeletedPages.Options = [];
+                            $scope.ui.data.DeletedPagesCount.Options = [];
+                            $scope.Show_RecycleBin = false;
+                            $scope.HeaderText = "[L:Pages]";
                         }
                         if (Response.HasErrors) {
                             window.parent.ShowNotification('[L:DeleteAllPagesError]', Response.Message, 'error');
@@ -509,12 +507,7 @@
         };
         common.webApi.post('pages/updatesettings', 'key=' + type, request).success(function (Response) {
             if (Response.IsSuccess) {
-                if ($scope.SearchKey.length > 0)
-                    $scope.FetchPages();
-                else {
-                    $scope.ui.data.PagesTree.Options = [];
-                    $scope.ui.data.PagesTree.Options = Response.Data.PagesTree;
-                }
+                $scope.Findnode(Response.Data.PagesTree, $scope.ui.data.PagesTree.Options, node.Value);
                 $scope.init();
                 window.parent.ShowNotification(node.label, Response.Message, 'success');
             }
@@ -523,6 +516,32 @@
             }
             $scope.RenderMarkup();
         });
+    };
+
+    $scope.Findnode = function (newPages, oldPages, nodeId) {
+        if (newPages != null) {
+            $.each(newPages, function (key, v) {
+                if (nodeId == v.Value) {
+                    oldPages[key] = v;
+                    return false;
+                }
+                if (v.children)
+                    $scope.Findnode(v.children, oldPages[key].children, nodeId);
+            });
+        }
+    };
+
+    $scope.RemovenodeFind = function (oldPages, nodeId) {
+        if (oldPages != null) {
+            $.each(oldPages, function (key, v) {
+                if (nodeId == v.Value) {
+                    oldPages.splice(key, 1);
+                    return false;
+                }
+                if (v.children)
+                    $scope.RemovenodeFind(oldPages[key].children, nodeId);
+            });
+        }
     };
 
     $scope.RenderMarkup = function () {
