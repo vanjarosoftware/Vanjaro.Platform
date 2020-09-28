@@ -208,7 +208,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users
                 {
                     using (Core.Data.Entities.VanjaroRepo vrepo = new Core.Data.Entities.VanjaroRepo())
                     {
-                        vrepo.Execute("INSERT [dbo].[ProfilePropertyDefinition] ([PortalID], [ModuleDefID], [Deleted], [DataType], [DefaultValue], [PropertyCategory], [PropertyName], [Length], [Required], [ValidationExpression], [ViewOrder], [Visible], [CreatedByUserID], [CreatedOnDate], [LastModifiedByUserID], [LastModifiedOnDate], [DefaultVisibility], [ReadOnly]) VALUES (NULL, -1, 0, 361, N'', N'Preferences', N'Photo', 0, 0, NULL, 42, 1, -1, CAST(N'2000-01-01T00:00:00.000' AS DateTime), NULL, NULL, 0, 0)");
+                        vrepo.Execute("INSERT " + Core.Data.Scripts.CommonScript.TablePrefix + "[ProfilePropertyDefinition] ([PortalID], [ModuleDefID], [Deleted], [DataType], [DefaultValue], [PropertyCategory], [PropertyName], [Length], [Required], [ValidationExpression], [ViewOrder], [Visible], [CreatedByUserID], [CreatedOnDate], [LastModifiedByUserID], [LastModifiedOnDate], [DefaultVisibility], [ReadOnly]) VALUES (NULL, -1, 0, 361, N'', N'Preferences', N'Photo', 0, 0, NULL, 42, 1, -1, CAST(N'2000-01-01T00:00:00.000' AS DateTime), NULL, NULL, 0, 0)");
                     }
                     if (user.UserID == PortalSettings.Current.AdministratorId)
                     {
