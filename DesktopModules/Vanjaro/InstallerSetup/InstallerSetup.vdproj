@@ -491,6 +491,17 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_A5518DFA6CDE47FB9491F68E34EE71B8"
+                    {
+                    "Name" = "8:Vanjaro"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_001601CCD73148B2ADE2B6C720A42573"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_982409F49F3340C9B1C982EC403EBE89"
@@ -664,6 +675,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1E668A59C1C34847B6AA257B8F1C9EBC"
+            {
+            "Name" = "8:Vanjaro Installer"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:32512"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_DACE9AC2E7D14266992BA68DBA0DE295"
+            "Folder" = "8:_A5518DFA6CDE47FB9491F68E34EE71B8"
+            "WorkingFolder" = "8:_982409F49F3340C9B1C982EC403EBE89"
+            "Icon" = "8:_DACE9AC2E7D14266992BA68DBA0DE295"
+            "Feature" = "8:"
+            }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B41B69555EE24D019C5EAE92F4CD60CD"
             {
             "Name" = "8:Vanjaro Installer"
