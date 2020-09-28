@@ -158,6 +158,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -536,7 +544,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Vanjaro Installer"
         "ProductCode" = "8:{42F623CA-DB89-4F7D-91A1-20AD3F08636C}"
-        "PackageCode" = "8:{94EA08B1-1CA1-4E68-9FF0-2D705EA90331}"
+        "PackageCode" = "8:{AFA2DF12-1FCD-4418-9FF6-5EA765CA3EDA}"
         "UpgradeCode" = "8:{BC9A88B5-81D6-43FA-B707-6858CE83BDD9}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

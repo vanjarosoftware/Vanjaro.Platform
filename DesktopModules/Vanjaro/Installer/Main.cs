@@ -66,11 +66,13 @@ namespace Vanjaro.Installer
         {
             try
             {
-                cbVersion.DataSource = GetReleases();
+                var releases = GetReleases();
+
+                cbVersion.DataSource = releases;
                 cbVersion.DisplayMember = "Name";
                 cbVersion.ValueMember = "Id";
 
-                cbUpgradeVersion.DataSource = GetReleases();
+                cbUpgradeVersion.DataSource = releases;
                 cbUpgradeVersion.DisplayMember = "Name";
                 cbUpgradeVersion.ValueMember = "Id";
             }
@@ -106,6 +108,10 @@ namespace Vanjaro.Installer
                                 if (UpdateConfig())
                                 {
                                     LaunchSite();
+
+                                    MessageBox.Show("Continue installation using the site wizard...", "Site Created", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                    BindUpgradeList();
                                 }
                             }
                         }
@@ -310,7 +316,7 @@ namespace Vanjaro.Installer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Set Folder Permissions", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Error: " + ex.Message, "Set Folder Permissions", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private bool SiteExists(string siteName)
@@ -889,7 +895,11 @@ namespace Vanjaro.Installer
 
         }
 
-
+        private void bBrowsePhysicalPath_Click(object sender, EventArgs e)
+        {
+            fbdPhysicalPath.ShowDialog();
+            tbPhysicalPath.Text = fbdPhysicalPath.SelectedPath;
+        }
     }
     public class VanjaroSite
     {
