@@ -28,6 +28,7 @@ $(document).ready(function () {
     else
         CurrentExtTabUrl = window.parent.CurrentTabUrl + '?mid=0&icp=true';
 
+    window.addEventListener('message', event => {
 
         var url = 'http://library.vanjaro.local';
 

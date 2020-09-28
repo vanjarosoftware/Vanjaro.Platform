@@ -121,15 +121,28 @@ namespace Vanjaro.UXManager.Library.Controllers
                     {
                         using (StreamReader reader = new StreamReader(entry.Open()))
                         {
+                            
                             ExportTemplate exportTemplate = JsonConvert.DeserializeObject<ExportTemplate>(reader.ReadToEnd());
-                            if (exportTemplate != null && exportTemplate.Templates.FirstOrDefault() != null && exportTemplate.Templates.FirstOrDefault().Blocks.FirstOrDefault() != null)
-                            {
-                                foreach (CustomBlock block in exportTemplate.Templates.FirstOrDefault().Blocks)
-                                {
-                                    Result.Html += block.Html;
-                                    Result.Css += block.Css;
-                                }
+                            Layout pagelayout = exportTemplate.Templates.FirstOrDefault();
 
+                            if (exportTemplate != null && pagelayout != null)
+                            {
+                                if (string.IsNullOrEmpty(pagelayout.Content))
+                                {
+                                    foreach (CustomBlock cb  in pagelayout.Blocks)
+                                    {
+                                        Result.Html += cb.Html;
+                                        Result.Css += cb.Css;
+                                        Result.Name = cb.Name;
+                                    }
+                                }
+                                else
+                                { 
+                                    Result.Html = Core.Managers.PageManager.DeTokenizeLinks(pagelayout.Content.ToString(), PortalSettings.ActiveTab.PortalID);
+                                    Result.Css = Core.Managers.PageManager.DeTokenizeLinks(pagelayout.Style.ToString(), PortalSettings.ActiveTab.PortalID);
+                                    Result.Name = pagelayout.Name;
+                                }
+                                    
                                 List<ZipArchiveEntry> assets = archive.Entries.Where(e => e.FullName.StartsWith("Assets/")).ToList();
 
                                 if (assets != null && assets.Count > 0)
@@ -141,14 +154,7 @@ namespace Vanjaro.UXManager.Library.Controllers
 
                                         if (fi != null)
                                         {
-                                            try
-                                            {
-                                                FileManager.Instance.AddFile(fi, asset.Name, asset.Open());
-                                            }
-                                            catch (Exception ex)
-                                            {
-
-                                            }
+                                            FileManager.Instance.AddFile(fi, asset.Name, asset.Open());
                                         }
                                     }
                                 }
@@ -157,10 +163,14 @@ namespace Vanjaro.UXManager.Library.Controllers
                         }
                     }
                 }
+                Result.Html = Core.Managers.PageManager.DeTokenizeLinks(Result.Html, PortalSettings.ActiveTab.PortalID);
+                Result.Css = Core.Managers.PageManager.DeTokenizeLinks(Result.Css, PortalSettings.ActiveTab.PortalID);
             }
             catch (Exception ex)
             {
+                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
             }
+
             return Result;
         }
     }

@@ -826,6 +826,7 @@ namespace Vanjaro.Core
             {
                 string portalRoot = GetPortalRoot(portalId);
                 content = content.Replace(PortalRootToken, portalRoot);
+                content = content.Replace(ExportTemplateRootToken, portalRoot.EndsWith("/") ? portalRoot + "Images/" : portalRoot + "/Images/");
                 return content;
             }
 
