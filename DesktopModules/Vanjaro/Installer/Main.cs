@@ -866,7 +866,7 @@ namespace Vanjaro.Installer
                     bUpgradeSite.Enabled = true;
                     bUpgradeSite.Text = "Upgrade";
 
-                    MessageBox.Show("Selected sites upgraded", "Sites Upgraded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Continue upgrading all sites using the site wizard...", "Site Upgraded", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     BindUpgradeList();
                 }

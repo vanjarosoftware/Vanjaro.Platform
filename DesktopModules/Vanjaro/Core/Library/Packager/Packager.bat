@@ -414,10 +414,13 @@ cd ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\
 del Temp_DNN /Q >NUL 2>&1
 mkdir Temp_DNN >NUL
 xcopy /e /i "DNN Install"\* Temp_DNN\*  /Y >NUL
-cd Temp_DNN\
 
 ::Need to copy the Core DLL for Vanjaro Installer
 copy ..\..\..\..\..\bin\Vanjaro.Core.dll Temp_DNN\bin >NUL
+
+cd Temp_DNN\
+
+
 
 echo Optimizing DNN Install...
 
