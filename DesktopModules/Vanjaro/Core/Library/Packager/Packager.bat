@@ -416,6 +416,9 @@ mkdir Temp_DNN >NUL
 xcopy /e /i "DNN Install"\* Temp_DNN\*  /Y >NUL
 cd Temp_DNN\
 
+::Need to copy the Core DLL for Vanjaro Installer
+copy ..\..\..\..\..\bin\Vanjaro.Core.dll Temp_DNN\bin >NUL
+
 echo Optimizing DNN Install...
 
 del DNN.ico /Q >NUL 2>&1

@@ -73,7 +73,7 @@ li.openbtn {
 
 /*Content Pane*/
 
-.gjs-editor-cont {
+#vjEditor {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -3203,4 +3203,13 @@ div#gjs-sm-top, div#gjs-sm-right, div#gjs-sm-left, div#gjs-sm-bottom {
     -ms-animation: driftBlock 4s linear infinite;
     -o-animation: driftBlock 4s linear infinite;
     animation: driftBlock 4s linear infinite;
+}
+
+.gjs-frame-wrapper {
+    position: relative;
+    height: 100%;
+    margin: auto;
+}
+.gjs-frames {
+    height: 100%;
 }

@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{47C5CBBB-6ABB-48D7-8D15-123BF28B2BD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "DesktopModules\Vanjaro\Installer\Installer.csproj", "{94BE8ADC-CB86-477A-A734-0BB7A70DBA9F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InstallerSetup", "DesktopModules\Vanjaro\InstallerSetup\InstallerSetup.vdproj", "{6A04099D-8FCD-4747-B492-97DA77B58589}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94BE8ADC-CB86-477A-A734-0BB7A70DBA9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94BE8ADC-CB86-477A-A734-0BB7A70DBA9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94BE8ADC-CB86-477A-A734-0BB7A70DBA9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94BE8ADC-CB86-477A-A734-0BB7A70DBA9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A04099D-8FCD-4747-B492-97DA77B58589}.Debug|Any CPU.ActiveCfg = Debug
+		{6A04099D-8FCD-4747-B492-97DA77B58589}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{94BE8ADC-CB86-477A-A734-0BB7A70DBA9F} = {47C5CBBB-6ABB-48D7-8D15-123BF28B2BD7}
+		{6A04099D-8FCD-4747-B492-97DA77B58589} = {47C5CBBB-6ABB-48D7-8D15-123BF28B2BD7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54A96059-6996-42FC-B348-4E326F62E67A}
+	EndGlobalSection
+EndGlobal
