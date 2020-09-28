@@ -1,4 +1,4 @@
-﻿using Dnn.PersonaBar.Recyclebin.Components;
+using Dnn.PersonaBar.Recyclebin.Components;
 using Dnn.PersonaBar.Users.Components;
 using Dnn.PersonaBar.Users.Components.Contracts;
 using Dnn.PersonaBar.Users.Components.Dto;
@@ -549,11 +549,17 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
             try
             {
                 UserBasicDto userBasicDto = new UserBasicDto();
+                KeyValuePair<HttpStatusCode, string> response;
                 userBasicDto = JsonConvert.DeserializeObject<UserBasicDto>(userdata.UserBasicDto.ToString());
                 List<Entities.ProfileProperties> profileProperties = JsonConvert.DeserializeObject<List<Entities.ProfileProperties>>(userdata.ProfilePropertyDefinitionCollection.ToString());
                 Validate(userBasicDto);
                 int UserID = UserInfo.IsInRole("Administrators") || UserInfo.IsSuperUser ? userBasicDto.UserId : UserInfo.UserID;
-                UserInfo user = UsersController.GetUser(UserID, PortalSettings, UserInfo, out KeyValuePair<HttpStatusCode, string> response);
+                UserInfo user = UsersController.GetUser(UserID, PortalSettings, UserInfo, out response);
+                
+                //for update Super User  profile picture need Photo Member profile property
+                if (user.IsSuperUser)
+                    Managers.UserManager.AddProfileProperties(ref user, UserInfo, ref profileProperties, ref response);
+
                 if (user == null)
                 {
                     actionResult.AddError(response.Key.ToString(), response.Value);

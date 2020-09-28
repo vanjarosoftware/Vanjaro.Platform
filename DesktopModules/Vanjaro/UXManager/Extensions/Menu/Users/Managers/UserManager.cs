@@ -1,4 +1,5 @@
-﻿using Dnn.PersonaBar.Library.Common;
+using Dnn.PersonaBar.Library.Common;
+using Dnn.PersonaBar.Users.Components;
 using Dnn.PersonaBar.Users.Components.Dto;
 using DotNetNuke.Common.Lists;
 using DotNetNuke.Common.Utilities;
@@ -10,6 +11,7 @@ using DotNetNuke.Services.Localization;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
 using Vanjaro.UXManager.Extensions.Menu.Users.Entities;
 using static DotNetNuke.Web.InternalServices.CountryRegionController;
 
@@ -200,6 +202,27 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users
                 };
             }
             #endregion
+            public static void AddProfileProperties(ref UserInfo user, UserInfo UserInfo, ref List<Entities.ProfileProperties> profileProperties, ref KeyValuePair<HttpStatusCode, string> response)
+            {
+                if (profileProperties != null && profileProperties.Where(x => x.ProfilePropertyDefinition.PropertyName == "Photo").FirstOrDefault() == null)
+                {
+                    using (Core.Data.Entities.VanjaroRepo vrepo = new Core.Data.Entities.VanjaroRepo())
+                    {
+                        vrepo.Execute("INSERT [dbo].[ProfilePropertyDefinition] ([PortalID], [ModuleDefID], [Deleted], [DataType], [DefaultValue], [PropertyCategory], [PropertyName], [Length], [Required], [ValidationExpression], [ViewOrder], [Visible], [CreatedByUserID], [CreatedOnDate], [LastModifiedByUserID], [LastModifiedOnDate], [DefaultVisibility], [ReadOnly]) VALUES (NULL, -1, 0, 361, N'', N'Preferences', N'Photo', 0, 0, NULL, 42, 1, -1, CAST(N'2000-01-01T00:00:00.000' AS DateTime), NULL, NULL, 0, 0)");
+                    }
+                    if (user.UserID == PortalSettings.Current.AdministratorId)
+                    {
+                        //Clear the Portal Cache
+                        DataCache.ClearPortalCache(PortalSettings.Current.PortalId, true);
+                    }
+                    DataCache.ClearHostCache(true);
+
+                    user = UsersController.GetUser(user.UserID, PortalSettings.Current, UserInfo, out response);
+                    ProfilePropertyDefinition profilePropertyDefinition = user.Profile.ProfileProperties.GetByName("Photo");
+                    if (profilePropertyDefinition != null)
+                        profileProperties.Add(new Entities.ProfileProperties { ProfilePropertyDefinition = profilePropertyDefinition, ListEntries = new List<ListEntryInfo>() });
+                }
+            }
 
             #region Private Members
             private static bool IsAdminUser(PortalSettings portalSettings, UserInfo accessingUser, UserInfo targetUser)
