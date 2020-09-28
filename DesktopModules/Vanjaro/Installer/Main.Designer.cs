@@ -54,6 +54,8 @@
             this.bUpgradeSite = new MetroFramework.Controls.MetroButton();
             this.lUpgradeVersion = new MetroFramework.Controls.MetroLabel();
             this.cbUpgradeVersion = new MetroFramework.Controls.MetroComboBox();
+            this.fbdPhysicalPath = new System.Windows.Forms.FolderBrowserDialog();
+            this.bBrowsePhysicalPath = new MetroFramework.Controls.MetroButton();
             this.tabs.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -77,6 +79,7 @@
             // 
             // metroTabPage1
             // 
+            this.metroTabPage1.Controls.Add(this.bBrowsePhysicalPath);
             this.metroTabPage1.Controls.Add(this.bOtherSettings);
             this.metroTabPage1.Controls.Add(this.lProgressBar);
             this.metroTabPage1.Controls.Add(this.tbPhysicalPath);
@@ -126,7 +129,7 @@
             // 
             this.tbPhysicalPath.Location = new System.Drawing.Point(0, 156);
             this.tbPhysicalPath.Name = "tbPhysicalPath";
-            this.tbPhysicalPath.Size = new System.Drawing.Size(371, 23);
+            this.tbPhysicalPath.Size = new System.Drawing.Size(336, 23);
             this.tbPhysicalPath.TabIndex = 14;
             this.tbPhysicalPath.Text = "C:\\Sites";
             // 
@@ -346,6 +349,15 @@
             this.cbUpgradeVersion.Size = new System.Drawing.Size(370, 29);
             this.cbUpgradeVersion.TabIndex = 5;
             // 
+            // bBrowsePhysicalPath
+            // 
+            this.bBrowsePhysicalPath.Location = new System.Drawing.Point(342, 156);
+            this.bBrowsePhysicalPath.Name = "bBrowsePhysicalPath";
+            this.bBrowsePhysicalPath.Size = new System.Drawing.Size(28, 23);
+            this.bBrowsePhysicalPath.TabIndex = 17;
+            this.bBrowsePhysicalPath.Text = "...";
+            this.bBrowsePhysicalPath.Click += new System.EventHandler(this.bBrowsePhysicalPath_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -397,5 +409,7 @@
         private MetroFramework.Controls.MetroLabel lUpgradeVersion;
         private MetroFramework.Controls.MetroComboBox cbUpgradeVersion;
         private MetroFramework.Controls.MetroButton bDeleteSite;
+        private MetroFramework.Controls.MetroButton bBrowsePhysicalPath;
+        private System.Windows.Forms.FolderBrowserDialog fbdPhysicalPath;
     }
 }
