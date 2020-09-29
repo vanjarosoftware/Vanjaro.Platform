@@ -75,6 +75,7 @@
     <Compile Include="Entities\NotificationsViewModel.cs" />
     <Compile Include="Entities\BaseModel.cs" />
     <Compile Include="Entities\PixabayVideo.cs" />
+    <Compile Include="Components\Theme.cs" />
     <Compile Include="Entities\Theme\ThemeEditor.cs" />
     <Compile Include="Entities\Theme\ThemeEditorControl.cs" />
     <Compile Include="Entities\Theme\ThemeEditorData.cs" />

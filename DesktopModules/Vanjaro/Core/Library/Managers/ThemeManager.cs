@@ -21,21 +21,21 @@ namespace Vanjaro.Core
     {
         public class ThemeManager
         {
-            public static string GetCurrentThemeName(int? PortalID = null)
+            public static Theme GetCurrent(int? PortalID = null)
             {
-                int PortalId = -1;
-                if (PortalID != null)
-                    PortalId = PortalID.Value;
-                else if (PortalSettings.Current != null)
-                    PortalId = PortalSettings.Current.PortalId;
-                string ThemeValue = "Basic";
-                Data.Entities.Setting ThemeSetting = SettingManager.GetSettings(PortalId, -1, "setting_theme").Where(s => s.Name == "Theme").FirstOrDefault();
-                if (ThemeSetting != null)
+                if (PortalID.HasValue)
                 {
-                    ThemeValue = ThemeSetting.Value;
+                    Theme theme = new Theme(PortalID.Value);
+                    return theme;
                 }
-                return ThemeValue;
+                else
+                {
+                    Theme theme = new Theme();
+                    return theme;
+                }
             }
+
+
             public static List<string> GetControlTypes()
             {
                 List<string> result = new List<string>
@@ -101,7 +101,7 @@ namespace Vanjaro.Core
             public static void ProcessScss(int PortalID)
             {
                 StringBuilder sb = new StringBuilder();
-                string ThemeName = GetCurrentThemeName(PortalID);
+                string ThemeName = GetCurrent().ThemeName;
                 string BootstrapPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/bootstrap.scss");
                 string BeforePath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Before.scss");
                 string AfterPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/After.scss");
@@ -702,7 +702,7 @@ namespace Vanjaro.Core
                 IThemeEditor themeEditor = GetCategories().Where(c => c.Guid.ToLower() == CategoryGuid.ToLower()).FirstOrDefault();
                 if (themeEditor != null)
                 {
-                    string path = themeEditor.JsonPath.Replace("{{PortalID}}", PortalID.ToString()).Replace("{{ThemeName}}", Core.Managers.ThemeManager.GetCurrentThemeName(PortalID));
+                    string path = themeEditor.JsonPath.Replace("{{PortalID}}", PortalID.ToString()).Replace("{{ThemeName}}", Core.Managers.ThemeManager.GetCurrent().ThemeName);
                     string folder = Path.GetDirectoryName(path);
                     if (!Directory.Exists(folder))
                         Directory.CreateDirectory(folder);
@@ -712,7 +712,7 @@ namespace Vanjaro.Core
             }
             private static string GetThemeEditorValueJsonPath(int PortalId, string CategoryGuid)
             {
-                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalId + "/vThemes/" + Core.Managers.ThemeManager.GetCurrentThemeName(PortalId) + "/editor/" + CategoryGuid);
+                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalId + "/vThemes/" + Core.Managers.ThemeManager.GetCurrent().ThemeName + "/editor/" + CategoryGuid);
 
                 if (!Directory.Exists(FolderPath))
                 {
@@ -726,6 +726,8 @@ namespace Vanjaro.Core
 
                 return FolderPath + "\\theme.json";
             }
+
+
         }
     }
 }
