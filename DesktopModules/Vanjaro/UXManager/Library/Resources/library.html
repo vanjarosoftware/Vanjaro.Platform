@@ -17,6 +17,13 @@
             height: 100vh;
         }
     </style>
+    <script>
+        $(document).ready(function () {
+            var tlURL = window.parent.TemplateLibraryURL + '?tid=' + window.parent.ThemeGUID;
+            $('iframe#Block').attr('src', tlURL + '&type=' + 'block');
+            $('iframe#Page').attr('src', tlURL + '&type=' + 'page');
+        });
+    </script>
 </head>
 <body>
     <p></p>
@@ -28,10 +35,10 @@
     </nav>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="navhome" role="tabpanel">
-            <iframe scrolling="no" src="//library.vanjaro.local/home?type=block"></iframe> 
+            <iframe id="Block" scrolling="no"></iframe> 
         </div>
         <div class="tab-pane fade" id="navprofile" role="tabpanel">
-            <iframe scrolling="no" src="//library.vanjaro.local/home?type=page"></iframe>
+            <iframe id="Page" scrolling="no"></iframe>
         </div>
     </div>
 </body>

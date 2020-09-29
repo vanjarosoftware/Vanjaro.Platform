@@ -29,6 +29,7 @@ namespace Vanjaro.UXManager.Library
 {
     public partial class Base : ControlPanelBase
     {
+        private string TemplateLibraryURL = "http://library.vanjaro.local";
         private bool? m2v = null;
 
 #if DEBUG
@@ -144,8 +145,9 @@ namespace Vanjaro.UXManager.Library
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
+
             if (InjectEditor())
-                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "$(document).ready(function(){ if(typeof GrapesjsInit !='undefined') GrapesjsInit(" + JsonConvert.SerializeObject(Editor.Settings) + "); });", true);
+                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; var ThemeGUID = \"49A70BA1-206B-471F-800A-679799FF09DF\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined') GrapesjsInit(" + JsonConvert.SerializeObject(Editor.Settings) + "); });", true);
         }
 
         private BaseModel GetBaseModel()
