@@ -1,6 +1,7 @@
 ﻿using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Security.Permissions;
+using DotNetNuke.Services.Exceptions;
 using DotNetNuke.UI.Modules;
 using System;
 using System.Runtime.CompilerServices;
@@ -73,7 +74,7 @@ namespace Vanjaro.Container
             }
             catch (Exception ex)
             {
-
+                Exceptions.LogException(ex);
             }
             return false;
         }

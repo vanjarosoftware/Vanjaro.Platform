@@ -101,8 +101,13 @@ namespace Vanjaro.Core
                         }
                         #endregion
                         break;
+                    case "01.00.02":
+                        if (!IsDistribution(PortalController.Instance.GetCurrentSettings().PortalId))
+                        {
+                            HostController.Instance.Update("DisableEditBar", "False");
+                        }
+                        break;
                 }
-
             }
 
             private static void MoveFavicon()
@@ -626,6 +631,9 @@ namespace Vanjaro.Core
 
                 if (!IsVanjaroInstalled)
                     PortalController.UpdatePortalSetting(pinfo.PortalID, "IsVanjaroInstalled", "-1");
+
+                if (fi != null)
+                    UpdateValue(pinfo.PortalID, 0, "security_settings", "Picture_DefaultFolder", fi.FolderID.ToString());
             }
 
             private static void UpdatePortalSettings(List<StringValue> SettingNameValue, int PortalID, int UserID)

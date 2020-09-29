@@ -127,10 +127,13 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
                         }
 
                         string FileExtension = FileName.Substring(FileName.LastIndexOf('.'));
-                        
-                        //Force extention to be .png to maintain transparency
-                        FileName = FileName.Remove(FileName.Length - FileExtension.Length) + ".png";
-                        FileExtension = ".png";
+
+                        if (!string.IsNullOrEmpty(Suffix))
+                        {
+                            //Force extention to be .png to maintain transparency
+                            FileName = FileName.Remove(FileName.Length - FileExtension.Length) + "_edited.png";
+                            FileExtension = ".png";
+                        }
 
                         string TempFileName = FileName;
 
@@ -159,24 +162,19 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
                             }
                             else
                             {
-                                byte[] photoBytes = ToByteArray(stream);
+                                FileName = TempFileName;
+                                IFileInfo fileInfo;
 
-                                System.Drawing.Image SrcImage = System.Drawing.Image.FromStream(stream);
-                                int Width = SrcImage.Width;
-                                SrcImage.Dispose();
-
-                                using (MemoryStream inStream = new MemoryStream(photoBytes))
+                                if (!string.IsNullOrEmpty(Suffix))
                                 {
-                                    FileName = TempFileName;
-                                    IFileInfo fileInfo;
-                                    if (!string.IsNullOrEmpty(Suffix))
+                                    byte[] photoBytes = ToByteArray(stream);
+
+                                    using (MemoryStream inStream = new MemoryStream(photoBytes))
                                     {
                                         using (ImageFactory imageFactory = new ImageFactory(preserveExifData: false))
                                         {
                                             //Convert to png
-                                            ISupportedImageFormat format = new PngFormat();
-
-                                            System.Drawing.Size size = new System.Drawing.Size(Width, 0);
+                                            ISupportedImageFormat format = new PngFormat { };
 
                                             // Load, resize, set the format and quality and save an image.
                                             imageFactory.Load(inStream)
@@ -186,26 +184,25 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
                                             memoryStream.Seek(0, SeekOrigin.Begin);
                                         }
                                     }
-                                    else
-                                    {
-                                        stream.CopyTo(memoryStream);
-                                        fileInfo = FileManager.Instance.AddFile(folderInfo, FileName, memoryStream);
-                                        memoryStream.Seek(0, SeekOrigin.Begin);
-                                    }
-
-                                    if (Utils.IsImageVersionable(fileInfo))
-                                    {
-                                        BrowseUploadFactory.CropImage(FileName, FileExtension, folderInfo, memoryStream);
-                                    }
-
-                                    if (fileInfo != null)
-                                    {
-                                        result = BrowseUploadFactory.GetUrl(fileInfo.FileId);
-                                    }
+                                }
+                                else
+                                {
+                                    stream.CopyTo(memoryStream);
+                                    fileInfo = FileManager.Instance.AddFile(folderInfo, FileName, memoryStream);
+                                    memoryStream.Seek(0, SeekOrigin.Begin);
                                 }
 
-                                
+                                if (Utils.IsImageVersionable(fileInfo))
+                                {
+                                    BrowseUploadFactory.CropImage(FileName, FileExtension, folderInfo, memoryStream);
+                                }
+
+                                if (fileInfo != null)
+                                {
+                                    result = BrowseUploadFactory.GetUrl(fileInfo.FileId);
+                                }
                             }
+
                         }
                     }
 

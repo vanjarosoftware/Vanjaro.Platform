@@ -82,40 +82,41 @@
     $scope.Pipe_UserRolePagging = function (tableState) {
         //Pipe_(event) is a Method of Smart table(Grid) and using for Pagging
         var SearchKeys = {};
+        if (Boolean.parse($scope.ui.data.IsAdmin.Value)) {
+            SearchKeys.Search_Key = $('.UserRole .input-sm.form-control').val();
 
-        SearchKeys.Search_Key = $('.UserRole .input-sm.form-control').val();
-
-        if (tableState != null && tableState != 'undefiend' && tableState != '') {
-            tableState.pagination.numberOfPages = 0;
-            $scope.pagginationData = tableState;
-        }
-        if (tableState != null && tableState != 'undefiend' && tableState != '') {
-            SearchKeys.skip = tableState.pagination.start;
-            if ($scope.ui.data.UserRoles.Options.length - 1 == 0)
-                SearchKeys.skip = 0;
-            SearchKeys.pagesize = tableState.pagination.number;
-        }
-        else {
-            SearchKeys.skip = $scope.pagginationData.pagination.start,
-                SearchKeys.pagesize = $scope.pagginationData.pagination.number;
-        }
-
-        common.webApi.get('user/getuserroles', 'keyword=' + SearchKeys.Search_Key + '&userId=' + $scope.uid + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize).success(function (data) {
-            if (data != null && data.Data != null && data.IsSuccess && !data.HasErrors) {
-                if (tableState != null && tableState != 'undefiend' && tableState != '') {
-                    tableState.pagination.numberOfPages = Math.ceil(data.Data.totalRecords / SearchKeys.pagesize);
-                }
-                else {
-                    $scope.pagginationData.pagination.numberOfPages = Math.ceil(data.Data.totalRecords / SearchKeys.pagesize);
-                    $scope.pagginationData.pagination.start = 0;
-                }
-                $scope.ui.data.UserRoles.Options = data.Data.UserRoles;
+            if (tableState != null && tableState != 'undefiend' && tableState != '') {
+                tableState.pagination.numberOfPages = 0;
+                $scope.pagginationData = tableState;
             }
-        });
+            if (tableState != null && tableState != 'undefiend' && tableState != '') {
+                SearchKeys.skip = tableState.pagination.start;
+                if ($scope.ui.data.UserRoles.Options.length - 1 == 0)
+                    SearchKeys.skip = 0;
+                SearchKeys.pagesize = tableState.pagination.number;
+            }
+            else {
+                SearchKeys.skip = $scope.pagginationData.pagination.start,
+                    SearchKeys.pagesize = $scope.pagginationData.pagination.number;
+            }
 
-        setTimeout(function () {
-            $scope.InjectDatetTimePicker();
-        }, 100);
+            common.webApi.get('user/getuserroles', 'keyword=' + SearchKeys.Search_Key + '&userId=' + $scope.uid + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize).success(function (data) {
+                if (data != null && data.Data != null && data.IsSuccess && !data.HasErrors) {
+                    if (tableState != null && tableState != 'undefiend' && tableState != '') {
+                        tableState.pagination.numberOfPages = Math.ceil(data.Data.totalRecords / SearchKeys.pagesize);
+                    }
+                    else {
+                        $scope.pagginationData.pagination.numberOfPages = Math.ceil(data.Data.totalRecords / SearchKeys.pagesize);
+                        $scope.pagginationData.pagination.start = 0;
+                    }
+                    $scope.ui.data.UserRoles.Options = data.Data.UserRoles;
+                }
+            });
+
+            setTimeout(function () {
+                $scope.InjectDatetTimePicker();
+            }, 100);
+        }
     };
 
     $scope.Click_ShowTab = function (type) {

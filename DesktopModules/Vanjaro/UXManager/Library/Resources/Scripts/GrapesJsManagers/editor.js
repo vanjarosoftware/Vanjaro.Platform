@@ -8,12 +8,20 @@ global.VJIsSaveCall = true;
 global.VJLocalBlocksMarkup = '';
 global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
-global.GrapesjsInitData;
+global.vjEditorSettings;
 global.IsVJEditorSaveCall;
 
 $(document).ready(function () {
 
-    
+    var Responsive = VjLocalized.Responsive.replace(/ /g, '_').toLowerCase();
+    var Filters = VjLocalized.Filters.replace(/ /g, '_').toLowerCase();
+    var Transform = VjLocalized.Transform.replace(/ /g, '_').toLowerCase();
+    var Transitions = VjLocalized.Transitions.replace(/ /g, '_').toLowerCase();
+    var LayoutDimensions = VjLocalized.LayoutDimensions.replace(/ /g, '_').toLowerCase();
+    var Borders = VjLocalized.Borders.replace(/ /g, '_').toLowerCase();
+    var Typography = VjLocalized.Typography.replace(/ /g, '').toLowerCase();
+    var BackgroundShadow = VjLocalized.BackgroundShadow.replace(/ /g, '_').toLowerCase();
+    var Positioning = VjLocalized.Positioning.replace(/ /g, '_').toLowerCase();
 
     if (window.parent.CurrentTabUrl.indexOf('?') > 0)
         CurrentExtTabUrl = window.parent.CurrentTabUrl + '&mid=0&icp=true';
@@ -148,7 +156,7 @@ $(document).ready(function () {
 
     global.GrapesjsInit = function (data) {
 
-        global.GrapesjsInitData = data;
+        global.vjEditorSettings = data;
 
         if (getCookie("InitGrapejs") == "" || getCookie("InitGrapejs") == "true") {
             if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
@@ -303,7 +311,7 @@ $(document).ready(function () {
                                             defaults: 'auto',
                                         }]
                                     }, {
-                                        name: VjLocalized.Responsive,
+                                            name: VjLocalized.Responsive,
                                         open: false,
                                         buildProps: ['d-mobile-none', 'd-tablet-none', 'd-desktop-none'],
                                         properties: [{
@@ -347,7 +355,7 @@ $(document).ready(function () {
                                             }],
                                         }]
                                     }, {
-                                        name: VjLocalized.Borders,
+                                            name: VjLocalized.Borders,
                                         open: false,
                                         buildProps: ['border-style', 'border-color'],
                                         properties: [{
@@ -371,11 +379,11 @@ $(document).ready(function () {
                                             }],
                                         }]
                                     }, {
-                                        name: VjLocalized.BackgroundShadow,
+                                            name: VjLocalized.BackgroundShadow,
                                         open: false,
                                         buildProps: ['background-color', 'background', 'box-shadow'],
                                     }, {
-                                        name: VjLocalized.Positioning,
+                                            name: VjLocalized.Positioning,
                                         open: false,
                                         buildProps: ['float', 'display', 'position', 'top', 'right', 'left', 'bottom'],
                                         properties: [{
@@ -402,14 +410,14 @@ $(document).ready(function () {
                                             }],
                                         }]
                                     }, {
-                                        name: VjLocalized.Transform,
+                                            name: VjLocalized.Transform,
                                         open: false,
                                     }, {
-                                        name: VjLocalized.Transitions,
+                                            name: VjLocalized.Transitions,
                                         open: false,
                                         buildProps: ['transition'],
-                                    }, {
-                                        name: VjLocalized.Filters,
+                                        }, {
+                                            name: VjLocalized.Filters,
                                         open: false,
                                     }]
                                 },
@@ -558,7 +566,7 @@ $(document).ready(function () {
                             //});
 
                             //Filters
-                            VjEditor.StyleManager.addProperty(VjLocalized.Filters.toLowerCase(), {
+                            VjEditor.StyleManager.addProperty(Filters, {
                                 type: 'custom_slider',
                                 name: 'Blur',
                                 property: 'blur',
@@ -571,7 +579,7 @@ $(document).ready(function () {
                                 defaults: '0',
                             });
 
-                            VjEditor.StyleManager.addProperty(VjLocalized.Filters.toLowerCase(), {
+                            VjEditor.StyleManager.addProperty(Filters, {
                                 type: 'custom_slider',
                                 name: 'Brightness',
                                 property: 'brightness',
@@ -584,7 +592,7 @@ $(document).ready(function () {
                                 defaults: '100',
                             });
 
-                            VjEditor.StyleManager.addProperty(VjLocalized.Filters.toLowerCase(), {
+                            VjEditor.StyleManager.addProperty(Filters, {
                                 type: 'custom_slider',
                                 name: 'Contrast',
                                 property: 'contrast',
@@ -597,7 +605,7 @@ $(document).ready(function () {
                                 defaults: '100',
                             });
 
-                            VjEditor.StyleManager.addProperty(VjLocalized.Filters.toLowerCase(), {
+                            VjEditor.StyleManager.addProperty(Filters, {
                                 type: 'custom_slider',
                                 name: 'Grayscale',
                                 property: 'grayscale',
@@ -610,7 +618,7 @@ $(document).ready(function () {
                                 defaults: '0',
                             });
 
-                            VjEditor.StyleManager.addProperty(VjLocalized.Filters.toLowerCase(), {
+                            VjEditor.StyleManager.addProperty(Filters, {
                                 type: 'custom_slider',
                                 name: 'Hue-rotate',
                                 property: 'hue-rotate',
@@ -623,7 +631,7 @@ $(document).ready(function () {
                                 defaults: '0',
                             });
 
-                            VjEditor.StyleManager.addProperty(VjLocalized.Filters.toLowerCase(), {
+                            VjEditor.StyleManager.addProperty(Filters, {
                                 type: 'custom_slider',
                                 name: 'Invert',
                                 property: 'invert',
@@ -636,7 +644,7 @@ $(document).ready(function () {
                                 defaults: '0',
                             });
 
-                            VjEditor.StyleManager.addProperty(VjLocalized.Filters.toLowerCase(), {
+                            VjEditor.StyleManager.addProperty(Filters, {
                                 type: 'custom_slider',
                                 name: 'Opacity',
                                 property: 'opacity',
@@ -649,7 +657,7 @@ $(document).ready(function () {
                                 defaults: '100',
                             });
 
-                            VjEditor.StyleManager.addProperty(VjLocalized.Filters.toLowerCase(), {
+                            VjEditor.StyleManager.addProperty(Filters, {
                                 type: 'custom_slider',
                                 name: 'Saturate',
                                 property: 'saturate',
@@ -662,7 +670,7 @@ $(document).ready(function () {
                                 defaults: '100',
                             });
 
-                            VjEditor.StyleManager.addProperty(VjLocalized.Filters.toLowerCase(), {
+                            VjEditor.StyleManager.addProperty(Filters, {
                                 type: 'custom_slider',
                                 name: 'Sepia',
                                 property: 'sepia',
@@ -676,7 +684,7 @@ $(document).ready(function () {
                             });
 
                             //Transform - Rotate
-                            VjEditor.StyleManager.addProperty('transform', {
+                            VjEditor.StyleManager.addProperty(Transform, {
                                 type: 'custom_slider',
                                 name: 'Transform Rotate X',
                                 property: 'rotateX',
@@ -689,7 +697,7 @@ $(document).ready(function () {
                                 defaults: '0',
                             });
 
-                            VjEditor.StyleManager.addProperty('transform', {
+                            VjEditor.StyleManager.addProperty(Transform, {
                                 type: 'custom_slider',
                                 name: 'Transform Rotate Y',
                                 property: 'rotateY',
@@ -702,7 +710,7 @@ $(document).ready(function () {
                                 defaults: '0',
                             });
 
-                            VjEditor.StyleManager.addProperty('transform', {
+                            VjEditor.StyleManager.addProperty(Transform, {
                                 type: 'custom_slider',
                                 name: 'Transform Rotate Z',
                                 property: 'rotateZ',
@@ -716,7 +724,7 @@ $(document).ready(function () {
                             });
 
                             //Transform - Scale
-                            VjEditor.StyleManager.addProperty('transform', {
+                            VjEditor.StyleManager.addProperty(Transform, {
                                 type: 'custom_slider',
                                 name: 'Transform Scale X',
                                 property: 'scaleX',
@@ -727,7 +735,7 @@ $(document).ready(function () {
                                 defaults: '1',
                             });
 
-                            VjEditor.StyleManager.addProperty('transform', {
+                            VjEditor.StyleManager.addProperty(Transform, {
                                 type: 'custom_slider',
                                 name: 'Transform Scale Y',
                                 property: 'scaleY',
@@ -738,7 +746,7 @@ $(document).ready(function () {
                                 defaults: '1',
                             });
 
-                            VjEditor.StyleManager.addProperty('transform', {
+                            VjEditor.StyleManager.addProperty(Transform, {
                                 type: 'custom_slider',
                                 name: 'Transform Scale Z',
                                 property: 'scaleZ',
@@ -750,7 +758,7 @@ $(document).ready(function () {
                             });
 
                             //Transform - Skew
-                            VjEditor.StyleManager.addProperty('transform', {
+                            VjEditor.StyleManager.addProperty(Transform, {
                                 type: 'custom_slider',
                                 name: 'Transform Skew X',
                                 property: 'skewX',
@@ -762,7 +770,7 @@ $(document).ready(function () {
                                 defaults: '0',
                             });
 
-                            VjEditor.StyleManager.addProperty('transform', {
+                            VjEditor.StyleManager.addProperty(Transform, {
                                 type: 'custom_slider',
                                 name: 'Transform Skew Y',
                                 property: 'skewY',
@@ -774,7 +782,7 @@ $(document).ready(function () {
                                 defaults: '0',
                             });
 
-                            VjEditor.StyleManager.addProperty('layout_&_dimensions', {
+                            VjEditor.StyleManager.addProperty(LayoutDimensions, {
                                 type: 'custom-styleslider',
                                 name: 'Margin',
                                 property: 'margin',
@@ -792,7 +800,7 @@ $(document).ready(function () {
                                 defaults: 0,
                             });
 
-                            VjEditor.StyleManager.addProperty('layout_&_dimensions', {
+                            VjEditor.StyleManager.addProperty(LayoutDimensions, {
                                 type: 'custom-styleslider',
                                 name: 'Padding',
                                 property: 'padding',
@@ -810,7 +818,7 @@ $(document).ready(function () {
                                 defaults: 0,
                             });
 
-                            VjEditor.StyleManager.addProperty('borders', {
+                            VjEditor.StyleManager.addProperty(Borders, {
                                 type: 'custom-styleslider',
                                 name: 'border-width',
                                 property: 'border-width',
@@ -828,7 +836,7 @@ $(document).ready(function () {
                                 defaults: 0,
                             }, { at: 0 });
 
-                            VjEditor.StyleManager.addProperty('borders', {
+                            VjEditor.StyleManager.addProperty(Borders, {
                                 type: 'custom-styleslider',
                                 name: 'border-radius',
                                 property: 'border-radius',
@@ -847,9 +855,13 @@ $(document).ready(function () {
                             });
 
                             VjEditor.on('load', function () {
-                                LoadApps();
+
+                                if (data.EditPage) {
+                                    LoadApps();
+                                    LoadDesignBlocks();
+                                }
+
                                 LoadCustomBlocks();
-                                LoadDesignBlocks();
                                 VjEditor.UndoManager.start();
                                 if (VJIsPageDraft == "False" || VJIsLocked == "True")
                                     $('#VJBtnPublish').addClass('disabled');
@@ -1096,34 +1108,34 @@ $(document).ready(function () {
 
                                     if (classList.contains(desktop)) {
                                         setTimeout(function () {
-                                            VjEditor.StyleManager.getProperty(VjLocalized.Responsive.toLowerCase(), desktop).setValue('true');
+                                            VjEditor.StyleManager.getProperty(Responsive, desktop).setValue('true');
                                         });
                                     }
                                     else {
                                         setTimeout(function () {
-                                            VjEditor.StyleManager.getProperty(VjLocalized.Responsive.toLowerCase(), desktop).setValue('false');
+                                            VjEditor.StyleManager.getProperty(Responsive, desktop).setValue('false');
                                         });
                                     }
 
                                     if (classList.contains(tablet)) {
                                         setTimeout(function () {
-                                            VjEditor.StyleManager.getProperty(VjLocalized.Responsive.toLowerCase(), tablet).setValue('true');
+                                            VjEditor.StyleManager.getProperty(Responsive, tablet).setValue('true');
                                         });
                                     }
                                     else {
                                         setTimeout(function () {
-                                            VjEditor.StyleManager.getProperty(VjLocalized.Responsive.toLowerCase(), tablet).setValue('false');
+                                            VjEditor.StyleManager.getProperty(Responsive, tablet).setValue('false');
                                         });
                                     }
 
                                     if (classList.contains(mobile)) {
                                         setTimeout(function () {
-                                            VjEditor.StyleManager.getProperty(VjLocalized.Responsive.toLowerCase(), mobile).setValue('true');
+                                            VjEditor.StyleManager.getProperty(Responsive, mobile).setValue('true');
                                         });
                                     }
                                     else {
                                         setTimeout(function () {
-                                            VjEditor.StyleManager.getProperty(VjLocalized.Responsive.toLowerCase(), mobile).setValue('false');
+                                            VjEditor.StyleManager.getProperty(Responsive, mobile).setValue('false');
                                         });
                                     }
                                 }
@@ -1131,52 +1143,52 @@ $(document).ready(function () {
                                 if (typeof model.getStyle()['filter'] != "undefined") {
 
                                     if (model.getStyle()['filter'].indexOf('blur') != -1)
-                                        VjEditor.StyleManager.getProperty(VjLocalized.Filters.toLowerCase(), 'blur').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Filters, 'blur').view.setValue('true');
 
                                     if (model.getStyle()['filter'].indexOf('brightness') != -1)
-                                        VjEditor.StyleManager.getProperty(VjLocalized.Filters.toLowerCase(), 'brightness').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Filters, 'brightness').view.setValue('true');
 
                                     if (model.getStyle()['filter'].indexOf('contrast') != -1)
-                                        VjEditor.StyleManager.getProperty(VjLocalized.Filters.toLowerCase(), 'contrast').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Filters, 'contrast').view.setValue('true');
 
                                     if (model.getStyle()['filter'].indexOf('grayscale') != -1)
-                                        VjEditor.StyleManager.getProperty(VjLocalized.Filters.toLowerCase(), 'grayscale').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Filters, 'grayscale').view.setValue('true');
 
                                     if (model.getStyle()['filter'].indexOf('hue-rotate') != -1)
-                                        VjEditor.StyleManager.getProperty(VjLocalized.Filters.toLowerCase(), 'hue-rotate').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Filters, 'hue-rotate').view.setValue('true');
 
                                     if (model.getStyle()['filter'].indexOf('invert') != -1)
-                                        VjEditor.StyleManager.getProperty(VjLocalized.Filters.toLowerCase(), 'invert').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Filters, 'invert').view.setValue('true');
 
                                     if (model.getStyle()['filter'].indexOf('opacity') != -1)
-                                        VjEditor.StyleManager.getProperty(VjLocalized.Filters.toLowerCase(), 'opacity').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Filters, 'opacity').view.setValue('true');
 
                                     if (model.getStyle()['filter'].indexOf('saturate') != -1)
-                                        VjEditor.StyleManager.getProperty(VjLocalized.Filters.toLowerCase(), 'saturate').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Filters, 'saturate').view.setValue('true');
 
                                     if (model.getStyle()['filter'].indexOf('sepia') != -1)
-                                        VjEditor.StyleManager.getProperty(VjLocalized.Filters.toLowerCase(), 'sepia').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Filters, 'sepia').view.setValue('true');
                                 }
 
                                 if (typeof model.getStyle()['transform'] != "undefined") {
 
                                     if (model.getStyle()['transform'].indexOf('rotateX') != -1)
-                                        VjEditor.StyleManager.getProperty('transform', 'rotateX').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Transform, 'rotateX').view.setValue('true');
 
                                     if (model.getStyle()['transform'].indexOf('rotateY') != -1)
-                                        VjEditor.StyleManager.getProperty('transform', 'rotateY').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Transform, 'rotateY').view.setValue('true');
 
                                     if (model.getStyle()['transform'].indexOf('rotateZ') != -1)
-                                        VjEditor.StyleManager.getProperty('transform', 'rotateZ').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Transform, 'rotateZ').view.setValue('true');
 
                                     if (model.getStyle()['transform'].indexOf('scaleX') != -1)
-                                        VjEditor.StyleManager.getProperty('transform', 'scaleX').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Transform, 'scaleX').view.setValue('true');
 
                                     if (model.getStyle()['transform'].indexOf('scaleY') != -1)
-                                        VjEditor.StyleManager.getProperty('transform', 'scaleY').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Transform, 'scaleY').view.setValue('true');
 
                                     if (model.getStyle()['transform'].indexOf('scaleZ') != -1)
-                                        VjEditor.StyleManager.getProperty('transform', 'scaleZ').view.setValue('true');
+                                        VjEditor.StyleManager.getProperty(Transform, 'scaleZ').view.setValue('true');
                                 }
 
                                 $('.tlb-app-setting-panel').hide();
@@ -1230,7 +1242,7 @@ $(document).ready(function () {
                                         dataPane.destroy();
                                 }
 
-                                var flexProperty = VjEditor.StyleManager.getProperty('responsive', 'flex-direction');
+                                var flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
 
                                 if (model.attributes.type == 'grid') {
 
@@ -1238,7 +1250,7 @@ $(document).ready(function () {
 
                                     if (flexProperty.length == 0) {
 
-                                        VjEditor.StyleManager.addProperty('responsive', {
+                                        VjEditor.StyleManager.addProperty(Responsive, {
                                             type: 'radio',
                                             name: 'Reverse Columns',
                                             property: 'flex-direction',
@@ -1252,7 +1264,7 @@ $(document).ready(function () {
                                             }],
                                         });
 
-                                        flexProperty = VjEditor.StyleManager.getProperty('responsive', 'flex-direction');
+                                        flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
                                     }
 
                                     var flexDirection = model.components().models[0].getStyle()['flex-direction'];
@@ -1264,7 +1276,7 @@ $(document).ready(function () {
                                 }
                                 else {
                                     if (typeof flexProperty != 'undefined')
-                                        VjEditor.StyleManager.removeProperty('responsive', 'flex-direction');
+                                        VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
                                 }
 
                                 if (model.attributes.type == 'heading' || model.attributes.type == 'text' || model.attributes.type == 'button' || model.attributes.type == 'list' || model.attributes.type == 'link') {
@@ -1274,8 +1286,8 @@ $(document).ready(function () {
                                         fontfamilylist.push({ value: v.Value, name: v.Name });
                                     });
 
-                                    VjEditor.StyleManager.addSector('typography', {
-                                        name: 'Typography',
+                                    VjEditor.StyleManager.addSector(Typography, {
+                                        name: VjLocalized.Typography,
                                         open: false,
                                         buildProps: ['color', 'font-family', 'font-size', 'line-height', 'letter-spacing', 'word-spacing', 'font-weight', 'font-style', 'text-transform', 'text-decoration', 'text-shadow'],
                                         properties: [{
@@ -1402,8 +1414,8 @@ $(document).ready(function () {
                                     }, { at: 1 })
                                 }
                                 else {
-                                    if (typeof VjEditor.StyleManager.getSector('typography') != 'undefined')
-                                        VjEditor.StyleManager.removeSector('typography');
+                                    if (typeof VjEditor.StyleManager.getSector(Typography) != 'undefined')
+                                        VjEditor.StyleManager.removeSector(Typography);
                                 }
 
                                 $(VjEditor.StyleManager.getSectors().models).each(function (index, value) {
@@ -1458,18 +1470,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Width*/
-                                if (property == "width" && typeof model.getStyle()['width'] != 'undefined' && VjEditor.StyleManager.getProperty('layout_&_dimensions', 'width').length != 0) {
+                                if (property == "width" && typeof model.getStyle()['width'] != 'undefined' && VjEditor.StyleManager.getProperty(LayoutDimensions, 'width').length != 0) {
                                     if (model.getStyle()['width'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty('layout_&_dimensions', 'width').set({ 'min': 1, 'max': 1920, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('layout_&_dimensions').attributes.properties.models[0].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(LayoutDimensions, 'width').set({ 'min': 1, 'max': 1920, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[0].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 1920,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['width'].indexOf('%') > -1 || model.getStyle()['width'].indexOf('vw') > -1) {
-                                        VjEditor.StyleManager.getProperty('layout_&_dimensions', 'width').set({ 'min': 1, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('layout_&_dimensions').attributes.properties.models[0].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(LayoutDimensions, 'width').set({ 'min': 1, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[0].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 100,
                                             'step': 1,
@@ -1478,18 +1490,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Height*/
-                                if (property == "height" && typeof model.getStyle()['height'] != 'undefined' && VjEditor.StyleManager.getProperty('layout_&_dimensions', 'height').length != 0) {
+                                if (property == "height" && typeof model.getStyle()['height'] != 'undefined' && VjEditor.StyleManager.getProperty(LayoutDimensions, 'height').length != 0) {
                                     if (model.getStyle()['height'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty('layout_&_dimensions', 'height').set({ 'min': 1, 'max': 1080, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('layout_&_dimensions').attributes.properties.models[1].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(LayoutDimensions, 'height').set({ 'min': 1, 'max': 1080, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[1].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 1080,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['height'].indexOf('%') > -1 || model.getStyle()['height'].indexOf('vh') > -1) {
-                                        VjEditor.StyleManager.getProperty('layout_&_dimensions', 'height').set({ 'min': 1, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('layout_&_dimensions').attributes.properties.models[1].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(LayoutDimensions, 'height').set({ 'min': 1, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[1].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 100,
                                             'step': 1,
@@ -1500,18 +1512,18 @@ $(document).ready(function () {
                                 /*Min-Height*/
                                 if (property == "min-height" && typeof model.getStyle()['min-height'] != 'undefined') {
                                     if (model.getStyle()['min-height'].indexOf('px') > -1) {
-                                        if (VjEditor.StyleManager.getProperty('layout_&_dimensions', 'max-height').length > 0)
-                                            VjEditor.StyleManager.getProperty('layout_&_dimensions', 'max-height').set({ 'min': 1, 'max': 1080, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('layout_&_dimensions').attributes.properties.models[3].view.el).find('input[type="range"]').attr({
+                                        if (VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-height').length > 0)
+                                            VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-height').set({ 'min': 1, 'max': 1080, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 1080,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['min-height'].indexOf('%') > -1 || model.getStyle()['min-height'].indexOf('vh') > -1) {
-                                        if (VjEditor.StyleManager.getProperty('layout_&_dimensions', 'max-height').length > 0)
-                                            VjEditor.StyleManager.getProperty('layout_&_dimensions', 'max-height').set({ 'min': 1, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('layout_&_dimensions').attributes.properties.models[3].view.el).find('input[type="range"]').attr({
+                                        if (VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-height').length > 0)
+                                            VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-height').set({ 'min': 1, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 100,
                                             'step': 1,
@@ -1520,18 +1532,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Max-Width*/
-                                if (property == "max-width" && typeof model.getStyle()['max-width'] != 'undefined' && VjEditor.StyleManager.getProperty('layout_&_dimensions', 'max-width').length != 0) {
+                                if (property == "max-width" && typeof model.getStyle()['max-width'] != 'undefined' && VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-width').length != 0) {
                                     if (model.getStyle()['max-width'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty('layout_&_dimensions', 'max-width').set({ 'min': 1, 'max': 1920, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('layout_&_dimensions').attributes.properties.models[2].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-width').set({ 'min': 1, 'max': 1920, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 1920,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['max-width'].indexOf('%') > -1 || model.getStyle()['max-width'].indexOf('vw') > -1) {
-                                        VjEditor.StyleManager.getProperty('layout_&_dimensions', 'max-width').set({ 'min': 1, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('layout_&_dimensions').attributes.properties.models[2].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-width').set({ 'min': 1, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 100,
                                             'step': 1,
@@ -1540,26 +1552,26 @@ $(document).ready(function () {
                                 }
 
                                 /*Font Size*/
-                                if (property == 'font-size' && typeof model.getStyle()['font-size'] != 'undefined' && VjEditor.StyleManager.getProperty('typography', 'font-size').length != 0) {
+                                if (property == 'font-size' && typeof model.getStyle()['font-size'] != 'undefined' && VjEditor.StyleManager.getProperty(Typography, 'font-size').length != 0) {
                                     if (model.getStyle()['font-size'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty('typography', 'font-size').set({ 'min': 10, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('typography').attributes.properties.models[2].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Typography, 'font-size').set({ 'min': 10, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
                                             'min': 10,
                                             'max': 100,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['font-size'].indexOf('rem') > -1 || model.getStyle()['font-size'].indexOf('em') > -1) {
-                                        VjEditor.StyleManager.getProperty('typography', 'font-size').set({ 'min': .1, 'max': 10, 'step': .1 });
-                                        $(VjEditor.StyleManager.getSector('typography').attributes.properties.models[2].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Typography, 'font-size').set({ 'min': .1, 'max': 10, 'step': .1 });
+                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
                                             'min': .1,
                                             'max': 10,
                                             'step': .1,
                                         });
                                     }
                                     else if (model.getStyle()['font-size'].indexOf('%') > -1) {
-                                        VjEditor.StyleManager.getProperty('typography', 'font-size').set({ 'min': 0, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('typography').attributes.properties.models[2].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Typography, 'font-size').set({ 'min': 0, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
                                             'min': 0,
                                             'max': 100,
                                             'step': 1,
@@ -1568,18 +1580,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Line Height*/
-                                if (property == 'line-height' && typeof model.getStyle()['line-height'] != 'undefined' && VjEditor.StyleManager.getProperty('typography', 'line-height').length != 0) {
+                                if (property == 'line-height' && typeof model.getStyle()['line-height'] != 'undefined' && VjEditor.StyleManager.getProperty(Typography, 'line-height').length != 0) {
                                     if (model.getStyle()['line-height'].indexOf('px') > -1 || model.getStyle()['line-height'].indexOf('%') > -1) {
-                                        VjEditor.StyleManager.getProperty('typography', 'line-height').set({ 'min': 0, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('typography').attributes.properties.models[3].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Typography, 'line-height').set({ 'min': 0, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
                                             'min': 0,
                                             'max': 100,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['line-height'].indexOf('rem') > -1 || model.getStyle()['line-height'].indexOf('em') > -1) {
-                                        VjEditor.StyleManager.getProperty('typography', 'line-height').set({ 'min': .1, 'max': 10, 'step': .1 });
-                                        $(VjEditor.StyleManager.getSector('typography').attributes.properties.models[3].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Typography, 'line-height').set({ 'min': .1, 'max': 10, 'step': .1 });
+                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
                                             'min': .1,
                                             'max': 10,
                                             'step': .1,
@@ -1588,18 +1600,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Letter Spacing*/
-                                if (property == 'letter-spacing' && typeof model.getStyle()['letter-spacing'] != 'undefined' && VjEditor.StyleManager.getProperty('typography', 'letter-spacing').length != 0) {
+                                if (property == 'letter-spacing' && typeof model.getStyle()['letter-spacing'] != 'undefined' && VjEditor.StyleManager.getProperty(Typography, 'letter-spacing').length != 0) {
                                     if (model.getStyle()['letter-spacing'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty('typography', 'letter-spacing').set({ 'min': 0, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('typography').attributes.properties.models[4].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Typography, 'letter-spacing').set({ 'min': 0, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[4].view.el).find('input[type="range"]').attr({
                                             'min': 0,
                                             'max': 100,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['letter-spacing'].indexOf('rem') > -1 || model.getStyle()['letter-spacing'].indexOf('em') > -1) {
-                                        VjEditor.StyleManager.getProperty('typography', 'letter-spacing').set({ 'min': .1, 'max': 25, 'step': .1 });
-                                        $(VjEditor.StyleManager.getSector('typography').attributes.properties.models[4].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Typography, 'letter-spacing').set({ 'min': .1, 'max': 25, 'step': .1 });
+                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[4].view.el).find('input[type="range"]').attr({
                                             'min': .1,
                                             'max': 25,
                                             'step': .1,
@@ -1608,18 +1620,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Word Spacing*/
-                                if (property == 'word-spacing' && typeof model.getStyle()['word-spacing'] != 'undefined' && VjEditor.StyleManager.getProperty('typography', 'word-spacing').length != 0) {
+                                if (property == 'word-spacing' && typeof model.getStyle()['word-spacing'] != 'undefined' && VjEditor.StyleManager.getProperty(Typography, 'word-spacing').length != 0) {
                                     if (model.getStyle()['word-spacing'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty('typography', 'word-spacing').set({ 'min': 0, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('typography').attributes.properties.models[5].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Typography, 'word-spacing').set({ 'min': 0, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[5].view.el).find('input[type="range"]').attr({
                                             'min': 0,
                                             'max': 100,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['word-spacing'].indexOf('rem') > -1 || model.getStyle()['word-spacing'].indexOf('em') > -1) {
-                                        VjEditor.StyleManager.getProperty('typography', 'word-spacing').set({ 'min': .1, 'max': 25, 'step': .1 });
-                                        $(VjEditor.StyleManager.getSector('typography').attributes.properties.models[5].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Typography, 'word-spacing').set({ 'min': .1, 'max': 25, 'step': .1 });
+                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[5].view.el).find('input[type="range"]').attr({
                                             'min': .1,
                                             'max': 25,
                                             'step': .1,
@@ -1628,18 +1640,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Border Width*/
-                                if (property == "border-width" && typeof model.getStyle()['border-width'] != 'undefined' && VjEditor.StyleManager.getProperty('borders', 'border-width').length != 0) {
+                                if (property == "border-width" && typeof model.getStyle()['border-width'] != 'undefined' && VjEditor.StyleManager.getProperty(Borders, 'border-width').length != 0) {
                                     if (model.getStyle()['border-width'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty('borders', 'border-width').set({ 'min': 1, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('borders').attributes.properties.models[0].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Borders, 'border-width').set({ 'min': 1, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Borders).attributes.properties.models[0].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 100,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['border-width'].indexOf('em') > -1) {
-                                        VjEditor.StyleManager.getProperty('borders', 'border-width').set({ 'min': .1, 'max': 10, 'step': .1 });
-                                        $(VjEditor.StyleManager.getSector('borders').attributes.properties.models[0].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Borders, 'border-width').set({ 'min': .1, 'max': 10, 'step': .1 });
+                                        $(VjEditor.StyleManager.getSector(Borders).attributes.properties.models[0].view.el).find('input[type="range"]').attr({
                                             'min': .1,
                                             'max': 10,
                                             'step': .1,
@@ -1648,18 +1660,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Border Radius*/
-                                if (property == "border-radius" && typeof model.getStyle()['border-radius'] != 'undefined' && VjEditor.StyleManager.getProperty('borders', 'border-radius').length != 0) {
+                                if (property == "border-radius" && typeof model.getStyle()['border-radius'] != 'undefined' && VjEditor.StyleManager.getProperty(Borders, 'border-radius').length != 0) {
                                     if (model.getStyle()['border-radius'].indexOf('px') > -1 || model.getStyle()['border-radius'].indexOf('%') > -1) {
-                                        VjEditor.StyleManager.getProperty('borders', 'border-radius').set({ 'min': 0, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector('borders').attributes.properties.models[3].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Borders, 'border-radius').set({ 'min': 0, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Borders).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
                                             'min': 0,
                                             'max': 100,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['border-radius'].indexOf('em') > -1) {
-                                        VjEditor.StyleManager.getProperty('borders', 'border-radius').set({ 'min': 0, 'max': 10, 'step': .1 });
-                                        $(VjEditor.StyleManager.getSector('borders').attributes.properties.models[3].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Borders, 'border-radius').set({ 'min': 0, 'max': 10, 'step': .1 });
+                                        $(VjEditor.StyleManager.getSector(Borders).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
                                             'min': 0,
                                             'max': 10,
                                             'step': .1,
@@ -2205,7 +2217,7 @@ $(document).ready(function () {
             $('#dnn_ContentPane').addClass("sidebar-open").removeClass('sidebar-close');
             $('.sidebar').animate({ "left": "0" }, "fast").removeClass('settingclosebtn');
             $('.panel-top, .add-custom , #ContentBlocks').show();
-            window.GrapesjsInit(global.GrapesjsInitData);
+            window.GrapesjsInit(global.vjEditorSettings);
             DestroyAppActionMenu();
         });
     };

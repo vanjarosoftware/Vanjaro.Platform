@@ -1,0 +1,14 @@
+name: Move issue to Completed in Triage Project
+on:
+  issues:
+    types: [labeled]
+jobs:
+  Move_Labeled_Issue_On_Project_Board:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: konradpabjan/move-labeled-or-milestoned-issue@v2.0
+      with:
+        action-token: "${{ secrets.GITHUB_TOKEN }}"
+        project-url: "https://github.com/vanjarosoftware/Vanjaro.Platform/projects/3"
+        column-name: "Completed"
+        label-name: "Release: Patch"

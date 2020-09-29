@@ -200,8 +200,6 @@ namespace Vanjaro.Core
                     CompilationResult result = SassCompiler.Compile(sb.ToString(), HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/"));
                     File.WriteAllText(ThemeCss, result.CompiledContent);
                     PortalController.IncrementCrmVersion(PortalID);
-
-                    UnloadSassCompiler();
                 }
             }
 
@@ -212,9 +210,9 @@ namespace Vanjaro.Core
             /// </summary>
             public static void UnloadSassCompiler()
             {
-                foreach (var p in Process.GetProcesses().Where(p => p.ProcessName.ToLower() == "w3wp"))
+                try
                 {
-                    foreach (ProcessModule mod in p.Modules)
+                    foreach (ProcessModule mod in Process.GetCurrentProcess().Modules)
                     {
                         if (mod.ModuleName.ToLower() == "libsass.dll")
                         {
@@ -223,6 +221,8 @@ namespace Vanjaro.Core
                         }
                     }
                 }
+                catch { }
+
             }
 
             public static void Save(string CategoryGuid, List<ThemeEditorValue> ThemeEditorValues)
@@ -530,7 +530,7 @@ namespace Vanjaro.Core
                                 if (slider != null)
                                 {
                                     string value = GetGuidValue(themeEditorValues, slider);
-                                    sb.Append("<div class=\"field csslider optioncontrol \" id=" + item.Guid + "><label>" + slider.Title + "</label>  <span class=\"input-wrapper\"><input type=\"range\" value=" + value + " guid=" + slider.Guid + " name=" + slider.Title + " value=" + value + " min=" + slider.RangeMin + " max=" + slider.RangeMax + " /><input type=\"number\" guid=" + slider.Guid + " name=" + slider.Title + " value=" + value + " min=" + slider.RangeMin + " max=" + slider.RangeMax + "><span class=\"units\">" + slider.Suffix + "</span></span> " + GetCssMarkup(slider.Guid, slider.CustomCSS, slider.PreviewCSS, slider.LessVariable, item.Sass) + GetPvNotAvailableMarkup(slider.PreviewCSS) + "</div>");
+                                    sb.Append("<div class=\"field csslider optioncontrol\" id=" + item.Guid + "><label>" + slider.Title + "</label>  <span class=\"input-wrapper\"><input type=\"range\" value=" + value + " guid=" + slider.Guid + " name=" + slider.Title + " value=" + value + " min=" + slider.RangeMin + " max=" + slider.RangeMax + " /><input type=\"number\" guid=" + slider.Guid + " name=" + slider.Title + " value=" + value + " min=" + slider.RangeMin + " max=" + slider.RangeMax + "><span class=\"units\">" + slider.Suffix + "</span></span> " + GetCssMarkup(slider.Guid, slider.CustomCSS, slider.PreviewCSS, slider.LessVariable, item.Sass) + GetPvNotAvailableMarkup(slider.PreviewCSS) + "</div>");
                                 }
                             }
                             else if (ctl.Type == "Dropdown")

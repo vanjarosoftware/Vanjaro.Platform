@@ -57,7 +57,8 @@
     Library: "[LS:Library]",
     TemplateLibrary: "[LS:TemplateLibrary]",
     PrefixAppName: "[LS:PrefixAppName]",
-    ExportMessage: "[LS:ExportMessage]"
+    ExportMessage: "[LS:ExportMessage]",
+    Typography: "[LS:Typography]"
 };
 
 $.fn.dnnModuleDragDrop = function (options) {

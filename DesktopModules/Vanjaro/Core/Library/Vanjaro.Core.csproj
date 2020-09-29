@@ -97,12 +97,13 @@
     <Compile Include="Factories\SettingFactory.cs" />
     <Compile Include="Factories\WorkflowFactory.cs" />
     <Compile Include="Managers\CookieManager.cs" />
-    <Compile Include="Packager\Vanjaro\Install\Install.aspx.cs">
-      <DependentUpon>Install.aspx</DependentUpon>
+    <Compile Include="Managers\SignatureManager.cs" />
+    <Compile Include="Packager\Vanjaro\Install\Upgrade.aspx.cs">
+      <DependentUpon>Upgrade.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Packager\Vanjaro\Install\Install.aspx.designer.cs">
-      <DependentUpon>Install.aspx</DependentUpon>
+    <Compile Include="Packager\Vanjaro\Install\Upgrade.aspx.designer.cs">
+      <DependentUpon>Upgrade.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\GlobalAssemblyInfo.cs" />
     <Compile Include="Managers\BlockManager.cs" />
@@ -250,7 +251,7 @@
     <Content Include="Packager\Vanjaro\bin\x64\libsass.dll" />
     <Content Include="Packager\Vanjaro\bin\LibSassHost.dll" />
     <Content Include="Packager\Vanjaro\bin\System.Buffers.dll" />
-    <Content Include="Packager\Vanjaro\Install\Install.aspx" />
+    <Content Include="Packager\Vanjaro\Install\Upgrade.aspx" />
     <Content Include="Packager\Vanjaro\Install\Install.htm" />
     <Content Include="Packager\Vanjaro\vcustom.css" />
     <Content Include="License.txt" />
@@ -438,6 +439,7 @@
     <Content Include="Themes\Basic\templates\website\Signup.json" />
     <Content Include="Install\Core.01.00.01.SqlDataProvider" />
     <Content Include="Packager\Packager.bat" />
+    <Content Include="Install\Core.01.00.02.SqlDataProvider" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

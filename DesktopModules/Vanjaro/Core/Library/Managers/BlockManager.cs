@@ -167,7 +167,7 @@ namespace Vanjaro.Core
 
             public static string GetTemplateDir(PortalSettings PortalSettings, string Block)
             {
-                return GetVirtualPath() + GetTheme() + "Blocks\\" + Block + "\\Templates\\";
+                return GetVirtualPath() + GetTheme(ThemeManager.GetCurrentThemeName()) + "Blocks\\" + Block + "\\Templates\\";
             }
 
             public static void UpdateDesignElement(PortalSettings PortalSettings, Dictionary<string, string> Attributes)
@@ -353,8 +353,8 @@ namespace Vanjaro.Core
                     string Theme = Core.Managers.ThemeManager.GetCurrentThemeName();
                     ExportTemplate exportTemplate = new ExportTemplate
                     {
-                        Guid = Guid.NewGuid().ToString(),
-                        Type = TemplateType.BlockTemplate.ToString(),
+                        Name = customBlock.Name,
+                        Type = TemplateType.Block.ToString(),
                         UpdatedOn = DateTime.UtcNow,
                         Templates = new List<Layout>(),
                         ThemeName = Theme,
@@ -390,7 +390,7 @@ namespace Vanjaro.Core
                         {
                             using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                             {
-                                AddZipItem("ExportTemplate.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
+                                AddZipItem("Template.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
 
                                 if (Assets != null && Assets.Count > 0)
                                 {
@@ -408,7 +408,7 @@ namespace Vanjaro.Core
                             }
                             fileBytes = memoryStream.ToArray();
                         }
-                        string fileName = customBlock.Name + "_BlockTemplate.zip";
+                        string fileName = customBlock.Name + "_Block.zip";
                         Response.Content = new ByteArrayContent(fileBytes.ToArray());
                         Response.Content.Headers.Add("x-filename", fileName);
                         Response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");

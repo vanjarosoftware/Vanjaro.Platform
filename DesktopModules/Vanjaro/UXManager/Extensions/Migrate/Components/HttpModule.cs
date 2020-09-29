@@ -59,10 +59,12 @@ namespace Vanjaro.Migrate.Components
                                 string ControlPanel = HostController.Instance.GetSettings().ContainsKey("ControlPanel") ? HostController.Instance.GetSettings()["ControlPanel"].Value.ToLower() : null;
 
                                 HostController.Instance.GetSettings()["ControlPanel"].Value = "DesktopModules/Vanjaro/UXManager/Library/Base.ascx";
+                                HostController.Instance.GetSettings()["DisableEditBar"].Value = "True";
 
                                 _Page.PreRender += delegate (object ss, EventArgs ee)
                                 {
                                     HostController.Instance.GetSettings()["ControlPanel"].Value = "DesktopModules/admin/Dnn.PersonaBar/UserControls/PersonaBarContainer.ascx";
+                                    HostController.Instance.GetSettings()["DisableEditBar"].Value = "False";
                                 };
                             }
                             else
