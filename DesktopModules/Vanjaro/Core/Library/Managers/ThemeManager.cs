@@ -200,8 +200,6 @@ namespace Vanjaro.Core
                     CompilationResult result = SassCompiler.Compile(sb.ToString(), HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/"));
                     File.WriteAllText(ThemeCss, result.CompiledContent);
                     PortalController.IncrementCrmVersion(PortalID);
-
-                    UnloadSassCompiler();
                 }
             }
 
