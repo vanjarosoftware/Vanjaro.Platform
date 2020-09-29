@@ -237,7 +237,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
 
                 if (portalId > 0)
                 {
-                    Core.Managers.SettingManager.ApplyingSettings(portalId);
+                    Core.Managers.SettingManager.ApplyingSettings(true, portalId);
                 }
 
                 actionResult.IsSuccess = true;
@@ -250,10 +250,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 return actionResult;
             }
         }
-
-
-
-
         public static ActionResult DeletePortal(int portalId, PortalSettings portalSettings)
         {
             ActionResult actionResult = new ActionResult();
@@ -292,9 +288,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 return actionResult;
             }
         }
-
-
-        private static string GetDomainName()
+        public static string GetDomainName()
         {
             return HttpContext.Current != null ? Globals.GetDomainName(HttpContext.Current.Request, true) : string.Empty;
         }
@@ -305,7 +299,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             portalInfo.RegisterTabId = SignUpTab != null && !SignUpTab.IsDeleted ? SignUpTab.TabID : Null.NullInteger;
             PortalController.Instance.UpdatePortalInfo(portalInfo);
         }
-        private static string GetAbsoluteServerPath()
+        public static string GetAbsoluteServerPath()
         {
             string strServerPath = string.Empty;
             if (HttpContext.Current != null)
@@ -319,7 +313,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             }
             return strServerPath;
         }
-
         private static void DeleteVanjaroPortal(int PortalID)
         {
             Core.Factories.PortalFactory.DeletePages(PortalID);
