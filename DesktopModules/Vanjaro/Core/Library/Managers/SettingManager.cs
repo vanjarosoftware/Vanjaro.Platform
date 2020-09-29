@@ -45,7 +45,7 @@ namespace Vanjaro.Core
                 return SettingFactory.GetSettings(PortalID, TabID, Identifier);
             }
 
-            public static void ApplyingSettings(int? PortalID = null)
+            public static void ApplyingSettings(bool ApplyTemplates, int? PortalID = null)
             {
                 int Index = 0;
                 foreach (PortalInfo pinfo in PortalController.Instance.GetPortals())
@@ -63,7 +63,7 @@ namespace Vanjaro.Core
 
                         if ((PortalID.HasValue && PortalID.Value == pinfo.PortalID) || !PortalID.HasValue)
                         {
-                            DoIUpgradeable(pinfo);
+                            DoIUpgradeable(pinfo, ApplyTemplates);
                         }
                     }
                     catch (Exception ex)
@@ -189,7 +189,7 @@ namespace Vanjaro.Core
                     CopyAll(diSourceSubDir, nextTargetSubDir);
                 }
             }
-            private static void DoIUpgradeable(PortalInfo pinfo)
+            private static void DoIUpgradeable(PortalInfo pinfo, bool ApplyTemplates)
             {
                 UserInfo uInfo = UserController.Instance.GetCurrentUserInfo();
 
@@ -245,222 +245,12 @@ namespace Vanjaro.Core
 
                     #endregion
 
-                    #region Applying Home and Signup layout
-
-                    List<Layout> pageLayouts = GetLayouts(pinfo);
-                    TabInfo HomeTab = TabController.Instance.GetTabByName("Home", pinfo.PortalID);
-                    Layout homelayout = pageLayouts.Where(a => a.Name == "Home").FirstOrDefault();
-                    PortalSettings portalSettings = new PortalSettings(pinfo);
-                    if (HomeTab != null && homelayout != null && portalSettings != null)
+                    if (ApplyTemplates)
                     {
-                        ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
-
-                        if (portalSettings.ActiveTab == null)
-                        {
-                            portalSettings.ActiveTab = new TabInfo();
-                        }
-
-                        portalSettings.ActiveTab.TabID = HomeTab.TabID;
-                        PortalController.UpdatePortalSetting(pinfo.PortalID, "Redirect_AfterLogin", HomeTab.TabID.ToString(), false, portalSettings.CultureCode, false);
-                        Dictionary<string, object> LayoutData = new Dictionary<string, object>
-                        {
-                            ["IsPublished"] = false,
-                            ["Comment"] = string.Empty,
-                            ["gjs-assets"] = string.Empty,
-                            ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(homelayout.Style.ToString(), pinfo.PortalID),
-                            ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(homelayout.Content.ToString(), pinfo.PortalID),
-                            ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(homelayout.ContentJSON.ToString(), pinfo.PortalID),
-                            ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(homelayout.StyleJSON.ToString(), pinfo.PortalID)
-                        };
-                        Core.Managers.PageManager.Update(portalSettings, LayoutData);
-
-                        Pages Page = Managers.PageManager.GetPages(HomeTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
-
-                        if (Page != null && uInfo != null)
-                        {
-                            WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
-                            Page.Version = 1;
-                            Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
-                            Page.IsPublished = true;
-                            Page.PublishedBy = uInfo.UserID;
-                            Page.PublishedOn = DateTime.UtcNow;
-                            PageFactory.Update(Page, uInfo.UserID);
-                        }
-                        pinfo.HomeTabId = HomeTab != null && !HomeTab.IsDeleted ? HomeTab.TabID : Null.NullInteger;
-
+                        List<Layout> pageLayouts = GetLayouts(pinfo);
+                        ApplyDefaultLayouts(pinfo, uInfo, pageLayouts);
+                        pinfo.LogoFile = fi.FolderPath + "vanjaro_logo.png";
                     }
-
-                    TabInfo SignUpTab = TabController.Instance.GetTabByName("Signup", pinfo.PortalID);
-                    Layout Signuplayout = pageLayouts.Where(a => a.Name == "Signup").FirstOrDefault();
-                    if (SignUpTab != null && Signuplayout != null && portalSettings != null)
-                    {
-                        ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
-
-                        if (portalSettings.ActiveTab == null)
-                        {
-                            portalSettings.ActiveTab = new TabInfo();
-                        }
-
-                        portalSettings.ActiveTab.TabID = SignUpTab.TabID;
-                        Dictionary<string, object> LayoutData = new Dictionary<string, object>
-                        {
-                            ["IsPublished"] = false,
-                            ["Comment"] = string.Empty,
-                            ["gjs-assets"] = string.Empty,
-                            ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.Style.ToString(), pinfo.PortalID),
-                            ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.Content.ToString(), pinfo.PortalID),
-                            ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.ContentJSON.ToString(), pinfo.PortalID),
-                            ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.StyleJSON.ToString(), pinfo.PortalID)
-                        };
-                        Core.Managers.PageManager.Update(portalSettings, LayoutData);
-
-                        Pages Page = Managers.PageManager.GetPages(SignUpTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
-
-
-                        if (Page != null && uInfo != null)
-                        {
-                            WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
-                            Page.Version = 1;
-                            Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
-                            Page.IsPublished = true;
-                            Page.PublishedBy = uInfo.UserID;
-                            Page.PublishedOn = DateTime.UtcNow;
-                            PageFactory.Update(Page, uInfo.UserID);
-                        }
-                    }
-
-                    TabInfo NotFoundTab = TabController.Instance.GetTabByName("404 Error Page", pinfo.PortalID);
-                    Layout NotFoundPagelayout = pageLayouts.Where(a => a.Name == "NotFoundPage").FirstOrDefault();
-                    if (NotFoundTab != null && NotFoundPagelayout != null && portalSettings != null)
-                    {
-                        ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
-
-                        if (portalSettings.ActiveTab == null)
-                        {
-                            portalSettings.ActiveTab = new TabInfo();
-                        }
-
-                        portalSettings.ActiveTab.TabID = NotFoundTab.TabID;
-                        Dictionary<string, object> LayoutData = new Dictionary<string, object>
-                        {
-                            ["IsPublished"] = false,
-                            ["Comment"] = string.Empty,
-                            ["gjs-assets"] = string.Empty,
-                            ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.Style.ToString(), pinfo.PortalID),
-                            ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.Content.ToString(), pinfo.PortalID),
-                            ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.ContentJSON.ToString(), pinfo.PortalID),
-                            ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.StyleJSON.ToString(), pinfo.PortalID)
-                        };
-                        Core.Managers.PageManager.Update(portalSettings, LayoutData);
-
-                        Pages Page = Managers.PageManager.GetPages(NotFoundTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
-
-
-                        if (Page != null && uInfo != null)
-                        {
-                            WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
-                            Page.Version = 1;
-                            Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
-                            Page.IsPublished = true;
-                            Page.PublishedBy = uInfo.UserID;
-                            Page.PublishedOn = DateTime.UtcNow;
-                            PageFactory.Update(Page, uInfo.UserID);
-                        }
-
-                        pinfo.Custom404TabId = NotFoundTab.TabID;
-                    }
-
-                    TabInfo ProfileTab = TabController.Instance.GetTabByName("Profile", pinfo.PortalID);
-                    Layout Profilelayout = pageLayouts.Where(a => a.Name == "Profile").FirstOrDefault();
-                    if (ProfileTab != null && Profilelayout != null && portalSettings != null)
-                    {
-                        ProfileTab.ParentId = TabController.Instance.GetTabByName("User", pinfo.PortalID).TabID;
-                        TabController.Instance.UpdateTab(ProfileTab);
-                        ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
-                        pinfo.UserTabId = ProfileTab.TabID;
-                        if (portalSettings.ActiveTab == null)
-                        {
-                            portalSettings.ActiveTab = new TabInfo();
-                        }
-
-                        portalSettings.ActiveTab.TabID = ProfileTab.TabID;
-                        Dictionary<string, object> LayoutData = new Dictionary<string, object>
-                        {
-                            ["IsPublished"] = false,
-                            ["Comment"] = string.Empty,
-                            ["gjs-assets"] = string.Empty,
-                            ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.Style.ToString(), pinfo.PortalID),
-                            ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.Content.ToString(), pinfo.PortalID),
-                            ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.ContentJSON.ToString(), pinfo.PortalID),
-                            ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.StyleJSON.ToString(), pinfo.PortalID)
-                        };
-                        Core.Managers.PageManager.Update(portalSettings, LayoutData);
-
-                        Pages Page = Managers.PageManager.GetPages(ProfileTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
-
-
-                        if (Page != null && uInfo != null)
-                        {
-                            WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
-                            Page.Version = 1;
-                            Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
-                            Page.IsPublished = true;
-                            Page.PublishedBy = uInfo.UserID;
-                            Page.PublishedOn = DateTime.UtcNow;
-                            PageFactory.Update(Page, uInfo.UserID);
-                        }
-
-                    }
-
-                    TabInfo SearchResultTab = TabController.Instance.GetTabByName("Search Results", pinfo.PortalID);
-                    Layout SearchResultlayout = pageLayouts.Where(a => a.Name == "SearchResults").FirstOrDefault();
-                    if (SearchResultTab != null && SearchResultlayout != null && portalSettings != null)
-                    {
-                        ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
-                        if (portalSettings.ActiveTab == null)
-                        {
-                            portalSettings.ActiveTab = new TabInfo();
-                        }
-
-                        portalSettings.ActiveTab.TabID = SearchResultTab.TabID;
-                        Dictionary<string, object> LayoutData = new Dictionary<string, object>
-                        {
-                            ["IsPublished"] = false,
-                            ["Comment"] = string.Empty,
-                            ["gjs-assets"] = string.Empty,
-                            ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.Style.ToString(), pinfo.PortalID),
-                            ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.Content.ToString(), pinfo.PortalID),
-                            ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.ContentJSON.ToString(), pinfo.PortalID),
-                            ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.StyleJSON.ToString(), pinfo.PortalID)
-                        };
-                        Core.Managers.PageManager.Update(portalSettings, LayoutData);
-
-                        Pages Page = Managers.PageManager.GetPages(SearchResultTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
-
-
-                        if (Page != null && uInfo != null)
-                        {
-                            WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
-                            Page.Version = 1;
-                            Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
-                            Page.IsPublished = true;
-                            Page.PublishedBy = uInfo.UserID;
-                            Page.PublishedOn = DateTime.UtcNow;
-                            PageFactory.Update(Page, uInfo.UserID);
-                        }
-
-                    }
-
-
-                    #endregion
-
-                    #region Update Default SignUp Tab and Search Results page
-
-                    pinfo.RegisterTabId = SignUpTab != null && !SignUpTab.IsDeleted ? SignUpTab.TabID : Null.NullInteger;
-                    pinfo.LogoFile = fi.FolderPath + "vanjaro_logo.png";
-                    pinfo.SearchTabId = SearchResultTab != null && !SearchResultTab.IsDeleted ? SearchResultTab.TabID : Null.NullInteger;
-
-                    #endregion
 
                     #region Update SEO Settings
                     List<StringValue> SeoSettings = new List<StringValue>
@@ -475,9 +265,9 @@ namespace Vanjaro.Core
                         new StringValue { Text = "DefaultIconLocation", Value = "icons/Font Awesome" },
                     };
                     UpdatePortalSettings(SeoSettings, pinfo.PortalID, uInfo.UserID);
-                    #endregion
+                    #endregion                    
                 }
-                if (!IsVanjaroInstalled)
+                if (!IsVanjaroInstalled && ApplyTemplates)
                 {
                     #region Signin Tab
                     if (pinfo.LoginTabId == -1)
@@ -634,6 +424,223 @@ namespace Vanjaro.Core
 
                 if (fi != null)
                     UpdateValue(pinfo.PortalID, 0, "security_settings", "Picture_DefaultFolder", fi.FolderID.ToString());
+            }
+            public static void ApplyDefaultLayouts(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts)
+            {
+                #region Applying Home and Signup layout
+
+                TabInfo HomeTab = TabController.Instance.GetTabByName("Home", pinfo.PortalID);
+                Layout homelayout = pageLayouts.Where(a => a.Name == "Home").FirstOrDefault();
+                PortalSettings portalSettings = new PortalSettings(pinfo);
+                if (HomeTab != null && homelayout != null && portalSettings != null)
+                {
+                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+
+                    if (portalSettings.ActiveTab == null)
+                    {
+                        portalSettings.ActiveTab = new TabInfo();
+                    }
+
+                    portalSettings.ActiveTab.TabID = HomeTab.TabID;
+                    PortalController.UpdatePortalSetting(pinfo.PortalID, "Redirect_AfterLogin", HomeTab.TabID.ToString(), false, portalSettings.CultureCode, false);
+                    Dictionary<string, object> LayoutData = new Dictionary<string, object>
+                    {
+                        ["IsPublished"] = false,
+                        ["Comment"] = string.Empty,
+                        ["gjs-assets"] = string.Empty,
+                        ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(homelayout.Style.ToString(), pinfo.PortalID),
+                        ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(homelayout.Content.ToString(), pinfo.PortalID),
+                        ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(homelayout.ContentJSON.ToString(), pinfo.PortalID),
+                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(homelayout.StyleJSON.ToString(), pinfo.PortalID)
+                    };
+                    Core.Managers.PageManager.Update(portalSettings, LayoutData);
+
+                    Pages Page = Managers.PageManager.GetPages(HomeTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
+
+                    if (Page != null && uInfo != null)
+                    {
+                        WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
+                        Page.Version = 1;
+                        Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
+                        Page.IsPublished = true;
+                        Page.PublishedBy = uInfo.UserID;
+                        Page.PublishedOn = DateTime.UtcNow;
+                        PageFactory.Update(Page, uInfo.UserID);
+                    }
+                    pinfo.HomeTabId = HomeTab != null && !HomeTab.IsDeleted ? HomeTab.TabID : Null.NullInteger;
+
+                }
+
+                TabInfo SignUpTab = TabController.Instance.GetTabByName("Signup", pinfo.PortalID);
+                Layout Signuplayout = pageLayouts.Where(a => a.Name == "Signup").FirstOrDefault();
+                if (SignUpTab != null && Signuplayout != null && portalSettings != null)
+                {
+                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+
+                    if (portalSettings.ActiveTab == null)
+                    {
+                        portalSettings.ActiveTab = new TabInfo();
+                    }
+
+                    portalSettings.ActiveTab.TabID = SignUpTab.TabID;
+                    Dictionary<string, object> LayoutData = new Dictionary<string, object>
+                    {
+                        ["IsPublished"] = false,
+                        ["Comment"] = string.Empty,
+                        ["gjs-assets"] = string.Empty,
+                        ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.Style.ToString(), pinfo.PortalID),
+                        ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.Content.ToString(), pinfo.PortalID),
+                        ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.ContentJSON.ToString(), pinfo.PortalID),
+                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.StyleJSON.ToString(), pinfo.PortalID)
+                    };
+                    Core.Managers.PageManager.Update(portalSettings, LayoutData);
+
+                    Pages Page = Managers.PageManager.GetPages(SignUpTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
+
+
+                    if (Page != null && uInfo != null)
+                    {
+                        WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
+                        Page.Version = 1;
+                        Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
+                        Page.IsPublished = true;
+                        Page.PublishedBy = uInfo.UserID;
+                        Page.PublishedOn = DateTime.UtcNow;
+                        PageFactory.Update(Page, uInfo.UserID);
+                    }
+                }
+
+                TabInfo NotFoundTab = TabController.Instance.GetTabByName("404 Error Page", pinfo.PortalID);
+                Layout NotFoundPagelayout = pageLayouts.Where(a => a.Name == "NotFoundPage").FirstOrDefault();
+                if (NotFoundTab != null && NotFoundPagelayout != null && portalSettings != null)
+                {
+                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+
+                    if (portalSettings.ActiveTab == null)
+                    {
+                        portalSettings.ActiveTab = new TabInfo();
+                    }
+
+                    portalSettings.ActiveTab.TabID = NotFoundTab.TabID;
+                    Dictionary<string, object> LayoutData = new Dictionary<string, object>
+                    {
+                        ["IsPublished"] = false,
+                        ["Comment"] = string.Empty,
+                        ["gjs-assets"] = string.Empty,
+                        ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.Style.ToString(), pinfo.PortalID),
+                        ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.Content.ToString(), pinfo.PortalID),
+                        ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.ContentJSON.ToString(), pinfo.PortalID),
+                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.StyleJSON.ToString(), pinfo.PortalID)
+                    };
+                    Core.Managers.PageManager.Update(portalSettings, LayoutData);
+
+                    Pages Page = Managers.PageManager.GetPages(NotFoundTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
+
+
+                    if (Page != null && uInfo != null)
+                    {
+                        WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
+                        Page.Version = 1;
+                        Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
+                        Page.IsPublished = true;
+                        Page.PublishedBy = uInfo.UserID;
+                        Page.PublishedOn = DateTime.UtcNow;
+                        PageFactory.Update(Page, uInfo.UserID);
+                    }
+
+                    pinfo.Custom404TabId = NotFoundTab.TabID;
+                }
+
+                TabInfo ProfileTab = TabController.Instance.GetTabByName("Profile", pinfo.PortalID);
+                Layout Profilelayout = pageLayouts.Where(a => a.Name == "Profile").FirstOrDefault();
+                if (ProfileTab != null && Profilelayout != null && portalSettings != null)
+                {
+                    ProfileTab.ParentId = TabController.Instance.GetTabByName("User", pinfo.PortalID).TabID;
+                    TabController.Instance.UpdateTab(ProfileTab);
+                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+                    pinfo.UserTabId = ProfileTab.TabID;
+                    if (portalSettings.ActiveTab == null)
+                    {
+                        portalSettings.ActiveTab = new TabInfo();
+                    }
+
+                    portalSettings.ActiveTab.TabID = ProfileTab.TabID;
+                    Dictionary<string, object> LayoutData = new Dictionary<string, object>
+                    {
+                        ["IsPublished"] = false,
+                        ["Comment"] = string.Empty,
+                        ["gjs-assets"] = string.Empty,
+                        ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.Style.ToString(), pinfo.PortalID),
+                        ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.Content.ToString(), pinfo.PortalID),
+                        ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.ContentJSON.ToString(), pinfo.PortalID),
+                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.StyleJSON.ToString(), pinfo.PortalID)
+                    };
+                    Core.Managers.PageManager.Update(portalSettings, LayoutData);
+
+                    Pages Page = Managers.PageManager.GetPages(ProfileTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
+
+
+                    if (Page != null && uInfo != null)
+                    {
+                        WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
+                        Page.Version = 1;
+                        Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
+                        Page.IsPublished = true;
+                        Page.PublishedBy = uInfo.UserID;
+                        Page.PublishedOn = DateTime.UtcNow;
+                        PageFactory.Update(Page, uInfo.UserID);
+                    }
+
+                }
+
+                TabInfo SearchResultTab = TabController.Instance.GetTabByName("Search Results", pinfo.PortalID);
+                Layout SearchResultlayout = pageLayouts.Where(a => a.Name == "SearchResults").FirstOrDefault();
+                if (SearchResultTab != null && SearchResultlayout != null && portalSettings != null)
+                {
+                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+                    if (portalSettings.ActiveTab == null)
+                    {
+                        portalSettings.ActiveTab = new TabInfo();
+                    }
+
+                    portalSettings.ActiveTab.TabID = SearchResultTab.TabID;
+                    Dictionary<string, object> LayoutData = new Dictionary<string, object>
+                    {
+                        ["IsPublished"] = false,
+                        ["Comment"] = string.Empty,
+                        ["gjs-assets"] = string.Empty,
+                        ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.Style.ToString(), pinfo.PortalID),
+                        ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.Content.ToString(), pinfo.PortalID),
+                        ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.ContentJSON.ToString(), pinfo.PortalID),
+                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.StyleJSON.ToString(), pinfo.PortalID)
+                    };
+                    Core.Managers.PageManager.Update(portalSettings, LayoutData);
+
+                    Pages Page = Managers.PageManager.GetPages(SearchResultTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
+
+
+                    if (Page != null && uInfo != null)
+                    {
+                        WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
+                        Page.Version = 1;
+                        Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
+                        Page.IsPublished = true;
+                        Page.PublishedBy = uInfo.UserID;
+                        Page.PublishedOn = DateTime.UtcNow;
+                        PageFactory.Update(Page, uInfo.UserID);
+                    }
+
+                }
+
+
+                #endregion
+
+                #region Update Default SignUp Tab and Search Results page
+
+                pinfo.RegisterTabId = SignUpTab != null && !SignUpTab.IsDeleted ? SignUpTab.TabID : Null.NullInteger;
+                pinfo.SearchTabId = SearchResultTab != null && !SearchResultTab.IsDeleted ? SearchResultTab.TabID : Null.NullInteger;
+
+                #endregion
             }
 
             private static void UpdatePortalSettings(List<StringValue> SettingNameValue, int PortalID, int UserID)

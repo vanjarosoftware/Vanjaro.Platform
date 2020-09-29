@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.UI;
 using Vanjaro.Common.ASPNET;
@@ -752,39 +753,50 @@ namespace Vanjaro.Core
             {
                 if (url.Contains(','))
                 {
-                    return url;
+                    List<string> result = new List<string>();
+                    foreach (var item in url.Split(','))
+                    {
+                        var obj = item.Split(' ');
+                        result.Add(ExtractAndProcessLink(item, Assets) + (obj.Length > 1 ? (" " + item.Split(' ')[1]) : ""));
+                    }
+                    return string.Join(",", result);
                 }
                 else
                 {
-                    url = url.Split('?')[0];
-                    string newurl = ExportTemplateRootToken + System.IO.Path.GetFileName(url);
-                    if (!Assets.ContainsKey(newurl))
-                    {
-                        Assets.Add(newurl, url);
-                    }
-                    else if (Assets.ContainsKey(newurl) && Assets[newurl] != url)
-                    {
-                        string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
-                        string tempNewUrl = newurl;
-                        int count = 1;
-                        Find:
-                        if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
-                        {
-                            tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;
-                            count++;
-                            goto Find;
-                        }
-                        else
-                        {
-                            newurl = tempNewUrl;
-                            if (!Assets.ContainsKey(newurl))
-                            {
-                                Assets.Add(newurl, url);
-                            }
-                        }
-                    }
-                    return newurl;
+                    return ExtractAndProcessLink(url, Assets);
                 }
+            }
+
+            private static string ExtractAndProcessLink(string url, Dictionary<string, string> Assets)
+            {
+                url = url.Split('?')[0];
+                string newurl = ExportTemplateRootToken + (url.ToLower().Contains(".versions") ? ".versions/" : "") + System.IO.Path.GetFileName(url);
+                if (!Assets.ContainsKey(newurl))
+                {
+                    Assets.Add(newurl, url);
+                }
+                else if (Assets.ContainsKey(newurl) && Assets[newurl] != url)
+                {
+                    string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
+                    string tempNewUrl = newurl;
+                    int count = 1;
+                    Find:
+                    if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
+                    {
+                        tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;
+                        count++;
+                        goto Find;
+                    }
+                    else
+                    {
+                        newurl = tempNewUrl;
+                        if (!Assets.ContainsKey(newurl))
+                        {
+                            Assets.Add(newurl, url);
+                        }
+                    }
+                }
+                return newurl;
             }
 
             private static void ProcessJsonObject(dynamic arr, Dictionary<string, string> Assets)
@@ -826,6 +838,7 @@ namespace Vanjaro.Core
             {
                 string portalRoot = GetPortalRoot(portalId);
                 content = content.Replace(PortalRootToken, portalRoot);
+                content = content.Replace(ExportTemplateRootToken, portalRoot.EndsWith("/") ? portalRoot + "Images/" : portalRoot + "/Images/");
                 return content;
             }
 
