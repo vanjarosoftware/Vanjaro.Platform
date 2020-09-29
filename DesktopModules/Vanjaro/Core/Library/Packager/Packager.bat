@@ -393,7 +393,7 @@ copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_F
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.dll >NUL
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.dll >NUL
 
-"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\libsass.dll bin\libsass.dll >NUL
+
 "C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\libsass.dll bin\libsass.dll >NUL
 
 copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Install.zip >NUL
@@ -406,7 +406,7 @@ copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_F
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\*.dll >NUL
 
 
-"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\libsass.dll bin\libsass.dll >NUL
+
 "C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\libsass.dll bin\libsass.dll >NUL
 
 
@@ -417,6 +417,11 @@ xcopy /e /i "DNN Install"\* Temp_DNN\*  /Y >NUL
 
 ::Need to copy the Core DLL for Vanjaro Installer
 copy ..\..\..\..\..\bin\Vanjaro.Core.dll Temp_DNN\bin >NUL
+
+::Need to copy the libsass.dll for install Package
+copy Vanjaro\bin\x64\libsass.dll Temp_DNN\bin >NUL
+copy Vanjaro\bin\x86\libsass.dll Temp_DNN\bin >NUL
+
 
 cd Temp_DNN\
 
