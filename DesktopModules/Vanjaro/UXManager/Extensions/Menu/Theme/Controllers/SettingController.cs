@@ -72,16 +72,20 @@ namespace Vanjaro.UXManager.Extensions.Menu.Theme.Controllers
             if (!string.IsNullOrEmpty(Theme))
             {
                 string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Theme + "/editor");
-                Core.Managers.SettingManager.Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", PortalSettings.PortalId.ToString()));
-                try
+                string PortalThemeFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Theme + "/").Replace("_default", PortalSettings.PortalId.ToString());
+                if (!File.Exists(PortalThemeFolder + "Theme.css"))
                 {
-                    ThemeManager.ProcessScss(PortalSettings.PortalId);
+                    Core.Managers.SettingManager.Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", PortalSettings.PortalId.ToString()));
+                    try
+                    {
+                        ThemeManager.ProcessScss(PortalSettings.PortalId);
+                    }
+                    catch (System.Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
                 }
-                catch (System.Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
                 Core.Managers.SettingManager.UpdateValue(PortalSettings.PortalId, -1, "setting_theme", "Theme", Theme);
             }
         }
-
+         
         public override string AccessRoles()
         {
             return Factories.AppFactory.GetAccessRoles(UserInfo);
