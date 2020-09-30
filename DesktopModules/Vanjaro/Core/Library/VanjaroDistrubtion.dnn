@@ -1,10 +1,10 @@
 <dotnetnuke type="Package" version="6.0">
 	<packages>
-		<package name="Vanjaro" type="Library" version="00.05.01">
+		<package name="Vanjaro" type="Library" version="00.05.02">
 			<friendlyName>Vanjaro</friendlyName>
 			<description>Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN.</description>
 			<dependencies>
-				<dependency type="CoreVersion">09.07.00</dependency>
+				<dependency type="CoreVersion">09.07.02</dependency>
 				<dependency type="ManagedPackage" version="01.00.00">Dnn.PersonaBar.UI</dependency>
 			</dependencies>
 			<owner>
@@ -80,7 +80,7 @@
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.Core.dll</name>
-							<version>00.02.00</version>
+							<version>00.05.02</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
@@ -316,10 +316,6 @@
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.dll</name>
 							<version>01.00.00</version>
-						</assembly>
-						<assembly>
-							<path>bin</path>
-							<name>libsass.dll</name>
 						</assembly>
 						<assembly>
 							<path>bin</path>

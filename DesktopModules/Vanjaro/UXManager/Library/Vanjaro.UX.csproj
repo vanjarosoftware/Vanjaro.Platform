@@ -235,6 +235,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Library\Vanjaro.Core.csproj">
+      <Project>{3ed0d4a5-e2da-4dd9-ab64-9e0a2b6b4305}</Project>
+      <Name>Vanjaro.Core</Name>
+    </ProjectReference>
     <Reference Include="DotNetNuke, Version=9.3.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\bin\DotNetNuke.dll</HintPath>
@@ -283,10 +287,6 @@
       <HintPath>..\..\..\..\bin\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <ProjectReference Include="..\..\Core\Library\Vanjaro.Core.csproj">
-      <Project>{3ed0d4a5-e2da-4dd9-ab64-9e0a2b6b4305}</Project>
-      <Name>Vanjaro.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

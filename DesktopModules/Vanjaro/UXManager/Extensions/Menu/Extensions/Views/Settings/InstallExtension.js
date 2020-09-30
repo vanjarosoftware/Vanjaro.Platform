@@ -132,9 +132,14 @@
                         window.parent.ShowNotification($scope.Name, '[L:InstalledSuccessfully]', 'success');
                     }
                     else {
-                        $scope.showerrorlog = true;
-                        $scope.Logs = response.Data.logs;
+                        $scope.$apply(function () {
+                            $scope.showerrorlog = true;
+                            $scope.Logs = response.Data.logs;
+                            $('#extentionInstall').html('[L:Finish]');
+                            $scope.CheckLicence = false;
+                        });
                     }
+                    $scope.DisableFinish = false;
                 });
             } else {
                 var form_data = new FormData();
@@ -159,9 +164,14 @@
                             window.parent.ShowNotification($scope.Name, '[L:InstalledSuccessfully]', 'success');
                         }
                         else {
-                            $scope.showerrorlog = true;
-                            $scope.Logs = response.Data.logs;
+                            $scope.$apply(function () {
+                                $scope.showerrorlog = true;
+                                $scope.Logs = response.Data.logs;
+                                $('#extentionInstall').html('[L:Finish]');
+                                $scope.CheckLicence = false;
+                            });
                         }
+                        $scope.DisableFinish = false;
                     }
                 });
             }

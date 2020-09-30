@@ -14,7 +14,7 @@ namespace Vanjaro.Core.Components
             if (Version == "01.00.00")
             {
                 MoveFilesInRoot();
-                Managers.SettingManager.ApplyingSettings();
+                Managers.SettingManager.ApplyingSettings(true);
                 Services.Search.SearchEngineScheduler.Install();
                 Components.PageWorkflowPermission.InitTabPermissions();
             }
@@ -42,6 +42,6 @@ namespace Vanjaro.Core.Components
             }
 
         }
-      
+
     }
 }

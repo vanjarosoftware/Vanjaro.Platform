@@ -49,7 +49,7 @@ namespace Vanjaro.Skin
         protected override void OnPreRender(EventArgs e)
         {
             HandleAppSettings();
-            
+
             RemoveDNNDependencies();
 
         }
@@ -102,10 +102,6 @@ namespace Vanjaro.Skin
 
         private void HandleEditMode()
         {
-            ///Forcing View Mode Until we can find a solution to prevent Edit Bar from appearing. 
-            ToggleUserMode("VIEW");
-            return;
-
             ///Code to support IsEditable pending a solution to prevent Edit Bar from appearing. 
 #pragma warning disable CS0162 // Unreachable code detected
             if (HttpContext.Current != null && HttpContext.Current.Request.Cookies["PageIsEdit"] != null && HttpContext.Current.Request.Cookies["PageIsEdit"].Value == "true")
@@ -141,7 +137,7 @@ namespace Vanjaro.Skin
                 WebForms.RegisterClientScriptBlock(Page, "DefaultPath", "var VjThemePath='" + Page.ResolveUrl("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.GetCurrentThemeName()) + "'; var VjDefaultPath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/") + "'; var VjSitePath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/") + "';", true);
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/js/skin.js"), 2, "DnnFormBottomProvider");
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/DesktopModules/Vanjaro/Common/Frameworks/Bootstrap/4.5.0/js/bootstrap.min.js"), 1, "DnnFormBottomProvider");
-                
+
                 string DirectoryPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.GetCurrentThemeName() + "/js/");
                 if ((TabPermissionController.HasTabPermission("EDIT") || (page != null && page.StateID.HasValue && HasReviewPermission)) && Directory.Exists(DirectoryPath))
                 {

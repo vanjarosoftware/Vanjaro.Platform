@@ -180,7 +180,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         List<TabInfo> tabs = TabController.GetPortalTabs(portalSettings.PortalId, Null.NullInteger, false, true, false, true);
                         string url = tab.FullUrl;
                         Data.url = tab.FullUrl;
-                        actionResult.Data = GetPagesTreeView();
+                        Data.PagesTree = GetPagesTreeView();
                     }
                 }
                 catch (PageNotFoundException)

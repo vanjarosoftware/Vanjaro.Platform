@@ -393,7 +393,7 @@ copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_F
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.dll >NUL
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.dll >NUL
 
-"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\libsass.dll bin\libsass.dll >NUL
+
 "C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\libsass.dll bin\libsass.dll >NUL
 
 copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Install.zip >NUL
@@ -406,7 +406,7 @@ copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_F
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\*.dll >NUL
 
 
-"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\libsass.dll bin\libsass.dll >NUL
+
 "C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\libsass.dll bin\libsass.dll >NUL
 
 
@@ -414,7 +414,18 @@ cd ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\
 del Temp_DNN /Q >NUL 2>&1
 mkdir Temp_DNN >NUL
 xcopy /e /i "DNN Install"\* Temp_DNN\*  /Y >NUL
+
+::Need to copy the Core DLL for Vanjaro Installer
+copy ..\..\..\..\..\bin\Vanjaro.Core.dll Temp_DNN\bin >NUL
+
+::Need to copy the libsass.dll for install Package
+copy Vanjaro\bin\x64\libsass.dll Temp_DNN\bin >NUL
+copy Vanjaro\bin\x86\libsass.dll Temp_DNN\bin >NUL
+
+
 cd Temp_DNN\
+
+
 
 echo Optimizing DNN Install...
 
@@ -537,7 +548,7 @@ del UpgradeTemp_DNN /Q >NUL 2>&1
 mkdir UpgradeTemp_DNN >NUL
 xcopy /e /i "DNN Upgrade"\* UpgradeTemp_DNN\*  /Y >NUL
 
-::Need to copy the Core DLL to Upgrade Package for Upgrade Page (Install.aspx) to kick off
+::Need to copy the Core DLL to Upgrade Package for Upgrade Page (Upgrade.aspx) to kick off
 copy ..\..\..\..\..\bin\Vanjaro.Core.dll UpgradeTemp_DNN\bin >NUL
 
 cd UpgradeTemp_DNN\
@@ -652,34 +663,21 @@ cd ..\
 rmdir UpgradeTemp_DNN /s /q >NUL 2>&1
 rmdir Temp_DNN /s /q >NUL 2>&1
 
+
+"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\Install\Upgrade.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\install\Upgrade.aspx Install/Upgrade.aspx >NUL
+
+"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\Install\Upgrade.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\install\Upgrade.aspx Install/Upgrade.aspx >NUL
+
+
 echo.
 echo.
-SET /P HasDNNChanged=Has DNN Version Changed (Y/[N])? 
-IF /I "%HasDNNChanged%" NEQ "Y" GOTO :CopyInstall
-cls
 echo. 
-echo All Packages Created w/ DNN Upgrade
+echo All Packages Created!
 echo. 
 SET /P AnyKeyExit=Please any key to terminate
 
 :END
 endlocal
-exit
-
-:CopyInstall
-@echo off
-
-"C:\Program Files\7-Zip\7z.exe" d Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Install/Install.aspx >NUL
-"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\Install\Install.aspx >NUL
-"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\install\Install.aspx Install/Install.aspx >NUL
-
-"C:\Program Files\7-Zip\7z.exe" d Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Install/Install.aspx >NUL
-"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\Install\Install.aspx >NUL
-"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\install\Install.aspx Install/Install.aspx >NUL
-
-cls
-echo. 
-echo All Packages Created w/out DNN Upgrade
-echo. 
-SET /P AnyKeyExit=Please any key to terminate
 exit
