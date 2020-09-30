@@ -162,6 +162,7 @@
     <Content Include="Resources\Images\svg\icon-d.svg" />
     <Content Include="Resources\Images\thumbnail-video.jpg" />
     <Content Include="Resources\extension.html" />
+    <Content Include="Resources\placeholder.html" />
     <Content Include="Resources\node_modules\.bin\webpack.config.js" />
     <Content Include="Resources\Scripts\Blocks\carousel.js" />
     <Content Include="Resources\Scripts\Blocks\config.js" />

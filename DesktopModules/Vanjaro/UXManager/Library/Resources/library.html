@@ -14,8 +14,20 @@
         }
 
         .tab-content > .tab-pane {
-            height: 100vh;
+            height: calc(100vh - 65px);
         }
+
+        .nav-tabs {
+            border-bottom: 0px;
+        }
+
+            .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+                border-bottom: 2px solid #333;
+            }
+
+            .nav-tabs .nav-link {
+                border: 0px;
+            }
     </style>
     <script>
         $(document).ready(function () {
@@ -35,7 +47,7 @@
     </nav>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="navhome" role="tabpanel">
-            <iframe id="Block" scrolling="no"></iframe> 
+            <iframe id="Block" scrolling="no"></iframe>
         </div>
         <div class="tab-pane fade" id="navprofile" role="tabpanel">
             <iframe id="Page" scrolling="no"></iframe>
