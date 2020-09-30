@@ -12,12 +12,11 @@ namespace Vanjaro.Core.Components
     {
         #region Private Member
         int? PortalID;
+        #endregion
 
         public Theme()
         {
         }
-        #endregion
-
         public Theme(int PortalID)
         {
             this.PortalID = PortalID;
