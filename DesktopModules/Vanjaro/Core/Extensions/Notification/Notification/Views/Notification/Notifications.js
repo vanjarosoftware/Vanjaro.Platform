@@ -18,4 +18,16 @@
         });
     };
 
+    $scope.Click_Dismiss = function (row) {
+        var postData = {
+            NotificationId: row.NotificationId
+        };
+        common.webApi.post('Notification/Dismiss', '', postData).success(function (data) {
+            if (data.IsSuccess) {
+                $("#VJnotifycount", parent.document).text(data.NotifyCount);
+                $scope.ui.data.NotificationsCount.Value = data.NotificationsCount;
+                $scope.Pipe_NotificationsPages($scope.NotificationsPagestableState);
+            }
+        });
+    };
 });
