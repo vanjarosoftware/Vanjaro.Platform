@@ -35,42 +35,42 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
             {
                 string redirectUrl = "";
                 int redirectAfterLogin = PortalSettings.Current.Registration.RedirectAfterLogin;
-                if (checkSettings && redirectAfterLogin > 0) //redirect to after login page
+
+                if (HttpContext.Current.Request.QueryString["returnurl"] != null || HttpUtility.ParseQueryString(HttpContext.Current.Request.UrlReferrer.Query)["returnurl"] != null)
+                {
+                    //return to the url passed to login
+                    if (HttpContext.Current.Request.QueryString["returnurl"] != null)
+                    {
+                        redirectUrl = HttpUtility.UrlDecode(HttpContext.Current.Request.QueryString["returnurl"]);
+                    }
+                    else
+                    {
+                        redirectUrl = HttpUtility.UrlDecode(HttpUtility.ParseQueryString(HttpContext.Current.Request.UrlReferrer.Query)["returnurl"]);
+                    }
+
+                    //clean the return url to avoid possible XSS attack.
+                    redirectUrl = UrlUtils.ValidReturnUrl(redirectUrl);
+
+                    if (redirectUrl.Contains("?returnurl"))
+                    {
+                        string baseURL = redirectUrl.Substring(0,
+                            redirectUrl.IndexOf("?returnurl", StringComparison.Ordinal));
+                        string returnURL =
+                            redirectUrl.Substring(redirectUrl.IndexOf("?returnurl", StringComparison.Ordinal) + 11);
+
+                        redirectUrl = string.Concat(baseURL, "?returnurl", HttpUtility.UrlEncode(returnURL));
+                    }
+                }
+
+                if (string.IsNullOrEmpty(redirectUrl) && checkSettings && redirectAfterLogin > 0) //redirect to after login page
                 {
                     redirectUrl = ServiceProvider.NavigationManager.NavigateURL(redirectAfterLogin);
                 }
-                else
+
+                if (string.IsNullOrEmpty(redirectUrl))
                 {
-                    if (HttpContext.Current.Request.QueryString["returnurl"] != null || HttpUtility.ParseQueryString(HttpContext.Current.Request.UrlReferrer.Query)["returnurl"] != null)
-                    {
-                        //return to the url passed to login
-                        if (HttpContext.Current.Request.QueryString["returnurl"] != null)
-                        {
-                            redirectUrl = HttpUtility.UrlDecode(HttpContext.Current.Request.QueryString["returnurl"]);
-                        }
-                        else
-                        {
-                            redirectUrl = HttpUtility.UrlDecode(HttpUtility.ParseQueryString(HttpContext.Current.Request.UrlReferrer.Query)["returnurl"]);
-                        }
-
-                        //clean the return url to avoid possible XSS attack.
-                        redirectUrl = UrlUtils.ValidReturnUrl(redirectUrl);
-
-                        if (redirectUrl.Contains("?returnurl"))
-                        {
-                            string baseURL = redirectUrl.Substring(0,
-                                redirectUrl.IndexOf("?returnurl", StringComparison.Ordinal));
-                            string returnURL =
-                                redirectUrl.Substring(redirectUrl.IndexOf("?returnurl", StringComparison.Ordinal) + 11);
-
-                            redirectUrl = string.Concat(baseURL, "?returnurl", HttpUtility.UrlEncode(returnURL));
-                        }
-                    }
-                    if (string.IsNullOrEmpty(redirectUrl))
-                    {
-                        //redirect to current page 
-                        redirectUrl = ServiceProvider.NavigationManager.NavigateURL();
-                    }
+                    //redirect to current page 
+                    redirectUrl = ServiceProvider.NavigationManager.NavigateURL();
                 }
 
                 return redirectUrl;
