@@ -31,9 +31,9 @@
     </style>
     <script>
         $(document).ready(function () {
-            var tlURL = window.parent.TemplateLibraryURL + '?tid=' + window.parent.ThemeGUID;
-            $('iframe#Block').attr('src', tlURL + '&type=' + 'block');
-            $('iframe#Page').attr('src', tlURL + '&type=' + 'page');
+            var tlURL = window.parent.TemplateLibraryURL + '/templates/tid/' + window.parent.ThemeGUID;
+            $('iframe#Block').attr('src', tlURL + '/type/' + 'block');
+            $('iframe#Page').attr('src', tlURL + '/type/' + 'page');
         });
     </script>
 </head>
