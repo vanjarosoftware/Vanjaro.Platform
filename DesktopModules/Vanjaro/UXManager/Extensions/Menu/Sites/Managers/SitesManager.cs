@@ -79,7 +79,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
         internal static HttpResponseMessage Export(int PortalID, string Name)
         {
             HttpResponseMessage Response = new HttpResponseMessage();
-            string Theme = Core.Managers.ThemeManager.GetCurrent().ThemeName;
+            string Theme = Core.Managers.ThemeManager.GetCurrent().Name;
             ExportTemplate exportTemplate = new ExportTemplate
             {
                 Name = Name,

@@ -53,7 +53,7 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage
 
         public List<AngularView> AngularViews => AppFactory.GetViews();
 
-        public string TemplatePath => "~/vThemes/" + ThemeManager.GetCurrent().ThemeName + "/Blocks/Language/Templates/";
+        public string TemplatePath => "~/vThemes/" + ThemeManager.GetCurrent().Name + "/Blocks/Language/Templates/";
 
         public string UIPath => "~/DesktopModules/Vanjaro/UXManager/Extensions/Block/" + ExtensionInfo.Name + "/Views/";
 

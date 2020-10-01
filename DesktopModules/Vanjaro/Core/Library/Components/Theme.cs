@@ -21,7 +21,7 @@ namespace Vanjaro.Core.Components
         {
             this.PortalID = PortalID;
         }
-        public string ThemeName
+        public string Name
         {
             get
             {
@@ -44,8 +44,15 @@ namespace Vanjaro.Core.Components
         {
             get
             {
-                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/Layout.Edit.html");
-                return System.IO.File.ReadAllText(FolderPath);
+                string CacheKey = Factories.CacheFactory.GetCacheKey(Factories.CacheFactory.Keys.Theme + "EditLayout", Name);
+                string _EditLayout= Factories.CacheFactory.Get(CacheKey);
+                if (string.IsNullOrEmpty(_EditLayout))
+                {
+                    string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Name + "/Layout.Edit.html");
+                    _EditLayout= System.IO.File.ReadAllText(FolderPath);
+                    Factories.CacheFactory.Set(CacheKey, _EditLayout);
+                }
+                return _EditLayout;
             }
         }
     }

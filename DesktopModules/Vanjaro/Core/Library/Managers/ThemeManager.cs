@@ -101,7 +101,7 @@ namespace Vanjaro.Core
             public static void ProcessScss(int PortalID)
             {
                 StringBuilder sb = new StringBuilder();
-                string ThemeName = GetCurrent().ThemeName;
+                string ThemeName = GetCurrent().Name;
                 string BootstrapPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/bootstrap.scss");
                 string BeforePath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Before.scss");
                 string AfterPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/After.scss");
@@ -702,7 +702,7 @@ namespace Vanjaro.Core
                 IThemeEditor themeEditor = GetCategories().Where(c => c.Guid.ToLower() == CategoryGuid.ToLower()).FirstOrDefault();
                 if (themeEditor != null)
                 {
-                    string path = themeEditor.JsonPath.Replace("{{PortalID}}", PortalID.ToString()).Replace("{{ThemeName}}", Core.Managers.ThemeManager.GetCurrent().ThemeName);
+                    string path = themeEditor.JsonPath.Replace("{{PortalID}}", PortalID.ToString()).Replace("{{ThemeName}}", Core.Managers.ThemeManager.GetCurrent().Name);
                     string folder = Path.GetDirectoryName(path);
                     if (!Directory.Exists(folder))
                         Directory.CreateDirectory(folder);
@@ -712,7 +712,7 @@ namespace Vanjaro.Core
             }
             private static string GetThemeEditorValueJsonPath(int PortalId, string CategoryGuid)
             {
-                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalId + "/vThemes/" + Core.Managers.ThemeManager.GetCurrent().ThemeName + "/editor/" + CategoryGuid);
+                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalId + "/vThemes/" + Core.Managers.ThemeManager.GetCurrent().Name + "/editor/" + CategoryGuid);
 
                 if (!Directory.Exists(FolderPath))
                 {
