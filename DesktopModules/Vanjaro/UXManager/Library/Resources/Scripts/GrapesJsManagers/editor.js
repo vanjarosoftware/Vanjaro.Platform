@@ -2355,7 +2355,7 @@ $(document).ready(function () {
         else if ($this.hasClass('librarytab')) {
             $('.blockstab').removeClass('active');
             $(this).parent().addClass('active');
-            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, "~UXManager/Library/Resources/library.html", '100%');
+            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, "~UXManager/Library/Resources/library.html" + "?v=" + (new Date()).getTime(), '100%');
         }
         else {
             $('.blockstab').removeClass('active');
