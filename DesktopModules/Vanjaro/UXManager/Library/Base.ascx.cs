@@ -29,7 +29,7 @@ namespace Vanjaro.UXManager.Library
 {
     public partial class Base : ControlPanelBase
     {
-        private string TemplateLibraryURL = "http://library.vanjaro.local";
+        private string TemplateLibraryURL = string.Empty;
         private bool? m2v = null;
 
 #if DEBUG
@@ -39,6 +39,12 @@ namespace Vanjaro.UXManager.Library
 #endif
         protected override void OnInit(EventArgs e)
         {
+#if INTERNAL
+            TemplateLibraryURL = "http://library.vanjaro.local";
+#else
+            TemplateLibraryURL = Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
+#endif
+
             base.OnInit(e);
             if (CanShowUXManager())
             {
