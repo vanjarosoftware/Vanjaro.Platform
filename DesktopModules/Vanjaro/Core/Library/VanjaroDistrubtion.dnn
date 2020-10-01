@@ -99,11 +99,6 @@
 						</assembly>
 						<assembly>
 							<path>bin</path>
-							<name>Mandeeps.DNN.Modules.Licensing.dll</name>
-							<version>07.05.00</version>
-						</assembly>
-						<assembly>
-							<path>bin</path>
 							<name>Vanjaro.URL.dll</name>
 							<version>03.04.00</version>
 						</assembly>
@@ -1003,28 +998,28 @@
 						<install>
 							<configuration>
 								<nodes>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<remove fileExtension=".woff2" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<mimeMap fileExtension=".woff2" mimeType="font/woff2" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<remove fileExtension=".mp4" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<mimeMap fileExtension=".mp4" mimeType="video/mp4" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<remove fileExtension=".webp" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<mimeMap fileExtension=".webp" mimeType="image/webp" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<remove fileExtension=".svg" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<mimeMap fileExtension=".svg" mimeType="image/svg+xml" />
 									</node>
 									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
