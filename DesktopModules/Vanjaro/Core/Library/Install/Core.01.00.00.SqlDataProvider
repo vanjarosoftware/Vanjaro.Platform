@@ -144,7 +144,7 @@ IF NOT EXISTS (select 1 from {databaseOwner}[VJ_Core_Workflow])
 BEGIN
 DECLARE @ScopeValue as int
 INSERT INTO {databaseOwner}[VJ_Core_Workflow](PortalID,Name,Description,Revisions,IsDeleted,DeletedOn,DeletedBy,CreatedOn,CreatedBy)
-VALUES(null,'Content Staging','Allows an author to manage content in a staging area before publishing it to the site',5,0,null,null,GETDATE(),-1)
+VALUES(null,'Content Staging','Allows an author to manage content in a staging area before publishing it to the site',10,0,null,null,GETDATE(),-1)
 SELECT @ScopeValue=scope_identity();
 INSERT INTO {databaseOwner}[VJ_Core_WorkflowState](WorkflowID,Name,[Order],IsActive,Notify)
 VALUES(@ScopeValue,'Draft',1,1,0)
