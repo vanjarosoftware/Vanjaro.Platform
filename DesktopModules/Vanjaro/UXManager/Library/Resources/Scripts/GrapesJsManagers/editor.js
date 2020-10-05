@@ -28,6 +28,51 @@ $(document).ready(function () {
     else
         CurrentExtTabUrl = window.parent.CurrentTabUrl + '?mid=0&icp=true';
 
+    if (typeof TemplateLibraryURL != 'undefined' && TemplateLibraryURL != '') {
+
+        window.addEventListener('message', event => {
+
+            if (event.origin.startsWith(TemplateLibraryURL)) {
+
+                var templatePath = '';
+
+                if (!event.data.startsWith(TemplateLibraryURL))
+                    templatePath = TemplateLibraryURL + '/' + event.data;
+                else
+                    templatePath = event.data;
+
+                var sf = $.ServicesFramework(-1);
+
+                $.ajax({
+                    type: "Post",
+                    url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/ImportCustomBlock?TemplatePath=" + templatePath,
+                    headers: {
+                        'ModuleId': parseInt(sf.getModuleId()),
+                        'TabId': parseInt(sf.getTabId()),
+                        'RequestVerificationToken': sf.getAntiForgeryValue()
+                    },
+                    success: function (data) {
+
+                        if (data.html != '' && data.Name != '') {
+
+                            var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
+                                label: data.Name,
+                                content: data.Html + '<style>' + data.Css + '</style>',
+                                attributes: {
+                                    class: 'fas fa-th-large floating',
+                                    id: 'LibraryBlock'
+                                }
+                            });
+
+                            var block = VjEditor.BlockManager.render(LibraryBlock);
+                            $(window.document.body).append(block).find('[data-dismiss="modal"]').click();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
     $(".pubish-btn").click(function (e) {
         e.preventDefault();
 
@@ -975,6 +1020,9 @@ $(document).ready(function () {
                             VjEditor.on('block:drag:stop', function (model, bmodel) {
 
                                 if (typeof model != "undefined") {
+
+                                    if (typeof VjEditor.BlockManager.get('LibraryBlock') != 'undefined')
+                                        VjEditor.BlockManager.remove('LibraryBlock');
 
                                     var Block = model.attributes.type;
 
@@ -2307,7 +2355,7 @@ $(document).ready(function () {
         else if ($this.hasClass('librarytab')) {
             $('.blockstab').removeClass('active');
             $(this).parent().addClass('active');
-            parent.OpenPopUp(null, 1200, 'center', VjLocalized.TemplateLibrary, "~UXManager/Library/Resources/library.html", '800');
+            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, "~UXManager/Library/Resources/library.html" + "?v=" + (new Date()).getTime(), '100%');
         }
         else {
             $('.blockstab').removeClass('active');
