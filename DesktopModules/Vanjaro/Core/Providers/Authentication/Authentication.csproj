@@ -139,7 +139,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Internal|AnyCPU'">
-    <OutputPath>..\..\..\..\..\..\bin\</OutputPath>
+    <OutputPath>..\..\..\..\..\bin\</OutputPath>
     <DefineConstants>TRACE;INTERNAL</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
