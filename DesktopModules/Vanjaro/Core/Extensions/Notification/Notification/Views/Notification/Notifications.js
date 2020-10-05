@@ -24,8 +24,9 @@
         };
         common.webApi.post('Notification/Dismiss', '', postData).success(function (data) {
             if (data.IsSuccess) {
-                $("#VJnotifycount", parent.document).text(data.NotifyCount);
-                $scope.ui.data.NotificationsCount.Value = data.NotificationsCount;
+                $("#VJnotifycount", parent.document).text(parseInt($("#VJnotifycount", parent.document).text()) - 1);
+                $('#Notification .Messagetab a>span', window.document).html(parseInt($('#Notification .Messagetab a>span', window.document).html()) - 1);
+                //$scope.ui.data.NotificationsCount.Value = data.NotificationsCount;
                 $scope.Pipe_NotificationsPages($scope.NotificationsPagestableState);
             }
         });
