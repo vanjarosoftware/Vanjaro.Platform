@@ -50,7 +50,6 @@ namespace Vanjaro.UXManager.Library
             {
                 ServicesFramework.Instance.RequestAjaxScriptSupport();
                 ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
-                Editor.RequestRegistration(null);
             }
         }
 
@@ -153,7 +152,7 @@ namespace Vanjaro.UXManager.Library
         {
 
             if (InjectEditor())
-                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; var ThemeGUID = \"49A70BA1-206B-471F-800A-679799FF09DF\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined') GrapesjsInit(" + JsonConvert.SerializeObject(Editor.Settings) + "); });", true);
+                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; var ThemeGUID = \"49A70BA1-206B-471F-800A-679799FF09DF\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined') GrapesjsInit(" + JsonConvert.SerializeObject(Editor.Options) + "); });", true);
         }
 
         private BaseModel GetBaseModel()
@@ -171,12 +170,12 @@ namespace Vanjaro.UXManager.Library
             };
             item.ShortcutMarkUp = item.HasShortcut ? ShortcutManager.RenderShortcut() : string.Empty;
 
-            if (!Editor.Settings.EditPage)
+            if (!Editor.Options.EditPage)
                 item.HasTabEditPermission = true;
             else
                 item.HasTabEditPermission = TabPermissionController.HasTabPermission("EDIT");
 
-            item.EditPage = Editor.Settings.EditPage;
+            item.EditPage = Editor.Options.EditPage;
             item.ShowUXManager = string.IsNullOrEmpty(Core.Managers.CookieManager.GetValue("InitGrapejs")) ? false : Convert.ToBoolean(Core.Managers.CookieManager.GetValue("InitGrapejs"));
             return item;
         }
@@ -219,7 +218,7 @@ namespace Vanjaro.UXManager.Library
 
         private bool InjectEditor()
         {
-            if (PortalSettings.UserId > 0 && TabPermissionController.CanViewPage() && (TabPermissionController.HasTabPermission("EDIT") || !Editor.Settings.EditPage))
+            if (PortalSettings.UserId > 0 && TabPermissionController.CanViewPage() && (TabPermissionController.HasTabPermission("EDIT") || !Editor.Options.EditPage))
             {
                 return true;
             }
