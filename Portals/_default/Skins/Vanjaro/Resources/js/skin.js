@@ -102,10 +102,16 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
     var showTogglebtn = false;
     var edit = "";
     var fullwidth = '';
+    var scrolling = 'no';
 
     if (typeof showtogglebtn != 'undefined' && showtogglebtn)
         showTogglebtn = true;
 
+    if (width == "100%") {
+        fullwidth = 'fullwidth';
+        fullScreen = true;
+        scrolling = 'yes';
+    }
 
     if (isnew)
         id += 'new';
@@ -122,7 +128,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
                 </div>
                 <div class="modal-body" id="UXRender">
 <img class="loader" alt="Loading" src="` + VjDefaultPath + `loading.gif" />
-                    <iframe id="UXpagerender" scrolling="no"></iframe>
+                    <iframe id="UXpagerender" scrolling="` + scrolling + `"></iframe>
                 </div>
             </div>
         </div>
@@ -137,21 +143,17 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
         var iframeurl = url;
         $modal.find('#UXpagerender').on("load", function () {
             var $iframe = $(this);
-            // Change check for library.html (!url.startsWith('~'))
-            if (GetParameterByName('mid', this.contentWindow.location.href) == null && !iframeurl.startsWith('~'))
-                $(window.parent.document.body).find('[data-dismiss="modal"]').trigger('click');
+            try {
+                // Change check for library.html (!url.startsWith('~'))
+                if (GetParameterByName('mid', this.contentWindow.location.href) == null && !iframeurl.startsWith('~'))
+                    $(window.parent.document.body).find('[data-dismiss="modal"]').trigger('click');
+            }
+            catch (e) {
+                
+            }
             $iframe.prev().hide();
             $iframe.show();
         });
-    }
-
-    if (width == "100%") {
-        fullScreen = true;
-        fullwidth = 'fullwidth';
-        window.parent.$("#UXpagerender").attr('scrolling', 'yes');
-    }
-    else {
-        window.parent.$("#UXpagerender").attr('scrolling', 'no');
     }
 
     if (position == 'right' && !fullScreen && showtogglebtn) {
@@ -220,8 +222,13 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
     else
         $modal.find('.modal-dialog').width(width).removeClass('center');
 
-    if (typeof height != 'undefined')
-        $modal.find('.modal-dialog').height(height);
+    if (typeof height != 'undefined') {
+
+        if (height == '100%')
+            $modal.find('.modal-dialog').addClass('fullheight');
+        else
+            $modal.find('.modal-dialog').height(height);
+    }
 
     $modal.modal({
         backdrop: 'static', keyboard: true
