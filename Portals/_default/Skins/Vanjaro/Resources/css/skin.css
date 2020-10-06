@@ -865,3 +865,23 @@ img#uploaded_image {
 [dmid] ~ [dmid] {
     margin-top: 20px;
 }
+
+#socialControls {
+    float: none !important;
+    width: 100%;
+}
+
+#socialControls ul.buttonList li {
+    margin: auto;
+}
+
+div.vj_authenticationcontrol {
+    text-align: center;
+}
+
+ul.vj_authenticationtab {
+    text-align: center;
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+}
