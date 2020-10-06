@@ -14,9 +14,6 @@ namespace Vanjaro.Core.Components
         int? PortalID;
         #endregion
 
-        public Theme()
-        {
-        }
         public Theme(int PortalID)
         {
             this.PortalID = PortalID;
@@ -53,6 +50,14 @@ namespace Vanjaro.Core.Components
                     Factories.CacheFactory.Set(CacheKey, _EditLayout);
                 }
                 return _EditLayout;
+            }
+        }
+
+        public string GUID
+        {
+            get 
+            {
+                return "49A70BA1-206B-471F-800A-679799FF09DF";
             }
         }
     }
