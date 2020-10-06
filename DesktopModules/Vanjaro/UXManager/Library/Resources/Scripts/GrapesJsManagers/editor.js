@@ -1294,9 +1294,9 @@ $(document).ready(function () {
 
                                 if (model.attributes.type == 'grid') {
 
-                                    $(model.components().models[0].getEl()).addClass('gjs-dashed');
+                                   $(model.components().models[0].getEl()).addClass('gjs-dashed');
 
-                                    if (flexProperty.length == 0) {
+                                    if (flexProperty == null) {
 
                                         VjEditor.StyleManager.addProperty(Responsive, {
                                             type: 'radio',
@@ -1323,7 +1323,7 @@ $(document).ready(function () {
                                         flexProperty.view.setValue('true');
                                 }
                                 else {
-                                    if (typeof flexProperty != 'undefined')
+                                    if (flexProperty != null)
                                         VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
                                 }
 
