@@ -11,7 +11,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder
 
         public int ViewOrder => 0;
 
-        public string JsonPath => HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.GetCurrentThemeName() + "/" + "theme.editor.json");
+        public string JsonPath => HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/" + "theme.editor.json");
     }
 
     public class ThemeEditorCustomImpl : IThemeEditor

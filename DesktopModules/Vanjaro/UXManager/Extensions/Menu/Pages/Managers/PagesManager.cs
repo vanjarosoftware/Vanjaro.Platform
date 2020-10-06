@@ -216,8 +216,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     layouts = new List<Layout>();
                     List<string> FolderPaths = new List<string>
                     {
-                        HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrentThemeName() + "/templates/pages/"),
-                        HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeManager.GetCurrentThemeName() + "/templates/pages/")
+                        HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.CurrentTheme.Name + "/templates/pages/"),
+                        HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/templates/pages/")
                     };
                     foreach (string FolderPath in FolderPaths)
                     {
@@ -246,7 +246,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
             }
             public static void DeleteLayout(string name)
             {
-                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeManager.GetCurrentThemeName() + "/templates/pages/");
+                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/templates/pages/");
                 if (Directory.Exists(FolderPath))
                 {
                     File.Delete(FolderPath + name + ".json");
@@ -294,7 +294,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         layout.StyleJSON = Core.Managers.PageManager.TokenizeLinks(data.StyleJSON, PortalId);
                         layout.Type = PageSettings.PageType = PageSettings.PageType.ToLower() == "url" ? "URL" : (PageSettings.DisableLink && PageSettings.IncludeInMenu) ? "Folder" : "Standard";
                         string SerializedLayoutData = JsonConvert.SerializeObject(layout);
-                        string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalId + "/vThemes/" + ThemeManager.GetCurrentThemeName() + "/templates/pages/");
+                        string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/templates/pages/");
                         if (!Directory.Exists(FolderPath))
                             Directory.CreateDirectory(FolderPath);
                         if (Directory.Exists(FolderPath))
@@ -525,7 +525,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                 Layout baseLayout = GetLayouts().Where(l => l.IsSystem == isSystem && l.Name.ToLower() == name.ToLower()).FirstOrDefault();
                 if (baseLayout != null)
                 {
-                    string Theme = Core.Managers.ThemeManager.GetCurrentThemeName();
+                    string Theme = Core.Managers.ThemeManager.CurrentTheme.Name;
                     ExportTemplate exportTemplate = new ExportTemplate
                     {
                         Name = name,
@@ -533,7 +533,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         UpdatedOn = DateTime.UtcNow,
                         Templates = new List<Layout>(),
                         ThemeName = Theme,
-                        ThemeGuid = "49A70BA1-206B-471F-800A-679799FF09DF"
+                        ThemeGuid = ThemeManager.CurrentTheme.GUID
                     };
                     Dictionary<string, string> Assets = new Dictionary<string, string>();
                     Layout layout = new Layout

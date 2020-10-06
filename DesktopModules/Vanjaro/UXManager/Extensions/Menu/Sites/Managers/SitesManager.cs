@@ -29,6 +29,7 @@ using Vanjaro.Core.Entities;
 using Vanjaro.UXManager.Extensions.Menu.Azure.Entities;
 using Vanjaro.UXManager.Library.Common;
 using static Vanjaro.Core.Factories;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
 {
@@ -79,7 +80,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
         internal static HttpResponseMessage Export(int PortalID, string Name)
         {
             HttpResponseMessage Response = new HttpResponseMessage();
-            string Theme = Core.Managers.ThemeManager.GetCurrentThemeName();
+            string Theme = Core.Managers.ThemeManager.CurrentTheme.Name;
             ExportTemplate exportTemplate = new ExportTemplate
             {
                 Name = Name,
@@ -87,7 +88,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 UpdatedOn = DateTime.UtcNow,
                 Templates = new List<Layout>(),
                 ThemeName = Theme,
-                ThemeGuid = "49A70BA1-206B-471F-800A-679799FF09DF"
+                ThemeGuid = ThemeManager.CurrentTheme.GUID
             };
             Dictionary<string, string> Assets = new Dictionary<string, string>();
             foreach (Core.Data.Entities.Pages page in Core.Managers.PageManager.GetAllPublishedPages(PortalID, null))
