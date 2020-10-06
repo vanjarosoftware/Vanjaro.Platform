@@ -1,92 +1,92 @@
 <dotnetnuke type="Package" version="6.0">
-	<packages>
-		<package name="Vanjaro" type="Library" version="00.05.02">
-			<friendlyName>Vanjaro</friendlyName>
-			<description>Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN.</description>
-			<dependencies>
-				<dependency type="CoreVersion">09.07.02</dependency>
-				<dependency type="ManagedPackage" version="01.00.00">Dnn.PersonaBar.UI</dependency>
-			</dependencies>
-			<owner>
-				<name>Vanjaro</name>
-				<organization>Vanjaro</organization>
-				<url>http://www.vanjaro.com</url>
-				<email>support@vanjaro.com</email>
-			</owner>
-			<license src="license.txt" />
-			<releaseNotes src="release.txt" />
-			<azureCompatible>true</azureCompatible>
-			<components>
-				<component type="Script">
-					<scripts>
-						<basePath>DesktopModules\Vanjaro\Core\Library</basePath>
-						<script type="Install">
-							<path>Install</path>
-							<name>Core.01.00.00.SqlDataProvider</name>
-							<version>01.00.00</version>
-						</script>
-						<script type="Install">
-							<path>Install</path>
-							<name>Core.01.00.01.SqlDataProvider</name>
-							<version>01.00.01</version>
-						</script>
-                        <script type="Install">
-							<path>Install</path>
-							<name>Core.01.00.02.SqlDataProvider</name>
-							<version>01.00.02</version>
-						</script>
-						<script type="UnInstall">
-							<path>Install</path>
-							<name>Uninstall.Core.SqlDataProvider</name>
-							<version>00.05.00</version>
-						</script>
-					</scripts>
-				</component>
-				<component type="Script">
-					<scripts>
-						<basePath>DesktopModules\Vanjaro\Common</basePath>
-						<script type="Install">
-							<path>Install</path>
-							<name>Common.01.00.00.SqlDataProvider</name>
-							<version>01.00.00</version>
-						</script>
-						<script type="UnInstall">
-							<path>Install</path>
-							<name>Uninstall.Common.SqlDataProvider</name>
-							<version>00.05.00</version>
-						</script>
-					</scripts>
-				</component>
-				<component type="Script">
-					<scripts>
-						<basePath>DesktopModules\Vanjaro\URL</basePath>
-						<script type="Install">
-							<path>Install</path>
-							<name>URL.01.00.00.SqlDataProvider</name>
-							<version>01.00.00</version>
-						</script>
-						<script type="UnInstall">
-							<path>Install</path>
-							<name>Uninstall.URL.SqlDataProvider</name>
-							<version>00.05.00</version>
-						</script>
-					</scripts>
-				</component>
-				<component type="Script">
-					<scripts>
-						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Migrate</basePath>
-						<script type="Install">
-							<path>Install</path>
-							<name>Migrate.01.00.00.SqlDataProvider</name>
-							<version>01.00.00</version>
-						</script>
-						<script type="UnInstall">
-							<path>Install</path>
-							<name>Uninstall.Migrate.SqlDataProvider</name>
-							<version>00.05.00</version>
-						</script>
-					</scripts>
-				</component>
+  <packages>
+    <package name="Vanjaro" type="Library" version="00.05.02">
+      <friendlyName>Vanjaro</friendlyName>
+      <description>Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN.</description>
+      <dependencies>
+        <dependency type="CoreVersion">09.07.02</dependency>
+        <dependency type="ManagedPackage" version="01.00.00">Dnn.PersonaBar.UI</dependency>
+      </dependencies>
+      <owner>
+        <name>Vanjaro</name>
+        <organization>Vanjaro</organization>
+        <url>http://www.vanjaro.com</url>
+        <email>support@vanjaro.com</email>
+      </owner>
+      <license src="license.txt" />
+      <releaseNotes src="release.txt" />
+      <azureCompatible>true</azureCompatible>
+      <components>
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\Vanjaro\Core\Library</basePath>
+            <script type="Install">
+              <path>Install</path>
+              <name>Core.01.00.00.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
+            <script type="Install">
+              <path>Install</path>
+              <name>Core.01.00.01.SqlDataProvider</name>
+              <version>01.00.01</version>
+            </script>
+            <script type="Install">
+              <path>Install</path>
+              <name>Core.01.00.02.SqlDataProvider</name>
+              <version>01.00.02</version>
+            </script>
+            <script type="UnInstall">
+              <path>Install</path>
+              <name>Uninstall.Core.SqlDataProvider</name>
+              <version>00.05.00</version>
+            </script>
+          </scripts>
+        </component>
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\Vanjaro\Common</basePath>
+            <script type="Install">
+              <path>Install</path>
+              <name>Common.01.00.00.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
+            <script type="UnInstall">
+              <path>Install</path>
+              <name>Uninstall.Common.SqlDataProvider</name>
+              <version>00.05.00</version>
+            </script>
+          </scripts>
+        </component>
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\Vanjaro\URL</basePath>
+            <script type="Install">
+              <path>Install</path>
+              <name>URL.01.00.00.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
+            <script type="UnInstall">
+              <path>Install</path>
+              <name>Uninstall.URL.SqlDataProvider</name>
+              <version>00.05.00</version>
+            </script>
+          </scripts>
+        </component>
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\Vanjaro\UXManager\Extensions\Migrate</basePath>
+            <script type="Install">
+              <path>Install</path>
+              <name>Migrate.01.00.00.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
+            <script type="UnInstall">
+              <path>Install</path>
+              <name>Uninstall.Migrate.SqlDataProvider</name>
+              <version>00.05.00</version>
+            </script>
+          </scripts>
+        </component>
 
 				<component type="AuthenticationSystem">
 					<authenticationService>
@@ -117,11 +117,6 @@
 							<path>bin</path>
 							<name>Vanjaro.Common.dll</name>
 							<version>03.04.00</version>
-						</assembly>
-						<assembly>
-							<path>bin</path>
-							<name>Mandeeps.DNN.Modules.Licensing.dll</name>
-							<version>07.05.00</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
@@ -1041,28 +1036,28 @@
 						<install>
 							<configuration>
 								<nodes>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<remove fileExtension=".woff2" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<mimeMap fileExtension=".woff2" mimeType="font/woff2" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<remove fileExtension=".mp4" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<mimeMap fileExtension=".mp4" mimeType="video/mp4" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<remove fileExtension=".webp" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<mimeMap fileExtension=".webp" mimeType="image/webp" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<remove fileExtension=".svg" />
 									</node>
-									<node path="/configuration/system.webServer/staticContent" action="update" key="name" collision="overwrite">
+									<node path="/configuration/system.webServer/staticContent" action="update" key="fileExtension" collision="overwrite">
 										<mimeMap fileExtension=".svg" mimeType="image/svg+xml" />
 									</node>
 									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
@@ -1074,8 +1069,7 @@
 									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
 										<add name="VanjaroCommonLibrary" type="Vanjaro.Common.Components.HttpModule, Vanjaro.Common" preCondition="managedHandler" />
 									</node>
-									<node path="/configuration/system.webServer/modules" action="update" collision="save"  nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab">
-										<remove name="VanjaroMigrate" />
+									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
 										<add name="VanjaroMigrate" type="Vanjaro.Migrate.Components.HttpModule,Vanjaro.Migrate" preCondition="managedHandler" />
 									</node>
 								</nodes>
