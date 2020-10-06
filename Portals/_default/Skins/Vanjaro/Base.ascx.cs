@@ -6,6 +6,7 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
+using DotNetNuke.Services.Authentication;
 using DotNetNuke.Services.Tokens;
 using DotNetNuke.UI.Skins;
 using DotNetNuke.Web.Client.ClientResourceManagement;
@@ -329,6 +330,7 @@ namespace Vanjaro.Skin
                         var authLoginControl = (DotNetNuke.Services.Authentication.AuthenticationLoginBase)LoadControl("~/" + authSystem.LoginControlSrc);
                         if (authLoginControl.Enabled)
                         {
+                            BindLoginControl(authLoginControl, authSystem);
                             if (authLoginControl is DotNetNuke.Services.Authentication.OAuth.OAuthLoginBase oAuthLoginControl)
                             {
                                 Authdiv.Controls.Add(oAuthLoginControl);
@@ -338,11 +340,11 @@ namespace Vanjaro.Skin
                                 if (!IsAuth)
                                 {
                                     string ResourceFile = Page.ResolveUrl("~/DesktopModules/AuthenticationServices") + "/Vanjaro/" + DotNetNuke.Services.Localization.Localization.LocalResourceDirectory + "/" + Path.GetFileNameWithoutExtension(authSystem.LoginControlSrc);
-                                    createDiv.InnerHtml += "<ul class=\"nav nav-tabs\" id=\"nav-tab\" role=\"tablist\">";
+                                    createDiv.InnerHtml += "<ul class=\"vj_authenticationtab nav nav-tabs\" id=\"nav-tab\" role=\"tablist\">";
                                     createDiv.InnerHtml += "<li class=\"nav-item\"><a class=\"nav-link active\" id=\"nav-tab-" + tab + "\" data-toggle=\"tab\" href=\"#dnn_navtab_" + tab + "\" role=\"tab\" aria-controls=\"dnn_navtab_" + tab + "\" aria-selected=\"true\">" + DotNetNuke.Services.Localization.Localization.GetString("Title", ResourceFile) + "</a></li>";
 
                                     HtmlGenericControl homediv = new HtmlGenericControl("div");
-                                    homediv.Attributes["class"] = "tab-pane fade show active";
+                                    homediv.Attributes["class"] = "tab-pane fade show active vj_authenticationcontrol";
                                     homediv.Attributes["role"] = "tabpanel";
                                     homediv.Attributes["aria-labelledby"] = "nav-tab-" + tab;
                                     homediv.Attributes["data-toggle"] = "tab";
@@ -359,10 +361,9 @@ namespace Vanjaro.Skin
                                     IsAuth = true;
                                 }
 
-                                string LocalResourceFile = authLoginControl.LocalResourceFile + Path.GetFileNameWithoutExtension(authSystem.LoginControlSrc);
-                                createDiv.InnerHtml += "<li class=\"nav-item\"><a class=\"nav-link\" id=\"nav-tab-" + tab + "\" data-toggle=\"tab\" href=\"#dnn_navtab_" + tab + "\" role=\"tab\" aria-controls=\"dnn_navtab_" + tab + "\" aria-selected=\"false\">" + DotNetNuke.Services.Localization.Localization.GetString("Title", LocalResourceFile) + "</a></li>";
+                                createDiv.InnerHtml += "<li class=\"nav-item\"><a class=\"nav-link\" id=\"nav-tab-" + tab + "\" data-toggle=\"tab\" href=\"#dnn_navtab_" + tab + "\" role=\"tab\" aria-controls=\"dnn_navtab_" + tab + "\" aria-selected=\"false\">" + DotNetNuke.Services.Localization.Localization.GetString("Title", authLoginControl.LocalResourceFile) + "</a></li>";
                                 HtmlGenericControl tabdiv = new HtmlGenericControl("div");
-                                tabdiv.Attributes["class"] = "tab-pane fade";
+                                tabdiv.Attributes["class"] = "tab-pane fade vj_authenticationcontrol";
                                 tabdiv.Attributes["role"] = "tabpanel";
                                 tabdiv.Attributes["aria-labelledby"] = "nav-tab-" + tab;
                                 tabdiv.Attributes["data-toggle"] = "tab";
@@ -386,7 +387,20 @@ namespace Vanjaro.Skin
                 socialControls.Controls.Add(Authdiv);
                 SocialRegistration.Controls.Add(socialControls);
                 VLoginControls.Controls.Add(SocialRegistration);
+                WebForms.LinkCSS(Page, "AuthModuelCSS", Page.ResolveUrl("~/DesktopModules/Admin/Authentication/module.css"));
+
             }
+        }
+
+        private void BindLoginControl(AuthenticationLoginBase authLoginControl, AuthenticationInfo authSystem)
+        {
+            // set the control ID to the resource file name ( ie. controlname.ascx = controlname )
+            // this is necessary for the Localization in PageBase
+            authLoginControl.AuthenticationType = authSystem.AuthenticationType;
+            authLoginControl.ID = Path.GetFileNameWithoutExtension(authSystem.LoginControlSrc) + "_" + authSystem.AuthenticationType;
+            authLoginControl.LocalResourceFile = authLoginControl.TemplateSourceDirectory + "/" + DotNetNuke.Services.Localization.Localization.LocalResourceDirectory + "/" +
+                                                 Path.GetFileNameWithoutExtension(authSystem.LoginControlSrc);
+            
         }
 
         private void ResetModulePanes()
