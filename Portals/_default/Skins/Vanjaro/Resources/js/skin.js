@@ -143,9 +143,14 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
         var iframeurl = url;
         $modal.find('#UXpagerender').on("load", function () {
             var $iframe = $(this);
-            // Change check for library.html (!url.startsWith('~'))
-            if (GetParameterByName('mid', this.contentWindow.location.href) == null && !iframeurl.startsWith('~'))
-                $(window.parent.document.body).find('[data-dismiss="modal"]').trigger('click');
+            try {
+                // Change check for library.html (!url.startsWith('~'))
+                if (GetParameterByName('mid', this.contentWindow.location.href) == null && !iframeurl.startsWith('~'))
+                    $(window.parent.document.body).find('[data-dismiss="modal"]').trigger('click');
+            }
+            catch (e) {
+                
+            }
             $iframe.prev().hide();
             $iframe.show();
         });

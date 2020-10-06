@@ -3,7 +3,6 @@ Resources\Images
 Resources\Scripts
 Resources\StyleSheets
 Resources\tui
-Resources\library.html
 Resources\extension.html
 *.ascx
 *.cshtml
