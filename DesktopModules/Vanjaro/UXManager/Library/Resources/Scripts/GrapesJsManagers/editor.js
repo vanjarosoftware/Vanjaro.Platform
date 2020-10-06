@@ -215,7 +215,7 @@ $(document).ready(function () {
                     sf = parent.$.ServicesFramework(-1);
                 $.ajax({
                     type: "GET",
-                    url: eval(data.GetURL),
+                    url: eval(data.GetContentUrl),
                     headers: {
                         'ModuleId': parseInt(data.ModuleId),
                         'TabId': parseInt(sf.getTabId()),
@@ -289,7 +289,7 @@ $(document).ready(function () {
                                 showOffsets: 1,
                                 avoidInlineStyle: 1,
                                 noticeOnUnload: 0,
-                                container: data.Container,
+                                container: data.ContainerID,
                                 height: '100%',
                                 fromElement: vjcomps != undefined ? false : true,
                                 plugins: ['modulewrapper', 'blockwrapper', 'vjpreset', 'ThemeBlocks'],
@@ -503,7 +503,7 @@ $(document).ready(function () {
                                     autosave: false,
                                     autoload: false,
                                     stepsBeforeSave: 2,
-                                    urlStore: eval(data.SetURL),
+                                    urlStore: eval(data.UpdateContentUrl),
                                     params: {
                                         EntityID: data.EntityID,
                                         IsPublished: false,

@@ -132,7 +132,7 @@ namespace Vanjaro.Core
                     wflow.CreatedBy = workflow.CreatedBy;
                     wflow.CreatedOn = workflow.CreatedOn;
                     wflow.PortalID = workflow.PortalID;
-                    wflow.Revisions = 5;
+                    wflow.Revisions = 10;
                     wflow.Insert();
                     UpdateWorkflowState(new WorkflowState { WorkflowID = wflow.ID, IsActive = true, Name = "Draft", Notify = true, Order = 1 });
                     WorkflowState wState = UpdateWorkflowState(new WorkflowState { WorkflowID = wflow.ID, IsActive = true, Name = "Ready for Review", Notify = true, Order = 2 });
