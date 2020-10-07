@@ -1088,7 +1088,7 @@
 				<component type="UrlProvider">
 					<urlProvider>
 						<name>Vanjaro URL Provider</name>
-						<type>Mandeeps.DNN.Libraries.URL.Providers.URLProvider</type>
+						<type>Vanjaro.URL.Providers.URLProvider</type>
 						<settingsControlSrc>DesktopModules/Vanjaro/URL/Views/Settings.ascx</settingsControlSrc>
 						<redirectAllUrls>false</redirectAllUrls>
 						<replaceAllUrls>true</replaceAllUrls>
