@@ -969,17 +969,28 @@
 						</resourceFile>
 					</resourceFiles>
 				</component>
-				<component type="File">
-					<files>
-						<basePath>DesktopModules/AuthenticationServices/Vanjaro</basePath>
-						<file>
-							<name>Login.ascx</name>
-						</file>
-						<file>
-							<name>Settings.ascx</name>
-						</file>
-					</files>
-				</component>
+        <component type="File">
+          <files>
+            <basePath>DesktopModules\AuthenticationServices\Vanjaro</basePath>
+            <file>
+              <name>Login.ascx</name>
+              <sourceFileName>AuthenticationViews\Login.ascx</sourceFileName>
+            </file>
+            <file>
+              <name>Settings.ascx</name>
+              <sourceFileName>AuthenticationViews\Settings.ascx</sourceFileName>
+            </file>
+          </files>
+        </component>
+        <component type="File">
+          <files>
+            <basePath>DesktopModules\AuthenticationServices\Vanjaro\App_LocalResources</basePath>
+            <file>
+              <name>Login.ascx.resx</name>
+              <sourceFileName>AuthenticationViews\App_LocalResources\Login.ascx.resx</sourceFileName>
+            </file>
+          </files>
+        </component>
 				<component type="Skin">
 					<skinFiles>
 						<skinName>Vanjaro</skinName>

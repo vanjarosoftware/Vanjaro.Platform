@@ -72,8 +72,7 @@ licenses-resources.zip
 ..\..\..\..\DesktopModules\Vanjaro\Core\Extensions\Notification\Notification\core-extensions-notification-resources.zip
 ..\..\..\..\DesktopModules\Vanjaro\Core\Extensions\Workflow\Review\core-extensions-review-resources.zip
 ..\..\..\..\DesktopModules\Vanjaro\Core\Providers\Authentication\providers-authentication-resources.zip
-..\..\..\..\DesktopModules\Vanjaro\Core\Providers\Authentication\Login.ascx
-..\..\..\..\DesktopModules\Vanjaro\Core\Providers\Authentication\Settings.ascx
+..\..\..\..\DesktopModules\Vanjaro\Core\Providers\Authentication\AuthenticationViews
 ..\..\..\..\Portals\_default\Containers\Vanjaro\container-resource.zip
 ..\..\..\..\Portals\_default\Skins\Vanjaro\skin-resource.zip
 ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Install\
