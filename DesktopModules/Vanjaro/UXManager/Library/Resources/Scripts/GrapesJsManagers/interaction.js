@@ -25,10 +25,6 @@ $(document).ready(function () {
     if ($("#dnn_ContentPane").css("marginTop") == '71px')
         $('body, form').css('height', 'calc(100vh - 71px)');
 
-    setTimeout(function () {
-        ChangeBlockType();
-    }, 200);
-
     //Menu Settings Animation
     $(".MenuItem li,.ToolbarItem li").each(function () {
         var menuitem = $(this).find('> a[target!="_blank"]');
@@ -218,11 +214,11 @@ $(document).ready(function () {
             $("#StyleToolManager").hide();
             $("#Notification").hide();
             $(".Menupanel-top").hide();
-            setTimeout(function () {
+            //setTimeout(function () {
                 $(".panel-top , .block-set").fadeIn();
                 $("#ContentBlocks").fadeIn();
                 ChangeBlockType();
-            }, 300);
+            //}, 300);
         }
 
         $("#iframeHolder").find('iframe').attr('src', 'about:blank');

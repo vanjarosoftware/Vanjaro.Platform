@@ -1,4 +1,4 @@
-﻿using DotNetNuke.Common;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Upgrade;
@@ -38,9 +38,11 @@ namespace Vanjaro.Core.Packager.Vanjaro
             DotNetNuke.Services.Upgrade.Upgrade.StartTimer();
 
             // Write out Header
-            HtmlUtils.WriteHeader(this.Response, "installResources");
+            HtmlUtils.WriteHeader(this.Response, "");
 
-            this.Response.Write("<h2>Install Resources Status Report</h2>");
+			this.Response.Write("<div class='install'>");
+			this.Response.Write("<h2>Installing Resources</h2>");
+			this.Response.Write("<h2>Install Resources Status Report</h2>");
             this.Response.Flush();
 
             // install new resources(s)
@@ -51,8 +53,9 @@ namespace Vanjaro.Core.Packager.Vanjaro
             }
 
             this.Response.Write("<h2>Upgrade Complete</h2>");
-            this.Response.Write("<br><br><h2><a href='../Default.aspx'>Click Here To Access Your Site</a></h2><br><br>");
-            this.Response.Flush();
+            this.Response.Write("<br><h2><a href='../Default.aspx'>Click Here To Access Your Site</a></h2><br>");
+			this.Response.Write("</div>");
+			this.Response.Flush();
 
             // Write out Footer
             HtmlUtils.WriteFooter(this.Response);

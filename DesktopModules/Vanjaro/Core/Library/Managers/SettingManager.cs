@@ -197,7 +197,7 @@ namespace Vanjaro.Core
 
                 #region Copy Vthemes in portal folder
 
-                string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrentThemeName(pinfo.PortalID) + "/editor");
+                string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrent(pinfo.PortalID).Name + "/editor");
                 Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", pinfo.PortalID.ToString()));
                 try
                 {
@@ -394,7 +394,7 @@ namespace Vanjaro.Core
                 }
 
                 #region Delete Unnecessary Files
-                string LayoutPath = HttpContext.Current.Server.MapPath("~/Portals/" + pinfo.PortalID + "/vThemes/" + Core.Managers.ThemeManager.GetCurrentThemeName(pinfo.PortalID) + "/templates");
+                string LayoutPath = HttpContext.Current.Server.MapPath("~/Portals/" + pinfo.PortalID + "/vThemes/" + Core.Managers.ThemeManager.GetCurrent(pinfo.PortalID).Name + "/templates");
                 if (Directory.Exists(LayoutPath))
                     Directory.Delete(LayoutPath, true);
                 #endregion
@@ -678,7 +678,7 @@ namespace Vanjaro.Core
             private static List<Layout> GetLayouts(PortalInfo pinfo)
             {
                 List<Layout> layouts = new List<Layout>();
-                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrentThemeName(pinfo.PortalID) + "/templates/website/");
+                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrent(pinfo.PortalID).Name + "/templates/website/");
                 if (Directory.Exists(FolderPath))
                 {
                     foreach (string layout in Directory.GetFiles(FolderPath, "*.json"))
