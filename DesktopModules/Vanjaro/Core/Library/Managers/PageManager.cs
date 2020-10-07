@@ -157,10 +157,19 @@ namespace Vanjaro.Core
                                 result.RedirectAfterm2v = null;
                             }
                         }
-                        catch { }
+                        catch (Exception ex) {
+                            result.IsSuccess = false;
+                            result.Message = ex.Message;
+                        }
+
+                        result.IsSuccess = true;
                     }
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    result.IsSuccess = false;
+                    result.Message = ex.Message;
+                }
                 return result;
             }
 

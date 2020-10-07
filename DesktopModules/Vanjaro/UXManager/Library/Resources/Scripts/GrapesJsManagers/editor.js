@@ -98,10 +98,8 @@ $(document).ready(function () {
                         }
                     });
             }
-            else {
+            else
                 RunSaveCommand();
-                ShowNotification('', VjLocalized.PagePublished, 'success');
-            }
         };
 
 
@@ -504,6 +502,12 @@ $(document).ready(function () {
                                     autoload: false,
                                     stepsBeforeSave: 2,
                                     urlStore: eval(data.UpdateContentUrl),
+                                    onComplete(jqXHR, status) {
+                                        if (jqXHR.IsSuccess)
+                                            ShowNotification('', VjLocalized.Message, 'success');
+                                        else
+                                            ShowNotification('', jqXHR.Message, 'error');
+                                    },
                                     params: {
                                         EntityID: data.EntityID,
                                         IsPublished: false,
