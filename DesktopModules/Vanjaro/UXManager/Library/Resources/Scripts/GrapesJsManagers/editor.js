@@ -2355,7 +2355,7 @@ $(document).ready(function () {
         else if ($this.hasClass('librarytab')) {
             $('.blockstab').removeClass('active');
             $(this).parent().addClass('active');
-            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL + '/templates/tid/' + ThemeGUID, '100%');
+            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%');
         }
         else {
             $('.blockstab').removeClass('active');
