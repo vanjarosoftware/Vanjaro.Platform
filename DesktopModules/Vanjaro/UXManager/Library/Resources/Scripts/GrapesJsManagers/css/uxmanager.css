@@ -967,6 +967,7 @@ div#MenuSettings .parent-menu-hide {
 
 .traitsmanager .gjs-field-range {
     width: 276px;
+    border: none;
 }
 
 .backbtn {
@@ -2553,7 +2554,7 @@ span.notificationname {
 }
 
 
-.gjs-field.gjs-field-range {
+.stylemanager  .gjs-field.gjs-field-range {
     border: none;
     width: 0%; /*value changed from 75% to 0%*/
     margin-right: 10px;

@@ -306,15 +306,15 @@ div.actionMenu ul {
                 list-style-type: none;
             }
 
-                div.actionMenu ul.dnn_mact > li > ul > li {
-                    /*display: block;
+            div.actionMenu ul.dnn_mact > li > ul > li {
+                /*display: block;
                     padding: 0;
                     margin: 0;*/
-                    /*border-top: 1px solid #cccccc;*/
-                    white-space: nowrap;
-                    /*background: #3b97e3;
+                /*border-top: 1px solid #cccccc;*/
+                white-space: nowrap;
+                /*background: #3b97e3;
                     transition: background-color .25s;*/
-                }
+            }
 
             /*div.actionMenu ul.dnn_mact > li > ul > li:first-child {
                         border: none;
@@ -367,9 +367,9 @@ div.actionMenu ul {
         background: #585858;
     }
 
-    .tlb-app-setting-panel__option:hover {
-        background: #2c8cdc;
-    }
+.tlb-app-setting-panel__option:hover {
+    background: #2c8cdc;
+}
 
 .dnnFormMessage {
     display: block;
@@ -567,6 +567,7 @@ Theme.css end
 
 .vj-map {
     height: 350px;
+    width: 100%;
 }
 
 .spacer {
@@ -872,9 +873,9 @@ img#uploaded_image {
     width: 100%;
 }
 
-#socialControls ul.buttonList li {
-    margin: auto;
-}
+    #socialControls ul.buttonList li {
+        margin: auto;
+    }
 
 div.vj_authenticationcontrol {
     text-align: center;
