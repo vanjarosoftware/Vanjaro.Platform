@@ -124,6 +124,10 @@ namespace Vanjaro.Skin
         {
             JavaScript.RequestRegistration(CommonJs.jQuery, null, SpecificVersion.Latest);
 
+            string ThemeJS = "~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/theme.js";
+            if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(ThemeJS)))
+                ClientResourceManager.RegisterScript(Page, Page.ResolveUrl(ThemeJS));
+
             PageManager.Init(Page, PortalSettings);
             if (string.IsNullOrEmpty(Request.QueryString["mid"]) || (!string.IsNullOrEmpty(Request.QueryString["icp"]) && bool.Parse(Request.QueryString["icp"]) && (!string.IsNullOrEmpty(Request.QueryString["mid"]) && Request.QueryString["mid"] != "0")))
             {
@@ -157,12 +161,7 @@ namespace Vanjaro.Skin
                     if (!string.IsNullOrEmpty(script.Trim()))
                         WebForms.RegisterStartupScript(Page, "ThemeBlocks", "LoadThemeBlocks = function (grapesjs) { grapesjs.plugins.add('ThemeBlocks', (editor, opts = {}) => { " + script + "}); };", true);
                 }
-                else
-                {
-                    string ThemeJS = "~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/theme.js";
-                    if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(ThemeJS)))
-                        ClientResourceManager.RegisterScript(Page, Page.ResolveUrl(ThemeJS));
-                }
+
             }
             else
             {
@@ -399,7 +398,7 @@ namespace Vanjaro.Skin
             authLoginControl.ID = Path.GetFileNameWithoutExtension(authSystem.LoginControlSrc) + "_" + authSystem.AuthenticationType;
             authLoginControl.LocalResourceFile = authLoginControl.TemplateSourceDirectory + "/" + DotNetNuke.Services.Localization.Localization.LocalResourceDirectory + "/" +
                                                  Path.GetFileNameWithoutExtension(authSystem.LoginControlSrc);
-            
+
         }
 
         private void ResetModulePanes()
