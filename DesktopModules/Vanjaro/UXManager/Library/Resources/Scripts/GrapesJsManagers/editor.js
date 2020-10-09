@@ -32,12 +32,12 @@ $(document).ready(function () {
 
         window.addEventListener('message', event => {
 
-            if (event.origin.startsWith(TemplateLibraryURL)) {
+            if (TemplateLibraryURL.startsWith(event.origin)) {
 
                 var templatePath = '';
 
-                if (!event.data.startsWith(TemplateLibraryURL))
-                    templatePath = TemplateLibraryURL + '/' + event.data;
+                if (!event.data.startsWith(event.origin))
+                    templatePath = event.origin + '/' + event.data;
                 else
                     templatePath = event.data;
 
