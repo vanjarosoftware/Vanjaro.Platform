@@ -28,7 +28,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Logo
         public string Icon => "fa fa-info-circle";
 
         public Guid Guid => Guid.Parse(ExtensionInfo.GUID);
-        public bool Visible => true;
+        public bool Visible { get; set; } = true;
 
         public Dictionary<string, string> Attributes
         {

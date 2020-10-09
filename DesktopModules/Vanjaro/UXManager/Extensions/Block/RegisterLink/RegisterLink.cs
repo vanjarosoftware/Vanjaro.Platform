@@ -29,7 +29,7 @@ namespace Vanjaro.UXManager.Extensions.Block.RegisterLink
         public string Icon => "fas fa-sign-in-alt";
 
         public Guid Guid => Guid.Parse(ExtensionInfo.GUID);
-        public bool Visible => true;
+        public bool Visible { get; set; } = true;
 
         public Dictionary<string, string> Attributes
         {

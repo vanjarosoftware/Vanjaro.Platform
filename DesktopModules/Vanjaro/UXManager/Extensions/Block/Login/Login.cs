@@ -30,7 +30,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
         public string Icon => "fas fa-user-circle";
 
         public Guid Guid => Guid.Parse(ExtensionInfo.GUID);
-        public bool Visible => true;
+        public bool Visible { get; set; } = true;
 
         public Dictionary<string, string> Attributes
         {
