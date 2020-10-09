@@ -42,7 +42,7 @@ namespace Vanjaro.UXManager.Library
 #if RELEASE
             TemplateLibraryURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
 #else
-            TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/49A70BA1-206B-471F-800A-679799FF09D";
+            TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/49A70BA1-206B-471F-800A-679799FF09DF";
 #endif
 
             base.OnInit(e);
