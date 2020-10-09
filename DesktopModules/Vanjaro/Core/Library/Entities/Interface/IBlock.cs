@@ -8,6 +8,7 @@ namespace Vanjaro.Core.Entities.Interface
     {
         string Category { get; }
         string Name { get; }
+        bool Visible { get; }
         string DisplayName { get; }
         string Icon { get; }
 

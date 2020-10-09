@@ -25,6 +25,8 @@ namespace Vanjaro.UXManager.Extensions.Block.Custom
 
         public string LocalResourcesFile => "~/DesktopModules/Vanjaro/UXManager/Extensions/Block/" + ExtensionInfo.Name + "/Views/App_LocalResources/Shared.resx";
 
+        public bool Visible => true;
+
         public Dictionary<string, string> Attributes
         {
             get

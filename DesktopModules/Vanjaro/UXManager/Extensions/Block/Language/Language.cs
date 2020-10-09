@@ -86,6 +86,8 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage
         public string[] Dependencies => new string[] {
                     "Bootstrap" };
 
+        public bool Visible => true;
+
         public string AccessRoles(UserInfo userInfo)
         {
             return AppFactory.GetAccessRoles(userInfo);

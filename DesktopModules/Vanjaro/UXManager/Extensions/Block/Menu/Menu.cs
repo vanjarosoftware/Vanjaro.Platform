@@ -26,6 +26,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Menu
         public string Icon => "fas fa-bars";
 
         public Guid Guid => Guid.Parse(ExtensionInfo.GUID);
+        public bool Visible => true;
 
         public Dictionary<string, string> Attributes
         {
