@@ -26,11 +26,10 @@
         </asp:placeholder>	
         <div class="install">	
             <h2 class="dnnForm dnnInstall dnnClear">	
-                <img src="../images/Branding/Vanjaro_logo.png" border="0" alt="Vanjaro">
-                <p></p>
-                <h5><asp:Label ID="currentVersionLabel" runat="server" /></h5>	
-                <h5><asp:Label ID="versionLabel" runat="server" /></h5>	
-				<h5><asp:Label ID="versionsMatch" runat="server" /></h5>	
+                <img src="../images/Branding/Vanjaro_logo.png" border="0" alt="Vanjaro" style="margin: 0 auto; display: block;">
+                <h5><asp:Label ID="currentVersionLabel" runat="server" Visible="false" /></h5>	
+                <h5><asp:Label ID="versionLabel" runat="server" Visible="false" /></h5>	
+				<h5><asp:Label ID="versionsMatch" runat="server" Visible="false" /></h5>	
             </h2>	
             <br/>	
             <div class="dnnForm dnnInstall dnnClear" id="dnnInstall" runat="server">	
