@@ -83,16 +83,23 @@
     <Compile Include="..\..\Library\Properties\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Controllers\ResetPasswordController.cs" />
-    <Compile Include="Controllers\ServiceRouteMapper.cs" />
-    <Compile Include="Entities\ResetPassword.cs" />
-    <Compile Include="Login.ascx.cs">
+    <Compile Include="AuthenticationViews\Login.ascx.cs">
       <DependentUpon>Login.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Login.ascx.designer.cs">
+    <Compile Include="AuthenticationViews\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
     </Compile>
+    <Compile Include="AuthenticationViews\Settings.ascx.cs">
+      <DependentUpon>Settings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AuthenticationViews\Settings.ascx.designer.cs">
+      <DependentUpon>Settings.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ResetPasswordController.cs" />
+    <Compile Include="Controllers\ServiceRouteMapper.cs" />
+    <Compile Include="Entities\ResetPassword.cs" />
     <Compile Include="Managers\ResetPasswordManager.cs" />
     <Compile Include="PasswordReset.ascx.cs">
       <DependentUpon>PasswordReset.ascx</DependentUpon>
@@ -109,21 +116,14 @@
     <Compile Include="Register.ascx.designer.cs">
       <DependentUpon>Register.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Settings.ascx.cs">
-      <DependentUpon>Settings.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Settings.ascx.designer.cs">
-      <DependentUpon>Settings.ascx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Login.ascx" />
+    <Content Include="AuthenticationViews\Login.ascx" />
+    <Content Include="AuthenticationViews\Settings.ascx" />
     <Content Include="PasswordReset.ascx" />
     <Content Include="Register.ascx" />
     <Content Include="Resources.txt" />
     <Content Include="Resources\Scripts\ResetPassword.js" />
-    <Content Include="Settings.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
@@ -136,6 +136,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\Login.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AuthenticationViews\App_LocalResources\Login.ascx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
