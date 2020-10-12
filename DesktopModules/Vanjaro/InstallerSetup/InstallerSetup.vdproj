@@ -15,32 +15,14 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_248F82957AC4ED768380EB24682BE97A"
-        "OwnerKey" = "8:_36CC390901B5A8955DF70B198E042E2E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_248F82957AC4ED768380EB24682BE97A"
-        "OwnerKey" = "8:_DACE9AC2E7D14266992BA68DBA0DE295"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_248F82957AC4ED768380EB24682BE97A"
-        "OwnerKey" = "8:_D642F553FB07E4FCBC93CCDA343C9AF6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_36CC390901B5A8955DF70B198E042E2E"
+        "MsmKey" = "8:_3F073E3761AC344F764848B7F43A559A"
         "OwnerKey" = "8:_DACE9AC2E7D14266992BA68DBA0DE295"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_4A119F999ABD3E6D7A135319EB3C0025"
-        "OwnerKey" = "8:_70B6931448113597047E45599D118516"
+        "OwnerKey" = "8:_D8085586F2324F7D6BD424826297F3E0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -51,8 +33,32 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_70B6931448113597047E45599D118516"
+        "MsmKey" = "8:_8465519E5F01A053B34C7BC53C4B0DDD"
         "OwnerKey" = "8:_DACE9AC2E7D14266992BA68DBA0DE295"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_98AC3729F41E6E8EDF64B74AFB85D068"
+        "OwnerKey" = "8:_DACE9AC2E7D14266992BA68DBA0DE295"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9ED1117CB92B5AA039A188F40EAE0E05"
+        "OwnerKey" = "8:_98AC3729F41E6E8EDF64B74AFB85D068"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9ED1117CB92B5AA039A188F40EAE0E05"
+        "OwnerKey" = "8:_DACE9AC2E7D14266992BA68DBA0DE295"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9ED1117CB92B5AA039A188F40EAE0E05"
+        "OwnerKey" = "8:_8465519E5F01A053B34C7BC53C4B0DDD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -63,7 +69,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D642F553FB07E4FCBC93CCDA343C9AF6"
+        "MsmKey" = "8:_D8085586F2324F7D6BD424826297F3E0"
         "OwnerKey" = "8:_DACE9AC2E7D14266992BA68DBA0DE295"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -71,12 +77,6 @@
         {
         "MsmKey" = "8:_DACE9AC2E7D14266992BA68DBA0DE295"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EEB804DAE5F2B059A5D166060E91B8CB"
-        "OwnerKey" = "8:_DACE9AC2E7D14266992BA68DBA0DE295"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -94,7 +94,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_70B6931448113597047E45599D118516"
+        "OwnerKey" = "8:_D8085586F2324F7D6BD424826297F3E0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,25 +106,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D642F553FB07E4FCBC93CCDA343C9AF6"
+        "OwnerKey" = "8:_8465519E5F01A053B34C7BC53C4B0DDD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_36CC390901B5A8955DF70B198E042E2E"
+        "OwnerKey" = "8:_98AC3729F41E6E8EDF64B74AFB85D068"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_248F82957AC4ED768380EB24682BE97A"
+        "OwnerKey" = "8:_9ED1117CB92B5AA039A188F40EAE0E05"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EEB804DAE5F2B059A5D166060E91B8CB"
+        "OwnerKey" = "8:_3F073E3761AC344F764848B7F43A559A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -173,7 +173,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\InstallerSetup.msi"
+        "OutputFilename" = "8:Release\\VanjaroSetup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -228,20 +228,20 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_248F82957AC4ED768380EB24682BE97A"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3F073E3761AC344F764848B7F43A559A"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:DotNetZip, Version=1.13.8.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_248F82957AC4ED768380EB24682BE97A"
+                    "_3F073E3761AC344F764848B7F43A559A"
                     {
-                    "Name" = "8:MetroFramework.dll"
+                    "Name" = "8:DotNetZip.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:MetroFramework.dll"
+            "SourcePath" = "8:DotNetZip.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_982409F49F3340C9B1C982EC403EBE89"
@@ -256,37 +256,6 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_36CC390901B5A8955DF70B198E042E2E"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MetroFramework.Design, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_36CC390901B5A8955DF70B198E042E2E"
-                    {
-                    "Name" = "8:MetroFramework.Design.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:MetroFramework.Design.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_982409F49F3340C9B1C982EC403EBE89"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -352,20 +321,82 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_70B6931448113597047E45599D118516"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8465519E5F01A053B34C7BC53C4B0DDD"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Octokit, Version=0.48.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:MetroFramework.Fonts, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_70B6931448113597047E45599D118516"
+                    "_8465519E5F01A053B34C7BC53C4B0DDD"
                     {
-                    "Name" = "8:Octokit.dll"
+                    "Name" = "8:MetroFramework.Fonts.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Octokit.dll"
+            "SourcePath" = "8:MetroFramework.Fonts.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_982409F49F3340C9B1C982EC403EBE89"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_98AC3729F41E6E8EDF64B74AFB85D068"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MetroFramework.Design, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_98AC3729F41E6E8EDF64B74AFB85D068"
+                    {
+                    "Name" = "8:MetroFramework.Design.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:MetroFramework.Design.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_982409F49F3340C9B1C982EC403EBE89"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9ED1117CB92B5AA039A188F40EAE0E05"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_9ED1117CB92B5AA039A188F40EAE0E05"
+                    {
+                    "Name" = "8:MetroFramework.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:MetroFramework.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_982409F49F3340C9B1C982EC403EBE89"
@@ -414,51 +445,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D642F553FB07E4FCBC93CCDA343C9AF6"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D8085586F2324F7D6BD424826297F3E0"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MetroFramework.Fonts, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Octokit, Version=0.48.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_D642F553FB07E4FCBC93CCDA343C9AF6"
+                    "_D8085586F2324F7D6BD424826297F3E0"
                     {
-                    "Name" = "8:MetroFramework.Fonts.dll"
+                    "Name" = "8:Octokit.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:MetroFramework.Fonts.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_982409F49F3340C9B1C982EC403EBE89"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EEB804DAE5F2B059A5D166060E91B8CB"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DotNetZip, Version=1.13.8.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_EEB804DAE5F2B059A5D166060E91B8CB"
-                    {
-                    "Name" = "8:DotNetZip.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DotNetZip.dll"
+            "SourcePath" = "8:Octokit.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_982409F49F3340C9B1C982EC403EBE89"
@@ -555,7 +555,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Vanjaro Installer"
         "ProductCode" = "8:{42F623CA-DB89-4F7D-91A1-20AD3F08636C}"
-        "PackageCode" = "8:{AFA2DF12-1FCD-4418-9FF6-5EA765CA3EDA}"
+        "PackageCode" = "8:{9ECA39D9-BD18-414D-A2CC-9370D02D617B}"
         "UpgradeCode" = "8:{BC9A88B5-81D6-43FA-B707-6858CE83BDD9}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
