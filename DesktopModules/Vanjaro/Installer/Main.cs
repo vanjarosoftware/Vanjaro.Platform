@@ -109,7 +109,7 @@ namespace Vanjaro.Installer
                                 {
                                     LaunchSite();
 
-                                    MessageBox.Show("Continue installation using the site wizard...", "Site Created", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    //MessageBox.Show("Continue installation using the site wizard...", "Site Created", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                                     BindUpgradeList();
                                 }
@@ -872,7 +872,7 @@ namespace Vanjaro.Installer
                     bUpgradeSite.Enabled = true;
                     bUpgradeSite.Text = "Upgrade";
 
-                    MessageBox.Show("Continue upgrading all sites using the site wizard...", "Site Upgraded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Continue upgrading all sites using the site wizard...", "Site Upgraded", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     BindUpgradeList();
                 }
