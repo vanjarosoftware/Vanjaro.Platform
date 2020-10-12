@@ -125,7 +125,8 @@ namespace Vanjaro.Skin
             JavaScript.RequestRegistration(CommonJs.jQuery, null, SpecificVersion.Latest);
 
             string ThemeJS = "~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/theme.js";
-            if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(ThemeJS)))
+            
+            if (Core.Managers.ThemeManager.HasScript(ThemeJS))
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl(ThemeJS));
 
             PageManager.Init(Page, PortalSettings);
@@ -144,6 +145,7 @@ namespace Vanjaro.Skin
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/DesktopModules/Vanjaro/Common/Frameworks/Bootstrap/4.5.0/js/bootstrap.min.js"), 1, "DnnFormBottomProvider");
 
                 string DirectoryPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/js/");
+
                 if ((TabPermissionController.HasTabPermission("EDIT") || (page != null && page.StateID.HasValue && HasReviewPermission)) && Directory.Exists(DirectoryPath))
                 {
                     string script = "";

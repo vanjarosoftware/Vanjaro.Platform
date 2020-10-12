@@ -1,4 +1,5 @@
-﻿using DotNetNuke.Entities.Portals;
+﻿using Dnn.PersonaBar.Prompt.Components.Commands.Host;
+using DotNetNuke.Entities.Portals;
 using LibSassHost;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -33,6 +34,21 @@ namespace Vanjaro.Core
             {
                 Theme theme = new Theme(PortalID);
                 return theme;
+            }
+
+            public static bool HasScript(string ThemeJS)
+            {
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, ThemeJS);
+                bool? hasScript = CacheFactory.Get(CacheKey);
+                if (hasScript == null)
+                {
+                    if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(ThemeJS)))
+                        hasScript = true;
+                    else
+                        hasScript = false;
+                    CacheFactory.Set(CacheKey, hasScript);
+                }
+                return hasScript.Value;
             }
 
 
