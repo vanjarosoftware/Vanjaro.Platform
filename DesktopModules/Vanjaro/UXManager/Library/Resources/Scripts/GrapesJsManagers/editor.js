@@ -32,7 +32,7 @@ $(document).ready(function () {
 
         window.addEventListener('message', event => {
 
-            if (TemplateLibraryURL.startsWith(event.origin)) {
+            if (TemplateLibraryURL.startsWith(event.origin) && typeof event.data != 'undefined') {
 
                 var templatePath = '';
 
@@ -53,10 +53,9 @@ $(document).ready(function () {
                     },
                     success: function (data) {
 
-                        if (data.html != '' && data.Name != '') {
+                        if (data.html != '') {
 
                             var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
-                                label: data.Name,
                                 content: data.Html + '<style>' + data.Css + '</style>',
                                 attributes: {
                                     class: 'fas fa-th-large floating',
@@ -2073,8 +2072,14 @@ $(document).ready(function () {
 
 
                             VjEditor.on('block:drag:start', function (model) {
+
                                 VjEditor.runCommand('core:component-outline');
 
+                                if (typeof model != "undefined") {
+
+                                    if (model.attributes.id == 'LibraryBlock')
+                                        $('#LibraryBlock').css('opacity', '0.01');
+                                }
                             });
 
                             VjEditor.on('change:changesCount', e => {
