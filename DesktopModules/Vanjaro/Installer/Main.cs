@@ -447,7 +447,12 @@ namespace Vanjaro.Installer
         private string GetReleasePackagePath(string ReleaseType, string Architecture = null)
         {
             if (Architecture == null)
-                Architecture = PlatformArchitecture;
+            {
+                if (ReleaseType.ToLower() == "install")
+                    Architecture = PlatformArchitecture;
+                else
+                    Architecture = "upgrade";
+            }
 
             var ReleaseDir = Directory.GetCurrentDirectory() + @"\Releases\";
             Release rel = cbVersion.SelectedItem as Release;
@@ -479,7 +484,12 @@ namespace Vanjaro.Installer
             }
 
             if (Architecture == null)
-                Architecture = PlatformArchitecture;
+            {
+                if (ReleaseType.ToLower() == "install")
+                    Architecture = PlatformArchitecture;
+                else
+                    Architecture = "upgrade";
+            }
 
             var ReleaseDir = Directory.GetCurrentDirectory() + @"\Releases\";
             Release rel = cbVersion.SelectedItem as Release;
@@ -842,11 +852,7 @@ namespace Vanjaro.Installer
                     return;
                 }
 
-                if (!ReleaseExists("upgrade", "x86"))
-                {
-                    return;
-                }
-                if (!ReleaseExists("upgrade", "x64"))
+                if (!ReleaseExists("upgrade"))
                 {
                     return;
                 }
@@ -885,7 +891,7 @@ namespace Vanjaro.Installer
             File.Copy(Directory.GetCurrentDirectory() + "\\app_offline.htm", vanjaroSite.PhysicalPath + "\\app_offline.htm");
 
             //Extract Files
-            ExtractRelease("upgrade", Architecture, vanjaroSite.PhysicalPath);
+            ExtractRelease("upgrade", null, vanjaroSite.PhysicalPath);
 
             //Remove app_offline
             File.Delete(vanjaroSite.PhysicalPath + "\\app_offline.htm");
