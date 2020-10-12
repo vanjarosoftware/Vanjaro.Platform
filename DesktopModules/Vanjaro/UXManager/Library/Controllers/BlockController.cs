@@ -133,14 +133,12 @@ namespace Vanjaro.UXManager.Library.Controllers
                                     {
                                         Result.Html += cb.Html;
                                         Result.Css += cb.Css;
-                                        Result.Name = cb.Name;
                                     }
                                 }
                                 else
                                 { 
                                     Result.Html = Core.Managers.PageManager.DeTokenizeLinks(pagelayout.Content.ToString(), PortalSettings.ActiveTab.PortalID);
                                     Result.Css = Core.Managers.PageManager.DeTokenizeLinks(pagelayout.Style.ToString(), PortalSettings.ActiveTab.PortalID);
-                                    Result.Name = pagelayout.Name;
                                 }
                                     
                                 List<ZipArchiveEntry> assets = archive.Entries.Where(e => e.FullName.StartsWith("Assets/")).ToList();
