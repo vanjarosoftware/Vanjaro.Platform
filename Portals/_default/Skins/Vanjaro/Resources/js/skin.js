@@ -142,15 +142,15 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
     if (url != '') {
         var iframeurl = url;
         $modal.find('#UXpagerender').on("load", function () {
+            //Not Required Anymore
+            //try {
+            //    // Change check for library.html (!url.startsWith('~'))
+            //    if (GetParameterByName('mid', this.contentWindow.location.href) == null && !iframeurl.startsWith('~'))
+            //        $(window.parent.document.body).find('[data-dismiss="modal"]').trigger('click');
+            //}
+            //catch (e) {
+            //}
             var $iframe = $(this);
-            try {
-                // Change check for library.html (!url.startsWith('~'))
-                if (GetParameterByName('mid', this.contentWindow.location.href) == null && !iframeurl.startsWith('~'))
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').trigger('click');
-            }
-            catch (e) {
-                
-            }
             $iframe.prev().hide();
             $iframe.show();
         });
@@ -191,14 +191,18 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
         $modal.find('.modal-toggle').remove();
 
     if (url != '') {
+
+        var existingurl = window.parent.$('#iframe').attr('src');
+
         if (url.startsWith('~'))
-            url = url.replace('~', VjSitePath);
+            url = url.replace('~', '');
         else if (!url.startsWith('http')) {
-            var existingurl = window.parent.$('#iframe').attr('src');
+
             if (existingurl.indexOf("?") == -1)
                 existingurl = existingurl + "?v=" + (new Date()).getTime();
             else
                 existingurl = existingurl + "&v=" + (new Date()).getTime();
+
             url = existingurl + url;
         }
         else {

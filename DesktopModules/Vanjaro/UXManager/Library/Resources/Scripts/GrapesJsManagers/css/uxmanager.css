@@ -84,12 +84,12 @@ li.openbtn {
     transition: left .5s, width .5s;
 }
 
-    .gjs-editor-cont .gjs-cv-canvas {
-        background-color: #333;
-        width: 100%;
-        height: 100%;
-        top: 0;
-    }
+.gjs-editor-cont .gjs-cv-canvas {
+    background-color: #333;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
 
 .device-manager .device-view,
 .setting-button .device-view,
@@ -599,6 +599,7 @@ div#MenuSettings .parent-menu-hide {
     font-size: 22px;
     margin-bottom: 10px;
 }
+
 .sidebar .block-manager .gjs-blocks-cs .gjs-block:hover .Customblockdropdown {
     top: 10px;
     right: -5px;
@@ -660,6 +661,7 @@ div#MenuSettings .parent-menu-hide {
         border-radius: 2px;
         margin-right: 10px;
     }
+
 .sidebar .block-manager .gjs-block svg {
     height: 28px;
     margin-bottom: 10px;
@@ -965,6 +967,7 @@ div#MenuSettings .parent-menu-hide {
 
 .traitsmanager .gjs-field-range {
     width: 276px;
+    border: none;
 }
 
 .backbtn {
@@ -1040,6 +1043,23 @@ div#MenuSettings .parent-menu-hide {
     padding: 6px 12px;
     margin-top: 10px;
 }
+
+#ModalContent .btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+    #ModalContent .btn-primary.active,
+    #ModalContent .btn-primary.focus
+    #ModalContent .btn-primary:active,
+    #ModalContent .btn-primary:focus,
+    #ModalContent .btn-primary:hover {
+        color: #fff;
+        background-color: #286090;
+        border-color: #204d74;
+        box-shadow: 0 0 0 0.2rem rgba(40, 96, 144, 0.5);
+    }
 
 #ModalContent .cbglobal button.btn {
     font-size: 14px;
@@ -2534,7 +2554,7 @@ span.notificationname {
 }
 
 
-.gjs-field.gjs-field-range {
+.stylemanager  .gjs-field.gjs-field-range {
     border: none;
     width: 0%; /*value changed from 75% to 0%*/
     margin-right: 10px;
@@ -3210,6 +3230,7 @@ div#gjs-sm-top, div#gjs-sm-right, div#gjs-sm-left, div#gjs-sm-bottom {
     height: 100%;
     margin: auto;
 }
+
 .gjs-frames {
     height: 100%;
 }

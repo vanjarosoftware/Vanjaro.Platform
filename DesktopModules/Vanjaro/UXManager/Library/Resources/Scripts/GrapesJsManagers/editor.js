@@ -32,12 +32,12 @@ $(document).ready(function () {
 
         window.addEventListener('message', event => {
 
-            if (event.origin.startsWith(TemplateLibraryURL)) {
+            if (TemplateLibraryURL.startsWith(event.origin)) {
 
                 var templatePath = '';
 
-                if (!event.data.startsWith(TemplateLibraryURL))
-                    templatePath = TemplateLibraryURL + '/' + event.data;
+                if (!event.data.startsWith(event.origin))
+                    templatePath = event.origin + '/' + event.data;
                 else
                     templatePath = event.data;
 
@@ -98,10 +98,8 @@ $(document).ready(function () {
                         }
                     });
             }
-            else {
+            else
                 RunSaveCommand();
-                ShowNotification('', VjLocalized.PagePublished, 'success');
-            }
         };
 
 
@@ -504,6 +502,12 @@ $(document).ready(function () {
                                     autoload: false,
                                     stepsBeforeSave: 2,
                                     urlStore: eval(data.UpdateContentUrl),
+                                    onComplete(jqXHR, status) {
+                                        if (jqXHR.IsSuccess)
+                                            ShowNotification('', VjLocalized.Message, 'success');
+                                        else
+                                            ShowNotification('', jqXHR.Message, 'error');
+                                    },
                                     params: {
                                         EntityID: data.EntityID,
                                         IsPublished: false,
@@ -2355,7 +2359,7 @@ $(document).ready(function () {
         else if ($this.hasClass('librarytab')) {
             $('.blockstab').removeClass('active');
             $(this).parent().addClass('active');
-            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL + '/templates/tid/' + ThemeGUID, '100%');
+            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%');
         }
         else {
             $('.blockstab').removeClass('active');

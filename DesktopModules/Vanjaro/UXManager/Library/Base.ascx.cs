@@ -39,10 +39,10 @@ namespace Vanjaro.UXManager.Library
 #endif
         protected override void OnInit(EventArgs e)
         {
-#if INTERNAL
-            TemplateLibraryURL = "http://library.vanjaro.local";
+#if RELEASE
+            TemplateLibraryURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
 #else
-            TemplateLibraryURL = Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
+            TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/49A70BA1-206B-471F-800A-679799FF09DF";
 #endif
 
             base.OnInit(e);
@@ -152,7 +152,7 @@ namespace Vanjaro.UXManager.Library
         {
 
             if (InjectEditor())
-                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; var ThemeGUID = \"49A70BA1-206B-471F-800A-679799FF09DF\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined') GrapesjsInit(" + JsonConvert.SerializeObject(Editor.Options) + "); });", true);
+                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined') GrapesjsInit(" + JsonConvert.SerializeObject(Editor.Options) + "); });", true);
         }
 
         private BaseModel GetBaseModel()

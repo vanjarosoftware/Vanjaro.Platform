@@ -11,7 +11,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Web;
 using System.Web.Http;
+using System.Web.UI;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Library.Common;
@@ -26,7 +28,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>
             {
-                { "Extensions", new UIData { Name = "Extensions", Options = Managers.ExtensionsManager.GetAllExtensions(UserInfo, PortalID, true) } }
+                { "Extensions", new UIData { Name = "Extensions", Options = Managers.ExtensionsManager.GetAllExtensions(UserInfo, PortalID, true) } },
+                { "ExtensionLibraryURL", new UIData { Name = "ExtensionLibraryURL", Value = VirtualPathUtility.ToAbsolute("~/DesktopModules/Vanjaro/UXManager/Library/Resources/extension.html")} }
             };
             return Settings.Values.ToList();
         }
