@@ -383,7 +383,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         var ParentScope = parent.document.getElementById("iframe").contentWindow.angular;
                         if (ParentScope != null && ParentScope != undefined) {
                             var Menuextension = ParentScope.element(".menuextension");
-                            if (Menuextension != undefined && Menuextension.scope() != undefined && Menuextension.scope().$apply != undefined && Menuextension.scope().init != undefined && Menuextension.scope().FetchPages != undefined && Menuextension.scope().Findnode != undefined && Menuextension.scope().ui != undefined && Menuextension.scope().ui.data != undefined && Menuextension.scope().ui.data.PagesTree != undefined) {
+                            if (Menuextension != undefined && Menuextension.scope() != undefined && has(Menuextension.scope(), '$apply') && has(Menuextension.scope(), 'init') && has(Menuextension.scope(), 'FetchPages') && has(Menuextension.scope(), 'Findnode') && has(Menuextension.scope(), 'ui.data.PagesTree')) {
                                 if ($scope.pid > 0 && $scope.ParentPageValue != parseInt($scope.ui.data.ParentPage.Value)) {
                                     Menuextension.scope().FetchPages();
                                 }
@@ -432,6 +432,15 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                 window.parent.ShowNotification('[L:InvalidDateTitle]', '[L:InvalidDateText]', 'error');
             }
         }
+    };
+
+    has = function (obj, key) {
+        return key.split(".").every(function (x) {
+            if (typeof obj != "object" || obj === null || !x in obj || typeof obj[x] === "undefined")
+                return false;
+            obj = obj[x];
+            return true;
+        });
     };
 
     $scope.Findnode = function (newPages, oldPages, parentnodeId) {
