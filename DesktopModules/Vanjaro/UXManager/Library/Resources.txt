@@ -4,5 +4,6 @@ Resources\Scripts
 Resources\StyleSheets
 Resources\tui
 Resources\extension.html
+Resources\placeholder.html
 *.ascx
 *.cshtml
