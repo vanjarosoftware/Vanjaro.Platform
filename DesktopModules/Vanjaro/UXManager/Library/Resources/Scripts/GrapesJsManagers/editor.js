@@ -1509,17 +1509,7 @@ $(document).ready(function () {
                                         model.removeClass(classes)
                                     }
                                 }
-
-                                if (property == "animation-type" && typeof model.getStyle()['animation-type'] != 'undefined') {
-                                    var animationType = model.getStyle()['animation-type'];
-                                    model.addAttributes({ 'data-animate': animationType });
-                                }
-
-                                if (property == "animation-speed" && typeof model.getStyle()['animation-speed'] != 'undefined') {
-                                    var animationSpeed = model.getStyle()['animation-speed'];
-                                    model.addAttributes({ 'data-speed': animationSpeed });
-                                }
-
+								
                                 /*Width*/
                                 if (property == "width" && typeof model.getStyle()['width'] != 'undefined' && VjEditor.StyleManager.getProperty(LayoutDimensions, 'width').length != 0) {
                                     if (model.getStyle()['width'].indexOf('px') > -1) {
