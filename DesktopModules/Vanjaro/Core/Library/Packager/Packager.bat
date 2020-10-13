@@ -375,42 +375,25 @@ cd ..\Core\Library\ >NUL
 
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip >NUL 2>&1
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip >NUL 2>&1
-
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Install.zip >NUL 2>&1
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Install.zip >NUL 2>&1
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_Install.zip >NUL 2>&1
-
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_Upgrade.zip >NUL 2>&1
 
 
-
+:: Vanjaro for DNN
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip @PackageList.txt >NUL
-"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip @PackageList.txt >NUL
-
-copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Install.zip >NUL
-
-"C:\Program Files\7-Zip\7z.exe" d -r ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Install.zip @DistrubtionRemoveList.txt >NUL
-
-"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Install.zip @DistrubtionAddList.txt >NUL
-
-::"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.dll >NUL
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.dll >NUL
-
-
 "C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\libsass.dll bin\libsass.dll >NUL
 
-copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Install.zip >NUL
-
-"C:\Program Files\7-Zip\7z.exe" d -r ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Install.zip @DistrubtionRemoveList.txt >NUL
-
-"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Install.zip @DistrubtionAddList.txt >NUL
-
-::"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\*.dll >NUL
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip @PackageList.txt >NUL
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\*.dll >NUL
-
-
-
 "C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\libsass.dll bin\libsass.dll >NUL
+
+:: Vanjaro Platform 
+copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_Install.zip >NUL
+"C:\Program Files\7-Zip\7z.exe" d -r ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_Install.zip @DistrubtionRemoveList.txt >NUL
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_Install.zip @DistrubtionAddList.txt >NUL
 
 
 cd ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\ 
@@ -420,10 +403,6 @@ xcopy /e /i "DNN Install"\* Temp_DNN\*  /Y >NUL
 
 ::Need to copy the Core DLL for Vanjaro Installer
 copy ..\..\..\..\..\bin\Vanjaro.Core.dll Temp_DNN\bin >NUL
-
-::Need to copy the libsass.dll for install Package
-copy Vanjaro\bin\x64\libsass.dll Temp_DNN\bin >NUL
-copy Vanjaro\bin\x86\libsass.dll Temp_DNN\bin >NUL
 
 
 cd Temp_DNN\
@@ -526,24 +505,21 @@ copy Images\*.* ..\Temp_DNN\Images >NUL
 copy "Images\Branding\Vanjaro_logo.png" ..\Temp_DNN\Images\Branding\ >NUL
 
 cd ..\Releases >NUL
-copy Vanjaro_Platform_"%Version%"_x64_Install.zip ..\Temp_DNN\Install\Module\ >NUL
-copy Vanjaro_Platform_"%Version%"_x86_Install.zip ..\Temp_DNN\Install\Module\ >NUL
-
-ren Vanjaro_Platform_"%Version%"_x64_Install.zip Vanjaro_Platform_"%Version%"_Install.zip >NUL 2>&1
-del Vanjaro_Platform_"%Version%"_x86_Install.zip >NUL 2>&1
+copy Vanjaro_Platform_"%Version%"_Install.zip ..\Temp_DNN\Install\Module\ >NUL
 
 cd ..\Temp_DNN 
 
+
+::Need to copy the libsass.dll for install Package x64
+copy ..\Vanjaro\bin\x64\libsass.dll ..\Temp_DNN\bin\ >NUL
 "C:\Program Files\7-Zip\7z.exe" a Vanjaro_Platform_"%Version%"_x64_Install.zip -xr!?svn >NUL
-"C:\Program Files\7-Zip\7z.exe" a Vanjaro_Platform_"%Version%"_x86_Install.zip -xr!?svn >NUL
-
-"C:\Program Files\7-Zip\7z.exe" d -r Vanjaro_Platform_"%Version%"_x86_Install.zip Vanjaro_Platform_"%Version%"_x64_Install.zip >NUL
-
-"C:\Program Files\7-Zip\7z.exe" d -r Vanjaro_Platform_"%Version%"_x64_Install.zip Install\Module\Vanjaro_Platform_"%Version%"_x86_Install.zip >NUL
-"C:\Program Files\7-Zip\7z.exe" d -r Vanjaro_Platform_"%Version%"_x86_Install.zip Install\Module\Vanjaro_Platform_"%Version%"_x64_Install.zip >NUL
 move Vanjaro_Platform_"%Version%"_x64_Install.zip ..\Releases\ >NUL
-move Vanjaro_Platform_"%Version%"_x86_Install.zip ..\Releases\ >NUL
 
+
+::Need to copy the libsass.dll for install Package x86
+copy ..\Vanjaro\bin\x86\libsass.dll ..\Temp_DNN\bin\ >NUL
+"C:\Program Files\7-Zip\7z.exe" a Vanjaro_Platform_"%Version%"_x86_Install.zip -xr!?svn >NUL
+move Vanjaro_Platform_"%Version%"_x86_Install.zip ..\Releases\ >NUL
 
 
 cd ..\..\Packager\
