@@ -1,12 +1,13 @@
 ﻿<div ng-controller="setting_setting" class="vj-ux-manager">
     <uiengine provider="AngularBootstrap" identifier="setting_setting" class="uiengine-wrapper scrollbar">
         <uilayout name="default">
-            <uielement name="SMTPmode" control="checkboxtoggle" attr-class="toggle_right" container-attr-ng-show="ui.data.IsSuperUser.Options" ngmodel="ui.data.SMTPmode.Options"></uielement>
+            <uielement name="SMTPmode" control="checkboxtoggle" attr-class="text-center" container-attr-ng-show="ui.data.IsSuperUser.Options" ngmodel="ui.data.SMTPmode.Options"></uielement>
         </uilayout>
         <uilayout name="default" attr-ng-show="ui.data.SMTPmode.Options">
             <uielement name="Host_Server" control="textbox"></uielement>
             <uielement name="Host_Username" control="textbox"></uielement>
             <uielement name="Host_Password" control="password"></uielement>
+            <uielement name="Host_Email" control="textbox"></uielement>
             <uielement name="Host_EnableSSL" attr-class="toggle_right" ngmodel="ui.data.Host_EnableSSL.Options" control="checkboxtoggle"></uielement>
         </uilayout>
         <uilayout name="default" attr-ng-show="!ui.data.SMTPmode.Options">

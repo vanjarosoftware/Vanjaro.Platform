@@ -160,10 +160,10 @@
     <value>Site</value>
   </data>
   <data name="SMTPmode.ON" xml:space="preserve">
-    <value>Host</value>
+    <value>Global</value>
   </data>
   <data name="SMTPmode.Text" xml:space="preserve">
-    <value>SMTP Server Mode</value>
+    <value> </value>
   </data>
   <data name="Portal_EnableSSL.OFF" xml:space="preserve">
     <value>No</value>
