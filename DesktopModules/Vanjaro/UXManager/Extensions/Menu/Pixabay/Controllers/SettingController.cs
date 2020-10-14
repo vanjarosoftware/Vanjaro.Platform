@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Web.Api;
@@ -16,28 +17,50 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pixabay.Controllers
     {
         internal static List<IUIData> GetData(int portalId, UserInfo userInfo)
         {
-            Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
-            string apikey = PortalController.GetEncryptedString("Vanjaro.Integration.Pixabay", portalId, Config.GetDecryptionkey());
-            bool HasApiKey = false;
-            if (!string.IsNullOrEmpty(apikey))
-            {
-                HasApiKey = true;
-            }
+            bool IsSuperUser = UserController.Instance.GetCurrentUserInfo().IsSuperUser;
+            string mode = IsSuperUser ? "h" : "p";
+            bool ApplyTo = IsSuperUser ? PortalController.GetPortalSetting("ApplyTo", portalId, mode) == mode : false;
 
-            Settings.Add("ApiKey", new UIData { Name = "ApiKey", Value = apikey });
-            Settings.Add("HasApiKey", new UIData { Name = "HasApiKey", Options = HasApiKey });
+            Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
+
+
+            string Site_ApiKey = PortalController.GetEncryptedString("Vanjaro.Integration.Pixabay", portalId, Config.GetDecryptionkey());
+            string Host_ApiKey = HostController.Instance.GetEncryptedString("Vanjaro.Integration.Pixabay", Config.GetDecryptionkey());
+
+            Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Options = IsSuperUser });
+            Settings.Add("ApplyTo", new UIData { Name = "ApplyTo", Options = ApplyTo });
+            Settings.Add("Host_ApiKey", new UIData { Name = "Host_ApiKey", Value = Host_ApiKey });
+            Settings.Add("Host_HasApiKey", new UIData { Name = "Host_HasApiKey", Options = string.IsNullOrEmpty(Host_ApiKey) ? false : true });
+            Settings.Add("Site_ApiKey", new UIData { Name = "Site_ApiKey", Value = Site_ApiKey });
+            Settings.Add("Site_HasApiKey", new UIData { Name = "Site_HasApiKey", Options = string.IsNullOrEmpty(Site_ApiKey) ? false : true });
             return Settings.Values.ToList();
         }
 
         [HttpPost]
         public bool Save(dynamic Data)
         {
-            if (Vanjaro.Core.Providers.Pixabay.IsValid(Data.ToString()))
-            {
-                PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.Pixabay", Data.ToString(), Config.GetDecryptionkey());
+                if (bool.Parse(Data.ApplyTo.ToString()))
+                {
+                    if (Vanjaro.Core.Providers.Pixabay.IsValid(Data.Host_ApiKey.ToString()))
+                    {
+                        PortalController.UpdatePortalSetting(PortalSettings.PortalId, "ApplyTo", "h");
+                        HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.Pixabay", Data.Host_ApiKey.ToString(), Config.GetDecryptionkey());
+                    }
+                    else
+                        return false;
+                }
+                else 
+                {
+                    if (Vanjaro.Core.Providers.Pixabay.IsValid(Data.Site_ApiKey.ToString()))
+                    {
+                        PortalController.UpdatePortalSetting(PortalSettings.PortalId, "ApplyTo", "p");
+                        PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.Pixabay", Data.Site_ApiKey.ToString(), Config.GetDecryptionkey());
+                    }
+                    else
+                        return false;
+                } 
                 return true;
-            }
-            return false;
+            
         }
 
         [HttpGet]
