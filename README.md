@@ -16,7 +16,7 @@ Use **Vanjaro Installer** to create your next Vanjaro Site. Refer to [**Vanjaro 
 
 **Manual Installation:** Minimum requirements and installation steps are identical to [DNN](https://github.com/dnnsoftware/Dnn.Platform). Be sure to install either [x86 or x64](https://github.com/vanjarosoftware/Vanjaro.Platform/wiki/x86-or-x64-Build) depending on your environment. Refer to our [Upgrade Guide](https://github.com/vanjarosoftware/Vanjaro.Platform/wiki/Vanjaro-Distribution) to update your Vanjaro Site to the latest version. 
 
-### Vanjaro for DNN
+## Vanjaro for DNN
 
 Vanjaro is also available as an extension for DNN. Use this option if you're installing on an existing DNN 9.7.2+ Site.
 
