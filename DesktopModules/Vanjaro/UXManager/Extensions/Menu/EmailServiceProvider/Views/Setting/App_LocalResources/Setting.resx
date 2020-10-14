@@ -126,22 +126,22 @@
   <data name="Update.Text" xml:space="preserve">
     <value>Update</value>
   </data>
-  <data name="Password.Text" xml:space="preserve">
+  <data name="Host_Password.Text" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="Server.Text" xml:space="preserve">
+  <data name="Host_Server.Text" xml:space="preserve">
     <value>Server and port</value>
   </data>
-  <data name="Username.Text" xml:space="preserve">
+  <data name="Host_Username.Text" xml:space="preserve">
     <value>Username</value>
   </data>
-  <data name="EnableSSL.OFF" xml:space="preserve">
+  <data name="Host_EnableSSL.OFF" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="EnableSSL.ON" xml:space="preserve">
+  <data name="Host_EnableSSL.ON" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="EnableSSL.Text" xml:space="preserve">
+  <data name="Host_EnableSSL.Text" xml:space="preserve">
     <value>Enable SSL</value>
   </data>
   <data name="TestSMTP.Text" xml:space="preserve">
@@ -155,5 +155,35 @@
   </data>
   <data name="to.Text" xml:space="preserve">
     <value> to </value>
+  </data>
+  <data name="SMTPmode.OFF" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="SMTPmode.ON" xml:space="preserve">
+    <value>Host</value>
+  </data>
+  <data name="SMTPmode.Text" xml:space="preserve">
+    <value>SMTP Server Mode</value>
+  </data>
+  <data name="Portal_EnableSSL.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Portal_EnableSSL.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Portal_EnableSSL.Text" xml:space="preserve">
+    <value>Enable SSL</value>
+  </data>
+  <data name="Portal_Password.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Portal_Server.Text" xml:space="preserve">
+    <value>Server and port</value>
+  </data>
+  <data name="Portal_Username.Text" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Host_Email.Text" xml:space="preserve">
+    <value>Host Email</value>
   </data>
 </root>
