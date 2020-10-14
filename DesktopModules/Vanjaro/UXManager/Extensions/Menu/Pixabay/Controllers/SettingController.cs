@@ -63,10 +63,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pixabay.Controllers
             
         }
 
-        [HttpGet]
-        public string Delete()
+        [HttpPost]
+        public string Delete(dynamic Data)
         {
-            PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.Pixabay", string.Empty, Config.GetDecryptionkey());
+            if (bool.Parse(Data.ToString()))
+                HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.Pixabay", string.Empty, Config.GetDecryptionkey());
+            else
+                PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.Pixabay", string.Empty, Config.GetDecryptionkey());
             return string.Empty;
         }
         public override string AccessRoles()

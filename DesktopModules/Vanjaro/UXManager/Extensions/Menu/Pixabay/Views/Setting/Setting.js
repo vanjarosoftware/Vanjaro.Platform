@@ -29,7 +29,7 @@
         }
     };
     $scope.Click_Delete = function () {
-        common.webApi.get('Setting/delete').success(function (Response) {
+        common.webApi.post('Setting/delete', '', $scope.ui.data.ApplyTo.Options).success(function (Response) {
             if ($scope.ui.data.ApplyTo.Options) {
                 $scope.ui.data.Host_ApiKey.Value = Response;
                 $scope.ui.data.Host_HasApiKey.Options = false;
