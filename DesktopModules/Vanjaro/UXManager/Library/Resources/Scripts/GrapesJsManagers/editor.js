@@ -32,12 +32,12 @@ $(document).ready(function () {
 
         window.addEventListener('message', event => {
 
-            if (event.origin.startsWith(TemplateLibraryURL)) {
+            if (TemplateLibraryURL.startsWith(event.origin) && typeof event.data != 'undefined') {
 
                 var templatePath = '';
 
-                if (!event.data.startsWith(TemplateLibraryURL))
-                    templatePath = TemplateLibraryURL + '/' + event.data;
+                if (!event.data.startsWith(event.origin))
+                    templatePath = event.origin + '/' + event.data;
                 else
                     templatePath = event.data;
 
@@ -53,10 +53,9 @@ $(document).ready(function () {
                     },
                     success: function (data) {
 
-                        if (data.html != '' && data.Name != '') {
+                        if (data.html != '') {
 
                             var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
-                                label: data.Name,
                                 content: data.Html + '<style>' + data.Css + '</style>',
                                 attributes: {
                                     class: 'fas fa-th-large floating',
@@ -1510,17 +1509,7 @@ $(document).ready(function () {
                                         model.removeClass(classes)
                                     }
                                 }
-
-                                if (property == "animation-type" && typeof model.getStyle()['animation-type'] != 'undefined') {
-                                    var animationType = model.getStyle()['animation-type'];
-                                    model.addAttributes({ 'data-animate': animationType });
-                                }
-
-                                if (property == "animation-speed" && typeof model.getStyle()['animation-speed'] != 'undefined') {
-                                    var animationSpeed = model.getStyle()['animation-speed'];
-                                    model.addAttributes({ 'data-speed': animationSpeed });
-                                }
-
+								
                                 /*Width*/
                                 if (property == "width" && typeof model.getStyle()['width'] != 'undefined' && VjEditor.StyleManager.getProperty(LayoutDimensions, 'width').length != 0) {
                                     if (model.getStyle()['width'].indexOf('px') > -1) {
@@ -2077,8 +2066,14 @@ $(document).ready(function () {
 
 
                             VjEditor.on('block:drag:start', function (model) {
+
                                 VjEditor.runCommand('core:component-outline');
 
+                                if (typeof model != "undefined") {
+
+                                    if (model.attributes.id == 'LibraryBlock')
+                                        $('#LibraryBlock').css('opacity', '0.01');
+                                }
                             });
 
                             VjEditor.on('change:changesCount', e => {

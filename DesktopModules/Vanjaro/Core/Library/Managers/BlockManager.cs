@@ -65,7 +65,7 @@ namespace Vanjaro.Core
 
             public static List<Block> GetAll()
             {
-                return Extentions.Where(e => e.Name != "Custom").Select(s => new Block()
+                return Extentions.Where(e => e.Name != "Custom" && e.Visible).Select(s => new Block()
                 {
                     Category = s.Category,
                     Guid = s.Guid,

@@ -532,10 +532,6 @@ Theme.css end
     display: inline-block;
 }
 
-[data-gjs-type="text"] .link {
-    padding: 5px;
-}
-
 .vj-divider {
     border-top-width: 10px;
     border-top-style: solid;

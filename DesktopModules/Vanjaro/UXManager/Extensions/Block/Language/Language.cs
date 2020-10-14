@@ -30,6 +30,8 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage
 
         public Guid Guid => Guid.Parse(ExtensionInfo.GUID);
 
+        public bool Visible { get; set; } = true;
+
         public Dictionary<string, string> Attributes
         {
             get

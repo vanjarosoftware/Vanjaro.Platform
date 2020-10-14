@@ -167,7 +167,6 @@
     <Content Include="Resources\node_modules\.bin\webpack.config.js" />
     <Content Include="Resources\Scripts\Blocks\carousel.js" />
     <Content Include="Resources\Scripts\Blocks\config.js" />
-    <Content Include="Resources\library.html" />
     <Content Include="Resources\Scripts\Blocks\map.js" />
     <Content Include="Resources\Scripts\Blocks\heading.js" />
     <Content Include="Resources\Scripts\Blocks\icon.js" />
@@ -373,7 +372,7 @@
     <PreBuildEvent>cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\ &amp;&amp; npm install &amp;&amp; cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\node_modules\.bin\ &amp;&amp; webpack</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Internal start ..\DesktopModules\Vanjaro\Core\Library\Packager\Packager.bat"</PostBuildEvent>
+    <PostBuildEvent>if not $(ConfigurationName) == Debug start ..\DesktopModules\Vanjaro\Core\Library\Packager\Packager.bat"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
