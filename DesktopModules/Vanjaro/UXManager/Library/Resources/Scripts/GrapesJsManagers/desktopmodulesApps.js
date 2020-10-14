@@ -19,7 +19,7 @@ global.LoadApps = function () {
                     category: VjLocalized.Apps,
                     attributes: { type: 'apps' },
                     label: '<div><img style="width:32px;height:32px;" src="' + value.ModuleImage + '"/><div class="my-label-block">' + value.ModuleName + '</div></div>',
-                    content: '<div dmid="' + value.ModuleID + '" mid="" uid="' + value.UniqueID + '"><div vjmod="true">[Module]</div></div>'
+                    content: '<div dmid="' + value.ModuleID + '" mid="" uid="' + value.UniqueID + '" fname="' + value.ModuleName + '"><div vjmod="true">[Module]</div></div>'
                 })
             });
             setTimeout(function () {
@@ -362,7 +362,8 @@ global.BuildAppComponentFromHtml = function (vjcomps, html) {
                             dmid: $(com).attr('dmid'),
                             mid: mid,
                             uid: $(com).attr('uid'),
-                            id: $(com).attr('id')
+                            id: $(com).attr('id'),
+                            fname: $(com).attr('fname')
                         },
                         components: [{
                             type: "module",

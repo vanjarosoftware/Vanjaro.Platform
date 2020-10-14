@@ -1072,7 +1072,7 @@ $(document).ready(function () {
                                             else
                                                 framesrc = framesrc + "&mid=" + response + "&icp=true";
                                             model.view.$el[0].innerHTML = '<div data-gjs-type="module" draggable="true" vjmod="true"><div id="dnn_vj_' + response + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div></div>';
-                                            bmodel.attributes.content = '<div dmid="' + parseInt(model.attributes.attributes.dmid) + '" mid="' + response + '"><div vjmod="true"><app id="' + response + '"></app></div></div>';
+                                            bmodel.attributes.content = '<div dmid="' + parseInt(model.attributes.attributes.dmid) + '" mid="' + response + '" fname="' + model.attributes.attributes.fname + '"><div vjmod="true"><app id="' + response + '"></app></div></div>';
                                             model.attributes.components.models[0].attributes.content = '<app id="' + response + '"></app>';
                                             model.attributes.name = VjLocalized.PrefixAppName + bmodel.id;
                                             VjEditor.LayerManager.render();

@@ -15,6 +15,7 @@ using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.Common.Factories;
+using Vanjaro.Core.Entities;
 using Vanjaro.UXManager.Extensions.Menu.LogoAndTitle.Entities;
 using Vanjaro.UXManager.Library.Common;
 
@@ -71,7 +72,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.LogoAndTitle.Controllers
 
             return Settings.Values.ToList();
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -208,6 +208,25 @@ namespace Vanjaro.UXManager.Extensions.Menu.LogoAndTitle.Controllers
                 str1 = string.Concat(str1, directoryInfo1.Name, ",");
             }
             return str1.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        public static ExportTemplate GetExportSettings(int portalId)
+        {
+            dynamic siteSetting = new SettingController().GetPortalSettings(portalId, null).Data;
+            if (siteSetting != null)
+            {
+                ExportTemplate result = new ExportTemplate();
+                if (siteSetting.LogoFile.fileId > 0)
+                    result.LogoFile = FileManager.Instance.GetUrl(FileManager.Instance.GetFile(siteSetting.LogoFile.fileId));
+                if (siteSetting.FavIcon.fileId > 0)
+                    result.FavIcon = FileManager.Instance.GetUrl(FileManager.Instance.GetFile(siteSetting.FavIcon.fileId));
+                string PortalRoot = Core.Managers.PageManager.GetPortalRoot(portalId);
+                PortalRoot = PortalRoot + "/";
+                result.SocialSharingLogo = PortalRoot + PortalController.GetPortalSetting("SocialSharingLogo", portalId, "", null);
+                result.HomeScreenIcon = PortalRoot + PortalController.GetPortalSetting("HomeScreenIcon", portalId, "", null);
+                return result;
+            }
+            return null;
         }
 
         public override string AccessRoles()

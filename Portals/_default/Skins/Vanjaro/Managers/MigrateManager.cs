@@ -50,7 +50,8 @@ namespace Vanjaro.Skin
                             }
                             else
                             {
-                                item.InnerHtml += "<div data-m2v=\"\" data-appname=\"" + m.ModuleTitle + "\" dmid=\"" + m.DesktopModuleID + "\" mid=\"" + m.ModuleID + "\" uid=\"0\"><div vjmod=\"true\"><app id=\"" + m.ModuleID + "\"></app></div></div>";
+                                DesktopModuleInfo desktopModuleInfo = DesktopModuleController.GetDesktopModule(m.DesktopModuleID, m.PortalID);
+                                item.InnerHtml += "<div data-m2v=\"\" data-appname=\"" + m.ModuleTitle + "\" dmid=\"" + m.DesktopModuleID + "\" mid=\"" + m.ModuleID + "\" uid=\"0\" fname=\"" + desktopModuleInfo.FriendlyName + "\"><div vjmod=\"true\"><app id=\"" + m.ModuleID + "\"></app></div></div>";
                             }
 
                             DataPanes.AddRange(item.Attributes.Where(a => a.Name == "data-pane").Select(s => s.Value.ToLower()).ToList());
@@ -71,7 +72,8 @@ namespace Vanjaro.Skin
                         }
                         else
                         {
-                            Outhtml += "<div data-m2v=\"\" data-appname=\"" + m.ModuleTitle + "\" dmid=\"" + m.DesktopModuleID + "\" mid=\"" + m.ModuleID + "\" uid=\"0\"><div vjmod=\"true\"><app id=\"" + m.ModuleID + "\"></app></div></div>";
+                            DesktopModuleInfo desktopModuleInfo = DesktopModuleController.GetDesktopModule(m.DesktopModuleID, m.PortalID);
+                            Outhtml += "<div data-m2v=\"\" data-appname=\"" + m.ModuleTitle + "\" dmid=\"" + m.DesktopModuleID + "\" mid=\"" + m.ModuleID + "\" uid=\"0\" fname=\"" + desktopModuleInfo.FriendlyName + "\"><div vjmod=\"true\"><app id=\"" + m.ModuleID + "\"></app></div></div>";
                         }
                     }
                 }
