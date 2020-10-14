@@ -21,7 +21,7 @@ Refer to our [Upgrade Guide](https://github.com/vanjarosoftware/Vanjaro.Platform
 
 ### For Existing DNN Sites
 
-Vanjaro is also available as an extension for DNN. Use this option if you're installing on an existing DNN 9.7.0+ Site.
+Vanjaro is also available as an extension for DNN. Use this option if you're installing on an existing DNN 9.7.2+ Site.
 
 You may install Vanjaro as any other DNN Extension. Refer to [Getting Started Video](https://www.youtube.com/watch?v=mezy_YV0acs) for step by step instructions. Be sure to install either [x86 or x64](https://github.com/vanjarosoftware/Vanjaro.Platform/wiki/x86-or-x64-Build) depending on your environment. 
 
