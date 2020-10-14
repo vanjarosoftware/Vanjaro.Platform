@@ -164,7 +164,7 @@ namespace Vanjaro.Skin
         {
             string ScriptsPath = System.Web.Hosting.HostingEnvironment.MapPath(Core.Managers.ThemeManager.CurrentTheme.ScriptsPath);
 
-            string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, ScriptsPath);
+            string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, "ThemeScripts");
             string ThemeScripts = CacheFactory.Get(CacheKey);
 
             if (Directory.Exists(ScriptsPath) && string.IsNullOrEmpty(ThemeScripts))
@@ -181,7 +181,7 @@ namespace Vanjaro.Skin
                 CacheFactory.Set(CacheKey, ThemeScripts);
             }
 
-            if (!string.IsNullOrEmpty(ThemeScripts.Trim()))
+            if (!string.IsNullOrEmpty(ThemeScripts))
                 WebForms.RegisterStartupScript(Page, "ThemeBlocks", "LoadThemeBlocks = function (grapesjs) { grapesjs.plugins.add('ThemeBlocks', (editor, opts = {}) => { " + ThemeScripts + "}); };", true);
         }
 
