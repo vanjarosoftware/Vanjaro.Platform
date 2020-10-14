@@ -29,7 +29,9 @@ namespace Vanjaro.Core
             {
                 get
                 {
-                    return GetCurrent(PortalSettings.Current.PortalId);
+                    int PortalID = PortalSettings.Current != null ? PortalSettings.Current.PortalId : -1;
+
+                    return GetCurrent(PortalID);
                 }
             }
 
@@ -119,7 +121,7 @@ namespace Vanjaro.Core
             public static void ProcessScss(int PortalID)
             {
                 StringBuilder sb = new StringBuilder();
-                string ThemeName = CurrentTheme.Name;
+                string ThemeName = GetCurrent(PortalID).Name;
                 string BootstrapPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/bootstrap.scss");
                 string BeforePath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Before.scss");
                 string AfterPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/After.scss");

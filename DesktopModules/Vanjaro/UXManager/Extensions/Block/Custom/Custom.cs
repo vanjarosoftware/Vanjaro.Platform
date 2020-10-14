@@ -22,6 +22,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Custom
         public string Icon => "fas fa-bars";
 
         public Guid Guid => Guid.Parse(ExtensionInfo.GUID);
+        public bool Visible { get; set; } = true;
 
         public string LocalResourcesFile => "~/DesktopModules/Vanjaro/UXManager/Extensions/Block/" + ExtensionInfo.Name + "/Views/App_LocalResources/Shared.resx";
 
