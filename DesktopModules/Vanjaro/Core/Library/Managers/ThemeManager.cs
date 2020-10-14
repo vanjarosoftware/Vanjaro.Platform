@@ -1,5 +1,6 @@
 ﻿using Dnn.PersonaBar.Prompt.Components.Commands.Host;
 using DotNetNuke.Entities.Portals;
+using DotNetNuke.Web.Client.ClientResourceManagement;
 using LibSassHost;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -11,6 +12,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Web;
+using System.Web.UI;
+using Vanjaro.Common.ASPNET;
 using Vanjaro.Core.Components;
 using Vanjaro.Core.Entities.Interface;
 using Vanjaro.Core.Entities.Theme;
@@ -36,13 +39,13 @@ namespace Vanjaro.Core
                 return theme;
             }
 
-            public static bool HasScript(string ThemeJS)
+            public static bool HasThemeJS()
             {
-                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, ThemeJS);
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, "ThemeJS");
                 bool? hasScript = CacheFactory.Get(CacheKey);
                 if (hasScript == null)
                 {
-                    if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(ThemeJS)))
+                    if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(CurrentTheme.ThemeJS)))
                         hasScript = true;
                     else
                         hasScript = false;
@@ -50,7 +53,6 @@ namespace Vanjaro.Core
                 }
                 return hasScript.Value;
             }
-
 
             public static List<string> GetControlTypes()
             {

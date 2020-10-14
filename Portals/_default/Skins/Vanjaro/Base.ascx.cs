@@ -29,6 +29,7 @@ using Vanjaro.Common.Manager;
 using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Entities.Menu;
+using static Vanjaro.Core.Factories;
 using static Vanjaro.Core.Managers;
 using static Vanjaro.Skin.Managers;
 
@@ -123,13 +124,11 @@ namespace Vanjaro.Skin
         protected void Page_Load(object sender, EventArgs e)
         {
             JavaScript.RequestRegistration(CommonJs.jQuery, null, SpecificVersion.Latest);
-
-            string ThemeJS = "~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/theme.js";
             
-            if (Core.Managers.ThemeManager.HasScript(ThemeJS))
-                ClientResourceManager.RegisterScript(Page, Page.ResolveUrl(ThemeJS));
+            InjectThemeJS();
 
             PageManager.Init(Page, PortalSettings);
+
             if (string.IsNullOrEmpty(Request.QueryString["mid"]) || (!string.IsNullOrEmpty(Request.QueryString["icp"]) && bool.Parse(Request.QueryString["icp"]) && (!string.IsNullOrEmpty(Request.QueryString["mid"]) && Request.QueryString["mid"] != "0")))
             {
                 if (page != null && page.StateID.HasValue)
@@ -144,26 +143,8 @@ namespace Vanjaro.Skin
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/js/skin.js"), 2, "DnnFormBottomProvider");
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/DesktopModules/Vanjaro/Common/Frameworks/Bootstrap/4.5.0/js/bootstrap.min.js"), 1, "DnnFormBottomProvider");
 
-                string DirectoryPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/js/");
-
-                if ((TabPermissionController.HasTabPermission("EDIT") || (page != null && page.StateID.HasValue && HasReviewPermission)) && Directory.Exists(DirectoryPath))
-                {
-                    string script = "";
-
-                    foreach (string file in Directory.GetFiles(DirectoryPath))
-                    {
-                        string FileName = Path.GetFileName(file);
-                        if (!string.IsNullOrEmpty(FileName))
-                        {
-                            if (FileName.EndsWith(".js"))
-                                script += File.ReadAllText(DirectoryPath + "/" + FileName);
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(script.Trim()))
-                        WebForms.RegisterStartupScript(Page, "ThemeBlocks", "LoadThemeBlocks = function (grapesjs) { grapesjs.plugins.add('ThemeBlocks', (editor, opts = {}) => { " + script + "}); };", true);
-                }
-
+                if ((TabPermissionController.HasTabPermission("EDIT") || (page != null && page.StateID.HasValue && HasReviewPermission)))
+                    InjectThemeScripts();
             }
             else
             {
@@ -171,6 +152,37 @@ namespace Vanjaro.Skin
             }
 
             ResetModulePanes();
+        }
+
+        private void InjectThemeJS()
+        {
+            if (Core.Managers.ThemeManager.HasThemeJS())
+                ClientResourceManager.RegisterScript(Page, Page.ResolveUrl(Core.Managers.ThemeManager.CurrentTheme.ThemeJS));
+        }
+
+        private void InjectThemeScripts()
+        {
+            string ScriptsPath = System.Web.Hosting.HostingEnvironment.MapPath(Core.Managers.ThemeManager.CurrentTheme.ScriptsPath);
+
+            string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, ScriptsPath);
+            string ThemeScripts = CacheFactory.Get(CacheKey);
+
+            if (Directory.Exists(ScriptsPath) && string.IsNullOrEmpty(ThemeScripts))
+            {
+                foreach (string file in Directory.GetFiles(ScriptsPath))
+                {
+                    string FileName = Path.GetFileName(file);
+                    if (!string.IsNullOrEmpty(FileName))
+                    {
+                        if (FileName.EndsWith(".js"))
+                            ThemeScripts += File.ReadAllText(ScriptsPath + "/" + FileName);
+                    }
+                }
+                CacheFactory.Set(CacheKey, ThemeScripts);
+            }
+
+            if (!string.IsNullOrEmpty(ThemeScripts.Trim()))
+                WebForms.RegisterStartupScript(Page, "ThemeBlocks", "LoadThemeBlocks = function (grapesjs) { grapesjs.plugins.add('ThemeBlocks', (editor, opts = {}) => { " + ThemeScripts + "}); };", true);
         }
 
         private void InjectViewport()
