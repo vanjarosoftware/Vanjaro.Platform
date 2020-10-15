@@ -1310,7 +1310,7 @@ export default (editor, config = {}) => {
 				input.setAttribute("id", value.id);
 				input.setAttribute("value", value.name);
 
-				label.setAttribute("class", "bg-" + value.id);
+				label.setAttribute("class", value.color);
 				label.setAttribute("for", value.id);
 
 				el.appendChild(input);
@@ -1345,11 +1345,13 @@ export default (editor, config = {}) => {
 				var BGcolor = $(this).find(".gjs-field-color-picker").css("background-color");
 				$(this).parents(".color-wrapper").find(".colorPicker").css("background-color", BGcolor);
 
-				$(trait.target.getTrait('styles').el).find('label').css("color", BGcolor);
+				if (typeof trait.target.getTrait('styles') != 'undefined') {
+					$(trait.target.getTrait('styles').el).find('label').css("color", BGcolor);
 
-				$(trait.target.getTrait('styles').el).find('label').removeClass(function (index, className) {
-					return (className.match(/\btext-\S+/g) || []).join(' ');
-				});
+					$(trait.target.getTrait('styles').el).find('label').removeClass(function (index, className) {
+						return (className.match(/\btext-\S+/g) || []).join(' ');
+					});
+				}
 
 				if (trait.target.attributes.type == 'heading' || trait.target.attributes.type == 'text') {
 
@@ -1434,15 +1436,15 @@ export default (editor, config = {}) => {
 		onEvent({ elInput, component, event }) {
 
 			if (component.attributes.type == 'heading' || component.attributes.type == 'text') {
-					var className = event.target.nextElementSibling.className;
-					className = className.replace('bg', 'text');
+				var className = event.target.nextElementSibling.className;
+				className = className.replace('bg', 'text');
 
-					$(component.getTrait('styles').el).find('label').removeClass(function (index, css) {
-						return (css.match(/\btext-\S+/g) || []).join(' ');
-					});
-					$(component.getTrait('styles').el).find('label').addClass(className);
-				}
-			
+				$(component.getTrait('styles').el).find('label').removeClass(function (index, css) {
+					return (css.match(/\btext-\S+/g) || []).join(' ');
+				});
+				$(component.getTrait('styles').el).find('label').addClass(className);
+			}
+
 			$(event.target).parents(".color-wrapper").find(".colorPicker").css("background-color", "transparent");
 			$(event.target).parents(".color-wrapper").find(".active").removeClass("active");
 			$(event.target.nextElementSibling).addClass("active");
