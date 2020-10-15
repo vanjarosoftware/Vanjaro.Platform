@@ -54,9 +54,9 @@ export default (editor, config = {}) => {
 	});
 
 	//Changing Classes
-	global.SwitchClass = function (elInput, component, event) {
+	global.SwitchClass = function (elInput, component, event, getTrait) {
 
-		var trait = component.getTrait(event.target.name);
+		var trait = component.getTrait(event.target.name) || getTrait;
 		var comp = component.attributes.type;
 		var classes = [];
 		var className = '';
@@ -1435,27 +1435,37 @@ export default (editor, config = {}) => {
 		eventCapture: ['input'],
 		onEvent({ elInput, component, event }) {
 
-			if (component.attributes.type == 'heading' || component.attributes.type == 'text') {
-				var className = event.target.nextElementSibling.className;
-				className = className.replace('bg', 'text');
+			var model = component;
+			var trait = component.getTrait(event.target.name);
 
-				$(component.getTrait('styles').el).find('label').removeClass(function (index, css) {
-					return (css.match(/\btext-\S+/g) || []).join(' ');
-				});
-				$(component.getTrait('styles').el).find('label').addClass(className);
-			}
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector);
 
-			$(event.target).parents(".color-wrapper").find(".colorPicker").css("background-color", "transparent");
-			$(event.target).parents(".color-wrapper").find(".active").removeClass("active");
-			$(event.target.nextElementSibling).addClass("active");
+			$(model).each(function (index, item) {
 
-			var style = component.getStyle();
-			style["background-color"] = "transparent";
-			component.setStyle(style);
+				if (item.attributes.type == 'heading' || item.attributes.type == 'text') {
 
-			SwitchClass(elInput, component, event);
+					var className = event.target.nextElementSibling.className;
+					className = className.replace('bg', 'text');
 
+					$(item.getTrait('styles').el).find('label').removeClass(function (index, css) {
+						return (css.match(/\btext-\S+/g) || []).join(' ');
+					});
 
+					$(item.getTrait('styles').el).find('label').addClass(className);
+				}
+
+				$(event.target).parents(".color-wrapper").find(".colorPicker").css("background-color", "transparent");
+				$(event.target).parents(".color-wrapper").find(".active").removeClass("active");
+				$(event.target.nextElementSibling).addClass("active");
+
+				var style = item.getStyle();
+				style["background-color"] = "transparent";
+				item.setStyle(style);
+
+				SwitchClass(elInput, item, event, trait);
+
+			});
 		}
 	});
 
