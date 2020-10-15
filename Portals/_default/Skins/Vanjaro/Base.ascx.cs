@@ -156,7 +156,7 @@ namespace Vanjaro.Skin
 
         private void InjectThemeJS()
         {
-            if (Core.Managers.ThemeManager.HasThemeJS())
+            if (Core.Managers.ThemeManager.CurrentTheme.HasThemeJS())
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl(Core.Managers.ThemeManager.CurrentTheme.ThemeJS));
         }
 

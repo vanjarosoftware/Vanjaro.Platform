@@ -1,9 +1,11 @@
 ﻿using DotNetNuke.Entities.Portals;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using static Vanjaro.Core.Factories;
 using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Components
@@ -75,6 +77,21 @@ namespace Vanjaro.Core.Components
             {
                 return "~/Portals/_default/vThemes/" + Name + "/theme.js";
             }
+        }
+
+        public bool HasThemeJS()
+        {
+            string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, "ThemeJS");
+            bool? hasScript = CacheFactory.Get(CacheKey);
+            if (hasScript == null)
+            {
+                if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(ThemeJS)))
+                    hasScript = true;
+                else
+                    hasScript = false;
+                CacheFactory.Set(CacheKey, hasScript);
+            }
+            return hasScript.Value;
         }
     }
 }

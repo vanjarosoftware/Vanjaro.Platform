@@ -41,21 +41,6 @@ namespace Vanjaro.Core
                 return theme;
             }
 
-            public static bool HasThemeJS()
-            {
-                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, "ThemeJS");
-                bool? hasScript = CacheFactory.Get(CacheKey);
-                if (hasScript == null)
-                {
-                    if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(CurrentTheme.ThemeJS)))
-                        hasScript = true;
-                    else
-                        hasScript = false;
-                    CacheFactory.Set(CacheKey, hasScript);
-                }
-                return hasScript.Value;
-            }
-
             public static List<string> GetControlTypes()
             {
                 List<string> result = new List<string>
