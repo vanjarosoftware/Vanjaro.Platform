@@ -18,14 +18,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
         internal static List<IUIData> GetData(int portalId, UserInfo userInfo)
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
-            bool IsSuperUser = UserController.Instance.GetCurrentUserInfo().IsSuperUser;
-            string mode = IsSuperUser ? "h" : "p";
-            bool ApplyTo = IsSuperUser ? PortalController.GetPortalSetting("Vanjaro.Integration.YouTube.ApplyTo", portalId, mode) == mode : false;
             string Site_ApiKey = PortalController.GetEncryptedString("Vanjaro.Integration.YouTube.ApiKey", portalId, Config.GetDecryptionkey());
             string Host_ApiKey = HostController.Instance.GetEncryptedString("Vanjaro.Integration.YouTube.ApiKey", Config.GetDecryptionkey());
 
-            Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Options = IsSuperUser });
-            Settings.Add("ApplyTo", new UIData { Name = "ApplyTo", Options = ApplyTo });
+            Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Options = UserController.Instance.GetCurrentUserInfo().IsSuperUser });
+            Settings.Add("ApplyTo", new UIData { Name = "ApplyTo", Options = false });
             Settings.Add("Host_ApiKey", new UIData { Name = "Host_ApiKey", Value = Host_ApiKey });
             Settings.Add("Host_HasApiKey", new UIData { Name = "Host_HasApiKey", Options = string.IsNullOrEmpty(Host_ApiKey) ? false : true });
             Settings.Add("Site_ApiKey", new UIData { Name = "Site_ApiKey", Value = Site_ApiKey });
