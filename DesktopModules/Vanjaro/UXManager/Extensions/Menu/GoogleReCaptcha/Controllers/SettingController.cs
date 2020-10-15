@@ -24,11 +24,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.Controllers
             
             bool IsSuperUser = UserController.Instance.GetCurrentUserInfo().IsSuperUser;
             string mode = IsSuperUser ? "h" : "p";
-            bool ApplyTo = IsSuperUser ? PortalController.GetPortalSetting("ApplyTo", portalId, mode) == mode : false;
-            string Host_SiteKey = HostController.Instance.GetEncryptedString("Vanjaro.Integration.SiteKey", Config.GetDecryptionkey());
-            string Host_SecretKey = HostController.Instance.GetEncryptedString("Vanjaro.Integration.SecretKey", Config.GetDecryptionkey());
-            string Site_SiteKey = PortalController.GetEncryptedString("Vanjaro.Integration.SiteKey", portalId, Config.GetDecryptionkey());
-            string Site_SecretKey = PortalController.GetEncryptedString("Vanjaro.Integration.SecretKey", portalId, Config.GetDecryptionkey());
+            bool ApplyTo = IsSuperUser ? PortalController.GetPortalSetting("Vanjaro.Integration.GoogleReCaptcha.ApplyTo", portalId, mode) == mode : false;
+            string Host_SiteKey = HostController.Instance.GetEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SiteKey", Config.GetDecryptionkey());
+            string Host_SecretKey = HostController.Instance.GetEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SecretKey", Config.GetDecryptionkey());
+            string Site_SiteKey = PortalController.GetEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SiteKey", portalId, Config.GetDecryptionkey());
+            string Site_SecretKey = PortalController.GetEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SecretKey", portalId, Config.GetDecryptionkey());
             
             Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Options = IsSuperUser });
             Settings.Add("ApplyTo", new UIData { Name = "ApplyTo", Options = ApplyTo });
@@ -48,8 +48,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.Controllers
             {
                 if (!string.IsNullOrEmpty(Data.Host_SiteKey.ToString()) && !string.IsNullOrEmpty(Data.Host_SecretKey.ToString()))
                 {
-                    HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.SiteKey", Data.Host_SiteKey.ToString(), Config.GetDecryptionkey());
-                    HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.SecretKey", Data.Host_SecretKey.ToString(), Config.GetDecryptionkey());
+                    PortalController.UpdatePortalSetting(PortalSettings.PortalId, "Vanjaro.Integration.GoogleReCaptcha.ApplyTo", "h");
+                    HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SiteKey", Data.Host_SiteKey.ToString(), Config.GetDecryptionkey());
+                    HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SecretKey", Data.Host_SecretKey.ToString(), Config.GetDecryptionkey());
                 }
                 else
                     return false;
@@ -58,8 +59,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.Controllers
             {
                 if (!string.IsNullOrEmpty(Data.Site_SiteKey.ToString()) && !string.IsNullOrEmpty(Data.Site_SecretKey.ToString()))
                 {
-                    PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.SiteKey", Data.Site_SiteKey.ToString(), Config.GetDecryptionkey());
-                    PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.SecretKey", Data.Site_SecretKey.ToString(), Config.GetDecryptionkey());
+                    PortalController.UpdatePortalSetting(PortalSettings.PortalId, "Vanjaro.Integration.GoogleReCaptcha.ApplyTo", "p");
+                    PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.GoogleReCaptcha.SiteKey", Data.Site_SiteKey.ToString(), Config.GetDecryptionkey());
+                    PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.GoogleReCaptcha.SecretKey", Data.Site_SecretKey.ToString(), Config.GetDecryptionkey());
                 }
                 else
                     return false;
@@ -72,13 +74,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.Controllers
         {
             if (bool.Parse(Data.ToString()))
             {
-                HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.SiteKey", string.Empty, Config.GetDecryptionkey());
-                HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.SecretKey", string.Empty, Config.GetDecryptionkey());
+                HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SiteKey", string.Empty, Config.GetDecryptionkey());
+                HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SecretKey", string.Empty, Config.GetDecryptionkey());
             }
             else
             {
-                PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.SiteKey", string.Empty, Config.GetDecryptionkey());
-                PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.SecretKey", string.Empty, Config.GetDecryptionkey());
+                PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.GoogleReCaptcha.SiteKey", string.Empty, Config.GetDecryptionkey());
+                PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.GoogleReCaptcha.SecretKey", string.Empty, Config.GetDecryptionkey());
             }
 
             return string.Empty;

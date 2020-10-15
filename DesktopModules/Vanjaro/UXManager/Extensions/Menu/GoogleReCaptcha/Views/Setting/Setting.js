@@ -35,7 +35,7 @@
             if ($scope.ui.data.ApplyTo.Options) {
                 $scope.ui.data.Host_SiteKey.Value = Response;
                 $scope.ui.data.Host_SecretKey.Value = Response;
-                $scope.ui.data.Site_HasSiteKey.Options = false;
+                $scope.ui.data.Host_HasSiteKey.Options = false;
             }
             else {
                 $scope.ui.data.Site_SiteKey.Value = Response;
