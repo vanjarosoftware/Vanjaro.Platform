@@ -1,7 +1,7 @@
 ﻿<div ng-controller="setting_setting" class="vj-ux-manager">
     <uiengine provider="AngularBootstrap" identifier="setting_setting" class="uiengine-wrapper scrollbar">
         <uilayout name="default">
-            <uielement name="ApplyTo" control="toggle" attr-class="text-center" container-attr-ng-show="ui.data.IsSuperUser.Options" ngmodel="ui.data.ApplyTo.Options"></uielement>
+            <uielement name="ApplyTo" control="checkboxtoggle" attr-class="text-center" container-attr-ng-show="ui.data.IsSuperUser.Options" ngmodel="ui.data.ApplyTo.Options"></uielement>
         </uilayout>
         <uilayout name="default" attr-ng-show="ui.data.ApplyTo.Options">
             <uielement name="Host_ApiKey" control="textbox" attr-required="true"></uielement>
