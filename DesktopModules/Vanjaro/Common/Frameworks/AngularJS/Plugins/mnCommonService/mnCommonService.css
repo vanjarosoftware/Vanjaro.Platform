@@ -993,3 +993,27 @@ a.page-link.active {
     background-color: #fff;
     border: 1px solid #ccc !important;
 }
+
+
+#loading-bar .bar {
+    background-image: linear-gradient(to left, #0088cc 0%, #07acff 100%) !important;
+}
+
+#loading-bar-spinner {
+    top: 50% !important;
+    margin-top: -12px;
+    margin-left: -12px;
+}
+
+    #loading-bar-spinner .spinner-icon {
+        background-image: url('/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.gif') !important;
+        position: fixed;
+        background-size: 24px !important;
+        width: 24px !important;
+        height: 24px !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        border: none !important;
+        border-radius: 0 !important;
+        animation: none !important;
+    }
