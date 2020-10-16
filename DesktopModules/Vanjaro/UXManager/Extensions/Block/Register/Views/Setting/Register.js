@@ -13,11 +13,13 @@
                 $scope.ui.data.ShowLabel.Value = $scope.ui.data.GlobalConfigs.Options['data-block-showlabel'] == "false" ? false : true;
                 $scope.ui.data.TermsPrivacy.Value = $scope.ui.data.GlobalConfigs.Options['data-block-termsprivacy'] == "false" ? false : true;
                 $scope.ui.data.ButtonAlign.Value = $scope.ui.data.GlobalConfigs.Options['data-block-buttonalign'];
+                $scope.ui.data.ShowGoogleReCaptcha.Value = $scope.ui.data.GlobalConfigs.Options['data-block-showgooglerecaptcha'] == "false" ? false : true;
             }
             else {
                 $scope.ui.data.ShowLabel.Value = $scope.CurrentRegistration.attributes.attributes['data-block-showlabel'] == "false" ? false : true;
                 $scope.ui.data.TermsPrivacy.Value = $scope.ui.data.GlobalConfigs.Options['data-block-termsprivacy'] == "false" ? false : true;
-                $scope.ui.data.ButtonAlign.Value = $scope.CurrentRegistration.attributes.attributes['data-block-buttonalign'];
+                $scope.ui.data.ButtonAlign.Value = $scope.ui.data.GlobalConfigs.Options['data-block-buttonalign'];
+                $scope.ui.data.ShowGoogleReCaptcha.Value = $scope.CurrentRegistration.attributes.attributes['data-block-showgooglerecaptcha'] == "false" ? false : true;
             }
         }
         $scope.Loaded = true;
@@ -72,6 +74,17 @@
             var registered = window.parent.VjEditor.getSelected();
             registered.addAttributes({ 'data-block-buttonalign': newValue.toString() });
             $scope.ApplyChanges(registered);
+        }
+    });
+
+    $scope.$watch('ui.data.ShowGoogleReCaptcha.Value', function (newValue, oldValue) {
+        if (newValue != undefined && oldValue != undefined) {
+            var login = window.parent.VjEditor.getSelected();
+            if (newValue)
+                login.addAttributes({ 'data-block-showgooglerecaptcha': 'true' });
+            else
+                login.addAttributes({ 'data-block-showgooglerecaptcha': 'false' });
+            $scope.ApplyChanges(login);
         }
     });
 });

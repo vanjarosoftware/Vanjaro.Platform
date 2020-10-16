@@ -28,6 +28,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register.Controllers
                 { "TermsPrivacy", new UIData { Name = "TermsPrivacy", Value = "false" } },
                 { "ButtonAlign", new UIData { Name = "ButtonAlign", Value = "justify" } },
                 { "Global", new UIData { Name = "Global", Value = "false" } },
+                { "ShowGoogleReCaptcha", new UIData { Name = "ShowGoogleReCaptcha", Value = "false" } },
                 { "GlobalConfigs", new UIData { Name = "GlobalConfigs", Options = Core.Managers.BlockManager.GetGlobalConfigs(portalSettings, "register") } },
                 { "IsAdmin", new UIData { Name = "IsAdmin", Value = userInfo.IsInRole("Administrators").ToString().ToLower() } }
             };

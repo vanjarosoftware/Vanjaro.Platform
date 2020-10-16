@@ -13,8 +13,7 @@ using Vanjaro.UXManager.Library.Common;
 
 namespace Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.Controllers
 {
-    [ValidateAntiForgeryToken]
-    [AuthorizeAccessRoles(AccessRoles = "admin")]
+    [ValidateAntiForgeryToken]    
     public class SettingController : UIEngineController
     {
         internal static List<IUIData> GetData(int portalId, UserInfo userInfo)
@@ -34,6 +33,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.Controllers
             return Settings.Values.ToList();
         }
 
+        [AuthorizeAccessRoles(AccessRoles = "admin")]
         [HttpPost]
         public bool Save(dynamic Data)
         {
@@ -46,12 +46,21 @@ namespace Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.Controllers
             return false;
         }
 
+        [AuthorizeAccessRoles(AccessRoles = "admin")]
         [HttpGet]
         public string Delete()
         {
             PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.SiteKey", string.Empty, Config.GetDecryptionkey());
             PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.SecretKey", string.Empty, Config.GetDecryptionkey());
             return string.Empty;
+        }
+
+        [HttpPost]
+        [AuthorizeAccessRoles(AccessRoles = "user,anonymous")]
+        public string SiteKey()
+        {
+            string SiteKey = PortalController.GetEncryptedString("Vanjaro.Integration.SiteKey", PortalSettings.PortalId, Config.GetDecryptionkey());
+            return SiteKey;
         }
 
         public override string AccessRoles()

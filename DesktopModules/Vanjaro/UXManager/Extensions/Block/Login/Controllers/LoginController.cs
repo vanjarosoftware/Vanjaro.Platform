@@ -31,6 +31,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
                 { "ShowLabel", new UIData { Name = "ShowLabel", Value = "false" } },
                 { "ButtonAlign", new UIData { Name = "ButtonAlign", Value = "justify" } },
                 { "ShowRegister", new UIData { Name = "ShowRegister", Value = "true" } },
+                { "ShowGoogleReCaptcha", new UIData { Name = "ShowGoogleReCaptcha", Value = "false" } },
                 { "GlobalConfigs", new UIData { Name = "GlobalConfigs", Options = Core.Managers.BlockManager.GetGlobalConfigs(portalSettings, "login") } },
                 { "IsAdmin", new UIData { Name = "IsAdmin", Value = userInfo.IsInRole("Administrators").ToString().ToLower() } }
             };

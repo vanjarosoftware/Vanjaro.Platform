@@ -15,6 +15,7 @@
                 $scope.ui.data.ButtonAlign.Value = $scope.ui.data.GlobalConfigs.Options['data-block-buttonalign'];
                 $scope.ui.data.ResetPassword.Value = $scope.ui.data.GlobalConfigs.Options['data-block-resetpassword'] == "false" ? false : true;
                 $scope.ui.data.ShowRegister.Value = $scope.ui.data.GlobalConfigs.Options['data-block-showregister'] == "false" ? false : true;
+                $scope.ui.data.ShowGoogleReCaptcha.Value = $scope.ui.data.GlobalConfigs.Options['data-block-showgooglerecaptcha'] == "false" ? false : true;
             }
             else {
                 $scope.ui.data.ShowResetPassword.Value = $scope.CurrentLogin.attributes.attributes['data-block-showresetpassword'] == "false" ? false : true;
@@ -23,6 +24,7 @@
                 $scope.ui.data.ButtonAlign.Value = $scope.CurrentLogin.attributes.attributes['data-block-buttonalign'];
                 $scope.ui.data.ResetPassword.Value = $scope.CurrentLogin.attributes.attributes['data-block-resetpassword'] == "false" ? false : true;
                 $scope.ui.data.ShowRegister.Value = $scope.CurrentLogin.attributes.attributes['data-block-showregister'] == "false" ? false : true;
+                $scope.ui.data.ShowGoogleReCaptcha.Value = $scope.CurrentLogin.attributes.attributes['data-block-showgooglerecaptcha'] == "false" ? false : true;
             }
         }
         $scope.Loaded = true;
@@ -100,7 +102,7 @@
                 login.addAttributes({ 'data-block-showregister': 'false' });
             $scope.ApplyChanges(login);
         }
-    });
+    });      
 
     $scope.$watch('ui.data.Global.Value', function (newValue, oldValue) {
         if (newValue != undefined && oldValue != undefined) {
@@ -112,4 +114,16 @@
             $scope.ApplyChanges(login);
         }
     });
+
+    $scope.$watch('ui.data.ShowGoogleReCaptcha.Value', function (newValue, oldValue) {
+        if (newValue != undefined && oldValue != undefined) {
+            var login = window.parent.VjEditor.getSelected();
+            if (newValue)
+                login.addAttributes({ 'data-block-showgooglerecaptcha': 'true' });
+            else
+                login.addAttributes({ 'data-block-showgooglerecaptcha': 'false' });
+            $scope.ApplyChanges(login);
+        }
+    });
+
 });
