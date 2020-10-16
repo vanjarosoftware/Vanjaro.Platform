@@ -37,7 +37,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
             {
                 if (Core.Providers.Youtube.IsValid(Data.Host_ApiKey.ToString()))
                 {
-                    PortalController.UpdatePortalSetting(PortalSettings.PortalId, "Vanjaro.Integration.YouTube.ApplyTo", "h");
                     HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.YouTube.ApiKey", Data.Host_ApiKey.ToString(), Config.GetDecryptionkey());
                 }
                 else
@@ -47,7 +46,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
             {
                 if (Core.Providers.Youtube.IsValid(Data.Site_ApiKey.ToString()))
                 {
-                    PortalController.UpdatePortalSetting(PortalSettings.PortalId, "Vanjaro.Integration.YouTube.ApplyTo", "p");
                     PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.YouTube.ApiKey", Data.Site_ApiKey.ToString(), Config.GetDecryptionkey());
                 }
                 else
