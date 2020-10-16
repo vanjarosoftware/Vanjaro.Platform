@@ -1,8 +1,11 @@
 ﻿using DotNetNuke.Entities.Portals;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
+using static Vanjaro.Core.Factories;
 using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Components
@@ -42,11 +45,11 @@ namespace Vanjaro.Core.Components
             get
             {
                 string CacheKey = Factories.CacheFactory.GetCacheKey(Factories.CacheFactory.Keys.Theme + "EditLayout", Name);
-                string _EditLayout= Factories.CacheFactory.Get(CacheKey);
+                string _EditLayout = Factories.CacheFactory.Get(CacheKey);
                 if (string.IsNullOrEmpty(_EditLayout))
                 {
                     string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Name + "/Layout.Edit.html");
-                    _EditLayout= System.IO.File.ReadAllText(FolderPath);
+                    _EditLayout = System.IO.File.ReadAllText(FolderPath);
                     Factories.CacheFactory.Set(CacheKey, _EditLayout);
                 }
                 return _EditLayout;
@@ -55,10 +58,40 @@ namespace Vanjaro.Core.Components
 
         public string GUID
         {
-            get 
+            get
             {
                 return "49A70BA1-206B-471F-800A-679799FF09DF";
             }
+        }
+
+        public string ScriptsPath
+        {
+            get
+            {
+                return "~/Portals/_default/vThemes/" + Name + "/js/";
+            }
+        }
+        public string ThemeJS
+        {
+            get
+            {
+                return "~/Portals/_default/vThemes/" + Name + "/theme.js";
+            }
+        }
+
+        public bool HasThemeJS()
+        {
+            string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, "ThemeJS");
+            bool? hasScript = CacheFactory.Get(CacheKey);
+            if (hasScript == null)
+            {
+                if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(ThemeJS)))
+                    hasScript = true;
+                else
+                    hasScript = false;
+                CacheFactory.Set(CacheKey, hasScript);
+            }
+            return hasScript.Value;
         }
     }
 }

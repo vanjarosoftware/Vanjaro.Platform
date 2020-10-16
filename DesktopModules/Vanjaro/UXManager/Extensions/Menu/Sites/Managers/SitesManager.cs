@@ -6,7 +6,6 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
@@ -24,9 +23,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
-using Vanjaro.Common.Factories;
 using Vanjaro.Core.Entities;
-using Vanjaro.UXManager.Extensions.Menu.Azure.Entities;
 using Vanjaro.UXManager.Library.Common;
 using static Vanjaro.Core.Factories;
 using static Vanjaro.Core.Managers;
@@ -80,7 +77,23 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
         internal static HttpResponseMessage Export(int PortalID, string Name)
         {
             HttpResponseMessage Response = new HttpResponseMessage();
-            string Theme = Core.Managers.ThemeManager.CurrentTheme.Name;
+            string Theme = ThemeManager.CurrentTheme.Name;
+            Dictionary<string, string> Assets = new Dictionary<string, string>();
+
+            string LogoURL = string.Empty, FavIconurl = string.Empty, SocialSharingLogourl = string.Empty, HomeScreenIcon = string.Empty;
+            var siteSetting = LogoAndTitle.Controllers.SettingController.GetExportSettings(PortalID);
+            if (siteSetting != null)
+            {
+                if (!string.IsNullOrEmpty(siteSetting.LogoFile))
+                    LogoURL = siteSetting.LogoFile.Split('?')[0];
+                if (!string.IsNullOrEmpty(siteSetting.FavIcon))
+                    FavIconurl = siteSetting.FavIcon.Split('?')[0];
+                if (!string.IsNullOrEmpty(siteSetting.SocialSharingLogo))
+                    SocialSharingLogourl = siteSetting.SocialSharingLogo.Split('?')[0];
+                if (!string.IsNullOrEmpty(siteSetting.HomeScreenIcon))
+                    HomeScreenIcon = siteSetting.HomeScreenIcon.Split('?')[0];
+            }
+
             ExportTemplate exportTemplate = new ExportTemplate
             {
                 Name = Name,
@@ -88,9 +101,22 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 UpdatedOn = DateTime.UtcNow,
                 Templates = new List<Layout>(),
                 ThemeName = Theme,
-                ThemeGuid = ThemeManager.CurrentTheme.GUID
+                ThemeGuid = ThemeManager.CurrentTheme.GUID,
+                LogoFile = Path.GetFileName(LogoURL),
+                FavIcon = Path.GetFileName(FavIconurl),
+                SocialSharingLogo = Path.GetFileName(SocialSharingLogourl),
+                HomeScreenIcon = Path.GetFileName(HomeScreenIcon)
             };
-            Dictionary<string, string> Assets = new Dictionary<string, string>();
+
+            if (!string.IsNullOrEmpty(exportTemplate.LogoFile) && !Assets.ContainsKey(exportTemplate.LogoFile))
+                Assets.Add(exportTemplate.LogoFile, LogoURL);
+            if (!string.IsNullOrEmpty(exportTemplate.FavIcon) && !Assets.ContainsKey(exportTemplate.FavIcon))
+                Assets.Add(exportTemplate.FavIcon, FavIconurl);
+            if (!string.IsNullOrEmpty(exportTemplate.SocialSharingLogo) && !Assets.ContainsKey(exportTemplate.SocialSharingLogo))
+                Assets.Add(exportTemplate.SocialSharingLogo, SocialSharingLogourl);
+            if (!string.IsNullOrEmpty(exportTemplate.HomeScreenIcon) && !Assets.ContainsKey(exportTemplate.HomeScreenIcon))
+                Assets.Add(exportTemplate.HomeScreenIcon, HomeScreenIcon);
+
             foreach (Core.Data.Entities.Pages page in Core.Managers.PageManager.GetAllPublishedPages(PortalID, null))
             {
                 Dnn.PersonaBar.Pages.Services.Dto.PageSettings pageSettings = Dnn.PersonaBar.Pages.Components.PagesController.Instance.GetPageSettings(page.TabID);
