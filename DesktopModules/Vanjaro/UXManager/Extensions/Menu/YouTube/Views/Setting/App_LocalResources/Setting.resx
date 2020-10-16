@@ -117,14 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ApiKey.Text" xml:space="preserve">
-    <value>API Key</value>
+  <data name="ApplyTo.OFF" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="ApplyTo.ON" xml:space="preserve">
+    <value>Globel</value>
+  </data>
+  <data name="ApplyTo.Text" xml:space="preserve">
+    <value> </value>
   </data>
   <data name="Delete.Text" xml:space="preserve">
     <value>Remove Integration</value>
   </data>
+  <data name="Host_ApiKey.Text" xml:space="preserve">
+    <value>API Key</value>
+  </data>
   <data name="Invalid.Text" xml:space="preserve">
     <value>Input is not a valid Pixabay API Key.</value>
+  </data>
+  <data name="Site_ApiKey.Text" xml:space="preserve">
+    <value>API Key</value>
   </data>
   <data name="Success.Text" xml:space="preserve">
     <value>Save Successfully</value>
