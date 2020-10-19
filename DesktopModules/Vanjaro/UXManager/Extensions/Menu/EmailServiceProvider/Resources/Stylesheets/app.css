@@ -1,3 +1,7 @@
-﻿.vj-ux-manager .smtpservermode {
-    margin-top: 15px;
+﻿.vj-ux-manager .btn_integration {
+    margin-bottom: 0
 }
+
+    .vj-ux-manager .btn_integration .btn-group .btn {
+        width: 100px;
+    }
