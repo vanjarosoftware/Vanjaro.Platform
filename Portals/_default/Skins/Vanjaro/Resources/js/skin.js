@@ -144,7 +144,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     </div>`;
 
     if (typeof removemodals != 'undefined' && removemodals)
-        $("body div[id*='vjModal']").remove();
+        $("body div[id*='vjModal'], .modal-backdrop").remove();
 
     if ($('body').find('#' + id).length <= 0)
         $('body').append(modal);
@@ -246,8 +246,10 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     if (position === 'right')
         $modal.find('.modal-dialog').addClass('modal-right');
 
-    if ($modal.prev('.modal-backdrop').length > 0) {
-        var zindex = parseInt($modal.prev().prev().css('z-index'));
+    var $backdrop = $modal.prev('.modal-backdrop');
+
+    if ($backdrop.length && $backdrop.prev('div[id*="vjModal"]').length) {
+        var zindex = parseInt($backdrop.prev('div[id*="vjModal"]').css('z-index'));
         $modal.css('z-index', zindex + 2);
         $modal.next(".modal-backdrop").css('z-index', zindex + 1);
     }

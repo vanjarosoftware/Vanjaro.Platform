@@ -183,7 +183,7 @@
         //$("uiengine #permDiv").on("hidden.bs.modal", function (e) {
         //    $('uiengine .PermissionFrame').attr('src', 'about:blank');
         //});
-        window.parent.OpenPopUp(null, 700, 'centre', 'Permissions', window.location.href + '#/permission/' + folder.Value, 850, '', true);
+        window.parent.OpenPopUp(null, 700, 'centre', 'Permissions', window.location.href + '#/permission/' + folder.Value, 850, '');
     };
 
     $scope.RenameFolder = function (folderid, foldername) {
