@@ -95,26 +95,35 @@ GetPopupURL = function (TabUrl, Param) {
     return TabUrl + Param;
 };
 
-OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isnew, ModuleId) {
+OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, removemodals, ModuleId, scrollbars, titleposition) {
 
-    var id = 'defaultModal';
+    var id = 'vjModal' + (new Date()).getTime();
     var fullScreen = false;
-    var showTogglebtn = false;
     var edit = "";
     var fullwidth = '';
-    var scrolling = 'no';
+    var scrolling;
 
-    if (typeof showtogglebtn != 'undefined' && showtogglebtn)
-        showTogglebtn = true;
-
-    if (width == "100%") {
-        fullwidth = 'fullwidth';
-        fullScreen = true;
-        scrolling = 'yes';
+    if (typeof scrollbars != 'undefined') {
+        if (scrollbars)
+            scrolling = 'yes';
+        else
+            scrolling = 'no';
     }
 
-    if (isnew)
-        id += 'new';
+    if (typeof titleposition == 'undefined')
+        titleposition = '';
+
+    if (typeof showtogglebtn == 'undefined')
+        showtogglebtn = false
+
+    if (width == "100%") {
+
+        fullwidth = 'fullwidth';
+        fullScreen = true;
+
+        if (typeof scrollbars == 'undefined')
+            scrolling = 'yes';;
+    }
 
     if (typeof ModuleId != 'undefined')
         edit = 'data-edit="edit_module" data-mid="' + ModuleId + '"';
@@ -123,7 +132,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel"></h4>
+                    <h4 class="modal-title ` + titleposition + `" id="defaultModalLabel"></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body" id="UXRender">
@@ -134,22 +143,16 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
         </div>
     </div>`;
 
+    if (typeof removemodals != 'undefined' && removemodals)
+        $("body div[id*='vjModal']").remove();
+
     if ($('body').find('#' + id).length <= 0)
         $('body').append(modal);
 
     var $modal = $('#' + id);
 
     if (url != '') {
-        var iframeurl = url;
         $modal.find('#UXpagerender').on("load", function () {
-            //Not Required Anymore
-            //try {
-            //    // Change check for library.html (!url.startsWith('~'))
-            //    if (GetParameterByName('mid', this.contentWindow.location.href) == null && !iframeurl.startsWith('~'))
-            //        $(window.parent.document.body).find('[data-dismiss="modal"]').trigger('click');
-            //}
-            //catch (e) {
-            //}
             var $iframe = $(this);
             $iframe.prev().hide();
             $iframe.show();
@@ -222,9 +225,9 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
     $modal.find('.modal-dialog').removeAttr('style');
 
     if (fullScreen)
-        $modal.find('.modal-dialog').width('100%').addClass('center');
+        $modal.find('.modal-dialog').width('100%');
     else
-        $modal.find('.modal-dialog').width(width).removeClass('center');
+        $modal.find('.modal-dialog').width(width);
 
     if (typeof height != 'undefined') {
 
@@ -243,12 +246,11 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
     if (position === 'right')
         $modal.find('.modal-dialog').addClass('modal-right');
 
-    if (isnew) {
-        $modal.css('z-index', '1051');
-        $modal.next(".modal-backdrop").css('z-index', '1050');
+    if ($modal.prev('.modal-backdrop').length > 0) {
+        var zindex = parseInt($modal.prev().prev().css('z-index'));
+        $modal.css('z-index', zindex + 2);
+        $modal.next(".modal-backdrop").css('z-index', zindex + 1);
     }
-
-    var submitButton = $("iframe").contents().find("#" + id + " #save");
 
     window.document.callbacktype = '';
 
