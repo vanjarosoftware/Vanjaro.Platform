@@ -5,7 +5,7 @@
     };
 
     $scope.openIconPopup = function () {
-        window.parent.OpenPopUp(null, 700, 'right', 'Select Icon', window.parent.CurrentExtTabUrl + '&guid=85682cd1-d5fd-4611-b252-3bc1972545a0&ignoregj=true#/setting', '', '', true);
+        window.parent.OpenPopUp(null, 700, 'right', 'Select Icon', window.parent.CurrentExtTabUrl + '&guid=85682cd1-d5fd-4611-b252-3bc1972545a0&ignoregj=true#/setting', '', '', false);
     };
 
     $scope.Click_Save = function (type) {
