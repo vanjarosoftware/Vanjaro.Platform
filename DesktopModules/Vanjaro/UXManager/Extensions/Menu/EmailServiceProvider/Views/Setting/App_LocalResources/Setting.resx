@@ -156,12 +156,6 @@
   <data name="to.Text" xml:space="preserve">
     <value> to </value>
   </data>
-  <data name="SMTPmode.OFF" xml:space="preserve">
-    <value>Site</value>
-  </data>
-  <data name="SMTPmode.ON" xml:space="preserve">
-    <value>Global</value>
-  </data>
   <data name="SMTPmode.Text" xml:space="preserve">
     <value> </value>
   </data>
@@ -185,5 +179,11 @@
   </data>
   <data name="Host_Email.Text" xml:space="preserve">
     <value>Host Email</value>
+  </data>
+  <data name="SMTPmode.OFF" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="SMTPmode.ON" xml:space="preserve">
+    <value>Global</value>
   </data>
 </root>
