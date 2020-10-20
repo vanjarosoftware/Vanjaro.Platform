@@ -851,7 +851,7 @@ namespace Vanjaro.Skin
             {
                 string script = @"$(document).ready(function () {                               
                                $('.dnnActions').click(function () {
-                                   $(window.parent.document.body).find('#defaultModalnew [data-dismiss=" + @"modal" + @"]').click();
+                                   $(window.parent.document.body).find('.uxmanager-modal [data-dismiss=" + @"modal" + @"]').click();
                                });
                                setTimeout(function () {$('[href=""#msSpecificSettings""]').click();},100);
                           });";

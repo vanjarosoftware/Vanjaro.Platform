@@ -7,7 +7,7 @@
     $scope.CurrentMenu;
 
     $scope.onInit = function () {
-        $("#defaultModal .modal-title", parent.document).html('[L:SettingTitle]');
+        $(".uxmanager-modal .modal-title", parent.document).html('[L:SettingTitle]');
         $scope.CurrentMenu = window.parent.VjEditor.getSelected();
         if ($scope.CurrentMenu != undefined) {
             $scope.ui.data.Global.Value = $scope.CurrentMenu.attributes.attributes["data-block-global"] == "false" ? false : true;

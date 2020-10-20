@@ -265,7 +265,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
                     iframe[0].src = iframe[0].src;
                 }
             }
-            var appid = $(window.document.body).find('#defaultModal').data('mid')
+            var appid = $(window.document.body).find('.uxmanager-modal').data('mid')
             var appdiv = "#dnn_vj_" + appid;
             var $appframe = $('.gjs-frame').contents().find(appdiv).find("#Appframe");
 
@@ -286,8 +286,8 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     $modal.modal('show');
 
     $(window.parent.document.body).find('[data-dismiss="modal"]').on("click", function (e) {
-        if ($(window.document.body).find('#defaultModal').data('edit') == 'edit_module') {
-            var mid = $(window.document.body).find('#defaultModal').data('mid');
+        if ($(window.document.body).find('.uxmanager-modal').data('edit') == 'edit_module') {
+            var mid = $(window.document.body).find('.uxmanager-modal').data('mid');
             if ($('.gjs-frame').contents().find('#dnn_vj_' + mid).length > 0) {
                 var framesrc = CurrentTabUrl;
                 if (framesrc.indexOf("?") == -1)
@@ -311,10 +311,10 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
 $(document).keyup(function (e) {
     var code = e.keyCode || e.which;
     if (code == 27 && $('[ng-show=ShowFileManager]:not(".ng-hide")').length <= 0) {
-        var $modal = $("#defaultModal");
+        var $modal = $(".uxmanager-modal");
 
         if ($modal.length <= 0)
-            $modal = $(window.parent.document.body).find('#defaultModal');
+            $modal = $(window.parent.document.body).find('.uxmanager-modal');
 
         if ($modal.length > 0)
             $modal.find('[data-dismiss="modal"]').click();
@@ -386,7 +386,7 @@ $(document).ready(function () {
         $("body").append(modal);
     }
 
-    $('#defaultModal [data-dismiss="modal"]').on("click", function (e) {
+    $('.uxmanager-modal [data-dismiss="modal"]').on("click", function (e) {
         $('#UXpagerender').show().siblings().remove();
     });
 

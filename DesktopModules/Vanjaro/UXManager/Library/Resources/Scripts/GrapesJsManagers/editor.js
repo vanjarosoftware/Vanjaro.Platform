@@ -2282,7 +2282,7 @@ $(document).ready(function () {
             $('#dnn_ContentPane').removeClass("sidebar-open").addClass('sidebar-close');
             $('.sidebar').animate({ "left": "-300px" }, "fast").addClass('settingclosebtn');
             $('.modal-toggle').hide();
-            $('#defaultModal').modal('hide');
+            $('.uxmanager-modal').modal('hide');
             if (VjLayerpanel != null)
                 VjLayerpanel.close();
             if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
