@@ -2354,7 +2354,7 @@ $(document).ready(function () {
         else if ($this.hasClass('librarytab')) {
             $('.blockstab').removeClass('active');
             $(this).parent().addClass('active');
-            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%');
+            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%', true, false, null, false);
         }
         else {
             $('.blockstab').removeClass('active');
@@ -2492,7 +2492,10 @@ global.RenderApp = function (iframe) {
     $(iframe.contentWindow.document.body).append('<style>.actionMenu {display: none !important;}</style>');
     VjEditor.select();
     model.initToolbar(true);
-    VjEditor.select(model);
+    setTimeout(function () {
+        VjEditor.select(model);
+    }, 0);
+
     iframe.contentWindow.document.body.addEventListener("DOMSubtreeModified", function () {
         iframe.style.height = this.offsetHeight + 'px';
     });

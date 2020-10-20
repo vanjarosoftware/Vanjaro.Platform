@@ -117,13 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApplyTo.OFF" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="ApplyTo.ON" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="ApplyTo.Text" xml:space="preserve">
+    <value> </value>
+  </data>
   <data name="Delete.Text" xml:space="preserve">
     <value>Remove Integration</value>
   </data>
-  <data name="SecretKey.Text" xml:space="preserve">
+  <data name="Host_SecretKey.Text" xml:space="preserve">
     <value>Secret Key</value>
   </data>
-  <data name="SiteKey.Text" xml:space="preserve">
+  <data name="Host_SiteKey.Text" xml:space="preserve">
+    <value>Site Key</value>
+  </data>
+  <data name="Site_SecretKey.Text" xml:space="preserve">
+    <value>Secret Key</value>
+  </data>
+  <data name="Site_SiteKey.Text" xml:space="preserve">
     <value>Site Key</value>
   </data>
   <data name="Update.Text" xml:space="preserve">

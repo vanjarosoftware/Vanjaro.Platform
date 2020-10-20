@@ -61,7 +61,7 @@
             $('#apps').removeClass('active');
         }
         else if (type === 'apps') {
-            window.parent.OpenPopUp(null, '100%', '', 'App Settings', $scope.ui.data.AppSettingUrl.Value, '', '', true, true);
+            window.parent.OpenPopUp(null, '100%', '', 'App Settings', $scope.ui.data.AppSettingUrl.Value, '', '', false, true);
             setTimeout(function () { window.location.reload(); }, 500);
         }
     };

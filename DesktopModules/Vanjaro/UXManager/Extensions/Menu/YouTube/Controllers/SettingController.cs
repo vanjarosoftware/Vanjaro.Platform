@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Web.Api;
@@ -17,33 +18,49 @@ namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
         internal static List<IUIData> GetData(int portalId, UserInfo userInfo)
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
-            string apikey = PortalController.GetEncryptedString("Vanjaro.Integration.YouTube", portalId, Config.GetDecryptionkey());
-            bool HasApiKey = false;
-            if (!string.IsNullOrEmpty(apikey))
-            {
-                HasApiKey = true;
-            }
+            string Site_ApiKey = PortalController.GetEncryptedString("Vanjaro.Integration.YouTube", portalId, Config.GetDecryptionkey());
+            string Host_ApiKey = HostController.Instance.GetEncryptedString("Vanjaro.Integration.YouTube", Config.GetDecryptionkey());
 
-            Settings.Add("ApiKey", new UIData { Name = "ApiKey", Value = apikey });
-            Settings.Add("HasApiKey", new UIData { Name = "HasApiKey", Options = HasApiKey });
+            Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Options = UserController.Instance.GetCurrentUserInfo().IsSuperUser });
+            Settings.Add("ApplyTo", new UIData { Name = "ApplyTo", Options = false });
+            Settings.Add("Host_ApiKey", new UIData { Name = "Host_ApiKey", Value = Host_ApiKey });
+            Settings.Add("Host_HasApiKey", new UIData { Name = "Host_HasApiKey", Options = string.IsNullOrEmpty(Host_ApiKey) ? false : true });
+            Settings.Add("Site_ApiKey", new UIData { Name = "Site_ApiKey", Value = Site_ApiKey });
+            Settings.Add("Site_HasApiKey", new UIData { Name = "Site_HasApiKey", Options = string.IsNullOrEmpty(Site_ApiKey) ? false : true });
             return Settings.Values.ToList();
         }
 
         [HttpPost]
         public bool Save(dynamic Data)
         {
-            if (Core.Providers.Youtube.IsValid(Data.ToString()))
+            if (bool.Parse(Data.ApplyTo.ToString()))
             {
-                PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.YouTube", Data.ToString(), Config.GetDecryptionkey());
-                return true;
+                if (Core.Providers.Youtube.IsValid(Data.Host_ApiKey.ToString()))
+                {
+                    HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.YouTube", Data.Host_ApiKey.ToString(), Config.GetDecryptionkey());
+                }
+                else
+                    return false;
             }
-            return false;
+            else
+            {
+                if (Core.Providers.Youtube.IsValid(Data.Site_ApiKey.ToString()))
+                {
+                    PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.YouTube", Data.Site_ApiKey.ToString(), Config.GetDecryptionkey());
+                }
+                else
+                    return false;
+            }
+            return true;
         }
 
-        [HttpGet]
-        public string Delete()
+        [HttpPost]
+        public string Delete(dynamic Data)
         {
-            PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.YouTube", string.Empty, Config.GetDecryptionkey());
+            if (bool.Parse(Data.ToString()))
+                HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.YouTube", string.Empty, Config.GetDecryptionkey());
+            else
+                PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.YouTube", string.Empty, Config.GetDecryptionkey());
             return string.Empty;
         }
         public override string AccessRoles()

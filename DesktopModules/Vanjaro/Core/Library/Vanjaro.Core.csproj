@@ -127,6 +127,7 @@
     <Compile Include="Models\VanjaroRepo.cs" />
     <Compile Include="Models\PetaPoco.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Authentication\OAuth\IOAuthClient.cs" />
     <Compile Include="Services\PageContext\PageContext.cs" />
     <Compile Include="Services\Search\SearchEngine.cs" />
     <Compile Include="Services\Search\SearchEngineScheduler.cs" />

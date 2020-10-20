@@ -1,4 +1,6 @@
-﻿using DotNetNuke.Entities.Portals;
+﻿using Dnn.PersonaBar.Prompt.Components.Commands.Host;
+using DotNetNuke.Entities.Portals;
+using DotNetNuke.Web.Client.ClientResourceManagement;
 using LibSassHost;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -10,6 +12,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Web;
+using System.Web.UI;
+using Vanjaro.Common.ASPNET;
 using Vanjaro.Core.Components;
 using Vanjaro.Core.Entities.Interface;
 using Vanjaro.Core.Entities.Theme;
@@ -36,7 +40,6 @@ namespace Vanjaro.Core
                 Theme theme = new Theme(PortalID);
                 return theme;
             }
-
 
             public static List<string> GetControlTypes()
             {
