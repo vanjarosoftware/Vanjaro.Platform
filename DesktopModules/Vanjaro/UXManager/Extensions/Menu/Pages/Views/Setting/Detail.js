@@ -261,9 +261,9 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
             $('#Folder').removeClass("active");
             $scope.ui.data.PagesTemplate.Options.pageType = type;
             if ($scope.pid > 0)
-                $("#defaultModal .modal-title", parent.document).html('[L:EditPages]');
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:EditPages]');
             else {
-                $("#defaultModal .modal-title", parent.document).html('[L:AddPages]');
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:AddPages]');
                 $scope.ui.data.PagesTemplate.Options.includeInMenu = true;
             }
         }
@@ -273,9 +273,9 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
             $('#Folder').removeClass("active");
             $scope.ui.data.PagesTemplate.Options.pageType = type;
             if ($scope.pid > 0)
-                $("#defaultModal .modal-title", parent.document).html('[L:EditRedirectLink]');
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:EditRedirectLink]');
             else {
-                $("#defaultModal .modal-title", parent.document).html('[L:AddRedirectLink]');
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:AddRedirectLink]');
                 $scope.ui.data.PagesTemplate.Options.includeInMenu = true;
             }
         }
@@ -285,9 +285,9 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
             $('#Folder').addClass("active");
             $scope.ui.data.PagesTemplate.Options.pageType = type;
             if ($scope.pid > 0)
-                $("#defaultModal .modal-title", parent.document).html('[L:EditFolder]');
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:EditFolder]');
             else
-                $("#defaultModal .modal-title", parent.document).html('[L:AddFolder]');
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:AddFolder]');
             $scope.ui.data.PagesTemplate.Options.includeInMenu = true;
         }
         setTimeout(function () {

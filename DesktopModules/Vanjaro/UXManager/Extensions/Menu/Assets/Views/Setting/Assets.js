@@ -67,11 +67,11 @@
     $scope.ChangeAssetMode = function () {
         $scope.ui.data.AssetType.Value = !$scope.ui.data.AssetType.Value;
         if ($scope.ui.data.AssetType.Value) {
-            $("#defaultModal .modal-title", parent.document).html('[L:SiteAssetsTitle]');
+            $(".uxmanager-modal .modal-title", parent.document).html('[L:SiteAssetsTitle]');
             $('.global').attr('data-original-title', '[L:GlobalAssetsTitle]');
         }
         else {
-            $("#defaultModal .modal-title", parent.document).html('[L:GlobalAssetsTitle]');
+            $(".uxmanager-modal .modal-title", parent.document).html('[L:GlobalAssetsTitle]');
             $('.global').attr('data-original-title', '[L:SiteAssetsTitle]');
         }
     };
