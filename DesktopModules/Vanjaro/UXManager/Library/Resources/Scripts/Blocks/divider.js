@@ -99,7 +99,7 @@
 						name: "color",
 						type: 'custom_color',
 						cssproperties: [
-							{ name: "border-top-color" }
+							{ name: "border-color" }
 						],
 						options: [ 
                             { id: 'primary', color: 'bg-primary', name: 'Primary', class: 'border-primary' },

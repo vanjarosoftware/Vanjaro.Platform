@@ -81,6 +81,7 @@
 			},
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				droppable: false,
+				classes: ['btn', 'btn-primary'],
 				resizable: {
 					tl: 0, // Top left
 					tc: 0, // Top center
@@ -191,19 +192,13 @@
 				]
 			}),
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('btn')) {
-						return { type: 'button' };
-					}
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('btn')) {
+					return { type: 'button' };
 				}
-			}),
-		view: defaultView.extend({
-			onRender() {
-				var hasClass = this.model.getClasses().find(v => v == 'btn-primary')
-				if (typeof hasClass == 'undefined')
-					this.model.addClass('btn-primary');
-			},
-		})
+			}
+		}),
+		view: defaultView
 	});
 
 	const textType = domc.getType('text');
@@ -221,14 +216,13 @@
 				hoverable: false,
 				traits: [],
 			}),
-		},
-			{
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('button-text')) {
-						return { type: 'button-text' };
-					}
+		}, {
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('button-text')) {
+					return { type: 'button-text' };
 				}
-			}),
+			}
+		}),
 		view: textView
 	});
 }
