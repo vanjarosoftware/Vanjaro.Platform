@@ -103,6 +103,16 @@
                 </div>
             </div>
         }
+
+        
+        <ul>
+            @foreach (var auth in Model.OAuthClients)
+            {
+                <li><a href="@auth.Client.GetAuthorizationUrl()">@auth.State</a></li>
+            }
+        </ul>
+        
+
     </div>
 </div>
 

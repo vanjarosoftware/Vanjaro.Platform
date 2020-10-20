@@ -10,10 +10,12 @@ using DotNetNuke.Services.Authentication;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.UserRequest;
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Web;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Data.Entities;
+using Vanjaro.Core.Services.Authentication.OAuth;
 
 namespace Vanjaro.Core
 {
@@ -145,6 +147,49 @@ namespace Vanjaro.Core
                 public int ModuleID { get; set; }
                 public string PaneName { get; set; }
                 public bool IsDeleted { get; set; }
+            }
+
+            public static List<IOAuthClient> GetOAuthClients()
+            {
+                return new List<IOAuthClient>(){ new Facebook(), new Google() };
+            }
+        }
+
+        public class Facebook : IOAuthClient
+        {
+            public Facebook()
+            {
+                Client = new OAuthClient(this, State, "test", "test", "https://graph.facebook.com/oauth/authorize", "https://graph.facebook.com/oauth/access_token", "https://graph.facebook.com/me?fields=id,name,email");
+            }
+            public bool Enabled => true;
+
+            public string State => "vanjaro.facebook";
+
+            public OAuthClient Client { get; set; }
+
+            public OAuthUser GetUser(string response)
+            {
+                return Json.Deserialize<OAuthUser>(response);
+            }
+        }
+
+        public class Google : IOAuthClient
+        {
+            public Google()
+            {
+                Client = new OAuthClient(this, State, "test", "test", "https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", "https://www.googleapis.com/oauth2/v1/userinfo");
+
+                Client.Scope = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";
+            }
+            public bool Enabled => true;
+
+            public string State => "vanjaro.google";
+
+            public OAuthClient Client { get; set; }
+
+            public OAuthUser GetUser(string response)
+            {
+                return Json.Deserialize<OAuthUser>(response);
             }
         }
     }

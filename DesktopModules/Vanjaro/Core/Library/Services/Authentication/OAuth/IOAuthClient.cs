@@ -5,7 +5,12 @@ using System.Web;
 
 namespace Vanjaro.Core.Services.Authentication.OAuth
 {
-    public class OAuthClient
+    public interface IOAuthClient
     {
+        bool Enabled { get; }
+        string State { get; }
+
+        OAuthUser GetUser(string response);
+        OAuthClient Client { get; set; }
     }
 }
