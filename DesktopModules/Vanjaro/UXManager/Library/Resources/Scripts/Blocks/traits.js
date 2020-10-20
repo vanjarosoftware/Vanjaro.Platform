@@ -103,6 +103,9 @@ export default (editor, config = {}) => {
 				});;
 			}
 			else {
+				component.removeStyle("color");
+				component.removeStyle("border-color");
+				component.removeStyle("background-color");
 				$(mainComponent.getTrait('styles').el).find('label').css({
 					"background-color": "",
 					"border-color": "",
