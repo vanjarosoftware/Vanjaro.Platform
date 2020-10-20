@@ -1818,7 +1818,8 @@ $(document).ready(function () {
                                     var guid = $(event.event.currentTarget).attr('guid');
                                     var url = CurrentExtTabUrl + "&guid=" + guid;
                                     var width = 500;
-                                    if (typeof $(event.event.currentTarget).attr('width') != 'undefined' && $(event.event.currentTarget).attr('width') != null) {
+                                    var currentTargetWidth = $(event.event.currentTarget).attr('width');
+                                    if (typeof currentTargetWidth != 'undefined' && currentTargetWidth != null && currentTargetWidth != 'undefined') {
                                         width = parseInt($(event.event.currentTarget).attr('width'));
                                     }
                                     OpenPopUp(null, width, 'right', '', url);
