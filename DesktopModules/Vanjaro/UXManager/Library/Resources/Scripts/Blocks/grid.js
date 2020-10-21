@@ -406,10 +406,72 @@ export default (editor, config = {}) => {
 				this.listenTo(this.model, 'active', this.ShowGrid);
 			},
 			ShowGrid() {
-				var $html = `<div class="select-layout"><div class="toggle-wrapper" id="width"><input type="radio" checked="checked" onclick="$('#' + $(this).attr('id').replace('m', '')).trigger('click')" name="mwidth" id="mfixed" value="mFixed"><label for="mfixed">Fixed</label><input type="radio" onclick="$('#' + $(this).attr('id').replace('m', '')).trigger('click')" name="mwidth" id="mfluid" value="mFluid"><label for="mfluid">Fluid</label></div>	<div class="text-center layout-header">Equal Widths</div>	<div class="container-fluid pt-3 pb-3">		<div class="row text-center">			<div class="col-sm-2"> 				<a onclick="SingleClick([{'size': '12'}])" ondblclick="DoubleClick([{'size': '12'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-12.png">				    <h5>1 col</h5>                </a>			</div>			<div class="col-sm-2 active">				<a onclick="SingleClick([{'size': '6'}, {'size': '6'}])" ondblclick="DoubleClick([{'size': '6'}, {'size': '6'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-6.png">				    <h5>2 col</h5>                </a>			</div>			<div class="col-sm-2">				<a onclick="SingleClick([{'size': '4'}, {'size': '4'}, {'size': '4'}])" ondblclick="DoubleClick([{'size': '4'}, {'size': '4'}, {'size': '4'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-4.png">				    <h5>3 col</h5>                </a>			</div>			<div class="col-sm-2">				<a onclick="SingleClick([{'size': '3'}, {'size': '3'}, {'size': '3'}, {'size': '3'}])" ondblclick="DoubleClick([{'size': '3'}, {'size': '3'}, {'size': '3'}, {'size': '3'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-3.png">				    <h5>4 col</h5>                </a>			</div>			<div class="col-sm-2">				<a onclick="SingleClick([{'size': '2'}, {'size': '2'}, {'size': '2'}, {'size': '2'}, {'size': '2'}, {'size': '2'}])" ondblclick="DoubleClick([{'size': '2'}, {'size': '2'}, {'size': '2'}, {'size': '2'}, {'size': '2'}, {'size': '2'}])"><img style="width: 42px;height: 42px;" class="img-responsive" src="`+ VjDefaultPath + `col-2.png">				    <h5>6 col</h5>                </a>			</div>		</div>	</div>	<div class="text-center layout-header">Sidebars</div>	<div class="container-fluid pt-3 pb-3">		<div class="row text-center">			<div class="col-sm-2">				<a onclick="SingleClick([{'size': '3'}, {'size': '9'}])" ondblclick="DoubleClick([{'size': '3'}, {'size': '9'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-3.9.png">				    <h5>33% + 67%</h5>                </a>    			</div>			<div class="col-sm-2">				<a onclick="SingleClick([{'size': '4'}, {'size': '8'}])" ondblclick="DoubleClick([{'size': '4'}, {'size': '8'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-4.8.png">				    <h5>25% + 75%</h5>                </a>			</div>			<div class="col-sm-2">				<a onclick="SingleClick([{'size': '9'}, {'size': '3'}])" ondblclick="DoubleClick([{'size': '9'}, {'size': '3'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-9.3.png">				    <h5>67% + 33%</h5>                </a>			</div>			<div class="col-sm-2">				<a onclick="SingleClick([{'size': '8'}, {'size': '4'}])" ondblclick="DoubleClick([{'size': '8'}, {'size': '4'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-8.4.png">				    <h5>75% + 25%</h5>                </a>			</div>			<div class="col-sm-2">				<a onclick="SingleClick([{'size': '3'}, {'size': '6'}, {'size': '3'}])" ondblclick="DoubleClick([{'size': '3'}, {'size': '6'}, {'size': '3'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-3.6.3.png">				    <h5>25% x2 + 50%</h5>                </a>    			</div>		</div>	</div></div>`;
+				var $html = `<div class="select-layout">
+<div class="toggle-wrapper" id="width"><input type="radio" checked="checked" onclick="$('#' + $(this).attr('id').replace('m', '')).trigger('click')" name="mwidth" id="mfixed" value="mFixed"><label for="mfixed">Fixed</label><input type="radio" onclick="$('#' + $(this).attr('id').replace('m', '')).trigger('click')" name="mwidth" id="mfluid" value="mFluid"><label for="mfluid">Fluid</label></div>
+	<div class="text-center layout-header">Equal Widths</div>
+	<div class="container-fluid pt-3 pb-3">
+		<div class="row text-center">
+			<div class="col-sm-2"> 
+				<a onclick="SingleClick([{'size': '12'}])" ondblclick="DoubleClick([{'size': '12'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-12.png">
+				    <h5>1 col</h5>
+                </a>
+			</div>
+			<div class="col-sm-2 active">
+				<a onclick="SingleClick([{'size': '6'}, {'size': '6'}])" ondblclick="DoubleClick([{'size': '6'}, {'size': '6'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-6.png">
+				    <h5>2 col</h5>
+                </a>
+			</div>
+			<div class="col-sm-2">
+				<a onclick="SingleClick([{'size': '4'}, {'size': '4'}, {'size': '4'}])" ondblclick="DoubleClick([{'size': '4'}, {'size': '4'}, {'size': '4'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-4.png">
+				    <h5>3 col</h5>
+                </a>
+			</div>
+			<div class="col-sm-2">
+				<a onclick="SingleClick([{'size': '3'}, {'size': '3'}, {'size': '3'}, {'size': '3'}])" ondblclick="DoubleClick([{'size': '3'}, {'size': '3'}, {'size': '3'}, {'size': '3'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-3.png">
+				    <h5>4 col</h5>
+                </a>
+			</div>
+			<div class="col-sm-2">
+				<a onclick="SingleClick([{'size': '2'}, {'size': '2'}, {'size': '2'}, {'size': '2'}, {'size': '2'}, {'size': '2'}])" ondblclick="DoubleClick([{'size': '2'}, {'size': '2'}, {'size': '2'}, {'size': '2'}, {'size': '2'}, {'size': '2'}])"><img style="width: 42px;height: 42px;" class="img-responsive" src="`+ VjDefaultPath + `col-2.png">
+				    <h5>6 col</h5>
+                </a>
+			</div>
+		</div>
+	</div>
+	<div class="text-center layout-header">Sidebars</div>
+	<div class="container-fluid pt-3 pb-3">
+		<div class="row text-center">
+			<div class="col-sm-2">
+				<a onclick="SingleClick([{'size': '3'}, {'size': '9'}])" ondblclick="DoubleClick([{'size': '3'}, {'size': '9'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-3.9.png">
+				    <h5>33% + 67%</h5>
+                </a>    
+			</div>
+			<div class="col-sm-2">
+				<a onclick="SingleClick([{'size': '4'}, {'size': '8'}])" ondblclick="DoubleClick([{'size': '4'}, {'size': '8'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-4.8.png">
+				    <h5>25% + 75%</h5>
+                </a>
+			</div>
+			<div class="col-sm-2">
+				<a onclick="SingleClick([{'size': '9'}, {'size': '3'}])" ondblclick="DoubleClick([{'size': '9'}, {'size': '3'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-9.3.png">
+				    <h5>67% + 33%</h5>
+                </a>
+			</div>
+			<div class="col-sm-2">
+				<a onclick="SingleClick([{'size': '8'}, {'size': '4'}])" ondblclick="DoubleClick([{'size': '8'}, {'size': '4'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-8.4.png">
+				    <h5>75% + 25%</h5>
+                </a>
+			</div>
+			<div class="col-sm-2">
+				<a onclick="SingleClick([{'size': '3'}, {'size': '6'}, {'size': '3'}])" ondblclick="DoubleClick([{'size': '3'}, {'size': '6'}, {'size': '3'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-3.6.3.png">
+				    <h5>25% x2 + 50%</h5>
+                </a>    
+			</div>
+		</div>
+	</div>
+</div>`;
 				OpenPopUp(null, 500, 'right', 'Grid', '', '', true);
 
-				var $modalbody = $('#defaultModal .modal-body');
+				var $modalbody = $('.uxmanager-modal .modal-body');
 
 				$modalbody.find('.loader').hide();
 

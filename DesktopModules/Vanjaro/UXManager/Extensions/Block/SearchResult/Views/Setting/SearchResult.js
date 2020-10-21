@@ -2,7 +2,7 @@
     var common = CommonSvc.getData($scope);
     $scope.Loaded = false;
     $scope.onInit = function () {
-        $("#defaultModal .modal-title", parent.document).html('[L:SettingTitle]');
+        $(".uxmanager-modal .modal-title", parent.document).html('[L:SettingTitle]');
         if ($scope.ui.data.IsAdmin.Value)
             $scope.ui.data.IsAdmin.Value = $scope.ui.data.IsAdmin.Value == 'true' ? true : false;
         $scope.CurrentSearchresult = window.parent.VjEditor.getSelected();

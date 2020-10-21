@@ -6,6 +6,7 @@ using DotNetNuke.Framework;
 using DotNetNuke.Services.Localization;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using Vanjaro.Common.Engines.TokenEngine;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
@@ -15,6 +16,7 @@ using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Extensions.Block.Login.Factories;
 using Vanjaro.UXManager.Library.Entities.Interface;
+using static Vanjaro.UXManager.Extensions.Block.Login.Managers;
 using Localization = DotNetNuke.Services.Localization.Localization;
 
 namespace Vanjaro.UXManager.Extensions.Block.Login
@@ -43,6 +45,8 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
         public ThemeTemplateResponse Render(Dictionary<string, string> Attributes)
         {
+            LoginManager.OAuthUserLogin();
+
             PortalSettings ps = PortalController.Instance.GetCurrentSettings() as PortalSettings;
             ServicesFramework.Instance.RequestAjaxScriptSupport();
             ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
@@ -55,6 +59,8 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
             return response;
         }
+
+
 
         public AppInformation App => AppFactory.GetAppInformation();
 
@@ -134,9 +140,12 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                 };
 
                 login.RegisterUrl = Globals.RegisterURL(HttpUtility.UrlEncode(ServiceProvider.NavigationManager.NavigateURL()), Null.NullString);
+                
                 IDictionary<string, object> Objects = new System.Dynamic.ExpandoObject() as IDictionary<string, object>;
                 Objects.Add("Login", login);
                 Objects.Add("UseEmailAsUserName", (PortalController.Instance.GetCurrentSettings() as PortalSettings).Registration.UseEmailAsUserName);
+                Objects.Add("OAuthClients", Core.Managers.LoginManager.GetOAuthClients().Where(c => c.Enabled));
+
                 string Template = RazorEngineManager.RenderTemplate(ExtensionInfo.GUID, BlockPath, Attributes["data-block-template"], Objects);
                 Template = new DNNLocalizationEngine(null, ResouceFilePath, false).Parse(Template);
                 return Template;

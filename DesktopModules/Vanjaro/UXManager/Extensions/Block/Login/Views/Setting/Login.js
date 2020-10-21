@@ -4,7 +4,7 @@
     $scope.Loaded = false;
     //Init Scope
     $scope.onInit = function () {
-        $("#defaultModal .modal-title", parent.document).html('[L:SettingTitle]');
+        $(".uxmanager-modal .modal-title", parent.document).html('[L:SettingTitle]');
         $scope.CurrentLogin = window.parent.VjEditor.getSelected();
         if ($scope.CurrentLogin != undefined) {
             $scope.ui.data.Global.Value = $scope.CurrentLogin.attributes.attributes["data-block-global"] == "false" ? false : true;
