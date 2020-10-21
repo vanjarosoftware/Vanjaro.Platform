@@ -70,9 +70,9 @@
 	$scope.SaveImage = function () {
 		if ($scope.PictureId != undefined) {
 
-			$(window.parent.document.body).find('#defaultModal .modal-dialog').find('iframe').css("pointer-events", "none");
-			if (!$(window.parent.document.body).find('#defaultModal .modal-dialog').find('.modal-backdrop').length)
-				$(window.parent.document.body).find('#defaultModal .modal-dialog').append('<div class="modal-backdrop fade show"></div>');
+			$(window.parent.document.body).find('.uxmanager-modal .modal-dialog').find('iframe').css("pointer-events", "none");
+			if (!$(window.parent.document.body).find('.uxmanager-modal .modal-dialog').find('.modal-backdrop').length)
+				$(window.parent.document.body).find('.uxmanager-modal .modal-dialog').append('<div class="modal-backdrop fade show"></div>');
 
 			common.webApi.post('Image/Save', 'path=' + window.parent.document.vj_image_target.attributes["src"] + '&id=' + $scope.PictureId).success(function (data) {
 				if (data != "failed") {

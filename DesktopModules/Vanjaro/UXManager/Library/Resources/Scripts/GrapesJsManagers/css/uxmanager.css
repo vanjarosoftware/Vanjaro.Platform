@@ -1558,7 +1558,7 @@ html.responsive {
     background-color: transparent;
     border: 0;
     box-shadow: none;
-    padding: 0;
+    /*padding: 0;*/
     width: 100%;
 }
 
@@ -3224,6 +3224,10 @@ div#gjs-sm-top, div#gjs-sm-right, div#gjs-sm-left, div#gjs-sm-bottom {
     -o-animation: driftBlock 4s linear infinite;
     animation: driftBlock 4s linear infinite;
 }
+
+    .gjs-block.floating:before {
+        font-size: 125px;
+    }
 
 .gjs-frame-wrapper {
     position: relative;

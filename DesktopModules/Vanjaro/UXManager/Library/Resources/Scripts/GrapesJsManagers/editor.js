@@ -32,7 +32,7 @@ $(document).ready(function () {
 
         window.addEventListener('message', event => {
 
-            if (TemplateLibraryURL.startsWith(event.origin)) {
+            if (TemplateLibraryURL.startsWith(event.origin) && typeof event.data != 'undefined') {
 
                 var templatePath = '';
 
@@ -53,10 +53,9 @@ $(document).ready(function () {
                     },
                     success: function (data) {
 
-                        if (data.html != '' && data.Name != '') {
+                        if (data.html != '') {
 
                             var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
-                                label: data.Name,
                                 content: data.Html + '<style>' + data.Css + '</style>',
                                 attributes: {
                                     class: 'fas fa-th-large floating',
@@ -1075,7 +1074,7 @@ $(document).ready(function () {
                                             else
                                                 framesrc = framesrc + "&mid=" + response + "&icp=true";
                                             model.view.$el[0].innerHTML = '<div data-gjs-type="module" draggable="true" vjmod="true"><div id="dnn_vj_' + response + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div></div>';
-                                            bmodel.attributes.content = '<div dmid="' + parseInt(model.attributes.attributes.dmid) + '" mid="' + response + '"><div vjmod="true"><app id="' + response + '"></app></div></div>';
+                                            bmodel.attributes.content = '<div dmid="' + parseInt(model.attributes.attributes.dmid) + '" mid="' + response + '" fname="' + model.attributes.attributes.fname + '"><div vjmod="true"><app id="' + response + '"></app></div></div>';
                                             model.attributes.components.models[0].attributes.content = '<app id="' + response + '"></app>';
                                             model.attributes.name = VjLocalized.PrefixAppName + bmodel.id;
                                             VjEditor.LayerManager.render();
@@ -1512,17 +1511,7 @@ $(document).ready(function () {
                                         model.removeClass(classes)
                                     }
                                 }
-
-                                if (property == "animation-type" && typeof model.getStyle()['animation-type'] != 'undefined') {
-                                    var animationType = model.getStyle()['animation-type'];
-                                    model.addAttributes({ 'data-animate': animationType });
-                                }
-
-                                if (property == "animation-speed" && typeof model.getStyle()['animation-speed'] != 'undefined') {
-                                    var animationSpeed = model.getStyle()['animation-speed'];
-                                    model.addAttributes({ 'data-speed': animationSpeed });
-                                }
-
+								
                                 /*Width*/
                                 if (property == "width" && typeof model.getStyle()['width'] != 'undefined' && VjEditor.StyleManager.getProperty(LayoutDimensions, 'width').length != 0) {
                                     if (model.getStyle()['width'].indexOf('px') > -1) {
@@ -1831,7 +1820,8 @@ $(document).ready(function () {
                                     var guid = $(event.event.currentTarget).attr('guid');
                                     var url = CurrentExtTabUrl + "&guid=" + guid;
                                     var width = 500;
-                                    if (typeof $(event.event.currentTarget).attr('width') != 'undefined' && $(event.event.currentTarget).attr('width') != null) {
+                                    var currentTargetWidth = $(event.event.currentTarget).attr('width');
+                                    if (typeof currentTargetWidth != 'undefined' && currentTargetWidth != null && currentTargetWidth != 'undefined') {
                                         width = parseInt($(event.event.currentTarget).attr('width'));
                                     }
                                     OpenPopUp(null, width, 'right', '', url);
@@ -2079,8 +2069,14 @@ $(document).ready(function () {
 
 
                             VjEditor.on('block:drag:start', function (model) {
+
                                 VjEditor.runCommand('core:component-outline');
 
+                                if (typeof model != "undefined") {
+
+                                    if (model.attributes.id == 'LibraryBlock')
+                                        $('#LibraryBlock').css('opacity', '0.01');
+                                }
                             });
 
                             VjEditor.on('change:changesCount', e => {
@@ -2288,7 +2284,7 @@ $(document).ready(function () {
             $('#dnn_ContentPane').removeClass("sidebar-open").addClass('sidebar-close');
             $('.sidebar').animate({ "left": "-300px" }, "fast").addClass('settingclosebtn');
             $('.modal-toggle').hide();
-            $('#defaultModal').modal('hide');
+            $('.uxmanager-modal').modal('hide');
             if (VjLayerpanel != null)
                 VjLayerpanel.close();
             if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
@@ -2361,7 +2357,7 @@ $(document).ready(function () {
         else if ($this.hasClass('librarytab')) {
             $('.blockstab').removeClass('active');
             $(this).parent().addClass('active');
-            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%');
+            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%', true, false, null, false);
         }
         else {
             $('.blockstab').removeClass('active');
@@ -2499,7 +2495,10 @@ global.RenderApp = function (iframe) {
     $(iframe.contentWindow.document.body).append('<style>.actionMenu {display: none !important;}</style>');
     VjEditor.select();
     model.initToolbar(true);
-    VjEditor.select(model);
+    setTimeout(function () {
+        VjEditor.select(model);
+    }, 0);
+
     iframe.contentWindow.document.body.addEventListener("DOMSubtreeModified", function () {
         iframe.style.height = this.offsetHeight + 'px';
     });

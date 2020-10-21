@@ -29,6 +29,7 @@ using Vanjaro.Common.Manager;
 using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Entities.Menu;
+using static Vanjaro.Core.Factories;
 using static Vanjaro.Core.Managers;
 using static Vanjaro.Skin.Managers;
 
@@ -123,8 +124,11 @@ namespace Vanjaro.Skin
         protected void Page_Load(object sender, EventArgs e)
         {
             JavaScript.RequestRegistration(CommonJs.jQuery, null, SpecificVersion.Latest);
+            
+            InjectThemeJS();
 
             PageManager.Init(Page, PortalSettings);
+
             if (string.IsNullOrEmpty(Request.QueryString["mid"]) || (!string.IsNullOrEmpty(Request.QueryString["icp"]) && bool.Parse(Request.QueryString["icp"]) && (!string.IsNullOrEmpty(Request.QueryString["mid"]) && Request.QueryString["mid"] != "0")))
             {
                 if (page != null && page.StateID.HasValue)
@@ -139,30 +143,8 @@ namespace Vanjaro.Skin
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/js/skin.js"), 2, "DnnFormBottomProvider");
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/DesktopModules/Vanjaro/Common/Frameworks/Bootstrap/4.5.0/js/bootstrap.min.js"), 1, "DnnFormBottomProvider");
 
-                string DirectoryPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/js/");
-                if ((TabPermissionController.HasTabPermission("EDIT") || (page != null && page.StateID.HasValue && HasReviewPermission)) && Directory.Exists(DirectoryPath))
-                {
-                    string script = "";
-
-                    foreach (string file in Directory.GetFiles(DirectoryPath))
-                    {
-                        string FileName = Path.GetFileName(file);
-                        if (!string.IsNullOrEmpty(FileName))
-                        {
-                            if (FileName.EndsWith(".js"))
-                                script += File.ReadAllText(DirectoryPath + "/" + FileName);
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(script.Trim()))
-                        WebForms.RegisterStartupScript(Page, "ThemeBlocks", "LoadThemeBlocks = function (grapesjs) { grapesjs.plugins.add('ThemeBlocks', (editor, opts = {}) => { " + script + "}); };", true);
-                }
-                else
-                {
-                    string ThemeJS = "~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/theme.js";
-                    if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(ThemeJS)))
-                        ClientResourceManager.RegisterScript(Page, Page.ResolveUrl(ThemeJS));
-                }
+                if ((TabPermissionController.HasTabPermission("EDIT") || (page != null && page.StateID.HasValue && HasReviewPermission)))
+                    InjectThemeScripts();
             }
             else
             {
@@ -170,6 +152,37 @@ namespace Vanjaro.Skin
             }
 
             ResetModulePanes();
+        }
+
+        private void InjectThemeJS()
+        {
+            if (Core.Managers.ThemeManager.CurrentTheme.HasThemeJS())
+                ClientResourceManager.RegisterScript(Page, Page.ResolveUrl(Core.Managers.ThemeManager.CurrentTheme.ThemeJS));
+        }
+
+        private void InjectThemeScripts()
+        {
+            string ScriptsPath = System.Web.Hosting.HostingEnvironment.MapPath(Core.Managers.ThemeManager.CurrentTheme.ScriptsPath);
+
+            string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, "ThemeScripts");
+            string ThemeScripts = CacheFactory.Get(CacheKey);
+
+            if (Directory.Exists(ScriptsPath) && string.IsNullOrEmpty(ThemeScripts))
+            {
+                foreach (string file in Directory.GetFiles(ScriptsPath))
+                {
+                    string FileName = Path.GetFileName(file);
+                    if (!string.IsNullOrEmpty(FileName))
+                    {
+                        if (FileName.EndsWith(".js"))
+                            ThemeScripts += File.ReadAllText(ScriptsPath + "/" + FileName);
+                    }
+                }
+                CacheFactory.Set(CacheKey, ThemeScripts);
+            }
+
+            if (!string.IsNullOrEmpty(ThemeScripts))
+                WebForms.RegisterStartupScript(Page, "ThemeBlocks", "LoadThemeBlocks = function (grapesjs) { grapesjs.plugins.add('ThemeBlocks', (editor, opts = {}) => { " + ThemeScripts + "}); };", true);
         }
 
         private void InjectViewport()
@@ -399,7 +412,7 @@ namespace Vanjaro.Skin
             authLoginControl.ID = Path.GetFileNameWithoutExtension(authSystem.LoginControlSrc) + "_" + authSystem.AuthenticationType;
             authLoginControl.LocalResourceFile = authLoginControl.TemplateSourceDirectory + "/" + DotNetNuke.Services.Localization.Localization.LocalResourceDirectory + "/" +
                                                  Path.GetFileNameWithoutExtension(authSystem.LoginControlSrc);
-            
+
         }
 
         private void ResetModulePanes()
@@ -838,7 +851,7 @@ namespace Vanjaro.Skin
             {
                 string script = @"$(document).ready(function () {                               
                                $('.dnnActions').click(function () {
-                                   $(window.parent.document.body).find('#defaultModalnew [data-dismiss=" + @"modal" + @"]').click();
+                                   $(window.parent.document.body).find('.uxmanager-modal [data-dismiss=" + @"modal" + @"]').click();
                                });
                                setTimeout(function () {$('[href=""#msSpecificSettings""]').click();},100);
                           });";

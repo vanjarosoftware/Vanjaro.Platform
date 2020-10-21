@@ -1,10 +1,20 @@
 ﻿<div ng-controller="setting_setting" class="vj-ux-manager">
     <uiengine provider="AngularBootstrap" identifier="setting_setting" class="uiengine-wrapper scrollbar">
         <uilayout name="default">
-            <uielement name="Server" control="textbox"></uielement>
-            <uielement name="Username" control="textbox"></uielement>
-            <uielement name="Password" control="password"></uielement>
-            <uielement name="EnableSSL" attr-class="toggle_right" ngmodel="ui.data.EnableSSL.Options" control="checkboxtoggle"></uielement>
+            <uielement name="SMTPmode" control="checkboxtoggle" label="false" attr-class="toggle_right btn_integration" container-attr-ng-show="ui.data.IsSuperUser.Options" ngmodel="ui.data.SMTPmode.Options"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ui.data.SMTPmode.Options">
+            <uielement name="Host_Server" control="textbox"></uielement>
+            <uielement name="Host_Username" control="textbox"></uielement>
+            <uielement name="Host_Password" control="password"></uielement>
+            <uielement name="Host_Email" control="textbox"></uielement>
+            <uielement name="Host_EnableSSL" attr-class="toggle_right" ngmodel="ui.data.Host_EnableSSL.Options" control="checkboxtoggle"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="!ui.data.SMTPmode.Options">
+            <uielement name="Portal_Server" control="textbox"></uielement>
+            <uielement name="Portal_Username" control="textbox"></uielement>
+            <uielement name="Portal_Password" control="password"></uielement>
+            <uielement name="Portal_EnableSSL" attr-class="toggle_right" ngmodel="ui.data.Portal_EnableSSL.Options" control="checkboxtoggle"></uielement>
         </uilayout>
         <uilayout name="default">
             <uitemplate>

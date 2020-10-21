@@ -67,11 +67,11 @@
     $scope.ChangeAssetMode = function () {
         $scope.ui.data.AssetType.Value = !$scope.ui.data.AssetType.Value;
         if ($scope.ui.data.AssetType.Value) {
-            $("#defaultModal .modal-title", parent.document).html('[L:SiteAssetsTitle]');
+            $(".uxmanager-modal .modal-title", parent.document).html('[L:SiteAssetsTitle]');
             $('.global').attr('data-original-title', '[L:GlobalAssetsTitle]');
         }
         else {
-            $("#defaultModal .modal-title", parent.document).html('[L:GlobalAssetsTitle]');
+            $(".uxmanager-modal .modal-title", parent.document).html('[L:GlobalAssetsTitle]');
             $('.global').attr('data-original-title', '[L:SiteAssetsTitle]');
         }
     };
@@ -183,7 +183,7 @@
         //$("uiengine #permDiv").on("hidden.bs.modal", function (e) {
         //    $('uiengine .PermissionFrame').attr('src', 'about:blank');
         //});
-        window.parent.OpenPopUp(null, 700, 'centre', 'Permissions', window.location.href + '#/permission/' + folder.Value, 850, '', true);
+        window.parent.OpenPopUp(null, 700, 'centre', 'Permissions', window.location.href + '#/permission/' + folder.Value, 850, '');
     };
 
     $scope.RenameFolder = function (folderid, foldername) {

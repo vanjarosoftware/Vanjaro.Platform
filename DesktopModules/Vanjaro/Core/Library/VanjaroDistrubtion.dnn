@@ -30,6 +30,11 @@
 							<name>Core.01.00.01.SqlDataProvider</name>
 							<version>01.00.01</version>
 						</script>
+            <script type="Install">
+              <path>Install</path>
+              <name>Core.01.00.02.SqlDataProvider</name>
+              <version>01.00.02</version>
+            </script>
 						<script type="UnInstall">
 							<path>Install</path>
 							<name>Uninstall.Core.SqlDataProvider</name>

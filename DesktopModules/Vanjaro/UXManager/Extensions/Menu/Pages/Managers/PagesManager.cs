@@ -1231,8 +1231,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     ModuleInfo minfo = ModuleController.Instance.GetModule(ModuleId, PageId, true);
                     if (minfo != null && !page.Content.Contains("<app id=\"" + ModuleId + "\"></app>"))
                     {
-
-                        string Content = page.Content + "<div dmid=\"" + minfo.DesktopModuleID + "\" mid=\"" + ModuleId + "\" uid=\"0\"><div vjmod=\"true\"><app id=\"" + ModuleId + "\"></app></div></div>";
+                        DesktopModuleInfo desktopModuleInfo = DesktopModuleController.GetDesktopModule(minfo.DesktopModuleID, minfo.PortalID);
+                        string Content = page.Content + "<div dmid=\"" + minfo.DesktopModuleID + "\" mid=\"" + ModuleId + "\" uid=\"0\" fname=\"" + desktopModuleInfo.FriendlyName + "\"><div vjmod=\"true\"><app id=\"" + ModuleId + "\"></app></div></div>";
                         Dictionary<string, object> LayoutData = new Dictionary<string, object>
                         {
                             ["IsPublished"] = false,

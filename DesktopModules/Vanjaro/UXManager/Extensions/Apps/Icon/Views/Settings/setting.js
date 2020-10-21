@@ -35,7 +35,7 @@
         var compSelected = window.parent.VjEditor.getSelected();
 
         if (location.href.indexOf('ignoregj') > 0)
-            $(window.parent.document.body).find('#defaultModal #UXpagerender').contents().find('svg').replaceWith(option.SVG);
+            $(window.parent.document.body).find('.uxmanager-modal #UXpagerender').contents().find('svg').replaceWith(option.SVG);
         else {
             var style = compSelected.components().models[0].getStyle();
             compSelected.components(option.SVG);
@@ -46,7 +46,7 @@
 
     $scope.doubleclick = function () {
         if (location.href.indexOf('ignoregj') > 0)
-            $(window.parent.document.body).find('#defaultModalnew [data-dismiss="modal"]').click();
+            $(window.parent.document.body).find('.uxmanager-modal [data-dismiss="modal"]').click();
         else
             $(window.parent.document.body).find('[data-dismiss="modal"]').click();
     };

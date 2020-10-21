@@ -172,12 +172,8 @@
     display: none;
 }
 
-.uxmanager-modal .modal-dialog.center .modal-title {
+.uxmanager-modal .modal-dialog .modal-title.center {
     margin: 0 auto;
-}
-
-.uxmanager-modal .modal-dialog.center .close {
-    margin-left: 0;
 }
 
 video {
@@ -530,10 +526,6 @@ Theme.css end
 .image-box,
 .button-box {
     display: inline-block;
-}
-
-[data-gjs-type="text"] .link {
-    padding: 5px;
 }
 
 .vj-divider {

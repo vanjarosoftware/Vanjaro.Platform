@@ -1,4 +1,6 @@
-﻿using DotNetNuke.Entities.Portals;
+﻿using Dnn.PersonaBar.Prompt.Components.Commands.Host;
+using DotNetNuke.Entities.Portals;
+using DotNetNuke.Web.Client.ClientResourceManagement;
 using LibSassHost;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -10,6 +12,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Web;
+using System.Web.UI;
+using Vanjaro.Common.ASPNET;
 using Vanjaro.Core.Components;
 using Vanjaro.Core.Entities.Interface;
 using Vanjaro.Core.Entities.Theme;
@@ -25,7 +29,9 @@ namespace Vanjaro.Core
             {
                 get
                 {
-                    return GetCurrent(PortalSettings.Current.PortalId);
+                    int PortalID = PortalSettings.Current != null ? PortalSettings.Current.PortalId : -1;
+
+                    return GetCurrent(PortalID);
                 }
             }
 
@@ -34,7 +40,6 @@ namespace Vanjaro.Core
                 Theme theme = new Theme(PortalID);
                 return theme;
             }
-
 
             public static List<string> GetControlTypes()
             {
@@ -101,7 +106,7 @@ namespace Vanjaro.Core
             public static void ProcessScss(int PortalID)
             {
                 StringBuilder sb = new StringBuilder();
-                string ThemeName = CurrentTheme.Name;
+                string ThemeName = GetCurrent(PortalID).Name;
                 string BootstrapPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/bootstrap.scss");
                 string BeforePath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Before.scss");
                 string AfterPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/After.scss");
