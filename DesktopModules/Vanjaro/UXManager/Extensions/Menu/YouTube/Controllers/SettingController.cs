@@ -19,7 +19,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
             string Site_ApiKey = PortalController.GetEncryptedString("Vanjaro.Integration.YouTube", portalId, Config.GetDecryptionkey());
-            string Host_ApiKey = HostController.Instance.GetEncryptedString("Vanjaro.Integration.YouTube", Config.GetDecryptionkey());
+            HostController hostController = new HostController();
+            string Host_ApiKey = hostController.GetEncryptedString("Vanjaro.Integration.YouTube", Config.GetDecryptionkey());
 
             Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Options = UserController.Instance.GetCurrentUserInfo().IsSuperUser });
             Settings.Add("ApplyTo", new UIData { Name = "ApplyTo", Options = false });
@@ -37,7 +38,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
             {
                 if (Core.Providers.Youtube.IsValid(Data.Host_ApiKey.ToString()))
                 {
-                    HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.YouTube", Data.Host_ApiKey.ToString(), Config.GetDecryptionkey());
+                    HostController hostController = new HostController();
+                    hostController.UpdateEncryptedString("Vanjaro.Integration.YouTube", Data.Host_ApiKey.ToString(), Config.GetDecryptionkey());
                 }
                 else
                     return false;
@@ -57,8 +59,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
         [HttpPost]
         public string Delete(dynamic Data)
         {
+            HostController hostController = new HostController();
             if (bool.Parse(Data.ToString()))
-                HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.YouTube", string.Empty, Config.GetDecryptionkey());
+                hostController.UpdateEncryptedString("Vanjaro.Integration.YouTube", string.Empty, Config.GetDecryptionkey());
             else
                 PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.YouTube", string.Empty, Config.GetDecryptionkey());
             return string.Empty;

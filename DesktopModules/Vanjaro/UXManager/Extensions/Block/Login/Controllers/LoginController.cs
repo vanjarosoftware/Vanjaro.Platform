@@ -6,6 +6,7 @@ using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Api.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
@@ -51,6 +52,14 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
         public ActionResult UserLogin(UserLogin userLogin)
         {
             ActionResult actionResult = new ActionResult();
+
+            string response = System.Web.HttpContext.Current.Request.Headers["vj-recaptcha"];
+            if (!Core.Services.GoogleReCaptcha.Request(PortalSettings.PortalId, response, HttpContext.Current.Request.Url.Host))
+            {
+                string ResourceFile = "~/DesktopModules/Vanjaro/UXManager/Extensions/Block/Login/Views/Setting/App_LocalResources/Login.resx";
+                actionResult.AddError("recaptcha_error", DotNetNuke.Services.Localization.Localization.GetString("ReCaptcha_Error", ResourceFile));
+                return actionResult;
+            }
 
             dynamic eventArgs = Core.Managers.LoginManager.UserLogin(userLogin);
 

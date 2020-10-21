@@ -135,6 +135,9 @@
   <data name="IsPageAdminAlert.Text" xml:space="preserve">
     <value>&lt;strong&gt;&lt;em class="fa fa-info-circle"&gt;&lt;/em&gt; Info&lt;/strong&gt;: This is a theme block. Only administrators can make changes to Site Settings. You may customize this block only.</value>
   </data>
+  <data name="ReCaptcha_Error.Text" xml:space="preserve">
+    <value>Invalid Captcha Code</value>
+  </data>
   <data name="ResetPassword.OFF" xml:space="preserve">
     <value>No</value>
   </data>

@@ -7,6 +7,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register.Entities
     public class Register
     {
         public bool ShowLabel { get; set; }
+        public bool ShowGoogleReCaptcha { get; set; }
         public bool TermsPrivacy { get; set; }
         public string ButtonAlign { get; set; }
         public string LoginURL => Managers.LoginLinkManager.LoginURL("", false);

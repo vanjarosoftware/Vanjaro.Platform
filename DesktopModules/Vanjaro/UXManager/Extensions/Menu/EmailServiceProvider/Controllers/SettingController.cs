@@ -24,15 +24,16 @@ namespace Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.Controllers
         {
             bool IsSuperUser = UserController.Instance.GetCurrentUserInfo().IsSuperUser;
             string mode = IsSuperUser ? "h" : "p";
+            HostController hostController = new HostController();
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>
             {
                 { "IsSuperUser", new UIData { Name = "IsSuperUser", Options = IsSuperUser } },
                 { "SMTPmode", new UIData { Name = "SMTPmode", Options = IsSuperUser? PortalController.GetPortalSetting("SMTPmode", PortalSettings.PortalId, mode) == mode:false } },
-                { "Host_Server", new UIData { Name = "Host_Server", Value = HostController.Instance.GetString("SMTPServer") } },
-                { "Host_Username", new UIData { Name = "Host_Username", Value = HostController.Instance.GetString("SMTPUsername") } },
-                { "Host_Password", new UIData { Name = "Host_Password", Value = HostController.Instance.GetEncryptedString("SMTPPassword", Config.GetDecryptionkey()) } },
-                { "Host_Email", new UIData { Name = "Host_Email", Value = HostController.Instance.GetString("SMTPEmail",PortalSettings.Email) } },
-                { "Host_EnableSSL", new UIData { Name = "Host_EnableSSL", Options = HostController.Instance.GetBoolean("SMTPEnableSSL", false) } },
+                { "Host_Server", new UIData { Name = "Host_Server", Value = hostController.GetString("SMTPServer") } },
+                { "Host_Username", new UIData { Name = "Host_Username", Value = hostController.GetString("SMTPUsername") } },
+                { "Host_Password", new UIData { Name = "Host_Password", Value = hostController.GetEncryptedString("SMTPPassword", Config.GetDecryptionkey()) } },
+                { "Host_Email", new UIData { Name = "Host_Email", Value = hostController.GetString("SMTPEmail",PortalSettings.Email) } },
+                { "Host_EnableSSL", new UIData { Name = "Host_EnableSSL", Options = hostController.GetBoolean("SMTPEnableSSL", false) } },
                 { "Portal_Server", new UIData { Name = "Portal_Server", Value = PortalController.GetPortalSetting("SMTPServer", PortalSettings.PortalId, string.Empty) } },
                 { "Portal_Username", new UIData { Name = "Portal_Username", Value = PortalController.GetPortalSetting("SMTPUsername", PortalSettings.PortalId, string.Empty) } },
                 { "Portal_Password", new UIData { Name = "Portal_Password", Value = PortalController.GetEncryptedString("SMTPPassword", PortalSettings.PortalId, Config.GetDecryptionkey()) } },
@@ -50,12 +51,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.Controllers
                 if (bool.Parse(Data.SMTPmode.ToString()))
                 {
                     PortalController.UpdatePortalSetting(PortalSettings.PortalId, "SMTPmode", "h");
-                    HostController.Instance.Update("SMTPServer", Data.Host_Server.ToString(), false);
-                    HostController.Instance.Update("SMTPAuthentication", "1", false);
-                    HostController.Instance.Update("SMTPUsername", Data.Host_Username.ToString(), false);
-                    HostController.Instance.Update("SMTPEmail", Data.Host_Email.ToString(), false);
-                    HostController.Instance.UpdateEncryptedString("SMTPPassword", Data.Host_Password.ToString(), Config.GetDecryptionkey());
-                    HostController.Instance.Update("SMTPEnableSSL", bool.Parse(Data.Host_EnableSSL.ToString()) ? "Y" : "N", false);
+                    HostController hostController = new HostController();
+                    hostController.Update("SMTPServer", Data.Host_Server.ToString(), false);
+                    hostController.Update("SMTPAuthentication", "1", false);
+                    hostController.Update("SMTPUsername", Data.Host_Username.ToString(), false);
+                    hostController.Update("SMTPEmail", Data.Host_Email.ToString(), false);
+                    hostController.UpdateEncryptedString("SMTPPassword", Data.Host_Password.ToString(), Config.GetDecryptionkey());
+                    hostController.Update("SMTPEnableSSL", bool.Parse(Data.Host_EnableSSL.ToString()) ? "Y" : "N", false);
                 }
                 else
                 {

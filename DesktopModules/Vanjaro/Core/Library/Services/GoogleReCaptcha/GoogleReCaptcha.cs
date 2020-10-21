@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,10 @@ namespace Vanjaro.Core.Services
     {
         public static bool Request(int PortalId, string ResponseToken,string hostname)
         {
-            string SecretKey = PortalController.GetEncryptedString("Vanjaro.Integration.SecretKey", PortalId, Config.GetDecryptionkey());
+            string SecretKey = PortalController.GetEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SecretKey", PortalId, Config.GetDecryptionkey());
+            HostController hostController = new HostController();
             if (string.IsNullOrEmpty(SecretKey))
-                SecretKey = PortalController.GetEncryptedString("Vanjaro.Integration.SecretKey", PortalId, Config.GetDecryptionkey());
+                SecretKey = hostController.GetEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SecretKey", Config.GetDecryptionkey());
 
             bool result = false;
             if (string.IsNullOrEmpty(SecretKey))

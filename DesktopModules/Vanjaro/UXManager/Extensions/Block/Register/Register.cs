@@ -123,7 +123,8 @@ namespace Vanjaro.UXManager.Extensions.Block.Register
                 {
                     ButtonAlign = Attributes["data-block-buttonalign"],
                     ShowLabel = Convert.ToBoolean(Attributes["data-block-showlabel"]),
-                    TermsPrivacy = Convert.ToBoolean(Attributes["data-block-termsprivacy"])
+                    TermsPrivacy = Convert.ToBoolean(Attributes["data-block-termsprivacy"]),
+                    ShowGoogleReCaptcha = Convert.ToBoolean(Attributes["data-block-showgooglerecaptcha"])
                 };
                 dynObjects.Add("Register", register);
                 dynObjects.Add("RegistrationSettings", RegistrationSettings);

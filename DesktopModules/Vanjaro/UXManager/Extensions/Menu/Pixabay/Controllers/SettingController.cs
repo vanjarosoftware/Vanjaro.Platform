@@ -18,9 +18,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pixabay.Controllers
         internal static List<IUIData> GetData(int portalId, UserInfo userInfo)
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
-            
+            HostController hostController = new HostController();
             string Site_ApiKey = PortalController.GetEncryptedString("Vanjaro.Integration.Pixabay", portalId, Config.GetDecryptionkey());
-            string Host_ApiKey = HostController.Instance.GetEncryptedString("Vanjaro.Integration.Pixabay", Config.GetDecryptionkey());
+            string Host_ApiKey = hostController.GetEncryptedString("Vanjaro.Integration.Pixabay", Config.GetDecryptionkey());
             
             Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Options = UserController.Instance.GetCurrentUserInfo().IsSuperUser });
             Settings.Add("ApplyTo", new UIData { Name = "ApplyTo", Options = false });
@@ -34,33 +34,35 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pixabay.Controllers
         [HttpPost]
         public bool Save(dynamic Data)
         {
-                if (bool.Parse(Data.ApplyTo.ToString()))
+            if (bool.Parse(Data.ApplyTo.ToString()))
+            {
+                if (Vanjaro.Core.Providers.Pixabay.IsValid(Data.Host_ApiKey.ToString()))
                 {
-                    if (Vanjaro.Core.Providers.Pixabay.IsValid(Data.Host_ApiKey.ToString()))
-                    {
-                        HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.Pixabay", Data.Host_ApiKey.ToString(), Config.GetDecryptionkey());
-                    }
-                    else
-                        return false;
+                    HostController hostController = new HostController();
+                    hostController.UpdateEncryptedString("Vanjaro.Integration.Pixabay", Data.Host_ApiKey.ToString(), Config.GetDecryptionkey());
                 }
-                else 
+                else
+                    return false;
+            }
+            else
+            {
+                if (Vanjaro.Core.Providers.Pixabay.IsValid(Data.Site_ApiKey.ToString()))
                 {
-                    if (Vanjaro.Core.Providers.Pixabay.IsValid(Data.Site_ApiKey.ToString()))
-                    {
-                        PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.Pixabay", Data.Site_ApiKey.ToString(), Config.GetDecryptionkey());
-                    }
-                    else
-                        return false;
-                } 
-                return true;
-            
+                    PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.Pixabay", Data.Site_ApiKey.ToString(), Config.GetDecryptionkey());
+                }
+                else
+                    return false;
+            }
+            return true;
+
         }
 
         [HttpPost]
         public string Delete(dynamic Data)
         {
+            HostController hostController = new HostController();
             if (bool.Parse(Data.ToString()))
-                HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.Pixabay", string.Empty, Config.GetDecryptionkey());
+                hostController.UpdateEncryptedString("Vanjaro.Integration.Pixabay", string.Empty, Config.GetDecryptionkey());
             else
                 PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.Pixabay", string.Empty, Config.GetDecryptionkey());
             return string.Empty;
