@@ -502,8 +502,10 @@ $(document).ready(function () {
                                     stepsBeforeSave: 2,
                                     urlStore: eval(data.UpdateContentUrl),
                                     onComplete(jqXHR, status) {
-                                        if (jqXHR.IsSuccess)
-                                            ShowNotification('', VjLocalized.Message, 'success');
+                                        if (jqXHR.IsSuccess) {
+                                            if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
+                                                ShowNotification('', VjLocalized.PagePublished, 'success');
+                                        }
                                         else
                                             ShowNotification('', jqXHR.Message, 'error');
                                     },
