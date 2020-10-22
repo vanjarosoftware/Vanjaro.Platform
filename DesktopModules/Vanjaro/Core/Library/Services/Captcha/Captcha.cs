@@ -36,36 +36,37 @@ namespace Vanjaro.Core.Services
             bool Valid = true;
             if (IsEnabled())
             {
-                string ResponseToken = HttpContext.Current.Request.Headers["vj-recaptcha"];
-
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-                HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=" + GetSecretKey() + "&response=" + ResponseToken);
-                try
+                Valid = false;
+                if (HttpContext.Current != null)
                 {
-                    //reading Google recaptcha Response
-                    using (WebResponse wResponse = req.GetResponse())
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=" + GetSecretKey() + "&response=" + HttpContext.Current.Request.Headers["vj-recaptcha"]);
+                    try
                     {
-                        using (StreamReader readStream = new StreamReader(wResponse.GetResponseStream()))
+                        //reading Google recaptcha Response
+                        using (WebResponse wResponse = req.GetResponse())
                         {
-                            string jsonResponse = readStream.ReadToEnd();
+                            using (StreamReader readStream = new StreamReader(wResponse.GetResponseStream()))
+                            {
+                                string jsonResponse = readStream.ReadToEnd();
 
-                            JavaScriptSerializer js = new JavaScriptSerializer();
-                            CaptchaResponse res = js.Deserialize<CaptchaResponse>(jsonResponse);
-                            if (HttpContext.Current.Request.Url.Host == res.hostname)
-                                Valid = res.Success;
+                                JavaScriptSerializer js = new JavaScriptSerializer();
+                                CaptchaResponse res = js.Deserialize<CaptchaResponse>(jsonResponse);
+                                if (HttpContext.Current.Request.Url.Host == res.hostname)
+                                    Valid = res.Success;
 
+                            }
                         }
                     }
+                    catch (WebException webex)
+                    {
+                        DotNetNuke.Services.Exceptions.Exceptions.LogException(webex);
+                    }
+                    catch (Exception ex)
+                    {
+                        DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    }
                 }
-                catch (WebException webex)
-                {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(webex);
-                }
-                catch (Exception ex)
-                {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
-                }
-
             }
             return Valid;
         }
