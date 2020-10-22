@@ -168,4 +168,7 @@
   <data name="UserNamePlaceholder.Text" xml:space="preserve">
     <value>Username</value>
   </data>
+  <data name="OAuthClientError.Text" xml:space="preserve">
+    <value>We're unable to sign you in. Please contact our support team if issue persists.</value>
+  </data>
 </root>
