@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
+using Vanjaro.Core;
 using Vanjaro.UXManager.Library.Common;
 
 namespace Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.Controllers
@@ -24,9 +25,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.Controllers
             string Host_SiteKey = hostController.GetEncryptedString(Core.Services.Captcha.SiteKey, Config.GetDecryptionkey());
             string Host_SecretKey = hostController.GetEncryptedString(Core.Services.Captcha.SecretKey, Config.GetDecryptionkey());
             bool Host_Enabled = hostController.GetBoolean(Core.Services.Captcha.Enabled, false);
-            string Site_SiteKey = PortalController.GetEncryptedString(Core.Services.Captcha.SiteKey, portalId, Config.GetDecryptionkey());
-            string Site_SecretKey = PortalController.GetEncryptedString(Core.Services.Captcha.SecretKey, portalId, Config.GetDecryptionkey());
-            bool Site_Enabled = PortalController.GetPortalSettingAsBoolean(Core.Services.Captcha.Enabled, portalId, false);       
+            string Site_SiteKey = Managers.SettingManager.GetPortalSetting(Core.Services.Captcha.SiteKey, true);
+            string Site_SecretKey = Managers.SettingManager.GetPortalSetting(Core.Services.Captcha.SecretKey, true);
+            bool Site_Enabled = Managers.SettingManager.GetPortalSettingAsBoolean(Core.Services.Captcha.Enabled);
 
             Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Options = UserController.Instance.GetCurrentUserInfo().IsSuperUser });
             Settings.Add("ApplyTo", new UIData { Name = "ApplyTo", Options = false });

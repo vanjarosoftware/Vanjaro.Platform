@@ -72,9 +72,7 @@ namespace Vanjaro.Core.Services
 
         public static bool IsEnabled()
         {
-            int PortalId = PortalController.Instance.GetCurrentSettings().PortalId;
-            bool IsEnabled = PortalController.GetPortalSettingAsBoolean(Enabled, PortalId, false);
-            if (IsEnabled)
+            if (Managers.SettingManager.GetPortalSettingAsBoolean(Enabled))
                 return true;
             HostController hostController = new HostController();
             return hostController.GetBoolean(Enabled, false);
@@ -82,28 +80,22 @@ namespace Vanjaro.Core.Services
 
         public static string GetSiteKey()
         {
-            int PortalId = PortalController.Instance.GetCurrentSettings().PortalId;
-            bool IsEnabled = PortalController.GetPortalSettingAsBoolean(Enabled, PortalId, false);
-            if (IsEnabled)
-                return PortalController.GetEncryptedString(SiteKey, PortalId, Config.GetDecryptionkey());
+            if (Managers.SettingManager.GetPortalSettingAsBoolean(Enabled))
+                return Managers.SettingManager.GetPortalSetting(SiteKey, true);
 
             HostController hostController = new HostController();
-            IsEnabled = hostController.GetBoolean(Enabled, false);
-            if (IsEnabled)
+            if (hostController.GetBoolean(Enabled, false))
                 return hostController.GetEncryptedString(SiteKey, Config.GetDecryptionkey());
             return string.Empty;
         }
 
         public static string GetSecretKey()
         {
-            int PortalId = PortalController.Instance.GetCurrentSettings().PortalId;
-            bool IsEnabled = PortalController.GetPortalSettingAsBoolean(Enabled, PortalId, false);
-            if (IsEnabled)
-                return PortalController.GetEncryptedString(SecretKey, PortalId, Config.GetDecryptionkey());
+            if (Managers.SettingManager.GetPortalSettingAsBoolean(Enabled))
+                return Managers.SettingManager.GetPortalSetting(SecretKey, true);
 
             HostController hostController = new HostController();
-            IsEnabled = hostController.GetBoolean(Enabled, false);
-            if (IsEnabled)
+            if (hostController.GetBoolean(Enabled, false))
                 return hostController.GetEncryptedString(SecretKey, Config.GetDecryptionkey());
             return string.Empty;
         }
