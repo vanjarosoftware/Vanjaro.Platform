@@ -35,79 +35,83 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
             public const string LocalResourceFile = "~/DesktopModules/Admin/Authentication/App_LocalResources/Login.ascx.resx";
 
-            public static void OAuthUserLogin()
+            public static ActionResult OAuthUserLogin()
             {
+                ActionResult actionResult = new ActionResult();
 
-                if (HttpContext.Current.Request.QueryString["code"] != null && HttpContext.Current.Request.QueryString["state"] != null)
+                try
                 {
-                    var auth = Core.Managers.LoginManager.GetOAuthClients().Where(i => i.Enabled && i.State == HttpContext.Current.Request.QueryString["state"]).SingleOrDefault();
-
-                    if (auth != null)
+                    if (HttpContext.Current.Request.QueryString["code"] != null && HttpContext.Current.Request.QueryString["state"] != null)
                     {
-                        OAuthUser user = auth.Client.GetUser(HttpContext.Current.Request.QueryString["code"]);
+                        var auth = Core.Managers.LoginManager.GetOAuthClients().Where(i => i.Enabled && i.ProviderName == HttpContext.Current.Request.QueryString["state"]).SingleOrDefault();
 
-                        if (user != null)
+                        if (auth != null)
                         {
-                            string username = auth.State + "-" + user.Id;
+                            auth.Client.ProcessResources(HttpContext.Current.Request.QueryString["state"]);
 
-                            var loginStatus = UserLoginStatus.LOGIN_SUCCESS;
-                           
-                            UserInfo objUserInfo = MembershipProvider.Instance().GetUserByUserName(PortalSettings.Current.PortalId, username);
-
-                            if (objUserInfo == null)
+                            if (auth.Client.User.Id != null && auth.Client.User.Name != null && auth.Client.User.Email != null)
                             {
-                                objUserInfo = new UserInfo()
-                                {
-                                    PortalID = PortalSettings.Current.PortalId,
-                                    Email = user.Email,
-                                    DisplayName = user.Name,
-                                    Username = username
-                                };
+                                string username = auth.ProviderName + "-" + auth.Client.User.Id;
 
-                                if (objUserInfo.DisplayName.IndexOf(' ') > 0)
+                                var loginStatus = UserLoginStatus.LOGIN_SUCCESS;
+
+                                UserInfo objUserInfo = MembershipProvider.Instance().GetUserByUserName(PortalSettings.Current.PortalId, username);
+
+                                if (objUserInfo == null)
                                 {
-                                    objUserInfo.FirstName = objUserInfo.DisplayName.Substring(0, objUserInfo.DisplayName.IndexOf(' '));
-                                    objUserInfo.LastName = objUserInfo.DisplayName.Substring(objUserInfo.DisplayName.IndexOf(' ') + 1);
+                                    objUserInfo = new UserInfo()
+                                    {
+                                        PortalID = PortalSettings.Current.PortalId,
+                                        Email = auth.Client.User.Email,
+                                        DisplayName = auth.Client.User.Name,
+                                        Username = username
+                                    };
+
+                                    if (objUserInfo.DisplayName.IndexOf(' ') > 0)
+                                    {
+                                        objUserInfo.FirstName = objUserInfo.DisplayName.Substring(0, objUserInfo.DisplayName.IndexOf(' '));
+                                        objUserInfo.LastName = objUserInfo.DisplayName.Substring(objUserInfo.DisplayName.IndexOf(' ') + 1);
+                                    }
+                                    else
+                                    {
+                                        objUserInfo.FirstName = auth.Client.User.Name;
+                                        objUserInfo.LastName = string.Empty;
+                                    }
+
+                                    objUserInfo.Membership.Approved = true;
+                                    objUserInfo.Membership.Password = UserController.GeneratePassword();
+
+                                    var createStatus = UserController.CreateUser(ref objUserInfo);
                                 }
                                 else
                                 {
-                                    objUserInfo.FirstName = user.Name;
-                                    objUserInfo.LastName = string.Empty;
+                                    if (objUserInfo.DisplayName != auth.Client.User.Name)
+                                    {
+                                        objUserInfo.DisplayName = auth.Client.User.Name;
+                                        UserController.UpdateUser(PortalSettings.Current.PortalId, objUserInfo);
+                                    }
                                 }
 
-                                objUserInfo.Membership.Approved = true;
-                                objUserInfo.Membership.Password = UserController.GeneratePassword();
-
-                                var createStatus = UserController.CreateUser(ref objUserInfo);
-                            }
-                            else
-                            {
-                                if (objUserInfo.DisplayName != user.Name)
+                                var eventArgs = new UserAuthenticatedEventArgs(objUserInfo, username, loginStatus, auth.ProviderName)
                                 {
-                                    objUserInfo.DisplayName = user.Name;
-                                    UserController.UpdateUser(PortalSettings.Current.PortalId, objUserInfo);
-                                }
+                                    UserName = username,
+                                    RememberMe = true
+                                };
+
+                                actionResult = UserAuthenticated(eventArgs);
+
+                                if (!string.IsNullOrEmpty(actionResult.RedirectURL))
+                                    HttpContext.Current.Response.Redirect(actionResult.RedirectURL, true);
                             }
-
-                            var eventArgs = new UserAuthenticatedEventArgs(objUserInfo, username, loginStatus, auth.State)
-                            {
-                                UserName = username,
-                                RememberMe = true
-                            };                         
-
-                            var actionResult = UserAuthenticated(eventArgs);
-
-                            if (actionResult.HasErrors)
-                            {
-                                //Handle Errors
-                            }
-
-                            if (!string.IsNullOrEmpty(actionResult.RedirectURL))
-                                HttpContext.Current.Response.Redirect(actionResult.RedirectURL, true);
                         }
                     }
                 }
+                catch (Exception ex )
+                {
+                    actionResult.AddError("OAuthClientError", "We're unable to sign you in. Please contact our support team if issue persists.");
+                }
 
+                return actionResult;
             }
             public static string GetRedirectUrl(bool checkSettings = true)
             {
