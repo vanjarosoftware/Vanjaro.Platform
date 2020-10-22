@@ -163,6 +163,7 @@ namespace Vanjaro.Core
                         }
 
                         result.IsSuccess = true;
+                        result.ShowNotification = Data["IsPublished"];
                     }
                 }
                 catch (Exception ex)

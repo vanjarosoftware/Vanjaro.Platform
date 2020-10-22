@@ -11,29 +11,34 @@ namespace Vanjaro.Core.Services.Authentication.OAuth
 {
     public class OAuthClient
     {
-        public OAuthClient(IOAuthClient provider, string state, string clientID, string clientSecret, string authRedirectEndpoint, string authTokenEndpoint, string resourceEndpoint)
+        public OAuthClient(IOAuthClient provider, string providerName, string clientID, string clientSecret, string authRedirectEndpoint, string authTokenEndpoint, string resourceEndpoint)
         {
-            this.State = state;
+            this.ProviderName = providerName;
 
             this.ClientID = clientID;
             this.ClientSecret = clientSecret;
 
-            this.RedirectUri = new Uri(Globals.LoginURL(string.Empty, false)).ToString().Replace("http","https");
+            this.RedirectUri = new Uri(Globals.LoginURL(string.Empty, false)).ToString(); //.Replace("http","https").Replace("local","com").Replace("dev","www");
 
             this.AuthRedirectEndPoint = authRedirectEndpoint;
             this.AuthTokenEndPoint = authTokenEndpoint;
-            this.ResourceEndPoint = resourceEndpoint;
-
+            
+            this.ResourceEndPoints = new List<string>() { resourceEndpoint };
+            
             this.Provider = provider;
 
             this.AuthMethod = "GET";
+
+            this.User = new OAuthUser();
+
+            this.AuthTokenQuery = true;
         }
 
         public string GetAuthorizationUrl()
         {
             NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
 
-            queryString.Add("state", this.State);
+            queryString.Add("state", this.ProviderName);
             queryString.Add("scope", this.Scope);
             queryString.Add("client_id", this.ClientID);
             queryString.Add("redirect_uri", this.RedirectUri);
@@ -60,31 +65,35 @@ namespace Vanjaro.Core.Services.Authentication.OAuth
                 response = PostWebResponse(this.AuthTokenEndPoint, queryString.ToString());
 
             var dictionary = Json.Deserialize<IDictionary<string, object>>(response);
-            this.AuthToken = Convert.ToString(dictionary["access_token"]); ;
+            this.AuthToken = Convert.ToString(dictionary["access_token"]);
             
             return this.AuthToken;
         }
 
-        public OAuthUser GetUser(string code = null)
+        public void ProcessResources(string code = null)
         {
             if (string.IsNullOrEmpty(AuthToken) && !string.IsNullOrEmpty(code))
                 GetAuthToken(code);
 
             if (!string.IsNullOrEmpty(AuthToken))
             {
-                string accessToken;
+                foreach (var Endpoint in ResourceEndPoints)
+                {
+                    string accessToken = string.Empty;
 
-                if (ResourceEndPoint.Contains("?"))
-                    accessToken = "&access_token=" + this.AuthToken;
-                else
-                    accessToken = "?access_token=" + this.AuthToken;
+                    if (AuthTokenQuery)
+                    {
+                        if (Endpoint.Contains("?"))
+                            accessToken = "&access_token=" + this.AuthToken;
+                        else
+                            accessToken = "?access_token=" + this.AuthToken;
+                    }
+                    string response = GetWebResponse(Endpoint + accessToken);
 
-                string response = GetWebResponse(ResourceEndPoint + accessToken);
-
-                return Provider.GetUser(response);
+                    Provider.OnResourceResponse(response);
+                }
             }
 
-            return null;
         }
 
 
@@ -95,6 +104,9 @@ namespace Vanjaro.Core.Services.Authentication.OAuth
             {
                 try
                 {
+                    if (!string.IsNullOrEmpty(Provider.AuthHeader))
+                        wc.Headers.Add(Provider.AuthHeader);
+
                     wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
                     return wc.UploadString(Url, Parameters);
                 }
@@ -112,6 +124,9 @@ namespace Vanjaro.Core.Services.Authentication.OAuth
             {
                 try
                 {
+                    if (!string.IsNullOrEmpty(Provider.AuthHeader))
+                        wc.Headers.Add(Provider.AuthHeader);
+
                     return wc.DownloadString(Url);
                 }
                 catch (Exception ex)
@@ -123,17 +138,20 @@ namespace Vanjaro.Core.Services.Authentication.OAuth
             }
         }
         public string Scope { get; set; }
-        public string State { get; set; }
+        public string ProviderName { get; set; }
         public string ClientID { get; set; }
         public string ClientSecret { get; set; }
         public string RedirectUri { get; set; }
 
         public string AuthRedirectEndPoint { get; set; }
         public string AuthTokenEndPoint { get; set; }
-        public string ResourceEndPoint { get; set; }
+
+        public List<string> ResourceEndPoints { get; set; }
         public string AuthToken { get; private set; }
         public string AuthMethod { get; set; }
 
+        public OAuthUser User { get; set; }
         public IOAuthClient Provider { get; set; }
+        public bool AuthTokenQuery { get;  set; }
     }
 }
