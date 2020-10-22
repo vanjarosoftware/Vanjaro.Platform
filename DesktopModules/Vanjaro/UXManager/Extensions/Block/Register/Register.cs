@@ -5,11 +5,14 @@ using DotNetNuke.Framework;
 using DotNetNuke.Services.Localization;
 using System;
 using System.Collections.Generic;
+using System.Web;
+using System.Web.UI;
 using Vanjaro.Common.Engines.TokenEngine;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Common.Entities.Apps;
 using Vanjaro.Common.Manager;
 using Vanjaro.Core.Entities.Menu;
+using Vanjaro.Core.Services;
 using Vanjaro.UXManager.Extensions.Block.Register.Factories;
 using Vanjaro.UXManager.Library.Entities.Interface;
 
@@ -124,7 +127,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register
                     ButtonAlign = Attributes["data-block-buttonalign"],
                     ShowLabel = Convert.ToBoolean(Attributes["data-block-showlabel"]),
                     TermsPrivacy = Convert.ToBoolean(Attributes["data-block-termsprivacy"]),
-                    ShowGoogleReCaptcha = Convert.ToBoolean(Attributes["data-block-showgooglerecaptcha"])
+                    CaptchaEnabled = Captcha.IsEnabled()
                 };
                 dynObjects.Add("Register", register);
                 dynObjects.Add("RegistrationSettings", RegistrationSettings);
@@ -132,6 +135,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register
 
                 string Template = RazorEngineManager.RenderTemplate(ExtensionInfo.GUID, BlockPath, Attributes["data-block-template"], dynObjects);
                 Template = new DNNLocalizationEngine(null, ResouceFilePath, false).Parse(Template);
+                Captcha.Request();
                 return Template;
             }
             catch (Exception ex)

@@ -8,12 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
 using Vanjaro.Common.Engines.TokenEngine;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Common.Entities.Apps;
 using Vanjaro.Common.Manager;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Entities.Menu;
+using Vanjaro.Core.Services;
 using Vanjaro.UXManager.Extensions.Block.Login.Factories;
 using Vanjaro.UXManager.Library.Entities.Interface;
 using static Vanjaro.UXManager.Extensions.Block.Login.Managers;
@@ -136,7 +138,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                     ShowRememberPassword = Convert.ToBoolean(Attributes["data-block-showrememberpassword"]),
                     ResetPassword = Convert.ToBoolean(Attributes["data-block-resetpassword"]),
                     ShowRegister = Convert.ToBoolean(Attributes["data-block-showregister"]),
-                    ShowGoogleReCaptcha = Convert.ToBoolean(Attributes["data-block-showgooglerecaptcha"])
+                    CaptchaEnabled = Captcha.IsEnabled()
                 };
 
                 login.RegisterUrl = Globals.RegisterURL(HttpUtility.UrlEncode(ServiceProvider.NavigationManager.NavigateURL()), Null.NullString);
@@ -148,6 +150,8 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
                 string Template = RazorEngineManager.RenderTemplate(ExtensionInfo.GUID, BlockPath, Attributes["data-block-template"], Objects);
                 Template = new DNNLocalizationEngine(null, ResouceFilePath, false).Parse(Template);
+                Captcha.Request();
+
                 return Template;
             }
             catch (Exception ex)

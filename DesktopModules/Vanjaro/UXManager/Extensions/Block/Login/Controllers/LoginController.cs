@@ -32,7 +32,6 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
                 { "ShowLabel", new UIData { Name = "ShowLabel", Value = "false" } },
                 { "ButtonAlign", new UIData { Name = "ButtonAlign", Value = "justify" } },
                 { "ShowRegister", new UIData { Name = "ShowRegister", Value = "true" } },
-                { "ShowGoogleReCaptcha", new UIData { Name = "ShowGoogleReCaptcha", Value = "false" } },
                 { "GlobalConfigs", new UIData { Name = "GlobalConfigs", Options = Core.Managers.BlockManager.GetGlobalConfigs(portalSettings, "login") } },
                 { "IsAdmin", new UIData { Name = "IsAdmin", Value = userInfo.IsInRole("Administrators").ToString().ToLower() } }
             };
@@ -53,26 +52,29 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
         {
             ActionResult actionResult = new ActionResult();
 
-            string response = System.Web.HttpContext.Current.Request.Headers["vj-recaptcha"];
-            if (!Core.Services.GoogleReCaptcha.Request(PortalSettings.PortalId, response, HttpContext.Current.Request.Url.Host))
+            if (Core.Services.Captcha.Validate())
+            {
+
+                dynamic eventArgs = Core.Managers.LoginManager.UserLogin(userLogin);
+
+                if (userLogin.HasAgreedToTerms)
+                {
+                    eventArgs.User.HasAgreedToTerms = true;
+                    UserController.UserAgreedToTerms(eventArgs.User);
+                    OnDataConsentComplete(new DataConsentEventArgs(DataConsentStatus.Consented));
+                }
+
+                actionResult = Managers.LoginManager.UserAuthenticated(eventArgs);
+
+                return actionResult;
+            }
+            else
             {
                 string ResourceFile = "~/DesktopModules/Vanjaro/UXManager/Extensions/Block/Login/Views/Setting/App_LocalResources/Login.resx";
                 actionResult.AddError("recaptcha_error", DotNetNuke.Services.Localization.Localization.GetString("ReCaptcha_Error", ResourceFile));
                 return actionResult;
             }
 
-            dynamic eventArgs = Core.Managers.LoginManager.UserLogin(userLogin);
-
-            if (userLogin.HasAgreedToTerms)
-            {
-                eventArgs.User.HasAgreedToTerms = true;
-                UserController.UserAgreedToTerms(eventArgs.User);
-                OnDataConsentComplete(new DataConsentEventArgs(DataConsentStatus.Consented));
-            }
-
-            actionResult = Managers.LoginManager.UserAuthenticated(eventArgs);
-
-            return actionResult;
         }
 
         /// <summary>

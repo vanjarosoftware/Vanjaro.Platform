@@ -112,7 +112,7 @@
     <Compile Include="Managers\LocalizationManager.cs" />
     <Compile Include="Managers\ThemeManager.cs" />
     <Compile Include="Managers\NotificationManager.cs" />
-    <Compile Include="Services\GoogleReCaptcha\GoogleReCaptcha.cs" />
+    <Compile Include="Services\Captcha\Captcha.cs" />
     <Compile Include="Providers\Youtube.cs" />
     <Compile Include="Providers\Pixabay.cs" />
     <Compile Include="Managers\ExtensionManager.cs" />
