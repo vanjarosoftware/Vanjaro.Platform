@@ -10,6 +10,8 @@ namespace Vanjaro.Core.Services.Authentication.OAuth
         bool Enabled { get; }
         string ProviderName { get; }
         string AuthHeader { get; }
+        string DisplayName { get; }
+        string ImageIcon { get; }
         void OnResourceResponse(string response);
         OAuthClient Client { get; set; }
     }

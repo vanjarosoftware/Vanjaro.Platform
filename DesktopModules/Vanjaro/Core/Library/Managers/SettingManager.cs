@@ -30,6 +30,18 @@ namespace Vanjaro.Core
     {
         public class SettingManager
         {
+
+            public static string GetPortalSetting(string Name, bool Secure)
+            {
+                if (Secure)
+                    return PortalController.GetEncryptedString(Name, PortalController.Instance.GetCurrentSettings().PortalId, Config.GetDecryptionkey());
+                return PortalController.GetPortalSetting(Name, PortalController.Instance.GetCurrentSettings().PortalId, string.Empty);
+            }
+            public static bool GetPortalSettingAsBoolean(string Name)
+            {
+                return PortalController.GetPortalSettingAsBoolean(Name, PortalController.Instance.GetCurrentSettings().PortalId, false);
+            }
+
             public static void UpdateValue(int PortalID, int TabID, string Identifier, string Name, string Value)
             {
                 SettingFactory.UpdateValue(PortalID, TabID, Identifier, Name, Value);
