@@ -8,9 +8,9 @@ namespace Vanjaro.Core.Services.Authentication.OAuth
     public interface IOAuthClient
     {
         bool Enabled { get; }
-        string State { get; }
-
-        OAuthUser GetUser(string response);
+        string ProviderName { get; }
+        string AuthHeader { get; }
+        void OnResourceResponse(string response);
         OAuthClient Client { get; set; }
     }
 }

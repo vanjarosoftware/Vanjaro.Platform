@@ -14,12 +14,12 @@
                 common.webApi.post('user/createuser', '', $scope.ui.data.UserTemplate.Options).success(function (data) {
                     if (data != null && data.Data != null && data.IsSuccess) {
                         var ParentScope = parent.document.getElementById("iframe").contentWindow.angular;
-                        if (ParentScope != undefined && ParentScope.element(".menuextension").scope() != undefined && ParentScope.element(".menuextension").scope().ui.data.AllUsers != undefined) {
+                        if (ParentScope != undefined && ParentScope.element(".menuextension").scope() != undefined && has(ParentScope.element(".menuextension").scope(), 'ui.data.AllUsers')) {
                             ParentScope.element(".menuextension").scope().ui.data.AllUsers.Options.push(data.Data);
                             ParentScope.element(".menuextension").scope().$apply();
                         }
 
-                        if (data.Data.displayName != undefined && data.Data.displayName != null)
+                        if (has(data.Data, 'displayName'))
                             window.parent.ShowNotification(data.Data.displayName, '[L:UserCreatedSuccess]', 'success');
 
                         $(window.parent.document.body).find('[data-dismiss="modal"]').click();
@@ -34,5 +34,14 @@
                 parent.ShowNotification('[L:AddUser]', '[LS:PasswordMismatch]', 'error');
             }
         }
+    };
+
+    has = function (obj, key) {
+        return key.split(".").every(function (x) {
+            if (typeof obj != "object" || obj === null || !x in obj || typeof obj[x] === "undefined")
+                return false;
+            obj = obj[x];
+            return true;
+        });
     };
 });

@@ -29,6 +29,7 @@ namespace Vanjaro.UXManager.Library.Entities.Menu
 
         Default = 3,
         OpenInNewWindow = 4,
-        onClick = 5
+        onClick = 5,
+        FullScreen = 6
     }
 }

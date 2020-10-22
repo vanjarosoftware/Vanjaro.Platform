@@ -35,7 +35,7 @@
                     </div>
                 }
                 <div class="text-@Model.Login.ButtonAlign">
-                    <a id="loginbtn" onclick="validateCaptcha(this,function(el){Login.User('Login',el)})" attr-localize-signIn-text="[LS:Data.Block.Login.LoginText]" attr-localize-loading-text="[LS:Data.Block.Login.LoadingText]" class="btn btn-primary @Model.Login.ButtonAlign">
+                    <a id="loginbtn" onclick="validateCaptcha(this,function(el){Login.User('Login')})" attr-localize-signIn-text="[LS:Data.Block.Login.LoginText]" attr-localize-loading-text="[LS:Data.Block.Login.LoadingText]" class="btn btn-primary @Model.Login.ButtonAlign">
                         [LS:Data.Block.Login.LoginText]
                     </a>
                 </div>
@@ -107,7 +107,7 @@
         <ul>
             @foreach (var auth in Model.OAuthClients)
             {
-                <li><a href="@auth.Client.GetAuthorizationUrl()">@auth.State</a></li>
+                <li><a href="@auth.Client.GetAuthorizationUrl()">@auth.ProviderName</a></li>
             }
         </ul>
         

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using Vanjaro.Common.ASPNET;
 using Vanjaro.Common.Engines.TokenEngine;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Common.Entities.Apps;
@@ -17,6 +18,7 @@ using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Entities.Menu;
 using Vanjaro.Core.Services;
 using Vanjaro.UXManager.Extensions.Block.Login.Factories;
+using Vanjaro.UXManager.Library.Common;
 using Vanjaro.UXManager.Library.Entities.Interface;
 using static Vanjaro.UXManager.Extensions.Block.Login.Managers;
 using Localization = DotNetNuke.Services.Localization.Localization;
@@ -47,7 +49,11 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
         public ThemeTemplateResponse Render(Dictionary<string, string> Attributes)
         {
-            LoginManager.OAuthUserLogin();
+            ActionResult actionResult = LoginManager.OAuthUserLogin();
+
+            if (actionResult.HasErrors || actionResult.HasWarnings)
+                WebForms.RegisterStartupScript(HttpContext.Current.Handler as Page, "OAuthClientScriptResponseScript", "Login.processResponse(" + Json.Serialize(actionResult) + ")", true);
+            
 
             PortalSettings ps = PortalController.Instance.GetCurrentSettings() as PortalSettings;
             ServicesFramework.Instance.RequestAjaxScriptSupport();
