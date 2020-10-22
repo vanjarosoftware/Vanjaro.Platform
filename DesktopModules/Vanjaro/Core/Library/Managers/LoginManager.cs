@@ -173,7 +173,8 @@ namespace Vanjaro.Core
                         }
                         catch { continue; }
                     }
-
+                    if (OAuthClients == null)
+                        OAuthClients = new List<IOAuthClient>();
                     CacheFactory.Set(CacheFactory.Keys.OAuthClients, OAuthClients);
                 }
 

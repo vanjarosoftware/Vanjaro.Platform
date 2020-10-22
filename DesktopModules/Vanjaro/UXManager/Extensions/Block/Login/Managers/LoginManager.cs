@@ -108,7 +108,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                 }
                 catch (Exception ex )
                 {
-                    actionResult.AddError("OAuthClientError", "We're unable to sign you in. Please contact our support team if issue persists.");
+                    actionResult.AddError("OAuthClientError", Localization.GetString("OAuthClientError", Components.Constants.LocalResourcesFile));
                 }
 
                 return actionResult;
