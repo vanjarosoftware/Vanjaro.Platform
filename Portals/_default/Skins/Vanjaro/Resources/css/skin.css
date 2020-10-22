@@ -593,57 +593,6 @@ Theme.css end
     font-weight: 500;
 }
 
-.head-style-1 {
-    font-weight: 500;
-    text-transform: capitalize;
-}
-
-.head-style-2 {
-    font-weight: 500;
-    text-transform: uppercase;
-}
-
-.head-style-3 {
-    font-weight: 500;
-    letter-spacing: 10px;
-}
-
-.head-style-4 {
-    font-weight: 500;
-    text-decoration: underline;
-}
-
-.head-style-5 {
-    font-weight: bold;
-}
-
-.head-style-6 {
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-.head-style-7 {
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.head-style-8 {
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.head-style-9 {
-    font-weight: bold;
-    text-decoration: underline;
-    text-transform: capitalize;
-}
-
-.head-style-10 {
-    font-weight: bold;
-    text-decoration: underline;
-    text-transform: uppercase;
-}
-
 .text .normal {
     font-weight: 400;
 }
