@@ -145,8 +145,6 @@ export default (editor, config = {}) => {
 			className = trait.attributes.options.find(opt => opt.id == event.target.id).class;
 		}
 
-		trait.setTargetValue(event.target.id);
-
 		for (let i = 0; i < classes.length; i++) {
 			if (classes[i].length > 0) {
 				var classes_i_a = classes[i].split(' ');
@@ -178,6 +176,8 @@ export default (editor, config = {}) => {
 					component.addClass(value_a[i]);
 			}
 		}
+
+		trait.setTargetValue(event.target.id);
 	};
 
 	//Color Picker
