@@ -1,4 +1,4 @@
-name: Move issue to Development Project
+name: Move Milestoned issue to Development Project
 on:
   issues:
     types: [milestoned]
