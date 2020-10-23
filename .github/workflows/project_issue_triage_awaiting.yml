@@ -1,4 +1,4 @@
-name: Auto Assign to Project(s)
+name: Assign NEW issues to issue triage project
 
 on:
   issues:
