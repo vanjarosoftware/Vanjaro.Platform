@@ -52,7 +52,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
         {
             ActionResult actionResult = new ActionResult();
 
-            if (Core.Services.Captcha.Validate())
+            if (Core.Services.Captcha.Validate("login"))
             {
 
                 dynamic eventArgs = Core.Managers.LoginManager.UserLogin(userLogin);
@@ -65,16 +65,13 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
                 }
 
                 actionResult = Managers.LoginManager.UserAuthenticated(eventArgs);
-
-                return actionResult;
             }
             else
             {
                 string ResourceFile = "~/DesktopModules/Vanjaro/UXManager/Extensions/Block/Login/Views/Setting/App_LocalResources/Login.resx";
                 actionResult.AddError("recaptcha_error", DotNetNuke.Services.Localization.Localization.GetString("ReCaptcha_Error", ResourceFile));
-                return actionResult;
             }
-
+            return actionResult;
         }
 
         /// <summary>
@@ -86,7 +83,18 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
         [AuthorizeAccessRoles(AccessRoles = "user,anonymous")]
         public ActionResult OnSendPasswordClick(string Email)
         {
-            return Managers.LoginManager.OnSendPasswordClick(Email);
+            ActionResult actionResult = new ActionResult();
+
+            if (Core.Services.Captcha.Validate("reset_password"))
+            {
+                actionResult = Managers.LoginManager.OnSendPasswordClick(Email);
+            }
+            else
+            {
+                string ResourceFile = "~/DesktopModules/Vanjaro/UXManager/Extensions/Block/Login/Views/Setting/App_LocalResources/Login.resx";
+                actionResult.AddError("recaptcha_error", DotNetNuke.Services.Localization.Localization.GetString("ReCaptcha_Error", ResourceFile));
+            }
+            return actionResult;
         }
 
 

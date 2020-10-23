@@ -1,8 +1,8 @@
 ﻿var Register = {
     User: function (data_Selector) {
         var sf = $.ServicesFramework(-1);
-        var EventTarget = $(event.target);
-        var Form = $(EventTarget).closest('#Register');
+        var obj = $('#registerbtn');
+        var Form = obj.closest('#Register');
         Form.find('.show-message').remove();
         if (mnValidationService.DoValidationAndSubmit(data_Selector)) {
             var Username = Form.find('input.username').length > 0 ? Form.find('input.username').val() : Form.find('input.email').val();
@@ -13,12 +13,12 @@
                 'DisplayName': Form.find('input.displayname').val(),
                 'Email': Form.find('input.email').val()
             };
-            var registerText = $(Form.find('#submit')).attr('attr-localize-register-text');
+            var registerText = obj.attr('attr-localize-register-text');
             if ($.trim(registerText) == "" || registerText == null)
                 registerText = "Reset Password";
 
-            Form.find('#submit').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> ' + registerText);
-            Form.find('#submit').addClass('disabled');
+            obj.html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> ' + registerText);
+            obj.addClass('disabled');
             $.ajax({
                 type: "POST",
                 url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Register") + "Register/Index",
@@ -39,14 +39,14 @@
                             Form.find('#checktermcondition').prop("checked", false);
                         }
                         else {
-                            Form.find('#submit').html(registerText);
-                            Form.find('#submit').removeClass('disabled');
+                            obj.html(registerText);
+                            obj.removeClass('disabled');
                         }
                     }
                     else {
-                        Form.find('#submit').html(registerText);
+                        obj.html(registerText);
                         $('<div class="show-message alert alert-danger">' + response.Message + '</div>').insertAfter(Form.find('.Registerhead'));
-                        Form.find('#submit').removeClass('disabled');
+                        obj.removeClass('disabled');
                     }
                 },
                 error: function (Error) {

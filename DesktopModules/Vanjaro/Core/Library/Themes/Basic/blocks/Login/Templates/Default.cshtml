@@ -35,7 +35,7 @@
                     </div>
                 }
                 <div class="text-@Model.Login.ButtonAlign">
-                    <a id="loginbtn" onclick="validateCaptcha(this,function(el){Login.User('Login')})" attr-localize-signIn-text="[LS:Data.Block.Login.LoginText]" attr-localize-loading-text="[LS:Data.Block.Login.LoadingText]" class="btn btn-primary @Model.Login.ButtonAlign">
+                    <a id="loginbtn" onclick="validateCaptcha(this, 'login', function (el) { Login.User('Login') })" attr-localize-signIn-text="[LS:Data.Block.Login.LoginText]" attr-localize-loading-text="[LS:Data.Block.Login.LoadingText]" class="btn btn-primary @Model.Login.ButtonAlign">
                         [LS:Data.Block.Login.LoginText]
                     </a>
                 </div>
@@ -87,7 +87,7 @@
                     <input type="email" id="loginemail" name="loginemail" placeholder="[LS:Data.Block.Login.EmailAddressPlaceholderText]" class="Email" emailrequired="emailrequired" required />
                 </div>
                 <div class="text-justify">
-                    <a href="#" id="btnReset" class="btn btn-primary resetbtn @Model.Login.ButtonAlign" attr-localize-reset-text="[LS:Data.Block.Login.ResetText]" onclick="Login.ResetPassword(this)">[LS:Data.Block.Login.ResetText]</a>
+                    <a href="#" id="btnReset" class="btn btn-primary resetbtn @Model.Login.ButtonAlign" attr-localize-reset-text="[LS:Data.Block.Login.ResetText]" onclick="validateCaptcha(this, 'reset_password', function (el) { Login.ResetPassword(el) })">[LS:Data.Block.Login.ResetText]</a>
                 </div>
             </div>
             <div class="text-justify">

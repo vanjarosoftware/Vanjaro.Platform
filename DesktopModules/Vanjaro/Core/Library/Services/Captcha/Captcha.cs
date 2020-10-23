@@ -31,12 +31,10 @@ namespace Vanjaro.Core.Services
                 }
             }
         }
-        public static bool Validate()
+        public static bool Validate(string action, decimal minimumScore = 0.5m)
         {
-            bool Valid = true;
             if (IsEnabled())
             {
-                Valid = false;
                 if (HttpContext.Current != null)
                 {
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
@@ -52,8 +50,8 @@ namespace Vanjaro.Core.Services
 
                                 JavaScriptSerializer js = new JavaScriptSerializer();
                                 CaptchaResponse res = js.Deserialize<CaptchaResponse>(jsonResponse);
-                                if (HttpContext.Current.Request.Url.Host == res.hostname)
-                                    Valid = res.Success;
+                                if (HttpContext.Current.Request.Url.Host.ToLower() == res.hostname.ToLower() && action == res.action && minimumScore < res.score)
+                                    return res.success;
 
                             }
                         }
@@ -68,7 +66,10 @@ namespace Vanjaro.Core.Services
                     }
                 }
             }
-            return Valid;
+            else
+                return true;
+
+            return false;
         }
 
         public static bool IsEnabled()
@@ -103,7 +104,9 @@ namespace Vanjaro.Core.Services
     }
     public class CaptchaResponse
     {
-        public bool Success { get; set; }
+        public bool success { get; set; }
         public string hostname { get; set; }
+        public string action { get; set; }
+        public decimal score { get; set; }
     }
 }
