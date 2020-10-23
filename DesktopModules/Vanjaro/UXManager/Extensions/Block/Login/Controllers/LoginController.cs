@@ -85,7 +85,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
         {
             ActionResult actionResult = new ActionResult();
 
-            if (Core.Services.Captcha.Validate("reset_password"))
+            if (Core.Services.Captcha.Validate("reset-password"))
             {
                 actionResult = Managers.LoginManager.OnSendPasswordClick(Email);
             }
