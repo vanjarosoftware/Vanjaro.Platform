@@ -1,5 +1,5 @@
 name: Add PR to development Project
-on: [pull_request]
+on: [issues, pull_request]
 jobs:
   github-actions-automate-projects:
     runs-on: ubuntu-latest
