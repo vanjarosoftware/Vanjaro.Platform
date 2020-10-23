@@ -56,10 +56,6 @@ namespace Vanjaro.Core.Services
                             }
                         }
                     }
-                    catch (WebException webex)
-                    {
-                        DotNetNuke.Services.Exceptions.Exceptions.LogException(webex);
-                    }
                     catch (Exception ex)
                     {
                         DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
