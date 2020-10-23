@@ -24,20 +24,19 @@ namespace Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.Controllers
         {
             bool IsSuperUser = UserController.Instance.GetCurrentUserInfo().IsSuperUser;
             string mode = IsSuperUser ? "h" : "p";
-            HostController hostController = new HostController();
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>
             {
                 { "IsSuperUser", new UIData { Name = "IsSuperUser", Options = IsSuperUser } },
-                { "SMTPmode", new UIData { Name = "SMTPmode", Options = IsSuperUser? PortalController.GetPortalSetting("SMTPmode", PortalSettings.PortalId, mode) == mode:false } },
-                { "Host_Server", new UIData { Name = "Host_Server", Value = hostController.GetString("SMTPServer") } },
-                { "Host_Username", new UIData { Name = "Host_Username", Value = hostController.GetString("SMTPUsername") } },
-                { "Host_Password", new UIData { Name = "Host_Password", Value = hostController.GetEncryptedString("SMTPPassword", Config.GetDecryptionkey()) } },
-                { "Host_Email", new UIData { Name = "Host_Email", Value = hostController.GetString("SMTPEmail",PortalSettings.Email) } },
-                { "Host_EnableSSL", new UIData { Name = "Host_EnableSSL", Options = hostController.GetBoolean("SMTPEnableSSL", false) } },
-                { "Portal_Server", new UIData { Name = "Portal_Server", Value = PortalController.GetPortalSetting("SMTPServer", PortalSettings.PortalId, string.Empty) } },
-                { "Portal_Username", new UIData { Name = "Portal_Username", Value = PortalController.GetPortalSetting("SMTPUsername", PortalSettings.PortalId, string.Empty) } },
-                { "Portal_Password", new UIData { Name = "Portal_Password", Value = PortalController.GetEncryptedString("SMTPPassword", PortalSettings.PortalId, Config.GetDecryptionkey()) } },
-                { "Portal_EnableSSL", new UIData { Name = "Portal_EnableSSL", Options = PortalController.GetPortalSetting("SMTPEnableSSL", PortalSettings.PortalId, string.Empty) == "Y" } }
+                { "SMTPmode", new UIData { Name = "SMTPmode", Options = IsSuperUser? Core.Managers.SettingManager.GetPortalSetting("SMTPmode", false, mode) == mode:false } },
+                { "Host_Server", new UIData { Name = "Host_Server", Value = Core.Managers.SettingManager.GetHostSetting("SMTPServer",false) } },
+                { "Host_Username", new UIData { Name = "Host_Username", Value = Core.Managers.SettingManager.GetHostSetting("SMTPUsername",false) } },
+                { "Host_Password", new UIData { Name = "Host_Password", Value = Core.Managers.SettingManager.GetHostSetting("SMTPPassword", true) } },
+                { "Host_Email", new UIData { Name = "Host_Email", Value = Core.Managers.SettingManager.GetHostSetting("SMTPEmail",false,PortalSettings.Email) } },
+                { "Host_EnableSSL", new UIData { Name = "Host_EnableSSL", Options = Core.Managers.SettingManager.GetHostSettingAsBoolean("SMTPEnableSSL", false) } },
+                { "Portal_Server", new UIData { Name = "Portal_Server", Value = Core.Managers.SettingManager.GetPortalSetting("SMTPServer", false) } },
+                { "Portal_Username", new UIData { Name = "Portal_Username", Value = Core.Managers.SettingManager.GetPortalSetting("SMTPUsername", false) } },
+                { "Portal_Password", new UIData { Name = "Portal_Password", Value = Core.Managers.SettingManager.GetPortalSetting("SMTPPassword", true) } },
+                { "Portal_EnableSSL", new UIData { Name = "Portal_EnableSSL", Options = Core.Managers.SettingManager.GetPortalSetting("SMTPEnableSSL", false) == "Y" } }
             };
             return Settings.Values.ToList();
         }

@@ -18,9 +18,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pixabay.Controllers
         internal static List<IUIData> GetData(int portalId, UserInfo userInfo)
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
-            HostController hostController = new HostController();
-            string Site_ApiKey = PortalController.GetEncryptedString("Vanjaro.Integration.Pixabay", portalId, Config.GetDecryptionkey());
-            string Host_ApiKey = hostController.GetEncryptedString("Vanjaro.Integration.Pixabay", Config.GetDecryptionkey());
+            string Site_ApiKey = Core.Managers.SettingManager.GetPortalSetting("Vanjaro.Integration.Pixabay", true);
+            string Host_ApiKey = Core.Managers.SettingManager.GetHostSetting("Vanjaro.Integration.Pixabay", true);
             
             Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Options = UserController.Instance.GetCurrentUserInfo().IsSuperUser });
             Settings.Add("ApplyTo", new UIData { Name = "ApplyTo", Options = false });

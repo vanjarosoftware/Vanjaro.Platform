@@ -143,8 +143,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                     ShowResetPassword = Convert.ToBoolean(Attributes["data-block-showresetpassword"]),
                     ShowRememberPassword = Convert.ToBoolean(Attributes["data-block-showrememberpassword"]),
                     ResetPassword = Convert.ToBoolean(Attributes["data-block-resetpassword"]),
-                    ShowRegister = Convert.ToBoolean(Attributes["data-block-showregister"]),
-                    CaptchaEnabled = Captcha.IsEnabled()
+                    ShowRegister = Convert.ToBoolean(Attributes["data-block-showregister"])
                 };
 
                 login.RegisterUrl = Globals.RegisterURL(HttpUtility.UrlEncode(ServiceProvider.NavigationManager.NavigateURL()), Null.NullString);

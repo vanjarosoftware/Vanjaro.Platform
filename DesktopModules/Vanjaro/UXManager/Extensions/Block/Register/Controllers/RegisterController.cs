@@ -82,8 +82,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register.Controllers
             }
             else
             {
-                string ResourceFile = "~/DesktopModules/Vanjaro/UXManager/Extensions/Block/Register/Views/Setting/App_LocalResources/Register.resx";
-                actionResult.AddError("recaptcha_error", DotNetNuke.Services.Localization.Localization.GetString("ReCaptcha_Error", ResourceFile));
+                actionResult.AddError("recaptcha_error", DotNetNuke.Services.Localization.Localization.GetString("ReCaptcha_Error", Core.Components.Constants.LocalResourcesFile));
                 return actionResult;
 
             }

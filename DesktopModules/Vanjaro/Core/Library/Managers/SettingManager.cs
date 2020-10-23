@@ -31,15 +31,28 @@ namespace Vanjaro.Core
         public class SettingManager
         {
 
-            public static string GetPortalSetting(string Name, bool Secure)
+            public static string GetHostSetting(string Name, bool Secure, string defaultValue = "")
+            {
+                HostController hostController = new HostController();
+                if (Secure)
+                    return hostController.GetEncryptedString("Vanjaro.Integration.YouTube", Config.GetDecryptionkey());
+                return hostController.GetString(Name,defaultValue);
+            }
+            public static bool GetHostSettingAsBoolean(string Name, bool defaultValue = false)
+            {
+                HostController hostController = new HostController();
+                return hostController.GetBoolean(Name, defaultValue);
+            }
+
+            public static string GetPortalSetting(string Name, bool Secure, string defaultValue = "")
             {
                 if (Secure)
                     return PortalController.GetEncryptedString(Name, PortalController.Instance.GetCurrentSettings().PortalId, Config.GetDecryptionkey());
-                return PortalController.GetPortalSetting(Name, PortalController.Instance.GetCurrentSettings().PortalId, string.Empty);
+                return PortalController.GetPortalSetting(Name, PortalController.Instance.GetCurrentSettings().PortalId, defaultValue);
             }
-            public static bool GetPortalSettingAsBoolean(string Name)
+            public static bool GetPortalSettingAsBoolean(string Name, bool defaultValue = false)
             {
-                return PortalController.GetPortalSettingAsBoolean(Name, PortalController.Instance.GetCurrentSettings().PortalId, false);
+                return PortalController.GetPortalSettingAsBoolean(Name, PortalController.Instance.GetCurrentSettings().PortalId, defaultValue);
             }
 
             public static void UpdateValue(int PortalID, int TabID, string Identifier, string Name, string Value)

@@ -126,8 +126,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register
                 {
                     ButtonAlign = Attributes["data-block-buttonalign"],
                     ShowLabel = Convert.ToBoolean(Attributes["data-block-showlabel"]),
-                    TermsPrivacy = Convert.ToBoolean(Attributes["data-block-termsprivacy"]),
-                    CaptchaEnabled = Captcha.IsEnabled()
+                    TermsPrivacy = Convert.ToBoolean(Attributes["data-block-termsprivacy"])
                 };
                 dynObjects.Add("Register", register);
                 dynObjects.Add("RegistrationSettings", RegistrationSettings);

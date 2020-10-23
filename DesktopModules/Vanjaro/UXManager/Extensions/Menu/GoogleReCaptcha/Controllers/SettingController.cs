@@ -21,10 +21,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.Controllers
         internal static List<IUIData> GetData(int portalId, UserInfo userInfo)
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
-            HostController hostController = new HostController();
-            string Host_SiteKey = hostController.GetEncryptedString(Core.Services.Captcha.SiteKey, Config.GetDecryptionkey());
-            string Host_SecretKey = hostController.GetEncryptedString(Core.Services.Captcha.SecretKey, Config.GetDecryptionkey());
-            bool Host_Enabled = hostController.GetBoolean(Core.Services.Captcha.Enabled, false);
+            string Host_SiteKey = Managers.SettingManager.GetHostSetting(Core.Services.Captcha.SiteKey, true);
+            string Host_SecretKey = Managers.SettingManager.GetHostSetting(Core.Services.Captcha.SecretKey, true);
+            bool Host_Enabled = Managers.SettingManager.GetHostSettingAsBoolean(Core.Services.Captcha.Enabled, false);
             string Site_SiteKey = Managers.SettingManager.GetPortalSetting(Core.Services.Captcha.SiteKey, true);
             string Site_SecretKey = Managers.SettingManager.GetPortalSetting(Core.Services.Captcha.SecretKey, true);
             bool Site_Enabled = Managers.SettingManager.GetPortalSettingAsBoolean(Core.Services.Captcha.Enabled);

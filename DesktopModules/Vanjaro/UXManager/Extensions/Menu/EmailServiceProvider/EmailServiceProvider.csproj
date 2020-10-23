@@ -106,6 +106,10 @@
       <Project>{203151e8-6239-447c-8bf3-41f864a35b23}</Project>
       <Name>Vanjaro.UX</Name>
     </ProjectReference>
+    <Reference Include="Vanjaro.Core, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\bin\Vanjaro.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

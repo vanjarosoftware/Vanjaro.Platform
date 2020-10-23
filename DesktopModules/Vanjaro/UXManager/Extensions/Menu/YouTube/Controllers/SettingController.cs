@@ -18,9 +18,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
         internal static List<IUIData> GetData(int portalId, UserInfo userInfo)
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
-            string Site_ApiKey = PortalController.GetEncryptedString("Vanjaro.Integration.YouTube", portalId, Config.GetDecryptionkey());
-            HostController hostController = new HostController();
-            string Host_ApiKey = hostController.GetEncryptedString("Vanjaro.Integration.YouTube", Config.GetDecryptionkey());
+            string Site_ApiKey = Core.Managers.SettingManager.GetPortalSetting("Vanjaro.Integration.YouTube", true);
+            string Host_ApiKey = Core.Managers.SettingManager.GetHostSetting("Vanjaro.Integration.YouTube", true);
 
             Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Options = UserController.Instance.GetCurrentUserInfo().IsSuperUser });
             Settings.Add("ApplyTo", new UIData { Name = "ApplyTo", Options = false });

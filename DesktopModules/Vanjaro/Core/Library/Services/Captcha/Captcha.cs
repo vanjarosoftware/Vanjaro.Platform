@@ -50,7 +50,7 @@ namespace Vanjaro.Core.Services
 
                                 JavaScriptSerializer js = new JavaScriptSerializer();
                                 CaptchaResponse res = js.Deserialize<CaptchaResponse>(jsonResponse);
-                                if (HttpContext.Current.Request.Url.Host.ToLower() == res.hostname.ToLower() && action == res.action && minimumScore < res.score)
+                                if (HttpContext.Current.Request.Url.Host.ToLower() == res.hostname.ToLower() && action.ToLower() == res.action.ToLower() && minimumScore < res.score)
                                     return res.success;
 
                             }
