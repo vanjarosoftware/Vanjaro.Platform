@@ -124,7 +124,7 @@ namespace Vanjaro.Skin
         protected void Page_Load(object sender, EventArgs e)
         {
             JavaScript.RequestRegistration(CommonJs.jQuery, null, SpecificVersion.Latest);
-            
+
             InjectThemeJS();
 
             PageManager.Init(Page, PortalSettings);
@@ -937,12 +937,9 @@ namespace Vanjaro.Skin
         {
             DotNetNuke.Services.Personalization.PersonalizationController personalizationController = new DotNetNuke.Services.Personalization.PersonalizationController();
             DotNetNuke.Services.Personalization.PersonalizationInfo personalization = personalizationController.LoadProfile(PortalSettings.Current.UserInfo.UserID, PortalSettings.Current.PortalId);
-            if (personalization.Profile["Usability:UserMode" + PortalSettings.Current.PortalId] != null)
-            {
-                personalization.Profile["Usability:UserMode" + PortalSettings.Current.PortalId] = mode.ToUpper();
-                personalization.IsModified = true;
-                personalizationController.SaveProfile(personalization);
-            }
+            personalization.Profile["Usability:UserMode" + PortalSettings.Current.PortalId] = mode.ToUpper();
+            personalization.IsModified = true;
+            personalizationController.SaveProfile(personalization);
         }
 
         #region Migrate Page
