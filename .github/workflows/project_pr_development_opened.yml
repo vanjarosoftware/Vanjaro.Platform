@@ -1,4 +1,4 @@
-name: Auto Assign to Project(s)
+name: Assign PR to Development Project
 
 on:
   pull_request:
@@ -9,9 +9,9 @@ env:
 jobs:
   assign_one_project:
     runs-on: ubuntu-latest
-    name: Assign to One Project
+    name: Assign PR to development project
     steps:
-    - name: Assign NEW PRs to development project
+    - name: Assign PR to development project
       uses: srggrs/assign-one-project-github-action@1.2.0
       if: github.event.action == 'opened'
       with:
