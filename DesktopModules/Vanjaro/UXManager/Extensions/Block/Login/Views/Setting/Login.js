@@ -113,15 +113,5 @@
         }
     });
 
-    $scope.$watch('ui.data.ShowGoogleReCaptcha.Value', function (newValue, oldValue) {
-        if (newValue != undefined && oldValue != undefined) {
-            var login = window.parent.VjEditor.getSelected();
-            if (newValue)
-                login.addAttributes({ 'data-block-showgooglerecaptcha': 'true' });
-            else
-                login.addAttributes({ 'data-block-showgooglerecaptcha': 'false' });
-            $scope.ApplyChanges(login);
-        }
-    });
 
 });
