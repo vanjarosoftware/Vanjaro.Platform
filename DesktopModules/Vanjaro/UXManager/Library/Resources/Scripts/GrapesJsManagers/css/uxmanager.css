@@ -172,7 +172,7 @@ li.openbtn {
 .jsPanel-content::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background: rgba(170, 170, 170, 0.3);
-    outline: 1px solid slategrey;
+    outline: none;
     -webkit-transition: background-color .2s linear,width .2s ease-in-out;
     -o-transition: background-color .2s linear,width .2s ease-in-out;
     transition: background-color .2s linear,width .2s ease-in-out;
