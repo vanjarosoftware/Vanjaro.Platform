@@ -68,16 +68,15 @@ namespace Vanjaro.UXManager.Library
             {
                 if (string.IsNullOrEmpty(Request.QueryString["ctl"]) && (string.IsNullOrEmpty(Request.QueryString["icp"]) || Convert.ToBoolean(Request.QueryString["icp"]) == false))
                 {
-                    if (string.IsNullOrEmpty(Request.QueryString["uxmode"]))
-                    {
-                        Literal lt = new Literal();
-                        IDictionary<string, object> dynObjects = new ExpandoObject() as IDictionary<string, object>;
-                        dynObjects.Add("Setting", GetBaseModel());
-                        string Template = RazorEngineManager.RenderTemplate("VanjaroUXManager", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/"), "Base", dynObjects);
-                        Template = new DNNLocalizationEngine(null, Server.MapPath("~/DesktopModules/Vanjaro/UXManager/Library/App_LocalResources/Shared.resx"), ShowMissingKeys).Parse(Template);
-                        lt.Text = Template;
-                        Controls.Add(lt);
-                    }
+
+                    Literal lt = new Literal();
+                    IDictionary<string, object> dynObjects = new ExpandoObject() as IDictionary<string, object>;
+                    dynObjects.Add("Setting", GetBaseModel());
+                    string Template = RazorEngineManager.RenderTemplate("VanjaroUXManager", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/"), "Base", dynObjects);
+                    Template = new DNNLocalizationEngine(null, Server.MapPath("~/DesktopModules/Vanjaro/UXManager/Library/App_LocalResources/Shared.resx"), ShowMissingKeys).Parse(Template);
+                    lt.Text = Template;
+                    Controls.Add(lt);
+
 
                     string DirectoryPath = System.Web.Hosting.HostingEnvironment.MapPath("~/DesktopModules/Vanjaro/UXManager/Library/Resources/tui/");
                     if (Directory.Exists(DirectoryPath))

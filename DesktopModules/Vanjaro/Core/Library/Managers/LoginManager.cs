@@ -159,6 +159,8 @@ namespace Vanjaro.Core
 
                 if (OAuthClients == null)
                 {
+                    OAuthClients = new List<IOAuthClient>();
+
                     string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll")).ToArray();
 
                     foreach (string Path in binAssemblies)
