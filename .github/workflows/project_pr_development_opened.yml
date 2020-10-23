@@ -16,4 +16,3 @@ jobs:
       if: github.event.action == 'opened'
       with:
         project: 'https://github.com/vanjarosoftware/Vanjaro.Platform/projects/7'
-        column_name: 'In progress'
