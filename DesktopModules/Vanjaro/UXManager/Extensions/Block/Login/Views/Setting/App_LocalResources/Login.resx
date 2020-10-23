@@ -150,15 +150,6 @@
   <data name="SettingTitle.Text" xml:space="preserve">
     <value>Sign In Form</value>
   </data>
-  <data name="ShowGoogleReCaptcha.OFF" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="ShowGoogleReCaptcha.ON" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="ShowGoogleReCaptcha.Text" xml:space="preserve">
-    <value>Show ReCaptcha</value>
-  </data>
   <data name="ShowLabel.OFF" xml:space="preserve">
     <value>No</value>
   </data>

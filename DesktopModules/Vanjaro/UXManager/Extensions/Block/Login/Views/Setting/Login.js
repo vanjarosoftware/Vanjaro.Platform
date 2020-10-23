@@ -15,7 +15,6 @@
                 $scope.ui.data.ButtonAlign.Value = $scope.ui.data.GlobalConfigs.Options['data-block-buttonalign'];
                 $scope.ui.data.ResetPassword.Value = $scope.ui.data.GlobalConfigs.Options['data-block-resetpassword'] == "false" ? false : true;
                 $scope.ui.data.ShowRegister.Value = $scope.ui.data.GlobalConfigs.Options['data-block-showregister'] == "false" ? false : true;
-                $scope.ui.data.ShowGoogleReCaptcha.Value = $scope.ui.data.GlobalConfigs.Options['data-block-showgooglerecaptcha'] == "false" ? false : true;
             }
             else {
                 $scope.ui.data.ShowResetPassword.Value = $scope.CurrentLogin.attributes.attributes['data-block-showresetpassword'] == "false" ? false : true;
@@ -24,7 +23,6 @@
                 $scope.ui.data.ButtonAlign.Value = $scope.CurrentLogin.attributes.attributes['data-block-buttonalign'];
                 $scope.ui.data.ResetPassword.Value = $scope.CurrentLogin.attributes.attributes['data-block-resetpassword'] == "false" ? false : true;
                 $scope.ui.data.ShowRegister.Value = $scope.CurrentLogin.attributes.attributes['data-block-showregister'] == "false" ? false : true;
-                $scope.ui.data.ShowGoogleReCaptcha.Value = $scope.CurrentLogin.attributes.attributes['data-block-showgooglerecaptcha'] == "false" ? false : true;
             }
         }
         $scope.Loaded = true;

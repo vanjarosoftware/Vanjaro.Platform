@@ -13,13 +13,11 @@
                 $scope.ui.data.ShowLabel.Value = $scope.ui.data.GlobalConfigs.Options['data-block-showlabel'] == "false" ? false : true;
                 $scope.ui.data.TermsPrivacy.Value = $scope.ui.data.GlobalConfigs.Options['data-block-termsprivacy'] == "false" ? false : true;
                 $scope.ui.data.ButtonAlign.Value = $scope.ui.data.GlobalConfigs.Options['data-block-buttonalign'];
-                $scope.ui.data.ShowGoogleReCaptcha.Value = $scope.ui.data.GlobalConfigs.Options['data-block-showgooglerecaptcha'] == "false" ? false : true;
             }
             else {
                 $scope.ui.data.ShowLabel.Value = $scope.CurrentRegistration.attributes.attributes['data-block-showlabel'] == "false" ? false : true;
                 $scope.ui.data.TermsPrivacy.Value = $scope.ui.data.GlobalConfigs.Options['data-block-termsprivacy'] == "false" ? false : true;
                 $scope.ui.data.ButtonAlign.Value = $scope.ui.data.GlobalConfigs.Options['data-block-buttonalign'];
-                $scope.ui.data.ShowGoogleReCaptcha.Value = $scope.CurrentRegistration.attributes.attributes['data-block-showgooglerecaptcha'] == "false" ? false : true;
             }
         }
         $scope.Loaded = true;
