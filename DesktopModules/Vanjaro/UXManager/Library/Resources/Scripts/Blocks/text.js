@@ -23,7 +23,7 @@
         model: textModel.extend({
             defaults: Object.assign({}, textModel.prototype.defaults, {
                 droppable: false,
-                classes: ['vj-text', 'text-primary'],
+                classes: ['vj-text', 'text-primary', 'paragraph-style-1'],
                 traits: [
                     {
                         label: 'Alignment',
@@ -81,7 +81,6 @@
                         name: 'styles',
                         type: 'preset_radio',
                         options: [
-                            { id: 'normal', name: 'Normal', class: 'normal' },
                             { id: 'paragraph-style-1', name: 'Style 1', class: 'paragraph-style-1' },
                             { id: 'paragraph-style-2', name: 'Style 2', class: 'paragraph-style-2' },
                             { id: 'paragraph-style-3', name: 'Style 3', class: 'paragraph-style-3' },
