@@ -23,7 +23,7 @@ app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http,
         if ($scope.ui.data.FavIcon.Value == "") {
             $scope.ui.data.FavIcon.Value = $scope.ui.data.DefaultFavIcon.Value;
         }
-        $("#defaultModal .modal-title", parent.document).html('[LS:LogoAndTitle]');
+        $(".uxmanager-modal .modal-title", parent.document).html('[LS:LogoAndTitle]');
         $scope.Click_ShowTab('Logo_Title');
 
         $.each($('input[type="file"]'), function (key, element) {

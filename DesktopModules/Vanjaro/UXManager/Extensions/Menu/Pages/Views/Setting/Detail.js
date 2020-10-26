@@ -261,9 +261,9 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
             $('#Folder').removeClass("active");
             $scope.ui.data.PagesTemplate.Options.pageType = type;
             if ($scope.pid > 0)
-                $("#defaultModal .modal-title", parent.document).html('[L:EditPages]');
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:EditPages]');
             else {
-                $("#defaultModal .modal-title", parent.document).html('[L:AddPages]');
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:AddPages]');
                 $scope.ui.data.PagesTemplate.Options.includeInMenu = true;
             }
         }
@@ -273,9 +273,9 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
             $('#Folder').removeClass("active");
             $scope.ui.data.PagesTemplate.Options.pageType = type;
             if ($scope.pid > 0)
-                $("#defaultModal .modal-title", parent.document).html('[L:EditRedirectLink]');
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:EditRedirectLink]');
             else {
-                $("#defaultModal .modal-title", parent.document).html('[L:AddRedirectLink]');
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:AddRedirectLink]');
                 $scope.ui.data.PagesTemplate.Options.includeInMenu = true;
             }
         }
@@ -285,9 +285,9 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
             $('#Folder').addClass("active");
             $scope.ui.data.PagesTemplate.Options.pageType = type;
             if ($scope.pid > 0)
-                $("#defaultModal .modal-title", parent.document).html('[L:EditFolder]');
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:EditFolder]');
             else
-                $("#defaultModal .modal-title", parent.document).html('[L:AddFolder]');
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:AddFolder]');
             $scope.ui.data.PagesTemplate.Options.includeInMenu = true;
         }
         setTimeout(function () {
@@ -381,9 +381,9 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
 
                         }
                         var ParentScope = parent.document.getElementById("iframe").contentWindow.angular;
-                        if (ParentScope != null && ParentScope != undefined) {
+                        if (ParentScope != null && typeof ParentScope != 'undefined') {
                             var Menuextension = ParentScope.element(".menuextension");
-                            if (ParentScope != undefined && Menuextension != undefined && Menuextension.scope() != undefined && Menuextension.scope().FetchPages != undefined) {
+                            if (typeof Menuextension != 'undefined' && typeof Menuextension.scope != 'undefined' && hasObject(Menuextension.scope(), 'ui.data.PagesTree')) {
                                 if ($scope.pid > 0 && $scope.ParentPageValue != parseInt($scope.ui.data.ParentPage.Value)) {
                                     Menuextension.scope().FetchPages();
                                 }
@@ -403,29 +403,29 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                                         });
                                     }
                                 }
+                                Menuextension.scope().$apply();
+                                Menuextension.scope().init();
                             }
-                            Menuextension.scope().$apply();
-                            Menuextension.scope().init();
                         }
-                    }
-                    $scope.RenderMarkup();
-                    if (parent.GetParameterByName('m2vsetup', parent.window.location) != null && typeof parent.GetParameterByName('m2vsetup', parent.window.location) != undefined && data.Data.url != null) {
-                        parent.window.location.href = data.Data.url + "?migrate=true";
-                    }
-                    else {
-                        if (TabID == 0 || IsCopy) {
-                            if (IsCopy) {
-                                window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageCreatedSuccess]', 'success', data.Data.url);
-                            }
-                            else {
-                                window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageCreatedSuccess]', 'success', data.Data.url);
-                            }
+                        $scope.RenderMarkup();
+                        if (parent.GetParameterByName('m2vsetup', parent.window.location) != null && typeof parent.GetParameterByName('m2vsetup', parent.window.location) != undefined && data.Data.url != null) {
+                            parent.window.location.href = data.Data.url + "?migrate=true";
                         }
                         else {
-                            window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageUpdatedSuccess]', 'success');
+                            if (TabID == 0 || IsCopy) {
+                                if (IsCopy) {
+                                    window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageCreatedSuccess]', 'success', data.Data.url);
+                                }
+                                else {
+                                    window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageCreatedSuccess]', 'success', data.Data.url);
+                                }
+                            }
+                            else {
+                                window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageUpdatedSuccess]', 'success');
+                            }
                         }
+                        $(window.parent.document.body).find('[data-dismiss="modal"]').click();
                     }
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
                 });
             }
             else {

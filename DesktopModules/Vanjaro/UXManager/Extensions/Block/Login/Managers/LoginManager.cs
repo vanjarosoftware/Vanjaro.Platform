@@ -13,8 +13,11 @@ using DotNetNuke.Services.Messaging.Data;
 using DotNetNuke.Services.UserRequest;
 using System;
 using System.Collections;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Web;
 using Vanjaro.Common.Utilities;
+using Vanjaro.Core.Services.Authentication.OAuth;
 using Vanjaro.UXManager.Library.Common;
 using Localization = DotNetNuke.Services.Localization.Localization;
 
@@ -31,23 +34,94 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
 
             public const string LocalResourceFile = "~/DesktopModules/Admin/Authentication/App_LocalResources/Login.ascx.resx";
+
+            public static ActionResult OAuthUserLogin()
+            {
+                ActionResult actionResult = new ActionResult();
+
+                try
+                {
+                    if (HttpContext.Current.Request.QueryString["code"] != null && HttpContext.Current.Request.QueryString["state"] != null)
+                    {
+                        var auth = Core.Managers.LoginManager.GetOAuthClients().Where(i => i.Enabled && i.ProviderName == HttpContext.Current.Request.QueryString["state"]).SingleOrDefault();
+
+                        if (auth != null)
+                        {
+                            auth.Client.ProcessResources(HttpContext.Current.Request.QueryString["state"]);
+
+                            if (auth.Client.User.Id != null && auth.Client.User.Name != null && auth.Client.User.Email != null)
+                            {
+                                string username = auth.ProviderName + "-" + auth.Client.User.Id;
+
+                                var loginStatus = UserLoginStatus.LOGIN_SUCCESS;
+
+                                UserInfo objUserInfo = MembershipProvider.Instance().GetUserByUserName(PortalSettings.Current.PortalId, username);
+
+                                if (objUserInfo == null)
+                                {
+                                    objUserInfo = new UserInfo()
+                                    {
+                                        PortalID = PortalSettings.Current.PortalId,
+                                        Email = auth.Client.User.Email,
+                                        DisplayName = auth.Client.User.Name,
+                                        Username = username
+                                    };
+
+                                    if (objUserInfo.DisplayName.IndexOf(' ') > 0)
+                                    {
+                                        objUserInfo.FirstName = objUserInfo.DisplayName.Substring(0, objUserInfo.DisplayName.IndexOf(' '));
+                                        objUserInfo.LastName = objUserInfo.DisplayName.Substring(objUserInfo.DisplayName.IndexOf(' ') + 1);
+                                    }
+                                    else
+                                    {
+                                        objUserInfo.FirstName = auth.Client.User.Name;
+                                        objUserInfo.LastName = string.Empty;
+                                    }
+
+                                    objUserInfo.Membership.Approved = true;
+                                    objUserInfo.Membership.Password = UserController.GeneratePassword();
+
+                                    var createStatus = UserController.CreateUser(ref objUserInfo);
+                                }
+                                else
+                                {
+                                    if (objUserInfo.DisplayName != auth.Client.User.Name)
+                                    {
+                                        objUserInfo.DisplayName = auth.Client.User.Name;
+                                        UserController.UpdateUser(PortalSettings.Current.PortalId, objUserInfo);
+                                    }
+                                }
+
+                                var eventArgs = new UserAuthenticatedEventArgs(objUserInfo, username, loginStatus, auth.ProviderName)
+                                {
+                                    UserName = username,
+                                    RememberMe = true
+                                };
+
+                                actionResult = UserAuthenticated(eventArgs);
+
+                                if (!string.IsNullOrEmpty(actionResult.RedirectURL))
+                                    HttpContext.Current.Response.Redirect(actionResult.RedirectURL, true);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex )
+                {
+                    actionResult.AddError("OAuthClientError", Localization.GetString("OAuthClientError", Components.Constants.LocalResourcesFile));
+                }
+
+                return actionResult;
+            }
             public static string GetRedirectUrl(bool checkSettings = true)
             {
                 string redirectUrl = "";
                 int redirectAfterLogin = PortalSettings.Current.Registration.RedirectAfterLogin;
 
-                if (HttpContext.Current.Request.QueryString["returnurl"] != null || HttpUtility.ParseQueryString(HttpContext.Current.Request.UrlReferrer.Query)["returnurl"] != null)
+                if (HttpContext.Current.Request.QueryString["returnurl"] != null)
                 {
-                    //return to the url passed to login
-                    if (HttpContext.Current.Request.QueryString["returnurl"] != null)
-                    {
-                        redirectUrl = HttpUtility.UrlDecode(HttpContext.Current.Request.QueryString["returnurl"]);
-                    }
-                    else
-                    {
-                        redirectUrl = HttpUtility.UrlDecode(HttpUtility.ParseQueryString(HttpContext.Current.Request.UrlReferrer.Query)["returnurl"]);
-                    }
-
+                    redirectUrl = HttpUtility.UrlDecode(HttpContext.Current.Request.QueryString["returnurl"]);
+                    
                     //clean the return url to avoid possible XSS attack.
                     redirectUrl = UrlUtils.ValidReturnUrl(redirectUrl);
 
@@ -541,6 +615,16 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                 };
                 log.AddProperty(propertyName, propertyValue);
                 LogController.Instance.AddLog(log);
+            }
+
+            public static string IPAddress
+            {
+                get
+                {
+                    var controller = UserRequestIPAddressController.Instance;
+                    var request = new HttpRequestWrapper(HttpContext.Current.Request);
+                    return controller.GetUserRequestIPAddress(request);
+                }
             }
         }
     }

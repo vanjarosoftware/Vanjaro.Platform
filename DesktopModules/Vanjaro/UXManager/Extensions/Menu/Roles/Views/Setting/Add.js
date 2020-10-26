@@ -55,9 +55,8 @@
             $scope.isDisabled = true;
             common.webApi.post('role/saverole', '', $scope.ui.data.Working_RoleDto.Options).success(function (data) {
                 if (data.IsSuccess) {
-                    if (parent.document.getElementById("iframe").contentWindow.angular != undefined
-                        && parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope() != undefined
-                        && parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope().ui.data.RoleGroup != undefined) {
+                    var ParentScope = parent.document.getElementById("iframe").contentWindow.angular;
+                    if (ParentScope != undefined && ParentScope.element(".menuextension") != undefined && ParentScope.element(".menuextension").scope() != undefined && has(ParentScope.element(".menuextension").scope(), 'ui.data.RoleGroup')) {
                         $scope.ParentScope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
                         var option = { GroupId: data.Data.Roles[0].GroupId, Name: data.Data.Roles[0].GroupName };
                         if ($scope.ParentScope.FilterGroupOption != null)
@@ -76,5 +75,14 @@
                 $scope.isDisabled = false;
             });
         }
+    };
+
+    has = function (obj, key) {
+        return key.split(".").every(function (x) {
+            if (typeof obj != "object" || obj === null || !x in obj || typeof obj[x] === "undefined")
+                return false;
+            obj = obj[x];
+            return true;
+        });
     };
 });

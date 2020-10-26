@@ -30,6 +30,45 @@ namespace Vanjaro.Core
     {
         public class SettingManager
         {
+
+            public static string GetHostSetting(string Name, bool Secure, string defaultValue = "")
+            {
+                HostController hostController = new HostController();
+                if (Secure)
+                    return hostController.GetEncryptedString("Vanjaro.Integration.YouTube", Config.GetDecryptionkey());
+                return hostController.GetString(Name,defaultValue);
+            }
+            public static bool GetHostSettingAsBoolean(string Name, bool defaultValue = false)
+            {
+                HostController hostController = new HostController();
+                return hostController.GetBoolean(Name, defaultValue);
+            }
+            public static void UpdateHostSetting(string Name, string Value, bool Secure)
+            {
+                HostController hostController = new HostController();
+                if (Secure)
+                    hostController.UpdateEncryptedString(Name, Value, Config.GetDecryptionkey());
+                else
+                    hostController.Update(Name, Value, false);
+            }
+            public static string GetPortalSetting(string Name, bool Secure, string defaultValue = "")
+            {
+                if (Secure)
+                    return PortalController.GetEncryptedString(Name, PortalController.Instance.GetCurrentSettings().PortalId, Config.GetDecryptionkey());
+                return PortalController.GetPortalSetting(Name, PortalController.Instance.GetCurrentSettings().PortalId, defaultValue);
+            }
+            public static bool GetPortalSettingAsBoolean(string Name, bool defaultValue = false)
+            {
+                return PortalController.GetPortalSettingAsBoolean(Name, PortalController.Instance.GetCurrentSettings().PortalId, defaultValue);
+            }
+            public static void UpdatePortalSetting(string Name, string Value, bool Secure)
+            {
+                if (Secure)
+                    PortalController.UpdateEncryptedString(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, Config.GetDecryptionkey());
+                else
+                    PortalController.UpdatePortalSetting(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, false);
+            }           
+
             public static void UpdateValue(int PortalID, int TabID, string Identifier, string Name, string Value)
             {
                 SettingFactory.UpdateValue(PortalID, TabID, Identifier, Name, Value);

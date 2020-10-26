@@ -53,7 +53,7 @@
             }
         });
 
-        $(window.parent.document.body).find('#defaultModal').on('hidden.bs.modal', function () {
+        $(window.parent.document.body).find('.uxmanager-modal').on('hidden.bs.modal', function () {
             $(window.parent.document.body).find(".Gravitar").remove();
         })
 

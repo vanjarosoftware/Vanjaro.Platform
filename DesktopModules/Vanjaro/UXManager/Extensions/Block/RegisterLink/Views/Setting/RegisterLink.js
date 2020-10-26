@@ -3,7 +3,7 @@
     $scope.Loaded = false;
 
     $scope.onInit = function () {
-        $("#defaultModal .modal-title", parent.document).html('[L:SettingTitle]');
+        $(".uxmanager-modal .modal-title", parent.document).html('[L:SettingTitle]');
         $scope.CurrentRegistrationLink = window.parent.VjEditor.getSelected();
         if ($scope.CurrentRegistrationLink != undefined) {
             $scope.ui.data.Global.Value = $scope.CurrentRegistrationLink.attributes.attributes["data-block-global"] == "false" ? false : true;

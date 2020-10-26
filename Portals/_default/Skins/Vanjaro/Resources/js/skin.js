@@ -95,26 +95,35 @@ GetPopupURL = function (TabUrl, Param) {
     return TabUrl + Param;
 };
 
-OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isnew, ModuleId) {
+OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, removemodals, ModuleId, scrollbars, titleposition) {
 
-    var id = 'defaultModal';
+    var id = 'vjModal' + (new Date()).getTime();
     var fullScreen = false;
-    var showTogglebtn = false;
     var edit = "";
     var fullwidth = '';
-    var scrolling = 'no';
+    var scrolling;
 
-    if (typeof showtogglebtn != 'undefined' && showtogglebtn)
-        showTogglebtn = true;
-
-    if (width == "100%") {
-        fullwidth = 'fullwidth';
-        fullScreen = true;
-        scrolling = 'yes';
+    if (typeof scrollbars != 'undefined') {
+        if (scrollbars)
+            scrolling = 'yes';
+        else
+            scrolling = 'no';
     }
 
-    if (isnew)
-        id += 'new';
+    if (typeof titleposition == 'undefined')
+        titleposition = '';
+
+    if (typeof showtogglebtn == 'undefined')
+        showtogglebtn = false
+
+    if (width == "100%") {
+
+        fullwidth = 'fullwidth';
+        fullScreen = true;
+
+        if (typeof scrollbars == 'undefined')
+            scrolling = 'yes';;
+    }
 
     if (typeof ModuleId != 'undefined')
         edit = 'data-edit="edit_module" data-mid="' + ModuleId + '"';
@@ -123,7 +132,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel"></h4>
+                    <h4 class="modal-title ` + titleposition + `" id="defaultModalLabel"></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body" id="UXRender">
@@ -134,22 +143,16 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
         </div>
     </div>`;
 
+    if (typeof removemodals != 'undefined' && removemodals)
+        $("body div[id*='vjModal'], .modal-backdrop").remove();
+
     if ($('body').find('#' + id).length <= 0)
         $('body').append(modal);
 
     var $modal = $('#' + id);
 
     if (url != '') {
-        var iframeurl = url;
         $modal.find('#UXpagerender').on("load", function () {
-            //Not Required Anymore
-            //try {
-            //    // Change check for library.html (!url.startsWith('~'))
-            //    if (GetParameterByName('mid', this.contentWindow.location.href) == null && !iframeurl.startsWith('~'))
-            //        $(window.parent.document.body).find('[data-dismiss="modal"]').trigger('click');
-            //}
-            //catch (e) {
-            //}
             var $iframe = $(this);
             $iframe.prev().hide();
             $iframe.show();
@@ -222,9 +225,9 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
     $modal.find('.modal-dialog').removeAttr('style');
 
     if (fullScreen)
-        $modal.find('.modal-dialog').width('100%').addClass('center');
+        $modal.find('.modal-dialog').width('100%');
     else
-        $modal.find('.modal-dialog').width(width).removeClass('center');
+        $modal.find('.modal-dialog').width(width);
 
     if (typeof height != 'undefined') {
 
@@ -243,12 +246,13 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
     if (position === 'right')
         $modal.find('.modal-dialog').addClass('modal-right');
 
-    if (isnew) {
-        $modal.css('z-index', '1051');
-        $modal.next(".modal-backdrop").css('z-index', '1050');
-    }
+    var $backdrop = $modal.prev('.modal-backdrop');
 
-    var submitButton = $("iframe").contents().find("#" + id + " #save");
+    if ($backdrop.length && $backdrop.prev('div[id*="vjModal"]').length) {
+        var zindex = parseInt($backdrop.prev('div[id*="vjModal"]').css('z-index'));
+        $modal.css('z-index', zindex + 2);
+        $modal.next(".modal-backdrop").css('z-index', zindex + 1);
+    }
 
     window.document.callbacktype = '';
 
@@ -261,7 +265,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
                     iframe[0].src = iframe[0].src;
                 }
             }
-            var appid = $(window.document.body).find('#defaultModal').data('mid')
+            var appid = $(window.document.body).find('.uxmanager-modal').data('mid')
             var appdiv = "#dnn_vj_" + appid;
             var $appframe = $('.gjs-frame').contents().find(appdiv).find("#Appframe");
 
@@ -282,8 +286,8 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
     $modal.modal('show');
 
     $(window.parent.document.body).find('[data-dismiss="modal"]').on("click", function (e) {
-        if ($(window.document.body).find('#defaultModal').data('edit') == 'edit_module') {
-            var mid = $(window.document.body).find('#defaultModal').data('mid');
+        if ($(window.document.body).find('.uxmanager-modal').data('edit') == 'edit_module') {
+            var mid = $(window.document.body).find('.uxmanager-modal').data('mid');
             if ($('.gjs-frame').contents().find('#dnn_vj_' + mid).length > 0) {
                 var framesrc = CurrentTabUrl;
                 if (framesrc.indexOf("?") == -1)
@@ -307,10 +311,10 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
 $(document).keyup(function (e) {
     var code = e.keyCode || e.which;
     if (code == 27 && $('[ng-show=ShowFileManager]:not(".ng-hide")').length <= 0) {
-        var $modal = $("#defaultModal");
+        var $modal = $(".uxmanager-modal");
 
         if ($modal.length <= 0)
-            $modal = $(window.parent.document.body).find('#defaultModal');
+            $modal = $(window.parent.document.body).find('.uxmanager-modal');
 
         if ($modal.length > 0)
             $modal.find('[data-dismiss="modal"]').click();
@@ -382,7 +386,7 @@ $(document).ready(function () {
         $("body").append(modal);
     }
 
-    $('#defaultModal [data-dismiss="modal"]').on("click", function (e) {
+    $('.uxmanager-modal [data-dismiss="modal"]').on("click", function (e) {
         $('#UXpagerender').show().siblings().remove();
     });
 
@@ -597,4 +601,23 @@ $(window).resize(function () {
     };
 })(jQuery);
 
+var vj_recaptcha_responsetoken = "";
+
+function validateCaptcha(el, action, callback) {
+    if (typeof grecaptcha !== "undefined") {
+        var sitekey = $('#vjrecaptcha').data('sitekey');
+        grecaptcha.ready(function () {
+            grecaptcha.execute(sitekey, { action: action }).then(function (token) {
+                vj_recaptcha_responsetoken = token;
+                callback(el);
+            });
+        });
+    } else {
+        callback(el);
+    }
+}
+
+$(document).on("ajaxSend", function (event, xhr, settings) {
+    xhr.setRequestHeader('vj-recaptcha', vj_recaptcha_responsetoken);
+});
 

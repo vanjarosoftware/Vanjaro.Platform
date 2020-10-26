@@ -7,12 +7,13 @@
     $scope.CurrentMenu;
 
     $scope.onInit = function () {
-        $("#defaultModal .modal-title", parent.document).html('[L:SettingTitle]');
+        $(".uxmanager-modal .modal-title", parent.document).html('[L:SettingTitle]');
         $scope.CurrentMenu = window.parent.VjEditor.getSelected();
         if ($scope.CurrentMenu != undefined) {
             $scope.ui.data.Global.Value = $scope.CurrentMenu.attributes.attributes["data-block-global"] == "false" ? false : true;
             if ($scope.ui.data.Global.Value) {
                 $scope.ui.data.IncludeHiddenPageNo.Value = $scope.ui.data.GlobalConfigs.Options["data-block-includehidden"] == "false" ? false : true;
+                $scope.ui.data.Template.Value = $scope.ui.data.GlobalConfigs.Options["data-block-template"];
                 if ($scope.ui.data.GlobalConfigs.Options["data-block-nodeselector"] != "*") {
                     $scope.ui.data.DisplayAllPages.Value = false;
                     var nodeItems = $scope.ui.data.GlobalConfigs.Options["data-block-nodeselector"].split(',');
@@ -40,6 +41,7 @@
             }
             else {
                 $scope.ui.data.IncludeHiddenPageNo.Value = $scope.CurrentMenu.attributes.attributes["data-block-includehidden"] == "false" ? false : true;
+                $scope.ui.data.Template.Value = $scope.CurrentMenu.attributes.attributes["data-block-template"];
                 if ($scope.CurrentMenu.attributes.attributes["data-block-nodeselector"] != "*") {
                     $scope.ui.data.DisplayAllPages.Value = false;
                     var nodeItems = $scope.CurrentMenu.attributes.attributes["data-block-nodeselector"].split(',');
@@ -77,6 +79,14 @@
                 menu.addAttributes({ 'data-block-global': 'true' });
             else
                 menu.addAttributes({ 'data-block-global': 'false' });
+            $scope.ApplyChanges(menu);
+        }
+    });
+
+    $scope.$watch('ui.data.Template.Value', function (newValue, oldValue) {
+        if (newValue != undefined && oldValue != undefined) {
+            var menu = window.parent.VjEditor.getSelected();
+            menu.addAttributes({ 'data-block-template': newValue });
             $scope.ApplyChanges(menu);
         }
     });

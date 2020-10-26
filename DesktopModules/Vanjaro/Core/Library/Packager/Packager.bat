@@ -1,5 +1,4 @@
 @echo off
-xcopy /e /i ..\DesktopModules\Vanjaro\Core\Library\Themes\* ..\Portals\_default\vThemes\*  /Y >NUL
 setlocal
 :PROMPT
 SET /P AREYOUSURE=Build Packages (Y/[N])?: 

@@ -183,4 +183,7 @@
   <data name="SkipPages.Text" xml:space="preserve">
     <value>Skip Pages</value>
   </data>
+  <data name="Template.Text" xml:space="preserve">
+    <value>Style</value>
+  </data>
 </root>

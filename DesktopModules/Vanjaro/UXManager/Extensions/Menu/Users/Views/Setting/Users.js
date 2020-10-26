@@ -216,7 +216,7 @@
                         }
                     });
                 }
-            });        
+            });
     };
 
 
@@ -261,7 +261,7 @@
                 $scope.Pipe_DeletedUserPagging($scope.pagginationData);
                 $scope.Pipe_AllUserPagging($scope.allUserPagginationData);
                 window.parent.ShowNotification(row.DisplayName, '[L:Success_RemoveUserMessage]', 'success');
-                Click_Back();
+                $scope.Click_Back();
             }
             else {
                 window.parent.ShowNotification(row.DisplayName, data.Message, 'error');
