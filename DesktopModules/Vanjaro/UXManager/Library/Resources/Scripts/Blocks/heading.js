@@ -26,7 +26,7 @@
 				'custom-name': 'Heading',
 				droppable: false,
 				tagName: 'h1',
-                classes: ['vj-heading', 'text-primary'],
+                classes: ['vj-heading', 'text-primary', 'head-style-1'],
 				traits: [
 					{
 						label: 'Importance',
@@ -99,7 +99,6 @@
 						name: 'styles',
 						type: 'preset_radio',
 						options: [
-							{ id: 'normal', name: 'Normal', class: 'normal' },
 							{ id: 'head-style-1', name: 'Style 1', class: 'head-style-1' },
 							{ id: 'head-style-2', name: 'Style 2', class: 'head-style-2' },
 							{ id: 'head-style-3', name: 'Style 3', class: 'head-style-3' },
@@ -137,7 +136,7 @@
             onRender() {
                 var hasClass = this.model.getClasses().find(v => v == 'vj-heading' || v == 'text-primary')
                 if (typeof hasClass == 'undefined')
-                    this.model.addClass('vj-heading text-primary');
+                    this.model.addClass('vj-heading  text-primary');
             },
         })
 	});
