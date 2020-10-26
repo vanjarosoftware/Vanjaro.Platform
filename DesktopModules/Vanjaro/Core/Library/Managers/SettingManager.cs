@@ -43,7 +43,14 @@ namespace Vanjaro.Core
                 HostController hostController = new HostController();
                 return hostController.GetBoolean(Name, defaultValue);
             }
-
+            public static void UpdateHostSetting(string Name, string Value, bool Secure)
+            {
+                HostController hostController = new HostController();
+                if (Secure)
+                    hostController.UpdateEncryptedString(Name, Value, Config.GetDecryptionkey());
+                else
+                    hostController.Update(Name, Value, false);
+            }
             public static string GetPortalSetting(string Name, bool Secure, string defaultValue = "")
             {
                 if (Secure)
@@ -54,6 +61,13 @@ namespace Vanjaro.Core
             {
                 return PortalController.GetPortalSettingAsBoolean(Name, PortalController.Instance.GetCurrentSettings().PortalId, defaultValue);
             }
+            public static void UpdatePortalSetting(string Name, string Value, bool Secure)
+            {
+                if (Secure)
+                    PortalController.UpdateEncryptedString(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, Config.GetDecryptionkey());
+                else
+                    PortalController.UpdatePortalSetting(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, false);
+            }           
 
             public static void UpdateValue(int PortalID, int TabID, string Identifier, string Name, string Value)
             {

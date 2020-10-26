@@ -13,6 +13,7 @@ using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.Controllers
 {
@@ -27,16 +28,16 @@ namespace Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.Controllers
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>
             {
                 { "IsSuperUser", new UIData { Name = "IsSuperUser", Options = IsSuperUser } },
-                { "SMTPmode", new UIData { Name = "SMTPmode", Options = IsSuperUser? Core.Managers.SettingManager.GetPortalSetting("SMTPmode", false, mode) == mode:false } },
-                { "Host_Server", new UIData { Name = "Host_Server", Value = Core.Managers.SettingManager.GetHostSetting("SMTPServer",false) } },
-                { "Host_Username", new UIData { Name = "Host_Username", Value = Core.Managers.SettingManager.GetHostSetting("SMTPUsername",false) } },
-                { "Host_Password", new UIData { Name = "Host_Password", Value = Core.Managers.SettingManager.GetHostSetting("SMTPPassword", true) } },
-                { "Host_Email", new UIData { Name = "Host_Email", Value = Core.Managers.SettingManager.GetHostSetting("SMTPEmail",false,PortalSettings.Email) } },
-                { "Host_EnableSSL", new UIData { Name = "Host_EnableSSL", Options = Core.Managers.SettingManager.GetHostSettingAsBoolean("SMTPEnableSSL", false) } },
-                { "Portal_Server", new UIData { Name = "Portal_Server", Value = Core.Managers.SettingManager.GetPortalSetting("SMTPServer", false) } },
-                { "Portal_Username", new UIData { Name = "Portal_Username", Value = Core.Managers.SettingManager.GetPortalSetting("SMTPUsername", false) } },
-                { "Portal_Password", new UIData { Name = "Portal_Password", Value = Core.Managers.SettingManager.GetPortalSetting("SMTPPassword", true) } },
-                { "Portal_EnableSSL", new UIData { Name = "Portal_EnableSSL", Options = Core.Managers.SettingManager.GetPortalSetting("SMTPEnableSSL", false) == "Y" } }
+                { "SMTPmode", new UIData { Name = "SMTPmode", Options = IsSuperUser? SettingManager.GetPortalSetting("SMTPmode", false, mode) == mode:false } },
+                { "Host_Server", new UIData { Name = "Host_Server", Value = SettingManager.GetHostSetting("SMTPServer",false) } },
+                { "Host_Username", new UIData { Name = "Host_Username", Value = SettingManager.GetHostSetting("SMTPUsername",false) } },
+                { "Host_Password", new UIData { Name = "Host_Password", Value = SettingManager.GetHostSetting("SMTPPassword", true) } },
+                { "Host_Email", new UIData { Name = "Host_Email", Value = SettingManager.GetHostSetting("SMTPEmail",false,PortalSettings.Email) } },
+                { "Host_EnableSSL", new UIData { Name = "Host_EnableSSL", Options = SettingManager.GetHostSettingAsBoolean("SMTPEnableSSL", false) } },
+                { "Portal_Server", new UIData { Name = "Portal_Server", Value = SettingManager.GetPortalSetting("SMTPServer", false) } },
+                { "Portal_Username", new UIData { Name = "Portal_Username", Value = SettingManager.GetPortalSetting("SMTPUsername", false) } },
+                { "Portal_Password", new UIData { Name = "Portal_Password", Value = SettingManager.GetPortalSetting("SMTPPassword", true) } },
+                { "Portal_EnableSSL", new UIData { Name = "Portal_EnableSSL", Options = SettingManager.GetPortalSetting("SMTPEnableSSL", false) == "Y" } }
             };
             return Settings.Values.ToList();
         }
@@ -49,23 +50,22 @@ namespace Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.Controllers
             {
                 if (bool.Parse(Data.SMTPmode.ToString()))
                 {
-                    PortalController.UpdatePortalSetting(PortalSettings.PortalId, "SMTPmode", "h");
-                    HostController hostController = new HostController();
-                    hostController.Update("SMTPServer", Data.Host_Server.ToString(), false);
-                    hostController.Update("SMTPAuthentication", "1", false);
-                    hostController.Update("SMTPUsername", Data.Host_Username.ToString(), false);
-                    hostController.Update("SMTPEmail", Data.Host_Email.ToString(), false);
-                    hostController.UpdateEncryptedString("SMTPPassword", Data.Host_Password.ToString(), Config.GetDecryptionkey());
-                    hostController.Update("SMTPEnableSSL", bool.Parse(Data.Host_EnableSSL.ToString()) ? "Y" : "N", false);
+                    SettingManager.UpdatePortalSetting("SMTPmode", "h", false);
+                    SettingManager.UpdateHostSetting("SMTPServer", Data.Host_Server.ToString(), false);
+                    SettingManager.UpdateHostSetting("SMTPAuthentication", "1", false);
+                    SettingManager.UpdateHostSetting("SMTPUsername", Data.Host_Username.ToString(), false);
+                    SettingManager.UpdateHostSetting("SMTPEmail", Data.Host_Email.ToString(), false);
+                    SettingManager.UpdateHostSetting("SMTPPassword", Data.Host_Password.ToString(), true);
+                    SettingManager.UpdateHostSetting("SMTPEnableSSL", bool.Parse(Data.Host_EnableSSL.ToString()) ? "Y" : "N", false);
                 }
                 else
                 {
-                    PortalController.UpdatePortalSetting(PortalSettings.PortalId, "SMTPmode", "p");
-                    PortalController.UpdatePortalSetting(PortalSettings.PortalId, "SMTPAuthentication", "1");
-                    PortalController.UpdatePortalSetting(PortalSettings.PortalId, "SMTPServer", Data.Portal_Server.ToString());
-                    PortalController.UpdatePortalSetting(PortalSettings.PortalId, "SMTPUsername", Data.Portal_Username.ToString());
-                    PortalController.UpdateEncryptedString(PortalSettings.PortalId, "SMTPPassword", Data.Portal_Password.ToString(), Config.GetDecryptionkey());
-                    PortalController.UpdatePortalSetting(PortalSettings.PortalId, "SMTPEnableSSL", bool.Parse(Data.Portal_EnableSSL.ToString()) ? "Y" : "N");
+                    SettingManager.UpdatePortalSetting("SMTPmode", "p", false);
+                    SettingManager.UpdatePortalSetting("SMTPAuthentication", "1", false);
+                    SettingManager.UpdatePortalSetting("SMTPServer", Data.Portal_Server.ToString(), false);
+                    SettingManager.UpdatePortalSetting("SMTPUsername", Data.Portal_Username.ToString(), false);
+                    SettingManager.UpdatePortalSetting("SMTPPassword", Data.Portal_Password.ToString(), true);
+                    SettingManager.UpdatePortalSetting("SMTPEnableSSL", bool.Parse(Data.Portal_EnableSSL.ToString()) ? "Y" : "N", false);
                 }
 
                 DataCache.ClearCache();

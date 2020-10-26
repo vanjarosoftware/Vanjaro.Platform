@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
 {
@@ -18,8 +19,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
         internal static List<IUIData> GetData(int portalId, UserInfo userInfo)
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
-            string Site_ApiKey = Core.Managers.SettingManager.GetPortalSetting("Vanjaro.Integration.YouTube", true);
-            string Host_ApiKey = Core.Managers.SettingManager.GetHostSetting("Vanjaro.Integration.YouTube", true);
+            string Site_ApiKey = SettingManager.GetPortalSetting("Vanjaro.Integration.YouTube", true);
+            string Host_ApiKey = SettingManager.GetHostSetting("Vanjaro.Integration.YouTube", true);
 
             Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Options = UserController.Instance.GetCurrentUserInfo().IsSuperUser });
             Settings.Add("ApplyTo", new UIData { Name = "ApplyTo", Options = false });
@@ -37,8 +38,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
             {
                 if (Core.Providers.Youtube.IsValid(Data.Host_ApiKey.ToString()))
                 {
-                    HostController hostController = new HostController();
-                    hostController.UpdateEncryptedString("Vanjaro.Integration.YouTube", Data.Host_ApiKey.ToString(), Config.GetDecryptionkey());
+                    SettingManager.UpdateHostSetting("Vanjaro.Integration.YouTube", Data.Host_ApiKey.ToString(), true);
                 }
                 else
                     return false;
@@ -47,7 +47,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
             {
                 if (Core.Providers.Youtube.IsValid(Data.Site_ApiKey.ToString()))
                 {
-                    PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.YouTube", Data.Site_ApiKey.ToString(), Config.GetDecryptionkey());
+                    SettingManager.UpdatePortalSetting("Vanjaro.Integration.YouTube", Data.Site_ApiKey.ToString(), true);
                 }
                 else
                     return false;
@@ -58,11 +58,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.YouTube.Controllers
         [HttpPost]
         public string Delete(dynamic Data)
         {
-            HostController hostController = new HostController();
             if (bool.Parse(Data.ToString()))
-                hostController.UpdateEncryptedString("Vanjaro.Integration.YouTube", string.Empty, Config.GetDecryptionkey());
+                SettingManager.UpdateHostSetting("Vanjaro.Integration.YouTube", string.Empty, true);
             else
-                PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.YouTube", string.Empty, Config.GetDecryptionkey());
+                SettingManager.UpdatePortalSetting("Vanjaro.Integration.YouTube", string.Empty, true);
             return string.Empty;
         }
         public override string AccessRoles()
