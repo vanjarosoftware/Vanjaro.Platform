@@ -171,7 +171,7 @@ mnSvc.directive('showtab',
             link: function (scope, element, attrs) {
                 element.click(function (e) {
                     e.preventDefault();
-                    $(element).mstab('show');
+                    $(element).tab('show');
                 });
             }
         };
