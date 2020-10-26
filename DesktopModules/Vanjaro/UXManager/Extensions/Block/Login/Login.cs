@@ -16,6 +16,7 @@ using Vanjaro.Common.Entities.Apps;
 using Vanjaro.Common.Manager;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Entities.Menu;
+using Vanjaro.Core.Services;
 using Vanjaro.UXManager.Extensions.Block.Login.Factories;
 using Vanjaro.UXManager.Library.Common;
 using Vanjaro.UXManager.Library.Entities.Interface;
@@ -154,6 +155,8 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
                 string Template = RazorEngineManager.RenderTemplate(ExtensionInfo.GUID, BlockPath, Attributes["data-block-template"], Objects);
                 Template = new DNNLocalizationEngine(null, ResouceFilePath, false).Parse(Template);
+                Captcha.Request();
+
                 return Template;
             }
             catch (Exception ex)

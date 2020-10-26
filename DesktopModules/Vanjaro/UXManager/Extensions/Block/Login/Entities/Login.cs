@@ -11,6 +11,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Entities
         public bool ResetPassword { get; set; }
         public bool ShowRegister { get; set; }
         public string RegisterUrl { get; set; }
+
         public string LoginURL => Managers.LoginManager.LoginURL("", false);
         public int RegistrationMode => (PortalController.Instance.GetCurrentSettings() as PortalSettings).UserRegistration;
         public DataConsent DataConsent => new DataConsent();

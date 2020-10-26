@@ -597,4 +597,23 @@ $(window).resize(function () {
     };
 })(jQuery);
 
+var vj_recaptcha_responsetoken = "";
+
+function validateCaptcha(el, action, callback) {
+    if (typeof grecaptcha !== "undefined") {
+        var sitekey = $('#vjrecaptcha').data('sitekey');
+        grecaptcha.ready(function () {
+            grecaptcha.execute(sitekey, { action: action }).then(function (token) {
+                vj_recaptcha_responsetoken = token;
+                callback(el);
+            });
+        });
+    } else {
+        callback(el);
+    }
+}
+
+$(document).on("ajaxSend", function (event, xhr, settings) {
+    xhr.setRequestHeader('vj-recaptcha', vj_recaptcha_responsetoken);
+});
 
