@@ -1864,12 +1864,17 @@ $(document).ready(function () {
                                                         window.open(t.Url, '_blank');
                                                     else {
                                                         var width = '100%';
-                                                        if (t.Width) {
+
+                                                        if (typeof t.Width == 'undefined')
                                                             width = t.Width;
-                                                        }
+
+                                                        var position = 'right';
+
+                                                        if (typeof t.Position != 'undefined')
+                                                            position = t.Position;
 
                                                         if (t.Url.indexOf('javascript:') == -1)
-                                                            OpenPopUp(null, width, 'right', t.Title, t.Url, '', '', '', t.ModuleId);
+                                                            OpenPopUp(null, width, position, t.Title, t.Url, '', '', '', t.ModuleId, t.Scrollbars, t.TitlePosition);
                                                         else
                                                             eval(t.Url);
                                                     }
