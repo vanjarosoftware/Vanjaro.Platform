@@ -1,7 +1,7 @@
 ﻿<div ng-controller="setting_register" class="vj-ux-manager" ng-show="Loaded">
     <uiengine provider="AngularBootstrap" identifier="setting_register">
         <uilayout name="default">
-            <uielement name="Global" label="false" attr-class="showglobal text-center" control="checkboxtoggle"></uielement>           
+            <uielement name="Global" label="false" attr-class="showglobal text-center" control="checkboxtoggle"></uielement>
             <uitemplate>
                 <div access-roles="admin" mn-ng-show="ui.data.IsAdmin.Value && ui.data.Global.Value" class="vj-alert alert alert-warning" role="alert">
                     [L:IsAdminAlert]
@@ -15,12 +15,14 @@
             <uielement name="ShowLabel" attr-class="toggle_right showlabel" control="toggle"></uielement>
             <uielement name="TermsPrivacy" attr-class="toggle_right" control="toggle"></uielement>
             <uitemplate>
-                <label>[L:ButtonAlign]</label>
-                <div class="btn-group buttonalign" role="group" aria-label="Basic example">
-                    <button type="button" id="left" mn-ng-click="ui.data.ButtonAlign.Value = 'left'" mn-ng-class="ui.data.ButtonAlign.Value == 'left'? 'btn btn-secondary active' :'btn btn-secondary'"><em class="fas fa-align-left"></em></button>
-                    <button type="button" id="center" mn-ng-click="ui.data.ButtonAlign.Value = 'center'" mn-ng-class="ui.data.ButtonAlign.Value == 'center'? 'btn btn-secondary active' :'btn btn-secondary'"><em class="fas fa-align-center"></em></button>
-                    <button type="button" id="right" mn-ng-click="ui.data.ButtonAlign.Value = 'right'" mn-ng-class="ui.data.ButtonAlign.Value == 'right'? 'btn btn-secondary active' :'btn btn-secondary'"><em class="fas fa-align-right"></em></button>
-                    <button type="button" id="justify" mn-ng-click="ui.data.ButtonAlign.Value='justify'" mn-ng-class="ui.data.ButtonAlign.Value == 'justify'? 'btn btn-secondary active' :'btn btn-secondary'"><em class="fas fa-align-justify"></em></button>
+                <div class="form-group">
+                    <label>[L:ButtonAlign]</label>
+                    <div class="btn-group buttonalign" role="group" aria-label="Basic example">
+                        <button type="button" id="left" mn-ng-click="ui.data.ButtonAlign.Value = 'left'" mn-ng-class="ui.data.ButtonAlign.Value == 'left'? 'btn btn-secondary active' :'btn btn-secondary'"><em class="fas fa-align-left"></em></button>
+                        <button type="button" id="center" mn-ng-click="ui.data.ButtonAlign.Value = 'center'" mn-ng-class="ui.data.ButtonAlign.Value == 'center'? 'btn btn-secondary active' :'btn btn-secondary'"><em class="fas fa-align-center"></em></button>
+                        <button type="button" id="right" mn-ng-click="ui.data.ButtonAlign.Value = 'right'" mn-ng-class="ui.data.ButtonAlign.Value == 'right'? 'btn btn-secondary active' :'btn btn-secondary'"><em class="fas fa-align-right"></em></button>
+                        <button type="button" id="justify" mn-ng-click="ui.data.ButtonAlign.Value='justify'" mn-ng-class="ui.data.ButtonAlign.Value == 'justify'? 'btn btn-secondary active' :'btn btn-secondary'"><em class="fas fa-align-justify"></em></button>
+                    </div>
                 </div>
             </uitemplate>
         </uilayout>

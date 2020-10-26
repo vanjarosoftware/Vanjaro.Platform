@@ -6,6 +6,7 @@ using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Api.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
@@ -51,17 +52,24 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
         {
             ActionResult actionResult = new ActionResult();
 
-            dynamic eventArgs = Core.Managers.LoginManager.UserLogin(userLogin);
-
-            if (userLogin.HasAgreedToTerms)
+            if (Core.Services.Captcha.Validate("login"))
             {
-                eventArgs.User.HasAgreedToTerms = true;
-                UserController.UserAgreedToTerms(eventArgs.User);
-                OnDataConsentComplete(new DataConsentEventArgs(DataConsentStatus.Consented));
+
+                dynamic eventArgs = Core.Managers.LoginManager.UserLogin(userLogin);
+
+                if (userLogin.HasAgreedToTerms)
+                {
+                    eventArgs.User.HasAgreedToTerms = true;
+                    UserController.UserAgreedToTerms(eventArgs.User);
+                    OnDataConsentComplete(new DataConsentEventArgs(DataConsentStatus.Consented));
+                }
+
+                actionResult = Managers.LoginManager.UserAuthenticated(eventArgs);
             }
-
-            actionResult = Managers.LoginManager.UserAuthenticated(eventArgs);
-
+            else
+            {
+                actionResult.AddError("recaptcha_error", DotNetNuke.Services.Localization.Localization.GetString("ReCaptcha_Error", Core.Components.Constants.LocalResourcesFile));
+            }
             return actionResult;
         }
 
@@ -74,7 +82,17 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
         [AuthorizeAccessRoles(AccessRoles = "user,anonymous")]
         public ActionResult OnSendPasswordClick(string Email)
         {
-            return Managers.LoginManager.OnSendPasswordClick(Email);
+            ActionResult actionResult = new ActionResult();
+
+            if (Core.Services.Captcha.Validate("resetpassword"))
+            {
+                actionResult = Managers.LoginManager.OnSendPasswordClick(Email);
+            }
+            else
+            {
+                actionResult.AddError("recaptcha_error", DotNetNuke.Services.Localization.Localization.GetString("ReCaptcha_Error", Core.Components.Constants.LocalResourcesFile));
+            }
+            return actionResult;
         }
 
 

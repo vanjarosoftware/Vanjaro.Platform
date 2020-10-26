@@ -70,6 +70,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\bin\Vanjaro.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Vanjaro.Core, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\bin\Vanjaro.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Vanjaro.UXManager.Library, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\bin\Vanjaro.UXManager.Library.dll</HintPath>
