@@ -263,4 +263,5 @@ $(document).ready(function () {
     });
 
     Login.UserLoginAPIUri = window.location.origin + $.ServicesFramework(-1).getServiceRoot("Login") + "Login/UserLogin" + window.location.search;
+    
 });

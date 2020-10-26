@@ -100,7 +100,7 @@
                 login.addAttributes({ 'data-block-showregister': 'false' });
             $scope.ApplyChanges(login);
         }
-    });
+    });      
 
     $scope.$watch('ui.data.Global.Value', function (newValue, oldValue) {
         if (newValue != undefined && oldValue != undefined) {
@@ -112,4 +112,6 @@
             $scope.ApplyChanges(login);
         }
     });
+
+
 });
