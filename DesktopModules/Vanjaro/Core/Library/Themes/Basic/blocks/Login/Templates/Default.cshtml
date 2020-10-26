@@ -1,9 +1,15 @@
 ﻿@inherits System.Web.WebPages.WebPage
 
+@{string socialbutton = ""; }
+@if (Model.OAuthClients.Count > 0)
+{
+    socialbutton = "socialbutton";
+}
+
 <div id="vLoginControls" runat="server"></div>
 <div class="login-container validationGroup" id="LoginControl" runat="server">
     <div class="form-Login">
-        <div class="login-box">
+        <div class="login-box @socialbutton">
             <div class="Login Vj-Login" id="Login">
                 <h4 class="loginhead">[LS:Data.Block.Login.LoginText]</h4>
                 <div class="login-control">
@@ -49,20 +55,22 @@
                     }
                 </div>
             </div>
-            <div class="seaparator-box">
-                <div class="topline"></div>
-                <span class="separator">OR</span>
-                <div class="bottomline"></div>
-            </div>
-            <div class="authentication-btn">
-                <ul>
-                    @foreach (var auth in Model.OAuthClients)
-                    {
-                        <li><a href="@auth.Client.GetAuthorizationUrl()"><img class="btn-img" src="https://www.shareicon.net/data/512x512/2015/09/23/106011_logo_512x512.png" alt="@auth.DisplayName" /><span class="btn-name">@auth.DisplayName</span></a></li>
-                    }
-                </ul>
-            </div>
-
+            @if (Model.OAuthClients.Count > 0)
+            {
+                <div class="separator-box">
+                    <div class="topline"></div>
+                    <span class="separator">OR</span>
+                    <div class="bottomline"></div>
+                </div>
+                <div class="authentication-btn">
+                    <ul>
+                        @foreach (var auth in Model.OAuthClients)
+                        {
+                            <li><a href="@auth.Client.GetAuthorizationUrl()"><img class="btn-img" src="@auth.ImageIcon" alt="@auth.DisplayName" /><span class="btn-name">@auth.DisplayName</span></a></li>
+                        }
+                    </ul>
+                </div>
+            }
         </div>
     </div>
     @if (Model.Login.DataConsent.DataConsentActive)
