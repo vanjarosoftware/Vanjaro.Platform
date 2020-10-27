@@ -35,7 +35,7 @@ namespace Vanjaro.Core
             {
                 HostController hostController = new HostController();
                 if (Secure)
-                    return hostController.GetEncryptedString("Vanjaro.Integration.YouTube", Config.GetDecryptionkey());
+                    return hostController.GetEncryptedString(Name, Config.GetDecryptionkey());
                 return hostController.GetString(Name,defaultValue);
             }
             public static bool GetHostSettingAsBoolean(string Name, bool defaultValue = false)
@@ -49,7 +49,7 @@ namespace Vanjaro.Core
                 if (Secure)
                     hostController.UpdateEncryptedString(Name, Value, Config.GetDecryptionkey());
                 else
-                    hostController.Update(Name, Value, false);
+                    hostController.Update(Name, Value, true);
             }
             public static string GetPortalSetting(string Name, bool Secure, string defaultValue = "")
             {
@@ -66,7 +66,7 @@ namespace Vanjaro.Core
                 if (Secure)
                     PortalController.UpdateEncryptedString(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, Config.GetDecryptionkey());
                 else
-                    PortalController.UpdatePortalSetting(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, false);
+                    PortalController.UpdatePortalSetting(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, true);
             }           
 
             public static void UpdateValue(int PortalID, int TabID, string Identifier, string Name, string Value)
