@@ -1785,7 +1785,9 @@ html.responsive {
     border: 1px solid #ddd;
     border-radius: 3px;
 }
-
+.traitsmanager .gjs-field-href .link-wrapper .link-block input{
+    padding-right:30px;
+}
 .traitsmanager .gjs-field-href .link-wrapper .link-block .email {
     margin-bottom: 15px;
 }
