@@ -1864,12 +1864,17 @@ $(document).ready(function () {
                                                         window.open(t.Url, '_blank');
                                                     else {
                                                         var width = '100%';
-                                                        if (t.Width) {
+
+                                                        if (typeof t.Width == 'undefined')
                                                             width = t.Width;
-                                                        }
+
+                                                        var position = 'right';
+
+                                                        if (typeof t.Position != 'undefined')
+                                                            position = t.Position;
 
                                                         if (t.Url.indexOf('javascript:') == -1)
-                                                            OpenPopUp(null, width, 'right', t.Title, t.Url, '', '', '', t.ModuleId);
+                                                            OpenPopUp(null, width, position, t.Title, t.Url, '', '', '', t.ModuleId, t.Scrollbars, t.TitlePosition);
                                                         else
                                                             eval(t.Url);
                                                     }
@@ -2486,10 +2491,10 @@ global.RenderApp = function (iframe) {
     $(iframe).prev().hide();
     var model = window.parent.VjEditor.getSelected();
     iframe.style.height = iframe.contentWindow.document.body.offsetHeight + 'px';
-    var AppMenusScript = $(iframe.contentWindow.document.head).find('[data-actionmid]');
+    var AppMenusScript = $(iframe).contents().find('[data-actionmid]');
     if (!$('head').find('[data-actionmid=' + AppMenusScript.data("actionmid") + ']').length)
         $('head').append(AppMenusScript);
-    var AppSettingsScript = $(iframe.contentWindow.document.head).find('[data-settingsmid]');
+    var AppSettingsScript = $(iframe).contents().find('[data-settingsmid]');
     if (!$('head').find('[data-settingsmid=' + AppSettingsScript.data("settingsmid") + ']').length)
         $('head').append(AppSettingsScript);
     $(iframe.contentWindow.document.body).append('<style>.actionMenu {display: none !important;}</style>');

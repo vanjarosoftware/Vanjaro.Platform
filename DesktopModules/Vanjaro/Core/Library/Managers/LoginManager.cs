@@ -9,13 +9,17 @@ using DotNetNuke.Security.Membership;
 using DotNetNuke.Services.Authentication;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.UserRequest;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Services.Authentication.OAuth;
+using static Vanjaro.Core.Factories;
 
 namespace Vanjaro.Core
 {
@@ -151,45 +155,30 @@ namespace Vanjaro.Core
 
             public static List<IOAuthClient> GetOAuthClients()
             {
-                return new List<IOAuthClient>(){ new Facebook(), new Google() };
-            }
-        }
+                List<IOAuthClient> OAuthClients = CacheFactory.Get(CacheFactory.Keys.OAuthClients);
 
-        public class Facebook : IOAuthClient
-        {
-            public Facebook()
-            {
-                Client = new OAuthClient(this, State, "test", "test", "https://graph.facebook.com/oauth/authorize", "https://graph.facebook.com/oauth/access_token", "https://graph.facebook.com/me?fields=id,name,email");
-            }
-            public bool Enabled => true;
+                if (OAuthClients == null)
+                {
+                    OAuthClients = new List<IOAuthClient>();
+                    string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll")).ToArray();
 
-            public string State => "vanjaro.facebook";
+                    foreach (string Path in binAssemblies)
+                    {
+                        try
+                        {
+                            //get all assemblies
+                            IEnumerable<IOAuthClient> AssembliesToAdd = from t in System.Reflection.Assembly.LoadFrom(Path).GetTypes()
+                                                                        where t != (typeof(IOAuthClient)) && (typeof(IOAuthClient).IsAssignableFrom(t))
+                                                                        select Activator.CreateInstance(t) as IOAuthClient;
+                            OAuthClients.AddRange(AssembliesToAdd.ToList<IOAuthClient>());
+                        }
+                        catch { continue; }
+                    }
+                    
+                    CacheFactory.Set(CacheFactory.Keys.OAuthClients, OAuthClients);
+                }
 
-            public OAuthClient Client { get; set; }
-
-            public OAuthUser GetUser(string response)
-            {
-                return Json.Deserialize<OAuthUser>(response);
-            }
-        }
-
-        public class Google : IOAuthClient
-        {
-            public Google()
-            {
-                Client = new OAuthClient(this, State, "test", "test", "https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", "https://www.googleapis.com/oauth2/v1/userinfo");
-
-                Client.Scope = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";
-            }
-            public bool Enabled => true;
-
-            public string State => "vanjaro.google";
-
-            public OAuthClient Client { get; set; }
-
-            public OAuthUser GetUser(string response)
-            {
-                return Json.Deserialize<OAuthUser>(response);
+                return OAuthClients;
             }
         }
     }

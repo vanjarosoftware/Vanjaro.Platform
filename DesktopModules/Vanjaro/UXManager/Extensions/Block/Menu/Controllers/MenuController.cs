@@ -3,11 +3,14 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Api.Internal;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Extensions.Block.Menu.Entities;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Block.Menu.Controllers
 {
@@ -37,6 +40,8 @@ namespace Vanjaro.UXManager.Extensions.Block.Menu.Controllers
             Settings.Add("Global", new UIData { Name = "Global", Value = "true" });
             Settings.Add("GlobalConfigs", new UIData { Name = "GlobalConfigs", Options = Core.Managers.BlockManager.GetGlobalConfigs(portalSettings, "menu") });
             Settings.Add("IsAdmin", new UIData { Name = "IsAdmin", Value = userInfo.IsInRole("Administrators").ToString().ToLower() });
+            List<StringText> templates = GetTemplates();
+            Settings.Add("Template", new UIData { Name = "Template", Options = templates, OptionsText = "Text", OptionsValue = "Value"});
             return Settings.Values.ToList();
         }
 
@@ -51,6 +56,29 @@ namespace Vanjaro.UXManager.Extensions.Block.Menu.Controllers
         private static List<StringText> GetPages()
         {
             return Library.Managers.PageManager.GetParentPages(PortalSettings.Current).Where(p => p.TabID != -1).Select(a => new StringText() { Value = a.TabID.ToString(), Text = a.TabName }).ToList();
+        }
+
+        private static List<StringText> GetTemplates()
+        {    
+            string TemplatesPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.CurrentTheme.Name + "/blocks/Menu/Templates");
+            List<StringText> Templates = new List<StringText>();
+            if (Directory.Exists(TemplatesPath))
+            {
+                foreach (string file in Directory.GetFiles(TemplatesPath))
+                {
+                    string FileName = Path.GetFileName(file);
+                    if (!string.IsNullOrEmpty(FileName))
+                    {
+                        if (FileName.EndsWith(".cshtml"))
+                        {
+                            FileName = FileName.Replace(".cshtml", "");
+                            Templates.Add( new StringText() { Value = FileName.ToString(), Text = FileName.ToString() });
+                        }
+                    }
+                }
+            }
+
+            return Templates;
         }
 
         public override string AccessRoles()

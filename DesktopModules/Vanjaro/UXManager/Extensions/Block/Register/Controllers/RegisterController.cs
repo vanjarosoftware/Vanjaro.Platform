@@ -7,6 +7,7 @@ using DotNetNuke.Web.Api.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
@@ -48,33 +49,44 @@ namespace Vanjaro.UXManager.Extensions.Block.Register.Controllers
         public ActionResult Index(RegisterDetails RegisterDetails)
         {
             ActionResult actionResult = new ActionResult();
-            try
+
+            if (Core.Services.Captcha.Validate("signup"))
             {
-                RegisterManager.MapRegisterDetail(RegisterDetails);
-                if (RegisterManager.Validate())
+                try
                 {
-                    if (PortalSettings.UserRegistration != (int)Globals.PortalRegistrationType.NoRegistration)
+                    RegisterManager.MapRegisterDetail(RegisterDetails);
+                    if (RegisterManager.Validate())
                     {
-                        actionResult = RegisterManager.CreateUser(RegisterDetails);
+                        if (PortalSettings.UserRegistration != (int)Globals.PortalRegistrationType.NoRegistration)
+                        {
+                            actionResult = RegisterManager.CreateUser(RegisterDetails);
+                        }
+                        else
+                        {
+                            actionResult.AddError("Registration_NotAllowed", "User registration is not allowed.");
+                        }
                     }
                     else
                     {
-                        actionResult.AddError("Registration_NotAllowed", "User registration is not allowed.");
+                        if (RegisterManager.CreateStatus != UserCreateStatus.AddUser)
+                        {
+                            actionResult.AddError("Registration_Failed", UserController.GetUserCreateStatus(RegisterManager.CreateStatus));
+                        }
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    if (RegisterManager.CreateStatus != UserCreateStatus.AddUser)
-                    {
-                        actionResult.AddError("Registration_Failed", UserController.GetUserCreateStatus(RegisterManager.CreateStatus));
-                    }
+                    actionResult.AddError("Register_Error", ex.Message);
                 }
+                return actionResult;
             }
-            catch (Exception ex)
+            else
             {
-                actionResult.AddError("Register_Error", ex.Message);
+                actionResult.AddError("recaptcha_error", DotNetNuke.Services.Localization.Localization.GetString("ReCaptcha_Error", Core.Components.Constants.LocalResourcesFile));
+                return actionResult;
+
             }
-            return actionResult;
+
         }
 
         public override string AccessRoles()

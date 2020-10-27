@@ -74,6 +74,7 @@
             $scope.ApplyChanges(registered);
         }
     });
+
 });
 
 

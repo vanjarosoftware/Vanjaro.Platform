@@ -33,7 +33,7 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('sites/delete', 'PortalID=' + row.PortalID).success(function (Response) {
+                    common.webApi.get('sites/delete', 'PortalID=' + row.PortalId).success(function (Response) {
                         if (Response.IsSuccess) {
                             $scope.RefreshGrid();
                             window.parent.ShowNotification('[LS:Sites]', '[L:Success_DeleteMessage]', 'success');
@@ -66,7 +66,7 @@
                 if (IsConfirm) {
                     $http({
                         method: 'GET',
-                        url: window.location.origin + jQuery.ServicesFramework(-1).getServiceRoot('Sites') + "Sites/Export?PortalID=" + row.PortalID + "&Name=" + row.PortalName,
+                        url: window.location.origin + jQuery.ServicesFramework(-1).getServiceRoot('Sites') + "Sites/Export?PortalID=" + row.PortalId + "&Name=" + row.PortalName,
                         responseType: 'arraybuffer',
                         headers: {
                             'ModuleId': -1,

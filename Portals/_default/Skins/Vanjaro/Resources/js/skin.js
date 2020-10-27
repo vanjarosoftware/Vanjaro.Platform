@@ -97,11 +97,12 @@ GetPopupURL = function (TabUrl, Param) {
 
 OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, removemodals, ModuleId, scrollbars, titleposition) {
 
-    var id = 'vjModal' + (new Date()).getTime();
-    var fullScreen = false;
-    var edit = "";
+   var id = 'vjModal' + (new Date()).getTime();
+    var edit = '';
     var fullwidth = '';
     var scrolling;
+    var modalclass = '';
+    var modalstyle = ' style=';
 
     if (typeof scrollbars != 'undefined') {
         if (scrollbars)
@@ -119,17 +120,31 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     if (width == "100%") {
 
         fullwidth = 'fullwidth';
-        fullScreen = true;
 
         if (typeof scrollbars == 'undefined')
-            scrolling = 'yes';;
+            scrolling = 'yes';
+
+        modalstyle += 'width: 100%';
     }
+    else
+        modalstyle += 'width:' + width + 'px';
+
+    if (typeof height != 'undefined' && height != null && height != '' && height != '100%')
+        modalstyle += 'height:' + height + 'px';
+    else
+        modalclass += ' fullheight';
+
+    if (position == 'right')
+        modalclass += ' modal-right'
 
     if (typeof ModuleId != 'undefined')
         edit = 'data-edit="edit_module" data-mid="' + ModuleId + '"';
 
+    if (modalstyle == ' style=')
+        modalstyle = '';
+
     var modal = `<div id="` + id + `"  class="uxmanager-modal modal fade ` + fullwidth + `" tabindex="-1" ` + edit + ` role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog` + modalclass + `"` + modalstyle + `>
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title ` + titleposition + `" id="defaultModalLabel"></h4>
@@ -159,7 +174,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
         });
     }
 
-    if (position == 'right' && !fullScreen && showtogglebtn) {
+    if (position == 'right' && width == "100%" && showtogglebtn) {
 
         if ($modal.find(".modal-toggle").length == 0)
             $modal.append('<button type="button" class="modal-toggle" style="right: ' + (width - 1) + 'px;"><em class="fas fa-chevron-right"></em></a>');
@@ -222,29 +237,10 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     }
 
     $modal.find('#defaultModalLabel').text(title);
-    $modal.find('.modal-dialog').removeAttr('style');
-
-    if (fullScreen)
-        $modal.find('.modal-dialog').width('100%');
-    else
-        $modal.find('.modal-dialog').width(width);
-
-    if (typeof height != 'undefined') {
-
-        if (height == '100%')
-            $modal.find('.modal-dialog').addClass('fullheight');
-        else
-            $modal.find('.modal-dialog').height(height);
-    }
 
     $modal.modal({
         backdrop: 'static', keyboard: true
     });
-
-    $modal.find('.modal-dialog').removeClass('modal-right');
-
-    if (position === 'right')
-        $modal.find('.modal-dialog').addClass('modal-right');
 
     var $backdrop = $modal.prev('.modal-backdrop');
 
@@ -601,4 +597,23 @@ $(window).resize(function () {
     };
 })(jQuery);
 
+var vj_recaptcha_responsetoken = "";
+
+function validateCaptcha(el, action, callback) {
+    if (typeof grecaptcha !== "undefined") {
+        var sitekey = $('#vjrecaptcha').data('sitekey');
+        grecaptcha.ready(function () {
+            grecaptcha.execute(sitekey, { action: action }).then(function (token) {
+                vj_recaptcha_responsetoken = token;
+                callback(el);
+            });
+        });
+    } else {
+        callback(el);
+    }
+}
+
+$(document).on("ajaxSend", function (event, xhr, settings) {
+    xhr.setRequestHeader('vj-recaptcha', vj_recaptcha_responsetoken);
+});
 

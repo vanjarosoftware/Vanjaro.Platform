@@ -12,7 +12,7 @@
 				<div class="gjs-block-label">`+ VjLocalized.Button + `</div>
 			`,
 			category: VjLocalized.Basic,
-			content: '<div class="button-box"><a role="button" href="" class="btn btn-primary"><span class="button-text">Button</span></a></div>',
+            content: '<div class="button-box"><a role="button" href="" class="btn btn-primary button-style-1"><span class="button-text">Button</span></a></div>',
 		});
 	}
 
@@ -81,7 +81,7 @@
 			},
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				droppable: false,
-				classes: ['btn', 'btn-primary'],
+                classes: ['btn', 'btn-primary', 'button-style-1'],
 				resizable: {
 					tl: 0, // Top left
 					tc: 0, // Top center
@@ -179,7 +179,6 @@
 						name: 'styles',
 						type: 'preset_radio',
 						options: [
-							{ id: 'normal', name: 'Normal', class: 'normal' },
 							{ id: 'button-style-1', name: 'Style 1', class: 'button-style-1' },
 							{ id: 'button-style-2', name: 'Style 2', class: 'button-style-2' },
 							{ id: 'button-style-3', name: 'Style 3', class: 'button-style-3' },

@@ -1121,6 +1121,528 @@ a.loginuser {
 .bg-colordark {
   background-color: #343a40 !important; }
 
+.button-style-1 {
+  font-weight: 400; }
+
+.button-style-1 {
+  font-family: Poppins, sans-serif; }
+
+.button-style-1 {
+  font-style: normal; }
+
+.button-style-1 {
+  letter-spacing: 0px; }
+
+.button-style-1 {
+  word-spacing: 0px; }
+
+.button-style-1 {
+  text-transform: capitalize; }
+
+.button-style-1 {
+  text-decoration: none; }
+
+.button-style-2 {
+  font-weight: 400; }
+
+.button-style-2 {
+  font-family: Poppins, sans-serif; }
+
+.button-style-2 {
+  font-style: normal; }
+
+.button-style-2 {
+  letter-spacing: 0px; }
+
+.button-style-2 {
+  word-spacing: 0px; }
+
+.button-style-2 {
+  text-transform: uppercase; }
+
+.button-style-2 {
+  text-decoration: none; }
+
+.button-style-3 {
+  font-weight: 400; }
+
+.button-style-3 {
+  font-family: Poppins, sans-serif; }
+
+.button-style-3 {
+  font-style: italic; }
+
+.button-style-3 {
+  letter-spacing: 0px; }
+
+.button-style-3 {
+  word-spacing: 0px; }
+
+.button-style-3 {
+  text-transform: none; }
+
+.button-style-3 {
+  text-decoration: none; }
+
+.button-style-4 {
+  font-weight: 700; }
+
+.button-style-4 {
+  font-family: Poppins, sans-serif; }
+
+.button-style-4 {
+  font-style: normal; }
+
+.button-style-4 {
+  letter-spacing: 0px; }
+
+.button-style-4 {
+  word-spacing: 0px; }
+
+.button-style-4 {
+  text-transform: capitalize; }
+
+.button-style-4 {
+  text-decoration: none; }
+
+.button-style-5 {
+  font-weight: 700; }
+
+.button-style-5 {
+  font-family: Poppins, sans-serif; }
+
+.button-style-5 {
+  font-style: normal; }
+
+.button-style-5 {
+  letter-spacing: 0px; }
+
+.button-style-5 {
+  word-spacing: 0px; }
+
+.button-style-5 {
+  text-transform: uppercase; }
+
+.button-style-5 {
+  text-decoration: none; }
+
+.head-style-1 {
+  font-weight: 500; }
+
+.head-style-1 {
+  font-family: Poppins, sans-serif; }
+
+.head-style-1 {
+  font-style: normal; }
+
+.head-style-1 {
+  letter-spacing: 0px; }
+
+.head-style-1 {
+  word-spacing: 0px; }
+
+.head-style-1 {
+  text-transform: capitalize; }
+
+.head-style-1 {
+  text-decoration: none; }
+
+.head-style-2 {
+  font-weight: 500; }
+
+.head-style-2 {
+  font-family: Poppins, sans-serif; }
+
+.head-style-2 {
+  font-style: normal; }
+
+.head-style-2 {
+  letter-spacing: 0; }
+
+.head-style-2 {
+  word-spacing: 0; }
+
+.head-style-2 {
+  text-transform: uppercase; }
+
+.head-style-2 {
+  text-decoration: none; }
+
+.head-style-3 {
+  font-weight: 500; }
+
+.head-style-3 {
+  font-family: Poppins, sans-serif; }
+
+.head-style-3 {
+  font-style: normal; }
+
+.head-style-3 {
+  letter-spacing: 10; }
+
+.head-style-3 {
+  word-spacing: 0; }
+
+.head-style-3 {
+  text-transform: capitalize; }
+
+.head-style-3 {
+  text-decoration: none; }
+
+.head-style-4 {
+  font-weight: 500; }
+
+.head-style-4 {
+  font-family: Poppins, sans-serif; }
+
+.head-style-4 {
+  font-style: normal; }
+
+.head-style-4 {
+  letter-spacing: 0; }
+
+.head-style-4 {
+  word-spacing: 0; }
+
+.head-style-4 {
+  text-transform: none; }
+
+.head-style-4 {
+  text-decoration: underline; }
+
+.head-style-5 {
+  font-weight: 700; }
+
+.head-style-5 {
+  text-transform: none; }
+
+.head-style-5 {
+  font-family: Poppins, sans-serif; }
+
+.head-style-5 {
+  font-style: normal; }
+
+.head-style-5 {
+  letter-spacing: 0; }
+
+.head-style-5 {
+  word-spacing: 0; }
+
+.head-style-5 {
+  text-decoration: none; }
+
+.head-style-6 {
+  font-weight: 700; }
+
+.head-style-6 {
+  font-family: Poppins, sans-serif; }
+
+.head-style-6 {
+  font-style: normal; }
+
+.head-style-6 {
+  letter-spacing: 0; }
+
+.head-style-6 {
+  word-spacing: 0; }
+
+.head-style-6 {
+  text-transform: capitalize; }
+
+.head-style-6 {
+  text-decoration: none; }
+
+.head-style-7 {
+  font-weight: 700; }
+
+.head-style-7 {
+  font-family: Poppins, sans-serif; }
+
+.head-style-7 {
+  font-style: normal; }
+
+.head-style-7 {
+  letter-spacing: 0; }
+
+.head-style-7 {
+  word-spacing: 0; }
+
+.head-style-7 {
+  text-transform: uppercase; }
+
+.head-style-7 {
+  text-decoration: none; }
+
+.head-style-8 {
+  font-weight: 700; }
+
+.head-style-8 {
+  font-family: Poppins, sans-serif; }
+
+.head-style-8 {
+  font-style: normal; }
+
+.head-style-8 {
+  letter-spacing: 0px; }
+
+.head-style-8 {
+  word-spacing: 0px; }
+
+.head-style-8 {
+  text-transform: none; }
+
+.head-style-8 {
+  text-decoration: underline; }
+
+.head-style-9 {
+  font-weight: 700; }
+
+.head-style-9 {
+  font-family: Poppins, sans-serif; }
+
+.head-style-9 {
+  font-style: normal; }
+
+.head-style-9 {
+  letter-spacing: 0px; }
+
+.head-style-9 {
+  word-spacing: 0px; }
+
+.head-style-9 {
+  text-transform: capitalize; }
+
+.head-style-9 {
+  text-decoration: underline; }
+
+.head-style-10 {
+  font-weight: 700; }
+
+.head-style-10 {
+  font-family: Poppins, sans-serif; }
+
+.head-style-10 {
+  font-style: normal; }
+
+.head-style-10 {
+  letter-spacing: 0px; }
+
+.head-style-10 {
+  text-transform: uppercase; }
+
+.head-style-10 {
+  text-decoration: underline; }
+
+.paragraph-style-1 {
+  font-weight: 400; }
+
+.paragraph-style-1 {
+  font-family: Poppins, sans-serif; }
+
+.paragraph-style-1 {
+  font-Style: normal; }
+
+.paragraph-style-1 {
+  letter-spacing: -1px; }
+
+.paragraph-style-1 {
+  word-spacing: 5px; }
+
+.paragraph-style-1 {
+  text-transform: none; }
+
+.paragraph-style-1 {
+  text-decoration: none; }
+
+.paragraph-style-2 {
+  font-weight: 400; }
+
+.paragraph-style-2 {
+  font-family: Poppins, sans-serif; }
+
+.paragraph-style-2 {
+  font-style: italic; }
+
+.paragraph-style-2 {
+  letter-spacing: 0px; }
+
+.paragraph-style-2 {
+  word-spacing: 0px; }
+
+.paragraph-style-2 {
+  text-transform: none; }
+
+.paragraph-style-2 {
+  text-decoration: none; }
+
+.paragraph-style-3 {
+  font-weight: 400; }
+
+.paragraph-style-3 {
+  font-family: Poppins, sans-serif; }
+
+.paragraph-style-3 {
+  font-style: italic; }
+
+.paragraph-style-3 {
+  letter-spacing: 4px; }
+
+.paragraph-style-3 {
+  word-spacing: 5px; }
+
+.paragraph-style-3 {
+  text-transform: none; }
+
+.paragraph-style-3 {
+  text-decoration: none; }
+
+.paragraph-style-4 {
+  font-weight: 400; }
+
+.paragraph-style-4 {
+  font-family: Poppins, sans-serif; }
+
+.paragraph-style-4 {
+  font-style: italic; }
+
+.paragraph-style-4 {
+  letter-spacing: -2px; }
+
+.paragraph-style-4 {
+  word-spacing: 0px; }
+
+.paragraph-style-4 {
+  text-transform: none; }
+
+.paragraph-style-4 {
+  text-decoration: none; }
+
+.paragraph-style-5 {
+  font-weight: 400; }
+
+.paragraph-style-5 {
+  font-family: Poppins, sans-serif; }
+
+.paragraph-style-5 {
+  font-style: italic; }
+
+.paragraph-style-5 {
+  letter-spacing: 0px; }
+
+.paragraph-style-5 {
+  word-spacing: 5px; }
+
+.paragraph-style-5 {
+  text-transform: none; }
+
+.paragraph-style-5 {
+  text-decoration: none; }
+
+.paragraph-style-6 {
+  font-weight: 700; }
+
+.paragraph-style-6 {
+  font-family: Poppins, sans-serif; }
+
+.paragraph-style-6 {
+  font-style: normal; }
+
+.paragraph-style-6 {
+  letter-spacing: 4px; }
+
+.paragraph-style-6 {
+  word-spacing: 0px; }
+
+.paragraph-style-6 {
+  text-transform: none; }
+
+.paragraph-style-6 {
+  text-decoration: none; }
+
+.paragraph-style-7 {
+  font-weight: 700; }
+
+.paragraph-style-7 {
+  font-family: Poppins, sans-serif; }
+
+.paragraph-style-7 {
+  font-style: normal; }
+
+.paragraph-style-7 {
+  letter-spacing: 0px; }
+
+.paragraph-style-7 {
+  word-spacing: 5px; }
+
+.paragraph-style-7 {
+  text-transform: none; }
+
+.paragraph-style-7 {
+  text-decoration: none; }
+
+.paragraph-style-8 {
+  font-weight: 700; }
+
+.paragraph-style-8 {
+  font-family: Poppins, sans-serif; }
+
+.paragraph-style-8 {
+  font-style: normal; }
+
+.paragraph-style-8 {
+  letter-spacing: 0px; }
+
+.paragraph-style-8 {
+  word-spacing: 0px; }
+
+.paragraph-style-8 {
+  text-transform: none; }
+
+.paragraph-style-8 {
+  text-decoration: none; }
+
+.paragraph-style-9 {
+  font-weight: 700; }
+
+.paragraph-style-9 {
+  font-family: Poppins, sans-serif; }
+
+.paragraph-style-9 {
+  font-style: italic; }
+
+.paragraph-style-9 {
+  letter-spacing: 0px; }
+
+.paragraph-style-9 {
+  word-spacing: 0px; }
+
+.paragraph-style-9 {
+  text-transform: none; }
+
+.paragraph-style-9 {
+  text-decoration: none; }
+
+.paragraph-style-10 {
+  font-weight: 700; }
+
+.paragraph-style-10 {
+  font-family: Poppins, sans-serif; }
+
+.paragraph-style-10 {
+  font-style: normal; }
+
+.paragraph-style-10 {
+  letter-spacing: -2px; }
+
+.paragraph-style-10 {
+  letter-spacing: 5px; }
+
+.paragraph-style-10 {
+  text-transform: none; }
+
+.paragraph-style-10 {
+  text-decoration: none; }
+
 .profileinfo {
   background: #ffffff !important; }
 
@@ -2646,7 +3168,7 @@ input[type="date"].form-control,
 input[type="time"].form-control,
 input[type="datetime-local"].form-control,
 input[type="month"].form-control {
-  appearance: none; }
+    appearance: none; }
 
 select.form-control:focus::-ms-value {
   color: #495057;
@@ -3007,12 +3529,12 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #007bff;
     border-color: #007bff; }
-  .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
-    color: #fff;
-    background-color: #0062cc;
-    border-color: #005cbf; }
-    .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
-      box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); }
+    .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+        color: #fff;
+        background-color: #0062cc;
+        border-color: #005cbf; }
+        .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); }
 
 .btn-secondary {
   color: #fff;
@@ -3031,7 +3553,7 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #6c757d;
     border-color: #6c757d; }
-  .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active, .show > .btn-secondary.dropdown-toggle {
+   .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active, .show > .btn-secondary.dropdown-toggle {
     color: #fff;
     background-color: #545b62;
     border-color: #4e555b; }
@@ -3055,7 +3577,7 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #28a745;
     border-color: #28a745; }
-  .btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active, .show > .btn-success.dropdown-toggle {
+   .btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active, .show > .btn-success.dropdown-toggle {
     color: #fff;
     background-color: #1e7e34;
     border-color: #1c7430; }
@@ -3079,7 +3601,7 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #17a2b8;
     border-color: #17a2b8; }
-  .btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active, .show > .btn-info.dropdown-toggle {
+ .btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active, .show > .btn-info.dropdown-toggle {
     color: #fff;
     background-color: #117a8b;
     border-color: #10707f; }

@@ -22,9 +22,9 @@
             <uielement name="Line" control="line" container-attr-ng-show="ui.data.Profiles.Value!=-3"></uielement>
             <uitemplate>
                 <ul class="nav nav-tabs" ng-show="ui.data.Profiles.Value!=-3">
-                    <li class="active"><a href="#" showtab="" mn-ng-click="ToggleLinkSetting(true,false)">[L:Link]</a></li>
-                    <li><a href="#" showtab="" mn-ng-click="ToggleLinkSetting(false,false)">[L:Image]</a></li>
-                    <li><a href="#" showtab="" mn-ng-click="ToggleLinkSetting(false,true)">[L:Settings]</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#" showtab="" mn-ng-click="ToggleLinkSetting(true,false)">[L:Link]</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" showtab="" mn-ng-click="ToggleLinkSetting(false,false)">[L:Image]</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" showtab="" mn-ng-click="ToggleLinkSetting(false,true)">[L:Settings]</a></li>
                 </ul>
             </uitemplate>
             <uielement name="UploadFilesRootFolder" ngmodel="ui.data.Settings.Options.UploadFilesRootFolder" ngoptions="ui.data.Folders.Options" attr-required="true" control="dropdownlist" container-attr-ng-show="!ShowSetting && ShowLink && ui.data.Profiles.Value!=-3"></uielement>
