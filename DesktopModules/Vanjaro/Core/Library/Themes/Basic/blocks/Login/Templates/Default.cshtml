@@ -1,5 +1,4 @@
 ﻿@inherits System.Web.WebPages.WebPage
-
 @{string socialbutton = ""; }
 @if (Model.OAuthClients.Count > 0)
 {
@@ -43,7 +42,7 @@
                         </div>
                     }
                     <div class="text-@Model.Login.ButtonAlign">
-                        <a id="loginbtn" onclick="Login.User('Login')" attr-localize-signIn-text="[LS:Data.Block.Login.LoginText]" attr-localize-loading-text="[LS:Data.Block.Login.LoadingText]" class="btn btn-primary @Model.Login.ButtonAlign">
+                        <a id="loginbtn" onclick="validateCaptcha(this, 'login', function (el) { Login.User('Login') })" attr-localize-signIn-text="[LS:Data.Block.Login.LoginText]" attr-localize-loading-text="[LS:Data.Block.Login.LoadingText]" class="btn btn-primary @Model.Login.ButtonAlign">
                             [LS:Data.Block.Login.LoginText]
                         </a>
                     </div>
