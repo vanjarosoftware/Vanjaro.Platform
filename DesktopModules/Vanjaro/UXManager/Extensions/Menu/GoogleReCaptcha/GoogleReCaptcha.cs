@@ -26,7 +26,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha
                 {
                     Text = Localization.Get("GoogleReCaptcha", "Text", Constants.LocalResourcesFile, Extension.ShowMissingKeysStatic, Localization.SharedMissingPrefix),
                     ItemGuid = Guid.Parse(ExtensionInfo.GUID),
-                    Icon = "fas fa-plug",
+                    Icon = "fab fa-google",
                     ViewOrder = 600,
                     Hierarchy = new MenuItem
                     {
