@@ -29,26 +29,5 @@ body {
     }
 
 
-.scrollbar::-webkit-scrollbar {
-    margin-top: 10px;
-    height: 10px;
-    width: 8px;
-}
-
-.scrollbar::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: rgba(170, 170, 170, 0.3);
-    outline: slategrey solid 1px;
-    transition: background-color 0.2s linear 0s, width 0.2s ease-in-out 0s;
-}
-
-.scrollbar::-webkit-scrollbar-track {
-    opacity: 0.8;
-    border-radius: 10px;
-}
-
-.scrollbar::-webkit-scrollbar-track-piece {
-    background: rgba(255, 255, 255, 0);
-}
 
 
