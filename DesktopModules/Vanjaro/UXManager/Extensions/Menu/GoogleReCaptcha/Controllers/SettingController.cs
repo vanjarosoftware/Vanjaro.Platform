@@ -3,83 +3,59 @@ using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Web.Api;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
-using Vanjaro.UXManager.Library.Common;
+using Vanjaro.Core.Services;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.Controllers
 {
-    [ValidateAntiForgeryToken]
     [AuthorizeAccessRoles(AccessRoles = "admin")]
+    [ValidateAntiForgeryToken]    
     public class SettingController : UIEngineController
     {
         internal static List<IUIData> GetData(int portalId, UserInfo userInfo)
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
-            string Host_SiteKey = HostController.Instance.GetEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SiteKey", Config.GetDecryptionkey());
-            string Host_SecretKey = HostController.Instance.GetEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SecretKey", Config.GetDecryptionkey());
-            string Site_SiteKey = PortalController.GetEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SiteKey", portalId, Config.GetDecryptionkey());
-            string Site_SecretKey = PortalController.GetEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SecretKey", portalId, Config.GetDecryptionkey());       
+            string Host_SiteKey = SettingManager.GetHostSetting(Captcha.SiteKey, true);
+            string Host_SecretKey = SettingManager.GetHostSetting(Captcha.SecretKey, true);
+            bool Host_Enabled = SettingManager.GetHostSettingAsBoolean(Captcha.Enabled, false);
+            string Site_SiteKey = SettingManager.GetPortalSetting(Captcha.SiteKey, true);
+            string Site_SecretKey = SettingManager.GetPortalSetting(Captcha.SecretKey, true);
+            bool Site_Enabled = SettingManager.GetPortalSettingAsBoolean(Captcha.Enabled);
 
             Settings.Add("IsSuperUser", new UIData { Name = "IsSuperUser", Options = UserController.Instance.GetCurrentUserInfo().IsSuperUser });
             Settings.Add("ApplyTo", new UIData { Name = "ApplyTo", Options = false });
             Settings.Add("Host_SiteKey", new UIData { Name = "Host_SiteKey", Value = Host_SiteKey });
             Settings.Add("Host_SecretKey", new UIData { Name = "Host_SecretKey", Value = Host_SecretKey });
-            Settings.Add("Host_HasSiteKey", new UIData { Name = "Host_HasSiteKey", Options = string.IsNullOrEmpty(Host_SiteKey) ? false : true });
+            Settings.Add("Host_Enabled", new UIData { Name = "Host_Enabled", Options = Host_Enabled });
             Settings.Add("Site_SiteKey", new UIData { Name = "Site_SiteKey", Value = Site_SiteKey });
             Settings.Add("Site_SecretKey", new UIData { Name = "Site_SecretKey", Value = Site_SecretKey });
-            Settings.Add("Site_HasSiteKey", new UIData { Name = "Site_HasSiteKey", Options = string.IsNullOrEmpty(Site_SiteKey) ? false : true });
+            Settings.Add("Site_Enabled", new UIData { Name = "Site_Enabled", Options = Site_Enabled });
             return Settings.Values.ToList();
         }
 
         [HttpPost]
-        public bool Save(dynamic Data)
+        public void Save(dynamic Data)
         {
             if (bool.Parse(Data.ApplyTo.ToString()))
             {
-                if (!string.IsNullOrEmpty(Data.Host_SiteKey.ToString()) && !string.IsNullOrEmpty(Data.Host_SecretKey.ToString()))
-                {
-                    HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SiteKey", Data.Host_SiteKey.ToString(), Config.GetDecryptionkey());
-                    HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SecretKey", Data.Host_SecretKey.ToString(), Config.GetDecryptionkey());
-                }
-                else
-                    return false;
+                SettingManager.UpdateHostSetting(Captcha.SiteKey, Data.Host_SiteKey.ToString(), true);
+                SettingManager.UpdateHostSetting(Captcha.SecretKey, Data.Host_SecretKey.ToString(), true);
+                SettingManager.UpdateHostSetting(Captcha.Enabled, Data.Host_Enabled.ToString(), false);
+
             }
             else
             {
-                if (!string.IsNullOrEmpty(Data.Site_SiteKey.ToString()) && !string.IsNullOrEmpty(Data.Site_SecretKey.ToString()))
-                {
-                    PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.GoogleReCaptcha.SiteKey", Data.Site_SiteKey.ToString(), Config.GetDecryptionkey());
-                    PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.GoogleReCaptcha.SecretKey", Data.Site_SecretKey.ToString(), Config.GetDecryptionkey());
-                }
-                else
-                    return false;
+                SettingManager.UpdatePortalSetting(Captcha.SiteKey, Data.Site_SiteKey.ToString(), true);
+                SettingManager.UpdatePortalSetting(Captcha.SecretKey, Data.Site_SecretKey.ToString(), true);
+                SettingManager.UpdatePortalSetting(Captcha.Enabled, Data.Site_Enabled.ToString(), false);
             }
-            return true;
         }
-
-        [HttpPost]
-        public string Delete(dynamic Data)
-        {
-            if (bool.Parse(Data.ToString()))
-            {
-                HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SiteKey", string.Empty, Config.GetDecryptionkey());
-                HostController.Instance.UpdateEncryptedString("Vanjaro.Integration.GoogleReCaptcha.SecretKey", string.Empty, Config.GetDecryptionkey());
-            }
-            else
-            {
-                PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.GoogleReCaptcha.SiteKey", string.Empty, Config.GetDecryptionkey());
-                PortalController.UpdateEncryptedString(PortalSettings.PortalId, "Vanjaro.Integration.GoogleReCaptcha.SecretKey", string.Empty, Config.GetDecryptionkey());
-            }
-
-            return string.Empty;
-        }
-
+        
         public override string AccessRoles()
         {
             return Factories.AppFactory.GetAccessRoles(UserInfo);

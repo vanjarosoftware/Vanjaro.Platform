@@ -46,10 +46,9 @@
     };
 
     $scope.CloseWindow = function () {
-        dnnModal.closePopUp(false);
+        $(window.parent.document.body).find('.uxmanager-modal').last().find('[data-dismiss="modal"]').click();
         window.close();
     };
-
 
     $scope.SaveEditorProfileConfirm = function (apply) {
         CommonSvc.SweetAlert.swal({
