@@ -151,7 +151,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                 IDictionary<string, object> Objects = new System.Dynamic.ExpandoObject() as IDictionary<string, object>;
                 Objects.Add("Login", login);
                 Objects.Add("UseEmailAsUserName", (PortalController.Instance.GetCurrentSettings() as PortalSettings).Registration.UseEmailAsUserName);
-                Objects.Add("OAuthClients", Core.Managers.LoginManager.GetOAuthClients().Where(c => c.Enabled));
+                Objects.Add("OAuthClients", Core.Managers.LoginManager.GetOAuthClients().Where(c => c.Enabled).ToList());
 
                 string Template = RazorEngineManager.RenderTemplate(ExtensionInfo.GUID, BlockPath, Attributes["data-block-template"], Objects);
                 Template = new DNNLocalizationEngine(null, ResouceFilePath, false).Parse(Template);
