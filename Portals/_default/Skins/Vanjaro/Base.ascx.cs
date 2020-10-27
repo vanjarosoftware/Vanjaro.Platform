@@ -325,14 +325,14 @@ namespace Vanjaro.Skin
                 };
                 TabContent.Attributes["class"] = "tab-content";
 
-                HtmlGenericControl SocialRegistration = new HtmlGenericControl("div");
-                SocialRegistration.Attributes["class"] = "dnnSocialRegistration";
+                //HtmlGenericControl SocialRegistration = new HtmlGenericControl("div");
+                //SocialRegistration.Attributes["class"] = "dnnSocialRegistration";
 
-                HtmlGenericControl socialControls = new HtmlGenericControl("div");
-                socialControls.Attributes["id"] = "socialControls";
+                //HtmlGenericControl socialControls = new HtmlGenericControl("div");
+                //socialControls.Attributes["id"] = "socialControls";
 
-                HtmlGenericControl Authdiv = new HtmlGenericControl("ul");
-                Authdiv.Attributes["class"] = "buttonList";
+                //HtmlGenericControl Authdiv = new HtmlGenericControl("ul");
+                //Authdiv.Attributes["class"] = "buttonList";
 
                 int tab = 1;
                 foreach (DotNetNuke.Services.Authentication.AuthenticationInfo authSystem in DotNetNuke.Services.Authentication.AuthenticationController.GetEnabledAuthenticationServices())
@@ -345,7 +345,7 @@ namespace Vanjaro.Skin
                             BindLoginControl(authLoginControl, authSystem);
                             if (authLoginControl is DotNetNuke.Services.Authentication.OAuth.OAuthLoginBase oAuthLoginControl)
                             {
-                                Authdiv.Controls.Add(oAuthLoginControl);
+                                //Authdiv.Controls.Add(oAuthLoginControl);
                             }
                             else
                             {
@@ -396,9 +396,9 @@ namespace Vanjaro.Skin
                     VLoginControls.Controls.Add(createDiv);
                 }
 
-                socialControls.Controls.Add(Authdiv);
-                SocialRegistration.Controls.Add(socialControls);
-                VLoginControls.Controls.Add(SocialRegistration);
+                //socialControls.Controls.Add(Authdiv);
+                //SocialRegistration.Controls.Add(socialControls);
+                //VLoginControls.Controls.Add(SocialRegistration);
                 WebForms.LinkCSS(Page, "AuthModuelCSS", Page.ResolveUrl("~/DesktopModules/Admin/Authentication/module.css"));
 
             }

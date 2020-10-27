@@ -1,51 +1,75 @@
 ﻿@inherits System.Web.WebPages.WebPage
+@{string socialbutton = ""; }
+@if (Model.OAuthClients.Count > 0)
+{
+    socialbutton = "socialbutton";
+}
+
 <div id="vLoginControls" runat="server"></div>
 <div class="login-container validationGroup" id="LoginControl" runat="server">
     <div class="form-Login">
-        <div class="Login Vj-Login" id="Login">
-            <h4 class="loginhead">[LS:Data.Block.Login.LoginText]</h4>
-            <div class="login-control">
-                <div>
-                    @if (Model.Login.ShowLabel)
-                    {
-                        <label class="loginlabel" for="UserId">[LS:Data.Block.Login.UsernameText]</label>
-                    }
-                    else
-                    {
-                        <label class="loginlabel sr-only" for="UserId">[LS:Data.Block.Login.UsernameText]</label>
-                    }
-                    <input type="text" name="UserId" placeholder="[LS:Data.Block.Login.EmailAddressOrUsernamePlaceholderText]" id="UserId" required />
-                </div>
-                <div>
-                    @if (Model.Login.ShowLabel)
-                    {
-                        <label class="loginlabel" for="Password">[LS:Data.Block.Login.PasswordText]</label>
-                    }
-                    else
-                    {
-                        <label class="loginlabel sr-only" for="Password">[LS:Data.Block.Login.PasswordText]</label>
-                    }
-                    <input type="password" name="Password" placeholder="[LS:Data.Block.Login.PasswordPlaceholderText]" id="Password" required />
-                </div>
-                @if (Model.Login.ShowRememberPassword)
-                {
-                    <div class="rememberlogin">
-                        <label class="sr-only" for="rememberpassword"></label>
-                        <input type="checkbox" id="rememberpassword" name="rememberpassword" class="rememberme" /><span>[LS:Data.Block.Login.RememberLoginText]</span>
+        <div class="login-box @socialbutton">
+            <div class="Login Vj-Login" id="Login">
+                <h4 class="loginhead">[LS:Data.Block.Login.LoginText]</h4>
+                <div class="login-control">
+                    <div>
+                        @if (Model.Login.ShowLabel)
+                        {
+                            <label class="loginlabel" for="UserId">[LS:Data.Block.Login.UsernameText]</label>
+                        }
+                        else
+                        {
+                            <label class="loginlabel sr-only" for="UserId">[LS:Data.Block.Login.UsernameText]</label>
+                        }
+                        <input type="text" name="UserId" placeholder="[LS:Data.Block.Login.EmailAddressOrUsernamePlaceholderText]" id="UserId" required />
                     </div>
-                }
-                <div class="text-@Model.Login.ButtonAlign">
-                    <a id="loginbtn" onclick="validateCaptcha(this, 'login', function (el) { Login.User('Login') })" attr-localize-signIn-text="[LS:Data.Block.Login.LoginText]" attr-localize-loading-text="[LS:Data.Block.Login.LoadingText]" class="btn btn-primary @Model.Login.ButtonAlign">
-                        [LS:Data.Block.Login.LoginText]
-                    </a>
-                </div>
-                @if (Model.Login.ShowResetPassword)
-                {
-                    <div class="text-center resetpass">
-                        <a href="#" class="loginlink" onclick="Login.ShowResetPassword(this)">[LS:Data.Block.Login.ResetPasswordText]</a>
+                    <div>
+                        @if (Model.Login.ShowLabel)
+                        {
+                            <label class="loginlabel" for="Password">[LS:Data.Block.Login.PasswordText]</label>
+                        }
+                        else
+                        {
+                            <label class="loginlabel sr-only" for="Password">[LS:Data.Block.Login.PasswordText]</label>
+                        }
+                        <input type="password" name="Password" placeholder="[LS:Data.Block.Login.PasswordPlaceholderText]" id="Password" required />
                     </div>
-                }
+                    @if (Model.Login.ShowRememberPassword)
+                    {
+                        <div class="rememberlogin">
+                            <label class="sr-only" for="rememberpassword"></label>
+                            <input type="checkbox" id="rememberpassword" name="rememberpassword" class="rememberme" /><span>[LS:Data.Block.Login.RememberLoginText]</span>
+                        </div>
+                    }
+                    <div class="text-@Model.Login.ButtonAlign">
+                        <a id="loginbtn" onclick="validateCaptcha(this, 'login', function (el) { Login.User('Login') })" attr-localize-signIn-text="[LS:Data.Block.Login.LoginText]" attr-localize-loading-text="[LS:Data.Block.Login.LoadingText]" class="btn btn-primary @Model.Login.ButtonAlign">
+                            [LS:Data.Block.Login.LoginText]
+                        </a>
+                    </div>
+                    @if (Model.Login.ShowResetPassword)
+                    {
+                        <div class="text-center resetpass">
+                            <a href="#" class="loginlink" onclick="Login.ShowResetPassword(this)">[LS:Data.Block.Login.ResetPasswordText]</a>
+                        </div>
+                    }
+                </div>
             </div>
+            @if (Model.OAuthClients.Count > 0)
+            {
+                <div class="separator-box">
+                    <div class="topline"></div>
+                    <span class="separator">OR</span>
+                    <div class="bottomline"></div>
+                </div>
+                <div class="authentication-btn">
+                    <ul>
+                        @foreach (var auth in Model.OAuthClients)
+                        {
+                            <li><a href="@auth.Client.GetAuthorizationUrl()"><img class="btn-img" src="@auth.ImageIcon" alt="@auth.DisplayName" /><span class="btn-name">@auth.DisplayName</span></a></li>
+                        }
+                    </ul>
+                </div>
+            }
         </div>
     </div>
     @if (Model.Login.DataConsent.DataConsentActive)
@@ -103,14 +127,8 @@
             </div>
         }
 
-        
-        <ul>
-            @foreach (var auth in Model.OAuthClients)
-            {
-                <li><a href="@auth.Client.GetAuthorizationUrl()">@auth.ProviderName</a></li>
-            }
-        </ul>
-        
+
+
 
     </div>
 </div>
