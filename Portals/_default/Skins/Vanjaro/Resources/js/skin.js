@@ -131,13 +131,13 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
         if (typeof scrollbars == 'undefined')
             scrolling = 'yes';
 
-        modalstyle += 'width: 100%';
+        modalstyle += 'width: 100%;';
     }
     else
-        modalstyle += 'width:' + width + 'px';
+        modalstyle += 'width:' + width + 'px;';
 
     if (typeof height != 'undefined' && height != null && height != '' && height != '100%')
-        modalstyle += 'height:' + height + 'px';
+        modalstyle += 'height:' + height + 'px;';
     else
         modalclass += ' fullheight';
 
