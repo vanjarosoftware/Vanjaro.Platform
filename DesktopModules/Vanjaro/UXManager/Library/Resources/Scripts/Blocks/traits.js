@@ -548,7 +548,7 @@ export default (editor, config = {}) => {
 				</div>
 				<div class="link-block">
 					<div id="url" class="link-type">
-						<input type="url" id="vj_link_target" class="url" placeholder="Insert URL" ondblclick="window.parent.OpenPopUp(null, 900, 'right', 'Link', window.parent.CurrentExtTabUrl + '&guid=a0a86356-6c9f-49c4-a431-24917641cb32');" autofocus/>
+						<input type="url" id="vj_link_target" class="url" placeholder="Insert URL"  autofocus/>
                         <em class="fas fa-link urlbtn" onclick="window.parent.OpenPopUp(null, 900, 'right', 'Link', window.parent.CurrentExtTabUrl + '&guid=a0a86356-6c9f-49c4-a431-24917641cb32');"></em>
 					</div>
 					<div id="page" class="link-type">

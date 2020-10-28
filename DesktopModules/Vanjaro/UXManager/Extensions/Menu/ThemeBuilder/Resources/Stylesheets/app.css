@@ -414,30 +414,6 @@
     cursor: default;
 }
 
-.scrollbar::-webkit-scrollbar {
-    margin-top: 10px;
-    height: 10px;
-    width: 8px;
-}
-
-.scrollbar::-webkit-scrollbar-track {
-    border-radius: 10px;
-    opacity: 0.8;
-}
-
-.scrollbar::-webkit-scrollbar-track-piece {
-    background: rgba(255, 255, 255, 0);
-}
-
-.scrollbar::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: rgba(170, 170, 170, 0.3);
-    outline: 1px solid slategrey;
-    -webkit-transition: background-color .2s linear,width .2s ease-in-out;
-    -o-transition: background-color .2s linear,width .2s ease-in-out;
-    transition: background-color .2s linear,width .2s ease-in-out;
-}
-
 .RightSideMenu .fieldcolor:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, 0.05);
 }

@@ -23,7 +23,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.GoogleAnalytics
                 {
                     Text = Localization.Get("GoogleAnalytics", "Text", Constants.LocalResourcesFile, Extension.ShowMissingKeysStatic, Localization.SharedMissingPrefix),
                     ItemGuid = Guid.Parse(ExtensionInfo.GUID),
-                    Icon = "fas fa-plug",
+                    Icon = "fab fa-google",
                     ViewOrder = 600,
                     Hierarchy = new MenuItem
                     {

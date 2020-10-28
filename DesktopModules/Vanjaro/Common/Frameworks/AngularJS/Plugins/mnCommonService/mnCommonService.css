@@ -1021,3 +1021,31 @@ a.page-link.active {
 ul.nav.nav-tabs {
     margin-bottom: 10px;
 }
+
+
+/*Scrollbar*/
+
+::-webkit-scrollbar {
+    margin-top: 10px;
+    height: 10px;
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+    border-radius: 10px;
+    opacity: 0.8;
+}
+
+::-webkit-scrollbar-track-piece {
+    background: rgba(255, 255, 255, 0);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(170, 170, 170, 0.3);
+    outline: none;
+    -webkit-transition: background-color .2s linear,width .2s ease-in-out;
+    -o-transition: background-color .2s linear,width .2s ease-in-out;
+    transition: background-color .2s linear,width .2s ease-in-out;
+}

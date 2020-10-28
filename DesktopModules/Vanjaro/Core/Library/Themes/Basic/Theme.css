@@ -1137,7 +1137,7 @@ a.loginuser {
   word-spacing: 0px; }
 
 .button-style-1 {
-  text-transform: capitalize; }
+  text-transform: none; }
 
 .button-style-1 {
   text-decoration: none; }
@@ -1242,7 +1242,7 @@ a.loginuser {
   word-spacing: 0px; }
 
 .head-style-1 {
-  text-transform: capitalize; }
+  text-transform: none; }
 
 .head-style-1 {
   text-decoration: none; }
@@ -1278,10 +1278,10 @@ a.loginuser {
   font-style: normal; }
 
 .head-style-3 {
-  letter-spacing: 10; }
+  letter-spacing: 10px; }
 
 .head-style-3 {
-  word-spacing: 0; }
+  word-spacing: 0px; }
 
 .head-style-3 {
   text-transform: capitalize; }
@@ -1443,10 +1443,10 @@ a.loginuser {
   font-Style: normal; }
 
 .paragraph-style-1 {
-  letter-spacing: -1px; }
+  letter-spacing: 0px; }
 
 .paragraph-style-1 {
-  word-spacing: 5px; }
+  word-spacing: 0px; }
 
 .paragraph-style-1 {
   text-transform: none; }
@@ -3891,6 +3891,7 @@ input[type="submit"].btn-block,
 input[type="reset"].btn-block,
 input[type="button"].btn-block {
   width: 100%; }
+
 
 .fade {
   transition: opacity 0.15s linear; }
