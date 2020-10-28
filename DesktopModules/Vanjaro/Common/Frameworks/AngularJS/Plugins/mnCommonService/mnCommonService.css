@@ -576,7 +576,7 @@ span.choosefile.glyphicon.glyphicon-plus:before, span.choosefile.glyphicon.glyph
     margin-top: 0px !important;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    width: 15%;
+    width: 20%;
 }
 
 .editorconfig-delete-hidden {
@@ -1017,6 +1017,10 @@ a.page-link.active {
         border-radius: 0 !important;
         animation: none !important;
     }
+
+ul.nav.nav-tabs {
+    margin-bottom: 10px;
+}
 
 
 /*Scrollbar*/
