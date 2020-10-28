@@ -74,7 +74,7 @@ namespace Vanjaro.UXManager.Library
                                 url = ServiceProvider.NavigationManager.NavigateURL().TrimEnd('/') + "?mid=0&icp=true&guid=" + dr.GUID;
                             }
 
-                            string ClickFunction = dr.MenuAction == MenuAction.FullScreen ? ("OpenPopUp(event, \"" + dr.Width + "%" + "\",\"right\",\"" + dr.Name + "\", \"" + url + "\")") : dr.MenuAction == MenuAction.RightOverlay ? ("OpenPopUp(event, " + dr.Width + ",\"right\",\"" + dr.Name + "\", \"" + url + "\")") : ("OpenPopUp(event, " + dr.Width + ",\"center\",\"" + dr.Name + "\", \"" + url + "\")");
+                            string ClickFunction = dr.MenuAction == MenuAction.FullScreen ? ("OpenPopUp(event, \"" + dr.Width + "%" + "\",\"center\",\"" + dr.Name + "\", \"" + url + "\")") : dr.MenuAction == MenuAction.RightOverlay ? ("OpenPopUp(event, " + dr.Width + ",\"right\",\"" + dr.Name + "\", \"" + url + "\")") : ("OpenPopUp(event, " + dr.Width + ",\"center\",\"" + dr.Name + "\", \"" + url + "\")");
                             sb.Append(string.Format(@"<li><a href='javascript:void(0);' onclick='{0}' data-width='{2}'>{1} {3}</a>", ClickFunction, icon, dr.Width, dr.Name));
                         }
                         else

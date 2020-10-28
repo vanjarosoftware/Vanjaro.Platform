@@ -107,12 +107,17 @@ namespace Vanjaro.Common.Utilities
 
         public static string BrowseUrl(int ModuleId, string Key = "")
         {
-            return BrowseUrl(ModuleId, Key, null);
+            return BrowseUrl(ModuleId, true, Key, null);
         }
 
-        public static string BrowseUrl(int ModuleId, string Key = "", Dictionary<string, string> additionalParameters = null)
+        public static string BrowseUrl(int ModuleId, bool InculdePopup, string Key = "")
         {
-            
+            return BrowseUrl(ModuleId, InculdePopup, Key, null);
+        }
+
+        public static string BrowseUrl(int ModuleId, bool InculdePopup, string Key = "", Dictionary<string, string> additionalParameters = null)
+        {
+
             if (additionalParameters == null)
             {
                 additionalParameters = new Dictionary<string, string>();
@@ -136,14 +141,18 @@ namespace Vanjaro.Common.Utilities
                 result += '?';
             }
 
-            if (DotNetNuke.Entities.Portals.PortalSettings.Current.EnablePopUps)
+            if (InculdePopup)
             {
-                result += "popUp=true";
+                if (DotNetNuke.Entities.Portals.PortalSettings.Current.EnablePopUps)
+                {
+                    result += "popUp=true";
+                }
+                else
+                {
+                    result += "popUp=true&hidecommandbar=true&SkinSrc=[G]Skins/_default/popUpSkin";
+                }
             }
-            else
-            {
-                result += "popUp=true&hidecommandbar=true&SkinSrc=[G]Skins/_default/popUpSkin";
-            }
+            result = result.TrimEnd('?', '&');
 
             return result;
         }
@@ -170,7 +179,7 @@ namespace Vanjaro.Common.Utilities
 
             return TotalWidth > 0 ? new string(result).PadLeft(TotalWidth, PaddingChar) : new string(result);
         }
-        
+
 
         /// <summary>
         /// Gets a flag that dertermines if the file is an image of type jpg,jpeg,jpe,png.

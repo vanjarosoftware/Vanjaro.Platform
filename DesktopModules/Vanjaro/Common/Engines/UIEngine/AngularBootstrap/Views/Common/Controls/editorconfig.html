@@ -15,7 +15,7 @@
                         <a class="btn btn-default manageslug" mn-ng-if="ui.data.IsSuperUser.Value==true" ng-click="ManageProfile()" role="button"><span style='font-family:Arial, Helvetica, sans-serif;'>[L:Manage]</span></a>
                         <a class="btn btn-default manageslug" mn-ng-if="ui.data.IsSuperUser.Value==false" mn-ng-show="ui.data.Profiles.Options.length>4" ng-click="ManageProfile()" role="button"><span style='font-family:Arial, Helvetica, sans-serif;'>[L:Manage]</span></a>
                         <a class="btn btn-default manageslug" mn-ng-if="ui.data.IsSuperUser.Value==false" mn-ng-hide="ui.data.Profiles.Options.length>4" ng-click="ManageProfile()" role="button"><span style='font-family:Arial, Helvetica, sans-serif;'>[L:New]</span></a>
-                        <select class="form-control control-background" ng-change="changeProfile()" ng-model="ui.data.Profiles.Value" ng-options="option.ProfileID as option.Name for option in ui.data.Profiles.Options" style="width:85%;"></select>
+                        <select class="form-control control-background" ng-change="changeProfile()" ng-model="ui.data.Profiles.Value" ng-options="option.ProfileID as option.Name for option in ui.data.Profiles.Options" style="width:80%;"></select>
                     </div>
                 </div>
             </uitemplate>
@@ -46,7 +46,7 @@
                     <!--<a class="btn btn-default" role="button" mn-ng-click="SaveEditorProfile()">
                         <span class="glyphicon glyphicon-" style="float: left;margin-right: 5px;"></span>[L:Update]
                     </a>-->
-                    <div class="dropdown btn-group" style="display: inline;">
+                    <div class="dropdown btn-group" style="display: inline; margin-right:5px;">
                         <button type="button" class="btn btn-primary " mn-ng-click="SaveEditorProfile('CurrentModule')">[L:Apply]</button>
                         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" mn-ng-if="ui.data.ModuleID.Value>0">
                             <span class="caret"></span>
@@ -69,7 +69,7 @@
                     <label mn-ng-hide="ui.data.Profiles.Options.length==0 || ProfileName==''">[L:Profile]</label>
                     <div mn-ng-hide="ui.data.Profiles.Options.length==0 || ProfileName==''" class="form-group">
                         <a class="btn btn-default manageslug" ng-click="CreateNewProfile()" role="button"><span style='font-family:Arial, Helvetica, sans-serif;'>[L:New]</span></a>
-                        <select class="form-control control-background" ng-model="ui.data.Profiles.Value" ng-change="changeProfile()" ng-options="option.ProfileID as option.Name for option in ui.data.Profiles.Options" style="width:85%;"></select>
+                        <select class="form-control control-background" ng-model="ui.data.Profiles.Value" ng-change="changeProfile()" ng-options="option.ProfileID as option.Name for option in ui.data.Profiles.Options" style="width:80%;"></select>
                     </div>
                     <div class="form-group" mn-ng-if="NewProfile">
                         <label class="">[L:NewProfile]</label>
@@ -110,7 +110,7 @@
                     <a class="btn btn-default" role="button" mn-ng-disabled="ui.data.Profiles.Value<0 && ui.data.IsSuperUser.Value !=true?true:null" id="Update" mn-ng-click="Update('Update',ProfileName,false)">
                         <span class="glyphicon glyphicon-" style="float: left;margin-right: 5px;"></span>[L:Update]
                     </a>
-                    <a class="btn btn-default" role="button" style="margin-left:5px;" mn-ng-disabled="ui.data.Profiles.Value<0 && ui.data.IsSuperUser.Value !=true?true:null" id="Update" mn-ng-click="Update('Update',ProfileName,true)">
+                    <a class="btn btn-default" role="button" style="margin-left:5px; margin-right:5px;" mn-ng-disabled="ui.data.Profiles.Value<0 && ui.data.IsSuperUser.Value !=true?true:null" id="Update" mn-ng-click="Update('Update',ProfileName,true)">
                         <span class="glyphicon glyphicon-" style="float: left;margin-right: 5px;"></span>[L:UpdateApply]
                     </a>
                     <a class="btn btn-default btn-link " role="button" mn-ng-click="showSelectEditorProfile()">
