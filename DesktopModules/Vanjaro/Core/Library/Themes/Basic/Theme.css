@@ -252,7 +252,7 @@
   border-radius: 5px; }
 
 .DefaultMenu li a.nav-link {
-  color: #444444 !important; }
+  color: #444 !important; }
 
 .navbar {
   padding: 0 !important; }
@@ -519,16 +519,16 @@
 
 @media (min-width: 992px) {
   .DefaultMenu .dropdown ul li a.menu-item {
-    color: #999999 !important; }
+    color: #999 !important; }
   .DefaultMenu .dropdown ul li a.menu-item:after {
-    border-left-color: #999999 !important; } }
+    border-left-color: #999 !important; } }
 
 .DefaultMenu .dropdown ul li a.menu-item:hover {
-  color: #ffffff !important; }
+  color: #fff !important; }
 
 @media (min-width: 992px) {
   .DefaultMenu .dropdown ul li a.menu-item {
-    background: #ffffff !important; } }
+    background: #fff !important; } }
 
 .DefaultMenu .dropdown ul li a.menu-item:hover {
   background: #444444 !important; }
@@ -781,11 +781,17 @@ a.loginuser {
 .Vj-Login .spinner-grow-sm {
   color: #fff !important; }
 
+.Vj-Login #loginbtn:hover {
+  color: #ffffff; }
+
 .Vj-Login #loginbtn {
   background: #444444; }
 
 .Vj-Login #loginbtn:hover {
   background: #555555; }
+
+.Vj-Login #loginbtn {
+  font-family: Poppins, sans-serif !important; }
 
 .Vj-Login #loginbtn {
   font-size: 16px; }
@@ -855,9 +861,6 @@ a.loginuser {
 .ResetPassword label.error {
   color: #ee0a0a;
   font-size: 12px; }
-
-.login-container {
-  padding: 20px 0; }
 
 .form-ResetPassword .resetbtn:hover,
 .form-ResetPassword .Login-link:hover {
@@ -997,20 +1000,26 @@ a.loginuser {
 .Vj-Register label {
   letter-spacing: 0px; }
 
-.registered #submit {
-  color: #fff; }
+.registered #registerbtn {
+  color: #ffffff; }
 
-.registered #submit {
+.registered #registerbtn {
   border-color: #444; }
 
 .registered .spinner-grow-sm {
   color: #fff; }
 
-.registered #submit {
+.registered #registerbtn:hover {
+  color: #ffffff; }
+
+.registered a {
   background-color: #444444; }
 
-.registered #submit:hover {
+.registered a:hover {
   background-color: #555555; }
+
+.registered #registerbtn {
+  font-family: Poppins, sans-serif !important; }
 
 .Vj-Register .registered a {
   font-size: 16px; }
@@ -1120,6 +1129,27 @@ a.loginuser {
 .bg-framedark,
 .bg-colordark {
   background-color: #343a40 !important; }
+
+.authentication-btn li a .btn-name {
+  color: #444444; }
+
+.authentication-btn li a:hover .btn-name {
+  color: #444444; }
+
+.authentication-btn li {
+  background-color: #ffffff; }
+
+.authentication-btn li:hover {
+  background-color: #ffffff; }
+
+.authentication-btn li a .btn-name {
+  font-family: Poppins, sans-serif !important; }
+
+.authentication-btn li a .btn-name {
+  font-size: 16px; }
+
+.authentication-btn li a .btn-name {
+  letter-spacing: 0px; }
 
 .button-style-1 {
   font-weight: 400; }
@@ -3529,7 +3559,7 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #007bff;
     border-color: #007bff; }
-    .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+   .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
         color: #fff;
         background-color: #0062cc;
         border-color: #005cbf; }
@@ -3891,7 +3921,6 @@ input[type="submit"].btn-block,
 input[type="reset"].btn-block,
 input[type="button"].btn-block {
   width: 100%; }
-
 
 .fade {
   transition: opacity 0.15s linear; }
@@ -8928,186 +8957,103 @@ a.text-dark:hover, a.text-dark:focus {
 .bg-quaternary {
   background-color: #fa8072 !important; }
 
-
-
-.Vj-Login #loginbtn:hover {
-    color: #ffffff;
-}
-
-.registered #registerbtn {
-    color: #ffffff;
-}
-
-.registered #registerbtn {
-    border-color: #444;
-}
-
-.registered .spinner-grow-sm {
-    color: #fff;
-}
-
-.registered #registerbtn:hover {
-    color: #ffffff;
-}
-
-.registered a {
-    background-color: #444444;
-}
-
-    .registered a:hover {
-        background-color: #555555;
-    }
-
-.authentication-btn li a .btn-name {
-    color: #444444;
-}
-
-.authentication-btn li a:hover .btn-name {
-    color: #444444;
-}
-
-.authentication-btn li {
-    background-color: #ffffff;
-}
-
-    .authentication-btn li:hover {
-        background-color: #ffffff;
-    }
-
-    .authentication-btn li a .btn-name {
-        font-family: Poppins, sans-serif !important;
-    }
-
-    .authentication-btn li a .btn-name {
-        font-size: 16px;
-    }
-
-    .authentication-btn li a .btn-name {
-        letter-spacing: 0px;
-    }
-
 /*------------ social buttons --------------*/
 .authentication-btn ul {
-    padding-left: 0;
-    list-style: none;
-}
+  padding-left: 0;
+  list-style: none; }
 
 .authentication-btn li img {
-    width: 30px;
-    height: 30px;
-    float: left;
-    margin-top: -3px;
-}
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin-top: -3px; }
 
 .authentication-btn li a {
-    border: 1px solid #ccc;
-    margin-bottom: 15px;
-    cursor: pointer;
-    border-radius: 4px;
-}
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  cursor: pointer;
+  border-radius: 4px; }
 
 .authentication-btn li a {
-    display: block;
-    padding: 15px 10px;
-    padding: 15px 10px;
-    text-align: center;
-    -webkit-box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62);
-    -moz-box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62);
-    box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62);
-}
+  display: block;
+  padding: 15px 10px;
+  padding: 15px 10px;
+  text-align: center;
+  -webkit-box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62);
+  -moz-box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62);
+  box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62); }
 
-    .authentication-btn li a .btn-name {
-        margin-left: -30px;
-        color: #444;
-    }
+.authentication-btn li a .btn-name {
+  margin-left: -30px;
+  color: #444; }
 
 .authentication-btn li:hover {
-    background: #eee;
-}
+  background: #eee; }
 
 .authentication-btn {
-    display: block;
-    width: 100%;
-    max-width: 350px;
-}
+  display: block;
+  width: 100%;
+  max-width: 350px; }
 
 .login-box.socialbutton {
-    max-width: 800px;
-    margin: auto;
-    display: flex;
-}
+  max-width: 800px;
+  margin: auto;
+  display: flex; }
 
 .socialbutton .Vj-Login {
-    width: 100%;
-    float: left;
-    margin: 0;
-}
+  width: 100%;
+  float: left;
+  margin: 0; }
 
 span.separator {
-    display: inline;
-    padding: 20px;
-    position: relative;
-    top: 46%;
-}
+  display: inline;
+  padding: 20px;
+  position: relative;
+  top: 46%; }
 
 .separator-box {
-    position: relative;
-    display: inline-block;
-    margin: 0 15px;
-}
+  position: relative;
+  display: inline-block;
+  margin: 0 15px; }
 
 .topline {
-    content: '';
-    position: absolute;
-    width: 1px;
-    height: 44%;
-    background: #ccc;
-    right: 32px;
-    top: 0px;
-}
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 44%;
+  background: #ccc;
+  right: 32px;
+  top: 0px; }
 
 .bottomline {
-    content: '';
-    position: absolute;
-    width: 1px;
-    height: 44%;
-    background: #ccc;
-    right: 32px;
-    bottom: 0;
-}
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 44%;
+  background: #ccc;
+  right: 32px;
+  bottom: 0; }
 
 @media (max-width: 991px) {
-    .login-box.socialbutton {
-        display: block;
-    }
-
-    .socialbutton .Vj-Login {
-        margin: auto;
-        float: none;
-    }
-
-    .authentication-btn {
-        margin: auto;
-    }
-
-    .separator-box {
-        display: block;
-        text-align: center;
-        max-width: 350px;
-        margin: 20px auto;
-    }
-
-    .topline {
-        width: 40%;
-        height: 1px;
-        left: 0;
-        top: 12px;
-    }
-
-    .bottomline {
-        width: 40%;
-        height: 1px;
-        right: 0;
-        top: 12px;
-    }
-}
+  .login-box.socialbutton {
+    display: block; }
+  .socialbutton .Vj-Login {
+    margin: auto;
+    float: none; }
+  .authentication-btn {
+    margin: auto; }
+  .separator-box {
+    display: block;
+    text-align: center;
+    max-width: 350px;
+    margin: 20px auto; }
+  .topline {
+    width: 40%;
+    height: 1px;
+    left: 0;
+    top: 12px; }
+  .bottomline {
+    width: 40%;
+    height: 1px;
+    right: 0;
+    top: 12px; } }
