@@ -46,7 +46,7 @@
     };
 
     $scope.CloseWindow = function () {
-        $(window.parent.document.body).find('.uxmanager-modal').last().find('[data-dismiss="modal"]').click();
+        window.parent.ClosePopUp();
         window.close();
     };
 
@@ -72,7 +72,7 @@
     $scope.SaveEditorProfile = function (apply) {
         common.webApi.post('~EditorConfig/SaveEditorProfile', 'uid=' + $scope.ui.data.UID.Value + '&profileid=' + $scope.ui.data.Profiles.Value + '&applyto=' + apply, $scope.ui.data.Settings.Options).success(function (success) {
             if (success) {
-                dnnModal.closePopUp(false);
+                window.parent.ClosePopUp();
                 window.close();
             }
         });

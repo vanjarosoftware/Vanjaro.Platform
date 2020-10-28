@@ -95,9 +95,16 @@ GetPopupURL = function (TabUrl, Param) {
     return TabUrl + Param;
 };
 
+ClosePopUp = function (closeall) {
+    if (typeof closeall != 'undefined' && closeall)
+        $('.uxmanager-modal').find('[data-dismiss="modal"]').click();
+    else
+        $('.uxmanager-modal').last().find('[data-dismiss="modal"]').click();
+};
+
 OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, removemodals, ModuleId, scrollbars, titleposition) {
 
-   var id = 'vjModal' + (new Date()).getTime();
+    var id = 'vjModal' + (new Date()).getTime();
     var edit = '';
     var fullwidth = '';
     var scrolling;
