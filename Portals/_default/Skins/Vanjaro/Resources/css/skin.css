@@ -206,7 +206,7 @@ a, a:hover, a:focus, a:active {
         word-break: break-word;
     }
 
-.modal-open .modal.fullwidth {
+.modal.fullwidth {
     padding-left: 1.75rem;
     padding-right: 1.75rem;
 }
