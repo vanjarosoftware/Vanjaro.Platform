@@ -1877,7 +1877,7 @@ $(document).ready(function () {
                                                     else {
                                                         var width = '100%';
 
-                                                        if (typeof t.Width == 'undefined')
+                                                        if (typeof t.Width != 'undefined')
                                                             width = t.Width;
 
                                                         var position = 'right';

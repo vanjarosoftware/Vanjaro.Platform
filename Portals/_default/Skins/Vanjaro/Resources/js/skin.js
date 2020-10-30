@@ -109,7 +109,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     var fullwidth = '';
     var scrolling;
     var modalclass = '';
-    var modalstyle = ' style=';
+    var modalstyle = ' style="';
 
     if (typeof scrollbars != 'undefined') {
         if (scrollbars)
@@ -147,8 +147,10 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     if (typeof ModuleId != 'undefined')
         edit = 'data-edit="edit_module" data-mid="' + ModuleId + '"';
 
-    if (modalstyle == ' style=')
+    if (modalstyle == ' style="')
         modalstyle = '';
+    else
+        modalstyle += '"';
 
     var modal = `<div id="` + id + `"  class="uxmanager-modal modal fade ` + fullwidth + `" tabindex="-1" ` + edit + ` role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
         <div class="modal-dialog` + modalclass + `"` + modalstyle + `>

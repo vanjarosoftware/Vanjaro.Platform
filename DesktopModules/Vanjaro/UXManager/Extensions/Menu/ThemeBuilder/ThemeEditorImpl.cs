@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using DotNetNuke.Entities.Users;
+using System.Web;
 using Vanjaro.Core.Entities.Interface;
 
 namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder
@@ -12,6 +13,8 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder
         public int ViewOrder => 0;
 
         public string JsonPath => HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/" + "theme.editor.json");
+
+        public bool Visibility => Factories.AppFactory.GetAccessRoles(UserController.Instance.GetCurrentUserInfo()).Contains("admin");
     }
 
     public class ThemeEditorCustomImpl : IThemeEditor
@@ -29,5 +32,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder
                 return HttpContext.Current.Server.MapPath("~/Portals/{{PortalID}}/vThemes/{{ThemeName}}/" + "theme.editor.custom.json");
             }
         }
+
+        public bool Visibility => Factories.AppFactory.GetAccessRoles(UserController.Instance.GetCurrentUserInfo()).Contains("admin");
     }
 }
