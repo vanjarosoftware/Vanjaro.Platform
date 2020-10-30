@@ -6,180 +6,170 @@
 // 
 //     Connection String Name: `SiteSql`
 //     Provider:               `System.Data.SqlClient`
-//     Connection String:      `Data Source=HC22;Initial Catalog=dev950;User ID=sa;Password=20hybridSQL10`
+//     Connection String:      `Data Source=DESKTOP-9SGJF9E\SA;Initial Catalog=dev_vanjaro_local;User ID=sa;Password=20hybridSQL10`
 //     Schema:                 ``
 //     Include Views:          `False`
 
 using System;
-using Vanjaro.Core.Data.PetaPoco;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using   Vanjaro.Core.Data.PetaPoco;
 
 namespace Vanjaro.Core.Data.Entities
 {
+	
 
-
-
-    [TableName("VJ_Core_Workflow")]
-    [PrimaryKey("ID")]
-    [ExplicitColumns]
-    public partial class Workflow : VanjaroRepo.Record<Workflow>
+    
+	[TableName("VJ_Core_Pages")]
+	[PrimaryKey("ID")]
+	[ExplicitColumns]
+    public partial class Pages : VanjaroRepo.Record<Pages>  
     {
-        [Column] public int ID { get; set; }
-        [Column] public int? PortalID { get; set; }
-        [Column] public string Name { get; set; }
-        [Column] public string Description { get; set; }
-        [Column] public int Revisions { get; set; }
-        [Column] public bool IsDeleted { get; set; }
-        [Column] public DateTime? DeletedOn { get; set; }
-        [Column] public int? DeletedBy { get; set; }
-        [Column] public DateTime CreatedOn { get; set; }
-        [Column] public int CreatedBy { get; set; }
-    }
-
-    [TableName("VJ_Core_WorkflowPermission")]
-    [PrimaryKey("WorkflowPermissionID")]
-    [ExplicitColumns]
-    public partial class WorkflowPermission : VanjaroRepo.Record<WorkflowPermission>
+		[Column] public int ID { get; set; }
+		[Column] public int PortalID { get; set; }
+		[Column] public int TabID { get; set; }
+		[Column] public string Content { get; set; }
+		[Column] public string Style { get; set; }
+		[Column] public string ContentJSON { get; set; }
+		[Column] public string StyleJSON { get; set; }
+		[Column] public int Version { get; set; }
+		[Column] public int CreatedBy { get; set; }
+		[Column] public DateTime CreatedOn { get; set; }
+		[Column] public int? UpdatedBy { get; set; }
+		[Column] public DateTime? UpdatedOn { get; set; }
+		[Column] public bool IsPublished { get; set; }
+		[Column] public int? PublishedBy { get; set; }
+		[Column] public DateTime? PublishedOn { get; set; }
+		[Column] public string Locale { get; set; }
+		[Column] public int? StateID { get; set; }
+	}
+    
+	[TableName("VJ_Core_CustomBlock")]
+	[PrimaryKey("ID")]
+	[ExplicitColumns]
+    public partial class CustomBlock : VanjaroRepo.Record<CustomBlock>  
     {
-        [Column] public int WorkflowPermissionID { get; set; }
-        [Column] public int WorkflowID { get; set; }
-        [Column] public int PermissionID { get; set; }
-        [Column] public bool AllowAccess { get; set; }
-        [Column] public int? RoleID { get; set; }
-        [Column] public int? UserID { get; set; }
-        [Column] public int CreatedBy { get; set; }
-        [Column] public DateTime CreatedOn { get; set; }
-        [Column] public int? UpdatedBy { get; set; }
-        [Column] public DateTime? UpdatedOn { get; set; }
-    }
-
-    [TableName("VJ_Core_CustomBlock")]
-    [PrimaryKey("ID")]
-    [ExplicitColumns]
-    public partial class CustomBlock : VanjaroRepo.Record<CustomBlock>
+		[Column] public int ID { get; set; }
+		[Column] public string Guid { get; set; }
+		[Column] public int PortalID { get; set; }
+		[Column] public string Name { get; set; }
+		[Column] public string Category { get; set; }
+		[Column] public string Html { get; set; }
+		[Column] public string Css { get; set; }
+		[Column] public bool IsGlobal { get; set; }
+		[Column] public string Locale { get; set; }
+		[Column] public int CreatedBy { get; set; }
+		[Column] public DateTime CreatedOn { get; set; }
+		[Column] public int UpdatedBy { get; set; }
+		[Column] public DateTime UpdatedOn { get; set; }
+	}
+    
+	[TableName("VJ_Core_Setting")]
+	[PrimaryKey("SettingID")]
+	[ExplicitColumns]
+    public partial class Setting : VanjaroRepo.Record<Setting>  
     {
-        [Column] public int ID { get; set; }
-        [Column] public string Guid { get; set; }
-        [Column] public int PortalID { get; set; }
-        [Column] public string Name { get; set; }
-        [Column] public string Category { get; set; }
-        [Column] public string Html { get; set; }
-        [Column] public string Css { get; set; }
-        [Column] public bool IsGlobal { get; set; }
-        [Column] public string Locale { get; set; }
-        [Column] public int CreatedBy { get; set; }
-        [Column] public DateTime CreatedOn { get; set; }
-        [Column] public int UpdatedBy { get; set; }
-        [Column] public DateTime UpdatedOn { get; set; }
-    }
-
-    [TableName("VJ_Core_Pages")]
-    [PrimaryKey("ID")]
-    [ExplicitColumns]
-    public partial class Pages : VanjaroRepo.Record<Pages>
+		[Column] public int SettingID { get; set; }
+		[Column] public int TabID { get; set; }
+		[Column] public int PortalID { get; set; }
+		[Column] public string Identifier { get; set; }
+		[Column] public string Name { get; set; }
+		[Column] public string Value { get; set; }
+	}
+    
+	[TableName("VJ_Core_Workflow")]
+	[PrimaryKey("ID")]
+	[ExplicitColumns]
+    public partial class Workflow : VanjaroRepo.Record<Workflow>  
     {
-        [Column] public int ID { get; set; }
-        [Column] public int PortalID { get; set; }
-        [Column] public int TabID { get; set; }
-        [Column] public string Content { get; set; }
-        [Column] public string Style { get; set; }
-        [Column] public string ContentJSON { get; set; }
-        [Column] public string StyleJSON { get; set; }
-        [Column] public int Version { get; set; }
-        [Column] public int CreatedBy { get; set; }
-        [Column] public DateTime CreatedOn { get; set; }
-        [Column] public int? UpdatedBy { get; set; }
-        [Column] public DateTime? UpdatedOn { get; set; }
-        [Column] public bool IsPublished { get; set; }
-        [Column] public int? PublishedBy { get; set; }
-        [Column] public DateTime? PublishedOn { get; set; }
-        [Column] public string Locale { get; set; }
-        [Column] public int? StateID { get; set; }
-    }
-
-    [TableName("VJ_Core_Setting")]
-    [PrimaryKey("SettingID")]
-    [ExplicitColumns]
-    public partial class Setting : VanjaroRepo.Record<Setting>
+		[Column] public int ID { get; set; }
+		[Column] public int? PortalID { get; set; }
+		[Column] public string Name { get; set; }
+		[Column] public string Description { get; set; }
+		[Column] public int Revisions { get; set; }
+		[Column] public bool IsDeleted { get; set; }
+		[Column] public DateTime? DeletedOn { get; set; }
+		[Column] public int? DeletedBy { get; set; }
+		[Column] public DateTime CreatedOn { get; set; }
+		[Column] public int CreatedBy { get; set; }
+	}
+    
+	[TableName("VJ_Core_WorkflowState")]
+	[PrimaryKey("StateID")]
+	[ExplicitColumns]
+    public partial class WorkflowState : VanjaroRepo.Record<WorkflowState>  
     {
-        [Column] public int SettingID { get; set; }
-        [Column] public int TabID { get; set; }
-        [Column] public int PortalID { get; set; }
-        [Column] public string Identifier { get; set; }
-        [Column] public string Name { get; set; }
-        [Column] public string Value { get; set; }
-    }
-
-    [TableName("VJ_Core_WorkflowContentReview")]
-    [PrimaryKey("ContentID", autoIncrement = false)]
-    [ExplicitColumns]
-    public partial class WorkflowContentReview : VanjaroRepo.Record<WorkflowContentReview>
+		[Column] public int StateID { get; set; }
+		[Column] public int WorkflowID { get; set; }
+		[Column] public string Name { get; set; }
+		[Column] public int Order { get; set; }
+		[Column] public bool IsActive { get; set; }
+		[Column] public bool Notify { get; set; }
+	}
+    
+	[TableName("VJ_Core_WorkflowStatePermission")]
+	[PrimaryKey("StatePermissionID")]
+	[ExplicitColumns]
+    public partial class WorkflowStatePermission : VanjaroRepo.Record<WorkflowStatePermission>  
     {
-        [Column] public string ContentID { get; set; }
-        [Column] public int TabID { get; set; }
-        [Column] public string ContentType { get; set; }
-        [Column] public string ContentLink { get; set; }
-        [Column] public string Title { get; set; }
-        [Column] public int? WorkflowId { get; set; }
-        [Column] public int? StateId { get; set; }
-    }
-
-    [TableName("VJ_Core_WorkflowState")]
-    [PrimaryKey("StateID")]
-    [ExplicitColumns]
-    public partial class WorkflowState : VanjaroRepo.Record<WorkflowState>
+		[Column] public int StatePermissionID { get; set; }
+		[Column] public int StateID { get; set; }
+		[Column] public int PermissionID { get; set; }
+		[Column] public bool AllowAccess { get; set; }
+		[Column] public int? RoleID { get; set; }
+		[Column] public int? UserID { get; set; }
+		[Column] public int CreatedBy { get; set; }
+		[Column] public DateTime CreatedOn { get; set; }
+		[Column] public int? UpdatedBy { get; set; }
+		[Column] public DateTime? UpdatedOn { get; set; }
+	}
+    
+	[TableName("VJ_Core_WorkflowLog")]
+	[PrimaryKey("WorkflowLogID")]
+	[ExplicitColumns]
+    public partial class WorkflowLog : VanjaroRepo.Record<WorkflowLog>  
     {
-        [Column] public int StateID { get; set; }
-        [Column] public int WorkflowID { get; set; }
-        [Column] public string Name { get; set; }
-        [Column] public int Order { get; set; }
-        [Column] public bool IsActive { get; set; }
-        [Column] public bool Notify { get; set; }
-    }
-
-    [TableName("VJ_Core_WorkflowStatePermission")]
-    [PrimaryKey("StatePermissionID")]
-    [ExplicitColumns]
-    public partial class WorkflowStatePermission : VanjaroRepo.Record<WorkflowStatePermission>
+		[Column] public int WorkflowLogID { get; set; }
+		[Column] public int PortalID { get; set; }
+		[Column] public int ModuleID { get; set; }
+		[Column] public int EntityID { get; set; }
+		[Column] public int Version { get; set; }
+		[Column] public int StateID { get; set; }
+		[Column] public string Comment { get; set; }
+		[Column] public bool Approved { get; set; }
+		[Column] public int ReviewedBy { get; set; }
+		[Column] public DateTime ReviewedOn { get; set; }
+		[Column] public string Entity { get; set; }
+	}
+    
+	[TableName("VJ_Core_Localization")]
+	[PrimaryKey("LocalizationID")]
+	[ExplicitColumns]
+    public partial class Localization : VanjaroRepo.Record<Localization>  
     {
-        [Column] public int StatePermissionID { get; set; }
-        [Column] public int StateID { get; set; }
-        [Column] public int PermissionID { get; set; }
-        [Column] public bool AllowAccess { get; set; }
-        [Column] public int? RoleID { get; set; }
-        [Column] public int? UserID { get; set; }
-        [Column] public int CreatedBy { get; set; }
-        [Column] public DateTime CreatedOn { get; set; }
-        [Column] public int? UpdatedBy { get; set; }
-        [Column] public DateTime? UpdatedOn { get; set; }
-    }
-
-    [TableName("VJ_Core_WorkflowLog")]
-    [PrimaryKey("WorkflowLogID")]
-    [ExplicitColumns]
-    public partial class WorkflowLog : VanjaroRepo.Record<WorkflowLog>
+		[Column] public int LocalizationID { get; set; }
+		[Column] public string Language { get; set; }
+		[Column] public string EntityName { get; set; }
+		[Column] public int EntityID { get; set; }
+		[Column] public string Name { get; set; }
+		[Column] public string Value { get; set; }
+	}
+    
+	[TableName("VJ_Core_WorkflowPermission")]
+	[PrimaryKey("WorkflowPermissionID")]
+	[ExplicitColumns]
+    public partial class WorkflowPermission : VanjaroRepo.Record<WorkflowPermission>  
     {
-        [Column] public int WorkflowLogID { get; set; }
-        [Column] public int PortalID { get; set; }
-        [Column] public int ModuleID { get; set; }
-        [Column] public int TabID { get; set; }
-        [Column] public int Version { get; set; }
-        [Column] public int StateID { get; set; }
-        [Column] public string Comment { get; set; }
-        [Column] public bool Approved { get; set; }
-        [Column] public int ReviewedBy { get; set; }
-        [Column] public DateTime ReviewedOn { get; set; }
-    }
-
-    [TableName("VJ_Core_Localization")]
-    [PrimaryKey("LocalizationID")]
-    [ExplicitColumns]
-    public partial class Localization : VanjaroRepo.Record<Localization>
-    {
-        [Column] public int LocalizationID { get; set; }
-        [Column] public string Language { get; set; }
-        [Column] public string EntityName { get; set; }
-        [Column] public int EntityID { get; set; }
-        [Column] public string Name { get; set; }
-        [Column] public string Value { get; set; }
-    }
+		[Column] public int WorkflowPermissionID { get; set; }
+		[Column] public int WorkflowID { get; set; }
+		[Column] public int PermissionID { get; set; }
+		[Column] public bool AllowAccess { get; set; }
+		[Column] public int? RoleID { get; set; }
+		[Column] public int? UserID { get; set; }
+		[Column] public int CreatedBy { get; set; }
+		[Column] public DateTime CreatedOn { get; set; }
+		[Column] public int? UpdatedBy { get; set; }
+		[Column] public DateTime? UpdatedOn { get; set; }
+	}
 }

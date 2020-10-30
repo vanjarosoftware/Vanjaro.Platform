@@ -19,7 +19,7 @@ namespace Vanjaro.Core
                 if (NotificationTasks == null)
                 {
                     List<INotificationTask> ServiceInterfaceAssemblies = new List<INotificationTask>();
-                    string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll") && (c.Contains("Vanjaro.UXManager.Extensions") || c.Contains("Vanjaro.Core.Extensions"))).ToArray();
+                    string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll") && (c.Contains("Vanjaro.UXManager.Extensions") || c.Contains("Vanjaro.Core.Extensions") || c.Contains("Mandeeps.DNN.Modules.LiveBlog"))).ToArray();
                     foreach (string Path in binAssemblies)
                     {
                         try

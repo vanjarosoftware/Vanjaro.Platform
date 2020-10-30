@@ -55,17 +55,17 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.PageSetting
             {
                 Dictionary<MenuAction, dynamic> Event = new Dictionary<MenuAction, dynamic>
                 {
-                    { MenuAction.onClick, "parent.OpenPopUp(event, " + Width + ",\"right\",\"" + PortalSettings.Current.ActiveTab.TabName + "\", \"" + ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/')+MenuManager.GetURL() + "mid=0&icp=true&guid=" + "10E56C75-548E-4A10-822E-52E6AA2AB45F#/detail?pid=" + PortalSettings.Current.ActiveTab.TabID + "\")" }
+                    { MenuAction.onClick, "parent.OpenPopUp(event, " + Width + ",\"right\",\"" + PortalSettings.Current.ActiveTab.TabName + "\", \"" + ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/')+MenuManager.GetURL() + "mid=0&icp=true&guid=" + "7FD34485-0F09-4D3C-BB91-9777A9F9BC43\")" }
                 };
 
                 if (!string.IsNullOrEmpty(Editor.Options.SettingsUrl))
                 {
                     Event = new Dictionary<MenuAction, dynamic>
                     {
-                        { MenuAction.onClick, "parent.OpenPopUp(event, " + Width + ",\"right\",\"\", \"" + Editor.Options.SettingsUrl + "\")" }
+                        { MenuAction.onClick, "parent.OpenPopUp(event,\"900\",\"right\",\"\", \"" + Editor.Options.SettingsUrl + "\")" }
                     };
                 }
-                
+
                 return Event;
             }
         }

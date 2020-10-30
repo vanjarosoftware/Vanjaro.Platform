@@ -47,14 +47,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Components\Constants.cs" />
+    <Compile Include="Components\Interfaces\IReviewComment.cs" />
     <Compile Include="Components\NotificationItem.cs" />
+    <Compile Include="Components\ReviewContentInfo.cs" />
     <Compile Include="Components\ReviewSettings.cs" />
     <Compile Include="Components\StringText.cs" />
     <Compile Include="Components\StringValue.cs" />
     <Compile Include="Components\Enum.cs" />
     <Compile Include="Data\Entities\Pages.cs" />
     <Compile Include="Data\Entities\PropertyLocalization.cs" />
-    <Compile Include="Data\Entities\WorkflowPage.cs" />
+    <Compile Include="Data\Entities\WorkflowContent.cs" />
     <Compile Include="Data\Entities\WorkflowPermissionInfo.cs" />
     <Compile Include="Components\PageWorkflowPermission.cs" />
     <Compile Include="Data\Entities\Setting.cs" />
@@ -278,7 +280,9 @@
     <Content Include="UserControls\Login.ascx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\Shared.resx" />
+    <Content Include="App_LocalResources\Shared.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Install\Core.01.00.00.SqlDataProvider" />

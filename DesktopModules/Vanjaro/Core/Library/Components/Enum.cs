@@ -6,5 +6,10 @@
         {
             ContentStaging = 1, ContentApproval = 2
         }
+
+        public enum WorkflowLogType
+        {
+            VJPage
+        }
     }
 }

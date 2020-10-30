@@ -45,7 +45,7 @@
         if ($('.ReviewPages [type="search"]').val() != undefined)
             $scope.ProgressKeyword = $('.ReviewPages [type="search"]').val();
 
-        common.webApi.get('Review/GetPages', 'skip=' + tableState.pagination.start + '&pagesize=' + tableState.pagination.number + '&StateID=' + $scope.StateID).success(function (data) {
+        common.webApi.get('Review/GetPages', 'skip=' + tableState.pagination.start + '&pagesize=' + tableState.pagination.number + '&StateID=' + $scope.StateID + '&WorkflowReviewType=' + $scope.ui.data.WorkflowReviewType.Value).success(function (data) {
             if (data) {
                 tableState.pagination.numberOfPages = data.NumberOfPages;
                 $scope.ReviewPages = [];
@@ -55,6 +55,6 @@
     };
 
     $scope.OpenModelPopup = function (Row) {
-        parent.window.location.href = Row.TabURL;
+        parent.window.location.href = Row.EntityURL;
     }
 });

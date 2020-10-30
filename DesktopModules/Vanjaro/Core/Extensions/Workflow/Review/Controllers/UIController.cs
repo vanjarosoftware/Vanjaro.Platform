@@ -14,7 +14,7 @@ namespace Vanjaro.Core.Extensions.Workflow.Review.Controllers
                 case AppFactory.Identifier.review_moderator:
                     return ModeratorController.GetData(UserInfo, PortalSettings, Parameters);
                 case AppFactory.Identifier.review_review:
-                    return ReviewController.GetData(UserInfo);
+                    return ReviewController.GetData(UserInfo, Parameters);
                 default:
                     break;
             }

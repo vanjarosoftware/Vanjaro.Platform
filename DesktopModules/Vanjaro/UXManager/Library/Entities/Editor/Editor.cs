@@ -26,6 +26,7 @@ namespace Vanjaro.UXManager.Library.Entities
                 GetContentUrl = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/get'",
                 ContainerID = "#vjEditor",
                 EditPage = true,
+                ModuleId=-1
             };
 
             return options;

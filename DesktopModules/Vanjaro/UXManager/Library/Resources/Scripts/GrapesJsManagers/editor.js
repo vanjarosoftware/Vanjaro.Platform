@@ -76,7 +76,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         var VjPublishChanges = function () {
-            if (VJIsContentApproval == 'True' && IsVJEditorSaveCall) {
+            if (VJIsContentApproval == 'True') {
                 swal(
                     {
                         title: VjLocalized.PublishAreyousure, text: VjLocalized.PublishCommentlable + ' <span class="SweetAlertBold">' + VJNextStateName + '</span> <textarea class="form-control" id="VJReviewComment" rows="4" style="width: 100%;margin-top: 20px;" type="text" tabindex="3" placeholder="Comments"></textarea>', html: true, confirmButtonText: VjLocalized.Submit, cancelButtonText: VjLocalized.Cancel, showCancelButton: true, closeOnConfirm: false, animation: "slide-from-top", inputPlaceholder: VjLocalized.EnterComment
@@ -207,7 +207,6 @@ $(document).ready(function () {
             $(window.parent.document.body).find('.vj-wrapper').removeClass("m2vDisplayNone");
             if ($.isFunction($.ServicesFramework)) {
                 var sf = $.ServicesFramework(-1);
-                global.IsVJEditorSaveCall = data.ModuleId > 0 ? false : true
                 if (parseInt(sf.getTabId()) <= 0)
                     sf = parent.$.ServicesFramework(-1);
                 $.ajax({

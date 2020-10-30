@@ -7,6 +7,7 @@ using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Common.Entities.Apps;
 using Vanjaro.Common.Utilities;
 using Vanjaro.UXManager.Library;
+using Vanjaro.UXManager.Library.Entities;
 using Vanjaro.UXManager.Library.Entities.Interface;
 using Vanjaro.UXManager.Library.Entities.Menu;
 
@@ -49,7 +50,23 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement
 
         public bool Visibility => TabPermissionController.CanManagePage(PortalSettings.Current.ActiveTab);
 
-        public Dictionary<MenuAction, dynamic> ToolbarAction => new Dictionary<MenuAction, dynamic>();
+        public Dictionary<MenuAction, dynamic> ToolbarAction
+        {
+            get
+            {
+                Dictionary<MenuAction, dynamic> Event = new Dictionary<MenuAction, dynamic>();
+
+                if (!string.IsNullOrEmpty(Editor.Options.RevisionUrl))
+                {
+                    Event = new Dictionary<MenuAction, dynamic>
+                    {
+                        { MenuAction.onClick, Editor.Options.RevisionUrl }
+                    };
+                }
+
+                return Event;
+            }
+        }
 
         public string AccessRoles(UserInfo userInfo)
         {
