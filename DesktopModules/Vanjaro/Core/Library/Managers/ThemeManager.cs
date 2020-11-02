@@ -65,7 +65,16 @@ namespace Vanjaro.Core
                     return null;
                 }
             }
-            public static List<IThemeEditor> GetCategories()
+
+            public static List<IThemeEditor> GetCategories(bool CheckVisibilityPermission)
+            {
+                if (CheckVisibilityPermission)
+                    return GetCategories().Where(x => x.IsVisible).ToList();
+                else
+                    return GetCategories();
+            }
+
+            private static List<IThemeEditor> GetCategories()
             {
                 string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeCategory, "AllPortals");
                 List<IThemeEditor> Items = CacheFactory.Get(CacheKey);
@@ -125,7 +134,7 @@ namespace Vanjaro.Core
                 }
 
                 List<string> Css = new List<string>();
-                foreach (IThemeEditor category in GetCategories())
+                foreach (IThemeEditor category in GetCategories(true))
                 {
                     List<ThemeEditorValue> themeEditorValues = GetThemeEditorValues(PortalID, category.Guid);
                     ThemeEditorWrapper editors = GetThemeEditors(PortalID, category.Guid);
@@ -398,7 +407,7 @@ namespace Vanjaro.Core
                 {
                     if (CategoryGuid.ToLower() == "all")
                     {
-                        foreach (IThemeEditor te in GetCategories())
+                        foreach (IThemeEditor te in GetCategories(true))
                         {
                             ThemeEditorWrapper ThemeEditorWrapper = GetThemeEditors(PortalID, te.Guid);
                             if (ThemeEditorWrapper != null && ThemeEditorWrapper.Fonts != null)
@@ -704,7 +713,7 @@ namespace Vanjaro.Core
             }
             private static string GetThemeEditorJsonPath(int PortalID, string CategoryGuid)
             {
-                IThemeEditor themeEditor = GetCategories().Where(c => c.Guid.ToLower() == CategoryGuid.ToLower()).FirstOrDefault();
+                IThemeEditor themeEditor = GetCategories(true).Where(c => c.Guid.ToLower() == CategoryGuid.ToLower()).FirstOrDefault();
                 if (themeEditor != null)
                 {
                     string path = themeEditor.JsonPath.Replace("{{PortalID}}", PortalID.ToString()).Replace("{{ThemeName}}", Core.Managers.ThemeManager.CurrentTheme.Name);

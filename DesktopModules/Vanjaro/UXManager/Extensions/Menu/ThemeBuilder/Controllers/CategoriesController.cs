@@ -24,7 +24,8 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.Controllers
                 }
             }
             Settings.Add("Theme", new UIData { Name = "Theme", Value = Theme });
-            Settings.Add("Categories", new UIData { Name = "Categories", Options = Core.Managers.ThemeManager.GetCategories().OrderBy(o => o.ViewOrder).ToList() });
+            bool CheckFeatureAccess = UserController.Instance.GetCurrentUserInfo().IsSuperUser ? false : true;
+            Settings.Add("Categories", new UIData { Name = "Categories", Options = Core.Managers.ThemeManager.GetCategories(CheckFeatureAccess).OrderBy(o => o.ViewOrder).ToList() });
             string ThemeUrl = PageManager.GetCurrentTabUrl(PortalSettings) + "?mid=0&icp=true&guid=5fa3e7fb-bdcb-4b4b-9620-f6318fe95cc5";
             Settings.Add("ThemeUrl", new UIData { Name = "ThemeUrl", Value = ThemeUrl });
             return Settings.Values.ToList();
