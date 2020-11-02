@@ -32,42 +32,54 @@ $(document).ready(function () {
 
         window.addEventListener('message', event => {
 
-            if (TemplateLibraryURL.startsWith(event.origin) && typeof event.data != 'undefined') {
+            if (TemplateLibraryURL.startsWith(event.origin)) {
 
-                var templatePath = '';
+                if (typeof event.data != 'undefined') {
 
-                if (!event.data.startsWith(event.origin))
-                    templatePath = event.origin + '/' + event.data;
-                else
-                    templatePath = event.data;
+                    if (typeof event.data.action != 'undefined') {
 
-                var sf = $.ServicesFramework(-1);
-
-                $.ajax({
-                    type: "Post",
-                    url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/ImportCustomBlock?TemplatePath=" + templatePath,
-                    headers: {
-                        'ModuleId': parseInt(sf.getModuleId()),
-                        'TabId': parseInt(sf.getTabId()),
-                        'RequestVerificationToken': sf.getAntiForgeryValue()
-                    },
-                    success: function (data) {
-
-                        if (data.html != '') {
-
-                            var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
-                                content: data.Html + '<style>' + data.Css + '</style>',
-                                attributes: {
-                                    class: 'fas fa-th-large floating',
-                                    id: 'LibraryBlock'
-                                }
-                            });
-
-                            var block = VjEditor.BlockManager.render(LibraryBlock);
-                            $(window.document.body).append(block).find('[data-dismiss="modal"]').click();
-                        }
+                        if (event.data.action == 'preview-open')
+                            $('#UXpagerender').addClass('preview-open')
+                        else
+                            $('#UXpagerender').removeClass('preview-open');
                     }
-                });
+                    else {
+                        var templatePath = '';
+
+                        if (!event.data.startsWith(event.origin))
+                            templatePath = event.origin + '/' + event.data;
+                        else
+                            templatePath = event.data;
+
+                        var sf = $.ServicesFramework(-1);
+
+                        $.ajax({
+                            type: "Post",
+                            url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/ImportCustomBlock?TemplatePath=" + templatePath,
+                            headers: {
+                                'ModuleId': parseInt(sf.getModuleId()),
+                                'TabId': parseInt(sf.getTabId()),
+                                'RequestVerificationToken': sf.getAntiForgeryValue()
+                            },
+                            success: function (data) {
+
+                                if (data.html != '') {
+
+                                    var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
+                                        content: data.Html + '<style>' + data.Css + '</style>',
+                                        attributes: {
+                                            class: 'fas fa-th-large floating',
+                                            id: 'LibraryBlock'
+                                        }
+                                    });
+
+                                    var block = VjEditor.BlockManager.render(LibraryBlock);
+                                    $(window.document.body).append(block).find('[data-dismiss="modal"]').click();
+                                }
+                            }
+                        });
+                    }
+                }
             }
         });
     }
