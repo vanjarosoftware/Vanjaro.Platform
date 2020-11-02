@@ -14,7 +14,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder
 
         public string JsonPath => HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/" + "theme.editor.json");
 
-        public bool Visibility => Factories.AppFactory.GetAccessRoles(UserController.Instance.GetCurrentUserInfo()).Contains("admin");
+        public bool IsVisible => Factories.AppFactory.GetAccessRoles(UserController.Instance.GetCurrentUserInfo()).Contains("admin");
     }
 
     public class ThemeEditorCustomImpl : IThemeEditor
@@ -33,6 +33,6 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder
             }
         }
 
-        public bool Visibility => Factories.AppFactory.GetAccessRoles(UserController.Instance.GetCurrentUserInfo()).Contains("admin");
+        public bool IsVisible => Factories.AppFactory.GetAccessRoles(UserController.Instance.GetCurrentUserInfo()).Contains("admin");
     }
 }

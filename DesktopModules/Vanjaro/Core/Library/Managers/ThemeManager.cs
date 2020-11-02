@@ -69,7 +69,7 @@ namespace Vanjaro.Core
             public static List<IThemeEditor> GetCategories(bool CheckVisibilityPermission)
             {
                 if (CheckVisibilityPermission)
-                    return GetCategories().Where(x => x.Visibility).ToList();
+                    return GetCategories().Where(x => x.IsVisible).ToList();
                 else
                     return GetCategories();
             }
