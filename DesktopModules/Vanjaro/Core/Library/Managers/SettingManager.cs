@@ -10,6 +10,7 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.FileSystem;
+using DotNetNuke.Web.Client;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace Vanjaro.Core
                 HostController hostController = new HostController();
                 if (Secure)
                     return hostController.GetEncryptedString(Name, Config.GetDecryptionkey());
-                return hostController.GetString(Name,defaultValue);
+                return hostController.GetString(Name, defaultValue);
             }
             public static bool GetHostSettingAsBoolean(string Name, bool defaultValue = false)
             {
@@ -67,7 +68,7 @@ namespace Vanjaro.Core
                     PortalController.UpdateEncryptedString(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, Config.GetDecryptionkey());
                 else
                     PortalController.UpdatePortalSetting(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, true);
-            }           
+            }
 
             public static void UpdateValue(int PortalID, int TabID, string Identifier, string Name, string Value)
             {
@@ -463,6 +464,10 @@ namespace Vanjaro.Core
 
                 if (fi != null)
                     UpdateValue(pinfo.PortalID, 0, "security_settings", "Picture_DefaultFolder", fi.FolderID.ToString());
+
+                PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.EnableCompositeFilesKey, "True");
+                PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.MinifyCssKey, "True");
+                PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.MinifyJsKey, "True");
             }
             public static void ApplyDefaultLayouts(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts)
             {
