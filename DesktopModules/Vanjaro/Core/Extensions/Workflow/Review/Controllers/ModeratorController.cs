@@ -48,7 +48,7 @@ namespace Vanjaro.Core.Extensions.Workflow.Review.Controllers
 
             if (!string.IsNullOrEmpty(Useraction) && !string.IsNullOrEmpty(Comment))
             {
-                ModeratorManager.AddComment(Entity, int.Parse(EntityID), Useraction, Comment, PortalSettings);
+                WorkflowManager.AddComment(Entity, int.Parse(EntityID), Useraction, Comment, PortalSettings);
             }
 
             Result.Data = ModeratorManager.GetData(PortalSettings, int.Parse(Version), Entity, int.Parse(EntityID));

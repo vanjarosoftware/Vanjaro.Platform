@@ -24,12 +24,12 @@ namespace Vanjaro.Core
             public static ReviewContentInfo GetReviewContentInfo(int Version, string Entity, int EntityID, UserInfo UserInfo)
             {
                 ReviewContentInfo rinfo = new ReviewContentInfo();
-                if (Entity == WorkflowLogType.VJPage.ToString())
+                if (Entity == WorkflowType.Page.ToString())
                 {
                     Pages Pages = Version > 0 ? GetByVersion(EntityID, Version, null) : PageManager.GetLatestVersion(EntityID, UserInfo);
                     if (Pages != null)
                     {
-                        rinfo.Entity = WorkflowLogType.VJPage.ToString();
+                        rinfo.Entity = WorkflowType.Page.ToString();
                         rinfo.EntityID = Pages.TabID;
                         rinfo.IsPublished = Pages.IsPublished;
                         rinfo.StateID = Pages.StateID.Value;

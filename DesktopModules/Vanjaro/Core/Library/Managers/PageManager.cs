@@ -65,7 +65,7 @@ namespace Vanjaro.Core
                 if (State != null)
                 {
                     string URL = ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=33d8efed-0f1d-471e-80a4-6a7f10e87a42");
-                    URL += "#/moderator?version=" + page.Version + "&entity=" + WorkflowLogType.VJPage.ToString() + "&entityid=" + page.TabID;
+                    URL += "#/moderator?version=" + page.Version + "&entity=" + WorkflowType.Page.ToString() + "&entityid=" + page.TabID;
                     string ReviewChangesBtn = ShowReview ? "ReviewChangeMarkup.append(ReviewChangesBtn);" : string.Empty;
                     string Subject = ShowReview ? State.Name : DotNetNuke.Services.Localization.Localization.GetString("PendingReview", Components.Constants.LocalResourcesFile);
                     string Message = !ShowReview ? "ReviewChangeMarkup.append('" + DotNetNuke.Services.Localization.Localization.GetString("ThisPageIsWaiting", Components.Constants.LocalResourcesFile) + "');" : string.Empty;
@@ -422,10 +422,10 @@ namespace Vanjaro.Core
                 if (string.IsNullOrEmpty(Action) && IsHaveReviewPermission && !WorkflowManager.IsFirstState(wState.WorkflowID, wState.StateID))
                 {
                     string SystemLog = "System Log: Changes made by user";
-                    WorkflowLog log = WorkflowManager.GetEntityWorkflowLogs(WorkflowLogType.VJPage.ToString(), Page.TabID, Page.Version).LastOrDefault();
+                    WorkflowLog log = WorkflowManager.GetEntityWorkflowLogs(WorkflowType.Page.ToString(), Page.TabID, Page.Version).LastOrDefault();
                     if (log == null || (log != null && (!log.Comment.Contains(SystemLog) || log.ReviewedBy != UserInfo.UserID)))
                     {
-                        WorkflowFactory.AddWorkflowLog(PortalSettings.PortalId, 0, UserInfo.UserID, WorkflowLogType.VJPage.ToString(), Page.TabID, Page.StateID.Value, Page.Version, "approve", "System Log: Changes made by user");
+                        WorkflowFactory.AddWorkflowLog(PortalSettings.PortalId, 0, UserInfo.UserID, WorkflowType.Page.ToString(), Page.TabID, Page.StateID.Value, Page.Version, "approve", "System Log: Changes made by user");
 
                     }
                 }
@@ -896,7 +896,7 @@ namespace Vanjaro.Core
                     {
                         ModeratePage(Action, Page, PortalSettings);
                         WorkflowManager.SendWorkflowNotification(PortalID, Page, Comment, Action);
-                        WorkflowFactory.AddWorkflowLog(PortalID, 0, userinfo.UserID, WorkflowLogType.VJPage.ToString(), Page.TabID, Page.StateID.Value, Page.Version, Action, Comment);
+                        WorkflowFactory.AddWorkflowLog(PortalID, 0, userinfo.UserID, WorkflowType.Page.ToString(), Page.TabID, Page.StateID.Value, Page.Version, Action, Comment);
                     }
                 }
 
@@ -904,7 +904,7 @@ namespace Vanjaro.Core
 
             public void AddComment(string Entity, int EntityID, string Action, string Comment, PortalSettings PortalSettings)
             {
-                if (Entity == WorkflowLogType.VJPage.ToString())
+                if (Entity == WorkflowType.Page.ToString())
                     AddComment(PortalSettings, Action, Comment);
             }
         }

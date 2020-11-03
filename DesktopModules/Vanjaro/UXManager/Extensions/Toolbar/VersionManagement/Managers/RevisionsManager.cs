@@ -48,7 +48,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Managers
                     PhotoURL = Vanjaro.Common.Utilities.UserUtils.GetProfileImage(PortalID, UserID),
                     IsPublished = item.IsPublished,
                     State = item.StateID.HasValue ? Core.Managers.WorkflowManager.GetStateByID(item.StateID.Value) : null,
-                    IsLogsExist = WorkflowManager.GetEntityWorkflowLogs(Core.Components.Enum.WorkflowLogType.VJPage.ToString(), TabID, item.Version).Count() > 0,
+                    IsLogsExist = WorkflowManager.GetEntityWorkflowLogs(Core.Components.Enum.WorkflowType.Page.ToString(), TabID, item.Version).Count() > 0,
                     TabID = TabID
                 }) ;
             }

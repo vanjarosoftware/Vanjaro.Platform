@@ -8,11 +8,14 @@ using DotNetNuke.Security.Roles;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Web;
 using Vanjaro.Common.Permissions;
 using Vanjaro.Core.Components;
+using Vanjaro.Core.Components.Interfaces;
 using Vanjaro.Core.Data.Entities;
 using static Vanjaro.Core.Components.Enum;
 using static Vanjaro.Core.Factories;
@@ -1180,6 +1183,47 @@ namespace Vanjaro.Core
             public static List<StringValue> GetStatesforReview(int PortalID, int UserID, string ReviewType)
             {
                 return WorkflowFactory.GetStatesforReview(PortalID, UserID, ReviewType);
+            }
+
+            public static void AddComment(string Entity, int EntityID, string Action, string Comment, PortalSettings PortalSettings)
+            {
+
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Workflow + "AddComment");
+                List<Type> ExtensionTypes = CacheFactory.Get(CacheKey);
+                if (ExtensionTypes == null)
+                {
+                    string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll")).ToArray();
+                    List<Type> _ExtensionTypes = new List<Type>();
+                    foreach (string Path in binAssemblies)
+                    {
+
+                        try
+                        {
+
+                            IEnumerable<Type> AssembliesToAdd = from t in Assembly.LoadFrom(Path).GetTypes()
+                                                                where typeof(IReviewComment).IsAssignableFrom(t) && t.GetConstructor(Type.EmptyTypes) != null
+                                                                select t;
+
+                            _ExtensionTypes.AddRange(AssembliesToAdd.ToList());
+                        }
+                        catch { continue; }
+                    }
+
+                    CacheFactory.Set(CacheKey, _ExtensionTypes);
+                    ExtensionTypes = _ExtensionTypes;
+                }
+
+                foreach (Type t in ExtensionTypes)
+                {
+                    IReviewComment ReviewContent = Activator.CreateInstance(t) as IReviewComment;
+
+                    try
+                    {
+                        ReviewContent.AddComment(Entity, EntityID, Action, Comment, PortalSettings);
+                    }
+                    catch { }
+                }
+
             }
         }
     }

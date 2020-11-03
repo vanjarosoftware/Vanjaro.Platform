@@ -110,42 +110,5 @@ namespace Vanjaro.Core.Extensions.Workflow.Review.Managers
             Data.Add("LastState", WorkflowManager.GetStateByID(WorkflowManager.GetLastStateID(wState.WorkflowID).StateID));
             return Data;
         }
-
-     
-
-        public static void AddComment(string Entity, int EntityID, string Action, string Comment, PortalSettings PortalSettings)
-        {
-            List<Type> ExtensionTypes = new List<Type>();
-            string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll")).ToArray();
-            foreach (string Path in binAssemblies)
-            {
-
-                try
-                {
-
-                    IEnumerable<Type> AssembliesToAdd = from t in Assembly.LoadFrom(Path).GetTypes()
-                                                        where typeof(IReviewComment).IsAssignableFrom(t) && t.GetConstructor(Type.EmptyTypes) != null
-                                                        select t;
-
-                    ExtensionTypes.AddRange(AssembliesToAdd.ToList());
-                }
-                catch { continue; }
-            }
-
-
-            foreach (Type t in ExtensionTypes)
-            {
-                IReviewComment ReviewContent = Activator.CreateInstance(t) as IReviewComment;
-
-                try
-                {
-                    ReviewContent.AddComment(Entity, EntityID, Action, Comment, PortalSettings);
-                }
-                catch { }
-            }
-
-        }
-
-
     }
 }

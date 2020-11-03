@@ -25,7 +25,7 @@ namespace Vanjaro.Core.Data.Entities
 
                 if (EntityID > 0)
                 {
-                    if (EntityName.ToLower() == Enum.WorkflowLogType.VJPage.ToString().ToLower())
+                    if (EntityName.ToLower() == Enum.WorkflowType.Page.ToString().ToLower())
                     {
                         return ServiceProvider.NavigationManager.NavigateURL(EntityID);
                     }
