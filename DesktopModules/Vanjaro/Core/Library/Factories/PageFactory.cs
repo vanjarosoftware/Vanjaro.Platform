@@ -2,14 +2,17 @@
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
+using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Data.PetaPoco;
 using Vanjaro.Core.Data.Scripts;
+using static Vanjaro.Core.Components.Enum;
 using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core
@@ -18,6 +21,25 @@ namespace Vanjaro.Core
     {
         public class PageFactory
         {
+            public static ReviewContentInfo GetReviewContentInfo(int Version, string Entity, int EntityID, UserInfo UserInfo)
+            {
+                ReviewContentInfo rinfo = new ReviewContentInfo();
+                if (Entity == WorkflowType.Page.ToString())
+                {
+                    Pages Pages = Version > 0 ? GetByVersion(EntityID, Version, null) : PageManager.GetLatestVersion(EntityID, UserInfo);
+                    if (Pages != null)
+                    {
+                        rinfo.Entity = WorkflowType.Page.ToString();
+                        rinfo.EntityID = Pages.TabID;
+                        rinfo.IsPublished = Pages.IsPublished;
+                        rinfo.StateID = Pages.StateID.Value;
+                        rinfo.Version = Pages.Version;
+                        return rinfo;
+                    }
+                }
+                return null;
+
+            }
             public static void Update(Pages page, int UserID)
             {
                 if (page.ID == 0)
@@ -201,7 +223,7 @@ namespace Vanjaro.Core
                     {
                         Tab.SkinSrc = "[g]skins/vanjaro/base.ascx";
                         Tab.ContainerSrc = "[g]containers/vanjaro/base.ascx";
-                        
+
                         using (VanjaroRepo db = new VanjaroRepo())
                         {
                             db.Execute(PortalScript.UpdateTabContainerSrc(PortalSettings.Current.PortalId, Tab.TabID));

@@ -170,6 +170,9 @@
   <data name="RejectSubject.Text" xml:space="preserve">
     <value>Content Rejection Notification</value>
   </data>
+  <data name="ReviewContent.Text" xml:space="preserve">
+    <value>Review Page</value>
+  </data>
   <data name="ReviewPage.Text" xml:space="preserve">
     <value>Review Page</value>
   </data>

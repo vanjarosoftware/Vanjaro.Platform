@@ -19,22 +19,35 @@ namespace Vanjaro.Core.Extensions.Workflow.Review.Controllers
     [AuthorizeAccessRoles(AccessRoles = "review")]
     public class ReviewController : UIEngineController
     {
-        internal static List<IUIData> GetData(UserInfo UserInfo)
+        internal static List<IUIData> GetData(UserInfo UserInfo, Dictionary<string, string> Parameters)
         {
+            string ReviewType = string.Empty;
+            try
+            {
+                ReviewType = Parameters["reviewtype"].ToString();
+            }
+            catch { }
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>
             {
-                { "States", new UIData { Name = "States", Options = ReviewManager.GetStatesforReview(UserInfo.PortalID, UserInfo.UserID), OptionsText = "Text", OptionsValue = "Value", Value = "0" } },
-                { "NotificationExtensionURL", new UIData { Name = "NotificationExtensionURL", Value = ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=cd8c127f-da66-4036-b107-90061361cf87") } }
+                {
+                    "States", new UIData { Name = "States", Options = ReviewManager.GetStatesforReview(UserInfo.PortalID, UserInfo.UserID,ReviewType), OptionsText = "Text", OptionsValue = "Value", Value = "0" }
+                },
+                {
+                    "NotificationExtensionURL", new UIData { Name = "NotificationExtensionURL", Value = ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=cd8c127f-da66-4036-b107-90061361cf87")}
+                },
+                {
+                    "WorkflowReviewType", new UIData { Name = "WorkflowReviewType",Value  = ReviewType }
+                },
             };
 
             return Settings.Values.ToList();
         }
 
         [HttpGet]
-        public dynamic GetPages(int skip, int pagesize, int StateID)
+        public dynamic GetPages(int skip, int pagesize, int StateID, string WorkflowReviewType)
         {
             skip = (skip / pagesize) + 1;
-            int TotalCount = WorkflowManager.GetReviewPagesCountByUserID(PortalSettings.UserId, skip, pagesize, StateID);
+            int TotalCount = WorkflowManager.GetReviewCountByUserID(PortalSettings.UserId, skip, pagesize, StateID, WorkflowReviewType);
             double NumberOfPages = (double)TotalCount / pagesize;
             dynamic result = new ExpandoObject();
 
@@ -44,7 +57,7 @@ namespace Vanjaro.Core.Extensions.Workflow.Review.Controllers
             }
 
             result.NumberOfPages = NumberOfPages;
-            result.Data = WorkflowManager.GetReviewPagesbyUserID(PortalSettings.UserId, skip, pagesize, StateID);
+            result.Data = WorkflowManager.GetReviewContentbyUserID(PortalSettings.UserId, skip, pagesize, StateID, WorkflowReviewType);
             return result;
         }
 

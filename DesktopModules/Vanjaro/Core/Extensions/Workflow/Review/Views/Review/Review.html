@@ -17,8 +17,8 @@
             <uielement name="ReviewPages" control="grid" label="false" attr-class="table-grid ReviewPages GrayTh" ngoptions="ReviewPages" pagesize="10" paged="true" displayedpages="5" attr-st-pipe="Pipe_ReviewPages">
                 <column name="TabName" width="33">
                     <uitemplate>
-                        <a title="{{row.TabName}}" class="reviewpagename" style="cursor:pointer;" ng-click="OpenModelPopup(row)">
-                            <span>{{row.TabName}}</span>
+                        <a title="{{row.Title}}" class="reviewpagename" style="cursor:pointer;" ng-click="OpenModelPopup(row)">
+                            <span>{{row.Title}}</span>
                         </a>
                     </uitemplate>
                 </column>

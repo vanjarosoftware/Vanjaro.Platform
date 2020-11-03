@@ -34,9 +34,9 @@ namespace Vanjaro.Core.Extensions.Workflow.Review.Factories
             {
                 AccessRoles = "review,pageedit",
                 UrlPaths = new List<string> {
-                  "moderator/:version",
+                    "moderator",
+                  "moderator/:version/:entity",
                 },
-                IsDefaultTemplate = false,
                 TemplatePath = "review/moderator.html",
                 Identifier = Identifier.review_moderator.ToString(),
                 Defaults = new Dictionary<string, string> {
@@ -50,6 +50,7 @@ namespace Vanjaro.Core.Extensions.Workflow.Review.Factories
                 AccessRoles = "review",
                 UrlPaths = new List<string> {
                   "review",
+                  "review/:reviewtype"
                 },
                 TemplatePath = "review/review.html",
                 Identifier = Identifier.review_review.ToString(),

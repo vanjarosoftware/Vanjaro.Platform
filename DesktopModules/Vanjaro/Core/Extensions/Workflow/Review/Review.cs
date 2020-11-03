@@ -50,7 +50,7 @@ namespace Vanjaro.Core.Extensions.Workflow.Review
         {
             NotificationName = DotNetNuke.Services.Localization.Localization.GetString("ReviewContent", Core.Components.Constants.LocalResourcesFile),
             NotificationCount = WorkflowManager.GetPagesbyUserID(PortalSettings.Current.PortalId, PortalSettings.Current.UserId).Count,
-            URL = ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=33d8efed-0f1d-471e-80a4-6a7f10e87a42") + "#/review"
+            URL = ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=33d8efed-0f1d-471e-80a4-6a7f10e87a42") + "#/review/" + Core.Components.Enum.WorkflowType.Page.ToString().ToLower()
         };
 
         public string AccessRoles(UserInfo userInfo)

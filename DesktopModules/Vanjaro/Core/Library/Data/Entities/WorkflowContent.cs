@@ -1,30 +1,34 @@
 ﻿using DotNetNuke.Abstractions;
 using Vanjaro.Common.Utilities;
+using Vanjaro.Core.Components;
 
 namespace Vanjaro.Core.Data.Entities
 {
-    public class WorkflowPage
+    public class WorkflowContent
     {
 
-        public int PageID { get; set; }
-        public int TabID { get; set; }
+        public int ID { get; set; }
+        public int EntityID { get; set; }
         public int Version { get; set; }
         public int StateID { get; set; }
         public bool IsPublished { get; set; }
-        public string TabName { get; set; }
+        public string EntityName { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Workflow { get; set; }
         public string State { get; set; }
 
-        public string TabURL
+        public string EntityURL
         {
             get
             {
-                if (TabID > 0)
-                {
-                    return ServiceProvider.NavigationManager.NavigateURL(TabID);
 
+                if (EntityID > 0)
+                {
+                    if (EntityName.ToLower() == Enum.WorkflowType.Page.ToString().ToLower())
+                    {
+                        return ServiceProvider.NavigationManager.NavigateURL(EntityID);
+                    }
                 }
                 return null;
             }

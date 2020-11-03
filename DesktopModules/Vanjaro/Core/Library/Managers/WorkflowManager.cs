@@ -8,11 +8,14 @@ using DotNetNuke.Security.Roles;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Web;
 using Vanjaro.Common.Permissions;
 using Vanjaro.Core.Components;
+using Vanjaro.Core.Components.Interfaces;
 using Vanjaro.Core.Data.Entities;
 using static Vanjaro.Core.Components.Enum;
 using static Vanjaro.Core.Factories;
@@ -969,9 +972,9 @@ namespace Vanjaro.Core
                 return isSuperUser;
             }
 
-            public static List<WorkflowLog> GetPagesWorkflowLogs(int TabID, int Version)
+            public static List<WorkflowLog> GetEntityWorkflowLogs(string Entity, int EntityID, int Version)
             {
-                return WorkflowFactory.GetPagesWorkflowLogs(TabID, Version);
+                return WorkflowFactory.GetEntityWorkflowLogs(Entity, EntityID, Version);
             }
 
             public static int GetNextStateID(int WorkFlowID, int StateID)
@@ -1014,39 +1017,9 @@ namespace Vanjaro.Core
                 return -1;
             }
 
-            public static void AddComment(PortalSettings PortalSettings, string Action, string Comment, Pages Page)
-            {
-                if ((Page.ID == 0 || !Page.IsPublished || HasReviewPermission(Page.StateID.Value, PortalSettings.UserInfo)) && string.IsNullOrEmpty(Comment))
-                {
-                    PageManager.ModeratePage(Page.IsPublished ? Action : string.Empty, Page, PortalSettings);
-                }
-                else if (Page.IsPublished)
-                {
-                    AddComment(PortalSettings, Action, Comment);
-                }
-            }
 
-            public static void AddComment(PortalSettings PortalSettings, string Action, string Comment)
-            {
-                Pages Page = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, PortalSettings.UserInfo);
-                if (Page != null)
-                {
-                    UserInfo userinfo = PortalSettings.UserInfo;
-                    int PortalID = PortalSettings.PortalId;
-                    bool wfper = HasReviewPermission(Page.StateID.Value, userinfo);
-                    WorkflowState State = GetStateByID(Page.StateID.Value);
 
-                    if (wfper || (TabPermissionController.CanManagePage(PortalSettings.ActiveTab) && IsFirstState(State.WorkflowID, Page.StateID.Value)))
-                    {
-                        PageManager.ModeratePage(Action, Page, PortalSettings);
-                        SendWorkflowNotification(PortalID, Page, Comment, Action);
-                        WorkflowFactory.AddWorkflowLog(PortalID, 0, userinfo.UserID, Page, Action, Comment);
-                    }
-                }
-
-            }
-
-            private static void SendWorkflowNotification(int PortalID, Pages Page, string Comment, string Type)
+            internal static void SendWorkflowNotification(int PortalID, Pages Page, string Comment, string Type)
             {
                 if (Page.StateID.HasValue)
                 {
@@ -1191,25 +1164,66 @@ namespace Vanjaro.Core
                 }
             }
 
-            public static List<WorkflowPage> GetPagesbyUserID(int PortalID, int UserID)
+            public static List<WorkflowContent> GetPagesbyUserID(int PortalID, int UserID)
             {
                 return WorkflowFactory.GetPagesbyUserID(PortalID, UserID);
             }
 
-            public static List<WorkflowPage> GetReviewPagesbyUserID(int UserID, int Page, int PageSize, int StateID)
+            public static List<WorkflowContent> GetReviewContentbyUserID(int UserID, int Page, int PageSize, int StateID, string WorkflowReviewType)
             {
-                return WorkflowFactory.GetReviewPagesbyUserID(UserID, Page, PageSize, StateID);
+                return WorkflowFactory.GetReviewContentbyUserID(UserID, Page, PageSize, StateID, WorkflowReviewType);
             }
 
-            public static int GetReviewPagesCountByUserID(int UserID, int Page, int PageSize, int StateID)
+            public static int GetReviewCountByUserID(int UserID, int Page, int PageSize, int StateID, string WorkflowReviewType)
             {
-                return WorkflowFactory.GetReviewPagesCountByUserID(UserID, Page, PageSize, StateID);
+                return WorkflowFactory.GetReviewCountByUserID(UserID, Page, PageSize, StateID, WorkflowReviewType);
             }
 
 
-            public static List<StringValue> GetStatesforReview(int PortalID, int UserID)
+            public static List<StringValue> GetStatesforReview(int PortalID, int UserID, string ReviewType)
             {
-                return WorkflowFactory.GetStatesforReview(PortalID, UserID);
+                return WorkflowFactory.GetStatesforReview(PortalID, UserID, ReviewType);
+            }
+
+            public static void AddComment(string Entity, int EntityID, string Action, string Comment, PortalSettings PortalSettings)
+            {
+
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Workflow + "AddComment");
+                List<Type> ExtensionTypes = CacheFactory.Get(CacheKey);
+                if (ExtensionTypes == null)
+                {
+                    string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll")).ToArray();
+                    List<Type> _ExtensionTypes = new List<Type>();
+                    foreach (string Path in binAssemblies)
+                    {
+
+                        try
+                        {
+
+                            IEnumerable<Type> AssembliesToAdd = from t in Assembly.LoadFrom(Path).GetTypes()
+                                                                where typeof(IReviewComment).IsAssignableFrom(t) && t.GetConstructor(Type.EmptyTypes) != null
+                                                                select t;
+
+                            _ExtensionTypes.AddRange(AssembliesToAdd.ToList());
+                        }
+                        catch { continue; }
+                    }
+
+                    CacheFactory.Set(CacheKey, _ExtensionTypes);
+                    ExtensionTypes = _ExtensionTypes;
+                }
+
+                foreach (Type t in ExtensionTypes)
+                {
+                    IReviewComment ReviewContent = Activator.CreateInstance(t) as IReviewComment;
+
+                    try
+                    {
+                        ReviewContent.AddComment(Entity, EntityID, Action, Comment, PortalSettings);
+                    }
+                    catch { }
+                }
+
             }
         }
     }

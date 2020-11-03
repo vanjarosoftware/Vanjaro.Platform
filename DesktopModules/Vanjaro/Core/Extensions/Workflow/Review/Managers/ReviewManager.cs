@@ -8,7 +8,7 @@ namespace Vanjaro.Core.Extensions.Workflow.Review.Managers
     public class ReviewManager
     {
 
-        internal static List<StringValue> GetStatesforReview(int PortalID, int UserID)
+        public static List<StringValue> GetStatesforReview(int PortalID, int UserID, string ReviewType)
         {
             List<StringValue> DDLList = new List<StringValue>();
             StringValue st = new StringValue
@@ -17,7 +17,9 @@ namespace Vanjaro.Core.Extensions.Workflow.Review.Managers
                 Value = "0"
             };
             DDLList.Add(st);
-            DDLList.AddRange(WorkflowManager.GetStatesforReview(PortalID, UserID));
+
+            DDLList.AddRange(WorkflowManager.GetStatesforReview(PortalID, UserID, ReviewType));
+
             return DDLList;
         }
     }

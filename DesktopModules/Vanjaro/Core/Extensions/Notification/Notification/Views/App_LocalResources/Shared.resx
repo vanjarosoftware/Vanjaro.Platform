@@ -123,6 +123,9 @@
   <data name="Notifications.Text" xml:space="preserve">
     <value>Messages</value>
   </data>
+  <data name="Review.Text" xml:space="preserve">
+    <value>Review</value>
+  </data>
   <data name="ReviewContent.Text" xml:space="preserve">
     <value>Review Content</value>
   </data>

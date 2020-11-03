@@ -1,42 +1,53 @@
 ﻿using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.Common.Utilities;
+using Vanjaro.Core.Components;
+using Vanjaro.Core.Components.Interfaces;
 using Vanjaro.Core.Data.Entities;
+using Vanjaro.Core.Extensions.Workflow.Review.Components;
+using static Vanjaro.Core.Components.Enum;
 using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Extensions.Workflow.Review.Managers
 {
     public class ModeratorManager
     {
-        internal static Dictionary<string, IUIData> GetData(PortalSettings PortalSettings, int Version)
+        internal static Dictionary<string, IUIData> GetData(PortalSettings PortalSettings, int Version, string Entity, int EntityID)
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
-            Pages Page = Version > 0 ? PageManager.GetByVersion(PortalSettings.ActiveTab.TabID, Version, null) : PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, PortalSettings.UserInfo);
-            Dictionary<string, object> Data = GenerateMarkup(Page, PortalSettings.UserInfo);
+
+            Dictionary<string, object> Data = GenerateMarkup(Version, Entity, EntityID, PortalSettings.UserInfo);
             Settings.Add("Markup", new UIData { Name = "Markup", Value = Data["Markup"].ToString() });
             Settings.Add("WorkflowType", new UIData { Name = "WorkflowType", Value = Data["WorkflowType"].ToString() });
-            Settings.Add("Page", new UIData { Name = "Page", Options = Data["Page"] });
+            Settings.Add("ReviewContentInfo", new UIData { Name = "ReviewContentInfo", Options = Data["ReviewContentInfo"] });
             Settings.Add("PreviousState", new UIData { Name = "PreviousState", Options = Data["PreviousState"] });
             Settings.Add("CurrentState", new UIData { Name = "CurrentState", Options = Data["CurrentState"] });
             Settings.Add("NextState", new UIData { Name = "NextState", Options = Data["NextState"] });
             Settings.Add("LastState", new UIData { Name = "LastState", Options = Data["LastState"] });
             return Settings;
         }
-        internal static Dictionary<string, object> GenerateMarkup(Pages Page, UserInfo UserInfo)
+        internal static Dictionary<string, object> GenerateMarkup(int Version, string Entity, int EntityID, UserInfo UserInfo)
         {
+
+            ReviewContentInfo rinfo = Core.Factories.PageFactory.GetReviewContentInfo(Version, Entity, EntityID, UserInfo);
+
+
             Dictionary<string, object> Data = new Dictionary<string, object>();
             string Markup = string.Empty;
             WorkflowState wState = new WorkflowState();
-            if (Page != null)
+            if (rinfo != null)
             {
-                wState = WorkflowManager.GetStateByID((int)Page.StateID);
+                wState = WorkflowManager.GetStateByID(rinfo.StateID);
                 string tabtest = string.Empty;
                 bool hasperm = WorkflowManager.HasReviewPermission(wState.StateID, UserInfo);
-                List<WorkflowLog> PageWorkflowLogs = WorkflowManager.GetPagesWorkflowLogs(Page.TabID, Page.Version).OrderBy(a => a.ReviewedOn).ToList();
+                List<WorkflowLog> PageWorkflowLogs = WorkflowManager.GetEntityWorkflowLogs(Entity, rinfo.EntityID, rinfo.Version).OrderBy(a => a.ReviewedOn).ToList();
                 if (PageWorkflowLogs.Count > 0)
                 {
 
@@ -92,14 +103,12 @@ namespace Vanjaro.Core.Extensions.Workflow.Review.Managers
             }
             Data.Add("Markup", Markup);
             Data.Add("WorkflowType", WorkflowManager.GetWorkflowType(wState.WorkflowID));
-            Data.Add("Page", Page);
+            Data.Add("ReviewContentInfo", rinfo);
             Data.Add("PreviousState", WorkflowManager.GetStateByID(WorkflowManager.GetPreviousStateID(wState.WorkflowID, wState.StateID)));
             Data.Add("CurrentState", wState);
             Data.Add("NextState", WorkflowManager.GetStateByID(WorkflowManager.GetNextStateID(wState.WorkflowID, wState.StateID)));
             Data.Add("LastState", WorkflowManager.GetStateByID(WorkflowManager.GetLastStateID(wState.WorkflowID).StateID));
             return Data;
         }
-
-
     }
 }
