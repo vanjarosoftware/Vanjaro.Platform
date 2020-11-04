@@ -95,7 +95,7 @@ namespace Vanjaro.URL.Factories
         }
         internal static AppInformation GetAppInformation()
         {
-            return new AppInformation("URL", "E069BD62-2DEC-483F-B17E-27B6AA07FBB0", GetRuntimeVersion, "http://www.mandeeps.com/store.aspx", "http://www.mandeeps.com/Activation.aspx", 14, 7, new List<string> { "Domain" }, false);
+            return new AppInformation("vjURL", "E069BD62-2DEC-483F-B17E-27B6AA07FBB0", GetRuntimeVersion, "http://www.mandeeps.com/store.aspx", "http://www.mandeeps.com/Activation.aspx", 14, 7, new List<string> { "Domain" }, false);
         }
         internal static string GetRuntimeVersion
         {

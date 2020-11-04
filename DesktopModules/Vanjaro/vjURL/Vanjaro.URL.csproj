@@ -88,13 +88,6 @@
     <None Include="Install\URL.01.00.00.SqlDataProvider" />
     <Content Include="Models\Generated\PetaPoco.Core.ttinclude" />
     <Content Include="Models\Generated\PetaPoco.Generator.ttinclude" />
-    <Content Include="web.config" />
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources.txt" />
