@@ -84,7 +84,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Theme.Controllers
                     Core.Managers.SettingManager.Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", PortalSettings.PortalId.ToString()));
                     try
                     {
-                        ThemeManager.ProcessScss(PortalSettings.PortalId);
+                        ThemeManager.ProcessScss(PortalSettings.PortalId,true);
                     }
                     catch (System.Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
                 }
