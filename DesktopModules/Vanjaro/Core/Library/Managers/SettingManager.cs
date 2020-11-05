@@ -241,7 +241,7 @@ namespace Vanjaro.Core
                 Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", pinfo.PortalID.ToString()));
                 try
                 {
-                    ThemeManager.ProcessScss(pinfo.PortalID);
+                    ThemeManager.ProcessScss(pinfo.PortalID, false);
                 }
                 catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
 

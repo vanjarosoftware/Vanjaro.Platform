@@ -96,7 +96,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.Controllers
             try
             {
                 Core.Managers.ThemeManager.Save(Guid, Data.ThemeEditorValues);
-                Core.Managers.ThemeManager.ProcessScss(PortalSettings.Current.PortalId);
+                Core.Managers.ThemeManager.ProcessScss(PortalSettings.Current.PortalId,true);
                 actionResult.Data = Core.Managers.ThemeManager.GetMarkUp(AppFactory.Identifier.setting_settings.ToString(), Guid);
                 actionResult.IsSuccess = true;
             }
