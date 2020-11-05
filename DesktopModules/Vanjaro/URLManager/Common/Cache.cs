@@ -10,7 +10,7 @@ namespace Vanjaro.URL.Common
     {
         public class Keys
         {
-            public const string Prefix = "vjURL-";
+            public const string Prefix = "URLManager-";
             public const string Slug = Prefix + "Slug-";
             public const string SlugIndex = Prefix + "SlugIndex-";
             public const string ModuleTabIndex = Prefix + "ModuleTabIndex-";

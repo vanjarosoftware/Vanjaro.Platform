@@ -166,7 +166,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteGroups", "DesktopModule
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleReCaptcha", "DesktopModules\Vanjaro\UXManager\Extensions\Menu\GoogleReCaptcha\GoogleReCaptcha.csproj", "{AC3F54B3-D038-420A-8607-1CC4A0E6AAEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vanjaro.URL", "DesktopModules\Vanjaro\vjURL\Vanjaro.URL.csproj", "{850F7BD6-346A-4E09-AB09-9E1329FFD138}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vanjaro.URL", "DesktopModules\Vanjaro\URLManager\Vanjaro.URL.csproj", "{850F7BD6-346A-4E09-AB09-9E1329FFD138}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
