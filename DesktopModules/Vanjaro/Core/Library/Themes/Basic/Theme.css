@@ -8978,6 +8978,9 @@ a.text-dark:hover, a.text-dark:focus {
   cursor: pointer;
   border-radius: 4px; }
 
+.authentication-btn li:last-child a {
+    margin-bottom: 0; }
+
 .authentication-btn li a {
   display: block;
   padding: 15px 10px;
