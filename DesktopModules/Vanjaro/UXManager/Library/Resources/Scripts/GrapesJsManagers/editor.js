@@ -1282,19 +1282,6 @@ $(document).ready(function () {
                                     }, 300);
                                 }
 
-                                if (typeof model.getTrait("href") != 'undefined') {
-                                    if (typeof model.getAttributes().href != 'undefined')
-                                        model.getTrait('href').set({ href: model.getAttributes().href });
-                                    if (typeof model.getAttributes().data_href != 'undefined')
-                                        model.getTrait('href').set({ data_href: model.getAttributes().data_href });
-                                    if (typeof model.getAttributes().data_href_type != 'undefined')
-                                        model.getTrait('href').set({ data_href_type: model.getAttributes().data_href_type });
-                                    if (typeof model.getAttributes().data_subject != 'undefined')
-                                        model.getTrait('href').set({ data_subject: model.getAttributes().data_subject });
-                                    if (typeof model.getAttributes().target != 'undefined')
-                                        model.getTrait('href').set({ target: model.getAttributes().target });
-                                }
-
                                 if (model.attributes.type == 'column') {
 
                                     $(model.parent().getEl()).addClass('gjs-dashed');

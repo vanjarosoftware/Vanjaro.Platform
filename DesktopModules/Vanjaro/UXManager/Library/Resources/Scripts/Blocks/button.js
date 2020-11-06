@@ -185,7 +185,7 @@
 							{ id: 'button-style-4', name: 'Style 4', class: 'button-style-4' },
 							{ id: 'button-style-5', name: 'Style 5', class: 'button-style-5' },
 						],
-						value: 'Normal',
+						value: 'Style 1',
 						changeProp: 1,
 					}
 				]

@@ -92,7 +92,7 @@
                             { id: 'paragraph-style-9', name: 'Style 9', class: 'paragraph-style-9' },
                             { id: 'paragraph-style-10', name: 'Style 10', class: 'paragraph-style-10' },
                         ],
-                        value: 'Normal',
+						value: 'Style 1',
                         changeProp: 1,
                     }
                 ]
@@ -179,7 +179,6 @@
                     	name: 'styles',
                     	type: 'preset_radio',
                     	options: [
-                            { id: 'normal', name: 'Normal', class: 'normal' },
                             { id: 'paragraph-style-1', name: 'Style 1', class: 'paragraph-style-1' },
                             { id: 'paragraph-style-2', name: 'Style 2', class: 'paragraph-style-2' },
                             { id: 'paragraph-style-3', name: 'Style 3', class: 'paragraph-style-3' },
@@ -191,7 +190,7 @@
                             { id: 'paragraph-style-9', name: 'Style 9', class: 'paragraph-style-9' },
                             { id: 'paragraph-style-10', name: 'Style 10', class: 'paragraph-style-10' },
                     	],
-                    	value: 'Normal',
+						value: 'Style 1',
                     }
 				]
 			}),
