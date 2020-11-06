@@ -89,6 +89,10 @@
     box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62);
 }
 
+.authentication-btn li:last-child a {
+    margin-bottom: 0;
+}
+
 .authentication-btn li a .btn-name {
     margin-left: -30px;
     color: #444;
