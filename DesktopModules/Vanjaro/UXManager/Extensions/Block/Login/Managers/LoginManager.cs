@@ -6,6 +6,7 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
 using DotNetNuke.Services.Authentication;
+using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Mail;
@@ -47,7 +48,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
                         if (auth != null)
                         {
-                            auth.Client.ProcessResources(HttpContext.Current.Request.QueryString["state"]);
+                            auth.Client.ProcessResources(HttpContext.Current.Request.QueryString["code"]);
 
                             if (auth.Client.User.Id != null && auth.Client.User.Name != null && auth.Client.User.Email != null)
                             {
@@ -109,6 +110,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                 catch (Exception ex )
                 {
                     actionResult.AddError("OAuthClientError", Localization.GetString("OAuthClientError", Components.Constants.LocalResourcesFile));
+                    Exceptions.LogException(ex);
                 }
 
                 return actionResult;

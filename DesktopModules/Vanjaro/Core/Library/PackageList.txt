@@ -26,6 +26,7 @@ licenses-resources.zip
 ..\..\UXManager\Extensions\Menu\Azure\menu-integrations-azure-resources.zip
 ..\..\UXManager\Extensions\Menu\EmailServiceProvider\menu-integrations-emailserviceprovider-resources.zip
 ..\..\UXManager\Extensions\Menu\GoogleAnalytics\menu-integrations-googleanalytics-resources.zip
+..\..\UXManager\Extensions\Menu\GoogleReCaptcha\menu-integrations-googlerecaptcha-resources.zip
 ..\..\UXManager\Extensions\Menu\Pixabay\menu-integrations-pixabay-resources.zip
 ..\..\UXManager\Extensions\Menu\YouTube\menu-integrations-youtube-resources.zip
 
