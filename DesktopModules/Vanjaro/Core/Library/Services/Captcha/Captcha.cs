@@ -33,12 +33,20 @@ namespace Vanjaro.Core.Services
         }
         public static bool Validate(string action, decimal minimumScore = 0.5m)
         {
+            return Validate(action, null, minimumScore);
+        }
+        public static bool Validate(string action, string token, decimal minimumScore = 0.5m)
+        {
             if (IsEnabled())
             {
                 if (HttpContext.Current != null)
                 {
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=" + GetSecretKey() + "&response=" + HttpContext.Current.Request.Headers["vj-recaptcha"]);
+
+                    if (token == null)
+                        token = HttpContext.Current.Request.Headers["vj-recaptcha"];
+
+                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=" + GetSecretKey() + "&response=" + token);
                     try
                     {
                         //reading Google recaptcha Response

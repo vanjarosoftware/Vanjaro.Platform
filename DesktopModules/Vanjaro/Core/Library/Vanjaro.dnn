@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="Vanjaro" type="Library" version="00.05.02">
+    <package name="Vanjaro" type="Library" version="00.05.03">
       <friendlyName>Vanjaro</friendlyName>
       <description>Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN.</description>
       <dependencies>
@@ -101,7 +101,7 @@
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.Core.dll</name>
-							<version>00.05.02</version>
+							<version>00.05.03</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
@@ -228,6 +228,11 @@
 							<name>Vanjaro.UXManager.Extensions.Menu.GoogleAnalytics.dll</name>
 							<version>01.00.00</version>
 						</assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.dll</name>
+              <version>01.00.00</version>
+            </assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Pixabay.dll</name>
@@ -663,6 +668,14 @@
 						</resourceFile>
 					</resourceFiles>
 				</component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules\Vanjaro\UXManager\Extensions\Menu\GoogleReCaptcha</basePath>
+            <resourceFile>
+              <name>menu-integrations-googlerecaptcha-resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
 				<component type="ResourceFile">
 					<resourceFiles>
 						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Menu\Pixabay</basePath>

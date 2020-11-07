@@ -608,12 +608,13 @@ $(window).resize(function () {
 
 var vj_recaptcha_responsetoken = "";
 
-function validateCaptcha(el, action, callback) {
+function validateCaptcha(el, action, callback, input) {
     if (typeof grecaptcha !== "undefined") {
         var sitekey = $('#vjrecaptcha').data('sitekey');
         grecaptcha.ready(function () {
             grecaptcha.execute(sitekey, { action: action }).then(function (token) {
                 vj_recaptcha_responsetoken = token;
+                $(input).val(token);
                 callback(el);
             });
         });

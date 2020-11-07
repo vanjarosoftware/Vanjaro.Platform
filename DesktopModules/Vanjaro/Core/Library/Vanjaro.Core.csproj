@@ -243,10 +243,15 @@
     <Content Include="Packager\Licenses\Resources.txt" />
     <Content Include="Packager\Releases\placeholder.txt" />
     <Content Include="Packager\Vanjaro\bin\x86\libsass.dll" />
+    <Content Include="Packager\Vanjaro\Images\icon_authentication.png" />
+    <Content Include="Packager\Vanjaro\Images\Branding\Vanjaro_Icon.png" />
+    <Content Include="Packager\Vanjaro\Images\icon_extensions_32px.png" />
+    <Content Include="Packager\Vanjaro\Images\icon_library.png" />
     <Content Include="Packager\Vanjaro\Images\Branding\Vanjaro_logo.png" />
     <Content Include="Packager\Vanjaro\Images\checkbox.png" />
     <Content Include="Packager\Vanjaro\Images\favicon.ico" />
-    <Content Include="Packager\Vanjaro\Images\icon_library.png" />
+    <Content Include="Packager\Vanjaro\Images\icon_module.png" />
+    <Content Include="Packager\Vanjaro\Images\icon_provider.gif" />
     <Content Include="Packager\Vanjaro\Images\radiobutton.png" />
     <Content Include="Packager\Vanjaro\bin\AdvancedStringBuilder.dll" />
     <Content Include="Packager\Vanjaro\bin\HtmlAgilityPack.dll" />

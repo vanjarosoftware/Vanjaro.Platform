@@ -43,6 +43,7 @@ copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.dll 
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.GoogleAnalytics.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.Pixabay.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.YouTube.dll bin\ >NUL
+copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.dll bin\ >NUL
 
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.Assets.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.CustomCSS.dll bin\ >NUL
@@ -184,6 +185,10 @@ del menu-integrations-emailserviceprovider-resources.zip >NUL 2>&1
 cd ..\GoogleAnalytics >NUL
 del menu-integrations-googleanalytics-resources.zip >NUL 2>&1
 "C:\Program Files\7-Zip\7z.exe" a menu-integrations-googleanalytics-resources.zip @Resources.txt -xr!?svn\ >NUL
+
+cd ..\GoogleReCaptcha >NUL
+del menu-integrations-googlerecaptcha-resources.zip >NUL 2>&1
+"C:\Program Files\7-Zip\7z.exe" a menu-integrations-googlerecaptcha-resources.zip @Resources.txt -xr!?svn\ >NUL
 
 cd ..\Pixabay >NUL
 del menu-integrations-pixabay-resources.zip >NUL 2>&1
@@ -502,8 +507,8 @@ copy Install\Install.aspx.cs ..\Temp_DNN\Install\Install.aspx.cs >NUL
 copy Install\Install.aspx.designer.cs ..\Temp_DNN\Install\Install.aspx.designer.cs >NUL
 copy Install\Install.htm ..\Temp_DNN\Install\Install.htm >NUL
 copy "vcustom.css" ..\Temp_DNN\Resources\Shared\stylesheets\ >NUL
-copy Images\*.* ..\Temp_DNN\Images >NUL
-copy "Images\Branding\Vanjaro_logo.png" ..\Temp_DNN\Images\Branding\ >NUL
+xcopy Images\* ..\Temp_DNN\Images\*   /E /H /C /I /Y >NUL
+
 
 cd ..\Releases >NUL
 copy Vanjaro_Platform_"%Version%"_Install.zip ..\Temp_DNN\Install\Module\ >NUL
