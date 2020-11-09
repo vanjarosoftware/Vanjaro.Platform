@@ -18,7 +18,7 @@ namespace Vanjaro.Core.Services.Authentication.OAuth
             this.ClientID = clientID;
             this.ClientSecret = clientSecret;
 
-            this.RedirectUri = new Uri(Globals.LoginURL(string.Empty, false)).ToString(); //.Replace("http","https").Replace("local","com").Replace("dev","www");
+            this.RedirectUri = new Uri(Globals.LoginURL(string.Empty, false)).ToString();//.Replace("http", "https").Replace("local","com").Replace("dev","www");
 
             this.AuthRedirectEndPoint = authRedirectEndpoint;
             this.AuthTokenEndPoint = authTokenEndpoint;
@@ -72,7 +72,11 @@ namespace Vanjaro.Core.Services.Authentication.OAuth
 
         public void ProcessResources(string code = null)
         {
-            if (string.IsNullOrEmpty(AuthToken) && !string.IsNullOrEmpty(code))
+            //Reset Values
+            AuthToken = null;
+            User = new OAuthUser();
+
+            if (!string.IsNullOrEmpty(code))
                 GetAuthToken(code);
 
             if (!string.IsNullOrEmpty(AuthToken))
