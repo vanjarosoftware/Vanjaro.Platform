@@ -57,14 +57,12 @@ ShowNotification = function (heading, msg, type, url, autoHide, tapToDismiss) {
         $toast = toastr[type](msg, heading);
     }
 };
+
 InitAppActionMenu = function () {
+
     var AppMenusScript = $('[data-actionmid]');
-    var grapesjsCookie = '';
 
-    if (typeof getCookie != 'undefined')
-        grapesjsCookie = getCookie('InitGrapejs');
-
-    if (((grapesjsCookie == null || grapesjsCookie == '' || grapesjsCookie == 'false') || (typeof GrapesjsInitData != 'undefined' && !vjEditorSettings.EditPage)) && AppMenusScript.length > 0) {
+    if ((!isEditPage() || (typeof GrapesjsInitData != 'undefined' && !vjEditorSettings.EditPage)) && AppMenusScript.length > 0) {
         AppMenusScript.each(function () {
             var mid = $(this).data('actionmid');
             $('.DnnModule-' + mid).vjModuleActions({
@@ -73,6 +71,20 @@ InitAppActionMenu = function () {
         });
     }
 };
+
+isEditPage = function () {
+
+    var grapesjsCookie;
+
+    if (typeof getCookie != 'undefined')
+        grapesjsCookie = getCookie('InitGrapejs');
+
+    if (grapesjsCookie == null || grapesjsCookie == '' || grapesjsCookie == 'false')
+        return false;
+    else
+        return true;
+};
+
 DestroyAppActionMenu = function () {
     $('[data-actionmid]').each(function () {
         $('#moduleActions-' + $(this).data('actionmid')).remove();
