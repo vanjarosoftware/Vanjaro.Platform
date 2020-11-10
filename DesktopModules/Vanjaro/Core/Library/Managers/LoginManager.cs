@@ -155,7 +155,7 @@ namespace Vanjaro.Core
 
             public static List<IOAuthClient> GetOAuthClients()
             {
-                List<IOAuthClient> OAuthClients = CacheFactory.Get(CacheFactory.Keys.OAuthClients);
+                List<IOAuthClient> OAuthClients = CacheFactory.Get(CacheFactory.Keys.OAuthClients + "-" + PortalSettings.Current.PortalId);
 
                 if (OAuthClients == null)
                 {
@@ -175,7 +175,7 @@ namespace Vanjaro.Core
                         catch { continue; }
                     }
                     
-                    CacheFactory.Set(CacheFactory.Keys.OAuthClients, OAuthClients);
+                    CacheFactory.Set(CacheFactory.Keys.OAuthClients + "-" + PortalSettings.Current.PortalId, OAuthClients);
                 }
 
                 return OAuthClients;
