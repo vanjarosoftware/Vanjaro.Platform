@@ -90,6 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources.txt" />
     <Content Include="Resources\Stylesheets\app.css" />
     <Content Include="Views\Setting\Setting.html" />
     <Content Include="Views\Setting\Setting.js" />

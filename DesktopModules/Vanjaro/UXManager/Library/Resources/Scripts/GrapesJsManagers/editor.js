@@ -212,7 +212,7 @@ $(document).ready(function () {
 
         global.vjEditorSettings = data;
 
-        if (getCookie("InitGrapejs") == "" || getCookie("InitGrapejs") == "true") {
+        if (isEditPage()) {
             if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
                 $(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Please Wait . . .</h1></div>');
             }

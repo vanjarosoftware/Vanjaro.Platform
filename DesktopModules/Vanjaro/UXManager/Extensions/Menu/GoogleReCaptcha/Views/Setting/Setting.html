@@ -5,12 +5,12 @@
         </uilayout>
         <uilayout name="default" attr-ng-show="ui.data.ApplyTo.Options">
             <uielement name="SiteKey" control="textbox" ngmodel="ui.data.Host_SiteKey.Value"></uielement>
-            <uielement name="SecretKey" control="textbox" ngmodel="ui.data.Host_SecretKey.Value"></uielement>
+            <uielement name="SecretKey" control="password" ngmodel="ui.data.Host_SecretKey.Value"></uielement>
             <uielement name="Enabled" control="toggle" attr-class="toggle_right" ngmodel="ui.data.Host_Enabled.Options"></uielement>
         </uilayout>
         <uilayout name="default" attr-ng-show="!ui.data.ApplyTo.Options">
             <uielement name="SiteKey" control="textbox" ngmodel="ui.data.Site_SiteKey.Value"></uielement>
-            <uielement name="SecretKey" control="textbox" ngmodel="ui.data.Site_SecretKey.Value"></uielement>
+            <uielement name="SecretKey" control="password" ngmodel="ui.data.Site_SecretKey.Value"></uielement>
             <uielement name="Enabled" control="toggle" attr-class="toggle_right" ngmodel="ui.data.Site_Enabled.Options"></uielement>
         </uilayout>
         <uilayout name="default">
