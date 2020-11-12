@@ -79,3 +79,4 @@ licenses-resources.zip
 ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Install\
 Release.txt
 License.txt
+00.05.03.txt
