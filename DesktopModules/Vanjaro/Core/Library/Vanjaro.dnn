@@ -35,6 +35,11 @@
               <name>Core.01.00.02.SqlDataProvider</name>
               <version>01.00.02</version>
             </script>
+            <script type="Install">
+              <path>Install</path>
+              <name>Core.01.00.03.SqlDataProvider</name>
+              <version>01.00.03</version>
+            </script>
             <script type="UnInstall">
               <path>Install</path>
               <name>Uninstall.Core.SqlDataProvider</name>
@@ -59,7 +64,7 @@
         </component>
         <component type="Script">
           <scripts>
-            <basePath>DesktopModules\Vanjaro\URL</basePath>
+            <basePath>DesktopModules\Vanjaro\URLManager</basePath>
             <script type="Install">
               <path>Install</path>
               <name>URL.01.00.00.SqlDataProvider</name>
@@ -494,7 +499,7 @@
 				</component>
 				<component type="ResourceFile">
 					<resourceFiles>
-						<basePath>DesktopModules\Vanjaro\URL</basePath>
+						<basePath>DesktopModules\Vanjaro\URLManager</basePath>
 						<resourceFile>
 							<name>url-resources.zip</name>
 						</resourceFile>
@@ -1113,13 +1118,14 @@
 					<urlProvider>
 						<name>Vanjaro URL Provider</name>
 						<type>Vanjaro.URL.Providers.URLProvider</type>
-						<settingsControlSrc>DesktopModules/Vanjaro/URL/Views/Settings.ascx</settingsControlSrc>
+						<settingsControlSrc>DesktopModules/Vanjaro/URLManager/Views/Settings.ascx</settingsControlSrc>
 						<redirectAllUrls>false</redirectAllUrls>
 						<replaceAllUrls>true</replaceAllUrls>
 						<rewriteAllUrls>true</rewriteAllUrls>
 						<desktopModule>Vanjaro Url Library</desktopModule>
 					</urlProvider>
 				</component>
+        <component type="Cleanup" version="00.05.03" fileName="00.05.03.txt" />
 			</components>
 			<eventMessage>
 				<processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
