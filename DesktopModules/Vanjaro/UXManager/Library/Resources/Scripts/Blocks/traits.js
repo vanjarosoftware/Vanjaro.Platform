@@ -1612,6 +1612,7 @@ export default (editor, config = {}) => {
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);
+			var size = component.getStyle()['font-size'];
 
 			if (typeof trait.attributes.selector != 'undefined')
 				model = component.findType(trait.attributes.selector);
@@ -1638,12 +1639,11 @@ export default (editor, config = {}) => {
 					}
 				}
 
-				var size = item.getStyle()['font-size'];
-
-				if (item.attributes.type == 'heading' || item.attributes.type == 'text' || item.attributes.type == 'button')
-					$(item.getTrait('styles').el).find('label').css('font-size', size);
-
+				size = item.getStyle()['font-size'];
 			});
+
+			if (typeof component.getTrait('styles') != 'undefined')
+				$(component.getTrait('styles').el).find('label').css('font-size', size);
 		}
 	});
 
@@ -1943,10 +1943,15 @@ export default (editor, config = {}) => {
 				$(elInput).find('label').css('color', color);
 			}
 
-			var text = component.getEl().textContent;
+			var model = component;
+			var trait = component.getTrait('styles');
+
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector)[0];
+
+			var text = model.getEl().textContent;
 			text = text.split(/\s+/).slice(0, 20).join(" ");
 			$(elInput).find('label').text(text);
-
 
 			if (component.attributes.type == 'button') {
 
@@ -1997,28 +2002,30 @@ export default (editor, config = {}) => {
 
 				var className = event.target.className;
 				var classes = item.getClasses();
+				var $el = $(item.getEl());
 
-				if (item.attributes.type == 'heading') {
+				if ($el.is('[class*="head-style-"]')) {
 					classes = jQuery.grep(classes, function (className, index) {
 						return (className.match(/\bhead-style-\S+/g) || []).join(' ');
 					});
 				}
-				else if (item.attributes.type == 'text') {
+				else if ($el.is('[class*="paragraph-style-"]')) {
 					classes = jQuery.grep(classes, function (className, index) {
 						return (className.match(/\bparagraph-style-\S+/g) || []).join(' ');
 					});
 				}
-				else if (item.attributes.type == 'button') {
+				else if ($el.is('[class*="button-style-"]')) {
 					classes = jQuery.grep(classes, function (className, index) {
 						return (className.match(/\bbutton-style-\S+/g) || []).join(' ');
 					});
 				}
+				else
+					classes = "";
 
 				item.removeClass(classes);
 
 				if (className != 'none')
 					item.addClass(className);
-
 			});
 		}
 	});

@@ -110,7 +110,7 @@
 							{ id: 'head-style-9', name: 'Style 9', class: 'head-style-9' },
 							{ id: 'head-style-10', name: 'Style 10', class: 'head-style-10' },
 						],
-                        value: 'Normal',
+						value: 'Style 1',
                         changeProp: 1,
 					}
 				]
