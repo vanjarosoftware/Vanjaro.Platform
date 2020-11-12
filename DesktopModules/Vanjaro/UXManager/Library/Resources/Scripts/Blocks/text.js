@@ -23,7 +23,7 @@
         model: textModel.extend({
             defaults: Object.assign({}, textModel.prototype.defaults, {
                 droppable: false,
-                classes: ['vj-text', 'text-primary', 'paragraph-style-1'],
+                classes: ['vj-text', 'text-dark', 'paragraph-style-1'],
                 traits: [
                     {
                         label: 'Alignment',
@@ -74,7 +74,7 @@
 							{ id: 'light', color: 'bg-light', name: 'Light', class: 'text-light' },
 							{ id: 'dark', color: 'bg-dark', name: 'Dark', class: 'text-dark' }
                         ],
-                        value: 'primary',
+						value: 'dark',
                         changeProp: 1,
                     }, {
                         label: 'Styles',
@@ -111,9 +111,9 @@
                     this.model.removeClass(this.getClasses());
 			},
 			onRender() {
-				var hasClass = this.model.getClasses().find(v => v == 'vj-text' || v == 'text-primary')
+				var hasClass = this.model.getClasses().find(v => v == 'vj-text' || v == 'text-dark')
 				if (typeof hasClass == 'undefined' && this.model.tagName == 'p')
-					this.model.addClass('vj-text text-primary');
+					this.model.addClass('vj-text text-dark');
 			}
         })
 	});
@@ -123,7 +123,7 @@
 			defaults: Object.assign({}, textModel.prototype.defaults, {
 				droppable: false,
 				'custom-name': 'Text Inner',
-				classes: ['vj-text', 'text-primary'],
+				classes: ['vj-text', 'text-dark'],
 				tagName: 'p',
 				traits: [
                     {
