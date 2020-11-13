@@ -61,7 +61,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
                                 var loginStatus = UserLoginStatus.LOGIN_SUCCESS;
 
-                                UserInfo objUserInfo = objUserInfo = MembershipProvider.Instance().GetUserByUserName(PortalSettings.Current.PortalId, username);
+                                UserInfo objUserInfo = MembershipProvider.Instance().GetUserByUserName(PortalSettings.Current.PortalId, username);
 
                                 if (objUserInfo == null)
                                 {
