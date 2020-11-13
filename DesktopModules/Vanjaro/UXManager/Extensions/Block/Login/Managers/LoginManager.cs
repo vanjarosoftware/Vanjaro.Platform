@@ -52,7 +52,12 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
                             if (auth.Client.User.Id != null && auth.Client.User.Name != null && auth.Client.User.Email != null)
                             {
-                                string username = auth.ProviderName + "-" + auth.Client.User.Id;
+                                string username;
+
+                                if (MembershipProviderConfig.RequiresUniqueEmail) //Username as Email
+                                    username = auth.Client.User.Email;
+                                else
+                                    username = auth.ProviderName + "-" + auth.Client.User.Id;
 
                                 var loginStatus = UserLoginStatus.LOGIN_SUCCESS;
 
@@ -101,8 +106,12 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
                                 actionResult = UserAuthenticated(eventArgs);
 
-                                if (!string.IsNullOrEmpty(actionResult.RedirectURL))
+                                if (eventArgs.LoginStatus == UserLoginStatus.LOGIN_SUCCESS && !string.IsNullOrEmpty(actionResult.RedirectURL))
                                     HttpContext.Current.Response.Redirect(actionResult.RedirectURL, true);
+                                else
+                                {
+                                    actionResult.AddError("OAuthClientError", Localization.GetString("OAuthClientError", Components.Constants.LocalResourcesFile));
+                                }
                             }
                         }
                     }
