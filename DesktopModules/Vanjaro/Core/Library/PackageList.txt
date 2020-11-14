@@ -69,7 +69,7 @@ licenses-resources.zip
 ..\..\UXManager\Library\bin
 
 ..\..\..\..\DesktopModules\Vanjaro\Common\common-library-resources.zip
-..\..\..\..\DesktopModules\Vanjaro\URL\url-resources.zip
+..\..\..\..\DesktopModules\Vanjaro\URLManager\url-resources.zip
 ..\..\..\..\DesktopModules\Vanjaro\Core\Extensions\Notification\Notification\core-extensions-notification-resources.zip
 ..\..\..\..\DesktopModules\Vanjaro\Core\Extensions\Workflow\Review\core-extensions-review-resources.zip
 ..\..\..\..\DesktopModules\Vanjaro\Core\Providers\Authentication\providers-authentication-resources.zip
