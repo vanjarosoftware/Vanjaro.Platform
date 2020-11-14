@@ -9,7 +9,7 @@ SET /P Version=Please Enter Package Version:
 CLS
 echo Creating Extension Packages...
 xcopy /e /i ..\DesktopModules\Vanjaro\Common\Install\* ..\DesktopModules\Vanjaro\Core\Library\Install\*  /Y >NUL
-xcopy /e /i ..\DesktopModules\Vanjaro\URL\Install\* ..\DesktopModules\Vanjaro\Core\Library\Install\*  /Y >NUL
+xcopy /e /i ..\DesktopModules\Vanjaro\URLManager\Install\* ..\DesktopModules\Vanjaro\Core\Library\Install\*  /Y >NUL
 xcopy /e /i ..\DesktopModules\Vanjaro\UXManager\Extensions\Migrate\Install\* ..\DesktopModules\Vanjaro\Core\Library\Install\*  /Y >NUL
 
 cd ..\DesktopModules\Vanjaro\UXManager\Library\ >NUL
@@ -370,7 +370,7 @@ cd ..\..\..\..\DesktopModules\Vanjaro\Common\ >NUL
 del common-library-resources.zip >NUL 2>&1
 "C:\Program Files\7-Zip\7z.exe" a common-library-resources.zip @Resources.txt -xr!?svn\ >NUL
 
-cd ..\URL\ >NUL
+cd ..\URLManager\ >NUL
 del url-resources.zip >NUL 2>&1
 "C:\Program Files\7-Zip\7z.exe" a url-resources.zip @Resources.txt -xr!?svn\ >NUL
 
