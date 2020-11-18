@@ -65,7 +65,7 @@ namespace Vanjaro.Core
 
             public static List<Block> GetAll()
             {
-                return Extentions.Where(e => e.Name != "Custom").Select(s => new Block()
+                return Extentions.Where(e => e.Name != "Custom" && e.Visible).Select(s => new Block()
                 {
                     Category = s.Category,
                     Guid = s.Guid,
@@ -167,7 +167,7 @@ namespace Vanjaro.Core
 
             public static string GetTemplateDir(PortalSettings PortalSettings, string Block)
             {
-                return GetVirtualPath() + GetTheme(ThemeManager.GetCurrentThemeName()) + "Blocks\\" + Block + "\\Templates\\";
+                return GetVirtualPath() + GetTheme(ThemeManager.CurrentTheme.Name) + "Blocks\\" + Block + "\\Templates\\";
             }
 
             public static void UpdateDesignElement(PortalSettings PortalSettings, Dictionary<string, string> Attributes)
@@ -184,7 +184,7 @@ namespace Vanjaro.Core
                         }
                     }
                     sb.Append("></div>");
-                    string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrentThemeName() + "/Blocks/" + Attributes["data-block-type"] + "/");
+                    string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.CurrentTheme.Name + "/Blocks/" + Attributes["data-block-type"] + "/");
                     if (Directory.Exists(FolderPath))
                     {
                         if (!File.Exists(FolderPath + Attributes["data-block-type"] + ".config.html"))
@@ -350,7 +350,7 @@ namespace Vanjaro.Core
                 CustomBlock customBlock = BlockManager.GetByLocale(PortalID, GUID, null);
                 if (customBlock != null)
                 {
-                    string Theme = Core.Managers.ThemeManager.GetCurrentThemeName();
+                    string Theme = Core.Managers.ThemeManager.CurrentTheme.Name;
                     ExportTemplate exportTemplate = new ExportTemplate
                     {
                         Name = customBlock.Name,
@@ -358,7 +358,7 @@ namespace Vanjaro.Core
                         UpdatedOn = DateTime.UtcNow,
                         Templates = new List<Layout>(),
                         ThemeName = Theme,
-                        ThemeGuid = "49A70BA1-206B-471F-800A-679799FF09DF"
+                        ThemeGuid = ThemeManager.CurrentTheme.GUID
                     };
                     Dictionary<string, string> Assets = new Dictionary<string, string>();
                     Layout layout = new Layout();

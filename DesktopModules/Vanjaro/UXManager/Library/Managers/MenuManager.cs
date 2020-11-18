@@ -4,6 +4,7 @@ using DotNetNuke.Entities.Portals;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using Vanjaro.Common.Utilities;
 using Vanjaro.UXManager.Library.Entities.Interface;
@@ -17,17 +18,19 @@ namespace Vanjaro.UXManager.Library
         public class MenuManager
         {
             #region Sync Menu Extensions
-            public static List<IMenuItem> GetExtentions(bool CheckVisibilityPermisstion = true)
+            public static List<IMenuItem> GetExtentions(bool CheckVisibilityPermission = true)
             {
-                return MenuFactory.GetExtentions(CheckVisibilityPermisstion).ToList();
+                return MenuFactory.GetExtentions(CheckVisibilityPermission).ToList();
             }
-
 
             public static string RenderMenu(List<CategoryTree> tree, string SearchKeyword)
             {
                 StringBuilder sb = new StringBuilder();
                 tree.RemoveAll(x => string.IsNullOrEmpty(x.Name));
-                return GenerateUL(tree.Where(x => x.ParentID == null).ToList(), tree, sb, SearchKeyword);
+                GenerateUL(tree.Where(x => x.ParentID == null).ToList(), tree, sb, SearchKeyword);
+
+                //Replace Multiple breakline <br > to single breakline.
+                return Regex.Replace(sb.ToString(), @"(<br ?/?>)+", "<br />");
             }
 
             private static string GenerateUL(List<CategoryTree> menu, List<CategoryTree> table, StringBuilder sb, string SearchKeyword)
@@ -62,6 +65,9 @@ namespace Vanjaro.UXManager.Library
                             icon = "<em class=\"" + dr.Icon + "\"></em>";
                         }
 
+
+
+
                         if (dr.AboveBreakLine)
                         {
                             sb.Append("<br />");
@@ -74,7 +80,7 @@ namespace Vanjaro.UXManager.Library
                                 url = ServiceProvider.NavigationManager.NavigateURL().TrimEnd('/') + "?mid=0&icp=true&guid=" + dr.GUID;
                             }
 
-                            string ClickFunction = dr.MenuAction == MenuAction.RightOverlay ? ("OpenPopUp(event, " + dr.Width + ",\"right\",\"" + dr.Name + "\", \"" + url + "\")") : ("OpenPopUp(event, " + dr.Width + ",\"center\",\"" + dr.Name + "\", \"" + url + "\")");
+                            string ClickFunction = dr.MenuAction == MenuAction.FullScreen ? ("OpenPopUp(event, \"" + dr.Width + "%" + "\",\"center\",\"" + dr.Name + "\", \"" + url + "\")") : dr.MenuAction == MenuAction.RightOverlay ? ("OpenPopUp(event, " + dr.Width + ",\"right\",\"" + dr.Name + "\", \"" + url + "\")") : ("OpenPopUp(event, " + dr.Width + ",\"center\",\"" + dr.Name + "\", \"" + url + "\")");
                             sb.Append(string.Format(@"<li><a href='javascript:void(0);' onclick='{0}' data-width='{2}'>{1} {3}</a>", ClickFunction, icon, dr.Width, dr.Name));
                         }
                         else
@@ -169,8 +175,8 @@ namespace Vanjaro.UXManager.Library
                                     ParentID = hasParent.CID;
                                 }
 
-                                Node = Node.Hierarchy; CID++; 
-                                
+                                Node = Node.Hierarchy; CID++;
+
                                 Level += 1;
                             }
                         }

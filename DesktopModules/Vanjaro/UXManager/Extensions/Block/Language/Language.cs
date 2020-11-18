@@ -30,6 +30,8 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage
 
         public Guid Guid => Guid.Parse(ExtensionInfo.GUID);
 
+        public bool Visible { get; set; } = true;
+
         public Dictionary<string, string> Attributes
         {
             get
@@ -53,7 +55,7 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage
 
         public List<AngularView> AngularViews => AppFactory.GetViews();
 
-        public string TemplatePath => "~/vThemes/" + ThemeManager.GetCurrentThemeName() + "/Blocks/Language/Templates/";
+        public string TemplatePath => "~/vThemes/" + ThemeManager.CurrentTheme.Name + "/Blocks/Language/Templates/";
 
         public string UIPath => "~/DesktopModules/Vanjaro/UXManager/Extensions/Block/" + ExtensionInfo.Name + "/Views/";
 

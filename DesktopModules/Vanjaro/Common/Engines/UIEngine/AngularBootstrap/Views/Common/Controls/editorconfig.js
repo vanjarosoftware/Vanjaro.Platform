@@ -46,10 +46,9 @@
     };
 
     $scope.CloseWindow = function () {
-        dnnModal.closePopUp(false);
+        window.parent.ClosePopUp();
         window.close();
     };
-
 
     $scope.SaveEditorProfileConfirm = function (apply) {
         CommonSvc.SweetAlert.swal({
@@ -73,7 +72,7 @@
     $scope.SaveEditorProfile = function (apply) {
         common.webApi.post('~EditorConfig/SaveEditorProfile', 'uid=' + $scope.ui.data.UID.Value + '&profileid=' + $scope.ui.data.Profiles.Value + '&applyto=' + apply, $scope.ui.data.Settings.Options).success(function (success) {
             if (success) {
-                dnnModal.closePopUp(false);
+                window.parent.ClosePopUp();
                 window.close();
             }
         });

@@ -23,7 +23,7 @@
         model: textModel.extend({
             defaults: Object.assign({}, textModel.prototype.defaults, {
                 droppable: false,
-                classes: ['vj-text', 'text-primary'],
+                classes: ['vj-text', 'text-dark', 'paragraph-style-1'],
                 traits: [
                     {
                         label: 'Alignment',
@@ -63,25 +63,24 @@
                         type: 'custom_color',
                         cssproperties: [{ name: "color" }],
                         options: [
-                            { id: 'primary', name: 'Primary', class: 'text-primary' },
-                            { id: 'secondary', name: 'Secondary', class: 'text-secondary' },
-                            { id: 'tertiary', name: 'Tertiary', class: 'text-tertiary' },
-                            { id: 'quaternary', name: 'Quaternary', class: 'text-quaternary' },
-                            { id: 'success', name: 'Success', class: 'text-success' },
-                            { id: 'info', name: 'Info', class: 'text-info' },
-                            { id: 'warning', name: 'Warning', class: 'text-warning' },
-                            { id: 'danger', name: 'Danger', class: 'text-danger' },
-                            { id: 'light', name: 'Light', class: 'text-light' },
-                            { id: 'dark', name: 'Dark', class: 'text-dark' },
+							{ id: 'primary', color: 'bg-primary', name: 'Primary', class: 'text-primary' },
+							{ id: 'secondary', color: 'bg-secondary', name: 'Secondary', class: 'text-secondary' },
+							{ id: 'tertiary', color: 'bg-tertiary', name: 'Tertiary', class: 'text-tertiary' },
+							{ id: 'quaternary', color: 'bg-quaternary', name: 'Quaternary', class: 'text-quaternary' },
+							{ id: 'success', color: 'bg-success', name: 'Success', class: 'text-success' },
+							{ id: 'info', color: 'bg-info', name: 'Info', class: 'text-info' },
+							{ id: 'warning', color: 'bg-warning', name: 'Warning', class: 'text-warning' },
+							{ id: 'danger', color: 'bg-danger', name: 'Danger', class: 'text-danger' },
+							{ id: 'light', color: 'bg-light', name: 'Light', class: 'text-light' },
+							{ id: 'dark', color: 'bg-dark', name: 'Dark', class: 'text-dark' }
                         ],
-                        value: 'primary',
+						value: 'dark',
                         changeProp: 1,
                     }, {
                         label: 'Styles',
                         name: 'styles',
                         type: 'preset_radio',
                         options: [
-                            { id: 'normal', name: 'Normal', class: 'normal' },
                             { id: 'paragraph-style-1', name: 'Style 1', class: 'paragraph-style-1' },
                             { id: 'paragraph-style-2', name: 'Style 2', class: 'paragraph-style-2' },
                             { id: 'paragraph-style-3', name: 'Style 3', class: 'paragraph-style-3' },
@@ -93,7 +92,7 @@
                             { id: 'paragraph-style-9', name: 'Style 9', class: 'paragraph-style-9' },
                             { id: 'paragraph-style-10', name: 'Style 10', class: 'paragraph-style-10' },
                         ],
-                        value: 'Normal',
+						value: 'Style 1',
                         changeProp: 1,
                     }
                 ]
@@ -112,9 +111,9 @@
                     this.model.removeClass(this.getClasses());
 			},
 			onRender() {
-				var hasClass = this.model.getClasses().find(v => v == 'vj-text' || v == 'text-primary')
+				var hasClass = this.model.getClasses().find(v => v == 'vj-text' || v == 'text-dark')
 				if (typeof hasClass == 'undefined' && this.model.tagName == 'p')
-					this.model.addClass('vj-text text-primary');
+					this.model.addClass('vj-text text-dark');
 			}
         })
 	});
@@ -124,7 +123,7 @@
 			defaults: Object.assign({}, textModel.prototype.defaults, {
 				droppable: false,
 				'custom-name': 'Text Inner',
-				classes: ['vj-text', 'text-primary'],
+				classes: ['vj-text', 'text-dark'],
 				tagName: 'p',
 				traits: [
                     {
@@ -163,16 +162,16 @@
                     	type: 'custom_color',
                     	cssproperties: [{ name: "color" }],
                     	options: [
-                            { id: 'primary', name: 'Primary', class: 'text-primary' },
-                            { id: 'secondary', name: 'Secondary', class: 'text-secondary' },
-                            { id: 'tertiary', name: 'Tertiary', class: 'text-tertiary' },
-                            { id: 'quaternary', name: 'Quaternary', class: 'text-quaternary' },
-                            { id: 'success', name: 'Success', class: 'text-success' },
-                            { id: 'info', name: 'Info', class: 'text-info' },
-                            { id: 'warning', name: 'Warning', class: 'text-warning' },
-                            { id: 'danger', name: 'Danger', class: 'text-danger' },
-                            { id: 'light', name: 'Light', class: 'text-light' },
-                            { id: 'dark', name: 'Dark', class: 'text-dark' },
+							{ id: 'primary', color: 'bg-primary', name: 'Primary', class: 'text-primary' },
+							{ id: 'secondary', color: 'bg-secondary', name: 'Secondary', class: 'text-secondary' },
+							{ id: 'tertiary', color: 'bg-tertiary', name: 'Tertiary', class: 'text-tertiary' },
+							{ id: 'quaternary', color: 'bg-quaternary', name: 'Quaternary', class: 'text-quaternary' },
+							{ id: 'success', color: 'bg-success', name: 'Success', class: 'text-success' },
+							{ id: 'info', color: 'bg-info', name: 'Info', class: 'text-info' },
+							{ id: 'warning', color: 'bg-warning', name: 'Warning', class: 'text-warning' },
+							{ id: 'danger', color: 'bg-danger', name: 'Danger', class: 'text-danger' },
+							{ id: 'light', color: 'bg-light', name: 'Light', class: 'text-light' },
+							{ id: 'dark', color: 'bg-dark', name: 'Dark', class: 'text-dark' }
                     	],
                     	value: 'primary',
                     }, {
@@ -180,7 +179,6 @@
                     	name: 'styles',
                     	type: 'preset_radio',
                     	options: [
-                            { id: 'normal', name: 'Normal', class: 'normal' },
                             { id: 'paragraph-style-1', name: 'Style 1', class: 'paragraph-style-1' },
                             { id: 'paragraph-style-2', name: 'Style 2', class: 'paragraph-style-2' },
                             { id: 'paragraph-style-3', name: 'Style 3', class: 'paragraph-style-3' },
@@ -192,7 +190,7 @@
                             { id: 'paragraph-style-9', name: 'Style 9', class: 'paragraph-style-9' },
                             { id: 'paragraph-style-10', name: 'Style 10', class: 'paragraph-style-10' },
                     	],
-                    	value: 'Normal',
+						value: 'Style 1',
                     }
 				]
 			}),

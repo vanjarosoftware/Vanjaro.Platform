@@ -10,5 +10,5 @@ jobs:
       with:
         action-token: "${{ secrets.GITHUB_TOKEN }}"
         project-url: "https://github.com/vanjarosoftware/Vanjaro.Platform/projects/3"
-        column-name: "Completed"
+        column-name: "Triaged"
         label-name: "Release: Minor"

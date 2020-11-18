@@ -29,6 +29,7 @@ namespace Vanjaro.UXManager.Extensions.Block.RegisterLink
         public string Icon => "fas fa-sign-in-alt";
 
         public Guid Guid => Guid.Parse(ExtensionInfo.GUID);
+        public bool Visible { get; set; } = true;
 
         public Dictionary<string, string> Attributes
         {
@@ -56,7 +57,7 @@ namespace Vanjaro.UXManager.Extensions.Block.RegisterLink
 
         public List<AngularView> AngularViews => AppFactory.GetViews();
 
-        public string TemplatePath => "~/vThemes/" + Core.Managers.ThemeManager.GetCurrentThemeName() + "/Blocks/Register Link/Templates/";
+        public string TemplatePath => "~/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/Blocks/Register Link/Templates/";
 
         public string UIPath => "~/DesktopModules/Vanjaro/UXManager/Extensions/Block/" + ExtensionInfo.Name + "/Views/";
 

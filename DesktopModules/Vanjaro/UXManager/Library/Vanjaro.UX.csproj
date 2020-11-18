@@ -43,7 +43,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\..\..\bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -66,9 +66,10 @@
     <Compile Include="Controllers\BlockController.cs" />
     <Compile Include="Controllers\ServiceRouteMapper.cs" />
     <Compile Include="Controllers\PageController.cs" />
-    <Compile Include="Editor.cs" />
+    <Compile Include="Entities\Editor\Editor.cs" />
     <Compile Include="Entities\BaseModel.cs" />
     <Compile Include="Entities\DnnAdminAttribute.cs" />
+    <Compile Include="Entities\Editor\EditorOptions.cs" />
     <Compile Include="Entities\ImageEntity.cs" />
     <Compile Include="Entities\Interface\IShortcut.cs" />
     <Compile Include="Entities\Language.cs" />
@@ -98,7 +99,6 @@
     <Compile Include="Managers\MenuManager.cs" />
     <Compile Include="Managers\PageManager.cs" />
     <Compile Include="Managers\ToolbarManager.cs" />
-    <Compile Include="Managers\ThemeManager.cs" />
     <Compile Include="Managers\VideoManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extension.ascx.cs">
@@ -166,7 +166,6 @@
     <Content Include="Resources\node_modules\.bin\webpack.config.js" />
     <Content Include="Resources\Scripts\Blocks\carousel.js" />
     <Content Include="Resources\Scripts\Blocks\config.js" />
-    <Content Include="Resources\library.html" />
     <Content Include="Resources\Scripts\Blocks\map.js" />
     <Content Include="Resources\Scripts\Blocks\heading.js" />
     <Content Include="Resources\Scripts\Blocks\icon.js" />
@@ -372,7 +371,7 @@
     <PreBuildEvent>cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\ &amp;&amp; npm install &amp;&amp; cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\node_modules\.bin\ &amp;&amp; webpack</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release start ..\DesktopModules\Vanjaro\Core\Library\Packager\Packager.bat"</PostBuildEvent>
+    <PostBuildEvent>if not $(ConfigurationName) == Debug start ..\DesktopModules\Vanjaro\Core\Library\Packager\Packager.bat"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -47,14 +47,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Components\Constants.cs" />
+    <Compile Include="Components\Interfaces\IReviewComment.cs" />
     <Compile Include="Components\NotificationItem.cs" />
+    <Compile Include="Components\ReviewContentInfo.cs" />
     <Compile Include="Components\ReviewSettings.cs" />
     <Compile Include="Components\StringText.cs" />
     <Compile Include="Components\StringValue.cs" />
     <Compile Include="Components\Enum.cs" />
     <Compile Include="Data\Entities\Pages.cs" />
     <Compile Include="Data\Entities\PropertyLocalization.cs" />
-    <Compile Include="Data\Entities\WorkflowPage.cs" />
+    <Compile Include="Data\Entities\WorkflowContent.cs" />
     <Compile Include="Data\Entities\WorkflowPermissionInfo.cs" />
     <Compile Include="Components\PageWorkflowPermission.cs" />
     <Compile Include="Data\Entities\Setting.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="Entities\NotificationsViewModel.cs" />
     <Compile Include="Entities\BaseModel.cs" />
     <Compile Include="Entities\PixabayVideo.cs" />
+    <Compile Include="Components\Theme.cs" />
     <Compile Include="Entities\Theme\ThemeEditor.cs" />
     <Compile Include="Entities\Theme\ThemeEditorControl.cs" />
     <Compile Include="Entities\Theme\ThemeEditorData.cs" />
@@ -111,6 +114,7 @@
     <Compile Include="Managers\LocalizationManager.cs" />
     <Compile Include="Managers\ThemeManager.cs" />
     <Compile Include="Managers\NotificationManager.cs" />
+    <Compile Include="Services\Captcha\Captcha.cs" />
     <Compile Include="Providers\Youtube.cs" />
     <Compile Include="Providers\Pixabay.cs" />
     <Compile Include="Managers\ExtensionManager.cs" />
@@ -126,6 +130,9 @@
     <Compile Include="Models\VanjaroRepo.cs" />
     <Compile Include="Models\PetaPoco.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Authentication\OAuth\IOAuthClient.cs" />
+    <Compile Include="Services\Authentication\OAuth\OAuthClient.cs" />
+    <Compile Include="Services\Authentication\OAuth\OAuthUser.cs" />
     <Compile Include="Services\PageContext\PageContext.cs" />
     <Compile Include="Services\Search\SearchEngine.cs" />
     <Compile Include="Services\Search\SearchEngineScheduler.cs" />
@@ -139,6 +146,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="00.05.03.txt" />
     <Content Include="DistrubtionAddList.txt" />
     <Content Include="EULA.txt" />
     <Content Include="Images\1209008.jpg" />
@@ -165,9 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Dnn.PersonaBar.Extensions, Version=9.5.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -239,10 +244,15 @@
     <Content Include="Packager\Licenses\Resources.txt" />
     <Content Include="Packager\Releases\placeholder.txt" />
     <Content Include="Packager\Vanjaro\bin\x86\libsass.dll" />
+    <Content Include="Packager\Vanjaro\Images\icon_authentication.png" />
+    <Content Include="Packager\Vanjaro\Images\Branding\Vanjaro_Icon.png" />
+    <Content Include="Packager\Vanjaro\Images\icon_extensions_32px.png" />
+    <Content Include="Packager\Vanjaro\Images\icon_library.png" />
     <Content Include="Packager\Vanjaro\Images\Branding\Vanjaro_logo.png" />
     <Content Include="Packager\Vanjaro\Images\checkbox.png" />
     <Content Include="Packager\Vanjaro\Images\favicon.ico" />
-    <Content Include="Packager\Vanjaro\Images\icon_library.png" />
+    <Content Include="Packager\Vanjaro\Images\icon_module.png" />
+    <Content Include="Packager\Vanjaro\Images\icon_provider.gif" />
     <Content Include="Packager\Vanjaro\Images\radiobutton.png" />
     <Content Include="Packager\Vanjaro\bin\AdvancedStringBuilder.dll" />
     <Content Include="Packager\Vanjaro\bin\HtmlAgilityPack.dll" />
@@ -253,6 +263,7 @@
     <Content Include="Packager\Vanjaro\bin\System.Buffers.dll" />
     <Content Include="Packager\Vanjaro\Install\Upgrade.aspx" />
     <Content Include="Packager\Vanjaro\Install\Install.htm" />
+    <Content Include="Packager\Vanjaro\Install\UpgradeWizard.aspx" />
     <Content Include="Packager\Vanjaro\vcustom.css" />
     <Content Include="License.txt" />
     <Content Include="Release.txt" />
@@ -276,7 +287,9 @@
     <Content Include="UserControls\Login.ascx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\Shared.resx" />
+    <Content Include="App_LocalResources\Shared.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Install\Core.01.00.00.SqlDataProvider" />
@@ -440,6 +453,7 @@
     <Content Include="Install\Core.01.00.01.SqlDataProvider" />
     <Content Include="Packager\Packager.bat" />
     <Content Include="Install\Core.01.00.02.SqlDataProvider" />
+    <Content Include="Install\Core.01.00.03.SqlDataProvider" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -508,6 +522,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -529,6 +546,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /e /i ..\DesktopModules\Vanjaro\Core\Library\Themes\* ..\Portals\_default\vThemes\*  /Y &gt;NUL</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

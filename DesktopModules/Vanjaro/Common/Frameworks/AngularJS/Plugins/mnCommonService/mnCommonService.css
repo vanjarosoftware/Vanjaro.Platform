@@ -576,7 +576,7 @@ span.choosefile.glyphicon.glyphicon-plus:before, span.choosefile.glyphicon.glyph
     margin-top: 0px !important;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    width: 15%;
+    width: 20%;
 }
 
 .editorconfig-delete-hidden {
@@ -992,4 +992,60 @@ a.page-link.active {
     color: #333;
     background-color: #fff;
     border: 1px solid #ccc !important;
+}
+
+
+#loading-bar .bar {
+    background-image: linear-gradient(to left, #0088cc 0%, #07acff 100%) !important;
+}
+
+#loading-bar-spinner {
+    top: 50% !important;
+    margin-top: -12px;
+    margin-left: -12px;
+}
+
+    #loading-bar-spinner .spinner-icon {
+        background-image: url('/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.gif') !important;
+        position: fixed;
+        background-size: 24px !important;
+        width: 24px !important;
+        height: 24px !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        border: none !important;
+        border-radius: 0 !important;
+        animation: none !important;
+    }
+
+ul.nav.nav-tabs {
+    margin-bottom: 10px;
+}
+
+
+/*Scrollbar*/
+
+::-webkit-scrollbar {
+    margin-top: 10px;
+    height: 10px;
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+    border-radius: 10px;
+    opacity: 0.8;
+}
+
+::-webkit-scrollbar-track-piece {
+    background: rgba(255, 255, 255, 0);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(170, 170, 170, 0.3);
+    outline: none;
+    -webkit-transition: background-color .2s linear,width .2s ease-in-out;
+    -o-transition: background-color .2s linear,width .2s ease-in-out;
+    transition: background-color .2s linear,width .2s ease-in-out;
 }

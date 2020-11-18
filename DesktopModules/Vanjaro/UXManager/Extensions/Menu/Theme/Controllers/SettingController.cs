@@ -24,7 +24,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Theme.Controllers
             {
                 { "Theme", new UIData { Name = "Theme", Options = GetAllThemes(PortalSettings) } }
             };
-            string ThemeBuilderUrl = Library.Managers.PageManager.GetCurrentTabUrl(PortalSettings) + "?mid=0&icp=true&guid=726c5619-e193-4605-acaf-828576ba095a";
+
+            string ThemeBuilderUrl = string.Empty;
+
+            if (Library.Managers.PageManager.GetCurrentTabUrl(PortalSettings).Contains("?"))
+                ThemeBuilderUrl = Library.Managers.PageManager.GetCurrentTabUrl(PortalSettings) + "&mid=0&icp=true&guid=726c5619-e193-4605-acaf-828576ba095a";
+            else
+                ThemeBuilderUrl = Library.Managers.PageManager.GetCurrentTabUrl(PortalSettings) + "?mid=0&icp=true&guid=726c5619-e193-4605-acaf-828576ba095a";
             Settings.Add("ThemeBuilderUrl", new UIData { Name = "ThemeBuilderUrl", Value = ThemeBuilderUrl });
             return Settings.Values.ToList();
         }
@@ -78,14 +84,14 @@ namespace Vanjaro.UXManager.Extensions.Menu.Theme.Controllers
                     Core.Managers.SettingManager.Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", PortalSettings.PortalId.ToString()));
                     try
                     {
-                        ThemeManager.ProcessScss(PortalSettings.PortalId);
+                        ThemeManager.ProcessScss(PortalSettings.PortalId,true);
                     }
                     catch (System.Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
                 }
                 Core.Managers.SettingManager.UpdateValue(PortalSettings.PortalId, -1, "setting_theme", "Theme", Theme);
             }
         }
-         
+
         public override string AccessRoles()
         {
             return Factories.AppFactory.GetAccessRoles(UserInfo);

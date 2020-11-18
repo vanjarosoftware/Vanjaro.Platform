@@ -22,6 +22,7 @@ using Vanjaro.Common.ASPNET;
 using Vanjaro.Common.Factories;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Components;
+using Vanjaro.Core.Components.Interfaces;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Data.Scripts;
 using static Vanjaro.Core.Components.Enum;
@@ -31,7 +32,7 @@ namespace Vanjaro.Core
 {
     public static partial class Managers
     {
-        public class PageManager
+        public class PageManager : IReviewComment
         {
 
             private const string PortalRootToken = "{{PortalRoot}}";
@@ -64,6 +65,7 @@ namespace Vanjaro.Core
                 if (State != null)
                 {
                     string URL = ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=33d8efed-0f1d-471e-80a4-6a7f10e87a42");
+                    URL += "#/moderator?version=" + page.Version + "&entity=" + WorkflowType.Page.ToString() + "&entityid=" + page.TabID;
                     string ReviewChangesBtn = ShowReview ? "ReviewChangeMarkup.append(ReviewChangesBtn);" : string.Empty;
                     string Subject = ShowReview ? State.Name : DotNetNuke.Services.Localization.Localization.GetString("PendingReview", Components.Constants.LocalResourcesFile);
                     string Message = !ShowReview ? "ReviewChangeMarkup.append('" + DotNetNuke.Services.Localization.Localization.GetString("ThisPageIsWaiting", Components.Constants.LocalResourcesFile) + "');" : string.Empty;
@@ -135,7 +137,7 @@ namespace Vanjaro.Core
                         }
 
                         page.PortalID = PortalSettings.PortalId;
-                        WorkflowManager.AddComment(PortalSettings, "publish", Data["Comment"].ToString(), page);
+                        AddComment(PortalSettings, "publish", Data["Comment"].ToString(), page);
 
                         ReviewSettings ReviewSettings = GetPageReviewSettings(PortalSettings);
                         if (!string.IsNullOrEmpty(Data["Comment"].ToString()) || ReviewSettings.IsPageDraft)
@@ -157,10 +159,21 @@ namespace Vanjaro.Core
                                 result.RedirectAfterm2v = null;
                             }
                         }
-                        catch { }
+                        catch (Exception ex)
+                        {
+                            result.IsSuccess = false;
+                            result.Message = ex.Message;
+                        }
+
+                        result.IsSuccess = true;
+                        result.ShowNotification = Data["IsPublished"];
                     }
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    result.IsSuccess = false;
+                    result.Message = ex.Message;
+                }
                 return result;
             }
 
@@ -409,10 +422,10 @@ namespace Vanjaro.Core
                 if (string.IsNullOrEmpty(Action) && IsHaveReviewPermission && !WorkflowManager.IsFirstState(wState.WorkflowID, wState.StateID))
                 {
                     string SystemLog = "System Log: Changes made by user";
-                    WorkflowLog log = WorkflowManager.GetPagesWorkflowLogs(Page.TabID, Page.Version).LastOrDefault();
+                    WorkflowLog log = WorkflowManager.GetEntityWorkflowLogs(WorkflowType.Page.ToString(), Page.TabID, Page.Version).LastOrDefault();
                     if (log == null || (log != null && (!log.Comment.Contains(SystemLog) || log.ReviewedBy != UserInfo.UserID)))
                     {
-                        WorkflowFactory.AddWorkflowLog(PortalSettings.PortalId, 0, UserInfo.UserID, Page, "approve", "System Log: Changes made by user");
+                        WorkflowFactory.AddWorkflowLog(PortalSettings.PortalId, 0, UserInfo.UserID, WorkflowType.Page.ToString(), Page.TabID, Page.StateID.Value, Page.Version, "approve", "System Log: Changes made by user");
 
                     }
                 }
@@ -780,7 +793,7 @@ namespace Vanjaro.Core
                     string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
                     string tempNewUrl = newurl;
                     int count = 1;
-                    Find:
+                Find:
                     if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
                     {
                         tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;
@@ -855,6 +868,44 @@ namespace Vanjaro.Core
                 }
 
                 return portalRoot;
+            }
+
+            public static void AddComment(PortalSettings PortalSettings, string Action, string Comment, Pages Page)
+            {
+                if ((Page.ID == 0 || !Page.IsPublished || WorkflowManager.HasReviewPermission(Page.StateID.Value, PortalSettings.UserInfo)) && string.IsNullOrEmpty(Comment))
+                {
+                    ModeratePage(Page.IsPublished ? Action : string.Empty, Page, PortalSettings);
+                }
+                else if (Page.IsPublished)
+                {
+                    AddComment(PortalSettings, Action, Comment);
+                }
+            }
+
+            public static void AddComment(PortalSettings PortalSettings, string Action, string Comment)
+            {
+                Pages Page = GetLatestVersion(PortalSettings.ActiveTab.TabID, PortalSettings.UserInfo);
+                if (Page != null)
+                {
+                    UserInfo userinfo = PortalSettings.UserInfo;
+                    int PortalID = PortalSettings.PortalId;
+                    bool wfper = WorkflowManager.HasReviewPermission(Page.StateID.Value, userinfo);
+                    WorkflowState State = WorkflowManager.GetStateByID(Page.StateID.Value);
+
+                    if (wfper || (TabPermissionController.CanManagePage(PortalSettings.ActiveTab) && WorkflowManager.IsFirstState(State.WorkflowID, Page.StateID.Value)))
+                    {
+                        ModeratePage(Action, Page, PortalSettings);
+                        WorkflowManager.SendWorkflowNotification(PortalID, Page, Comment, Action);
+                        WorkflowFactory.AddWorkflowLog(PortalID, 0, userinfo.UserID, WorkflowType.Page.ToString(), Page.TabID, Page.StateID.Value, Page.Version, Action, Comment);
+                    }
+                }
+
+            }
+
+            public void AddComment(string Entity, int EntityID, string Action, string Comment, PortalSettings PortalSettings)
+            {
+                if (Entity == WorkflowType.Page.ToString())
+                    AddComment(PortalSettings, Action, Comment);
             }
         }
     }

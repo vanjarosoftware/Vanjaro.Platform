@@ -24,6 +24,8 @@ namespace Vanjaro.Core
                 internal const string Block_Extension = Prefix + "BlockExtension";
                 public const string ThemeCategory = Prefix + "ThemeCategory";
                 public const string ThemeManager = Prefix + "ThemeManager";
+                public const string Theme = Prefix + "Theme";
+                internal const string OAuthClients = Prefix + "OAuthClients";
             }
 
             public static string GetCacheKey(object extensions)

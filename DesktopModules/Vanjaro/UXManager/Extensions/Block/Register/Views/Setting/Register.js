@@ -5,7 +5,7 @@
 
     //Init Scope
     $scope.onInit = function () {
-        $("#defaultModal .modal-title", parent.document).html('[L:SettingTitle]');
+        $(".uxmanager-modal .modal-title", parent.document).html('[L:SettingTitle]');
         $scope.CurrentRegistration = window.parent.VjEditor.getSelected();
         if ($scope.CurrentRegistration != undefined) {
             $scope.ui.data.Global.Value = $scope.CurrentRegistration.attributes.attributes["data-block-global"] == "false" ? false : true;
@@ -74,6 +74,7 @@
             $scope.ApplyChanges(registered);
         }
     });
+
 });
 
 

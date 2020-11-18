@@ -145,6 +145,9 @@
   <data name="PendingReview.Text" xml:space="preserve">
     <value>Pending Review</value>
   </data>
+  <data name="ReCaptcha_Error.Text" xml:space="preserve">
+    <value>We couldn't determine if you're human or robot. Please try again.</value>
+  </data>
   <data name="RejectBody.Text" xml:space="preserve">
     <value>&lt;table width="100%" cellpadding="10" cellspacing="0"&gt;
   &lt;tr&gt;
@@ -166,6 +169,9 @@
   </data>
   <data name="RejectSubject.Text" xml:space="preserve">
     <value>Content Rejection Notification</value>
+  </data>
+  <data name="ReviewContent.Text" xml:space="preserve">
+    <value>Review Page</value>
   </data>
   <data name="ReviewPage.Text" xml:space="preserve">
     <value>Review Page</value>

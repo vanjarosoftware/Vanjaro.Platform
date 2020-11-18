@@ -16,7 +16,7 @@
         common.webApi.post('permission/save', 'folderid=' + $scope.ui.data.FolderID.Value + '&Copyfolder=' + $scope.CopyPermissionSubfolder, data).success(function (Response) {
             if (Response.IsSuccess && Response.Data !== null) {
 
-                var allFolders = $($(window.parent.$('#defaultModal').find('iframe')[0].contentDocument).find('.Iconsfoldersdiv')).find('.folders');
+                var allFolders = $($(window.parent.$('.uxmanager-modal').find('iframe')[0].contentDocument).find('.Iconsfoldersdiv')).find('.folders');
                 var objectkeys = Object.keys(Response.Data);
 
                 $.each(allFolders, function (k, v) {
@@ -34,7 +34,7 @@
                 });
 
                 setTimeout(function () {
-                    $(window.parent.document.body).find('#defaultModalnew [data-dismiss="modal"]').click();
+                    $(window.parent.document.body).find('.uxmanager-modal [data-dismiss="modal"]').click();
                 }, 100);
             }
             else if (Response.HasErrors)
@@ -46,7 +46,7 @@
         var result = [];
         result.push($scope.ui.data.FolderID.Value.toString());
         if (CopyPermissionSubfolder) {
-            var nestedli = $(window.parent.$('#defaultModal').find('iframe')[0].contentDocument).find('#folders' + $scope.ui.data.FolderID.Value.toString()).parent().next('ul').find('li');
+            var nestedli = $(window.parent.$('.uxmanager-modal').find('iframe')[0].contentDocument).find('#folders' + $scope.ui.data.FolderID.Value.toString()).parent().next('ul').find('li');
             $.each(nestedli, function (k, v) {
                 result.push($(v).find('.folders').attr('id').split("folders")[1]);
             });

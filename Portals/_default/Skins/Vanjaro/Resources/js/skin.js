@@ -57,14 +57,12 @@ ShowNotification = function (heading, msg, type, url, autoHide, tapToDismiss) {
         $toast = toastr[type](msg, heading);
     }
 };
+
 InitAppActionMenu = function () {
+
     var AppMenusScript = $('[data-actionmid]');
-    var grapesjsCookie = '';
 
-    if (typeof getCookie != 'undefined')
-        grapesjsCookie = getCookie('InitGrapejs');
-
-    if (((grapesjsCookie == null || grapesjsCookie == '' || grapesjsCookie == 'false') || (typeof GrapesjsInitData != 'undefined' && !vjEditorSettings.EditPage)) && AppMenusScript.length > 0) {
+    if ((!isEditPage() || (typeof GrapesjsInitData != 'undefined' && !vjEditorSettings.EditPage)) && AppMenusScript.length > 0) {
         AppMenusScript.each(function () {
             var mid = $(this).data('actionmid');
             $('.DnnModule-' + mid).vjModuleActions({
@@ -73,6 +71,20 @@ InitAppActionMenu = function () {
         });
     }
 };
+
+isEditPage = function () {
+
+    var grapesjsCookie;
+
+    if (typeof getCookie != 'undefined')
+        grapesjsCookie = getCookie('InitGrapejs');
+
+    if (grapesjsCookie == null || grapesjsCookie == '' || grapesjsCookie == 'false')
+        return false;
+    else
+        return true;
+};
+
 DestroyAppActionMenu = function () {
     $('[data-actionmid]').each(function () {
         $('#moduleActions-' + $(this).data('actionmid')).remove();
@@ -95,38 +107,80 @@ GetPopupURL = function (TabUrl, Param) {
     return TabUrl + Param;
 };
 
-OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isnew, ModuleId) {
+ClosePopUp = function (closeall) {
+    if (typeof closeall != 'undefined' && closeall)
+        $('.uxmanager-modal').find('[data-dismiss="modal"]').click();
+    else
+        $('.uxmanager-modal').last().find('[data-dismiss="modal"]').click();
+};
 
-    var id = 'defaultModal';
-    var fullScreen = false;
-    var showTogglebtn = false;
-    var edit = "";
+OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, removemodals, ModuleId, scrollbars, titleposition) {
+
+    var id = 'vjModal' + (new Date()).getTime();
+    var edit = '';
     var fullwidth = '';
+    var scrolling;
+    var modalclass = '';
+    var modalstyle = ' style="';
 
-    if (typeof showtogglebtn != 'undefined' && showtogglebtn)
-        showTogglebtn = true;
+    if (typeof scrollbars != 'undefined') {
+        if (scrollbars)
+            scrolling = 'yes';
+        else
+            scrolling = 'no';
+    }
 
+    if (typeof titleposition == 'undefined')
+        titleposition = '';
 
-    if (isnew)
-        id += 'new';
+    if (typeof showtogglebtn == 'undefined')
+        showtogglebtn = false
+
+    if (width == "100%") {
+
+        fullwidth = 'fullwidth';
+
+        if (typeof scrollbars == 'undefined')
+            scrolling = 'yes';
+
+        modalstyle += 'width: 100%;';
+    }
+    else
+        modalstyle += 'width:' + width + 'px;';
+
+    if (typeof height != 'undefined' && height != null && height != '' && height != '100%')
+        modalstyle += 'height:' + height + 'px;';
+    else
+        modalclass += ' fullheight';
+
+    if (position == 'right')
+        modalclass += ' modal-right'
 
     if (typeof ModuleId != 'undefined')
         edit = 'data-edit="edit_module" data-mid="' + ModuleId + '"';
 
+    if (modalstyle == ' style="')
+        modalstyle = '';
+    else
+        modalstyle += '"';
+
     var modal = `<div id="` + id + `"  class="uxmanager-modal modal fade ` + fullwidth + `" tabindex="-1" ` + edit + ` role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog` + modalclass + `"` + modalstyle + `>
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel"></h4>
+                    <h4 class="modal-title ` + titleposition + `" id="defaultModalLabel"></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body" id="UXRender">
 <img class="loader" alt="Loading" src="` + VjDefaultPath + `loading.gif" />
-                    <iframe id="UXpagerender" scrolling="no"></iframe>
+                    <iframe id="UXpagerender" scrolling="` + scrolling + `"></iframe>
                 </div>
             </div>
         </div>
     </div>`;
+
+    if (typeof removemodals != 'undefined' && removemodals)
+        $("body div[id*='vjModal'], .modal-backdrop").remove();
 
     if ($('body').find('#' + id).length <= 0)
         $('body').append(modal);
@@ -134,27 +188,14 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
     var $modal = $('#' + id);
 
     if (url != '') {
-        var iframeurl = url;
         $modal.find('#UXpagerender').on("load", function () {
             var $iframe = $(this);
-            // Change check for library.html (!url.startsWith('~'))
-            if (GetParameterByName('mid', this.contentWindow.location.href) == null && !iframeurl.startsWith('~'))
-                $(window.parent.document.body).find('[data-dismiss="modal"]').trigger('click');
             $iframe.prev().hide();
             $iframe.show();
         });
     }
 
-    if (width == "100%") {
-        fullScreen = true;
-        fullwidth = 'fullwidth';
-        window.parent.$("#UXpagerender").attr('scrolling', 'yes');
-    }
-    else {
-        window.parent.$("#UXpagerender").attr('scrolling', 'no');
-    }
-
-    if (position == 'right' && !fullScreen && showtogglebtn) {
+    if (position == 'right' && width == "100%" && showtogglebtn) {
 
         if ($modal.find(".modal-toggle").length == 0)
             $modal.append('<button type="button" class="modal-toggle" style="right: ' + (width - 1) + 'px;"><em class="fas fa-chevron-right"></em></a>');
@@ -189,14 +230,18 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
         $modal.find('.modal-toggle').remove();
 
     if (url != '') {
+
+        var existingurl = window.parent.$('#iframe').attr('src');
+
         if (url.startsWith('~'))
-            url = url.replace('~', VjSitePath);
+            url = url.replace('~', '');
         else if (!url.startsWith('http')) {
-            var existingurl = window.parent.$('#iframe').attr('src');
+
             if (existingurl.indexOf("?") == -1)
                 existingurl = existingurl + "?v=" + (new Date()).getTime();
             else
                 existingurl = existingurl + "&v=" + (new Date()).getTime();
+
             url = existingurl + url;
         }
         else {
@@ -213,31 +258,18 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
     }
 
     $modal.find('#defaultModalLabel').text(title);
-    $modal.find('.modal-dialog').removeAttr('style');
-
-    if (fullScreen)
-        $modal.find('.modal-dialog').width('100%').addClass('center');
-    else
-        $modal.find('.modal-dialog').width(width).removeClass('center');
-
-    if (typeof height != 'undefined')
-        $modal.find('.modal-dialog').height(height);
 
     $modal.modal({
         backdrop: 'static', keyboard: true
     });
 
-    $modal.find('.modal-dialog').removeClass('modal-right');
+    var $backdrop = $modal.prev('.modal-backdrop');
 
-    if (position === 'right')
-        $modal.find('.modal-dialog').addClass('modal-right');
-
-    if (isnew) {
-        $modal.css('z-index', '1051');
-        $modal.next(".modal-backdrop").css('z-index', '1050');
+    if ($backdrop.length && $backdrop.prev('div[id*="vjModal"]').length) {
+        var zindex = parseInt($backdrop.prev('div[id*="vjModal"]').css('z-index'));
+        $modal.css('z-index', zindex + 2);
+        $modal.next(".modal-backdrop").css('z-index', zindex + 1);
     }
-
-    var submitButton = $("iframe").contents().find("#" + id + " #save");
 
     window.document.callbacktype = '';
 
@@ -250,7 +282,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
                     iframe[0].src = iframe[0].src;
                 }
             }
-            var appid = $(window.document.body).find('#defaultModal').data('mid')
+            var appid = $(window.document.body).find('.uxmanager-modal').data('mid')
             var appdiv = "#dnn_vj_" + appid;
             var $appframe = $('.gjs-frame').contents().find(appdiv).find("#Appframe");
 
@@ -271,8 +303,8 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
     $modal.modal('show');
 
     $(window.parent.document.body).find('[data-dismiss="modal"]').on("click", function (e) {
-        if ($(window.document.body).find('#defaultModal').data('edit') == 'edit_module') {
-            var mid = $(window.document.body).find('#defaultModal').data('mid');
+        if ($(window.document.body).find('.uxmanager-modal').data('edit') == 'edit_module') {
+            var mid = $(window.document.body).find('.uxmanager-modal').data('mid');
             if ($('.gjs-frame').contents().find('#dnn_vj_' + mid).length > 0) {
                 var framesrc = CurrentTabUrl;
                 if (framesrc.indexOf("?") == -1)
@@ -296,10 +328,10 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, isn
 $(document).keyup(function (e) {
     var code = e.keyCode || e.which;
     if (code == 27 && $('[ng-show=ShowFileManager]:not(".ng-hide")').length <= 0) {
-        var $modal = $("#defaultModal");
+        var $modal = $(".uxmanager-modal");
 
         if ($modal.length <= 0)
-            $modal = $(window.parent.document.body).find('#defaultModal');
+            $modal = $(window.parent.document.body).find('.uxmanager-modal');
 
         if ($modal.length > 0)
             $modal.find('[data-dismiss="modal"]').click();
@@ -371,7 +403,7 @@ $(document).ready(function () {
         $("body").append(modal);
     }
 
-    $('#defaultModal [data-dismiss="modal"]').on("click", function (e) {
+    $('.uxmanager-modal [data-dismiss="modal"]').on("click", function (e) {
         $('#UXpagerender').show().siblings().remove();
     });
 
@@ -586,4 +618,24 @@ $(window).resize(function () {
     };
 })(jQuery);
 
+var vj_recaptcha_responsetoken = "";
+
+function validateCaptcha(el, action, callback, input) {
+    if (typeof grecaptcha !== "undefined") {
+        var sitekey = $('#vjrecaptcha').data('sitekey');
+        grecaptcha.ready(function () {
+            grecaptcha.execute(sitekey, { action: action }).then(function (token) {
+                vj_recaptcha_responsetoken = token;
+                $(input).val(token);
+                callback(el);
+            });
+        });
+    } else {
+        callback(el);
+    }
+}
+
+$(document).on("ajaxSend", function (event, xhr, settings) {
+    xhr.setRequestHeader('vj-recaptcha', vj_recaptcha_responsetoken);
+});
 

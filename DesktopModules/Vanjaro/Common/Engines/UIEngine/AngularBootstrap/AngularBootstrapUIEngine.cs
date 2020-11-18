@@ -1099,7 +1099,7 @@ namespace Vanjaro.Common.Engines
                     Profile = _UIElement.profile;
                 }
 
-                UIEngineInfo["InitScript"] += Environment.NewLine + "$scope." + _UIElement.Name.Value + "Click_EditorConfig = function() { dnnModal.show($scope.ui.data.BrowseUrl.Value + \"&v=\" + new Date().getTime() + \"&profile=" + Profile + "#/common/controls/editorconfig/" + UIEngineInfo["identifier"] + "-" + _UIElement.Name.Value + "\", false, 600, 990, false); };";
+                UIEngineInfo["InitScript"] += Environment.NewLine + "$scope." + _UIElement.Name.Value + "Click_EditorConfig = function() { parent.OpenPopUp(event, 900,'right','', $scope.ui.data.BrowseUrl.Value + \"&v=\" + new Date().getTime() + \"&profile=" + Profile + "#/common/controls/editorconfig/" + UIEngineInfo["identifier"] + "-" + _UIElement.Name.Value + "\"); };";
                 string EditorToolbarMarkup = EditorConfigFactory.GetEditorToolbarMarkup(int.Parse(UIEngineInfo["moduleid"]), UIEngineInfo["identifier"] + "-" + _UIElement.Name.Value + UIEngineInfo["moduleid"], _UIElement.Name.Value, Profile);
                 if (!string.IsNullOrEmpty(EditorToolbarMarkup))
                 {

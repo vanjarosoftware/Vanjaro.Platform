@@ -4,9 +4,11 @@ using DotNetNuke.Abstractions.Portals;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
+using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Entities.Users;
+using DotNetNuke.Framework;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
@@ -24,11 +26,10 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
-using Vanjaro.Common.Factories;
 using Vanjaro.Core.Entities;
-using Vanjaro.UXManager.Extensions.Menu.Azure.Entities;
 using Vanjaro.UXManager.Library.Common;
 using static Vanjaro.Core.Factories;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
 {
@@ -51,10 +52,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 {
                     var portalInfo = new
                     {
-                        pinfo.PortalID,
+                        pinfo.PortalId,
                         pinfo.PortalName,
-                        PortalAliases = sitecontroller.FormatPortalAliases(pinfo.PortalID),
-                        allowDelete = (pinfo.PortalID != PortalID && !PortalController.IsMemberOfPortalGroup(pinfo.PortalID))
+                        PortalAliases = sitecontroller.FormatPortalAliases(pinfo.PortalId),
+                        allowDelete = (pinfo.PortalId != PortalID && !PortalController.IsMemberOfPortalGroup(pinfo.PortalId))
                     };
                     PortalsInfo.Add(portalInfo);
                 }
@@ -79,7 +80,23 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
         internal static HttpResponseMessage Export(int PortalID, string Name)
         {
             HttpResponseMessage Response = new HttpResponseMessage();
-            string Theme = Core.Managers.ThemeManager.GetCurrentThemeName();
+            string Theme = ThemeManager.CurrentTheme.Name;
+            Dictionary<string, string> Assets = new Dictionary<string, string>();
+
+            string LogoURL = string.Empty, FavIconurl = string.Empty, SocialSharingLogourl = string.Empty, HomeScreenIcon = string.Empty;
+            var siteSetting = LogoAndTitle.Controllers.SettingController.GetExportSettings(PortalID);
+            if (siteSetting != null)
+            {
+                if (!string.IsNullOrEmpty(siteSetting.LogoFile))
+                    LogoURL = siteSetting.LogoFile.Split('?')[0];
+                if (!string.IsNullOrEmpty(siteSetting.FavIcon))
+                    FavIconurl = siteSetting.FavIcon.Split('?')[0];
+                if (!string.IsNullOrEmpty(siteSetting.SocialSharingLogo))
+                    SocialSharingLogourl = siteSetting.SocialSharingLogo.Split('?')[0];
+                if (!string.IsNullOrEmpty(siteSetting.HomeScreenIcon))
+                    HomeScreenIcon = siteSetting.HomeScreenIcon.Split('?')[0];
+            }
+
             ExportTemplate exportTemplate = new ExportTemplate
             {
                 Name = Name,
@@ -87,12 +104,29 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 UpdatedOn = DateTime.UtcNow,
                 Templates = new List<Layout>(),
                 ThemeName = Theme,
-                ThemeGuid = "49A70BA1-206B-471F-800A-679799FF09DF"
+                ThemeGuid = ThemeManager.CurrentTheme.GUID,
+                LogoFile = Path.GetFileName(LogoURL),
+                FavIcon = Path.GetFileName(FavIconurl),
+                SocialSharingLogo = Path.GetFileName(SocialSharingLogourl),
+                HomeScreenIcon = Path.GetFileName(HomeScreenIcon)
             };
-            Dictionary<string, string> Assets = new Dictionary<string, string>();
+
+            if (!string.IsNullOrEmpty(exportTemplate.LogoFile) && !Assets.ContainsKey(exportTemplate.LogoFile))
+                Assets.Add(exportTemplate.LogoFile, LogoURL);
+            if (!string.IsNullOrEmpty(exportTemplate.FavIcon) && !Assets.ContainsKey(exportTemplate.FavIcon))
+                Assets.Add(exportTemplate.FavIcon, FavIconurl);
+            if (!string.IsNullOrEmpty(exportTemplate.SocialSharingLogo) && !Assets.ContainsKey(exportTemplate.SocialSharingLogo))
+                Assets.Add(exportTemplate.SocialSharingLogo, SocialSharingLogourl);
+            if (!string.IsNullOrEmpty(exportTemplate.HomeScreenIcon) && !Assets.ContainsKey(exportTemplate.HomeScreenIcon))
+                Assets.Add(exportTemplate.HomeScreenIcon, HomeScreenIcon);
+            TabInfo tab;
+            Dictionary<int, string> ExportedModulesContent = new Dictionary<int, string>();
             foreach (Core.Data.Entities.Pages page in Core.Managers.PageManager.GetAllPublishedPages(PortalID, null))
             {
                 Dnn.PersonaBar.Pages.Services.Dto.PageSettings pageSettings = Dnn.PersonaBar.Pages.Components.PagesController.Instance.GetPageSettings(page.TabID);
+                tab = TabController.Instance.GetTab(page.TabID, page.PortalID);
+                if (!CanExport(pageSettings, tab))
+                    continue;
                 Layout layout = new Layout
                 {
                     Content = Core.Managers.PageManager.TokenizeTemplateLinks(page.Content, false, Assets)
@@ -136,6 +170,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 layout.StyleJSON = page.StyleJSON;
                 layout.Type = pageSettings.PageType = pageSettings.PageType.ToLower() == "url" ? "URL" : (pageSettings.DisableLink && pageSettings.IncludeInMenu) ? "Folder" : "Standard";
                 exportTemplate.Templates.Add(layout);
+                ProcessPortableModules(PortalID, tab, ExportedModulesContent);
             }
             string serializedExportTemplate = JsonConvert.SerializeObject(exportTemplate);
             if (!string.IsNullOrEmpty(serializedExportTemplate))
@@ -146,11 +181,14 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                     using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                     {
                         AddZipItem("Template.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
+                        foreach (var exportedModuleContent in ExportedModulesContent)
+                            AddZipItem("PortableModules/" + exportedModuleContent.Key + ".json", Encoding.ASCII.GetBytes(exportedModuleContent.Value), zip);
 
                         //AddZipItem(ScreenShotFileInfo.FileName, ToByteArray(FileManager.Instance.GetFileContent(ScreenShotFileInfo)), zip);
 
                         if (Assets != null && Assets.Count > 0)
                         {
+                            List<string> FileNames = new List<string>();
                             foreach (KeyValuePair<string, string> asset in Assets)
                             {
                                 string FileName = asset.Key.Replace(Vanjaro.Core.Managers.PageManager.ExportTemplateRootToken, "");
@@ -159,7 +197,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                                 {
                                     FileUrl = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, FileUrl);
                                 }
-                                AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                if (!FileNames.Contains(FileName))
+                                    AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                FileNames.Add(FileName);
                             }
                         }
                         if (!string.IsNullOrEmpty(Theme))
@@ -188,6 +228,40 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 Response.StatusCode = HttpStatusCode.OK;
             }
             return Response;
+        }
+
+        private static void ProcessPortableModules(int PortalID, TabInfo tab, Dictionary<int, string> ExportedModulesContent)
+        {
+            foreach (var tabmodule in ModuleController.Instance.GetTabModules(tab.TabID).Values)
+            {
+                var moduleDef = ModuleDefinitionController.GetModuleDefinitionByID(tabmodule.ModuleDefID);
+                var desktopModuleInfo = DesktopModuleController.GetDesktopModule(moduleDef.DesktopModuleID, PortalID);
+                if (!string.IsNullOrEmpty(desktopModuleInfo?.BusinessControllerClass))
+                {
+                    var module = ModuleController.Instance.GetModule(tabmodule.ModuleID, tab.TabID, true);
+                    if (!module.IsDeleted && !string.IsNullOrEmpty(module.DesktopModule.BusinessControllerClass) && module.DesktopModule.IsPortable)
+                    {
+                        var businessController = Reflection.CreateObject(
+                            module.DesktopModule.BusinessControllerClass,
+                            module.DesktopModule.BusinessControllerClass);
+                        var controller = businessController as IPortable;
+                        var content = controller?.ExportModule(module.ModuleID);
+                        if (!string.IsNullOrEmpty(content))
+                            ExportedModulesContent.Add(tabmodule.ModuleID, content);
+                    }
+                }
+            }
+        }
+
+        private static bool CanExport(Dnn.PersonaBar.Pages.Services.Dto.PageSettings pageSettings, TabInfo tab)
+        {
+            string Name = pageSettings.Name.ToLower().Replace(" ", "");
+            if (Name == "home" || Name == "signup" || Name == "notfoundpage" || Name == "profile" || Name == "searchresults" || Name == "404errorpage" || Name == "signin")
+                return true;
+            if (tab.IsVisible && tab.TabPermissions.Where(t => t != null && t.RoleName == "All Users").FirstOrDefault() != null && tab.TabPermissions.Where(t => t != null && t.RoleName == "All Users").FirstOrDefault().AllowAccess)
+                return true;
+            else
+                return false;
         }
 
         private static void AddZipItem(string zipItemName, byte[] zipData, ZipArchive zip)
@@ -261,7 +335,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 PortalInfo portal = PortalController.Instance.GetPortal(portalId);
                 if (portal != null)
                 {
-                    if (portal.PortalID != portalSettings.PortalId && !PortalController.IsMemberOfPortalGroup(portal.PortalID))
+                    if (portal.PortalId != portalSettings.PortalId && !PortalController.IsMemberOfPortalGroup(portal.PortalId))
                     {
                         string strMessage = PortalController.DeletePortal(portal, portalSettings.HomeDirectoryMapPath);// need to check this line
                         if (string.IsNullOrEmpty(strMessage))

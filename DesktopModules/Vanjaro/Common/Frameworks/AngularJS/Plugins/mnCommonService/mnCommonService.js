@@ -9,6 +9,15 @@ if (typeof String.prototype.endsWith != 'function') {
     };
 }
 
+hasObject = function (obj, key) {
+    return key.split(".").every(function (x) {
+        if (typeof obj != "object" || obj === null || !x in obj || typeof obj[x] === "undefined")
+            return false;
+        obj = obj[x];
+        return true;
+    });
+};
+
 function getElementByScopeID(id) {
     var elem;
     $('.ng-scope').each(function () {
@@ -162,7 +171,7 @@ mnSvc.directive('showtab',
             link: function (scope, element, attrs) {
                 element.click(function (e) {
                     e.preventDefault();
-                    $(element).mstab('show');
+                    $(element).tab('show');
                 });
             }
         };

@@ -1,4 +1,5 @@
-﻿using DotNetNuke.Framework.Providers;
+﻿using DotNetNuke.Entities.Host;
+using DotNetNuke.Framework.Providers;
 using DotNetNuke.UI.Skins;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using System;
@@ -91,10 +92,17 @@ namespace Vanjaro.Common.ASPNET
 
             if (Page.Header.FindControl(ID) == null)
             {
+                string cdv = "cdv=" + Host.CrmVersion.ToString();
+
+                if (URL.Contains("?"))
+                    cdv = "&" + cdv;
+                else
+                    cdv = "?" + cdv;
+
                 LiteralControl lit = new LiteralControl
                 {
                     ID = ID,
-                    Text = "<script src=\"" + URL + "\" type=\"text/javascript\"></script>"
+                    Text = "<script src=\"" + URL + cdv + "\" type=\"text/javascript\"></script>"
                 };
                 Page.Header.Controls.Add(lit);
             }

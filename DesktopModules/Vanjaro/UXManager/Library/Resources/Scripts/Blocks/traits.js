@@ -5,11 +5,6 @@ export default (editor, config = {}) => {
 	const tm = editor.TraitManager;
 	const cmd = editor.Commands;
 
-	cmd.add('showModal', {
-		run(editor, sender) {
-		},
-	});
-
 	cmd.add('vj-copy', editor => {
 
 		const selected = VjEditor.getSelected();
@@ -54,9 +49,9 @@ export default (editor, config = {}) => {
 	});
 
 	//Changing Classes
-	global.SwitchClass = function (elInput, component, event) {
+	global.SwitchClass = function (elInput, component, event, mainComponent) {
 
-		var trait = component.getTrait(event.target.name);
+		var trait = mainComponent.getTrait(event.target.name);
 		var comp = component.attributes.type;
 		var classes = [];
 		var className = '';
@@ -64,13 +59,13 @@ export default (editor, config = {}) => {
 
 		//Removing Custom Color in Inline Style
 		if (event.target.name == 'color') {
-			var property = component.getTrait('color').attributes.cssproperties;
+			var property = mainComponent.getTrait('color').attributes.cssproperties;
 			$(property).each(function (index, value) {
 				component.removeStyle(value.name);
 			});
 		}
 
-		if (event.target.name == 'background' && component.getTrait("background").getInitValue() != 'gradient') {
+		if (event.target.name == 'background' && mainComponent.getTrait("background").getInitValue() != 'gradient') {
 			var style = component.getStyle();
 			style["background-image"] = "none";
 			style["background-color"] = "transparent";
@@ -89,30 +84,29 @@ export default (editor, config = {}) => {
 
 			if (event.target.id == 'outline') {
 				var style = component.getStyle();
-				style["color"] = component.getTrait("color").getInitValue();
+				style["color"] = mainComponent.getTrait("color").getInitValue();
 				component.setStyle(style);
 				component.removeStyle("background-color");
-				$(component.getTrait('styles').el).find('label').css({
-					"color": component.getTrait("color").getInitValue(),
+				$(mainComponent.getTrait('styles').el).find('label').css({
+					"color": mainComponent.getTrait("color").getInitValue(),
 					"background-color": ""
 				});
 			}
 			else if (event.target.id == 'fill') {
 				var style = component.getStyle();
-				style["background-color"] = component.getTrait("color").getInitValue();
+				style["background-color"] = mainComponent.getTrait("color").getInitValue();
 				component.setStyle(style);
 				component.removeStyle("color");
-				$(component.getTrait('styles').el).find('label').css({
-					"background-color": component.getTrait("color").getInitValue(),
+				$(mainComponent.getTrait('styles').el).find('label').css({
+					"background-color": mainComponent.getTrait("color").getInitValue(),
 					"color": ""
 				});;
 			}
 			else {
-				component.removeStyle("background-color");
-				component.removeStyle("border-color");
 				component.removeStyle("color");
-
-				$(component.getTrait('styles').el).find('label').css({
+				component.removeStyle("border-color");
+				component.removeStyle("background-color");
+				$(mainComponent.getTrait('styles').el).find('label').css({
 					"background-color": "",
 					"border-color": "",
 					"color": ""
@@ -123,11 +117,11 @@ export default (editor, config = {}) => {
 			var btnEnd = '';
 
 			if (event.target.name == 'stylee')
-				btnEnd += component.getTrait("color").getInitValue();
-			else if (event.target.name == 'color' && component.getTrait("stylee").getInitValue() == 'outline')
+				btnEnd += mainComponent.getTrait("color").getInitValue();
+			else if (event.target.name == 'color' && mainComponent.getTrait("stylee").getInitValue() == 'outline')
 				btnStart += 'outline-';
 
-			var colorOpts = component.getTrait('color').attributes.options;
+			var colorOpts = mainComponent.getTrait('color').attributes.options;
 
 			for (let i = 0; i < colorOpts.length; i++) {
 				classes.push(btnStart + 'outline-' + colorOpts[i].class);
@@ -137,11 +131,19 @@ export default (editor, config = {}) => {
 			className = btnStart + trait.attributes.options.find(opt => opt.id == event.target.id).class + btnEnd;
 		}
 		else {
+
+			$(trait.attributes.cssproperties).each(function (index, property) {
+				if (property.name == 'color')
+					component.removeStyle("color");
+				else if (property.name == 'background-color')
+					component.removeStyle("background-color");
+				else if (property.name == 'border-color')
+					component.removeStyle("border-color");
+			});
+
 			classes = trait.attributes.options.map(opt => opt.class);
 			className = trait.attributes.options.find(opt => opt.id == event.target.id).class;
 		}
-
-		trait.setTargetValue(event.target.id);
 
 		for (let i = 0; i < classes.length; i++) {
 			if (classes[i].length > 0) {
@@ -152,7 +154,7 @@ export default (editor, config = {}) => {
 							component.components().models[0].removeClass(classes_i_a[j]);
 						else if (comp == 'button' && (event.target.name == 'color' || event.target.name == 'stylee' || event.target.name == 'size')) {
 							component.removeClass(classes_i_a[j]);
-							$(component.getTrait('styles').el).find('label').removeClass(classes_i_a[j]);
+							$(mainComponent.getTrait('styles').el).find('label').removeClass(classes_i_a[j]);
 						}
 						else
 							component.removeClass(classes_i_a[j]);
@@ -168,12 +170,14 @@ export default (editor, config = {}) => {
 					component.components().models[0].addClass(value_a[i]);
 				else if (comp == 'button' && (event.target.name == 'color' || event.target.name == 'stylee' || event.target.name == 'size')) {
 					component.addClass(value_a[i]);
-					$(component.getTrait('styles').el).find('label').addClass(value_a[i]);
+					$(mainComponent.getTrait('styles').el).find('label').addClass(value_a[i]);
 				}
 				else
 					component.addClass(value_a[i]);
 			}
 		}
+
+		trait.setTargetValue(event.target.id);
 	};
 
 	//Color Picker
@@ -181,53 +185,60 @@ export default (editor, config = {}) => {
 		var comp = VjEditor.getSelected();
 		var property = comp.getTrait($(event.target).parents(".colorPicker").attr("id")).attributes.cssproperties;
 		var color = comp.getTrait($(event.target).parents(".colorPicker").attr("id")).getInitValue();
-		var style = comp.getStyle();
 		var trait = comp.getTrait($(event.target).parents(".colorPicker").attr("id"));
 		var classes = [];
+		var model = comp;
 
-		if (comp.attributes.type == "button" && (comp.getTrait("stylee").getInitValue() == "outline" || comp.getTrait("stylee").getInitValue() == "fill")) {
+		if (typeof trait.attributes.selector != 'undefined')
+			model = comp.findType(trait.attributes.selector);
 
-			var colorOpts = comp.getTrait('color').attributes.options;
+		$(model).each(function (index, item) {
+			var style = item.getStyle();
 
-			for (let i = 0; i < colorOpts.length; i++) {
-				classes.push('btn-outline-' + colorOpts[i].class);
-				classes.push('btn-' + colorOpts[i].class);
+			if (item.attributes.type == "button" && (item.getTrait("stylee").getInitValue() == "outline" || item.getTrait("stylee").getInitValue() == "fill")) {
+
+				var colorOpts = comp.getTrait('color').attributes.options;
+
+				for (let i = 0; i < colorOpts.length; i++) {
+					classes.push('btn-outline-' + colorOpts[i].class);
+					classes.push('btn-' + colorOpts[i].class);
+				}
+
+				if (comp.getTrait("stylee").getInitValue() == "outline") {
+					style["border-color"] = color + " !important";
+					style["color"] = color + " !important";
+				}
+				else if (comp.getTrait("stylee").getInitValue() == "fill") {
+					$(property).each(function (index, value) {
+						style[value.name] = color + " !important";
+					});
+				}
 			}
-
-			if (comp.getTrait("stylee").getInitValue() == "outline") {
-				style["border-color"] = color + " !important";
-				style["color"] = color + " !important";
-			}
-			else if (comp.getTrait("stylee").getInitValue() == "fill") {
+			else {
 				$(property).each(function (index, value) {
 					style[value.name] = color + " !important";
 				});
 			}
-		}
-		else {
-			$(property).each(function (index, value) {
-				style[value.name] = color + " !important";
-			});
-		}
 
-		comp.setStyle(style);
+			item.setStyle(style);
 
-		for (let i = 0; i < classes.length; i++) {
-			if (classes[i].length > 0) {
-				var classes_i_a = classes[i].split(' ');
-				for (let j = 0; j < classes_i_a.length; j++) {
-					if (classes_i_a[j].length > 0) {
-						comp.removeClass(classes_i_a[j]);
+			for (let i = 0; i < classes.length; i++) {
+				if (classes[i].length > 0) {
+					var classes_i_a = classes[i].split(' ');
+					for (let j = 0; j < classes_i_a.length; j++) {
+						if (classes_i_a[j].length > 0) {
+							item.removeClass(classes_i_a[j]);
+						}
 					}
 				}
 			}
-		}
+		});
 	};
 
 	//Component Styling
-	global.UpdateStyles = function (elInput, component, event) {
+	global.UpdateStyles = function (elInput, component, event, mainComponent) {
 
-		var trait = component.getTrait(event.target.name);
+		var trait = mainComponent.getTrait(event.target.name);
 		var componentType = component.attributes.type;
 
 		if (componentType != 'image-gallery-item' && !event.target.classList.contains('choose-unit')) {
@@ -313,10 +324,10 @@ export default (editor, config = {}) => {
 
 				if (event.target.name == 'width') {
 					width = inputNumber.value;
-					height = component.getTrait('height').getInitValue();
+					height = mainComponent.getTrait('height').getInitValue();
 				}
 				else {
-					width = component.getTrait('width').getInitValue();
+					width = mainComponent.getTrait('width').getInitValue();
 					height = inputNumber.value;
 				}
 
@@ -362,7 +373,7 @@ export default (editor, config = {}) => {
 						style["display"] = "block";
 						component.set({ 'resizable': false });
 
-						$(component.getTrait('styles').el).find('label').css('width', '100%');
+						$(mainComponent.getTrait('styles').el).find('label').css('width', '100%');
 					}
 					else {
 						style["width"] = component.attributes["width"];
@@ -380,12 +391,12 @@ export default (editor, config = {}) => {
 							}
 						});
 
-						$(component.getTrait('styles').el).css('text-align', val);
+						$(mainComponent.getTrait('styles').el).css('text-align', val);
 
 						if (typeof component.attributes["width"] != "undefined")
-							$(component.getTrait('styles').el).find('label').css('width', component.attributes["width"]);
+							$(mainComponent.getTrait('styles').el).find('label').css('width', component.attributes["width"]);
 						else
-							$(component.getTrait('styles').el).find('label').css('width', 'auto');
+							$(mainComponent.getTrait('styles').el).find('label').css('width', 'auto');
 
 					}
 				}
@@ -451,14 +462,13 @@ export default (editor, config = {}) => {
 				style["border-radius"] = "0";
 			}
 			else if (event.target.value == "circle") {
-				style["border-width"] = component.getTrait('framewidth').getInitValue() + "px";
+				style["border-width"] = mainComponent.getTrait('framewidth').getInitValue() + "px";
 				style["border-radius"] = "50%";
 			}
 			else if (event.target.value == "square") {
-				style["border-width"] = component.getTrait('framewidth').getInitValue() + "px";
+				style["border-width"] = mainComponent.getTrait('framewidth').getInitValue() + "px";
 				style["border-radius"] = "0";
 			}
-
 		}
 
 		if (componentType == 'list' && event.target.name == 'ul_list_style') {
@@ -538,7 +548,7 @@ export default (editor, config = {}) => {
 				</div>
 				<div class="link-block">
 					<div id="url" class="link-type">
-						<input type="url" id="vj_link_target" class="url" placeholder="Insert URL" ondblclick="window.parent.OpenPopUp(null, 900, 'right', 'Link', window.parent.CurrentExtTabUrl + '&guid=a0a86356-6c9f-49c4-a431-24917641cb32');" autofocus/>
+						<input type="url" id="vj_link_target" class="url" placeholder="Insert URL"  autofocus/>
                         <em class="fas fa-link urlbtn" onclick="window.parent.OpenPopUp(null, 900, 'right', 'Link', window.parent.CurrentExtTabUrl + '&guid=a0a86356-6c9f-49c4-a431-24917641cb32');"></em>
 					</div>
 					<div id="page" class="link-type">
@@ -727,7 +737,6 @@ export default (editor, config = {}) => {
 						href = `tel:${num}`;
 						break;
 				}
-
 			}
 
 			changeURL();
@@ -832,9 +841,9 @@ export default (editor, config = {}) => {
 			$(event.target.parentElement).find("input:checked").not(event.target).prop('checked', false);
 
 			if (component.getTrait(event.target.name).attributes.UpdateStyles)
-				UpdateStyles(elInput, component, event);
+				UpdateStyles(elInput, component, event, component);
 			else if (component.getTrait(event.target.name).attributes.SwitchClass)
-				SwitchClass(elInput, component, event);
+				SwitchClass(elInput, component, event, component);
 		}
 	});
 
@@ -1282,9 +1291,9 @@ export default (editor, config = {}) => {
 			}
 
 			if (component.getTrait(event.target.name).attributes.UpdateStyles)
-				UpdateStyles(elInput, component, event);
+				UpdateStyles(elInput, component, event, component);
 			else if (component.getTrait(event.target.name).attributes.SwitchClass)
-				SwitchClass(elInput, component, event);
+				SwitchClass(elInput, component, event, component);
 
 			if (component.attributes.type == "column" && component.components().length == 0)
 				$(component.getEl()).attr("data-empty", "true");
@@ -1303,14 +1312,13 @@ export default (editor, config = {}) => {
 
 				var input = document.createElement('input');
 				var label = document.createElement("label");
-				var icon = document.createElement("em");
 
 				input.setAttribute("type", "radio");
 				input.setAttribute("name", trait.attributes.name);
 				input.setAttribute("id", value.id);
 				input.setAttribute("value", value.name);
 
-				label.setAttribute("class", "bg-" + value.id);
+				label.setAttribute("class", value.color);
 				label.setAttribute("for", value.id);
 
 				el.appendChild(input);
@@ -1345,20 +1353,51 @@ export default (editor, config = {}) => {
 				var BGcolor = $(this).find(".gjs-field-color-picker").css("background-color");
 				$(this).parents(".color-wrapper").find(".colorPicker").css("background-color", BGcolor);
 
-				$(trait.target.getTrait('styles').el).find('label').css("color", BGcolor);
+				if (typeof trait.target.getTrait('styles') != 'undefined') {
 
-				$(trait.target.getTrait('styles').el).find('label').removeClass(function (index, className) {
-					return (className.match(/\btext-\S+/g) || []).join(' ');
-				});
+					$(trait.attributes.cssproperties).each(function (index, property) {
 
-				if (trait.target.attributes.type == 'heading' || trait.target.attributes.type == 'text') {
+						if (property.name == 'color') {
+							$(trait.target.getTrait('styles').el).find('label').css("color", BGcolor);
 
-					var classes = jQuery.grep(trait.target.getClasses(), function (className, index) {
-						return (className.match(/\btext-\S+/g) || []).join(' ');
+							$(trait.target.getTrait('styles').el).find('label').removeClass(function (index, className) {
+								return (className.match(/\btext-\S+/g) || []).join(' ');
+							});
+						}
+					});
+				}
+
+				var classes = [];
+				var model = trait.target;
+
+				if (typeof trait.attributes.selector != 'undefined')
+					model = trait.target.findType(trait.attributes.selector);
+
+				$(model).each(function (index, item) {
+
+					$(trait.attributes.cssproperties).each(function (index, property) {
+
+						if (property.name == 'color') {
+							classes = jQuery.grep(item.getClasses(), function (className, index) {
+								return (className.match(/\btext-\S+/g) || []).join(' ');
+							});
+						}
+						else if (property.name == 'background-color') {
+							classes = jQuery.grep(item.getClasses(), function (className, index) {
+								return (className.match(/\bbg-\S+/g) || []).join(' ');
+							});
+						}
+						else if (property.name == 'border-color') {
+							classes = jQuery.grep(item.getClasses(), function (className, index) {
+								return (className.match(/\bborder-\S+/g) || []).join(' ');
+							});
+						}
 					});
 
-					trait.target.removeClass(classes);
-				}
+					$(classes).each(function (index, className) {
+						item.removeClass(className);
+					});
+				});
 
 				if (trait.target.attributes.type == 'button') {
 
@@ -1433,27 +1472,42 @@ export default (editor, config = {}) => {
 		eventCapture: ['input'],
 		onEvent({ elInput, component, event }) {
 
-			if (component.attributes.type == 'heading' || component.attributes.type == 'text') {
-					var className = event.target.nextElementSibling.className;
-					className = className.replace('bg', 'text');
+			var model = component;
+			var trait = component.getTrait(event.target.name);
 
-					$(component.getTrait('styles').el).find('label').removeClass(function (index, css) {
-						return (css.match(/\btext-\S+/g) || []).join(' ');
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector);
+
+			$(model).each(function (index, item) {
+
+				if (typeof component.getTrait('styles') != 'undefined') {
+
+					$(trait.attributes.cssproperties).each(function (index, property) {
+
+						if (property.name == 'color') {
+							var className = event.target.nextElementSibling.className;
+							className = className.replace('bg', 'text');
+
+							$(component.getTrait('styles').el).find('label').removeClass(function (index, css) {
+								return (css.match(/\btext-\S+/g) || []).join(' ');
+							});
+
+							$(component.getTrait('styles').el).find('label').addClass(className);
+						}
 					});
-					$(component.getTrait('styles').el).find('label').addClass(className);
 				}
-			
-			$(event.target).parents(".color-wrapper").find(".colorPicker").css("background-color", "transparent");
-			$(event.target).parents(".color-wrapper").find(".active").removeClass("active");
-			$(event.target.nextElementSibling).addClass("active");
 
-			var style = component.getStyle();
-			style["background-color"] = "transparent";
-			component.setStyle(style);
+				$(event.target).parents(".color-wrapper").find(".colorPicker").css("background-color", "transparent");
+				$(event.target).parents(".color-wrapper").find(".active").removeClass("active");
+				$(event.target.nextElementSibling).addClass("active");
 
-			SwitchClass(elInput, component, event);
+				//var style = item.getStyle();
+				//style["background-color"] = "transparent";
+				//item.setStyle(style);
 
+				SwitchClass(elInput, item, event, component);
 
+			});
 		}
 	});
 
@@ -1555,29 +1609,40 @@ export default (editor, config = {}) => {
 		},
 		eventCapture: ['input'],
 		onEvent({ elInput, component, event }) {
-			UpdateStyles(elInput, component, event);
 
-			if (component.attributes.type == 'section' && event.target.name == "angle") {
-
-				var angle = event.target.value;
-
-				if (angle == '180')
-					angle = '0';
-
-				if (typeof component.getTrait('gradient').view.gp != 'undefined') {
-
-					const gp = component.getTrait('gradient').view.gp;
-					gp.setDirection(angle + 'deg');
-
-					var style = component.getStyle();
-					style["background-image"] = gp.getSafeValue();
-					component.setStyle(style);
-				}
-			}
-
+			var model = component;
+			var trait = component.getTrait(event.target.name);
 			var size = component.getStyle()['font-size'];
 
-			if (component.attributes.type == 'heading' || component.attributes.type == 'text' || component.attributes.type == 'button')
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector);
+
+			$(model).each(function (index, item) {
+
+				UpdateStyles(elInput, item, event, component);
+
+				if (item.attributes.type == 'section' && event.target.name == "angle") {
+
+					var angle = event.target.value;
+
+					if (angle == '180')
+						angle = '0';
+
+					if (typeof item.getTrait('gradient').view.gp != 'undefined') {
+
+						const gp = item.getTrait('gradient').view.gp;
+						gp.setDirection(angle + 'deg');
+
+						var style = item.getStyle();
+						style["background-image"] = gp.getSafeValue();
+						item.setStyle(style);
+					}
+				}
+
+				size = item.getStyle()['font-size'];
+			});
+
+			if (typeof component.getTrait('styles') != 'undefined')
 				$(component.getTrait('styles').el).find('label').css('font-size', size);
 		}
 	});
@@ -1606,7 +1671,16 @@ export default (editor, config = {}) => {
 		},
 		eventCapture: ['input'],
 		onEvent({ elInput, component, event }) {
-			UpdateStyles(elInput, component, event);
+
+			var model = component;
+			var trait = component.getTrait(event.target.name);
+
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector);
+
+			$(model).each(function (index, item) {
+				UpdateStyles(elInput, item, event, component);
+			});
 		}
 	});
 
@@ -1728,15 +1802,23 @@ export default (editor, config = {}) => {
 			}
 		},
 		onEvent({ elInput, component, event }) {
-			if (component.attributes.type == 'video')
-				if (event.target.value == 'yt')
-					component.set({ 'provider': 'yt', 'videoId': '' });
-				else
-					component.set({ 'provider': 'so', 'src': '' });
-			else
-				UpdateStyles(elInput, component, event);
-		}
 
+			var model = component;
+			var trait = component.getTrait(event.target.name);
+
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector);
+
+			$(model).each(function (index, item) {
+				if (item.attributes.type == 'video')
+					if (event.target.value == 'yt')
+						item.set({ 'provider': 'yt', 'videoId': '' });
+					else
+						item.set({ 'provider': 'so', 'src': '' });
+				else
+					UpdateStyles(elInput, item, event, component);
+			});
+		}
 	});
 
 	tm.addType('gradient', {
@@ -1861,10 +1943,15 @@ export default (editor, config = {}) => {
 				$(elInput).find('label').css('color', color);
 			}
 
-			var text = component.getEl().textContent;
+			var model = component;
+			var trait = component.getTrait('styles');
+
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector)[0];
+
+			var text = model.getEl().textContent;
 			text = text.split(/\s+/).slice(0, 20).join(" ");
 			$(elInput).find('label').text(text);
-
 
 			if (component.attributes.type == 'button') {
 
@@ -1898,8 +1985,6 @@ export default (editor, config = {}) => {
 		},
 		onEvent({ elInput, component }) {
 
-			//VjEditor.getSelected().setStyle();
-
 			$(event.target).parents('.preset-wrapper').find('.active').removeClass('active');
 			$(event.target).parent().addClass('active');
 
@@ -1907,32 +1992,41 @@ export default (editor, config = {}) => {
 				'value': event.target.value
 			});
 
-			var className = event.target.className;
-			var classes = component.getClasses();
+			var model = component;
+			var trait = component.getTrait(event.target.name);
 
-			if (component.attributes.type == 'heading') {
-				classes = jQuery.grep(classes, function (className, index) {
-					return (className.match(/\bhead-style-\S+/g) || []).join(' ');
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector);
 
-				});
-			}
-			else if (component.attributes.type == 'text') {
-				classes = jQuery.grep(classes, function (className, index) {
-					return (className.match(/\bparagraph-style-\S+/g) || []).join(' ');
-				});
-			}
-			else if (component.attributes.type == 'button') {
-				classes = jQuery.grep(classes, function (className, index) {
-					return (className.match(/\bbutton-style-\S+/g) || []).join(' ');
-				});
-			}
+			$(model).each(function (index, item) {
 
-			component.removeClass(classes);
+				var className = event.target.className;
+				var classes = item.getClasses();
+				var $el = $(item.getEl());
 
-			if (className != 'none')
-				component.addClass(className);
+				if ($el.is('[class*="head-style-"]')) {
+					classes = jQuery.grep(classes, function (className, index) {
+						return (className.match(/\bhead-style-\S+/g) || []).join(' ');
+					});
+				}
+				else if ($el.is('[class*="paragraph-style-"]')) {
+					classes = jQuery.grep(classes, function (className, index) {
+						return (className.match(/\bparagraph-style-\S+/g) || []).join(' ');
+					});
+				}
+				else if ($el.is('[class*="button-style-"]')) {
+					classes = jQuery.grep(classes, function (className, index) {
+						return (className.match(/\bbutton-style-\S+/g) || []).join(' ');
+					});
+				}
+				else
+					classes = "";
+
+				item.removeClass(classes);
+
+				if (className != 'none')
+					item.addClass(className);
+			});
 		}
-
 	});
-
 }

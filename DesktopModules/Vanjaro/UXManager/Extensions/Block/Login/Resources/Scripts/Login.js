@@ -1,7 +1,9 @@
 ﻿var Login = {
     UserLoginAPIUri: '',
-    User: function (data_selector, obj) {
+    User: function (data_selector) {
         var sf = $.ServicesFramework(-1);
+        var obj = $('#loginbtn');
+
         $(obj).closest('.Login').find('.show-message').remove();
         if (mnValidationService.DoValidationAndSubmit(data_selector)) {
             var userLogin = {};
@@ -34,41 +36,50 @@
                     'RequestVerificationToken': sf.getAntiForgeryValue()
                 },
                 success: function (response) {
-                    if (response.IsSuccess) {
-                        if (response.IsRedirect) {
-                            window.location.href = response.RedirectURL;
-                        }
-                        else {
-                            $(obj).closest('.Login').find('#loginbtn').html(signinText);
-                            $(obj).closest('.Login').find('#loginbtn').removeClass('disabled');
-                        }
-                    }
-
-                    if (response.HasErrors) {
-                        if (response.Errors["MUSTAGREETOTERMS"] != null && typeof response.Errors["MUSTAGREETOTERMS"] != "undefined") {
-                            $(obj).closest('.Login').find('#loginbtn').html(signinText);
-                            $('<div class="show-message alert alert-warning">' + response.Message + '</div>').insertAfter($(obj).closest('.login-container').find('.dataconsent').find('.loginhead'));
-                            $(obj).closest('.Login').find('#loginbtn').removeClass('disabled');
-                            $(obj).closest('.Login').find('.login-control').hide();
-                            $(obj).closest('.login-container').find('.form-Login').hide();
-                            $(obj).closest('.login-container').find('.dataconsent').show();
-                        }
-                        else if (response.Errors["ProfileUpdate"] != null && typeof response.Errors["ProfileUpdate"] != "undefined") {
-                            $(obj).closest('.Login').find('#loginbtn').html(signinText);
-                            $(obj).closest('.Login').find('#loginbtn').removeClass('disabled');
-                            if (response.Data != null && response.Data.UserExtensionURL != null) {
-                                parent.OpenPopUp(null, 800, 'right', null, response.Data.UserExtensionURL);
-                            }
-                        }
-                        else {
-                            $(obj).closest('.Login').find('#loginbtn').html(signinText);
-                            $('<div class="show-message alert alert-danger">' + response.Message + '</div>').insertAfter($(obj).closest('.Login').find('.loginhead'));
-                            $(obj).closest('.Login').find('#loginbtn').removeClass('disabled');
-                        }
-
-                    }
+                    Login.processResponse(response);
                 }
             });
+        }
+    },
+    processResponse: function (response) {
+
+        var signinText = $($(obj).closest('.Login').find('#loginbtn')).attr('attr-localize-signin-text');
+        var obj = $('#loginbtn');
+
+        if (response.IsSuccess) {
+            if (response.IsRedirect) {
+                window.location.href = response.RedirectURL;
+            }
+            else {
+                $(obj).closest('.Login').find('#loginbtn').html(signinText);
+                $(obj).closest('.Login').find('#loginbtn').removeClass('disabled');
+            }
+        }
+
+        if (response.HasErrors) {
+
+            
+            if (response.Errors["MUSTAGREETOTERMS"] != null && typeof response.Errors["MUSTAGREETOTERMS"] != "undefined") {
+                $(obj).closest('.Login').find('#loginbtn').html(signinText);
+                $('<div class="show-message alert alert-warning">' + response.Message + '</div>').insertAfter($(obj).closest('.login-container').find('.dataconsent').find('.loginhead'));
+                $(obj).closest('.Login').find('#loginbtn').removeClass('disabled');
+                $(obj).closest('.Login').find('.login-control').hide();
+                $(obj).closest('.login-container').find('.form-Login').hide();
+                $(obj).closest('.login-container').find('.dataconsent').show();
+            }
+            else if (response.Errors["ProfileUpdate"] != null && typeof response.Errors["ProfileUpdate"] != "undefined") {
+                $(obj).closest('.Login').find('#loginbtn').html(signinText);
+                $(obj).closest('.Login').find('#loginbtn').removeClass('disabled');
+                if (response.Data != null && response.Data.UserExtensionURL != null) {
+                    parent.OpenPopUp(null, 800, 'right', null, response.Data.UserExtensionURL);
+                }
+            }
+            else {
+                $(obj).closest('.Login').find('#loginbtn').html(signinText);
+                $('<div class="show-message alert alert-danger">' + response.Message + '</div>').insertAfter($(obj).closest('.Login').find('.loginhead'));
+                $(obj).closest('.Login').find('#loginbtn').removeClass('disabled');
+            }
+
         }
     },
     ResetPassword: function (obj) {
@@ -251,5 +262,6 @@ $(document).ready(function () {
         }
     });
 
-    Login.UserLoginAPIUri = window.location.origin + $.ServicesFramework(-1).getServiceRoot("Login") + "Login/UserLogin" + window.parent.location.search;
+    Login.UserLoginAPIUri = window.location.origin + $.ServicesFramework(-1).getServiceRoot("Login") + "Login/UserLogin" + window.location.search;
+    
 });

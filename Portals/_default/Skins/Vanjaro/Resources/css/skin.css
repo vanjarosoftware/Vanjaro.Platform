@@ -4,9 +4,6 @@
 
 /*Modal*/
 .modal .modal-dialog.modal-right {
-    height: 100%;
-    position: fixed;
-    margin: 0;
     right: 0;
 }
 
@@ -172,12 +169,8 @@
     display: none;
 }
 
-.uxmanager-modal .modal-dialog.center .modal-title {
+.uxmanager-modal .modal-dialog .modal-title.center {
     margin: 0 auto;
-}
-
-.uxmanager-modal .modal-dialog.center .close {
-    margin-left: 0;
 }
 
 video {
@@ -213,12 +206,13 @@ a, a:hover, a:focus, a:active {
         word-break: break-word;
     }
 
-.modal-open .modal.fullwidth {
-    padding-left: 0 !important;
+.modal.fullwidth {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
 }
 
-.modal.fullwidth .modal-dialog {
-    margin: 0 !important;
+.modal .modal-dialog:not(.modal-right).fullheight {
+    height: calc(100% - 3.50rem);
 }
 
 #UXRender {
@@ -305,15 +299,15 @@ div.actionMenu ul {
                 list-style-type: none;
             }
 
-                div.actionMenu ul.dnn_mact > li > ul > li {
-                    /*display: block;
+            div.actionMenu ul.dnn_mact > li > ul > li {
+                /*display: block;
                     padding: 0;
                     margin: 0;*/
-                    /*border-top: 1px solid #cccccc;*/
-                    white-space: nowrap;
-                    /*background: #3b97e3;
+                /*border-top: 1px solid #cccccc;*/
+                white-space: nowrap;
+                /*background: #3b97e3;
                     transition: background-color .25s;*/
-                }
+            }
 
             /*div.actionMenu ul.dnn_mact > li > ul > li:first-child {
                         border: none;
@@ -366,9 +360,9 @@ div.actionMenu ul {
         background: #585858;
     }
 
-    .tlb-app-setting-panel__option:hover {
-        background: #2c8cdc;
-    }
+.tlb-app-setting-panel__option:hover {
+    background: #2c8cdc;
+}
 
 .dnnFormMessage {
     display: block;
@@ -531,10 +525,6 @@ Theme.css end
     display: inline-block;
 }
 
-[data-gjs-type="text"] .link {
-    padding: 5px;
-}
-
 .vj-divider {
     border-top-width: 10px;
     border-top-style: solid;
@@ -566,6 +556,7 @@ Theme.css end
 
 .vj-map {
     height: 350px;
+    width: 100%;
 }
 
 .spacer {
@@ -593,150 +584,6 @@ Theme.css end
     display: inline-block;
 }
 
-/*Presets*/
-
-.heading .normal {
-    font-weight: 500;
-}
-
-.head-style-1 {
-    font-weight: 500;
-    text-transform: capitalize;
-}
-
-.head-style-2 {
-    font-weight: 500;
-    text-transform: uppercase;
-}
-
-.head-style-3 {
-    font-weight: 500;
-    letter-spacing: 10px;
-}
-
-.head-style-4 {
-    font-weight: 500;
-    text-decoration: underline;
-}
-
-.head-style-5 {
-    font-weight: bold;
-}
-
-.head-style-6 {
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-.head-style-7 {
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.head-style-8 {
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.head-style-9 {
-    font-weight: bold;
-    text-decoration: underline;
-    text-transform: capitalize;
-}
-
-.head-style-10 {
-    font-weight: bold;
-    text-decoration: underline;
-    text-transform: uppercase;
-}
-
-.text .normal {
-    font-weight: 400;
-}
-
-.paragraph-style-1 {
-    font-weight: 400;
-    letter-spacing: -1px;
-    word-spacing: 5px;
-}
-
-.paragraph-style-2 {
-    font-weight: 400;
-    font-style: italic;
-}
-
-.paragraph-style-3 {
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: 4px;
-    word-spacing: 5px;
-}
-
-.paragraph-style-4 {
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: -2px;
-}
-
-.paragraph-style-5 {
-    font-weight: 400;
-    font-style: italic;
-    word-spacing: 5px;
-}
-
-.paragraph-style-6 {
-    font-weight: bold;
-    letter-spacing: 4px;
-}
-
-.paragraph-style-7 {
-    font-weight: bold;
-    word-spacing: 5px;
-}
-
-.paragraph-style-8 {
-    font-weight: bold;
-}
-
-.paragraph-style-9 {
-    font-weight: bold;
-    font-style: italic;
-}
-
-.paragraph-style-10 {
-    font-weight: bold;
-    letter-spacing: -2px;
-    word-spacing: 5px;
-}
-
-.button.normal {
-    font-weight: 400;
-}
-
-.button-style-1 {
-    font-weight: 400;
-    text-transform: capitalize;
-}
-
-.button-style-2 {
-    font-weight: 400;
-    text-transform: uppercase;
-}
-
-.button-style-3 {
-    font-weight: 400;
-    font-style: italic;
-}
-
-.button-style-4 {
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-.button-style-5 {
-    font-weight: bold;
-    text-transform: uppercase;
-}
 
 .d-desktop-none {
     display: none !important;
@@ -864,4 +711,24 @@ img#uploaded_image {
 
 [dmid] ~ [dmid] {
     margin-top: 20px;
+}
+
+#socialControls {
+    float: none !important;
+    width: 100%;
+}
+
+    #socialControls ul.buttonList li {
+        margin: auto;
+    }
+
+div.vj_authenticationcontrol {
+    text-align: center;
+}
+
+ul.vj_authenticationtab {
+    text-align: center;
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
 }

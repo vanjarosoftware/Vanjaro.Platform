@@ -10,6 +10,7 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.FileSystem;
+using DotNetNuke.Web.Client;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,45 @@ namespace Vanjaro.Core
     {
         public class SettingManager
         {
+
+            public static string GetHostSetting(string Name, bool Secure, string defaultValue = "")
+            {
+                HostController hostController = new HostController();
+                if (Secure)
+                    return hostController.GetEncryptedString(Name, Config.GetDecryptionkey());
+                return hostController.GetString(Name, defaultValue);
+            }
+            public static bool GetHostSettingAsBoolean(string Name, bool defaultValue = false)
+            {
+                HostController hostController = new HostController();
+                return hostController.GetBoolean(Name, defaultValue);
+            }
+            public static void UpdateHostSetting(string Name, string Value, bool Secure)
+            {
+                HostController hostController = new HostController();
+                if (Secure)
+                    hostController.UpdateEncryptedString(Name, Value, Config.GetDecryptionkey());
+                else
+                    hostController.Update(Name, Value, true);
+            }
+            public static string GetPortalSetting(string Name, bool Secure, string defaultValue = "")
+            {
+                if (Secure)
+                    return PortalController.GetEncryptedString(Name, PortalController.Instance.GetCurrentSettings().PortalId, Config.GetDecryptionkey());
+                return PortalController.GetPortalSetting(Name, PortalController.Instance.GetCurrentSettings().PortalId, defaultValue);
+            }
+            public static bool GetPortalSettingAsBoolean(string Name, bool defaultValue = false)
+            {
+                return PortalController.GetPortalSettingAsBoolean(Name, PortalController.Instance.GetCurrentSettings().PortalId, defaultValue);
+            }
+            public static void UpdatePortalSetting(string Name, string Value, bool Secure)
+            {
+                if (Secure)
+                    PortalController.UpdateEncryptedString(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, Config.GetDecryptionkey());
+                else
+                    PortalController.UpdatePortalSetting(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, true);
+            }
+
             public static void UpdateValue(int PortalID, int TabID, string Identifier, string Name, string Value)
             {
                 SettingFactory.UpdateValue(PortalID, TabID, Identifier, Name, Value);
@@ -197,11 +237,11 @@ namespace Vanjaro.Core
 
                 #region Copy Vthemes in portal folder
 
-                string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrentThemeName(pinfo.PortalID) + "/editor");
+                string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrent(pinfo.PortalID).Name + "/editor");
                 Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", pinfo.PortalID.ToString()));
                 try
                 {
-                    ThemeManager.ProcessScss(pinfo.PortalID);
+                    ThemeManager.ProcessScss(pinfo.PortalID, false);
                 }
                 catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
 
@@ -394,7 +434,7 @@ namespace Vanjaro.Core
                 }
 
                 #region Delete Unnecessary Files
-                string LayoutPath = HttpContext.Current.Server.MapPath("~/Portals/" + pinfo.PortalID + "/vThemes/" + Core.Managers.ThemeManager.GetCurrentThemeName(pinfo.PortalID) + "/templates");
+                string LayoutPath = HttpContext.Current.Server.MapPath("~/Portals/" + pinfo.PortalID + "/vThemes/" + Core.Managers.ThemeManager.GetCurrent(pinfo.PortalID).Name + "/templates");
                 if (Directory.Exists(LayoutPath))
                     Directory.Delete(LayoutPath, true);
                 #endregion
@@ -424,6 +464,10 @@ namespace Vanjaro.Core
 
                 if (fi != null)
                     UpdateValue(pinfo.PortalID, 0, "security_settings", "Picture_DefaultFolder", fi.FolderID.ToString());
+
+                PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.EnableCompositeFilesKey, "True");
+                PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.MinifyCssKey, "True");
+                PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.MinifyJsKey, "True");
             }
             public static void ApplyDefaultLayouts(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts)
             {
@@ -678,7 +722,7 @@ namespace Vanjaro.Core
             private static List<Layout> GetLayouts(PortalInfo pinfo)
             {
                 List<Layout> layouts = new List<Layout>();
-                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrentThemeName(pinfo.PortalID) + "/templates/website/");
+                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrent(pinfo.PortalID).Name + "/templates/website/");
                 if (Directory.Exists(FolderPath))
                 {
                     foreach (string layout in Directory.GetFiles(FolderPath, "*.json"))

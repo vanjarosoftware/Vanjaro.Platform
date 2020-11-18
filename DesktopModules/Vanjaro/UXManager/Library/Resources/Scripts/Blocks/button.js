@@ -12,7 +12,7 @@
 				<div class="gjs-block-label">`+ VjLocalized.Button + `</div>
 			`,
 			category: VjLocalized.Basic,
-			content: '<div class="button-box"><a role="button" href="" class="btn btn-primary"><span class="button-text">Button</span></a></div>',
+            content: '<div class="button-box"><a role="button" href="" class="btn btn-primary button-style-1"><span class="button-text">Button</span></a></div>',
 		});
 	}
 
@@ -81,6 +81,7 @@
 			},
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				droppable: false,
+                classes: ['btn', 'btn-primary', 'button-style-1'],
 				resizable: {
 					tl: 0, // Top left
 					tc: 0, // Top center
@@ -154,16 +155,16 @@
 							{ name: "border-color" }
 						],
 						options: [
-							{ id: 'primary', name: 'Primary', class: 'primary' },
-							{ id: 'secondary', name: 'Secondary', class: 'secondary' },
-							{ id: 'tertiary', name: 'Tertiary', class: 'tertiary' },
-							{ id: 'quaternary', name: 'Quaternary', class: 'quaternary' },
-							{ id: 'success', name: 'Success', class: 'success' },
-							{ id: 'info', name: 'Info', class: 'info' },
-							{ id: 'warning', name: 'Warning', class: 'warning' },
-							{ id: 'danger', name: 'Danger', class: 'danger' },
-							{ id: 'light', name: 'Light', class: 'light' },
-							{ id: 'dark', name: 'Dark', class: 'dark' },
+							{ id: 'primary', color: 'bg-primary', name: 'Primary', class: 'primary' },
+							{ id: 'secondary', color: 'bg-secondary', name: 'Secondary', class: 'secondary' },
+							{ id: 'tertiary', color: 'bg-tertiary', name: 'Tertiary', class: 'tertiary' },
+							{ id: 'quaternary', color: 'bg-quaternary', name: 'Quaternary', class: 'quaternary' },
+							{ id: 'success', color: 'bg-success', name: 'Success', class: 'success' },
+							{ id: 'info', color: 'bg-info', name: 'Info', class: 'info' },
+							{ id: 'warning', color: 'bg-warning', name: 'Warning', class: 'warning' },
+							{ id: 'danger', color: 'bg-danger', name: 'Danger', class: 'danger' },
+							{ id: 'light', color: 'bg-light', name: 'Light', class: 'light' },
+							{ id: 'dark', color: 'bg-dark', name: 'Dark', class: 'dark' }
 						],
 						value: 'primary',
 						changeProp: 1,
@@ -178,32 +179,25 @@
 						name: 'styles',
 						type: 'preset_radio',
 						options: [
-							{ id: 'normal', name: 'Normal', class: 'normal' },
 							{ id: 'button-style-1', name: 'Style 1', class: 'button-style-1' },
 							{ id: 'button-style-2', name: 'Style 2', class: 'button-style-2' },
 							{ id: 'button-style-3', name: 'Style 3', class: 'button-style-3' },
 							{ id: 'button-style-4', name: 'Style 4', class: 'button-style-4' },
 							{ id: 'button-style-5', name: 'Style 5', class: 'button-style-5' },
 						],
-						value: 'Normal',
+						value: 'Style 1',
 						changeProp: 1,
 					}
 				]
 			}),
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('btn')) {
-						return { type: 'button' };
-					}
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('btn')) {
+					return { type: 'button' };
 				}
-			}),
-		view: defaultView.extend({
-			onRender() {
-				var hasClass = this.model.getClasses().find(v => v == 'btn-primary')
-				if (typeof hasClass == 'undefined')
-					this.model.addClass('btn-primary');
-			},
-		})
+			}
+		}),
+		view: defaultView
 	});
 
 	const textType = domc.getType('text');
@@ -221,14 +215,13 @@
 				hoverable: false,
 				traits: [],
 			}),
-		},
-			{
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('button-text')) {
-						return { type: 'button-text' };
-					}
+		}, {
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('button-text')) {
+					return { type: 'button-text' };
 				}
-			}),
+			}
+		}),
 		view: textView
 	});
 }

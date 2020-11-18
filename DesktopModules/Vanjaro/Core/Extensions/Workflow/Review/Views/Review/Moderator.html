@@ -1,11 +1,11 @@
 ﻿<div ng-controller="review_moderator" class="vj-ux-manager">
     <uiengine provider="AngularBootstrap" identifier="review_moderator" class="uiengine-wrapper scrollbar">
-        <uilayout name="default" attr-ng-if="ui.data.Page.Options != null">
+        <uilayout name="default" attr-ng-if="ui.data.ReviewContentInfo.Options != null">
             <uitemplate>
                 <span ng-bind-html="ui.data.Markup.Value | unsafe"></span>
             </uitemplate>
             <uitemplate >
-                <div class="text-right fixed-footer" ng-hide="ui.data.Page.Options.IsPublished==true" access-roles="review">
+                <div class="text-right fixed-footer" ng-hide="ui.data.ReviewContentInfo.Options.IsPublished==true" access-roles="review">
                     <button type="button" id="publish" ng-show="ui.data.NextState.Options.StateID==ui.data.LastState.Options.StateID" class="btn btn-primary btn-sm button-left" ng-click="Click_Moderate('publish')"><span>[L:Publish]</span></button>
                     <button type="button" id="approve" ng-hide="ui.data.NextState.Options.StateID==ui.data.LastState.Options.StateID" class="btn btn-success  btn-sm button-left " role="button" ng-click="Click_Moderate('approve')"><span>[L:Approve]</span></button>
                     <a id="reject" ng-hide="ui.data.CurrentState.Options.StateID==1 || ui.data.CurrentState.Options.Order==1" class="btn btn-link  btn-sm button-left" role="button" ng-click="Click_Moderate('reject')"><span>[L:Reject]</span></a>

@@ -1,0 +1,26 @@
+﻿<div ng-controller="setting_setting" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_setting" class="uiengine-wrapper scrollbar">
+        <uilayout name="default">
+            <uielement name="ApplyTo" control="checkboxtoggle" label="false" attr-class="toggle_right btn_integration" container-attr-ng-show="ui.data.IsSuperUser.Options" ngmodel="ui.data.ApplyTo.Options"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="ui.data.ApplyTo.Options">
+            <uielement name="SiteKey" control="textbox" ngmodel="ui.data.Host_SiteKey.Value"></uielement>
+            <uielement name="SecretKey" control="password" ngmodel="ui.data.Host_SecretKey.Value"></uielement>
+            <uielement name="Enabled" control="toggle" attr-class="toggle_right" ngmodel="ui.data.Host_Enabled.Options"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="!ui.data.ApplyTo.Options">
+            <uielement name="SiteKey" control="textbox" ngmodel="ui.data.Site_SiteKey.Value"></uielement>
+            <uielement name="SecretKey" control="password" ngmodel="ui.data.Site_SecretKey.Value"></uielement>
+            <uielement name="Enabled" control="toggle" attr-class="toggle_right" ngmodel="ui.data.Site_Enabled.Options"></uielement>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div class="fixed-footer">
+                    <div class="text-right">
+                        <button class="btn btn-sm btn-primary button-left mr-sm" type="button" ng-click="Click_Update()">[L:Update]</button>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

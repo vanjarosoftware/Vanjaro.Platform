@@ -9,11 +9,17 @@ using DotNetNuke.Security.Membership;
 using DotNetNuke.Services.Authentication;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.UserRequest;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Data.Entities;
+using Vanjaro.Core.Services.Authentication.OAuth;
+using static Vanjaro.Core.Factories;
 
 namespace Vanjaro.Core
 {
@@ -145,6 +151,34 @@ namespace Vanjaro.Core
                 public int ModuleID { get; set; }
                 public string PaneName { get; set; }
                 public bool IsDeleted { get; set; }
+            }
+
+            public static List<IOAuthClient> GetOAuthClients()
+            {
+                List<IOAuthClient> OAuthClients = CacheFactory.Get(CacheFactory.Keys.OAuthClients + "-" + PortalSettings.Current.PortalId);
+
+                if (OAuthClients == null)
+                {
+                    OAuthClients = new List<IOAuthClient>();
+                    string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll")).ToArray();
+
+                    foreach (string Path in binAssemblies)
+                    {
+                        try
+                        {
+                            //get all assemblies
+                            IEnumerable<IOAuthClient> AssembliesToAdd = from t in System.Reflection.Assembly.LoadFrom(Path).GetTypes()
+                                                                        where t != (typeof(IOAuthClient)) && (typeof(IOAuthClient).IsAssignableFrom(t))
+                                                                        select Activator.CreateInstance(t) as IOAuthClient;
+                            OAuthClients.AddRange(AssembliesToAdd.ToList<IOAuthClient>());
+                        }
+                        catch { continue; }
+                    }
+                    
+                    CacheFactory.Set(CacheFactory.Keys.OAuthClients + "-" + PortalSettings.Current.PortalId, OAuthClients);
+                }
+
+                return OAuthClients;
             }
         }
     }

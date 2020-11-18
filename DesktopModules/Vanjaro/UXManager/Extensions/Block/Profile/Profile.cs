@@ -26,6 +26,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Profile
         public string Icon => "fas fa-user-tag";
 
         public Guid Guid => Guid.Parse(ExtensionInfo.GUID);
+        public bool Visible { get; set; } = true;
 
         public Dictionary<string, string> Attributes
         {
@@ -49,7 +50,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Profile
 
         public List<AngularView> AngularViews => AppFactory.GetViews();
 
-        public string TemplatePath => "~/vThemes/" + Core.Managers.ThemeManager.GetCurrentThemeName() + "/Blocks/Register Link/Templates/";
+        public string TemplatePath => "~/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/Blocks/Register Link/Templates/";
 
         public string UIPath => "~/DesktopModules/Vanjaro/UXManager/Extensions/Block/" + ExtensionInfo.Name + "/Views/";
 

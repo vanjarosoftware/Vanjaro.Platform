@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="Vanjaro" type="Library" version="00.05.02">
+    <package name="Vanjaro" type="Library" version="00.05.03">
       <friendlyName>Vanjaro</friendlyName>
       <description>Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN.</description>
       <dependencies>
@@ -35,6 +35,11 @@
               <name>Core.01.00.02.SqlDataProvider</name>
               <version>01.00.02</version>
             </script>
+            <script type="Install">
+              <path>Install</path>
+              <name>Core.01.00.03.SqlDataProvider</name>
+              <version>01.00.03</version>
+            </script>
             <script type="UnInstall">
               <path>Install</path>
               <name>Uninstall.Core.SqlDataProvider</name>
@@ -59,7 +64,7 @@
         </component>
         <component type="Script">
           <scripts>
-            <basePath>DesktopModules\Vanjaro\URL</basePath>
+            <basePath>DesktopModules\Vanjaro\URLManager</basePath>
             <script type="Install">
               <path>Install</path>
               <name>URL.01.00.00.SqlDataProvider</name>
@@ -101,7 +106,7 @@
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.Core.dll</name>
-							<version>00.05.02</version>
+							<version>00.05.03</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
@@ -228,6 +233,11 @@
 							<name>Vanjaro.UXManager.Extensions.Menu.GoogleAnalytics.dll</name>
 							<version>01.00.00</version>
 						</assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.dll</name>
+              <version>01.00.00</version>
+            </assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Pixabay.dll</name>
@@ -489,7 +499,7 @@
 				</component>
 				<component type="ResourceFile">
 					<resourceFiles>
-						<basePath>DesktopModules\Vanjaro\URL</basePath>
+						<basePath>DesktopModules\Vanjaro\URLManager</basePath>
 						<resourceFile>
 							<name>url-resources.zip</name>
 						</resourceFile>
@@ -663,6 +673,14 @@
 						</resourceFile>
 					</resourceFiles>
 				</component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules\Vanjaro\UXManager\Extensions\Menu\GoogleReCaptcha</basePath>
+            <resourceFile>
+              <name>menu-integrations-googlerecaptcha-resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
 				<component type="ResourceFile">
 					<resourceFiles>
 						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Menu\Pixabay</basePath>
@@ -1007,17 +1025,28 @@
 						</resourceFile>
 					</resourceFiles>
 				</component>
-				<component type="File">
-					<files>
-						<basePath>DesktopModules/AuthenticationServices/Vanjaro</basePath>
-						<file>
-							<name>Login.ascx</name>
-						</file>
-						<file>
-							<name>Settings.ascx</name>
-						</file>
-					</files>
-				</component>
+        <component type="File">
+          <files>
+            <basePath>DesktopModules\AuthenticationServices\Vanjaro</basePath>
+            <file>
+              <name>Login.ascx</name>
+              <sourceFileName>AuthenticationViews\Login.ascx</sourceFileName>
+            </file>
+            <file>
+              <name>Settings.ascx</name>
+              <sourceFileName>AuthenticationViews\Settings.ascx</sourceFileName>
+            </file>
+          </files>
+        </component>
+        <component type="File">
+          <files>
+            <basePath>DesktopModules\AuthenticationServices\Vanjaro\App_LocalResources</basePath>
+            <file>
+              <name>Login.ascx.resx</name>
+              <sourceFileName>AuthenticationViews\App_LocalResources\Login.ascx.resx</sourceFileName>
+            </file>
+          </files>
+        </component>
 				<component type="Skin">
 					<skinFiles>
 						<skinName>Vanjaro</skinName>
@@ -1088,14 +1117,15 @@
 				<component type="UrlProvider">
 					<urlProvider>
 						<name>Vanjaro URL Provider</name>
-						<type>Mandeeps.DNN.Libraries.URL.Providers.URLProvider</type>
-						<settingsControlSrc>DesktopModules/Vanjaro/URL/Views/Settings.ascx</settingsControlSrc>
+						<type>Vanjaro.URL.Providers.URLProvider</type>
+						<settingsControlSrc>DesktopModules/Vanjaro/URLManager/Views/Settings.ascx</settingsControlSrc>
 						<redirectAllUrls>false</redirectAllUrls>
 						<replaceAllUrls>true</replaceAllUrls>
 						<rewriteAllUrls>true</rewriteAllUrls>
 						<desktopModule>Vanjaro Url Library</desktopModule>
 					</urlProvider>
 				</component>
+        <component type="Cleanup" version="00.05.03" fileName="00.05.03.txt" />
 			</components>
 			<eventMessage>
 				<processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>

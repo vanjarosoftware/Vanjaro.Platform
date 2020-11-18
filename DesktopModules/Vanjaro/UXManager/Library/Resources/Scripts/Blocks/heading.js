@@ -26,7 +26,7 @@
 				'custom-name': 'Heading',
 				droppable: false,
 				tagName: 'h1',
-                classes: ['vj-heading', 'text-primary'],
+                classes: ['vj-heading', 'text-primary', 'head-style-1'],
 				traits: [
 					{
 						label: 'Importance',
@@ -80,16 +80,16 @@
 						type: 'custom_color',
 						cssproperties: [{ name: "color" }],
 						options: [ 
-                            { id: 'primary', name: 'Primary', class: 'text-primary' },
-                            { id: 'secondary', name: 'Secondary', class: 'text-secondary' },
-                            { id: 'tertiary', name: 'Tertiary', class: 'text-tertiary' },
-                            { id: 'quaternary', name: 'Quaternary', class: 'text-quaternary' },
-                            { id: 'success', name: 'Success', class: 'text-success' },
-                            { id: 'info', name: 'Info', class: 'text-info' },
-                            { id: 'warning', name: 'Warning', class: 'text-warning' },
-                            { id: 'danger', name: 'Danger', class: 'text-danger' },
-                            { id: 'light', name: 'Light', class: 'text-light' },
-                            { id: 'dark', name: 'Dark', class: 'text-dark' },
+                            { id: 'primary', color: 'bg-primary', name: 'Primary', class: 'text-primary' },
+							{ id: 'secondary', color: 'bg-secondary', name: 'Secondary', class: 'text-secondary' },
+							{ id: 'tertiary', color: 'bg-tertiary', name: 'Tertiary', class: 'text-tertiary' },
+							{ id: 'quaternary', color: 'bg-quaternary', name: 'Quaternary', class: 'text-quaternary' },
+							{ id: 'success', color: 'bg-success', name: 'Success', class: 'text-success' },
+							{ id: 'info', color: 'bg-info', name: 'Info', class: 'text-info' },
+							{ id: 'warning', color: 'bg-warning', name: 'Warning', class: 'text-warning' },
+							{ id: 'danger', color: 'bg-danger', name: 'Danger', class: 'text-danger' },
+							{ id: 'light', color: 'bg-light', name: 'Light', class: 'text-light' },
+							{ id: 'dark', color: 'bg-dark', name: 'Dark', class: 'text-dark' }
 						],
                         value: 'primary',
                         changeProp: 1,
@@ -99,7 +99,6 @@
 						name: 'styles',
 						type: 'preset_radio',
 						options: [
-							{ id: 'normal', name: 'Normal', class: 'normal' },
 							{ id: 'head-style-1', name: 'Style 1', class: 'head-style-1' },
 							{ id: 'head-style-2', name: 'Style 2', class: 'head-style-2' },
 							{ id: 'head-style-3', name: 'Style 3', class: 'head-style-3' },
@@ -111,7 +110,7 @@
 							{ id: 'head-style-9', name: 'Style 9', class: 'head-style-9' },
 							{ id: 'head-style-10', name: 'Style 10', class: 'head-style-10' },
 						],
-                        value: 'Normal',
+						value: 'Style 1',
                         changeProp: 1,
 					}
 				]
@@ -137,7 +136,7 @@
             onRender() {
                 var hasClass = this.model.getClasses().find(v => v == 'vj-heading' || v == 'text-primary')
                 if (typeof hasClass == 'undefined')
-                    this.model.addClass('vj-heading text-primary');
+                    this.model.addClass('vj-heading  text-primary');
             },
         })
 	});

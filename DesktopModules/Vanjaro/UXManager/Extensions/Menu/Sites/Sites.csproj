@@ -95,6 +95,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\bin\Vanjaro.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Vanjaro.UXManager.Extensions.Menu.LogoAndTitle, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.LogoAndTitle.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\Core\Library\Properties\GlobalAssemblyInfo.cs">
