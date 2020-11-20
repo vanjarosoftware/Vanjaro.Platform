@@ -234,6 +234,10 @@ namespace Vanjaro.Core
                 UserInfo uInfo = UserController.Instance.GetCurrentUserInfo();
 
                 IFolderInfo fi = FolderManager.Instance.GetFolder(pinfo.PortalID, "Images/");
+                if (fi == null)
+                {
+                    fi = FolderManager.Instance.AddFolder(pinfo.PortalID, "Images/");
+                }
 
                 #region Copy Vthemes in portal folder
 
