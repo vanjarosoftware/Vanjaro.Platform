@@ -1239,6 +1239,7 @@ $(document).ready(function () {
 									$(".traitsmanager > .empty_msg").css({ "display": "none" });
 									$(".traitsmanager > .gjs-two-color").css({ "display": "block" });
 								}
+
 								if (model.attributes.type != 'wrapper')
 									Stylemanager();
 								else {
@@ -1255,6 +1256,8 @@ $(document).ready(function () {
 										ChangeBlockType();
 									}, 300);
 								}
+
+								VjEditor.StyleManager.render();
 
 								if (model.attributes.type == 'column') {
 
