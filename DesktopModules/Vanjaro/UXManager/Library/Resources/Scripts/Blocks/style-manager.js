@@ -4,89 +4,74 @@
 	const cmd = editor.Commands;
 
 	sm.addType('customradio', {
-		model: {
+		create({ props, change }) {
+
+			const el = document.createElement('div');
+			el.classList.add("sm-radio-wrapper");
+			el.id = props.property;
+
+			$(props.list).each(function (index, item) {
+
+				var input = document.createElement('input');
+				var label = document.createElement("label");
+
+				input.setAttribute("type", "radio");
+				input.setAttribute("name", props.property);
+				input.setAttribute("id", item.name + '-' + item.value);
+				input.setAttribute("value", item.value);
+
+				label.setAttribute("for", item.name + '-' + item.value);
+				label.innerHTML = item.name;
+
+				el.appendChild(input);
+				el.appendChild(label);
+
+				input.addEventListener('change', event => change({ event }));
+			});
+
+			return el;
 		},
-		view: {
-			templateInput() {
-				const pfx = this.pfx;
-				const ppfx = this.ppfx;
-				return `
-      <div class="${ppfx}field ${ppfx}field-radio">
-      </div>
-    `;
-			},
+		emit({ props, updateStyle }, { event, complete }) {
 
-			events() {
-				return {
-					'change [type=radio]': 'inputradioChanged',
-					'input [type=radio]': 'inputradioChanged',
-					change: ''
-				};
-			},
+			var val = event.target.value;
+			var property = props.property;
+			var selected = VjEditor.getSelected();
+			var classes = props.list.map(opt => opt.value);
 
-			onRender() {
-				const pfx = this.pfx;
-				const ppfx = this.ppfx;
-				const itemCls = `${ppfx}radio-item-label`;
-				const model = this.model;
-				const prop = model.get('property');
-				const options = model.get('list') || model.get('options') || [];
+			$(classes).each(function (index, className) {
+				selected.removeClass(className);
+			});
 
-				if (!this.input) {
-					if (options && options.length) {
-						let inputStr = '';
+			selected.addClass(val);
+			selected.set(property, val);
 
-						options.forEach(el => {
-							let cl = el.className ? `${el.className} ${pfx}icon ${itemCls}` : '';
-							let id = `${prop}-${el.value}`;
-							let labelTxt = el.name || el.value;
-							let titleAttr = el.title ? `title="${el.title}"` : '';
-							inputStr += `
-							<div class="${ppfx}radio-item">
-								<input type="radio" class="${pfx}radio" id="${id}" name="${prop}" value="${el.value}"/>
-								<label class="${cl || itemCls}" ${titleAttr} for="${id}">${cl ? '' : labelTxt}</label>
-							</div>
-							`;
-						});
+			$(this.$el).find('.gjs-sm-clear').show();
+		},
+		setValue(value) {
+			const model = this.model;
+			model.view.$el.find('input[value=' + value + ']').prop('checked', true);
 
-						const inputHld = this.el.querySelector(`.${ppfx}field`);
-						inputHld.innerHTML = `<div class="${ppfx}radio-items">${inputStr}</div>`;
-						this.input = inputHld.firstChild;
-					}
-				}
-			},
+			if (value == model.getDefaultValue())
+				$(this.$el).find('.gjs-sm-clear').hide();
+			else
+				$(this.$el).find('.gjs-sm-clear').show();
+		},
+		clear() {
 
-			getInputValue() {
-				const inputChk = this.getCheckedEl();
-				return inputChk ? inputChk.value : '';
-			},
-			inputradioChanged() {
-				var property = this.property;
-				if (this.getInputValue() == 'true')
-					VjEditor.getSelected().addClass(property);
-				else
-					VjEditor.getSelected().removeClass(property);
-			},
+			var model = this.model;
+			var defaultValue = model.getDefaultValue();
 
-			getCheckedEl() {
-				const input = this.getInputEl();
-				return input ? input.querySelector('input:checked') : '';
-			},
+			$(this.$el).find('.gjs-sm-clear').hide();
+			model.view.$el.find('input[value=' + defaultValue + ']').prop('checked', true);
 
-			setValue(value) {
+			var selected = VjEditor.getSelected();
+			var classes = model.attributes.list.map(opt => opt.value);
 
-				const model = this.model;
-				let val = value || model.get('value') || model.getDefaultValue();
-				const input = this.getInputEl();
-				const inputIn = input ? input.querySelector(`[value="${val}"]`) : '';
+			$(classes).each(function (index, className) {
+				selected.removeClass(className);
+			});
 
-				if (inputIn) {
-					inputIn.checked = true;
-				} else {
-					const inputChk = this.getCheckedEl();
-					inputChk && (inputChk.checked = true);
-				}
-			}
+			selected.set(model.attributes.property, defaultValue);
 		}
 	});
 
