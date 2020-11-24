@@ -50,12 +50,10 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
                 if (recipient != null)
                 {
                     NotificationsController.Instance.DeleteNotificationRecipient(postData.NotificationId, this.UserInfo.UserID);
-                    response.IsSuccess = true;
                     response.NotifyCount = Core.Managers.NotificationManager.RenderNotificationsCount(PortalSettings.PortalId);
                     response.NotificationsCount = NotificationsController.Instance.CountNotifications(this.UserInfo.UserID, PortalSettings.PortalId);
-                }
-                if (!response.IsSuccess)
-                    response.Message = "Unable to dismiss notification";
+                    response.IsSuccess = true;
+                }                
             }
             catch (Exception exc)
             {

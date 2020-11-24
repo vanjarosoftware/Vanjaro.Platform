@@ -10,18 +10,17 @@
                                     <img class="img-responsive " src="{{row.SenderAvatar}}">
                                 </div>
                                 <div class="senderinfo">
-                                    <span class="author_name author_sub pt-sm"><strong>{{row.Subject}}</strong></span>
-                                    <span class="author_name pt-sm">{{row.SenderDisplayName}} </span>
-                                    <span class="author_name pt-sm">{{row.DisplayDate}}</span>
+                                    <span class="author_name author_sub pt-sm">{{row.Subject}}</span>
+                                    <div class="author_name"><span class="fontsmall senderdisplayname">{{row.SenderDisplayName}}</span></div>
                                 </div>
                             </div>
                             <div class="row m-none">
                                 <div class="col-12 p-0 userinfo">
                                     <div class="vanjaro-users">
-                                        <span>{{row.Body}}</span>
+                                        <div class="fontsmall display-date">{{row.DisplayDate}}</div>
+                                        <div class="fontsmall" ng-bind-html="to_trusted(row.Body)"></div><a class="float-right dismiss-action" mn-ng-click="Click_Dismiss(row)">[L:Dismiss]</a>
                                     </div>
                                 </div>
-                                <div class="col-12 text-right"><a mn-ng-click="Click_Dismiss(row)">[L:Dismiss]</a></div>
                             </div>
                         </div>
                     </uitemplate>
