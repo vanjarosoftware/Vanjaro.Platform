@@ -84,6 +84,7 @@ namespace Vanjaro.Skin
             MigratePage();
 
             InjectViewport();
+            HomeLogoAndSiteIcons();
 
             GetCookieConsentMarkup();
 
@@ -843,6 +844,32 @@ namespace Vanjaro.Skin
                     PortalSettings.ActiveTab.Modules.Remove(m);
                 }
             }
+        }
+
+
+        private void HomeLogoAndSiteIcons()
+        {
+            string PortalRoot = PageManager.GetPortalRoot(PortalSettings.Current.PortalId);
+            PortalRoot = PortalRoot + "/";
+            string SocialSharingLogo = PortalRoot + PortalController.GetPortalSetting("SocialSharingLogo", PortalSettings.Current.PortalId, "", PortalSettings.CultureCode);
+            string HomeScreenIcon = PortalRoot + PortalController.GetPortalSetting("HomeScreenIcon", PortalSettings.Current.PortalId, "", PortalSettings.CultureCode);           
+            Literal lt = new Literal();
+            if (!string.IsNullOrEmpty(SocialSharingLogo))
+            {
+                lt.Text += "<meta property=\"og:image\" content=\"" + SocialSharingLogo + "\">";
+                lt.Text += "<meta property=\"og:image:type\" content=\"image/png\">";
+                lt.Text += "<meta property=\"og:image:width\" content=\"1024\">";
+                lt.Text += "<meta property=\"og:image:height\" content = \"1024\">";
+            }
+
+            if (!string.IsNullOrEmpty(HomeScreenIcon))
+            {
+                lt.Text += "<link rel=\"icon\" type=\"image/png\" sizes=\"64x64\" href=\"" + HomeScreenIcon + "\">";
+                lt.Text += "<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"" + HomeScreenIcon + "\">";
+            }
+
+            if (!string.IsNullOrEmpty(lt.Text))
+                Page.Header.Controls.Add(lt);
         }
 
         private void HandleAppSettings()
