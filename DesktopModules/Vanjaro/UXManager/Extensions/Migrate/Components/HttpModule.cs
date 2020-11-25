@@ -59,8 +59,18 @@ namespace Vanjaro.Migrate.Components
                                 string ControlPanel = HostController.Instance.GetSettings().ContainsKey("ControlPanel") ? HostController.Instance.GetSettings()["ControlPanel"].Value.ToLower() : null;
 
                                 HostController.Instance.GetSettings()["ControlPanel"].Value = "DesktopModules/Vanjaro/UXManager/Library/Base.ascx";
-                                if (HostController.Instance.GetBoolean("DisableEditBar"))
+
+                                bool HasDisableEditBarKey = false;
+                                try
+                                {
+                                    string DisableEditBar = HostController.Instance.GetSettings()["DisableEditBar"].Value;
+                                    HasDisableEditBarKey = true;
+                                }
+                                catch { }
+
+                                if (HasDisableEditBarKey)
                                     HostController.Instance.GetSettings()["DisableEditBar"].Value = "True";
+
 
                                 _Page.PreRender += delegate (object ss, EventArgs ee)
                                 {
