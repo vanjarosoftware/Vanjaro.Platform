@@ -49,7 +49,7 @@
 		},
 		setValue(value) {
 			const model = this.model;
-			model.view.$el.find('input[value=' + value + ']').prop('checked', true);
+			model.view.$el.find('input[value="' + value + '"]').prop('checked', true);
 
 			if (value == model.getDefaultValue())
 				$(this.$el).find('.gjs-sm-clear').hide();
@@ -62,7 +62,7 @@
 			var defaultValue = model.getDefaultValue();
 
 			$(this.$el).find('.gjs-sm-clear').hide();
-			model.view.$el.find('input[value=' + defaultValue + ']').prop('checked', true);
+			model.view.$el.find('input[value="' + defaultValue + '"]').prop('checked', true);
 
 			var selected = VjEditor.getSelected();
 			var classes = model.attributes.list.map(opt => opt.value);
