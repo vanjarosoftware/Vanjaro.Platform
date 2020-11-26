@@ -1,5 +1,6 @@
 ﻿using DotNetNuke.Abstractions;
 using DotNetNuke.Common;
+using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Portals;
@@ -53,7 +54,7 @@ namespace Vanjaro.Skin
             HandleAppSettings();
 
             RemoveDNNDependencies();
-
+            ResetTheme();
         }
 
         private void RemoveDNNDependencies()
@@ -843,6 +844,22 @@ namespace Vanjaro.Skin
                     PortalSettings.ActiveTab.Modules.Remove(m);
                 }
             }
+        }
+        private void ResetTheme()
+        {
+            try
+            {
+                string ThemeName = Core.Managers.ThemeManager.GetCurrent(PortalSettings.Current.PortalId).Name;
+                string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/editor");
+                string ThemeCss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/Theme.css");
+                if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))
+                {
+                    ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);
+                    Config.Touch();
+                    Response.Redirect(NavigationManager.NavigateURL(PortalSettings.Current.ActiveTab.TabID));
+                }
+            }
+            catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
         }
 
         private void HandleAppSettings()
