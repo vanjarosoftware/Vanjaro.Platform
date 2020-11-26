@@ -302,7 +302,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
 
     $modal.modal('show');
 
-    $(window.parent.document.body).find('[data-dismiss="modal"]').on("click", function (e) {
+    $(window.parent.document.body).find('[data-dismiss="modal"]').on("click", function (e, reload) {
         if ($(window.document.body).find('.uxmanager-modal').data('edit') == 'edit_module') {
             var mid = $(window.document.body).find('.uxmanager-modal').data('mid');
             if ($('.gjs-frame').contents().find('#dnn_vj_' + mid).length > 0) {
@@ -313,7 +313,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
                     framesrc = framesrc + "&mid=" + mid + "&icp=true";
                 $('.gjs-frame').contents().find('#dnn_vj_' + mid).html("<img class=\"centerloader moduleloader\" src='" + VjDefaultPath + "loading.gif'><iframe id=\"Appframe\" scrolling=\"no\" onload=\"window.parent.RenderApp(this);\" src='" + framesrc + "' style=\"width:100%;height:auto;\"></iframe>");
             }
-            else
+            else if (typeof reload == 'undefined' || reload)
                 window.parent.location.reload();
         }
     });
