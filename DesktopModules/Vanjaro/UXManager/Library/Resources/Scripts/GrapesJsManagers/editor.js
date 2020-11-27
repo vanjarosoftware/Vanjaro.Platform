@@ -74,7 +74,7 @@ $(document).ready(function () {
 									});
 
 									var block = VjEditor.BlockManager.render(LibraryBlock);
-									$(window.document.body).append(block).find('[data-dismiss="modal"]').click();
+                                    $(window.document.body).append(block).find('[data-dismiss="modal"]').trigger('click', [false]);
 								}
 							}
 						});
