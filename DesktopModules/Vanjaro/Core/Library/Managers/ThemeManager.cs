@@ -17,6 +17,7 @@ using Vanjaro.Common.ASPNET;
 using Vanjaro.Core.Components;
 using Vanjaro.Core.Entities.Interface;
 using Vanjaro.Core.Entities.Theme;
+using Vanjaro.Core.Services.Authentication.OAuth;
 using static Vanjaro.Core.Factories;
 
 namespace Vanjaro.Core
@@ -410,11 +411,12 @@ namespace Vanjaro.Core
             public static ThemeEditorWrapper GetThemeEditors(int PortalID, string CategoryGuid, bool CheckVisibilityPermission = true)
             {
                 string ThemeEditorJsonPath = GetThemeEditorJsonPath(PortalID, CategoryGuid, CheckVisibilityPermission);
+                List<string> RemoveFeatureAccess = new List<string>() { };
+                if (!HasAccessIOAuthClient())
+                    RemoveFeatureAccess.Add("Social Authentication Buttons");
 
                 if (!File.Exists(ThemeEditorJsonPath))
-                {
                     File.Create(ThemeEditorJsonPath).Dispose();
-                }
 
                 string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, PortalID, CategoryGuid);
                 ThemeEditorWrapper result = CacheFactory.Get(CacheKey);
@@ -423,8 +425,20 @@ namespace Vanjaro.Core
                     result = JsonConvert.DeserializeObject<ThemeEditorWrapper>(File.ReadAllText(ThemeEditorJsonPath));
                     CacheFactory.Set(CacheKey, result);
                 }
-                return result;
+
+                ThemeEditorWrapper themeEditors = null;
+                if (result != null)
+                {
+                    themeEditors = new ThemeEditorWrapper() { DeveloperMode = result.DeveloperMode, Fonts = result.Fonts, ThemeEditors = new List<ThemeEditor>() };
+                    foreach (ThemeEditor te in result.ThemeEditors)
+                    {
+                        if (!RemoveFeatureAccess.Contains(te.Category))
+                            themeEditors.ThemeEditors.Add(te);
+                    }
+                }
+                return themeEditors;
             }
+
             public static List<ThemeFont> GetFonts(int PortalID, string CategoryGuid, bool CheckVisibilityPermission = true)
             {
                 List<ThemeFont> Fonts = new List<ThemeFont>();
@@ -764,6 +778,36 @@ namespace Vanjaro.Core
                 }
 
                 return FolderPath + "\\theme.json";
+            }
+
+            private static bool HasAccessIOAuthClient()
+            {
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.IOAuthClient_Extension, PortalController.Instance.GetCurrentSettings().PortalId.ToString());
+                List<IOAuthClient> OAuthClient = CacheFactory.Get(CacheKey);
+                if (OAuthClient == null)
+                {
+                    string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll")).ToArray();
+                    List<IOAuthClient> ServiceInterfaceAssemblies = new List<IOAuthClient>();
+                    foreach (string Path in binAssemblies)
+                    {
+                        try
+                        {
+
+                            //get all assemblies 
+                            IEnumerable<IOAuthClient> AssembliesToAdd = from t in System.Reflection.Assembly.LoadFrom(Path).GetTypes()
+                                                                        where t != (typeof(IOAuthClient)) && (typeof(IOAuthClient).IsAssignableFrom(t))
+                                                                        select Activator.CreateInstance(t) as IOAuthClient;
+
+                            ServiceInterfaceAssemblies.AddRange(AssembliesToAdd.ToList<IOAuthClient>());
+                        }
+                        catch { continue; }
+                    }
+                    OAuthClient = ServiceInterfaceAssemblies;
+                    CacheFactory.Set(CacheKey, ServiceInterfaceAssemblies);
+                }
+
+                return OAuthClient.Count > 0;
+
             }
 
 
