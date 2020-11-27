@@ -297,7 +297,7 @@ namespace Vanjaro.UXManager.Library
                     foreach (string q in Context.Request.QueryString.AllKeys)
                     {
 
-                        if (!string.IsNullOrEmpty(q) && q.ToLower() != "language" && q.ToLower() != "tabid")
+                        if ((!string.IsNullOrEmpty(q) && q.ToLower() != "language" && q.ToLower() != "tabid") || string.IsNullOrEmpty(q))
                         {
                             param += ("&" + q + "=" + Context.Request.QueryString[q]);
                         }

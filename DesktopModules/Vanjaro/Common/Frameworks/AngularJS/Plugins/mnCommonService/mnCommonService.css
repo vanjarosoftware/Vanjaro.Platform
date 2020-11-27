@@ -996,7 +996,7 @@ a.page-link.active {
 
 
 #loading-bar .bar {
-    background-image: linear-gradient(to left, #777 0%, #444 100%) !important;
+    background-image: linear-gradient(to left, #444 0%, #777 100%) !important;
 }
 
 #loading-bar-spinner {

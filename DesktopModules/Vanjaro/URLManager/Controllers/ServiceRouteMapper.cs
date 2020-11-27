@@ -10,7 +10,7 @@ namespace Vanjaro.URL.Controllers
 	{
         public void RegisterRoutes(IMapRoute mapRouteManager)
         {
-            mapRouteManager.MapHttpRoute("vjURL", "default", "{controller}/{action}", new[] { "Vanjaro.URL.Controllers" });
+            mapRouteManager.MapHttpRoute("URLManager", "default", "{controller}/{action}", new[] { "Vanjaro.URL.Controllers" });
         }
 	}
 }

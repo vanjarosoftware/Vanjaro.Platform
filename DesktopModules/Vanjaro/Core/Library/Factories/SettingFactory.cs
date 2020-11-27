@@ -8,7 +8,7 @@ namespace Vanjaro.Core
 {
     public static partial class Factories
     {
-        internal static class SettingFactory
+        public static class SettingFactory
         {
             internal static Dictionary<string, IUIData> GetDictionary(int PortalID, int TabID, string Identifier, List<AngularView> Views)
             {

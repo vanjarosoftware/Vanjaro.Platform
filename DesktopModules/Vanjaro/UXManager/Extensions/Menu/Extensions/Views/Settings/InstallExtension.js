@@ -29,6 +29,7 @@
                         'RequestVerificationToken': sf.getAntiForgeryValue()
                     },
                     success: function (response) {
+                        $scope.UploadExtension.queue = [];
                         if (response.IsSuccess) {                            
                             $scope.$apply(function () {
                                 $scope.showupload = false;
@@ -66,7 +67,6 @@
                     }
                 });
             });
-            $scope.UploadExtension.queue = [];
         }
     };
     $scope.UploadExtension.onErrorItem = function (item, response, status, headers) {

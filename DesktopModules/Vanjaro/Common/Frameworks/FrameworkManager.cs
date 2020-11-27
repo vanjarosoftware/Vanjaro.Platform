@@ -350,7 +350,8 @@ namespace Vanjaro.Common
             Toastr = 9,
             ContextMenu = 10,
             BootstrapDatepicker = 11,
-            SpectrumColorPicker = 12
+            SpectrumColorPicker = 12,
+            jQueryMoment = 13
         }
         public enum AngularPlugins
         {
