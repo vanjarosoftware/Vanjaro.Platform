@@ -133,7 +133,7 @@
     <value>API Key</value>
   </data>
   <data name="Invalid.Text" xml:space="preserve">
-    <value>Input is not a valid Pixabay API Key.</value>
+    <value>Input is not a valid YouTube API Key.</value>
   </data>
   <data name="Site_ApiKey.Text" xml:space="preserve">
     <value>API Key</value>
