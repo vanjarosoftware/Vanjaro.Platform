@@ -2370,50 +2370,58 @@ $(document).ready(function () {
 
 	//Change Device
 	$(".device-manager .device-view").click(function () {
-		var $this = $(this);
+        var $this = $(this);
+        var $body = $('body');
 
-		$(".device-manager .device-view").removeClass("active");
-		$this.addClass("active");
+        $(".device-manager .device-view").removeClass("active");
+        $this.addClass("active");
 
-		//Desktop
-		if ($this.attr("id") == "Desktop") {
-			$('.gjs-frame').removeClass("fixed-height");
-			$('.gjs-frame').contents().find("html").removeClass('responsive');
-			$('.gjs-frame').contents().find("#wrapper").removeClass("scrollbar");
+        $(".panelfooter .ResponsiveMode").find("em").removeClass(function (index, css) {
+            return (css.match(/\bfa-\S+/g) || []).join(' ');
+        }).addClass("fa-" + $this.attr("id").toLowerCase());
 
-			$(".panelfooter .DeviceMode").find("em").removeClass(function (index, css) {
-				return (css.match(/\bfa-\S+/g) || []).join(' ');
-			}).addClass("fa-desktop");
+        //Desktop
+        if ($this.attr("id") == "Desktop") {
 
-			ChangeColumnResizeSpeed(0.075);
-			VjEditor.runCommand('set-device-desktop');
-		}
-		//Tablet Portrait
-		else if ($this.attr("id") == "Tablet") {
-			$('.gjs-frame').removeClass("fixed-height");
-			$('.gjs-frame').contents().find("html").addClass('responsive');
-			$('.gjs-frame').contents().find("#wrapper").addClass("scrollbar");
+            ChangeColumnResizeSpeed(0.075);
 
-			$(".panelfooter .DeviceMode").find("em").removeClass(function (index, css) {
-				return (css.match(/\bfa-\S+/g) || []).join(' ');
-			}).addClass("fa-tablet");
+            if (vjEditorSettings.EditPage) {
+                $('.gjs-frame').removeClass("fixed-height");
+                $('.gjs-frame').contents().find("html").removeClass('responsive');
+                $('.gjs-frame').contents().find("#wrapper").removeClass("scrollbar");
+                VjEditor.runCommand('set-device-desktop');
+            }
+            else
+                $body.removeClass('resp-mode tablet mobile').addClass('resp-mode');
+        }
+        //Tablet Portrait
+        else if ($this.attr("id") == "Tablet") {
 
-			ChangeColumnResizeSpeed(0.1);
-			VjEditor.runCommand('set-device-tablet');
-		}
-		//Mobile Portrait
-		else if ($this.attr("id") == "Mobile") {
-			$('.gjs-frame').addClass("fixed-height");
-			$('.gjs-frame').contents().find("html").addClass('responsive');
-			$('.gjs-frame').contents().find("#wrapper").addClass("scrollbar");
+            ChangeColumnResizeSpeed(0.1);
 
-			$(".panelfooter .DeviceMode").find("em").removeClass(function (index, css) {
-				return (css.match(/\bfa-\S+/g) || []).join(' ');
-			}).addClass("fa-mobile");
+            if (vjEditorSettings.EditPage) {
+                $('.gjs-frame').removeClass("fixed-height");
+                $('.gjs-frame').contents().find("html").addClass('responsive');
+                $('.gjs-frame').contents().find("#wrapper").addClass("scrollbar");
+                VjEditor.runCommand('set-device-tablet');
+            }
+            else
+                $body.removeClass('mobile').addClass('resp-mode tablet');
+        }
+        //Mobile Portrait
+        else if ($this.attr("id") == "Mobile") {
 
-			ChangeColumnResizeSpeed(0.2);
-			VjEditor.runCommand('set-device-mobile');
-		}
+            ChangeColumnResizeSpeed(0.2);
+
+            if (vjEditorSettings.EditPage) {
+                $('.gjs-frame').addClass("fixed-height");
+                $('.gjs-frame').contents().find("html").addClass('responsive');
+                $('.gjs-frame').contents().find("#wrapper").addClass("scrollbar");
+                VjEditor.runCommand('set-device-mobile');
+            }
+            else
+                $body.removeClass('tablet').addClass('resp-mode mobile');
+        }
 		var selected = VjEditor.getSelected();
 		VjEditor.select();
 		VjEditor.select(selected);
