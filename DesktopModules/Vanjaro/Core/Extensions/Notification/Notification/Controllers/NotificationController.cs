@@ -1,10 +1,15 @@
 ﻿using DotNetNuke.Entities.Users;
 using DotNetNuke.Web.Api;
+using System;
+using System.Dynamic;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
+using DotNetNuke.Web.InternalServices;
+using DotNetNuke.Services.Social.Notifications;
+using DotNetNuke.Services.Social.Messaging.Internal;
 using Vanjaro.Core.Extensions.Notification.Notification.Managers;
 
 namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
@@ -31,6 +36,30 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
         public dynamic GetNotificationList(int Page, int PageSize)
         {
             return TasksManager.GetNotifications(Page, PageSize);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public dynamic Dismiss(NotificationDTO postData)
+        {
+            dynamic response = new ExpandoObject();
+            response.IsSuccess = false;
+            try
+            {
+                var recipient = InternalMessagingController.Instance.GetMessageRecipient(postData.NotificationId, this.UserInfo.UserID);
+                if (recipient != null)
+                {
+                    NotificationsController.Instance.DeleteNotificationRecipient(postData.NotificationId, this.UserInfo.UserID);
+                    response.NotifyCount = Core.Managers.NotificationManager.RenderNotificationsCount(PortalSettings.PortalId);
+                    response.NotificationsCount = NotificationsController.Instance.CountNotifications(this.UserInfo.UserID, PortalSettings.PortalId);
+                    response.IsSuccess = true;
+                }                
+            }
+            catch (Exception exc)
+            {
+                DotNetNuke.Services.Exceptions.Exceptions.LogException(exc);
+            }
+            return response;
         }
 
         public override string AccessRoles()
