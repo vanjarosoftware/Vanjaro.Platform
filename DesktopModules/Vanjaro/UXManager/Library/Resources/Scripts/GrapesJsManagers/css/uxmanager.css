@@ -2342,8 +2342,8 @@ span.notificationname {
 	}
 
 .centerloader {
-	height: 25px;
-	width: 25px;
+	height: 25px !important;
+	width: 25px !important;
 	margin: 0 auto;
 	display: table;
 }

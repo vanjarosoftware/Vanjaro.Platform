@@ -70,8 +70,16 @@ $(document).ready(function () {
                             },
                             success: function (data) {
 
-                                if (data.html != '') {
-
+                                if (data.Html != '') {
+                                    $.each($(data.Html).find('[mid]'), function (k, v) {
+                                        var mid = $(v).attr('mid');
+                                        var framesrc = CurrentTabUrl;
+                                        if (framesrc.indexOf("?") == -1)
+                                            framesrc = framesrc + "?mid=" + mid + "&icp=true";
+                                        else
+                                            framesrc = framesrc + "&mid=" + mid + "&icp=true";
+                                        data.Html = data.Html.replace('<app id="' + mid + '"></app>', '<div id="dnn_vj_' + mid + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div>');
+                                    });
                                     var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
                                         content: data.Html + '<style>' + data.Css + '</style>',
                                         attributes: {
@@ -80,16 +88,16 @@ $(document).ready(function () {
                                         }
                                     });
 
-									var block = VjEditor.BlockManager.render(LibraryBlock);
+                                    var block = VjEditor.BlockManager.render(LibraryBlock);
                                     $(window.document.body).append(block).find('[data-dismiss="modal"]').trigger('click', [false]);
-								}
-							}
-						});
-					}
-				}
-			}
-		});
-	}
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
 
     $(".pubish-btn").click(function (e) {
         e.preventDefault();
