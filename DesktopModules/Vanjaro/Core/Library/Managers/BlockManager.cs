@@ -350,6 +350,7 @@ namespace Vanjaro.Core
                 CustomBlock customBlock = BlockManager.GetByLocale(PortalID, GUID, null);
                 if (customBlock != null)
                 {
+                    Dictionary<int, string> ExportedModulesContent = new Dictionary<int, string>();
                     string Theme = Core.Managers.ThemeManager.CurrentTheme.Name;
                     ExportTemplate exportTemplate = new ExportTemplate
                     {
@@ -368,7 +369,10 @@ namespace Vanjaro.Core
                         foreach (CustomBlock block in layout.Blocks)
                         {
                             if (!string.IsNullOrEmpty(block.Html))
+                            {
                                 block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
+                                PageManager.ProcessPortableModules(PortalID, block.Html, ExportedModulesContent);
+                            }
                             if (!string.IsNullOrEmpty(block.Css))
                                 block.Css = PageManager.DeTokenizeLinks(block.Css, PortalID);
                         }
@@ -391,7 +395,8 @@ namespace Vanjaro.Core
                             using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                             {
                                 AddZipItem("Template.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
-
+                                foreach (var exportedModuleContent in ExportedModulesContent)
+                                    AddZipItem("PortableModules/" + exportedModuleContent.Key + ".json", Encoding.ASCII.GetBytes(exportedModuleContent.Value), zip);
                                 if (Assets != null && Assets.Count > 0)
                                 {
                                     foreach (KeyValuePair<string, string> asset in Assets)
