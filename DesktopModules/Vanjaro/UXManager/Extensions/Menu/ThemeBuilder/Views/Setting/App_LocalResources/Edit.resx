@@ -162,6 +162,9 @@
   <data name="Increment.Text" xml:space="preserve">
     <value>Increment</value>
   </data>
+  <data name="JavascriptVariable.Text" xml:space="preserve">
+    <value>Javascript Variable</value>
+  </data>
   <data name="LessVariable.Text" xml:space="preserve">
     <value>Less Variable</value>
   </data>

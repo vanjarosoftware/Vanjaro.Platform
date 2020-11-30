@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </uitemplate>
-            <uielement name="Controls" control="grid" pagesize="20" paged="true" displayedpages="5" container-attr-ng-show="ui.data.ThemeEditor.Options.Controls.length>0" sortable="true" sortablekey="SortOrder" sortablehandle="drag"  ngoptions="ui.data.ThemeEditor.Options.Controls" attr-class="ux-gridcolumnhide table-grid addmodulebtn">
+            <uielement name="Controls" control="grid" pagesize="20" paged="true" displayedpages="5" container-attr-ng-show="ui.data.ThemeEditor.Options.Controls.length>0" sortable="true" sortablekey="SortOrder" sortablehandle="drag" ngoptions="ui.data.ThemeEditor.Options.Controls" attr-class="ux-gridcolumnhide table-grid addmodulebtn">
                 <column name="Image" width="90">
                     <uitemplate>
                         <span class="sortguid" guid="{{row.Guid}}">{{row.Title}}</span>
@@ -59,7 +59,7 @@
                             <i class="fas fa-arrows-alt"></i>
                         </button>
                     </uitemplate>
-                        
+
                 </column>
                 <column name="Actions" width="6">
                     <uitemplate>
@@ -101,6 +101,8 @@
             <uitemplate>
                 <div>[uilayout:Slider]</div>
                 <div>[uilayout:Dropdown]</div>
+                <div>[uilayout:ColorPicker]</div>
+                <div>[uilayout:Fonts]</div>
             </uitemplate>
             <uielement name="CustomCSS" control="textarea" attr-class="CustomCSS" attr-placeholder=".myCustomClass { background: red; }"></uielement>
             <uielement name="PreviewCSS" control="textarea" attr-class="PreviewCSS" attr-placeholder=".myCustomClass { background: red; }"></uielement>
@@ -148,8 +150,15 @@
                         [uilayout:RangeMax]
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        [uilayout:RangeIncrement]
+                    </div>
+                    <div class="col-sm-6">
+                        [uilayout:RangeJavascriptVariable]
+                    </div>
+                </div>
             </uitemplate>
-            <uielement name="Increment" control="integer" attr-required="true" attr-class="Increment"></uielement>
         </uilayout>
         <uilayout name="RangeMin" attr-ng-show="EditControl">
             <uielement name="RangeMin" control="integer" attr-required="true" attr-class="RangeMin"></uielement>
@@ -157,8 +166,44 @@
         <uilayout name="RangeMax" attr-ng-show="EditControl">
             <uielement name="RangeMax" control="integer" attr-required="true" attr-class="RangeMax"></uielement>
         </uilayout>
+        <uilayout name="RangeIncrement" attr-ng-show="EditControl">
+            <uielement name="Increment" control="integer" attr-required="true" attr-class="Increment"></uielement>
+        </uilayout>
         <uilayout name="Dropdown" attr-ng-show="EditControl && EditControltype=='Dropdown'">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-sm-6">
+                        [uilayout:DropdownOptions]
+                    </div>
+                    <div class="col-sm-6">
+                        [uilayout:RangeJavascriptVariable]
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="ColorPicker" attr-ng-show="EditControl && EditControltype=='Color Picker'">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-sm-6">
+                        [uilayout:RangeJavascriptVariable]
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="Fonts" attr-ng-show="EditControl && EditControltype=='Fonts'">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-sm-6">
+                        [uilayout:RangeJavascriptVariable]
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="DropdownOptions" attr-ng-show="EditControl">
             <uielement name="Options" control="textarea" attr-required="true" attr-class="Options" attr-rows="5"></uielement>
+        </uilayout>
+        <uilayout name="RangeJavascriptVariable" attr-ng-show="EditControl">
+            <uielement name="JavascriptVariable" control="textbox" attr-class="JavascriptVariable"></uielement>
         </uilayout>
         <uilayout name="Sass" attr-ng-show="!EditControl">
             <uielement name="SassInput" control="textarea" attr-class="Sass" attr-ng-model="ui.data.ThemeEditor.Options.Sass" attr-placeholder=".myCustomClass { background: red; }"></uielement>

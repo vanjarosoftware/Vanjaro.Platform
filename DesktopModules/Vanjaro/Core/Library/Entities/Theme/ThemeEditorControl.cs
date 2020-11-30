@@ -9,6 +9,7 @@
         public string CustomCSS { get; set; }
         public string PreviewCSS { get; set; }
         public string LessVariable { get; set; }
+        public string JavascriptVariable { get; set; }
         public string Type { get; set; }
     }
 
