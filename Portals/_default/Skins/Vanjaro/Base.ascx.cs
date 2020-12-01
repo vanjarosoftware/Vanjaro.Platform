@@ -192,7 +192,8 @@ namespace Vanjaro.Skin
             {
                 ID = "Vanjaro_Viewport",
                 Name = "viewport",
-                Content = "width=device-width, initial-scale=1, minimum-scale=1"
+                Content = "width=device-width, initial-scale=1, minimum-scale=1",
+
             };
             //if (Viewport)
             //tagKeyword.Content += " user-scalable=1";
@@ -852,24 +853,23 @@ namespace Vanjaro.Skin
             string PortalRoot = PageManager.GetPortalRoot(PortalSettings.Current.PortalId);
             PortalRoot = PortalRoot + "/";
             string SocialSharingLogo = PortalRoot + PortalController.GetPortalSetting("SocialSharingLogo", PortalSettings.Current.PortalId, "", PortalSettings.CultureCode);
-            string HomeScreenIcon = PortalRoot + PortalController.GetPortalSetting("HomeScreenIcon", PortalSettings.Current.PortalId, "", PortalSettings.CultureCode);           
-            Literal lt = new Literal();
+            string HomeScreenIcon = PortalRoot + PortalController.GetPortalSetting("HomeScreenIcon", PortalSettings.Current.PortalId, "", PortalSettings.CultureCode);          
             if (!string.IsNullOrEmpty(SocialSharingLogo))
             {
-                lt.Text += "<meta property=\"og:image\" content=\"" + SocialSharingLogo + "\">";
-                lt.Text += "<meta property=\"og:image:type\" content=\"image/png\">";
-                lt.Text += "<meta property=\"og:image:width\" content=\"1024\">";
-                lt.Text += "<meta property=\"og:image:height\" content = \"1024\">";
+                HtmlMeta Link = new HtmlMeta();
+                Link.ID = "SocialSharingLogo";             
+                Link.Attributes.Add("property", "og:image");
+                Link.Attributes.Add("content", SocialSharingLogo);
+                Page.Header.Controls.Add(Link);               
             }
-
             if (!string.IsNullOrEmpty(HomeScreenIcon))
             {
-                lt.Text += "<link rel=\"icon\" type=\"image/png\" sizes=\"64x64\" href=\"" + HomeScreenIcon + "\">";
-                lt.Text += "<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"" + HomeScreenIcon + "\">";
+                HtmlGenericControl Link = new HtmlGenericControl("link");
+                Link.ID = "HomeScreenIcon";
+                Link.Attributes["rel"] = "apple-touch-icon";
+                Link.Attributes["href"] = HomeScreenIcon;
+                Page.Header.Controls.Add(Link);
             }
-
-            if (!string.IsNullOrEmpty(lt.Text))
-                Page.Header.Controls.Add(lt);
         }
 
         private void HandleAppSettings()
