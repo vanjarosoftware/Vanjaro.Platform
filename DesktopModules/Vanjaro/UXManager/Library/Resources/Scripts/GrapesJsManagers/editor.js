@@ -24,9 +24,9 @@ $(document).ready(function () {
     var Positioning = VjLocalized.Positioning.replace(/ /g, '_').toLowerCase();
 
     if (window.parent.CurrentTabUrl.indexOf('?') > 0)
-        CurrentExtTabUrl = window.parent.CurrentTabUrl + '&mid=0&icp=true';
+        CurrentExtTabUrl = window.parent.AppsNavigateURL + '&mid=0&icp=true';
     else
-        CurrentExtTabUrl = window.parent.CurrentTabUrl + '?mid=0&icp=true';
+        CurrentExtTabUrl = window.parent.AppsNavigateURL + '?mid=0&icp=true';
 
     if (typeof TemplateLibraryURL != 'undefined' && TemplateLibraryURL != '') {
 

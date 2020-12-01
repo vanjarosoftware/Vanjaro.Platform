@@ -122,7 +122,8 @@ namespace Vanjaro.UXManager.Library
                     FrameworkManager.Load(this, "FontAwesome");
                 }
                 string NavigateURL = PageManager.GetCurrentTabUrl(PortalSettings);
-                string ClientScript = "var AppMenus=" + JsonConvert.SerializeObject(AppManager.GetAll(AppType.Module)) + "; var m2vPageTabUrl='" + NavigateURL + "'; var CurrentTabUrl ='" + NavigateURL + "'; var IsAdmin=" + PortalSettings.UserInfo.IsInRole("Administrators").ToString().ToLower() + ";";
+                string AppsNavigateURL = PageManager.GetCurrentTabUrl(PortalSettings, null, true);
+                string ClientScript = "var AppMenus=" + JsonConvert.SerializeObject(AppManager.GetAll(AppType.Module)) + "; var m2vPageTabUrl='" + NavigateURL + "'; var CurrentTabUrl ='" + NavigateURL + "'; var AppsNavigateURL ='" + AppsNavigateURL + "'; var IsAdmin=" + PortalSettings.UserInfo.IsInRole("Administrators").ToString().ToLower() + ";";
                 WebForms.RegisterClientScriptBlock(Page, "GrapesJsAppsExts", ClientScript, true);
 
                 if (TabPermissionController.HasTabPermission("EDIT") && !Request.QueryString.AllKeys.Contains("mid"))

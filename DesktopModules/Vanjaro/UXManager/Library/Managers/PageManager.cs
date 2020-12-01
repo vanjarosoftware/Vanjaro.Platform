@@ -273,7 +273,7 @@ namespace Vanjaro.UXManager.Library
             }
 
 
-            public static string GetCurrentTabUrl(PortalSettings pS, string QueryParameters = null)
+            public static string GetCurrentTabUrl(PortalSettings pS, string QueryParameters = null, bool AppsNavigateURL = false)
             {
                 string Language = Thread.CurrentThread.CurrentCulture.ToString();
                 if (pS != null && Thread.CurrentThread.CurrentCulture.ToString() == pS.DefaultLanguage)
@@ -300,6 +300,18 @@ namespace Vanjaro.UXManager.Library
                         if ((!string.IsNullOrEmpty(q) && q.ToLower() != "language" && q.ToLower() != "tabid") || string.IsNullOrEmpty(q))
                         {
                             param += ("&" + q + "=" + Context.Request.QueryString[q]);
+                        }
+                    }
+                    if (!AppsNavigateURL)
+                    {
+                        foreach (string q in Context.Request.QueryString.AllKeys)
+                        {
+                            if (string.IsNullOrEmpty(q))
+                            {
+                                string Value = Context.Request.QueryString[q].ToString();
+                                Value = Value.Contains(",") ? Value.Split(',')[0] : Value;
+                                param += ("&" + q + "=" + Value);
+                            }
                         }
                     }
                     QueryParameters = param + QueryParameters;
