@@ -525,6 +525,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                 Layout baseLayout = GetLayouts().Where(l => l.IsSystem == isSystem && l.Name.ToLower() == name.ToLower()).FirstOrDefault();
                 if (baseLayout != null)
                 {
+                    Dictionary<int, string> ExportedModulesContent = new Dictionary<int, string>();
                     string Theme = Core.Managers.ThemeManager.CurrentTheme.Name;
                     ExportTemplate exportTemplate = new ExportTemplate
                     {
@@ -578,6 +579,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     layout.StyleJSON = PageManager.DeTokenizeLinks(baseLayout.StyleJSON.ToString(), portalID);
                     layout.Type = baseLayout.Type;
                     exportTemplate.Templates.Add(layout);
+                    PageManager.ProcessPortableModules(portalID, layout.Content, ExportedModulesContent);
                     string serializedExportTemplate = JsonConvert.SerializeObject(exportTemplate);
                     if (!string.IsNullOrEmpty(serializedExportTemplate))
                     {
@@ -587,7 +589,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                             using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                             {
                                 AddZipItem("Template.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
-
+                                foreach (var exportedModuleContent in ExportedModulesContent)
+                                    AddZipItem("PortableModules/" + exportedModuleContent.Key + ".json", Encoding.ASCII.GetBytes(exportedModuleContent.Value), zip);
                                 if (Assets != null && Assets.Count > 0)
                                 {
                                     foreach (KeyValuePair<string, string> asset in Assets)
