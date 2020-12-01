@@ -519,8 +519,12 @@ $(document).ready(function () {
 											if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
 												ShowNotification('', VjLocalized.PagePublished, 'success');
 										}
-										else
+										else if (jqXHR.Message != undefined && jqXHR.Message != '')
 											ShowNotification('', jqXHR.Message, 'error');
+
+										if (jqXHR.SaveContentNotification != undefined && jqXHR.SaveContentNotification != '') {
+											eval(jqXHR.SaveContentNotification);
+										}
 									},
 									params: {
 										EntityID: data.EntityID,
