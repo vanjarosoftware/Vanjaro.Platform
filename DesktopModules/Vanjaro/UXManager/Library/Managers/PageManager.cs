@@ -296,10 +296,19 @@ namespace Vanjaro.UXManager.Library
                     string param = string.Empty;
                     foreach (string q in Context.Request.QueryString.AllKeys)
                     {
-
-                        if ((!string.IsNullOrEmpty(q) && q.ToLower() != "language" && q.ToLower() != "tabid") || string.IsNullOrEmpty(q))
+                        if (!string.IsNullOrEmpty(q) && q.ToLower() != "language" && q.ToLower() != "tabid")
                         {
                             param += ("&" + q + "=" + Context.Request.QueryString[q]);
+                        }
+                    }
+
+                    foreach (string q in Context.Request.QueryString.AllKeys)
+                    {
+                        if (string.IsNullOrEmpty(q))
+                        {
+                            string Value = Context.Request.QueryString[q].ToString();
+                            Value = Value.Contains(",") ? Value.Split(',')[0] : Value;
+                            param += ("&" + q + "=" + Value);
                         }
                     }
                     QueryParameters = param + QueryParameters;
