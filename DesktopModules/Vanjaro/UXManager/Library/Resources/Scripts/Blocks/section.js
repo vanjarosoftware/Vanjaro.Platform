@@ -98,7 +98,11 @@
 					br: 0, // Bottom right
 					keyHeight: 'min-height',
 				},
-				traits: [{
+                traits: [{
+                    label: "Id",
+                    name: "id",
+                    type: 'text',
+                },{
 					label: "Type",
 					name: "type",
 					type: 'select',

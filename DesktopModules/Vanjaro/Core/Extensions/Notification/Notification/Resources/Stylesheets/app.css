@@ -10,7 +10,7 @@
     cursor: pointer;
 }
 
-.Notification span.author_name {
+.Notification span.author_name, div.author_name {
     padding-top: 5px;
     display: block;
     font-size: 12px;
@@ -52,15 +52,16 @@ div.uitab.notificationtab a {
 
 .Notification .vanjaro-users {
     padding: 5px;
+    position: relative;
     white-space: pre-line;
     font-size: 12px;
-    margin-top: -32px;
+    margin-top: -60px;
     line-height: 16px;
     color: #777;
 }
 
 .Notification span.author_name.author_sub {
-    width: 192px;
+    width: 220px;
     height: 19px;
     white-space: nowrap;
     overflow: hidden;
@@ -100,20 +101,20 @@ div.uitab.notificationtab a {
 
 .Notification table {
     border-collapse: separate;
-    border-spacing: 0 10px;
+    border-spacing: 0 5px;
     overflow: hidden;
 }
 
-    .Notification table thead,
-    .Notification table tfoot {
+    .Notification table thead {
         display: none;
     }
 
 .userinfo {
     border-top: 1px solid #ccc;
+    margin-bottom: 4px;
 }
 
-.vj-ux-manager .Notification .table td {
+.vj-ux-manager .Notification .table tbody td {
     border: 1px solid #dee2e6 !important;
 }
 
@@ -135,10 +136,15 @@ div.uitab.notificationtab a {
 }
 
 .senderavatar img.img-responsive {
-    width: 65px;
+    width: 42px;
+    height: 42px;
     margin-right: 10px;
 }
 /*Notification*/
+.Notification .senderinfo {
+    width: calc(100% - 58px );
+}
+
 .Notification ul.Notifications {
     list-style: none;
     padding: 0 10px;
@@ -166,4 +172,39 @@ span.notificationname {
     font-size: 15px;
     font-weight: bold;
     line-height: 20px;
+}
+
+.Notification .dismiss-action {
+    bottom: 5px;
+    right: 5px;
+}
+
+.Notification .display-date {
+    position: absolute;
+    bottom: 19px;
+    right: 5px;
+}
+
+.Notification .pagination {
+    justify-content: center;
+}
+
+.Notification .author_name span.senderdisplayname {
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.Notification .vanjaro-users .notification-details {
+    width: 210px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.Notification .vanjaro-users .notification-date {
+    display: none;
 }

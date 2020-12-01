@@ -43,7 +43,7 @@ namespace Vanjaro.UXManager.Library
                         if (mItem.SettingGuid != Guid.Empty && mItem.ToolbarAction != null && mItem.ToolbarAction.ContainsKey(MenuAction.onClick))
                         {
                             if (!mItem.ToolbarAction[MenuAction.onClick].StartsWith("http"))
-                                sb.Append(string.Format(@"<li data-toggle='tooltip' title='{2}' data-placement='top' class='{2}' onclick='{0}' guid='{3}'>" + icon + "", mItem.ToolbarAction[MenuAction.onClick], mItem.Width, name, mItem.SettingGuid.ToString().ToLower()));
+                                sb.Append(string.Format(@"<li data-toggle='tooltip' title='{2}' data-placement='top' class='{4}' onclick='{0}' guid='{3}'>" + icon + "", mItem.ToolbarAction[MenuAction.onClick], mItem.Width, name, mItem.SettingGuid.ToString().ToLower(), name.Replace(" ", "")));
                             else
                             {
                                 sb.Append(string.Format(@"<li data-toggle='tooltip' title='{2}' data-placement='top' guid='{3}'><a href='{0}' data-url='{0}' data-width=''{1}''>" + icon + "</a>", mItem.ToolbarAction[MenuAction.onClick], mItem.Width, name, mItem.SettingGuid.ToString().ToLower()));
