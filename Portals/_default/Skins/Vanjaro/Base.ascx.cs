@@ -157,8 +157,13 @@ namespace Vanjaro.Skin
 
         private void InjectThemeJS()
         {
-            if (Core.Managers.ThemeManager.CurrentTheme.HasThemeJS())
-                ClientResourceManager.RegisterScript(Page, Page.ResolveUrl(Core.Managers.ThemeManager.CurrentTheme.ThemeJS));
+            if (string.IsNullOrEmpty(Request.QueryString["mid"]) || (!string.IsNullOrEmpty(Request.QueryString["icp"]) && bool.Parse(Request.QueryString["icp"]) && (!string.IsNullOrEmpty(Request.QueryString["mid"]) && Request.QueryString["mid"] != "0")))
+            {
+                if (File.Exists(HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/theme.editor.js")))
+                    ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/Portals/" + PortalSettings.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/theme.editor.js"));
+            }
+            if (ThemeManager.CurrentTheme.HasThemeJS())
+                ClientResourceManager.RegisterScript(Page, Page.ResolveUrl(ThemeManager.CurrentTheme.ThemeJS));
         }
 
         private void InjectThemeScripts()

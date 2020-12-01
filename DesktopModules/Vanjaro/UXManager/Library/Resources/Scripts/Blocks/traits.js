@@ -840,10 +840,20 @@ export default (editor, config = {}) => {
 
 			$(event.target.parentElement).find("input:checked").not(event.target).prop('checked', false);
 
-			if (component.getTrait(event.target.name).attributes.UpdateStyles)
-				UpdateStyles(elInput, component, event, component);
-			else if (component.getTrait(event.target.name).attributes.SwitchClass)
-				SwitchClass(elInput, component, event, component);
+			var model = component;
+			var trait = component.getTrait(event.target.name);
+
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector);
+
+			$(model).each(function (index, item) {
+
+				if (trait.attributes.UpdateStyles)
+					UpdateStyles(elInput, item, event, component);
+				else if (trait.attributes.SwitchClass)
+					SwitchClass(elInput, item, event, component);
+
+			});
 		}
 	});
 
@@ -1290,10 +1300,20 @@ export default (editor, config = {}) => {
 
 			}
 
-			if (component.getTrait(event.target.name).attributes.UpdateStyles)
-				UpdateStyles(elInput, component, event, component);
-			else if (component.getTrait(event.target.name).attributes.SwitchClass)
-				SwitchClass(elInput, component, event, component);
+			var model = component;
+			var trait = component.getTrait(event.target.name);
+
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector);
+
+			$(model).each(function (index, item) {
+
+				if (trait.attributes.UpdateStyles)
+					UpdateStyles(elInput, item, event, component);
+				else if (trait.attributes.SwitchClass)
+					SwitchClass(elInput, item, event, component);
+
+			});
 
 			if (component.attributes.type == "column" && component.components().length == 0)
 				$(component.getEl()).attr("data-empty", "true");
@@ -1500,10 +1520,6 @@ export default (editor, config = {}) => {
 				$(event.target).parents(".color-wrapper").find(".colorPicker").css("background-color", "transparent");
 				$(event.target).parents(".color-wrapper").find(".active").removeClass("active");
 				$(event.target.nextElementSibling).addClass("active");
-
-				//var style = item.getStyle();
-				//style["background-color"] = "transparent";
-				//item.setStyle(style);
 
 				SwitchClass(elInput, item, event, component);
 
@@ -1880,7 +1896,6 @@ export default (editor, config = {}) => {
 	});
 
 	tm.addType('preset_radio', {
-
 		createInput({ trait }) {
 
 			var targetName = trait.target.attributes.type;
