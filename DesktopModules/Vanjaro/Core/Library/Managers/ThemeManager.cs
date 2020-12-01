@@ -116,6 +116,7 @@ namespace Vanjaro.Core
             public static void ProcessScss(int PortalID, bool CheckVisibilityPermission)
             {
                 StringBuilder sb = new StringBuilder();
+                StringBuilder themeEditorJs = new StringBuilder();
                 string ThemeName = GetCurrent(PortalID).Name;
                 string BootstrapPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/bootstrap.scss");
                 string BeforePath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Before.scss");
@@ -175,6 +176,10 @@ namespace Vanjaro.Core
                                     {
                                         Css.Add(sass + ';');
                                     }
+                                    if (ctl.JavascriptVariable != null && !string.IsNullOrEmpty(ctl.JavascriptVariable.Value) && !string.IsNullOrEmpty(DefaultValue))
+                                    {
+                                        themeEditorJs.Append(ctl.JavascriptVariable.ToString() + ":'" + DefaultValue + "',");
+                                    }
                                 }
                             }
                         }
@@ -200,6 +205,7 @@ namespace Vanjaro.Core
                     sb.Append(File.ReadAllText(AfterPath));
                 }
 
+                bool IncrementCrmVersion = false;
                 if (sb.Length > 0)
                 {
                     string ThemeCss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + ThemeName + "/Theme.css");
@@ -214,8 +220,27 @@ namespace Vanjaro.Core
 
                     CompilationResult result = SassCompiler.Compile(sb.ToString(), HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/"));
                     File.WriteAllText(ThemeCss, result.CompiledContent);
-                    PortalController.IncrementCrmVersion(PortalID);
+                    IncrementCrmVersion = true;
                 }
+
+                if (themeEditorJs.Length > 0)
+                {
+                    string ThemeJs = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + ThemeName + "/theme.editor.js");
+                    if (!File.Exists(ThemeJs))
+                    {
+                        File.Create(ThemeJs).Dispose();
+                    }
+                    else
+                    {
+                        File.Copy(ThemeJs, ThemeJs.Replace("theme.editor.js", "theme.editor.backup.js"), true);
+                    }
+                    string themeEditorJsStr = "var vjthemeeditor={" + themeEditorJs.ToString().TrimEnd(',') + "};";
+                    File.WriteAllText(ThemeJs, themeEditorJsStr);
+                    IncrementCrmVersion = true;
+                }
+
+                if (IncrementCrmVersion)
+                    PortalController.IncrementCrmVersion(PortalID);
             }
 
             [DllImport("kernel32")]
