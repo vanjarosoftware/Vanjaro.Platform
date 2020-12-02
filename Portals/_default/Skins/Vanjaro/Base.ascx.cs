@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.UI;
@@ -52,9 +53,7 @@ namespace Vanjaro.Skin
         protected override void OnPreRender(EventArgs e)
         {
             HandleAppSettings();
-
             RemoveDNNDependencies();
-            ResetTheme();
         }
 
         private void RemoveDNNDependencies()
@@ -72,6 +71,7 @@ namespace Vanjaro.Skin
 
         protected override void OnInit(EventArgs e)
         {
+            ResetTheme();
             if (Request.QueryString["m2v"] != null)
                 m2v = Convert.ToBoolean(Request.QueryString["m2v"]);
 
@@ -859,12 +859,8 @@ namespace Vanjaro.Skin
                 string ThemeName = Core.Managers.ThemeManager.GetCurrent(PortalSettings.Current.PortalId).Name;
                 string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/editor");
                 string ThemeCss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/Theme.css");
-                if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))
-                {
-                    ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);
-                    Config.Touch();
-                    Response.Redirect(NavigationManager.NavigateURL(PortalSettings.Current.ActiveTab.TabID));
-                }
+                if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))                
+                    ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);  
             }
             catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
         }
@@ -875,14 +871,14 @@ namespace Vanjaro.Skin
             string PortalRoot = PageManager.GetPortalRoot(PortalSettings.Current.PortalId);
             PortalRoot = PortalRoot + "/";
             string SocialSharingLogo = PortalRoot + PortalController.GetPortalSetting("SocialSharingLogo", PortalSettings.Current.PortalId, "", PortalSettings.CultureCode);
-            string HomeScreenIcon = PortalRoot + PortalController.GetPortalSetting("HomeScreenIcon", PortalSettings.Current.PortalId, "", PortalSettings.CultureCode);          
+            string HomeScreenIcon = PortalRoot + PortalController.GetPortalSetting("HomeScreenIcon", PortalSettings.Current.PortalId, "", PortalSettings.CultureCode);
             if (!string.IsNullOrEmpty(SocialSharingLogo))
             {
                 HtmlMeta Link = new HtmlMeta();
-                Link.ID = "SocialSharingLogo";             
+                Link.ID = "SocialSharingLogo";
                 Link.Attributes.Add("property", "og:image");
                 Link.Attributes.Add("content", SocialSharingLogo);
-                Page.Header.Controls.Add(Link);               
+                Page.Header.Controls.Add(Link);
             }
             if (!string.IsNullOrEmpty(HomeScreenIcon))
             {
