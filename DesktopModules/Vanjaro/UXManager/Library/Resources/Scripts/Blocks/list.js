@@ -175,7 +175,7 @@ export default (editor, config = {}) => {
                             { name: 'px', min: 10, max: 100, step: 1, value: 16 },
                             { name: 'vw', min: 0.5, max: 10, step: 0.1, value: 1 },
                         ],
-                        unit: "px",
+						unit: "vw",
                         changeProp: 1,
                     }, {
 					label: "Color",
