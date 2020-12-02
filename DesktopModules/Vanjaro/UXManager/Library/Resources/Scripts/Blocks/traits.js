@@ -205,18 +205,18 @@ export default (editor, config = {}) => {
 				}
 
 				if (comp.getTrait("stylee").getInitValue() == "outline") {
-					style["border-color"] = color + " !important";
-					style["color"] = color + " !important";
+					style["border-color"] = color;
+					style["color"] = color;
 				}
 				else if (comp.getTrait("stylee").getInitValue() == "fill") {
 					$(property).each(function (index, value) {
-						style[value.name] = color + " !important";
+						style[value.name] = color;
 					});
 				}
 			}
 			else {
 				$(property).each(function (index, value) {
-					style[value.name] = color + " !important";
+					style[value.name] = color;
 				});
 			}
 
