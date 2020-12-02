@@ -1,4 +1,4 @@
-﻿export default (editor, config = {}) => {
+export default (editor, config = {}) => {
 	const c = config;
 	let bm = editor.BlockManager;
   
@@ -166,23 +166,18 @@
 					],
 					value: "none",
 					changeProp: 1,
-				}, {
-					label: "Font Size",
-					name: "fontsize",
-					type: "custom_range",
-					cssproperties: [{ name: "font-size" }],
-					unitOptions: true,
-					units: [
-						{ name: 'px' },
-						{ name: '%' },
-						{ name: 'em' }
-					],
-					unit: "px",
-					min: "10",
-					max: "100",
-					value: "16",
-					changeProp: 1,
-				}, {
+                    }, {
+                        label: "Font Size",
+                        name: "fontsize",
+                        type: "custom_range",
+                        cssproperties: [{ name: "font-size" }],
+                        units: [
+                            { name: 'px', min: 10, max: 100, step: 1, value: 16 },
+                            { name: 'vw', min: 0.5, max: 10, step: 0.1, value: 1 },
+                        ],
+						unit: "vw",
+                        changeProp: 1,
+                    }, {
 					label: "Color",
 					name: "color",
 					type: 'custom_color',

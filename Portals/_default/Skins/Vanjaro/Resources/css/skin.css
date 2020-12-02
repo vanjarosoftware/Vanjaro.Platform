@@ -536,13 +536,13 @@ Theme.css end
 .vj-heading {
     display: block;
     text-align: left;
-    font-size: 32px;
+    font-size: 2vw;
 }
 
 .vj-text {
     display: block;
     text-align: left;
-    font-size: 16px;
+    font-size: 1vw;
 }
 
 .vj-image-gallery-item {
