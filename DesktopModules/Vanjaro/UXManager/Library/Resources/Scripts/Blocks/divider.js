@@ -57,7 +57,7 @@ export default (editor, config = {}) => {
 							{ name: "width" }
 						],
                         units: [
-							{ name: 'px', min: 10, max: 1980, step: 1, value: 100 },
+							{ name: 'px', min: 10, max: 1920, step: 1, value: 100 },
                             { name: '%', min: 1, max: 100, step: 1, value: 100 },
                         ],
 						unit: "%",
