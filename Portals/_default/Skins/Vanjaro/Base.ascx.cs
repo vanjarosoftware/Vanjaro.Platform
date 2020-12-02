@@ -85,6 +85,7 @@ namespace Vanjaro.Skin
             MigratePage();
 
             InjectViewport();
+            HomeLogoAndSiteIcons();
 
             GetCookieConsentMarkup();
 
@@ -197,7 +198,8 @@ namespace Vanjaro.Skin
             {
                 ID = "Vanjaro_Viewport",
                 Name = "viewport",
-                Content = "width=device-width, initial-scale=1, minimum-scale=1"
+                Content = "width=device-width, initial-scale=1, minimum-scale=1",
+
             };
             //if (Viewport)
             //tagKeyword.Content += " user-scalable=1";
@@ -865,6 +867,31 @@ namespace Vanjaro.Skin
                 }
             }
             catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
+        }
+
+
+        private void HomeLogoAndSiteIcons()
+        {
+            string PortalRoot = PageManager.GetPortalRoot(PortalSettings.Current.PortalId);
+            PortalRoot = PortalRoot + "/";
+            string SocialSharingLogo = PortalRoot + PortalController.GetPortalSetting("SocialSharingLogo", PortalSettings.Current.PortalId, "", PortalSettings.CultureCode);
+            string HomeScreenIcon = PortalRoot + PortalController.GetPortalSetting("HomeScreenIcon", PortalSettings.Current.PortalId, "", PortalSettings.CultureCode);          
+            if (!string.IsNullOrEmpty(SocialSharingLogo))
+            {
+                HtmlMeta Link = new HtmlMeta();
+                Link.ID = "SocialSharingLogo";             
+                Link.Attributes.Add("property", "og:image");
+                Link.Attributes.Add("content", SocialSharingLogo);
+                Page.Header.Controls.Add(Link);               
+            }
+            if (!string.IsNullOrEmpty(HomeScreenIcon))
+            {
+                HtmlGenericControl Link = new HtmlGenericControl("link");
+                Link.ID = "HomeScreenIcon";
+                Link.Attributes["rel"] = "apple-touch-icon";
+                Link.Attributes["href"] = HomeScreenIcon;
+                Page.Header.Controls.Add(Link);
+            }
         }
 
         private void HandleAppSettings()

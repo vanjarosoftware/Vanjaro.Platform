@@ -2587,6 +2587,8 @@ function RunSaveCommand() {
     editor.StorageManager.getStorages().remote.attributes.params.IsPublished = false;
     $('#VJBtnPublish').addClass('disabled');
     $($('.panelheader .blockItem')[1]).click();
+    editor.StorageManager.getStorages().remote.attributes.params.Comment = "";
+    $('#VJReviewComment', parent.document).val('');
 };
 
 global.ToggleBlockType = function (e, type) {
