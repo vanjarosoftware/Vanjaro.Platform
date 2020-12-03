@@ -18,6 +18,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Configuration;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
@@ -779,6 +780,16 @@ namespace Vanjaro.Core
                 return "[G]Skins/Vanjaro/Base.ascx" == PortalController.GetPortalSetting("DefaultPortalSkin", PortalID, Null.NullString);
             }
 
+            public static void UpdateConfig(string Section, string Key, string Value)
+            {
+                var config = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
+                var section = (MembershipSection)config.GetSection(Section);
+
+                var defaultProvider = section.DefaultProvider;
+                var providerSettings = section.Providers[defaultProvider];
+                providerSettings.Parameters.Set(Key, Value.ToLower());
+                config.Save();
+            }
         }
         private class ModuleSettings
         {

@@ -1,5 +1,4 @@
 ﻿using Dnn.PersonaBar.Security.Components;
-using Dnn.PersonaBar.Security.Services.Dto;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Host;
@@ -214,6 +213,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
                     ActionResult.AddError("userEmailAsUsername", DotNetNuke.Services.Localization.Localization.GetString(Constants.ContainsDuplicateAddresses, Constants.LocalResourcesFile));
                     return ActionResult;
                 }
+
                 string setting = request.RegistrationFields;
                 PortalInfo portalInfo = PortalController.Instance.GetPortal(portalSettings.PortalId);
                 portalInfo.UserRegistration = Convert.ToInt32(request.UserRegistration);
@@ -234,6 +234,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
                 PortalController.UpdatePortalSetting(portalSettings.PortalId, "Security_RequireValidProfile", request.RequireValidProfile.ToString(), false);
                 PortalController.UpdatePortalSetting(portalSettings.PortalId, "Security_CaptchaRegister", request.UseCaptchaRegister.ToString(), false);
                 PortalController.UpdatePortalSetting(portalSettings.PortalId, "Redirect_AfterRegistration", request.RedirectAfterRegistrationTabId.ToString(), false, LocaleController.Instance.GetCurrentLocale(portalSettings.PortalId).Code, false);
+                                
+                Core.Managers.SettingManager.UpdateConfig("system.web/membership", "requiresUniqueEmail", userEmailAsUsername.ToString());
             }
             catch (Exception ex)
             {
