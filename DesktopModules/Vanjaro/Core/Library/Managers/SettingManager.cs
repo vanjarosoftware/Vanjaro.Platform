@@ -99,6 +99,8 @@ namespace Vanjaro.Core
                             DeleteTabs();
                             MoveFavicon();
                             DeleteDefaultMemberProfileProperties();
+                            if (Managers.SettingManager.IsDistribution(0))
+                                Managers.SettingManager.UpdateConfig("system.web/membership", "requiresUniqueEmail", "true");
                         }
 
 
@@ -148,6 +150,24 @@ namespace Vanjaro.Core
                             HostController.Instance.Update("DisableEditBar", "False");
                         }
                         break;
+                }
+            }
+
+            internal static void UpdateSettingWebConfig()
+            {
+                int Index = 0;
+                foreach (PortalInfo pinfo in PortalController.Instance.GetPortals())
+                {
+                    try
+                    {
+                        if (Index == 0 && IsDistribution(pinfo.PortalID))
+                            UpdateConfig("system.web/membership", "requiresUniqueEmail", "true");
+                    }
+                    catch (Exception ex)
+                    {
+                        DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    }
+                    Index++;
                 }
             }
 

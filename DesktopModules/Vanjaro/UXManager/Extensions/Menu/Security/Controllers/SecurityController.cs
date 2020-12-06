@@ -234,8 +234,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
                 PortalController.UpdatePortalSetting(portalSettings.PortalId, "Security_RequireValidProfile", request.RequireValidProfile.ToString(), false);
                 PortalController.UpdatePortalSetting(portalSettings.PortalId, "Security_CaptchaRegister", request.UseCaptchaRegister.ToString(), false);
                 PortalController.UpdatePortalSetting(portalSettings.PortalId, "Redirect_AfterRegistration", request.RedirectAfterRegistrationTabId.ToString(), false, LocaleController.Instance.GetCurrentLocale(portalSettings.PortalId).Code, false);
-                                
-                Core.Managers.SettingManager.UpdateConfig("system.web/membership", "requiresUniqueEmail", userEmailAsUsername.ToString());
             }
             catch (Exception ex)
             {
