@@ -769,13 +769,13 @@ namespace Vanjaro.Skin
             {
                 page = PageManager.GetByVersion(PortalSettings.ActiveTab.TabID, Convert.ToInt32(Request.QueryString["revisionversion"]), PageManager.GetCultureCode(PortalSettings));
             }
-            else if (!string.IsNullOrEmpty(Request.QueryString["uxmode"]) && Convert.ToBoolean(Request.QueryString["uxmode"]))
+            else if (!string.IsNullOrEmpty(Request.QueryString["InitGrapejs"]) && Convert.ToBoolean(Request.QueryString["InitGrapejs"]))
             {
-                page = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, true, PageManager.GetCultureCode(PortalSettings), true);
+                page = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, PageManager.GetCultureCode(PortalSettings));
             }
             else
             {
-                page = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, PageManager.GetCultureCode(PortalSettings));
+                page = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, true, PageManager.GetCultureCode(PortalSettings), true);
             }
 
             return page;
