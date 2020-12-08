@@ -779,14 +779,10 @@ namespace Vanjaro.Core
 
                 return FolderPath + "\\theme.json";
             }
-
-            private static bool HasAccessIOAuthClient()
-            {
-                return HasAccessIOAuthClient(PortalController.Instance.GetCurrentSettings().PortalId);
-            }
+                     
             private static bool HasAccessIOAuthClient(int PortalID)
             {
-                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.IOAuthClient_Extension, PortalID.ToString());
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.IOAuthClient_Extension, PortalID);
                 List<IOAuthClient> OAuthClient = CacheFactory.Get(CacheKey);
                 if (OAuthClient == null)
                 {
