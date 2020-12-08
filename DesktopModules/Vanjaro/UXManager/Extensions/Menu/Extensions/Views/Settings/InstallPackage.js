@@ -36,26 +36,6 @@
 
     $scope.Description = function (description) {
         return $sce.trustAsHtml(description);
-    };
-
-    $scope.Click_Download = function () {
-        var List = {
-            Uri: ["https://www.mandeeps.com/Portals/0/Mandeeps.png","https://www.mandeeps.com/Downloads/Latest/Modules/Install/Live%20Articles_v3.3.4_Extract%20Me.zip"]
-        };
-
-        common.webApi.get('InstallPackage/download', 'Data=' + JSON.stringify(List)).success(function (Response) {
-
-            if (Response === Response.Success) {
-                $scope.Click_InstallPackage();
-            }
-            else {
-                CommonSvc.SweetAlert.swal(Response.Error);
-            }
-        });
-    }
-
-    $scope.Click_InstallPackage = function () {
-        parent.OpenPopUp(null, 600, 'center', 'Install', "#/installpackage", 600);
-    };   
+    };    
 
 });

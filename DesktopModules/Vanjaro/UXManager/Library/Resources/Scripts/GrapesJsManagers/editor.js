@@ -30,58 +30,82 @@ $(document).ready(function () {
 
 	if (typeof TemplateLibraryURL != 'undefined' && TemplateLibraryURL != '') {
 
-		window.addEventListener('message', event => {
+        window.addEventListener('message', event => {
 
-			if (TemplateLibraryURL.startsWith(event.origin)) {
+            if (TemplateLibraryURL.startsWith(event.origin)) {
 
-				if (typeof event.data != 'undefined') {
+                if (typeof event.data != 'undefined') {
 
-					if (typeof event.data.action != 'undefined') {
+                    if (typeof event.data.action != 'undefined') {
 
-						if (event.data.action == 'preview-open')
-							$('#UXpagerender').addClass('preview-open')
-						else
-							$('#UXpagerender').removeClass('preview-open');
-					}
-					else {
-						var templatePath = '';
+                        if (event.data.action == 'preview-open')
+                            $('#UXpagerender').addClass('preview-open')
+                        else
+                            $('#UXpagerender').removeClass('preview-open');
+                    }
+                    else {
+                        var templatePath = '';
 
-						if (!event.data.startsWith(event.origin))
-							templatePath = event.origin + '/' + event.data;
-						else
-							templatePath = event.data;
+                        if (!event.data.startsWith(event.origin))
+                            templatePath = event.origin + '/' + event.data;
+                        else
+                            templatePath = event.data;
 
-						var sf = $.ServicesFramework(-1);
+                        var sf = $.ServicesFramework(-1);
 
-						$.ajax({
-							type: "Post",
-							url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/ImportCustomBlock?TemplatePath=" + templatePath,
-							headers: {
-								'ModuleId': parseInt(sf.getModuleId()),
-								'TabId': parseInt(sf.getTabId()),
-								'RequestVerificationToken': sf.getAntiForgeryValue()
-							},
-							success: function (data) {
+                        $.ajax({
+                            type: "Post",
+                            url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/ImportCustomBlock?TemplatePath=" + templatePath,
+                            headers: {
+                                'ModuleId': parseInt(sf.getModuleId()),
+                                'TabId': parseInt(sf.getTabId()),
+                                'RequestVerificationToken': sf.getAntiForgeryValue()
+                            },
+                            success: function (data) {
 
-								if (data.html != '') {
+                                if (data.html != '') {
 
-									var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
-										content: data.Html + '<style>' + data.Css + '</style>',
-										attributes: {
-											class: 'fas fa-th-large floating',
-											id: 'LibraryBlock'
-										}
-									});
+                                    var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
+                                        content: data.Html + '<style>' + data.Css + '</style>',
+                                        attributes: {
+                                            class: 'fas fa-th-large floating',
+                                            id: 'LibraryBlock'
+                                        }
+                                    });
 
-									var block = VjEditor.BlockManager.render(LibraryBlock);
-									$(window.document.body).append(block).find('[data-dismiss="modal"]').click();
-								}
-							}
-						});
-					}
-				}
-			}
-		});
+                                    var block = VjEditor.BlockManager.render(LibraryBlock);
+                                    $(window.document.body).append(block).find('[data-dismiss="modal"]').click();
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+            else if (ExtensionStoreURL.startsWith(event.origin)) {
+                if (typeof event.data != 'undefined') {
+                    if (typeof event.data.action != 'undefined' && event.data.action == 'DownloadPackage') {
+                        var sf = $.ServicesFramework(-1);
+                        var PackageData = {
+                            Packages: JSON.stringify(event.data.data)
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Extensions") + "InstallPackage/Download",
+                            data: PackageData,
+                            headers: {
+                                'ModuleId': parseInt(sf.getModuleId()),
+                                'TabId': parseInt(sf.getTabId()),
+                                'RequestVerificationToken': sf.getAntiForgeryValue()
+                            },
+                            success: function (data) {
+                                $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                                parent.OpenPopUp(null, 600, 'center', 'Install', "http://dev.vanjaro.local/home/mid/0/icp/true/guid/54caeff2-9fac-42ae-8594-40312867d56a#/installpackage", 800);
+                            }
+                        });
+                    }
+                }
+            }
+        });
 	}
 
 	$(".pubish-btn").click(function (e) {

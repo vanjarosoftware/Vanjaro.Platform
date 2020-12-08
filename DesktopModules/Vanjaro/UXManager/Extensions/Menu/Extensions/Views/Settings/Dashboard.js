@@ -142,6 +142,6 @@
     };
 
     $scope.Click_InstallPackage = function () {
-        parent.OpenPopUp(null, 1200, 'center', 'Install Extension', '~' + $scope.ui.data.ExtensionLibraryURL.Value, '800');
+        parent.OpenPopUp(null, 1200, 'center', 'Install Extension', window.parent.ExtensionStoreURL, '800');
     };
 });

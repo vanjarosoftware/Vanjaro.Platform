@@ -12,6 +12,9 @@ using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Library.Common;
 using Newtonsoft.Json.Linq;
+using System.Web;
+using Vanjaro.Core.Components;
+using Newtonsoft.Json;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
 {
@@ -44,27 +47,29 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
             return actionResult;
         }
 
-        [HttpGet]
-        public ActionResult Download(string Data)
+        [HttpPost]
+        public ActionResult Download()
         {
             ActionResult actionResult = new ActionResult();
-            JObject json = JObject.Parse(Data);
-            foreach (string item in json["Uri"])
+            if (HttpContext.Current != null && HttpContext.Current.Request != null && HttpContext.Current.Request.Form != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Form["Packages"]))
             {
-                WebClient webClient = new WebClient();
-
-                try
+                List<StringValue> packages = JsonConvert.DeserializeObject<List<StringValue>>(HttpContext.Current.Request.Form["Packages"]);
+                foreach (StringValue item in packages)
                 {
-                    webClient.DownloadFile(item, Globals.ApplicationMapPath + "\\Install\\Module\\" + Path.GetFileName(item));
+                    WebClient webClient = new WebClient();
 
+                    try
+                    {
+                        webClient.DownloadFile(item.Value, HttpContext.Current.Server.MapPath("\\Install\\Module\\") + Path.GetFileName(item.Text+".zip"));
+                    }
+                    catch (Exception ex)
+                    {
+                        actionResult.HasErrors = true;
+                        actionResult.Data = ex.Message;
+                        return actionResult;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    actionResult.HasErrors = true;
-                    actionResult.Data = ex.Message;
-                    return actionResult;
-                }
-            }
+            }            
             actionResult.IsSuccess = true;
             return actionResult;
         }

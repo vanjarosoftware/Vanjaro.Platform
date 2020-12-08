@@ -28,8 +28,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>
             {
-                { "Extensions", new UIData { Name = "Extensions", Options = Managers.ExtensionsManager.GetAllExtensions(UserInfo, PortalID, true) } },
-                { "ExtensionLibraryURL", new UIData { Name = "ExtensionLibraryURL", Value = VirtualPathUtility.ToAbsolute("~/DesktopModules/Vanjaro/UXManager/Library/Resources/extension.html")} }
+                { "Extensions", new UIData { Name = "Extensions", Options = Managers.ExtensionsManager.GetAllExtensions(UserInfo, PortalID, true) } }
             };
             return Settings.Values.ToList();
         }
