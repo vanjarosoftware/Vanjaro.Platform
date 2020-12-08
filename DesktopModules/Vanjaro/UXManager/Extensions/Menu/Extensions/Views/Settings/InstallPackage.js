@@ -15,7 +15,9 @@
         });
         if (val) {
             common.webApi.get('InstallPackage/install').success(function (Response) {
-
+                var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
+                Parentscope.Click_IsInstall(true);
+                $(window.parent.document.body).find('[data-dismiss="modal"]').click();
             });
         }
     };
