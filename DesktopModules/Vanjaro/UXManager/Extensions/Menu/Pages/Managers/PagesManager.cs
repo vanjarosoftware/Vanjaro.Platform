@@ -598,10 +598,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                                         string FileName = asset.Key.Replace(PageManager.ExportTemplateRootToken, "");
                                         string FileUrl = asset.Value;
                                         if (FileUrl.StartsWith("/"))
-                                        {
                                             FileUrl = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, FileUrl);
+
+                                        try
+                                        {
+                                            AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
                                         }
-                                        AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                        catch (Exception) { }
                                     }
                                 }
                             }
