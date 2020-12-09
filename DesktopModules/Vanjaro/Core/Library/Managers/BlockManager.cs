@@ -407,7 +407,11 @@ namespace Vanjaro.Core
                                         {
                                             FileUrl = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, FileUrl);
                                         }
-                                        AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                        try
+                                        {
+                                            AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                        }
+                                        catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }                                        
                                     }
                                 }
                             }

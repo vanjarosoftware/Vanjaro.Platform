@@ -198,7 +198,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                                     FileUrl = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, FileUrl);
                                 }
                                 if (!FileNames.Contains(FileName))
-                                    AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                {
+                                    try
+                                    {
+                                        AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                    }
+                                    catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
+                                }
                                 FileNames.Add(FileName);
                             }
                         }
