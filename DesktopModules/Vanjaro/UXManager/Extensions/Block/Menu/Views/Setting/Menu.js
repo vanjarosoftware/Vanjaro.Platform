@@ -17,7 +17,7 @@
                 if ($scope.ui.data.GlobalConfigs.Options["data-block-nodeselector"] != "*") {
                     $scope.ui.data.DisplayAllPages.Value = false;
                     var nodeItems = $scope.ui.data.GlobalConfigs.Options["data-block-nodeselector"].split(',');
-                    if (nodeItems[0] == "+*")
+                    if (nodeItems[0] == ".*")
                         $scope.ui.data.RootPages.Value = "0";
                     else if (nodeItems[0] == "+0")
                         $scope.ui.data.RootPages.Value = "1";
@@ -45,7 +45,7 @@
                 if ($scope.CurrentMenu.attributes.attributes["data-block-nodeselector"] != "*") {
                     $scope.ui.data.DisplayAllPages.Value = false;
                     var nodeItems = $scope.CurrentMenu.attributes.attributes["data-block-nodeselector"].split(',');
-                    if (nodeItems[0] == "+*")
+                    if (nodeItems[0] == ".*")
                         $scope.ui.data.RootPages.Value = "0";
                     else if (nodeItems[0] == "+0")
                         $scope.ui.data.RootPages.Value = "1";
@@ -144,7 +144,7 @@
         else {
             var markup = "";
             if ($scope.ui.data.RootPages.Value == "0")
-                markup += "+*";
+                markup += ".*";
             else if ($scope.ui.data.RootPages.Value == "1")
                 markup += "+0";
             else if ($scope.ui.data.RootPages.Value == "2")
@@ -152,9 +152,9 @@
             else
                 markup += $scope.ui.data.Pages.Value;
 
-            if ($scope.ui.data.SkipPages.Value && $scope.ui.data.NoOfPagesSkip.Value != "")
+            if ($scope.ui.data.SkipPages.Value && $scope.ui.data.NoOfPagesSkip.Value != "" && $scope.ui.data.NoOfPagesSkip.Value != null)
                 markup += "," + $scope.ui.data.NoOfPagesSkip.Value;
-            if ($scope.ui.data.LimitDepth.Value && $scope.ui.data.NoOfDepth.Value != "") {
+            if ($scope.ui.data.LimitDepth.Value && $scope.ui.data.NoOfDepth.Value != "" && $scope.ui.data.NoOfDepth.Value != null) {
                 if (markup.indexOf(',') > 0)
                     markup += "," + $scope.ui.data.NoOfDepth.Value;
                 else
