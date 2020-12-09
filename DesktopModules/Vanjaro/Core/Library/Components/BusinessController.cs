@@ -20,7 +20,9 @@ namespace Vanjaro.Core.Components
                 MoveFilesInRoot();
                 Managers.SettingManager.ApplyingSettings(true);
                 Services.Search.SearchEngineScheduler.Install();
-                Components.PageWorkflowPermission.InitTabPermissions();
+                PageWorkflowPermission.InitTabPermissions();
+                Managers.SettingManager.UpdateSettingWebConfig();
+
             }
             else
             {

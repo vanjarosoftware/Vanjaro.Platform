@@ -412,7 +412,7 @@ namespace Vanjaro.Core
             {
                 string ThemeEditorJsonPath = GetThemeEditorJsonPath(PortalID, CategoryGuid, CheckVisibilityPermission);
                 List<string> RemoveFeatureAccess = new List<string>() { };
-                if (!HasAccessIOAuthClient())
+                if (!HasAccessIOAuthClient(PortalID))
                     RemoveFeatureAccess.Add("Social Authentication Buttons");
 
                 if (!File.Exists(ThemeEditorJsonPath))
@@ -779,10 +779,10 @@ namespace Vanjaro.Core
 
                 return FolderPath + "\\theme.json";
             }
-
-            private static bool HasAccessIOAuthClient()
+                     
+            private static bool HasAccessIOAuthClient(int PortalID)
             {
-                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.IOAuthClient_Extension, PortalController.Instance.GetCurrentSettings().PortalId.ToString());
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.IOAuthClient_Extension, PortalID);
                 List<IOAuthClient> OAuthClient = CacheFactory.Get(CacheKey);
                 if (OAuthClient == null)
                 {

@@ -18,6 +18,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Configuration;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
@@ -98,6 +99,8 @@ namespace Vanjaro.Core
                             DeleteTabs();
                             MoveFavicon();
                             DeleteDefaultMemberProfileProperties();
+                            if (Managers.SettingManager.IsDistribution(0))
+                                Managers.SettingManager.UpdateConfig("system.web/membership", "requiresUniqueEmail", "true");
                         }
 
 
@@ -147,6 +150,24 @@ namespace Vanjaro.Core
                             HostController.Instance.Update("DisableEditBar", "False");
                         }
                         break;
+                }
+            }
+
+            internal static void UpdateSettingWebConfig()
+            {
+                int Index = 0;
+                foreach (PortalInfo pinfo in PortalController.Instance.GetPortals())
+                {
+                    try
+                    {
+                        if (Index == 0 && IsDistribution(pinfo.PortalID))
+                            UpdateConfig("system.web/membership", "requiresUniqueEmail", "true");
+                    }
+                    catch (Exception ex)
+                    {
+                        DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    }
+                    Index++;
                 }
             }
 
@@ -779,6 +800,16 @@ namespace Vanjaro.Core
                 return "[G]Skins/Vanjaro/Base.ascx" == PortalController.GetPortalSetting("DefaultPortalSkin", PortalID, Null.NullString);
             }
 
+            public static void UpdateConfig(string Section, string Key, string Value)
+            {
+                var config = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
+                var section = (MembershipSection)config.GetSection(Section);
+
+                var defaultProvider = section.DefaultProvider;
+                var providerSettings = section.Providers[defaultProvider];
+                providerSettings.Parameters.Set(Key, Value.ToLower());
+                config.Save();
+            }
         }
         private class ModuleSettings
         {
