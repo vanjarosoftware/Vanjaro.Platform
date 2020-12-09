@@ -26,7 +26,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>
             {
-                { "PackageList", new UIData { Name = "PackageList", Options = Managers.InstallPackageManager.ParsePackage(PortalSettings, UserInfo) } }
+                { "PackageList", new UIData { Name = "PackageList", Options = Managers.InstallPackageManager.ParsePackage(PortalSettings, UserInfo,HttpContext.Current.Server.MapPath("\\DesktopModules\\Vanjaro\\Temp\\Install\\")) } }
             };
             return Settings.Values.ToList();
         }
@@ -35,7 +35,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
         public ActionResult Install()
         {
             ActionResult actionResult = new ActionResult();
-            Managers.InstallPackageManager.InstallPackage(PortalSettings, UserInfo);
+            Managers.InstallPackageManager.InstallPackage(PortalSettings, UserInfo, HttpContext.Current.Server.MapPath("\\DesktopModules\\Vanjaro\\Temp\\Install\\"));
             return actionResult;
         }
 
@@ -43,7 +43,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
         public ActionResult Delete()
         {
             ActionResult actionResult = new ActionResult();
-            Managers.InstallPackageManager.DeletePackage(PortalSettings, UserInfo);
+            Managers.InstallPackageManager.DeletePackage(HttpContext.Current.Server.MapPath("\\DesktopModules\\Vanjaro\\Temp\\Install\\"));
             return actionResult;
         }
 
@@ -51,6 +51,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
         public ActionResult Download()
         {
             ActionResult actionResult = new ActionResult();
+            string installPackagePath = HttpContext.Current.Server.MapPath("\\DesktopModules\\Vanjaro\\Temp\\Install\\");
+            if (Directory.Exists(installPackagePath))
+                Directory.Delete(installPackagePath, true);
+            if (!Directory.Exists(installPackagePath))
+                Directory.CreateDirectory(installPackagePath);
+
             if (HttpContext.Current != null && HttpContext.Current.Request != null && HttpContext.Current.Request.Form != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Form["Packages"]))
             {
                 List<StringValue> packages = JsonConvert.DeserializeObject<List<StringValue>>(HttpContext.Current.Request.Form["Packages"]);
@@ -60,7 +66,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
 
                     try
                     {
-                        webClient.DownloadFile(item.Value, HttpContext.Current.Server.MapPath("\\Install\\Module\\") + Path.GetFileName(item.Text+".zip"));
+                        webClient.DownloadFile(item.Value, installPackagePath + Path.GetFileName(item.Text + ".zip"));
                     }
                     catch (Exception ex)
                     {
@@ -69,7 +75,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
                         return actionResult;
                     }
                 }
-            }            
+            }
             actionResult.IsSuccess = true;
             return actionResult;
         }

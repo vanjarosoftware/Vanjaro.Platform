@@ -15,10 +15,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
 {
     public class InstallPackageManager
     {
-        public static List<ParseResultDto> ParsePackage(PortalSettings PortalSettings, UserInfo UserInfo)
+        public static List<ParseResultDto> ParsePackage(PortalSettings PortalSettings, UserInfo UserInfo, string installPackagePath)
         {
             List<ParseResultDto> ParseResults = new List<ParseResultDto>();
-            foreach (KeyValuePair<string, PackageInfo> item in GetInstallPackages())
+            foreach (KeyValuePair<string, PackageInfo> item in GetInstallPackages(installPackagePath))
             {
                 using (FileStream stream = new FileStream(item.Key, FileMode.Open))
                 {
@@ -36,9 +36,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
             return ParseResults;
         }
 
-        internal static void InstallPackage(PortalSettings portalSettings, UserInfo userInfo)
+        internal static void InstallPackage(PortalSettings portalSettings, UserInfo userInfo, string installPackagePath)
         {
-            foreach (KeyValuePair<string, PackageInfo> item in GetInstallPackages())
+            foreach (KeyValuePair<string, PackageInfo> item in GetInstallPackages(installPackagePath))
             {
                 using (FileStream stream = new FileStream(item.Key, FileMode.Open))
                 {
@@ -51,35 +51,25 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
                         DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
                     }
                 }
-
             }
         }
 
-        internal static void DeletePackage(PortalSettings portalSettings, UserInfo userInfo)
+        internal static void DeletePackage(string installPackagePath)
         {
-            string installPackagePath = Globals.ApplicationMapPath + "\\Install\\Module";
             if (!Directory.Exists(installPackagePath))
             {
                 return;
             }
-
-            string[] files = Directory.GetFiles(installPackagePath);
-            foreach (string file in files)
-            {
-                if (!File.Exists(file))
-                {
-                    FileWrapper.Instance.Delete(file);
-                }
-            }
+            Directory.Delete(installPackagePath, true);
         }
 
-        public static IDictionary<string, PackageInfo> GetInstallPackages()
+        public static IDictionary<string, PackageInfo> GetInstallPackages(string installPackagePath)
         {
             List<string> invalidPackages = new List<string>();
 
             Dictionary<string, PackageInfo> packages = new Dictionary<string, PackageInfo>();
 
-            ParsePackagesFromApplicationPath(packages, invalidPackages);
+            ParsePackagesFromApplicationPath(packages, invalidPackages, installPackagePath);
 
             //Add packages with no dependency requirements
             Dictionary<string, PackageInfo> sortedPackages = packages.Where(p => p.Value.Dependencies.Count == 0).ToDictionary(p => p.Key, p => p.Value);
@@ -117,10 +107,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
             return sortedPackages;
         }
 
-        private static void ParsePackagesFromApplicationPath(Dictionary<string, PackageInfo> packages, List<string> invalidPackages)
+        private static void ParsePackagesFromApplicationPath(Dictionary<string, PackageInfo> packages, List<string> invalidPackages, string installPackagePath)
         {
 
-            string installPackagePath = Globals.ApplicationMapPath + "\\Install\\Module";
             if (!Directory.Exists(installPackagePath))
             {
                 return;
