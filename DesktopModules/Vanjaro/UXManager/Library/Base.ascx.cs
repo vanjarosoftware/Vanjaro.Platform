@@ -64,7 +64,7 @@ namespace Vanjaro.UXManager.Library
                 m2v = Convert.ToBoolean(Request.QueryString["m2v"]);
             }
 
-            if (CanShowUXManager() || InjectEditor())
+            if (CanShowUXManager())
             {
                 if (string.IsNullOrEmpty(Request.QueryString["ctl"]) && (string.IsNullOrEmpty(Request.QueryString["icp"]) || Convert.ToBoolean(Request.QueryString["icp"]) == false))
                 {
@@ -111,11 +111,6 @@ namespace Vanjaro.UXManager.Library
                     WebForms.LinkCSS(Page, "GrapesJspluginCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJsManagers/css/uxmanager.css"));
                     WebForms.LinkCSS(Page, "FontawesomeV4Css", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/fontawesome/v4.css"));
 
-                    if (!CanShowUXManager())
-                    {
-                        WebForms.RegisterClientScriptBlock(Page, "MenuSettingsBlocks", "$(document).ready(function(){$('[href=\"#MenuSettings\"]').click();$('#mode-switcher').remove();setTimeout(function(){$('.gjs-cv-canvas__frames').css('pointer-events','none');}, 100); });", true);
-                    }
-
                     LocalizeGrapeJS();
 
                     FrameworkManager.Load(this, "FontAwesome");
@@ -143,6 +138,9 @@ namespace Vanjaro.UXManager.Library
                     }
                 }
             }
+            else
+                WebForms.RegisterClientScriptBlock(Page, "MenuSettingsBlocks", "$(document).ready(function(){$('[href=\"#MenuSettings\"]').click();$('#mode-switcher').remove();setTimeout(function(){$('.gjs-cv-canvas__frames').css('pointer-events','none');}, 100); });", true);
+
 
         }
 
@@ -150,7 +148,7 @@ namespace Vanjaro.UXManager.Library
         protected void Page_PreRender(object sender, EventArgs e)
         {
 
-            if (CanShowUXManager())
+            if (InjectEditor())
                 WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined') GrapesjsInit(" + JsonConvert.SerializeObject(Editor.Options) + "); });", true);
         }
 
