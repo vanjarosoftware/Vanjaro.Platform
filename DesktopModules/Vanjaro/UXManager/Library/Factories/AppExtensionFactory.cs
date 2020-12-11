@@ -1,7 +1,10 @@
-﻿using System;
+﻿using DotNetNuke.Entities.Users;
+using DotNetNuke.Security.Permissions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Vanjaro.UXManager.Library.Entities;
 using Vanjaro.UXManager.Library.Entities.Interface;
 
 namespace Vanjaro.UXManager.Library
@@ -23,6 +26,16 @@ namespace Vanjaro.UXManager.Library
                                                                              where t != (typeof(IAppExtension)) && (typeof(IAppExtension).IsAssignableFrom(t))
                                                                              && t != (typeof(IModuleExtension)) && (typeof(IModuleExtension).IsAssignableFrom(t))
                                                                              select Activator.CreateInstance(t) as IAppExtension;                                ServiceInterfaceAssemblies.AddRange(AssembliesToAdd.ToList<IAppExtension>());                            }                            catch { continue; }                        }                        appItems = ServiceInterfaceAssemblies;                        CacheFactory.Set(CacheKey, ServiceInterfaceAssemblies);                    }                    return appItems;                }            }
+
+            internal static string GetAccessRoles(UserInfo UserInfo)
+            {
+                List<string> AccessRoles = new List<string>();
+                if (TabPermissionController.HasTabPermission("EDIT") || !Editor.Options.EditPage)
+                {
+                    AccessRoles.Add("pageedit");
+                }
+                return string.Join(",", AccessRoles.Distinct());
+            }
         }
     }
 }
