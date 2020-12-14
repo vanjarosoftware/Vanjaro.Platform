@@ -20,12 +20,14 @@ using Vanjaro.Core.Entities;
 using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Library.Entities;
 using static Vanjaro.Core.Managers;
+using Vanjaro.Common.ASPNET.WebAPI;
+using Vanjaro.Common.Engines.UIEngine;
 
 namespace Vanjaro.UXManager.Library.Controllers
 {
     [DnnAuthorize]
     [ValidateAntiForgeryToken]
-    public class BlockController : DnnApiController
+    public class BlockController : UIEngineController
     {
         [HttpPost]
         [DnnAdmin]
@@ -56,7 +58,7 @@ namespace Vanjaro.UXManager.Library.Controllers
         }
 
         [HttpGet]
-        [DnnPageEditor]
+        [AuthorizeAccessRoles(AccessRoles = "pageedit")]
         public List<CustomBlock> GetAllCustomBlock()
         {
             return Core.Managers.BlockManager.GetAll(PortalSettings);
@@ -194,6 +196,11 @@ namespace Vanjaro.UXManager.Library.Controllers
             ZipFile.ExtractToDirectory(path + ".zip", path);
             File.Create(path + "/Hash" + TemplateHash + ".txt").Dispose();
             File.Delete(path + ".zip");
+        }
+
+        public override string AccessRoles()
+        {
+            return Factories.AppExtensionFactory.GetAccessRoles(UserInfo);
         }
     }
 }
