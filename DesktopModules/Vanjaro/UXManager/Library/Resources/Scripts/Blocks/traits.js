@@ -1,4 +1,4 @@
-﻿import _ from 'underscore';
+import _ from 'underscore';
 import Grapick from 'grapick';
 export default (editor, config = {}) => {
 
@@ -205,18 +205,18 @@ export default (editor, config = {}) => {
 				}
 
 				if (comp.getTrait("stylee").getInitValue() == "outline") {
-					style["border-color"] = color + " !important";
-					style["color"] = color + " !important";
+					style["border-color"] = color;
+					style["color"] = color;
 				}
 				else if (comp.getTrait("stylee").getInitValue() == "fill") {
 					$(property).each(function (index, value) {
-						style[value.name] = color + " !important";
+						style[value.name] = color;
 					});
 				}
 			}
 			else {
 				$(property).each(function (index, value) {
-					style[value.name] = color + " !important";
+					style[value.name] = color;
 				});
 			}
 
@@ -258,92 +258,49 @@ export default (editor, config = {}) => {
 			var inputRange = elInput.querySelector('.range-wrapper .range');
 			var inputNumber = elInput.querySelector('.range-wrapper .number');
 
-			if (componentType == 'divider' || componentType == 'heading' || componentType == 'text' || componentType == 'button' || componentType == 'list') {
+			if (event.target.classList.contains('range'))
+				inputNumber.value = inputRange.value;
+			else if (event.target.classList.contains('number'))
+				inputRange.value = inputNumber.value;
 
-				if (event.target.name == "width" || event.target.name == "fontsize") {
-					unit = $(".unit-wrapper input.choose-unit:checked").val();
-					component.set({ 'unit': unit });
-				}
+			if (typeof trait.attributes.units != "undefined") {
+				unit = $(".unit-wrapper input.unit:checked").val();
+				component.set({ 'unit': unit });
+			}
 
-				if (event.target.classList.contains('choose-unit')) {
+			if (event.target.classList.contains('unit')) {
 
-					if (unit == "px") {
-						if (componentType == 'divider') {
-							$(inputRange).attr("max", "1920");
-							style["width"] = "100px";
-							inputNumber.value = inputRange.value = "100";
-							trait.setTargetValue('100');
-						}
-						else if (componentType == 'heading') {
-							$(inputRange).attr({ "min": "10", "max": "100", "step": "1" });
-							style["font-size"] = "32px";
-							inputNumber.value = inputRange.value = "32";
-							trait.setTargetValue('32');
-						}
-						else if (componentType == 'text' || componentType == 'button' || componentType == 'list') {
-							$(inputRange).attr({ "min": "10", "max": "100", "step": "1" });
-							style["font-size"] = "16px";
-							inputNumber.value = inputRange.value = "16";
-							trait.setTargetValue('16');
-						}
+				unit = event.target.value;
+				var inputControl = elInput.querySelectorAll('.input-control');
+
+				$(trait.attributes.units).each(function (index, option) {
+					if (option.name == unit) {
+						$(inputControl).attr({
+							'value': option.value,
+							'min': option.min,
+							'max': option.max,
+							'step': option.step
+						});
+
+						$(inputControl).val(option.value);
+						trait.setTargetValue(option.value);
+
+						$(property).each(function (index, item) {
+							style[item.name] = option.value + unit;
+						})
 					}
-					else if (unit == "%") {
-						$(inputRange).attr({ "min": "0", "max": "100", "step": "1" });
-						style["font-size"] = "100%";
-						inputNumber.value = inputRange.value = "100";
-						trait.setTargetValue('100');
-					}
-					else if (unit == "em") {
-						$(inputRange).attr({ "min": ".1", "max": "10", "step": ".1" });
-						style["font-size"] = "1em";
-						inputNumber.value = inputRange.value = "1";
-						trait.setTargetValue('1');
-					}
-				}
-				else {
-					$(property).each(function (index, value) {
-						style[value.name] = val + unit;
-					});
-				}
+				});
+
 			}
 			else {
 				$(property).each(function (index, value) {
 					style[value.name] = val + unit;
 				});
 			}
-
-			if (event.target.className == "range")
-				inputNumber.value = inputRange.value;
-			else if (event.target.className == "number")
-				inputRange.value = inputNumber.value;
-
-			if (componentType == 'image-gallery-item' && (event.target.name == "width" || event.target.name == "height")) {
-
-				var width = "";
-				var height = "";
-
-				if (event.target.name == 'width') {
-					width = inputNumber.value;
-					height = mainComponent.getTrait('height').getInitValue();
-				}
-				else {
-					width = mainComponent.getTrait('width').getInitValue();
-					height = inputNumber.value;
-				}
-
-				$(component.parent().components().models).each(function () {
-					var traitGalleryItem = this.getTrait(event.target.name);
-					traitGalleryItem.set({
-						'value': event.target.value
-					});
-
-					this.setStyle('width:' + width + '; height:' + height + ';');
-				});
-			}
 		}
 		else {
 
-			unit = ""
+			unit = "";
 
 			$(property).each(function (index, value) {
 				style[value.name] = val + unit;
@@ -480,7 +437,7 @@ export default (editor, config = {}) => {
 
 		if (componentType == 'grid')
 			component.components().models[0].setStyle(style);
-		else if (componentType != 'image-gallery-item')
+		else
 			component.setStyle(style);
 	};
 
@@ -840,10 +797,20 @@ export default (editor, config = {}) => {
 
 			$(event.target.parentElement).find("input:checked").not(event.target).prop('checked', false);
 
-			if (component.getTrait(event.target.name).attributes.UpdateStyles)
-				UpdateStyles(elInput, component, event, component);
-			else if (component.getTrait(event.target.name).attributes.SwitchClass)
-				SwitchClass(elInput, component, event, component);
+			var model = component;
+			var trait = component.getTrait(event.target.name);
+
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector);
+
+			$(model).each(function (index, item) {
+
+				if (trait.attributes.UpdateStyles)
+					UpdateStyles(elInput, item, event, component);
+				else if (trait.attributes.SwitchClass)
+					SwitchClass(elInput, item, event, component);
+
+			});
 		}
 	});
 
@@ -1290,10 +1257,20 @@ export default (editor, config = {}) => {
 
 			}
 
-			if (component.getTrait(event.target.name).attributes.UpdateStyles)
-				UpdateStyles(elInput, component, event, component);
-			else if (component.getTrait(event.target.name).attributes.SwitchClass)
-				SwitchClass(elInput, component, event, component);
+			var model = component;
+			var trait = component.getTrait(event.target.name);
+
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector);
+
+			$(model).each(function (index, item) {
+
+				if (trait.attributes.UpdateStyles)
+					UpdateStyles(elInput, item, event, component);
+				else if (trait.attributes.SwitchClass)
+					SwitchClass(elInput, item, event, component);
+
+			});
 
 			if (component.attributes.type == "column" && component.components().length == 0)
 				$(component.getEl()).attr("data-empty", "true");
@@ -1501,10 +1478,6 @@ export default (editor, config = {}) => {
 				$(event.target).parents(".color-wrapper").find(".active").removeClass("active");
 				$(event.target.nextElementSibling).addClass("active");
 
-				//var style = item.getStyle();
-				//style["background-color"] = "transparent";
-				//item.setStyle(style);
-
 				SwitchClass(elInput, item, event, component);
 
 			});
@@ -1521,74 +1494,64 @@ export default (editor, config = {}) => {
 			el.id = trait.attributes.name;
 
 			el.innerHTML = `
-				<input type="range" value="`+ traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="range" /> 
-				<input type="number" value="`+ traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="number" />
+				<input type="range" value="`+ traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="input-control range" /> 
+				<input type="number" value="`+ traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="input-control number" />
 			`;
+			if (typeof trait.attributes.units != "undefined" && trait.attributes.units.length) {
 
-			if (trait.attributes.unitOptions) {
-
-				var div = document.createElement('div');
+				var div = document.createElement("div");
 				div.setAttribute("class", "unit-wrapper");
 
-				$(trait.attributes.units).each(function (index, value) {
+				$(trait.attributes.units).each(function (index, option) {
 					var input = document.createElement('input');
 					var label = document.createElement("label");
 
-					input.setAttribute('class', 'choose-unit');
-					input.setAttribute('type', 'radio');
-					input.setAttribute('name', trait.attributes.name);
-					input.setAttribute('id', 'width' + value.name);
-					input.setAttribute('value', value.name);
+					input.setAttribute("class", "unit");
+					input.setAttribute("type", "radio");
+					input.setAttribute("name", trait.attributes.name);
+					input.setAttribute("id", trait.attributes.name + option.name);
+					input.setAttribute("value", option.name);
 
-					label.setAttribute('for', 'width' + value.name);
-					label.innerHTML = value.name;
+					label.setAttribute("for", trait.attributes.name + option.name);
+					label.innerHTML = option.name;
 
 					div.appendChild(input);
 					div.appendChild(label);
-
 				});
 
 				el.appendChild(div);
+			}
 
-				var unitVal = trait.target.attributes.unit;
 
-				if (typeof unitVal == "undefined") {
-					if (trait.target.attributes.type == 'heading' || trait.target.attributes.type == 'text' || trait.target.attributes.type == 'button' || trait.target.attributes.type == 'list')
-						unitVal = "px";
-					else if (trait.target.attributes.type == "divider")
-						unitVal = "%";
+			var unit = trait.target.attributes.unit;
+
+			if (typeof unit == "undefined")
+				unit = trait.attributes.unit;
+
+			var inputControl = el.querySelectorAll('.input-control');
+			var inputUnit = el.querySelectorAll('.unit');
+
+			$(trait.attributes.units).each(function (index, option) {
+
+				if (option.name == unit) {
+					$(inputControl).attr({
+						'value': option.value,
+						'min': option.min,
+						'max': option.max,
+						'step': option.step
+					});
 				}
 
+			});
 
-				var unitInput = el.querySelectorAll('.range-wrapper input.choose-unit');
-				var input = el.querySelectorAll('.range-wrapper>input');
+			$(inputUnit).each(function () {
+				if ($(this).attr("value") == unit)
+					$(this).prop('checked', true);
+			});
 
-				$(unitInput).each(function () {
-					if (unitVal == "%") {
-						if (trait.target.attributes.type == "divider")
-							$(this).parents('.range-wrapper').find('input').attr("max", "100");
-						else if (trait.target.attributes.type == 'heading' || trait.target.attributes.type == 'text')
-							$(this).parents('.range-wrapper').find('input').attr("min", "1").attr("max", "100").attr("step", "1");
-					}
-					else if (unitVal == "em") {
-						if (trait.target.attributes.type == 'heading' || trait.target.attributes.type == 'text')
-							$(this).parents('.range-wrapper').find('input').attr("min", ".1").attr("max", "10").attr("step", ".1");
-					}
-					else {
-						if (trait.target.attributes.type == "divider")
-							$(this).parents('.range-wrapper').find('input').attr("max", "1920");
-						else if (trait.target.attributes.type == 'heading' || trait.target.attributes.type == 'text')
-							$(this).parents('.range-wrapper').find('input').attr("min", "10").attr("max", "100").attr("step", "1");
-					}
-				});
-
-				$(unitInput).each(function () {
-					if ($(this).attr("value") == unitVal)
-						$(this).prop('checked', true);
-				});
-
-				$(input).each(function () {
-					$(this).attr("value", trait.getInitValue());
+			if (traitValue != "") {
+				$(inputControl).each(function () {
+					$(this).attr("value", traitValue);
 				});
 			}
 
@@ -1880,7 +1843,6 @@ export default (editor, config = {}) => {
 	});
 
 	tm.addType('preset_radio', {
-
 		createInput({ trait }) {
 
 			var targetName = trait.target.attributes.type;
@@ -1985,7 +1947,7 @@ export default (editor, config = {}) => {
 		},
 		onEvent({ elInput, component }) {
 
-			$(event.target).parents('.preset-wrapper').find('.active').removeClass('active');
+			$(event.target).parents('.preset-wrapper').find('label.active').removeClass('active');
 			$(event.target).parent().addClass('active');
 
 			component.getTrait('styles').set({

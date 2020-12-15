@@ -16,7 +16,7 @@
             }
             else {
                 $scope.ui.data.ShowLabel.Value = $scope.CurrentRegistration.attributes.attributes['data-block-showlabel'] == "false" ? false : true;
-                $scope.ui.data.TermsPrivacy.Value = $scope.ui.data.GlobalConfigs.Options['data-block-termsprivacy'] == "false" ? false : true;
+                $scope.ui.data.TermsPrivacy.Value = $scope.CurrentRegistration.attributes.attributes['data-block-termsprivacy'] == "false" ? false : true;
                 $scope.ui.data.ButtonAlign.Value = $scope.CurrentRegistration.attributes.attributes['data-block-buttonalign'];
             }
         }

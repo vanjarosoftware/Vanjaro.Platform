@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Common.Entities.Apps;
+using Vanjaro.UXManager.Library.Entities;
 
 namespace Vanjaro.UXManager.Extensions.Apps.Video.Factories
 {
@@ -100,7 +101,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Video.Factories
                 AccessRoles.Add("editpage");
             }
 
-            if (TabPermissionController.HasTabPermission("EDIT"))
+            if (TabPermissionController.HasTabPermission("EDIT") || !Editor.Options.EditPage)
             {
                 AccessRoles.Add("editpage");
             }

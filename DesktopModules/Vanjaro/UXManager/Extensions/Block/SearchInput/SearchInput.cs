@@ -24,7 +24,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput
         public string Icon => "fas fa-search";
 
         public Guid Guid => Guid.Parse(ExtensionInfo.GUID);
-        public bool Visible { get; set; } = false;
+        public bool Visible { get; set; } = true;
 
         public Dictionary<string, string> Attributes
         {

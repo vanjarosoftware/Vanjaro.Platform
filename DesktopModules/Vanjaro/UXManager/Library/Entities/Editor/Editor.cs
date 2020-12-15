@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DotNetNuke.Security.Permissions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Dynamic;
@@ -25,21 +26,22 @@ namespace Vanjaro.UXManager.Library.Entities
                 UpdateContentUrl = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/save'",
                 GetContentUrl = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/get'",
                 ContainerID = "#vjEditor",
-                EditPage = true,
-                ModuleId=-1
+                EditPage = TabPermissionController.HasTabPermission("EDIT"),
+                ModuleId = -1
             };
 
             return options;
         }
-        public static EditorOptions Options { 
-            get 
+        public static EditorOptions Options
+        {
+            get
             {
                 if (HttpContext.Current != null && HttpContext.Current.Items["vjeditor"] != null)
                     return HttpContext.Current.Items["vjeditor"] as EditorOptions;
 
                 return DefaultSettings();
             }
-            set 
+            set
             {
                 if (HttpContext.Current != null)
                     HttpContext.Current.Items["vjeditor"] = value;

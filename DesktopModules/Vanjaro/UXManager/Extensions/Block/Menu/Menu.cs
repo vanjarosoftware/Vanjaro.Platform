@@ -122,7 +122,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Menu
 
                 MenuSetting menuSetting = new MenuSetting
                 {
-                    NodeSelector = Attributes["data-block-nodeselector"],
+                    NodeSelector = Attributes["data-block-nodeselector"]?.TrimStart('.'),
                     IncludeHidden = Convert.ToBoolean(Attributes["data-block-includehidden"]),
                 };
 

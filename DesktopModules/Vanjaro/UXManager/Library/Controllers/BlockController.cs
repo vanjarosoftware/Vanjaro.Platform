@@ -12,6 +12,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using Vanjaro.Core.Data.Entities;
@@ -19,12 +20,14 @@ using Vanjaro.Core.Entities;
 using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Library.Entities;
 using static Vanjaro.Core.Managers;
+using Vanjaro.Common.ASPNET.WebAPI;
+using Vanjaro.Common.Engines.UIEngine;
 
 namespace Vanjaro.UXManager.Library.Controllers
 {
     [DnnAuthorize]
     [ValidateAntiForgeryToken]
-    public class BlockController : DnnApiController
+    public class BlockController : UIEngineController
     {
         [HttpPost]
         [DnnAdmin]
@@ -55,7 +58,7 @@ namespace Vanjaro.UXManager.Library.Controllers
         }
 
         [HttpGet]
-        [DnnPageEditor]
+        [AuthorizeAccessRoles(AccessRoles = "pageedit")]
         public List<CustomBlock> GetAllCustomBlock()
         {
             return Core.Managers.BlockManager.GetAll(PortalSettings);
@@ -95,81 +98,109 @@ namespace Vanjaro.UXManager.Library.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public CustomBlock ImportCustomBlock(string TemplatePath)
+        public CustomBlock ImportCustomBlock(string TemplateHash, string TemplatePath)
         {
             CustomBlock Result = new CustomBlock();
             try
             {
                 IFolderInfo fi = FolderManager.Instance.GetFolder(PortalSettings.ActiveTab.PortalID, "Images/");
-
-                if (fi == null)
-                    fi = FolderManager.Instance.GetFolder(PortalSettings.ActiveTab.PortalID, "assets/Images/");
-
-                string path = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.ActiveTab.PortalID + "/temp/");
-
+                IFolderInfo foldersizeinfo = FolderManager.Instance.GetFolder(PortalSettings.ActiveTab.PortalID, fi.FolderPath + ".versions");
+                if (foldersizeinfo == null)
+                    foldersizeinfo = FolderManager.Instance.AddFolder(PortalSettings.ActiveTab.PortalID, fi.FolderPath + ".versions");
+                string path = HttpContext.Current.Server.MapPath("~/Portals/_default/ThemeLibrary/");
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
-
-                path = path + Path.GetFileName(TemplatePath);
-                WebClient webClient = new WebClient();
-                webClient.DownloadFile(TemplatePath, path);
-
-                using (ZipArchive archive = ZipFile.OpenRead(path))
+                path = path + Path.GetFileName(TemplatePath).Replace(".zip", "");
+                if (!Directory.Exists(path))
                 {
-                    ZipArchiveEntry entry = archive.GetEntry("Template.json");
-                    if (entry != null)
+                    DownloadTemplate(TemplateHash, TemplatePath, path);
+                }
+                if (Directory.Exists(path))
+                {
+                    if (TemplateHash != Path.GetFileNameWithoutExtension(Directory.GetFiles(path, "Hash*").FirstOrDefault()).Replace("Hash", ""))
                     {
-                        using (StreamReader reader = new StreamReader(entry.Open()))
+                        Directory.Delete(path, true);
+                        DownloadTemplate(TemplateHash, TemplatePath, path);
+                    }
+                    if (File.Exists(path + "/Template.json"))
+                    {
+                        ExportTemplate exportTemplate = JsonConvert.DeserializeObject<ExportTemplate>(File.ReadAllText(path + "/Template.json"));
+                        if (exportTemplate != null)
                         {
-                            
-                            ExportTemplate exportTemplate = JsonConvert.DeserializeObject<ExportTemplate>(reader.ReadToEnd());
                             Layout pagelayout = exportTemplate.Templates.FirstOrDefault();
-
-                            if (exportTemplate != null && pagelayout != null)
+                            if (pagelayout != null)
                             {
                                 if (string.IsNullOrEmpty(pagelayout.Content))
                                 {
-                                    foreach (CustomBlock cb  in pagelayout.Blocks)
+                                    foreach (CustomBlock cb in pagelayout.Blocks)
                                     {
                                         Result.Html += cb.Html;
                                         Result.Css += cb.Css;
                                     }
                                 }
                                 else
-                                { 
-                                    Result.Html = Core.Managers.PageManager.DeTokenizeLinks(pagelayout.Content.ToString(), PortalSettings.ActiveTab.PortalID);
-                                    Result.Css = Core.Managers.PageManager.DeTokenizeLinks(pagelayout.Style.ToString(), PortalSettings.ActiveTab.PortalID);
+                                {
+                                    Result.Html = PageManager.DeTokenizeLinks(pagelayout.Content.ToString(), PortalSettings.ActiveTab.PortalID);
+                                    Result.Css = PageManager.DeTokenizeLinks(pagelayout.Style.ToString(), PortalSettings.ActiveTab.PortalID);
                                 }
-                                    
-                                List<ZipArchiveEntry> assets = archive.Entries.Where(e => e.FullName.StartsWith("Assets/")).ToList();
 
+                                List<string> assets = Directory.GetFiles(path + "/Assets", "*", SearchOption.AllDirectories).ToList();
                                 if (assets != null && assets.Count > 0)
                                 {
-                                    foreach (ZipArchiveEntry asset in assets)
+                                    Parallel.ForEach(assets,
+                                    new ParallelOptions { MaxDegreeOfParallelism = Convert.ToInt32(Math.Ceiling((Environment.ProcessorCount * 0.50) * 1.0)) },
+                                    asset =>
                                     {
                                         if (fi == null)
                                             fi = FolderManager.Instance.AddFolder(PortalSettings.ActiveTab.PortalID, "Images");
-
                                         if (fi != null)
                                         {
-                                            FileManager.Instance.AddFile(fi, asset.Name, asset.Open());
+                                            string fileName = Path.GetFileName(asset);
+                                            if (fileName.ToLower().EndsWith("w.webp") || fileName.ToLower().EndsWith("w.png") || fileName.ToLower().EndsWith("w.jpeg"))
+                                            {
+                                                using (FileStream fs = File.OpenRead(asset))
+                                                {
+                                                    FileManager.Instance.AddFile(foldersizeinfo, fileName, fs);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                using (FileStream fs = File.OpenRead(asset))
+                                                {
+                                                    FileManager.Instance.AddFile(fi, fileName, fs);
+                                                }
+                                            }
                                         }
-                                    }
+                                    });
                                 }
-
                             }
                         }
                     }
                 }
-                Result.Html = Core.Managers.PageManager.DeTokenizeLinks(Result.Html, PortalSettings.ActiveTab.PortalID);
-                Result.Css = Core.Managers.PageManager.DeTokenizeLinks(Result.Css, PortalSettings.ActiveTab.PortalID);
+                Result.Html = PageManager.DeTokenizeLinks(Result.Html, PortalSettings.ActiveTab.PortalID);
+                Result.Css = PageManager.DeTokenizeLinks(Result.Css, PortalSettings.ActiveTab.PortalID);
+                Dictionary<string, object> LayoutData = new Dictionary<string, object>();
+                LayoutData.Add("gjs-html", Result.Html);
+                PageManager.AddModules(PortalSettings, LayoutData, PortalSettings.UserInfo, path + "/PortableModules");
+                Result.Html = LayoutData["gjs-html"].ToString();
             }
             catch (Exception ex)
             {
                 DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
             }
-
             return Result;
+        }
+        private static void DownloadTemplate(string TemplateHash, string TemplatePath, string path)
+        {
+            new WebClient().DownloadFile(TemplatePath, path + ".zip");
+            ZipFile.ExtractToDirectory(path + ".zip", path);
+            File.Create(path + "/Hash" + TemplateHash + ".txt").Dispose();
+            File.Delete(path + ".zip");
+        }
+
+        public override string AccessRoles()
+        {
+            return Factories.AppExtensionFactory.GetAccessRoles(UserInfo);
         }
     }
 }

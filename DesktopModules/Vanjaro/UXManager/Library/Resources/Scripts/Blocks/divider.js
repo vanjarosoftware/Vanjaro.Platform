@@ -1,4 +1,4 @@
-﻿export default (editor, config = {}) => {
+export default (editor, config = {}) => {
 	const c = config;
 	let bm = editor.BlockManager;
   
@@ -56,15 +56,11 @@
 						cssproperties: [
 							{ name: "width" }
 						],
-						unitOptions: true,
-						units: [
-                            { name: 'px' },
-                            { name: '%' }
-						],
+                        units: [
+							{ name: 'px', min: 10, max: 1920, step: 1, value: 100 },
+                            { name: '%', min: 1, max: 100, step: 1, value: 100 },
+                        ],
 						unit: "%",
-						min: "1",
-						max: "100",
-						value: "100",
                         changeProp: 1,
                     }, {
 						label: "Design",
