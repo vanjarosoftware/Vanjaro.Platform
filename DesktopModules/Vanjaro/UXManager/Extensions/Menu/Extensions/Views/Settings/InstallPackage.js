@@ -5,6 +5,12 @@
 
     };
 
+    $scope.showInstall = function () {
+        if ($scope.ui.data.PackageErrorList.Options.length === 0)
+            return true;
+        return false;
+    };
+
     $scope.Click_Install = function () {
         var val = true;
         $.each($("input[type=checkbox]"), function (i,v) {

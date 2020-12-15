@@ -15,6 +15,7 @@ using Newtonsoft.Json.Linq;
 using System.Web;
 using Vanjaro.Core.Components;
 using Newtonsoft.Json;
+using Dnn.PersonaBar.Extensions.Components.Dto;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
 {
@@ -24,9 +25,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
     {
         internal static List<IUIData> GetData(PortalSettings PortalSettings, UserInfo UserInfo)
         {
+            List<ParseResultDto> ParseResults = Managers.InstallPackageManager.ParsePackage(PortalSettings, UserInfo, HttpContext.Current.Server.MapPath("\\DesktopModules\\Vanjaro\\Temp\\Install\\"));
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>
             {
-                { "PackageList", new UIData { Name = "PackageList", Options = Managers.InstallPackageManager.ParsePackage(PortalSettings, UserInfo,HttpContext.Current.Server.MapPath("\\DesktopModules\\Vanjaro\\Temp\\Install\\")) } }
+                { "PackageList", new UIData { Name = "PackageList", Options =ParseResults  } },
+                { "PackageErrorList", new UIData { Name = "PackageErrorList", Options = ParseResults.Where(p=>p.Success==false).ToList() } }
             };
             return Settings.Values.ToList();
         }
