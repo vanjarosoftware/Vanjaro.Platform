@@ -12,6 +12,10 @@ using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Library.Common;
 using Newtonsoft.Json.Linq;
+using System.Web;
+using Vanjaro.Core.Components;
+using Newtonsoft.Json;
+using Dnn.PersonaBar.Extensions.Components.Dto;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
 {
@@ -21,9 +25,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
     {
         internal static List<IUIData> GetData(PortalSettings PortalSettings, UserInfo UserInfo)
         {
+            List<ParseResultDto> ParseResults = Managers.InstallPackageManager.ParsePackage(PortalSettings, UserInfo, HttpContext.Current.Server.MapPath("\\DesktopModules\\Vanjaro\\Temp\\Install\\"));
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>
             {
-                { "PackageList", new UIData { Name = "PackageList", Options = Managers.InstallPackageManager.ParsePackage(PortalSettings, UserInfo) } }
+                { "PackageList", new UIData { Name = "PackageList", Options =ParseResults  } },
+                { "PackageErrorList", new UIData { Name = "PackageErrorList", Options = ParseResults.Where(p=>p.Success==false).ToList() } }
             };
             return Settings.Values.ToList();
         }
@@ -32,37 +38,37 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
         public ActionResult Install()
         {
             ActionResult actionResult = new ActionResult();
-            Managers.InstallPackageManager.InstallPackage(PortalSettings, UserInfo);
+            Managers.InstallPackageManager.InstallPackage(PortalSettings, UserInfo, HttpContext.Current.Server.MapPath("\\DesktopModules\\Vanjaro\\Temp\\Install\\"));
             return actionResult;
         }
-
-        [HttpGet]
-        public ActionResult Delete()
+        
+        [HttpPost]
+        public ActionResult Download()
         {
             ActionResult actionResult = new ActionResult();
-            Managers.InstallPackageManager.DeletePackage(PortalSettings, UserInfo);
-            return actionResult;
-        }
+            string installPackagePath = HttpContext.Current.Server.MapPath("\\DesktopModules\\Vanjaro\\Temp\\Install\\");
+            if (Directory.Exists(installPackagePath))
+                Directory.Delete(installPackagePath, true);
+            if (!Directory.Exists(installPackagePath))
+                Directory.CreateDirectory(installPackagePath);
 
-        [HttpGet]
-        public ActionResult Download(string Data)
-        {
-            ActionResult actionResult = new ActionResult();
-            JObject json = JObject.Parse(Data);
-            foreach (string item in json["Uri"])
+            if (HttpContext.Current != null && HttpContext.Current.Request != null && HttpContext.Current.Request.Form != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Form["Packages"]))
             {
-                WebClient webClient = new WebClient();
-
-                try
+                List<StringValue> packages = JsonConvert.DeserializeObject<List<StringValue>>(HttpContext.Current.Request.Form["Packages"]);
+                foreach (StringValue item in packages)
                 {
-                    webClient.DownloadFile(item, Globals.ApplicationMapPath + "\\Install\\Module\\" + Path.GetFileName(item));
+                    WebClient webClient = new WebClient();
 
-                }
-                catch (Exception ex)
-                {
-                    actionResult.HasErrors = true;
-                    actionResult.Data = ex.Message;
-                    return actionResult;
+                    try
+                    {
+                        webClient.DownloadFile(item.Value, installPackagePath + Path.GetFileName(item.Text + ".zip"));
+                    }
+                    catch (Exception ex)
+                    {
+                        actionResult.HasErrors = true;
+                        actionResult.Data = ex.Message;
+                        return actionResult;
+                    }
                 }
             }
             actionResult.IsSuccess = true;

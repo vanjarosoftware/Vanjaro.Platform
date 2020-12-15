@@ -5,6 +5,12 @@
 
     };
 
+    $scope.showInstall = function () {
+        if ($scope.ui.data.PackageErrorList.Options.length === 0)
+            return true;
+        return false;
+    };
+
     $scope.Click_Install = function () {
         var val = true;
         $.each($("input[type=checkbox]"), function (i,v) {
@@ -15,7 +21,9 @@
         });
         if (val) {
             common.webApi.get('InstallPackage/install').success(function (Response) {
-
+                var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
+                Parentscope.Click_IsInstall(true);
+                $(window.parent.document.body).find('[data-dismiss="modal"]').click();
             });
         }
     };
@@ -36,26 +44,6 @@
 
     $scope.Description = function (description) {
         return $sce.trustAsHtml(description);
-    };
-
-    $scope.Click_Download = function () {
-        var List = {
-            Uri: ["https://www.mandeeps.com/Portals/0/Mandeeps.png","https://www.mandeeps.com/Downloads/Latest/Modules/Install/Live%20Articles_v3.3.4_Extract%20Me.zip"]
-        };
-
-        common.webApi.get('InstallPackage/download', 'Data=' + JSON.stringify(List)).success(function (Response) {
-
-            if (Response === Response.Success) {
-                $scope.Click_InstallPackage();
-            }
-            else {
-                CommonSvc.SweetAlert.swal(Response.Error);
-            }
-        });
-    }
-
-    $scope.Click_InstallPackage = function () {
-        parent.OpenPopUp(null, 600, 'center', 'Install', "#/installpackage", 600);
-    };   
+    };    
 
 });
