@@ -96,6 +96,30 @@ $(document).ready(function () {
                     }
                 }
             }
+            else if (ExtensionStoreURL.startsWith(event.origin)) {
+                if (typeof event.data != 'undefined') {
+                    if (typeof event.data.action != 'undefined' && event.data.action == 'DownloadPackage') {
+                        var sf = $.ServicesFramework(-1);
+                        var PackageData = {
+                            Packages: JSON.stringify(event.data.data)
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Extensions") + "InstallPackage/Download",
+                            data: PackageData,
+                            headers: {
+                                'ModuleId': parseInt(sf.getModuleId()),
+                                'TabId': parseInt(sf.getTabId()),
+                                'RequestVerificationToken': sf.getAntiForgeryValue()
+                            },
+                            success: function (data) {
+                                $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                                parent.OpenPopUp(null, 600, 'center', 'Install', ExtensionURL, 800);
+                            }
+                        });
+                    }
+                }
+            }
         });
     }
 
