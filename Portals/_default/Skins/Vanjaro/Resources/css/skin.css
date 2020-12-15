@@ -397,19 +397,22 @@ div.actionMenu ul {
 
 /*Menu Alignment*/
 
-div[alignment="left"] [data-block-type="Menu"] nav .collapse .navbar-nav,
-div[alignment="left"] [data-block-type="Menu"] nav.navbar.navbar-expand-lg {
+div[alignment="left"][data-block-type="Menu"] nav .collapse .navbar-nav,
+div[alignment="left"][data-block-type="Menu"] nav.navbar.navbar-expand-lg {
     justify-content: flex-start;
+    display: inline-flex;
 }
 
-div[alignment="center"] [data-block-type="Menu"] nav .collapse .navbar-nav,
-div[alignment="center"] [data-block-type="Menu"] nav.navbar.navbar-expand-lg {
+div[alignment="center"][data-block-type="Menu"] nav .collapse .navbar-nav,
+div[alignment="center"][data-block-type="Menu"] nav.navbar.navbar-expand-lg {
     justify-content: center;
+    display: inline-flex;
 }
 
-div[alignment="right"] [data-block-type="Menu"] nav .collapse .navbar-nav,
-div[alignment="right"] [data-block-type="Menu"] nav.navbar.navbar-expand-lg {
+div[alignment="right"][data-block-type="Menu"] nav .collapse .navbar-nav,
+div[alignment="right"][data-block-type="Menu"] nav.navbar.navbar-expand-lg {
     justify-content: flex-end;
+    display: inline-flex;
 }
 
 .embed-container {
