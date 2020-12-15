@@ -99,7 +99,7 @@ $(document).ready(function () {
                             },
                             success: function (data) {
                                 $(window.parent.document.body).find('[data-dismiss="modal"]').click();
-                                parent.OpenPopUp(null, 600, 'center', 'Install', "http://dev.vanjaro.local/home/mid/0/icp/true/guid/54caeff2-9fac-42ae-8594-40312867d56a#/installpackage", 800);
+                                parent.OpenPopUp(null, 600, 'center', 'Install', ExtensionURL, 800);
                             }
                         });
                     }

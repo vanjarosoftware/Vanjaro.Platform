@@ -165,16 +165,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
                 }
             }
         }
-
-        internal static void DeletePackage(string installPackagePath)
-        {
-            if (!Directory.Exists(installPackagePath))
-            {
-                return;
-            }
-            Directory.Delete(installPackagePath, true);
-        }
-
+        
         public static IDictionary<string, PackageInfo> GetInstallPackages(string installPackagePath)
         {
             List<string> invalidPackages = new List<string>();

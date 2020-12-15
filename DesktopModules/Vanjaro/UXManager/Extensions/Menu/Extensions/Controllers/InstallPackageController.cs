@@ -41,15 +41,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
             Managers.InstallPackageManager.InstallPackage(PortalSettings, UserInfo, HttpContext.Current.Server.MapPath("\\DesktopModules\\Vanjaro\\Temp\\Install\\"));
             return actionResult;
         }
-
-        [HttpGet]
-        public ActionResult Delete()
-        {
-            ActionResult actionResult = new ActionResult();
-            Managers.InstallPackageManager.DeletePackage(HttpContext.Current.Server.MapPath("\\DesktopModules\\Vanjaro\\Temp\\Install\\"));
-            return actionResult;
-        }
-
+        
         [HttpPost]
         public ActionResult Download()
         {
