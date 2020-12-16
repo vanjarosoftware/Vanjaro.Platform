@@ -4,6 +4,7 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Portals;
+using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
@@ -310,7 +311,23 @@ namespace Vanjaro.Skin
                 {
                     ContentPane.Controls.Add(ParseControl("<div class=\"" + ClassName + "\"><div id=\"vjEditor\">" + InjectModules(html.DocumentNode.OuterHtml) + "</div></div>"));
                 }
-                catch (Exception ex) { Exceptions.LogException(ex); }
+                catch (Exception ex)
+                {
+                    string Message = string.Empty;
+                    if (!UserController.Instance.GetCurrentUserInfo().IsAdmin)
+                        Message = DotNetNuke.Services.Localization.Localization.GetString("Non_Admin_Users_Message", Constants.LocalResourcesFile);
+                    if (UserController.Instance.GetCurrentUserInfo().IsAdmin || UserController.Instance.GetCurrentUserInfo().IsSuperUser)
+                        Message = DotNetNuke.Services.Localization.Localization.GetString("Admin_Super_Users_Message", Constants.LocalResourcesFile);
+                    
+                    if (!string.IsNullOrEmpty(Message))
+                    {
+                        Literal lt = new Literal();
+                        lt.Text = "<div class=\"alert alert-danger\" role=\"alert\">" + Message + "</div>";
+                        ContentPane.Controls.Add(lt);
+                    }
+
+                    Exceptions.LogException(ex);
+                }
 
                 InjectLoginAuthentication();
             }
@@ -865,8 +882,8 @@ namespace Vanjaro.Skin
                 string ThemeName = Core.Managers.ThemeManager.GetCurrent(PortalSettings.Current.PortalId).Name;
                 string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/editor");
                 string ThemeCss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/Theme.css");
-                if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))                
-                    ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);  
+                if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))
+                    ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);
             }
             catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
         }
