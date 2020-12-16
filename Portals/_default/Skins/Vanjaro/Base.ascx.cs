@@ -8,6 +8,7 @@ using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Authentication;
+using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Tokens;
 using DotNetNuke.UI.Skins;
 using DotNetNuke.Web.Client.ClientResourceManagement;
@@ -304,7 +305,13 @@ namespace Vanjaro.Skin
                 {
                     ClassName += " m2vDisplayNone";
                 }
-                ContentPane.Controls.Add(ParseControl("<div class=\"" + ClassName + "\"><div id=\"vjEditor\">" + InjectModules(html.DocumentNode.OuterHtml) + "</div></div>"));
+
+                try
+                {
+                    ContentPane.Controls.Add(ParseControl("<div class=\"" + ClassName + "\"><div id=\"vjEditor\">" + InjectModules(html.DocumentNode.OuterHtml) + "</div></div>"));
+                }
+                catch (Exception ex) { Exceptions.LogException(ex); }
+
                 InjectLoginAuthentication();
             }
             else
