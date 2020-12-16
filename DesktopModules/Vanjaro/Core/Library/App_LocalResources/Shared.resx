@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Admin_Super_Users_Message.Text" xml:space="preserve">
+    <value>An error occurred in displaying content for this section. Please check event viewer for more information. You may also revert back to a previous version.</value>
+  </data>
   <data name="ApproveBody.Text" xml:space="preserve">
     <value>&lt;table width="100%" cellpadding="10" cellspacing="0"&gt;
   &lt;tr&gt;
@@ -141,6 +144,9 @@
   </data>
   <data name="MakeChanges.Text" xml:space="preserve">
     <value>Make Changes</value>
+  </data>
+  <data name="Non_Admin_Users_Message.Text" xml:space="preserve">
+    <value>Content in this section is currently unavailable. Please contact the site administrator if the issue persists.</value>
   </data>
   <data name="PendingReview.Text" xml:space="preserve">
     <value>Pending Review</value>
