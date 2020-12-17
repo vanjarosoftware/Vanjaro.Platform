@@ -297,6 +297,7 @@ namespace Vanjaro.Skin
 
                 HtmlDocument html = new HtmlDocument();
                 html.LoadHtml(sb.ToString());
+                CheckPermission(html);
                 InjectBlocks(page, html);
 
                 string ClassName = "vj-wrapper";
@@ -481,7 +482,26 @@ namespace Vanjaro.Skin
             }
 
         }
-
+        private void CheckPermission(HtmlDocument html)
+        {
+            IEnumerable<HtmlNode> query = html.DocumentNode.SelectNodes("//*[@perm]");
+            if (query != null)
+            {
+                foreach (HtmlNode item in query.ToList())
+                {
+                    if (!string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "perm").FirstOrDefault().Value))
+                    {
+                        int EntityID = int.Parse(item.Attributes.Where(a => a.Name == "perm").FirstOrDefault().Value);
+                        bool Inherit = true;
+                        CustomPermissionEntity customPermissionEntity = CustomPermissionManager.GetCustomPermissionEntity(EntityID);
+                        if (customPermissionEntity != null && customPermissionEntity.Inherit.HasValue)
+                            Inherit = customPermissionEntity.Inherit.Value;
+                        if (!Inherit && !CustomPermissionManager.HasViewPermission(EntityID))
+                            item.Remove();
+                    }
+                }
+            }
+        }
         private void InjectBlocks(Pages page, HtmlDocument html, bool ignoreFirstDiv = false, bool isGlobalBlockCall = false)
         {
             IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
@@ -858,8 +878,8 @@ namespace Vanjaro.Skin
                 string ThemeName = Core.Managers.ThemeManager.GetCurrent(PortalSettings.Current.PortalId).Name;
                 string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/editor");
                 string ThemeCss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/Theme.css");
-                if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))                
-                    ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);  
+                if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))
+                    ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);
             }
             catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
         }

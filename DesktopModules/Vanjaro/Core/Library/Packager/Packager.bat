@@ -18,6 +18,7 @@ md bin >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Library.dll bin\  >NUL
 
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Apps.About.dll bin\ >NUL
+copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Apps.BlockSettings.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Apps.Icon.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Apps.Image.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Apps.Link.dll bin\ >NUL
@@ -104,6 +105,10 @@ del library-uxmanager-resources.zip >NUL 2>&1
 cd ..\Extensions\Apps\About\ >NUL
 del apps-about-resources.zip >NUL 2>&1
 "C:\Program Files\7-Zip\7z.exe" a apps-about-resources.zip @Resources.txt -xr!?svn\ >NUL
+
+cd ..\BlockSettings\ >NUL
+del apps-blocksettings-resources.zip >NUL 2>&1
+"C:\Program Files\7-Zip\7z.exe" a apps-blocksettings-resources.zip @Resources.txt -xr!?svn\ >NUL
 
 cd ..\Icon\ >NUL
 del apps-icon-resources.zip >NUL 2>&1

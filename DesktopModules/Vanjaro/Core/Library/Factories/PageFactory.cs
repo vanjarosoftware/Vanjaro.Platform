@@ -4,6 +4,7 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Exceptions;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -111,6 +112,7 @@ namespace Vanjaro.Core
                 List<int> pages = GetAllByTabID(TabID).OrderByDescending(a => a.Version).Select(a => a.Version).Distinct().Take(MaxVersion).ToList();
                 if (pages.Count > 0)
                 {
+                    RemoveCustomPermissions(TabID, pages);
                     Pages.Delete("Where TabID=@0 and Version not in (" + string.Join(",", pages) + ")", TabID);
                     CacheFactory.Clear(CacheFactory.Keys.Page);
 
@@ -133,6 +135,35 @@ namespace Vanjaro.Core
                             }
                         }
                     }
+                }
+            }
+
+            private static void RemoveCustomPermissions(int TabID, List<int> pages)
+            {
+                List<int> EntityIDs = new List<int>();
+                List<Pages> PagesToDelete = Pages.Query("Where TabID=@0 and Version not in (" + string.Join(",", pages) + ")", TabID).ToList();
+                if (PagesToDelete != null)
+                {
+                    foreach (Pages _page in PagesToDelete)
+                    {
+                        HtmlDocument html = new HtmlDocument();
+                        html.LoadHtml(_page.Content);
+                        IEnumerable<HtmlNode> query = html.DocumentNode.SelectNodes("//*[@perm]");
+                        if (query != null)
+                        {
+                            foreach (HtmlNode item in query.ToList())
+                            {
+                                if (!string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "perm").FirstOrDefault().Value))
+                                    EntityIDs.Add(int.Parse(item.Attributes.Where(a => a.Name == "perm").FirstOrDefault().Value));
+                            }
+                        }
+                    }
+                }
+                if (EntityIDs.Count > 0)
+                {
+                    CustomPermissionEntity.Delete("Where EntityID in (" + string.Join(",", EntityIDs) + ")");
+                    CustomPermission.Delete("Where EntityID in (" + string.Join(",", EntityIDs) + ")");
+                    CacheFactory.Clear(CacheFactory.Keys.CustomPermission);
                 }
             }
 

@@ -158,7 +158,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                         if (!string.IsNullOrEmpty(block.Html))
                             block.Html = Core.Managers.PageManager.TokenizeTemplateLinks(Core.Managers.PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
                         if (!string.IsNullOrEmpty(block.Css))
-                            block.Css = Core.Managers.PageManager.DeTokenizeLinks(block.Css, PortalID);
+                            block.Css = Core.Managers.PageManager.TokenizeTemplateLinks(Core.Managers.PageManager.DeTokenizeLinks(block.Css, PortalID), false, Assets);
                     }
                     CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
                 }
@@ -166,8 +166,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 layout.Content = html.DocumentNode.OuterHtml;
                 layout.SVG = "";
                 layout.ContentJSON = Core.Managers.PageManager.TokenizeTemplateLinks(page.ContentJSON, true, Assets);
-                layout.Style = page.Style;
-                layout.StyleJSON = page.StyleJSON;
+                layout.Style = Core.Managers.PageManager.TokenizeTemplateLinks(page.Style, false, Assets);
+                layout.StyleJSON = Core.Managers.PageManager.TokenizeTemplateLinks(page.StyleJSON, true, Assets);
                 layout.Type = pageSettings.PageType = pageSettings.PageType.ToLower() == "url" ? "URL" : (pageSettings.DisableLink && pageSettings.IncludeInMenu) ? "Folder" : "Standard";
                 exportTemplate.Templates.Add(layout);
                 ProcessPortableModules(PortalID, tab, ExportedModulesContent);
@@ -261,6 +261,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
 
         private static bool CanExport(Dnn.PersonaBar.Pages.Services.Dto.PageSettings pageSettings, TabInfo tab)
         {
+            if (tab.IsDeleted)
+                return false;
             string Name = pageSettings.Name.ToLower().Replace(" ", "");
             if (Name == "home" || Name == "signup" || Name == "notfoundpage" || Name == "profile" || Name == "searchresults" || Name == "404errorpage" || Name == "signin")
                 return true;

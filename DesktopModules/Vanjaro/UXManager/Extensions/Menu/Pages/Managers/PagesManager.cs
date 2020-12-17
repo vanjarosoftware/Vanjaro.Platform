@@ -567,7 +567,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                             if (!string.IsNullOrEmpty(block.Html))
                                 block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, portalID), false, Assets);
                             if (!string.IsNullOrEmpty(block.Css))
-                                block.Css = PageManager.DeTokenizeLinks(block.Css, portalID);
+                                block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, portalID), false, Assets);
                         }
                         Core.Factories.CacheFactory.Clear(Core.Factories.CacheFactory.GetCacheKey(Core.Factories.CacheFactory.Keys.CustomBlock + "ALL", portalID));
                     }
@@ -575,8 +575,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     layout.Content = html.DocumentNode.OuterHtml;
                     layout.SVG = "";
                     layout.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.ContentJSON, portalID), true, Assets);
-                    layout.Style = PageManager.DeTokenizeLinks(baseLayout.Style.ToString(), portalID);
-                    layout.StyleJSON = PageManager.DeTokenizeLinks(baseLayout.StyleJSON.ToString(), portalID);
+                    layout.Style = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.Style.ToString(), portalID), false, Assets);
+                    layout.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.StyleJSON.ToString(), portalID), true, Assets);
                     layout.Type = baseLayout.Type;
                     exportTemplate.Templates.Add(layout);
                     PageManager.ProcessPortableModules(portalID, layout.Content, ExportedModulesContent);

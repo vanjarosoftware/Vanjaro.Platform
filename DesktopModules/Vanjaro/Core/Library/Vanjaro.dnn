@@ -40,6 +40,11 @@
               <name>Core.01.00.03.SqlDataProvider</name>
               <version>01.00.03</version>
             </script>
+            <script type="Install">
+              <path>Install</path>
+              <name>Core.01.00.04.SqlDataProvider</name>
+              <version>01.00.04</version>
+            </script>
             <script type="UnInstall">
               <path>Install</path>
               <name>Uninstall.Core.SqlDataProvider</name>
@@ -133,6 +138,11 @@
 							<name>Vanjaro.UXManager.Extensions.Apps.About.dll</name>
 							<version>01.00.00</version>
 						</assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Vanjaro.UXManager.Extensions.Apps.BlockSettings.dll</name>
+              <version>01.00.00</version>
+            </assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.Icon.dll</name>
@@ -513,6 +523,14 @@
 						</resourceFile>
 					</resourceFiles>
 				</component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules\Vanjaro\UXManager\Extensions\Apps\BlockSettings</basePath>
+            <resourceFile>
+              <name>apps-blocksettings-resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
 				<component type="ResourceFile">
 					<resourceFiles>
 						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Apps\Icon</basePath>

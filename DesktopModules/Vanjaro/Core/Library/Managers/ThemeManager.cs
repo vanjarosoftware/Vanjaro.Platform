@@ -755,7 +755,7 @@ namespace Vanjaro.Core
                 IThemeEditor themeEditor = GetCategories(CheckVisibilityPermission).Where(c => c.Guid.ToLower() == CategoryGuid.ToLower()).FirstOrDefault();
                 if (themeEditor != null)
                 {
-                    string path = themeEditor.JsonPath.Replace("{{PortalID}}", PortalID.ToString()).Replace("{{ThemeName}}", Core.Managers.ThemeManager.CurrentTheme.Name);
+                    string path = themeEditor.JsonPath.Replace("{{PortalID}}", PortalID.ToString()).Replace("{{ThemeName}}", GetCurrent(PortalID).Name);
                     string folder = Path.GetDirectoryName(path);
                     if (!Directory.Exists(folder))
                         Directory.CreateDirectory(folder);
@@ -765,7 +765,7 @@ namespace Vanjaro.Core
             }
             private static string GetThemeEditorValueJsonPath(int PortalId, string CategoryGuid)
             {
-                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalId + "/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/editor/" + CategoryGuid);
+                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalId + "/vThemes/" + GetCurrent(PortalId).Name + "/editor/" + CategoryGuid);
 
                 if (!Directory.Exists(FolderPath))
                 {
@@ -779,7 +779,7 @@ namespace Vanjaro.Core
 
                 return FolderPath + "\\theme.json";
             }
-                     
+
             private static bool HasAccessIOAuthClient(int PortalID)
             {
                 string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.IOAuthClient_Extension, PortalID);
