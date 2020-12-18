@@ -1919,6 +1919,20 @@ $(document).ready(function () {
                                 },
                             });
 
+                            //Personalization
+                            VjEditor.Commands.add('tlb-app-personalization', {
+                                run(editor, sender) {
+                                    var event = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {};
+                                    var target = event.target || editor.getSelected();
+                                    window.document.vj_personalization_target = target;
+                                    var perm = target.attributes.attributes.perm;
+                                    if (perm == undefined)
+                                        perm = 0;
+                                    var url = CurrentExtTabUrl + "&guid=b1b28eac-b520-4a20-8c36-f0283e8ca263#/permissions/" + perm + "/" + target.attributes.type;
+                                    OpenPopUp(null, 800, 'right', VjLocalized.Setting, url);
+                                }
+                            });
+
                             //Image
                             VjEditor.Commands.add('open-assets', {
                                 run(editor, sender) {
@@ -2407,8 +2421,8 @@ $(document).ready(function () {
         $('#SettingButton,#DeviceManager,#LanguageManager,.ntoolbox').hide();
     });
 
-	//Change Device
-	$(".device-manager .device-view").click(function () {
+    //Change Device
+    $(".device-manager .device-view").click(function () {
         var $this = $(this);
         var $body = $('body');
 
@@ -2461,10 +2475,10 @@ $(document).ready(function () {
             else
                 $body.removeClass('tablet').addClass('resp-mode mobile');
         }
-		var selected = VjEditor.getSelected();
-		VjEditor.select();
-		VjEditor.select(selected);
-	});
+        var selected = VjEditor.getSelected();
+        VjEditor.select();
+        VjEditor.select(selected);
+    });
 
     var Stylemanager = function () {
         setTimeout(function () {

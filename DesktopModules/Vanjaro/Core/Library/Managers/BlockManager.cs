@@ -374,7 +374,7 @@ namespace Vanjaro.Core
                                 PageManager.ProcessPortableModules(PortalID, block.Html, ExportedModulesContent);
                             }
                             if (!string.IsNullOrEmpty(block.Css))
-                                block.Css = PageManager.DeTokenizeLinks(block.Css, PortalID);
+                                block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, PortalID), false, Assets);
                         }
                         CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
                     }
@@ -411,7 +411,7 @@ namespace Vanjaro.Core
                                         {
                                             AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
                                         }
-                                        catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }                                        
+                                        catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
                                     }
                                 }
                             }
@@ -467,7 +467,6 @@ namespace Vanjaro.Core
 
                 return cb;
             }
-
             public static List<CustomBlock> GetAll(PortalSettings PortalSettings)
             {
                 List<CustomBlock> CustomBlocks = BlockFactory.GetAll(PortalSettings.PortalId).Where(c => c.Locale == null).ToList();

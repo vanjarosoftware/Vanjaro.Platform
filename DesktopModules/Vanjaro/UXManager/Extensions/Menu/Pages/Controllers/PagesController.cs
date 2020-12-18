@@ -286,7 +286,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
             if (!string.IsNullOrEmpty(searchKey))
             {
                 IEnumerable<TabInfo> pages = Dnn.PersonaBar.Pages.Components.PagesController.Instance.SearchPages(out _, searchKey, pageType, tags, publishStatus, publishDateStart, publishDateEnd, workflowId, pageIndex, pageSize);
-                PagesTreeList = Managers.PagesManager.GetPagesTreeView(pages);
+                PagesTreeList = Managers.PagesManager.GetPagesTreeView(PortalSettings.Current, pages);
             }
             else
             {

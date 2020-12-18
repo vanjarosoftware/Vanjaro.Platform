@@ -849,6 +849,15 @@ namespace Vanjaro.Core
                     }
                     content = html.DocumentNode.OuterHtml;
                 }
+                foreach (Match match in Regex.Matches(content, "url\\(([^)]*)\\)"))
+                {
+                    try
+                    {
+                        string matchurl = match.Value.Replace("url(\"", "").Replace("\")", "");
+                        content = content.Replace(matchurl, GetNewLink(matchurl, Assets));
+                    }
+                    catch { }
+                }
                 return content;
             }
 
@@ -872,6 +881,8 @@ namespace Vanjaro.Core
 
             private static string ExtractAndProcessLink(string url, Dictionary<string, string> Assets)
             {
+                if (url.StartsWith("http"))
+                    return url;
                 url = url.Split('?')[0];
                 string newurl = ExportTemplateRootToken + (url.ToLower().Contains(".versions") ? ".versions/" : "") + System.IO.Path.GetFileName(url);
                 if (!Assets.ContainsKey(newurl))

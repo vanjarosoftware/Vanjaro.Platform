@@ -299,6 +299,7 @@ namespace Vanjaro.Skin
 
                 HtmlDocument html = new HtmlDocument();
                 html.LoadHtml(sb.ToString());
+                CheckPermission(html);
                 InjectBlocks(page, html);
 
                 string ClassName = "vj-wrapper";
@@ -505,7 +506,26 @@ namespace Vanjaro.Skin
             }
 
         }
-
+        private void CheckPermission(HtmlDocument html)
+        {
+            IEnumerable<HtmlNode> query = html.DocumentNode.SelectNodes("//*[@perm]");
+            if (query != null)
+            {
+                foreach (HtmlNode item in query.ToList())
+                {
+                    if (!string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "perm").FirstOrDefault().Value))
+                    {
+                        int EntityID = int.Parse(item.Attributes.Where(a => a.Name == "perm").FirstOrDefault().Value);
+                        bool Inherit = true;
+                        BlockSection blockSection = SectionPermissionManager.GetBlockSection(EntityID);
+                        if (blockSection != null && blockSection.Inherit.HasValue)
+                            Inherit = blockSection.Inherit.Value;
+                        if (!Inherit && !SectionPermissionManager.HasViewPermission(EntityID))
+                            item.Remove();
+                    }
+                }
+            }
+        }
         private void InjectBlocks(Pages page, HtmlDocument html, bool ignoreFirstDiv = false, bool isGlobalBlockCall = false)
         {
             IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");

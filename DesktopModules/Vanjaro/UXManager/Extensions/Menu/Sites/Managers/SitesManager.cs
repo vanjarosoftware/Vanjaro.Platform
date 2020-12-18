@@ -27,6 +27,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
 using Vanjaro.Core.Entities;
+using Vanjaro.UXManager.Extensions.Menu.Pages.Entities;
 using Vanjaro.UXManager.Library.Common;
 using static Vanjaro.Core.Factories;
 using static Vanjaro.Core.Managers;
@@ -119,59 +120,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 Assets.Add(exportTemplate.SocialSharingLogo, SocialSharingLogourl);
             if (!string.IsNullOrEmpty(exportTemplate.HomeScreenIcon) && !Assets.ContainsKey(exportTemplate.HomeScreenIcon))
                 Assets.Add(exportTemplate.HomeScreenIcon, HomeScreenIcon);
-            TabInfo tab;
             Dictionary<int, string> ExportedModulesContent = new Dictionary<int, string>();
-            foreach (Core.Data.Entities.Pages page in Core.Managers.PageManager.GetAllPublishedPages(PortalID, null))
-            {
-                Dnn.PersonaBar.Pages.Services.Dto.PageSettings pageSettings = Dnn.PersonaBar.Pages.Components.PagesController.Instance.GetPageSettings(page.TabID);
-                tab = TabController.Instance.GetTab(page.TabID, page.PortalID);
-                if (!CanExport(pageSettings, tab))
-                    continue;
-                Layout layout = new Layout
-                {
-                    Content = Core.Managers.PageManager.TokenizeTemplateLinks(page.Content, false, Assets)
-                };
-
-                HtmlDocument html = new HtmlDocument();
-                html.LoadHtml(layout.Content);
-                IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
-                foreach (HtmlNode item in query.ToList())
-                {
-                    if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault() != null && !string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value) && item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value.ToLower() == "global")
-                    {
-                        string guid = item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value.ToLower();
-                        Core.Data.Entities.CustomBlock Block = Core.Managers.BlockManager.GetByLocale(PortalID, guid, null);
-                        if (Block != null)
-                        {
-                            if (layout.Blocks == null)
-                            {
-                                layout.Blocks = new List<Core.Data.Entities.CustomBlock>();
-                            }
-                            layout.Blocks.Add(Block);
-                        }
-                    }
-                }
-                if (layout.Blocks != null)
-                {
-                    foreach (Core.Data.Entities.CustomBlock block in layout.Blocks)
-                    {
-                        if (!string.IsNullOrEmpty(block.Html))
-                            block.Html = Core.Managers.PageManager.TokenizeTemplateLinks(Core.Managers.PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
-                        if (!string.IsNullOrEmpty(block.Css))
-                            block.Css = Core.Managers.PageManager.DeTokenizeLinks(block.Css, PortalID);
-                    }
-                    CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
-                }
-                layout.Name = pageSettings.Name;
-                layout.Content = html.DocumentNode.OuterHtml;
-                layout.SVG = "";
-                layout.ContentJSON = Core.Managers.PageManager.TokenizeTemplateLinks(page.ContentJSON, true, Assets);
-                layout.Style = page.Style;
-                layout.StyleJSON = page.StyleJSON;
-                layout.Type = pageSettings.PageType = pageSettings.PageType.ToLower() == "url" ? "URL" : (pageSettings.DisableLink && pageSettings.IncludeInMenu) ? "Folder" : "Standard";
-                exportTemplate.Templates.Add(layout);
-                ProcessPortableModules(PortalID, tab, ExportedModulesContent);
-            }
+            PortalSettings ps = new PortalSettings(PortalID);
+            List<Pages.Entities.PagesTreeView> PagesTreeView = Pages.Managers.PagesManager.GetPagesTreeView(new PortalSettings(PortalID), null);
+            exportTemplate.Templates.AddRange(ConvertToLayouts(PortalID, Assets, ExportedModulesContent, ps, PagesTreeView));
             string serializedExportTemplate = JsonConvert.SerializeObject(exportTemplate);
             if (!string.IsNullOrEmpty(serializedExportTemplate))
             {
@@ -236,6 +188,68 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             return Response;
         }
 
+        private static List<Layout> ConvertToLayouts(int PortalID, Dictionary<string, string> Assets, Dictionary<int, string> ExportedModulesContent, PortalSettings ps, List<PagesTreeView> PagesTreeView)
+        {
+            List<Layout> result = new List<Layout>();
+            int ctr = 1;
+            foreach (Pages.Entities.PagesTreeView page in PagesTreeView)
+            {
+                Dnn.PersonaBar.Pages.Services.Dto.PageSettings pageSettings = Dnn.PersonaBar.Pages.Components.PagesController.Instance.GetPageSettings(page.Value);
+                TabInfo tab = TabController.Instance.GetTab(page.Value, PortalID);
+                if (!CanExport(pageSettings, tab))
+                    continue;
+                var version = PageManager.GetLatestVersion(page.Value, PageManager.GetCultureCode(ps));
+                Layout layout = new Layout
+                {
+                    Content = PageManager.TokenizeTemplateLinks(version.Content, false, Assets)
+                };
+
+                HtmlDocument html = new HtmlDocument();
+                html.LoadHtml(layout.Content);
+                IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
+                foreach (HtmlNode item in query.ToList())
+                {
+                    if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault() != null && !string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value) && item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value.ToLower() == "global")
+                    {
+                        string guid = item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value.ToLower();
+                        Core.Data.Entities.CustomBlock Block = Core.Managers.BlockManager.GetByLocale(PortalID, guid, null);
+                        if (Block != null)
+                        {
+                            if (layout.Blocks == null)
+                            {
+                                layout.Blocks = new List<Core.Data.Entities.CustomBlock>();
+                            }
+                            layout.Blocks.Add(Block);
+                        }
+                    }
+                }
+                if (layout.Blocks != null)
+                {
+                    foreach (Core.Data.Entities.CustomBlock block in layout.Blocks)
+                    {
+                        if (!string.IsNullOrEmpty(block.Html))
+                            block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
+                        if (!string.IsNullOrEmpty(block.Css))
+                            block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, PortalID), false, Assets);
+                    }
+                    CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
+                }
+                layout.Name = pageSettings.Name;
+                layout.Content = html.DocumentNode.OuterHtml;
+                layout.SVG = "";
+                layout.ContentJSON = PageManager.TokenizeTemplateLinks(version.ContentJSON, true, Assets);
+                layout.Style = PageManager.TokenizeTemplateLinks(version.Style, false, Assets);
+                layout.StyleJSON = PageManager.TokenizeTemplateLinks(version.StyleJSON, true, Assets);
+                layout.Type = pageSettings.PageType = pageSettings.PageType.ToLower() == "url" ? "URL" : (pageSettings.DisableLink && pageSettings.IncludeInMenu) ? "Folder" : "Standard";
+                layout.Children = ConvertToLayouts(PortalID, Assets, ExportedModulesContent, ps, page.children);
+                layout.SortOrder = ctr;
+                ProcessPortableModules(PortalID, tab, ExportedModulesContent);
+                result.Add(layout);
+                ctr++;
+            }
+            return result;
+        }
+
         private static void ProcessPortableModules(int PortalID, TabInfo tab, Dictionary<int, string> ExportedModulesContent)
         {
             foreach (var tabmodule in ModuleController.Instance.GetTabModules(tab.TabID).Values)
@@ -261,6 +275,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
 
         private static bool CanExport(Dnn.PersonaBar.Pages.Services.Dto.PageSettings pageSettings, TabInfo tab)
         {
+            if (tab.IsDeleted)
+                return false;
             string Name = pageSettings.Name.ToLower().Replace(" ", "");
             if (Name == "home" || Name == "signup" || Name == "notfoundpage" || Name == "profile" || Name == "searchresults" || Name == "404errorpage" || Name == "signin")
                 return true;
