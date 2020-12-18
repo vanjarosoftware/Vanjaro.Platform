@@ -143,20 +143,20 @@ namespace Vanjaro.Core.Data.Entities
         [Column] public string Entity { get; set; }
     }
 
-    [TableName("VJ_Core_CustomPermissionEntity")]
+    [TableName("VJ_Core_BlockSection")]
     [PrimaryKey("EntityID")]
     [ExplicitColumns]
-    public partial class CustomPermissionEntity : VanjaroRepo.Record<CustomPermissionEntity>
+    public partial class BlockSection : VanjaroRepo.Record<BlockSection>
     {
         [Column] public int EntityID { get; set; }
-        [Column] public string Entity { get; set; }
+        [Column] public int TabID { get; set; }
         [Column] public bool? Inherit { get; set; }
     }
 
-    [TableName("VJ_Core_CustomPermission")]
+    [TableName("VJ_Core_BlockSectionPermission")]
     [PrimaryKey("ID")]
     [ExplicitColumns]
-    public partial class CustomPermission : VanjaroRepo.Record<CustomPermission>
+    public partial class BlockSectionPermission : VanjaroRepo.Record<BlockSectionPermission>
     {
         [Column] public int ID { get; set; }
         [Column] public int EntityID { get; set; }

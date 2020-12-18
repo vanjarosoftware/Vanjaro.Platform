@@ -4,7 +4,7 @@ using System.Linq;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Common.Entities.Apps;
 
-namespace Vanjaro.UXManager.Extensions.Apps.BlockSettings.Factories
+namespace Vanjaro.UXManager.Extensions.Apps.SectionSettings.Factories
 {
     public class AppFactory
     {

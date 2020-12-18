@@ -7,7 +7,7 @@ using Vanjaro.UXManager.Library.Entities.Interface;
 using Vanjaro.UXManager.Library.Entities.Menu;
 using static Vanjaro.Common.FrameworkManager;
 
-namespace Vanjaro.UXManager.Extensions.Apps.BlockSettings
+namespace Vanjaro.UXManager.Extensions.Apps.SectionSettings
 {
     public class Setting : IAppExtension
     {

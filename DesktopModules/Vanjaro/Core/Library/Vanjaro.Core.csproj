@@ -93,7 +93,7 @@
     <Compile Include="Entities\Interface\IVideoProvider.cs" />
     <Compile Include="Factories\CacheFactory.cs" />
     <Compile Include="Factories\BlockFactory.cs" />
-    <Compile Include="Factories\CustomPermissionFactory.cs" />
+    <Compile Include="Factories\SectionPermissionFactory.cs" />
     <Compile Include="Factories\LocalizationFactory.cs" />
     <Compile Include="Factories\NotificationTaskFactory.cs" />
     <Compile Include="Factories\PageFactory.cs" />
@@ -101,7 +101,7 @@
     <Compile Include="Factories\SettingFactory.cs" />
     <Compile Include="Factories\WorkflowFactory.cs" />
     <Compile Include="Managers\CookieManager.cs" />
-    <Compile Include="Managers\CustomPermissionManager.cs" />
+    <Compile Include="Managers\SectionPermissionManager.cs" />
     <Compile Include="Managers\SignatureManager.cs" />
     <Compile Include="Packager\Vanjaro\Install\Upgrade.aspx.cs">
       <DependentUpon>Upgrade.aspx</DependentUpon>

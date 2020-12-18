@@ -168,7 +168,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleReCaptcha", "DesktopM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vanjaro.URL", "DesktopModules\Vanjaro\URLManager\Vanjaro.URL.csproj", "{850F7BD6-346A-4E09-AB09-9E1329FFD138}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockSettings", "DesktopModules\Vanjaro\UXManager\Extensions\Apps\BlockSettings\BlockSettings.csproj", "{E9A66748-1CA1-46CA-8CFB-F02B063144E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SectionSettings", "DesktopModules\Vanjaro\UXManager\Extensions\Apps\SectionSettings\SectionSettings.csproj", "{E9A66748-1CA1-46CA-8CFB-F02B063144E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

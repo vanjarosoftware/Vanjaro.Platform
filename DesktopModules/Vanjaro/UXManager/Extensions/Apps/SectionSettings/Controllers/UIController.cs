@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Vanjaro.Common.Engines.UIEngine;
 
-namespace Vanjaro.UXManager.Extensions.Apps.BlockSettings.Controllers
+namespace Vanjaro.UXManager.Extensions.Apps.SectionSettings.Controllers
 {
     public class UIController : UIEngineController
     {

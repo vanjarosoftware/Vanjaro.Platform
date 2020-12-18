@@ -124,7 +124,7 @@
 						</assembly>
             <assembly>
               <path>bin</path>
-              <name>Vanjaro.UXManager.Extensions.Apps.BlockSettings.dll</name>
+              <name>Vanjaro.UXManager.Extensions.Apps.SectionSettings.dll</name>
               <version>01.00.00</version>
             </assembly>
 						<assembly>
@@ -500,9 +500,9 @@
 				</component>
         <component type="ResourceFile">
           <resourceFiles>
-            <basePath>DesktopModules\Vanjaro\UXManager\Extensions\Apps\BlockSettings</basePath>
+            <basePath>DesktopModules\Vanjaro\UXManager\Extensions\Apps\SectionSettings</basePath>
             <resourceFile>
-              <name>apps-blocksettings-resources.zip</name>
+              <name>apps-sectionsettings-resources.zip</name>
             </resourceFile>
           </resourceFiles>
         </component>

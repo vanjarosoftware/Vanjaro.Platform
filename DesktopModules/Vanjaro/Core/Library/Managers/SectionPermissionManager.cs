@@ -17,7 +17,7 @@ namespace Vanjaro.Core
 {
     public static partial class Managers
     {
-        public class CustomPermissionManager
+        public class SectionPermissionManager
         {
             public static Dictionary<string, dynamic> GetPermissions(int EntityID)
             {
@@ -35,11 +35,11 @@ namespace Vanjaro.Core
                 }
 
                 bool Inherit = true;
-                CustomPermissionEntity customPermissionEntity = GetCustomPermissionEntity(EntityID);
-                if (customPermissionEntity != null && customPermissionEntity.Inherit.HasValue)
-                    Inherit = customPermissionEntity.Inherit.Value;
+                BlockSection blockSection = GetBlockSection(EntityID);
+                if (blockSection != null && blockSection.Inherit.HasValue)
+                    Inherit = blockSection.Inherit.Value;
 
-                Permissions _permission = GetCustomPermission(EntityID);
+                Permissions _permission = GetSectionPermission(EntityID);
                 _permission.PermissionDefinitions = PermissionDefinitions;
                 Permissions = _permission;
                 Permissions.Inherit = Inherit;
@@ -49,24 +49,24 @@ namespace Vanjaro.Core
                 return permData;
             }
 
-            public static CustomPermissionEntity GetCustomPermissionEntity(int EntityID)
+            public static BlockSection GetBlockSection(int EntityID)
             {
-                return CustomPermissionFactory.GetCustomPermissionEntity(EntityID);
+                return SectionPermissionFactory.GetBlockSection(EntityID);
             }
 
             public static void Delete(int EntityID)
             {
-                CustomPermissionFactory.Delete(EntityID);
+                SectionPermissionFactory.Delete(EntityID);
             }
 
-            public static int AddCustomPermissionEntity(string Entity, bool? Inherit)
+            public static int AddBlockSection(int TabID, bool? Inherit)
             {
-                return CustomPermissionFactory.AddCustomPermissionEntity(Entity, Inherit);
+                return SectionPermissionFactory.AddBlockSection(TabID, Inherit);
             }
 
             public static void UpdateInherit(int EntityID, bool? Inherit)
             {
-                CustomPermissionFactory.UpdateInherit(EntityID, Inherit);
+                SectionPermissionFactory.UpdateInherit(EntityID, Inherit);
             }
 
             public static void Update(int EntityID, dynamic Data)
@@ -103,17 +103,17 @@ namespace Vanjaro.Core
                     }
 
                 }
-                CustomPermissionFactory.ClearAllPermissions(EntityID);
-                CustomPermissionFactory.UpdatePermissions(GetCustomPermissions(EntityID, Permissions));
+                SectionPermissionFactory.ClearAllPermissions(EntityID);
+                SectionPermissionFactory.UpdatePermissions(GetSectionPermissions(EntityID, Permissions));
             }
-            public static List<CustomPermission> GetCustomPermissions(int EntityID, List<GenericPermissionInfo> GenericPermissions)
+            public static List<BlockSectionPermission> GetSectionPermissions(int EntityID, List<GenericPermissionInfo> GenericPermissions)
             {
-                List<CustomPermission> Permissions = new List<CustomPermission>();
+                List<BlockSectionPermission> Permissions = new List<BlockSectionPermission>();
                 foreach (GenericPermissionInfo gp in GenericPermissions)
                 {
                     if (gp.RoleID != -4 || gp.UserID != -4)
                     {
-                        CustomPermission ws = new CustomPermission
+                        BlockSectionPermission ws = new BlockSectionPermission
                         {
                             AllowAccess = gp.AllowAccess,
                             EntityID = EntityID,
@@ -165,7 +165,7 @@ namespace Vanjaro.Core
                 };
                 return Permission;
             }
-            public static Permissions GetCustomPermission(int EntityID)
+            public static Permissions GetSectionPermission(int EntityID)
             {
                 UserInfo UserInfo = UserController.Instance.GetCurrentUserInfo();
                 Permissions Permissions = new Permissions(true, false);
@@ -174,7 +174,7 @@ namespace Vanjaro.Core
                 {
                     foreach (GenericPermissionInfo perm in GetGenericPermissions(GetPermissionsByEntityID(EntityID)))
                     {
-                        foreach (CustomPermissionInfo p in GetPermissionByCode("SYSTEM_MODULE_DEFINITION"))
+                        foreach (SectionPermissionInfo p in GetPermissionByCode("SYSTEM_MODULE_DEFINITION"))
                         {
                             if (p.PermissionID == perm.PermissionID)
                             {
@@ -205,18 +205,18 @@ namespace Vanjaro.Core
                 }
                 return Permissions;
             }
-            public static List<CustomPermission> GetPermissionsByEntityID(int EntityID)
+            public static List<BlockSectionPermission> GetPermissionsByEntityID(int EntityID)
             {
-                return CustomPermissionFactory.GetPermissionsByEntityID(EntityID);
+                return SectionPermissionFactory.GetPermissionsByEntityID(EntityID);
             }
-            public static List<CustomPermissionInfo> GetPermissionByCode(string Code)
+            public static List<SectionPermissionInfo> GetPermissionByCode(string Code)
             {
-                return CustomPermissionFactory.GetPermissionByCode(Code);
+                return SectionPermissionFactory.GetPermissionByCode(Code);
             }
-            public static List<GenericPermissionInfo> GetGenericPermissions(List<CustomPermission> Permissions)
+            public static List<GenericPermissionInfo> GetGenericPermissions(List<BlockSectionPermission> Permissions)
             {
                 List<GenericPermissionInfo> GenericPermissions = new List<GenericPermissionInfo>();
-                foreach (CustomPermission wp in Permissions)
+                foreach (BlockSectionPermission wp in Permissions)
                 {
                     GenericPermissionInfo gp = new GenericPermissionInfo
                     {
@@ -265,8 +265,8 @@ namespace Vanjaro.Core
             private static bool CheckPermissions(int EntityID, UserInfo userInfo)
             {
                 StringBuilder sb = new StringBuilder();
-                List<CustomPermission> Permissions = GetPermissionsByEntityID(EntityID);
-                foreach (CustomPermission vPerm in Permissions)
+                List<BlockSectionPermission> Permissions = GetPermissionsByEntityID(EntityID);
+                foreach (BlockSectionPermission vPerm in Permissions)
                 {
                     string temp = null;
                     string temp2 = null;

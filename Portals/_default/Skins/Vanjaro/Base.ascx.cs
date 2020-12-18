@@ -493,10 +493,10 @@ namespace Vanjaro.Skin
                     {
                         int EntityID = int.Parse(item.Attributes.Where(a => a.Name == "perm").FirstOrDefault().Value);
                         bool Inherit = true;
-                        CustomPermissionEntity customPermissionEntity = CustomPermissionManager.GetCustomPermissionEntity(EntityID);
-                        if (customPermissionEntity != null && customPermissionEntity.Inherit.HasValue)
-                            Inherit = customPermissionEntity.Inherit.Value;
-                        if (!Inherit && !CustomPermissionManager.HasViewPermission(EntityID))
+                        BlockSection blockSection = SectionPermissionManager.GetBlockSection(EntityID);
+                        if (blockSection != null && blockSection.Inherit.HasValue)
+                            Inherit = blockSection.Inherit.Value;
+                        if (!Inherit && !SectionPermissionManager.HasViewPermission(EntityID))
                             item.Remove();
                     }
                 }

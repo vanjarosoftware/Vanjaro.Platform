@@ -27,7 +27,7 @@ namespace Vanjaro.Core
                 public const string Theme = Prefix + "Theme";
                 internal const string OAuthClients = Prefix + "OAuthClients";
                 internal const string IOAuthClient_Extension = Prefix + "IOAuthClient_Extension";
-                internal const string CustomPermission = Prefix + "CustomPermission";
+                internal const string SectionPermission = Prefix + "SectionPermission";
             }
 
             public static string GetCacheKey(object extensions)

@@ -1,10 +1,10 @@
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_CustomPermissionEntity]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_BlockSection]') AND type in (N'U'))
 BEGIN
-CREATE TABLE {databaseOwner}[VJ_Core_CustomPermissionEntity](
+CREATE TABLE {databaseOwner}[VJ_Core_BlockSection](
 	[EntityID] [int] IDENTITY(1,1) NOT NULL,
-	[Entity] [nvarchar](50) NOT NULL,
+	[TabID] [int] NOT NULL,
 	[Inherit] [bit] NULL
- CONSTRAINT [PK_VJ_Core_CustomPermissionEntity] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_VJ_Core_BlockSection] PRIMARY KEY CLUSTERED 
 (
 	[EntityID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -13,9 +13,9 @@ END
 GO
 
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_CustomPermission]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_BlockSectionPermission]') AND type in (N'U'))
 BEGIN
-CREATE TABLE {databaseOwner}[VJ_Core_CustomPermission](
+CREATE TABLE {databaseOwner}[VJ_Core_BlockSectionPermission](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[EntityID] [int] NOT NULL,
 	[PermissionID] [int] NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE {databaseOwner}[VJ_Core_CustomPermission](
 	[CreatedOn] [datetime] NOT NULL,
 	[UpdatedBy] [int] NULL,
 	[UpdatedOn] [datetime] NULL
- CONSTRAINT [PK_VJ_Core_CustomPermission] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_VJ_Core_BlockSectionPermission] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

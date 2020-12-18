@@ -112,7 +112,7 @@ namespace Vanjaro.Core
                 List<int> pages = GetAllByTabID(TabID).OrderByDescending(a => a.Version).Select(a => a.Version).Distinct().Take(MaxVersion).ToList();
                 if (pages.Count > 0)
                 {
-                    RemoveCustomPermissions(TabID, pages);
+                    RemoveSectionPermissions(TabID, pages);
                     Pages.Delete("Where TabID=@0 and Version not in (" + string.Join(",", pages) + ")", TabID);
                     CacheFactory.Clear(CacheFactory.Keys.Page);
 
@@ -138,7 +138,7 @@ namespace Vanjaro.Core
                 }
             }
 
-            private static void RemoveCustomPermissions(int TabID, List<int> pages)
+            private static void RemoveSectionPermissions(int TabID, List<int> pages)
             {
                 List<int> EntityIDs = new List<int>();
                 List<Pages> PagesToDelete = Pages.Query("Where TabID=@0 and Version not in (" + string.Join(",", pages) + ")", TabID).ToList();
@@ -161,9 +161,7 @@ namespace Vanjaro.Core
                 }
                 if (EntityIDs.Count > 0)
                 {
-                    CustomPermissionEntity.Delete("Where EntityID in (" + string.Join(",", EntityIDs) + ")");
-                    CustomPermission.Delete("Where EntityID in (" + string.Join(",", EntityIDs) + ")");
-                    CacheFactory.Clear(CacheFactory.Keys.CustomPermission);
+                    SectionPermissionFactory.DeletePermissions(EntityIDs);
                 }
             }
 

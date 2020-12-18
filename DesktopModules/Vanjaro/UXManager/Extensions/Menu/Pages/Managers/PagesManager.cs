@@ -825,14 +825,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
 
             public static List<PagesTreeView> GetPagesTreeView()
             {
-                return GetPagesTreeView(null);
+                return GetPagesTreeView(PortalSettings.Current, null);
             }
 
-            public static List<PagesTreeView> GetPagesTreeView(IEnumerable<TabInfo> TabInfo)
+            public static List<PagesTreeView> GetPagesTreeView(PortalSettings portalSettings, IEnumerable<TabInfo> tabInfo)
             {
-                PortalSettings portalSettings = PortalController.Instance.GetCurrentSettings() as PortalSettings;
                 List<PagesTreeView> result = new List<PagesTreeView>();
-                IEnumerable<TabInfo> AvailablePages = TabInfo ?? Core.Managers.PageManager.GetPageList(PortalSettings.Current).ToList();
+                IEnumerable<TabInfo> AvailablePages = tabInfo ?? PageManager.GetPageList(portalSettings).ToList();
                 if (AvailablePages != null)
                 {
                     foreach (TabInfo c in AvailablePages)
@@ -849,7 +848,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
 
                         if (c.TabID > Null.NullInteger)
                         {
-                            result.Add(new PagesTreeView { HasContent = Core.Managers.PageManager.GetAllTabIdByPortalID(PortalSettings.Current.PortalId).Where(x => x == c.TabID).FirstOrDefault() > 0 ? true : false, label = c.TabName.TrimStart('.'), Value = c.TabID, selected = false, children = TabInfo == null ? GetPageTreeChildrens(c.TabID, portalSettings) : new List<PagesTreeView>(), usedbyCount = 0, PageUrl = c.FullUrl, FolderPage = IsFolder, LinkNewWindow = LinkNewWindow, HasBeenPublished = HasBeenPublished, IsVisible = c.IsVisible, IsRedirectPage = IsRedirectPage, HasEditPermission = HasEditPermission });
+                            result.Add(new PagesTreeView { HasContent = Core.Managers.PageManager.GetAllTabIdByPortalID(PortalSettings.Current.PortalId).Where(x => x == c.TabID).FirstOrDefault() > 0 ? true : false, label = c.TabName.TrimStart('.'), Value = c.TabID, selected = false, children = tabInfo == null ? GetPageTreeChildrens(c.TabID, portalSettings) : new List<PagesTreeView>(), usedbyCount = 0, PageUrl = c.FullUrl, FolderPage = IsFolder, LinkNewWindow = LinkNewWindow, HasBeenPublished = HasBeenPublished, IsVisible = c.IsVisible, IsRedirectPage = IsRedirectPage, HasEditPermission = HasEditPermission });
                         }
                     }
                 }
