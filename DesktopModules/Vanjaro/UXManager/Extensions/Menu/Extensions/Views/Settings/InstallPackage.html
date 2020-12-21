@@ -1,6 +1,6 @@
 ﻿<div ng-controller="settings_installpackage" class="vj-ux-manager">
     <uiengine provider="AngularBootstrap" identifier="settings_installpackage">
-        <uilayout name="default" attr-ng-show="showInstall()">
+        <uilayout name="default" attr-ng-show="showInstall">
             <uitemplate>
                 <div mn-ng-repeat="package in ui.data.PackageList.Options">
                     <div class="float-right textright">
@@ -33,7 +33,7 @@
                 </div>
             </uitemplate>
         </uilayout>
-        <uilayout name="default" attr-ng-hide="showInstall()">
+        <uilayout name="default" attr-ng-hide="showInstall">
             <uitemplate>
                 <div mn-ng-repeat="package in ui.data.PackageErrorList.Options">
                     <br />

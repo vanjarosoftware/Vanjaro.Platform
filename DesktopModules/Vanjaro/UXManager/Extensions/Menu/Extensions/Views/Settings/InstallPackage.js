@@ -1,14 +1,15 @@
 ﻿app.controller('settings_installpackage', function ($scope, $attrs, $http, CommonSvc, $sce) {
     var common = CommonSvc.getData($scope);
-
+    $scope.showInstall = true;
     $scope.onInit = function () {
-
+        $scope.PackageError();
     };
 
-    $scope.showInstall = function () {
+    $scope.PackageError = function () {
         if ($scope.ui.data.PackageErrorList.Options.length === 0)
-            return true;
-        return false;
+            $scope.showInstall = true;
+        else
+            $scope.showInstall = false;
     };
 
     $scope.Click_Install = function () {
@@ -21,9 +22,15 @@
         });
         if (val) {
             common.webApi.get('InstallPackage/install').success(function (Response) {
-                var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
-                Parentscope.Click_IsInstall(true);
-                $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                if (Response.Data.length===0) {
+                    var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
+                    Parentscope.Click_IsInstall(true);
+                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                }
+                else {
+                    $scope.ui.data.PackageErrorList.Options = Response.Data;
+                    $scope.PackageError();
+                }
             });
         }
     };
