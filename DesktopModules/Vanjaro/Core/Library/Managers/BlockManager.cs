@@ -206,6 +206,10 @@ namespace Vanjaro.Core
                 dynamic Result = new ExpandoObject();
                 try
                 {
+                    if (!string.IsNullOrEmpty(CustomBlock.Html))
+                        CustomBlock.Html = PageManager.DeTokenizeLinks(CustomBlock.Html, PortalSettings.PortalId);
+                    if (!string.IsNullOrEmpty(CustomBlock.Css))
+                        CustomBlock.Css = PageManager.DeTokenizeLinks(CustomBlock.Css, PortalSettings.PortalId);
                     if (BlockFactory.Get(PortalSettings.PortalId, CustomBlock.Name) == null)
                     {
                         if (ForceCount == 0)
