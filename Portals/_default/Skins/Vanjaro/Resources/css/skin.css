@@ -215,6 +215,14 @@ a, a:hover, a:focus, a:active {
     height: calc(100% - 3.50rem);
 }
 
+.modal .modal-dialog.modal-right {
+    height: 100%;
+    position: fixed;
+    margin: 0;
+    right: 0;
+}
+
+
 #UXRender {
     padding: 0;
 }
