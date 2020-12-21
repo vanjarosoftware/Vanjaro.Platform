@@ -1,9 +1,11 @@
 ﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Exceptions;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -27,7 +29,14 @@ namespace Vanjaro.Core.Providers
 
         public string Link => "https://www.youtube.com";
 
-        private string Key => PortalController.GetEncryptedString("Vanjaro.Integration.YouTube", PortalSettings.Current.PortalId, Config.GetDecryptionkey());
+        private string Key
+        {
+            get
+            {
+                HostController hostController = new HostController();
+                return string.IsNullOrEmpty(PortalController.GetEncryptedString("Vanjaro.Integration.YouTube", PortalSettings.Current.PortalId, Config.GetDecryptionkey())) ? hostController.GetEncryptedString("Vanjaro.Integration.YouTube", Config.GetDecryptionkey()) : PortalController.GetEncryptedString("Vanjaro.Integration.YouTube", PortalSettings.Current.PortalId, Config.GetDecryptionkey());
+            }
+        }
 
         public static bool IsValid(string Key)
         {

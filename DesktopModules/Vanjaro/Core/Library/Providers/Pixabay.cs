@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,15 @@ namespace Vanjaro.Core.Providers
 
         public string Link => "https://pixabay.com";
         public bool IsSupportBackground => true;
-        private string Key => PortalController.GetEncryptedString("Vanjaro.Integration.Pixabay", PortalSettings.Current.PortalId, Config.GetDecryptionkey());
+
+        private string Key
+        {
+            get
+            {
+                HostController hostController = new HostController();
+                return string.IsNullOrEmpty(PortalController.GetEncryptedString("Vanjaro.Integration.Pixabay", PortalSettings.Current.PortalId, Config.GetDecryptionkey())) ? hostController.GetEncryptedString("Vanjaro.Integration.Pixabay", Config.GetDecryptionkey()) : PortalController.GetEncryptedString("Vanjaro.Integration.Pixabay", PortalSettings.Current.PortalId, Config.GetDecryptionkey()); ;
+            }
+        }
 
         public static bool IsValid(string Key)
         {
