@@ -551,33 +551,37 @@ $(document).ready(function () {
                                     }]
                                 },
 
-                                storageManager: {
-                                    type: 'remote',
-                                    autosave: false,
-                                    autoload: false,
-                                    stepsBeforeSave: 2,
-                                    urlStore: eval(data.UpdateContentUrl),
-                                    onComplete(jqXHR, status) {
-                                        if (jqXHR.IsSuccess) {
-                                            if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
-                                                ShowNotification('', VjLocalized.PagePublished, 'success');
-                                        }
-                                        else
-                                            ShowNotification('', jqXHR.Message, 'error');
-                                    },
-                                    params: {
-                                        EntityID: data.EntityID,
-                                        IsPublished: false,
-                                        m2v: false,
-                                        Comment: ""
-                                    },
-                                    headers: {
-                                        'ModuleId': parseInt(data.ModuleId),
-                                        'TabId': parseInt(sf.getTabId()),
-                                        'RequestVerificationToken': sf.getAntiForgeryValue()
-                                    }
-                                }
-                            });
+								storageManager: {
+									type: 'remote',
+									autosave: false,
+									autoload: false,
+									stepsBeforeSave: 2,
+									urlStore: eval(data.UpdateContentUrl),
+									onComplete(jqXHR, status) {
+										if (jqXHR.IsSuccess) {
+											if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
+												ShowNotification('', VjLocalized.PagePublished, 'success');
+										}
+										else if (jqXHR.Message != undefined && jqXHR.Message != '')
+											ShowNotification('', jqXHR.Message, 'error');
+
+										if (jqXHR.SaveContentNotification != undefined && jqXHR.SaveContentNotification != '') {
+											eval(jqXHR.SaveContentNotification);
+										}
+									},
+									params: {
+										EntityID: data.EntityID,
+										IsPublished: false,
+										m2v: false,
+										Comment: ""
+									},
+									headers: {
+										'ModuleId': parseInt(data.ModuleId),
+										'TabId': parseInt(sf.getTabId()),
+										'RequestVerificationToken': sf.getAntiForgeryValue()
+									}
+								}
+							});
 
                             //setCustomRte();
                             const rte = VjEditor.RichTextEditor;
