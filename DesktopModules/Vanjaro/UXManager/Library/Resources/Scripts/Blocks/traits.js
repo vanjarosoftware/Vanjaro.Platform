@@ -1335,6 +1335,10 @@ export default (editor, config = {}) => {
 					$(trait.attributes.cssproperties).each(function (index, property) {
 
 						if (property.name == 'color') {
+
+							if (BGcolor == "#fff" || BGcolor == "#ffffff" || BGcolor == "rgb(255, 255, 255)")
+								BGcolor = "#000000";
+
 							$(trait.target.getTrait('styles').el).find('label').css("color", BGcolor);
 
 							$(trait.target.getTrait('styles').el).find('label').removeClass(function (index, className) {
@@ -1902,6 +1906,10 @@ export default (editor, config = {}) => {
 
 			if (typeof component.getStyle()['color'] != 'undefined') {
 				var color = component.getStyle()['color'].replace('!important', '');
+
+				if (color == "#fff" || color == "#ffffff" || color == "rgb(255, 255, 255)")
+					color = "#000000";
+
 				$(elInput).find('label').css('color', color);
 			}
 
