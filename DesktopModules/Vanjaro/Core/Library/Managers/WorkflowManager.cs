@@ -1108,7 +1108,7 @@ namespace Vanjaro.Core
                         string FromEmail = "Vanjaro@dnnuser.com";
                         foreach (string ToEmail in Emails.Distinct())
                         {
-                            Vanjaro.Common.Manager.NotificationManager.QueueMail(0, NotificationSubject, NotificationBody, ToEmail, new List<Vanjaro.Common.Data.Entities.Attachment>(), FromEmail, FromEmail);
+                            Vanjaro.Common.Manager.NotificationManager.QueueMail(PortalID, 0, NotificationSubject, NotificationBody, ToEmail, new List<Vanjaro.Common.Data.Entities.Attachment>(), FromEmail, FromEmail);
                         }
                     }
                 }
