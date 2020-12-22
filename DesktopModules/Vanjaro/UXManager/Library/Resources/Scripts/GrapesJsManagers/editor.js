@@ -1983,8 +1983,8 @@ $(document).ready(function () {
                                                 target: e
                                             }))
                                     }),
-                                        r.html = this.cleanHtmlIds(r.html, r.css),
-                                        r.css = '',
+                                        r.html = r.html,
+                                        r.css = r.css,
                                         r
                                 },
                                 cleanHtmlIds: function (t, tc) {
@@ -2032,7 +2032,7 @@ $(document).ready(function () {
                                     return l.forEach(function (t) {
                                         var css = t.toCSS();
                                         if (css.startsWith('#'))
-                                            return a += (css.substr(0, 0) + 'vjbrk#' + css.substr(0 + 1));
+                                            return a += (css.substr(0, 0) + '#' + css.substr(0 + 1));
                                         else
                                             return a;
                                     }),
