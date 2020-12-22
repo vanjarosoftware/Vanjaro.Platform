@@ -1,0 +1,28 @@
+/****** Object:  Table {databaseOwner}[VJ_Common_MailQueue_Log]    Script Date: 12/22/2020 2:09:59 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_MailQueue_Log]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Common_MailQueue_Log](
+	[LogID] [int] IDENTITY(1,1) NOT NULL,
+	[PortalID] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[ToEmail] [nvarchar](255) NOT NULL,
+	[Subject] [nvarchar](255) NOT NULL,
+ CONSTRAINT [PK_VJ_Common_MailQueue_Log] PRIMARY KEY CLUSTERED 
+(
+	[LogID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+
+
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_MailQueue]') AND name = 'PortalID')
+BEGIN 
+  ALTER TABLE {databaseOwner}VJ_Common_MailQueue 
+    ADD PortalID int NOT NULL
+END
+

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Controllers;
+using System.Collections.Generic;
 using System.Linq;
 using Vanjaro.Common.Components;
 using Vanjaro.Common.Data.Entities;
@@ -214,6 +216,14 @@ namespace Vanjaro.Common.Factories
         internal static IEnumerable<int> GetDistinctModuleIds(string Identifier)
         {
             return Setting.Query("WHERE Identifier=@0", Identifier).Select(s => s.ModuleID).Distinct();
+        }
+
+        public static string GetHostSetting(string Name, bool Secure, string defaultValue = "")
+        {
+            HostController hostController = new HostController();
+            if (Secure)
+                return hostController.GetEncryptedString(Name, Config.GetDecryptionkey());
+            return hostController.GetString(Name, defaultValue);
         }
         #endregion
     }

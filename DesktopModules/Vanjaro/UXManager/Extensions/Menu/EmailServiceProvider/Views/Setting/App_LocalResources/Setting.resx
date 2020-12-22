@@ -186,4 +186,10 @@
   <data name="SMTPmode.ON" xml:space="preserve">
     <value>Global</value>
   </data>
+  <data name="Host_PurgeLogsAfter.Suffix" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="Host_PurgeLogsAfter.Text" xml:space="preserve">
+    <value>Purge Logs after</value>
+  </data>
 </root>

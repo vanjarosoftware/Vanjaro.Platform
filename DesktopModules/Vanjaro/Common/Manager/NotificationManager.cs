@@ -43,24 +43,24 @@ namespace Vanjaro.Common.Manager
         }
 
 
-        public static void QueueMail(int ModuleID, string Subject, string Content, string ToEmail, string FromEmailPrefix = null)
+        public static void QueueMail(int PortalID, int ModuleID, string Subject, string Content, string ToEmail, string FromEmailPrefix = null)
         {
-            QueueMail(ModuleID, Subject, Content, ToEmail, null, FromEmailPrefix);
+            QueueMail(PortalID, ModuleID, Subject, Content, ToEmail, null, FromEmailPrefix);
         }
 
-        public static void QueueMail(int ModuleID, string Subject, string Content, string ToEmail, List<Attachment> Attachments, string FromEmailPrefix = null)
+        public static void QueueMail(int PortalID, int ModuleID, string Subject, string Content, string ToEmail, List<Attachment> Attachments, string FromEmailPrefix = null)
         {
-            QueueMail(ModuleID, Subject, Content, ToEmail, Attachments, string.Empty, string.Empty, FromEmailPrefix);
+            QueueMail(PortalID, ModuleID, Subject, Content, ToEmail, Attachments, string.Empty, string.Empty, FromEmailPrefix);
         }
 
-        public static void QueueMail(int ModuleID, string Subject, string Content, string ToEmail, List<Attachment> Attachments, string FromName, string FromEmail, string FromEmailPrefix = null)
+        public static void QueueMail(int PortalID, int ModuleID, string Subject, string Content, string ToEmail, List<Attachment> Attachments, string FromName, string FromEmail, string FromEmailPrefix = null)
         {
-            QueueMail(ModuleID, Subject, Content, ToEmail, Attachments, FromName, FromEmail, string.Empty, FromEmailPrefix);
+            QueueMail(PortalID, ModuleID, Subject, Content, ToEmail, Attachments, FromName, FromEmail, string.Empty, FromEmailPrefix);
         }
 
-        public static void QueueMail(int ModuleID, string Subject, string Content, string ToEmail, List<Attachment> Attachments, string FromName, string FromEmail, string ReplyEmail, string FromEmailPrefix = null)
+        public static void QueueMail(int PortalID, int ModuleID, string Subject, string Content, string ToEmail, List<Attachment> Attachments, string FromName, string FromEmail, string ReplyEmail, string FromEmailPrefix = null)
         {
-            NotificationFactory.QueueMail(ModuleID, Subject, Content, ToEmail, Attachments, FromName, FromEmail, FromEmailPrefix, ReplyEmail);
+            NotificationFactory.QueueMail(PortalID, ModuleID, Subject, Content, ToEmail, Attachments, FromName, FromEmail, FromEmailPrefix, ReplyEmail);
         }
 
         public static void QueueMail(MailQueue MailQueue)

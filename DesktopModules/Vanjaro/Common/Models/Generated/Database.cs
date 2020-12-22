@@ -24,6 +24,7 @@ namespace Vanjaro.Common.Data.Entities
     public partial class MailQueue : CommonLibraryRepo.Record<MailQueue>
     {
         [Column] public int MailQueueID { get; set; }
+        [Column] public int PortalID { get; set; }
         [Column] public string ToEmail { get; set; }
         [Column] public string Subject { get; set; }
         [Column] public string Content { get; set; }
@@ -72,5 +73,17 @@ namespace Vanjaro.Common.Data.Entities
         [Column] public int PortalID { get; set; }
         [Column] public string Name { get; set; }
         [Column] public string Value { get; set; }
+    }
+
+    [TableName("VJ_Common_MailQueue_Log")]
+    [PrimaryKey("LogID")]
+    [ExplicitColumns]
+    public partial class MailQueue_Log : CommonLibraryRepo.Record<MailQueue_Log>
+    {
+        [Column] public int LogID { get; set; }
+        [Column] public int PortalID { get; set; }
+        [Column] public DateTime CreatedOn { get; set; }
+        [Column] public string ToEmail { get; set; }
+        [Column] public string Subject { get; set; }
     }
 }
