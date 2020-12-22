@@ -47,8 +47,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_MailQueue]') AND type in (N'U'))
 BEGIN
 CREATE TABLE {databaseOwner}[VJ_Common_MailQueue](
-	[MailQueueID] [int] IDENTITY(1,1) NOT NULL,
-	[PortalID] [int] NOT NULL,
+	[MailQueueID] [int] IDENTITY(1,1) NOT NULL,	
 	[ToEmail] [nvarchar](255) NOT NULL,
 	[Subject] [nvarchar](255) NOT NULL,
 	[Content] [nvarchar](max) NOT NULL,
