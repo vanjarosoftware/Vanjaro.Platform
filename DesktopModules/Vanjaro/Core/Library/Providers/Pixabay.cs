@@ -9,6 +9,7 @@ using System.Web.Script.Serialization;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Entities;
 using Vanjaro.Core.Entities.Interface;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Providers
 {
@@ -29,8 +30,8 @@ namespace Vanjaro.Core.Providers
         {
             get
             {
-                HostController hostController = new HostController();
-                return string.IsNullOrEmpty(PortalController.GetEncryptedString("Vanjaro.Integration.Pixabay", PortalSettings.Current.PortalId, Config.GetDecryptionkey())) ? hostController.GetEncryptedString("Vanjaro.Integration.Pixabay", Config.GetDecryptionkey()) : PortalController.GetEncryptedString("Vanjaro.Integration.Pixabay", PortalSettings.Current.PortalId, Config.GetDecryptionkey()); ;
+                string Pixabay_Key = SettingManager.GetPortalSetting("Vanjaro.Integration.Pixabay", true);
+                return string.IsNullOrEmpty(Pixabay_Key) ? SettingManager.GetHostSetting("Vanjaro.Integration.Pixabay", true) : Pixabay_Key;
             }
         }
 

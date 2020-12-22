@@ -13,6 +13,7 @@ using System.Web.Script.Serialization;
 using System.Xml;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Entities.Interface;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Providers
 {
@@ -33,8 +34,8 @@ namespace Vanjaro.Core.Providers
         {
             get
             {
-                HostController hostController = new HostController();
-                return string.IsNullOrEmpty(PortalController.GetEncryptedString("Vanjaro.Integration.YouTube", PortalSettings.Current.PortalId, Config.GetDecryptionkey())) ? hostController.GetEncryptedString("Vanjaro.Integration.YouTube", Config.GetDecryptionkey()) : PortalController.GetEncryptedString("Vanjaro.Integration.YouTube", PortalSettings.Current.PortalId, Config.GetDecryptionkey());
+                string YouTube_key = SettingManager.GetPortalSetting("Vanjaro.Integration.YouTube", true);
+                return string.IsNullOrEmpty(YouTube_key) ? SettingManager.GetHostSetting("Vanjaro.Integration.YouTube", true) : YouTube_key;
             }
         }
 
