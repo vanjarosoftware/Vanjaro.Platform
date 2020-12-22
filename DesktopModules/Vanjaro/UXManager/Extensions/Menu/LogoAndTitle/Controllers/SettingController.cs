@@ -99,13 +99,15 @@ namespace Vanjaro.UXManager.Extensions.Menu.LogoAndTitle.Controllers
                 //portalInfo.PortalName = request.PortalName;
 
                 if (request.LogoFile != null && request.LogoFile.fileId > 0)
-                {
                     portalInfo.LogoFile = FileManager.Instance.GetFile(request.LogoFile.fileId).RelativePath;
-                }
 
                 //portalInfo.FooterText = request.FooterText;
 
-                PortalController.Instance.UpdatePortalInfo(portalInfo);
+                if (portalInfo.LogoFile.Length > 50)
+                    actionResult.AddError("InvalidLogoURL.Error" + HttpStatusCode.BadRequest, Localization.GetString("InvalidLogoURL_Error", Components.Constants.LocalResourcesFile));
+                else
+                    PortalController.Instance.UpdatePortalInfo(portalInfo);
+
                 PortalController.UpdatePortalSetting(pid, "TimeZone", request.TimeZone, false);
 
                 if (request.FavIcon != null && request.FavIcon.fileId > 0)
