@@ -5,3 +5,21 @@
     .vj-ux-manager .btn_integration .btn-group .btn {
         width: 100px;
     }
+
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    line-height: 22px;
+}
+
+    .input-group-addon:last-child {
+        border-left: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }

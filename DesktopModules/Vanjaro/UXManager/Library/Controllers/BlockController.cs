@@ -65,14 +65,14 @@ namespace Vanjaro.UXManager.Library.Controllers
         }
 
         [HttpGet]
-        [DnnPageEditor]
+        [AuthorizeAccessRoles(AccessRoles = "pageedit")]
         public List<Block> GetAll()
         {
             return Core.Managers.BlockManager.GetAll();
         }
 
         [HttpPost]
-        [DnnPageEditor]
+        [AuthorizeAccessRoles(AccessRoles = "pageedit")]
         public ThemeTemplateResponse Render()
         {
             Dictionary<string, string> Attributes = new Dictionary<string, string>();

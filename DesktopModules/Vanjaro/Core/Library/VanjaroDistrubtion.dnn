@@ -60,6 +60,11 @@
 							<name>Common.01.00.00.SqlDataProvider</name>
 							<version>01.00.00</version>
 						</script>
+						<script type="Install">
+							<path>Install</path>
+							<name>Common.01.00.10.SqlDataProvider</name>
+							<version>01.00.00</version>
+						</script>
 						<script type="UnInstall">
 							<path>Install</path>
 							<name>Uninstall.Common.SqlDataProvider</name>

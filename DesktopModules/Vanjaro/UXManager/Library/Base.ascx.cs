@@ -111,21 +111,15 @@ namespace Vanjaro.UXManager.Library
 
                     WebForms.LinkCSS(Page, "UXManagerAppCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/StyleSheets/app.css"));
 
-                    if (InjectEditor())
-                    {
-                        WebForms.LinkCSS(Page, "GrapesJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapes.min.css"));
-                        WebForms.LinkCSS(Page, "GrapickJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapick.min.css"));
-                        WebForms.LinkCSS(Page, "GrapesJsPanelCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/jsPanel/jspanel.min.css"));
-                    }
+
+                    WebForms.LinkCSS(Page, "GrapesJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapes.min.css"));
+                    WebForms.LinkCSS(Page, "GrapickJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapick.min.css"));
+                    WebForms.LinkCSS(Page, "GrapesJsPanelCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/jsPanel/jspanel.min.css"));
+
 
                     WebForms.RegisterClientScriptInclude(Page, "GrapesJsJs", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/uxmanager.min.js"), false);
                     WebForms.LinkCSS(Page, "GrapesJspluginCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJsManagers/css/uxmanager.css"));
                     WebForms.LinkCSS(Page, "FontawesomeV4Css", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/fontawesome/v4.css"));
-
-                    if (!CanShowUXManager())
-                    {
-                        WebForms.RegisterClientScriptBlock(Page, "MenuSettingsBlocks", "$(document).ready(function(){$('[href=\"#MenuSettings\"]').click();$('#mode-switcher').remove();setTimeout(function(){$('.gjs-cv-canvas__frames').css('pointer-events','none');}, 100); });", true);
-                    }
 
                     LocalizeGrapeJS();
 
@@ -154,6 +148,9 @@ namespace Vanjaro.UXManager.Library
                     }
                 }
             }
+            else
+                WebForms.RegisterClientScriptBlock(Page, "MenuSettingsBlocks", "$(document).ready(function(){$('[href=\"#MenuSettings\"]').click();$('#mode-switcher').remove();setTimeout(function(){$('.gjs-cv-canvas__frames').css('pointer-events','none');}, 100); });", true);
+
 
         }
 

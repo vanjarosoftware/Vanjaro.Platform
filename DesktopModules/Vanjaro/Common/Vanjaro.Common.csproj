@@ -4041,7 +4041,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Install\Common.01.00.00.SqlDataProvider" />
+    <Content Include="Install\Common.01.00.10.SqlDataProvider" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Install\Uninstall.Common.SqlDataProvider" />
@@ -4081,6 +4081,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
+    <Content Include="Install\Common.01.00.00.SqlDataProvider" />
     <Content Include="Frameworks\EnjoyHint\src\Casino_Hand\casino_hand-webfont.eot" />
     <Content Include="Frameworks\EnjoyHint\src\Casino_Hand\casino_hand-webfont.ttf" />
     <Content Include="Frameworks\EnjoyHint\src\Casino_Hand\casino_hand-webfont.woff" />

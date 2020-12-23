@@ -49,33 +49,34 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
                                 {
                                     using (var archive = new ZipArchive(zipFile))
                                     {
-                                        ZipArchiveEntry zipArchiveEntry = archive.Entries.Where(r => r.FullName.Contains(".dnn")).FirstOrDefault();
-                                        File.WriteAllBytes(installPackagePath + zipArchiveEntry.FullName, ReadToEnd(zipArchiveEntry.Open()));
-                                        
+                                        ZipArchiveEntry zipArchiveEntry = archive.Entries.Where(r => r.FullName.Contains(".dnn")).FirstOrDefault();                                        
                                         XmlDocument doc = new XmlDocument();
-                                        doc.Load(installPackagePath + zipArchiveEntry.FullName);
-                                        ParseResult.Description = doc.GetElementsByTagName("description")[0].InnerText;
-                                        ParseResult.FriendlyName = doc.GetElementsByTagName("friendlyName")[0].InnerText;
-                                        ParseResult.Organization = doc.GetElementsByTagName("organization")[0].InnerText;
-                                        ParseResult.Email = doc.GetElementsByTagName("email")[0].InnerText;
-                                        ParseResult.Url = doc.GetElementsByTagName("url")[0].InnerText;
+                                        if (zipArchiveEntry != null)
+                                        {
+                                            doc.Load(zipArchiveEntry.Open());
+                                            ParseResult.Description = doc.GetElementsByTagName("description")[0].InnerText;
+                                            ParseResult.FriendlyName = doc.GetElementsByTagName("friendlyName")[0].InnerText;
+                                            ParseResult.Organization = doc.GetElementsByTagName("organization")[0].InnerText;
+                                            ParseResult.Email = doc.GetElementsByTagName("email")[0].InnerText;
+                                            ParseResult.Url = doc.GetElementsByTagName("url")[0].InnerText;
 
-                                        XmlNode node = doc.GetElementsByTagName("package")[0];
-                                        var attribute = node.Attributes["version"];
-                                        if (attribute != null)
-                                        {
-                                            ParseResult.Version = attribute.Value;
-                                        }
-                                        node = doc.GetElementsByTagName("license")[0];
-                                        attribute = node.Attributes["src"];
-                                        if (attribute != null)
-                                        {
-                                            string License = attribute.Value;
-                                            zipArchiveEntry = archive.Entries.Where(r => r.FullName.ToLower() == License.ToLower()).FirstOrDefault();
-                                            if (zipArchiveEntry != null)
+                                            XmlNode node = doc.GetElementsByTagName("package")[0];
+                                            var attribute = node.Attributes["version"];
+                                            if (attribute != null)
                                             {
-                                                byte[] bytes = ReadToEnd(zipArchiveEntry.Open());
-                                                ParseResult.License = Encoding.ASCII.GetString(bytes, 0, bytes.Length);
+                                                ParseResult.Version = attribute.Value;
+                                            }
+                                            node = doc.GetElementsByTagName("license")[0];
+                                            attribute = node.Attributes["src"];
+                                            if (attribute != null)
+                                            {
+                                                string License = attribute.Value;
+                                                zipArchiveEntry = archive.Entries.Where(r => r.FullName.ToLower() == License.ToLower()).FirstOrDefault();
+                                                if (zipArchiveEntry != null)
+                                                {
+                                                    StreamReader reader = new StreamReader(zipArchiveEntry.Open());
+                                                    ParseResult.License = reader.ReadToEnd();
+                                                }
                                             }
                                         }
                                         ParseResult.Success = IsSuccess;
@@ -95,68 +96,19 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
             }
             return ParseResults;
         }
-
-        public static byte[] ReadToEnd(System.IO.Stream stream)
+        
+        internal static List<InstallResultDto> InstallPackage(PortalSettings portalSettings, UserInfo userInfo, string installPackagePath)
         {
-            long originalPosition = 0;
-
-            if (stream.CanSeek)
-            {
-                originalPosition = stream.Position;
-                stream.Position = 0;
-            }
-
-            try
-            {
-                byte[] readBuffer = new byte[4096];
-
-                int totalBytesRead = 0;
-                int bytesRead;
-
-                while ((bytesRead = stream.Read(readBuffer, totalBytesRead, readBuffer.Length - totalBytesRead)) > 0)
-                {
-                    totalBytesRead += bytesRead;
-
-                    if (totalBytesRead == readBuffer.Length)
-                    {
-                        int nextByte = stream.ReadByte();
-                        if (nextByte != -1)
-                        {
-                            byte[] temp = new byte[readBuffer.Length * 2];
-                            Buffer.BlockCopy(readBuffer, 0, temp, 0, readBuffer.Length);
-                            Buffer.SetByte(temp, totalBytesRead, (byte)nextByte);
-                            readBuffer = temp;
-                            totalBytesRead++;
-                        }
-                    }
-                }
-
-                byte[] buffer = readBuffer;
-                if (readBuffer.Length != totalBytesRead)
-                {
-                    buffer = new byte[totalBytesRead];
-                    Buffer.BlockCopy(readBuffer, 0, buffer, 0, totalBytesRead);
-                }
-                return buffer;
-            }
-            finally
-            {
-                if (stream.CanSeek)
-                {
-                    stream.Position = originalPosition;
-                }
-            }
-        }
-
-        internal static void InstallPackage(PortalSettings portalSettings, UserInfo userInfo, string installPackagePath)
-        {
+            List<InstallResultDto> installResults = new List<InstallResultDto>();
             foreach (KeyValuePair<string, PackageInfo> item in GetInstallPackages(installPackagePath))
             {
                 using (FileStream stream = new FileStream(item.Key, FileMode.Open))
                 {
                     try
                     {
-                        InstallController.Instance.InstallPackage(portalSettings, userInfo, null, item.Key, stream);
+                        InstallResultDto installResult = InstallController.Instance.InstallPackage(portalSettings, userInfo, null, item.Key, stream);
+                        if (!installResult.Success)
+                            installResults.Add(installResult);
                     }
                     catch (Exception ex)
                     {
@@ -164,6 +116,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
                     }
                 }
             }
+            return installResults;
         }
         
         public static IDictionary<string, PackageInfo> GetInstallPackages(string installPackagePath)

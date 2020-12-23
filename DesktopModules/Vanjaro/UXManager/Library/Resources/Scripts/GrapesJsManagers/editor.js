@@ -551,33 +551,37 @@ $(document).ready(function () {
                                     }]
                                 },
 
-                                storageManager: {
-                                    type: 'remote',
-                                    autosave: false,
-                                    autoload: false,
-                                    stepsBeforeSave: 2,
-                                    urlStore: eval(data.UpdateContentUrl),
-                                    onComplete(jqXHR, status) {
-                                        if (jqXHR.IsSuccess) {
-                                            if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
-                                                ShowNotification('', VjLocalized.PagePublished, 'success');
-                                        }
-                                        else
-                                            ShowNotification('', jqXHR.Message, 'error');
-                                    },
-                                    params: {
-                                        EntityID: data.EntityID,
-                                        IsPublished: false,
-                                        m2v: false,
-                                        Comment: ""
-                                    },
-                                    headers: {
-                                        'ModuleId': parseInt(data.ModuleId),
-                                        'TabId': parseInt(sf.getTabId()),
-                                        'RequestVerificationToken': sf.getAntiForgeryValue()
-                                    }
-                                }
-                            });
+								storageManager: {
+									type: 'remote',
+									autosave: false,
+									autoload: false,
+									stepsBeforeSave: 2,
+									urlStore: eval(data.UpdateContentUrl),
+									onComplete(jqXHR, status) {
+										if (jqXHR.IsSuccess) {
+											if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
+												ShowNotification('', VjLocalized.PagePublished, 'success');
+										}
+										else if (jqXHR.Message != undefined && jqXHR.Message != '')
+											ShowNotification('', jqXHR.Message, 'error');
+
+										if (jqXHR.SaveContentNotification != undefined && jqXHR.SaveContentNotification != '') {
+											eval(jqXHR.SaveContentNotification);
+										}
+									},
+									params: {
+										EntityID: data.EntityID,
+										IsPublished: false,
+										m2v: false,
+										Comment: ""
+									},
+									headers: {
+										'ModuleId': parseInt(data.ModuleId),
+										'TabId': parseInt(sf.getTabId()),
+										'RequestVerificationToken': sf.getAntiForgeryValue()
+									}
+								}
+							});
 
                             //setCustomRte();
                             const rte = VjEditor.RichTextEditor;
@@ -1983,8 +1987,8 @@ $(document).ready(function () {
                                                 target: e
                                             }))
                                     }),
-                                        r.html = this.cleanHtmlIds(r.html, r.css),
-                                        r.css = '',
+                                        r.html = r.html,
+                                        r.css = r.css,
                                         r
                                 },
                                 cleanHtmlIds: function (t, tc) {
@@ -2032,7 +2036,7 @@ $(document).ready(function () {
                                     return l.forEach(function (t) {
                                         var css = t.toCSS();
                                         if (css.startsWith('#'))
-                                            return a += (css.substr(0, 0) + 'vjbrk#' + css.substr(0 + 1));
+                                            return a += (css.substr(0, 0) + '#' + css.substr(0 + 1));
                                         else
                                             return a;
                                     }),
