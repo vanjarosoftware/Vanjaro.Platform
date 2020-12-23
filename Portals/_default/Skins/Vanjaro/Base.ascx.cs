@@ -1003,10 +1003,12 @@ namespace Vanjaro.Skin
 
         private void InitGuidedTours()
         {
-            //!PortalController.Instance.GetPortalSettings(PortalSettings.PortalId).ContainsKey("IsVanjaroToursGuided")
-            if (HttpContext.Current != null && (HttpContext.Current.Request.Cookies["PageIsEdit"] == null || HttpContext.Current.Request.Cookies["PageIsEdit"].Value == "false")
+            if (!PortalController.Instance.GetPortalSettings(PortalSettings.PortalId).ContainsKey("VanjaroToursGuided") 
+                && !string.IsNullOrEmpty(Request.QueryString["uxm"]) && Request.QueryString["uxm"] == "close"
                 && (TabPermissionController.HasTabPermission("EDIT") || UserController.Instance.GetCurrentUserInfo().IsAdmin || UserController.Instance.GetCurrentUserInfo().IsSuperUser))
             {
+                CookieManager.AddValue("PageIsEdit", "false", new DateTime());
+                CookieManager.AddValue("InitGrapejs", "false", new DateTime());
                 StringBuilder sb = new StringBuilder();
                 //initialize instance
                 sb.Append("var enjoyhint_instance = new EnjoyHint({});");
@@ -1024,7 +1026,7 @@ namespace Vanjaro.Skin
                 sb.Append("enjoyhint_instance.run();");
                 FrameworkManager.Load(this, "EnjoyHint");
                 WebForms.RegisterStartupScript(Page, "EnjoyHintJS", sb.ToString(), true);
-                PortalController.UpdatePortalSetting(PortalSettings.PortalId, "IsVanjaroToursGuided", "true");
+                PortalController.UpdatePortalSetting(PortalSettings.PortalId, "VanjaroToursGuided", "true");
             }
         }
 
