@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="PermissionAddedSuccess.Text" xml:space="preserve">
+    <value>Permissions will apply after page is published.</value>
+  </data>
   <data name="PermissionsInheritPermission.Text" xml:space="preserve">
     <value>Inherit View permissions from Page</value>
   </data>
@@ -135,11 +138,17 @@
   <data name="PermissionsUsersEmpty.Text" xml:space="preserve">
     <value>There are no users with explicit permissions</value>
   </data>
+  <data name="PermissionUpdatedSuccess.Text" xml:space="preserve">
+    <value>Permissions updated successfully.</value>
+  </data>
   <data name="SearchByRole.Text" xml:space="preserve">
     <value>Begin typing to add a role</value>
   </data>
   <data name="SearchByUser.Text" xml:space="preserve">
     <value>Begin typing to add a user</value>
+  </data>
+  <data name="Section.Text" xml:space="preserve">
+    <value>Section</value>
   </data>
   <data name="Update.Text" xml:space="preserve">
     <value>Update</value>
