@@ -405,6 +405,127 @@
 			},
 
 		}
-	})
+    })
+
+    sm.addType('custom_rangeslider', {
+        model: {
+
+        },
+        view: {
+            templateInput(model) {
+                const ppfx = this.ppfx;
+                const el = document.createElement('div');
+                el.setAttribute('class', 'd-flex sm-slider-wrapper custom-range-slider');
+
+                el.innerHTML = `
+					<div class="${ppfx}field ${ppfx}field-range">
+						<input type="range" name="` + model.attributes.name + `" step="` + model.attributes.step + `" min="` + model.attributes.min + `" max="` + model.attributes.max + `" class="sm-range" /> 
+					</div>
+					<div class="${ppfx}field ${ppfx}field-integer">
+						<input type="number" name="` + model.attributes.name + `" class="sm-number" />
+						<span class="${ppfx}field-units sm-unit-wrapper"></span>
+					</div>
+				`;
+
+                const select = document.createElement('select');
+
+                if (typeof model.attributes.units != "undefined") {
+                    $(model.attributes.units).each(function (index, value) {
+                        var option = document.createElement('option');
+                        option.setAttribute('class', '${ppfx}input-unit sm-unit-options');
+                        option.innerHTML = value;
+                        select.appendChild(option);
+                    });
+                }
+
+                $(el).find(".sm-unit-wrapper").append(select);
+
+                return `` + el.outerHTML + ``;
+            },
+            events() {
+                return {
+                    'input': 'inputEvent',
+                    'click [class=gjs-sm-clear]': 'clear',
+                }
+            },
+            inputEvent() {
+
+                var propArr = [];
+                var properties = "";
+                var value = event.target.value;
+                var unit = this.el.querySelector('select').value;
+                var propertyName = this.model.attributes.cssproperty;
+                var property = this.model.attributes.property;
+                var Selected = VjEditor.getSelected();
+
+                var inputRange = this.el.querySelector('.sm-slider-wrapper .sm-range');
+                var inputNumber = this.el.querySelector('.sm-slider-wrapper .sm-number');
+
+                if (event.target.className == "sm-range")
+                    inputNumber.value = value;
+                else if (event.target.className == "sm-number")
+                    inputRange.value = value;
+
+                if (propArr.length == 0 && typeof Selected.getStyle()[propertyName] != "undefined") {
+
+                    var prop = Selected.getStyle()[propertyName].split(" ");
+
+                    $(prop).each(function (index, value) {
+                        if (value != "")
+                            propArr.push(value + " ");
+                    });
+                }
+
+                var search = new RegExp(property, 'i');
+                let removeItem = propArr.filter(item => search.test(item));
+
+                propArr = jQuery.grep(propArr, function (value) {
+                    return value != removeItem;
+                });
+
+                propArr.push(property + "(" + value + unit + ") ");
+
+                $(propArr).each(function (index, value) {
+                    properties += value;
+                });
+
+                var style = Selected.getStyle();
+                style[propertyName] = value + unit;
+                Selected.setStyle(style);
+                Selected.set(property, event.target.value);
+                $(event.target).parents(".gjs-sm-property").find('.gjs-sm-clear').show();
+            },
+            setValue(value) {
+                var model = this.model;
+                var val = model.getDefaultValue();
+                var Selected = VjEditor.getSelected();
+
+                if (typeof Selected != "undefined" && typeof Selected.attributes[model.attributes.property] != "undefined")
+                    val = Selected.attributes[this.model.attributes.property];
+
+                this.$el.find('input[type=range]').val(val);
+                this.$el.find('input[type=number]').val(val);
+
+                if (value == "true")
+                    this.$el.find('.gjs-sm-clear').css('display', 'inline-block');
+
+            },
+            clear() {
+
+                var model = this.model;
+                var Selected = VjEditor.getSelected();
+                var style = Selected.getStyle();
+                var defaultValue = model.getDefaultValue();
+
+                model.setValue(model.getDefaultValue());
+                $(this.$el).find('input').val(model.getDefaultValue());
+                $(this.$el).find('.gjs-sm-clear').hide();
+              
+                Selected.set(this.model.attributes.property, defaultValue);
+
+            },
+
+        }
+    })
 
 };
