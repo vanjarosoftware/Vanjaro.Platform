@@ -62,8 +62,8 @@
 						</script>
 						<script type="Install">
 							<path>Install</path>
-							<name>Common.01.00.10.SqlDataProvider</name>
-							<version>01.00.00</version>
+							<name>Common.01.00.01.SqlDataProvider</name>
+							<version>01.00.01</version>
 						</script>
 						<script type="UnInstall">
 							<path>Install</path>

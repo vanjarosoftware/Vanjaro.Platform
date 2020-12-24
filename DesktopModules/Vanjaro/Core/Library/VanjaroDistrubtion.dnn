@@ -30,21 +30,21 @@
 							<name>Core.01.00.01.SqlDataProvider</name>
 							<version>01.00.01</version>
 						</script>
-            <script type="Install">
-              <path>Install</path>
-              <name>Core.01.00.02.SqlDataProvider</name>
-              <version>01.00.02</version>
-            </script>
-            <script type="Install">
-              <path>Install</path>
-              <name>Core.01.00.03.SqlDataProvider</name>
-              <version>01.00.03</version>
-            </script>
-            <script type="Install">
-              <path>Install</path>
-              <name>Core.01.00.04.SqlDataProvider</name>
-              <version>01.00.04</version>
-            </script>
+						<script type="Install">
+							<path>Install</path>
+							<name>Core.01.00.02.SqlDataProvider</name>
+							<version>01.00.02</version>
+						</script>
+						<script type="Install">
+							<path>Install</path>
+							<name>Core.01.00.03.SqlDataProvider</name>
+							<version>01.00.03</version>
+						</script>
+						<script type="Install">
+							<path>Install</path>
+							<name>Core.01.00.04.SqlDataProvider</name>
+							<version>01.00.04</version>
+						</script>
 						<script type="UnInstall">
 							<path>Install</path>
 							<name>Uninstall.Core.SqlDataProvider</name>
@@ -62,8 +62,8 @@
 						</script>
 						<script type="Install">
 							<path>Install</path>
-							<name>Common.01.00.10.SqlDataProvider</name>
-							<version>01.00.00</version>
+							<name>Common.01.00.01.SqlDataProvider</name>
+							<version>01.00.01</version>
 						</script>
 						<script type="UnInstall">
 							<path>Install</path>
@@ -127,11 +127,11 @@
 							<name>Vanjaro.UXManager.Extensions.Apps.About.dll</name>
 							<version>01.00.00</version>
 						</assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Vanjaro.UXManager.Extensions.Apps.SectionSettings.dll</name>
-              <version>01.00.00</version>
-            </assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Vanjaro.UXManager.Extensions.Apps.SectionSettings.dll</name>
+							<version>01.00.00</version>
+						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.Icon.dll</name>
@@ -232,11 +232,11 @@
 							<name>Vanjaro.UXManager.Extensions.Menu.GoogleAnalytics.dll</name>
 							<version>01.00.00</version>
 						</assembly>
-            <assembly>
-              <path>bin</path>
-              <name>Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.dll</name>
-              <version>01.00.00</version>
-            </assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.dll</name>
+							<version>01.00.00</version>
+						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Pixabay.dll</name>
@@ -503,14 +503,14 @@
 						</resourceFile>
 					</resourceFiles>
 				</component>
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath>DesktopModules\Vanjaro\UXManager\Extensions\Apps\SectionSettings</basePath>
-            <resourceFile>
-              <name>apps-sectionsettings-resources.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Apps\SectionSettings</basePath>
+						<resourceFile>
+							<name>apps-sectionsettings-resources.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
 				<component type="ResourceFile">
 					<resourceFiles>
 						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Apps\Icon</basePath>
@@ -671,14 +671,14 @@
 						</resourceFile>
 					</resourceFiles>
 				</component>
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath>DesktopModules\Vanjaro\UXManager\Extensions\Menu\GoogleReCaptcha</basePath>
-            <resourceFile>
-              <name>menu-integrations-googlerecaptcha-resources.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Menu\GoogleReCaptcha</basePath>
+						<resourceFile>
+							<name>menu-integrations-googlerecaptcha-resources.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
 				<component type="ResourceFile">
 					<resourceFiles>
 						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Menu\Pixabay</basePath>
@@ -1015,28 +1015,28 @@
 						</resourceFile>
 					</resourceFiles>
 				</component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\AuthenticationServices\Vanjaro</basePath>
-            <file>
-              <name>Login.ascx</name>
-              <sourceFileName>AuthenticationViews\Login.ascx</sourceFileName>
-            </file>
-            <file>
-              <name>Settings.ascx</name>
-              <sourceFileName>AuthenticationViews\Settings.ascx</sourceFileName>
-            </file>
-          </files>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\AuthenticationServices\Vanjaro\App_LocalResources</basePath>
-            <file>
-              <name>Login.ascx.resx</name>
-              <sourceFileName>AuthenticationViews\App_LocalResources\Login.ascx.resx</sourceFileName>
-            </file>
-          </files>
-        </component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\AuthenticationServices\Vanjaro</basePath>
+						<file>
+							<name>Login.ascx</name>
+							<sourceFileName>AuthenticationViews\Login.ascx</sourceFileName>
+						</file>
+						<file>
+							<name>Settings.ascx</name>
+							<sourceFileName>AuthenticationViews\Settings.ascx</sourceFileName>
+						</file>
+					</files>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\AuthenticationServices\Vanjaro\App_LocalResources</basePath>
+						<file>
+							<name>Login.ascx.resx</name>
+							<sourceFileName>AuthenticationViews\App_LocalResources\Login.ascx.resx</sourceFileName>
+						</file>
+					</files>
+				</component>
 				<component type="Skin">
 					<skinFiles>
 						<skinName>Vanjaro</skinName>
@@ -1110,7 +1110,7 @@
 						<desktopModule>Vanjaro Url Library</desktopModule>
 					</urlProvider>
 				</component>
-        <component type="Cleanup" version="00.05.03" fileName="00.05.03.txt" />
+				<component type="Cleanup" version="00.05.03" fileName="00.05.03.txt" />
 			</components>
 			<eventMessage>
 				<processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
