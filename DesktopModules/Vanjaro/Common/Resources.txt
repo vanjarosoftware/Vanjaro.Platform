@@ -13,6 +13,7 @@ Frameworks\ContextMenu
 Frameworks\FontAwesome
 Frameworks\JQuery
 Frameworks\ReCaptcha
+Frameworks\EnjoyHint
 Frameworks\Toastr
 Frameworks\ValidationJS
 Frameworks\WebAPI

@@ -1003,7 +1003,7 @@ namespace Vanjaro.Skin
 
         private void InitGuidedTours()
         {
-            if (!PortalController.Instance.GetPortalSettings(PortalSettings.PortalId).ContainsKey("VanjaroToursGuided") 
+            if (!PortalController.Instance.GetPortalSettings(PortalSettings.PortalId).ContainsKey("VanjaroToursGuided")
                 && !string.IsNullOrEmpty(Request.QueryString["uxm"]) && Request.QueryString["uxm"] == "close"
                 && (TabPermissionController.HasTabPermission("EDIT") || UserController.Instance.GetCurrentUserInfo().IsAdmin || UserController.Instance.GetCurrentUserInfo().IsSuperUser))
             {
@@ -1024,6 +1024,7 @@ namespace Vanjaro.Skin
                 sb.Append("enjoyhint_instance.set(enjoyhint_script_steps);");
                 //run Enjoyhint script
                 sb.Append("enjoyhint_instance.run();");
+                sb.Append("window.history.pushState({'html':'','pageTitle':''},'', '" + NavigationManager.NavigateURL(PortalSettings.Current.HomeTabId) + "');");
                 FrameworkManager.Load(this, "EnjoyHint");
                 WebForms.RegisterStartupScript(Page, "EnjoyHintJS", sb.ToString(), true);
                 PortalController.UpdatePortalSetting(PortalSettings.PortalId, "VanjaroToursGuided", "true");
