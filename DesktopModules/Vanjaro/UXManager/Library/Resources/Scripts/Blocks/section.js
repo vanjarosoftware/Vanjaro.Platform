@@ -75,6 +75,11 @@
 						});
 					}
 
+					tb.push({
+						attributes: { class: 'fa fa-cog' },
+						command: 'tlb-app-personalization',
+					});
+
 					if (model.get('removable')) {
 						tb.push({
 							attributes: { class: 'fa fa-trash-o' },

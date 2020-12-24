@@ -4,10 +4,12 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Portals;
+using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Authentication;
+using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Tokens;
 using DotNetNuke.UI.Skins;
 using DotNetNuke.Web.Client.ClientResourceManagement;
@@ -297,6 +299,7 @@ namespace Vanjaro.Skin
 
                 HtmlDocument html = new HtmlDocument();
                 html.LoadHtml(sb.ToString());
+                CheckPermission(html);
                 InjectBlocks(page, html);
 
                 string ClassName = "vj-wrapper";
@@ -304,7 +307,29 @@ namespace Vanjaro.Skin
                 {
                     ClassName += " m2vDisplayNone";
                 }
-                ContentPane.Controls.Add(ParseControl("<div class=\"" + ClassName + "\"><div id=\"vjEditor\">" + InjectModules(html.DocumentNode.OuterHtml) + "</div></div>"));
+
+                try
+                {
+                    ContentPane.Controls.Add(ParseControl("<div class=\"" + ClassName + "\"><div id=\"vjEditor\">" + InjectModules(html.DocumentNode.OuterHtml) + "</div></div>"));
+                }
+                catch (Exception ex)
+                {
+                    string Message = string.Empty;
+                    if (!UserController.Instance.GetCurrentUserInfo().IsAdmin)
+                        Message = DotNetNuke.Services.Localization.Localization.GetString("Non_Admin_Users_Message", Constants.LocalResourcesFile);
+                    if (UserController.Instance.GetCurrentUserInfo().IsAdmin || UserController.Instance.GetCurrentUserInfo().IsSuperUser)
+                        Message = DotNetNuke.Services.Localization.Localization.GetString("Admin_Super_Users_Message", Constants.LocalResourcesFile);
+                    
+                    if (!string.IsNullOrEmpty(Message))
+                    {
+                        Literal lt = new Literal();
+                        lt.Text = "<div class=\"alert alert-danger\" role=\"alert\">" + Message + "</div>";
+                        ContentPane.Controls.Add(lt);
+                    }
+
+                    Exceptions.LogException(ex);
+                }
+
                 InjectLoginAuthentication();
             }
             else
@@ -481,7 +506,26 @@ namespace Vanjaro.Skin
             }
 
         }
-
+        private void CheckPermission(HtmlDocument html)
+        {
+            IEnumerable<HtmlNode> query = html.DocumentNode.SelectNodes("//*[@perm]");
+            if (query != null)
+            {
+                foreach (HtmlNode item in query.ToList())
+                {
+                    if (!string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "perm").FirstOrDefault().Value))
+                    {
+                        int EntityID = int.Parse(item.Attributes.Where(a => a.Name == "perm").FirstOrDefault().Value);
+                        bool Inherit = true;
+                        BlockSection blockSection = SectionPermissionManager.GetBlockSection(EntityID);
+                        if (blockSection != null && blockSection.Inherit.HasValue)
+                            Inherit = blockSection.Inherit.Value;
+                        if (!Inherit && !SectionPermissionManager.HasViewPermission(EntityID))
+                            item.Remove();
+                    }
+                }
+            }
+        }
         private void InjectBlocks(Pages page, HtmlDocument html, bool ignoreFirstDiv = false, bool isGlobalBlockCall = false)
         {
             IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
@@ -858,8 +902,8 @@ namespace Vanjaro.Skin
                 string ThemeName = Core.Managers.ThemeManager.GetCurrent(PortalSettings.Current.PortalId).Name;
                 string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/editor");
                 string ThemeCss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/Theme.css");
-                if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))                
-                    ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);  
+                if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))
+                    ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);
             }
             catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
         }

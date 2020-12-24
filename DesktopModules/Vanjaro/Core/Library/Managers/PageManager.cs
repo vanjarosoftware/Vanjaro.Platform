@@ -847,7 +847,24 @@ namespace Vanjaro.Core
                             node.Attributes["srcset"].Value = GetNewLink(node.Attributes["srcset"].Value, Assets);
                         }
                     }
+                    HtmlNodeCollection NodeCollectionThumb = html.DocumentNode.SelectNodes("//*[@thumbnail]");
+                    if (NodeCollectionThumb != null)
+                    {
+                        foreach (HtmlNode node in NodeCollectionThumb)
+                        {
+                            node.Attributes["thumbnail"].Value = GetNewLink(node.Attributes["thumbnail"].Value, Assets);
+                        }
+                    }
                     content = html.DocumentNode.OuterHtml;
+                }
+                foreach (Match match in Regex.Matches(content, "url\\(([^)]*)\\)"))
+                {
+                    try
+                    {
+                        string matchurl = match.Value.Replace("url(\"", "").Replace("\")", "").Replace("url(\\\"", "").Replace("\\\")", "");
+                        content = content.Replace(matchurl, GetNewLink(matchurl, Assets));
+                    }
+                    catch { }
                 }
                 return content;
             }
@@ -872,6 +889,8 @@ namespace Vanjaro.Core
 
             private static string ExtractAndProcessLink(string url, Dictionary<string, string> Assets)
             {
+                if (url.StartsWith("http"))
+                    return url;
                 url = url.Split('?')[0];
                 string newurl = ExportTemplateRootToken + (url.ToLower().Contains(".versions") ? ".versions/" : "") + System.IO.Path.GetFileName(url);
                 if (!Assets.ContainsKey(newurl))
@@ -906,7 +925,7 @@ namespace Vanjaro.Core
             {
                 foreach (JProperty prop in arr.Properties())
                 {
-                    if ((prop.Name == "src" || prop.Name == "srcset") && !string.IsNullOrEmpty(prop.Value.ToString()))
+                    if ((prop.Name == "src" || prop.Name == "srcset" || prop.Name == "thumbnail") && !string.IsNullOrEmpty(prop.Value.ToString()))
                     {
                         prop.Value = GetNewLink(prop.Value.ToString(), Assets);
                     }
@@ -915,7 +934,7 @@ namespace Vanjaro.Core
                 {
                     foreach (dynamic prop in arr.attributes)
                     {
-                        if ((prop.Name == "src" || prop.Name == "srcset") && !string.IsNullOrEmpty(prop.Value.ToString()))
+                        if ((prop.Name == "src" || prop.Name == "srcset" || prop.Name == "thumbnail") && !string.IsNullOrEmpty(prop.Value.ToString()))
                         {
                             prop.Value = GetNewLink(prop.Value.ToString(), Assets);
                         }

@@ -4,6 +4,7 @@ themes-resources.zip
 licenses-resources.zip
 ..\..\UXManager\Library\library-uxmanager-resources.zip
 ..\..\UXManager\Extensions\Apps\About\apps-about-resources.zip
+..\..\UXManager\Extensions\Apps\SectionSettings\apps-sectionsettings-resources.zip
 ..\..\UXManager\Extensions\Apps\Icon\apps-icon-resources.zip
 ..\..\UXManager\Extensions\Apps\Image\apps-image-resources.zip
 ..\..\UXManager\Extensions\Apps\Link\apps-link-resources.zip

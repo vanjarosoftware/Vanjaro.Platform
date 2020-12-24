@@ -12,7 +12,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder
 
         public int ViewOrder => 0;
 
-        public string JsonPath => HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/" + "theme.editor.json");
+        public string JsonPath => HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/{{ThemeName}}/" + "theme.editor.json");
 
         public bool IsVisible => Factories.AppFactory.GetAccessRoles(UserController.Instance.GetCurrentUserInfo()).Contains("admin");
     }

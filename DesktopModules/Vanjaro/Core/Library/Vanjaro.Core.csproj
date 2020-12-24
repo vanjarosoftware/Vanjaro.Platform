@@ -49,6 +49,7 @@
     <Compile Include="Components\Constants.cs" />
     <Compile Include="Components\Interfaces\IReviewComment.cs" />
     <Compile Include="Components\NotificationItem.cs" />
+    <Compile Include="Components\Product.cs" />
     <Compile Include="Components\ReviewContentInfo.cs" />
     <Compile Include="Components\ReviewSettings.cs" />
     <Compile Include="Components\StringText.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Entities\Interface\IVideoProvider.cs" />
     <Compile Include="Factories\CacheFactory.cs" />
     <Compile Include="Factories\BlockFactory.cs" />
+    <Compile Include="Factories\SectionPermissionFactory.cs" />
     <Compile Include="Factories\LocalizationFactory.cs" />
     <Compile Include="Factories\NotificationTaskFactory.cs" />
     <Compile Include="Factories\PageFactory.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Factories\SettingFactory.cs" />
     <Compile Include="Factories\WorkflowFactory.cs" />
     <Compile Include="Managers\CookieManager.cs" />
+    <Compile Include="Managers\SectionPermissionManager.cs" />
     <Compile Include="Managers\SignatureManager.cs" />
     <Compile Include="Packager\Vanjaro\Install\Upgrade.aspx.cs">
       <DependentUpon>Upgrade.aspx</DependentUpon>
@@ -455,6 +458,7 @@
     <Content Include="Packager\Packager.bat" />
     <Content Include="Install\Core.01.00.02.SqlDataProvider" />
     <Content Include="Install\Core.01.00.03.SqlDataProvider" />
+    <Content Include="Install\Core.01.00.04.SqlDataProvider" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

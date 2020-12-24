@@ -215,6 +215,14 @@ a, a:hover, a:focus, a:active {
     height: calc(100% - 3.50rem);
 }
 
+.modal .modal-dialog.modal-right {
+    height: 100%;
+    position: fixed;
+    margin: 0;
+    right: 0;
+}
+
+
 #UXRender {
     padding: 0;
 }
@@ -539,13 +547,13 @@ Theme.css end
 .vj-heading {
     display: block;
     text-align: left;
-    font-size: 2vw;
+    font-size: 32px;
 }
 
 .vj-text {
     display: block;
     text-align: left;
-    font-size: 1vw;
+    font-size: 16px;
 }
 
 .vj-image-gallery-item {

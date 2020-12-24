@@ -259,6 +259,10 @@ $(document).ready(function () {
             if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
                 $(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Please Wait . . .</h1></div>');
             }
+
+            if ($('#dnn_ContentPane').length > 0)
+                $('#dnn_ContentPane').addClass("sidebar-open");
+
             $(window.parent.document.body).find('.vj-wrapper').removeClass("m2vDisplayNone");
             if ($.isFunction($.ServicesFramework)) {
                 var sf = $.ServicesFramework(-1);
@@ -671,33 +675,37 @@ $(document).ready(function () {
                                     }]
                                 },
 
-                                storageManager: {
-                                    type: 'remote',
-                                    autosave: false,
-                                    autoload: false,
-                                    stepsBeforeSave: 2,
-                                    urlStore: eval(data.UpdateContentUrl),
-                                    onComplete(jqXHR, status) {
-                                        if (jqXHR.IsSuccess) {
-                                            if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
-                                                ShowNotification('', VjLocalized.PagePublished, 'success');
-                                        }
-                                        else
-                                            ShowNotification('', jqXHR.Message, 'error');
-                                    },
-                                    params: {
-                                        EntityID: data.EntityID,
-                                        IsPublished: false,
-                                        m2v: false,
-                                        Comment: ""
-                                    },
-                                    headers: {
-                                        'ModuleId': parseInt(data.ModuleId),
-                                        'TabId': parseInt(sf.getTabId()),
-                                        'RequestVerificationToken': sf.getAntiForgeryValue()
-                                    }
-                                }
-                            });
+								storageManager: {
+									type: 'remote',
+									autosave: false,
+									autoload: false,
+									stepsBeforeSave: 2,
+									urlStore: eval(data.UpdateContentUrl),
+									onComplete(jqXHR, status) {
+										if (jqXHR.IsSuccess) {
+											if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
+												ShowNotification('', VjLocalized.PagePublished, 'success');
+										}
+										else if (jqXHR.Message != undefined && jqXHR.Message != '')
+											ShowNotification('', jqXHR.Message, 'error');
+
+										if (jqXHR.SaveContentNotification != undefined && jqXHR.SaveContentNotification != '') {
+											eval(jqXHR.SaveContentNotification);
+										}
+									},
+									params: {
+										EntityID: data.EntityID,
+										IsPublished: false,
+										m2v: false,
+										Comment: ""
+									},
+									headers: {
+										'ModuleId': parseInt(data.ModuleId),
+										'TabId': parseInt(sf.getTabId()),
+										'RequestVerificationToken': sf.getAntiForgeryValue()
+									}
+								}
+							});
 
                             //setCustomRte();
                             const rte = VjEditor.RichTextEditor;
@@ -2506,6 +2514,20 @@ $(document).ready(function () {
                                 },
                             });
 
+                            //Personalization
+                            VjEditor.Commands.add('tlb-app-personalization', {
+                                run(editor, sender) {
+                                    var event = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {};
+                                    var target = event.target || editor.getSelected();
+                                    window.document.vj_personalization_target = target;
+                                    var perm = target.attributes.attributes.perm;
+                                    if (perm == undefined)
+                                        perm = 0;
+                                    var url = CurrentExtTabUrl + "&guid=b1b28eac-b520-4a20-8c36-f0283e8ca263#/permissions/" + perm + "/" + target.attributes.type;
+                                    OpenPopUp(null, 800, 'right', VjLocalized.Setting, url);
+                                }
+                            });
+
                             //Image
                             VjEditor.Commands.add('open-assets', {
                                 run(editor, sender) {
@@ -2552,8 +2574,8 @@ $(document).ready(function () {
                                                 target: e
                                             }))
                                     }),
-                                        r.html = this.cleanHtmlIds(r.html, r.css),
-                                        r.css = '',
+                                        r.html = r.html,
+                                        r.css = r.css,
                                         r
                                 },
                                 cleanHtmlIds: function (t, tc) {
@@ -2601,7 +2623,7 @@ $(document).ready(function () {
                                     return l.forEach(function (t) {
                                         var css = t.toCSS();
                                         if (css.startsWith('#'))
-                                            return a += (css.substr(0, 0) + 'vjbrk#' + css.substr(0 + 1));
+                                            return a += (css.substr(0, 0) + '#' + css.substr(0 + 1));
                                         else
                                             return a;
                                     }),
