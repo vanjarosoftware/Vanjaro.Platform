@@ -125,7 +125,7 @@ namespace Vanjaro.UXManager.Library.Controllers
                     if (File.Exists(path + "/Template.json"))
                     {
                         ExportTemplate exportTemplate = JsonConvert.DeserializeObject<ExportTemplate>(File.ReadAllText(path + "/Template.json"));
-                        if (exportTemplate != null)
+                        if (exportTemplate != null && exportTemplate.ThemeGuid.ToLower() == ThemeManager.CurrentTheme.GUID.ToLower())
                         {
                             Layout pagelayout = exportTemplate.Templates.FirstOrDefault();
                             if (pagelayout != null)
