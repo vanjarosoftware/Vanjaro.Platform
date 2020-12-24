@@ -138,6 +138,9 @@
   <data name="Icon.Text" xml:space="preserve">
     <value>Icons</value>
   </data>
+  <data name="InvalidLogoURL_Error.Text" xml:space="preserve">
+    <value>Logo file path must be 50 characters or less. Consider renaming the file and moving it to the root folder.</value>
+  </data>
   <data name="LogoAndFavicon.Text" xml:space="preserve">
     <value>Logo &amp; Favicon</value>
   </data>

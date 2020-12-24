@@ -1,4 +1,5 @@
-﻿using DotNetNuke.Services.Exceptions;
+﻿using DotNetNuke.Entities.Portals;
+using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Scheduling;
 using System;
 using System.Collections.Generic;
@@ -60,6 +61,8 @@ namespace Vanjaro.Common.Components
 
         private void ProcessMailQueue()
         {
+
+            NotificationFactory.SMTPPurgeLogs();
             foreach (int ModuleId in SettingFactory.GetDistinctModuleIds(AppFactory.Identifiers.admin_notifications_email.ToString()))
             {
                 SmtpClient client = null;
@@ -83,6 +86,7 @@ namespace Vanjaro.Common.Components
                                     {
                                         NotificationFactory.SendMail(client, mail);
                                         mail.Delete();
+                                        NotificationFactory.Log(new MailQueue_Log { PortalID = mail.PortalID, Subject = mail.Subject, ToEmail = mail.ToEmail });
                                     }
                                     catch (Exception ex)
                                     {

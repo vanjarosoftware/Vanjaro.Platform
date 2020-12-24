@@ -34,6 +34,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.Controllers
                 { "Host_Password", new UIData { Name = "Host_Password", Value = SettingManager.GetHostSetting("SMTPPassword", true) } },
                 { "Host_Email", new UIData { Name = "Host_Email", Value = SettingManager.GetHostSetting("SMTPEmail",false,PortalSettings.Email) } },
                 { "Host_EnableSSL", new UIData { Name = "Host_EnableSSL", Options = SettingManager.GetHostSettingAsBoolean("SMTPEnableSSL", false) } },
+                { "Host_PurgeLogsAfter", new UIData { Name = "Host_PurgeLogsAfter", Value = SettingManager.GetHostSetting("SMTPPurgeLogsAfter", false,"60") } },
                 { "Portal_Server", new UIData { Name = "Portal_Server", Value = SettingManager.GetPortalSetting("SMTPServer", false) } },
                 { "Portal_Username", new UIData { Name = "Portal_Username", Value = SettingManager.GetPortalSetting("SMTPUsername", false) } },
                 { "Portal_Password", new UIData { Name = "Portal_Password", Value = SettingManager.GetPortalSetting("SMTPPassword", true) } },
@@ -57,6 +58,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.Controllers
                     SettingManager.UpdateHostSetting("SMTPEmail", Data.Host_Email.ToString(), false);
                     SettingManager.UpdateHostSetting("SMTPPassword", Data.Host_Password.ToString(), true);
                     SettingManager.UpdateHostSetting("SMTPEnableSSL", bool.Parse(Data.Host_EnableSSL.ToString()) ? "Y" : "N", false);
+                    SettingManager.UpdateHostSetting("SMTPPurgeLogsAfter", Data.Host_PurgeLogsAfter.ToString(), false);
                 }
                 else
                 {

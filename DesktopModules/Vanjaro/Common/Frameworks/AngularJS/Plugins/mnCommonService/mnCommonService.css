@@ -333,7 +333,7 @@ table tbody tr.imagesrow td {
         cursor: pointer;
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 5px;
     }
 
