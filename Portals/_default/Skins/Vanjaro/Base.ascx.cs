@@ -769,7 +769,7 @@ namespace Vanjaro.Skin
             {
                 page = PageManager.GetByVersion(PortalSettings.ActiveTab.TabID, Convert.ToInt32(Request.QueryString["revisionversion"]), PageManager.GetCultureCode(PortalSettings));
             }
-            else if (!string.IsNullOrEmpty(Request.QueryString["InitGrapejs"]) && Convert.ToBoolean(Request.QueryString["InitGrapejs"]))
+            else if (Request.Cookies["PageIsEdit"] != null && Request.Cookies["PageIsEdit"].Value == "true")
             {
                 page = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, PageManager.GetCultureCode(PortalSettings));
             }
