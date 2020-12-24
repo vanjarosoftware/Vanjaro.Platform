@@ -174,6 +174,11 @@ namespace Vanjaro.Common.Foundation
                 FrameworkManager.Load(this, "BootstrapDatepicker");
             }
 
+            if (Dependencies.Contains(JavaScriptPlugins.EnjoyHint.ToString()))
+            {
+                FrameworkManager.Load(this, "EnjoyHint");
+            }
+
             if (Dependencies.Contains(AngularPlugins.Grid.ToString()))
             {
                 FrameworkManager.LoadPlugin(this, "AngularJS", "SmartTable", "smart-table.min.js");

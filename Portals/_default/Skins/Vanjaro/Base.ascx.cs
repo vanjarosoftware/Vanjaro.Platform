@@ -155,6 +155,7 @@ namespace Vanjaro.Skin
             }
 
             ResetModulePanes();
+            InitGuidedTours();
         }
 
         private void InjectThemeJS()
@@ -319,7 +320,7 @@ namespace Vanjaro.Skin
                         Message = DotNetNuke.Services.Localization.Localization.GetString("Non_Admin_Users_Message", Constants.LocalResourcesFile);
                     if (UserController.Instance.GetCurrentUserInfo().IsAdmin || UserController.Instance.GetCurrentUserInfo().IsSuperUser)
                         Message = DotNetNuke.Services.Localization.Localization.GetString("Admin_Super_Users_Message", Constants.LocalResourcesFile);
-                    
+
                     if (!string.IsNullOrEmpty(Message))
                     {
                         Literal lt = new Literal();
@@ -1000,7 +1001,35 @@ namespace Vanjaro.Skin
             }
         }
 
-
+        private void InitGuidedTours()
+        {
+            if (!PortalController.Instance.GetPortalSettings(PortalSettings.PortalId).ContainsKey("VanjaroToursGuided")
+                && !string.IsNullOrEmpty(Request.QueryString["uxm"]) && Request.QueryString["uxm"] == "close"
+                && (TabPermissionController.HasTabPermission("EDIT") || UserController.Instance.GetCurrentUserInfo().IsAdmin || UserController.Instance.GetCurrentUserInfo().IsSuperUser))
+            {
+                CookieManager.AddValue("PageIsEdit", "false", new DateTime());
+                CookieManager.AddValue("InitGrapejs", "false", new DateTime());
+                StringBuilder sb = new StringBuilder();
+                //initialize instance
+                sb.Append("var enjoyhint_instance = new EnjoyHint({});");
+                //Only one step - highlighting(with description) "New" button
+                //hide EnjoyHint after a click on the button.
+                sb.Append("var enjoyhint_script_steps = [");
+                sb.Append("{'click #mode-switcher' : \"Welcome to your new site. Let\'s learn the basics. <br> Click on \'Arrow Toggle\' to edit or manage your site.\"},");
+                sb.Append("{'click .settings' : 'Use the Site Menu to manage pages, assets, content, and settings.'},");
+                sb.Append("{'click .Messages' : 'Your Tasks & Messages appear here.'},");
+                sb.Append("{'click .active' : 'Use the Blocks Menu to drag and drop and build your page'}");
+                sb.Append("];");
+                //set script config
+                sb.Append("enjoyhint_instance.set(enjoyhint_script_steps);");
+                //run Enjoyhint script
+                sb.Append("enjoyhint_instance.run();");
+                sb.Append("window.history.pushState({'html':'','pageTitle':''},'', '" + NavigationManager.NavigateURL(PortalSettings.Current.HomeTabId) + "');");
+                FrameworkManager.Load(this, "EnjoyHint");
+                WebForms.RegisterStartupScript(Page, "EnjoyHintJS", sb.ToString(), true);
+                PortalController.UpdatePortalSetting(PortalSettings.PortalId, "VanjaroToursGuided", "true");
+            }
+        }
 
         public string ResouceFilePath
         {
