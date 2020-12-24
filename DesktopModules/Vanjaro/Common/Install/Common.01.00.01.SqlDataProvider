@@ -19,10 +19,9 @@ CREATE TABLE {databaseOwner}[VJ_Common_MailQueue_Log](
 END
 GO
 
-
-IF NOT EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_MailQueue]') AND name = 'PortalID')
-BEGIN 
-  ALTER TABLE {databaseOwner}VJ_Common_MailQueue 
-    ADD PortalID int NOT NULL
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='VJ_Common_MailQueue' and COLUMN_NAME='PortalID')
+BEGIN
+ALTER TABLE {databaseOwner}[VJ_Common_MailQueue] ADD
+ [PortalID] [int] NOT NULL
 END
-
+GO
