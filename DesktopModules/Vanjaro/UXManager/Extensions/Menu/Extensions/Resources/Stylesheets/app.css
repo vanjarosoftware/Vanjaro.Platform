@@ -74,6 +74,10 @@
     text-decoration: none !important;
 }
 
+.displayprop .ux-btn{
+    color:#ccc !important;
+}
+
 .ux-btn-hover:hover {
     color: #000;
     cursor: pointer;
@@ -127,9 +131,14 @@
             color: #aaa;
         }
 
-.vj-ux-manager .cursorpointer {
-    cursor: pointer;
-}
+    .vj-ux-manager .termsinfo input[type=checkbox] {
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+
+    .vj-ux-manager .cursorpointer {
+        cursor: pointer;
+    }
 
 .sweet-alert h2 {
     font-size: 12px !important;

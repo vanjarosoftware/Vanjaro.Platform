@@ -77,7 +77,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Factories
 
             AngularView installpack = new AngularView
             {
-                AccessRoles = "admin",
+                AccessRoles = "host",
                 UrlPaths = new List<string> {
                   "installpackage",
                 },
