@@ -673,7 +673,7 @@ namespace Vanjaro.Core
                                 {
                                     sb.Append("<div class=\"dropdownselect optioncontrol\" id=" + item.Guid + "><div class=\"dropdownlabel\" ><label>" + fonts.Title + ":</label></div>");
                                     sb.Append("<div class=\"dropdownOption\"><select  guid=" + fonts.Guid + ">");
-                                    foreach (StringTextNV opt in GetDDLFonts(Guid))
+                                    foreach (StringTextNV opt in GetDDLFonts("all"))
                                     {
                                         string value = GetGuidValue(themeEditorValues, fonts);
                                         if (opt.Value == value)
