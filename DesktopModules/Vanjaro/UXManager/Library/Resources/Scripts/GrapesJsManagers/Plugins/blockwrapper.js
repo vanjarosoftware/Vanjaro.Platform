@@ -66,7 +66,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
             }),
             init() {
                 //Trait - Alignment
-                if (typeof this.getAttributes()["data-block-alignment"] != 'undefined' && this.getAttributes()["data-block-alignment"] == "true") {
+                if (typeof this.getTrait() == "undefined" && typeof this.getAttributes()["data-block-alignment"] != 'undefined' && this.getAttributes()["data-block-alignment"] == "true") {
                     //this.setStyle({ "display": "inline-block" });
                     this.addTrait({
                         label: "Alignment",
