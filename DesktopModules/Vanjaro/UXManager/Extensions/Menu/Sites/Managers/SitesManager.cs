@@ -56,7 +56,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                         pinfo.PortalId,
                         pinfo.PortalName,
                         PortalAliases = sitecontroller.FormatPortalAliases(pinfo.PortalId),
-                        allowDelete = (pinfo.PortalId != PortalID && !PortalController.IsMemberOfPortalGroup(pinfo.PortalId))
+                        allowDelete = (pinfo.PortalId != PortalID && !PortalController.IsMemberOfPortalGroup(pinfo.PortalId)),
+                        IsVjToursGuided = PortalController.Instance.GetPortalSettings(pinfo.PortalId).ContainsKey("VanjaroToursGuided")
                     };
                     PortalsInfo.Add(portalInfo);
                 }

@@ -134,7 +134,7 @@
             this.finishInstall = function () {	
                 upgradeWizard.stopProgressBar();	
                 $('#seeLogs, #visitSite').removeClass('dnnDisabledAction');	
-                $('#visitSite').attr("href", location.pathname + "?complete");	
+                $('#visitSite').attr("href", location.pathname + "?complete&uxm=close");	
                 $('#installation-steps > p').attr('class', 'step-done');	
                 $('#tabs ul li a[href="#upgradeInstallation"]').parent().removeClass('ui-tabs-active ui-state-active');	
                 $('#tabs ul li a[href="#upgradeInstallation"]').parent().addClass('ui-state-disabled');	

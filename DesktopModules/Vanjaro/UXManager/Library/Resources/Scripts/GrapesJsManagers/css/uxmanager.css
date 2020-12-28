@@ -2831,10 +2831,6 @@ span.notificationname {
 	padding-right: 30px;
 }
 
-#gjs-sm-top, #gjs-sm-right, #gjs-sm-left, #gjs-sm-bottom {
-	width: 25%;
-}
-
 .gjs-sm-sector .gjs-sm-property .gjs-sm-layer, .gjs-clm-tags .gjs-sm-property .gjs-sm-layer {
 	padding: 0px;
 }
@@ -2912,10 +2908,6 @@ input.rangeinput {
 		position: relative;
 		top: -12px;
 	}
-
-div#gjs-sm-top, div#gjs-sm-right, div#gjs-sm-left, div#gjs-sm-bottom {
-	text-align: center;
-}
 
 
 #gjs-sm-margin .diffmargin,
@@ -3367,4 +3359,8 @@ body.resp-mode.tablet .vj-wrapper {
 body.resp-mode.mobile .vj-wrapper {
     width: 360px;
     height: 700px;
+}
+
+.custom-range-slider  .gjs-field.gjs-field-integer {
+    width: 30% !important;
 }

@@ -814,7 +814,7 @@ namespace DotNetNuke.Services.Install
                 //Do nothing
             }
             Config.Touch();
-            HttpContext.Current.Response.Redirect("../Default.aspx");
+            HttpContext.Current.Response.Redirect("../Default.aspx?uxm=close");
         }
         #endregion 
 
@@ -961,7 +961,7 @@ namespace DotNetNuke.Services.Install
             {
                 var synchConnectionString = new SynchConnectionStringStep();
                 synchConnectionString.Execute();
-                Response.Redirect(HttpContext.Current.Request.RawUrl.Replace("&initiateinstall", "&executeinstall"), true);
+                Response.Redirect(HttpContext.Current.Request.RawUrl.Replace("&initiateinstall", "&executeinstall")+"&uxm=close", true);
             }
             else if (HttpContext.Current.Request.RawUrl.EndsWith("&executeinstall"))
             {
