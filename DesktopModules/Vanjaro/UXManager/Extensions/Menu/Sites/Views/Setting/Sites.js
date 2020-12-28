@@ -98,4 +98,14 @@
                 }
             });
     };
+    $scope.Click_View = function (row) {
+        var link = '';
+        if (row.IsVjToursGuided)
+            link = row.PortalAliases[0].link;
+        else {
+            link = row.PortalAliases[0].link + '?uxm=close';
+            row.IsVjToursGuided = true;
+        }
+        window.parent.open(link, '_blank');
+    };
 });

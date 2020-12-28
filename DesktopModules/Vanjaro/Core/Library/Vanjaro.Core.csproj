@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Components\Constants.cs" />
     <Compile Include="Components\Interfaces\IReviewComment.cs" />
+    <Compile Include="Components\Interfaces\ITheme.cs" />
     <Compile Include="Components\NotificationItem.cs" />
     <Compile Include="Components\Product.cs" />
     <Compile Include="Components\ReviewContentInfo.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Services\Search\SearchEngine.cs" />
     <Compile Include="Services\Search\SearchEngineScheduler.cs" />
     <Compile Include="Services\Search\TabIndexer.cs" />
+    <Compile Include="Themes\Basic\Theme.cs" />
     <Compile Include="UserControls\Login.ascx.cs">
       <DependentUpon>Login.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

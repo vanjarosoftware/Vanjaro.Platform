@@ -3813,6 +3813,12 @@
     <Content Include="Frameworks\ContextMenu\2.8.0\css\jquery.contextMenu.min.css" />
     <Content Include="Frameworks\ContextMenu\2.8.0\js\jquery.contextMenu.js" />
     <Content Include="Frameworks\ContextMenu\2.8.0\js\jquery.contextMenu.min.js" />
+    <Content Include="Frameworks\EnjoyHint\enjoyhint.css" />
+    <Content Include="Frameworks\EnjoyHint\enjoyhint.js" />
+    <Content Include="Frameworks\EnjoyHint\enjoyhint.min.js" />
+    <Content Include="Frameworks\EnjoyHint\jquery.scrollTo.min.js" />
+    <Content Include="Frameworks\EnjoyHint\kinetic.js" />
+    <Content Include="Frameworks\EnjoyHint\src\Casino_Hand\casino_hand-webfont.svg" />
     <Content Include="Frameworks\FontAwesome\5.10.1\css\fontawesome.css" />
     <Content Include="Frameworks\FontAwesome\5.10.1\fonts\fa-brands-400.svg" />
     <Content Include="Frameworks\FontAwesome\5.10.1\fonts\fa-regular-400.svg" />
@@ -4076,6 +4082,9 @@
   <ItemGroup>
     <Content Include="web.config" />
     <Content Include="Install\Common.01.00.00.SqlDataProvider" />
+    <Content Include="Frameworks\EnjoyHint\src\Casino_Hand\casino_hand-webfont.eot" />
+    <Content Include="Frameworks\EnjoyHint\src\Casino_Hand\casino_hand-webfont.ttf" />
+    <Content Include="Frameworks\EnjoyHint\src\Casino_Hand\casino_hand-webfont.woff" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
