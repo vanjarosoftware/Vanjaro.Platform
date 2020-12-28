@@ -325,10 +325,6 @@ div#MenuSettings .parent-menu-hide {
 	color: #fff;
 }
 
-#Modeiframe {
-	width: 100%;
-}
-
 /*Modal*/
 
 .uxmanager-modal * {
@@ -338,33 +334,6 @@ div#MenuSettings .parent-menu-hide {
 
 .uxmanager-modal .fas {
 	font-family: 'Font Awesome 5 Free';
-}
-
-.modal .modal-dialog.modal-right {
-	height: 100%;
-	position: fixed;
-	margin: 0;
-	right: 0;
-}
-
-.modal .modal-dialog iframe {
-	height: 100%;
-	width: 100%;
-	border: none;
-}
-
-	.modal .modal-dialog iframe body {
-		background: #fff !important;
-	}
-
-.modal-body {
-	overflow: hidden;
-}
-
-.modal-content {
-	border-radius: 0 !important;
-	height: 100%;
-	overflow: auto;
 }
 
 /*Sidebar Open/Close*/
