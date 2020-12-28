@@ -17,11 +17,15 @@ $(document).ready(function () {
     var Filters = VjLocalized.Filters.replace(/ /g, '_').toLowerCase();
     var Transform = VjLocalized.Transform.replace(/ /g, '_').toLowerCase();
     var Transitions = VjLocalized.Transitions.replace(/ /g, '_').toLowerCase();
-    var LayoutDimensions = VjLocalized.LayoutDimensions.replace(/ /g, '_').toLowerCase();
-    var Borders = VjLocalized.Borders.replace(/ /g, '_').toLowerCase();
-    var Typography = VjLocalized.Typography.replace(/ /g, '').toLowerCase();
+    var Size = VjLocalized.Size.replace(/ /g, '_').toLowerCase();
+    var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();
+    var BorderRadius = VjLocalized.BorderRadius.replace(/ /g, '_').toLowerCase();
+    var Text = VjLocalized.Text.replace(/ /g, '').toLowerCase();
     var BackgroundShadow = VjLocalized.BackgroundShadow.replace(/ /g, '_').toLowerCase();
-    var Positioning = VjLocalized.Positioning.replace(/ /g, '_').toLowerCase();
+    var Position = VjLocalized.Position.replace(/ /g, '_').toLowerCase();
+    var Margin = VjLocalized.Margin.replace(/ /g, '_').toLowerCase();
+    var Padding = VjLocalized.Padding.replace(/ /g, '_').toLowerCase();
+    var Extra = VjLocalized.Extra.replace(/ /g, '_').toLowerCase();
 
     if (window.parent.CurrentTabUrl.indexOf('?') > 0)
         CurrentExtTabUrl = window.parent.CurrentTabUrl + '&mid=0&icp=true';
@@ -70,7 +74,7 @@ $(document).ready(function () {
                             },
                             success: function (data) {
 
-                                if (data.Html != '') {
+                                if (data.Html != undefined && data.Html.length > 0) {
                                     $.each($(data.Html).find('[mid]'), function (k, v) {
                                         var mid = $(v).attr('mid');
                                         var framesrc = CurrentTabUrl;
@@ -362,49 +366,81 @@ $(document).ready(function () {
                                     clearProperties: true,
                                     appendTo: '.stylemanager',
                                     sectors: [{
-                                        name: VjLocalized.LayoutDimensions,
+                                        name: VjLocalized.Margin,
                                         open: false,
-                                        buildProps: ['width', 'height', 'max-width', 'min-height'],
+                                    }, {
+                                        name: VjLocalized.Padding,
+                                        open: false,
+                                    }, {
+                                        name: VjLocalized.Size,
+                                        open: false,
+                                        buildProps: ['width', 'min-width', 'max-width', 'height', 'min-height', 'max-height'],
                                         properties: [{
                                             id: 'width',
-                                            type: 'slider',
+                                            type: 'custom_rangeslider',
                                             name: 'Width',
                                             property: 'width',
+                                            cssproperty: 'width',
                                             step: 1,
                                             min: 0,
                                             max: 1920,
                                             units: ['px', '%', 'vw'],
-                                            defaults: 'auto',
+                                            defaults: '0',
                                         }, {
-                                            id: 'height',
-                                            type: 'slider',
-                                            name: 'Height',
-                                            property: 'height',
-                                            step: 1,
-                                            min: 10,
-                                            max: 1080,
-                                            units: ['px', '%', 'vh'],
-                                            defaults: 'auto',
-                                        }, {
-                                            id: 'max-width',
-                                            type: 'slider',
-                                            name: 'Max Width',
-                                            property: 'max-width',
+                                            id: 'min-width',
+                                            type: 'custom_rangeslider',
+                                            name: 'Min Width',
+                                            property: 'min-width',
+                                            cssproperty: 'min-width',
                                             step: 1,
                                             min: 10,
                                             max: 1920,
                                             units: ['px', '%', 'vw'],
-                                            defaults: 'auto',
+                                            defaults: '0',
                                         }, {
-                                            id: 'min-height',
-                                            type: 'slider',
-                                            name: 'Min Height',
-                                            property: 'min-height',
+                                            id: 'max-width',
+                                            type: 'custom_rangeslider',
+                                            name: 'Max Width',
+                                            property: 'max-width',
+                                            cssproperty: 'max-width',
+                                            step: 1,
+                                            min: 10,
+                                            max: 1920,
+                                            units: ['px', '%', 'vw'],
+                                            defaults: '0',
+                                        }, {
+                                            id: 'height',
+                                            type: 'custom_rangeslider',
+                                            name: 'Height',
+                                            property: 'height',
+                                            cssproperty: 'height',
                                             step: 1,
                                             min: 10,
                                             max: 1080,
                                             units: ['px', '%', 'vh'],
-                                            defaults: 'auto',
+                                            defaults: '0',
+                                        }, {
+                                            id: 'min-height',
+                                            type: 'custom_rangeslider',
+                                            name: 'Min Height',
+                                            property: 'min-height',
+                                            cssproperty: 'min-height',
+                                            step: 1,
+                                            min: 10,
+                                            max: 1080,
+                                            units: ['px', '%', 'vh'],
+                                            defaults: '0',
+                                        }, {
+                                            id: 'max-height',
+                                            type: 'custom_rangeslider',
+                                            name: 'Max Height',
+                                            property: 'max-height',
+                                            cssproperty: 'max-height',
+                                            step: 1,
+                                            min: 10,
+                                            max: 1080,
+                                            units: ['px', '%', 'vh'],
+                                            defaults: '0',
                                         }]
                                     }, {
                                         name: VjLocalized.Responsive,
@@ -453,38 +489,98 @@ $(document).ready(function () {
                                             }],
                                         }]
                                     }, {
-                                        name: VjLocalized.Borders,
+                                        name: VjLocalized.Border,
+                                        open: false,                                                                               
+                                    }, {
+                                        name: VjLocalized.BorderRadius,
                                         open: false,
-                                        buildProps: ['border-style', 'border-color'],
-                                        properties: [{
-                                            id: 'border-style',
-                                            type: 'radio',
-                                            name: 'Border-Style',
-                                            property: 'border-style',
-                                            defaults: 'none',
-                                            list: [{
-                                                value: 'solid',
-                                                name: 'Solid',
-                                            }, {
-                                                value: 'dotted',
-                                                name: 'Dotted',
-                                            }, {
-                                                value: 'dashed',
-                                                name: 'Dashed',
-                                            }, {
-                                                value: 'double',
-                                                name: 'Double',
-                                            }],
-                                        }]
                                     }, {
                                         name: VjLocalized.BackgroundShadow,
                                         open: false,
                                         buildProps: ['background-color', 'background', 'box-shadow'],
                                     }, {
-                                        name: VjLocalized.Positioning,
+                                        name: VjLocalized.Position,
                                         open: false,
-                                        buildProps: ['float', 'display', 'position', 'top', 'right', 'left', 'bottom'],
+                                        buildProps: ['z-index', 'position', 'top', 'right', 'left', 'bottom'],
                                         properties: [{
+                                            id: 'z-index',
+                                            type: 'custom_rangeslider',
+                                            name: 'Z Index',
+                                            property: 'z-index',
+                                            cssproperty: 'z-index',
+                                            step: 1,
+                                            min: -1,
+                                            max: 1000,
+                                            defaults: 0,
+                                        }, {
+                                            id: 'top',
+                                            type: 'custom_rangeslider',
+                                            name: 'Top',
+                                            property: 'top',
+                                            cssproperty: 'top',
+                                            step: 1,
+                                            min: 0,
+                                            max: 1000,
+                                            defaults: 0,
+                                        }, {
+                                            id: 'Right',
+                                            type: 'custom_rangeslider',
+                                            name: 'Right',
+                                            property: 'right',
+                                            cssproperty: 'right',
+                                            step: 1,
+                                            min: 0,
+                                            max: 1000,
+                                            defaults: 0,
+                                        }, {
+                                            id: 'Left',
+                                            type: 'custom_rangeslider',
+                                            name: 'Left',
+                                            property: 'left',
+                                            cssproperty: 'left',
+                                            step: 1,
+                                            min: 0,
+                                            max: 1000,
+                                            defaults: 0,
+                                        }, {
+                                            id: 'Bottom',
+                                            type: 'custom_rangeslider',
+                                            name: 'Bottom',
+                                            property: 'bottom',
+                                            cssproperty: 'bottom',
+                                            step: 1,
+                                            min: 0,
+                                            max: 1000,
+                                            defaults: 0,
+                                        }]
+                                    }, {
+                                        name: VjLocalized.Transform,
+                                        open: false,
+                                    }, {
+                                        name: VjLocalized.Transitions,
+                                        open: false,
+                                        buildProps: ['transition'],
+                                    }, {
+                                        name: VjLocalized.Filters,
+                                        open: false,
+                                    }, {
+                                        name: VjLocalized.Extra,
+                                        open: false,
+                                        buildProps: ['float', 'clear', 'display', 'cursor'],
+                                        properties: [{
+                                            id: 'clear',
+                                            type: 'radio',
+                                            name: 'Clear',
+                                            property: 'clear',
+                                            defaults: 'none',
+                                            list: [{
+                                                value: 'none',
+                                                name: 'none',
+                                            }, {
+                                                value: 'both',
+                                                name: 'both',
+                                            }],
+                                        }, {
                                             id: 'display',
                                             type: 'radio',
                                             name: 'Display',
@@ -506,17 +602,45 @@ $(document).ready(function () {
                                                 value: 'flex',
                                                 name: 'flex',
                                             }],
+                                        }, {
+                                            id: 'overflow-horizontal',
+                                            type: 'radio',
+                                            name: 'Overflow Horizontal',
+                                            property: 'overflow-x',
+                                            defaults: 'visible',
+                                            list: [{
+                                                value: 'visible',
+                                                name: 'visible',
+                                            }, {
+                                                value: 'hidden',
+                                                name: 'hidden',
+                                            }, {
+                                                value: 'scroll',
+                                                name: 'scroll',
+                                            }, {
+                                                value: 'auto',
+                                                name: 'auto',
+                                            }],
+                                        }, {
+                                            id: 'overflow-vertical',
+                                            type: 'radio',
+                                            name: 'Overflow Vertical',
+                                            property: 'overflow-y',
+                                            defaults: 'visible',
+                                            list: [{
+                                                value: 'visible',
+                                                name: 'visible',
+                                            }, {
+                                                value: 'hidden',
+                                                name: 'hidden',
+                                            }, {
+                                                value: 'scroll',
+                                                name: 'scroll',
+                                            }, {
+                                                value: 'auto',
+                                                name: 'auto',
+                                            }],
                                         }]
-                                    }, {
-                                        name: VjLocalized.Transform,
-                                        open: false,
-                                    }, {
-                                        name: VjLocalized.Transitions,
-                                        open: false,
-                                        buildProps: ['transition'],
-                                    }, {
-                                        name: VjLocalized.Filters,
-                                        open: false,
                                     }]
                                 },
 
@@ -551,37 +675,37 @@ $(document).ready(function () {
                                     }]
                                 },
 
-								storageManager: {
-									type: 'remote',
-									autosave: false,
-									autoload: false,
-									stepsBeforeSave: 2,
-									urlStore: eval(data.UpdateContentUrl),
-									onComplete(jqXHR, status) {
-										if (jqXHR.IsSuccess) {
-											if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
-												ShowNotification('', VjLocalized.PagePublished, 'success');
-										}
-										else if (jqXHR.Message != undefined && jqXHR.Message != '')
-											ShowNotification('', jqXHR.Message, 'error');
+                                storageManager: {
+                                    type: 'remote',
+                                    autosave: false,
+                                    autoload: false,
+                                    stepsBeforeSave: 2,
+                                    urlStore: eval(data.UpdateContentUrl),
+                                    onComplete(jqXHR, status) {
+                                        if (jqXHR.IsSuccess) {
+                                            if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
+                                                ShowNotification('', VjLocalized.PagePublished, 'success');
+                                        }
+                                        else if (jqXHR.Message != undefined && jqXHR.Message != '')
+                                            ShowNotification('', jqXHR.Message, 'error');
 
-										if (jqXHR.SaveContentNotification != undefined && jqXHR.SaveContentNotification != '') {
-											eval(jqXHR.SaveContentNotification);
-										}
-									},
-									params: {
-										EntityID: data.EntityID,
-										IsPublished: false,
-										m2v: false,
-										Comment: ""
-									},
-									headers: {
-										'ModuleId': parseInt(data.ModuleId),
-										'TabId': parseInt(sf.getTabId()),
-										'RequestVerificationToken': sf.getAntiForgeryValue()
-									}
-								}
-							});
+                                        if (jqXHR.SaveContentNotification != undefined && jqXHR.SaveContentNotification != '') {
+                                            eval(jqXHR.SaveContentNotification);
+                                        }
+                                    },
+                                    params: {
+                                        EntityID: data.EntityID,
+                                        IsPublished: false,
+                                        m2v: false,
+                                        Comment: ""
+                                    },
+                                    headers: {
+                                        'ModuleId': parseInt(data.ModuleId),
+                                        'TabId': parseInt(sf.getTabId()),
+                                        'RequestVerificationToken': sf.getAntiForgeryValue()
+                                    }
+                                }
+                            });
 
                             //setCustomRte();
                             const rte = VjEditor.RichTextEditor;
@@ -674,6 +798,109 @@ $(document).ready(function () {
                             //	type: 'filter',
                             //	full: 1,
                             //});
+                            //margin
+                            VjEditor.StyleManager.addProperty(Margin, {
+                                type: 'custom_rangeslider',
+                                name: 'Margin Top',
+                                property: 'margin-top',
+                                cssproperty: 'margin-top',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'vh'],
+                                unit: 'px',
+                                defaults: 0,
+                            });
+                            VjEditor.StyleManager.addProperty(Margin, {
+                                type: 'custom_rangeslider',
+                                name: 'Margin Left',
+                                property: 'margin-left',
+                                cssproperty: 'margin-left',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'vh'],
+                                unit: 'px',
+                                defaults: 0,
+
+                            });
+                            VjEditor.StyleManager.addProperty(Margin, {
+                                type: 'custom_rangeslider',
+                                name: 'Margin Bottom',
+                                property: 'margin-bottom',
+                                cssproperty: 'margin-bottom',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'vh'],
+                                unit: 'px',
+                                defaults: 0,
+                            });
+                            VjEditor.StyleManager.addProperty(Margin, {
+                                type: 'custom_rangeslider',
+                                name: 'Margin Right',
+                                property: 'margin-right',
+                                cssproperty: 'margin-right',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'vh'],
+                                unit: 'px',
+                                defaults: 0,
+                            });
+
+                            //Padding
+                            VjEditor.StyleManager.addProperty(Padding, {
+                                type: 'custom_rangeslider',
+                                name: 'Padding Top',
+                                property: 'padding-top',
+                                cssproperty: 'padding-top',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'vh'],
+                                unit: 'px',
+                                defaults: 0,
+                            });
+                            VjEditor.StyleManager.addProperty(Padding, {
+                                type: 'custom_rangeslider',
+                                name: 'Padding Left',
+                                property: 'padding-left',
+                                cssproperty: 'padding-left',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'vh'],
+                                unit: 'px',
+                                defaults: 0,
+
+                            });
+                            VjEditor.StyleManager.addProperty(Padding, {
+                                type: 'custom_rangeslider',
+                                name: 'Padding Bottom',
+                                property: 'padding-bottom',
+                                cssproperty: 'padding-bottom',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'vh'],
+                                unit: 'px',
+                                defaults: 0,
+                            });
+                            VjEditor.StyleManager.addProperty(Padding, {
+                                type: 'custom_rangeslider',
+                                name: 'Padding Right',
+                                property: 'padding-right',
+                                cssproperty: 'padding-right',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'vh'],
+                                unit: 'px',
+                                defaults: 0,
+                            });
+
+
 
                             //Filters
                             VjEditor.StyleManager.addProperty(Filters, {
@@ -892,70 +1119,291 @@ $(document).ready(function () {
                                 defaults: '0',
                             });
 
-                            VjEditor.StyleManager.addProperty(LayoutDimensions, {
-                                type: 'custom-styleslider',
-                                name: 'Margin',
-                                property: 'margin',
-                                properties: [
-                                    { name: "Top", CSS: "margin-top" },
-                                    { name: "Right", CSS: "margin-right" },
-                                    { name: "Bottom", CSS: "margin-bottom" },
-                                    { name: "Left", CSS: "margin-left" },
-                                ],
-                                step: 1,
-                                min: 0,
-                                max: 100,
-                                units: ['px', '%', 'vh'],
-                                unit: 'px',
-                                defaults: 0,
-                            });
 
-                            VjEditor.StyleManager.addProperty(LayoutDimensions, {
-                                type: 'custom-styleslider',
-                                name: 'Padding',
-                                property: 'padding',
-                                properties: [
-                                    { name: "Top", CSS: "padding-top" },
-                                    { name: "Right", CSS: "padding-right" },
-                                    { name: "Bottom", CSS: "padding-bottom" },
-                                    { name: "Left", CSS: "padding-left" },
-                                ],
-                                step: 1,
-                                min: 0,
-                                max: 100,
-                                units: ['px', '%', 'vh'],
-                                unit: 'px',
-                                defaults: 0,
-                            });
-
-                            VjEditor.StyleManager.addProperty(Borders, {
-                                type: 'custom-styleslider',
-                                name: 'border-width',
-                                property: 'border-width',
-                                properties: [
-                                    { name: "Top", CSS: "border-top-width" },
-                                    { name: "Right", CSS: "border-right-width" },
-                                    { name: "Bottom", CSS: "border-bottom-width" },
-                                    { name: "Left", CSS: "border-left-width" },
-                                ],
-                                step: 1,
-                                min: 0,
-                                max: 100,
-                                units: ['px', '%', 'vh'],
-                                unit: 'px',
-                                defaults: 0,
+                            //border
+                            VjEditor.StyleManager.addProperty(Border, {
+                                type: 'radio',
+                                name: 'Border Postion',
+                                property: 'border-position',
+                                defaults: 'B',
+                                list: [{
+                                    value: 'B',
+                                    name: 'B',
+                                }, {
+                                    value: 'BT',
+                                    name: 'BT',
+                                }, {
+                                    value: 'BL',
+                                    name: 'BL',
+                                }, {
+                                    value: 'BB',
+                                    name: 'BB',
+                                }, {
+                                    value: 'BR',
+                                    name: 'BR',
+                                }],
+                              
                             }, { at: 0 });
 
-                            VjEditor.StyleManager.addProperty(Borders, {
-                                type: 'custom-styleslider',
-                                name: 'border-radius',
-                                property: 'border-radius',
-                                properties: [
-                                    { name: "Top-Left", CSS: "border-top-left-radius" },
-                                    { name: "Top-Right", CSS: "border-top-right-radius" },
-                                    { name: "Bottom-Right", CSS: "border-bottom-right-radius" },
-                                    { name: "Bottom-Left", CSS: "border-bottom-left-radius" },
-                                ],
+                            VjEditor.StyleManager.addProperty(Border, {
+                                type: 'radio',
+                                name: 'Border Style',
+                                property: 'border-style',
+                                cssproperty: 'border-style',
+                                defaults: 'none',
+                                list: [{
+                                    value: 'solid',
+                                    name: 'Solid',
+                                }, {
+                                    value: 'dotted',
+                                    name: 'Dotted',
+                                }, {
+                                    value: 'dashed',
+                                    name: 'Dashed',
+                                }, {
+                                    value: 'double',
+                                    name: 'Double',
+                                }],
+
+                            }, { at: 1 });
+
+                                VjEditor.StyleManager.addProperty(Border, {
+                                    id: 'border-color',
+                                    type: 'color',
+                                    name: 'Color',
+                                    property: 'border-color',
+                                    cssproperty: 'border-color',
+                                    defaults: 'rgb(33,37,41)',
+                                }, { at: 2 });  
+
+                                VjEditor.StyleManager.addProperty(Border, {
+                                    id: 'border-width',
+                                    type: 'custom_rangeslider',
+                                    name: 'Width',
+                                    property: 'border-width',
+                                    cssproperty: 'border-width',
+                                    step: 1,
+                                    min: 0,
+                                    max: 100,
+                                    units: ['px', '%', 'vh'],
+                                    unit: 'px',
+                                    defaults: 0,
+                                }, { at: 3 });  
+
+                             //border top                          
+                            VjEditor.StyleManager.addProperty(Border, {
+                                type: 'radio',
+                                name: 'Border Style',
+                                property: 'border-top-style',
+                                cssproperty: 'border-top-style',
+                                defaults: 'none',
+                                list: [{
+                                    value: 'solid',
+                                    name: 'Solid',
+                                }, {
+                                    value: 'dotted',
+                                    name: 'Dotted',
+                                }, {
+                                    value: 'dashed',
+                                    name: 'Dashed',
+                                }, {
+                                    value: 'double',
+                                    name: 'Double',
+                                }],
+
+                            }, { at: 4 });
+
+                            VjEditor.StyleManager.addProperty(Border, {
+                                id: 'border-top-color',
+                                type: 'color',
+                                name: 'Color',
+                                property: 'border-top-color',
+                                cssproperty: 'border-top-color',
+                                defaults: 'rgb(33,37,41)',
+                            }, { at: 5 });
+
+                            VjEditor.StyleManager.addProperty(Border, {
+                                id: 'border-top-width',
+                                type: 'custom_rangeslider',
+                                name: 'Width',
+                                property: 'border-top-width',
+                                cssproperty: 'border-top-width',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'vh'],
+                                unit: 'px',
+                                defaults: 0,
+                            }, { at: 6 });
+
+                            //border left                          
+                            VjEditor.StyleManager.addProperty(Border, {
+                                type: 'radio',
+                                name: 'Border Style',
+                                property: 'border-left-style',
+                                cssproperty: 'border-left-style',
+                                defaults: 'none',
+                                list: [{
+                                    value: 'solid',
+                                    name: 'Solid',
+                                }, {
+                                    value: 'dotted',
+                                    name: 'Dotted',
+                                }, {
+                                    value: 'dashed',
+                                    name: 'Dashed',
+                                }, {
+                                    value: 'double',
+                                    name: 'Double',
+                                }],
+
+                            }, { at: 7 });
+
+                            VjEditor.StyleManager.addProperty(Border, {
+                                id: 'border-left-color',
+                                type: 'color',
+                                name: 'Color',
+                                property: 'border-left-color',
+                                cssproperty: 'border-left-color',
+                                defaults: 'rgb(33,37,41)',
+                            }, { at: 8 });
+
+                            VjEditor.StyleManager.addProperty(Border, {
+                                id: 'border-left-width',
+                                type: 'custom_rangeslider',
+                                name: 'Width',
+                                property: 'border-left-width',
+                                cssproperty: 'border-left-width',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'vh'],
+                                unit: 'px',
+                                defaults: 0,
+                            }, { at: 9 });
+
+                            //border right                          
+                            VjEditor.StyleManager.addProperty(Border, {
+                                type: 'radio',
+                                name: 'Border Style',
+                                property: 'border-right-style',
+                                cssproperty: 'border-right-style',
+                                defaults: 'solid',
+                                list: [{
+                                    value: 'solid',
+                                    name: 'Solid',
+                                }, {
+                                    value: 'dotted',
+                                    name: 'Dotted',
+                                }, {
+                                    value: 'dashed',
+                                    name: 'Dashed',
+                                }, {
+                                    value: 'double',
+                                    name: 'Double',
+                                }],
+
+                            }, { at: 10 });
+
+                            VjEditor.StyleManager.addProperty(Border, {
+                                id: 'border-right-color',
+                                type: 'color',
+                                name: 'Color',
+                                property: 'border-right-color',
+                                cssproperty: 'border-right-color',
+                                defaults: 'rgb(33,37,41)',
+                            }, { at: 11 });
+
+                            VjEditor.StyleManager.addProperty(Border, {
+                                id: 'border-right-width',
+                                type: 'custom_rangeslider',
+                                name: 'Width',
+                                property: 'border-right-width',
+                                cssproperty: 'border-right-width',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'vh'],
+                                unit: 'px',
+                                defaults: 0,
+                            }, { at: 12 });
+
+                            //border bottom                          
+                            VjEditor.StyleManager.addProperty(Border, {
+                                type: 'radio',
+                                name: 'Border Style',
+                                property: 'border-bottom-style',
+                                cssproperty: 'border-bottom-style',
+                                defaults: 'none',
+                                list: [{
+                                    value: 'solid',
+                                    name: 'Solid',
+                                }, {
+                                    value: 'dotted',
+                                    name: 'Dotted',
+                                }, {
+                                    value: 'dashed',
+                                    name: 'Dashed',
+                                }, {
+                                    value: 'double',
+                                    name: 'Double',
+                                }],
+
+                            }, { at: 13 });
+
+                            VjEditor.StyleManager.addProperty(Border, {
+                                id: 'border-bottom-color',
+                                type: 'color',
+                                name: 'Color',
+                                property: 'border-bottom-color',
+                                cssproperty: 'border-bottom-color',
+                                defaults: 'rgb(33,37,41)',
+                            }, { at: 14 });
+
+                            VjEditor.StyleManager.addProperty(Border, {
+                                id: 'border-bottom-width',
+                                type: 'custom_rangeslider',
+                                name: 'Width',
+                                property: 'border-bottom-width',
+                                cssproperty: 'border-bottom-width',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'vh'],
+                                unit: 'px',
+                                defaults: 0,
+                            }, { at: 15 });
+                            
+                           
+                            
+                            //VjEditor.StyleManager.addProperty(Border, {
+                            //    type: 'custom-rangelider',
+                            //    name: 'border-width',
+                            //    property: 'border-width',
+                            //    properties: [
+                            //        { name: "Top", CSS: "border-top-width" },
+                            //        { name: "Right", CSS: "border-right-width" },
+                            //        { name: "Bottom", CSS: "border-bottom-width" },
+                            //        { name: "Left", CSS: "border-left-width" },
+                            //    ],
+                            //    step: 1,
+                            //    min: 0,
+                            //    max: 100,
+                            //    units: ['px', '%', 'vh'],
+                            //    unit: 'px',
+                            //    defaults: 0,
+                            //}, { at: 0 });
+
+
+                            //border
+
+                            //Border Raduis
+                            VjEditor.StyleManager.addProperty(BorderRadius, {
+                                id:'border-top-left-radius',
+                                type: 'custom_rangeslider',
+                                name: 'Top Left',
+                                property: 'border-top-left-radius',
+                                cssproperty: 'border-top-left-radius',
                                 step: 1,
                                 min: 0,
                                 max: 100,
@@ -963,6 +1411,46 @@ $(document).ready(function () {
                                 unit: 'px',
                                 defaults: 0,
                             });
+                            VjEditor.StyleManager.addProperty(BorderRadius, {
+                                id: 'border-top-right-radius',
+                                type: 'custom_rangeslider',
+                                name: 'Top Right',
+                                property: 'border-top-right-radius',
+                                cssproperty: 'border-top-right-radius',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'em'],
+                                unit: 'px',
+                                defaults: 0,
+                            });
+                            VjEditor.StyleManager.addProperty(BorderRadius, {
+                                id: 'border-bottom-left-radius',
+                                type: 'custom_rangeslider',
+                                name: 'Bottom-Left',
+                                property: 'border-bottom-left-radius',
+                                cssproperty: 'border-bottom-left-radius',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'em'],
+                                unit: 'px',
+                                defaults: 0,
+                            });
+                            VjEditor.StyleManager.addProperty(BorderRadius, {
+                                id: 'border-bottom-right-radius',
+                                type: 'custom_rangeslider',
+                                name: 'Bottom-Right',
+                                property: 'border-bottom-right-radius',
+                                cssproperty: 'border-bottom-right-radius',
+                                step: 1,
+                                min: 0,
+                                max: 100,
+                                units: ['px', '%', 'em'],
+                                unit: 'px',
+                                defaults: 0,
+                            });
+                            //end Border Radius
 
                             VjEditor.on('load', function () {
 
@@ -1180,6 +1668,7 @@ $(document).ready(function () {
                             });
 
                             VjEditor.on('component:selected', (model, argument) => {
+
                                 if (typeof model.attributes.type == 'undefined')
                                     return false;
                                 if (model.attributes.type == 'carousel-caption') {
@@ -1223,7 +1712,6 @@ $(document).ready(function () {
 
                                 if (typeof model.get(desktop) != 'undefined')
                                     VjEditor.StyleManager.getProperty(Responsive, desktop).setValue(model.get(mobile));
-
 
                                 if (typeof model.getStyle()['filter'] != "undefined") {
 
@@ -1306,6 +1794,46 @@ $(document).ready(function () {
 
                                 VjEditor.StyleManager.render();
 
+                                setTimeout(function () {
+                                    if (VjEditor.StyleManager.getProperty(Border, 'border-position').length != 0) {
+                                        var sm = VjEditor.StyleManager;
+                                        var position = sm.getProperty(Border, 'border-position').attributes.value;
+                                        var val;
+                                        var borderPosition = VjEditor.StyleManager.getProperty(Border, 'border-position').attributes.value;
+
+                                        jQuery.each(VjEditor.StyleManager.getProperties('border').models, function (n, i) {
+                                            if (i.attributes.name != 'Border Postion')
+                                                $(i.view.el).hide();
+                                        });
+
+                                        switch (position) {
+                                            case "B":
+                                                val = "border"
+                                                break;
+                                            case "BT":
+                                                val = "border-top"
+                                                break;
+                                            case "BR":
+                                                val = "border-right"
+                                                break;
+                                            case "BB":
+                                                val = "border-bottom"
+                                                break;
+                                            case "BL":
+                                                val = "border-left"
+                                                break;
+                                            default:
+                                                val = "border"
+                                        }
+
+                                        if (position == borderPosition) {
+                                            $(sm.getProperty(Border, val + '-style').view.el).show();
+                                            $(sm.getProperty(Border, val + '-color').view.el).show();
+                                            $(sm.getProperty(Border, val + '-width').view.el).show();
+                                        }
+                                    }
+                                });                                                             
+
                                 if (model.attributes.type == 'column') {
 
                                     $(model.parent().getEl()).addClass('gjs-dashed');
@@ -1361,8 +1889,8 @@ $(document).ready(function () {
                                         fontfamilylist.push({ value: v.Value, name: v.Name });
                                     });
 
-                                    VjEditor.StyleManager.addSector(Typography, {
-                                        name: VjLocalized.Typography,
+                                    VjEditor.StyleManager.addSector(Text, {
+                                        name: VjLocalized.Text,
                                         open: false,
                                         buildProps: ['color', 'font-family', 'font-size', 'line-height', 'letter-spacing', 'word-spacing', 'font-weight', 'font-style', 'text-transform', 'text-decoration', 'text-shadow'],
                                         properties: [{
@@ -1411,7 +1939,7 @@ $(document).ready(function () {
                                             step: 1,
                                             min: 10,
                                             max: 100,
-                                            units: ['px', 'em', 'rem', '%'],
+                                            units: ['px', 'em', 'rem', '%', 'vh', 'vw'],
                                             unit: 'px',
                                         }, {
                                             id: 'line-height',
@@ -1486,11 +2014,11 @@ $(document).ready(function () {
                                                 name: 'Capitalize',
                                             }],
                                         }],
-                                    }, { at: 1 })
+                                    }, { at: 3 })
                                 }
                                 else {
-                                    if (typeof VjEditor.StyleManager.getSector(Typography) != 'undefined')
-                                        VjEditor.StyleManager.removeSector(Typography);
+                                    if (typeof VjEditor.StyleManager.getSector(Text) != 'undefined')
+                                        VjEditor.StyleManager.removeSector(Text);
                                 }
 
                                 $(VjEditor.StyleManager.getSectors().models).each(function (index, value) {
@@ -1522,6 +2050,49 @@ $(document).ready(function () {
 
                             VjEditor.on('component:styleUpdate', (model, property) => {
 
+                                if (property == "border-position" && typeof model.getStyle()['border-position'] != 'undefined' && VjEditor.StyleManager.getProperty(Border, 'border-position').length != 0) {
+                                    var sm = VjEditor.StyleManager;
+                                    var position = sm.getProperty(Border, 'border-position').attributes.value;
+                                    var val;
+                                    var borderPosition = VjEditor.StyleManager.getProperty(Border, 'border-position').attributes.list;
+                                  
+                                    jQuery.each(VjEditor.StyleManager.getProperties('border').models, function (n, i) {
+                                        if (i.attributes.name != 'Border Postion')
+                                            $(i.view.el).hide();
+                                    });
+
+                                    switch (position) {
+                                        case "B":
+                                            val = "border"
+                                            break;
+                                        case "BT":
+                                            val = "border-top"
+                                            break;
+                                        case "BR":
+                                            val = "border-right"
+                                            break;
+                                        case "BB":
+                                            val = "border-bottom"
+                                            break;
+                                        case "BL":
+                                            val = "border-left"
+                                            break;
+                                        default:
+                                            val = "border"
+                                    }
+
+                                    borderPosition.forEach(function (item) {
+                                        if (position == item.name) {                                           
+                                            $(sm.getProperty(Border, val + '-style').view.el).show();
+                                            $(sm.getProperty(Border, val + '-color').view.el).show();
+                                            $(sm.getProperty(Border, val + '-width').view.el).show();
+
+                                        } 
+                                    });
+                                }
+
+
+
                                 if (property == "color" && typeof event != "undefined" && $(event.target).parents(".gjs-sm-property.gjs-sm-color").length) {
                                     if (model.attributes.type == "heading" || model.attributes.type == "text" || model.attributes.type == "button" || model.attributes.type == "list") {
 
@@ -1535,18 +2106,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Width*/
-                                if (property == "width" && typeof model.getStyle()['width'] != 'undefined' && VjEditor.StyleManager.getProperty(LayoutDimensions, 'width').length != 0) {
+                                if (property == "width" && typeof model.getStyle()['width'] != 'undefined' && VjEditor.StyleManager.getProperty(Size, 'width').length != 0) {
                                     if (model.getStyle()['width'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty(LayoutDimensions, 'width').set({ 'min': 1, 'max': 1920, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[0].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Size, 'width').set({ 'min': 1, 'max': 1920, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Size).attributes.properties.models[0].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 1920,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['width'].indexOf('%') > -1 || model.getStyle()['width'].indexOf('vw') > -1) {
-                                        VjEditor.StyleManager.getProperty(LayoutDimensions, 'width').set({ 'min': 1, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[0].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Size, 'width').set({ 'min': 1, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Size).attributes.properties.models[0].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 100,
                                             'step': 1,
@@ -1555,18 +2126,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Height*/
-                                if (property == "height" && typeof model.getStyle()['height'] != 'undefined' && VjEditor.StyleManager.getProperty(LayoutDimensions, 'height').length != 0) {
+                                if (property == "height" && typeof model.getStyle()['height'] != 'undefined' && VjEditor.StyleManager.getProperty(Size, 'height').length != 0) {
                                     if (model.getStyle()['height'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty(LayoutDimensions, 'height').set({ 'min': 1, 'max': 1080, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[1].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Size, 'height').set({ 'min': 1, 'max': 1080, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Size).attributes.properties.models[1].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 1080,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['height'].indexOf('%') > -1 || model.getStyle()['height'].indexOf('vh') > -1) {
-                                        VjEditor.StyleManager.getProperty(LayoutDimensions, 'height').set({ 'min': 1, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[1].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Size, 'height').set({ 'min': 1, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Size).attributes.properties.models[1].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 100,
                                             'step': 1,
@@ -1577,18 +2148,18 @@ $(document).ready(function () {
                                 /*Min-Height*/
                                 if (property == "min-height" && typeof model.getStyle()['min-height'] != 'undefined') {
                                     if (model.getStyle()['min-height'].indexOf('px') > -1) {
-                                        if (VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-height').length > 0)
-                                            VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-height').set({ 'min': 1, 'max': 1080, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
+                                        if (VjEditor.StyleManager.getProperty(Size, 'max-height').length > 0)
+                                            VjEditor.StyleManager.getProperty(Size, 'max-height').set({ 'min': 1, 'max': 1080, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Size).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 1080,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['min-height'].indexOf('%') > -1 || model.getStyle()['min-height'].indexOf('vh') > -1) {
-                                        if (VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-height').length > 0)
-                                            VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-height').set({ 'min': 1, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
+                                        if (VjEditor.StyleManager.getProperty(Size, 'max-height').length > 0)
+                                            VjEditor.StyleManager.getProperty(Size, 'max-height').set({ 'min': 1, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Size).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 100,
                                             'step': 1,
@@ -1597,18 +2168,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Max-Width*/
-                                if (property == "max-width" && typeof model.getStyle()['max-width'] != 'undefined' && VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-width').length != 0) {
+                                if (property == "max-width" && typeof model.getStyle()['max-width'] != 'undefined' && VjEditor.StyleManager.getProperty(Size, 'max-width').length != 0) {
                                     if (model.getStyle()['max-width'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-width').set({ 'min': 1, 'max': 1920, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Size, 'max-width').set({ 'min': 1, 'max': 1920, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Size).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 1920,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['max-width'].indexOf('%') > -1 || model.getStyle()['max-width'].indexOf('vw') > -1) {
-                                        VjEditor.StyleManager.getProperty(LayoutDimensions, 'max-width').set({ 'min': 1, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(LayoutDimensions).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Size, 'max-width').set({ 'min': 1, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Size).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 100,
                                             'step': 1,
@@ -1617,26 +2188,42 @@ $(document).ready(function () {
                                 }
 
                                 /*Font Size*/
-                                if (property == 'font-size' && typeof model.getStyle()['font-size'] != 'undefined' && VjEditor.StyleManager.getProperty(Typography, 'font-size').length != 0) {
+                                if (property == 'font-size' && typeof model.getStyle()['font-size'] != 'undefined' && VjEditor.StyleManager.getProperty(Text, 'font-size').length != 0) {
                                     if (model.getStyle()['font-size'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty(Typography, 'font-size').set({ 'min': 10, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Text, 'font-size').set({ 'min': 10, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Text).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
                                             'min': 10,
                                             'max': 100,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['font-size'].indexOf('rem') > -1 || model.getStyle()['font-size'].indexOf('em') > -1) {
-                                        VjEditor.StyleManager.getProperty(Typography, 'font-size').set({ 'min': .1, 'max': 10, 'step': .1 });
-                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Text, 'font-size').set({ 'min': .1, 'max': 10, 'step': .1 });
+                                        $(VjEditor.StyleManager.getSector(Text).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
                                             'min': .1,
                                             'max': 10,
                                             'step': .1,
                                         });
                                     }
                                     else if (model.getStyle()['font-size'].indexOf('%') > -1) {
-                                        VjEditor.StyleManager.getProperty(Typography, 'font-size').set({ 'min': 0, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Text, 'font-size').set({ 'min': 0, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Text).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
+                                            'min': 0,
+                                            'max': 100,
+                                            'step': 1,
+                                        });
+                                    }
+                                    else if (model.getStyle()['font-size'].indexOf('vh') > -1) {
+                                        VjEditor.StyleManager.getProperty(Text, 'font-size').set({ 'min': 0, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Text).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
+                                            'min': 0,
+                                            'max': 100,
+                                            'step': 1,
+                                        });
+                                    }
+                                    else if (model.getStyle()['font-size'].indexOf('vw') > -1) {
+                                        VjEditor.StyleManager.getProperty(Text, 'font-size').set({ 'min': 0, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Text).attributes.properties.models[2].view.el).find('input[type="range"]').attr({
                                             'min': 0,
                                             'max': 100,
                                             'step': 1,
@@ -1645,18 +2232,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Line Height*/
-                                if (property == 'line-height' && typeof model.getStyle()['line-height'] != 'undefined' && VjEditor.StyleManager.getProperty(Typography, 'line-height').length != 0) {
+                                if (property == 'line-height' && typeof model.getStyle()['line-height'] != 'undefined' && VjEditor.StyleManager.getProperty(Text, 'line-height').length != 0) {
                                     if (model.getStyle()['line-height'].indexOf('px') > -1 || model.getStyle()['line-height'].indexOf('%') > -1) {
-                                        VjEditor.StyleManager.getProperty(Typography, 'line-height').set({ 'min': 0, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Text, 'line-height').set({ 'min': 0, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Text).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
                                             'min': 0,
                                             'max': 100,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['line-height'].indexOf('rem') > -1 || model.getStyle()['line-height'].indexOf('em') > -1) {
-                                        VjEditor.StyleManager.getProperty(Typography, 'line-height').set({ 'min': .1, 'max': 10, 'step': .1 });
-                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Text, 'line-height').set({ 'min': .1, 'max': 10, 'step': .1 });
+                                        $(VjEditor.StyleManager.getSector(Text).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
                                             'min': .1,
                                             'max': 10,
                                             'step': .1,
@@ -1665,18 +2252,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Letter Spacing*/
-                                if (property == 'letter-spacing' && typeof model.getStyle()['letter-spacing'] != 'undefined' && VjEditor.StyleManager.getProperty(Typography, 'letter-spacing').length != 0) {
+                                if (property == 'letter-spacing' && typeof model.getStyle()['letter-spacing'] != 'undefined' && VjEditor.StyleManager.getProperty(Text, 'letter-spacing').length != 0) {
                                     if (model.getStyle()['letter-spacing'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty(Typography, 'letter-spacing').set({ 'min': 0, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[4].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Text, 'letter-spacing').set({ 'min': 0, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Text).attributes.properties.models[4].view.el).find('input[type="range"]').attr({
                                             'min': 0,
                                             'max': 100,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['letter-spacing'].indexOf('rem') > -1 || model.getStyle()['letter-spacing'].indexOf('em') > -1) {
-                                        VjEditor.StyleManager.getProperty(Typography, 'letter-spacing').set({ 'min': .1, 'max': 25, 'step': .1 });
-                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[4].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Text, 'letter-spacing').set({ 'min': .1, 'max': 25, 'step': .1 });
+                                        $(VjEditor.StyleManager.getSector(Text).attributes.properties.models[4].view.el).find('input[type="range"]').attr({
                                             'min': .1,
                                             'max': 25,
                                             'step': .1,
@@ -1685,18 +2272,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Word Spacing*/
-                                if (property == 'word-spacing' && typeof model.getStyle()['word-spacing'] != 'undefined' && VjEditor.StyleManager.getProperty(Typography, 'word-spacing').length != 0) {
+                                if (property == 'word-spacing' && typeof model.getStyle()['word-spacing'] != 'undefined' && VjEditor.StyleManager.getProperty(Text, 'word-spacing').length != 0) {
                                     if (model.getStyle()['word-spacing'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty(Typography, 'word-spacing').set({ 'min': 0, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[5].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Text, 'word-spacing').set({ 'min': 0, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Text).attributes.properties.models[5].view.el).find('input[type="range"]').attr({
                                             'min': 0,
                                             'max': 100,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['word-spacing'].indexOf('rem') > -1 || model.getStyle()['word-spacing'].indexOf('em') > -1) {
-                                        VjEditor.StyleManager.getProperty(Typography, 'word-spacing').set({ 'min': .1, 'max': 25, 'step': .1 });
-                                        $(VjEditor.StyleManager.getSector(Typography).attributes.properties.models[5].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Text, 'word-spacing').set({ 'min': .1, 'max': 25, 'step': .1 });
+                                        $(VjEditor.StyleManager.getSector(Text).attributes.properties.models[5].view.el).find('input[type="range"]').attr({
                                             'min': .1,
                                             'max': 25,
                                             'step': .1,
@@ -1705,18 +2292,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Border Width*/
-                                if (property == "border-width" && typeof model.getStyle()['border-width'] != 'undefined' && VjEditor.StyleManager.getProperty(Borders, 'border-width').length != 0) {
+                                if (property == "border-width" && typeof model.getStyle()['border-width'] != 'undefined' && VjEditor.StyleManager.getProperty(Border, 'border-width').length != 0) {
                                     if (model.getStyle()['border-width'].indexOf('px') > -1) {
-                                        VjEditor.StyleManager.getProperty(Borders, 'border-width').set({ 'min': 1, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(Borders).attributes.properties.models[0].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Border, 'border-width').set({ 'min': 1, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Border).attributes.properties.models[0].view.el).find('input[type="range"]').attr({
                                             'min': 1,
                                             'max': 100,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['border-width'].indexOf('em') > -1) {
-                                        VjEditor.StyleManager.getProperty(Borders, 'border-width').set({ 'min': .1, 'max': 10, 'step': .1 });
-                                        $(VjEditor.StyleManager.getSector(Borders).attributes.properties.models[0].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Border, 'border-width').set({ 'min': .1, 'max': 10, 'step': .1 });
+                                        $(VjEditor.StyleManager.getSector(Border).attributes.properties.models[0].view.el).find('input[type="range"]').attr({
                                             'min': .1,
                                             'max': 10,
                                             'step': .1,
@@ -1725,18 +2312,18 @@ $(document).ready(function () {
                                 }
 
                                 /*Border Radius*/
-                                if (property == "border-radius" && typeof model.getStyle()['border-radius'] != 'undefined' && VjEditor.StyleManager.getProperty(Borders, 'border-radius').length != 0) {
+                                if (property == "border-radius" && typeof model.getStyle()['border-radius'] != 'undefined' && VjEditor.StyleManager.getProperty(Border, 'border-radius').length != 0) {
                                     if (model.getStyle()['border-radius'].indexOf('px') > -1 || model.getStyle()['border-radius'].indexOf('%') > -1) {
-                                        VjEditor.StyleManager.getProperty(Borders, 'border-radius').set({ 'min': 0, 'max': 100, 'step': 1 });
-                                        $(VjEditor.StyleManager.getSector(Borders).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Border, 'border-radius').set({ 'min': 0, 'max': 100, 'step': 1 });
+                                        $(VjEditor.StyleManager.getSector(Border).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
                                             'min': 0,
                                             'max': 100,
                                             'step': 1,
                                         });
                                     }
                                     else if (model.getStyle()['border-radius'].indexOf('em') > -1) {
-                                        VjEditor.StyleManager.getProperty(Borders, 'border-radius').set({ 'min': 0, 'max': 10, 'step': .1 });
-                                        $(VjEditor.StyleManager.getSector(Borders).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
+                                        VjEditor.StyleManager.getProperty(Border, 'border-radius').set({ 'min': 0, 'max': 10, 'step': .1 });
+                                        $(VjEditor.StyleManager.getSector(Border).attributes.properties.models[3].view.el).find('input[type="range"]').attr({
                                             'min': 0,
                                             'max': 10,
                                             'step': .1,
@@ -2083,10 +2670,10 @@ $(document).ready(function () {
                                         } else
                                             n.push(t)
                                     }),
-                                    {
-                                        atRules: e,
-                                        notAtRules: n
-                                    }
+                                        {
+                                            atRules: e,
+                                            notAtRules: n
+                                        }
                                 },
                                 getQueryLength: function (t) {
                                     var e = /(-?\d*\.?\d+)\w{0,}/.exec(t);
@@ -2214,7 +2801,7 @@ $(document).ready(function () {
                                 if (model.parent() != undefined && model.parent().attributes.type == "column" && model.parent().components().length == 0)
                                     $(model.parent().getEl()).attr("data-empty", "true");
 
-                                if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
+                                if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
                                     return false;
                                 else {
                                     if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf('e2f6ebcb-5d68-4d85-b180-058fb2d26178') < 0) {

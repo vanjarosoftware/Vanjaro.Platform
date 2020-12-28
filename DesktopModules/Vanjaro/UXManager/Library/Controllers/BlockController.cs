@@ -65,15 +65,15 @@ namespace Vanjaro.UXManager.Library.Controllers
         }
 
         [HttpGet]
-        [DnnPageEditor]
+        [AuthorizeAccessRoles(AccessRoles = "pageedit")]
         public List<Block> GetAll()
         {
             return Core.Managers.BlockManager.GetAll();
         }
 
         [HttpPost]
-        [DnnPageEditor]
-        public ThemeTemplateResponse Render()
+        [AuthorizeAccessRoles(AccessRoles = "pageedit")]
+        public ThemeTemplateResponse RenderItem()
         {
             Dictionary<string, string> Attributes = new Dictionary<string, string>();
             foreach (string key in HttpContext.Current.Request.Form.AllKeys)
@@ -125,7 +125,7 @@ namespace Vanjaro.UXManager.Library.Controllers
                     if (File.Exists(path + "/Template.json"))
                     {
                         ExportTemplate exportTemplate = JsonConvert.DeserializeObject<ExportTemplate>(File.ReadAllText(path + "/Template.json"));
-                        if (exportTemplate != null)
+                        if (exportTemplate != null && exportTemplate.ThemeGuid.ToLower() == ThemeManager.CurrentTheme.GUID.ToLower())
                         {
                             Layout pagelayout = exportTemplate.Templates.FirstOrDefault();
                             if (pagelayout != null)

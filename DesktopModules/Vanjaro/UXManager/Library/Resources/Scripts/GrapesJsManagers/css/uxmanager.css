@@ -325,10 +325,6 @@ div#MenuSettings .parent-menu-hide {
 	color: #fff;
 }
 
-#Modeiframe {
-	width: 100%;
-}
-
 /*Modal*/
 
 .uxmanager-modal * {
@@ -338,33 +334,6 @@ div#MenuSettings .parent-menu-hide {
 
 .uxmanager-modal .fas {
 	font-family: 'Font Awesome 5 Free';
-}
-
-.modal .modal-dialog.modal-right {
-	height: 100%;
-	position: fixed;
-	margin: 0;
-	right: 0;
-}
-
-.modal .modal-dialog iframe {
-	height: 100%;
-	width: 100%;
-	border: none;
-}
-
-	.modal .modal-dialog iframe body {
-		background: #fff !important;
-	}
-
-.modal-body {
-	overflow: hidden;
-}
-
-.modal-content {
-	border-radius: 0 !important;
-	height: 100%;
-	overflow: auto;
 }
 
 /*Sidebar Open/Close*/
@@ -2858,10 +2827,6 @@ span.notificationname {
 	padding-right: 30px;
 }
 
-#gjs-sm-top, #gjs-sm-right, #gjs-sm-left, #gjs-sm-bottom {
-	width: 25%;
-}
-
 .gjs-sm-sector .gjs-sm-property .gjs-sm-layer, .gjs-clm-tags .gjs-sm-property .gjs-sm-layer {
 	padding: 0px;
 }
@@ -2939,10 +2904,6 @@ input.rangeinput {
 		position: relative;
 		top: -12px;
 	}
-
-div#gjs-sm-top, div#gjs-sm-right, div#gjs-sm-left, div#gjs-sm-bottom {
-	text-align: center;
-}
 
 
 #gjs-sm-margin .diffmargin,
@@ -3394,4 +3355,8 @@ body.resp-mode.tablet .vj-wrapper {
 body.resp-mode.mobile .vj-wrapper {
     width: 360px;
     height: 700px;
+}
+
+.custom-range-slider  .gjs-field.gjs-field-integer {
+    width: 30% !important;
 }

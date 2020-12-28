@@ -15,6 +15,7 @@ using System.Web;
 using System.Web.UI;
 using Vanjaro.Common.ASPNET;
 using Vanjaro.Core.Components;
+using Vanjaro.Core.Components.Interfaces;
 using Vanjaro.Core.Entities.Interface;
 using Vanjaro.Core.Entities.Theme;
 using Vanjaro.Core.Services.Authentication.OAuth;
@@ -65,6 +66,38 @@ namespace Vanjaro.Core
                 {
                     return null;
                 }
+            }
+
+            public static string GetGUID(string name)
+            {
+                ITheme theme = GetThemes().Where(s => s.Name.ToLower() == name.ToLower()).FirstOrDefault();
+                if (theme != null)
+                    return theme.GUID.ToString();
+                else
+                    return string.Empty;
+            }
+
+            public static List<ITheme> GetThemes()
+            {
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Theme, "AllIThemes");
+                List<ITheme> Items = CacheFactory.Get(CacheKey);
+                if (Items == null || Items.Count == 0)
+                {
+                    Items = new List<ITheme>();
+                    string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll")).ToArray();
+                    foreach (string Path in binAssemblies)
+                    {
+                        try
+                        {
+                            Items.AddRange((from t in System.Reflection.Assembly.LoadFrom(Path).GetTypes()
+                                            where t != (typeof(ITheme)) && (typeof(ITheme).IsAssignableFrom(t))
+                                            select Activator.CreateInstance(t) as ITheme).ToList());
+                        }
+                        catch { continue; }
+                    }
+                    CacheFactory.Set(CacheKey, Items);
+                }
+                return Items;
             }
 
             public static List<IThemeEditor> GetCategories(bool CheckVisibilityPermission)
@@ -640,7 +673,7 @@ namespace Vanjaro.Core
                                 {
                                     sb.Append("<div class=\"dropdownselect optioncontrol\" id=" + item.Guid + "><div class=\"dropdownlabel\" ><label>" + fonts.Title + ":</label></div>");
                                     sb.Append("<div class=\"dropdownOption\"><select  guid=" + fonts.Guid + ">");
-                                    foreach (StringTextNV opt in GetDDLFonts(Guid))
+                                    foreach (StringTextNV opt in GetDDLFonts("all"))
                                     {
                                         string value = GetGuidValue(themeEditorValues, fonts);
                                         if (opt.Value == value)

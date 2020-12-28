@@ -91,8 +91,8 @@
 				}
 			},
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
-				droppable: true,
-				tagName: 'section',
+                droppable: true,
+                tagName: 'section',
 				unstylable: ['background-color', 'background'],
 				resizable: {
 					tl: 0, // Top left
@@ -109,7 +109,7 @@
                     type: 'text',
                 },{
 					label: "Type",
-					name: "type",
+					name: "tag",
 					type: 'select',
 					options: [
 						{ id: 'article', name: 'Article' },
@@ -119,7 +119,7 @@
 						{ id: 'nav', name: 'Nav' },
 						{ id: 'section', name: 'Section' },
 					],
-					value: 'section',
+                    default: 'section',
 					changeProp: 1,
 				}, {
 					label: "Gap",
@@ -265,18 +265,17 @@
 					changeProp: 1,
 				}]
 			}),
-			init() {
-				this.listenTo(this, 'change:type', this.handleTypeChange);
+            init() {
+
+				this.listenTo(this, 'change:tag', this.handleTypeChange);
 				this.listenTo(this, 'change:gradient', this.handleGradientChange);
 			},
 			handleTypeChange() {
-				if (typeof this.attributes.type != 'undefined' && this.attributes.type != "") {
-					this.attributes.tagName = this.attributes.type;
-					this.view.reset();
-				}
+                if (typeof this.attributes.tag != 'undefined' && this.attributes.tag != "")
+                    this.set('tagName', this.attributes.tag);
 			},
 			handleGradientChange() {
-				if (typeof this.attributes.gradient != 'undefined' && this.attributes.type != "") {
+                if (typeof this.attributes.gradient != 'undefined' && this.attributes.gradient != "") {
 
 					var gradient = this.attributes.gradient
 					var style = this.getStyle();
@@ -287,7 +286,6 @@
 		},
 			{
 				isComponent(el) {
-					//if (el && el.tagName && (el.tagName.toLowerCase() == 'section' || (el.tagName.toLowerCase() == 'div' && el.classList && !el.classList.contains('row') && el.attributes.dmid == undefined && el.attributes['data-block-type'] == undefined) || el.tagName.toLowerCase() == 'header' || el.tagName.toLowerCase() == 'footer' || el.tagName.toLowerCase() == 'nav' || el.tagName.toLowerCase() == 'article')) {
 					if (el && el.tagName && (el.tagName.toLowerCase() == 'section' || el.tagName.toLowerCase() == 'header' || el.tagName.toLowerCase() == 'footer' || (el.tagName.toLowerCase() == 'nav' && el.classList && !el.classList.contains('nav-breadcrumb')) || el.tagName.toLowerCase() == 'article')) {
 						return { type: 'section' };
 					}
@@ -343,5 +341,5 @@
 			},
 
 		}),
-	});
+    });
 }
