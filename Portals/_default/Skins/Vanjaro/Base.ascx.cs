@@ -1,6 +1,7 @@
 ﻿using DotNetNuke.Abstractions;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Data;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Portals;
@@ -156,6 +157,25 @@ namespace Vanjaro.Skin
 
             ResetModulePanes();
             InitGuidedTours();
+            AccessDenied();
+
+        }
+
+        private void AccessDenied()
+        {            
+            string Message = null;
+            Guid messageGuid;
+            var guidText = this.Request.QueryString["message"];
+            if (!string.IsNullOrEmpty(guidText) && Guid.TryParse(guidText, out messageGuid))         
+                Message = HttpUtility.HtmlEncode(DataProvider.Instance().GetRedirectMessage(messageGuid));
+         
+            if (!string.IsNullOrEmpty(Message))
+            {
+                Control ContentPane = FindControlRecursive(this, "ContentPane");
+                Literal lt = new Literal();
+                lt.Text = "<div class=\"alert alert-warning\" role=\"alert\">" + Message + "</div>";
+                ContentPane.Controls.Add(lt);
+            }
         }
 
         private void InjectThemeJS()
