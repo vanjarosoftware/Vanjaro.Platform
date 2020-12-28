@@ -26,7 +26,7 @@ namespace Vanjaro.UXManager.Library.Entities
                 UpdateContentUrl = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/save'",
                 GetContentUrl = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/get'",
                 ContainerID = "#vjEditor",
-                EditPage = TabPermissionController.HasTabPermission("EDIT"),
+                EditPage = true,
                 ModuleId = -1
             };
 
