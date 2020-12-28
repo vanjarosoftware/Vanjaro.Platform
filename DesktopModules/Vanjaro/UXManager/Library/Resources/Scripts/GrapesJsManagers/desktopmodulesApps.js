@@ -456,7 +456,7 @@ global.RenderBlock = function (model, bmodel, render) {
     model.view.$el[0].innerHTML = '<img class="centerloader" src=' + VjDefaultPath + 'loading.gif>';
     $.ajax({
         type: "POST",
-        url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/Render",
+        url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/RenderItem",
         data: model.attributes.attributes,
         headers: {
             'ModuleId': parseInt(sf.getModuleId()),

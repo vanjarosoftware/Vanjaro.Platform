@@ -73,7 +73,7 @@ namespace Vanjaro.UXManager.Library.Controllers
 
         [HttpPost]
         [AuthorizeAccessRoles(AccessRoles = "pageedit")]
-        public ThemeTemplateResponse Render()
+        public ThemeTemplateResponse RenderItem()
         {
             Dictionary<string, string> Attributes = new Dictionary<string, string>();
             foreach (string key in HttpContext.Current.Request.Form.AllKeys)
