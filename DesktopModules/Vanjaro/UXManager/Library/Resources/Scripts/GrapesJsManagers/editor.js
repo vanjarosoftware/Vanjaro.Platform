@@ -1849,8 +1849,6 @@ $(document).ready(function () {
 
                                 if (model.attributes.type == 'grid') {
 
-                                    $(model.components().models[0].getEl()).addClass('gjs-dashed');
-
                                     if (flexProperty == null) {
 
                                         VjEditor.StyleManager.addProperty(Responsive, {
@@ -1870,12 +1868,17 @@ $(document).ready(function () {
                                         flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
                                     }
 
-                                    var flexDirection = model.components().models[0].getStyle()['flex-direction'];
+                                    if (model.components().length) {
 
-                                    if (typeof flexDirection == 'undefined' || flexDirection.indexOf('reverse') <= 0)
-                                        flexProperty.view.setValue('false');
-                                    else
-                                        flexProperty.view.setValue('true');
+                                        $(model.components().models[0].getEl()).addClass('gjs-dashed');
+
+                                        var flexDirection = model.components().models[0].getStyle()['flex-direction'];
+
+                                        if (typeof flexDirection == 'undefined' || flexDirection.indexOf('reverse') <= 0)
+                                            flexProperty.view.setValue('false');
+                                        else
+                                            flexProperty.view.setValue('true');
+                                    }
                                 }
                                 else {
                                     if (flexProperty != null)
@@ -2044,7 +2047,7 @@ $(document).ready(function () {
                                 if (model.attributes.type == 'column')
                                     $(model.parent().getEl()).removeClass('gjs-dashed');
 
-                                if (model.attributes.type == 'grid')
+                                if (model.attributes.type == 'grid' && model.components().length)
                                     $(model.components().models[0].getEl()).removeClass('gjs-dashed');
                             });
 

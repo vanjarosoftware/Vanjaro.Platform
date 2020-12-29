@@ -396,7 +396,7 @@ export default (editor, config = {}) => {
 			})
 		}, {
 				isComponent(el) {
-					if (el && el.tagName && el.tagName.toLowerCase() == 'div' && el.classList && (el.classList.contains('container') || el.classList.contains('container-fluid'))) {
+				if (el && el.tagName && el.tagName.toLowerCase() == 'div' && el.classList && (el.classList.contains('container') || el.classList.contains('container-fluid')) && (el.firstElementChild != null && el.firstElementChild.classList.contains('row'))) {
 						return { type: 'grid' };
 					}
 				}
