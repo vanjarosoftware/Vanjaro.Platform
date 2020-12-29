@@ -61,7 +61,9 @@ namespace Vanjaro.Common.Engines.UIEngine.AngularBootstrap.Controllers
                     return new List<Suggestion>();
                 }
 
-                IEnumerable<Suggestion> matchedRoles = RoleController.Instance.GetRoles(PortalSettings.PortalId)
+                List<RoleInfo> roleInfos = RoleController.Instance.GetRoles(PortalSettings.PortalId).ToList();
+                roleInfos.Add(new RoleInfo { RoleGroupID = -2, Status = RoleStatus.Approved, RoleID = int.Parse(DotNetNuke.Common.Globals.glbRoleUnauthUser), RoleName = DotNetNuke.Common.Globals.glbRoleUnauthUserName });
+                IEnumerable<Suggestion> matchedRoles = roleInfos
                     .Where(r => (roleGroupId == -2 || r.RoleGroupID == roleGroupId)
                                 && r.RoleName.IndexOf(keyword, StringComparison.InvariantCultureIgnoreCase) > -1
                                    && r.Status == RoleStatus.Approved)
