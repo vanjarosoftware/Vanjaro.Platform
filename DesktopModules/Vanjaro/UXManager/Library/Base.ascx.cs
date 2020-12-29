@@ -24,6 +24,7 @@ using Vanjaro.UXManager.Library.Entities;
 using Vanjaro.UXManager.Library.Entities.Enum;
 using static Vanjaro.UXManager.Library.Managers;
 using System.Net;
+using Vanjaro.Common.Utilities;
 
 namespace Vanjaro.UXManager.Library
 {
@@ -47,13 +48,11 @@ namespace Vanjaro.UXManager.Library
 #if RELEASE
             TemplateLibraryURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
             ExtensionStoreURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");                       
-            ExtensionURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");                       
 #else
             TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/49A70BA1-206B-471F-800A-679799FF09DF";
             ExtensionStoreURL = "http://store.vanjaro.local/store";
-            ExtensionURL = "http://dev.vanjaro.local/home/mid/0/icp/true/guid/54caeff2-9fac-42ae-8594-40312867d56a#/installpackage";
-
 #endif
+            ExtensionURL= ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/') + MenuManager.GetURL() + "mid=0&icp=true&guid=54caeff2-9fac-42ae-8594-40312867d56a#/installpackage";
 
             base.OnInit(e);
             if (CanShowUXManager())
