@@ -20,7 +20,7 @@ using DotNetNuke.Services.Exceptions;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
 {
-    [AuthorizeAccessRoles(AccessRoles = "admin")]
+    [AuthorizeAccessRoles(AccessRoles = "host")]
     [ValidateAntiForgeryToken]
     public class InstallPackageController : UIEngineController
     {

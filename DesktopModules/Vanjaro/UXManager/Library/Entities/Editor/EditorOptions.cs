@@ -15,5 +15,6 @@ namespace Vanjaro.UXManager.Library.Entities
         public int ModuleId { get; set; }
         public int EntityID { get; set; }
         public string RevisionUrl { get; set; }
+        public string RevisionGUID { get; set; }
     }
 }
