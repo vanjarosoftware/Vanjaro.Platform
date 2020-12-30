@@ -62,7 +62,7 @@ InitAppActionMenu = function () {
 
     var AppMenusScript = $('[data-actionmid]');
 
-    if ((!isEditPage() || (typeof GrapesjsInitData != 'undefined' && !vjEditorSettings.EditPage)) && AppMenusScript.length > 0) {
+    if ((!isEditPage() || (typeof vjEditorSettings == 'undefined')) && AppMenusScript.length > 0) {
         AppMenusScript.each(function () {
             var mid = $(this).data('actionmid');
             $('.DnnModule-' + mid).vjModuleActions({
