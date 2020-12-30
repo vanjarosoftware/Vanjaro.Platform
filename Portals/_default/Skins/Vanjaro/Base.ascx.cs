@@ -162,13 +162,13 @@ namespace Vanjaro.Skin
         }
 
         private void AccessDenied()
-        {            
+        {
             string Message = null;
             Guid messageGuid;
             var guidText = this.Request.QueryString["message"];
-            if (!string.IsNullOrEmpty(guidText) && Guid.TryParse(guidText, out messageGuid))         
+            if (!string.IsNullOrEmpty(guidText) && Guid.TryParse(guidText, out messageGuid))
                 Message = HttpUtility.HtmlEncode(DataProvider.Instance().GetRedirectMessage(messageGuid));
-         
+
             if (!string.IsNullOrEmpty(Message))
             {
                 Control ContentPane = FindControlRecursive(this, "ContentPane");
@@ -637,7 +637,7 @@ namespace Vanjaro.Skin
 
                         if (!string.IsNullOrEmpty(response.Style))
                         {
-                            WebForms.RegisterClientScriptBlock(Page, "BlocksStyle" + item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value, "<style type=\"text/css\">" + response.Style + "</style>", false);
+                            WebForms.RegisterClientScriptBlock(Page, "BlocksStyle" + item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value, "<style type=\"text/css\" vj=\"true\">" + response.Style + "</style>", false);
                         }
                     }
 
