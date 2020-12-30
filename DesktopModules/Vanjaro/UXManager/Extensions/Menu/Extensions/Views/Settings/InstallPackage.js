@@ -15,14 +15,15 @@
     $scope.Click_Install = function () {
         var val = true;
         $.each($("input[type=checkbox]"), function (i,v) {
-            if (!v.checked){
+            if (!v.checked && val){
                 val = false;
-                CommonSvc.SweetAlert.swal("[L:CheckLicences]");
+                CommonSvc.SweetAlert.swal("", "[L:CheckLicences]", "warning");
             }
         });
         if (val) {
             common.webApi.get('InstallPackage/install').success(function (Response) {
-                if (Response.Data.length===0) {
+                if (Response.Data.length === 0) {
+                    window.parent.ShowNotification('[L:Products]','[L:InstalledSuccessfully]', 'success');
                     var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
                     Parentscope.Click_IsInstall(true);
                     $(window.parent.document.body).find('[data-dismiss="modal"]').click();

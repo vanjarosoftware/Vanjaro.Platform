@@ -10,7 +10,6 @@ using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Components
 {
-
     public class Theme
     {
         #region Private Member
@@ -60,7 +59,7 @@ namespace Vanjaro.Core.Components
         {
             get
             {
-                return "49A70BA1-206B-471F-800A-679799FF09DF";
+                return ThemeManager.GetGUID(Name);
             }
         }
 
