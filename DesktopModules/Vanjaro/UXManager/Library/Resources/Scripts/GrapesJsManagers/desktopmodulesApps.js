@@ -25,6 +25,7 @@ global.LoadApps = function () {
             setTimeout(function () {
                 const body = VjEditor.Canvas.getBody();
                 $(body).append('<script>' + VjScript + '</script>');
+                $(body).append('<style type="text/css">' + VjStyle + '</style>');
             }, 2000);
         }
     });
