@@ -256,6 +256,19 @@ $(document).ready(function () {
         global.vjEditorSettings = data;
 
         if (isEditPage()) {
+
+            if (!data.EditPage) {
+
+                $(document).on("click", function () {
+                    VjEditor.select();
+                    ShowBlockUI();
+                });
+
+                $('#vjEditor').scroll(function () {
+                    VjEditor.refresh();
+                });
+            }
+
             if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
                 $(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Please Wait . . .</h1></div>');
             }
@@ -2804,15 +2817,8 @@ $(document).ready(function () {
                                 if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
                                     return false;
                                 else {
-                                    if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(RevisionGUID) < 0) {
-                                        $("#iframeHolder").hide();
-                                        $("#StyleToolManager").hide();
-                                        $(".panel-top").show();
-                                        $(".Menupanel-top").hide();
-                                        $("#BlockManager").show();
-                                        $(".block-set").show();
-                                        $("#ContentBlocks").show();
-                                    }
+                                    if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(data.RevisionGUID) < 0)
+                                        ShowBlockUI();
                                 }
                             });
 
@@ -2850,6 +2856,11 @@ $(document).ready(function () {
             $('.sidebar').removeClass('sidebar-open').addClass('settingclosebtn');
         }
     }
+
+    var ShowBlockUI = function () {
+        $("#iframeHolder, #StyleToolManager, .Menupanel-top").hide();
+        $(".panel-top, #BlockManager, .block-set, #ContentBlocks").show();
+    };
 
     var GrapesjsDestroy = function () {
         if (VjEditor) {
