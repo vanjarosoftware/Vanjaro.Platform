@@ -2577,7 +2577,7 @@ $(document).ready(function () {
                                                 target: e
                                             }))
                                     }),
-                                        r.html = r.html,
+                                        r.html = CleanGjAttrs(r.html),
                                         r.css = r.css,
                                         r
                                 },

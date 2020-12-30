@@ -131,11 +131,16 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
                 this.model.set('custom-name', this.model.attributes.attributes["data-block-display-name"] != undefined ? this.model.attributes.attributes["data-block-display-name"] : this.model.attributes.attributes["data-block-type"]);
                 this.model.set('name', this.model.attributes.attributes["data-block-display-name"] != undefined ? this.model.attributes.attributes["data-block-display-name"] : this.model.attributes.attributes["data-block-type"]);
                 if (this.model.attributes != undefined && this.model.attributes.components != undefined && this.model.attributes.components.models[0] != undefined && this.model.attributes.components.models[0].attributes.content != '') {
-                    if (this.model.attributes.attributes["data-block-type"].toLowerCase() == 'logo' && !this.model.attributes.components.models[0].attributes.content.startsWith('<div data-block')) {
-                        this.model.attributes.components.models[0].replaceWith(this.model.attributes.components.models[0].attributes.content);
-                    }
+
+                    var compHtml = null;
+                    if (this.model.attributes.attributes["data-block-type"].toLowerCase() == 'logo' && !this.model.attributes.components.models[0].attributes.content.startsWith('<div data-block'))
+                        compHtml = this.model.attributes.components.models[0].attributes.content;
                     else
-                        this.model.attributes.components.models[0].replaceWith($(this.model.attributes.components.models[0].attributes.content).html());
+                        compHtml = $(this.model.attributes.components.models[0].attributes.content).html();
+
+                    this.model.components('');
+                    this.model.set('content', CleanGjAttrs(compHtml));
+
                     this.model.set({
                         removable: true,
                         draggable: true,
@@ -264,10 +269,16 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
                         if (v.attributes.type == 'blockwrapper') {
                             v.set('custom-name', v.attributes.attributes["data-block-display-name"] != undefined ? v.attributes.attributes["data-block-display-name"] : v.attributes.attributes["data-block-type"]);
                             v.set('name', v.attributes.attributes["data-block-display-name"] != undefined ? v.attributes.attributes["data-block-display-name"] : v.attributes.attributes["data-block-type"]);
+
+                            var compHtml = null;
                             if ($(v.view.$el[0].innerHTML).attr('data-gjs-type') == 'blockwrapper')
-                                v.components($(v.view.$el[0].innerHTML).html());
+                                compHtml = $(v.view.$el[0].innerHTML).html();
                             else
-                                v.components(v.view.$el[0].innerHTML);
+                                compHtml = v.view.$el[0].innerHTML;
+
+                            v.components('');
+                            v.set('content', CleanGjAttrs(compHtml));
+
 
                             if (v.attributes.attributes["data-block-type"].toLowerCase() == "logo") {
                                 var style = v.attributes.attributes["data-style"];
