@@ -1,6 +1,7 @@
 ﻿using DotNetNuke.Abstractions;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Data;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Portals;
@@ -153,9 +154,28 @@ namespace Vanjaro.Skin
             {
                 WebForms.LinkCSS(Page, "EditCSS", Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/css/edit.css"));
             }
-
+            HandleUXM();
             ResetModulePanes();
             InitGuidedTours();
+            AccessDenied();
+
+        }
+
+        private void AccessDenied()
+        {
+            string Message = null;
+            Guid messageGuid;
+            var guidText = this.Request.QueryString["message"];
+            if (!string.IsNullOrEmpty(guidText) && Guid.TryParse(guidText, out messageGuid))
+                Message = HttpUtility.HtmlEncode(DataProvider.Instance().GetRedirectMessage(messageGuid));
+
+            if (!string.IsNullOrEmpty(Message))
+            {
+                Control ContentPane = FindControlRecursive(this, "ContentPane");
+                Literal lt = new Literal();
+                lt.Text = "<div class=\"alert alert-warning\" role=\"alert\">" + Message + "</div>";
+                ContentPane.Controls.Add(lt);
+            }
         }
 
         private void InjectThemeJS()
@@ -167,6 +187,22 @@ namespace Vanjaro.Skin
             }
             if (ThemeManager.CurrentTheme.HasThemeJS())
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl(ThemeManager.CurrentTheme.ThemeJS));
+        }
+        private void HandleUXM()
+        {
+            if (!string.IsNullOrEmpty(Request.QueryString["uxm"]))
+            {
+                if (Request.QueryString["uxm"] == "open")
+                {
+                    CookieManager.AddValue("PageIsEdit", "true", new DateTime());
+                    CookieManager.AddValue("InitGrapejs", "true", new DateTime());
+                }
+                else if (Request.QueryString["uxm"] == "close")
+                {
+                    CookieManager.AddValue("PageIsEdit", "false", new DateTime());
+                    CookieManager.AddValue("InitGrapejs", "false", new DateTime());
+                }
+            }
         }
 
         private void InjectThemeScripts()
@@ -617,7 +653,7 @@ namespace Vanjaro.Skin
 
                         if (!string.IsNullOrEmpty(response.Style))
                         {
-                            WebForms.RegisterClientScriptBlock(Page, "BlocksStyle" + item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value, "<style type=\"text/css\">" + response.Style + "</style>", false);
+                            WebForms.RegisterClientScriptBlock(Page, "BlocksStyle" + item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value, "<style type=\"text/css\" vj=\"true\">" + response.Style + "</style>", false);
                         }
                     }
 
@@ -1004,11 +1040,9 @@ namespace Vanjaro.Skin
         private void InitGuidedTours()
         {
             if (!PortalController.Instance.GetPortalSettings(PortalSettings.PortalId).ContainsKey("VanjaroToursGuided")
-                && !string.IsNullOrEmpty(Request.QueryString["uxm"]) && Request.QueryString["uxm"] == "close"
+                && !string.IsNullOrEmpty(Request.QueryString["uxm"]) && Request.QueryString["uxm"] == "open"
                 && (TabPermissionController.HasTabPermission("EDIT") || UserController.Instance.GetCurrentUserInfo().IsAdmin || UserController.Instance.GetCurrentUserInfo().IsSuperUser))
             {
-                CookieManager.AddValue("PageIsEdit", "false", new DateTime());
-                CookieManager.AddValue("InitGrapejs", "false", new DateTime());
                 StringBuilder sb = new StringBuilder();
                 //initialize instance
                 sb.Append("var enjoyhint_instance = new EnjoyHint({});");
@@ -1024,7 +1058,6 @@ namespace Vanjaro.Skin
                 sb.Append("enjoyhint_instance.set(enjoyhint_script_steps);");
                 //run Enjoyhint script
                 sb.Append("enjoyhint_instance.run();");
-                sb.Append("window.history.pushState({'html':'','pageTitle':''},'', '" + NavigationManager.NavigateURL(PortalSettings.Current.HomeTabId) + "');");
                 FrameworkManager.Load(this, "EnjoyHint");
                 WebForms.RegisterStartupScript(Page, "EnjoyHintJS", sb.ToString(), true);
                 PortalController.UpdatePortalSetting(PortalSettings.PortalId, "VanjaroToursGuided", "true");

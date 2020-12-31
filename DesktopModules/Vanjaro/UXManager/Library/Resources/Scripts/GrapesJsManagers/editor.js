@@ -1849,8 +1849,6 @@ $(document).ready(function () {
 
                                 if (model.attributes.type == 'grid') {
 
-                                    $(model.components().models[0].getEl()).addClass('gjs-dashed');
-
                                     if (flexProperty == null) {
 
                                         VjEditor.StyleManager.addProperty(Responsive, {
@@ -1870,12 +1868,17 @@ $(document).ready(function () {
                                         flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
                                     }
 
-                                    var flexDirection = model.components().models[0].getStyle()['flex-direction'];
+                                    if (model.components().length) {
 
-                                    if (typeof flexDirection == 'undefined' || flexDirection.indexOf('reverse') <= 0)
-                                        flexProperty.view.setValue('false');
-                                    else
-                                        flexProperty.view.setValue('true');
+                                        $(model.components().models[0].getEl()).addClass('gjs-dashed');
+
+                                        var flexDirection = model.components().models[0].getStyle()['flex-direction'];
+
+                                        if (typeof flexDirection == 'undefined' || flexDirection.indexOf('reverse') <= 0)
+                                            flexProperty.view.setValue('false');
+                                        else
+                                            flexProperty.view.setValue('true');
+                                    }
                                 }
                                 else {
                                     if (flexProperty != null)
@@ -2044,7 +2047,7 @@ $(document).ready(function () {
                                 if (model.attributes.type == 'column')
                                     $(model.parent().getEl()).removeClass('gjs-dashed');
 
-                                if (model.attributes.type == 'grid')
+                                if (model.attributes.type == 'grid' && model.components().length)
                                     $(model.components().models[0].getEl()).removeClass('gjs-dashed');
                             });
 
@@ -2574,7 +2577,7 @@ $(document).ready(function () {
                                                 target: e
                                             }))
                                     }),
-                                        r.html = r.html,
+                                        r.html = CleanGjAttrs(r.html),
                                         r.css = r.css,
                                         r
                                 },
@@ -2804,7 +2807,7 @@ $(document).ready(function () {
                                 if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
                                     return false;
                                 else {
-                                    if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf('e2f6ebcb-5d68-4d85-b180-058fb2d26178') < 0) {
+                                    if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(RevisionGUID) < 0) {
                                         $("#iframeHolder").hide();
                                         $("#StyleToolManager").hide();
                                         $(".panel-top").show();

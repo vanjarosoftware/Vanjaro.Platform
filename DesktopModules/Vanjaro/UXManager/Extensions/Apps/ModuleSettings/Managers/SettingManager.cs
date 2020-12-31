@@ -77,7 +77,11 @@ namespace Vanjaro.UXManager.Extensions.Apps.ModuleSettings.Managers
 
                 if (perm.UserID == -1 && perm.RoleID != -4)
                 {
-                    if (perm.RoleID != -1)
+                    if (perm.RoleID == -3)
+                    {
+                        perm.RoleName = DotNetNuke.Common.Globals.glbRoleUnauthUserName;
+                    }
+                    else if (perm.RoleID != -1)
                     {
                         perm.RoleName = RoleController.Instance.GetRoleById(PortalID, perm.RoleID).RoleName;
                     }
