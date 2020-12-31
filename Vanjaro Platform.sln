@@ -170,6 +170,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vanjaro.URL", "DesktopModul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SectionSettings", "DesktopModules\Vanjaro\UXManager\Extensions\Apps\SectionSettings\SectionSettings.csproj", "{E9A66748-1CA1-46CA-8CFB-F02B063144E8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mail", "Mail", "{0D642708-861A-4340-B7E9-1232AB0969BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSMail", "DesktopModules\Vanjaro\Core\Providers\VSMail\VSMail.csproj", "{27960AD4-D591-4A21-9D47-14323E0D10F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -585,6 +589,12 @@ Global
 		{E9A66748-1CA1-46CA-8CFB-F02B063144E8}.Internal|Any CPU.Build.0 = Release|Any CPU
 		{E9A66748-1CA1-46CA-8CFB-F02B063144E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9A66748-1CA1-46CA-8CFB-F02B063144E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27960AD4-D591-4A21-9D47-14323E0D10F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27960AD4-D591-4A21-9D47-14323E0D10F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27960AD4-D591-4A21-9D47-14323E0D10F5}.Internal|Any CPU.ActiveCfg = Internal|Any CPU
+		{27960AD4-D591-4A21-9D47-14323E0D10F5}.Internal|Any CPU.Build.0 = Internal|Any CPU
+		{27960AD4-D591-4A21-9D47-14323E0D10F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27960AD4-D591-4A21-9D47-14323E0D10F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -666,6 +676,8 @@ Global
 		{AC3F54B3-D038-420A-8607-1CC4A0E6AAEF} = {AE289E00-EFE5-4EB0-9AF1-9B7E406CBDA2}
 		{850F7BD6-346A-4E09-AB09-9E1329FFD138} = {4E3F7CF8-9178-4C95-8662-A221E237C05A}
 		{E9A66748-1CA1-46CA-8CFB-F02B063144E8} = {D1CE2EAA-57A3-4E39-9B53-0173CCAAD738}
+		{0D642708-861A-4340-B7E9-1232AB0969BC} = {C06E9479-0ABA-4FA5-9489-2BE3E90167AB}
+		{27960AD4-D591-4A21-9D47-14323E0D10F5} = {0D642708-861A-4340-B7E9-1232AB0969BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {54A96059-6996-42FC-B348-4E326F62E67A}
