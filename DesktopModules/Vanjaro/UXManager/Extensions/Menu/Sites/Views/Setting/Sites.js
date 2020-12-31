@@ -103,7 +103,7 @@
         if (row.IsVjToursGuided)
             link = row.PortalAliases[0].link;
         else {
-            link = row.PortalAliases[0].link + '?uxm=close';
+            link = row.PortalAliases[0].link + '?uxm=open';
             row.IsVjToursGuided = true;
         }
         window.parent.open(link, '_blank');

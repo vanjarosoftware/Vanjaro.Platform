@@ -2,10 +2,12 @@
 global.VjLinks = [];
 global.VjScriptTags = [];
 global.VjScript = '';
+global.VjStyle = '';
 global.BindLinksAndScripts = function () {
     global.VjLinks = [];
     global.VjScriptTags = [];
     global.VjScript = '';
+    global.VjStyle = '';
     $('link').each(function () {
         if (VjLinks.indexOf(this.href) == -1) {
             VjLinks.push(this.href);
@@ -20,6 +22,10 @@ global.BindLinksAndScripts = function () {
             if (this.attributes.vanjarocore == undefined && this.attributes.grapejs == undefined && this.attributes["data-actionmid"] == undefined && this.innerHTML.indexOf('Sys.WebForms.PageRequestManager') <= 0)
                 VjScript += this.innerHTML;
         }
+    });
+    $('style').each(function () {
+        if (this.attributes.vj != undefined && this.innerHTML != undefined && this.innerHTML.length > 0)
+            VjStyle += this.innerHTML;
     });
 };
 

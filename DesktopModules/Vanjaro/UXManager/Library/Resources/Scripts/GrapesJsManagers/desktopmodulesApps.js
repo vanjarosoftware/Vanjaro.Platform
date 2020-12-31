@@ -25,6 +25,7 @@ global.LoadApps = function () {
             setTimeout(function () {
                 const body = VjEditor.Canvas.getBody();
                 $(body).append('<script>' + VjScript + '</script>');
+                $(body).append('<style type="text/css">' + VjStyle + '</style>');
             }, 2000);
         }
     });
@@ -548,3 +549,28 @@ global.RenderBlock = function (model, bmodel, render) {
         }
     });
 };
+
+global.CleanGjAttrs = function (html) {
+    var result = '';
+    var compHtml = $(html)[0];
+    if (compHtml != undefined) {
+        var attrsList = [];
+        $.each(compHtml.attributes, function (k, v) { attrsList.push(v.name); });
+        $.each(attrsList, function (k, v) {
+            if (v != undefined && v.startsWith('data-gjs')) {
+                $(compHtml).removeAttr(v);
+            }
+        });
+        $.each(compHtml.querySelectorAll('*'), function (k, v) {
+            var attrsList = [];
+            $.each(v.attributes, function (i, va) { attrsList.push(va.name); });
+            $.each(attrsList, function (kk, vv) {
+                if (vv != undefined && vv.startsWith('data-gjs')) {
+                    $(v).removeAttr(vv);
+                }
+            });
+        });
+        result = compHtml.outerHTML;
+    }
+    return result;
+}

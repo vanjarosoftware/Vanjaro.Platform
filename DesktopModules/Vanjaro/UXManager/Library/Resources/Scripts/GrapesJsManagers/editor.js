@@ -1778,9 +1778,7 @@ $(document).ready(function () {
 
 								if (model.attributes.type == 'grid') {
 
-									$(model.components().models[0].getEl()).addClass('gjs-dashed');
-
-									if (flexProperty == null) {
+                                    if (flexProperty == null) {
 
 										VjEditor.StyleManager.addProperty(Responsive, {
 											type: 'radio',
@@ -1799,17 +1797,22 @@ $(document).ready(function () {
 										flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
 									}
 
-									var flexDirection = model.components().models[0].getStyle()['flex-direction'];
+                                    if (model.components().length) {
 
-									if (typeof flexDirection == 'undefined' || flexDirection.indexOf('reverse') <= 0)
-										flexProperty.view.setValue('false');
-									else
-										flexProperty.view.setValue('true');
-								}
-								else {
-									if (flexProperty != null)
-										VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
-								}
+                                        $(model.components().models[0].getEl()).addClass('gjs-dashed');
+
+                                        var flexDirection = model.components().models[0].getStyle()['flex-direction'];
+
+                                        if (typeof flexDirection == 'undefined' || flexDirection.indexOf('reverse') <= 0)
+                                            flexProperty.view.setValue('false');
+                                        else
+                                            flexProperty.view.setValue('true');
+                                    }
+                                }
+                                else {
+                                    if (flexProperty != null)
+                                        VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
+                                }
 
 								if (model.attributes.type == 'heading' || model.attributes.type == 'text' || model.attributes.type == 'button' || model.attributes.type == 'list' || model.attributes.type == 'link') {
 
@@ -1989,9 +1992,9 @@ $(document).ready(function () {
 								if (model.attributes.type == 'column')
 									$(model.parent().getEl()).removeClass('gjs-dashed');
 
-								if (model.attributes.type == 'grid')
-									$(model.components().models[0].getEl()).removeClass('gjs-dashed');
-							});
+                                if (model.attributes.type == 'grid' && model.components().length)
+                                    $(model.components().models[0].getEl()).removeClass('gjs-dashed');
+                            });
 
 							VjEditor.on('component:styleUpdate', (model, property) => {
 
@@ -2221,58 +2224,58 @@ $(document).ready(function () {
 													r["data-gjs-" + b.attributes.name] = b.getInitValue();
 												});
 
-												(i && (r["data-gjs-type"] = i),
-													n.cleanIds && o && "i" === o[0]) && (t.CssComposer.getAll().filter(function (t) {
-														return t.get("selectors").getFullString() === "#".concat(o) && !Gt()(t.getStyle())
-													}).length || delete r.id);
-												return n.cleanClasses && r.class && (r.class = e.get("classes").filter(function (t) {
-													return !t.get("private")
-												}).map(function (t) {
-													return t.get("name")
-												}).join(" "),
-													r.class || delete r.class),
-													r
-											}
-										}),
-											r.css += t.runCommand("export-css", {
-												target: e
-											}))
-									}),
-										r.html = r.html,
-										r.css = r.css,
-										r
-								},
-								cleanHtmlIds: function (t, tc) {
-									tc = tc.split('vjbrk');
-									var elements = $(t);
-									if (elements != undefined) {
-										var atid = elements.attr('id');
-										if (atid != undefined && atid.length > 0) {
-											var grp = $.grep(tc, function (i) {
-												return i.startsWith('#' + atid);
-											});
-											if (grp != undefined && grp.length > 0)
-												elements.attr('style', grp[0].replace('#' + atid + '{', '').replace('}', ''));
-											elements.removeAttr('id');
-										}
-										$.each(elements.find('*'), function (k, v) {
-											v = $(v);
-											var atid = v.attr('id');
-											if (atid != undefined && atid.length > 0) {
-												var grp = $.grep(tc, function (i) {
-													return i.startsWith('#' + atid);
-												});
-												if (grp != undefined && grp.length > 0)
-													v.attr('style', grp[0].replace('#' + atid + '{', '').replace('}', ''));
-												v.removeAttr('id');
-											}
-										});
-										return elements[0].outerHTML;
-									}
-									else
-										return "";
-								},
-							});
+                                                (i && (r["data-gjs-type"] = i),
+                                                    n.cleanIds && o && "i" === o[0]) && (t.CssComposer.getAll().filter(function (t) {
+                                                        return t.get("selectors").getFullString() === "#".concat(o) && !Gt()(t.getStyle())
+                                                    }).length || delete r.id);
+                                                return n.cleanClasses && r.class && (r.class = e.get("classes").filter(function (t) {
+                                                    return !t.get("private")
+                                                }).map(function (t) {
+                                                    return t.get("name")
+                                                }).join(" "),
+                                                    r.class || delete r.class),
+                                                    r
+                                            }
+                                        }),
+                                            r.css += t.runCommand("export-css", {
+                                                target: e
+                                            }))
+                                    }),
+                                        r.html = CleanGjAttrs(r.html),
+                                        r.css = r.css,
+                                        r
+                                },
+                                cleanHtmlIds: function (t, tc) {
+                                    tc = tc.split('vjbrk');
+                                    var elements = $(t);
+                                    if (elements != undefined) {
+                                        var atid = elements.attr('id');
+                                        if (atid != undefined && atid.length > 0) {
+                                            var grp = $.grep(tc, function (i) {
+                                                return i.startsWith('#' + atid);
+                                            });
+                                            if (grp != undefined && grp.length > 0)
+                                                elements.attr('style', grp[0].replace('#' + atid + '{', '').replace('}', ''));
+                                            elements.removeAttr('id');
+                                        }
+                                        $.each(elements.find('*'), function (k, v) {
+                                            v = $(v);
+                                            var atid = v.attr('id');
+                                            if (atid != undefined && atid.length > 0) {
+                                                var grp = $.grep(tc, function (i) {
+                                                    return i.startsWith('#' + atid);
+                                                });
+                                                if (grp != undefined && grp.length > 0)
+                                                    v.attr('style', grp[0].replace('#' + atid + '{', '').replace('}', ''));
+                                                v.removeAttr('id');
+                                            }
+                                        });
+                                        return elements[0].outerHTML;
+                                    }
+                                    else
+                                        return "";
+                                },
+                            });
 
 							VjEditor.Commands.add("export-css", {
 								run: function (t, e) {

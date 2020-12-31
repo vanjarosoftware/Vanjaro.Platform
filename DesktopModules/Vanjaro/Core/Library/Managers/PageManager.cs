@@ -393,6 +393,12 @@ namespace Vanjaro.Core
                                     }
                                 }
                                 ModuleController.Instance.InitialModulePermission(objModule, objModule.TabID, 0);
+                                for (int i = 0; i < objModule.ModulePermissions.Count; i++)
+                                {
+                                    if (objModule.ModulePermissions[i].RoleID == 0)
+                                        objModule.ModulePermissions[i].RoleID = PortalSettings.AdministratorRoleId;
+
+                                }
                                 if (PortalSettings.ContentLocalizationEnabled)
                                 {
                                     Locale defaultLocale = LocaleController.Instance.GetDefaultLocale(PortalSettings.PortalId);
