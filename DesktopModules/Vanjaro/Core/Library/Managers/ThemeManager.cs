@@ -345,6 +345,7 @@ namespace Vanjaro.Core
             {
                 try
                 {
+                    themeEditor.Sass = themeEditor.Sass.Replace("\"", "'");
                     if (string.IsNullOrEmpty(themeEditor.Guid))
                     {
                         themeEditor.Guid = Guid.NewGuid().ToString();
@@ -394,7 +395,8 @@ namespace Vanjaro.Core
                             {
                                 slider.Guid = Guid.NewGuid().ToString();
                             }
-
+                            slider.CustomCSS = slider.CustomCSS.Replace("\"", "'");
+                            slider.PreviewCSS = slider.PreviewCSS.Replace("\"", "'");
                             NewControls.Add(slider);
                         }
                     }
@@ -407,7 +409,8 @@ namespace Vanjaro.Core
                             {
                                 dropdown.Guid = Guid.NewGuid().ToString();
                             }
-
+                            dropdown.CustomCSS = dropdown.CustomCSS.Replace("\"", "'");
+                            dropdown.PreviewCSS = dropdown.PreviewCSS.Replace("\"", "'");
                             NewControls.Add(dropdown);
                         }
                     }
@@ -420,7 +423,8 @@ namespace Vanjaro.Core
                             {
                                 colorPicker.Guid = Guid.NewGuid().ToString();
                             }
-
+                            colorPicker.CustomCSS = colorPicker.CustomCSS.Replace("\"", "'");
+                            colorPicker.PreviewCSS = colorPicker.PreviewCSS.Replace("\"", "'");
                             NewControls.Add(colorPicker);
                         }
                     }
@@ -433,7 +437,8 @@ namespace Vanjaro.Core
                             {
                                 fonts.Guid = Guid.NewGuid().ToString();
                             }
-
+                            fonts.CustomCSS = fonts.CustomCSS.Replace("\"", "'");
+                            fonts.PreviewCSS = fonts.PreviewCSS.Replace("\"", "'");
                             NewControls.Add(fonts);
                         }
                     }
@@ -528,12 +533,12 @@ namespace Vanjaro.Core
                     {
                         ThemeFont.Name = data.Name;
                         ThemeFont.Family = data.Family;
-                        ThemeFont.Css = data.Css;
+                        ThemeFont.Css = data.Css.Replace("\"", "'");
                     }
                 }
                 else
                 {
-                    ThemeEditorWrapper.Fonts.Add(new ThemeFont { Guid = GUID, Name = data.Name.ToString(), Family = data.Family.ToString(), Css = data.Css.ToString() });
+                    ThemeEditorWrapper.Fonts.Add(new ThemeFont { Guid = GUID, Name = data.Name.ToString(), Family = data.Family.ToString(), Css = data.Css.ToString().Replace("\"", "'") });
                 }
 
                 UpdateThemeEditorJson(CategoryGuid, ThemeEditorWrapper);
