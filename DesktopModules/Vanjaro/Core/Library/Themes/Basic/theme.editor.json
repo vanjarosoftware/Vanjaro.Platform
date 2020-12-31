@@ -71,11 +71,21 @@
         },
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "950a13cb-7a0f-4727-88a6-4f14518930c6",
           "Title": "Font Weight",
@@ -98,8 +108,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "ee25c5fe-0dd5-4d6c-85e3-7fd00cc403c5",
           "Title": "Font Style",
@@ -125,10 +139,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "5b561e36-0a0e-44bf-86d6-7d16d556e3ad",
           "Title": "Text Transform",
@@ -202,11 +224,21 @@
         },
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "1a4434cf-9664-46c6-b07e-efacfedef414",
           "Title": "Font Weight",
@@ -229,8 +261,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "905284c0-4ff9-4823-85c3-513fdb16df71",
           "Title": "Font Style",
@@ -243,10 +279,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "9bcdecd5-412f-4cda-9567-c64bdaaf47eb",
           "Title": "Text Transform",
@@ -300,8 +344,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "c9a91db8-f0ce-40b3-b3e1-bf80ce33289b",
           "Title": "Font Style",
@@ -402,8 +450,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "1bbf66bc-5cb6-4520-a80e-da9bf7703988",
           "Title": "Font Style",
@@ -467,8 +519,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "0018869b-f437-429a-8cc9-cf4518359b43",
           "Title": "Font Style",
@@ -481,10 +537,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "0022be06-2172-4ebc-ae74-38041e7c6168",
           "Title": "Text Transform",
@@ -497,11 +561,21 @@
         },
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "9d3cf99f-a47b-4b64-a0a4-1257f01e2c74",
           "Title": "Font Weight",
@@ -622,10 +696,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "e444d6fc-a23a-4fb5-b000-6a49b0d7d25a",
           "Title": "Text Transform",
@@ -889,10 +971,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "5b81dde4-4a66-4cc7-87a7-59eba51c299e",
           "Title": "Text-Transform",
@@ -1105,10 +1195,18 @@
         },
         {
           "Options": [
-            { "None": "None" },
-            { "Uppercase": "Uppercase" },
-            { "Lowercase": "Lowercase" },
-            { "Capitalize": "Capitalize" }
+            {
+              "None": "None"
+            },
+            {
+              "Uppercase": "Uppercase"
+            },
+            {
+              "Lowercase": "Lowercase"
+            },
+            {
+              "Capitalize": "Capitalize"
+            }
           ],
           "Guid": "72d09556-c2b0-4b16-9602-7227c70ffcb8",
           "Title": "Text Transform",
@@ -1240,8 +1338,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "c107f6f9-6a8d-4280-af2c-0c7e8d0e2cfc",
           "Title": "Font Style",
@@ -1336,10 +1438,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "5f053b9c-54ed-4ea2-b02f-c25c56427a65",
           "Title": "Text Transform",
@@ -1396,10 +1506,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "d68b342c-5202-4e8c-a6c4-97e71aa01ada",
           "Title": "Text Transform",
@@ -1656,10 +1774,18 @@
         },
         {
           "Options": [
-            { "Top": "Top" },
-            { "Bottom": "Bottom" },
-            { "BottomLeft": "Bottom Left" },
-            { "BottomRight": "Bottom Right" }
+            {
+              "Top": "Top"
+            },
+            {
+              "Bottom": "Bottom"
+            },
+            {
+              "BottomLeft": "Bottom Left"
+            },
+            {
+              "BottomRight": "Bottom Right"
+            }
           ],
           "Guid": "40cfc586-79b1-47a5-89c2-7162c57a3501",
           "Title": "Position",
@@ -1846,7 +1972,8 @@
       "Guid": "5e2e8985-adb4-461b-b27f-c7e8c0f96f43",
       "Category": "Styles: Heading",
       "Title": null,
-      "Controls": [],
+      "Controls": [
+      ],
       "Sass": ""
     },
     {
@@ -1856,11 +1983,21 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "d086c14f-61b2-499d-963a-ce4361b97d24",
           "Title": "Font Weight",
@@ -1883,8 +2020,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "847f3b77-69c3-4dea-8bdc-db72a5b957cc",
           "Title": "Font Style",
@@ -1923,10 +2064,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "92a6de0f-a303-4454-99da-0603fd42af12",
           "Title": "Text Transform",
@@ -1939,10 +2088,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "ebe78833-d593-4044-9a09-58659a027fac",
           "Title": "Text Decoration",
@@ -1963,19 +2120,30 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "69b4efd7-5f91-442c-b12e-72e0a9601729",
           "Title": "Font Weight",
-          "DefaultValue": "500",
+          "DefaultValue": "700",
           "Suffix": "",
           "CustomCSS": ".head-style-2 {\n    font-weight: $hstwoFontWeight;   \n}",
           "PreviewCSS": ".head-style-2 {\n    font-weight: $hstwoFontWeight;   \n}",
           "LessVariable": "$hstwoFontWeight",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -1986,12 +2154,17 @@
           "CustomCSS": ".head-style-2 {\n    font-family: $hstwoFontFamily;   \n}",
           "PreviewCSS": ".head-style-2 {\n    font-family: $hstwoFontFamily;   \n}",
           "LessVariable": "$hstwoFontFamily",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "f924ee05-62b8-4b38-9a54-be617a42eee7",
           "Title": "Font Style",
@@ -2000,6 +2173,7 @@
           "CustomCSS": ".head-style-2 {\n    font-style: $hsTwoFontStyle;   \n}",
           "PreviewCSS": ".head-style-2 {\n    font-style: $hsTwoFontStyle;   \n}",
           "LessVariable": "$hsTwoFontStyle",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -2013,6 +2187,7 @@
           "CustomCSS": ".head-style-2 {\n    letter-spacing: $hstwoLtterSpacing;   \n}",
           "PreviewCSS": ".head-style-2 {\n    letter-spacing: $hstwoLtterSpacing;   \n}",
           "LessVariable": "$hstwoLtterSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
@@ -2026,30 +2201,48 @@
           "CustomCSS": ".head-style-2 {\n    word-spacing: $hstwoWordSpacing;   \n}",
           "PreviewCSS": ".head-style-2 {\n    word-spacing: $hstwoWordSpacing;   \n}",
           "LessVariable": "$hstwoWordSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "4e1c30b4-e70d-4b4c-9b2e-1d198d0db0be",
           "Title": "Text Transform",
-          "DefaultValue": "uppercase",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": ".head-style-2 {\n    text-transform: $hsTwotestTransform;   \n}",
           "PreviewCSS": ".head-style-2 {\n    text-transform: $hsTwotestTransform;   \n}",
           "LessVariable": "$hsTwotestTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none ": " none" },
-            { "underline ": " underline" },
-            { "overline ": " overline" },
-            { "line-through ": " Strikethrough" }
+            {
+              "none ": " none"
+            },
+            {
+              "underline ": " underline"
+            },
+            {
+              "overline ": " overline"
+            },
+            {
+              "line-through ": " Strikethrough"
+            }
           ],
           "Guid": "a16cc095-4831-420b-b6e0-1e127ca017ad",
           "Title": "Text Decoration",
@@ -2058,6 +2251,7 @@
           "CustomCSS": ".head-style-2 {\n    text-decoration: $hsTwoTextDecoration;   \n}",
           "PreviewCSS": ".head-style-2 {\n    text-decoration: $hsTwoTextDecoration;   \n}",
           "LessVariable": "$hsTwoTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
@@ -2070,11 +2264,21 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "654bf786-2dc8-427f-a9a4-c5a965b87a7e",
           "Title": "Font Weight",
@@ -2083,6 +2287,7 @@
           "CustomCSS": ".head-style-3 {\n    font-weight: $HSThreeFontWeight;\n}",
           "PreviewCSS": ".head-style-3 {\n    font-weight: $HSThreeFontWeight;\n}",
           "LessVariable": "$HSThreeFontWeight",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -2093,12 +2298,17 @@
           "CustomCSS": ".head-style-3 {\n    font-family: $hsThreeFontFamily;\n}",
           "PreviewCSS": ".head-style-3 {\n    font-family: $hsThreeFontFamily;\n}",
           "LessVariable": "$hsThreeFontFamily",
+          "JavascriptVariable": "",
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "4b8dc7ab-baa7-4af5-87c2-2ef3805cd799",
           "Title": "Font Style",
@@ -2107,6 +2317,7 @@
           "CustomCSS": ".head-style-3 {\n    font-style: $hsThreeFontStyle;\n}",
           "PreviewCSS": ".head-style-3 {\n    font-style: $hsThreeFontStyle;\n}",
           "LessVariable": "$hsThreeFontStyle",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -2120,6 +2331,7 @@
           "CustomCSS": ".head-style-3 {\n    letter-spacing: $hsThreeLetterSpacingpx;\n}",
           "PreviewCSS": ".head-style-3 {\n    letter-spacing: $hsThreeLetterSpacingpx;\n}",
           "LessVariable": "$hsThreeLetterSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
@@ -2133,30 +2345,48 @@
           "CustomCSS": ".head-style-3 {\n    word-spacing: $hsThreeWordSpacingpx;\n}",
           "PreviewCSS": ".head-style-3 {\n    word-spacing: $hsThreeWordSpacingpx;\n}",
           "LessVariable": "$hsThreeWordSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "2d02a3fa-fad8-47fe-8921-7b5deb4afa75",
           "Title": "Text Transform",
-          "DefaultValue": "capitalize",
+          "DefaultValue": "uppercase",
           "Suffix": "",
           "CustomCSS": ".head-style-3 {\n    text-transform: $hsThreeTextTransform;\n}",
           "PreviewCSS": ".head-style-3 {\n    text-transform: $hsThreeTextTransform;\n}",
           "LessVariable": "$hsThreeTextTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none ": " none" },
-            { "underline ": " underline" },
-            { "overline ": " overline" },
-            { "line-through ": " Strikethrough" }
+            {
+              "none ": " none"
+            },
+            {
+              "underline ": " underline"
+            },
+            {
+              "overline ": " overline"
+            },
+            {
+              "line-through ": " Strikethrough"
+            }
           ],
           "Guid": "414cffc0-b53b-4f03-8fc0-c9f43fabcbec",
           "Title": "Text Decoration",
@@ -2165,6 +2395,7 @@
           "CustomCSS": ".head-style-3 {\n    text-decoration: $hsThreeTextDecoration;\n}",
           "PreviewCSS": ".head-style-3 {\n    text-decoration: $hsThreeTextDecoration;\n}",
           "LessVariable": "$hsThreeTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
@@ -2177,11 +2408,21 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "84d3ca8a-c490-42ec-bd11-3744c7565f99",
           "Title": "Font Weight",
@@ -2190,6 +2431,7 @@
           "CustomCSS": ".head-style-4 {\n    font-weight: $HSFourFontWeight;\n}\n",
           "PreviewCSS": ".head-style-4 {\n    font-weight: $HSFourFontWeight;\n}\n",
           "LessVariable": "$HSFourFontWeight",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
@@ -2200,12 +2442,17 @@
           "CustomCSS": ".head-style-4 {\n    font-family: $hsFourFontFamily;\n}\n",
           "PreviewCSS": ".head-style-4 {\n    font-family: $hsFourFontFamily;\n}\n",
           "LessVariable": "$hsFourFontFamily",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "30e9571c-8ce4-4a63-95a4-a8336d4acba7",
           "Title": "Font Style",
@@ -2214,12 +2461,13 @@
           "CustomCSS": ".head-style-4 {\n    font-style: $hsFourFontStyle;\n}\n",
           "PreviewCSS": ".head-style-4 {\n    font-style: $hsFourFontStyle;\n}\n",
           "LessVariable": "$hsFourFontStyle",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "c39509cf-b8d6-4f82-92fe-9013059a94db",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -2227,12 +2475,13 @@
           "CustomCSS": ".head-style-4 {\n    letter-spacing: $hsFourLetterSpacing;\n}\n",
           "PreviewCSS": ".head-style-4 {\n    letter-spacing: $hsFourLetterSpacing;\n}\n",
           "LessVariable": "$hsFourLetterSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "d404a87d-7781-437e-ba38-f1118526eaa1",
           "Title": "Word Spacing",
           "DefaultValue": "0",
@@ -2240,38 +2489,57 @@
           "CustomCSS": ".head-style-4 {\n    word-spacing: $hsFourWordSpacing;\n}\n",
           "PreviewCSS": ".head-style-4 {\n    word-spacing: $hsFourWordSpacing;\n}\n",
           "LessVariable": "$hsFourWordSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "62f04fba-f570-4d5c-bf3a-8390de4cc91f",
           "Title": "Text Transform",
-          "DefaultValue": "capitalize",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": ".head-style-4 {\n    text-transform: $hsFourTextTransform;\n}\n",
           "PreviewCSS": ".head-style-4 {\n    text-transform: $hsFourTextTransform;\n}\n",
           "LessVariable": "$hsFourTextTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "733f54df-6fcf-4cbb-aa75-cdffc9070d92",
           "Title": "Text Decoration",
-          "DefaultValue": "none",
+          "DefaultValue": "underline",
           "Suffix": "",
           "CustomCSS": ".head-style-4 {\n    text-decoration: $hsFourTextDecoration;\n}\n",
           "PreviewCSS": ".head-style-4 {\n    text-decoration: $hsFourTextDecoration;\n}",
           "LessVariable": "$hsFourTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
@@ -2284,35 +2552,30 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "d0b36c23-63b5-42d4-b11a-46834b392fd5",
           "Title": "Font Weight",
-          "DefaultValue": "700",
+          "DefaultValue": "500",
           "Suffix": "",
           "CustomCSS": ".head-style-5 {\n  font-weight: $HSFiveFontWeight;\n}",
           "PreviewCSS": ".head-style-5 {\n  font-weight: $HSFiveFontWeight;\n}",
           "LessVariable": "$HSFiveFontWeight",
-          "Type": "Dropdown"
-        },
-        {
-          "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
-          ],
-          "Guid": "c0647ecf-aed6-4b3f-90e4-1e954f419211",
-          "Title": "Text Transform",
-          "DefaultValue": "none",
-          "Suffix": "",
-          "CustomCSS": ".head-style-5 {\n  text-transform: $hsFiveTextTransform;\n}",
-          "PreviewCSS": ".head-style-5 {\n  text-transform: $hsFiveTextTransform;\n}",
-          "LessVariable": "$hsFiveTextTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -2323,12 +2586,17 @@
           "CustomCSS": ".head-style-5 {\n  font-family: $hsFiveFontFamily;\n}",
           "PreviewCSS": ".head-style-5 {\n  font-family: $hsFiveFontFamily;\n}",
           "LessVariable": "$hsFiveFontFamily",
+          "JavascriptVariable": "",
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "7d2e8a56-c7e8-405a-aa92-15dbf941eec5",
           "Title": "Font Style",
@@ -2337,12 +2605,13 @@
           "CustomCSS": ".head-style-5 {\n  font-style: $hsFiveFontStyle;\n}",
           "PreviewCSS": ".head-style-5 {\n  font-style: $hsFiveFontStyle;\n}",
           "LessVariable": "$hsFiveFontStyle",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "86f5b726-1bb0-459d-8c52-89e4de873359",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -2350,12 +2619,13 @@
           "CustomCSS": ".head-style-5 {\n  letter-spacing: $hsFiveLetterSpacing;\n}",
           "PreviewCSS": ".head-style-5 {\n  letter-spacing: $hsFiveLetterSpacing;\n}",
           "LessVariable": "$hsFiveLetterSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "414fa983-467e-48dd-9056-05dfb3dddb3b",
           "Title": "Word Spacing",
           "DefaultValue": "0",
@@ -2363,14 +2633,48 @@
           "CustomCSS": ".head-style-5 {\n  word-spacing: $hsFiveWordSpacing;\n}",
           "PreviewCSS": ".head-style-5 {\n  word-spacing: $hsFiveWordSpacing;\n}",
           "LessVariable": "$hsFiveWordSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none ": " none" },
-            { "underline ": " underline" },
-            { "overline ": " overline" },
-            { "line-through ": " Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "c0647ecf-aed6-4b3f-90e4-1e954f419211",
+          "Title": "Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".head-style-5 {\n  text-transform: $hsFiveTextTransform;\n}",
+          "PreviewCSS": ".head-style-5 {\n  text-transform: $hsFiveTextTransform;\n}",
+          "LessVariable": "$hsFiveTextTransform",
+          "JavascriptVariable": "",
+          "Type": "Dropdown"
+        },
+        {
+          "Options": [
+            {
+              "none ": " none"
+            },
+            {
+              "underline ": " underline"
+            },
+            {
+              "overline ": " overline"
+            },
+            {
+              "line-through ": " Strikethrough"
+            }
           ],
           "Guid": "e4de2bca-25da-4b5c-ae2a-59e08cce17e3",
           "Title": "Text Decoration",
@@ -2379,10 +2683,11 @@
           "CustomCSS": ".head-style-5 {\n  text-decoration: $hsFiveTextDecoration;\n}",
           "PreviewCSS": ".head-style-5 {\n  text-decoration: $hsFiveTextDecoration;\n}",
           "LessVariable": "$hsFiveTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
-      "Sass": ""
+      "Sass": ".head-style-5 {\n  text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 1px;\n}"
     },
     {
       "Guid": "3b64c21e-cfda-4fc5-9496-81c826708ade",
@@ -2391,19 +2696,30 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "7544de04-ae2d-473c-9367-4660b4ec88f1",
           "Title": "Font Weight",
-          "DefaultValue": "700",
+          "DefaultValue": "500",
           "Suffix": "",
           "CustomCSS": ".head-style-6 {\n    font-weight: $HSSixFontWeight;\n}",
           "PreviewCSS": ".head-style-6 {\n    font-weight: $HSSixFontWeight;\n}",
           "LessVariable": "$HSSixFontWeight",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -2414,12 +2730,17 @@
           "CustomCSS": ".head-style-6 {\n    font-family: $hsSixFontFamily;\n}",
           "PreviewCSS": ".head-style-6 {\n    font-family: $hsSixFontFamily;\n}",
           "LessVariable": "$hsSixFontFamily",
+          "JavascriptVariable": "",
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "86338f6e-0f68-4ef4-aca0-a21824f9c839",
           "Title": "Font Style",
@@ -2428,12 +2749,13 @@
           "CustomCSS": ".head-style-6 {\n    font-style: $hsSixFontStyle;\n}",
           "PreviewCSS": ".head-style-6 {\n    font-style: $hsSixFontStyle;\n}",
           "LessVariable": "$hsSixFontStyle",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "b9e96de3-0a77-48cd-aa24-39546bc617be",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -2441,12 +2763,13 @@
           "CustomCSS": ".head-style-6 {\n    letter-spacing: $hsSixLetterSpacing;\n}",
           "PreviewCSS": ".head-style-6 {\n    letter-spacing: $hsSixLetterSpacing;\n}",
           "LessVariable": "$hsSixLetterSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "bbf703c3-3abc-4964-a5fd-313d36c194e1",
           "Title": "Word Spacing",
           "DefaultValue": "0",
@@ -2454,30 +2777,48 @@
           "CustomCSS": ".head-style-6 {\n    word-spacing: $hsSixWordSpacing;\n}",
           "PreviewCSS": ".head-style-6 {\n    word-spacing: $hsSixWordSpacing;\n}",
           "LessVariable": "$hsSixWordSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "2efb7f55-90f0-4717-8420-bf369ec4fe8a",
           "Title": "Text Transform",
-          "DefaultValue": "capitalize",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": ".head-style-6 {\n    text-transform: $hsSixTextTransform;\n}",
           "PreviewCSS": ".head-style-6 {\n    text-transform: $hsSixTextTransform;\n}",
           "LessVariable": "$hsSixTextTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "9bf60fc9-d945-4e2f-a698-92ced4255b0b",
           "Title": "Text Decoration",
@@ -2486,6 +2827,7 @@
           "CustomCSS": ".head-style-6 {\n    text-decoration: $hsSixTextDecoration;\n}",
           "PreviewCSS": ".head-style-6 {\n    text-decoration: $hsSixTextDecoration;\n}",
           "LessVariable": "$hsSixTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
@@ -2498,11 +2840,21 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "91182979-3927-4f59-af26-cde5f19e0c56",
           "Title": "Font Weight",
@@ -2525,8 +2877,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "67bd3b64-a00d-4f5d-9e56-7defd7856559",
           "Title": "Font Style",
@@ -2565,10 +2921,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "5011d4d9-962a-4495-8277-6bb0a62f2de8",
           "Title": "Text Transform",
@@ -2581,10 +2945,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "8300d998-9b3f-420e-b54f-82814694cb1c",
           "Title": "Text Decoration",
@@ -2605,35 +2977,51 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "8dc9876a-4202-49fe-a0ec-7e310f0ec794",
           "Title": "Font Weight",
-          "DefaultValue": "700",
+          "DefaultValue": "500",
           "Suffix": "",
           "CustomCSS": ".head-style-8 {\n    font-weight: $HSEthFontWeight;\n}\n",
           "PreviewCSS": ".head-style-8 {\n    font-weight: $HSEthFontWeight;\n}\n",
           "LessVariable": "$HSEthFontWeight",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Guid": "caf9819d-3a8a-4782-92b5-a85d3dd19930",
           "Title": "Font Family",
-          "DefaultValue": "Poppins, sans-serif",
+          "DefaultValue": "Lucida Sans Unicode, Lucida Grande, sans-serif",
           "Suffix": "",
           "CustomCSS": ".head-style-8 {\n    font-family: $hsEthFontFamily;\n}\n",
           "PreviewCSS": ".head-style-8 {\n    font-family: $hsEthFontFamily;\n}",
           "LessVariable": "$hsEthFontFamily",
+          "JavascriptVariable": "",
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "7f8fd028-fde3-4d24-b2cf-3b0c3af63c10",
           "Title": "Font Style",
@@ -2642,12 +3030,13 @@
           "CustomCSS": ".head-style-8 {\n    font-style: $hsEthFontstyle;\n}",
           "PreviewCSS": ".head-style-8 {\n    font-style: $hsEthFontstyle;\n}",
           "LessVariable": "$hsEthFontstyle",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "c8e853e0-2890-4c36-be88-ac0e76b7a62e",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -2655,12 +3044,13 @@
           "CustomCSS": ".head-style-8 {\n    letter-spacing: $hsEthLetterSpacingpx;\n}",
           "PreviewCSS": ".head-style-8 {\n    letter-spacing: $hsEthLetterSpacing;\n}",
           "LessVariable": "$hsEthLetterSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "8202405c-43cb-430b-bc82-8ada875a5959",
           "Title": "Word Spacing",
           "DefaultValue": "0",
@@ -2668,14 +3058,23 @@
           "CustomCSS": ".head-style-8 {\n    word-spacing: $hsEthWordSpacingpx;\n}",
           "PreviewCSS": ".head-style-8 {\n    word-spacing: $hsEthWordSpacing;\n}",
           "LessVariable": "$hsEthWordSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "b5d6d553-b04d-42b3-9ba2-687b9b420a92",
           "Title": "Text Transform",
@@ -2684,14 +3083,23 @@
           "CustomCSS": ".head-style-8 {\n    text-transform: $hsEthTextTransform;\n}",
           "PreviewCSS": ".head-style-8 {\n    text-transform: $hsEthTextTransform;\n}",
           "LessVariable": "$hsEthTextTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "4ad11e1f-81ee-4439-a4b4-78c68cf3844f",
           "Title": "Text Decoration",
@@ -2700,6 +3108,7 @@
           "CustomCSS": ".head-style-8 {\n    text-decoration: $hsEthTextDecoration;\n}",
           "PreviewCSS": ".head-style-8 {\n    text-decoration: $hsEthTextDecoration;\n}",
           "LessVariable": "$hsEthTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
@@ -2712,35 +3121,51 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "b9952f3d-4928-458f-a172-1aa3e485a95b",
           "Title": "Font Weight",
-          "DefaultValue": "700",
+          "DefaultValue": "500",
           "Suffix": "",
           "CustomCSS": ".head-style-9 {\n    font-weight: $HSNineFontWeight;\n}",
           "PreviewCSS": ".head-style-9 {\n    font-weight: $HSNineFontWeight;\n}",
           "LessVariable": "$HSNineFontWeight",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Guid": "0a28b7cb-4a42-425e-8b62-ac07afa341bf",
           "Title": "Font Family",
-          "DefaultValue": "Poppins, sans-serif",
+          "DefaultValue": "Tahoma, Geneva, sans-serif",
           "Suffix": "",
           "CustomCSS": ".head-style-9 {\n    font-family: $hsNineFontFamily;\n}",
           "PreviewCSS": ".head-style-9 {\n    font-family: $hsNineFontFamily;\n}",
           "LessVariable": "$hsNineFontFamily",
+          "JavascriptVariable": "",
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "d4180e0c-a916-4048-b4e2-a2dccb93c111",
           "Title": "Font Style",
@@ -2749,12 +3174,13 @@
           "CustomCSS": ".head-style-9 {\n    font-style: $hsNineFontStyle;\n}",
           "PreviewCSS": ".head-style-9 {\n    font-style: $hsNineFontStyle;\n}",
           "LessVariable": "$hsNineFontStyle",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "e8d674f2-b560-496e-88ba-1e8fd2c07691",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -2762,12 +3188,13 @@
           "CustomCSS": ".head-style-9 {\n    letter-spacing: $hsNineLetterSpacingpx;\n}",
           "PreviewCSS": ".head-style-9 {\n    letter-spacing: $hsNineLetterSpacingpx;\n}",
           "LessVariable": "$hsNineLetterSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "cb52bb16-c0d4-46f2-8dab-f2140db7404c",
           "Title": "Word Spacing",
           "DefaultValue": "0",
@@ -2775,38 +3202,57 @@
           "CustomCSS": ".head-style-9 {\n    word-spacing: $hsNineWordSpacingpx;\n}",
           "PreviewCSS": ".head-style-9 {\n    word-spacing: $hsNineWordSpacingpx;\n}",
           "LessVariable": "$hsNineWordSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "4ca3b5c2-4a2c-4ac0-a176-17610beb073a",
           "Title": "Text Transform",
-          "DefaultValue": "capitalize",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": ".head-style-9 {\n    text-transform: $hsNineTextTransform;\n}",
           "PreviewCSS": ".head-style-9 {\n    text-transform: $hsNineTextTransform;\n}",
           "LessVariable": "$hsNineTextTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "13276c45-5cd2-4696-ae01-9f84a6dd6692",
           "Title": "Text Decoration",
-          "DefaultValue": "underline",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": ".head-style-9 {\n    text-decoration: $hsNineTextDecoration;\n}",
           "PreviewCSS": ".head-style-9 {\n    text-decoration: $hsNineTextDecoration;\n}",
           "LessVariable": "$hsNineTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
@@ -2819,35 +3265,51 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "69038e77-eb19-4739-8f6a-fe0430b20aeb",
           "Title": "Font Weight",
-          "DefaultValue": "700",
+          "DefaultValue": "500",
           "Suffix": "",
           "CustomCSS": ".head-style-10 {\n    font-weight: $HSTenFontWeight;\n}",
           "PreviewCSS": ".head-style-10 {\n    font-weight: $HSTenFontWeight;\n}",
           "LessVariable": "$HSTenFontWeight",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Guid": "586f343f-e661-4273-b523-8836545f2fb2",
           "Title": "Font Family",
-          "DefaultValue": "Poppins, sans-serif",
+          "DefaultValue": "Verdana, Geneva, sans-serif",
           "Suffix": "",
           "CustomCSS": ".head-style-10 {\n    font-family: $hsTenFontFamily;\n}",
           "PreviewCSS": ".head-style-10 {\n    font-family: $hsTenFontFamily;\n}",
           "LessVariable": "$hsTenFontFamily",
+          "JavascriptVariable": "",
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "0979c336-f8b7-44af-8005-7ddfd8f7c2e4",
           "Title": "Font Style",
@@ -2856,12 +3318,13 @@
           "CustomCSS": ".head-style-10 {\n    font-style: $hsTenFontStyle;\n}",
           "PreviewCSS": ".head-style-10 {\n    font-style: $hsTenFontStyle;\n}",
           "LessVariable": "$hsTenFontStyle",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "00e9e392-673c-4d82-bfa0-cd97542715bf",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -2869,12 +3332,13 @@
           "CustomCSS": ".head-style-10 {\n    letter-spacing: $hsTenLetterSpacingpx;\n}",
           "PreviewCSS": ".head-style-10 {\n    letter-spacing: $hsTenLetterSpacingpx;\n}",
           "LessVariable": "$hsTenLetterSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "b2da85d3-6f6c-4426-9c90-99441d424f17",
           "Title": "Word Spacing",
           "DefaultValue": "0",
@@ -2882,38 +3346,57 @@
           "CustomCSS": ".head-style-10 {\n    letter-spacing: $hsTenWordSpacingpx;\n}",
           "PreviewCSS": ".head-style-10 {\n    letter-spacing: $hsTenWordSpacingpx;\n}",
           "LessVariable": "$hsTenWordSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "213153da-3344-49a3-88d9-43f32304b03c",
           "Title": "Text Transform",
-          "DefaultValue": "uppercase",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": ".head-style-10 {\n    text-transform: $hsTenTextTransform;\n}",
           "PreviewCSS": ".head-style-10 {\n    text-transform: $hsTenTextTransform;\n}",
           "LessVariable": "$hsTenTextTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "93df67d9-6e79-4aae-9425-ad55c1c4c887",
           "Title": "Text Decoration",
-          "DefaultValue": "underline",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": ".head-style-10 {\n    text-decoration: $hsTenTextDecoration;\n}",
           "PreviewCSS": ".head-style-10 {\n    text-decoration: $hsTenTextDecoration;\n}",
           "LessVariable": "$hsTenTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
@@ -2923,7 +3406,8 @@
       "Guid": "d8a12c05-6e56-4692-8ae2-e906bda60c80",
       "Category": "Styles: Text",
       "Title": null,
-      "Controls": [],
+      "Controls": [
+      ],
       "Sass": ""
     },
     {
@@ -2933,12 +3417,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "3cfccf9e-c577-49c2-8205-26a467e38cf4",
           "Title": "Font Weight",
@@ -2961,8 +3457,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "f1817890-3ed0-4d7b-883e-3c50222f728a",
           "Title": "Font Style",
@@ -3001,10 +3501,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "676143ba-393e-4324-831b-f8d0a2d6e26d",
           "Title": "Text Transform",
@@ -3017,10 +3525,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "9b40907d-5e03-4058-b66f-384fa5e89aa9",
           "Title": "Text Decoration",
@@ -3041,12 +3557,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "78d427e4-3c9c-4693-a903-515f599f6f60",
           "Title": "Font Weight",
@@ -3069,8 +3597,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "0d3321f4-f588-4aab-936c-69f0af26ad78",
           "Title": "Font Style",
@@ -3109,10 +3641,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "815e1932-0c31-4429-b49f-37e7b2ea7ae6",
           "Title": "Text Transform",
@@ -3125,10 +3665,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "1dd5385c-e6dc-4602-9548-161bd8e8868b",
           "Title": "Text Decoration",
@@ -3149,12 +3697,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "91767487-c559-4f3f-8ff1-159dda1bb03c",
           "Title": "Font Weight",
@@ -3177,8 +3737,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "f7ebb4cf-4d04-4747-b523-e45a9894fbcb",
           "Title": "Font Style",
@@ -3217,10 +3781,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "949ca44d-7609-43e4-98d2-4fe458b874fc",
           "Title": "Text Transform",
@@ -3233,10 +3805,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "1e28480a-38f6-4b72-8426-44a3fbf41c22",
           "Title": "Text Decoration",
@@ -3257,12 +3837,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "cd029610-fdeb-44df-b06b-cedb81700dcb",
           "Title": "Font Weight",
@@ -3271,6 +3863,7 @@
           "CustomCSS": ".paragraph-style-4 {\n    font-weight: $psFourFontWeight;\n}",
           "PreviewCSS": ".paragraph-style-4 {\n    font-weight: $psFourFontWeight;\n}",
           "LessVariable": "$psFourFontWeight",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
@@ -3281,12 +3874,17 @@
           "CustomCSS": ".paragraph-style-4 {\n    font-family: $psFourFontFamily;\n}",
           "PreviewCSS": ".paragraph-style-4 {\n    font-family: $psFourFontFamily;\n}",
           "LessVariable": "$psFourFontFamily",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "da9b0684-853e-4c70-b407-f02c6513ca6a",
           "Title": "Font Style",
@@ -3295,12 +3893,13 @@
           "CustomCSS": ".paragraph-style-4 {\n    font-style: $psFourFontStyle;\n}",
           "PreviewCSS": ".paragraph-style-4 {\n    font-style: $psFourFontStyle;\n}",
           "LessVariable": "$psFourFontStyle",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
-          "RangeMin": -2,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": -2.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "e612dd89-3ed9-46dc-94ab-8081230d1deb",
           "Title": "Letter Spacing",
           "DefaultValue": "-2",
@@ -3308,12 +3907,13 @@
           "CustomCSS": ".paragraph-style-4 {\n    letter-spacing: $psFourLetterSpacingpx;\n}",
           "PreviewCSS": ".paragraph-style-4 {\n    letter-spacing: $psFourLetterSpacingpx;\n}",
           "LessVariable": "$psFourLetterSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "00f32a02-2c53-41bc-b3be-500559933411",
           "Title": "Word Spacing",
           "DefaultValue": "0",
@@ -3321,14 +3921,23 @@
           "CustomCSS": ".paragraph-style-4 {\n    word-spacing: $psFourWordSpacingpx;\n}",
           "PreviewCSS": ".paragraph-style-4 {\n    word-spacing: $psFourWordSpacingpx;\n}",
           "LessVariable": "$psFourWordSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "0cde392f-c6db-42de-9580-0c663ad4c8e3",
           "Title": "Text Transform",
@@ -3337,14 +3946,23 @@
           "CustomCSS": ".paragraph-style-4 {\n    text-transform: $psFourTextTransform;\n}",
           "PreviewCSS": ".paragraph-style-4 {\n    text-transform: $psFourTextTransform;\n}",
           "LessVariable": "$psFourTextTransform",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "7c3c1b1b-8c31-4e03-8e46-21c9926b8274",
           "Title": "Text Decoration",
@@ -3353,10 +3971,11 @@
           "CustomCSS": ".paragraph-style-4 {\n    text-decoration: $psFourTextDecoration;\n}",
           "PreviewCSS": ".paragraph-style-4 {\n    text-decoration: $psFourTextDecoration;\n}",
           "LessVariable": "$psFourTextDecoration",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
-      "Sass": ""
+      "Sass": ".paragraph-style-4:first-letter {\n    float: left;\n    font-size: 75px;\n    line-height: 60px;\n    padding: 4px;\n    margin-right: 5px;\n}\n"
     },
     {
       "Guid": "a55c9de9-e121-4b8b-af5f-31d02f03c6d8",
@@ -3365,12 +3984,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "ca651306-6bba-4179-84e0-af349025f23f",
           "Title": "Font Weight",
@@ -3393,8 +4024,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "64f1f510-d819-4390-937d-b8079f036a18",
           "Title": "Font Style",
@@ -3433,10 +4068,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "78ffa0f7-8ca4-40e4-ab96-ba80b806cd75",
           "Title": "Text Transform",
@@ -3449,10 +4092,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "357edc66-40b9-46a8-a0b6-4a657fbbaf75",
           "Title": "Text Decoration",
@@ -3473,20 +4124,33 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "c7d7bdce-edb5-4e8e-ba0e-b940b30cab98",
           "Title": "Font Weight",
-          "DefaultValue": "700",
+          "DefaultValue": "400",
           "Suffix": "",
           "CustomCSS": ".paragraph-style-6 {\n    font-weight: $psSixFontWeight;\n}",
           "PreviewCSS": ".paragraph-style-6 {\n    font-weight: $psSixFontWeight;\n}",
           "LessVariable": "$psSixFontWeight",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -3497,12 +4161,17 @@
           "CustomCSS": ".paragraph-style-6 {\n    font-family: $psSixFontFamily;\n}",
           "PreviewCSS": ".paragraph-style-6 {\n    font-family: $psSixFontFamily;\n}",
           "LessVariable": "$psSixFontFamily",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "121fdb8f-ac7a-4141-93fc-2de96ce1b53e",
           "Title": "Font Style",
@@ -3511,25 +4180,27 @@
           "CustomCSS": ".paragraph-style-6 {\n    font-style: $psSixFontStyle;\n}",
           "PreviewCSS": ".paragraph-style-6 {\n    font-style: $psSixFontStyle;\n}",
           "LessVariable": "$psSixFontStyle",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "f1d3a84f-91b1-491f-ae65-ec0435a1b5f2",
           "Title": "Letter Spacing",
-          "DefaultValue": "4",
+          "DefaultValue": "0",
           "Suffix": "px",
           "CustomCSS": ".paragraph-style-6 {\n    letter-spacing: $psSixLetterSpacingpx;\n}",
           "PreviewCSS": ".paragraph-style-6 {\n    letter-spacing: $psSixLetterSpacingpx;\n}",
           "LessVariable": "$psSixLetterSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "e4707425-6289-4938-90ad-1ddf5a7c0602",
           "Title": "Word Spacing",
           "DefaultValue": "0",
@@ -3537,14 +4208,23 @@
           "CustomCSS": ".paragraph-style-6 {\n    word-spacing: $psSixWordSpacingpx;\n}",
           "PreviewCSS": ".paragraph-style-6 {\n    word-spacing: $psSixWordSpacingpx;\n}",
           "LessVariable": "$psSixWordSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "1ac68813-e0b5-4304-9091-957b5e407f13",
           "Title": "Text Transform",
@@ -3553,14 +4233,23 @@
           "CustomCSS": ".paragraph-style-6 {\n    text-transform: $psSixTextTransform;\n}",
           "PreviewCSS": ".paragraph-style-6 {\n    text-transform: $psSixTextTransform;\n}",
           "LessVariable": "$psSixTextTransform",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "8db1198d-1bc2-41f2-89f3-869d21fda63a",
           "Title": "Text Decoration",
@@ -3569,10 +4258,11 @@
           "CustomCSS": ".paragraph-style-6 {\n    text-decoration: $psSixTextDecoration;\n}",
           "PreviewCSS": ".paragraph-style-6 {\n    text-decoration: $psSixTextDecoration;\n}",
           "LessVariable": "$psSixTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
-      "Sass": ""
+      "Sass": ".paragraph-style-6 {\n  text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 1px;\n}"
     },
     {
       "Guid": "51c2398a-cb67-43fc-8082-ab253fd6f990",
@@ -3581,12 +4271,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "10ba1513-f180-4ba1-b382-eb087ecfffa1",
           "Title": "Font Weight",
@@ -3609,8 +4311,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "14e0a6b6-0009-4738-afb2-6aa950f88cc7",
           "Title": "Font Style",
@@ -3649,10 +4355,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "de155c64-9489-4e85-a12f-aefa2b7f0713",
           "Title": "Text Transform",
@@ -3665,10 +4379,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "fcbd3fde-c8bd-40df-a46f-a04429250666",
           "Title": "Text Decoration",
@@ -3689,12 +4411,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "0ba16c98-5450-4a5c-878d-f3cfe7b05ac7",
           "Title": "Font Weight",
@@ -3717,8 +4451,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "832d6e06-2d7f-4d6e-a46d-3b426b48a1c1",
           "Title": "Font Style",
@@ -3757,10 +4495,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "b6d08660-061d-4d0b-b7f0-9c5cf3144d30",
           "Title": "Text Transform",
@@ -3773,10 +4519,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "45a7fbaa-07d4-4eff-aebb-cd408193624e",
           "Title": "Text Decoration",
@@ -3797,12 +4551,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "e04755ce-f497-4d97-8416-78d63fd15996",
           "Title": "Font Weight",
@@ -3825,8 +4591,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "bbf1af1d-147d-4848-bc13-ce6577f9a07a",
           "Title": "Font Style",
@@ -3865,10 +4635,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "ffda9697-9f4a-4af7-b21a-2a2b3140a134",
           "Title": "Text Transform",
@@ -3881,10 +4659,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "c89f013f-f908-4caa-8062-0d9fc85ca031",
           "Title": "Text Decoration",
@@ -3902,14 +4688,16 @@
       "Guid": "8b1e5bee-e27a-4709-86b3-3b06713abcfd",
       "Category": "Styles: Text",
       "Title": null,
-      "Controls": [],
+      "Controls": [
+      ],
       "Sass": ""
     },
     {
       "Guid": "69dcdee5-47f6-467c-9144-34dfc3d1c6ef",
       "Category": "Styles: Button",
       "Title": null,
-      "Controls": [],
+      "Controls": [
+      ],
       "Sass": ""
     },
     {
@@ -3919,19 +4707,31 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "57c89a0a-604b-4c8b-ba62-7a6d7a2bdbf8",
           "Title": "Font Weight",
           "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".button-style-1 {\n    font-weight: $bsoneFontWeight;\n}",
-          "PreviewCSS": ".button-style-1 {\n    font-weight: $bsoneFontWeight;\n}",
+          "CustomCSS": ".btn.button-style-1 {\n    font-weight: $bsoneFontWeight;\n}",
+          "PreviewCSS": ".btn.button-style-1 {\n    font-weight: $bsoneFontWeight;\n}",
           "LessVariable": "$bsoneFontWeight",
           "Type": "Dropdown"
         },
@@ -3940,22 +4740,26 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".button-style-1 {\n    font-family: $bsoneFontFamily;\n}",
-          "PreviewCSS": ".button-style-1 {\n    font-family: $bsoneFontFamily;\n}",
+          "CustomCSS": ".btn.button-style-1 {\n    font-family: $bsoneFontFamily;\n}",
+          "PreviewCSS": ".btn.button-style-1 {\n    font-family: $bsoneFontFamily;\n}",
           "LessVariable": "$bsoneFontFamily",
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "01f879c5-0d5f-4f6c-b2bd-b5e7f3545ab3",
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".button-style-1 {\n    font-style: $bsoneFontStyle;\n}",
-          "PreviewCSS": ".button-style-1 {\n    font-style: $bsoneFontStyle;\n}",
+          "CustomCSS": ".btn.button-style-1 {\n    font-style: $bsoneFontStyle;\n}",
+          "PreviewCSS": ".btn.button-style-1 {\n    font-style: $bsoneFontStyle;\n}",
           "LessVariable": "$bsoneFontStyle",
           "Type": "Dropdown"
         },
@@ -3967,8 +4771,8 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-1 {\n    letter-spacing: $bsoneLetterSpacingpx;\n}",
-          "PreviewCSS": ".button-style-1 {\n    letter-spacing: $bsoneLetterSpacingpx;\n}",
+          "CustomCSS": ".btn.button-style-1 {\n    letter-spacing: $bsoneLetterSpacingpx;\n}",
+          "PreviewCSS": ".btn.button-style-1 {\n    letter-spacing: $bsoneLetterSpacingpx;\n}",
           "LessVariable": "$bsoneLetterSpacing",
           "Type": "Slider"
         },
@@ -3980,40 +4784,56 @@
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-1 {\n    word-spacing: $bsoneWordSpacingpx;\n}",
-          "PreviewCSS": ".button-style-1 {\n    word-spacing: $bsoneWordSpacingpx;\n}",
+          "CustomCSS": ".btn.button-style-1 {\n    word-spacing: $bsoneWordSpacingpx;\n}",
+          "PreviewCSS": ".btn.button-style-1 {\n    word-spacing: $bsoneWordSpacingpx;\n}",
           "LessVariable": "$bsoneWordSpacing",
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "826ffe7c-42d4-450f-ad04-d3ff0a156c2e",
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-1 {\n    text-transform: $bsoneTextTransform;\n}",
-          "PreviewCSS": ".button-style-1 {\n    text-transform: $bsoneTextTransform;\n}",
+          "CustomCSS": ".btn.button-style-1 {\n    text-transform: $bsoneTextTransform;\n}",
+          "PreviewCSS": ".btn.button-style-1 {\n    text-transform: $bsoneTextTransform;\n}",
           "LessVariable": "$bsoneTextTransform",
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "1e716e6c-6e4d-4aa3-ad0b-f3bb21bd9458",
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-1 {\n    text-decoration: $bsoneTextDecoration;\n}",
-          "PreviewCSS": ".button-style-1 {\n    text-decoration: $bsoneTextDecoration;\n}",
+          "CustomCSS": ".btn.button-style-1 {\n    text-decoration: $bsoneTextDecoration;\n}",
+          "PreviewCSS": ".btn.button-style-1 {\n    text-decoration: $bsoneTextDecoration;\n}",
           "LessVariable": "$bsoneTextDecoration",
           "Type": "Dropdown"
         }
@@ -4027,20 +4847,33 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "7ef85088-232c-4af4-b6ff-9a1033eaf42b",
           "Title": "Font Weight",
-          "DefaultValue": "400",
+          "DefaultValue": "700",
           "Suffix": "",
-          "CustomCSS": ".button-style-2 {\n    font-weight: $bsTwoFontWeight;\n}",
-          "PreviewCSS": ".button-style-2 {\n    font-weight: $bsTwoFontWeight;\n}",
+          "CustomCSS": ".btn.button-style-2 {\n    font-weight: $bsTwoFontWeight ;\n}",
+          "PreviewCSS": ".btn.button-style-2 {\n    font-weight: $bsTwoFontWeight ;\n}",
           "LessVariable": "$bsTwoFontWeight",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -4048,81 +4881,107 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".button-style-2 {\n    font-family: $bsTwoFontFamily;\n}",
-          "PreviewCSS": ".button-style-2 {\n    font-family: $bsTwoFontFamily;\n}",
+          "CustomCSS": ".btn.button-style-2 {\n    font-family: $bsTwoFontFamily;\n}",
+          "PreviewCSS": ".btn.button-style-2 {\n    font-family: $bsTwoFontFamily;\n}",
           "LessVariable": "$bsTwoFontFamily",
+          "JavascriptVariable": "",
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "681a2634-aa14-4d33-849b-5bb5c642a00a",
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".button-style-2 {\n    font-style: $bsTwoFontStyle;\n}",
-          "PreviewCSS": ".button-style-2 {\n    font-style: $bsTwoFontStyle;\n}",
+          "CustomCSS": ".btn.button-style-2 {\n    font-style: $bsTwoFontStyle;\n}",
+          "PreviewCSS": ".btn.button-style-2 {\n    font-style: $bsTwoFontStyle;\n}",
           "LessVariable": "$bsTwoFontStyle",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "14be592b-d1f2-44a5-aff9-0eb403288b99",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-2 {\n    letter-spacing: $bsTwoLetterSpacingpx;\n}",
-          "PreviewCSS": ".button-style-2 {\n    letter-spacing: $bsTwoLetterSpacingpx;\n}",
+          "CustomCSS": ".btn.button-style-2 {\n    letter-spacing: $bsTwoLetterSpacingpx;\n}",
+          "PreviewCSS": ".btn.button-style-2 {\n    letter-spacing: $bsTwoLetterSpacingpx;\n}",
           "LessVariable": "$bsTwoLetterSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "7d3d23a6-f318-4331-9aa2-5c8ff1c3f191",
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-2 {\n    word-spacing: $bsTwoWordSpacingpx;\n}",
-          "PreviewCSS": ".button-style-2 {\n    word-spacing: $bsTwoWordSpacingpx;\n}",
+          "CustomCSS": ".btn.button-style-2 {\n    word-spacing: $bsTwoWordSpacingpx;\n}",
+          "PreviewCSS": ".btn.button-style-2 {\n    word-spacing: $bsTwoWordSpacingpx;\n}",
           "LessVariable": "$bsTwoWordSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "9b1c7958-4aa5-4a31-86ef-285adcd471b3",
           "Title": "Text Transform",
-          "DefaultValue": "uppercase",
+          "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-2 {\n    text-transform: $bsTwoTextTransform;\n}",
-          "PreviewCSS": ".button-style-2 {\n    text-transform: $bsTwoTextTransform;\n}",
+          "CustomCSS": ".btn.button-style-2 {\n    text-transform: $bsTwoTextTransform;\n}",
+          "PreviewCSS": ".btn.button-style-2 {\n    text-transform: $bsTwoTextTransform;\n}",
           "LessVariable": "$bsTwoTextTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "54df2601-2cc4-47ba-b461-9c4fb62b9c18",
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-2 {\n    text-decoration: $bsTwoTextDecoration;\n}",
-          "PreviewCSS": ".button-style-2 {\n    text-decoration: $bsTwoTextDecoration;\n}",
+          "CustomCSS": ".btn.button-style-2 {\n    text-decoration: $bsTwoTextDecoration;\n}",
+          "PreviewCSS": ".btn.button-style-2 {\n    text-decoration: $bsTwoTextDecoration;\n}",
           "LessVariable": "$bsTwoTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
@@ -4135,20 +4994,33 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "41b35c60-544e-47ae-bb04-2caf6827664a",
           "Title": "Font Weight",
           "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".button-style-3 {\n    font-weight: $bsThreeFontWeight;\n}",
-          "PreviewCSS": ".button-style-3 {\n    font-weight: $bsThreeFontWeight;\n}",
+          "CustomCSS": ".btn.button-style-3 {\n    font-weight: $bsThreeFontWeight;\n}",
+          "PreviewCSS": ".btn.button-style-3 {\n    font-weight: $bsThreeFontWeight;\n}",
           "LessVariable": "$bsThreeFontWeight",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
@@ -4156,81 +5028,107 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".button-style-3 {\n    font-family: $bsThreeFontFamily;\n}",
-          "PreviewCSS": ".button-style-3 {\n    font-family: $bsThreeFontFamily;\n}",
+          "CustomCSS": ".btn.button-style-3 {\n    font-family: $bsThreeFontFamily;\n}",
+          "PreviewCSS": ".btn.button-style-3 {\n    font-family: $bsThreeFontFamily;\n}",
           "LessVariable": "$bsThreeFontFamily",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "6c69f2dc-d784-4b6e-ba04-2039422ffd44",
           "Title": "Font Style",
           "DefaultValue": "italic",
           "Suffix": "",
-          "CustomCSS": ".button-style-3 {\n    font-style: $bsThreeFontStyle;\n}",
-          "PreviewCSS": ".button-style-3 {\n    font-style: $bsThreeFontStyle;\n}",
+          "CustomCSS": ".btn.button-style-3 {\n    font-style: $bsThreeFontStyle;\n}",
+          "PreviewCSS": ".btn.button-style-3 {\n    font-style: $bsThreeFontStyle;\n}",
           "LessVariable": "$bsThreeFontStyle",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "6e606532-9111-4fc6-84d5-23ca4c0f3523",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-3 {\n    letter-spacing: $bsThreeLetterSpacingpx;\n}",
-          "PreviewCSS": ".button-style-3 {\n    letter-spacing: $bsThreeLetterSpacingpx;\n}",
+          "CustomCSS": ".btn.button-style-3 {\n    letter-spacing: $bsThreeLetterSpacingpx;\n}",
+          "PreviewCSS": ".btn.button-style-3 {\n    letter-spacing: $bsThreeLetterSpacingpx;\n}",
           "LessVariable": "$bsThreeLetterSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "766fe282-e2d1-4b34-9a98-20960f0761a0",
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-3 {\n    word-spacing: $bsThreeWordSpacingpx;\n}",
-          "PreviewCSS": ".button-style-3 {\n    word-spacing: $bsThreeWordSpacingpx;\n}",
+          "CustomCSS": ".btn.button-style-3 {\n    word-spacing: $bsThreeWordSpacingpx;\n}",
+          "PreviewCSS": ".btn.button-style-3 {\n    word-spacing: $bsThreeWordSpacingpx;\n}",
           "LessVariable": "$bsThreeWordSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "644b2239-4d95-4d87-8a7f-4341dd3cb768",
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-3 {\n    text-transform: $bsThreeTextTransform;\n}",
-          "PreviewCSS": ".button-style-3 {\n    text-transform: $bsThreeTextTransform;\n}",
+          "CustomCSS": ".btn.button-style-3 {\n    text-transform: $bsThreeTextTransform;\n}",
+          "PreviewCSS": ".btn.button-style-3 {\n    text-transform: $bsThreeTextTransform;\n}",
           "LessVariable": "$bsThreeTextTransform",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "06df7bc0-4722-40da-bfc6-9e537c2db991",
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-3 {\n    text-decoration: $bsThreeTextDecoration;\n}",
-          "PreviewCSS": ".button-style-3 {\n    text-decoration: $bsThreeTextDecoration;\n}",
+          "CustomCSS": ".btn.button-style-3 {\n    text-decoration: $bsThreeTextDecoration;\n}",
+          "PreviewCSS": ".btn.button-style-3 {\n    text-decoration: $bsThreeTextDecoration;\n}",
           "LessVariable": "$bsThreeTextDecoration",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
@@ -4243,20 +5141,33 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "f19b4007-e56a-4332-bad7-7875b98badc4",
           "Title": "Font Weight",
-          "DefaultValue": "700",
+          "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".button-style-4 {\n    font-weight: $bsFourFontWeight;\n}",
-          "PreviewCSS": ".button-style-4 {\n    font-weight: $bsFourFontWeight;\n}",
+          "CustomCSS": ".btn.button-style-4 {\n    font-weight: $bsFourFontWeight;\n}",
+          "PreviewCSS": ".btn.button-style-4 {\n    font-weight: $bsFourFontWeight;\n}",
           "LessVariable": "$bsFourFontWeight",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -4264,81 +5175,107 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".button-style-4 {\n    font-family: $bsFourFontFamily;\n}",
-          "PreviewCSS": ".button-style-4 {\n    font-family: $bsFourFontFamily;\n}",
+          "CustomCSS": ".btn.button-style-4 {\n    font-family: $bsFourFontFamily;\n}",
+          "PreviewCSS": ".btn.button-style-4 {\n    font-family: $bsFourFontFamily;\n}",
           "LessVariable": "$bsFourFontFamily",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "157d2138-0c99-4514-a4ca-52fd6da26b5f",
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".button-style-4 {\n    font-style: $bsFourFontStyle;\n}",
-          "PreviewCSS": ".button-style-4 {\n    font-style: $bsFourFontStyle;\n}",
+          "CustomCSS": ".btn.button-style-4 {\n    font-style: $bsFourFontStyle;\n}",
+          "PreviewCSS": ".btn.button-style-4 {\n    font-style: $bsFourFontStyle;\n}",
           "LessVariable": "$bsFourFontStyle",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "28f8bbf9-5e14-449b-8a88-d9a0e4422552",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-4 {\n    letter-spacing: $bsFourLetterSpacingpx;\n}",
-          "PreviewCSS": ".button-style-4 {\n    letter-spacing: $bsFourLetterSpacingpx;\n}",
+          "CustomCSS": ".btn.button-style-4 {\n    letter-spacing: $bsFourLetterSpacingpx;\n}",
+          "PreviewCSS": ".btn.button-style-4 {\n    letter-spacing: $bsFourLetterSpacingpx;\n}",
           "LessVariable": "$bsFourLetterSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 5,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 5.0,
           "Guid": "8fd7ff23-d9a8-48a8-b700-b79f835f341e",
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-4 {\n    word-spacing: $bsFourWordSpacingpx;\n}",
-          "PreviewCSS": ".button-style-4 {\n    word-spacing: $bsFourWordSpacingpx;\n}",
+          "CustomCSS": ".btn.button-style-4 {\n    word-spacing: $bsFourWordSpacingpx;\n}",
+          "PreviewCSS": ".btn.button-style-4 {\n    word-spacing: $bsFourWordSpacingpx;\n}",
           "LessVariable": "$bsFourWordSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "b85e0376-3743-4acc-b104-100ceaa9bd14",
           "Title": "Text Transform",
-          "DefaultValue": "capitalize",
+          "DefaultValue": "uppercase",
           "Suffix": "",
-          "CustomCSS": ".button-style-4 {\n    text-transform: $bsFourTextTransform;\n}",
-          "PreviewCSS": ".button-style-4 {\n    text-transform: $bsFourTextTransform;\n}",
+          "CustomCSS": ".btn.button-style-4 {\n    text-transform: $bsFourTextTransform;\n}",
+          "PreviewCSS": ".btn.button-style-4 {\n    text-transform: $bsFourTextTransform;\n}",
           "LessVariable": "$bsFourTextTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "9bbe9774-77f6-466e-8c1b-024583fdde7f",
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-4 {\n    text-decoration: $bsFourTextDecoration;\n}",
-          "PreviewCSS": ".button-style-4 {\n    text-decoration: $bsFourTextDecoration;\n}",
+          "CustomCSS": ".btn.button-style-4 {\n    text-decoration: $bsFourTextDecoration;\n}",
+          "PreviewCSS": ".btn.button-style-4 {\n    text-decoration: $bsFourTextDecoration;\n}",
           "LessVariable": "$bsFourTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
@@ -4351,20 +5288,33 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "70383cd1-1cfe-4623-b8ba-6a10bb2456a8",
           "Title": "Font Weight",
-          "DefaultValue": "500",
+          "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".button-style-5 {\n    font-weight: $bsFiveFontWeight;\n}",
-          "PreviewCSS": ".button-style-5 {\n    font-weight: $bsFiveFontWeight;\n}",
+          "CustomCSS": ".btn.button-style-5 {\n    font-weight: $bsFiveFontWeight;\n}",
+          "PreviewCSS": ".btn.button-style-5 {\n    font-weight: $bsFiveFontWeight;\n}",
           "LessVariable": "$bsFiveFontWeight",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -4372,81 +5322,842 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".button-style-5 {\n    font-family: $bsFiveFontFamily;\n}",
-          "PreviewCSS": ".button-style-5 {\n    font-family: $bsFiveFontFamily;\n}",
+          "CustomCSS": ".btn.button-style-5 {\n    font-family: $bsFiveFontFamily;\n}",
+          "PreviewCSS": ".btn.button-style-5 {\n    font-family: $bsFiveFontFamily;\n}",
           "LessVariable": "$bsFiveFontFamily",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "92cf54b6-3f8e-4bd1-a32e-ffb3d0217289",
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".button-style-5 {\n    font-style: $bsFiveFontStyle;\n}",
-          "PreviewCSS": ".button-style-5 {\n    font-style: $bsFiveFontStyle;\n}",
+          "CustomCSS": ".btn.button-style-5 {\n    font-style: $bsFiveFontStyle;\n}",
+          "PreviewCSS": ".btn.button-style-5 {\n    font-style: $bsFiveFontStyle;\n}",
           "LessVariable": "$bsFiveFontStyle",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "ded2fc64-3223-416f-aac6-c6f445aa9d78",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-5 {\n    letter-spacing: $bsFiveLetterSpacingpx;\n}",
-          "PreviewCSS": ".button-style-5 {\n    letter-spacing: $bsFiveLetterSpacingpx;\n}",
+          "CustomCSS": ".btn.button-style-5 {\n    letter-spacing: $bsFiveLetterSpacingpx;\n}",
+          "PreviewCSS": ".btn.button-style-5 {\n    letter-spacing: $bsFiveLetterSpacingpx;\n}",
           "LessVariable": "$bsFiveLetterSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "9b03f817-5cd0-4596-9ac2-72abd10df521",
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-5 {\n    word-spacing: $bsFiveWordSpacingpx;\n}",
-          "PreviewCSS": ".button-style-5 {\n    word-spacing: $bsFiveWordSpacingpx;\n}",
+          "CustomCSS": ".btn.button-style-5 {\n    word-spacing: $bsFiveWordSpacingpx;\n}",
+          "PreviewCSS": ".btn.button-style-5 {\n    word-spacing: $bsFiveWordSpacingpx;\n}",
           "LessVariable": "$bsFiveWordSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "3c246b10-9e83-457e-ae07-c0ae408bcce2",
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-5 {\n    text-transform: $bsFiveTextTransform;\n}",
-          "PreviewCSS": ".button-style-5 {\n    text-transform: $bsFiveTextTransform;\n}",
+          "CustomCSS": ".btn.button-style-5 {\n    text-transform: $bsFiveTextTransform;\n}",
+          "PreviewCSS": ".btn.button-style-5 {\n    text-transform: $bsFiveTextTransform;\n}",
           "LessVariable": "$bsFiveTextTransform",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "9093d5ac-51b9-4490-beb0-c6d0fad2ea93",
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-5 {\n    text-decoration: $bsFiveTextDecoration;\n}",
-          "PreviewCSS": ".button-style-5 {\n    text-decoration: $bsFiveTextDecoration;\n}",
+          "CustomCSS": ".btn.button-style-5 {\n    text-decoration: $bsFiveTextDecoration;\n}",
+          "PreviewCSS": ".btn.button-style-5 {\n    text-decoration: $bsFiveTextDecoration;\n}",
           "LessVariable": "$bsFiveTextDecoration",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        }
+      ],
+      "Sass": ".button-style-5 {\n     text-shadow: 0px 2px 3px rgba(0,0,0,0.4),\n               0px 4px 7px rgba(0,0,0,0.1),\n               0px 9px 12px rgba(0,0,0,0.1);\n}"
+    },
+    {
+      "Guid": "d117654c-7a56-45af-a343-d95883a597fa",
+      "Category": "Styles: Button",
+      "Title": "Style F",
+      "Controls": [
+        {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "66a33e36-5166-4fee-acab-5e631a134310",
+          "Title": "Font Weight",
+          "DefaultValue": "400",
+          "Suffix": "",
+          "CustomCSS": ".button-style-6 {\n    font-weight: $bsSixFontWeight;\n}",
+          "PreviewCSS": ".button-style-6 {\n    font-weight: $bsSixFontWeight;\n}",
+          "LessVariable": "$bsSixFontWeight",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "1e6d6165-b7b6-4544-8e77-45a4f35137ef",
+          "Title": "Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".button-style-6 {\n    font-family: $bsSixFontFamily;\n}",
+          "PreviewCSS": ".button-style-6 {\n    font-family: $bsSixFontFamily;\n}",
+          "LessVariable": "$bsSixFontFamily",
+          "JavascriptVariable": null,
+          "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "32fa4a54-0655-41e9-82cd-49a11cbbdc45",
+          "Title": "Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".button-style-6 {\n    font-style: $bsSixFontStyle;\n}",
+          "PreviewCSS": ".button-style-6 {\n    font-style: $bsSixFontStyle;\n}",
+          "LessVariable": "$bsSixFontStyle",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "c01448ed-bd83-41fd-a3b6-30c620c5f8df",
+          "Title": "Letter Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".button-style-6 {\n    letter-spacing: $bsSixLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-6 {\n    letter-spacing: $bsSixLetterSpacingpx;\n}",
+          "LessVariable": "$bsSixLetterSpacing",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "d915a9b7-a5e2-4f7d-9372-325e4ba84727",
+          "Title": "Word Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".button-style-6 {\n    word-spacing: $bsSixWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-6 {\n    word-spacing: $bsSixWordSpacingpx;\n}",
+          "LessVariable": "$bsSixWordSpacing",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "bda6f2b4-5f01-4141-a1d1-0374c8f93051",
+          "Title": "Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".button-style-6 {\n    text-transform: $bsSixTextTransform;\n}",
+          "PreviewCSS": ".button-style-6 {\n    text-transform: $bsSixTextTransform;\n}",
+          "LessVariable": "$bsSixTextTransform",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
+          ],
+          "Guid": "f82d1226-4eb0-4ca4-a8d2-b7f59f134bb3",
+          "Title": "Text Decoration",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".button-style-6 {\n    text-decoration: $bsSixTextDecoration;\n}",
+          "PreviewCSS": ".button-style-6 {\n    text-decoration: $bsSixTextDecoration;\n}",
+          "LessVariable": "$bsSixTextDecoration",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        }
+      ],
+      "Sass": ".button-style-6 {\n    text-shadow: 3px 3px 0px rgba(0,0,0,0.2);\n}"
+    },
+    {
+      "Guid": "064caf31-91e3-447b-a92e-fd9eddc187e3",
+      "Category": "Styles: Button",
+      "Title": "Style G",
+      "Controls": [
+        {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "e8c8581b-8714-45e2-a68b-8eddc96d7511",
+          "Title": "Font Weight",
+          "DefaultValue": "400",
+          "Suffix": "",
+          "CustomCSS": ".button-style-7 {\n    font-weight: $bsSevFontWeight;\n}",
+          "PreviewCSS": ".button-style-7 {\n    font-weight: $bsSevFontWeight;\n}",
+          "LessVariable": "$bsSevFontWeight",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "86470494-c12d-4267-b27f-4e5ba90d2330",
+          "Title": "Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".button-style-7 {\n    font-family: $bsSevFontFamily;\n}",
+          "PreviewCSS": ".button-style-7 {\n    font-family: $bsSevFontFamily;\n}",
+          "LessVariable": "$bsSevFontFamily",
+          "JavascriptVariable": null,
+          "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "9dec87bd-b789-4788-b1de-1113dcfdf939",
+          "Title": "Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".button-style-7 {\n    font-style: $bsSevFontStyle;\n}",
+          "PreviewCSS": ".button-style-7 {\n    font-style: $bsSevFontStyle;\n}",
+          "LessVariable": "$bsSevFontStyle",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "6b1e379f-d160-4772-890a-a22a4986f51f",
+          "Title": "Letter Spacing",
+          "DefaultValue": "5",
+          "Suffix": "px",
+          "CustomCSS": ".button-style-7 {\n    letter-spacing: $bsSevLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-7 {\n    letter-spacing: $bsSevLetterSpacingpx;\n}",
+          "LessVariable": "$bsSevLetterSpacing",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "9e56794f-a7bc-4161-839c-96e03b0b67cb",
+          "Title": "Word Spacing",
+          "DefaultValue": "5",
+          "Suffix": "px",
+          "CustomCSS": ".button-style-7 {\n    word-spacing: $bsSevWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-7 {\n    word-spacing: $bsSevWordSpacingpx;\n}",
+          "LessVariable": "$bsSevWordSpacing",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "f4155e7f-3c12-4d3b-b9ee-674fabba751f",
+          "Title": "Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".button-style-7 {\n    text-transform: $bsSevTextTransform;\n}",
+          "PreviewCSS": ".button-style-7 {\n    text-transform: $bsSevTextTransform;\n}",
+          "LessVariable": "$bsSevTextTransform",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
+          ],
+          "Guid": "bc1f132d-8169-4fa6-aca4-6a0efbe0ecc9",
+          "Title": "Text Decoration",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".button-style-7 {\n    text-decoration: $bsSevTextDecoration;\n}",
+          "PreviewCSS": ".button-style-7 {\n    text-decoration: $bsSevTextDecoration;\n}",
+          "LessVariable": "$bsSevTextDecoration",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        }
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "33dd7ace-cbed-427e-b10d-8fad316c1716",
+      "Category": "Styles: Button",
+      "Title": "Style H",
+      "Controls": [
+        {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "f5a9d43b-9fba-49a1-b0ab-70968799ceaa",
+          "Title": "Font Weight",
+          "DefaultValue": "400",
+          "Suffix": "",
+          "CustomCSS": ".button-style-8 {\n    font-weight: $bsEtFontWeight;\n}",
+          "PreviewCSS": ".button-style-8 {\n    font-weight: $bsEtFontWeight;\n}",
+          "LessVariable": "$bsEtFontWeight",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "b7c9fd27-4838-4978-82f7-b90213054334",
+          "Title": "Font Family",
+          "DefaultValue": "Lucida Sans Unicode, Lucida Grande, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".button-style-8 {\n    font-family: $bsEtFontFamily;\n}",
+          "PreviewCSS": ".button-style-8 {\n    font-family: $bsEtFontFamily;\n}",
+          "LessVariable": "$bsEtFontFamily",
+          "JavascriptVariable": "",
+          "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "cd2cd87a-32e0-4254-9b3a-e2dee8510e5f",
+          "Title": "Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".button-style-8 {\n    font-style: $bsEtFontStyle;\n}",
+          "PreviewCSS": ".button-style-8 {\n    font-style: $bsEtFontStyle;\n}",
+          "LessVariable": "$bsEtFontStyle",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "ef2c1cbf-a201-4c21-bb6c-84aa9fec0629",
+          "Title": "Letter Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".button-style-8 {\n    letter-spacing: $bsEtLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-8 {\n    letter-spacing: $bsEtLetterSpacingpx;\n}",
+          "LessVariable": "$bsEtLetterSpacing",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "ae96ef07-17f7-47f3-a46a-be3f9a013d40",
+          "Title": "Word Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".button-style-8 {\n    word-spacing: $bsEtWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-8 {\n    word-spacing: $bsEtWordSpacingpx;\n}",
+          "LessVariable": "$bsEtWordSpacing",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "dffdc066-c9e4-4cf2-a945-03b503effec9",
+          "Title": "Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".button-style-8 {\n    text-transform: $bsEtTextTransform;\n}",
+          "PreviewCSS": ".button-style-8 {\n    text-transform: $bsEtTextTransform;\n}",
+          "LessVariable": "$bsEtTextTransform",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
+          ],
+          "Guid": "f6491fb0-4e84-4ea0-a405-567719dd1c28",
+          "Title": "Text Decoration",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".button-style-8 {\n    text-decoration: $bsEtTextDecoration;\n}",
+          "PreviewCSS": ".button-style-8 {\n    text-decoration: $bsEtTextDecoration;\n}",
+          "LessVariable": "$bsEtTextDecoration",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        }
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "71e4e670-bb03-4f67-890d-910f978c964a",
+      "Category": "Styles: Button",
+      "Title": "Style I",
+      "Controls": [
+        {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "72d29dd7-f48b-45fb-aec0-2914bc52a7f6",
+          "Title": "Font Weight",
+          "DefaultValue": "400",
+          "Suffix": "",
+          "CustomCSS": ".button-style-9 {\n    font-weight: $bsNnFontWeight;\n}",
+          "PreviewCSS": ".button-style-9 {\n    font-weight: $bsNnFontWeight;\n}",
+          "LessVariable": "$bsNnFontWeight",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "7b1178cf-99b6-40d8-b3ae-1debcbbfd827",
+          "Title": "Font Family",
+          "DefaultValue": "Tahoma, Geneva, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".button-style-9 {\n    font-family: $bsNnFontFamily;\n}",
+          "PreviewCSS": ".button-style-9 {\n    font-family: $bsNnFontFamily;\n}",
+          "LessVariable": "$bsNnFontFamily",
+          "JavascriptVariable": "",
+          "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "478f93de-2218-4034-bb71-9a7449b355a3",
+          "Title": "Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".button-style-9 {\n    font-style: $bsNnFontStyle;\n}",
+          "PreviewCSS": ".button-style-9 {\n    font-style: $bsNnFontStyle;\n}",
+          "LessVariable": "$bsNnFontStyle",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "f25eced9-c7f0-4e46-9f2d-0fd09ade2a26",
+          "Title": "Letter Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".button-style-9 {\n    letter-spacing: $bsNnLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-9 {\n    letter-spacing: $bsNnLetterSpacingpx;\n}",
+          "LessVariable": "$bsNnLetterSpacing",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "233f7a24-df23-4dd9-aa7d-92757d560abb",
+          "Title": "Word Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".button-style-9 {\n    word-spacing: $bsNnWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-9 {\n    word-spacing: $bsNnWordSpacingpx;\n}",
+          "LessVariable": "$bsNnWordSpacing",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "80b8e1af-625a-450b-bd6c-8160467eecb7",
+          "Title": "Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".button-style-9 {\n    text-transform: $bsNnTextTransform;\n}",
+          "PreviewCSS": ".button-style-9 {\n    text-transform: $bsNnTextTransform;\n}",
+          "LessVariable": "$bsNnTextTransform",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
+          ],
+          "Guid": "db997c82-d279-4218-92ba-b744ecb81a23",
+          "Title": "Text Decoration",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".button-style-9 {\n    text-decoration: $bsNnTextDecoration;\n}",
+          "PreviewCSS": ".button-style-9 {\n    text-decoration: $bsNnTextDecoration;\n}",
+          "LessVariable": "$bsNnTextDecoration",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        }
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "d7592376-8740-4947-9db8-59c51be3627b",
+      "Category": "Styles: Button",
+      "Title": "Style J",
+      "Controls": [
+        {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "0c7c980d-7d67-4002-b717-d4be968aeed4",
+          "Title": "Font Weight",
+          "DefaultValue": "400",
+          "Suffix": "",
+          "CustomCSS": ".button-style-10 {\n    font-weight: $bsTenFontWeight;\n}",
+          "PreviewCSS": ".button-style-10 {\n    font-weight: $bsTenFontWeight;\n}",
+          "LessVariable": "$bsTenFontWeight",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "93dc76b1-cc46-4ffa-a1c4-fd5d3d41515a",
+          "Title": "Font Family",
+          "DefaultValue": "Verdana, Geneva, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".button-style-10 {\n    font-family: $bsTenFontFamily;\n}",
+          "PreviewCSS": ".button-style-10 {\n    font-family: $bsTenFontFamily;\n}",
+          "LessVariable": "$bsTenFontFamily",
+          "JavascriptVariable": "",
+          "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "e4bfe3e0-090c-47cf-b241-f321d17817b7",
+          "Title": "Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".button-style-10 {\n    font-style: $bsTenFontStyle;\n}",
+          "PreviewCSS": ".button-style-10 {\n    font-style: $bsTenFontStyle;\n}",
+          "LessVariable": "$bsTenFontStyle",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "3003be20-90ea-471f-b586-888ea8d1c62e",
+          "Title": "Letter Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".button-style-10 {\n    letter-spacing: $bsTenLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-10 {\n    letter-spacing: $bsTenLetterSpacingpx;\n}",
+          "LessVariable": "$bsTenLetterSpacing",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "561d1bab-d53f-47d9-9625-69ff6ce9200a",
+          "Title": "Word Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".button-style-10 {\n    word-spacing: $bsTenWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-10 {\n    word-spacing: $bsTenWordSpacingpx;\n}",
+          "LessVariable": "$bsTenWordSpacing",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "1cb85756-1678-43fd-85c5-e06cb952d889",
+          "Title": "Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".button-style-10 {\n    text-transform: $bsTenTextTransform;\n}",
+          "PreviewCSS": ".button-style-10 {\n    text-transform: $bsTenTextTransform;\n}",
+          "LessVariable": "$bsTenTextTransform",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
+          ],
+          "Guid": "7a5b4faa-94cc-454e-acdb-4a4030300d90",
+          "Title": "Text Decoration",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".button-style-10 {\n    text-decoration: $bsTenTextDecoration;\n}",
+          "PreviewCSS": ".button-style-10 {\n    text-decoration: $bsTenTextDecoration;\n}",
+          "LessVariable": "$bsTenTextDecoration",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
@@ -4459,12 +6170,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "b41d2467-4f50-4cdc-88e9-2489f4312b10",
           "Title": "Font Weight",
@@ -4487,8 +6210,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "3d705781-70bf-41d1-a959-4a8b57aa9744",
           "Title": "Font Style",
@@ -4527,10 +6254,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "44343188-3b0e-4cb4-aaca-1e57ef76cb40",
           "Title": "Text Transform",
@@ -4543,10 +6278,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "d87014f0-9fa9-44e3-ba67-3983ecad40ee",
           "Title": "Text Decoration",
@@ -4556,90 +6299,6 @@
           "PreviewCSS": ".paragraph-style-10 {\n    text-decoration: $psTenTextDecoration;\n}",
           "LessVariable": "$psTenTextDecoration",
           "Type": "Dropdown"
-        }
-      ],
-      "Sass": ""
-    },
-    {
-      "Guid": "f29cdf5c-f91f-412b-bfeb-28af3d482ae0",
-      "Category": "Social Authentication Buttons",
-      "Title": null,
-      "Controls": [
-        {
-          "Guid": "b0462ebb-d18c-4bb0-a109-a436680fb828",
-          "Title": "Color",
-          "DefaultValue": "#444444",
-          "Suffix": "",
-          "CustomCSS": ".authentication-btn li a .btn-name {\n    color: $socialAuthbtnClr;\n}",
-          "PreviewCSS": ".authentication-btn li a .btn-name {\n    color: $socialAuthbtnClr;\n}",
-          "LessVariable": "$socialAuthbtnClr",
-          "Type": "Color Picker"
-        },
-        {
-          "Guid": "3e82c050-d0e9-48d9-a2a0-98d6a35913e1",
-          "Title": "Text Hover Color",
-          "DefaultValue": "#444444",
-          "Suffix": "",
-          "CustomCSS": ".authentication-btn li a:hover .btn-name {\n    color: $socialAuthTextHc;\n}",
-          "PreviewCSS": ".authentication-btn li a:hover .btn-name {\n    color: $socialAuthTextHc;\n}",
-          "LessVariable": "$socialAuthTextHc",
-          "Type": "Color Picker"
-        },
-        {
-          "Guid": "58215731-b376-41dd-8541-46445b008bab",
-          "Title": "Background",
-          "DefaultValue": "#ffffff",
-          "Suffix": "",
-          "CustomCSS": ".authentication-btn li  {\n    background-color: $socialAuthbg;\n}",
-          "PreviewCSS": ".authentication-btn li  {\n    background-color: $socialAuthbg;\n}",
-          "LessVariable": "$socialAuthbg",
-          "Type": "Color Picker"
-        },
-        {
-          "Guid": "972354ad-9275-45cc-a252-17658890c80d",
-          "Title": "Background Hover Color",
-          "DefaultValue": "#ffffff",
-          "Suffix": "",
-          "CustomCSS": ".authentication-btn li:hover  {\n    background-color: $socialAuthbackHClr;\n}",
-          "PreviewCSS": ".authentication-btn li:hover  {\n    background-color: $socialAuthbackHClr;\n}",
-          "LessVariable": "$socialAuthbackHClr",
-          "Type": "Color Picker"
-        },
-        {
-          "Guid": "7d2282df-7167-4c46-8133-d9fc10fc6544",
-          "Title": "Font Family",
-          "DefaultValue": "Poppins, sans-serif",
-          "Suffix": "",
-          "CustomCSS": ".authentication-btn li a .btn-name {\n  font-family: $socialAuthFontF !important; \n}",
-          "PreviewCSS": ".authentication-btn li a .btn-name {\n  font-family: $socialAuthFontF !important; \n}",
-          "LessVariable": "$socialAuthFontF",
-          "Type": "Fonts"
-        },
-        {
-          "RangeMin": 0.0,
-          "RangeMax": 100.0,
-          "Increment": 1.0,
-          "Guid": "5fd57f64-4306-4f0f-8b8d-4c5e9e115919",
-          "Title": "Font Size",
-          "DefaultValue": "16",
-          "Suffix": "px",
-          "CustomCSS": ".authentication-btn li a .btn-name {\n  font-size: $socialAuthFspx;\n}",
-          "PreviewCSS": ".authentication-btn li a .btn-name {\n  font-size: $socialAuthFspx;\n}",
-          "LessVariable": "$socialAuthFs",
-          "Type": "Slider"
-        },
-        {
-          "RangeMin": 0.0,
-          "RangeMax": 25.0,
-          "Increment": 1.0,
-          "Guid": "091189c9-4f0d-4927-a4bd-dfe4c700e887",
-          "Title": "Letter Spacing",
-          "DefaultValue": "0",
-          "Suffix": "px",
-          "CustomCSS": ".authentication-btn li a .btn-name {\n  letter-spacing: $socialAuthletterSpx;\n}",
-          "PreviewCSS": ".authentication-btn li a .btn-name {\n  letter-spacing: $socialAuthletterSpx;\n}",
-          "LessVariable": "$socialAuthletterS",
-          "Type": "Slider"
         }
       ],
       "Sass": ""

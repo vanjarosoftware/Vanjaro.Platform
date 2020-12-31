@@ -1938,8 +1938,9 @@ export default (editor, config = {}) => {
                 $(elInput).css(component.parent().getStyle());
 
                 $(component.getClasses()).each(function (index, className) {
-                    $(elInput).find('label').addClass(className);
-                })
+                    if (!className.includes("button-style"))
+                        $(elInput).find('label').addClass(className);
+                });
 
                 if (typeof component.getStyle()['width'] != "undefined") {
                     if ($(component.getEl()).outerWidth() < $(".sidebar .panel").outerWidth())
@@ -1947,15 +1948,11 @@ export default (editor, config = {}) => {
                     else
                         $(elInput).find('label').css('width', '100%');
                 }
-
             }
-
-            var font = component.view.$el.css('font-family');
-            $(elInput).find('label').css('font-family', font);
         },
         onEvent({ elInput, component }) {
 
-            $(event.target).parents('.preset-wrapper').find('label.active').removeClass('active');
+            $(event.target).parents('.preset-wrapper').find('div.active').removeClass('active');
             $(event.target).parent().addClass('active');
 
             component.getTrait('styles').set({
