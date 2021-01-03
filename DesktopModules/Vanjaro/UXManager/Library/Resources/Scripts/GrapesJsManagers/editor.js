@@ -274,15 +274,15 @@ $(document).ready(function () {
 
             if (!data.EditPage) {
 
-                $(document).on("click", function () {
-                    VjEditor.select();
-                    ShowBlockUI();
+                $(document).on("click", function (e) {
+                    if ($(e.target).parents('.sidebar').length <= 0) {
+                        VjEditor.select();
+                        ShowBlockUI();
+                    }
                 });
 
-                $('#vjEditor').scroll(function () {
-                    $('#vjEditor,' + data.ContainerID).scroll(function () {
-                        debounce(VjEditor.refresh(), 100);
-                    });
+                $('#vjEditor,' + data.ContainerID).scroll(function () {
+                    debounce(VjEditor.refresh(), 100);
                 });
             }
 
