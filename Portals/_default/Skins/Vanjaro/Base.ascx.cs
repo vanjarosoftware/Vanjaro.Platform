@@ -1058,6 +1058,7 @@ namespace Vanjaro.Skin
                 sb.Append("enjoyhint_instance.set(enjoyhint_script_steps);");
                 //run Enjoyhint script
                 sb.Append("enjoyhint_instance.run();");
+                sb.Append("try{window.history.pushState({},'', '" + NavigationManager.NavigateURL(PortalSettings.HomeTabId) + "');}catch(err) {}");
                 FrameworkManager.Load(this, "EnjoyHint");
                 WebForms.RegisterStartupScript(Page, "EnjoyHintJS", sb.ToString(), true);
                 PortalController.UpdatePortalSetting(PortalSettings.PortalId, "VanjaroToursGuided", "true");
