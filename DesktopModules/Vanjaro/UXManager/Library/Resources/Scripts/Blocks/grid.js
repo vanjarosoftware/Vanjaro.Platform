@@ -106,40 +106,40 @@ export default (editor, config = {}) => {
 			SelectedCol.addClass(colClass + colSize);
 
 		SelectedCol.removeStyle('flex-basis');
-	},
+	};
 
-		dc.addType('row', {
-			model: defaultModel.extend({
-				defaults: Object.assign({}, defaultModel.prototype.defaults, {
-					'custom-name': 'Row',
-					tagName: 'div',
-					draggable: false,
-					droppable: '[data-gjs-type=column]',
-					layerable: true,
-					selectable: false,
-					hoverable: false,
-					highlightable: false,
-				})
-			}, {
-                    isComponent(el) {
-                        if (el && el.tagName && el.tagName.toLowerCase() == 'div' && el.classList && el.classList.contains('row')) {
-                            return { type: 'row' };
-                        }
-                    }
-                }),
-            view: defaultView.extend({
-                onRender() {
+	dc.addType('row', {
+		model: defaultModel.extend({
+			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+				'custom-name': 'Row',
+				tagName: 'div',
+				draggable: false,
+				droppable: '[data-gjs-type=column]',
+				layerable: true,
+				selectable: false,
+				hoverable: false,
+				highlightable: false,
+			})
+		}, {
+			isComponent(el) {
+				if (el && el.tagName && el.tagName.toLowerCase() == 'div' && el.classList && el.classList.contains('row') && el.parentElement.classList.contains('container')) {
+					return { type: 'row' };
+				}
+			}
+		}),
+		view: defaultView.extend({
+			onRender() {
 
-                    var model = this.model;
+				var model = this.model;
 
-                    if (typeof model.parent() != 'undefined' && model.parent().attributes.type != "grid") {
-                        setTimeout(function () {
-                            model.replaceWith('<div class="container">' + model.getEl().outerHTML + '</div>');
-                        });
-                    }
-                },
-            })
-		});
+				if (typeof model.parent() != 'undefined' && model.parent().attributes.type != "grid") {
+					setTimeout(function () {
+						model.replaceWith('<div class="container">' + model.getEl().outerHTML + '</div>');
+					});
+				}
+			},
+		})
+	});
 
 	dc.addType('column', {
 		model: defaultModel.extend({
@@ -277,18 +277,18 @@ export default (editor, config = {}) => {
 					$(this.getEl()).attr("data-empty", "true");
 			}
 		}, {
-				isComponent(el) {
-					let match = false;
-					if (el && el.tagName && el.tagName.toLowerCase() == 'div') {
-						el.classList.forEach(function (klass) {
-							if (klass == "col" || klass.match(/^col-/)) {
-								match = true;
-							}
-						});
-					}
-					if (match) return { type: 'column' };
+			isComponent(el) {
+				let match = false;
+				if (el && el.tagName && el.tagName.toLowerCase() == 'div') {
+					el.classList.forEach(function (klass) {
+						if (klass == "col" || klass.match(/^col-/)) {
+							match = true;
+						}
+					});
 				}
-			}),
+				if (match) return { type: 'column' };
+			}
+		}),
 		view: defaultView.extend({
 			onRender() {
 				if (!this.model.components().length)
@@ -395,12 +395,12 @@ export default (editor, config = {}) => {
 				]
 			})
 		}, {
-				isComponent(el) {
+			isComponent(el) {
 				if (el && el.tagName && el.tagName.toLowerCase() == 'div' && el.classList && (el.classList.contains('container') || el.classList.contains('container-fluid')) && (el.firstElementChild != null && el.firstElementChild.classList.contains('row'))) {
-						return { type: 'grid' };
-					}
+					return { type: 'grid' };
 				}
-			}),
+			}
+		}),
 		view: defaultView.extend({
 			init() {
 				this.listenTo(this.model, 'active', this.ShowGrid);
