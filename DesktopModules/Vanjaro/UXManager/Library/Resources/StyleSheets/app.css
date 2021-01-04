@@ -1,5 +1,6 @@
 ﻿[data-gjs-type='modulewrapper'] > [vjmod] {
     pointer-events: none;
+    min-height: 25px;
 }
 
 .cell {
