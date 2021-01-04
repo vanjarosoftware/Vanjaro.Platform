@@ -49,7 +49,7 @@ namespace Vanjaro.UXManager.Library
             TemplateLibraryURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
             ExtensionStoreURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
 # else
-            TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID;
+            TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower();
             ExtensionStoreURL = "http://store.vanjaro.local/store";
 #endif
             ExtensionURL = ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/') + MenuManager.GetURL() + "mid=0&icp=true&guid=54caeff2-9fac-42ae-8594-40312867d56a#/installpackage";
