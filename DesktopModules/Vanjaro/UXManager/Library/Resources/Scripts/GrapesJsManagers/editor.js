@@ -1525,15 +1525,15 @@ $(document).ready(function () {
 
 								if (typeof model != "undefined") {
 
-									if (typeof VjEditor.BlockManager.get('LibraryBlock') != 'undefined')
-										VjEditor.BlockManager.remove('LibraryBlock');
+                                    if (typeof model.attributes != "undefined") {
 
-									var Block = model.attributes.type;
+                                        var Block = model.attributes.type;
 
-									if (Block == 'grid' || Block == 'image-block' || Block == 'modulewrapper')
-										VjEditor.select(model);
+                                        if (Block == 'grid' || Block == 'image-block' || Block == 'modulewrapper')
+                                            VjEditor.select(model);
+                                    }
 
-									if (typeof model.components() != 'undefined' && typeof model.components().models[0] != 'undefined') {
+                                    if (typeof model.components != 'undefined' && typeof model.components().models[0] != 'undefined') {
 
 										var childBlock = model.components().models[0].attributes.type;
 
@@ -1541,12 +1541,15 @@ $(document).ready(function () {
 											VjEditor.select(model.components().models[0]);
 									}
 
-									if (model.getAttributes()["data-block-alignment"] == "true")
-										model.setStyle({ "display": "inline-block" });
-								}
+                                    if (typeof model.getAttributes != "undefined" && model.getAttributes()["data-block-alignment"] == "true")
+                                        model.setStyle({ "display": "inline-block" });
+                                }
 
-								if (!$('.borderlines').hasClass('active'))
-									VjEditor.stopCommand('core:component-outline');
+                                if (typeof VjEditor.BlockManager.get('LibraryBlock') != 'undefined')
+                                    VjEditor.BlockManager.remove('LibraryBlock');
+
+                                if (!$('.borderlines').hasClass('active'))
+                                    VjEditor.stopCommand('core:component-outline');
 
 								if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes.mid != undefined) {
 									model.view.$el[0].innerHTML = '<img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />';
