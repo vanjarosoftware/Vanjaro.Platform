@@ -11,7 +11,7 @@ using DotNetNuke.Entities.Portals;
 
 namespace Vanjaro.Core.Providers.Mail
 {
-    public class VSMailProvider : MailProvider
+    public class VanjaroMailProvider : MailProvider
     {
         public override string SendMail(MailInfo mailInfo, SmtpInfo smtpInfo = null)
         {

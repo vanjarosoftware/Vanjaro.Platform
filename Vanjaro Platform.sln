@@ -172,7 +172,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SectionSettings", "DesktopM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mail", "Mail", "{0D642708-861A-4340-B7E9-1232AB0969BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSMail", "DesktopModules\Vanjaro\Core\Providers\VSMail\VSMail.csproj", "{27960AD4-D591-4A21-9D47-14323E0D10F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VanjaroMailProvider", "DesktopModules\Vanjaro\Core\Providers\VanjaroMailProvider\VanjaroMailProvider.csproj", "{27960AD4-D591-4A21-9D47-14323E0D10F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
