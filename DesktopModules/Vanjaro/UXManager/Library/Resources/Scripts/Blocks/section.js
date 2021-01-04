@@ -93,7 +93,6 @@
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
                 droppable: true,
                 tagName: 'section',
-				unstylable: ['background-color', 'background'],
 				resizable: {
 					tl: 0, // Top left
 					tr: 0, // Top right

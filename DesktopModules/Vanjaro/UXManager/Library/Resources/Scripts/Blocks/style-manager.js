@@ -1,7 +1,6 @@
 ﻿export default (editor, config = {}) => {
 
-	const sm = editor.StyleManager;
-	const cmd = editor.Commands;
+	var sm = editor.StyleManager;
 
 	sm.addType('customradio', {
 		create({ props, change }) {
@@ -21,7 +20,16 @@
 				input.setAttribute("value", item.value);
 
 				label.setAttribute("for", item.name + '-' + item.value);
-				label.innerHTML = item.name;
+
+				if (typeof item.img != 'undefined') {
+
+					var img = document.createElement("img");
+
+					img.setAttribute("src", VjDefaultPath + item.img);
+					label.appendChild(img);
+				}
+				else
+					label.innerHTML = item.name;
 
 				el.appendChild(input);
 				el.appendChild(label);
@@ -48,7 +56,7 @@
 			$(this.$el).find('.gjs-sm-clear').show();
 		},
 		setValue(value) {
-			const model = this.model;
+			var model = this.model;
 			model.view.$el.find('input[value="' + value + '"]').prop('checked', true);
 
 			if (value == model.getDefaultValue())
@@ -74,211 +82,6 @@
 			selected.set(model.attributes.property, defaultValue);
 		}
 	});
-
-	sm.addType('custom-styleslider', {
-		model: {
-
-		},
-		view: {
-			templateInput(model) {
-				const ppfx = this.ppfx;
-				const el = document.createElement('div');
-				el.setAttribute('class', 'diffmargin');
-               
-
-				$(model.attributes.properties).each(function (index, value) {
-					const input = document.createElement('input');
-					input.setAttribute('type', 'number');
-					input.setAttribute('class', 'custominput');
-					input.setAttribute('changeProperty', value.CSS);
-					input.setAttribute('value', 0);
-
-					const selectunit = document.createElement('select');
-					selectunit.setAttribute('class', 'unitselect');
-
-					$(model.attributes.units).each(function (index, value) {
-						const unitoption =  document.createElement('option');
-						unitoption.innerHTML = value;
-						selectunit.appendChild(unitoption);
-					});
-
-					const label = document.createElement('label');
-					label.innerHTML = value.name;
-
-					const inputdiv = document.createElement('div');
-					inputdiv.setAttribute('class', 'inputdiv');
-
-					inputdiv.appendChild(input);
-					inputdiv.appendChild(selectunit);
-					inputdiv.appendChild(label); 
-               
-
-					el.appendChild(inputdiv);
-				});
-				return `
-                        <div class="styleslider-wrapper">
-                            
-                                <div class="d-flex">
-                                    <div class="${ppfx}field ${ppfx}field-range custom-range-sliderInput">
-                                        <input class="sliderange" type="range" id="vol" name="vol" min="${model.get('min')}" max="${model.get('max')}" value="${model.get('value')}"></input>
-                                    </div>
-                                    <div class="${ppfx}field ${ppfx}field-integer custom-range-sliderText">
-                                        <input class="rangeinput" type="number" name="rangeinput" value="${model.get('value')}"></input>
-                                        <div>
-                                            <select class="sliderSelect">
-                                                <option>px</option>
-                                                <option>%</option>
-                                                <option>vh</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    `+ el.outerHTML + `
-                                </div>
-                            </div>
-                        
-                        </div>
-                       `;
-			},
-
-			events() {
-				return {
-					'change [type=range]': 'inputValueChanged',
-					'input [type=range]': 'inputValueChangedSoft',
-					'change [class=rangeinput]': 'inputValueChanged',
-					'input [class=rangeinput]': 'inputValueChangedSoft',
-					'change [class=custominput]': 'inputMarginChanged',
-					'input [class=custominput]': 'inputMarginChanged',
-					'change [class=sliderSelect]': 'optionSelectChanged',
-					'change [class=unitselect]': 'optionMarginChanged',
-					'click [class=gjs-sm-clear]': 'clear',
-					change:''
-				};
-			},
-
-			getSliderEl() {
-				if (!this.slider) {
-					this.slider = this.el.querySelector('input[type=range]');
-				}
-
-				return this.slider;
-			},
-
-			clear(ev) {
-				ev && ev.stopPropagation();
-				this.model.clearValue();
-				setTimeout(() => this.targetUpdated());
-			},
-
-			inputMarginChanged(){
-				var style = VjEditor.getSelected().getStyle();
-				var unit = $(event.target.parentNode).find('select').val();
-				style[event.target.attributes.changeproperty.value] = event.target.value + unit;
-				VjEditor.getSelected().setStyle(style);
-			},
-
-			optionMarginChanged(){
-				var style = VjEditor.getSelected().getStyle();
-				var value = $(event.target.parentNode).find('input').val();
-				var unit = event.target.value;
-				style[$(event.target.parentNode).find('input').attr('changeproperty')] = value + unit;
-				VjEditor.getSelected().setStyle(style);
-			},
-
-			optionSelectChanged(){
-				const model = this.model;
-				const value = this.getInputValue();
-				const  unit = this.el.querySelector('.sliderSelect').value;
-				this.$el.find('select').val(unit);
-				model.set('value', value, { avoidStore: 1 }).set('value', value + unit);
-
-				this.elementUpdated();
-			},
-
-
-			inputValueChanged() {
-				const model = this.model;
-				const step = model.get('step');
-
-              
-				if(event.target.type == 'slider')
-					this.getInputEl().value = this.getSliderEl().value;
-				else
-					this.getInputEl().value = event.target.value;
-
-				const value = this.getInputValue();
-				const unit = this.el.querySelector('.sliderSelect').value;
-				model.set('value', value, { avoidStore: 1 }).set('value', value + unit);
-				this.$el.find('input[type=number]').val(value);
-				this.elementUpdated();
-			},
-			inputValueChangedSoft() {
-				if (event.target.type == 'slider')
-					this.getInputEl().value = this.getSliderEl().value;
-				else
-					this.getInputEl().value = event.target.value;
-
-				$( this.model.attributes.properties).each(function (index, value) {
-					VjEditor.getSelected().removeStyle(value.CSS);
-				});
-
-				this.model.set('value', this.getInputValue() + this.el.querySelector('.sliderSelect').value , { avoidStore: 1 });
-				this.$el.find('input[type=number]').val(this.getInputValue());
-				this.elementUpdated();
-			},
-
-			setValue(value) {
-				//const parsed = this.model.parseValue(value);
-				const model = this.model;
-				const unit = this.el.querySelector('.sliderSelect').value;
-				//this.getSliderEl().value = parseFloat(parsed.value);
-				this.$el.find('.sliderSelect').val(unit);
-				var inputmodel = this.$el;
-
-				var Selected = VjEditor.getSelected();
-				if (typeof Selected != "undefined") {
-
-					var compVal = parseInt(VjEditor.getSelected().view.$el.css(this.model.attributes.property));
-					this.$el.find('input[type=number]').val(compVal);
-					this.$el.find('input[type=range]').val(compVal);
-
-					$(model.attributes.properties).each(function (index, v) {
-
-						if (typeof Selected != "undefined" ){
-							var style = Selected.getStyle();
-							var styleval = style[v.CSS];
-							var stylename =  inputmodel.find('input[changeproperty="'+ v.CSS +'"]');
-							if (styleval == undefined) {
-								stylename.val(parseInt(VjEditor.getSelected().view.$el.css(v.CSS)));
-								stylename.parent().find("select").val(unit);
-							}
-							else {
-								var styleunit = styleval.replace(/[0-9]/g, '');
-								stylename.val(parseFloat(styleval));
-								stylename.parent().find("select").val(styleunit);
-							}
-						}
-					});
-				}
-
-			},
-
-			onRender() {
-				if (!this.model.get('showInput')) {
-					//this.inputInst.el.style.display = 'none';
-				}
-			},
-
-			clearCached() {
-				this.slider = null;
-				this.$el.find('input[type=number]').val('');
-				this.$el.find('select').val('');
-			}
-
-
-		},
-	})
 
 	sm.addType('custom_slider', {
 		model: {
@@ -313,7 +116,7 @@
 
 				$(el).find(".sm-unit-wrapper").append(select);
 
-				return ``+ el.outerHTML + ``;
+				return `` + el.outerHTML + ``;
 			},
 			events() {
 				return {
@@ -336,29 +139,29 @@
 
 				if (event.target.className == "sm-range")
 					inputNumber.value = value;
-				else if (event.target.className == "sm-number") 
+				else if (event.target.className == "sm-number")
 					inputRange.value = value;
 
 				if (propArr.length == 0 && typeof Selected.getStyle()[propertyName] != "undefined") {
 
 					var prop = Selected.getStyle()[propertyName].split(" ");
-					
-					$(prop).each( function(index, value) {
+
+					$(prop).each(function (index, value) {
 						if (value != "")
 							propArr.push(value + " ");
 					});
 				}
-				
-				var search = new RegExp(property , 'i'); 
+
+				var search = new RegExp(property, 'i');
 				let removeItem = propArr.filter(item => search.test(item));
-				
-				propArr = jQuery.grep(propArr, function(value) {
+
+				propArr = jQuery.grep(propArr, function (value) {
 					return value != removeItem;
 				});
 
 				propArr.push(property + "(" + value + unit + ") ");
 
-				$(propArr).each(function(index, value) {
+				$(propArr).each(function (index, value) {
 					properties += value;
 				});
 
@@ -379,9 +182,9 @@
 				this.$el.find('input[type=range]').val(val);
 				this.$el.find('input[type=number]').val(val);
 
-				if (value== "true")
+				if (value == "true")
 					this.$el.find('.gjs-sm-clear').css('display', 'inline-block');
-					
+
 			},
 			clear(ev) {
 
@@ -394,10 +197,10 @@
 				$(this.$el).find('.gjs-sm-clear').hide();
 
 				var string = $.trim(style[model.attributes.cssproperty]),
-				preString = this.model.attributes.property,
-				preIndex = string.indexOf(preString),
-				subString = string.substring(preIndex),
-				searchString = subString.slice(subString.indexOf(preString), subString.indexOf(')') + 1).replace(/\s\s+/g, ' ');
+					preString = this.model.attributes.property,
+					preIndex = string.indexOf(preString),
+					subString = string.substring(preIndex),
+					searchString = subString.slice(subString.indexOf(preString), subString.indexOf(')') + 1).replace(/\s\s+/g, ' ');
 
 				style[model.attributes.cssproperty] = string.replace(searchString, '');
 				Selected.setStyle(style);
@@ -405,127 +208,159 @@
 			},
 
 		}
-    })
+	});
 
-    sm.addType('custom_rangeslider', {
-        model: {
+	sm.addType('customrange', {
+		create({ props, change }) {
 
-        },
-        view: {
-            templateInput(model) {
-                const ppfx = this.ppfx;
-                const el = document.createElement('div');
-                el.setAttribute('class', 'd-flex sm-slider-wrapper custom-range-slider');
+			const el = document.createElement('div');
+			el.classList.add("sm-range-wrapper");
+			el.id = props.property;
 
-                el.innerHTML = `
-					<div class="${ppfx}field ${ppfx}field-range">
-						<input type="range" name="` + model.attributes.name + `" step="` + model.attributes.step + `" min="` + model.attributes.min + `" max="` + model.attributes.max + `" class="sm-range" /> 
-					</div>
-					<div class="${ppfx}field ${ppfx}field-integer">
-						<input type="number" name="` + model.attributes.name + `" class="sm-number" />
-						<span class="${ppfx}field-units sm-unit-wrapper"></span>
-					</div>
-				`;
+			el.innerHTML = `
+				<input type="range" value="`+ props.defaults + `" name="` + props.property + `" min="` + props.min + `" max="` + props.max + `" class="input-control range" /> 
+				<input type="number" value="`+ props.defaults + `" name="` + props.property + `" min="` + props.min + `" max="` + props.max + `" class="input-control number" />
+				<span class="sm-unit-wrapper"></span>
+			`;
 
-                const select = document.createElement('select');
+			var inputRange = el.querySelector('.range');
+			var inputNumber = el.querySelector('.number');
 
-                if (typeof model.attributes.units != "undefined") {
-                    $(model.attributes.units).each(function (index, value) {
-                        var option = document.createElement('option');
-                        option.setAttribute('class', '${ppfx}input-unit sm-unit-options');
-                        option.innerHTML = value;
-                        select.appendChild(option);
-                    });
-                }
+			inputRange.addEventListener('change', event => change({ event }));
+			inputRange.addEventListener('input', event => change({ event }));
+			inputNumber.addEventListener('change', event => change({ event }));
+			inputNumber.addEventListener('input', event => change({ event }));
 
-                $(el).find(".sm-unit-wrapper").append(select);
+			if (typeof props.units != "undefined" && props.units.length) {
 
-                return `` + el.outerHTML + ``;
-            },
-            events() {
-                return {
-                    'input': 'inputEvent',
-                    'click [class=gjs-sm-clear]': 'clear',
-                }
-            },
-            inputEvent() {
+				var select = document.createElement('select');
+				select.setAttribute("class", "unit-list");
+				select.setAttribute("name", props.property);
 
-                var propArr = [];
-                var properties = "";
-                var value = event.target.value;
-                var unit = this.el.querySelector('select').value;
-                var propertyName = this.model.attributes.cssproperty;
-                var property = this.model.attributes.property;
-                var Selected = VjEditor.getSelected();
+				$(props.units).each(function (index, item) {
+					var option = document.createElement("option");
+					option.setAttribute("name", item.name);
+					option.setAttribute("value", item.name);
+					option.text = item.name;
+					select.append(option);
+				})
 
-                var inputRange = this.el.querySelector('.sm-slider-wrapper .sm-range');
-                var inputNumber = this.el.querySelector('.sm-slider-wrapper .sm-number');
+				$(el).find(".sm-unit-wrapper").append(select);
 
-                if (event.target.className == "sm-range")
-                    inputNumber.value = value;
-                else if (event.target.className == "sm-number")
-                    inputRange.value = value;
+				select.addEventListener('change', event => change({ event }));
+			}
+			else if (typeof props.unit != 'undefined')
+				$(el).find(".sm-unit-wrapper").append(props.unit);
 
-                if (propArr.length == 0 && typeof Selected.getStyle()[propertyName] != "undefined") {
+			return el;
+		},
+		emit({ props, updateStyle }, { event, complete }) {
 
-                    var prop = Selected.getStyle()[propertyName].split(" ");
+			var selected = editor.getSelected(),
+				model = this.model,
+				property = model.attributes.property,
+				unit = "",
+				val = "",
+				style = selected.getStyle();
 
-                    $(prop).each(function (index, value) {
-                        if (value != "")
-                            propArr.push(value + " ");
-                    });
-                }
+			var inputRange = this.el.querySelector('.sm-range-wrapper .range');
+			var inputNumber = this.el.querySelector('.sm-range-wrapper .number');
 
-                var search = new RegExp(property, 'i');
-                let removeItem = propArr.filter(item => search.test(item));
+			if (event.target.classList.contains('range'))
+				inputNumber.value = inputRange.value;
+			else if (event.target.classList.contains('number'))
+				inputRange.value = inputNumber.value;
 
-                propArr = jQuery.grep(propArr, function (value) {
-                    return value != removeItem;
-                });
+			if (event.target.classList.contains('unit-list')) {
 
-                propArr.push(property + "(" + value + unit + ") ");
+				val = inputRange.value;
+				unit = event.target.value;
 
-                $(propArr).each(function (index, value) {
-                    properties += value;
-                });
+				var inputControl = this.el.querySelectorAll('.input-control');
 
-                var style = Selected.getStyle();
-                style[propertyName] = value + unit;
-                Selected.setStyle(style);
-                Selected.set(property, event.target.value);
-                $(event.target).parents(".gjs-sm-property").find('.gjs-sm-clear').show();
-            },
-            setValue(value) {
-                var model = this.model;
-                var val = model.getDefaultValue();
-                var Selected = VjEditor.getSelected();
+				$(model.attributes.units).each(function (index, option) {
+					if (option.name == unit) {
+						$(inputControl).attr({
+							'min': option.min,
+							'max': option.max,
+							'step': option.step
+						});
+					}
+				});
+			}
+			else {
+				val = event.target.value;
+				unit = model.view.$el.find('select').val();
+			}
 
-                if (typeof Selected != "undefined" && typeof Selected.attributes[model.attributes.property] != "undefined")
-                    val = Selected.attributes[this.model.attributes.property];
+			style[property] = val + unit;
 
-                this.$el.find('input[type=range]').val(val);
-                this.$el.find('input[type=number]').val(val);
+			selected.setStyle(style);
+			selected.set(property, val + unit);
 
-                if (value == "true")
-                    this.$el.find('.gjs-sm-clear').css('display', 'inline-block');
+			model.setValue(val + unit);
+		},
+		setValue(value) {
 
-            },
-            clear() {
+			var selected = editor.getSelected(),
+				model = this.model;
 
-                var model = this.model;
-                var Selected = VjEditor.getSelected();
-                var style = Selected.getStyle();
-                var defaultValue = model.getDefaultValue();
+			var val = value;
+			var unit = model.attributes.unit;
 
-                model.setValue(model.getDefaultValue());
-                $(this.$el).find('input').val(model.getDefaultValue());
-                $(this.$el).find('.gjs-sm-clear').hide();
-              
-                Selected.set(this.model.attributes.property, defaultValue);
+			if (typeof selected != 'undefined') {
 
-            },
+				if (model.attributes.property == 'height')
+					value = selected.view.$el.css('height');
 
-        }
-    })
+				if (typeof value == "string") {
+					val = value.replace(/[^-\d\.]/g, '');
+					unit = value.replace(/\d+/, '');
+				}
 
+				if (typeof model.attributes.units != 'undefined' && model.attributes.units.length) {
+
+					var inputControl = this.el.querySelectorAll('.input-control');
+
+					$(model.attributes.units).each(function (index, option) {
+						if (option.name == unit) {
+							$(inputControl).attr({
+								'min': option.min,
+								'max': option.max,
+								'step': option.step
+							});
+						}
+					});
+				}
+			}
+
+			model.view.$el.find('input').val(val);
+			model.view.$el.find('select').val(unit);
+
+			if (value == model.getDefaultValue())
+				$(this.$el).find('.gjs-sm-clear').hide();
+			else
+				$(this.$el).find('.gjs-sm-clear').show();
+
+		},
+		clear() {
+
+			var model = this.model,
+				property = model.attributes.property,
+				value = model.getDefaultValue(),
+				unit = model.attributes.unit;
+
+			$(this.$el).find('.gjs-sm-clear').hide();
+
+			model.view.$el.find('input').val(value);
+			model.view.$el.find('select').val(unit);
+
+			var selected = VjEditor.getSelected();
+			var style = selected.getStyle();
+			style[property] = value + unit;
+
+			selected.setStyle(style);
+		}
+	});
 };
+
