@@ -357,7 +357,15 @@ namespace Vanjaro.Core
                         ThemeEditor existingThemeEditor = GetThemeEditor(ThemeEditorWrapper.ThemeEditors, themeEditor.Guid, ref index);
                         if (existingThemeEditor != null && index >= 0)
                         {
+                            string oldcat = ThemeEditorWrapper.ThemeEditors[index].Category;
                             ThemeEditorWrapper.ThemeEditors[index] = themeEditor;
+                            if (string.IsNullOrEmpty(themeEditor.Title))
+                            {
+                                foreach (ThemeEditor ete in ThemeEditorWrapper.ThemeEditors.Where(t => !string.IsNullOrEmpty(t.Title) && t.Category == oldcat))
+                                {
+                                    ete.Category = themeEditor.Category;
+                                }
+                            }
                         }
                         else
                         {
@@ -747,7 +755,10 @@ namespace Vanjaro.Core
                     sb.Append("<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuLink\">");
                     if (themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count == 0).FirstOrDefault() != null)
                     {
-                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/new')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
+                        string type = themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count == 0).FirstOrDefault().Guid;
+                        if (string.IsNullOrEmpty(type))
+                            type = "new";
+                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/" + type + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
                     }
                     else if (themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count > 0).FirstOrDefault() != null)
                     {
@@ -755,7 +766,10 @@ namespace Vanjaro.Core
                     }
                     else
                     {
-                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/new')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
+                        string type = "new";
+                        if (themeEditorGroup != null && themeEditorGroup.FirstOrDefault() != null)
+                            type = themeEditorGroup.FirstOrDefault().Guid;
+                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/" + type + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
                     }
 
                     sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/newsub')\"><em class=\"fas fa-plus mr-xs\"></em><span>Add Subcategory</span></a>");

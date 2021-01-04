@@ -26,6 +26,7 @@ global.LoadApps = function () {
                 const body = VjEditor.Canvas.getBody();
                 $(body).append('<script>' + VjScript + '</script>');
                 $(body).append('<style type="text/css">' + VjStyle + '</style>');
+                //VjEditor.addComponents('<style>' + VjStyle + '</style>');
             }, 2000);
         }
     });
@@ -282,25 +283,30 @@ global.StyleGlobal = function (model) {
 
 global.UpdateGlobalBlock = function (model) {
     if (model != undefined) {
-        if (model.attributes != undefined)
-            model.attributes.content = '';
-        var content = VjEditor.runCommand("export-component", {
-            component: model
-        });
-        if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
-            var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));
-            if (Block != undefined) {
-                var CustomBlock = {
-                    ID: Block.attributes.attributes.id,
-                    Guid: Block.attributes.attributes.guid,
-                    Name: Block.attributes.label,
-                    Category: Block.attributes.category.id,
-                    Html: $(content.html)[0].innerHTML,
-                    Css: content.css,
-                    IsGlobal: true
-                };
-                UpdateCustomBlock(VjEditor, CustomBlock);
+        try {
+            if (model.attributes != undefined)
+                model.attributes.content = '';
+            var content = VjEditor.runCommand("export-component", {
+                component: model.attributes.components.models[0]
+            });
+            if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
+                var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));
+                if (Block != undefined) {
+                    var CustomBlock = {
+                        ID: Block.attributes.attributes.id,
+                        Guid: Block.attributes.attributes.guid,
+                        Name: Block.attributes.label,
+                        Category: Block.attributes.category.id,
+                        Html: content.html,
+                        Css: content.css,
+                        IsGlobal: true
+                    };
+                    UpdateCustomBlock(VjEditor, CustomBlock);
+                }
             }
+        }
+        catch (err) {
+            console.log(err);
         }
     }
 }
