@@ -251,14 +251,44 @@ $(document).ready(function () {
 		$('#VJBtnPublish').removeClass('disabled');
 	}
 
-	global.GrapesjsInit = function (data) {
+    global.debounce = function (func, wait, immediate) {
+        var timeout;
+        return function () {
+            var context = this, args = arguments;
+            var later = function () {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
+
+    global.GrapesjsInit = function (data) {
 
 		global.vjEditorSettings = data;
 
-		if (isEditPage()) {
-			if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
-				$(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Please Wait . . .</h1></div>');
-			}
+        if (isEditPage()) {
+
+            if (!data.EditPage) {
+
+                $(document).on("click", function (e) {
+                    if ($(e.target).parents('.sidebar').length <= 0) {
+                        VjEditor.select();
+                        ShowBlockUI();
+                    }
+                });
+
+                $('#vjEditor,' + data.ContainerID).scroll(function () {
+                    debounce(VjEditor.refresh(), 100);
+                });
+            }
+
+            if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
+                $(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Please Wait . . .</h1></div>');
+            }
 
 			if ($('#dnn_ContentPane').length > 0)
 				$('#dnn_ContentPane').addClass("sidebar-open");
@@ -2467,20 +2497,13 @@ $(document).ready(function () {
 								if (model.parent() != undefined && model.parent().attributes.type == "column" && model.parent().components().length == 0)
 									$(model.parent().getEl()).attr("data-empty", "true");
 
-								if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
-									return false;
-								else {
-									if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(RevisionGUID) < 0) {
-										$("#iframeHolder").hide();
-										$("#StyleToolManager").hide();
-										$(".panel-top").show();
-										$(".Menupanel-top").hide();
-										$("#BlockManager").show();
-										$(".block-set").show();
-										$("#ContentBlocks").show();
-									}
-								}
-							});
+                                if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
+                                    return false;
+                                else {
+                                    if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(data.RevisionGUID) < 0)
+                                        ShowBlockUI();
+                                }
+                            });
 
 							//Tooltip
 							$('[data-toggle="tooltip"]').tooltip();
@@ -2516,28 +2539,33 @@ $(document).ready(function () {
 		}
 	}
 
-	var GrapesjsDestroy = function () {
-		if (VjEditor) {
-			VjEditor.destroy();
-			$.get(CurrentTabUrl + (CurrentTabUrl.indexOf("?") != -1 ? "&uxmode=true" : "?uxmode=true"), function (data) {
-				var html = $.parseHTML(data);
-				var dom = $(data);
-				var newhtml = $(html).find('#dnn_ContentPane');
-				$('#dnn_ContentPane').html('');
-				$('#dnn_ContentPane').html($(newhtml).html());
-				$('#dnn_ContentPane').removeClass("sidebar-open");
-				var Scripts_Links = $(data).find('script');
-				$.each(dom, function (i, v) {
-					Scripts_Links.push(v);
-				});
-				InjectLinksAndScripts(Scripts_Links, window.document);
-				InitAppActionMenu();
-				$(window.parent.document.body).find('.pageloader').remove();
-			});
-		}
-		// Remove All Managers
-		$('#ContentBlocks, .stylemanager, .traitsmanager').empty();
-	};
+    var ShowBlockUI = function () {
+        $("#iframeHolder, #StyleToolManager, .Menupanel-top").hide();
+        $(".panel-top, #BlockManager, .block-set, #ContentBlocks").show();
+    };
+
+    var GrapesjsDestroy = function () {
+        if (VjEditor) {
+            VjEditor.destroy();
+            $.get(CurrentTabUrl + (CurrentTabUrl.indexOf("?") != -1 ? "&uxmode=true" : "?uxmode=true"), function (data) {
+                var html = $.parseHTML(data);
+                var dom = $(data);
+                var newhtml = $(html).find('#dnn_ContentPane');
+                $('#dnn_ContentPane').html('');
+                $('#dnn_ContentPane').html($(newhtml).html());
+                $('#dnn_ContentPane').removeClass("sidebar-open");
+                var Scripts_Links = $(data).find('script');
+                $.each(dom, function (i, v) {
+                    Scripts_Links.push(v);
+                });
+                InjectLinksAndScripts(Scripts_Links, window.document);
+                InitAppActionMenu();
+                $(window.parent.document.body).find('.pageloader').remove();
+            });
+        }
+        // Remove All Managers
+        $('#ContentBlocks, .stylemanager, .traitsmanager').empty();
+    };
 
 	var VjInit = function () {
 		$.get(CurrentTabUrl, function (data) {
