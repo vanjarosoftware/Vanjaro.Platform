@@ -145,22 +145,15 @@ global.AddCustomBlock = function (editor, CustomBlock) {
 }
 
 var AddCustom_Block = function (CustomBlock, ID, Guid) {
-    var Content = CustomBlock.Html;
-    if (CustomBlock.IsGlobal && !Content.includes("7a4be0f2-56ab-410a-9422-6bc91b488150"))
-        Content = "<div data-block-type=\"global\" data-block-guid=\"7a4be0f2-56ab-410a-9422-6bc91b488150\" data-guid=\"" + CustomBlock.Guid + "\">" + Content + "</div>";
-    VjEditor.BlockManager.add(CustomBlock.Name, {
-        attributes: { class: 'fa fa-th-large', id: ID, type: 'VjCustomBlock', isGlobalBlock: CustomBlock.IsGlobal, guid: CustomBlock.Guid },
-        label: CustomBlock.Name,
-        category: CustomBlock.Category.toUpperCase(),
-        content: '<style>' + CustomBlock.Css + '</style>' + Content,
-        render: ({ el }) => {
-            const updateblock = document.createElement("span");
-            updateblock.className = "update-custom-block";
-            if (IsAdmin)
-                updateblock.innerHTML = "<div class='addpage-blocks dropdown pull-right dropbtn'><a id='dropdownMenuLink' class='dropdownmenu Customblockdropdown' data-toggle='dropdown' aria-haspopup='true'  aria-expanded='false'><em class='fas fa-ellipsis-v'></em></a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'><li><a class='edit-block' onclick='VjEditor.runCommand(\"edit-custom-block\", { name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\" })'><em class='fas fa-pencil-alt'></em><span>Edit</span></a></li><li><a class='export-block' onclick='VjEditor.runCommand(\"export-custom-block\",{ name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\"  })'><em class='fas fa-file-export'></em><span>Export</span></a></li><li><a class='delete-block' onclick='VjEditor.runCommand(\"delete-custom-block\",{ name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\"  })'><em class='fas fa-trash-alt'></em><span>Delete</span></a></li></ul></div>";
-            el.appendChild(updateblock);
-        }
-    });
+    var blocksToRemove = [];
+    $.each(VjEditor.BlockManager.getAll().models, function (key, value) {
+        if (value != undefined && value.attributes != undefined && value.attributes.attributes != undefined && value.attributes.attributes.guid != undefined && value.attributes.attributes.type == 'VjCustomBlock')
+            blocksToRemove.push(value.cid);
+    })
+    $.each(blocksToRemove, function (key, value) {
+        VjEditor.BlockManager.remove(value);
+    })
+    LoadCustomBlocks();
 }
 
 global.UpdateCustomBlock = function (editor, CustomBlock) {
