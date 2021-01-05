@@ -168,7 +168,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                             {
                                 foreach (string file in Directory.EnumerateFiles(FolderPath, "*", SearchOption.AllDirectories))
                                 {
-                                    if (!file.ToLower().Contains("theme.backup.css"))
+                                    if (!file.ToLower().Contains("theme.css") && !file.ToLower().Contains("theme.backup.css") && !file.ToLower().Contains("theme.editor.js"))
                                         AddZipItem("Theme" + file.Replace(FolderPath, "").Replace("\\", "/"), File.ReadAllBytes(file), zip);
                                 }
                             }

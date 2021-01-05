@@ -302,7 +302,7 @@ namespace Vanjaro.Core
                     }
                     else
                     {
-                        temp2 = string.Concat(new object[] { temp, "[", -1, "];" });
+                        temp2 = string.Concat(new object[] { temp, "[", vPerm.RoleID, "];" });
                     }
 
                     if (temp == "!")
@@ -355,13 +355,13 @@ namespace Vanjaro.Core
                                 if ((currentPortalSettings.PortalId != currentUserInfo.PortalID) || (currentPortalSettings.AdministratorId != currentUserInfo.UserID))
                                 {
                                     string str2 = role.Replace("!", "");
-                                    if ((!current.Request.IsAuthenticated && (str2 == "Unauthenticated Users")) || ((str2 == "[-1]") || currentUserInfo.IsInRole(str2)))
+                                    if ((!current.Request.IsAuthenticated && (str2 == "[-3]")) || ((str2 == "[-1]") || currentUserInfo.IsInRole(str2)))
                                     {
                                         return false;
                                     }
                                 }
                             }
-                            else if ((!current.Request.IsAuthenticated && (role == "Unauthenticated Users")) || ((role == "[-1]") || currentUserInfo.IsInRole(role)))
+                            else if ((!current.Request.IsAuthenticated && (role == "[-3]")) || ((role == "[-1]") || currentUserInfo.IsInRole(role)))
                             {
                                 return true;
                             }
