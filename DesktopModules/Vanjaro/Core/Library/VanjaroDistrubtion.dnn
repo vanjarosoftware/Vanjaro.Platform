@@ -1088,6 +1088,15 @@
 									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
 										<add name="VanjaroCommonLibrary" type="Vanjaro.Common.Components.HttpModule, Vanjaro.Common" preCondition="managedHandler" />
 									</node>
+									<node path="/configuration/dotnetnuke" action="update" targetpath="/configuration/dotnetnuke/mail" collision="overwrite">
+										<mail defaultProvider="VanjaroMailProvider">
+											<providers>
+												<clear />
+												<add name="CoreMailProvider" type="DotNetNuke.Services.Mail.CoreMailProvider, DotNetNuke" hideCoreSettings="False" />
+												<add name="VanjaroMailProvider" type="Vanjaro.Core.Providers.Mail.VanjaroMailProvider, Vanjaro.Core.Providers.Mail.VanjaroMailProvider" hideCoreSettings="True" />
+											</providers>
+										</mail>
+									</node>
 								</nodes>
 							</configuration>
 						</install>
