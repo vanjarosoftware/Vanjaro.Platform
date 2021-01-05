@@ -456,7 +456,7 @@ namespace Vanjaro.Common.Factories
         internal static void SMTPPurgeLogs()
         {
             string Days = SettingFactory.GetHostSetting("SMTPPurgeLogsAfter", false, "60");
-            MailQueue_Log.Delete("WHERE DATEDIFF(DAY, CAST(C.CreatedOn as DATETIME), GETUTCDATE())>@0", Days);
+            MailQueue_Log.Delete("WHERE DATEDIFF(DAY, CAST(CreatedOn as DATETIME), GETUTCDATE())>@0", Days);
         }
 
 

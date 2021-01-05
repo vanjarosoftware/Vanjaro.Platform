@@ -52,6 +52,13 @@ namespace Vanjaro.Skin
         private dynamic ModulesDictObj;
         private readonly Dictionary<int, dynamic> ModulesDict = new Dictionary<int, dynamic>();
         bool HasReviewPermission = false;
+
+#if DEBUG
+        private const bool ShowMissingKeys = true;
+#else
+        private const bool ShowMissingKeys = false;
+#endif
+
         protected override void OnPreRender(EventArgs e)
         {
             HandleAppSettings();
@@ -227,7 +234,11 @@ namespace Vanjaro.Skin
             }
 
             if (!string.IsNullOrEmpty(ThemeScripts))
+            {
+                string SharedResourceFile = ScriptsPath.Replace("/js", "").Replace(@"\js", "") + "App_LocalResources/Shared.resx";
+                ThemeScripts = new DNNLocalizationEngine(null, SharedResourceFile, ShowMissingKeys).Parse(ThemeScripts);
                 WebForms.RegisterStartupScript(Page, "ThemeBlocks", "LoadThemeBlocks = function (grapesjs) { grapesjs.plugins.add('ThemeBlocks', (editor, opts = {}) => { " + ThemeScripts + "}); };", true);
+            }
         }
 
         private void InjectViewport()
