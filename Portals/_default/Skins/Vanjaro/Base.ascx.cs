@@ -209,6 +209,7 @@ namespace Vanjaro.Skin
                     CookieManager.AddValue("PageIsEdit", "false", new DateTime());
                     CookieManager.AddValue("InitGrapejs", "false", new DateTime());
                 }
+                Response.Redirect(URLManager.RemoveQueryStringByKey(Request.Url.AbsoluteUri, "uxm"), true);
             }
         }
 
@@ -1051,7 +1052,6 @@ namespace Vanjaro.Skin
         private void InitGuidedTours()
         {
             if (!PortalController.Instance.GetPortalSettings(PortalSettings.PortalId).ContainsKey("VanjaroToursGuided")
-                && !string.IsNullOrEmpty(Request.QueryString["uxm"]) && Request.QueryString["uxm"] == "open"
                 && (TabPermissionController.HasTabPermission("EDIT") || UserController.Instance.GetCurrentUserInfo().IsAdmin || UserController.Instance.GetCurrentUserInfo().IsSuperUser))
             {
                 StringBuilder sb = new StringBuilder();
@@ -1146,7 +1146,7 @@ namespace Vanjaro.Skin
         }
 
         #endregion
-
+        
         #endregion
     }
 }
