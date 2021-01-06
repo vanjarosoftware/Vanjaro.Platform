@@ -251,44 +251,44 @@ $(document).ready(function () {
 		$('#VJBtnPublish').removeClass('disabled');
 	}
 
-	global.debounce = function (func, wait, immediate) {
-		var timeout;
-		return function () {
-			var context = this, args = arguments;
-			var later = function () {
-				timeout = null;
-				if (!immediate) func.apply(context, args);
-			};
-			var callNow = immediate && !timeout;
-			clearTimeout(timeout);
-			timeout = setTimeout(later, wait);
-			if (callNow) func.apply(context, args);
-		};
-	};
+    global.debounce = function (func, wait, immediate) {
+        var timeout;
+        return function () {
+            var context = this, args = arguments;
+            var later = function () {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
 
-	global.GrapesjsInit = function (data) {
+    global.GrapesjsInit = function (data) {
 
 		global.vjEditorSettings = data;
 
-		if (isEditPage()) {
+        if (isEditPage()) {
 
-			if (!data.EditPage) {
+            if (!data.EditPage) {
 
-				$(document).on("click", function (e) {
-					if ($(e.target).parents('.sidebar').length <= 0) {
-						VjEditor.select();
-						ShowBlockUI();
-					}
-				});
+                $(document).on("click", function (e) {
+                    if ($(e.target).parents('.sidebar').length <= 0) {
+                        VjEditor.select();
+                        ShowBlockUI();
+                    }
+                });
 
-				$('#vjEditor,' + data.ContainerID).scroll(function () {
-					debounce(VjEditor.refresh(), 100);
-				});
-			}
+                $('#vjEditor,' + data.ContainerID).scroll(function () {
+                    debounce(VjEditor.refresh(), 100);
+                });
+            }
 
-			if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
-				$(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Please Wait . . .</h1></div>');
-			}
+            if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
+                $(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Please Wait . . .</h1></div>');
+            }
 
 			if ($('#dnn_ContentPane').length > 0)
 				$('#dnn_ContentPane').addClass("sidebar-open");
@@ -657,7 +657,7 @@ $(document).ready(function () {
 												}],
 											},
 											{
-												type: 'customradio',
+												type: 'radio',
 												name: 'Border Style',
 												property: 'border-style',
 												defaults: 'none',
@@ -674,7 +674,6 @@ $(document).ready(function () {
 													value: 'double',
 													name: 'Double',
 												}],
-												UpdateStyles: true,
 											},
 											{
 												type: 'color',
@@ -693,10 +692,10 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 }
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 3,
 											},
 											{
-												type: 'customradio',
+												type: 'radio',
 												name: 'Border Style',
 												property: 'border-top-style',
 												defaults: 'none',
@@ -713,7 +712,6 @@ $(document).ready(function () {
 													value: 'double',
 													name: 'Double',
 												}],
-												UpdateStyles: true,
 											},
 											{
 												type: 'color',
@@ -732,10 +730,10 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 }
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 3,
 											},
 											{
-												type: 'customradio',
+												type: 'radio',
 												name: 'Border Style',
 												property: 'border-right-style',
 												defaults: 'none',
@@ -752,7 +750,6 @@ $(document).ready(function () {
 													value: 'double',
 													name: 'Double',
 												}],
-												UpdateStyles: true,
 											},
 											{
 												type: 'color',
@@ -771,10 +768,10 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 }
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 3,
 											},
 											{
-												type: 'customradio',
+												type: 'radio',
 												name: 'Border Style',
 												property: 'border-bottom-style',
 												defaults: 'none',
@@ -791,7 +788,6 @@ $(document).ready(function () {
 													value: 'double',
 													name: 'Double',
 												}],
-												UpdateStyles: true,
 											},
 											{
 												type: 'color',
@@ -810,10 +806,10 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 }
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 3,
 											},
 											{
-												type: 'customradio',
+												type: 'radio',
 												name: 'Border Style',
 												property: 'border-left-style',
 												defaults: 'none',
@@ -830,7 +826,6 @@ $(document).ready(function () {
 													value: 'double',
 													name: 'Double',
 												}],
-												UpdateStyles: true,
 											},
 											{
 												type: 'color',
@@ -849,7 +844,7 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 }
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 3,
 											}
 										]
 									}, {
@@ -1530,15 +1525,15 @@ $(document).ready(function () {
 
 								if (typeof model != "undefined") {
 
-									if (typeof model.attributes != "undefined") {
+                                    if (typeof model.attributes != "undefined") {
 
-										var Block = model.attributes.type;
+                                        var Block = model.attributes.type;
 
-										if (Block == 'grid' || Block == 'image-block' || Block == 'modulewrapper')
-											VjEditor.select(model);
-									}
+                                        if (Block == 'grid' || Block == 'image-block' || Block == 'modulewrapper')
+                                            VjEditor.select(model);
+                                    }
 
-									if (typeof model.components != 'undefined' && typeof model.components().models[0] != 'undefined') {
+                                    if (typeof model.components != 'undefined' && typeof model.components().models[0] != 'undefined') {
 
 										var childBlock = model.components().models[0].attributes.type;
 
@@ -1546,15 +1541,15 @@ $(document).ready(function () {
 											VjEditor.select(model.components().models[0]);
 									}
 
-									if (typeof model.getAttributes != "undefined" && model.getAttributes()["data-block-alignment"] == "true")
-										model.setStyle({ "display": "inline-block" });
-								}
+                                    if (typeof model.getAttributes != "undefined" && model.getAttributes()["data-block-alignment"] == "true")
+                                        model.setStyle({ "display": "inline-block" });
+                                }
 
-								if (typeof VjEditor.BlockManager.get('LibraryBlock') != 'undefined')
-									VjEditor.BlockManager.remove('LibraryBlock');
+                                if (typeof VjEditor.BlockManager.get('LibraryBlock') != 'undefined')
+                                    VjEditor.BlockManager.remove('LibraryBlock');
 
-								if (!$('.borderlines').hasClass('active'))
-									VjEditor.stopCommand('core:component-outline');
+                                if (!$('.borderlines').hasClass('active'))
+                                    VjEditor.stopCommand('core:component-outline');
 
 								if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes.mid != undefined) {
 									model.view.$el[0].innerHTML = '<img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />';
@@ -1626,7 +1621,7 @@ $(document).ready(function () {
 								}
 							});
 
-							var FilterBorderOptions = function (target, position) {
+							var FilterBorderOptions = function (position) {
 
 								var val;
 
@@ -1660,10 +1655,7 @@ $(document).ready(function () {
 							}
 
 							VjEditor.on('component:update:border-position', (model, argument) => {
-								if (typeof event != "undefined")
-									FilterBorderOptions(model, event.target.value);
-								else
-									FilterBorderOptions(model, 'sm-border');
+								FilterBorderOptions(event.target.value);
 							});
 
 							VjEditor.on('component:selected', (model, argument) => {
@@ -1793,7 +1785,15 @@ $(document).ready(function () {
 
 								setTimeout(function () {
 									VjEditor.StyleManager.render();
-									model.set('border-position', 'sm-border');
+
+									var borderPosition = jQuery.grep(model.getClasses(), function (className, index) {
+										return (className.match(/\bsm-border-\S+/g) || []).join(' ');
+									});
+
+									if (borderPosition.length)
+										FilterBorderOptions(borderPosition[0]);
+									else
+										FilterBorderOptions("sm-border");
 								});
 
 								if (model.attributes.type == 'column') {
@@ -1811,7 +1811,7 @@ $(document).ready(function () {
 
 								if (model.attributes.type == 'grid') {
 
-									if (flexProperty == null) {
+                                    if (flexProperty == null) {
 
 										VjEditor.StyleManager.addProperty(Responsive, {
 											type: 'radio',
@@ -1830,22 +1830,22 @@ $(document).ready(function () {
 										flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
 									}
 
-									if (model.components().length) {
+                                    if (model.components().length) {
 
-										$(model.components().models[0].getEl()).addClass('gjs-dashed');
+                                        $(model.components().models[0].getEl()).addClass('gjs-dashed');
 
-										var flexDirection = model.components().models[0].getStyle()['flex-direction'];
+                                        var flexDirection = model.components().models[0].getStyle()['flex-direction'];
 
-										if (typeof flexDirection == 'undefined' || flexDirection.indexOf('reverse') <= 0)
-											flexProperty.view.setValue('false');
-										else
-											flexProperty.view.setValue('true');
-									}
-								}
-								else {
-									if (flexProperty != null)
-										VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
-								}
+                                        if (typeof flexDirection == 'undefined' || flexDirection.indexOf('reverse') <= 0)
+                                            flexProperty.view.setValue('false');
+                                        else
+                                            flexProperty.view.setValue('true');
+                                    }
+                                }
+                                else {
+                                    if (flexProperty != null)
+                                        VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
+                                }
 
 								if (model.attributes.type == 'heading' || model.attributes.type == 'text' || model.attributes.type == 'button' || model.attributes.type == 'list' || model.attributes.type == 'link') {
 
@@ -2025,9 +2025,9 @@ $(document).ready(function () {
 								if (model.attributes.type == 'column')
 									$(model.parent().getEl()).removeClass('gjs-dashed');
 
-								if (model.attributes.type == 'grid' && model.components().length)
-									$(model.components().models[0].getEl()).removeClass('gjs-dashed');
-							});
+                                if (model.attributes.type == 'grid' && model.components().length)
+                                    $(model.components().models[0].getEl()).removeClass('gjs-dashed');
+                            });
 
 							VjEditor.on('component:styleUpdate', (model, property) => {
 
@@ -2093,39 +2093,6 @@ $(document).ready(function () {
 									style['float'] = model.getStyle()['float'];
 									model.parent().parent().setStyle(style);
 								}
-							});
-
-							var UpdateBorderStyle = function (target, property) {
-
-								var style = target.getStyle();
-
-								if (typeof style[property] == 'undefined' && typeof style['border-width'] == 'undefined') {
-
-									VjEditor.StyleManager.getProperty(Border, property).setValue('3px');
-									style[property] = '3px';
-								}
-
-								target.setStyle(style);
-							}
-
-							VjEditor.on('component:update:border-style', (model) => {
-								UpdateBorderStyle(model, 'border-width');
-							});
-
-							VjEditor.on('component:update:border-top-style', (model) => {
-								UpdateBorderStyle(model, 'border-top-width');
-							});
-
-							VjEditor.on('component:update:border-right-style', (model) => {
-								UpdateBorderStyle(model, 'border-right-width');
-							});
-
-							VjEditor.on('component:update:border-bottom-style', (model) => {
-								UpdateBorderStyle(model, 'border-bottom-width');
-							});
-
-							VjEditor.on('component:update:border-left-style', (model) => {
-								UpdateBorderStyle(model, 'border-left-width');
 							});
 
 							VjEditor.Commands.add('global-delete', {
@@ -2290,58 +2257,58 @@ $(document).ready(function () {
 													r["data-gjs-" + b.attributes.name] = b.getInitValue();
 												});
 
-												(i && (r["data-gjs-type"] = i),
-													n.cleanIds && o && "i" === o[0]) && (t.CssComposer.getAll().filter(function (t) {
-														return t.get("selectors").getFullString() === "#".concat(o) && !Gt()(t.getStyle())
-													}).length || delete r.id);
-												return n.cleanClasses && r.class && (r.class = e.get("classes").filter(function (t) {
-													return !t.get("private")
-												}).map(function (t) {
-													return t.get("name")
-												}).join(" "),
-													r.class || delete r.class),
-													r
-											}
-										}),
-											r.css += t.runCommand("export-css", {
-												target: e
-											}))
-									}),
-										r.html = CleanGjAttrs(r.html),
-										r.css = r.css,
-										r
-								},
-								cleanHtmlIds: function (t, tc) {
-									tc = tc.split('vjbrk');
-									var elements = $(t);
-									if (elements != undefined) {
-										var atid = elements.attr('id');
-										if (atid != undefined && atid.length > 0) {
-											var grp = $.grep(tc, function (i) {
-												return i.startsWith('#' + atid);
-											});
-											if (grp != undefined && grp.length > 0)
-												elements.attr('style', grp[0].replace('#' + atid + '{', '').replace('}', ''));
-											elements.removeAttr('id');
-										}
-										$.each(elements.find('*'), function (k, v) {
-											v = $(v);
-											var atid = v.attr('id');
-											if (atid != undefined && atid.length > 0) {
-												var grp = $.grep(tc, function (i) {
-													return i.startsWith('#' + atid);
-												});
-												if (grp != undefined && grp.length > 0)
-													v.attr('style', grp[0].replace('#' + atid + '{', '').replace('}', ''));
-												v.removeAttr('id');
-											}
-										});
-										return elements[0].outerHTML;
-									}
-									else
-										return "";
-								},
-							});
+                                                (i && (r["data-gjs-type"] = i),
+                                                    n.cleanIds && o && "i" === o[0]) && (t.CssComposer.getAll().filter(function (t) {
+                                                        return t.get("selectors").getFullString() === "#".concat(o) && !Gt()(t.getStyle())
+                                                    }).length || delete r.id);
+                                                return n.cleanClasses && r.class && (r.class = e.get("classes").filter(function (t) {
+                                                    return !t.get("private")
+                                                }).map(function (t) {
+                                                    return t.get("name")
+                                                }).join(" "),
+                                                    r.class || delete r.class),
+                                                    r
+                                            }
+                                        }),
+                                            r.css += t.runCommand("export-css", {
+                                                target: e
+                                            }))
+                                    }),
+                                        r.html = CleanGjAttrs(r.html),
+                                        r.css = r.css,
+                                        r
+                                },
+                                cleanHtmlIds: function (t, tc) {
+                                    tc = tc.split('vjbrk');
+                                    var elements = $(t);
+                                    if (elements != undefined) {
+                                        var atid = elements.attr('id');
+                                        if (atid != undefined && atid.length > 0) {
+                                            var grp = $.grep(tc, function (i) {
+                                                return i.startsWith('#' + atid);
+                                            });
+                                            if (grp != undefined && grp.length > 0)
+                                                elements.attr('style', grp[0].replace('#' + atid + '{', '').replace('}', ''));
+                                            elements.removeAttr('id');
+                                        }
+                                        $.each(elements.find('*'), function (k, v) {
+                                            v = $(v);
+                                            var atid = v.attr('id');
+                                            if (atid != undefined && atid.length > 0) {
+                                                var grp = $.grep(tc, function (i) {
+                                                    return i.startsWith('#' + atid);
+                                                });
+                                                if (grp != undefined && grp.length > 0)
+                                                    v.attr('style', grp[0].replace('#' + atid + '{', '').replace('}', ''));
+                                                v.removeAttr('id');
+                                            }
+                                        });
+                                        return elements[0].outerHTML;
+                                    }
+                                    else
+                                        return "";
+                                },
+                            });
 
 							VjEditor.Commands.add("export-css", {
 								run: function (t, e) {
@@ -2533,13 +2500,13 @@ $(document).ready(function () {
 								if (model.parent() != undefined && model.parent().attributes.type == "column" && model.parent().components().length == 0)
 									$(model.parent().getEl()).attr("data-empty", "true");
 
-								if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
-									return false;
-								else {
-									if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(data.RevisionGUID) < 0)
-										ShowBlockUI();
-								}
-							});
+                                if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
+                                    return false;
+                                else {
+                                    if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(data.RevisionGUID) < 0)
+                                        ShowBlockUI();
+                                }
+                            });
 
 							//Tooltip
 							$('[data-toggle="tooltip"]').tooltip();
@@ -2575,33 +2542,33 @@ $(document).ready(function () {
 		}
 	}
 
-	var ShowBlockUI = function () {
-		$("#iframeHolder, #StyleToolManager, .Menupanel-top").hide();
-		$(".panel-top, #BlockManager, .block-set, #ContentBlocks").show();
-	};
+    var ShowBlockUI = function () {
+        $("#iframeHolder, #StyleToolManager, .Menupanel-top").hide();
+        $(".panel-top, #BlockManager, .block-set, #ContentBlocks").show();
+    };
 
-	var GrapesjsDestroy = function () {
-		if (VjEditor) {
-			VjEditor.destroy();
-			$.get(CurrentTabUrl + (CurrentTabUrl.indexOf("?") != -1 ? "&uxmode=true" : "?uxmode=true"), function (data) {
-				var html = $.parseHTML(data);
-				var dom = $(data);
-				var newhtml = $(html).find('#dnn_ContentPane');
-				$('#dnn_ContentPane').html('');
-				$('#dnn_ContentPane').html($(newhtml).html());
-				$('#dnn_ContentPane').removeClass("sidebar-open");
-				var Scripts_Links = $(data).find('script');
-				$.each(dom, function (i, v) {
-					Scripts_Links.push(v);
-				});
-				InjectLinksAndScripts(Scripts_Links, window.document);
-				InitAppActionMenu();
-				$(window.parent.document.body).find('.pageloader').remove();
-			});
-		}
-		// Remove All Managers
-		$('#ContentBlocks, .stylemanager, .traitsmanager').empty();
-	};
+    var GrapesjsDestroy = function () {
+        if (VjEditor) {
+            VjEditor.destroy();
+            $.get(CurrentTabUrl + (CurrentTabUrl.indexOf("?") != -1 ? "&uxmode=true" : "?uxmode=true"), function (data) {
+                var html = $.parseHTML(data);
+                var dom = $(data);
+                var newhtml = $(html).find('#dnn_ContentPane');
+                $('#dnn_ContentPane').html('');
+                $('#dnn_ContentPane').html($(newhtml).html());
+                $('#dnn_ContentPane').removeClass("sidebar-open");
+                var Scripts_Links = $(data).find('script');
+                $.each(dom, function (i, v) {
+                    Scripts_Links.push(v);
+                });
+                InjectLinksAndScripts(Scripts_Links, window.document);
+                InitAppActionMenu();
+                $(window.parent.document.body).find('.pageloader').remove();
+            });
+        }
+        // Remove All Managers
+        $('#ContentBlocks, .stylemanager, .traitsmanager').empty();
+    };
 
 	var VjInit = function () {
 		$.get(CurrentTabUrl, function (data) {
