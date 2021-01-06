@@ -121,10 +121,15 @@
     <Content Include="Resources\Images\align-right.png" />
     <Content Include="Release.txt" />
     <Content Include="Resources\Images\align-top.png" />
+    <Content Include="Resources\Images\border-bottom.svg" />
     <Content Include="Resources\Images\border-dashed.png" />
     <Content Include="Resources\Images\border-dotted.png" />
     <Content Include="Resources\Images\border-double.png" />
+    <Content Include="Resources\Images\border-left.svg" />
+    <Content Include="Resources\Images\border-right.svg" />
     <Content Include="Resources\Images\border-solid.png" />
+    <Content Include="Resources\Images\border-top.svg" />
+    <Content Include="Resources\Images\border.svg" />
     <Content Include="Resources\Images\col-12.png" />
     <Content Include="Resources\Images\col-2.png" />
     <Content Include="Resources\Images\col-3.6.3.png" />
