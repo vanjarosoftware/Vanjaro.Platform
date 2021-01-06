@@ -664,15 +664,19 @@ $(document).ready(function () {
 												list: [{
 													value: 'solid',
 													name: 'Solid',
-												}, {
-													value: 'dotted',
-													name: 'Dotted',
-												}, {
-													value: 'dashed',
-													name: 'Dashed',
+													img: 'border-solid.png'
 												}, {
 													value: 'double',
 													name: 'Double',
+													img: 'border-double.png'
+												}, {
+													value: 'dotted',
+													name: 'Dotted',
+													img: 'border-dotted.png'
+												}, {
+													value: 'dashed',
+													name: 'Dashed',
+													img: 'border-dashed.png'
 												}],
 												UpdateStyles: true,
 											},
@@ -703,15 +707,19 @@ $(document).ready(function () {
 												list: [{
 													value: 'solid',
 													name: 'Solid',
-												}, {
-													value: 'dotted',
-													name: 'Dotted',
-												}, {
-													value: 'dashed',
-													name: 'Dashed',
+													img: 'border-solid.png'
 												}, {
 													value: 'double',
 													name: 'Double',
+													img: 'border-double.png'
+												}, {
+													value: 'dotted',
+													name: 'Dotted',
+													img: 'border-dotted.png'
+												}, {
+													value: 'dashed',
+													name: 'Dashed',
+													img: 'border-dashed.png'
 												}],
 												UpdateStyles: true,
 											},
@@ -742,15 +750,19 @@ $(document).ready(function () {
 												list: [{
 													value: 'solid',
 													name: 'Solid',
-												}, {
-													value: 'dotted',
-													name: 'Dotted',
-												}, {
-													value: 'dashed',
-													name: 'Dashed',
+													img: 'border-solid.png'
 												}, {
 													value: 'double',
 													name: 'Double',
+													img: 'border-double.png'
+												}, {
+													value: 'dotted',
+													name: 'Dotted',
+													img: 'border-dotted.png'
+												}, {
+													value: 'dashed',
+													name: 'Dashed',
+													img: 'border-dashed.png'
 												}],
 												UpdateStyles: true,
 											},
@@ -781,15 +793,19 @@ $(document).ready(function () {
 												list: [{
 													value: 'solid',
 													name: 'Solid',
-												}, {
-													value: 'dotted',
-													name: 'Dotted',
-												}, {
-													value: 'dashed',
-													name: 'Dashed',
+													img: 'border-solid.png'
 												}, {
 													value: 'double',
 													name: 'Double',
+													img: 'border-double.png'
+												}, {
+													value: 'dotted',
+													name: 'Dotted',
+													img: 'border-dotted.png'
+												}, {
+													value: 'dashed',
+													name: 'Dashed',
+													img: 'border-dashed.png'
 												}],
 												UpdateStyles: true,
 											},
@@ -820,15 +836,19 @@ $(document).ready(function () {
 												list: [{
 													value: 'solid',
 													name: 'Solid',
-												}, {
-													value: 'dotted',
-													name: 'Dotted',
-												}, {
-													value: 'dashed',
-													name: 'Dashed',
+													img: 'border-solid.png'
 												}, {
 													value: 'double',
 													name: 'Double',
+													img: 'border-double.png'
+												}, {
+													value: 'dotted',
+													name: 'Dotted',
+													img: 'border-dotted.png'
+												}, {
+													value: 'dashed',
+													name: 'Dashed',
+													img: 'border-dashed.png'
 												}],
 												UpdateStyles: true,
 											},
@@ -1628,35 +1648,38 @@ $(document).ready(function () {
 
 							var FilterBorderOptions = function (target, position) {
 
-								var val;
+								setTimeout(function () {
+									var val;
 
-								switch (position) {
-									case "sm-border-top":
-										val = "border-top"
-										break;
-									case "sm-border-right":
-										val = "border-right"
-										break;
-									case "sm-border-bottom":
-										val = "border-bottom"
-										break;
-									case "sm-border-left":
-										val = "border-left"
-										break;
-									default:
-										val = "border"
-								}
+									switch (position) {
+										case "sm-border-top":
+											val = "border-top"
+											break;
+										case "sm-border-right":
+											val = "border-right"
+											break;
+										case "sm-border-bottom":
+											val = "border-bottom"
+											break;
+										case "sm-border-left":
+											val = "border-left"
+											break;
+										default:
+											val = "border"
+									}
 
-								var sm = VjEditor.StyleManager;
+									var sm = VjEditor.StyleManager;
 
-								$(sm.getProperties('border').models).each(function () {
-									if (this.attributes.name != 'Border Postion')
-										this.view.$el.hide();
+									$(sm.getProperties('border').models).each(function () {
+										if (this.attributes.name != 'Border Postion')
+											this.view.$el.hide();
+									});
+
+									$(sm.getProperty(Border, val + '-style').view.el).show();
+									$(sm.getProperty(Border, val + '-color').view.el).show();
+									$(sm.getProperty(Border, val + '-width').view.el).show();
+
 								});
-
-								$(sm.getProperty(Border, val + '-style').view.el).show();
-								$(sm.getProperty(Border, val + '-color').view.el).show();
-								$(sm.getProperty(Border, val + '-width').view.el).show();
 							}
 
 							VjEditor.on('component:update:border-position', (model, argument) => {
@@ -1791,10 +1814,10 @@ $(document).ready(function () {
 									}, 300);
 								}
 
-								setTimeout(function () {
-									VjEditor.StyleManager.render();
-									model.set('border-position', 'sm-border');
-								});
+								VjEditor.StyleManager.render();
+
+								model.set('border-position', 'sm-border');
+								FilterBorderOptions(model, 'sm-border');
 
 								if (model.attributes.type == 'column') {
 
