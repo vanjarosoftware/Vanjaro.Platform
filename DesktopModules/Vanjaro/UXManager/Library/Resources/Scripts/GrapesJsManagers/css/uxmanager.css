@@ -3376,7 +3376,7 @@ body.resp-mode.mobile .vj-wrapper {
 		z-index: 1;
 	}
 
-		.stylemanager .sm-range-wrapper input[type="number"] {
+		.stylemanager .sm-range-wrapper input[type="text"] {
 			width: 30%;
 			padding-right: 25px;
 			margin-left: 10px;
