@@ -50,6 +50,7 @@ namespace Vanjaro.Common.Components
         {
             UpdateLowerCaseUrlRegex();
             PreCompileRazorTemplates(context);
+            HttpContext.Current.Application.Add("PingAnalytics", true);
         }
         private static void PreCompileRazorTemplates(HttpContext context)
         {

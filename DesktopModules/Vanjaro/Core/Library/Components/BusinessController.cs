@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
@@ -7,6 +8,7 @@ using System.IO;
 using System.Web;
 using Vanjaro.Common.Data.Scripts;
 using Vanjaro.Core.Data.Entities;
+using Vanjaro.Core.Services;
 
 namespace Vanjaro.Core.Components
 {
@@ -22,12 +24,13 @@ namespace Vanjaro.Core.Components
                 Services.Search.SearchEngineScheduler.Install();
                 PageWorkflowPermission.InitTabPermissions();
                 Managers.SettingManager.UpdateSettingWebConfig();
-
             }
             else
             {
                 Managers.SettingManager.ApplyingSettings(Version);
             }
+
+            Managers.AnalyticsManager.TrackEvent(Version);
             return "Success";
         }
 

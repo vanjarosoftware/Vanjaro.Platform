@@ -24,6 +24,7 @@ using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Data.Scripts;
 using Vanjaro.Core.Entities;
+using Vanjaro.Core.Services;
 using static Vanjaro.Core.Factories;
 
 namespace Vanjaro.Core
@@ -800,6 +801,22 @@ namespace Vanjaro.Core
                 return "[G]Skins/Vanjaro/Base.ascx" == PortalController.GetPortalSetting("DefaultPortalSkin", PortalID, Null.NullString);
             }
 
+            public static bool IsInstalledVanjaroExtension()
+            {
+                return SettingFactory.IsInstalledVanjaroExtension();
+            }
+
+            public static bool IsVanjaroInstalled()
+            {
+                bool IsVanjaroInstalled = false;
+                foreach (PortalInfo pinfo in PortalController.Instance.GetPortals())
+                {
+                    if (!IsVanjaroInstalled)
+                        IsVanjaroInstalled = PortalController.Instance.GetPortalSettings(pinfo.PortalID).ContainsKey("IsVanjaroInstalled");
+                }
+                return IsVanjaroInstalled;
+            }
+
             public static void UpdateConfig(string Section, string Key, string Value)
             {
                 var config = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
@@ -810,6 +827,7 @@ namespace Vanjaro.Core
                 providerSettings.Parameters.Set(Key, Value.ToLower());
                 config.Save();
             }
+
         }
         private class ModuleSettings
         {

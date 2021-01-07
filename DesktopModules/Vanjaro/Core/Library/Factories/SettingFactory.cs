@@ -127,6 +127,22 @@ namespace Vanjaro.Core
                 }
                 return null;
             }
+
+            public static bool IsInstalledVanjaroExtension()
+            {
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Settings, "_IsInstalledVanjaroExtension");
+                bool? iv = CacheFactory.Get(CacheKey);
+                if (iv == null)
+                {
+                    using (VanjaroRepo db = new VanjaroRepo())
+                    {
+                        iv = db.Fetch<dynamic>("SELECT * FROM " + Core.Data.Scripts.CommonScript.DnnTablePrefix + "[PersonaBarMenu] WHERE identifier = @0 and ModuleName =@0", "Vanjaro").FirstOrDefault() != null;
+                        CacheFactory.Set(CacheKey, iv);
+                    }
+                }
+                return iv.Value;
+            }
+
         }
     }
 }

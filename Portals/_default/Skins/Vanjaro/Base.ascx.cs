@@ -2,10 +2,12 @@
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Framework;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
@@ -33,6 +35,7 @@ using Vanjaro.Common.Manager;
 using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Entities.Menu;
+using Vanjaro.Core.Services;
 using static Vanjaro.Core.Factories;
 using static Vanjaro.Core.Managers;
 using static Vanjaro.Skin.Managers;
@@ -158,7 +161,22 @@ namespace Vanjaro.Skin
             ResetModulePanes();
             InitGuidedTours();
             AccessDenied();
+            InjectAnalyticsScript();
+            AnalyticsManager.AnalyticsPost();
 
+
+
+            if (HttpContext.Current.Application["VanjaroClientID"] != null && !string.IsNullOrEmpty(HttpContext.Current.Application["VanjaroClientID"].ToString()))
+            {
+                Dictionary<string, string> eventParam = new Dictionary<string, string>();
+                eventParam.Add("install", "platform");
+                Analytics.Content.Event events = new Analytics.Content.Event()
+                {
+                    name = "install",
+                    parameter = eventParam
+                };
+                Analytics.TrackEvent("mp/collect", events);
+            }
         }
 
         private void AccessDenied()
@@ -201,6 +219,25 @@ namespace Vanjaro.Skin
                 {
                     CookieManager.AddValue("PageIsEdit", "false", new DateTime());
                     CookieManager.AddValue("InitGrapejs", "false", new DateTime());
+                }
+            }
+        }
+
+        private void InjectAnalyticsScript()
+        {
+            if (HostController.Instance.GetBoolean("VJImprovementProgram", true))
+            {
+                if (string.IsNullOrEmpty(CookieManager.GetValue("vj_AnalyticsClientID")))
+                {
+                    //Request Services Framework
+                    ServicesFramework.Instance.RequestAjaxScriptSupport();
+                    ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
+
+                    WebForms.RegisterClientScriptBlock(Page, "GTagManager", "<script type='text/javascript' async src='https://www.googletagmanager.com/gtag/js?id=" + Analytics.MeasurementID + "'></script>", false);
+                    WebForms.RegisterClientScriptBlock(Page, "GTagManagerScript", "window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); ", true);
+                    WebForms.RegisterClientScriptBlock(Page, "GoogleAnalyticsClientKey", "function SetClientKey(clientKey){var sf = $.ServicesFramework(-1);$.ajax({ type: 'POST', url: window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'Analytics/SetClientKey', contentType: 'application/json;charset=utf-8',dataType: 'json',headers: {'ModuleId': parseInt(sf.getModuleId()),'TabId': parseInt(sf.getTabId()),'RequestVerificationToken': sf.getAntiForgeryValue(),'client_id': clientKey}, success: function (response) {}});}", true);
+                    string script = @"$(document).ready(function () {gtag('get', 'UA-XXXXXXXX-Y', 'client_id', (clientID) => {console.log(clientID); SetClientKey(clientID)});  });";
+                    WebForms.RegisterStartupScript(Page, "VanjaroNeedClientID", script, true);
                 }
             }
         }
