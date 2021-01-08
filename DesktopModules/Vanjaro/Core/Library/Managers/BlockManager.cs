@@ -480,7 +480,7 @@ namespace Vanjaro.Core
                     List<CustomBlock> CustomBlocksByLocale = BlockFactory.GetAll(PortalSettings.PortalId).Where(c => c.Locale == Locale).ToList();
                     if (CustomBlocksByLocale == null || CustomBlocksByLocale.Count <= 0)
                     {
-                        return CustomBlocks;
+                        return CustomBlocks.OrderBy(o => o.Category).OrderBy(o => o.Name).ToList();
                     }
                     else
                     {
@@ -491,12 +491,12 @@ namespace Vanjaro.Core
                                 CustomBlocksByLocale.Add(item);
                             }
                         }
-                        return CustomBlocksByLocale;
+                        return CustomBlocksByLocale.OrderBy(o => o.Category).OrderBy(o => o.Name).ToList();
                     }
                 }
                 else
                 {
-                    return CustomBlocks;
+                    return CustomBlocks.OrderBy(o => o.Category).OrderBy(o => o.Name).ToList();
                 }
             }
         }

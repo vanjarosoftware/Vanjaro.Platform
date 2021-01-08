@@ -43,31 +43,34 @@ namespace Vanjaro.Core
             }
             public static void Update(Pages page, int UserID)
             {
-                if (page.ID == 0)
+                if (page != null && page.StateID.HasValue)
                 {
-                    page.CreatedBy = UserID;
-                    page.UpdatedBy = UserID;
-                    page.CreatedOn = DateTime.UtcNow;
-                    page.UpdatedOn = DateTime.UtcNow;
-                    page.Insert();
-                    CacheFactory.Clear(CacheFactory.Keys.Page);
-                    RemoveHistory(page.TabID, WorkflowManager.GetMaxRevisions(page.TabID));
-                }
-                else
-                {
-                    page.UpdatedBy = UserID;
-                    page.UpdatedOn = DateTime.UtcNow;
-                    page.Update();
-                    CacheFactory.Clear(CacheFactory.Keys.Page);
-                }
-
-                //For TabIndexer
-                if (page.IsPublished)
-                {
-                    TabInfo tabinfo = TabController.Instance.GetTab(page.TabID, page.PortalID);
-                    if (tabinfo != null)
+                    if (page.ID == 0)
                     {
-                        TabController.Instance.UpdateTab(tabinfo);
+                        page.CreatedBy = UserID;
+                        page.UpdatedBy = UserID;
+                        page.CreatedOn = DateTime.UtcNow;
+                        page.UpdatedOn = DateTime.UtcNow;
+                        page.Insert();
+                        CacheFactory.Clear(CacheFactory.Keys.Page);
+                        RemoveHistory(page.TabID, WorkflowManager.GetMaxRevisions(page.TabID));
+                    }
+                    else
+                    {
+                        page.UpdatedBy = UserID;
+                        page.UpdatedOn = DateTime.UtcNow;
+                        page.Update();
+                        CacheFactory.Clear(CacheFactory.Keys.Page);
+                    }
+
+                    //For TabIndexer
+                    if (page.IsPublished)
+                    {
+                        TabInfo tabinfo = TabController.Instance.GetTab(page.TabID, page.PortalID);
+                        if (tabinfo != null)
+                        {
+                            TabController.Instance.UpdateTab(tabinfo);
+                        }
                     }
                 }
             }

@@ -55,6 +55,13 @@ namespace Vanjaro.Skin
         private dynamic ModulesDictObj;
         private readonly Dictionary<int, dynamic> ModulesDict = new Dictionary<int, dynamic>();
         bool HasReviewPermission = false;
+
+#if DEBUG
+        private const bool ShowMissingKeys = true;
+#else
+        private const bool ShowMissingKeys = false;
+#endif
+
         protected override void OnPreRender(EventArgs e)
         {
             HandleAppSettings();
@@ -206,6 +213,7 @@ namespace Vanjaro.Skin
                     CookieManager.AddValue("PageIsEdit", "false", new DateTime());
                     CookieManager.AddValue("InitGrapejs", "false", new DateTime());
                 }
+                Response.Redirect(URLManager.RemoveQueryStringByKey(Request.Url.AbsoluteUri, "uxm"), true);
             }
         }
 
@@ -249,7 +257,11 @@ namespace Vanjaro.Skin
             }
 
             if (!string.IsNullOrEmpty(ThemeScripts))
+            {
+                string SharedResourceFile = ScriptsPath.Replace("/js", "").Replace(@"\js", "") + "App_LocalResources/Shared.resx";
+                ThemeScripts = new DNNLocalizationEngine(null, SharedResourceFile, ShowMissingKeys).Parse(ThemeScripts);
                 WebForms.RegisterStartupScript(Page, "ThemeBlocks", "LoadThemeBlocks = function (grapesjs) { grapesjs.plugins.add('ThemeBlocks', (editor, opts = {}) => { " + ThemeScripts + "}); };", true);
+            }
         }
 
         private void InjectViewport()
@@ -1062,7 +1074,6 @@ namespace Vanjaro.Skin
         private void InitGuidedTours()
         {
             if (!PortalController.Instance.GetPortalSettings(PortalSettings.PortalId).ContainsKey("VanjaroToursGuided")
-                && !string.IsNullOrEmpty(Request.QueryString["uxm"]) && Request.QueryString["uxm"] == "open"
                 && (TabPermissionController.HasTabPermission("EDIT") || UserController.Instance.GetCurrentUserInfo().IsAdmin || UserController.Instance.GetCurrentUserInfo().IsSuperUser))
             {
                 StringBuilder sb = new StringBuilder();
@@ -1157,7 +1168,7 @@ namespace Vanjaro.Skin
         }
 
         #endregion
-
+        
         #endregion
     }
 }
