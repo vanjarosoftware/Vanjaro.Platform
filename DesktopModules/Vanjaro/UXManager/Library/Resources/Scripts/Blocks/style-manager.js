@@ -7,7 +7,6 @@
 
 			const el = document.createElement('div');
 			el.classList.add("sm-radio-wrapper");
-			el.id = props.property;
 
 			$(props.list).each(function (index, item) {
 
@@ -100,9 +99,7 @@
 	});
 
 	sm.addType('custom_slider', {
-		model: {
-
-		},
+		model: {},
 		view: {
 			templateInput(model) {
 				const ppfx = this.ppfx;
@@ -222,7 +219,6 @@
 				Selected.setStyle(style);
 
 			},
-
 		}
 	});
 
@@ -246,7 +242,6 @@
 
 			const el = document.createElement('div');
 			el.classList.add("sm-range-wrapper");
-			el.id = props.property;
 
 			el.innerHTML = `
 				<input type="range" value="`+ props.defaults + `" name="` + props.property + `" min="` + props.min + `" max="` + props.max + `" class="sm-input-control range" /> 
@@ -362,7 +357,7 @@
 				if (value == 'auto')
 					model.view.$el.find('select').prop('disabled', 'disabled');
 				else {
-					
+
 					if (typeof value == "string") {
 						inputvalue = value.replace(/[^-\d\.]/g, '');
 						unit = value.replace(/-/g, ' ').replace(/\d+/, '');
