@@ -1610,36 +1610,6 @@ $(document).ready(function () {
 									RenderBlock(model, bmodel);
 							});
 
-							VjEditor.on('component:update:src', (model, argument) => {
-
-								var Component = model.attributes.type;
-
-								if ((Component == 'image' || Component == 'image-gallery-item') && model.changed.src.indexOf("data:image") > -1) {
-
-									var ImageData = {
-										PreviousFileName: model._previousAttributes.attributes.src.substring(model._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
-										ImageByte: model.changed.src
-									};
-
-									$.ajax({
-										type: "POST",
-										url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Image") + "Image/Convert",
-										data: ImageData,
-										headers: {
-											'ModuleId': parseInt(sf.getModuleId()),
-											'TabId': parseInt(sf.getTabId()),
-											'RequestVerificationToken': sf.getAntiForgeryValue()
-										},
-										success: function (response) {
-											if (response != "failed") {
-												model.addAttributes({ src: response.Url });
-												ChangeToWebp(model.parent(), response.Urls);
-											}
-										}
-									});
-								}
-							});
-
 							var FilterBorderOptions = function (target, position) {
 
 								setTimeout(function () {
