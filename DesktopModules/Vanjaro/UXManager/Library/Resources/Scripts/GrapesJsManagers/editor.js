@@ -520,8 +520,8 @@ $(document).ready(function () {
 													{ name: '%', min: 0, max: 100, step: 1 },
 													{ name: 'vw', min: 0, max: 100, step: 1 },
 												],
-												unit: '%',
-												defaults: 100,
+												unit: 'px',
+												defaults: 'auto',
 											}, {
 												type: 'customrange',
 												name: 'Min Width',
@@ -532,7 +532,7 @@ $(document).ready(function () {
 													{ name: 'vw', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}, {
 												type: 'customrange',
 												name: 'Max Width',
@@ -543,7 +543,7 @@ $(document).ready(function () {
 													{ name: 'vw', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}, {
 												type: 'customrange',
 												name: 'Height',
@@ -554,7 +554,7 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}, {
 												type: 'customrange',
 												name: 'Min Height',
@@ -565,7 +565,7 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}, {
 												type: 'customrange',
 												name: 'Max Height',
@@ -576,7 +576,7 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}
 										]
 									}, {
@@ -931,7 +931,6 @@ $(document).ready(function () {
 										buildProps: ['z-index', 'position', 'top', 'left', 'bottom', 'right'],
 										properties: [
 											{
-												id: 'z-index',
 												type: 'customrange',
 												name: 'Z Index',
 												property: 'z-index',
@@ -940,7 +939,6 @@ $(document).ready(function () {
 												max: 999,
 												defaults: 0,
 											}, {
-												id: 'top',
 												type: 'customrange',
 												name: 'Top',
 												property: 'top',
@@ -951,10 +949,8 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
-											},
-											{
-												id: 'Left',
+												defaults: 'auto',
+											}, {
 												type: 'customrange',
 												name: 'Left',
 												property: 'left',
@@ -965,9 +961,8 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}, {
-												id: 'Bottom',
 												type: 'customrange',
 												name: 'Bottom',
 												property: 'bottom',
@@ -978,9 +973,8 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}, {
-												id: 'Right',
 												type: 'customrange',
 												name: 'Right',
 												property: 'right',
@@ -991,7 +985,7 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}
 										]
 									}, {
@@ -1784,7 +1778,9 @@ $(document).ready(function () {
 									}, 300);
 								}
 
-								VjEditor.StyleManager.render();
+								setTimeout(function () {
+									VjEditor.StyleManager.render();
+								});
 
 								model.set('border-position', 'sm-border');
 								FilterBorderOptions(model, 'sm-border');
@@ -1852,7 +1848,6 @@ $(document).ready(function () {
 										open: false,
 										buildProps: ['color', 'font-family', 'font-size', 'line-height', 'letter-spacing', 'word-spacing', 'font-weight', 'font-style', 'text-transform', 'text-decoration', 'text-shadow'],
 										properties: [{
-											id: 'text-decoration',
 											type: 'radio',
 											name: 'Text decoration',
 											property: 'text-decoration',
@@ -1871,7 +1866,6 @@ $(document).ready(function () {
 												name: 'Strikethrough',
 											}],
 										}, {
-											id: 'font-style',
 											type: 'radio',
 											name: 'Font style',
 											property: 'font-style',
@@ -1884,13 +1878,11 @@ $(document).ready(function () {
 												name: 'Italic',
 											}],
 										}, {
-											id: 'font-family',
 											type: 'select',
 											name: 'Font Family',
 											property: 'font-family',
 											list: fontfamilylist
 										}, {
-											id: 'font-size',
 											type: 'customrange',
 											name: 'Font size',
 											property: 'font-size',
@@ -1905,7 +1897,6 @@ $(document).ready(function () {
 											unit: 'px',
 											defaults: 16
 										}, {
-											id: 'line-height',
 											type: 'customrange',
 											name: 'Line height',
 											property: 'line-height',
@@ -1920,7 +1911,6 @@ $(document).ready(function () {
 											unit: 'px',
 											defaults: 24
 										}, {
-											id: 'letter-spacing',
 											type: 'customrange',
 											name: 'Letter spacing',
 											property: 'letter-spacing',
@@ -1934,7 +1924,6 @@ $(document).ready(function () {
 											unit: 'px',
 											defaults: 0
 										}, {
-											id: 'word-spacing',
 											type: 'customrange',
 											name: 'Word spacing',
 											property: 'word-spacing',
@@ -1948,7 +1937,6 @@ $(document).ready(function () {
 											unit: 'px',
 											defaults: 0
 										}, {
-											id: 'font-weight',
 											type: 'radio',
 											name: 'Font Weight',
 											property: 'font-weight',
