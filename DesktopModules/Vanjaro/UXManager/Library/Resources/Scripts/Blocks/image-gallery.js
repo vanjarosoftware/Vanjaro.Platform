@@ -254,7 +254,7 @@
                         else
                             height = SelectedCol.getStyle().height;
 
-                        $(SelectedCol.parent().components().models).each(function () {
+                        $(SelectedCol.parent().parent().parent().find('img')).each(function () {
                             this.setStyle('width:' + width + '; height:' + height + ';');
                         });
                     },
@@ -274,7 +274,7 @@
                         else
                             height = SelectedCol.getStyle().height;
 
-                        $(SelectedCol.parent().components().models).each(function () {
+                        $(SelectedCol.parent().parent().parent().find('img')).each(function () {
 
                             //Updating Trait on resize
                             if (typeof this.view != 'undefined') {

@@ -91,9 +91,8 @@
 				}
 			},
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
-                droppable: true,
-                tagName: 'section',
-				unstylable: ['background-color', 'background'],
+				droppable: true,
+				tagName: 'section',
 				resizable: {
 					tl: 0, // Top left
 					tr: 0, // Top right
@@ -103,11 +102,11 @@
 					br: 0, // Bottom right
 					keyHeight: 'min-height',
 				},
-                traits: [{
-                    label: "Id",
-                    name: "id",
-                    type: 'text',
-                },{
+				traits: [{
+					label: "Id",
+					name: "id",
+					type: 'text',
+				}, {
 					label: "Type",
 					name: "tag",
 					type: 'select',
@@ -119,7 +118,7 @@
 						{ id: 'nav', name: 'Nav' },
 						{ id: 'section', name: 'Section' },
 					],
-                    default: 'section',
+					default: 'section',
 					changeProp: 1,
 				}, {
 					label: "Gap",
@@ -168,12 +167,12 @@
 					value: "primary",
 					changeProp: 1,
 				}, {
-					label: "Image",
+					label: " ",
 					name: "backgroundimage",
 					type: "uploader",
 					changeProp: 1,
 				}, {
-					label: "Video",
+					label: " ",
 					name: "backgroundvideo",
 					type: "uploader",
 					changeProp: 1,
@@ -265,17 +264,16 @@
 					changeProp: 1,
 				}]
 			}),
-            init() {
-
+			init() {
 				this.listenTo(this, 'change:tag', this.handleTypeChange);
 				this.listenTo(this, 'change:gradient', this.handleGradientChange);
 			},
 			handleTypeChange() {
-                if (typeof this.attributes.tag != 'undefined' && this.attributes.tag != "")
-                    this.set('tagName', this.attributes.tag);
+				if (typeof this.attributes.tag != 'undefined' && this.attributes.tag != "")
+					this.set('tagName', this.attributes.tag);
 			},
 			handleGradientChange() {
-                if (typeof this.attributes.gradient != 'undefined' && this.attributes.gradient != "") {
+				if (typeof this.attributes.gradient != 'undefined' && this.attributes.gradient != "") {
 
 					var gradient = this.attributes.gradient
 					var style = this.getStyle();
@@ -341,5 +339,5 @@
 			},
 
 		}),
-    });
+	});
 }

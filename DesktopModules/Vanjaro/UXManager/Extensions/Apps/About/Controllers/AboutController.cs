@@ -40,6 +40,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.About.Controllers
 
             //Get Vanjaro Version            
             Settings.Add("VanjaroVersion", new UIData() { Name = "VanjaroVersion", Value = Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.') });
+            Settings.Add("SKU", new UIData() { Name = "SKU", Value = Core.Components.Product.SKU });
 
             return Settings.Values.ToList();
         }

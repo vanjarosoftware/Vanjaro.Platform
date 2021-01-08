@@ -25,7 +25,9 @@ global.LoadApps = function () {
             setTimeout(function () {
                 const body = VjEditor.Canvas.getBody();
                 $(body).append('<script>' + VjScript + '</script>');
-                $(body).append('<style type="text/css">' + VjStyle + '</style>');
+                //$(body).append('<style type="text/css">' + VjStyle + '</style>');     
+                if (VjStyle != undefined && VjStyle.length > 0)
+                    VjEditor.addComponents('<style>' + VjStyle + '</style>');
             }, 2000);
         }
     });
@@ -143,22 +145,15 @@ global.AddCustomBlock = function (editor, CustomBlock) {
 }
 
 var AddCustom_Block = function (CustomBlock, ID, Guid) {
-    var Content = CustomBlock.Html;
-    if (CustomBlock.IsGlobal && !Content.includes("7a4be0f2-56ab-410a-9422-6bc91b488150"))
-        Content = "<div data-block-type=\"global\" data-block-guid=\"7a4be0f2-56ab-410a-9422-6bc91b488150\" data-guid=\"" + CustomBlock.Guid + "\">" + Content + "</div>";
-    VjEditor.BlockManager.add(CustomBlock.Name, {
-        attributes: { class: 'fa fa-th-large', id: ID, type: 'VjCustomBlock', isGlobalBlock: CustomBlock.IsGlobal, guid: CustomBlock.Guid },
-        label: CustomBlock.Name,
-        category: CustomBlock.Category.toUpperCase(),
-        content: '<style>' + CustomBlock.Css + '</style>' + Content,
-        render: ({ el }) => {
-            const updateblock = document.createElement("span");
-            updateblock.className = "update-custom-block";
-            if (IsAdmin)
-                updateblock.innerHTML = "<div class='addpage-blocks dropdown pull-right dropbtn'><a id='dropdownMenuLink' class='dropdownmenu Customblockdropdown' data-toggle='dropdown' aria-haspopup='true'  aria-expanded='false'><em class='fas fa-ellipsis-v'></em></a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'><li><a class='edit-block' onclick='VjEditor.runCommand(\"edit-custom-block\", { name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\" })'><em class='fas fa-pencil-alt'></em><span>Edit</span></a></li><li><a class='export-block' onclick='VjEditor.runCommand(\"export-custom-block\",{ name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\"  })'><em class='fas fa-file-export'></em><span>Export</span></a></li><li><a class='delete-block' onclick='VjEditor.runCommand(\"delete-custom-block\",{ name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\"  })'><em class='fas fa-trash-alt'></em><span>Delete</span></a></li></ul></div>";
-            el.appendChild(updateblock);
-        }
-    });
+    var blocksToRemove = [];
+    $.each(VjEditor.BlockManager.getAll().models, function (key, value) {
+        if (value != undefined && value.attributes != undefined && value.attributes.attributes != undefined && value.attributes.attributes.guid != undefined && value.attributes.attributes.type == 'VjCustomBlock')
+            blocksToRemove.push(value.cid);
+    })
+    $.each(blocksToRemove, function (key, value) {
+        VjEditor.BlockManager.remove(value);
+    })
+    LoadCustomBlocks();
 }
 
 global.UpdateCustomBlock = function (editor, CustomBlock) {
@@ -282,25 +277,30 @@ global.StyleGlobal = function (model) {
 
 global.UpdateGlobalBlock = function (model) {
     if (model != undefined) {
-        if (model.attributes != undefined)
-            model.attributes.content = '';
-        var content = VjEditor.runCommand("export-component", {
-            component: model
-        });
-        if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
-            var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));
-            if (Block != undefined) {
-                var CustomBlock = {
-                    ID: Block.attributes.attributes.id,
-                    Guid: Block.attributes.attributes.guid,
-                    Name: Block.attributes.label,
-                    Category: Block.attributes.category.id,
-                    Html: $(content.html)[0].innerHTML,
-                    Css: content.css,
-                    IsGlobal: true
-                };
-                UpdateCustomBlock(VjEditor, CustomBlock);
+        try {
+            if (model.attributes != undefined)
+                model.attributes.content = '';
+            var content = VjEditor.runCommand("export-component", {
+                component: model.attributes.components.models[0]
+            });
+            if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
+                var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));
+                if (Block != undefined) {
+                    var CustomBlock = {
+                        ID: Block.attributes.attributes.id,
+                        Guid: Block.attributes.attributes.guid,
+                        Name: Block.attributes.label,
+                        Category: Block.attributes.category.id,
+                        Html: content.html,
+                        Css: content.css,
+                        IsGlobal: true
+                    };
+                    UpdateCustomBlock(VjEditor, CustomBlock);
+                }
             }
+        }
+        catch (err) {
+            console.log(err);
         }
     }
 }
