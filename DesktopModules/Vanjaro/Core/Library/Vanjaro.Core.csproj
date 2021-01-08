@@ -208,10 +208,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\bin\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="LibSassHost, Version=1.2.10.0, Culture=neutral, PublicKeyToken=3e24e88796a38e46, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\bin\LibSassHost.dll</HintPath>
-    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
@@ -249,7 +245,8 @@
     <Content Include="Packager\documentation.txt" />
     <Content Include="Packager\Licenses\Resources.txt" />
     <Content Include="Packager\Releases\placeholder.txt" />
-    <Content Include="Packager\Vanjaro\bin\x86\libsass.dll" />
+    <Content Include="Packager\Vanjaro\bin\x64\dart.exe" />
+    <Content Include="Packager\Vanjaro\bin\x86\dart.exe" />
     <Content Include="Packager\Vanjaro\Images\icon_authentication.png" />
     <Content Include="Packager\Vanjaro\Images\Branding\Vanjaro_Icon.png" />
     <Content Include="Packager\Vanjaro\Images\icon_extensions_32px.png" />
@@ -264,8 +261,6 @@
     <Content Include="Packager\Vanjaro\bin\HtmlAgilityPack.dll" />
     <Content Include="Packager\Vanjaro\bin\ImageProcessor.dll" />
     <Content Include="Packager\Vanjaro\bin\ImageProcessor.Plugins.WebP.dll" />
-    <Content Include="Packager\Vanjaro\bin\x64\libsass.dll" />
-    <Content Include="Packager\Vanjaro\bin\LibSassHost.dll" />
     <Content Include="Packager\Vanjaro\bin\System.Buffers.dll" />
     <Content Include="Packager\Vanjaro\Install\Upgrade.aspx" />
     <Content Include="Packager\Vanjaro\Install\Install.htm" />
@@ -461,6 +456,8 @@
     <Content Include="Install\Core.01.00.02.SqlDataProvider" />
     <Content Include="Install\Core.01.00.03.SqlDataProvider" />
     <Content Include="Install\Core.01.00.04.SqlDataProvider" />
+    <Content Include="Packager\Vanjaro\bin\x64\sass.snapshot" />
+    <Content Include="Packager\Vanjaro\bin\x86\sass.snapshot" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -480,6 +477,7 @@
     <EmbeddedResource Include="Packager\Licenses\ColorPicker %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\ContextMenu %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Cookie %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Dart Sass %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Grapesjs %28BSD 3%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Dialog %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Fabric %28MIT%29.txt.resources" />
@@ -489,8 +487,6 @@
     <EmbeddedResource Include="Packager\Licenses\JQuery Autocomplete %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\JQuery SweetAlert %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\JsonViewer %28MIT%29.txt.resources" />
-    <EmbeddedResource Include="Packager\Licenses\libsass.txt %28SOS%29.resources" />
-    <EmbeddedResource Include="Packager\Licenses\LibSassHost %28Apache%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Loading-Bar %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Mark %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Moment %28MIT%29.txt.resources" />
