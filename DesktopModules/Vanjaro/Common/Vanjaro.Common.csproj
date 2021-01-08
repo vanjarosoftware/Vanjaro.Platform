@@ -4080,7 +4080,6 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Images\unknown_avatar.png" />
     <Content Include="web.config" />
     <Content Include="Install\Common.01.00.00.SqlDataProvider" />
     <Content Include="Frameworks\EnjoyHint\src\Casino_Hand\casino_hand-webfont.eot" />
