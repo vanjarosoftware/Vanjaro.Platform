@@ -46,7 +46,16 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.Controllers
             }
 
             ThemeEditor te = Core.Managers.ThemeManager.GetThemeEditor(CatGuid, Guid);
-            Settings.Add("ThemeEditor", new UIData { Name = "ThemeEditor", Options = te ?? new ThemeEditor() });
+            if (te == null)
+                te = new ThemeEditor();
+            try
+            {
+                System.Guid guidResult = System.Guid.Parse(Type);
+                if (guidResult != null)
+                    te.Guid = Type;
+            }
+            catch { }
+            Settings.Add("ThemeEditor", new UIData { Name = "ThemeEditor", Options = te });
             Settings.Add("ControlTypes", new UIData { Name = "ControlTypes", Options = Core.Managers.ThemeManager.GetControlTypes() });
             Settings.Add("IsNew", new UIData { Name = "IsNew", Value = string.IsNullOrEmpty(Guid) ? "true" : "false" });
             Settings.Add("Fonts", new UIData { Name = "Fonts", OptionsText = "Name", OptionsValue = "Value", Options = Core.Managers.ThemeManager.GetDDLFonts(CatGuid), Value = "0" });
