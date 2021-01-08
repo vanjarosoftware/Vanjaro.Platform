@@ -161,22 +161,8 @@ namespace Vanjaro.Skin
             ResetModulePanes();
             InitGuidedTours();
             AccessDenied();
-            InjectAnalyticsScript();
             AnalyticsManager.AnalyticsPost();
-
-
-
-            if (HttpContext.Current.Application["VanjaroClientID"] != null && !string.IsNullOrEmpty(HttpContext.Current.Application["VanjaroClientID"].ToString()))
-            {
-                Dictionary<string, string> eventParam = new Dictionary<string, string>();
-                eventParam.Add("install", "platform");
-                Analytics.Content.Event events = new Analytics.Content.Event()
-                {
-                    name = "install",
-                    parameter = eventParam
-                };
-                Analytics.TrackEvent("mp/collect", events);
-            }
+            InjectAnalyticsScript();
         }
 
         private void AccessDenied()
@@ -227,17 +213,16 @@ namespace Vanjaro.Skin
         {
             if (HostController.Instance.GetBoolean("VJImprovementProgram", true))
             {
-                if (string.IsNullOrEmpty(CookieManager.GetValue("vj_AnalyticsClientID")))
+                if (Analytics.RegisterScript)
                 {
-                    //Request Services Framework
-                    ServicesFramework.Instance.RequestAjaxScriptSupport();
-                    ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
-
-                    WebForms.RegisterClientScriptBlock(Page, "GTagManager", "<script type='text/javascript' async src='https://www.googletagmanager.com/gtag/js?id=" + Analytics.MeasurementID + "'></script>", false);
-                    WebForms.RegisterClientScriptBlock(Page, "GTagManagerScript", "window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); ", true);
-                    WebForms.RegisterClientScriptBlock(Page, "GoogleAnalyticsClientKey", "function SetClientKey(clientKey){var sf = $.ServicesFramework(-1);$.ajax({ type: 'POST', url: window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'Analytics/SetClientKey', contentType: 'application/json;charset=utf-8',dataType: 'json',headers: {'ModuleId': parseInt(sf.getModuleId()),'TabId': parseInt(sf.getTabId()),'RequestVerificationToken': sf.getAntiForgeryValue(),'client_id': clientKey}, success: function (response) {}});}", true);
-                    string script = @"$(document).ready(function () {gtag('get', 'UA-XXXXXXXX-Y', 'client_id', (clientID) => {console.log(clientID); SetClientKey(clientID)});  });";
-                    WebForms.RegisterStartupScript(Page, "VanjaroNeedClientID", script, true);
+                    string PostEvent = Analytics.PostEvent();
+                    if (!string.IsNullOrEmpty(PostEvent))
+                    {
+                        WebForms.RegisterClientScriptBlock(Page, "GTagManager", "<script type='text/javascript' async src='https://www.googletagmanager.com/gtag/js?id=" + Analytics.MeasurementID + "'></script>", false);
+                        //WebForms.RegisterStartupScript(Page, "GTagManagerScript", "window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', '" + Analytics.MeasurementID + "', { 'send_page_view': false }); " + PostEvent, true);
+                        string script = @"$(document).ready(function () {window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', '" + Analytics.MeasurementID + "', { 'send_page_view': false }); " + PostEvent + "});";
+                        WebForms.RegisterStartupScript(Page, "AnalyticsPostEventScript", script, true);
+                    }
                 }
             }
         }

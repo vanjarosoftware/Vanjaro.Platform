@@ -29,88 +29,56 @@ namespace Vanjaro.Core.Services
         public const string MeasurementID = "G-WJTPTNNMHN";
 #endif
 
-
-        public static void TrackEvent(Content.Event Event)
+        public static void TrackEvent(Event Event)
         {
-            Content content = new Content()
+            if (Event != null)
             {
-                events = Event
-            };
+                if (HttpContext.Current.Application["AnalyticEvents"] == null)
+                    HttpContext.Current.Application["AnalyticEvents"] = new List<Event>();
 
-            TrackEvent("mp/collect", content);
-        }
-        public static void TrackEvent(Content content)
-        {
-            TrackEvent("mp/collect", content);
-        }
-        public static void TrackEvent(string Action, Content.Event Event)
-        {
-            Content content = new Content()
-            {
-                events = Event
-            };
-            TrackEvent(Action, content);
-        }
-        public static void TrackEvent(string Action, Content content)
-        {
-            if (string.IsNullOrEmpty(Action) || string.IsNullOrEmpty(content.clientId))
-                return;
-
-            if (HostController.Instance.GetBoolean("VJImprovementProgram", true))
-                PostWebResponse(TrackUrl + Action + "?measurement_id=" + MeasurementID + "&api_secret=" + SecretKey, content);
-        }
-        private static void PostWebResponse(string Url, Content content)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(Url);
-                string Json = JsonConvert.SerializeObject(content, Formatting.Indented);
-                var stringContent = new StringContent(Json, Encoding.UTF8, "application/json");
-                client.DefaultRequestHeaders.Add("user-agent", HttpContext.Current.Request.UserAgent);
-                HttpResponseMessage Res = client.PostAsync("", stringContent).Result;
-            }
-        }
-
-
-        #region Post Content Class
-        public class Content
-        {
-            string _ClientID = null;
-            public string clientId
-            {
-                get
+                if (HttpContext.Current.Application["AnalyticEvents"] != null)
                 {
-                    if (_ClientID == null)
+                    Event.parameter.Add("send_to", MeasurementID);
+                    List<Event> e = new List<Event>();
+                    e = (List<Event>)HttpContext.Current.Application["AnalyticEvents"];
+                    e.Add(Event);
+                    HttpContext.Current.Application["AnalyticEvents"] = e;
+                }
+            }           
+        }
 
-                        if (!string.IsNullOrEmpty(CookieManager.GetValue("vj_AnalyticsClientID")))
-                            _ClientID = CookieManager.GetValue("vj_AnalyticsClientID");
-                        else
+        public static string PostEvent()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (HttpContext.Current.Application["AnalyticEvents"] != null && ((List<Event>)HttpContext.Current.Application["AnalyticEvents"]).Count > 0)
+            {
+                foreach (Event e in (List<Event>)HttpContext.Current.Application["AnalyticEvents"])
+                {
+                    if (e.parameter.Count > 0)
+                    {
+                        StringBuilder s = new StringBuilder();
+                        s.Append("gtag('event','" + e.name + "',{");
+                        foreach (var p in e.parameter)
                         {
-                            Exceptions.LogException(new Exception("Analytics ClientID is null"));
-                            _ClientID = null;
+                            s.Append("'" + p.Key + "': '" + p.Value + "',");
                         }
-                    return _ClientID;
+                        sb.Append(s.ToString().TrimEnd(',') + "});");
+                    }
                 }
             }
-            public string userId { get { return HostController.Instance.GetString("GUID"); } }
-            public bool nonPersonalizedAds { get; set; }
-            public Event events { get; set; }
+            HttpContext.Current.Application["AnalyticEvents"] = null;
+            return sb.ToString();
+        }
 
-            public class Event
-            {
-                public string name { get; set; }
+        public static bool RegisterScript { get { return (HttpContext.Current.Application["AnalyticEvents"] != null && ((List<Event>)HttpContext.Current.Application["AnalyticEvents"]).Count > 0); } }
 
-                [JsonProperty(PropertyName = "params")]
-                public Dictionary<string, string> parameter { get; set; }
-            }
+        #region Post Content Class
+
+        public class Event
+        {
+            public string name { get; set; }
+            public Dictionary<string, string> parameter { get; set; }
         }
         #endregion
-
     }
-
-
-
-
-
-
 }
