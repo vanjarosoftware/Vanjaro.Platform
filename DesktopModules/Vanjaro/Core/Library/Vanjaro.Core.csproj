@@ -47,7 +47,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Components\Constants.cs" />
-    <Compile Include="Components\HttpModule.cs" />
     <Compile Include="Components\Interfaces\IReviewComment.cs" />
     <Compile Include="Components\Interfaces\ITheme.cs" />
     <Compile Include="Components\NotificationItem.cs" />
@@ -120,6 +119,7 @@
     <Compile Include="Managers\LocalizationManager.cs" />
     <Compile Include="Managers\ThemeManager.cs" />
     <Compile Include="Managers\NotificationManager.cs" />
+    <Compile Include="Services\Analytics\AnalyticsStartup.cs" />
     <Compile Include="Services\Captcha\Captcha.cs" />
     <Compile Include="Providers\Youtube.cs" />
     <Compile Include="Providers\Pixabay.cs" />

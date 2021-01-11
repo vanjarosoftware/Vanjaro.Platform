@@ -128,9 +128,9 @@ namespace Vanjaro.Core
                 return null;
             }
 
-            public static bool IsInstalledVanjaroExtension()
+            public static bool IsVanjaroExtensionInstalled()
             {
-                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Settings, "_IsInstalledVanjaroExtension");
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Settings, "IsVanjaroExtensionInstalled");
                 bool? iv = CacheFactory.Get(CacheKey);
                 if (iv == null)
                 {

@@ -801,9 +801,9 @@ namespace Vanjaro.Core
                 return "[G]Skins/Vanjaro/Base.ascx" == PortalController.GetPortalSetting("DefaultPortalSkin", PortalID, Null.NullString);
             }
 
-            public static bool IsInstalledVanjaroExtension()
+            public static bool IsVanjaroExtensionInstalled()
             {
-                return SettingFactory.IsInstalledVanjaroExtension();
+                return SettingFactory.IsVanjaroExtensionInstalled();
             }
 
             public static bool IsVanjaroInstalled()

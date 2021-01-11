@@ -146,18 +146,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
             actionResult.RedirectURL = ServiceProvider.NavigationManager.NavigateURL();
             return actionResult;
         }
-
-        //[HttpPost]
-        //[AuthorizeAccessRoles(AccessRoles = "user,anonymous")]
-        //public ActionResult SetClientKey()
-        //{
-        //    ActionResult actionResult = new ActionResult();
-        //    if (HttpContext.Current.Request.Headers["client_id"] != null)
-        //    {
-        //        Core.Managers.CookieManager.AddValue("vj_AnalyticsClientID", HttpContext.Current.Request.Headers["client_id"], DateTime.UtcNow.AddMinutes(30));
-        //    }
-        //    return actionResult;
-        //}
+                
         public void OnDataConsentComplete(DataConsentEventArgs e)
         {
             DataConsentCompleted?.Invoke(this, e);

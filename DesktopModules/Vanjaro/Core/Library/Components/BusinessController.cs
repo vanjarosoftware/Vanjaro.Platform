@@ -16,7 +16,7 @@ namespace Vanjaro.Core.Components
     {
         public string UpgradeModule(string Version)
         {
-            Managers.AnalyticsManager.TrackEvent(Version);
+            Managers.AnalyticsManager.Update(Version);
             if (Version == "01.00.00")
             {
                 PlatformCleanup();

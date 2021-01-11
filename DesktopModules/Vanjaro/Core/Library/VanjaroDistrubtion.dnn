@@ -1087,10 +1087,7 @@
 									</node>
 									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
 										<add name="VanjaroCommonLibrary" type="Vanjaro.Common.Components.HttpModule, Vanjaro.Common" preCondition="managedHandler" />
-									</node>
-									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
-										<add name="VanjaroCore" type="Vanjaro.Core.Components.HttpModule, Vanjaro.Core" preCondition="managedHandler" />
-									</node>
+									</node>									
 									<node path="/configuration/dotnetnuke" action="update" targetpath="/configuration/dotnetnuke/mail" collision="overwrite">
 										<mail defaultProvider="VanjaroMailProvider">
 											<providers>

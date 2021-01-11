@@ -62,7 +62,6 @@
     <Compile Include="Common\ActionResult.cs" />
     <Compile Include="Common\ExceptionDictionary.cs" />
     <Compile Include="Common\VerboseLevels.cs" />
-    <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\UXManagerController.cs" />
     <Compile Include="Controllers\BlockController.cs" />
     <Compile Include="Controllers\ServiceRouteMapper.cs" />

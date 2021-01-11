@@ -18,14 +18,9 @@ namespace Vanjaro.Core.Services
     public class Analytics
     {
 
-
-#if DEBUG
-        private const string TrackUrl = "https://www.google-analytics.com/";
-        private const string SecretKey = "V9HPVrLWQBu4amOgbWDl9g";
-        public const string MeasurementID = "G-WJTPTNNMHN";
-#else
-        private const string TrackUrl = "https://www.google-analytics.com/";
-        private const string SecretKey = "V9HPVrLWQBu4amOgbWDl9g";
+#if RELEASE
+        public const string MeasurementID = "G-W7S4EZFGWW";
+#else        
         public const string MeasurementID = "G-WJTPTNNMHN";
 #endif
 
@@ -33,44 +28,49 @@ namespace Vanjaro.Core.Services
         {
             if (Event != null)
             {
-                if (HttpContext.Current.Application["AnalyticEvents"] == null)
-                    HttpContext.Current.Application["AnalyticEvents"] = new List<Event>();
+                if (HttpContext.Current.Application["AnalyticsEvents"] == null)
+                    HttpContext.Current.Application["AnalyticsEvents"] = new List<Event>();
 
-                if (HttpContext.Current.Application["AnalyticEvents"] != null)
+                if (HttpContext.Current.Application["AnalyticsEvents"] != null)
                 {
                     Event.parameter.Add("send_to", MeasurementID);
+                    Event.parameter.Add("non_interaction", "true");
                     List<Event> e = new List<Event>();
-                    e = (List<Event>)HttpContext.Current.Application["AnalyticEvents"];
+                    e = (List<Event>)HttpContext.Current.Application["AnalyticsEvents"];
                     e.Add(Event);
-                    HttpContext.Current.Application["AnalyticEvents"] = e;
+                    HttpContext.Current.Application["AnalyticsEvents"] = e;
                 }
-            }           
+            }
         }
 
         public static string PostEvent()
         {
             StringBuilder sb = new StringBuilder();
-            if (HttpContext.Current.Application["AnalyticEvents"] != null && ((List<Event>)HttpContext.Current.Application["AnalyticEvents"]).Count > 0)
+            if (HttpContext.Current.Application["AnalyticsEvents"] != null && ((List<Event>)HttpContext.Current.Application["AnalyticsEvents"]).Count > 0)
             {
-                foreach (Event e in (List<Event>)HttpContext.Current.Application["AnalyticEvents"])
+                foreach (Event e in (List<Event>)HttpContext.Current.Application["AnalyticsEvents"])
                 {
-                    if (e.parameter.Count > 0)
+                    if (!string.IsNullOrEmpty(e.name) && e.parameter.Count > 0)
                     {
                         StringBuilder s = new StringBuilder();
-                        s.Append("gtag('event','" + e.name + "',{");
+                        s.Append("gtag(\"event\",\"" + ((e.name.Length <= 40) ? e.name : e.name.Substring(0, 40)) + "\",{");
                         foreach (var p in e.parameter)
                         {
-                            s.Append("'" + p.Key + "': '" + p.Value + "',");
+                            if (!string.IsNullOrEmpty(p.Value))
+                            {
+                                string Value = p.Value.Trim(' ').TrimEnd(new[] { '/', '\\' });
+                                s.Append("\"" + ((p.Key.Length <= 25) ? p.Key : p.Key.Substring(0, 25)) + "\": \"" + ((Value.Length <= 100) ? Value : Value.Substring(0, 100)) + "\",");
+                            }
                         }
                         sb.Append(s.ToString().TrimEnd(',') + "});");
                     }
                 }
             }
-            HttpContext.Current.Application["AnalyticEvents"] = null;
+            HttpContext.Current.Application["AnalyticsEvents"] = null;
             return sb.ToString();
         }
 
-        public static bool RegisterScript { get { return (HttpContext.Current.Application["AnalyticEvents"] != null && ((List<Event>)HttpContext.Current.Application["AnalyticEvents"]).Count > 0); } }
+        public static bool RegisterScript { get { return (HttpContext.Current.Application["AnalyticsEvents"] != null && ((List<Event>)HttpContext.Current.Application["AnalyticsEvents"]).Count > 0); } }
 
         #region Post Content Class
 

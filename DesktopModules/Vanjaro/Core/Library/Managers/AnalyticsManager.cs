@@ -11,7 +11,7 @@ namespace Vanjaro.Core
     {
         public class AnalyticsManager
         {
-            internal static void TrackEvent(string Version)
+            internal static void Update(string Version)
             {
                 if (Version == "01.00.00" && !SettingManager.IsVanjaroInstalled())
                     SettingManager.UpdateHostSetting("AnalyticsUpdate", "install", false);
@@ -22,6 +22,23 @@ namespace Vanjaro.Core
                     SettingManager.UpdateHostSetting("AnalyticsUpdate", "upgrade", false);
                 }
             }
+            public static void TrackException(Exception ex)
+            {
+                if (ex != null && !string.IsNullOrEmpty(ex.Message))
+                {
+                    Dictionary<string, string> parameter = new Dictionary<string, string>();
+                    parameter.Add("description", ex.Message);
+                    if (!string.IsNullOrEmpty(ex.StackTrace))
+                        parameter.Add("stacktrace", ex.StackTrace);
+                    parameter.Add("fatal", "false");
+                    Analytics.Event e = new Analytics.Event()
+                    {
+                        name = "exception",
+                        parameter = parameter
+                    };
+                    Analytics.TrackEvent(e);
+                }
+            }
 
             public static void Post()
             {
@@ -29,7 +46,7 @@ namespace Vanjaro.Core
 
                 if (!string.IsNullOrEmpty(AnalyticsUpdate))
                 {
-                    bool extension = SettingManager.IsInstalledVanjaroExtension();
+                    bool extension = SettingManager.IsVanjaroExtensionInstalled();
                     if (AnalyticsUpdate == "install")
                     {
                         Dictionary<string, string> parameter = new Dictionary<string, string>();
@@ -56,13 +73,10 @@ namespace Vanjaro.Core
                         SettingManager.UpdateHostSetting("AnalyticsUpdate", "", false);
                     }
                 }
-            }
 
-            private static void Ping()
-            {
                 if (HttpContext.Current != null && HttpContext.Current.Application["PingAnalytics"] != null && HttpContext.Current.Application["PingAnalytics"].ToString().ToLower() == "true")
                 {
-                    bool extension = SettingManager.IsInstalledVanjaroExtension();
+                    bool extension = SettingManager.IsVanjaroExtensionInstalled();
                     Dictionary<string, string> parameter = new Dictionary<string, string>();
                     parameter.Add(extension ? "extension" : "platform", Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.'));
                     Analytics.Event e = new Analytics.Event()
@@ -73,12 +87,6 @@ namespace Vanjaro.Core
                     Analytics.TrackEvent(e);
                     HttpContext.Current.Application["PingAnalytics"] = null;
                 }
-            }
-
-            public static void AnalyticsPost()
-            {
-                Ping();
-                Post();
             }
         }
     }

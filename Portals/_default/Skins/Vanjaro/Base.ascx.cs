@@ -138,7 +138,6 @@ namespace Vanjaro.Skin
         protected void Page_Load(object sender, EventArgs e)
         {
             JavaScript.RequestRegistration(CommonJs.jQuery, null, SpecificVersion.Latest);
-
             InjectThemeJS();
 
             PageManager.Init(Page, PortalSettings);
@@ -168,7 +167,7 @@ namespace Vanjaro.Skin
             ResetModulePanes();
             InitGuidedTours();
             AccessDenied();
-            AnalyticsManager.AnalyticsPost();
+            AnalyticsManager.Post();
             InjectAnalyticsScript();
         }
 
@@ -1168,7 +1167,7 @@ namespace Vanjaro.Skin
         }
 
         #endregion
-        
+
         #endregion
     }
 }
