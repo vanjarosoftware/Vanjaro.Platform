@@ -49,8 +49,8 @@
         $('#dvMarkUp').find('.color').spectrum({
             showInput: true,
             preferredFormat: "hex",
-            showPalette: true,
-            showSelectionPalette: true, // true by default
+            showPalette: false,
+            showAlpha: true,
             palette: [],
             chooseText: "Ok",
             move: function (color) {
