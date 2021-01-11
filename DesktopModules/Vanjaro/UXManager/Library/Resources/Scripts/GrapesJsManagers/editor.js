@@ -2659,6 +2659,10 @@ $(document).ready(function () {
 				}
 			});
 		}
+
+		var selected = VjEditor.getSelected();
+		VjEditor.select();
+		VjEditor.select(selected);
 	});
 
 	$(".notification-set a").click(function () {

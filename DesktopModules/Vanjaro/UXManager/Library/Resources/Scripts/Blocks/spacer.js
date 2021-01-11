@@ -5,17 +5,17 @@
 	const cssComposer = editor.CssComposer;
 
 	if (c.blocks.spacer) {
-        bm.add('spacer').set({
-            label: VjLocalized.Spacer,
+		bm.add('spacer').set({
+			label: VjLocalized.Spacer,
 			attributes: { class: 'fas fa-chalkboard' },
-            category: VjLocalized.Basic,
+			category: VjLocalized.Basic,
 			content: {
 				type: 'spacer',
 				content: `<div class="spacer"></div>`,
 			}
 
 		});
-	}   
+	}
 
 	let domc = editor.DomComponents;
 	const defaultType = domc.getType('default');
@@ -37,7 +37,7 @@
 					bl: 0, // Bottom left
 					bc: 1, // Bottom center
 					br: 0, // Bottom right
-                    minDim: 10,
+					minDim: 10,
 					maxDim: 600,
 					onMove: function (e) {
 						var comp = VjEditor.getSelected();
@@ -48,7 +48,7 @@
 							comp.getTrait('height').set({
 								value: val
 							});
-				
+
 							if (typeof comp.getTrait('height').el != 'undefined') {
 								comp.getTrait('height').el.children[0].value = val
 								comp.getTrait('height').el.children[1].value = val
@@ -61,24 +61,22 @@
 						label: "Space",
 						name: "height",
 						type: "custom_range",
-						cssproperties: [
-							{ name: "height" }
-						],
+						cssproperties: [{ name: "height" }],
 						min: "10",
 						max: "600",
-						value: "50",
-                        changeProp: 1,
+						default: "50",
+						changeProp: 1,
 					}
 				]
 			})
-		}, 
-		{
-			isComponent(el) {
-				if (el && el.classList && el.classList.contains('spacer')) {
-					return { type: 'spacer' };
+		},
+			{
+				isComponent(el) {
+					if (el && el.classList && el.classList.contains('spacer')) {
+						return { type: 'spacer' };
+					}
 				}
-			}
-		}),
+			}),
 		view: defaultView
 	});
 }
