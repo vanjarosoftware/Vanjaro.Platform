@@ -1,7 +1,6 @@
 ﻿using Dnn.PersonaBar.Prompt.Components.Commands.Host;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Web.Client.ClientResourceManagement;
-using LibSassHost;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -241,18 +240,32 @@ namespace Vanjaro.Core
                 bool IncrementCrmVersion = false;
                 if (sb.Length > 0)
                 {
-                    string ThemeCss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + ThemeName + "/Theme.css");
-                    if (!File.Exists(ThemeCss))
-                    {
-                        File.Create(ThemeCss).Dispose();
-                    }
-                    else
-                    {
-                        File.Copy(ThemeCss, ThemeCss.Replace("Theme.css", "Theme.backup.css"), true);
-                    }
+                    string ThemeScss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + ThemeName + "/Theme.scss");
+                    if (!File.Exists(ThemeScss))
+                        File.Create(ThemeScss).Dispose();
+                    File.WriteAllText(ThemeScss, sb.ToString());
 
-                    CompilationResult result = SassCompiler.Compile(sb.ToString(), HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/"));
-                    File.WriteAllText(ThemeCss, result.CompiledContent);
+                    string ThemeCss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + ThemeName + "/Theme.css");
+                    if (File.Exists(ThemeCss))
+                        File.Copy(ThemeCss, ThemeCss.Replace("Theme.css", "Theme.backup.css"), true);
+
+                    string _out = "";
+                    Process _process = new Process();
+                    _process.StartInfo.UseShellExecute = false;
+                    _process.StartInfo.RedirectStandardInput = true;
+                    _process.StartInfo.RedirectStandardError = true;
+                    _process.StartInfo.RedirectStandardOutput = true;
+                    _process.StartInfo.CreateNoWindow = true;
+                    _process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    _process.StartInfo.FileName = HttpContext.Current.Server.MapPath("~/bin/dart.exe");
+                    _process.StartInfo.Arguments = " " + HttpContext.Current.Server.MapPath("~/bin/sass.snapshot") + " " + "" + ThemeScss + " " + ThemeScss.Replace("scss", "css") + " --load-path=" + HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/");
+                    if (_process.Start())
+                    {
+                        _out = _process.StandardOutput.ReadToEnd();
+                        _process.WaitForExit(30000);
+                        if (!_process.HasExited)
+                            _process.Kill();
+                    }
                     IncrementCrmVersion = true;
                 }
 
@@ -274,28 +287,6 @@ namespace Vanjaro.Core
 
                 if (IncrementCrmVersion)
                     PortalController.IncrementCrmVersion(PortalID);
-            }
-
-            [DllImport("kernel32")]
-            private static extern bool FreeLibrary(IntPtr hModule);
-            /// <summary>
-            /// Frees libsass.dll so it can be replaced in Vanjaro Package Update. 
-            /// </summary>
-            public static void UnloadSassCompiler()
-            {
-                try
-                {
-                    foreach (ProcessModule mod in Process.GetCurrentProcess().Modules)
-                    {
-                        if (mod.ModuleName.ToLower() == "libsass.dll")
-                        {
-                            FreeLibrary(mod.BaseAddress);
-                            break;
-                        }
-                    }
-                }
-                catch { }
-
             }
 
             public static void Save(string CategoryGuid, List<ThemeEditorValue> ThemeEditorValues)
