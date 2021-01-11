@@ -627,7 +627,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 actionResult.AddError("UpdateUserBasicInfo_Exception", ex.Message);
                 if (actionResult.Message.Contains("Violation of UNIQUE KEY constraint 'IX_Users'. Cannot insert duplicate key in object 'dbo.Users'"))
                 {

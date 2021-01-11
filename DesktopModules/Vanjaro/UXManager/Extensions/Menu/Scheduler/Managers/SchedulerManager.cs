@@ -44,7 +44,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Managers
             }
             catch (Exception exc)
             {
-                Exceptions.LogException(exc);
+                Core.Managers.ExceptionManage.LogException(exc);
                 return Result.Status = exc.Message.ToString();
             }
         }

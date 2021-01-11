@@ -69,7 +69,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security
                 }
                 catch (Exception exc)
                 {
-                    Exceptions.LogException(exc);
+                    Core.Managers.ExceptionManage.LogException(exc);
                 }
 
                 return response;

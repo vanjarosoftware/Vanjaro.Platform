@@ -218,7 +218,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Azure
             }
             catch (Exception ex)
             {
-                Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 return false;
             }
         }

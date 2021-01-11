@@ -363,7 +363,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
             }
             return TotalPortals;
         }
@@ -384,7 +384,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
                         }
                         catch (Exception ex)
                         {
-                            DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                            Core.Managers.ExceptionManage.LogException(ex);
                         }
                     }
                 }

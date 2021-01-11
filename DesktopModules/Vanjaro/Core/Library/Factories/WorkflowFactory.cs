@@ -239,7 +239,7 @@ namespace Vanjaro.Core
                         }
                     }
                 }
-                catch (Exception ex) { Exceptions.LogException(ex); }
+                catch (Exception ex) { Managers.ExceptionManage.LogException(ex); }
             }
 
             internal static int UpdateSatesOrder(List<WorkflowState> wStates, Workflow wflow, bool IncrementOrder, int? DeletedWorkflowStateOrder)

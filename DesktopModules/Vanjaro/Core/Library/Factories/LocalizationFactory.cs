@@ -32,7 +32,7 @@ namespace Vanjaro.Core
                     }
                     catch (Exception ex)
                     {
-                        Exceptions.LogException(ex);
+                        Managers.ExceptionManage.LogException(ex);
                     }
                 }
             }

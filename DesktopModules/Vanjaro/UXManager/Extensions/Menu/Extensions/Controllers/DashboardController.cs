@@ -85,7 +85,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Error = ex.Message });
             }
         }
@@ -119,7 +119,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }

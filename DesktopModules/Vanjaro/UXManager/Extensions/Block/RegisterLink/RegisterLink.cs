@@ -136,7 +136,7 @@ namespace Vanjaro.UXManager.Extensions.Block.RegisterLink
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 return ex.Message;
             }
         }

@@ -113,7 +113,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 actionResult.AddError("", ex.Message);
             }
             return actionResult;

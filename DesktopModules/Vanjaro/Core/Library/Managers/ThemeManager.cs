@@ -318,7 +318,7 @@ namespace Vanjaro.Core
                     }
                     return true;
                 }
-                catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); return false; }
+                catch (Exception ex) { Managers.ExceptionManage.LogException(ex); return false; }
             }
             private static void UpdateThemeEditorJson(string CategoryGuid, ThemeEditorWrapper ThemeEditorWrapper)
             {
@@ -378,7 +378,7 @@ namespace Vanjaro.Core
                     UpdateThemeEditorJson(categoryGuid, ThemeEditorWrapper);
                     return true;
                 }
-                catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); return false; }
+                catch (Exception ex) { Managers.ExceptionManage.LogException(ex); return false; }
             }
             public static void BuildThemeEditor(ThemeEditor themeEditor)
             {

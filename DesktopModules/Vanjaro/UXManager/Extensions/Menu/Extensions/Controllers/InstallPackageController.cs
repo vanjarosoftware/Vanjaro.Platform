@@ -66,7 +66,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
                     }
                     catch (Exception ex)
                     {
-                        Exceptions.LogException(ex);
+                        Core.Managers.ExceptionManage.LogException(ex);
                         actionResult.HasErrors = true;
                         actionResult.Data = ex.Message;
                         return actionResult;

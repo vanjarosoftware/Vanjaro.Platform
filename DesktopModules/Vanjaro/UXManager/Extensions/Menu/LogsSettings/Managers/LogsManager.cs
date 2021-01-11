@@ -65,7 +65,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message;
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                 }
                 return Result;
             }
@@ -93,7 +93,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
                 }
                 catch (Exception ex)
                 {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                 }
                 return LogTypeInfos;
             }
@@ -133,7 +133,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message;
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                 }
                 return Result;
             }
@@ -155,7 +155,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
                 catch (Exception ex)
                 {
                     Data.Status = ex.Message;
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                 }
                 return Data;
             }
@@ -179,7 +179,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message;
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                 }
                 return Result;
             }
@@ -205,7 +205,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message;
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                 }
                 return Result;
             }

@@ -62,7 +62,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.SQLConsole.Managers
                 }
                 catch (SqlException sqlException)
                 {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(sqlException);
+                    Core.Managers.ExceptionManage.LogException(sqlException);
                     errorMessage = sqlException.Message;
                 }
             }

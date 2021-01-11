@@ -86,7 +86,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput.Controllers
                         new GroupedBasicView(new BasicView { Description = Localization.GetString("NoSearchResultFound", Components.Constants.LocalResourcesFile), Title = "NoSearchResultFound" })
                     };
                     results = NotFound;
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                 }
             }
             actionResult.Data = results;

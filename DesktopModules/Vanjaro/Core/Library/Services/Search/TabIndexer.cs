@@ -72,7 +72,7 @@ namespace Vanjaro.Core.Services.Search
                     }
                     catch (Exception ex)
                     {
-                        Exceptions.LogException(ex);
+                        Managers.ExceptionManage.LogException(ex);
                     }
                 }
 

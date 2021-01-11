@@ -102,7 +102,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 actionResult.Message = ex.Message;
                 actionResult.Data = Core.Managers.ThemeManager.GetMarkUp(AppFactory.Identifier.setting_settings.ToString(), Guid);
                 actionResult.IsSuccess = false;

@@ -116,10 +116,10 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                         }
                     }
                 }
-                catch (Exception ex )
+                catch (Exception ex)
                 {
                     actionResult.AddError("OAuthClientError", Localization.GetString("OAuthClientError", Components.Constants.LocalResourcesFile));
-                    Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                 }
 
                 return actionResult;
@@ -132,7 +132,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                 if (HttpContext.Current.Request.QueryString["returnurl"] != null)
                 {
                     redirectUrl = HttpUtility.UrlDecode(HttpContext.Current.Request.QueryString["returnurl"]);
-                    
+
                     //clean the return url to avoid possible XSS attack.
                     redirectUrl = UrlUtils.ValidReturnUrl(redirectUrl);
 

@@ -102,13 +102,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Azure.Controllers
             catch (StorageException storageException1)
             {
                 StorageException storageException = storageException1;
-                Exceptions.LogException(storageException);
+                Core.Managers.ExceptionManage.LogException(storageException);
                 string httpStatusMessage = storageException.RequestInformation.HttpStatusMessage ?? storageException.Message;
                 actionResult.AddError("InternalServerError", httpStatusMessage);
             }
             catch (Exception exception)
             {
-                Exceptions.LogException(exception);
+                Core.Managers.ExceptionManage.LogException(exception);
                 actionResult.AddError("InternalServerError", "An error has occurred connecting to the Azure account.");
             }
             return actionResult;

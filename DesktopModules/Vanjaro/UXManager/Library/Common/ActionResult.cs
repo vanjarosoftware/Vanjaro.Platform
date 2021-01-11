@@ -50,7 +50,7 @@ namespace Vanjaro.UXManager.Library.Common
 
                 this.Message = LocalizedMessage;
             }
-            DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+            Core.Managers.ExceptionManage.LogException(ex);
         }
 
 

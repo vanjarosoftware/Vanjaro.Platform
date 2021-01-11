@@ -59,7 +59,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.About.Controllers
             }
             catch (Exception exc)
             {
-                Exceptions.LogException(exc);
+                Core.Managers.ExceptionManage.LogException(exc);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.About.Controllers
             }
             catch (Exception exc)
             {
-                Exceptions.LogException(exc);
+                Core.Managers.ExceptionManage.LogException(exc);
             }
         }
 

@@ -44,7 +44,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Languages.Managers
             }
             catch (Exception exc)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(exc);
+                Core.Managers.ExceptionManage.LogException(exc);
             }
             return Languages;
         }
@@ -131,7 +131,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Languages.Managers
             }
             catch (Exception exc)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(exc);
+                Core.Managers.ExceptionManage.LogException(exc);
             }
             return Languages.OrderBy(l => l.DisplayName).ToList();
         }

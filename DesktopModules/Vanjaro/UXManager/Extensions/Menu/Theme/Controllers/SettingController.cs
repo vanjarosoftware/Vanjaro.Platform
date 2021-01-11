@@ -86,7 +86,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Theme.Controllers
                     {
                         ThemeManager.ProcessScss(PortalSettings.PortalId,true);
                     }
-                    catch (System.Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
+                    catch (System.Exception ex) { Core.Managers.ExceptionManage.LogException(ex); }
                 }
                 Core.Managers.SettingManager.UpdateValue(PortalSettings.PortalId, -1, "setting_theme", "Theme", Theme);
             }

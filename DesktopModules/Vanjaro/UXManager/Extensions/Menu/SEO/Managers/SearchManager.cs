@@ -121,12 +121,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.SEO
                 }
                 catch (SearchIndexEmptyException ex)
                 {
-                    Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                     return null;
                 }
                 catch (Exception ex)
                 {
-                    Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                     return null;
                 }
             }

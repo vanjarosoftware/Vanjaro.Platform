@@ -68,7 +68,7 @@ namespace Vanjaro.Core.Services.Search
                 Errored(ref ex);
                 if (ScheduleHistoryItem.ScheduleSource != ScheduleSource.STARTED_FROM_BEGIN_REQUEST)
                 {
-                    Exceptions.LogException(ex);
+                    Managers.ExceptionManage.LogException(ex);
                 }
             }
         }

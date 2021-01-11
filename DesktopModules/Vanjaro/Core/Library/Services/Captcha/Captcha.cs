@@ -66,7 +66,7 @@ namespace Vanjaro.Core.Services
                     }
                     catch (Exception ex)
                     {
-                        DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                        Managers.ExceptionManage.LogException(ex);
                     }
                 }
             }

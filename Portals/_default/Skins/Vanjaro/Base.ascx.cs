@@ -376,7 +376,7 @@ namespace Vanjaro.Skin
                         ContentPane.Controls.Add(lt);
                     }
 
-                    Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                 }
 
                 InjectLoginAuthentication();
@@ -954,7 +954,7 @@ namespace Vanjaro.Skin
                 if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))
                     ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);
             }
-            catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
+            catch (Exception ex) { Core.Managers.ExceptionManage.LogException(ex); }
         }
 
 
@@ -1045,7 +1045,7 @@ namespace Vanjaro.Skin
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
             }
         }
 
@@ -1146,7 +1146,7 @@ namespace Vanjaro.Skin
         }
 
         #endregion
-        
+
         #endregion
     }
 }

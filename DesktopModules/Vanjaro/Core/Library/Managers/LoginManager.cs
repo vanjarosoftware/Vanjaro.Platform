@@ -27,7 +27,7 @@ namespace Vanjaro.Core
     {
         public class LoginManager
         {
-            
+
             public static UserAuthenticatedEventArgs UserLogin(dynamic userLogin)
             {
                 string IPAddress = UserRequestIPAddressController.Instance.GetUserRequestIPAddress(new HttpRequestWrapper(HttpContext.Current.Request));
@@ -135,12 +135,12 @@ namespace Vanjaro.Core
                         }
                     }
                 }
-                catch (Exception exc) { Exceptions.LogException(exc); }
+                catch (Exception exc) { Managers.ExceptionManage.LogException(exc); }
             }
 
             public static string Logoff()
             {
-                
+
                 return ServiceProvider.NavigationManager.NavigateURL(PortalSettings.Current.ActiveTab.TabID, "Logoff");
             }
 
@@ -174,7 +174,7 @@ namespace Vanjaro.Core
                         }
                         catch { continue; }
                     }
-                    
+
                     CacheFactory.Set(CacheFactory.Keys.OAuthClients + "-" + PortalSettings.Current.PortalId, OAuthClients);
                 }
 

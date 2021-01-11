@@ -53,7 +53,7 @@ namespace Vanjaro.Core.Providers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Managers.ExceptionManage.LogException(ex);
             }
             return result;
         }

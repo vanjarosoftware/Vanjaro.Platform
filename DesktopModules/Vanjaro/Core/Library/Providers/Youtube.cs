@@ -57,7 +57,7 @@ namespace Vanjaro.Core.Providers
             }
             catch (Exception ex)
             {
-                Exceptions.LogException(ex);
+                Managers.ExceptionManage.LogException(ex);
             }
             return result;
         }
@@ -172,7 +172,7 @@ namespace Vanjaro.Core.Providers
                     errorTemplate += string.Format("domain: {0}, reason: {1}, message: {2}, extendedHelp: {3}", err["domain"].Value, err["reason"].Value, err["message"].Value, err["extendedHelp"].Value);
                     errorTemplate += Environment.NewLine + Environment.NewLine;
                 }
-                Exceptions.LogException(new Exception(errorTemplate)); throw wex;
+                Managers.ExceptionManage.LogException(new Exception(errorTemplate)); throw wex;
             }
             return searchListResponse;
         }

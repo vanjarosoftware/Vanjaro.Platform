@@ -68,7 +68,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
                     }
                 }
             }
-            catch (Exception ex) { Exceptions.LogException(ex); }
+            catch (Exception ex) { Core.Managers.ExceptionManage.LogException(ex); }
             return result;
         }
 
@@ -96,7 +96,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
             }
             catch (Exception ex)
             {
-                Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
             }
             return result;
         }

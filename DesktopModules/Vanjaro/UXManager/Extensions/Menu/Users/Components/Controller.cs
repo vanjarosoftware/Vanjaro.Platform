@@ -58,7 +58,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Components
                 }
                 catch (Exception ex)
                 {
-                    Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                 }
 
                 return "An error occurred impersonating the user. Please refer to event viewer for details!";

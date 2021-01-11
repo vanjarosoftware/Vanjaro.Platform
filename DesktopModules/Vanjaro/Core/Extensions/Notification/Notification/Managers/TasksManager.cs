@@ -168,7 +168,7 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Managers
             }
             catch (Exception exc)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(exc);
+                Core.Managers.ExceptionManage.LogException(exc);
             }
             return Result;
         }

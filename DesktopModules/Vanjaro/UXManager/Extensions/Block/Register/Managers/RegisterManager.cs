@@ -366,7 +366,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register
 
                         //HS Skin Messages 
                         //actionResult.AddError("SendMail_Error", string.Format(Localization.GetString("SendMail.Error", Localization.SharedResourceFile), newUser.Email));
-                        Exceptions.LogException(new Exception("Skin Messages : " + string.Format(Localization.GetString("SendMail.Error", Localization.SharedResourceFile), newUser.Email)));
+                        Core.Managers.ExceptionManage.LogException(new Exception("Skin Messages : " + string.Format(Localization.GetString("SendMail.Error", Localization.SharedResourceFile), newUser.Email)));
                         actionResult.Message = strMessage;
                     }
                     else

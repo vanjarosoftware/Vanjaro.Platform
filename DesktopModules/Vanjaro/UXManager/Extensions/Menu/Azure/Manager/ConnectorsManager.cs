@@ -26,7 +26,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Azure.Manager
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 actionResult.AddError("AuthenticationFailure", Localization.GetString("AuthenticationFailure.ErrorMessage", Components.Constants.LocalResourceFile));
                 return actionResult;
             }
@@ -65,7 +65,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Azure.Manager
                             actionResult.IsSuccess = true;
                             return actionResult;
                         default:
-                            DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                            Core.Managers.ExceptionManage.LogException(ex);
                             actionResult.AddError("NewContainer", Localization.GetString("NewContainer.ErrorMessage", Components.Constants.LocalResourceFile));
                             break;
                     }
@@ -77,7 +77,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Azure.Manager
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 actionResult.AddError("NewContainer", Localization.GetString("NewContainer.ErrorMessage", Components.Constants.LocalResourceFile));
             }
 
@@ -131,7 +131,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Azure.Manager
             }
             catch (Exception ex)
             {
-                Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 actionResult.AddError("InternalServerError", "InternalServerError", ex);
                 return actionResult;
             }

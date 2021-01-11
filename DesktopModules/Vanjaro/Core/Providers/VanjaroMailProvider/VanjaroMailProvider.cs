@@ -36,7 +36,7 @@ namespace Vanjaro.Core.Providers.Mail
             }
             catch (Exception ex)
             {
-                Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 return ex.Message;
             }
         }

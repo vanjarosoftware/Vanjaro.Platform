@@ -196,7 +196,7 @@ namespace Vanjaro.UXManager.Library
                     }
                     catch (Exception ex)
                     {
-                        Exceptions.LogException(ex);
+                        Core.Managers.ExceptionManage.LogException(ex);
                     }
                     CacheFactory.Set(CacheKey, ModuleDefDTOs);
                 }

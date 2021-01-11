@@ -20,7 +20,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Workflow.Components
             //    {
             //        DotNetNuke.Services.Mail.Mail.SendMail(Queue.From, Queue.To, "", Queue.BCC, DotNetNuke.Services.Mail.MailPriority.Normal, Queue.Subject, DotNetNuke.Services.Mail.MailFormat.Html, System.Text.Encoding.UTF8, Queue.Body, "", "", "", "", "");
             //    }
-            //    catch (Exception ex) { Exceptions.LogException(ex); Success = false; this.Errored(ref ex); }
+            //    catch (Exception ex) { Core.Managers.ExceptionManage.LogException(ex); Success = false; this.Errored(ref ex); }
             //    try
             //    {
             //        Mandeeps.DNN.Library.Workflow.WorkflowController.WorkflowNotificationController.DeleteNotification(Queue);

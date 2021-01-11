@@ -114,7 +114,7 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 return ex.Message;
             }
         }

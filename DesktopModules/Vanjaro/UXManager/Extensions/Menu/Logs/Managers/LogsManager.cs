@@ -64,7 +64,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Logs
                 }
                 catch (Exception ex)
                 {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                     return ex.ToString();
                 }
             }
@@ -121,7 +121,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Logs
                 }
                 catch (Exception ex)
                 {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                     return ex.ToString();
                 }
             }
@@ -139,7 +139,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Logs
                 }
                 catch (Exception ex)
                 {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                     return ex.ToString();
                 }
             }
@@ -172,7 +172,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Logs
                 }
                 catch (Exception ex)
                 {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    Core.Managers.ExceptionManage.LogException(ex);
                     Result.Status = ex.ToString();
                 }
                 return Result;

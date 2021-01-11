@@ -67,7 +67,7 @@ namespace Vanjaro.Core.Providers.Authentication
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                Core.Managers.ExceptionManage.LogException(ex);
                 return ex.Message;
             }
         }

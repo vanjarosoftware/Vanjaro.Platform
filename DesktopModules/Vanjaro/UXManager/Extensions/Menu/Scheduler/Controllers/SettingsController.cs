@@ -68,7 +68,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
             catch (Exception exc)
             {
                 Result.Status = exc.Message.ToString();
-                Exceptions.LogException(exc);
+                Core.Managers.ExceptionManage.LogException(exc);
             }
             ActionResult.Data = Result;
             return ActionResult;

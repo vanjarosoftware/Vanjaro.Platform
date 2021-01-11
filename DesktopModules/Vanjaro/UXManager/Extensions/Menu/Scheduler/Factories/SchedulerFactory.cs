@@ -139,7 +139,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Factories
             }
             catch (Exception exc)
             {
-                Exceptions.LogException(exc);
+                Core.Managers.ExceptionManage.LogException(exc);
                 return exc.Message.ToString();
             }
         }

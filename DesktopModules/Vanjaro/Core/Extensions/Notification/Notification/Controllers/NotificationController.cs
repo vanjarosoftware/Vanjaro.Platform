@@ -53,11 +53,11 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
                     response.NotifyCount = Core.Managers.NotificationManager.RenderNotificationsCount(PortalSettings.PortalId);
                     response.NotificationsCount = NotificationsController.Instance.CountNotifications(this.UserInfo.UserID, PortalSettings.PortalId);
                     response.IsSuccess = true;
-                }                
+                }
             }
             catch (Exception exc)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(exc);
+                Core.Managers.ExceptionManage.LogException(exc);
             }
             return response;
         }

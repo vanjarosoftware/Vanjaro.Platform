@@ -43,7 +43,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
             }
             catch (Exception exc)
             {
-                Exceptions.LogException(exc);
+                Core.Managers.ExceptionManage.LogException(exc);
                 actionResult.AddError("SchedulerStopError", Localization.GetString("SchedulerStopError", Components.Constants.TaskSchedulerResourcesFile));
             }
             return actionResult;
@@ -61,7 +61,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
             catch (Exception exc)
             {
                 actionResult.AddError("SchedulerStartError", Localization.GetString("SchedulerStartError", Components.Constants.TaskSchedulerResourcesFile));
-                Exceptions.LogException(exc);
+                Core.Managers.ExceptionManage.LogException(exc);
             }
             return actionResult;
         }
@@ -111,7 +111,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
             }
             catch (Exception exc)
             {
-                Exceptions.LogException(exc);
+                Core.Managers.ExceptionManage.LogException(exc);
                 actionResult.AddError("SchedulerUpdateError", Localization.GetString("SchedulerUpdateError", Components.Constants.TaskSchedulerResourcesFile));
             }
             return actionResult;
