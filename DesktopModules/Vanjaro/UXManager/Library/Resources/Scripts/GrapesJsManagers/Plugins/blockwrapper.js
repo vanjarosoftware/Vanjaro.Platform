@@ -35,7 +35,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 
                     if (model.attributes.attributes["data-block-allow-customization"] != undefined && model.attributes.attributes["data-block-allow-customization"] == "true") {
                         tb.push({
-                            attributes: { class: 'fa fa-cog', guid: ((typeof model.attributes.attributes["data-block-setting-guid"] != 'undefined') ? model.attributes.attributes["data-block-setting-guid"] : model.attributes.attributes["data-block-guid"]), width: model.attributes.attributes["data-block-width"] },
+                            attributes: { class: 'fa fa-cog', guid: ((typeof model.attributes.attributes["data-block-setting-guid"] != 'undefined') ? model.attributes.attributes["data-block-setting-guid"] : model.attributes.attributes["data-block-guid"]), width: model.attributes.attributes["data-block-width"], title: VjLocalized.Settings},
                             command: 'tlb-vjblock-setting',
                         });
                     }
