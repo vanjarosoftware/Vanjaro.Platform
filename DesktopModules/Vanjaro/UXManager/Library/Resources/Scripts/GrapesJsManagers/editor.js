@@ -1686,6 +1686,18 @@ $(document).ready(function () {
 									return;
 								}
 
+                                $.each(model.attributes.toolbar, function (k, v) {
+
+                                    if (v.attributes['class'] == 'fa fa-arrow-up')
+                                        v.attributes['title'] = 'Select Parent';
+                                    else if (v.command == 'vj-move' || v.command == 'tlb-move')
+                                        v.attributes['title'] = 'Move';
+                                    else if (v.command == 'vj-copy' || v.command == 'tlb-copy')
+                                        v.attributes['title'] = 'Copy';
+                                    else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
+                                        v.attributes['title'] = 'Delete';
+                                });
+
 								var desktop = 'd-desktop-none';
 								var tablet = 'd-tablet-none';
 								var mobile = 'd-mobile-none';

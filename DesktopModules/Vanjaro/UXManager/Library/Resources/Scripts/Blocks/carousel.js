@@ -32,14 +32,14 @@
 					var tb = [];
 
 					tb.push({
-						attributes: { class: 'fa fa-plus' },
+                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddSlide },
 						command: function (t) {
 							return t.runCommand("add-slide");
 						}
 					});
 
 					tb.push({
-						attributes: { class: 'fa fa-arrow-left' },
+                        attributes: { class: 'fa fa-arrow-left', title: VjLocalized.PrevSlide  },
 						command: function (t) {
 							const target = this;
 							return t.runCommand("slider-prev", { target });
@@ -47,7 +47,7 @@
 					});
 
 					tb.push({
-						attributes: { class: 'fa fa-arrow-right' },
+                        attributes: { class: 'fa fa-arrow-right', title: VjLocalized.NextSlide },
 						command: function (t) {
 							const target = this;
 							return t.runCommand("slider-next", { target });
@@ -379,7 +379,7 @@
 					var tb = [];
 
 					tb.push({
-						attributes: { class: 'fa fa-pencil' },
+                        attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
 						command: 'custom-tui-image-editor',
 					});
 
@@ -393,8 +393,8 @@
 					});
 
 					if (model.get('copyable')) {
-						tb.push({
-							attributes: { class: 'fa fa-clone' },
+                        tb.push({
+                            attributes: { class: 'fa fa-clone', title: VjLocalized.CopyCarouselImage },
 							command: 'slide-clone',
 						});
 					}

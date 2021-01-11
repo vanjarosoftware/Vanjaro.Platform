@@ -72,7 +72,7 @@
                     var tb = [];
 
                     tb.push({
-                        attributes: { class: 'fa fa-plus' },
+                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddImage },
                         command: 'add-image',
                     });
 
@@ -154,7 +154,7 @@
                     var tb = [];
 
                     tb.push({
-                        attributes: { class: 'fa fa-plus' },
+                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddImage },
                         command: 'add-image',
                     });
 

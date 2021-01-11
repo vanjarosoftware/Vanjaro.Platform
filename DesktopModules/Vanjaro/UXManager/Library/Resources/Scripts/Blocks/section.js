@@ -35,7 +35,7 @@
 					var GetBlockMenus = function () {
 						var Result = [];
 						if (IsAdmin)
-							Result.push({ 'Title': 'Save As Block', 'Command': 'custom-block' });
+                            Result.push({ 'title': VjLocalized.SaveBlock, 'Command': 'custom-block' });
 						return Result;
 					};
 
