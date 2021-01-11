@@ -80,4 +80,5 @@ licenses-resources.zip
 ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Install\
 Release.txt
 License.txt
-00.05.03.txt
+Cleanup\00.05.03.txt
+Cleanup\01.00.04.txt

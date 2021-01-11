@@ -151,7 +151,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="00.05.03.txt" />
+    <Content Include="Cleanup\01.00.04.txt" />
+    <Content Include="Cleanup\00.05.03.txt" />
     <Content Include="DistrubtionAddList.txt" />
     <Content Include="EULA.txt" />
     <Content Include="Images\1209008.jpg" />
