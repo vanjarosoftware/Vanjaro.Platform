@@ -432,6 +432,9 @@
   <data name="NextSlide.Text" xml:space="preserve">
     <value>Next Slide</value>
   </data>
+  <data name="Notifications.Text" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
   <data name="PrevSlide.Text" xml:space="preserve">
     <value>Prev Slide</value>
   </data>
@@ -443,5 +446,8 @@
   </data>
   <data name="Settings.Text" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Shortcuts.Text" xml:space="preserve">
+    <value>Shortcuts</value>
   </data>
 </root>
