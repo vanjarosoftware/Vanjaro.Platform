@@ -71,10 +71,10 @@
 				if (!model.get('toolbar')) {
 					var tb = [];
 
-					tb.push({
-						attributes: { class: 'fa fa-plus' },
-						command: 'add-image',
-					});
+                    tb.push({
+                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddImage },
+                        command: 'add-image',
+                    });
 
 					tb.push({
 						attributes: { class: 'fa fa-arrow-up' },
@@ -152,10 +152,10 @@
 				if (!model.get('toolbar')) {
 					var tb = [];
 
-					tb.push({
-						attributes: { class: 'fa fa-plus' },
-						command: 'add-image',
-					});
+                    tb.push({
+                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddImage },
+                        command: 'add-image',
+                    });
 
 					tb.push({
 						attributes: { class: 'fa fa-pencil' },

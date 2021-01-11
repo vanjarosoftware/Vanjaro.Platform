@@ -156,7 +156,7 @@ export default (editor, config = {}) => {
 					var tb = [];
 
 					tb.push({
-						attributes: { class: 'fa fa-plus' },
+                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddColumn},
 						command: 'add-column',
 					});
 
