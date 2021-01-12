@@ -17,6 +17,7 @@ namespace Vanjaro.Core
             public static void LogException(Exception ex)
             {
                 Exceptions.LogException(ex);
+                AnalyticsManager.TrackException(ex);
             }
         }
     }
