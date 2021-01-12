@@ -9,6 +9,7 @@ using System.Web;
 using Vanjaro.Common.Data.Scripts;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Services;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Components
 {
@@ -16,7 +17,7 @@ namespace Vanjaro.Core.Components
     {
         public string UpgradeModule(string Version)
         {
-            Managers.AnalyticsManager.Update(Version);
+            AnalyticsUpdate(Version);
             if (Version == "01.00.00")
             {
                 PlatformCleanup();
@@ -46,7 +47,17 @@ namespace Vanjaro.Core.Components
                 }
             }
         }
-
+        private void AnalyticsUpdate(string Version)
+        {
+            if (Version == "01.00.00" && !SettingManager.IsVanjaroInstalled())
+                SettingManager.UpdateHostSetting("AnalyticsUpdate", "install", false);
+            else
+            {
+                if (SettingManager.GetHostSetting("AnalyticsUpdate", false, string.Empty) == "install")
+                    return;
+                SettingManager.UpdateHostSetting("AnalyticsUpdate", "upgrade", false);
+            }
+        }
         private void MoveFilesInRoot()
         {
             try

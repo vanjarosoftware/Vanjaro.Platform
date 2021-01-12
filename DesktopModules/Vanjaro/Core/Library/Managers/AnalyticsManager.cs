@@ -11,18 +11,24 @@ namespace Vanjaro.Core
     {
         public class AnalyticsManager
         {
-            internal static void Update(string Version)
+            public static void TrackEvent(string Name, string Parameter, string Value)
             {
-                if (Version == "01.00.00" && !SettingManager.IsVanjaroInstalled())
-                    SettingManager.UpdateHostSetting("AnalyticsUpdate", "install", false);
-                else
-                {
-                    if (SettingManager.GetHostSetting("AnalyticsUpdate", false, string.Empty) == "install")
-                        return;
-                    SettingManager.UpdateHostSetting("AnalyticsUpdate", "upgrade", false);
-                }
+                Dictionary<string, string> p = new Dictionary<string, string>();
+                p.Add(Parameter, Value);
+                TrackEvent(Name, p);
             }
-            public static void TrackException(Exception ex)
+
+            protected static void TrackEvent(string Name, Dictionary<string, string> Parameter)
+            {
+                Analytics.Event e = new Analytics.Event()
+                {
+                    name = Name,
+                    parameter = Parameter
+                };
+                Analytics.TrackEvent(e);
+            }
+
+            internal static void TrackException(Exception ex)
             {
                 if (ex != null && !string.IsNullOrEmpty(ex.Message))
                 {
@@ -31,12 +37,7 @@ namespace Vanjaro.Core
                     if (!string.IsNullOrEmpty(ex.StackTrace))
                         parameter.Add("stacktrace", ex.StackTrace);
                     parameter.Add("fatal", "false");
-                    Analytics.Event e = new Analytics.Event()
-                    {
-                        name = "exception",
-                        parameter = parameter
-                    };
-                    Analytics.TrackEvent(e);
+                    TrackEvent("exception", parameter);
                 }
             }
 
@@ -51,12 +52,7 @@ namespace Vanjaro.Core
                     {
                         Dictionary<string, string> parameter = new Dictionary<string, string>();
                         parameter.Add(extension ? "extension" : "platform", Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.'));
-                        Analytics.Event e = new Analytics.Event()
-                        {
-                            name = "install",
-                            parameter = parameter
-                        };
-                        Analytics.TrackEvent(e);
+                        TrackEvent("install", parameter);
                         SettingManager.UpdateHostSetting("AnalyticsUpdate", "", false);
 
                     }
@@ -64,12 +60,7 @@ namespace Vanjaro.Core
                     {
                         Dictionary<string, string> parameter = new Dictionary<string, string>();
                         parameter.Add(extension ? "extension" : "platform", Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.'));
-                        Analytics.Event e = new Analytics.Event()
-                        {
-                            name = "upgrade",
-                            parameter = parameter
-                        };
-                        Analytics.TrackEvent(e);
+                        TrackEvent("upgrade", parameter);
                         SettingManager.UpdateHostSetting("AnalyticsUpdate", "", false);
                     }
                 }
@@ -79,12 +70,7 @@ namespace Vanjaro.Core
                     bool extension = SettingManager.IsVanjaroExtensionInstalled();
                     Dictionary<string, string> parameter = new Dictionary<string, string>();
                     parameter.Add(extension ? "extension" : "platform", Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.'));
-                    Analytics.Event e = new Analytics.Event()
-                    {
-                        name = "ping",
-                        parameter = parameter
-                    };
-                    Analytics.TrackEvent(e);
+                    TrackEvent("ping", parameter);
                     HttpContext.Current.Application["PingAnalytics"] = null;
                 }
             }

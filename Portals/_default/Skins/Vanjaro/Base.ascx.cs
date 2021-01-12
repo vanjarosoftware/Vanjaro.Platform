@@ -167,7 +167,6 @@ namespace Vanjaro.Skin
             ResetModulePanes();
             InitGuidedTours();
             AccessDenied();
-            AnalyticsManager.Post();
             InjectAnalyticsScript();
         }
 
@@ -220,6 +219,8 @@ namespace Vanjaro.Skin
         {
             if (HostController.Instance.GetBoolean("VJImprovementProgram", true))
             {
+                AnalyticsManager.Post();
+
                 if (Analytics.RegisterScript)
                 {
                     string PostEvent = Analytics.PostEvent();
