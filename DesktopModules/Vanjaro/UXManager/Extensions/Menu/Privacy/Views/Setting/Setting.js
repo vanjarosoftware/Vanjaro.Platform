@@ -10,14 +10,26 @@
         if (type == 'CookieConsent') {
             $('#CookieConsent a.nav-link').addClass("active");
             $('#DataConsent a.nav-link').removeClass("active");
+            $('#ImprovementProgram a.nav-link').removeClass("active");
             $scope.ShowCookieConsentTab = true;
             $scope.ShowDataConsentTab = false;
+            $scope.ShowImprovementProgramTab = false;
         }
         else if (type == 'DataConsent') {
             $('#CookieConsent a.nav-link').removeClass("active");
             $('#DataConsent a.nav-link').addClass("active");
+            $('#ImprovementProgram a.nav-link').removeClass("active");
             $scope.ShowCookieConsentTab = false;
             $scope.ShowDataConsentTab = true;
+            $scope.ShowImprovementProgramTab = false;
+        }
+        else if (type == 'ImprovementProgram') {
+            $('#CookieConsent a.nav-link').removeClass("active");
+            $('#DataConsent a.nav-link').removeClass("active");
+            $('#ImprovementProgram a.nav-link').addClass("active");
+            $scope.ShowCookieConsentTab = false;
+            $scope.ShowDataConsentTab = false;
+            $scope.ShowImprovementProgramTab = true;
         }
     };
 
@@ -52,7 +64,6 @@
         if (mnValidationService.DoValidationAndSubmit('', 'setting_setting')) {
             $scope.ui.data.UpdatePrivacy.Options.ShowCookieConsent = $scope.ui.data.GetPrivacy.Options.Settings.ShowCookieConsent;
             $scope.ui.data.UpdatePrivacy.Options.CheckUpgrade = $scope.ui.data.GetPrivacy.Options.Settings.CheckUpgrade;
-            $scope.ui.data.UpdatePrivacy.Options.DnnImprovementProgram = $scope.ui.data.GetPrivacy.Options.Settings.DnnImprovementProgram;
             //$scope.ui.data.UpdatePrivacy.Options.DisplayCopyright = $scope.ui.data.GetPrivacy.Options.Settings.DisplayCopyright;
             $scope.ui.data.UpdatePrivacy.Options.CookieMoreLink = $scope.ui.data.GetPrivacy.Options.Settings.CookieMoreLink;
             $scope.ui.data.UpdatePrivacy.Options.DataConsentActive = $scope.ui.data.GetPrivacy.Options.Settings.DataConsentActive;
@@ -60,7 +71,14 @@
             $scope.ui.data.UpdatePrivacy.Options.DataConsentConsentRedirect = $scope.ui.data.PageRedirect.Value;
             $scope.ui.data.UpdatePrivacy.Options.DataConsentDelay = $scope.ui.data.GetPrivacy.Options.Settings.DataConsentDelay;
             $scope.ui.data.UpdatePrivacy.Options.DataConsentDelayMeasurement = $scope.ui.data.HardDelete.Value;
-            common.webApi.post('setting/UpdatePrivacySettings', '', $scope.ui.data.UpdatePrivacy.Options).success(function (data) {
+            var customSettings = {
+                VJImprovementProgram: $scope.ui.data.GetPrivacy.Options.Settings.VJImprovementProgram,
+            };
+            var settingsData = {
+                PrivacySettingsRequest: $scope.ui.data.UpdatePrivacy.Options,
+                CustomSettingsRequest: customSettings
+            };
+            common.webApi.post('setting/UpdatePrivacySettings', '', settingsData).success(function (data) {
                 if (data.IsSuccess) {
                     //window.parent.document.callbacktype = type;
                     $(window.parent.document.body).find('[data-dismiss="modal"]').click();
