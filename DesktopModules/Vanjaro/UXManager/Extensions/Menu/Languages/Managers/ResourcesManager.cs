@@ -14,6 +14,7 @@ using System.Xml;
 using Vanjaro.UXManager.Extensions.Menu.Languages.Components;
 using Vanjaro.UXManager.Extensions.Menu.Languages.Entities;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Languages.Managers
 {
@@ -142,7 +143,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Languages.Managers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
             }
             return Count;
         }
@@ -211,7 +212,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Languages.Managers
                     }
                     if (toBeDeleted.Count > 0)
                     {
-                        DotNetNuke.Services.Exceptions.Exceptions.LogException(new DotNetNuke.Services.Exceptions.ModuleLoadException(Localization.GetString("Obsolete", Locale_ResourceFile)));
+                        ExceptionManager.LogException(new DotNetNuke.Services.Exceptions.ModuleLoadException(Localization.GetString("Obsolete", Locale_ResourceFile)));
                         foreach (string key in toBeDeleted)
                         {
                             editTable.Remove(key);
@@ -317,7 +318,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Languages.Managers
             }
             catch (Exception)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(new DotNetNuke.Services.Exceptions.ModuleLoadException(Localization.GetString("Obsolete", Locale_ResourceFile)));
+                ExceptionManager.LogException(new DotNetNuke.Services.Exceptions.ModuleLoadException(Localization.GetString("Obsolete", Locale_ResourceFile)));
                 xmlLoaded = false;
             }
             if (xmlLoaded)

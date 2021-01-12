@@ -11,6 +11,7 @@ using DotNetNuke.Web.InternalServices;
 using DotNetNuke.Services.Social.Notifications;
 using DotNetNuke.Services.Social.Messaging.Internal;
 using Vanjaro.Core.Extensions.Notification.Notification.Managers;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
 {
@@ -53,11 +54,11 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
                     response.NotifyCount = Core.Managers.NotificationManager.RenderNotificationsCount(PortalSettings.PortalId);
                     response.NotificationsCount = NotificationsController.Instance.CountNotifications(this.UserInfo.UserID, PortalSettings.PortalId);
                     response.IsSuccess = true;
-                }                
+                }
             }
             catch (Exception exc)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(exc);
+                ExceptionManager.LogException(exc);
             }
             return response;
         }

@@ -1,6 +1,4 @@
-﻿using DotNetNuke.Abstractions;
-using DotNetNuke.Common;
-using DotNetNuke.Common.Utilities;
+﻿using DotNetNuke.Common;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Modules;
@@ -12,7 +10,6 @@ using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Authentication;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Tokens;
 using DotNetNuke.UI.Skins;
 using DotNetNuke.Web.Client.ClientResourceManagement;
@@ -398,7 +395,7 @@ namespace Vanjaro.Skin
                         ContentPane.Controls.Add(lt);
                     }
 
-                    Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
 
                 InjectLoginAuthentication();
@@ -976,7 +973,7 @@ namespace Vanjaro.Skin
                 if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))
                     ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);
             }
-            catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
+            catch (Exception ex) { ExceptionManager.LogException(ex); }
         }
 
 
@@ -1067,7 +1064,7 @@ namespace Vanjaro.Skin
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
             }
         }
 
