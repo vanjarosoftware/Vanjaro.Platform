@@ -43,10 +43,7 @@ namespace Vanjaro.UXManager.Library
         protected override void OnInit(EventArgs e)
         {
 #if RELEASE
-#else
-#endif
-#if RELEASE
-            TemplateLibraryURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
+            TemplateLibraryURL = "https://library.vanjaro.com/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower();
             ExtensionStoreURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
 # else
             TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower();
