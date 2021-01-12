@@ -1,5 +1,4 @@
-﻿using DotNetNuke.Services.Exceptions;
-using DotNetNuke.Services.FileSystem;
+﻿using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Web.Api;
 using ImageProcessor;
 using ImageProcessor.Imaging.Formats;
@@ -20,6 +19,7 @@ using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.UXManager.Extensions.Apps.Image.Entities;
 using Vanjaro.UXManager.Library.Entities;
+using static Vanjaro.Core.Managers;
 using static Vanjaro.UXManager.Library.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
@@ -68,7 +68,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
                     }
                 }
             }
-            catch (Exception ex) { Core.Managers.ExceptionManage.LogException(ex); }
+            catch (Exception ex) { ExceptionManager.LogException(ex); }
             return result;
         }
 
@@ -81,9 +81,9 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
                 if (HttpContext.Current != null && HttpContext.Current.Request != null && HttpContext.Current.Request.Form != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Form["ImageByte"]) && !string.IsNullOrEmpty(HttpContext.Current.Request.Form["PreviousFileName"]))
                 {
                     byte[] ByteImage = System.Convert.FromBase64String(HttpContext.Current.Request.Form["ImageByte"].Split(',')[1]);
-                    
+
                     string PreviousFile = HttpContext.Current.Request.Form["PreviousFileName"];
-                    
+
                     using (MemoryStream stream = new MemoryStream(ByteImage))
                     {
                         Random random = new Random();
@@ -96,7 +96,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
             }
             return result;
         }
@@ -107,7 +107,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
             dynamic result = "failed";
 
             using (MemoryStream memoryStream = new MemoryStream())
-            { 
+            {
                 if (stream != null)
                 {
                     List<Setting> settings = Managers.SettingManager.GetSettings(PortalSettings.PortalId, 0, "security_settings");

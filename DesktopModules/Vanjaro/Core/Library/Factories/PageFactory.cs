@@ -3,7 +3,6 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Services.Exceptions;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
@@ -177,7 +176,7 @@ namespace Vanjaro.Core
                 }
                 catch (Exception ex)
                 {
-                    Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
             }
 

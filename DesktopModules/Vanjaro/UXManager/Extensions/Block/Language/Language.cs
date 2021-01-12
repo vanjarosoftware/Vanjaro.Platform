@@ -114,7 +114,7 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message;
             }
         }

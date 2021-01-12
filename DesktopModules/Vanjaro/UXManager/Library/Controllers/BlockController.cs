@@ -186,7 +186,7 @@ namespace Vanjaro.UXManager.Library.Controllers
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
             }
             return Result;
         }

@@ -178,7 +178,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Roles.Controllers
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                Core.Managers.ExceptionManager.LogException(ex);
                 actionResult.AddError("HttpStatusCode.InternalServerError", ex.Message);
             }
 

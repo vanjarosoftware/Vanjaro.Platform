@@ -9,6 +9,7 @@ using Vanjaro.Common.Manager;
 using Vanjaro.Core.Entities.Interface;
 using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Extensions.Block.BreadCrumb.Components;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Block.Custom
 {
@@ -86,7 +87,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Custom
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message;
             }
         }

@@ -318,7 +318,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                 }
                 catch (Exception ex)
                 {
-                    Core.Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                     actionResult.IsSuccess = false;
                 }
                 return actionResult;
@@ -604,7 +604,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                                         {
                                             AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
                                         }
-                                        catch (Exception ex) { Core.Managers.ExceptionManage.LogException(ex); }
+                                        catch (Exception ex) { ExceptionManager.LogException(ex); }
                                     }
                                 }
                             }

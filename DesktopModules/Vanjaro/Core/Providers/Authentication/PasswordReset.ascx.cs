@@ -16,6 +16,7 @@ using Vanjaro.Common.Manager;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Entities.Interface;
 using Vanjaro.Core.Entities.Menu;
+using static Vanjaro.Core.Managers;
 using Localization = DotNetNuke.Services.Localization.Localization;
 
 namespace Vanjaro.Core.Providers.Authentication
@@ -67,7 +68,7 @@ namespace Vanjaro.Core.Providers.Authentication
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message;
             }
         }

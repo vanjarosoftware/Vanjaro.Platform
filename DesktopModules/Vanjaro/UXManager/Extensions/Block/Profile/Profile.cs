@@ -13,6 +13,7 @@ using Vanjaro.Common.Manager;
 using Vanjaro.Core.Entities.Interface;
 using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Extensions.Block.Profile.Factories;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Block.Profile
 {
@@ -102,7 +103,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Profile
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message;
             }
         }

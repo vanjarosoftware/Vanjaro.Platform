@@ -20,6 +20,7 @@ using Vanjaro.Core.Services;
 using Vanjaro.UXManager.Extensions.Block.Login.Factories;
 using Vanjaro.UXManager.Library.Common;
 using Vanjaro.UXManager.Library.Entities.Interface;
+using static Vanjaro.Core.Managers;
 using static Vanjaro.UXManager.Extensions.Block.Login.Managers;
 using Localization = DotNetNuke.Services.Localization.Localization;
 
@@ -49,11 +50,11 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
         public ThemeTemplateResponse Render(Dictionary<string, string> Attributes)
         {
-            ActionResult actionResult = LoginManager.OAuthUserLogin();
+            ActionResult actionResult = Managers.LoginManager.OAuthUserLogin();
 
             if (actionResult.HasErrors || actionResult.HasWarnings)
                 WebForms.RegisterStartupScript(HttpContext.Current.Handler as Page, "OAuthClientScriptResponseScript", "Login.processResponse(" + Json.Serialize(actionResult) + ")", true);
-            
+
 
             PortalSettings ps = PortalController.Instance.GetCurrentSettings() as PortalSettings;
             ServicesFramework.Instance.RequestAjaxScriptSupport();
@@ -147,7 +148,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                 };
 
                 login.RegisterUrl = Globals.RegisterURL(HttpUtility.UrlEncode(ServiceProvider.NavigationManager.NavigateURL()), Null.NullString);
-                
+
                 IDictionary<string, object> Objects = new System.Dynamic.ExpandoObject() as IDictionary<string, object>;
                 Objects.Add("Login", login);
                 Objects.Add("UseEmailAsUserName", (PortalController.Instance.GetCurrentSettings() as PortalSettings).Registration.UseEmailAsUserName);
@@ -161,7 +162,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message;
             }
         }

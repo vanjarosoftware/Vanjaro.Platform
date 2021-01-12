@@ -1,8 +1,8 @@
 ﻿using DotNetNuke.Instrumentation;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Scheduling;
 using DotNetNuke.Services.Search.Internals;
 using System;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Services.Search
 {
@@ -68,7 +68,7 @@ namespace Vanjaro.Core.Services.Search
                 Errored(ref ex);
                 if (ScheduleHistoryItem.ScheduleSource != ScheduleSource.STARTED_FROM_BEGIN_REQUEST)
                 {
-                    Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
             }
         }

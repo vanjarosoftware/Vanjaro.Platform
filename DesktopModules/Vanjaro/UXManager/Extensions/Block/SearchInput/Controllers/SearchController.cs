@@ -12,6 +12,7 @@ using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 using static Vanjaro.UXManager.Extensions.Block.SearchInput.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Block.SearchInput.Controllers
@@ -86,7 +87,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput.Controllers
                         new GroupedBasicView(new BasicView { Description = Localization.GetString("NoSearchResultFound", Components.Constants.LocalResourcesFile), Title = "NoSearchResultFound" })
                     };
                     results = NotFound;
-                    Core.Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
             }
             actionResult.Data = results;

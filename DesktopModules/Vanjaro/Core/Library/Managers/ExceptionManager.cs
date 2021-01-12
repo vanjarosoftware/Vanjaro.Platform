@@ -8,7 +8,7 @@ namespace Vanjaro.Core
 {
     public static partial class Managers
     {
-        public class ExceptionManage
+        public class ExceptionManager
         {
             public static void LogException(string Message)
             {

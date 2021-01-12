@@ -12,6 +12,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
 {
@@ -89,7 +90,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
                     }
                     catch (Exception ex)
                     {
-                        Core.Managers.ExceptionManage.LogException(ex);
+                        ExceptionManager.LogException(ex);
                     }
                 }
 
@@ -112,7 +113,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
                     }
                     catch (Exception ex)
                     {
-                        Core.Managers.ExceptionManage.LogException(ex);
+                        ExceptionManager.LogException(ex);
                     }
                 }
             }

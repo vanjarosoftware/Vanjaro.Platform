@@ -1,6 +1,5 @@
 ﻿using DotNetNuke.Entities.Portals;
 using DotNetNuke.Providers.FolderProviders.AzureFolderProvider;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Api;
@@ -14,6 +13,7 @@ using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.Core.Components;
 using Vanjaro.UXManager.Extensions.Menu.Azure.Entities;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Azure.Controllers
 {
@@ -102,13 +102,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Azure.Controllers
             catch (StorageException storageException1)
             {
                 StorageException storageException = storageException1;
-                Core.Managers.ExceptionManage.LogException(storageException);
+                ExceptionManager.LogException(storageException);
                 string httpStatusMessage = storageException.RequestInformation.HttpStatusMessage ?? storageException.Message;
                 actionResult.AddError("InternalServerError", httpStatusMessage);
             }
             catch (Exception exception)
             {
-                Core.Managers.ExceptionManage.LogException(exception);
+                ExceptionManager.LogException(exception);
                 actionResult.AddError("InternalServerError", "An error has occurred connecting to the Azure account.");
             }
             return actionResult;

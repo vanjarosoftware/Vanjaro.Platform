@@ -15,6 +15,7 @@ using Vanjaro.Core.Entities.Menu;
 using Vanjaro.Core.Services;
 using Vanjaro.UXManager.Extensions.Block.Register.Factories;
 using Vanjaro.UXManager.Library.Entities.Interface;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Block.Register
 {
@@ -139,7 +140,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message;
             }
         }

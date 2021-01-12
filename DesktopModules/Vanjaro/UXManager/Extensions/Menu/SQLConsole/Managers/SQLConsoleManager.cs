@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.SQLConsole.Managers
 {
@@ -62,7 +63,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.SQLConsole.Managers
                 }
                 catch (SqlException sqlException)
                 {
-                    Core.Managers.ExceptionManage.LogException(sqlException);
+                    ExceptionManager.LogException(sqlException);
                     errorMessage = sqlException.Message;
                 }
             }

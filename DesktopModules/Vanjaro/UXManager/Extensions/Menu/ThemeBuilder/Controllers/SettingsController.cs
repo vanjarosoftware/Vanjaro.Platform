@@ -11,6 +11,7 @@ using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.Core.Entities.Theme;
 using Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.Factories;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.Controllers
 {
@@ -96,13 +97,13 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.Controllers
             try
             {
                 Core.Managers.ThemeManager.Save(Guid, Data.ThemeEditorValues);
-                Core.Managers.ThemeManager.ProcessScss(PortalSettings.Current.PortalId,true);
+                Core.Managers.ThemeManager.ProcessScss(PortalSettings.Current.PortalId, true);
                 actionResult.Data = Core.Managers.ThemeManager.GetMarkUp(AppFactory.Identifier.setting_settings.ToString(), Guid);
                 actionResult.IsSuccess = true;
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
                 actionResult.Message = ex.Message;
                 actionResult.Data = Core.Managers.ThemeManager.GetMarkUp(AppFactory.Identifier.setting_settings.ToString(), Guid);
                 actionResult.IsSuccess = false;

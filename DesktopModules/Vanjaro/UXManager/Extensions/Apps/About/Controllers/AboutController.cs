@@ -3,7 +3,6 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Web.Api;
@@ -17,6 +16,7 @@ using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Extensions.Apps.About.Managers;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Apps.About.Controllers
 {
@@ -59,7 +59,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.About.Controllers
             }
             catch (Exception exc)
             {
-                Core.Managers.ExceptionManage.LogException(exc);
+                ExceptionManager.LogException(exc);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.About.Controllers
             }
             catch (Exception exc)
             {
-                Core.Managers.ExceptionManage.LogException(exc);
+                ExceptionManager.LogException(exc);
             }
         }
 

@@ -17,6 +17,7 @@ using System.Web.UI;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
 {
@@ -85,7 +86,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Error = ex.Message });
             }
         }
@@ -119,7 +120,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }

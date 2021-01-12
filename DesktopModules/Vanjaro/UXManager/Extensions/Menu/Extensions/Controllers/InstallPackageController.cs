@@ -16,7 +16,7 @@ using System.Web;
 using Vanjaro.Core.Components;
 using Newtonsoft.Json;
 using Dnn.PersonaBar.Extensions.Components.Dto;
-using DotNetNuke.Services.Exceptions;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
 {
@@ -66,7 +66,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
                     }
                     catch (Exception ex)
                     {
-                        Core.Managers.ExceptionManage.LogException(ex);
+                        ExceptionManager.LogException(ex);
                         actionResult.HasErrors = true;
                         actionResult.Data = ex.Message;
                         return actionResult;

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using Vanjaro.UXManager.Extensions.Apps.LogsSettings.Entities;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
 {
@@ -65,7 +66,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message;
-                    Core.Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
                 return Result;
             }
@@ -93,7 +94,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
                 }
                 catch (Exception ex)
                 {
-                    Core.Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
                 return LogTypeInfos;
             }
@@ -133,7 +134,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message;
-                    Core.Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
                 return Result;
             }
@@ -155,7 +156,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
                 catch (Exception ex)
                 {
                     Data.Status = ex.Message;
-                    Core.Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
                 return Data;
             }
@@ -179,7 +180,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message;
-                    Core.Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
                 return Result;
             }
@@ -205,7 +206,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.LogsSettings
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message;
-                    Core.Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
                 return Result;
             }

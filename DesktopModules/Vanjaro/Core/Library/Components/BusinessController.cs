@@ -7,6 +7,7 @@ using System.IO;
 using System.Web;
 using Vanjaro.Common.Data.Scripts;
 using Vanjaro.Core.Data.Entities;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Components
 {
@@ -57,7 +58,7 @@ namespace Vanjaro.Core.Components
             }
             catch (Exception ex)
             {
-                Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
             }
 
         }

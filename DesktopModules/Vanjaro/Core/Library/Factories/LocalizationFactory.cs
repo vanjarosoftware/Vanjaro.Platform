@@ -1,8 +1,8 @@
-﻿using DotNetNuke.Services.Exceptions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Data.PetaPoco;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core
 {
@@ -32,7 +32,7 @@ namespace Vanjaro.Core
                     }
                     catch (Exception ex)
                     {
-                        Managers.ExceptionManage.LogException(ex);
+                        ExceptionManager.LogException(ex);
                     }
                 }
             }

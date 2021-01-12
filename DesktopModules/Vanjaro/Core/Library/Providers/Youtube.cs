@@ -1,7 +1,6 @@
 ﻿using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Services.Exceptions;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -57,7 +56,7 @@ namespace Vanjaro.Core.Providers
             }
             catch (Exception ex)
             {
-                Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
             }
             return result;
         }
@@ -172,7 +171,7 @@ namespace Vanjaro.Core.Providers
                     errorTemplate += string.Format("domain: {0}, reason: {1}, message: {2}, extendedHelp: {3}", err["domain"].Value, err["reason"].Value, err["message"].Value, err["extendedHelp"].Value);
                     errorTemplate += Environment.NewLine + Environment.NewLine;
                 }
-                Managers.ExceptionManage.LogException(new Exception(errorTemplate)); throw wex;
+                ExceptionManager.LogException(new Exception(errorTemplate)); throw wex;
             }
             return searchListResponse;
         }

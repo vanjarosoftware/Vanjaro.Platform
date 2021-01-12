@@ -2,7 +2,6 @@
 using Dnn.PersonaBar.TaskScheduler.Services.Dto;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Scheduling;
 using Microsoft.VisualBasic;
@@ -11,6 +10,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using Vanjaro.UXManager.Extensions.Menu.Scheduler.Entities;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Factories
 {
@@ -139,7 +139,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Factories
             }
             catch (Exception exc)
             {
-                Core.Managers.ExceptionManage.LogException(exc);
+                ExceptionManager.LogException(exc);
                 return exc.Message.ToString();
             }
         }

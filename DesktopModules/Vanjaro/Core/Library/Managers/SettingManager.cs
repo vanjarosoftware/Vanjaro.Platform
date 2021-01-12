@@ -111,7 +111,7 @@ namespace Vanjaro.Core
                     }
                     catch (Exception ex)
                     {
-                        Core.Managers.ExceptionManage.LogException(ex);
+                        ExceptionManager.LogException(ex);
                     }
 
                     Index++;
@@ -165,7 +165,7 @@ namespace Vanjaro.Core
                     }
                     catch (Exception ex)
                     {
-                        Managers.ExceptionManage.LogException(ex);
+                        ExceptionManager.LogException(ex);
                     }
                     Index++;
                 }
@@ -268,7 +268,7 @@ namespace Vanjaro.Core
                 {
                     ThemeManager.ProcessScss(pinfo.PortalID, false);
                 }
-                catch (Exception ex) { Managers.ExceptionManage.LogException(ex); }
+                catch (Exception ex) { ExceptionManager.LogException(ex); }
 
                 string UXManagervDefaultPath = HttpContext.Current.Request.PhysicalApplicationPath + "DesktopModules\\Vanjaro\\Core\\Library\\Images";
                 if (Directory.Exists(UXManagervDefaultPath) && fi != null)

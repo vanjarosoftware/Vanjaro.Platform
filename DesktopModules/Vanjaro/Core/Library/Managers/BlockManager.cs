@@ -252,7 +252,7 @@ namespace Vanjaro.Core
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message.ToString();
-                    Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
                 return Result;
             }
@@ -344,7 +344,7 @@ namespace Vanjaro.Core
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message.ToString();
-                    Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
                 return Result;
             }
@@ -415,7 +415,7 @@ namespace Vanjaro.Core
                                         {
                                             AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
                                         }
-                                        catch (Exception ex) { Managers.ExceptionManage.LogException(ex); }
+                                        catch (Exception ex) { ExceptionManager.LogException(ex); }
                                     }
                                 }
                             }
@@ -456,7 +456,7 @@ namespace Vanjaro.Core
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message.ToString();
-                    Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
                 return Result;
             }

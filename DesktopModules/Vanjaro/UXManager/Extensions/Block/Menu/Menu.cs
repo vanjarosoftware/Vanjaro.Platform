@@ -14,6 +14,7 @@ using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Extensions.Block.Menu.Entities;
 using Vanjaro.UXManager.Extensions.Block.Menu.Factories;
 using Vanjaro.UXManager.Library.Entities.Interface;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Block.Menu
 {
@@ -148,7 +149,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Menu
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message;
             }
         }

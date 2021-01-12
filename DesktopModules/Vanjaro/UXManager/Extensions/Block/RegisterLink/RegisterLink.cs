@@ -15,6 +15,7 @@ using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Extensions.Block.RegisterLink.Factories;
 using Vanjaro.UXManager.Library.Entities.Interface;
+using static Vanjaro.Core.Managers;
 using Localization = DotNetNuke.Services.Localization.Localization;
 
 namespace Vanjaro.UXManager.Extensions.Block.RegisterLink
@@ -136,7 +137,7 @@ namespace Vanjaro.UXManager.Extensions.Block.RegisterLink
             }
             catch (Exception ex)
             {
-                Core.Managers.ExceptionManage.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message;
             }
         }

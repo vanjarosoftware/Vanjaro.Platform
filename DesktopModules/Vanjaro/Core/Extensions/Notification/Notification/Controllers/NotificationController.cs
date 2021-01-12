@@ -11,6 +11,7 @@ using DotNetNuke.Web.InternalServices;
 using DotNetNuke.Services.Social.Notifications;
 using DotNetNuke.Services.Social.Messaging.Internal;
 using Vanjaro.Core.Extensions.Notification.Notification.Managers;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
 {
@@ -57,7 +58,7 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
             }
             catch (Exception exc)
             {
-                Core.Managers.ExceptionManage.LogException(exc);
+                ExceptionManager.LogException(exc);
             }
             return response;
         }

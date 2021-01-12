@@ -6,7 +6,6 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
 using DotNetNuke.Services.Authentication;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Mail;
@@ -20,6 +19,7 @@ using System.Web;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Services.Authentication.OAuth;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 using Localization = DotNetNuke.Services.Localization.Localization;
 
 namespace Vanjaro.UXManager.Extensions.Block.Login
@@ -119,7 +119,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                 catch (Exception ex)
                 {
                     actionResult.AddError("OAuthClientError", Localization.GetString("OAuthClientError", Components.Constants.LocalResourcesFile));
-                    Core.Managers.ExceptionManage.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
 
                 return actionResult;

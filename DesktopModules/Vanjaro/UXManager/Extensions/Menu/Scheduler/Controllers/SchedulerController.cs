@@ -2,7 +2,6 @@
 using Dnn.PersonaBar.TaskScheduler.Services.Dto;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Scheduling;
 using DotNetNuke.Web.Api;
@@ -16,6 +15,7 @@ using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Extensions.Menu.Scheduler.Factories;
 using Vanjaro.UXManager.Extensions.Menu.Scheduler.Managers;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
 {
@@ -160,7 +160,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
             }
             catch (Exception exc)
             {
-                Core.Managers.ExceptionManage.LogException(exc);
+                ExceptionManager.LogException(exc);
                 Result.Status = exc.Message.ToString();
                 ActionResult.AddError("ScheduleItemCreateError", Localization.GetString("ScheduleItemCreateError", Components.Constants.TaskSchedulerResourcesFile));
             }
@@ -217,7 +217,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
             }
             catch (Exception exc)
             {
-                Core.Managers.ExceptionManage.LogException(exc);
+                ExceptionManager.LogException(exc);
                 Result.Status = exc.Message.ToString();
                 ActionResult.AddError("ScheduleItemUpdateError", Localization.GetString("ScheduleItemUpdateError", Components.Constants.TaskSchedulerResourcesFile));
             }
@@ -240,7 +240,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
             }
             catch (Exception exc)
             {
-                Core.Managers.ExceptionManage.LogException(exc);
+                ExceptionManager.LogException(exc);
                 Result.Status = exc.Message.ToString();
                 ActionResult.AddError("DeleteError", Localization.GetString("DeleteError", Components.Constants.TaskSchedulerResourcesFile));
             }
@@ -260,7 +260,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
             }
             catch (Exception exc)
             {
-                Core.Managers.ExceptionManage.LogException(exc);
+                ExceptionManager.LogException(exc);
                 Result.Status = exc.Message.ToString();
             }
             return ActionResult;
