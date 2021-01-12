@@ -100,7 +100,7 @@
 					var tb = [];
 
 					tb.push({
-						attributes: { class: 'fa fa-pencil' },
+                        attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
 						command: 'custom-tui-image-editor',
 					});
 

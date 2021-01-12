@@ -49,7 +49,7 @@ namespace Vanjaro.Common.Components
         public virtual void OnStart(HttpContext context)
         {
             UpdateLowerCaseUrlRegex();
-            PreCompileRazorTemplates(context);
+            PreCompileRazorTemplates(context);           
         }
         private static void PreCompileRazorTemplates(HttpContext context)
         {

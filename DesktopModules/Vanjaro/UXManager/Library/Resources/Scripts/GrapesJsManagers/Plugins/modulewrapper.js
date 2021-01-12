@@ -23,7 +23,7 @@ export default grapesjs.plugins.add('modulewrapper', (editor, opts = {}) => {
                         if (AppMenusScript.length > 0) {
 
                             tb.push({
-                                attributes: { class: 'fa fa-bars' },
+                                attributes: { class: 'fa fa-bars', title: VjLocalized.Menu},
                                 command: function (t) {
                                     return t.runCommand("tlb-app-actions", {
                                         BlockMenus: jQuery.parseJSON(AppMenusScript.html())
@@ -51,7 +51,7 @@ export default grapesjs.plugins.add('modulewrapper', (editor, opts = {}) => {
                     if (AppMenus != undefined) {
                         $.each(AppMenus, function (k, v) {
                             tb.push({
-                                attributes: { class: v.Class, guid: v.ItemGuid, width: v.Width },
+                                attributes: { class: v.Class, guid: v.ItemGuid, width: v.Width, title: VjLocalized.Menu },
                                 command: v.Command,
                             });
                         });

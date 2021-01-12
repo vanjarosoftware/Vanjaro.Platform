@@ -405,4 +405,49 @@
   <data name="Extra.Text" xml:space="preserve">
     <value>Extra</value>
   </data>
+  <data name="AddSlide.Text" xml:space="preserve">
+    <value>Add Slide</value>
+  </data>
+  <data name="AddColumn.Text" xml:space="preserve">
+    <value>Add Column</value>
+  </data>
+  <data name="AddListItem.Text" xml:space="preserve">
+    <value>Add List Item</value>
+  </data>
+  <data name="Copy.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="CopyCarouselImage.Text" xml:space="preserve">
+    <value>Copy Carousel Image</value>
+  </data>
+  <data name="EditImage.Text" xml:space="preserve">
+    <value>Edit Image</value>
+  </data>
+  <data name="Menu.Text" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Move.Text" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="NextSlide.Text" xml:space="preserve">
+    <value>Next Slide</value>
+  </data>
+  <data name="Notifications.Text" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="PrevSlide.Text" xml:space="preserve">
+    <value>Prev Slide</value>
+  </data>
+  <data name="SaveBlock.Text" xml:space="preserve">
+    <value>Save As Block</value>
+  </data>
+  <data name="SelectParent.Text" xml:space="preserve">
+    <value>Select Parent</value>
+  </data>
+  <data name="Settings.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Shortcuts.Text" xml:space="preserve">
+    <value>Shortcuts</value>
+  </data>
 </root>

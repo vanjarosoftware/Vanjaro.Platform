@@ -639,3 +639,5 @@ $(document).on("ajaxSend", function (event, xhr, settings) {
     xhr.setRequestHeader('vj-recaptcha', vj_recaptcha_responsetoken);
 });
 
+$.fn.dnnModuleActions = function (options) {
+};

@@ -122,6 +122,7 @@ namespace Vanjaro.UXManager.Library
 
                     LocalizeGrapeJS();
 
+                    FrameworkManager.Load(this, "Bootstrap");
                     FrameworkManager.Load(this, "FontAwesome");
                 }
                 string NavigateURL = PageManager.GetCurrentTabUrl(PortalSettings);

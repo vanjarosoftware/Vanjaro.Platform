@@ -51,9 +51,16 @@ export default (editor, config = {}) => {
 
 	cmd.add('add-column', ed => {
 		var Selected = VjEditor.getSelected();
+		var Row = '<div class="row"></div>';
 		var Column = '<div class="col-lg-1 col-sm-1 col-1"></div>';
-		if (Selected.attributes.type == 'grid')
-			Selected.components().models[0].components().add(Column);
+		if (Selected.attributes.type == 'grid') {
+			if (typeof Selected.components().models[0] != 'undefined')
+				Selected.components().models[0].components().add(Column);
+			else {
+				Selected.components().add(Row);
+				Selected.components().models[0].components().add(Column);
+			}
+		}
 		else
 			Selected.parent().components().add(Column);
 	});
@@ -113,7 +120,7 @@ export default (editor, config = {}) => {
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				'custom-name': 'Row',
 				tagName: 'div',
-				draggable: false,
+				draggable: true,
 				droppable: '[data-gjs-type=column]',
 				layerable: true,
 				selectable: false,
@@ -122,7 +129,7 @@ export default (editor, config = {}) => {
 			})
 		}, {
 			isComponent(el) {
-				if (el && el.tagName && el.tagName.toLowerCase() == 'div' && el.classList && el.classList.contains('row') && el.parentElement.classList.contains('container')) {
+				if (el && el.tagName && el.tagName.toLowerCase() == 'div' && el.classList && el.classList.contains('row')) {
 					return { type: 'row' };
 				}
 			}
@@ -149,7 +156,7 @@ export default (editor, config = {}) => {
 					var tb = [];
 
 					tb.push({
-						attributes: { class: 'fa fa-plus' },
+                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddColumn},
 						command: 'add-column',
 					});
 
@@ -242,7 +249,7 @@ export default (editor, config = {}) => {
 							{ id: 'center', name: 'center', image: 'align-center' },
 							{ id: 'right', name: 'right', image: 'align-right' },
 						],
-						value: "left",
+						default: "left",
 						changeProp: 1,
 					},
 					{
@@ -255,7 +262,7 @@ export default (editor, config = {}) => {
 							{ id: 'middle', class: 'align-self-center', name: 'Middle', image: 'align-middle' },
 							{ id: 'bottom', class: 'align-self-end', name: 'Bottom', image: 'align-bottom' },
 						],
-						value: 'top',
+						default: 'top',
 						changeProp: 1,
 					},
 					{
@@ -375,7 +382,7 @@ export default (editor, config = {}) => {
 						{ id: 'fixed', name: 'Fixed', class: 'container' },
 						{ id: 'fluid', name: 'Fluid', class: 'container-fluid' }
 					],
-					value: 'fixed',
+					default: 'fixed',
 					changeProp: 1,
 				}, {
 					label: 'Alignment',
@@ -389,7 +396,7 @@ export default (editor, config = {}) => {
 						{ id: 'around', class: 'justify-content-around', name: 'Around', image: 'align-around' },
 						{ id: 'between', class: 'justify-content-between', name: 'Between', image: 'align-between' },
 					],
-					value: 'left',
+					default: 'left',
 					changeProp: 1,
 				},
 				]

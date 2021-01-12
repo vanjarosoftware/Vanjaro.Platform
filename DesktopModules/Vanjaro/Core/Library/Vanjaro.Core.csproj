@@ -102,6 +102,7 @@
     <Compile Include="Factories\PortalFactory.cs" />
     <Compile Include="Factories\SettingFactory.cs" />
     <Compile Include="Factories\WorkflowFactory.cs" />
+    <Compile Include="Managers\AnalyticsManager.cs" />
     <Compile Include="Managers\CookieManager.cs" />
     <Compile Include="Managers\ExceptionManager.cs" />
     <Compile Include="Managers\SectionPermissionManager.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Managers\LocalizationManager.cs" />
     <Compile Include="Managers\ThemeManager.cs" />
     <Compile Include="Managers\NotificationManager.cs" />
+    <Compile Include="Services\Analytics\AnalyticsStartup.cs" />
     <Compile Include="Services\Captcha\Captcha.cs" />
     <Compile Include="Providers\Youtube.cs" />
     <Compile Include="Providers\Pixabay.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="Services\Authentication\OAuth\OAuthClient.cs" />
     <Compile Include="Services\Authentication\OAuth\OAuthUser.cs" />
     <Compile Include="Services\PageContext\PageContext.cs" />
+    <Compile Include="Services\Analytics\Analytics.cs" />
     <Compile Include="Services\Search\SearchEngine.cs" />
     <Compile Include="Services\Search\SearchEngineScheduler.cs" />
     <Compile Include="Services\Search\TabIndexer.cs" />
@@ -152,7 +155,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="00.05.03.txt" />
+    <Content Include="Cleanup\01.00.04.txt" />
+    <Content Include="Cleanup\00.05.03.txt" />
     <Content Include="DistrubtionAddList.txt" />
     <Content Include="EULA.txt" />
     <Content Include="Images\1209008.jpg" />

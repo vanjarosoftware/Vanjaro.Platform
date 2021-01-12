@@ -62,7 +62,21 @@
     TemplateLibrary: "[LS:TemplateLibrary]",
     PrefixAppName: "[LS:PrefixAppName]",
     ExportMessage: "[LS:ExportMessage]",
-    Typography: "[LS:Typography]"
+    Typography: "[LS:Typography]",
+    AddSlide: "[LS:AddSlide]",
+    PrevSlide: "[LS:PrevSlide]",
+    NextSlide: "[LS:NextSlide]",
+    EditImage: "[LS:EditImage]",
+    AddColumn: "[LS:AddColumn]",
+    AddListItem: "[LS:AddListItem]",
+    SaveBlock: "[LS:SaveBlock]",
+    Settings: "[LS:Settings]",
+    Menu: "[LS:Menu]",
+    SelectParent: "[LS:SelectParent]",
+    Move: "[LS:Move]",
+    Copy: "[LS:Copy]",
+    Delete: "[LS:Delete]",
+    CopyCarouselImage: "[LS:CopyCarouselImage]",
 };
 
 $.fn.dnnModuleDragDrop = function (options) {
