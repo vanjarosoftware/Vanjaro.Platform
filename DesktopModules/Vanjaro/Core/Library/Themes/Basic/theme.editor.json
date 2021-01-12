@@ -1,5 +1,5 @@
 {
-  "DeveloperMode": true,
+  "DeveloperMode": false,
   "ThemeEditors": [
     {
       "Guid": "5ae3f702-7604-4480-817b-bee50df0ec32",
@@ -3425,7 +3425,7 @@
           "Type": "Dropdown"
         }
       ],
-      "Sass": ".head-style-5 {\n  text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 1px;\n}"
+      "Sass": ".head-style-5 {\n  text-shadow: 2px 2px 2px #999999;\n}"
     },
     {
       "Guid": "3b64c21e-cfda-4fc5-9496-81c826708ade",
@@ -3572,7 +3572,7 @@
           "Type": "Dropdown"
         }
       ],
-      "Sass": ""
+      "Sass": ".head-style-6 {\n  text-shadow: 1px 0px 1px #ccc, 0px 1px 1px #eee, 2px 1px 1px #ccc, 1px 2px 1px #eee, 3px 2px 1px #ccc, 2px 3px 1px #eee, 4px 3px 1px #ccc, 3px 4px 1px #eee, 5px 4px 1px #ccc, 4px 5px 1px #eee, 6px 5px 1px #ccc, 5px 6px 1px #eee, 7px 6px 1px #ccc;\n}"
     },
     {
       "Guid": "feb2d523-21a2-49d7-9bc1-738cc5ac59a4",
@@ -3646,12 +3646,12 @@
           "Increment": 1.0,
           "Guid": "a9f4cf91-5ede-47bf-bcca-460538f0c5f2",
           "Title": "Letter Spacing",
-          "DefaultValue": "0",
+          "DefaultValue": "5",
           "Suffix": "px",
-          "CustomCSS": ".head-style-7 {\n    letter-spacing: $hsSevLetterSpacing;\n}",
-          "PreviewCSS": ".head-style-7 {\n    letter-spacing: $hsSevLetterSpacing;\n}",
+          "CustomCSS": ".head-style-7 {\n    letter-spacing: $hsSevLetterSpacingpx;\n}",
+          "PreviewCSS": ".head-style-7 {\n    letter-spacing: $hsSevLetterSpacingpx;\n}",
           "LessVariable": "$hsSevLetterSpacing",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
@@ -3662,10 +3662,10 @@
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".head-style-7 {\n    word-spacing: $hsSevWordSpacing;\n}",
-          "PreviewCSS": ".head-style-7 {\n    word-spacing: $hsSevWordSpacing;\n}",
+          "CustomCSS": ".head-style-7 {\n    word-spacing: $hsSevWordSpacingpx;\n}",
+          "PreviewCSS": ".head-style-7 {\n    word-spacing: $hsSevWordSpacingpx;\n}",
           "LessVariable": "$hsSevWordSpacing",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
@@ -3685,12 +3685,12 @@
           ],
           "Guid": "5011d4d9-962a-4495-8277-6bb0a62f2de8",
           "Title": "Text Transform",
-          "DefaultValue": "uppercase",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": ".head-style-7 {\n    text-transform: $hsSevTextTransform;\n}",
           "PreviewCSS": ".head-style-7 {\n    text-transform: $hsSevTextTransform;\n}",
           "LessVariable": "$hsSevTextTransform",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -3715,7 +3715,7 @@
           "CustomCSS": ".head-style-7 {\n    text-decoration: $hsSevTextDecoration;\n}",
           "PreviewCSS": ".head-style-7 {\n    text-decoration: $hsSevTextDecoration;\n}",
           "LessVariable": "$hsSevTextDecoration",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
@@ -4669,12 +4669,12 @@
           "Increment": 1.0,
           "Guid": "e612dd89-3ed9-46dc-94ab-8081230d1deb",
           "Title": "Letter Spacing",
-          "DefaultValue": "0",
+          "DefaultValue": "5",
           "Suffix": "px",
           "CustomCSS": ".paragraph-style-4 {\n    letter-spacing: $psFourLetterSpacingpx;\n}",
           "PreviewCSS": ".paragraph-style-4 {\n    letter-spacing: $psFourLetterSpacingpx;\n}",
           "LessVariable": "$psFourLetterSpacing",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
@@ -4742,7 +4742,7 @@
           "Type": "Dropdown"
         }
       ],
-      "Sass": ".paragraph-style-4:first-letter {\n    float: left;\n    font-size: 75px;\n    line-height: 60px;\n    padding: 4px;\n    margin-right: 5px;\n}\n"
+      "Sass": ""
     },
     {
       "Guid": "a55c9de9-e121-4b8b-af5f-31d02f03c6d8",
@@ -4777,6 +4777,7 @@
           "CustomCSS": ".paragraph-style-5 {\n    font-weight: $psFiveFontWeight;\n}\n",
           "PreviewCSS": ".paragraph-style-5 {\n    font-weight: $psFiveFontWeight;\n}\n",
           "LessVariable": "$psFiveFontWeight",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -4787,6 +4788,7 @@
           "CustomCSS": ".paragraph-style-5 {\n    font-family: $psFiveFontFamily;\n}\n",
           "PreviewCSS": ".paragraph-style-5 {\n    font-family: $psFiveFontFamily;\n}\n",
           "LessVariable": "$psFiveFontFamily",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
@@ -4800,17 +4802,18 @@
           ],
           "Guid": "64f1f510-d819-4390-937d-b8079f036a18",
           "Title": "Font Style",
-          "DefaultValue": "italic",
+          "DefaultValue": "normal",
           "Suffix": "",
           "CustomCSS": ".paragraph-style-5 {\n    font-style: $psFiveFontStyle;\n}\n",
           "PreviewCSS": ".paragraph-style-5 {\n    font-style: $psFiveFontStyle;\n}\n",
           "LessVariable": "$psFiveFontStyle",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "444c6000-e464-43ff-8b90-813ea4322c78",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -4818,19 +4821,21 @@
           "CustomCSS": ".paragraph-style-5 {\n    letter-spacing: $psFiveLetterSpacingpx;\n}\n",
           "PreviewCSS": ".paragraph-style-5 {\n    letter-spacing: $psFiveLetterSpacingpx;\n}\n",
           "LessVariable": "$psFiveLetterSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "42055911-2ee9-4199-8382-d61b27b13993",
           "Title": "Word Spacing",
-          "DefaultValue": "5",
+          "DefaultValue": "0",
           "Suffix": "px",
           "CustomCSS": ".paragraph-style-5 {\n    word-spacing: $psFiveWordSpacingpx;\n}\n",
           "PreviewCSS": ".paragraph-style-5 {\n    word-spacing: $psFiveWordSpacingpx;\n}",
           "LessVariable": "$psFiveWordSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
@@ -4855,6 +4860,7 @@
           "CustomCSS": ".paragraph-style-5 {\n    text-transform: $psFiveTextTransform;\n}",
           "PreviewCSS": ".paragraph-style-5 {\n    text-transform: $psFiveTextTransform;\n}",
           "LessVariable": "$psFiveTextTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -4879,10 +4885,11 @@
           "CustomCSS": ".paragraph-style-5 {\n    text-decoration: $psFiveTextDecoration;\n}",
           "PreviewCSS": ".paragraph-style-5 {\n    text-decoration: $psFiveTextDecoration;\n}",
           "LessVariable": "$psFiveTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
-      "Sass": ""
+      "Sass": ".paragraph-style-5 {\n  text-shadow: 2px 2px 2px #999999;\n}"
     },
     {
       "Guid": "d37e7a18-f53d-4ef6-9910-67adc181475c",
@@ -5029,7 +5036,7 @@
           "Type": "Dropdown"
         }
       ],
-      "Sass": ".paragraph-style-6 {\n  text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 1px;\n}"
+      "Sass": ".paragraph-style-6 {\n  text-shadow: 1px 0px 1px #ccc, 0px 1px 1px #eee, 2px 1px 1px #ccc, 1px 2px 1px #eee, 3px 2px 1px #ccc, 2px 3px 1px #eee, 4px 3px 1px #ccc, 3px 4px 1px #eee, 5px 4px 1px #ccc;\n}"
     },
     {
       "Guid": "51c2398a-cb67-43fc-8082-ab253fd6f990",
@@ -6207,7 +6214,7 @@
           "Type": "Dropdown"
         }
       ],
-      "Sass": ".button-style-5 {\n     text-shadow: 0px 2px 3px rgba(0,0,0,0.4),\n               0px 4px 7px rgba(0,0,0,0.1),\n               0px 9px 12px rgba(0,0,0,0.1);\n}"
+      "Sass": ".button-style-5 {\n     text-shadow:  2px 2px 2px #000000;\n}"
     },
     {
       "Guid": "d117654c-7a56-45af-a343-d95883a597fa",
