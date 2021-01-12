@@ -360,7 +360,7 @@
 
 					if (typeof value == "string") {
 						inputvalue = value.replace(/[^-\d\.]/g, '');
-						unit = value.replace(/-/g, ' ').replace(/\d+/, '');
+						unit = value.replace(/-/g, '').replace(/\d+/, '');
 					}
 					else {
 						if (typeof model.attributes.unit != 'undefined')
