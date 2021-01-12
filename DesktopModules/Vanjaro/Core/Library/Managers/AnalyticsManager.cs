@@ -18,12 +18,12 @@ namespace Vanjaro.Core
                 TrackEvent(Name, p);
             }
 
-            protected static void TrackEvent(string Name, Dictionary<string, string> Parameter)
+            protected static void TrackEvent(string Name, Dictionary<string, string> Parameters)
             {
                 Analytics.Event e = new Analytics.Event()
                 {
                     name = Name,
-                    parameter = Parameter
+                    parameter = Parameters
                 };
                 Analytics.TrackEvent(e);
             }
