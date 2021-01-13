@@ -143,6 +143,10 @@
         color: #e6e9ec;
     }
 
+    .modal-toggle:focus {
+       outline: none;
+    }
+
     .modal-toggle.modalclosebtn {
         position: fixed;
         background: #0088cc;
