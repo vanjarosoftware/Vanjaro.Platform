@@ -206,7 +206,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
                     }
                     catch (Exception ex)
                     {
-                        DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                        ExceptionManager.LogException(ex);
                         ActionResult.AddError("", ex.Message);
                     }
                 }
@@ -229,7 +229,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
                         }
                         catch (Exception ex)
                         {
-                            DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                            ExceptionManager.LogException(ex);
                             ActionResult.AddError("", ex.Message);
                         }
                     }
@@ -520,7 +520,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
                 }
                 catch (Exception ex)
                 {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                     ActionResult.AddError("", ex.Message);
                 }
             }

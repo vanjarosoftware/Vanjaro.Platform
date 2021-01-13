@@ -18,6 +18,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.SEO
 {
@@ -121,12 +122,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.SEO
                 }
                 catch (SearchIndexEmptyException ex)
                 {
-                    Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                     return null;
                 }
                 catch (Exception ex)
                 {
-                    Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                     return null;
                 }
             }

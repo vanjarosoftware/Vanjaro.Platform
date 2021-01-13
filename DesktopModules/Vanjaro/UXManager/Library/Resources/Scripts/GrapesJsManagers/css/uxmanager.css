@@ -2635,25 +2635,25 @@ span.notificationname {
 }
 
 .traitsmanager .preset-wrapper.heading label {
-	display: flex;
-	align-items: center;
-	margin: 0px;
-	font-size: 2vw;
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    font-size: 32px;
 }
 
 .traitsmanager .preset-wrapper.text label {
-	margin: 10px 0px;
-	font-size: 1vw;
-	white-space: normal;
+    margin: 10px 0px;
+    font-size: 16px;
+    white-space: normal;
 }
 
 .traitsmanager .preset-wrapper.button label {
-	display: inline-block;
-	width: auto;
-	text-align: center;
-	margin: 0px;
-	font-size: 1vw;
-	white-space: normal;
+    display: inline-block;
+    width: auto;
+    text-align: center;
+    margin: 0px;
+    font-size: 16px;
+    white-space: normal;
 }
 
 .gjs-rte-active .fa-link:before {

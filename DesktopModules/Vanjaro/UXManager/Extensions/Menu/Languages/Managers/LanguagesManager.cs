@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using Vanjaro.UXManager.Extensions.Menu.Languages.Components;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Languages.Managers
 {
@@ -44,7 +45,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Languages.Managers
             }
             catch (Exception exc)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(exc);
+                ExceptionManager.LogException(exc);
             }
             return Languages;
         }
@@ -131,7 +132,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Languages.Managers
             }
             catch (Exception exc)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(exc);
+                ExceptionManager.LogException(exc);
             }
             return Languages.OrderBy(l => l.DisplayName).ToList();
         }

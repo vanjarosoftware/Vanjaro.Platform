@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Entities.Portals;
 
 namespace Vanjaro.Core.Providers.Mail
@@ -36,7 +35,7 @@ namespace Vanjaro.Core.Providers.Mail
             }
             catch (Exception ex)
             {
-                Exceptions.LogException(ex);
+                Managers.ExceptionManager.LogException(ex);
                 return ex.Message;
             }
         }

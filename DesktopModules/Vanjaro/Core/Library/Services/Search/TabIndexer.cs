@@ -2,7 +2,6 @@
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Instrumentation;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Scheduling;
 using DotNetNuke.Services.Search;
 using DotNetNuke.Services.Search.Entities;
@@ -11,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Vanjaro.Core.Data.Entities;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Services.Search
 {
@@ -72,7 +72,7 @@ namespace Vanjaro.Core.Services.Search
                     }
                     catch (Exception ex)
                     {
-                        Exceptions.LogException(ex);
+                        ExceptionManager.LogException(ex);
                     }
                 }
 

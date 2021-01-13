@@ -168,14 +168,14 @@
   <data name="DisplayCopyright.Text" xml:space="preserve">
     <value>Display Copyright</value>
   </data>
-  <data name="DNNImprovementProgram.OFF" xml:space="preserve">
+  <data name="VJImprovementProgram.OFF" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="DNNImprovementProgram.ON" xml:space="preserve">
+  <data name="VJImprovementProgram.ON" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="DNNImprovementProgram.Text" xml:space="preserve">
-    <value>Participate in DNN Improvement Program</value>
+  <data name="VJImprovementProgram.Text" xml:space="preserve">
+    <value>Participate in Vanjaro Improvement Program</value>
   </data>
   <data name="HardDeleteDelay.Text" xml:space="preserve">
     <value>Hard Delete Delay</value>
@@ -203,5 +203,8 @@
   </data>
   <data name="UserDeleteAction.Text" xml:space="preserve">
     <value>User Delete Action</value>
+  </data>
+  <data name="ImprovementProgram.Text" xml:space="preserve">
+    <value>Improvement Program</value>
   </data>
 </root>

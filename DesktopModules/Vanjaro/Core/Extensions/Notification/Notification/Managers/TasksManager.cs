@@ -13,6 +13,7 @@ using System.Text;
 using Vanjaro.Core.Entities;
 using Vanjaro.Core.Entities.Interface;
 using static Vanjaro.Core.Factories;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Extensions.Notification.Notification.Managers
 {
@@ -168,7 +169,7 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Managers
             }
             catch (Exception exc)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(exc);
+                ExceptionManager.LogException(exc);
             }
             return Result;
         }

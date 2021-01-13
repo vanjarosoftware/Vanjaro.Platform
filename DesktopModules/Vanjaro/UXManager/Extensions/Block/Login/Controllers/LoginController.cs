@@ -4,6 +4,7 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Security;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Api.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -145,9 +146,8 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
             actionResult.RedirectURL = ServiceProvider.NavigationManager.NavigateURL();
             return actionResult;
         }
-
-
-        public  void OnDataConsentComplete(DataConsentEventArgs e)
+                
+        public void OnDataConsentComplete(DataConsentEventArgs e)
         {
             DataConsentCompleted?.Invoke(this, e);
         }

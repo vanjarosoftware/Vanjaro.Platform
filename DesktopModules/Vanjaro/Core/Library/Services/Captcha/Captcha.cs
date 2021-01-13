@@ -9,6 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Services
 {
@@ -66,7 +67,7 @@ namespace Vanjaro.Core.Services
                     }
                     catch (Exception ex)
                     {
-                        DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                        ExceptionManager.LogException(ex);
                     }
                 }
             }
