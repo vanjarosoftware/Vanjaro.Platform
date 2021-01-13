@@ -313,7 +313,7 @@ export default (editor, config = {}) => {
 					var GetBlockMenus = function () {
 						var Result = [];
 						if (IsAdmin)
-							Result.push({ 'Title': 'Save As Block', 'Command': 'custom-block' });
+                            Result.push({ 'Title': VjLocalized.SaveBlock, 'Command': 'custom-block' });
 						return Result;
 					};
 
@@ -321,7 +321,7 @@ export default (editor, config = {}) => {
 
 					if (GetBlockMenus().length > 0) {
 						tb.push({
-							attributes: { class: 'fa fa-bars' },
+                            attributes: { class: 'fa fa-bars', title: VjLocalized.Menu },
 							command: function (t) {
 								return t.runCommand("tlb-app-actions", {
 									BlockMenus: GetBlockMenus()
