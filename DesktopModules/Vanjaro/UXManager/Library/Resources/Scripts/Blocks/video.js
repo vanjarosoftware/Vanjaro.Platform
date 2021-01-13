@@ -4,8 +4,8 @@
 
 	if (c.blocks.video) {
 		bm.add('video', {
-            label: VjLocalized.Video,
-            category: VjLocalized.Basic,
+			label: VjLocalized.Video,
+			category: VjLocalized.Basic,
 			attributes: { class: 'fa fa-youtube-play' },
 			content: `
 				<div class='video-box embed-container'>
@@ -113,7 +113,7 @@
 							{ id: 'reltrue', name: 'yes' },
 							{ id: 'relfalse', name: 'no' },
 						],
-						value: 'relfalse',
+						default: 'relfalse',
 						changeProp: 1,
 					},
 					{
@@ -124,7 +124,7 @@
 							{ id: 'logotrue', name: 'yes' },
 							{ id: 'logofalse', name: 'no' },
 						],
-						value: 'logofalse',
+						default: 'logofalse',
 						changeProp: 1,
 					}
 				]
@@ -138,7 +138,7 @@
 						{ id: 'so', name: 'HTML5 Source' },
 						{ id: 'yt', name: 'Youtube' },
 					],
-					value: 'so',
+					default: 'so',
 					changeProp: 1,
 				}
 			},
@@ -151,7 +151,7 @@
 						{ id: 'autoplaytrue', name: 'yes' },
 						{ id: 'autoplayfalse', name: 'no' },
 					],
-					value: 'autoplayfalse',
+					default: 'autoplayfalse',
 					changeProp: 1,
 				}
 			},
@@ -164,7 +164,7 @@
 						{ id: 'looptrue', name: 'yes' },
 						{ id: 'loopfalse', name: 'no' },
 					],
-					value: 'loopfalse',
+					default: 'loopfalse',
 					changeProp: 1,
 				}
 			},
@@ -177,7 +177,7 @@
 						{ id: 'controlstrue', name: 'yes' },
 						{ id: 'controlsfalse', name: 'no' },
 					],
-					value: 'controlstrue',
+					default: 'controlstrue',
 					changeProp: 1,
 				}
 			},

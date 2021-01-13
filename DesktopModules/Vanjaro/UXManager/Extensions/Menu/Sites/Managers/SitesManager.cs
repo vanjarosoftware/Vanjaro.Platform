@@ -156,7 +156,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                                     {
                                         AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
                                     }
-                                    catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
+                                    catch (Exception ex) { ExceptionManager.LogException(ex); }
                                 }
                                 FileNames.Add(FileName);
                             }
@@ -342,7 +342,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 actionResult.AddError("exceptions", ex.Message);
                 return actionResult;
             }

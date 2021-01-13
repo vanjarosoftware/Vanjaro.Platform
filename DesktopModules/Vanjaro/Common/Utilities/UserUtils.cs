@@ -117,6 +117,11 @@ namespace Vanjaro.Common.Utilities
                 return PhotoURL;
             }
 
+            if (UserID == -1 && string.IsNullOrEmpty(Email))
+            {
+                return VirtualPathUtility.ToAbsolute("~/DesktopModules/Vanjaro/Common/Resources/Images/no_avatar.gif");
+            }
+
             string Url = GetImageUrl(PortalID, Email);
             if (!string.IsNullOrEmpty(Url))
             {

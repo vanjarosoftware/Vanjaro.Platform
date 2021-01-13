@@ -1,7 +1,6 @@
 ﻿using Dnn.PersonaBar.TaskScheduler.Components;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Scheduling;
 using DotNetNuke.Web.Api;
@@ -14,6 +13,7 @@ using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Extensions.Menu.Scheduler.Factories;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
 {
@@ -43,7 +43,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
             }
             catch (Exception exc)
             {
-                Exceptions.LogException(exc);
+                ExceptionManager.LogException(exc);
                 actionResult.AddError("SchedulerStopError", Localization.GetString("SchedulerStopError", Components.Constants.TaskSchedulerResourcesFile));
             }
             return actionResult;
@@ -61,7 +61,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
             catch (Exception exc)
             {
                 actionResult.AddError("SchedulerStartError", Localization.GetString("SchedulerStartError", Components.Constants.TaskSchedulerResourcesFile));
-                Exceptions.LogException(exc);
+                ExceptionManager.LogException(exc);
             }
             return actionResult;
         }
@@ -111,7 +111,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler.Controllers
             }
             catch (Exception exc)
             {
-                Exceptions.LogException(exc);
+                ExceptionManager.LogException(exc);
                 actionResult.AddError("SchedulerUpdateError", Localization.GetString("SchedulerUpdateError", Components.Constants.TaskSchedulerResourcesFile));
             }
             return actionResult;

@@ -1,6 +1,5 @@
 ﻿using DotNetNuke.Common;
 using DotNetNuke.Services.Connections;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
@@ -10,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Vanjaro.UXManager.Extensions.Menu.Azure.Entities;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Azure.Manager
 {
@@ -26,7 +26,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Azure.Manager
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 actionResult.AddError("AuthenticationFailure", Localization.GetString("AuthenticationFailure.ErrorMessage", Components.Constants.LocalResourceFile));
                 return actionResult;
             }
@@ -65,7 +65,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Azure.Manager
                             actionResult.IsSuccess = true;
                             return actionResult;
                         default:
-                            DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                            ExceptionManager.LogException(ex);
                             actionResult.AddError("NewContainer", Localization.GetString("NewContainer.ErrorMessage", Components.Constants.LocalResourceFile));
                             break;
                     }
@@ -77,7 +77,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Azure.Manager
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 actionResult.AddError("NewContainer", Localization.GetString("NewContainer.ErrorMessage", Components.Constants.LocalResourceFile));
             }
 
@@ -131,7 +131,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Azure.Manager
             }
             catch (Exception ex)
             {
-                Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 actionResult.AddError("InternalServerError", "InternalServerError", ex);
                 return actionResult;
             }

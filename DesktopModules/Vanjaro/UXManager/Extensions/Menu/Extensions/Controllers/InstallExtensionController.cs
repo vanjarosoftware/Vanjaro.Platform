@@ -111,8 +111,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
         [HttpPost]
         public ActionResult InstallPackage()
         {
-            ThemeManager.UnloadSassCompiler();
-
             string legacySkin = null;
             bool isPortalPackage = false;
             ActionResult actionResult = new ActionResult();

@@ -1,9 +1,9 @@
 ﻿using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Security;
-using DotNetNuke.Services.Exceptions;
 using System;
 using System.Web;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Users.Components
 {
@@ -58,7 +58,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Components
                 }
                 catch (Exception ex)
                 {
-                    Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
 
                 return "An error occurred impersonating the user. Please refer to event viewer for details!";

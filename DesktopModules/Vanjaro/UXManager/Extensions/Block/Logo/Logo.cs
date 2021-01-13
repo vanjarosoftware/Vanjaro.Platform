@@ -1,8 +1,6 @@
-﻿using DotNetNuke.Common;
-using DotNetNuke.Entities.Portals;
+﻿using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.FileSystem;
-using DotNetNuke.Services.Localization;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -14,6 +12,7 @@ using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Extensions.Block.Logo.Factories;
 using Vanjaro.UXManager.Library.Entities.Interface;
+using static Vanjaro.Core.Managers;
 using Localization = DotNetNuke.Services.Localization.Localization;
 
 namespace Vanjaro.UXManager.Extensions.Block.Logo
@@ -108,7 +107,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Logo
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message;
             }
 

@@ -520,8 +520,8 @@ $(document).ready(function () {
 													{ name: '%', min: 0, max: 100, step: 1 },
 													{ name: 'vw', min: 0, max: 100, step: 1 },
 												],
-												unit: '%',
-												defaults: 100,
+												unit: 'px',
+												defaults: 'auto',
 											}, {
 												type: 'customrange',
 												name: 'Min Width',
@@ -532,7 +532,7 @@ $(document).ready(function () {
 													{ name: 'vw', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}, {
 												type: 'customrange',
 												name: 'Max Width',
@@ -543,7 +543,7 @@ $(document).ready(function () {
 													{ name: 'vw', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}, {
 												type: 'customrange',
 												name: 'Height',
@@ -554,7 +554,7 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}, {
 												type: 'customrange',
 												name: 'Min Height',
@@ -565,7 +565,7 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}, {
 												type: 'customrange',
 												name: 'Max Height',
@@ -576,7 +576,7 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}
 										]
 									}, {
@@ -931,7 +931,6 @@ $(document).ready(function () {
 										buildProps: ['z-index', 'position', 'top', 'left', 'bottom', 'right'],
 										properties: [
 											{
-												id: 'z-index',
 												type: 'customrange',
 												name: 'Z Index',
 												property: 'z-index',
@@ -940,7 +939,6 @@ $(document).ready(function () {
 												max: 999,
 												defaults: 0,
 											}, {
-												id: 'top',
 												type: 'customrange',
 												name: 'Top',
 												property: 'top',
@@ -951,10 +949,8 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
-											},
-											{
-												id: 'Left',
+												defaults: 'auto',
+											}, {
 												type: 'customrange',
 												name: 'Left',
 												property: 'left',
@@ -965,9 +961,8 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}, {
-												id: 'Bottom',
 												type: 'customrange',
 												name: 'Bottom',
 												property: 'bottom',
@@ -978,9 +973,8 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}, {
-												id: 'Right',
 												type: 'customrange',
 												name: 'Right',
 												property: 'right',
@@ -991,7 +985,7 @@ $(document).ready(function () {
 													{ name: 'vh', min: 0, max: 100, step: 1 },
 												],
 												unit: 'px',
-												defaults: 0,
+												defaults: 'auto',
 											}
 										]
 									}, {
@@ -1692,6 +1686,18 @@ $(document).ready(function () {
 									return;
 								}
 
+                                $.each(model.attributes.toolbar, function (k, v) {
+
+                                    if (v.attributes['class'] == 'fa fa-arrow-up')
+                                        v.attributes['title'] = 'Select Parent';
+                                    else if (v.command == 'vj-move' || v.command == 'tlb-move')
+                                        v.attributes['title'] = 'Move';
+                                    else if (v.command == 'vj-copy' || v.command == 'tlb-copy')
+                                        v.attributes['title'] = 'Copy';
+                                    else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
+                                        v.attributes['title'] = 'Delete';
+                                });
+
 								var desktop = 'd-desktop-none';
 								var tablet = 'd-tablet-none';
 								var mobile = 'd-mobile-none';
@@ -1784,7 +1790,9 @@ $(document).ready(function () {
 									}, 300);
 								}
 
-								VjEditor.StyleManager.render();
+								setTimeout(function () {
+									VjEditor.StyleManager.render();
+								});
 
 								model.set('border-position', 'sm-border');
 								FilterBorderOptions(model, 'sm-border');
@@ -1852,7 +1860,6 @@ $(document).ready(function () {
 										open: false,
 										buildProps: ['color', 'font-family', 'font-size', 'line-height', 'letter-spacing', 'word-spacing', 'font-weight', 'font-style', 'text-transform', 'text-decoration', 'text-shadow'],
 										properties: [{
-											id: 'text-decoration',
 											type: 'radio',
 											name: 'Text decoration',
 											property: 'text-decoration',
@@ -1871,7 +1878,6 @@ $(document).ready(function () {
 												name: 'Strikethrough',
 											}],
 										}, {
-											id: 'font-style',
 											type: 'radio',
 											name: 'Font style',
 											property: 'font-style',
@@ -1884,13 +1890,11 @@ $(document).ready(function () {
 												name: 'Italic',
 											}],
 										}, {
-											id: 'font-family',
 											type: 'select',
 											name: 'Font Family',
 											property: 'font-family',
 											list: fontfamilylist
 										}, {
-											id: 'font-size',
 											type: 'customrange',
 											name: 'Font size',
 											property: 'font-size',
@@ -1905,7 +1909,6 @@ $(document).ready(function () {
 											unit: 'px',
 											defaults: 16
 										}, {
-											id: 'line-height',
 											type: 'customrange',
 											name: 'Line height',
 											property: 'line-height',
@@ -1920,7 +1923,6 @@ $(document).ready(function () {
 											unit: 'px',
 											defaults: 24
 										}, {
-											id: 'letter-spacing',
 											type: 'customrange',
 											name: 'Letter spacing',
 											property: 'letter-spacing',
@@ -1934,7 +1936,6 @@ $(document).ready(function () {
 											unit: 'px',
 											defaults: 0
 										}, {
-											id: 'word-spacing',
 											type: 'customrange',
 											name: 'Word spacing',
 											property: 'word-spacing',
@@ -1948,7 +1949,6 @@ $(document).ready(function () {
 											unit: 'px',
 											defaults: 0
 										}, {
-											id: 'font-weight',
 											type: 'radio',
 											name: 'Font Weight',
 											property: 'font-weight',
@@ -2671,6 +2671,10 @@ $(document).ready(function () {
 				}
 			});
 		}
+
+		var selected = VjEditor.getSelected();
+		VjEditor.select();
+		VjEditor.select(selected);
 	});
 
 	$(".notification-set a").click(function () {
@@ -3045,28 +3049,20 @@ global.ConfirmReviewChange = function (FirstStateName) {
 
 global.ChangeToWebp = function (target, URLs) {
 
-	if (target.attributes.type == "picture-box") {
+	if (typeof target != 'undefined' && target.attributes.type == "picture-box") {
 
-		var markup = "";
-		var maxWidth = "";
+		var markup = "", maxWidth = "";
 
 		var webp = jQuery.grep(URLs, function (n, i) {
 			return (n.Type == 'webp');
 		});
 
-		var sourceWebp = document.createElement('source');
-		sourceWebp.setAttribute("type", "image/webp");
-		sourceWebp.setAttribute("class", "source");
-
 		var srcWebp = "";
-		var sizes = "";
 
 		$(webp).each(function (index, value) {
 
-			if (index == 0) {
+			if (index == 0)
 				maxWidth = value.Width;
-				var calcWidth = Math.round((value.Width / $(window).width()) * 100);
-			}
 
 			srcWebp += value.Url + ' ' + value.Width + 'w';
 
@@ -3076,43 +3072,60 @@ global.ChangeToWebp = function (target, URLs) {
 
 		});
 
+		var sourceWebp = document.createElement('source');
+		sourceWebp.setAttribute("class", "source");
+		sourceWebp.setAttribute("type", "image/webp");
 		sourceWebp.setAttribute("srcset", srcWebp);
-		markup += sourceWebp.outerHTML;
 
-		var img = jQuery.grep(URLs, function (n, i) {
+		var image = jQuery.grep(URLs, function (n, i) {
 			return (n.Type != 'webp');
+		});
+
+		var srcImage = "";
+
+		$(image).each(function (index, value) {
+
+			srcImage += value.Url + ' ' + value.Width + 'w';
+
+			if (webp.length != index + 1)
+				srcImage += ',';
+
 		});
 
 		var sourceImg = document.createElement('source');
 		sourceImg.setAttribute("class", "source");
+		sourceImg.setAttribute("srcset", srcImage);
 
-		var srcImg = "";
+		markup += sourceWebp.outerHTML + sourceImg.outerHTML;
 
-		$(img).each(function (index, value) {
+		var img = '', style = '';
 
-			srcImg += value.Url + ' ' + value.Width + 'w';
+		if (target.view.$el.find('img').length)
+			img = target.view.$el.find('img')[0].outerHTML
 
-			if (webp.length != index + 1)
-				srcImg += ',';
+		if (target.components().length) {
 
-		});
+			$(target.components().models).each(function (index, item) {
 
-		sourceImg.setAttribute("srcset", srcImg);
-		markup += sourceImg.outerHTML;
+				if (item.attributes.type == "image") {
 
-		var image = $(target.getEl()).find('img')[0].outerHTML;
+					window.document.vj_image_target = target.components().models[2];
+
+					style = item.getStyle();
+					style['max-width'] = maxWidth + 'px';
+				}
+			});
+		}
 
 		target.components([]);
-		target.append(markup + image);
+		target.append(markup + img);
 
-		if (target.components().models[2].attributes.type == "image") {
-			window.document.vj_image_target = target.components().models[2];
+		$(target.components().models).each(function (index, item) {
 
-			var style = target.components().models[2].getStyle();
-			style['max-width'] = maxWidth + 'px';
-			//style['width'] = 'auto';
-			target.components().models[2].setStyle(style);
-		}
+			if (item.attributes.type == "image")
+				target.components().models[2].setStyle(style);
+
+		});
 	}
 }
 

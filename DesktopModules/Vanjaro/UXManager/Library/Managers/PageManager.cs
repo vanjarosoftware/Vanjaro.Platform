@@ -6,7 +6,6 @@ using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Security.Permissions;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Installer.Packages;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Url.FriendlyUrl;
@@ -23,6 +22,7 @@ using System.Web;
 using Vanjaro.Common.Components;
 using Vanjaro.Common.Factories;
 using Vanjaro.UXManager.Library.Entities;
+using static Vanjaro.Core.Managers;
 using static Vanjaro.UXManager.Library.Factories;
 
 namespace Vanjaro.UXManager.Library
@@ -196,7 +196,7 @@ namespace Vanjaro.UXManager.Library
                     }
                     catch (Exception ex)
                     {
-                        Exceptions.LogException(ex);
+                        ExceptionManager.LogException(ex);
                     }
                     CacheFactory.Set(CacheKey, ModuleDefDTOs);
                 }

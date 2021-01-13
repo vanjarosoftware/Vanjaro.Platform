@@ -1,7 +1,6 @@
 ﻿using DotNetNuke.Collections;
 using DotNetNuke.Data;
 using DotNetNuke.Services.Connections;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.FileSystem.Internal;
 using DotNetNuke.Services.Localization;
@@ -13,6 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Vanjaro.UXManager.Extensions.Menu.Azure.Components;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Azure
 {
@@ -218,7 +218,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Azure
             }
             catch (Exception ex)
             {
-                Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return false;
             }
         }
