@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import Grapick from 'grapick';
+
 export default (editor, config = {}) => {
 
 	const tm = editor.TraitManager;
@@ -9,18 +10,22 @@ export default (editor, config = {}) => {
 
 		const selected = VjEditor.getSelected();
 		const selectedType = selected.attributes.type;
+		const parent = selected.parent();
+		const parentType = parent.attributes.type;
 
-		if (selected.parent() && selected.parent().attributes.type != 'wrapper' && (selectedType == 'button' || selectedType == 'icon' || selectedType == 'list' || selectedType == 'image-gallery-item')) {
-			var parent = selected.parent().clone();
-			var mainparent = selected.parent().parent();
-			mainparent.append(parent);
-		}
-		else if (selectedType == 'image' && selected.parent() && selected.parent().attributes.type != 'wrapper') {
-			var parent = selected.parent().parent().clone();
-			var mainparent = selected.parent().parent().parent();
-			mainparent.append(parent);
-		}
+		if (parent && parentType != 'wrapper') {
 
+			if (selectedType == 'button' || selectedType == 'icon' || selectedType == 'list' || selectedType == 'image-gallery-item') {
+				var parentClone = parent.clone();
+				var mainparent = parent.parent();
+				mainparent.append(parentClone);
+			}
+			else if (selectedType == 'image') {
+				var parentClone = parent.parent().clone();
+				var mainparent = parent.parent().parent();
+				mainparent.append(parentClone);
+			}
+		}
 	});
 
 	cmd.add('vj-delete', {
@@ -51,23 +56,16 @@ export default (editor, config = {}) => {
 	//Changing Classes
 	global.SwitchClass = function (elInput, component, event, mainComponent) {
 
-		var trait = mainComponent.getTrait(event.target.name);
+		var target = event.target.name;
+		var trait = mainComponent.getTrait(target);
 		var comp = component.attributes.type;
 		var classes = [];
 		var className = '';
 		var addClass = true;
 
 		//Removing Custom Color in Inline Style
-		if (event.target.name == 'color') {
-			var property = mainComponent.getTrait('color').attributes.cssproperties;
-			$(property).each(function (index, value) {
-				component.removeStyle(value.name);
-			});
-		}
-
-		if (event.target.name == 'background' && mainComponent.getTrait("background").getInitValue() != 'gradient') {
+		if (target == 'background' && mainComponent.getTrait("background").getInitValue() != 'gradient') {
 			var style = component.getStyle();
-			style["background-image"] = "none";
 			style["background-color"] = "transparent";
 			component.setStyle(style);
 
@@ -80,7 +78,7 @@ export default (editor, config = {}) => {
 		if (event.target.type == 'checkbox' && !$(event.target.parentElement).find("input:checked").length)
 			addClass = false;
 
-		if (comp == 'button' && (event.target.name == 'stylee' || event.target.name == 'color')) {
+		if (comp == 'button' && (target == 'stylee' || target == 'color')) {
 
 			if (event.target.id == 'outline') {
 				var style = component.getStyle();
@@ -116,9 +114,9 @@ export default (editor, config = {}) => {
 			var btnStart = 'btn-';
 			var btnEnd = '';
 
-			if (event.target.name == 'stylee')
+			if (target == 'stylee')
 				btnEnd += mainComponent.getTrait("color").getInitValue();
-			else if (event.target.name == 'color' && mainComponent.getTrait("stylee").getInitValue() == 'outline')
+			else if (target == 'color' && mainComponent.getTrait("stylee").getInitValue() == 'outline')
 				btnStart += 'outline-';
 
 			var colorOpts = mainComponent.getTrait('color').attributes.options;
@@ -150,9 +148,9 @@ export default (editor, config = {}) => {
 				var classes_i_a = classes[i].split(' ');
 				for (let j = 0; j < classes_i_a.length; j++) {
 					if (classes_i_a[j].length > 0) {
-						if (comp == 'grid' && event.target.name == 'horizontalalignment')
+						if (comp == 'grid' && target == 'horizontalalignment')
 							component.components().models[0].removeClass(classes_i_a[j]);
-						else if (comp == 'button' && (event.target.name == 'color' || event.target.name == 'stylee' || event.target.name == 'size')) {
+						else if (comp == 'button' && (target == 'color' || target == 'stylee' || target == 'size')) {
 							component.removeClass(classes_i_a[j]);
 							$(mainComponent.getTrait('styles').el).find('label').removeClass(classes_i_a[j]);
 						}
@@ -166,9 +164,9 @@ export default (editor, config = {}) => {
 		if (addClass && className != undefined && className != 'GJS_NO_CLASS') {
 			const value_a = className.split(' ');
 			for (let i = 0; i < value_a.length; i++) {
-				if (comp == 'grid' && event.target.name == 'horizontalalignment')
+				if (comp == 'grid' && target == 'horizontalalignment')
 					component.components().models[0].addClass(value_a[i]);
-				else if (comp == 'button' && (event.target.name == 'color' || event.target.name == 'stylee' || event.target.name == 'size')) {
+				else if (comp == 'button' && (target == 'color' || target == 'stylee' || target == 'size')) {
 					component.addClass(value_a[i]);
 					$(mainComponent.getTrait('styles').el).find('label').addClass(value_a[i]);
 				}
@@ -238,7 +236,8 @@ export default (editor, config = {}) => {
 	//Component Styling
 	global.UpdateStyles = function (elInput, component, event, mainComponent) {
 
-		var trait = mainComponent.getTrait(event.target.name);
+		var target = event.target.name;
+		var trait = mainComponent.getTrait(target);
 		var componentType = component.attributes.type;
 
 		if (componentType != 'image-gallery-item' && !event.target.classList.contains('choose-unit')) {
@@ -307,7 +306,7 @@ export default (editor, config = {}) => {
 			});
 		}
 
-		if (event.target.name == "alignment") {
+		if (target == "alignment") {
 
 			if ($(event.target.parentElement).find("input:checked").length) {
 
@@ -410,8 +409,7 @@ export default (editor, config = {}) => {
 				}
 			}
 		}
-
-		if (event.target.name == "frame") {
+		else if (target == "frame") {
 
 			if (event.target.value == "none") {
 				style["border-width"] = "0";
@@ -427,8 +425,7 @@ export default (editor, config = {}) => {
 				style["border-radius"] = "0";
 			}
 		}
-
-		if (componentType == 'list' && event.target.name == 'ul_list_style') {
+		else if (target == 'ul_list_style' && componentType == 'list') {
 			if (event.target.value == 'none')
 				style['padding-left'] = '0';
 			else
@@ -441,6 +438,7 @@ export default (editor, config = {}) => {
 			component.setStyle(style);
 	};
 
+	//TextArea
 	tm.addType('textarea', {
 		createInput({ trait }) {
 
@@ -461,7 +459,6 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
-		eventCapture: ['input'],
 		debounce: function (func, wait, immediate) {
 			var timeout;
 			return function () {
@@ -600,7 +597,6 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
-		eventCapture: ['input', 'select'],
 		debounce: function (func, wait, immediate) {
 			var timeout;
 			return function () {
@@ -872,32 +868,41 @@ export default (editor, config = {}) => {
 		},
 		onUpdate({ elInput, component }) {
 
-			if (component.attributes.type == 'list') {
-				if (elInput.firstElementChild.name == "ul_list_style" && component.getTrait('list_type').getInitValue() == "ol")
-					$(elInput).parents(".gjs-trt-trait__wrp").hide();
-				else if (elInput.firstElementChild.name == "ol_list_style" && component.getTrait('list_type').getInitValue() == "ul")
-					$(elInput).parents(".gjs-trt-trait__wrp").hide();
-				else if (elInput.firstElementChild.name == "start" && component.getTrait('list_type').getInitValue() == "ul")
-					$(elInput).parents(".gjs-trt-trait__wrp").hide();
+			var compType = component.attributes.type;
+			var childName = elInput.firstElementChild.name;
+			var $traitEl = $(elInput).parents(".gjs-trt-trait__wrp");
+
+			if (compType == 'list') {
+
+				var listType = component.getTrait('list_type').getInitValue();
+
+				if (childName == "ul_list_style" && listType == "ol")
+					$traitEl.hide();
+				else if (childName == "ol_list_style" && listType == "ul")
+					$traitEl.hide();
+				else if (childName == "start" && listType == "ul")
+					$traitEl.hide();
 			}
+			else if (compType == 'icon') {
 
-			if (component.attributes.type == 'icon') {
-				if (elInput.firstElementChild.name == "framestyle" && component.getTrait('frame').getInitValue() == "none")
-					$(elInput).parents(".gjs-trt-trait__wrp").hide();
+				if (childName == "framestyle" && component.getTrait('frame').getInitValue() == "none")
+					$traitEl.hide();
 			}
+			else if (compType == 'section') {
 
-			if (component.attributes.type == 'section') {
-				if (elInput.firstElementChild.name == "gradienttype" && component.getTrait('background').getInitValue() != "gradient")
-					$(elInput).parents(".gjs-trt-trait__wrp").hide();
-
-				if (elInput.firstElementChild.name == "angle" && component.getTrait('gradienttype').getInitValue() == "radial")
-					$(elInput).parents(".gjs-trt-trait__wrp").hide();
+				if (childName == "gradienttype" && component.getTrait('background').getInitValue() != "gradient")
+					$traitEl.hide();
+				else if (childName == "angle" && component.getTrait('gradienttype').getInitValue() == "radial")
+					$traitEl.hide();
 			}
 		},
 		eventCapture: ['input'],
 		onEvent({ elInput, component, event }) {
 
-			if (component.attributes.type == 'list' && event.target.name == "list_type") {
+			var componentType = component.attributes.type;
+			var targetName = event.target.name;
+
+			if (componentType == 'list' && targetName == "list_type") {
 
 				component.removeStyle("list-style-type");
 
@@ -921,10 +926,9 @@ export default (editor, config = {}) => {
 					$(component.getTrait('ul_list_style').el).find('input#disc').prop('checked', true);
 				}
 			}
+			else if (componentType == 'icon') {
 
-			if (component.attributes.type == 'icon') {
-
-				if (event.target.name == "frame") {
+				if (targetName == "frame") {
 					if (event.target.value != "none") {
 						$(component.getTrait("framewidth").el).parents(".gjs-trt-trait__wrp").show();
 						$(component.getTrait("framegap").el).parents(".gjs-trt-trait__wrp").show();
@@ -940,7 +944,7 @@ export default (editor, config = {}) => {
 					}
 				}
 
-				if (event.target.name == "background") {
+				if (targetName == "background") {
 					if (event.target.value == "fill") {
 						$(component.getTrait("backgroundcolor").el).parents(".gjs-trt-trait__wrp").show();
 						$(component.getTrait("backgroundcolor").el).find("input#color" + component.getTrait("backgroundcolor").attributes.value).prop('checked', true).next().addClass('active');
@@ -952,9 +956,8 @@ export default (editor, config = {}) => {
 					}
 				}
 			}
-
-			if (component.attributes.type == 'section') {
-				if (event.target.name == "background") {
+			else if (componentType == 'section') {
+				if (targetName == "background") {
 
 					component.addStyle({ 'overflow': 'visible' });
 					component.set({ 'src': '', 'thumbnail': '' });
@@ -968,6 +971,11 @@ export default (editor, config = {}) => {
 						$(component.getTrait("imageattachment").el).find("select").val("scroll");
 						$(component.getTrait("imagerepeat").el).find("select").val("no-repeat");
 						$(component.getTrait("imagesize").el).find("select").val("auto");
+
+						component.getTrait("imageposition").setTargetValue("center center");
+						component.getTrait("imageattachment").setTargetValue("scroll");
+						component.getTrait("imagerepeat").setTargetValue("no-repeat");
+						component.getTrait("imagesize").setTargetValue("auto");
 
 						$(component.getTrait("backgroundcolor").el).parents(".gjs-trt-trait__wrp").show();
 						$(component.getTrait("backgroundimage").el).parents(".gjs-trt-trait__wrp").show();
@@ -984,13 +992,6 @@ export default (editor, config = {}) => {
 						$(component.getTrait("backgroundvideo").el).parents(".gjs-trt-trait__wrp").hide();
 						component.components().forEach(item => item.getAttributes()["data-bg-video"] == 'true' ? item.remove() : null);
 
-						var style = component.getStyle();
-						style["background-position"] = "center center";
-						style["background-attachment"] = "scroll";
-						style["background-repeat"] = "no-repeat";
-						style["background-size"] = "auto";
-						component.setStyle(style);
-
 					}
 					else if (event.target.value == "gradient") {
 
@@ -1004,6 +1005,7 @@ export default (editor, config = {}) => {
 						$(component.getTrait("imageattachment").el).parents(".gjs-trt-trait__wrp").hide();
 						$(component.getTrait("imagerepeat").el).parents(".gjs-trt-trait__wrp").hide();
 						$(component.getTrait("imagesize").el).parents(".gjs-trt-trait__wrp").hide();
+						component.components().forEach(item => item.getAttributes()["data-bg-image"] == 'true' ? item.remove() : null);
 
 						$(component.getTrait("backgroundvideo").el).parents(".gjs-trt-trait__wrp").hide();
 						component.components().forEach(item => item.getAttributes()["data-bg-video"] == 'true' ? item.remove() : null);
@@ -1029,6 +1031,7 @@ export default (editor, config = {}) => {
 						$(component.getTrait("imageattachment").el).parents(".gjs-trt-trait__wrp").hide();
 						$(component.getTrait("imagerepeat").el).parents(".gjs-trt-trait__wrp").hide();
 						$(component.getTrait("imagesize").el).parents(".gjs-trt-trait__wrp").hide();
+						component.components().forEach(item => item.getAttributes()["data-bg-image"] == 'true' ? item.remove() : null);
 
 						$(component.getTrait("gradient").el).parents(".gjs-trt-trait__wrp").hide();
 						$(component.getTrait("gradienttype").el).parents(".gjs-trt-trait__wrp").hide();
@@ -1051,6 +1054,7 @@ export default (editor, config = {}) => {
 						$(component.getTrait("imageattachment").el).parents(".gjs-trt-trait__wrp").hide();
 						$(component.getTrait("imagerepeat").el).parents(".gjs-trt-trait__wrp").hide();
 						$(component.getTrait("imagesize").el).parents(".gjs-trt-trait__wrp").hide();
+						component.components().forEach(item => item.getAttributes()["data-bg-image"] == 'true' ? item.remove() : null);
 
 						$(component.getTrait("gradient").el).parents(".gjs-trt-trait__wrp").hide();
 						$(component.getTrait("gradienttype").el).parents(".gjs-trt-trait__wrp").hide();
@@ -1061,7 +1065,7 @@ export default (editor, config = {}) => {
 
 					}
 				}
-				else if (event.target.name == "gradienttype") {
+				else if (targetName == "gradienttype") {
 
 					component.getTrait("gradienttype").setTargetValue(event.target.value);
 
@@ -1086,16 +1090,14 @@ export default (editor, config = {}) => {
 					}
 				}
 			}
+			else if (componentType == "video") {
 
-			if (component.attributes.type == "video") {
+				var trait = component.getTrait(targetName);
 
-				var trait = component.getTrait(event.target.name);
-				trait.set({
-					'value': event.target.id
-				});
+				trait.set({ 'value': event.target.id });
 
 				if (component.getTrait("provider").getInitValue() == 'so') {
-					if (event.target.name == "autoplay") {
+					if (targetName == "autoplay") {
 						if (event.target.value == "yes") {
 							component.set({ 'autoplay': 'autoplaytrue' });
 							component.components().models[0].set({ 'autoplay': 1 });
@@ -1109,7 +1111,7 @@ export default (editor, config = {}) => {
 							component.components().models[0].setAttributes(attr);
 						}
 					}
-					else if (event.target.name == "loop") {
+					else if (targetName == "loop") {
 						if (event.target.value == "yes") {
 							component.set({ 'loop': 'looptrue' });
 							component.components().models[0].set({ 'loop': 1 });
@@ -1123,7 +1125,7 @@ export default (editor, config = {}) => {
 							component.components().models[0].setAttributes(attr);
 						}
 					}
-					else if (event.target.name == "controls") {
+					else if (targetName == "controls") {
 						if (event.target.value == "yes") {
 							component.set({ 'controls': 'controlstrue' });
 							component.components().models[0].set({ 'controls': 1 });
@@ -1258,7 +1260,7 @@ export default (editor, config = {}) => {
 			}
 
 			var model = component;
-			var trait = component.getTrait(event.target.name);
+			var trait = component.getTrait(targetName);
 
 			if (typeof trait.attributes.selector != 'undefined')
 				model = component.findType(trait.attributes.selector);
@@ -1272,7 +1274,7 @@ export default (editor, config = {}) => {
 
 			});
 
-			if (component.attributes.type == "column" && component.components().length == 0)
+			if (componentType == "column" && component.components().length == 0)
 				$(component.getEl()).attr("data-empty", "true");
 		}
 	});
@@ -1421,10 +1423,12 @@ export default (editor, config = {}) => {
 		onUpdate({ elInput, component, trait }) {
 
 			var property = trait.attributes.cssproperties[0].name;
+			var propertyValue = component.getStyle()[property];
 
-			if (typeof component.getStyle()[property] != "undefined") {
 
-				var customColor = component.getStyle()[property].replace("!important", "");
+			if (typeof propertyValue != "undefined") {
+
+				var customColor = propertyValue.replace("!important", "");
 
 				if (customColor != "transparent") {
 					elInput.querySelector('.gjs-field-color-picker').style.backgroundColor = customColor;
@@ -1435,21 +1439,26 @@ export default (editor, config = {}) => {
 				}
 			}
 
-			if (component.attributes.type == 'icon') {
+			var componentType = component.attributes.type;
+			var childName = elInput.parentElement.parentElement.firstElementChild.name;
+			var $traitEl = $(elInput).parents(".gjs-trt-trait__wrp");
 
-				if (elInput.parentElement.parentElement.firstElementChild.name == "framecolor" && component.getTrait('frame').getInitValue() == "none")
-					$(elInput).parents(".gjs-trt-trait__wrp").hide();
+			if (componentType == 'icon') {
 
-				if (elInput.parentElement.parentElement.firstElementChild.name == "backgroundcolor" && component.getTrait('background').getInitValue() == "empty")
-					$(elInput).parents(".gjs-trt-trait__wrp").hide();
+				if (childName == "framecolor" && component.getTrait('frame').getInitValue() == "none")
+					$traitEl.hide();
+
+				if (childName == "backgroundcolor" && component.getTrait('background').getInitValue() == "empty")
+					$traitEl.hide();
 			}
+			else if (componentType == 'section') {
 
-			if (component.attributes.type == 'section') {
-				if (elInput.parentElement.parentElement.firstElementChild.name == "backgroundcolor" && (component.getTrait('background').getInitValue() == "none" || component.getTrait('background').getInitValue() == "gradient" || component.getTrait('background').getInitValue() == "video"))
-					$(elInput).parents(".gjs-trt-trait__wrp").hide();
+				var bg = component.getTrait('background').getInitValue();
+
+				if (childName == "backgroundcolor" && (bg == "none" || bg == "gradient" || bg == "video"))
+					$traitEl.hide();
 			}
 		},
-		eventCapture: ['input'],
 		onEvent({ elInput, component, event }) {
 
 			var model = component;
@@ -1487,6 +1496,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Slider
 	tm.addType('custom_range', {
 		createInput({ trait }) {
 
@@ -1529,7 +1539,7 @@ export default (editor, config = {}) => {
 		},
 		onUpdate({ elInput, component, trait }) {
 
-			if (!event.target.classList.contains('input-control')) {
+			if (typeof event != 'undefined' && !event.target.classList.contains('input-control')) {
 				var inputvalue = '', unit = '', property = '', value = '';
 
 				if (typeof trait.attributes.cssproperties != 'undefined')
@@ -1631,6 +1641,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Number
 	tm.addType('custom_number', {
 		createInput({ trait }) {
 
@@ -1668,6 +1679,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Uploader
 	tm.addType('uploader', {
 		createInput({ trait }) {
 
@@ -1685,7 +1697,7 @@ export default (editor, config = {}) => {
 			var selected = VjEditor.getSelected()
 			var thumbnail = selected.attributes.thumbnail;
 
-			if ((selected.attributes.background == "image" && selected.getStyle()["background-image"] == "none") || (selected.attributes.background == "video" && $(selected.getEl()).find(".bg-video").length == 0))
+			if ((selected.attributes.background == "image" && $(selected.getEl()).find(".bg-image").length == 0) || (selected.attributes.background == "video" && $(selected.getEl()).find(".bg-video").length == 0))
 				thumbnail = ""
 
 			if (typeof thumbnail != "undefined")
@@ -1693,12 +1705,14 @@ export default (editor, config = {}) => {
 
 			const imgDelete = el.querySelector('.btn-delete');
 
-			imgDelete.addEventListener('click', ev => {
-				if ($(ev.target).parents(".uploader-wrapper").attr("id") == "backgroundimage") {
+			imgDelete.addEventListener('click', event => {
 
-					var comp = VjEditor.getSelected();
-					comp.removeStyle("background-image");
-					comp.set({ 'thumbnail': '', 'src': '' });
+				var comp = VjEditor.getSelected();
+				var target = $(event.target).parents(".uploader-wrapper").attr("id");
+
+				if (target == "backgroundimage") {
+
+					comp.components().forEach(item => item.getAttributes()["data-bg-image"] == 'true' ? item.remove() : null);
 
 					$(comp.getTrait("backgroundimage").el).removeAttr("style");
 					$(comp.getTrait("imageposition").el).parents(".gjs-trt-trait__wrp").hide();
@@ -1706,22 +1720,27 @@ export default (editor, config = {}) => {
 					$(comp.getTrait("imagerepeat").el).parents(".gjs-trt-trait__wrp").hide();
 					$(comp.getTrait("imagesize").el).parents(".gjs-trt-trait__wrp").hide();
 				}
-				else if ($(ev.target).parents(".uploader-wrapper").attr("id") == "backgroundvideo") {
+				else if (target == "backgroundvideo") {
 
-					var comp = VjEditor.getSelected();
 					comp.components().forEach(item => item.getAttributes()["data-bg-video"] == 'true' ? item.remove() : null);
-					comp.set({ 'thumbnail': '', 'src': '' });
+
 					$(comp.getTrait("backgroundvideo").el).removeAttr("style");
 				}
+
+				comp.set({ 'thumbnail': '', 'src': '' });
 			});
 
 			return el;
 		},
 		onUpdate({ elInput, component }) {
 			if (component.attributes.type == 'section') {
-				if (elInput.firstElementChild.name == "backgroundimage" && (component.getTrait('background').getInitValue() == "none" || component.getTrait('background').getInitValue() == "gradient" || component.getTrait('background').getInitValue() == "video"))
+
+				var childName = elInput.firstElementChild.name;
+				var bg = component.getTrait('background').getInitValue();
+
+				if (childName == "backgroundimage" && (bg == "none" || bg == "gradient" || bg == "video"))
 					$(elInput).parents(".gjs-trt-trait__wrp").hide();
-				else if (elInput.firstElementChild.name == "backgroundvideo" && (component.getTrait('background').getInitValue() == "none" || component.getTrait('background').getInitValue() == "image" || component.getTrait('background').getInitValue() == "gradient"))
+				else if (childName == "backgroundvideo" && (bg == "none" || bg == "image" || bg == "gradient"))
 					$(elInput).parents(".gjs-trt-trait__wrp").hide();
 			}
 		},
@@ -1744,6 +1763,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Select
 	tm.addType('dropdown', {
 		createInput({ trait }) {
 
@@ -1773,8 +1793,12 @@ export default (editor, config = {}) => {
 			return el;
 		},
 		onUpdate({ elInput, component }) {
+
 			if (component.attributes.type == 'section') {
-				if ((elInput.id == "imageposition" || elInput.id == "imageattachment" || elInput.id == "imagerepeat" || elInput.id == "imagesize") && (component.getTrait('background').getInitValue() == "none" || component.getTrait('background').getInitValue() == "gradient" || component.getTrait('background').getInitValue() == "video"))
+
+				var bg = component.getTrait('background').getInitValue();
+
+				if ((elInput.id == "imageposition" || elInput.id == "imageattachment" || elInput.id == "imagerepeat" || elInput.id == "imagesize") && (bg == "none" || bg == "gradient" || bg == "video"))
 					$(elInput).parents(".gjs-trt-trait__wrp").hide();
 
 				if (component.attributes["thumbnail"] == "") {
@@ -1794,17 +1818,38 @@ export default (editor, config = {}) => {
 				model = component.findType(trait.attributes.selector);
 
 			$(model).each(function (index, item) {
-				if (item.attributes.type == 'video')
+
+				if (item.attributes.type == 'video') {
 					if (event.target.value == 'yt')
 						item.set({ 'provider': 'yt', 'videoId': '' });
 					else
 						item.set({ 'provider': 'so', 'src': '' });
-				else
+				}
+				else {
+
+					if (item.attributes.type == 'section') {
+
+						var targetName = event.target.name;
+
+						if (targetName == 'imageposition' || targetName == 'imageattachment' || targetName == 'imagerepeat' || targetName == 'imagesize') {
+							$(item.components().models).each(function (index, element) {
+
+								if (element.getAttributes()["data-bg-image"] == "true") {
+									item = element;
+									return false;
+								}
+							});
+						}
+
+					}
+
 					UpdateStyles(elInput, item, event, component);
+				}
 			});
 		}
 	});
 
+	//Gradient
 	tm.addType('gradient', {
 		createInput({ trait }) {
 
@@ -1863,6 +1908,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Styles
 	tm.addType('preset_radio', {
 		createInput({ trait }) {
 
