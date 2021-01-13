@@ -2,6 +2,7 @@
 using DotNetNuke.Security.Permissions;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Common.Entities.Apps;
 using Vanjaro.UXManager.Library.Entities;
@@ -101,7 +102,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Factories
                 AccessRoles.Add("editpage");
             }
 
-            if (TabPermissionController.HasTabPermission("EDIT") || !Editor.Options.EditPage)
+            if (TabPermissionController.HasTabPermission("EDIT") || (HttpContext.Current.Request.Cookies["IsVjEditor"] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies["IsVjEditor"].Value)))
             {
                 AccessRoles.Add("editpage");
             }

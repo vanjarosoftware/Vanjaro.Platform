@@ -17,6 +17,11 @@ namespace Vanjaro.UXManager.Library.Entities
         {
             Options = options;
             Options.EditPage = false;
+            HttpCookie Cookies = new HttpCookie("IsVjEditor");
+            Cookies.Value = "true";
+            Cookies.Secure = HttpContext.Current.Request.IsSecureConnection;
+            HttpContext.Current.Response.Cookies.Add(Cookies);
+            HttpContext.Current.Request.Cookies.Add(Cookies);
         }
 
         private static EditorOptions DefaultSettings()
