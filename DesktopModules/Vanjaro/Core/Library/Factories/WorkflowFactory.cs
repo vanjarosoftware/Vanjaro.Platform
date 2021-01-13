@@ -1,7 +1,6 @@
 ﻿using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Security.Roles;
-using DotNetNuke.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,6 +10,7 @@ using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Data.PetaPoco;
 using Vanjaro.Core.Data.Scripts;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core
 {
@@ -239,7 +239,7 @@ namespace Vanjaro.Core
                         }
                     }
                 }
-                catch (Exception ex) { Exceptions.LogException(ex); }
+                catch (Exception ex) { ExceptionManager.LogException(ex); }
             }
 
             internal static int UpdateSatesOrder(List<WorkflowState> wStates, Workflow wflow, bool IncrementOrder, int? DeletedWorkflowStateOrder)

@@ -186,7 +186,7 @@ namespace Vanjaro.UXManager.Library.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
             }
             return Result;
         }

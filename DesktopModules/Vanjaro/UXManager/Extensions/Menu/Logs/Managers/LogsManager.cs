@@ -11,6 +11,7 @@ using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using Vanjaro.UXManager.Extensions.Menu.Logs.Data.Scripts;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Logs
 {
@@ -64,7 +65,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Logs
                 }
                 catch (Exception ex)
                 {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                     return ex.ToString();
                 }
             }
@@ -121,7 +122,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Logs
                 }
                 catch (Exception ex)
                 {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                     return ex.ToString();
                 }
             }
@@ -139,7 +140,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Logs
                 }
                 catch (Exception ex)
                 {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                     return ex.ToString();
                 }
             }
@@ -172,7 +173,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Logs
                 }
                 catch (Exception ex)
                 {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                     Result.Status = ex.ToString();
                 }
                 return Result;

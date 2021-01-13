@@ -15,6 +15,7 @@ using System.Text;
 using System.Web;
 using Vanjaro.Common.Permissions;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
 {
@@ -363,7 +364,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
             }
             return TotalPortals;
         }
@@ -384,7 +385,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
                         }
                         catch (Exception ex)
                         {
-                            DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                            ExceptionManager.LogException(ex);
                         }
                     }
                 }

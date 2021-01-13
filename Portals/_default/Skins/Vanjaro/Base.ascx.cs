@@ -1,16 +1,15 @@
-﻿using DotNetNuke.Abstractions;
-using DotNetNuke.Common;
-using DotNetNuke.Common.Utilities;
+﻿using DotNetNuke.Common;
 using DotNetNuke.Data;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Framework;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Authentication;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Tokens;
 using DotNetNuke.UI.Skins;
 using DotNetNuke.Web.Client.ClientResourceManagement;
@@ -33,6 +32,7 @@ using Vanjaro.Common.Manager;
 using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Entities.Menu;
+using Vanjaro.Core.Services;
 using static Vanjaro.Core.Factories;
 using static Vanjaro.Core.Managers;
 using static Vanjaro.Skin.Managers;
@@ -135,7 +135,6 @@ namespace Vanjaro.Skin
         protected void Page_Load(object sender, EventArgs e)
         {
             JavaScript.RequestRegistration(CommonJs.jQuery, null, SpecificVersion.Latest);
-
             InjectThemeJS();
 
             PageManager.Init(Page, PortalSettings);
@@ -165,7 +164,7 @@ namespace Vanjaro.Skin
             ResetModulePanes();
             InitGuidedTours();
             AccessDenied();
-
+            InjectAnalyticsScript();
         }
 
         private void AccessDenied()
@@ -210,6 +209,26 @@ namespace Vanjaro.Skin
                     CookieManager.AddValue("InitGrapejs", "false", new DateTime());
                 }
                 Response.Redirect(URLManager.RemoveQueryStringByKey(Request.Url.AbsoluteUri, "uxm"), true);
+            }
+        }
+
+        private void InjectAnalyticsScript()
+        {
+            if (HostController.Instance.GetBoolean("VJImprovementProgram", true))
+            {
+                AnalyticsManager.Post();
+
+                if (Analytics.RegisterScript)
+                {
+                    string PostEvent = Analytics.PostEvent();
+                    if (!string.IsNullOrEmpty(PostEvent))
+                    {
+                        WebForms.RegisterClientScriptBlock(Page, "GTagManager", "<script type='text/javascript' async src='https://www.googletagmanager.com/gtag/js?id=" + Analytics.MeasurementID + "'></script>", false);
+                        //WebForms.RegisterStartupScript(Page, "GTagManagerScript", "window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', '" + Analytics.MeasurementID + "', { 'send_page_view': false }); " + PostEvent, true);
+                        string script = @"$(document).ready(function () {window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', '" + Analytics.MeasurementID + "', { 'send_page_view': false }); " + PostEvent + "});";
+                        WebForms.RegisterStartupScript(Page, "AnalyticsPostEventScript", script, true);
+                    }
+                }
             }
         }
 
@@ -376,7 +395,7 @@ namespace Vanjaro.Skin
                         ContentPane.Controls.Add(lt);
                     }
 
-                    Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
 
                 InjectLoginAuthentication();
@@ -954,7 +973,7 @@ namespace Vanjaro.Skin
                 if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))
                     ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);
             }
-            catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
+            catch (Exception ex) { ExceptionManager.LogException(ex); }
         }
 
 
@@ -1045,7 +1064,7 @@ namespace Vanjaro.Skin
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
             }
         }
 
@@ -1146,7 +1165,7 @@ namespace Vanjaro.Skin
         }
 
         #endregion
-        
+
         #endregion
     }
 }

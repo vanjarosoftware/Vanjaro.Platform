@@ -16,6 +16,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Caching;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 using DotNetNukeSearch = DotNetNuke.Services.Search.Entities;
 
 namespace Vanjaro.UXManager.Extensions.Block.SearchResult
@@ -72,7 +73,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchResult
                     }
                     catch (Exception ex)
                     {
-                        DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                        ExceptionManager.LogException(ex);
                     }
                 }
                 actionResult.Data = new { results, totalHits, more, results.Count };

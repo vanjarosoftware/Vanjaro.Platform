@@ -1124,7 +1124,7 @@
 									</node>
 									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
 										<add name="VanjaroCommonLibrary" type="Vanjaro.Common.Components.HttpModule, Vanjaro.Common" preCondition="managedHandler" />
-									</node>
+									</node>									
 									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
 										<add name="VanjaroMigrate" type="Vanjaro.Migrate.Components.HttpModule,Vanjaro.Migrate" preCondition="managedHandler" />
 									</node>

@@ -13,6 +13,7 @@ using Vanjaro.Common.Manager;
 using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Extensions.Block.SearchResult.Factories;
 using Vanjaro.UXManager.Library.Entities.Interface;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Block.SearchResult
 {
@@ -151,7 +152,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchResult
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message;
             }
         }

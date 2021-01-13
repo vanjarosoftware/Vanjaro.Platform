@@ -1,5 +1,4 @@
-﻿using DotNetNuke.Abstractions;
-using DotNetNuke.Common.Utilities;
+﻿using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
@@ -7,7 +6,6 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
 using DotNetNuke.Services.Authentication;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.UserRequest;
 using Newtonsoft.Json.Linq;
 using System;
@@ -27,7 +25,7 @@ namespace Vanjaro.Core
     {
         public class LoginManager
         {
-            
+
             public static UserAuthenticatedEventArgs UserLogin(dynamic userLogin)
             {
                 string IPAddress = UserRequestIPAddressController.Instance.GetUserRequestIPAddress(new HttpRequestWrapper(HttpContext.Current.Request));
@@ -135,12 +133,12 @@ namespace Vanjaro.Core
                         }
                     }
                 }
-                catch (Exception exc) { Exceptions.LogException(exc); }
+                catch (Exception exc) { ExceptionManager.LogException(exc); }
             }
 
             public static string Logoff()
             {
-                
+
                 return ServiceProvider.NavigationManager.NavigateURL(PortalSettings.Current.ActiveTab.TabID, "Logoff");
             }
 
@@ -174,7 +172,7 @@ namespace Vanjaro.Core
                         }
                         catch { continue; }
                     }
-                    
+
                     CacheFactory.Set(CacheFactory.Keys.OAuthClients + "-" + PortalSettings.Current.PortalId, OAuthClients);
                 }
 

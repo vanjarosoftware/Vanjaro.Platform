@@ -1,5 +1,4 @@
 ﻿using Dnn.PersonaBar.Security.Components;
-using Dnn.PersonaBar.Security.Services.Dto;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
@@ -7,13 +6,13 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Security.Membership;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Security
 {
@@ -69,7 +68,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security
                 }
                 catch (Exception exc)
                 {
-                    Exceptions.LogException(exc);
+                    ExceptionManager.LogException(exc);
                 }
 
                 return response;
