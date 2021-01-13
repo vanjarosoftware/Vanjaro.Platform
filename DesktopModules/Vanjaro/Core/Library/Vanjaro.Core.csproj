@@ -152,7 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="00.05.03.txt" />
-    <Content Include="DistrubtionAddList.txt" />
+    <Content Include="DistributionAddList.txt" />
     <Content Include="EULA.txt" />
     <Content Include="Images\1209008.jpg" />
     <Content Include="Images\Greynob.png" />
@@ -169,7 +169,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database.cs</LastGenOutput>
     </Content>
-    <Content Include="DistrubtionRemoveList.txt" />
+    <Content Include="DistributionRemoveList.txt" />
     <Content Include="PackageList.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -440,7 +440,7 @@
     <Content Include="Themes\Basic\editor\921af5fa-3030-4bae-aaec-0e353b9489ff\theme.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="VanjaroDistrubtion.dnn" />
+    <Content Include="VanjaroDistribution.dnn" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Themes\Basic\scss\Bootstrap\utilities\_interactions.scss" />
