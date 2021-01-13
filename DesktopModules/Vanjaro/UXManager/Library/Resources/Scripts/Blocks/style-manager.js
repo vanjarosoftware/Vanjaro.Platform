@@ -305,8 +305,6 @@
 
 				if (typeof model.attributes.units != 'undefined')
 					unit = model.view.$el.find('select').val();
-				else if (typeof model.attributes.unit != 'undefined')
-					unit = model.attributes.unit;
 
 				if (val == 'auto') {
 					if (typeof selected != 'undefined') {
@@ -319,6 +317,13 @@
 
 						unit = 'px';
 					}
+				}
+
+				if (unit == null) {
+					if (typeof model.attributes.unit != 'undefined')
+						unit = model.attributes.unit;
+					else
+						unit = '';
 				}
 
 				if (event.keyCode === 38)
