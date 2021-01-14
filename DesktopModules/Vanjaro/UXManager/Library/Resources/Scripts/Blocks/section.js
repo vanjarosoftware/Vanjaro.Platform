@@ -290,30 +290,14 @@
 			},
 			ChangeSrc() {
 				if (this.model.attributes.src != '') {
-
-					var src = this.model.attributes.src;
-
 					if (this.model.attributes.background == "image") {
+						var src = this.model.attributes.src;
+						var style = this.model.getStyle();
 
-						this.model.components().forEach(item => item.getAttributes()["data-bg-image"] == "true" ? item.remove() : null);
-						this.model.append("<div class='bg-image' data-bg-image='true' data-gjs-layerable='false' data-gjs-clickable='false' data-gjs-selectable='false' data-gjs-hoverable='false' data-gjs-draggable='false' data-gjs-droppable='false'></div>");
+						style["background-image"] = 'url("' + src + '")';
+						this.model.setStyle(style);
 
-						this.model.components().forEach(item => {
-
-							if (item.getAttributes()["data-bg-image"] == "true") {
-
-								var style = item.getStyle();
-
-								style["background-image"] = 'url(' + src + ')';
-								style["background-position"] = this.model.getTrait("imageposition").getInitValue();
-								style["background-attachment"] = this.model.getTrait("imageattachment").getInitValue();
-								style["background-repeat"] = this.model.getTrait("imagerepeat").getInitValue();
-								style["background-size"] = this.model.getTrait("imagesize").getInitValue();
-
-								item.setStyle(style);
-							}
-						});
-
+						this.model.set({ "thumbnail": src });
 						$(this.model.getTrait("backgroundimage").el).css('background-image', 'url(' + src + ')');
 						$(this.model.getTrait("imageposition").el).parents(".gjs-trt-trait__wrp").show();
 						$(this.model.getTrait("imageattachment").el).parents(".gjs-trt-trait__wrp").show();
@@ -323,7 +307,7 @@
 					else if (this.model.attributes.background == "video") {
 
 						this.model.components().forEach(item => item.getAttributes()["data-bg-video"] == "true" ? item.remove() : null);
-						this.model.append("<video src=" + src + " data-gjs-layerable='false' data-gjs-clickable='false' data-gjs-selectable='false' data-gjs-hoverable='false' data-gjs-draggable='false' data-gjs-droppable='false' data-bg-video='true' class='bg-video' autoplay loop muted></video>");
+						this.model.append("<video src=" + this.model.attributes.src + " data-gjs-layerable='false' data-gjs-clickable='false' data-gjs-selectable='false' data-gjs-hoverable='false' data-gjs-draggable='false' data-gjs-droppable='false' data-bg-video='true' class='bg-video' autoplay loop muted></video>");
 
 						this.model.components().forEach(item => {
 							item.getAttributes()["data-bg-video"] == "true" ? item.set({ 'controls': 0 }) : null
@@ -334,14 +318,14 @@
 						else
 							var thumbnail = VjDefaultPath + "thumbnail-video.jpg";
 
+						this.model.set({ "thumbnail": thumbnail });
 						$(this.model.getTrait("backgroundvideo").el).css('background-image', 'url(' + thumbnail + ')');
 						$(this.model.getEl()).find('video').removeAttr('autoplay');
 
 						this.model.addStyle({ 'overflow': 'hidden' });
 					}
-
-					this.model.set({ "thumbnail": thumbnail });
 				}
+
 			},
 
 		}),
