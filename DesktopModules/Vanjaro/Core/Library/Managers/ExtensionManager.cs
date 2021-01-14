@@ -41,11 +41,6 @@ namespace Vanjaro.Core
                     return items;
                 }
             }
-
-            public static bool IsAllowVjEditor()
-            {
-                return HttpContext.Current.Request.Cookies["IsVjEditor"] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies["IsVjEditor"].Value);
-            }
         }
     }
 }

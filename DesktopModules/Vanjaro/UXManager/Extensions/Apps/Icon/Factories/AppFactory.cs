@@ -91,7 +91,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Block.Icon.Factories
                 AccessRoles.Add("admin");
             }
 
-            if (TabPermissionController.HasTabPermission("EDIT") || ExtensionManager.IsAllowVjEditor())
+            if (TabPermissionController.HasTabPermission("EDIT") || Editor.HasExtensionAccess())
             {
                 AccessRoles.Add("editpage");
             }
