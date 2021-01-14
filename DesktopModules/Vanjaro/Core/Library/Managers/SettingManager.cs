@@ -702,14 +702,90 @@ namespace Vanjaro.Core
 
                 }
 
+                TabInfo TermsTab = TabController.Instance.GetTabByName("Terms", pinfo.PortalID);
+                Layout Termslayout = pageLayouts.Where(a => a.Name == "Terms").FirstOrDefault();
+                if (TermsTab != null && Termslayout != null && portalSettings != null)
+                {
+                    ProcessBlocks(pinfo.PortalID, Termslayout.Blocks);
+                    if (portalSettings.ActiveTab == null)
+                    {
+                        portalSettings.ActiveTab = new TabInfo();
+                    }
+
+                    portalSettings.ActiveTab.TabID = TermsTab.TabID;
+                    Dictionary<string, object> LayoutData = new Dictionary<string, object>
+                    {
+                        ["IsPublished"] = false,
+                        ["Comment"] = string.Empty,
+                        ["gjs-assets"] = string.Empty,
+                        ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Termslayout.Style.ToString(), pinfo.PortalID),
+                        ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Termslayout.Content.ToString(), pinfo.PortalID),
+                        ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Termslayout.ContentJSON.ToString(), pinfo.PortalID),
+                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Termslayout.StyleJSON.ToString(), pinfo.PortalID)
+                    };
+                    Core.Managers.PageManager.Update(portalSettings, LayoutData);
+
+                    Pages Page = Managers.PageManager.GetPages(TermsTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
+                    UpdateValue(pinfo.PortalId, TermsTab.TabID, "setting_detail", "ReplaceTokens", "true");
+
+                    if (Page != null && uInfo != null)
+                    {
+                        WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
+                        Page.Version = 1;
+                        Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
+                        Page.IsPublished = true;
+                        Page.PublishedBy = uInfo.UserID;
+                        Page.PublishedOn = DateTime.UtcNow;
+                        PageFactory.Update(Page, uInfo.UserID);
+                    }
+                }
+
+                TabInfo PrivacyTab = TabController.Instance.GetTabByName("Privacy", pinfo.PortalID);
+                Layout Privacylayout = pageLayouts.Where(a => a.Name == "Privacy").FirstOrDefault();
+                if (PrivacyTab != null && Privacylayout != null && portalSettings != null)
+                {
+                    ProcessBlocks(pinfo.PortalID, Privacylayout.Blocks);
+                    if (portalSettings.ActiveTab == null)
+                    {
+                        portalSettings.ActiveTab = new TabInfo();
+                    }
+
+                    portalSettings.ActiveTab.TabID = PrivacyTab.TabID;
+                    Dictionary<string, object> LayoutData = new Dictionary<string, object>
+                    {
+                        ["IsPublished"] = false,
+                        ["Comment"] = string.Empty,
+                        ["gjs-assets"] = string.Empty,
+                        ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.Style.ToString(), pinfo.PortalID),
+                        ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.Content.ToString(), pinfo.PortalID),
+                        ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.ContentJSON.ToString(), pinfo.PortalID),
+                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.StyleJSON.ToString(), pinfo.PortalID)
+                    };
+                    Core.Managers.PageManager.Update(portalSettings, LayoutData);
+
+                    Pages Page = Managers.PageManager.GetPages(PrivacyTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
+                    UpdateValue(pinfo.PortalId, PrivacyTab.TabID, "setting_detail", "ReplaceTokens", "true");
+
+                    if (Page != null && uInfo != null)
+                    {
+                        WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
+                        Page.Version = 1;
+                        Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
+                        Page.IsPublished = true;
+                        Page.PublishedBy = uInfo.UserID;
+                        Page.PublishedOn = DateTime.UtcNow;
+                        PageFactory.Update(Page, uInfo.UserID);
+                    }
+                }
 
                 #endregion
 
-                #region Update Default SignUp Tab and Search Results page
+                #region Update Default SignUp Tab, Search Results,Terms of Service and Privacy Policy page
 
                 pinfo.RegisterTabId = SignUpTab != null && !SignUpTab.IsDeleted ? SignUpTab.TabID : Null.NullInteger;
                 pinfo.SearchTabId = SearchResultTab != null && !SearchResultTab.IsDeleted ? SearchResultTab.TabID : Null.NullInteger;
-
+                pinfo.TermsTabId = TermsTab != null && !TermsTab.IsDeleted ? TermsTab.TabID : Null.NullInteger;
+                pinfo.PrivacyTabId = PrivacyTab != null && !PrivacyTab.IsDeleted ? PrivacyTab.TabID : Null.NullInteger;
                 #endregion
             }
 

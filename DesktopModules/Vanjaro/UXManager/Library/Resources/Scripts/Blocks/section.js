@@ -43,7 +43,7 @@
 
 					if (GetBlockMenus().length > 0) {
 						tb.push({
-							attributes: { class: 'fa fa-bars' },
+                            attributes: { class: 'fa fa-bars', title: VjLocalized.Menu },
 							command: function (t) {
 								return t.runCommand("tlb-app-actions", {
 									BlockMenus: GetBlockMenus()
@@ -76,7 +76,7 @@
 					}
 
 					tb.push({
-						attributes: { class: 'fa fa-cog' },
+                        attributes: { class: 'fa fa-cog', title: VjLocalized.Settings },
 						command: 'tlb-app-personalization',
 					});
 

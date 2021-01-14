@@ -39,7 +39,6 @@
 }
 
 
-
     #toast-container > .toast-info:before {
         font-family: "Font Awesome 5 Free";
         font-size: 24px;
@@ -141,6 +140,10 @@
     .modal-toggle:hover {
         background: #0088cc;
         color: #e6e9ec;
+    }
+
+    .modal-toggle:focus {
+       outline: none;
     }
 
     .modal-toggle.modalclosebtn {

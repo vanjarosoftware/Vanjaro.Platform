@@ -35,7 +35,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 
                     if (model.attributes.attributes["data-block-allow-customization"] != undefined && model.attributes.attributes["data-block-allow-customization"] == "true") {
                         tb.push({
-                            attributes: { class: 'fa fa-cog', guid: ((typeof model.attributes.attributes["data-block-setting-guid"] != 'undefined') ? model.attributes.attributes["data-block-setting-guid"] : model.attributes.attributes["data-block-guid"]), width: model.attributes.attributes["data-block-width"], title: VjLocalized.Settings},
+                            attributes: { class: 'fa fa-cog', guid: ((typeof model.attributes.attributes["data-block-setting-guid"] != 'undefined') ? model.attributes.attributes["data-block-setting-guid"] : model.attributes.attributes["data-block-guid"]), width: model.attributes.attributes["data-block-width"], title: VjLocalized.Settings },
                             command: 'tlb-vjblock-setting',
                         });
                     }
@@ -264,7 +264,17 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
             render: function () {
                 defaultType.view.prototype.render.apply(this, arguments);
                 if (this.model.attributes != undefined && this.model.attributes.components != undefined && this.model.attributes.components.models[0] != undefined && this.model.attributes.components.models[0].attributes.content != '') {
-                    this.model.components($(this.model.attributes.components.models[0].attributes.content).html());
+                    var contentitems = $(this.model.attributes.components.models[0].attributes.content);
+                    if (contentitems != undefined && contentitems.length > 0) {
+                        var contentmarkup = '';
+                        $.each(contentitems, function (ind, itm) {
+                            if (itm.localName == 'style')
+                                contentmarkup += itm.outerHTML;
+                            else
+                                contentmarkup += itm.innerHTML;
+                        });
+                        this.model.components(contentmarkup);
+                    }
                     $.each(getAllComponents(this.model), function (k, v) {
                         if (v.attributes.type == 'blockwrapper') {
                             v.set('custom-name', v.attributes.attributes["data-block-display-name"] != undefined ? v.attributes.attributes["data-block-display-name"] : v.attributes.attributes["data-block-type"]);

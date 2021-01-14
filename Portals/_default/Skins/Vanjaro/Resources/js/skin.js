@@ -195,7 +195,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
         });
     }
 
-    if (position == 'right' && width == "100%" && showtogglebtn) {
+    if (position == 'right' && showtogglebtn) {
 
         if ($modal.find(".modal-toggle").length == 0)
             $modal.append('<button type="button" class="modal-toggle" style="right: ' + (width - 1) + 'px;"><em class="fas fa-chevron-right"></em></a>');
