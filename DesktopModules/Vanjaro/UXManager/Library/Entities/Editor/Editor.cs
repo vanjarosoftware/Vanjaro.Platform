@@ -77,7 +77,9 @@ namespace Vanjaro.UXManager.Library.Entities
 
         public static bool HasExtensionAccess()
         {
-            return HttpContext.Current.Request.Cookies["UXEditor"] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies["UXEditor"].Value);
+            if (HttpContext.Current.Request.Cookies["UXEditor"] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies["UXEditor"].Value))
+                return HttpContext.Current.Request.Cookies["UXEditor"].Value == CalculateSHA(PortalSettings.Current.UserId.ToString());
+            return false;
         }
 
     }
