@@ -22,13 +22,20 @@ global.LoadApps = function () {
                     content: '<div dmid="' + value.ModuleID + '" mid="" uid="' + value.UniqueID + '" fname="' + value.ModuleName + '"><div vjmod="true">[Module]</div></div>'
                 })
             });
-            setTimeout(function () {
+            if (VjEditor != undefined && VjEditor.Canvas != undefined && VjEditor.Canvas.getBody() != undefined) {
                 const body = VjEditor.Canvas.getBody();
                 $(body).append('<script>' + VjScript + '</script>');
-                //$(body).append('<style type="text/css">' + VjStyle + '</style>');     
                 if (VjStyle != undefined && VjStyle.length > 0)
-                    VjEditor.addComponents('<style>' + VjStyle + '</style>');
-            }, 2000);
+                    $(body).append('<style>' + VjStyle + '</style>');
+            }
+            else {
+                setTimeout(function () {
+                    const body = VjEditor.Canvas.getBody();
+                    $(body).append('<script>' + VjScript + '</script>');
+                    if (VjStyle != undefined && VjStyle.length > 0)
+                        $(body).append('<style>' + VjStyle + '</style>');
+                }, 2000);
+            }
         }
     });
 };
@@ -290,7 +297,7 @@ global.UpdateGlobalBlock = function (model) {
                         ID: Block.attributes.attributes.id,
                         Guid: Block.attributes.attributes.guid,
                         Name: Block.attributes.label,
-                        Category: Block.attributes.category.id,
+                        Category: Block.attributes.category.id || Block.attributes.category,
                         Html: content.html,
                         Css: content.css,
                         IsGlobal: true
@@ -398,7 +405,10 @@ global.BuildBlockComponent = function (vjcomps) {
                 if (v.components != undefined && v.components[0] != undefined) {
                     v.components[0].components = [];
                     if (v.attributes["data-block-type"].toLowerCase() == "global") {
-                        v.components[0].content = $this.outerHTML;
+                        var contentstyle = '';
+                        if ($('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0] != undefined)
+                            contentstyle = $('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0].outerHTML;
+                        v.components[0].content = contentstyle + $this.outerHTML;
                     }
                     else {
                         if (v.attributes["data-block-type"] == "Logo") {

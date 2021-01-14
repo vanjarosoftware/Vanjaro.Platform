@@ -214,7 +214,7 @@ namespace Vanjaro.Common.Factories
         public static List<TreeView> GetDnnPages(int PortalID)
         {
             List<TreeView> result = new List<TreeView>();
-            List<TabInfo> TabCollection = TabController.GetPortalTabs(PortalID, -1, false, null, false, false, true, true, false);
+            List<TabInfo> TabCollection = TabController.GetPortalTabs(PortalID, -1, false, null, true, false, true, true, false);
             if (TabCollection != null && TabCollection.Count > 0)
             {
                 foreach (TabInfo Item in TabCollection.Where(t => t.ParentId == -1))
@@ -313,7 +313,7 @@ namespace Vanjaro.Common.Factories
                 if (hasPermission)
                 {
                     TreeView FolderItem = new TreeView();
-                    
+
                     if (string.IsNullOrEmpty(parentFolder.FolderPath))
                     {
                         if (PortalId == -1)
@@ -519,7 +519,7 @@ namespace Vanjaro.Common.Factories
 
                         if (!flag)
                         {
-                            flaggedUrl =  DotNetNuke.Common.Globals.FriendlyUrl(tab, DotNetNuke.Common.Globals.ApplicationURL(tab.TabID), PortalSettings as IPortalSettings);
+                            flaggedUrl = DotNetNuke.Common.Globals.FriendlyUrl(tab, DotNetNuke.Common.Globals.ApplicationURL(tab.TabID), PortalSettings as IPortalSettings);
                         }
                         else
                         {
@@ -674,7 +674,7 @@ namespace Vanjaro.Common.Factories
             {
                 IFolderInfo folder = FolderManager.Instance.GetFolder(folderId);
                 result.FolderName = "";
-                
+
                 if (string.IsNullOrEmpty(folder.FolderPath))
                 {
                     if (folder.PortalID == -1)
@@ -1487,7 +1487,7 @@ namespace Vanjaro.Common.Factories
             foreach (IFolderInfo item in FolderManager.Instance.GetFolders(PortalId))
             {
                 string foldername = item.FolderPath;
-                
+
                 if (string.IsNullOrEmpty(foldername))
                 {
                     foldername = "Site Root";
