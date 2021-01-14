@@ -142,6 +142,10 @@
         color: #e6e9ec;
     }
 
+    .modal-toggle:focus {
+       outline: none;
+    }
+
     .modal-toggle.modalclosebtn {
         position: fixed;
         background: #0088cc;
@@ -176,20 +180,6 @@ video {
     width: 100%;
     height: auto;
 }
-
-.vj-section .bg-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-}
-
-    .vj-section .bg-video video {
-        height: auto !important;
-    }
 
 a, a:hover, a:focus, a:active {
     text-decoration: none;
@@ -520,12 +510,31 @@ Theme.css end
     position: relative;
     padding-top: 50px;
     padding-bottom: 50px;
-    background-position: center center;
-    background-attachment: scroll;
-    background-repeat: no-repeat;
-    background-size: auto;
-    /*z-index: 1;*/
+    z-index: 1;
 }
+
+    .vj-section .bg-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .vj-section .bg-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 0;
+    }
+
+    .vj-section .bg-video video {
+        height: auto !important;
+    }
 
 .link,
 .icon-box,

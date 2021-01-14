@@ -1689,13 +1689,13 @@ $(document).ready(function () {
                                 $.each(model.attributes.toolbar, function (k, v) {
 
                                     if (v.attributes['class'] == 'fa fa-arrow-up')
-                                        v.attributes['title'] = 'Select Parent';
+                                        v.attributes['title'] = VjLocalized.SelectParent;
                                     else if (v.command == 'vj-move' || v.command == 'tlb-move')
-                                        v.attributes['title'] = 'Move';
-                                    else if (v.command == 'vj-copy' || v.command == 'tlb-copy')
-                                        v.attributes['title'] = 'Copy';
+                                        v.attributes['title'] = VjLocalized.Move;
+                                    else if (v.command == 'vj-copy' || v.command == 'tlb-clone')
+                                        v.attributes['title'] = VjLocalized.Copy;
                                     else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
-                                        v.attributes['title'] = 'Delete';
+                                        v.attributes['title'] = VjLocalized.Delete;
                                 });
 
 								var desktop = 'd-desktop-none';
@@ -2526,7 +2526,7 @@ $(document).ready(function () {
 								if (model.parent() != undefined && model.parent().attributes.type == "column" && model.parent().components().length == 0)
 									$(model.parent().getEl()).attr("data-empty", "true");
 
-								if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
+								if ((typeof model.getAttributes() != "undefined" && (model.getAttributes()["data-bg-video"] == "true" || model.getAttributes()["data-bg-image"] == "true")) || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
 									return false;
 								else {
 									if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(data.RevisionGUID) < 0)
