@@ -2526,7 +2526,7 @@ $(document).ready(function () {
 								if (model.parent() != undefined && model.parent().attributes.type == "column" && model.parent().components().length == 0)
 									$(model.parent().getEl()).attr("data-empty", "true");
 
-								if ((typeof model.getAttributes() != "undefined" && (model.getAttributes()["data-bg-video"] == "true" || model.getAttributes()["data-bg-image"] == "true")) || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
+								if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
 									return false;
 								else {
 									if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(data.RevisionGUID) < 0)
