@@ -6,6 +6,7 @@ using System.Web;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Common.Entities.Apps;
 using Vanjaro.UXManager.Library.Entities;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Apps.Block.Icon.Factories
 {
@@ -90,7 +91,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Block.Icon.Factories
                 AccessRoles.Add("admin");
             }
 
-            if (TabPermissionController.HasTabPermission("EDIT") || (HttpContext.Current.Request.Cookies["IsVjEditor"] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies["IsVjEditor"].Value)))
+            if (TabPermissionController.HasTabPermission("EDIT") || ExtensionManager.IsAllowVjEditor())
             {
                 AccessRoles.Add("editpage");
             }

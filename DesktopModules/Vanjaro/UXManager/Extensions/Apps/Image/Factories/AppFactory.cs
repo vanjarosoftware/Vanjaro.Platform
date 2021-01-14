@@ -102,7 +102,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Factories
                 AccessRoles.Add("editpage");
             }
 
-            if (TabPermissionController.HasTabPermission("EDIT") || (HttpContext.Current.Request.Cookies["IsVjEditor"] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies["IsVjEditor"].Value)))
+            if (TabPermissionController.HasTabPermission("EDIT") || Core.Managers.ExtensionManager.IsAllowVjEditor())
             {
                 AccessRoles.Add("editpage");
             }

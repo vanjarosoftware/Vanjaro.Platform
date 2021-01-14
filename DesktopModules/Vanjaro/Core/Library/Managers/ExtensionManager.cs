@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web;
 using Vanjaro.Core.Entities.Interface;
 using static Vanjaro.Core.Factories;
 
@@ -39,6 +40,11 @@ namespace Vanjaro.Core
                     }
                     return items;
                 }
+            }
+
+            public static bool IsAllowVjEditor()
+            {
+                return HttpContext.Current.Request.Cookies["IsVjEditor"] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies["IsVjEditor"].Value);
             }
         }
     }
