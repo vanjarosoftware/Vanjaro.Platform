@@ -408,20 +408,21 @@ copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_P
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\*.snapshot >NUL
 "C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\sass.snapshot bin\sass.snapshot >NUL
 
-:: Vanjaro Platform 
+:: Vanjaro Platform
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.exe >NUL
 "C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\dart.exe bin\dart.exe >NUL
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.snapshot >NUL
 "C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\sass.snapshot bin\sass.snapshot >NUL
-"C:\Program Files\7-Zip\7z.exe" d -r ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip @DistrubtionRemoveList.txt >NUL
-"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip @DistrubtionAddList.txt >NUL
+
+"C:\Program Files\7-Zip\7z.exe" d -r ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip @DistributionRemoveList.txt >NUL
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip @DistributionAddList.txt >NUL
 
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\*.exe >NUL
 "C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\dart.exe bin\dart.exe >NUL
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\*.snapshot >NUL
 "C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\sass.snapshot bin\sass.snapshot >NUL
-"C:\Program Files\7-Zip\7z.exe" d -r ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip @DistrubtionRemoveList.txt >NUL
-"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip @DistrubtionAddList.txt >NUL
+"C:\Program Files\7-Zip\7z.exe" d -r ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip @DistributionRemoveList.txt >NUL
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip @DistributionAddList.txt >NUL
 
 cd ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\ 
 del Temp_DNN /Q >NUL 2>&1
