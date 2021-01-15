@@ -43,8 +43,10 @@
     },
     processResponse: function (response) {
 
-        var signinText = $($(obj).closest('.Login').find('#loginbtn')).attr('attr-localize-signin-text');
         var obj = $('#loginbtn');
+        var signinText = $($(obj).closest('.Login').find('#loginbtn')).attr('attr-localize-signin-text');
+        if ($.trim(signinText) == "" || signinText == null)
+            signinText = "Sign in";
 
         if (response.IsSuccess) {
             if (response.IsRedirect) {
