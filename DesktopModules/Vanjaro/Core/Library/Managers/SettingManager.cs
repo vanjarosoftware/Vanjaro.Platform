@@ -315,7 +315,7 @@ namespace Vanjaro.Core
                     {
                         List<Layout> pageLayouts = GetLayouts(pinfo);
                         ApplyDefaultLayouts(pinfo, uInfo, pageLayouts);
-                        pinfo.LogoFile = fi.FolderPath + "vanjaro_logo.png";
+                        pinfo.LogoFile = fi.FolderPath + "Logo.svg";
                     }
 
                     #region Update SEO Settings
