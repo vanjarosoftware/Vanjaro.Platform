@@ -17,6 +17,8 @@
 /Portals/_default/Containers/*
 !/Portals/_default/Containers/Vanjaro
 
+!favicon.ico
+
 /DesktopModules/Vanjaro/UXManager/Extensions/Apps/About/apps-about-resources.zip
 /DesktopModules/Vanjaro/UXManager/Extensions/Apps/Icon/apps-icon-resources.zip
 /DesktopModules/Vanjaro/UXManager/Extensions/Apps/Image/apps-image-resources.zip
