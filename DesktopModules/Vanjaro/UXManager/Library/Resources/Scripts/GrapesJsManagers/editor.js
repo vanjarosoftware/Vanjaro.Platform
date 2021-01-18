@@ -130,31 +130,6 @@ $(document).ready(function () {
 	$(".pubish-btn").click(function (e) {
 		e.preventDefault();
 
-		var ChangeDevice = function () {
-
-			if ($('.gjs-frame').contents().find("html").hasClass('responsive')) {
-
-				$(".device-manager .device-view").removeClass("active");
-				$(".device-manager .device-view #Desktop").addClass("active");
-
-				$(".panelfooter .ResponsiveMode").find("em").removeClass(function (index, css) {
-					return (css.match(/\bfa-\S+/g) || []).join(' ');
-				}).addClass("fa fa-desktop");
-
-				ChangeColumnResizeSpeed(0.075);
-
-				if (vjEditorSettings.EditPage) {
-					$('.gjs-frame').removeClass("fixed-height");
-					$('.gjs-frame').contents().find("html").removeClass('responsive');
-					$('.gjs-frame').contents().find("#wrapper").removeClass("scrollbar");
-					VjEditor.runCommand('set-device-desktop');
-				}
-				else
-					$('body').removeClass('resp-mode tablet mobile').addClass('resp-mode');
-			}
-
-		};
-
 		var VjPublishChanges = function () {
 			if (VJIsContentApproval == 'True') {
 				swal(
