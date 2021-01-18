@@ -947,8 +947,8 @@ namespace Vanjaro.Common.Factories
                     return Result;
                 }
             }
-            Result.Status = "Success";
-            Result.Url = FileManager.Instance.GetUrl(file);
+            Result.Status = "Success";            
+            Result.Url = Uri.EscapeUriString(FileManager.Instance.GetUrl(file));
             Result.Urls = GetUrls(file);
             return Result;
         }
@@ -1023,7 +1023,7 @@ namespace Vanjaro.Common.Factories
             {
                 result.Name = file.RelativePath;
                 result.FileId = file.FileId;
-                result.FileUrl = FileManager.Instance.GetUrl(file);
+                result.FileUrl = Uri.EscapeUriString(FileManager.Instance.GetUrl(file));
                 return result;
             }
             return result;
@@ -1047,7 +1047,7 @@ namespace Vanjaro.Common.Factories
                             {
                                 ImageUrl imgUrl = new ImageUrl
                                 {
-                                    Url = FileManager.Instance.GetUrl(finfo),
+                                    Url = Uri.EscapeUriString(FileManager.Instance.GetUrl(finfo)),
                                     Width = finfo.Width,
                                     Type = "image"
                                 };
@@ -1057,7 +1057,7 @@ namespace Vanjaro.Common.Factories
                                 {
                                     imgUrl = new ImageUrl
                                     {
-                                        Url = FileManager.Instance.GetUrl(webpfileinfo),
+                                        Url = Uri.EscapeUriString(FileManager.Instance.GetUrl(webpfileinfo)),
                                         Width = finfo.Width,
                                         Type = "webp"
                                     };
@@ -1233,7 +1233,7 @@ namespace Vanjaro.Common.Factories
             if (Security.IsAllowedExtension(FileExtension, FileTypes) && FileSize <= maxsize)
             {
                 int count = 1;
-                Find:
+            Find:
                 if (FileManager.Instance.FileExists(folderInfo, TempFileName))
                 {
                     TempFileName = FileName.Remove(FileName.Length - FileExtension.Length) + count + FileExtension;

@@ -156,7 +156,6 @@ $(document).ready(function () {
 				RunSaveCommand();
 		};
 
-
 		var waitForEl = function (selector, size, callback) {
 			//Added math.round to fix OptimizeImages issue on small screens
 			if (jQuery(selector).length && Math.round(jQuery(selector).width()) == size) {
@@ -217,13 +216,23 @@ $(document).ready(function () {
 				}, 500);
 			}
 		};
-
 		var optImages = jQuery.grep(getAllComponents(), function (n, i) {
 			return (n.attributes.type == 'image') && (typeof n.getStyle()['width'] == 'undefined') && (n.parent().attributes.type == 'picture-box') && (typeof n.parent().components().models[0] != 'undefined') && (typeof n.parent().components().models[1] != 'undefined');
 		});
 
-		if (optImages != undefined && optImages.length > 0)
-			OptimizeImages(optImages, resolutionSizes.slice());
+		if (optImages != undefined && optImages.length > 0) {
+
+			if (!$('.optimizing-overlay').length)
+				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Optimizing Images . . .</h1></div>');
+
+			if ($('.gjs-frame').contents().find("html").hasClass('responsive'))
+				$(".device-manager .device-view#Desktop").trigger("click");
+			
+			waitForEl('.gjs-frame-wrapper', VjEditor.Canvas.getCanvasView().$el.innerWidth(), function () {
+				OptimizeImages(optImages, resolutionSizes.slice());
+			});
+
+		}
 		else
 			VjPublishChanges();
 
@@ -1686,17 +1695,17 @@ $(document).ready(function () {
 									return;
 								}
 
-                                $.each(model.attributes.toolbar, function (k, v) {
+								$.each(model.attributes.toolbar, function (k, v) {
 
-                                    if (v.attributes['class'] == 'fa fa-arrow-up')
-                                        v.attributes['title'] = VjLocalized.SelectParent;
-                                    else if (v.command == 'vj-move' || v.command == 'tlb-move')
-                                        v.attributes['title'] = VjLocalized.Move;
-                                    else if (v.command == 'vj-copy' || v.command == 'tlb-clone')
-                                        v.attributes['title'] = VjLocalized.Copy;
-                                    else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
-                                        v.attributes['title'] = VjLocalized.Delete;
-                                });
+									if (v.attributes['class'] == 'fa fa-arrow-up')
+										v.attributes['title'] = VjLocalized.SelectParent;
+									else if (v.command == 'vj-move' || v.command == 'tlb-move')
+										v.attributes['title'] = VjLocalized.Move;
+									else if (v.command == 'vj-copy' || v.command == 'tlb-clone')
+										v.attributes['title'] = VjLocalized.Copy;
+									else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
+										v.attributes['title'] = VjLocalized.Delete;
+								});
 
 								var desktop = 'd-desktop-none';
 								var tablet = 'd-tablet-none';
@@ -2746,6 +2755,7 @@ $(document).ready(function () {
 	$(".device-manager .device-view").click(function () {
 		var $this = $(this);
 		var $body = $('body');
+		var $iframe = $('.gjs-frame');
 
 		$(".device-manager .device-view").removeClass("active");
 		$this.addClass("active");
@@ -2760,9 +2770,9 @@ $(document).ready(function () {
 			ChangeColumnResizeSpeed(0.075);
 
 			if (vjEditorSettings.EditPage) {
-				$('.gjs-frame').removeClass("fixed-height");
-				$('.gjs-frame').contents().find("html").removeClass('responsive');
-				$('.gjs-frame').contents().find("#wrapper").removeClass("scrollbar");
+				$iframe.removeClass("fixed-height");
+				$iframe.contents().find("html").removeClass('responsive');
+				$iframe.contents().find("#wrapper").removeClass("scrollbar");
 				VjEditor.runCommand('set-device-desktop');
 			}
 			else
@@ -2774,9 +2784,9 @@ $(document).ready(function () {
 			ChangeColumnResizeSpeed(0.1);
 
 			if (vjEditorSettings.EditPage) {
-				$('.gjs-frame').removeClass("fixed-height");
-				$('.gjs-frame').contents().find("html").addClass('responsive');
-				$('.gjs-frame').contents().find("#wrapper").addClass("scrollbar");
+				$iframe.removeClass("fixed-height");
+				$iframe.contents().find("html").addClass('responsive');
+				$iframe.contents().find("#wrapper").addClass("scrollbar");
 				VjEditor.runCommand('set-device-tablet');
 			}
 			else
@@ -2788,14 +2798,15 @@ $(document).ready(function () {
 			ChangeColumnResizeSpeed(0.2);
 
 			if (vjEditorSettings.EditPage) {
-				$('.gjs-frame').addClass("fixed-height");
-				$('.gjs-frame').contents().find("html").addClass('responsive');
-				$('.gjs-frame').contents().find("#wrapper").addClass("scrollbar");
+				$iframe.addClass("fixed-height");
+				$iframe.contents().find("html").addClass('responsive');
+				$iframe.contents().find("#wrapper").addClass("scrollbar");
 				VjEditor.runCommand('set-device-mobile');
 			}
 			else
 				$body.removeClass('tablet').addClass('resp-mode mobile');
 		}
+
 		var selected = VjEditor.getSelected();
 		VjEditor.select();
 		VjEditor.select(selected);
