@@ -130,6 +130,30 @@ $(document).ready(function () {
 	$(".pubish-btn").click(function (e) {
 		e.preventDefault();
 
+		var ChangeDevice = function () {
+
+			if ($('.gjs-frame').contents().find("html").hasClass('responsive')) {
+
+				$(".device-manager .device-view").removeClass("active");
+				$(".device-manager .device-view #Desktop").addClass("active");
+
+				$(".panelfooter .ResponsiveMode").find("em").removeClass(function (index, css) {
+					return (css.match(/\bfa-\S+/g) || []).join(' ');
+				}).addClass("fa fa-desktop");
+
+				ChangeColumnResizeSpeed(0.075);
+
+				if (vjEditorSettings.EditPage) {
+					$('.gjs-frame').removeClass("fixed-height");
+					$('.gjs-frame').contents().find("html").removeClass('responsive');
+					$('.gjs-frame').contents().find("#wrapper").removeClass("scrollbar");
+					VjEditor.runCommand('set-device-desktop');
+				}
+				else
+					$('body').removeClass('resp-mode tablet mobile').addClass('resp-mode');
+			}
+
+		};
 		var VjPublishChanges = function () {
 			if (VJIsContentApproval == 'True') {
 				swal(
@@ -155,7 +179,6 @@ $(document).ready(function () {
 			else
 				RunSaveCommand();
 		};
-
 
 		var waitForEl = function (selector, size, callback) {
 			//Added math.round to fix OptimizeImages issue on small screens
@@ -217,13 +240,22 @@ $(document).ready(function () {
 				}, 500);
 			}
 		};
-
 		var optImages = jQuery.grep(getAllComponents(), function (n, i) {
 			return (n.attributes.type == 'image') && (typeof n.getStyle()['width'] == 'undefined') && (n.parent().attributes.type == 'picture-box') && (typeof n.parent().components().models[0] != 'undefined') && (typeof n.parent().components().models[1] != 'undefined');
 		});
 
-		if (optImages != undefined && optImages.length > 0)
-			OptimizeImages(optImages, resolutionSizes.slice());
+		if (optImages != undefined && optImages.length > 0) {
+
+			if (!$('.optimizing-overlay').length)
+				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Optimizing Images . . .</h1></div>');
+
+			ChangeDevice();
+			
+			waitForEl('.gjs-frame-wrapper', VjEditor.Canvas.getCanvasView().$el.innerWidth(), function () {
+				OptimizeImages(optImages, resolutionSizes.slice());
+			});
+
+		}
 		else
 			VjPublishChanges();
 
@@ -1686,17 +1718,17 @@ $(document).ready(function () {
 									return;
 								}
 
-                                $.each(model.attributes.toolbar, function (k, v) {
+								$.each(model.attributes.toolbar, function (k, v) {
 
-                                    if (v.attributes['class'] == 'fa fa-arrow-up')
-                                        v.attributes['title'] = VjLocalized.SelectParent;
-                                    else if (v.command == 'vj-move' || v.command == 'tlb-move')
-                                        v.attributes['title'] = VjLocalized.Move;
-                                    else if (v.command == 'vj-copy' || v.command == 'tlb-clone')
-                                        v.attributes['title'] = VjLocalized.Copy;
-                                    else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
-                                        v.attributes['title'] = VjLocalized.Delete;
-                                });
+									if (v.attributes['class'] == 'fa fa-arrow-up')
+										v.attributes['title'] = VjLocalized.SelectParent;
+									else if (v.command == 'vj-move' || v.command == 'tlb-move')
+										v.attributes['title'] = VjLocalized.Move;
+									else if (v.command == 'vj-copy' || v.command == 'tlb-clone')
+										v.attributes['title'] = VjLocalized.Copy;
+									else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
+										v.attributes['title'] = VjLocalized.Delete;
+								});
 
 								var desktop = 'd-desktop-none';
 								var tablet = 'd-tablet-none';
