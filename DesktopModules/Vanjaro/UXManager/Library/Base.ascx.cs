@@ -156,7 +156,7 @@ namespace Vanjaro.UXManager.Library
         {
 
             if (InjectEditor())
-                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; var ExtensionStoreURL = \"" + ExtensionStoreURL + "\"; var ExtensionURL = \"" + ExtensionURL + "\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined' && getCookie('InitGrapejs') == 'false') GrapesjsInit(" + JsonConvert.SerializeObject(Editor.Options) + "); });", true);
+                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; var ExtensionStoreURL = \"" + ExtensionStoreURL + "\"; var ExtensionURL = \"" + ExtensionURL + "\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined' && getCookie('InitGrapejs') == 'true') GrapesjsInit(" + JsonConvert.SerializeObject(Editor.Options) + "); });", true);
         }
 
         private BaseModel GetBaseModel()

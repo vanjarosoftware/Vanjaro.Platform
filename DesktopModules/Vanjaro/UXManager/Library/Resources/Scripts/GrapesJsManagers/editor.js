@@ -2049,21 +2049,22 @@ $(document).ready(function () {
 
                                 var $globalblockwrapper = $(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]');
                                 if ($globalblockwrapper.length) {
-                                    if ($globalblockwrapper.find('style[data-id="' + model.getId() + '"]').length <= 0) {
-                                        //$globalblockwrapper.append('<style data-id=' + model.getId() + '>#' + model.getId() + '{' + property + ':' + model.getStyle()[property] + ';}</style>');
 
-                                        var result = VjEditor.runCommand("export-css", {
-                                            target: model
-                                        });
+                                    var result = VjEditor.runCommand("export-css", {
+                                        target: model
+                                    });
 
-                                        $globalblockwrapper.append(result);
-                                        model.removeStyle(property);
-                                    }
+                                    var style = $globalblockwrapper.find('style:contains(' + result.split("{")[0] + '{)');
+
+                                    if (style.length <= 0)
+                                        $globalblockwrapper.append('<style>' + result + '</style>');
+                                    else
+                                        style.replaceWith('<style>' + result + '</style>');
+
+                                    model.removeStyle();
                                 }
-
-								if (typeof event != "undefined" && event.target.className == "gjs-sm-clear") {
-									model.removeStyle(property);
-								}
+                                else if (typeof event != "undefined" && event.target.className == "gjs-sm-clear")
+                                    model.removeStyle(property);
 							});
 
 							VjEditor.on('component:styleUpdate:flex-direction', (model) => {
@@ -2321,8 +2322,7 @@ $(document).ready(function () {
 											}
                                         }),
 											r.css += t.runCommand("export-css", {
-                                                target: e,
-                                                globalblock: n.globalblock
+                                                target: e
 											}))
 									}),
 										r.html = CleanGjAttrs(r.html),
@@ -2362,42 +2362,25 @@ $(document).ready(function () {
 							});
 
 							VjEditor.Commands.add("export-css", {
-								run: function (t, e) {
-									var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}
-										, r = n.target || t.getWrapper()
-										, i = t.CssComposer
-										, o = i.getAll()
-										, a = ""
-										, s = this.splitRules(this.matchedRules(r, o))
-										, c = s.atRules
+                                run: function (t, e) {
+                                    var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}
+                                        , r = n.target || t.getWrapper()
+                                        , i = t.CssComposer
+                                        , o = i.getAll()
+                                        , a = ""
+                                        , s = this.splitRules(this.matchedRules(r, o))
+                                        , c = s.atRules
                                         , l = s.notAtRules;
 
-                                    if (typeof n.globalblock == 'undefined' || n.globalblock) {
-                                        var styles =  $(r.getEl()).parents('[data-gjs-type="globalblockwrapper"]').find('style');
-                                        return $.each(styles, function (i, s) {
-                                            a += s.innerText;
-                                        }), a;
-                                    }
-                                    else {
-                                        return l.forEach(function (t) {
-                                            var css = t.toCSS();
-                                            if (css.startsWith('#'))
-                                                return a += (css.substr(0, 0) + '#' + css.substr(0 + 1));
-                                            else
-                                                return a;
-                                        }),
-                                            //this.sortMediaObject(c).forEach(function (t) {
-                                            //    var e = ""
-                                            //        , n = t.key;
-                                            //    t.value.forEach(function (t) {
-                                            //        var r = t.getDeclaration();
-                                            //        t.get("singleAtRule") ? a += "".concat(n, "{").concat(r, "}") : e += r
-                                            //    }),
-                                            //        e && (a += "".concat(n, "{").concat(e, "}"))
-                                            //}),
-                                            a
-                                    }
-								},
+                                    return l.forEach(function (t) {
+                                        var css = t.toCSS();
+                                        if (css.startsWith('#'))
+                                            return a += (css.substr(0, 0) + '#' + css.substr(0 + 1));
+                                        else
+                                            return a;
+                                    }),
+                                    a
+                                },
 								matchedRules: function (t, e) {
 									var n = this
 										, r = t.getEl()
@@ -2439,20 +2422,20 @@ $(document).ready(function () {
 									var e = /(-?\d*\.?\d+)\w{0,}/.exec(t);
 									return e ? parseFloat(e[1]) : Number.MAX_VALUE
 								},
-								sortMediaObject: function () {
-									var t = this
-										, e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}
-										, n = [];
-									return Zt()(e, function (t, e) {
-										return n.push({
-											key: e,
-											value: t
-										})
-									}),
-										n.sort(function (e, n) {
-											return t.getQueryLength(n.key) - t.getQueryLength(e.key)
-										})
-								}
+                                sortMediaObject: function () {
+                                    var t = this
+                                        , e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}
+                                        , n = [];
+                                    return Zt()(e, function (t, e) {
+                                        return n.push({
+                                            key: e,
+                                            value: t
+                                        })
+                                    }),
+                                        n.sort(function (e, n) {
+                                            return t.getQueryLength(n.key) - t.getQueryLength(e.key)
+                                        })
+                                }
 							});
 
 							VjEditor.on('block:drag:start', function (model) {
@@ -2972,7 +2955,7 @@ global.ChangeBlockType = function (query) {
 
 function RunSaveCommand() {
 	$.each(getAllComponents(), function (k, v) {
-		if (v.attributes.type == "globalblockwrapper")
+        if (v.attributes.type == "globalblockwrapper" && $(v.getEl()).find('.fa-unlock').length <= 0)
 			UpdateGlobalBlock(v);
 	});
 	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
