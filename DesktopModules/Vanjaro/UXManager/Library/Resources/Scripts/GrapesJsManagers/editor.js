@@ -272,7 +272,7 @@ $(document).ready(function () {
 
 		if (isEditPage()) {
 
-			if (!data.EditPage) {
+            if (!data.EditPage) {
 
 				$(document).on("click", function (e) {
 					if ($(e.target).parents('.sidebar').length <= 0) {
@@ -355,8 +355,8 @@ $(document).ready(function () {
 							BuildAppComponentFromHtml(vjcomps, VJLandingPage.html);
 							BuildBlockComponent(vjcomps);
 							vjcomps = FilterComponents(vjcomps);
-							if (typeof LoadThemeBlocks != 'undefined')
-								LoadThemeBlocks(grapesjs);
+                            if (typeof LoadThemeBlocks != 'undefined')
+                                LoadThemeBlocks(grapesjs);
 							VjEditor = grapesjs.init({
 								protectedCss: '',
 								allowScripts: 1,
@@ -1424,6 +1424,8 @@ $(document).ready(function () {
 
 							VjEditor.on('load', function () {
 
+                                $('#BlockManager').find('.block-search').val('');
+
 								if (data.EditPage) {
 									LoadApps();
 									LoadDesignBlocks();
@@ -2034,12 +2036,25 @@ $(document).ready(function () {
 
 										model.removeClass(classes)
 									}
-								}
+                                }
+
+                                var $globalblockwrapper = $(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]');
+                                if ($globalblockwrapper.length) {
+                                    if ($globalblockwrapper.find('style[data-id="' + model.getId() + '"]').length <= 0) {
+                                        //$globalblockwrapper.append('<style data-id=' + model.getId() + '>#' + model.getId() + '{' + property + ':' + model.getStyle()[property] + ';}</style>');
+
+                                        var result = VjEditor.runCommand("export-css", {
+                                            target: model
+                                        });
+
+                                        $globalblockwrapper.append(result);
+                                        model.removeStyle(property);
+                                    }
+                                }
 
 								if (typeof event != "undefined" && event.target.className == "gjs-sm-clear") {
 									model.removeStyle(property);
 								}
-
 							});
 
 							VjEditor.on('component:styleUpdate:flex-direction', (model) => {
@@ -2295,9 +2310,10 @@ $(document).ready(function () {
 													r.class || delete r.class),
 													r
 											}
-										}),
+                                        }),
 											r.css += t.runCommand("export-css", {
-												target: e
+                                                target: e,
+                                                globalblock: n.globalblock
 											}))
 									}),
 										r.html = CleanGjAttrs(r.html),
@@ -2345,24 +2361,33 @@ $(document).ready(function () {
 										, a = ""
 										, s = this.splitRules(this.matchedRules(r, o))
 										, c = s.atRules
-										, l = s.notAtRules;
-									return l.forEach(function (t) {
-										var css = t.toCSS();
-										if (css.startsWith('#'))
-											return a += (css.substr(0, 0) + '#' + css.substr(0 + 1));
-										else
-											return a;
-									}),
-										//this.sortMediaObject(c).forEach(function (t) {
-										//    var e = ""
-										//        , n = t.key;
-										//    t.value.forEach(function (t) {
-										//        var r = t.getDeclaration();
-										//        t.get("singleAtRule") ? a += "".concat(n, "{").concat(r, "}") : e += r
-										//    }),
-										//        e && (a += "".concat(n, "{").concat(e, "}"))
-										//}),
-										a
+                                        , l = s.notAtRules;
+
+                                    if (typeof n.globalblock == 'undefined' || n.globalblock) {
+                                        var styles =  $(r.getEl()).parents('[data-gjs-type="globalblockwrapper"]').find('style');
+                                        return $.each(styles, function (i, s) {
+                                            a += s.innerText;
+                                        }), a;
+                                    }
+                                    else {
+                                        return l.forEach(function (t) {
+                                            var css = t.toCSS();
+                                            if (css.startsWith('#'))
+                                                return a += (css.substr(0, 0) + '#' + css.substr(0 + 1));
+                                            else
+                                                return a;
+                                        }),
+                                            //this.sortMediaObject(c).forEach(function (t) {
+                                            //    var e = ""
+                                            //        , n = t.key;
+                                            //    t.value.forEach(function (t) {
+                                            //        var r = t.getDeclaration();
+                                            //        t.get("singleAtRule") ? a += "".concat(n, "{").concat(r, "}") : e += r
+                                            //    }),
+                                            //        e && (a += "".concat(n, "{").concat(e, "}"))
+                                            //}),
+                                            a
+                                    }
 								},
 								matchedRules: function (t, e) {
 									var n = this
@@ -2575,7 +2600,7 @@ $(document).ready(function () {
 
 	var GrapesjsDestroy = function () {
 		if (VjEditor) {
-			VjEditor.destroy();
+            VjEditor.destroy();
 			$.get(CurrentTabUrl + (CurrentTabUrl.indexOf("?") != -1 ? "&uxmode=true" : "?uxmode=true"), function (data) {
 				var html = $.parseHTML(data);
 				var dom = $(data);
@@ -2616,8 +2641,8 @@ $(document).ready(function () {
 			$(this).find("em").addClass("fa-chevron-left").removeClass("fa-chevron-right");
 			$('#dnn_ContentPane').addClass("sidebar-open").removeClass('sidebar-close');
 			$('.sidebar').animate({ "left": "0" }, "fast").removeClass('settingclosebtn');
-			$('.panel-top, .add-custom , #ContentBlocks').show();
-			window.GrapesjsInit(global.vjEditorSettings);
+            $('.panel-top, .add-custom , #ContentBlocks').show();
+            window.GrapesjsInit(global.vjEditorSettings);
 			DestroyAppActionMenu();
 		});
 	};

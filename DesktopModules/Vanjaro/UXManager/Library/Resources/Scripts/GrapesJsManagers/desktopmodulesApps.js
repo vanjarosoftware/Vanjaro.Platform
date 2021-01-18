@@ -288,7 +288,8 @@ global.UpdateGlobalBlock = function (model) {
             if (model.attributes != undefined)
                 model.attributes.content = '';
             var content = VjEditor.runCommand("export-component", {
-                component: model.attributes.components.models[0]
+                component: model.attributes.components.models[0],
+                globalblock: true
             });
             if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
                 var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));
