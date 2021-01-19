@@ -2031,23 +2031,13 @@ $(document).ready(function () {
 
 								if (model.attributes.type == 'grid' && model.components().length)
 									$(model.components().models[0].getEl()).removeClass('gjs-dashed');
-							});
+                            });
 
-							VjEditor.on('component:styleUpdate', (model, property) => {
+                            VjEditor.on('styleable:change', () => {
 
-								if (property == "color" && typeof event != "undefined" && $(event.target).parents(".gjs-sm-property.gjs-sm-color").length) {
-									if (model.attributes.type == "heading" || model.attributes.type == "text" || model.attributes.type == "button" || model.attributes.type == "list") {
-
-										var classes = model.getClasses();
-										classes = jQuery.grep(classes, function (className, index) {
-											return (className.match(/\btext-\S+/g) || []).join(' ');
-										});
-
-										model.removeClass(classes)
-									}
-                                }
-
+                                var model = VjEditor.getSelected();
                                 var $globalblockwrapper = $(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]');
+
                                 if ($globalblockwrapper.length) {
 
                                     var result = VjEditor.runCommand("export-css", {
@@ -2063,7 +2053,23 @@ $(document).ready(function () {
 
                                     model.removeStyle();
                                 }
-                                else if (typeof event != "undefined" && event.target.className == "gjs-sm-clear")
+                            });
+
+							VjEditor.on('component:styleUpdate', (model, property) => {
+
+								if (property == "color" && typeof event != "undefined" && $(event.target).parents(".gjs-sm-property.gjs-sm-color").length) {
+									if (model.attributes.type == "heading" || model.attributes.type == "text" || model.attributes.type == "button" || model.attributes.type == "list") {
+
+										var classes = model.getClasses();
+										classes = jQuery.grep(classes, function (className, index) {
+											return (className.match(/\btext-\S+/g) || []).join(' ');
+										});
+
+                                        model.removeClass(classes);
+									}
+                                }
+
+                                if (typeof event != "undefined" && event.target.className == "gjs-sm-clear")
                                     model.removeStyle(property);
 							});
 
@@ -2125,6 +2131,10 @@ $(document).ready(function () {
 
 								target.setStyle(style);
 							}
+
+                            VjEditor.on('component:update', (model, property) => {
+                                console.log(property);
+                            });
 
 							VjEditor.on('component:update:border-style', (model) => {
 								UpdateBorderStyle(model, 'border-width');
