@@ -245,12 +245,12 @@
     ShowResetPassword: function (obj) {
         $(obj).closest('.Login').find('.show-message').remove();
         $(obj).closest('.Login').find('#Password').val('');
-        $(".Login").hide();
+        $(".login-box").hide();
         $(".ResetPassword").show();
         $(".reset-control").show();
     },
     HideResetPassword: function (obj) {
-        $(".Login").show();
+        $(".login-box").show();
         $(".ResetPassword").hide();
         $(obj).closest('.ResetPassword').find('.show-message').remove();
     }
