@@ -245,7 +245,7 @@
     ShowResetPassword: function (obj) {
         $(obj).closest('.Login').find('.show-message').remove();
         $(obj).closest('.Login').find('#Password').val('');
-        $(".Login").hide();
+        $(".login-box").hide();
         $(".ResetPassword").show();
         $(".reset-control").show();
     },
