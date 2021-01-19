@@ -156,7 +156,6 @@ $(document).ready(function () {
 				RunSaveCommand();
 		};
 
-
 		var waitForEl = function (selector, size, callback) {
 			//Added math.round to fix OptimizeImages issue on small screens
 			if (jQuery(selector).length && Math.round(jQuery(selector).width()) == size) {
@@ -217,13 +216,23 @@ $(document).ready(function () {
 				}, 500);
 			}
 		};
-
 		var optImages = jQuery.grep(getAllComponents(), function (n, i) {
 			return (n.attributes.type == 'image') && (typeof n.getStyle()['width'] == 'undefined') && (n.parent().attributes.type == 'picture-box') && (typeof n.parent().components().models[0] != 'undefined') && (typeof n.parent().components().models[1] != 'undefined');
 		});
 
-		if (optImages != undefined && optImages.length > 0)
-			OptimizeImages(optImages, resolutionSizes.slice());
+		if (optImages != undefined && optImages.length > 0) {
+
+			if (!$('.optimizing-overlay').length)
+				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Optimizing Images . . .</h1></div>');
+
+			if ($('.gjs-frame').contents().find("html").hasClass('responsive'))
+				$(".device-manager .device-view#Desktop").trigger("click");
+			
+			waitForEl('.gjs-frame-wrapper', VjEditor.Canvas.getCanvasView().$el.innerWidth(), function () {
+				OptimizeImages(optImages, resolutionSizes.slice());
+			});
+
+		}
 		else
 			VjPublishChanges();
 
@@ -272,7 +281,7 @@ $(document).ready(function () {
 
 		if (isEditPage()) {
 
-			if (!data.EditPage) {
+            if (!data.EditPage) {
 
 				$(document).on("click", function (e) {
 					if ($(e.target).parents('.sidebar').length <= 0) {
@@ -355,8 +364,8 @@ $(document).ready(function () {
 							BuildAppComponentFromHtml(vjcomps, VJLandingPage.html);
 							BuildBlockComponent(vjcomps);
 							vjcomps = FilterComponents(vjcomps);
-							if (typeof LoadThemeBlocks != 'undefined')
-								LoadThemeBlocks(grapesjs);
+                            if (typeof LoadThemeBlocks != 'undefined')
+                                LoadThemeBlocks(grapesjs);
 							VjEditor = grapesjs.init({
 								protectedCss: '',
 								allowScripts: 1,
@@ -1424,6 +1433,8 @@ $(document).ready(function () {
 
 							VjEditor.on('load', function () {
 
+                                $('#BlockManager').find('.block-search').val('');
+
 								if (data.EditPage) {
 									LoadApps();
 									LoadDesignBlocks();
@@ -1686,17 +1697,17 @@ $(document).ready(function () {
 									return;
 								}
 
-                                $.each(model.attributes.toolbar, function (k, v) {
+								$.each(model.attributes.toolbar, function (k, v) {
 
-                                    if (v.attributes['class'] == 'fa fa-arrow-up')
-                                        v.attributes['title'] = VjLocalized.SelectParent;
-                                    else if (v.command == 'vj-move' || v.command == 'tlb-move')
-                                        v.attributes['title'] = VjLocalized.Move;
-                                    else if (v.command == 'vj-copy' || v.command == 'tlb-clone')
-                                        v.attributes['title'] = VjLocalized.Copy;
-                                    else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
-                                        v.attributes['title'] = VjLocalized.Delete;
-                                });
+									if (v.attributes['class'] == 'fa fa-arrow-up')
+										v.attributes['title'] = VjLocalized.SelectParent;
+									else if (v.command == 'vj-move' || v.command == 'tlb-move')
+										v.attributes['title'] = VjLocalized.Move;
+									else if (v.command == 'vj-copy' || v.command == 'tlb-clone')
+										v.attributes['title'] = VjLocalized.Copy;
+									else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
+										v.attributes['title'] = VjLocalized.Delete;
+								});
 
 								var desktop = 'd-desktop-none';
 								var tablet = 'd-tablet-none';
@@ -2020,7 +2031,29 @@ $(document).ready(function () {
 
 								if (model.attributes.type == 'grid' && model.components().length)
 									$(model.components().models[0].getEl()).removeClass('gjs-dashed');
-							});
+                            });
+
+                            VjEditor.on('styleable:change', () => {
+
+                                var model = VjEditor.getSelected();
+                                var $globalblockwrapper = $(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]');
+
+                                if ($globalblockwrapper.length) {
+
+                                    var result = VjEditor.runCommand("export-css", {
+                                        target: model
+                                    });
+
+                                    var style = $globalblockwrapper.find('style:contains(' + result.split("{")[0] + '{)');
+
+                                    if (style.length <= 0)
+                                        $globalblockwrapper.append('<style>' + result + '</style>');
+                                    else
+                                        style.replaceWith('<style>' + result + '</style>');
+
+                                    model.removeStyle();
+                                }
+                            });
 
 							VjEditor.on('component:styleUpdate', (model, property) => {
 
@@ -2032,14 +2065,12 @@ $(document).ready(function () {
 											return (className.match(/\btext-\S+/g) || []).join(' ');
 										});
 
-										model.removeClass(classes)
+                                        model.removeClass(classes);
 									}
-								}
+                                }
 
-								if (typeof event != "undefined" && event.target.className == "gjs-sm-clear") {
-									model.removeStyle(property);
-								}
-
+                                if (typeof event != "undefined" && event.target.className == "gjs-sm-clear")
+                                    model.removeStyle(property);
 							});
 
 							VjEditor.on('component:styleUpdate:flex-direction', (model) => {
@@ -2100,6 +2131,10 @@ $(document).ready(function () {
 
 								target.setStyle(style);
 							}
+
+                            VjEditor.on('component:update', (model, property) => {
+                                console.log(property);
+                            });
 
 							VjEditor.on('component:update:border-style', (model) => {
 								UpdateBorderStyle(model, 'border-width');
@@ -2295,9 +2330,9 @@ $(document).ready(function () {
 													r.class || delete r.class),
 													r
 											}
-										}),
+                                        }),
 											r.css += t.runCommand("export-css", {
-												target: e
+                                                target: e
 											}))
 									}),
 										r.html = CleanGjAttrs(r.html),
@@ -2337,33 +2372,25 @@ $(document).ready(function () {
 							});
 
 							VjEditor.Commands.add("export-css", {
-								run: function (t, e) {
-									var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}
-										, r = n.target || t.getWrapper()
-										, i = t.CssComposer
-										, o = i.getAll()
-										, a = ""
-										, s = this.splitRules(this.matchedRules(r, o))
-										, c = s.atRules
-										, l = s.notAtRules;
-									return l.forEach(function (t) {
-										var css = t.toCSS();
-										if (css.startsWith('#'))
-											return a += (css.substr(0, 0) + '#' + css.substr(0 + 1));
-										else
-											return a;
-									}),
-										//this.sortMediaObject(c).forEach(function (t) {
-										//    var e = ""
-										//        , n = t.key;
-										//    t.value.forEach(function (t) {
-										//        var r = t.getDeclaration();
-										//        t.get("singleAtRule") ? a += "".concat(n, "{").concat(r, "}") : e += r
-										//    }),
-										//        e && (a += "".concat(n, "{").concat(e, "}"))
-										//}),
-										a
-								},
+                                run: function (t, e) {
+                                    var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}
+                                        , r = n.target || t.getWrapper()
+                                        , i = t.CssComposer
+                                        , o = i.getAll()
+                                        , a = ""
+                                        , s = this.splitRules(this.matchedRules(r, o))
+                                        , c = s.atRules
+                                        , l = s.notAtRules;
+
+                                    return l.forEach(function (t) {
+                                        var css = t.toCSS();
+                                        if (css.startsWith('#'))
+                                            return a += (css.substr(0, 0) + '#' + css.substr(0 + 1));
+                                        else
+                                            return a;
+                                    }),
+                                    a
+                                },
 								matchedRules: function (t, e) {
 									var n = this
 										, r = t.getEl()
@@ -2405,20 +2432,20 @@ $(document).ready(function () {
 									var e = /(-?\d*\.?\d+)\w{0,}/.exec(t);
 									return e ? parseFloat(e[1]) : Number.MAX_VALUE
 								},
-								sortMediaObject: function () {
-									var t = this
-										, e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}
-										, n = [];
-									return Zt()(e, function (t, e) {
-										return n.push({
-											key: e,
-											value: t
-										})
-									}),
-										n.sort(function (e, n) {
-											return t.getQueryLength(n.key) - t.getQueryLength(e.key)
-										})
-								}
+                                sortMediaObject: function () {
+                                    var t = this
+                                        , e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}
+                                        , n = [];
+                                    return Zt()(e, function (t, e) {
+                                        return n.push({
+                                            key: e,
+                                            value: t
+                                        })
+                                    }),
+                                        n.sort(function (e, n) {
+                                            return t.getQueryLength(n.key) - t.getQueryLength(e.key)
+                                        })
+                                }
 							});
 
 							VjEditor.on('block:drag:start', function (model) {
@@ -2575,7 +2602,7 @@ $(document).ready(function () {
 
 	var GrapesjsDestroy = function () {
 		if (VjEditor) {
-			VjEditor.destroy();
+            VjEditor.destroy();
 			$.get(CurrentTabUrl + (CurrentTabUrl.indexOf("?") != -1 ? "&uxmode=true" : "?uxmode=true"), function (data) {
 				var html = $.parseHTML(data);
 				var dom = $(data);
@@ -2616,8 +2643,8 @@ $(document).ready(function () {
 			$(this).find("em").addClass("fa-chevron-left").removeClass("fa-chevron-right");
 			$('#dnn_ContentPane').addClass("sidebar-open").removeClass('sidebar-close');
 			$('.sidebar').animate({ "left": "0" }, "fast").removeClass('settingclosebtn');
-			$('.panel-top, .add-custom , #ContentBlocks').show();
-			window.GrapesjsInit(global.vjEditorSettings);
+            $('.panel-top, .add-custom , #ContentBlocks').show();
+            window.GrapesjsInit(global.vjEditorSettings);
 			DestroyAppActionMenu();
 		});
 	};
@@ -2746,6 +2773,7 @@ $(document).ready(function () {
 	$(".device-manager .device-view").click(function () {
 		var $this = $(this);
 		var $body = $('body');
+		var $iframe = $('.gjs-frame');
 
 		$(".device-manager .device-view").removeClass("active");
 		$this.addClass("active");
@@ -2760,9 +2788,9 @@ $(document).ready(function () {
 			ChangeColumnResizeSpeed(0.075);
 
 			if (vjEditorSettings.EditPage) {
-				$('.gjs-frame').removeClass("fixed-height");
-				$('.gjs-frame').contents().find("html").removeClass('responsive');
-				$('.gjs-frame').contents().find("#wrapper").removeClass("scrollbar");
+				$iframe.removeClass("fixed-height");
+				$iframe.contents().find("html").removeClass('responsive');
+				$iframe.contents().find("#wrapper").removeClass("scrollbar");
 				VjEditor.runCommand('set-device-desktop');
 			}
 			else
@@ -2774,9 +2802,9 @@ $(document).ready(function () {
 			ChangeColumnResizeSpeed(0.1);
 
 			if (vjEditorSettings.EditPage) {
-				$('.gjs-frame').removeClass("fixed-height");
-				$('.gjs-frame').contents().find("html").addClass('responsive');
-				$('.gjs-frame').contents().find("#wrapper").addClass("scrollbar");
+				$iframe.removeClass("fixed-height");
+				$iframe.contents().find("html").addClass('responsive');
+				$iframe.contents().find("#wrapper").addClass("scrollbar");
 				VjEditor.runCommand('set-device-tablet');
 			}
 			else
@@ -2788,14 +2816,15 @@ $(document).ready(function () {
 			ChangeColumnResizeSpeed(0.2);
 
 			if (vjEditorSettings.EditPage) {
-				$('.gjs-frame').addClass("fixed-height");
-				$('.gjs-frame').contents().find("html").addClass('responsive');
-				$('.gjs-frame').contents().find("#wrapper").addClass("scrollbar");
+				$iframe.addClass("fixed-height");
+				$iframe.contents().find("html").addClass('responsive');
+				$iframe.contents().find("#wrapper").addClass("scrollbar");
 				VjEditor.runCommand('set-device-mobile');
 			}
 			else
 				$body.removeClass('tablet').addClass('resp-mode mobile');
 		}
+
 		var selected = VjEditor.getSelected();
 		VjEditor.select();
 		VjEditor.select(selected);
@@ -2936,7 +2965,7 @@ global.ChangeBlockType = function (query) {
 
 function RunSaveCommand() {
 	$.each(getAllComponents(), function (k, v) {
-		if (v.attributes.type == "globalblockwrapper")
+        if (v.attributes.type == "globalblockwrapper" && $(v.getEl()).find('.fa-unlock').length <= 0)
 			UpdateGlobalBlock(v);
 	});
 	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;

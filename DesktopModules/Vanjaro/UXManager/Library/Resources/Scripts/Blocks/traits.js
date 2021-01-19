@@ -1529,7 +1529,7 @@ export default (editor, config = {}) => {
 		},
 		onUpdate({ elInput, component, trait }) {
 
-			if (!event.target.classList.contains('input-control')) {
+			if (typeof event != 'undefined' && !event.target.classList.contains('input-control')) {
 				var inputvalue = '', unit = '', property = '', value = '';
 
 				if (typeof trait.attributes.cssproperties != 'undefined')
