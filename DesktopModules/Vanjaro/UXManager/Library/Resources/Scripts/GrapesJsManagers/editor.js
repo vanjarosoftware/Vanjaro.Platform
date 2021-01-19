@@ -2036,22 +2036,26 @@ $(document).ready(function () {
                             VjEditor.on('styleable:change', () => {
 
                                 var model = VjEditor.getSelected();
-                                var $globalblockwrapper = $(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]');
 
-                                if ($globalblockwrapper.length) {
+                                if (typeof model != 'undefined') {
 
-                                    var result = VjEditor.runCommand("export-css", {
-                                        target: model
-                                    });
+                                    var $globalblockwrapper = $(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]');
 
-                                    var style = $globalblockwrapper.find('style:contains(' + result.split("{")[0] + '{)');
+                                    if ($globalblockwrapper.length) {
 
-                                    if (style.length <= 0)
-                                        $globalblockwrapper.append('<style>' + result + '</style>');
-                                    else
-                                        style.replaceWith('<style>' + result + '</style>');
+                                        var result = VjEditor.runCommand("export-css", {
+                                            target: model
+                                        });
 
-                                    model.removeStyle();
+                                        var style = $globalblockwrapper.find('style:contains(' + result.split("{")[0] + '{)');
+
+                                        if (style.length <= 0)
+                                            $globalblockwrapper.append('<style>' + result + '</style>');
+                                        else
+                                            style.replaceWith('<style>' + result + '</style>');
+
+                                        model.removeStyle();
+                                    }
                                 }
                             });
 
@@ -2132,10 +2136,6 @@ $(document).ready(function () {
 								target.setStyle(style);
 							}
 
-                            VjEditor.on('component:update', (model, property) => {
-                                console.log(property);
-                            });
-
 							VjEditor.on('component:update:border-style', (model) => {
 								UpdateBorderStyle(model, 'border-width');
 							});
@@ -2144,7 +2144,7 @@ $(document).ready(function () {
 								UpdateBorderStyle(model, 'border-top-width');
 							});
 
-							VjEditor.on('component:update:border-right-style', (model) => {
+							VjEditor.on('component:update:VjEditor.getSelected()border-right-style', (model) => {
 								UpdateBorderStyle(model, 'border-right-width');
 							});
 
