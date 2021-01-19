@@ -1,7 +1,7 @@
 ﻿<portal version="5.0">
   <description>[PortalDescription.Text]</description>
   <settings>
-    <logofile>Images/vanjaro_logo.png</logofile>
+    <logofile>Images/Logo.svg</logofile>
     <footertext>[Setting.FooterText.Text]</footertext>
     <userregistration>1</userregistration>
     <banneradvertising>0</banneradvertising>
