@@ -842,8 +842,8 @@
           "Title": "Color",
           "DefaultValue": "#ffffff",
           "Suffix": "",
-          "CustomCSS": ".vj-breadcrumb .breadcrumb-item a span,\n.vj-breadcrumb .breadcrumb-item::before {\n    color: $breadcolor !important;\n}",
-          "PreviewCSS": ".vj-breadcrumb .breadcrumb-item a span,\n.vj-breadcrumb .breadcrumb-item::before {\n    color: $breadcolor !important;\n}",
+          "CustomCSS": ".vj-breadcrumb .breadcrumb-item,\n.vj-breadcrumb .breadcrumb-item a span,\n.vj-breadcrumb .breadcrumb-item::before {\n    color: $breadcolor !important;\n}",
+          "PreviewCSS": ".vj-breadcrumb .breadcrumb-item,\n.vj-breadcrumb .breadcrumb-item a span,\n.vj-breadcrumb .breadcrumb-item::before {\n    color: $breadcolor !important;\n}",
           "LessVariable": "$breadcolor",
           "JavascriptVariable": null,
           "Type": "Color Picker"
@@ -853,8 +853,8 @@
           "Title": "Active Color",
           "DefaultValue": "#ffffff",
           "Suffix": "",
-          "CustomCSS": ".vj-breadcrumb .breadcrumb .active{\n    color: $breadactivecolor;\n}",
-          "PreviewCSS": ".vj-breadcrumb .breadcrumb .active{\n    color: $breadactivecolor;\n}",
+          "CustomCSS": ".vj-breadcrumb .breadcrumb .active{\n    color: $breadactivecolor  !important;\n}",
+          "PreviewCSS": ".vj-breadcrumb .breadcrumb .active{\n    color: $breadactivecolor  !important;\n}",
           "LessVariable": "$breadactivecolor",
           "JavascriptVariable": null,
           "Type": "Color Picker"
