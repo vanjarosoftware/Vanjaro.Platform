@@ -281,7 +281,7 @@ $(document).ready(function () {
 
 		if (isEditPage()) {
 
-			if (!data.EditPage) {
+            if (!data.EditPage) {
 
 				$(document).on("click", function (e) {
 					if ($(e.target).parents('.sidebar').length <= 0) {
@@ -364,8 +364,8 @@ $(document).ready(function () {
 							BuildAppComponentFromHtml(vjcomps, VJLandingPage.html);
 							BuildBlockComponent(vjcomps);
 							vjcomps = FilterComponents(vjcomps);
-							if (typeof LoadThemeBlocks != 'undefined')
-								LoadThemeBlocks(grapesjs);
+                            if (typeof LoadThemeBlocks != 'undefined')
+                                LoadThemeBlocks(grapesjs);
 							VjEditor = grapesjs.init({
 								protectedCss: '',
 								allowScripts: 1,
@@ -1433,6 +1433,8 @@ $(document).ready(function () {
 
 							VjEditor.on('load', function () {
 
+                                $('#BlockManager').find('.block-search').val('');
+
 								if (data.EditPage) {
 									LoadApps();
 									LoadDesignBlocks();
@@ -2043,12 +2045,26 @@ $(document).ready(function () {
 
 										model.removeClass(classes)
 									}
-								}
+                                }
 
-								if (typeof event != "undefined" && event.target.className == "gjs-sm-clear") {
-									model.removeStyle(property);
-								}
+                                var $globalblockwrapper = $(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]');
+                                if ($globalblockwrapper.length) {
 
+                                    var result = VjEditor.runCommand("export-css", {
+                                        target: model
+                                    });
+
+                                    var style = $globalblockwrapper.find('style:contains(' + result.split("{")[0] + '{)');
+
+                                    if (style.length <= 0)
+                                        $globalblockwrapper.append('<style>' + result + '</style>');
+                                    else
+                                        style.replaceWith('<style>' + result + '</style>');
+
+                                    model.removeStyle();
+                                }
+                                else if (typeof event != "undefined" && event.target.className == "gjs-sm-clear")
+                                    model.removeStyle(property);
 							});
 
 							VjEditor.on('component:styleUpdate:flex-direction', (model) => {
@@ -2304,9 +2320,9 @@ $(document).ready(function () {
 													r.class || delete r.class),
 													r
 											}
-										}),
+                                        }),
 											r.css += t.runCommand("export-css", {
-												target: e
+                                                target: e
 											}))
 									}),
 										r.html = CleanGjAttrs(r.html),
@@ -2346,33 +2362,25 @@ $(document).ready(function () {
 							});
 
 							VjEditor.Commands.add("export-css", {
-								run: function (t, e) {
-									var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}
-										, r = n.target || t.getWrapper()
-										, i = t.CssComposer
-										, o = i.getAll()
-										, a = ""
-										, s = this.splitRules(this.matchedRules(r, o))
-										, c = s.atRules
-										, l = s.notAtRules;
-									return l.forEach(function (t) {
-										var css = t.toCSS();
-										if (css.startsWith('#'))
-											return a += (css.substr(0, 0) + '#' + css.substr(0 + 1));
-										else
-											return a;
-									}),
-										//this.sortMediaObject(c).forEach(function (t) {
-										//    var e = ""
-										//        , n = t.key;
-										//    t.value.forEach(function (t) {
-										//        var r = t.getDeclaration();
-										//        t.get("singleAtRule") ? a += "".concat(n, "{").concat(r, "}") : e += r
-										//    }),
-										//        e && (a += "".concat(n, "{").concat(e, "}"))
-										//}),
-										a
-								},
+                                run: function (t, e) {
+                                    var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}
+                                        , r = n.target || t.getWrapper()
+                                        , i = t.CssComposer
+                                        , o = i.getAll()
+                                        , a = ""
+                                        , s = this.splitRules(this.matchedRules(r, o))
+                                        , c = s.atRules
+                                        , l = s.notAtRules;
+
+                                    return l.forEach(function (t) {
+                                        var css = t.toCSS();
+                                        if (css.startsWith('#'))
+                                            return a += (css.substr(0, 0) + '#' + css.substr(0 + 1));
+                                        else
+                                            return a;
+                                    }),
+                                    a
+                                },
 								matchedRules: function (t, e) {
 									var n = this
 										, r = t.getEl()
@@ -2414,20 +2422,20 @@ $(document).ready(function () {
 									var e = /(-?\d*\.?\d+)\w{0,}/.exec(t);
 									return e ? parseFloat(e[1]) : Number.MAX_VALUE
 								},
-								sortMediaObject: function () {
-									var t = this
-										, e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}
-										, n = [];
-									return Zt()(e, function (t, e) {
-										return n.push({
-											key: e,
-											value: t
-										})
-									}),
-										n.sort(function (e, n) {
-											return t.getQueryLength(n.key) - t.getQueryLength(e.key)
-										})
-								}
+                                sortMediaObject: function () {
+                                    var t = this
+                                        , e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}
+                                        , n = [];
+                                    return Zt()(e, function (t, e) {
+                                        return n.push({
+                                            key: e,
+                                            value: t
+                                        })
+                                    }),
+                                        n.sort(function (e, n) {
+                                            return t.getQueryLength(n.key) - t.getQueryLength(e.key)
+                                        })
+                                }
 							});
 
 							VjEditor.on('block:drag:start', function (model) {
@@ -2584,7 +2592,7 @@ $(document).ready(function () {
 
 	var GrapesjsDestroy = function () {
 		if (VjEditor) {
-			VjEditor.destroy();
+            VjEditor.destroy();
 			$.get(CurrentTabUrl + (CurrentTabUrl.indexOf("?") != -1 ? "&uxmode=true" : "?uxmode=true"), function (data) {
 				var html = $.parseHTML(data);
 				var dom = $(data);
@@ -2625,8 +2633,8 @@ $(document).ready(function () {
 			$(this).find("em").addClass("fa-chevron-left").removeClass("fa-chevron-right");
 			$('#dnn_ContentPane').addClass("sidebar-open").removeClass('sidebar-close');
 			$('.sidebar').animate({ "left": "0" }, "fast").removeClass('settingclosebtn');
-			$('.panel-top, .add-custom , #ContentBlocks').show();
-			window.GrapesjsInit(global.vjEditorSettings);
+            $('.panel-top, .add-custom , #ContentBlocks').show();
+            window.GrapesjsInit(global.vjEditorSettings);
 			DestroyAppActionMenu();
 		});
 	};
@@ -2947,7 +2955,7 @@ global.ChangeBlockType = function (query) {
 
 function RunSaveCommand() {
 	$.each(getAllComponents(), function (k, v) {
-		if (v.attributes.type == "globalblockwrapper")
+        if (v.attributes.type == "globalblockwrapper" && $(v.getEl()).find('.fa-unlock').length <= 0)
 			UpdateGlobalBlock(v);
 	});
 	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
