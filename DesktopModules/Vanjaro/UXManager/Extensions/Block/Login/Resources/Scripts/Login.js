@@ -250,7 +250,7 @@
         $(".reset-control").show();
     },
     HideResetPassword: function (obj) {
-        $(".Login").show();
+        $(".login-box").show();
         $(".ResetPassword").hide();
         $(obj).closest('.ResetPassword').find('.show-message').remove();
     }
