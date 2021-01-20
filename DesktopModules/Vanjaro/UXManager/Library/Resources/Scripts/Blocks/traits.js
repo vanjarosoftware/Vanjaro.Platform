@@ -648,10 +648,6 @@ export default (editor, config = {}) => {
 
 				if (component.attributes.type == 'carousel-image')
 					component.parent().parent().addAttributes({ href: href });
-				else if (component.attributes.type == 'icon') {
-					component.set('tagName', 'a');
-					component.addAttributes({ href: href });
-				}
 				else
 					component.addAttributes({ href: href });
 			}
