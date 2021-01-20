@@ -77,7 +77,7 @@ isEditPage = function () {
     var grapesjsCookie;
 
     if (typeof getCookie != 'undefined')
-        grapesjsCookie = getCookie('InitGrapejs');
+        grapesjsCookie = getCookie('vj_InitUx');
 
     if (grapesjsCookie == null || grapesjsCookie == '' || grapesjsCookie == 'false')
         return false;

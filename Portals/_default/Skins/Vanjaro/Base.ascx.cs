@@ -117,7 +117,7 @@ namespace Vanjaro.Skin
         {
             ///Code to support IsEditable pending a solution to prevent Edit Bar from appearing. 
 #pragma warning disable CS0162 // Unreachable code detected
-            if (HttpContext.Current != null && HttpContext.Current.Request.Cookies["PageIsEdit"] != null && HttpContext.Current.Request.Cookies["PageIsEdit"].Value == "true")
+            if (HttpContext.Current != null && HttpContext.Current.Request.Cookies["vj_IsPageEdit"] != null && HttpContext.Current.Request.Cookies["vj_IsPageEdit"].Value == "true")
 #pragma warning restore CS0162 // Unreachable code detected
             {
                 ToggleUserMode("EDIT");
@@ -200,13 +200,13 @@ namespace Vanjaro.Skin
             {
                 if (Request.QueryString["uxm"] == "open")
                 {
-                    CookieManager.AddValue("PageIsEdit", "true", new DateTime());
-                    CookieManager.AddValue("InitGrapejs", "true", new DateTime());
+                    CookieManager.AddValue("vj_IsPageEdit", "true", new DateTime());
+                    CookieManager.AddValue("vj_InitUx", "true", new DateTime());
                 }
                 else if (Request.QueryString["uxm"] == "close")
                 {
-                    CookieManager.AddValue("PageIsEdit", "false", new DateTime());
-                    CookieManager.AddValue("InitGrapejs", "false", new DateTime());
+                    CookieManager.AddValue("vj_IsPageEdit", "false", new DateTime());
+                    CookieManager.AddValue("vj_InitUx", "false", new DateTime());
                 }
                 Response.Redirect(URLManager.RemoveQueryStringByKey(Request.Url.AbsoluteUri, "uxm"), true);
             }
@@ -886,7 +886,7 @@ namespace Vanjaro.Skin
             {
                 page = PageManager.GetByVersion(PortalSettings.ActiveTab.TabID, Convert.ToInt32(Request.QueryString["revisionversion"]), PageManager.GetCultureCode(PortalSettings));
             }
-            else if (Request.Cookies["PageIsEdit"] != null && Request.Cookies["PageIsEdit"].Value == "true")
+            else if (Request.Cookies["vj_IsPageEdit"] != null && Request.Cookies["vj_IsPageEdit"].Value == "true")
             {
                 page = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, PageManager.GetCultureCode(PortalSettings));
             }

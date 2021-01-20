@@ -8,7 +8,6 @@ global.VJIsSaveCall = true;
 global.VJLocalBlocksMarkup = '';
 global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
-global.vjEditorSettings;
 global.IsVJEditorSaveCall;
 
 $(document).ready(function () {
@@ -275,13 +274,13 @@ $(document).ready(function () {
 		};
 	};
 
-	global.GrapesjsInit = function (data) {
+	global.GrapesjsInit = function () {
 
-		global.vjEditorSettings = data;
+	
 
 		if (isEditPage()) {
 
-            if (!data.EditPage) {
+			if (!vjEditorSettings.EditPage) {
 
 				$(document).on("click", function (e) {
 					if ($(e.target).parents('.sidebar').length <= 0) {
@@ -290,7 +289,7 @@ $(document).ready(function () {
 					}
 				});
 
-				$('#vjEditor,' + data.ContainerID).scroll(function () {
+				$('#vjEditor,' + vjEditorSettings.ContainerID).scroll(function () {
 					debounce(VjEditor.refresh(), 100);
 				});
 			}
@@ -309,9 +308,9 @@ $(document).ready(function () {
 					sf = parent.$.ServicesFramework(-1);
 				$.ajax({
 					type: "GET",
-					url: eval(data.GetContentUrl),
+					url: eval(vjEditorSettings.GetContentUrl),
 					headers: {
-						'ModuleId': parseInt(data.ModuleId),
+						'ModuleId': parseInt(vjEditorSettings.ModuleId),
 						'TabId': parseInt(sf.getTabId()),
 						'RequestVerificationToken': sf.getAntiForgeryValue()
 					},
@@ -383,7 +382,7 @@ $(document).ready(function () {
 								showOffsets: 1,
 								avoidInlineStyle: 1,
 								noticeOnUnload: 0,
-								container: data.ContainerID,
+								container: vjEditorSettings.ContainerID,
 								height: '100%',
 								fromElement: vjcomps != undefined ? false : true,
 								plugins: ['modulewrapper', 'blockwrapper', 'vjpreset', 'ThemeBlocks'],
@@ -1320,7 +1319,7 @@ $(document).ready(function () {
 									autosave: false,
 									autoload: false,
 									stepsBeforeSave: 2,
-									urlStore: eval(data.UpdateContentUrl),
+									urlStore: eval(vjEditorSettings.UpdateContentUrl),
 									onComplete(jqXHR, status) {
 										if (jqXHR.IsSuccess) {
 											if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
@@ -1334,13 +1333,13 @@ $(document).ready(function () {
 										}
 									},
 									params: {
-										EntityID: data.EntityID,
+										EntityID: vjEditorSettings.EntityID,
 										IsPublished: false,
 										m2v: false,
 										Comment: ""
 									},
 									headers: {
-										'ModuleId': parseInt(data.ModuleId),
+										'ModuleId': parseInt(vjEditorSettings.ModuleId),
 										'TabId': parseInt(sf.getTabId()),
 										'RequestVerificationToken': sf.getAntiForgeryValue()
 									}
@@ -1435,7 +1434,7 @@ $(document).ready(function () {
 
                                 $('#BlockManager').find('.block-search').val('');
 
-								if (data.EditPage) {
+								if (vjEditorSettings.EditPage) {
 									LoadApps();
 									LoadDesignBlocks();
 								}
@@ -2556,7 +2555,7 @@ $(document).ready(function () {
 								if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
 									return false;
 								else {
-									if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(data.RevisionGUID) < 0)
+									if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(vjEditorSettings.RevisionGUID) < 0)
 										ShowBlockUI();
 								}
 							});
@@ -2636,7 +2635,7 @@ $(document).ready(function () {
 				Scripts_Links.push(v);
 			});
 			InjectLinksAndScripts(Scripts_Links, window.document);
-			setCookie("InitGrapejs", "true");
+			setCookie("vj_InitUx", "true");
 			if (window.location.href.indexOf('#') > 0 && window.location.href.split("#")[0] != CurrentTabUrl) {
 				window.location.href = CurrentTabUrl;
 			}
@@ -2644,7 +2643,7 @@ $(document).ready(function () {
 			$('#dnn_ContentPane').addClass("sidebar-open").removeClass('sidebar-close');
 			$('.sidebar').animate({ "left": "0" }, "fast").removeClass('settingclosebtn');
             $('.panel-top, .add-custom , #ContentBlocks').show();
-            window.GrapesjsInit(global.vjEditorSettings);
+			window.GrapesjsInit(vjEditorSettings);
 			DestroyAppActionMenu();
 		});
 	};
@@ -2654,8 +2653,8 @@ $(document).ready(function () {
 			$(window.parent.document.body).append('<div class="pageloader"><div class="modal-backdrop fade show"></div><img class="revisionloader revisionloaderimg" src="' + window.parent.VjDefaultPath + 'loading.gif" /></div>');
 
 		if ($("#mode-switcher").offset().left > 0) {
-			setCookie("PageIsEdit", "false");
-			setCookie("InitGrapejs", "false");
+			setCookie("vj_IsPageEdit", "false");
+			setCookie("vj_InitUx", "false");
 			GrapesjsDestroy();
 			$(this).find("em").addClass("fa-chevron-right").removeClass("fa-chevron-left");
 			$('#dnn_ContentPane').removeClass("sidebar-open").addClass('sidebar-close');
@@ -2669,7 +2668,7 @@ $(document).ready(function () {
 			}
 		}
 		else {
-			setCookie("PageIsEdit", "true");
+			setCookie("vj_IsPageEdit", "true");
 			VjInit();
 		}
 	});
