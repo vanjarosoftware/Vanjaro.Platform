@@ -1461,16 +1461,25 @@ export default (editor, config = {}) => {
 					value = trait.getInitValue();
 
 				if (typeof value == "string" && value != "") {
+
 					inputvalue = value.replace(/[^-\d\.]/g, '');
-					unit = value.replace(/-/g, '').replace(/\d+/, '');
+
+					if (typeof trait.attributes.units != 'undefined') {
+						$(trait.attributes.units).each(function (index, option) {
+
+							if (value.indexOf(option.name) >= 0) {
+								unit = option.name
+								return false;
+							}
+						});
+					}
 				}
 				else {
-
 					inputvalue = trait.attributes.value;
-
-					if (typeof trait.attributes.unit != 'undefined')
-						unit = trait.attributes.unit;
 				}
+
+				if (unit == '' && typeof trait.attributes.unit != 'undefined')
+					unit = trait.attributes.unit;
 
 				if (typeof trait.attributes.units != 'undefined') {
 
