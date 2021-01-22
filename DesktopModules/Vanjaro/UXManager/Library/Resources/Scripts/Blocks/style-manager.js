@@ -319,7 +319,7 @@
 					}
 				}
 
-				if (unit == null) {
+				if (unit == null || unit == '') {
 					if (typeof model.attributes.unit != 'undefined')
 						unit = model.attributes.unit;
 					else
