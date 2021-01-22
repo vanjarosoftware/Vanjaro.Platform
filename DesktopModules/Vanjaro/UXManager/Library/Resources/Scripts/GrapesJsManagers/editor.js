@@ -3142,7 +3142,7 @@ global.ChangeToWebp = function (target, URLs) {
 
 			$(target.components().models).each(function (index, item) {
 
-				if (item.attributes.type == "image") {
+				if (item.attributes.type == "image" || item.attributes.type == "image-gallery-item") {
 
 					window.document.vj_image_target = target.components().models[2];
 
@@ -3157,7 +3157,7 @@ global.ChangeToWebp = function (target, URLs) {
 
 		$(target.components().models).each(function (index, item) {
 
-			if (item.attributes.type == "image")
+			if (item.attributes.type == "image" || item.attributes.type == "image-gallery-item")
 				target.components().models[2].setStyle(style);
 
 		});
