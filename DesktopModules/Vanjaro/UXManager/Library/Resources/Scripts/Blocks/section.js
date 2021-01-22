@@ -115,7 +115,6 @@
 						{ id: 'div', name: 'Div' },
 						{ id: 'footer', name: 'Footer' },
 						{ id: 'header', name: 'Header' },
-						{ id: 'nav', name: 'Nav' },
 						{ id: 'section', name: 'Section' },
 					],
 					default: 'section',
