@@ -2446,7 +2446,13 @@ $(document).ready(function () {
                                             return t.getQueryLength(n.key) - t.getQueryLength(e.key)
                                         })
                                 }
-							});
+                            });
+
+                            $(VjEditor.Canvas.getBody()).on("paste", '[contenteditable="true"]', function (e) {
+                                e.preventDefault();
+                                var text = e.originalEvent.clipboardData.getData('text');
+                                e.target.ownerDocument.execCommand("insertText", false, text);
+                            });
 
 							VjEditor.on('block:drag:start', function (model) {
 
