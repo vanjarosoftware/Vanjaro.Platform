@@ -54,10 +54,11 @@
             palette: [],
             chooseText: "Ok",
             move: function (color) {
-                $(this).val(color);
+                $(this).val(color.toRgbString());
                 $scope.ApplyChanges(this);
             },
             change: function (color) {
+                $(this).val(color.toRgbString());
                 $scope.ApplyChanges(this);
             }
         });
