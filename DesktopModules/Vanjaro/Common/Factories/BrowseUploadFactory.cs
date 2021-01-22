@@ -947,8 +947,8 @@ namespace Vanjaro.Common.Factories
                     return Result;
                 }
             }
-            Result.Status = "Success";            
-            Result.Url = Uri.EscapeUriString(FileManager.Instance.GetUrl(file));
+            Result.Status = "Success";
+            Result.Url = GetEscapedFileName(FileManager.Instance.GetUrl(file));
             Result.Urls = GetUrls(file);
             return Result;
         }
@@ -1023,7 +1023,7 @@ namespace Vanjaro.Common.Factories
             {
                 result.Name = file.RelativePath;
                 result.FileId = file.FileId;
-                result.FileUrl = Uri.EscapeUriString(FileManager.Instance.GetUrl(file));
+                result.FileUrl = GetEscapedFileName(FileManager.Instance.GetUrl(file));
                 return result;
             }
             return result;
@@ -1047,7 +1047,7 @@ namespace Vanjaro.Common.Factories
                             {
                                 ImageUrl imgUrl = new ImageUrl
                                 {
-                                    Url = Uri.EscapeUriString(FileManager.Instance.GetUrl(finfo)),
+                                    Url = GetEscapedFileName(FileManager.Instance.GetUrl(finfo)),
                                     Width = finfo.Width,
                                     Type = "image"
                                 };
@@ -1057,7 +1057,7 @@ namespace Vanjaro.Common.Factories
                                 {
                                     imgUrl = new ImageUrl
                                     {
-                                        Url = Uri.EscapeUriString(FileManager.Instance.GetUrl(webpfileinfo)),
+                                        Url = GetEscapedFileName(FileManager.Instance.GetUrl(webpfileinfo)),
                                         Width = finfo.Width,
                                         Type = "webp"
                                     };
@@ -1463,7 +1463,7 @@ namespace Vanjaro.Common.Factories
         {
             if (!string.IsNullOrEmpty(fileName))
             {
-                fileName = Uri.EscapeUriString(fileName);
+                fileName = fileName.Replace(" ", "%20");
             }
 
             return fileName;
