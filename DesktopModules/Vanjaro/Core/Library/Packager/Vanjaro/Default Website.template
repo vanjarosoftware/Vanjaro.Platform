@@ -1,4 +1,4 @@
-﻿<portal version="5.0">
+<portal version="5.0">
   <description>[PortalDescription.Text]</description>
   <settings>
     <logofile>Images/Logo.svg</logofile>
@@ -365,6 +365,18 @@
           <allowaccess>true</allowaccess>
           <rolename>Registered Users</rolename>
         </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>VIEW</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>EDIT</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
+        </permission>
       </tabpermissions>
       <tabsettings />
       <tabUrls />
@@ -397,9 +409,22 @@
           <allowaccess>true</allowaccess>
           <rolename>Registered Users</rolename>
         </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>VIEW</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>EDIT</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
+        </permission>
       </tabpermissions>
       <tabsettings />
       <tabUrls />
+      <parent>User</parent>
     </tab>
     <tab>
       <content>Site</content>
@@ -428,6 +453,18 @@
           <permissionkey>VIEW</permissionkey>
           <allowaccess>true</allowaccess>
           <rolename>All Users</rolename>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>VIEW</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>EDIT</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
         </permission>
       </tabpermissions>
       <tabsettings />
@@ -717,6 +754,18 @@
           <allowaccess>true</allowaccess>
           <rolename>All Users</rolename>
         </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>VIEW</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>EDIT</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
+        </permission>
       </tabpermissions>
       <tabsettings />
       <tabUrls />
@@ -749,6 +798,18 @@
           <permissionkey>VIEW</permissionkey>
           <allowaccess>true</allowaccess>
           <rolename>All Users</rolename>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>VIEW</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>EDIT</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
         </permission>
       </tabpermissions>
       <tabsettings />
@@ -783,6 +844,18 @@
           <allowaccess>true</allowaccess>
           <rolename>All Users</rolename>
         </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>VIEW</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>EDIT</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
+        </permission>
       </tabpermissions>
       <tabsettings />
       <tabUrls />
@@ -815,6 +888,18 @@
           <permissionkey>VIEW</permissionkey>
           <allowaccess>true</allowaccess>
           <rolename>All Users</rolename>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>VIEW</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>EDIT</permissionkey>
+          <allowaccess>true</allowaccess>
+          <rolename>Administrators</rolename>
         </permission>
       </tabpermissions>
       <tabsettings />
