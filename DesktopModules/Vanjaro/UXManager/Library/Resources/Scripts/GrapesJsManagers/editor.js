@@ -1329,27 +1329,32 @@ $(document).ready(function () {
                                         else if (jqXHR.Message != undefined && jqXHR.Message != '')
                                             ShowNotification('', jqXHR.Message, 'error');
 
-                                        if (jqXHR.SaveContentNotification != undefined && jqXHR.SaveContentNotification != '') {
-                                            eval(jqXHR.SaveContentNotification);
-                                        }
-                                    },
-                                    params: {
-                                        EntityID: data.EntityID,
-                                        IsPublished: false,
-                                        m2v: false,
-                                        Comment: ""
-                                    },
-                                    headers: {
-                                        'ModuleId': parseInt(data.ModuleId),
-                                        'TabId': parseInt(sf.getTabId()),
-                                        'RequestVerificationToken': sf.getAntiForgeryValue()
-                                    }
-                                }
+										if (jqXHR.SaveContentNotification != undefined && jqXHR.SaveContentNotification != '') {
+											eval(jqXHR.SaveContentNotification);
+										}
+									},
+									params: {
+										EntityID: data.EntityID,
+										IsPublished: false,
+										m2v: false,
+										Comment: ""
+									},
+									headers: {
+										'ModuleId': parseInt(data.ModuleId),
+										'TabId': parseInt(sf.getTabId()),
+										'RequestVerificationToken': sf.getAntiForgeryValue()
+									}
+								}
                             });
 
-                            //setCustomRte();
-                            const rte = VjEditor.RichTextEditor;
-                            rte.remove('link');
+                            var fontfamilylist = [];
+                            $.each(VJFonts, function (k, v) {
+                                fontfamilylist.push({ value: v.Value, name: v.Name });
+                            });
+
+							//setCustomRte();
+							const rte = VjEditor.RichTextEditor;
+							rte.remove('link');
 
                             VjEditor.RichTextEditor.add('link', {
                                 icon: '<i class="fa fa-link"/>',
@@ -1623,38 +1628,32 @@ $(document).ready(function () {
 
                             var FilterBorderOptions = function (target, position) {
 
-                                setTimeout(function () {
-                                    var val;
+                                var val;
+                                switch (position) {
+                                    case "sm-border-top":
+                                        val = "border-top"
+                                        break;
+                                    case "sm-border-right":
+                                        val = "border-right"
+                                        break;
+                                    case "sm-border-bottom":
+                                        val = "border-bottom"
+                                        break;
+                                    case "sm-border-left":
+                                        val = "border-left"
+                                        break;
+                                    default:
+                                        val = "border"
+                                }
 
-                                    switch (position) {
-                                        case "sm-border-top":
-                                            val = "border-top"
-                                            break;
-                                        case "sm-border-right":
-                                            val = "border-right"
-                                            break;
-                                        case "sm-border-bottom":
-                                            val = "border-bottom"
-                                            break;
-                                        case "sm-border-left":
-                                            val = "border-left"
-                                            break;
-                                        default:
-                                            val = "border"
-                                    }
-
-                                    var sm = VjEditor.StyleManager;
-
-                                    $(sm.getProperties('border').models).each(function () {
-                                        if (this.attributes.name != 'Border Postion')
-                                            this.view.$el.hide();
-                                    });
-
-                                    $(sm.getProperty(Border, val + '-style').view.el).show();
-                                    $(sm.getProperty(Border, val + '-color').view.el).show();
-                                    $(sm.getProperty(Border, val + '-width').view.el).show();
-
+                                $(VjEditor.StyleManager.getProperties('border').models).each(function () {
+                                    if (this.attributes.name != 'Border Postion')
+                                        this.view.$el.hide();
                                 });
+
+                                $(VjEditor.StyleManager.getProperty(Border, val + '-style').view.el).show();
+                                $(VjEditor.StyleManager.getProperty(Border, val + '-color').view.el).show();
+                                $(VjEditor.StyleManager.getProperty(Border, val + '-width').view.el).show();
                             }
 
                             VjEditor.on('component:update:border-position', (model, argument) => {
@@ -1666,48 +1665,51 @@ $(document).ready(function () {
 
                             VjEditor.on('component:selected', (model, argument) => {
 
-                                if (typeof model.attributes.type == 'undefined')
-                                    return false;
-                                else if (model.attributes.type == 'carousel-caption') {
-                                    $.each(getAllComponents(model.parent()), function (i, n) {
-                                        if (n.attributes.type == 'carousel-image') {
-                                            VjEditor.select(n);
-                                            return false;
-                                        }
+								if (typeof model.attributes.type == 'undefined')
+									return false;
+								else if (model.attributes.type == 'carousel-caption') {
+									$.each(getAllComponents(model.parent()), function (i, n) {
+										if (n.attributes.type == 'carousel-image') {
+											VjEditor.select(n);
+											return false;
+										}
+									});
+									return;
+								}
+								else if (model.attributes.type == 'prev' || model.closest('[data-gjs-type="prev"]')) {
+									var slider = model.closest('[data-gjs-type="carousel"]');
+									VjEditor.select(slider);
+									VjEditor.runCommand("slider-prev", { slider });
+									return;
+								}
+								else if (model.attributes.type == 'next' || model.closest('[data-gjs-type="next"]')) {
+									var slider = model.closest('[data-gjs-type="carousel"]');
+									VjEditor.select(slider);
+									VjEditor.runCommand("slider-next", { slider });
+									return;
+								}
+								else if (model.attributes.type == 'indicator') {
+									var slider = model.closest('[data-gjs-type="carousel"]');
+									VjEditor.select(slider);
+									var index = parseInt(model.getAttributes()['data-slide-to']);
+									$('.gjs-frame').contents().find('#' + slider.getId()).carousel('dispose').carousel({ interval: false }).carousel(index);
+									return;
+                                }
+
+                                if (typeof model.attributes.toolbar[0]  != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
+
+                                    $.each(model.attributes.toolbar, function (k, v) {
+
+                                        if (v.attributes['class'] == 'fa fa-arrow-up')
+                                            v.attributes['title'] = VjLocalized.SelectParent;
+                                        else if (v.command == 'vj-move' || v.command == 'tlb-move')
+                                            v.attributes['title'] = VjLocalized.Move;
+                                        else if (v.command == 'vj-copy' || v.command == 'tlb-clone')
+                                            v.attributes['title'] = VjLocalized.Copy;
+                                        else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
+                                            v.attributes['title'] = VjLocalized.Delete;
                                     });
-                                    return;
                                 }
-                                else if (model.attributes.type == 'prev' || model.closest('[data-gjs-type="prev"]')) {
-                                    var slider = model.closest('[data-gjs-type="carousel"]');
-                                    VjEditor.select(slider);
-                                    VjEditor.runCommand("slider-prev", { slider });
-                                    return;
-                                }
-                                else if (model.attributes.type == 'next' || model.closest('[data-gjs-type="next"]')) {
-                                    var slider = model.closest('[data-gjs-type="carousel"]');
-                                    VjEditor.select(slider);
-                                    VjEditor.runCommand("slider-next", { slider });
-                                    return;
-                                }
-                                else if (model.attributes.type == 'indicator') {
-                                    var slider = model.closest('[data-gjs-type="carousel"]');
-                                    VjEditor.select(slider);
-                                    var index = parseInt(model.getAttributes()['data-slide-to']);
-                                    $('.gjs-frame').contents().find('#' + slider.getId()).carousel('dispose').carousel({ interval: false }).carousel(index);
-                                    return;
-                                }
-
-                                $.each(model.attributes.toolbar, function (k, v) {
-
-                                    if (v.attributes['class'] == 'fa fa-arrow-up')
-                                        v.attributes['title'] = VjLocalized.SelectParent;
-                                    else if (v.command == 'vj-move' || v.command == 'tlb-move')
-                                        v.attributes['title'] = VjLocalized.Move;
-                                    else if (v.command == 'vj-copy' || v.command == 'tlb-clone')
-                                        v.attributes['title'] = VjLocalized.Copy;
-                                    else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
-                                        v.attributes['title'] = VjLocalized.Delete;
-                                });
 
                                 var desktop = 'd-desktop-none';
                                 var tablet = 'd-tablet-none';
@@ -1801,9 +1803,8 @@ $(document).ready(function () {
                                     }, 300);
                                 }
 
-
-                                model.set('border-position', 'sm-border');
-                                FilterBorderOptions(model, 'sm-border');
+								model.set('border-position', 'sm-border');
+								FilterBorderOptions(model, 'sm-border');
 
                                 if (model.attributes.type == 'column') {
 
@@ -1857,11 +1858,6 @@ $(document).ready(function () {
                                 }
 
                                 if (model.attributes.type == 'heading' || model.attributes.type == 'text' || model.attributes.type == 'button' || model.attributes.type == 'list' || model.attributes.type == 'link') {
-
-                                    var fontfamilylist = [];
-                                    $.each(VJFonts, function (k, v) {
-                                        fontfamilylist.push({ value: v.Value, name: v.Name });
-                                    });
 
                                     VjEditor.StyleManager.addSector(Text, {
                                         name: VjLocalized.Text,
@@ -1998,10 +1994,8 @@ $(document).ready(function () {
                                         }],
                                     }, { at: 3 })
                                 }
-                                else {
-                                    if (typeof VjEditor.StyleManager.getSector(Text) != 'undefined')
-                                        VjEditor.StyleManager.removeSector(Text);
-                                }
+                                else if (typeof VjEditor.StyleManager.getSector(Text) != 'undefined')
+                                    VjEditor.StyleManager.removeSector(Text);
 
                                 $(VjEditor.StyleManager.getSectors().models).each(function (index, value) {
                                     $(value.attributes.properties.models).each(function (subIndex, subValue) {
@@ -2834,31 +2828,29 @@ $(document).ready(function () {
     });
 
     var Stylemanager = function () {
-            $("#BlockManager").hide();
-            $(".panel-top").hide();
-            $("#ContentBlocks").hide();
-            $(".block-set").hide();
-            $("#Notification").hide();
-            $("#iframeHolder").hide();
-            $('#SettingButton,#DeviceManager,.ntoolbox').hide();
-            $("#StyleToolManager").show();
-            $('.ssmanager').show();
 
-            setTimeout(function () {
-                VjEditor.StyleManager.render();
+        $("#BlockManager").hide();
+        $(".panel-top").hide();
+        $("#ContentBlocks").hide();
+        $(".block-set").hide();
+        $("#Notification").hide();
+        $("#iframeHolder").hide();
+        $('#SettingButton,#DeviceManager,.ntoolbox').hide();
+        $("#StyleToolManager").show();
+        $('.ssmanager').show();
 
-            $('.gjs-sm-sector').click(function () {
-                var $this = $(this);
-                var sectorName = $this.attr('id').replace("gjs-sm-", "");
-                if ($this.find('.gjs-sm-properties').is(':visible')) {
-                    $.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
-                        model.set('open', false);
-                    });
-                    VjEditor.StyleManager.getSector(sectorName).set('open', true);
-                }
-            });
+        VjEditor.StyleManager.render();
+
+        $('.gjs-sm-sector').click(function () {
+            var $this = $(this);
+            var sectorName = $this.attr('id').replace("gjs-sm-", "");
+            if ($this.find('.gjs-sm-properties').is(':visible')) {
+                $.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
+                    model.set('open', false);
+                });
+                VjEditor.StyleManager.getSector(sectorName).set('open', true);
+            }
         });
-
     }
 
     $('.jsPanel-content').on("mousedown", function () {
