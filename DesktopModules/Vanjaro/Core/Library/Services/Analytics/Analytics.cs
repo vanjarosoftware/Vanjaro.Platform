@@ -20,13 +20,13 @@ namespace Vanjaro.Core.Services
 
 #if RELEASE
         public const string MeasurementID = "G-W7S4EZFGWW";
-#else        
+#else
         public const string MeasurementID = "G-WJTPTNNMHN";
 #endif
 
         public static void TrackEvent(Event Event)
         {
-            if (Event != null)
+            if (Event != null && HttpContext.Current != null)
             {
                 if (HttpContext.Current.Application["AnalyticsEvents"] == null)
                     HttpContext.Current.Application["AnalyticsEvents"] = new List<Event>();
@@ -46,7 +46,7 @@ namespace Vanjaro.Core.Services
         public static string PostEvent()
         {
             StringBuilder sb = new StringBuilder();
-            if (HttpContext.Current.Application["AnalyticsEvents"] != null && ((List<Event>)HttpContext.Current.Application["AnalyticsEvents"]).Count > 0)
+            if (HttpContext.Current != null && HttpContext.Current.Application["AnalyticsEvents"] != null && ((List<Event>)HttpContext.Current.Application["AnalyticsEvents"]).Count > 0)
             {
                 foreach (Event e in (List<Event>)HttpContext.Current.Application["AnalyticsEvents"])
                 {
