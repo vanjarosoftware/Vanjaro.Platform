@@ -1345,7 +1345,12 @@ $(document).ready(function () {
 										'RequestVerificationToken': sf.getAntiForgeryValue()
 									}
 								}
-							});
+                            });
+
+                            var fontfamilylist = [];
+                            $.each(VJFonts, function (k, v) {
+                                fontfamilylist.push({ value: v.Value, name: v.Name });
+                            });
 
 							//setCustomRte();
 							const rte = VjEditor.RichTextEditor;
@@ -1621,41 +1626,35 @@ $(document).ready(function () {
 									RenderBlock(model, bmodel);
 							});
 
-							var FilterBorderOptions = function (target, position) {
+                            var FilterBorderOptions = function (target, position) {
 
-								setTimeout(function () {
-									var val;
+                                var val;
+                                switch (position) {
+                                    case "sm-border-top":
+                                        val = "border-top"
+                                        break;
+                                    case "sm-border-right":
+                                        val = "border-right"
+                                        break;
+                                    case "sm-border-bottom":
+                                        val = "border-bottom"
+                                        break;
+                                    case "sm-border-left":
+                                        val = "border-left"
+                                        break;
+                                    default:
+                                        val = "border"
+                                }
 
-									switch (position) {
-										case "sm-border-top":
-											val = "border-top"
-											break;
-										case "sm-border-right":
-											val = "border-right"
-											break;
-										case "sm-border-bottom":
-											val = "border-bottom"
-											break;
-										case "sm-border-left":
-											val = "border-left"
-											break;
-										default:
-											val = "border"
-									}
+                                $(VjEditor.StyleManager.getProperties('border').models).each(function () {
+                                    if (this.attributes.name != 'Border Postion')
+                                        this.view.$el.hide();
+                                });
 
-									var sm = VjEditor.StyleManager;
-
-									$(sm.getProperties('border').models).each(function () {
-										if (this.attributes.name != 'Border Postion')
-											this.view.$el.hide();
-									});
-
-									$(sm.getProperty(Border, val + '-style').view.el).show();
-									$(sm.getProperty(Border, val + '-color').view.el).show();
-									$(sm.getProperty(Border, val + '-width').view.el).show();
-
-								});
-							}
+                                $(VjEditor.StyleManager.getProperty(Border, val + '-style').view.el).show();
+                                $(VjEditor.StyleManager.getProperty(Border, val + '-color').view.el).show();
+                                $(VjEditor.StyleManager.getProperty(Border, val + '-width').view.el).show();
+                            }
 
 							VjEditor.on('component:update:border-position', (model, argument) => {
 								if (typeof event != "undefined")
@@ -1695,19 +1694,22 @@ $(document).ready(function () {
 									var index = parseInt(model.getAttributes()['data-slide-to']);
 									$('.gjs-frame').contents().find('#' + slider.getId()).carousel('dispose').carousel({ interval: false }).carousel(index);
 									return;
-								}
+                                }
 
-								$.each(model.attributes.toolbar, function (k, v) {
+                                if (typeof model.attributes.toolbar[0]  != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
 
-									if (v.attributes['class'] == 'fa fa-arrow-up')
-										v.attributes['title'] = VjLocalized.SelectParent;
-									else if (v.command == 'vj-move' || v.command == 'tlb-move')
-										v.attributes['title'] = VjLocalized.Move;
-									else if (v.command == 'vj-copy' || v.command == 'tlb-clone')
-										v.attributes['title'] = VjLocalized.Copy;
-									else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
-										v.attributes['title'] = VjLocalized.Delete;
-								});
+                                    $.each(model.attributes.toolbar, function (k, v) {
+
+                                        if (v.attributes['class'] == 'fa fa-arrow-up')
+                                            v.attributes['title'] = VjLocalized.SelectParent;
+                                        else if (v.command == 'vj-move' || v.command == 'tlb-move')
+                                            v.attributes['title'] = VjLocalized.Move;
+                                        else if (v.command == 'vj-copy' || v.command == 'tlb-clone')
+                                            v.attributes['title'] = VjLocalized.Copy;
+                                        else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
+                                            v.attributes['title'] = VjLocalized.Delete;
+                                    });
+                                }
 
 								var desktop = 'd-desktop-none';
 								var tablet = 'd-tablet-none';
@@ -1801,10 +1803,6 @@ $(document).ready(function () {
 									}, 300);
 								}
 
-								setTimeout(function () {
-									VjEditor.StyleManager.render();
-								});
-
 								model.set('border-position', 'sm-border');
 								FilterBorderOptions(model, 'sm-border');
 
@@ -1859,152 +1857,145 @@ $(document).ready(function () {
 										VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
 								}
 
-								if (model.attributes.type == 'heading' || model.attributes.type == 'text' || model.attributes.type == 'button' || model.attributes.type == 'list' || model.attributes.type == 'link') {
+                                if (model.attributes.type == 'heading' || model.attributes.type == 'text' || model.attributes.type == 'button' || model.attributes.type == 'list' || model.attributes.type == 'link') {
 
-									var fontfamilylist = [];
-									$.each(VJFonts, function (k, v) {
-										fontfamilylist.push({ value: v.Value, name: v.Name });
-									});
-
-									VjEditor.StyleManager.addSector(Text, {
-										name: VjLocalized.Text,
-										open: false,
-										buildProps: ['color', 'font-family', 'font-size', 'line-height', 'letter-spacing', 'word-spacing', 'font-weight', 'font-style', 'text-transform', 'text-decoration', 'text-shadow'],
-										properties: [{
-											type: 'radio',
-											name: 'Text decoration',
-											property: 'text-decoration',
-											defaults: 'none',
-											list: [{
-												value: 'none',
-												name: 'None',
-											}, {
-												value: 'underline',
-												name: 'Underline',
-											}, {
-												value: 'overline',
-												name: 'Overline',
-											}, {
-												value: 'line-through',
-												name: 'Strikethrough',
-											}],
-										}, {
-											type: 'radio',
-											name: 'Font style',
-											property: 'font-style',
-											defaults: 'normal',
-											list: [{
-												value: 'normal',
-												name: 'Normal',
-											}, {
-												value: 'italic',
-												name: 'Italic',
-											}],
-										}, {
-											type: 'select',
-											name: 'Font Family',
-											property: 'font-family',
-											list: fontfamilylist
-										}, {
-											type: 'customrange',
-											name: 'Font size',
-											property: 'font-size',
-											units: [
-												{ name: 'px', min: 1, max: 100, step: 1 },
-												{ name: '%', min: 1, max: 100, step: 1 },
-												{ name: 'em', min: 1, max: 100, step: 1 },
-												{ name: 'rem', min: 1, max: 100, step: 1 },
-												{ name: 'vw', min: 1, max: 100, step: 1 },
-												{ name: 'vh', min: 1, max: 100, step: 1 },
-											],
-											unit: 'px',
-											defaults: 16
-										}, {
-											type: 'customrange',
-											name: 'Line height',
-											property: 'line-height',
-											units: [
-												{ name: 'px', min: 1, max: 100, step: 1 },
-												{ name: '%', min: 1, max: 100, step: 1 },
-												{ name: 'em', min: 1, max: 6, step: 1 },
-												{ name: 'rem', min: 1, max: 6, step: 1 },
-												{ name: 'vw', min: 1, max: 100, step: 1 },
-												{ name: 'vh', min: 1, max: 100, step: 1 },
-											],
-											unit: 'px',
-											defaults: 24
-										}, {
-											type: 'customrange',
-											name: 'Letter spacing',
-											property: 'letter-spacing',
-											units: [
-												{ name: 'px', min: -5, max: 100, step: 1 },
-												{ name: 'em', min: -1, max: 5, step: 1 },
-												{ name: 'rem', min: -1, max: 5, step: 1 },
-												{ name: 'vw', min: -5, max: 100, step: 1 },
-												{ name: 'vh', min: -5, max: 100, step: 1 },
-											],
-											unit: 'px',
-											defaults: 0
-										}, {
-											type: 'customrange',
-											name: 'Word spacing',
-											property: 'word-spacing',
-											units: [
-												{ name: 'px', min: -5, max: 100, step: 1 },
-												{ name: 'em', min: -1, max: 5, step: 1 },
-												{ name: 'rem', min: -1, max: 5, step: 1 },
-												{ name: 'vw', min: -5, max: 100, step: 1 },
-												{ name: 'vh', min: -5, max: 100, step: 1 },
-											],
-											unit: 'px',
-											defaults: 0
-										}, {
-											type: 'radio',
-											name: 'Font Weight',
-											property: 'font-weight',
-											list: [{
-												value: '100',
-												name: 'Thin',
-											}, {
-												value: '300',
-												name: 'Light',
-											}, {
-												value: '500',
-												name: 'Medium',
-											}, {
-												value: '700',
-												name: 'Bold',
-											}, {
-												value: '900',
-												name: 'Ultra Bold',
-											}],
-										}, {
-											id: 'text-transform',
-											type: 'radio',
-											name: 'Text transform',
-											property: 'text-transform',
-											defaults: 'none',
-											list: [{
-												value: 'none',
-												name: 'None',
-											}, {
-												value: 'uppercase',
-												name: 'Uppercase',
-											}, {
-												value: 'lowercase',
-												name: 'Lowercase',
-											}, {
-												value: 'capitalize',
-												name: 'Capitalize',
-											}],
-										}],
-									}, { at: 3 })
-								}
-								else {
-									if (typeof VjEditor.StyleManager.getSector(Text) != 'undefined')
-										VjEditor.StyleManager.removeSector(Text);
-								}
+                                    VjEditor.StyleManager.addSector(Text, {
+                                        name: VjLocalized.Text,
+                                        open: false,
+                                        buildProps: ['color', 'font-family', 'font-size', 'line-height', 'letter-spacing', 'word-spacing', 'font-weight', 'font-style', 'text-transform', 'text-decoration', 'text-shadow'],
+                                        properties: [{
+                                            type: 'radio',
+                                            name: 'Text decoration',
+                                            property: 'text-decoration',
+                                            defaults: 'none',
+                                            list: [{
+                                                value: 'none',
+                                                name: 'None',
+                                            }, {
+                                                value: 'underline',
+                                                name: 'Underline',
+                                            }, {
+                                                value: 'overline',
+                                                name: 'Overline',
+                                            }, {
+                                                value: 'line-through',
+                                                name: 'Strikethrough',
+                                            }],
+                                        }, {
+                                            type: 'radio',
+                                            name: 'Font style',
+                                            property: 'font-style',
+                                            defaults: 'normal',
+                                            list: [{
+                                                value: 'normal',
+                                                name: 'Normal',
+                                            }, {
+                                                value: 'italic',
+                                                name: 'Italic',
+                                            }],
+                                        }, {
+                                            type: 'select',
+                                            name: 'Font Family',
+                                            property: 'font-family',
+                                            list: fontfamilylist
+                                        }, {
+                                            type: 'customrange',
+                                            name: 'Font size',
+                                            property: 'font-size',
+                                            units: [
+                                                { name: 'px', min: 1, max: 100, step: 1 },
+                                                { name: '%', min: 1, max: 100, step: 1 },
+                                                { name: 'em', min: 1, max: 100, step: 1 },
+                                                { name: 'rem', min: 1, max: 100, step: 1 },
+                                                { name: 'vw', min: 1, max: 100, step: 1 },
+                                                { name: 'vh', min: 1, max: 100, step: 1 },
+                                            ],
+                                            unit: 'px',
+                                            defaults: 16
+                                        }, {
+                                            type: 'customrange',
+                                            name: 'Line height',
+                                            property: 'line-height',
+                                            units: [
+                                                { name: 'px', min: 1, max: 100, step: 1 },
+                                                { name: '%', min: 1, max: 100, step: 1 },
+                                                { name: 'em', min: 1, max: 6, step: 1 },
+                                                { name: 'rem', min: 1, max: 6, step: 1 },
+                                                { name: 'vw', min: 1, max: 100, step: 1 },
+                                                { name: 'vh', min: 1, max: 100, step: 1 },
+                                            ],
+                                            unit: 'px',
+                                            defaults: 24
+                                        }, {
+                                            type: 'customrange',
+                                            name: 'Letter spacing',
+                                            property: 'letter-spacing',
+                                            units: [
+                                                { name: 'px', min: -5, max: 100, step: 1 },
+                                                { name: 'em', min: -1, max: 5, step: 1 },
+                                                { name: 'rem', min: -1, max: 5, step: 1 },
+                                                { name: 'vw', min: -5, max: 100, step: 1 },
+                                                { name: 'vh', min: -5, max: 100, step: 1 },
+                                            ],
+                                            unit: 'px',
+                                            defaults: 0
+                                        }, {
+                                            type: 'customrange',
+                                            name: 'Word spacing',
+                                            property: 'word-spacing',
+                                            units: [
+                                                { name: 'px', min: -5, max: 100, step: 1 },
+                                                { name: 'em', min: -1, max: 5, step: 1 },
+                                                { name: 'rem', min: -1, max: 5, step: 1 },
+                                                { name: 'vw', min: -5, max: 100, step: 1 },
+                                                { name: 'vh', min: -5, max: 100, step: 1 },
+                                            ],
+                                            unit: 'px',
+                                            defaults: 0
+                                        }, {
+                                            type: 'radio',
+                                            name: 'Font Weight',
+                                            property: 'font-weight',
+                                            list: [{
+                                                value: '100',
+                                                name: 'Thin',
+                                            }, {
+                                                value: '300',
+                                                name: 'Light',
+                                            }, {
+                                                value: '500',
+                                                name: 'Medium',
+                                            }, {
+                                                value: '700',
+                                                name: 'Bold',
+                                            }, {
+                                                value: '900',
+                                                name: 'Ultra Bold',
+                                            }],
+                                        }, {
+                                            id: 'text-transform',
+                                            type: 'radio',
+                                            name: 'Text transform',
+                                            property: 'text-transform',
+                                            defaults: 'none',
+                                            list: [{
+                                                value: 'none',
+                                                name: 'None',
+                                            }, {
+                                                value: 'uppercase',
+                                                name: 'Uppercase',
+                                            }, {
+                                                value: 'lowercase',
+                                                name: 'Lowercase',
+                                            }, {
+                                                value: 'capitalize',
+                                                name: 'Capitalize',
+                                            }],
+                                        }],
+                                    }, { at: 3 })
+                                }
+                                else if (typeof VjEditor.StyleManager.getSector(Text) != 'undefined')
+                                    VjEditor.StyleManager.removeSector(Text);
 
 								$(VjEditor.StyleManager.getSectors().models).each(function (index, value) {
 									$(value.attributes.properties.models).each(function (subIndex, subValue) {
@@ -2836,20 +2827,20 @@ $(document).ready(function () {
 		VjEditor.select(selected);
 	});
 
-	var Stylemanager = function () {
-		setTimeout(function () {
-			$("#BlockManager").hide();
-			$(".panel-top").hide();
-			$("#ContentBlocks").hide();
-			$(".block-set").hide();
-			$("#Notification").hide();
-			$("#iframeHolder").hide();
-			$('#SettingButton,#DeviceManager,.ntoolbox').hide();
-			$("#StyleToolManager").show();
-			$('.ssmanager').show();
-		}, 200);
+    var Stylemanager = function () {
 
-	}
+        $("#BlockManager").hide();
+        $(".panel-top").hide();
+        $("#ContentBlocks").hide();
+        $(".block-set").hide();
+        $("#Notification").hide();
+        $("#iframeHolder").hide();
+        $('#SettingButton,#DeviceManager,.ntoolbox').hide();
+        $("#StyleToolManager").show();
+        $('.ssmanager').show();
+
+        VjEditor.StyleManager.render();
+    }
 
 	$('.jsPanel-content').on("mousedown", function () {
 		Stylemanager();
