@@ -899,7 +899,7 @@ namespace Vanjaro.Skin
 
         private Pages GetPage()
         {
-            Pages page;
+            Pages page=new Pages();
             if (!string.IsNullOrEmpty(Request.QueryString["revisionversion"]) && TabPermissionController.HasTabPermission("EDIT"))
             {
                 page = PageManager.GetByVersion(PortalSettings.ActiveTab.TabID, Convert.ToInt32(Request.QueryString["revisionversion"]), PageManager.GetCultureCode(PortalSettings));
@@ -911,6 +911,8 @@ namespace Vanjaro.Skin
             else
             {
                 page = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, true, PageManager.GetCultureCode(PortalSettings), true);
+                page.ContentJSON = string.Empty;
+                page.StyleJSON = string.Empty;
             }
 
             return page;
