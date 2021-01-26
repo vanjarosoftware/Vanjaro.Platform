@@ -87,30 +87,17 @@ export default (editor, config = {}) => {
 				style["color"] = mainComponent.getTrait("color").getInitValue();
 				component.setStyle(style);
 				component.removeStyle("background-color");
-				$(mainComponent.getTrait('styles').el).find('label').css({
-					"color": mainComponent.getTrait("color").getInitValue(),
-					"background-color": ""
-				});
 			}
 			else if (event.target.id == 'fill') {
 				var style = component.getStyle();
 				style["background-color"] = mainComponent.getTrait("color").getInitValue();
 				component.setStyle(style);
 				component.removeStyle("color");
-				$(mainComponent.getTrait('styles').el).find('label').css({
-					"background-color": mainComponent.getTrait("color").getInitValue(),
-					"color": ""
-				});;
 			}
 			else {
 				component.removeStyle("color");
 				component.removeStyle("border-color");
 				component.removeStyle("background-color");
-				$(mainComponent.getTrait('styles').el).find('label').css({
-					"background-color": "",
-					"border-color": "",
-					"color": ""
-				});
 			}
 
 			var btnStart = 'btn-';
@@ -152,10 +139,8 @@ export default (editor, config = {}) => {
 					if (classes_i_a[j].length > 0) {
 						if (comp == 'grid' && event.target.name == 'horizontalalignment')
 							component.components().models[0].removeClass(classes_i_a[j]);
-						else if (comp == 'button' && (event.target.name == 'color' || event.target.name == 'stylee' || event.target.name == 'size')) {
+						else if (comp == 'button' && (event.target.name == 'color' || event.target.name == 'stylee' || event.target.name == 'size'))
 							component.removeClass(classes_i_a[j]);
-							$(mainComponent.getTrait('styles').el).find('label').removeClass(classes_i_a[j]);
-						}
 						else
 							component.removeClass(classes_i_a[j]);
 					}
@@ -168,10 +153,8 @@ export default (editor, config = {}) => {
 			for (let i = 0; i < value_a.length; i++) {
 				if (comp == 'grid' && event.target.name == 'horizontalalignment')
 					component.components().models[0].addClass(value_a[i]);
-				else if (comp == 'button' && (event.target.name == 'color' || event.target.name == 'stylee' || event.target.name == 'size')) {
+				else if (comp == 'button' && (event.target.name == 'color' || event.target.name == 'stylee' || event.target.name == 'size'))
 					component.addClass(value_a[i]);
-					$(mainComponent.getTrait('styles').el).find('label').addClass(value_a[i]);
-				}
 				else
 					component.addClass(value_a[i]);
 			}
@@ -329,8 +312,6 @@ export default (editor, config = {}) => {
 						style["width"] = "100%";
 						style["display"] = "block";
 						component.set({ 'resizable': false });
-
-						$(mainComponent.getTrait('styles').el).find('label').css('width', '100%');
 					}
 					else {
 						style["width"] = component.attributes["width"];
@@ -347,14 +328,6 @@ export default (editor, config = {}) => {
 								br: 0, // Bottom right
 							}
 						});
-
-						$(mainComponent.getTrait('styles').el).css('text-align', val);
-
-						if (typeof component.attributes["width"] != "undefined")
-							$(mainComponent.getTrait('styles').el).find('label').css('width', component.attributes["width"]);
-						else
-							$(mainComponent.getTrait('styles').el).find('label').css('width', 'auto');
-
 					}
 				}
 				else if (componentType == 'divider') {
@@ -648,6 +621,10 @@ export default (editor, config = {}) => {
 
 				if (component.attributes.type == 'carousel-image')
 					component.parent().parent().addAttributes({ href: href });
+				else if (component.attributes.type == 'icon') {
+					component.set('tagName', 'a');
+					component.addAttributes({ href: href });
+				}
 				else
 					component.addAttributes({ href: href });
 			}
@@ -1330,24 +1307,6 @@ export default (editor, config = {}) => {
 				var BGcolor = $(this).find(".gjs-field-color-picker").css("background-color");
 				$(this).parents(".color-wrapper").find(".colorPicker").css("background-color", BGcolor);
 
-				if (typeof trait.target.getTrait('styles') != 'undefined') {
-
-					$(trait.attributes.cssproperties).each(function (index, property) {
-
-						if (property.name == 'color') {
-
-							if (BGcolor == "#fff" || BGcolor == "#ffffff" || BGcolor == "rgb(255, 255, 255)")
-								BGcolor = "#000000";
-
-							$(trait.target.getTrait('styles').el).find('label').css("color", BGcolor);
-
-							$(trait.target.getTrait('styles').el).find('label').removeClass(function (index, className) {
-								return (className.match(/\btext-\S+/g) || []).join(' ');
-							});
-						}
-					});
-				}
-
 				var classes = [];
 				var model = trait.target;
 
@@ -1379,28 +1338,6 @@ export default (editor, config = {}) => {
 						item.removeClass(className);
 					});
 				});
-
-				if (trait.target.attributes.type == 'button') {
-
-					var className = $(trait.target.getTrait('styles').el).find('label').attr('class').match(/\bbtn-\S+/g);
-
-					$(trait.target.getTrait('styles').el).find('label').removeClass(className);
-
-					if (trait.target.getTrait("stylee").getInitValue() == "outline") {
-						$(trait.target.getTrait('styles').el).find('label').css({
-							'color': BGcolor,
-							'border-color': BGcolor,
-						});
-					}
-					else if (trait.target.getTrait("stylee").getInitValue() == "fill") {
-						$(trait.target.getTrait('styles').el).find('label').css({
-							'background-color': BGcolor,
-							'border-color': BGcolor,
-							'color': "",
-						});
-					}
-				}
-
 			});
 
 			var input = el.getElementsByTagName('input');
@@ -1459,23 +1396,6 @@ export default (editor, config = {}) => {
 				model = component.findType(trait.attributes.selector);
 
 			$(model).each(function (index, item) {
-
-				if (typeof component.getTrait('styles') != 'undefined') {
-
-					$(trait.attributes.cssproperties).each(function (index, property) {
-
-						if (property.name == 'color') {
-							var className = event.target.nextElementSibling.className;
-							className = className.replace('bg', 'text');
-
-							$(component.getTrait('styles').el).find('label').removeClass(function (index, css) {
-								return (css.match(/\btext-\S+/g) || []).join(' ');
-							});
-
-							$(component.getTrait('styles').el).find('label').addClass(className);
-						}
-					});
-				}
 
 				$(event.target).parents(".color-wrapper").find(".colorPicker").css("background-color", "transparent");
 				$(event.target).parents(".color-wrapper").find(".active").removeClass("active");
@@ -1541,16 +1461,25 @@ export default (editor, config = {}) => {
 					value = trait.getInitValue();
 
 				if (typeof value == "string" && value != "") {
+
 					inputvalue = value.replace(/[^-\d\.]/g, '');
-					unit = value.replace(/-/g, '').replace(/\d+/, '');
+
+					if (typeof trait.attributes.units != 'undefined') {
+						$(trait.attributes.units).each(function (index, option) {
+
+							if (value.indexOf(option.name) >= 0) {
+								unit = option.name
+								return false;
+							}
+						});
+					}
 				}
 				else {
-
 					inputvalue = trait.attributes.value;
-
-					if (typeof trait.attributes.unit != 'undefined')
-						unit = trait.attributes.unit;
 				}
+
+				if (unit == '' && typeof trait.attributes.unit != 'undefined')
+					unit = trait.attributes.unit;
 
 				if (typeof trait.attributes.units != 'undefined') {
 
@@ -1625,9 +1554,6 @@ export default (editor, config = {}) => {
 
 				size = item.getStyle()['font-size'];
 			});
-
-			if (typeof component.getTrait('styles') != 'undefined')
-				$(component.getTrait('styles').el).find('label').css('font-size', size);
 		}
 	});
 
@@ -1888,7 +1814,7 @@ export default (editor, config = {}) => {
 				input.setAttribute("value", value.name);
 
 				label.setAttribute("for", value.id);
-				label.setAttribute("class", value.class + ' text-primary');
+				label.setAttribute("class", value.class);
 				label.innerHTML = trait.target.getEl().textContent;
 
 				div.appendChild(input);
@@ -1909,27 +1835,6 @@ export default (editor, config = {}) => {
 		},
 		onUpdate({ elInput, component }) {
 
-			var compClass = component.getClasses();
-
-			compClass = jQuery.grep(compClass, function (className, index) {
-				return (className.match(/\btext-\S+/g) || []).join(' ');
-			});
-
-			$(elInput).find('label').removeClass(function (index, className) {
-				return (className.match(/\btext-\S+/g) || []).join(' ');
-			});
-
-			$(elInput).find('label').addClass(compClass[0]).css('font-size', component.getStyle()['font-size']);
-
-			if (typeof component.getStyle()['color'] != 'undefined') {
-				var color = component.getStyle()['color'].replace('!important', '');
-
-				if (color == "#fff" || color == "#ffffff" || color == "rgb(255, 255, 255)")
-					color = "#000000";
-
-				$(elInput).find('label').css('color', color);
-			}
-
 			var model = component;
 			var trait = component.getTrait('styles');
 
@@ -1940,32 +1845,6 @@ export default (editor, config = {}) => {
 			text = text.split(/\s+/).slice(0, 20).join(" ");
 			$(elInput).find('label').text(text);
 
-			if (component.attributes.type == 'button') {
-
-				if (typeof component.getStyle()['background-color'] != "undefined") {
-					var bgcolor = component.getStyle()['background-color'].replace('!important', '');
-					$(elInput).find('label').css('background-color', bgcolor);
-				}
-
-				if (typeof component.getStyle()['border-color'] != "undefined") {
-					var bgcolor = component.getStyle()['border-color'].replace('!important', '');
-					$(elInput).find('label').css('border-color', bgcolor);
-				}
-
-				$(elInput).css(component.parent().getStyle());
-
-				$(component.getClasses()).each(function (index, className) {
-					if (!className.includes("button-style"))
-						$(elInput).find('label').addClass(className);
-				});
-
-				if (typeof component.getStyle()['width'] != "undefined") {
-					if ($(component.getEl()).outerWidth() < $(".sidebar .panel").outerWidth())
-						$(elInput).find('label').css('width', $(component.getEl()).css('width'));
-					else
-						$(elInput).find('label').css('width', '100%');
-				}
-			}
 		},
 		onEvent({ elInput, component }) {
 
@@ -1988,8 +1867,6 @@ export default (editor, config = {}) => {
 				var classes = item.getClasses();
 				var $el = $(item.getEl());
 
-				item.removeStyle('font-size');
-				item.removeStyle('color');
 				item.removeStyle('font-family');
 				item.removeStyle('font-style');
 				item.removeStyle('line-height');

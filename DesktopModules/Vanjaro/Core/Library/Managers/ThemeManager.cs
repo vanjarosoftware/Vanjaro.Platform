@@ -467,10 +467,13 @@ namespace Vanjaro.Core
                 if (result != null)
                 {
                     themeEditors = new ThemeEditorWrapper() { DeveloperMode = result.DeveloperMode, Fonts = result.Fonts, ThemeEditors = new List<ThemeEditor>() };
-                    foreach (ThemeEditor te in result.ThemeEditors)
+                    if (result.ThemeEditors != null)
                     {
-                        if (!RemoveFeatureAccess.Contains(te.Category))
-                            themeEditors.ThemeEditors.Add(te);
+                        foreach (ThemeEditor te in result.ThemeEditors)
+                        {
+                            if (!RemoveFeatureAccess.Contains(te.Category))
+                                themeEditors.ThemeEditors.Add(te);
+                        }
                     }
                 }
                 return themeEditors;

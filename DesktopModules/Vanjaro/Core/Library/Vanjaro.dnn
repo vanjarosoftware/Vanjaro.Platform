@@ -115,6 +115,11 @@
 					<assemblies>
 						<assembly>
 							<path>bin</path>
+							<name>Vanjaro.Core.Providers.Mail.VanjaroMailProvider.dll</name>
+							<version>01.00.04</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
 							<name>Vanjaro.Core.dll</name>
 							<version>01.00.04</version>
 						</assembly>

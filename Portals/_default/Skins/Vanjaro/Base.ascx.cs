@@ -727,6 +727,24 @@ namespace Vanjaro.Skin
                                 }
                                 Node.InnerHtml = LogoHtml.DocumentNode.OuterHtml;
                             }
+                            else if (Node.Attributes["data-style"] != null)
+                            {
+                                HtmlDocument LogoHtml = new HtmlDocument();
+                                LogoHtml.LoadHtml(Response.Markup);
+                                IEnumerable<HtmlNode> LogoImg = LogoHtml.DocumentNode.Descendants("img");
+                                if (LogoImg != null && LogoImg.FirstOrDefault() != null && LogoImg.FirstOrDefault().Attributes != null)
+                                {
+                                    if (LogoImg.FirstOrDefault().Attributes.Where(a => a.Name == "style").FirstOrDefault() != null)
+                                    {
+                                        LogoImg.FirstOrDefault().Attributes["style"].Value = Node.Attributes["data-style"].Value;
+                                    }
+                                    else
+                                    {
+                                        LogoImg.FirstOrDefault().Attributes.Add("style", Node.Attributes["data-style"].Value);
+                                    }
+                                }
+                                Node.InnerHtml = LogoHtml.DocumentNode.OuterHtml;
+                            }
                             else
                             {
                                 Node.InnerHtml = Response.Markup;

@@ -2037,6 +2037,7 @@ img#uploaded_image {
 .traitsmanager .color-wrapper .colorPicker .sp-input-container .sp-input {
     display: block;
     width: auto;
+    color: #333333;
 }
 
 .traitsmanager .color-wrapper label,
@@ -2578,6 +2579,11 @@ span.notificationname {
 
 .sp-picker-container .sp-input {
     border: 1px solid #bbb;
+    color: #333333;
+}
+
+.sp-picker-container {
+    width: 180px;
 }
 
 [data-gjs-type="module"] iframe {
@@ -2642,11 +2648,13 @@ span.notificationname {
     display: flex;
     align-items: center;
     margin: 0px;
+    color: #333;
     font-size: 32px;
 }
 
 .traitsmanager .preset-wrapper.text label {
     margin: 10px 0px;
+    color: #333;
     font-size: 16px;
     white-space: normal;
 }
@@ -2656,6 +2664,11 @@ span.notificationname {
     width: auto;
     text-align: center;
     margin: 0px;
+    padding: 6px 12px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
     font-size: 16px;
     white-space: normal;
 }

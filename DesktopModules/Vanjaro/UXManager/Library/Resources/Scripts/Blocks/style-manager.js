@@ -319,7 +319,7 @@
 					}
 				}
 
-				if (unit == null) {
+				if (unit == null || unit == '') {
 					if (typeof model.attributes.unit != 'undefined')
 						unit = model.attributes.unit;
 					else
@@ -365,12 +365,20 @@
 
 					if (typeof value == "string") {
 						inputvalue = value.replace(/[^-\d\.]/g, '');
-						unit = value.replace(/-/g, '').replace(/\d+/, '');
+
+						if (typeof model.attributes.units != 'undefined') {
+							$(model.attributes.units).each(function (index, option) {
+
+								if (value.indexOf(option.name) >= 0) {
+									unit = option.name
+									return false;
+								}
+							});
+						}
 					}
-					else {
-						if (typeof model.attributes.unit != 'undefined')
-							unit = model.attributes.unit;
-					}
+
+					if (unit == '' && typeof model.attributes.unit != 'undefined')
+						unit = model.attributes.unit;
 
 					if (typeof model.attributes.units != 'undefined')
 						LoadAttr(model, unit);
