@@ -2635,7 +2635,7 @@ $(document).ready(function () {
 				Scripts_Links.push(v);
 			});
 			InjectLinksAndScripts(Scripts_Links, window.document);
-			setCookie("vj_InitUx", "true");
+			setCookie("vj_InitUX", "true");
 			if (window.location.href.indexOf('#') > 0 && window.location.href.split("#")[0] != CurrentTabUrl) {
 				window.location.href = CurrentTabUrl;
 			}
@@ -2654,7 +2654,7 @@ $(document).ready(function () {
 
 		if ($("#mode-switcher").offset().left > 0) {
 			setCookie("vj_IsPageEdit", "false");
-			setCookie("vj_InitUx", "false");
+			setCookie("vj_InitUX", "false");
 			GrapesjsDestroy();
 			$(this).find("em").addClass("fa-chevron-right").removeClass("fa-chevron-left");
 			$('#dnn_ContentPane').removeClass("sidebar-open").addClass('sidebar-close');

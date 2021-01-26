@@ -201,12 +201,12 @@ namespace Vanjaro.Skin
                 if (Request.QueryString["uxm"] == "open")
                 {
                     CookieManager.AddValue("vj_IsPageEdit", "true", new DateTime());
-                    CookieManager.AddValue("vj_InitUx", "true", new DateTime());
+                    CookieManager.AddValue("vj_InitUX", "true", new DateTime());
                 }
                 else if (Request.QueryString["uxm"] == "close")
                 {
                     CookieManager.AddValue("vj_IsPageEdit", "false", new DateTime());
-                    CookieManager.AddValue("vj_InitUx", "false", new DateTime());
+                    CookieManager.AddValue("vj_InitUX", "false", new DateTime());
                 }
                 Response.Redirect(URLManager.RemoveQueryStringByKey(Request.Url.AbsoluteUri, "uxm"), true);
             }

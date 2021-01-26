@@ -43,7 +43,7 @@
                                 parent.toastr.clear();
                                 if (data.Data.NextState.Options == null)
                                     $('.gjs-cv-canvas__frames', parent.document).removeClass('lockcanvas')
-                                if ($scope.getCookie("vj_InitUx") == "" || $scope.getCookie("vj_InitUx") == "true") {
+                                if ($scope.getCookie("vj_InitUX") == "" || $scope.getCookie("vj_InitUX") == "true") {
                                     $scope.RenderMarkup('Register Link');
                                 }
                                 else {

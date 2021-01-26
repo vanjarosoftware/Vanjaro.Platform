@@ -156,7 +156,7 @@ namespace Vanjaro.UXManager.Library
         {
 
             if (InjectEditor())
-                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var vjEditorSettings =" + JsonConvert.SerializeObject(Editor.Options) + "; var  TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; var ExtensionStoreURL = \"" + ExtensionStoreURL + "\"; var ExtensionURL = \"" + ExtensionURL + "\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined' && getCookie('vj_InitUx') == 'true') GrapesjsInit(); });", true);
+                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var vjEditorSettings =" + JsonConvert.SerializeObject(Editor.Options) + "; var  TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; var ExtensionStoreURL = \"" + ExtensionStoreURL + "\"; var ExtensionURL = \"" + ExtensionURL + "\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined' && getCookie('vj_InitUX') == 'true') GrapesjsInit(); });", true);
 
         }
 
@@ -181,7 +181,7 @@ namespace Vanjaro.UXManager.Library
                 item.HasTabEditPermission = TabPermissionController.HasTabPermission("EDIT");
 
             item.EditPage = Editor.Options.EditPage;
-            item.ShowUXManager = string.IsNullOrEmpty(Core.Managers.CookieManager.GetValue("vj_InitUx")) ? false : Convert.ToBoolean(Core.Managers.CookieManager.GetValue("vj_InitUx"));
+            item.ShowUXManager = string.IsNullOrEmpty(Core.Managers.CookieManager.GetValue("vj_InitUX")) ? false : Convert.ToBoolean(Core.Managers.CookieManager.GetValue("vj_InitUX"));
             return item;
         }
 
