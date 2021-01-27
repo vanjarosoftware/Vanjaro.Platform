@@ -102,9 +102,9 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage
                 dynObjects.Add("DefaultLanguage", LanguageManager.GetCultureListItems(true).Where(a => a.Code == PortalSettings.Current.DefaultLanguage).FirstOrDefault());
                 dynObjects.Add("Languages", Managers.LanguageManager.GetCultureListItems(false));
                 string InitGrapejs = "false";
-                if (HttpContext.Current != null && HttpContext.Current.Request.Cookies["InitGrapejs"] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies["InitGrapejs"].Value))
+                if (HttpContext.Current != null && HttpContext.Current.Request.Cookies["vj_InitUX"] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies["vj_InitUX"].Value))
                 {
-                    InitGrapejs = HttpContext.Current.Request.Cookies["InitGrapejs"].Value;
+                    InitGrapejs = HttpContext.Current.Request.Cookies["vj_InitUX"].Value;
                 }
 
                 dynObjects.Add("InitGrapejs", InitGrapejs);
