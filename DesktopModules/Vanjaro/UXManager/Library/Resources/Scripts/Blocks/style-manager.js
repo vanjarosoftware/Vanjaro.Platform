@@ -62,7 +62,7 @@
 
 			selected.set(property, val);
 
-			$(this.$el).find('.gjs-sm-clear').show();
+			model.setValue(val);
 		},
 		setValue(value) {
 			var model = this.model;
