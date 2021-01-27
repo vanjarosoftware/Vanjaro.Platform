@@ -1564,7 +1564,6 @@ $(document).ready(function () {
                             VjEditor.Keymaps.add('ns:redo', 'ctrl+y', editor => { console.log('redo call'); VjEditor.UndoManager.redo(); });
                             //VjEditor.Keymaps.add('ns:undo', 'ctrl+z', editor => { console.log('undo call'); VjEditor.UndoManager.undo(); });
 
-
                             //Adding TabModules
                             VjEditor.on('block:drag:stop', function (model, bmodel) {
 
@@ -1638,41 +1637,81 @@ $(document).ready(function () {
 
                             var FilterBorderOptions = function (target, position) {
 
-                                var val;
-                                switch (position) {
-                                    case "sm-border-top":
-                                        val = "border-top"
-                                        break;
-                                    case "sm-border-right":
-                                        val = "border-right"
-                                        break;
-                                    case "sm-border-bottom":
-                                        val = "border-bottom"
-                                        break;
-                                    case "sm-border-left":
-                                        val = "border-left"
-                                        break;
-                                    default:
-                                        val = "border"
-                                }
+                                setTimeout(function () {
+                                    var val;
 
-                                $(VjEditor.StyleManager.getProperties('border').models).each(function () {
-                                    if (this.attributes.name != 'Border Postion')
-                                        this.view.$el.hide();
+                                    switch (position) {
+                                        case "sm-border-top":
+                                            val = "border-top"
+                                            break;
+                                        case "sm-border-right":
+                                            val = "border-right"
+                                            break;
+                                        case "sm-border-bottom":
+                                            val = "border-bottom"
+                                            break;
+                                        case "sm-border-left":
+                                            val = "border-left"
+                                            break;
+                                        default:
+                                            val = "border"
+                                    }
+
+                                    var sm = VjEditor.StyleManager;
+
+                                    $(sm.getProperties('border').models).each(function () {
+                                        if (this.attributes.name != 'Border Postion')
+                                            this.view.$el.hide();
+                                    });
+
+                                    $(sm.getProperty(Border, val + '-style').view.el).show();
+                                    $(sm.getProperty(Border, val + '-color').view.el).show();
+                                    $(sm.getProperty(Border, val + '-width').view.el).show();
+
                                 });
-
-                                $(VjEditor.StyleManager.getProperty(Border, val + '-style').view.el).show();
-                                $(VjEditor.StyleManager.getProperty(Border, val + '-color').view.el).show();
-                                $(VjEditor.StyleManager.getProperty(Border, val + '-width').view.el).show();
                             }
 
-                            VjEditor.on('component:update:border-position', (model, argument) => {
-                                if (typeof event != "undefined")
-                                    FilterBorderOptions(model, event.target.value);
-                                else
-                                    FilterBorderOptions(model, 'sm-border');
-                            });
+                            var ReverseColums = function (model) {
 
+                                var flexDirection = model.getStyle()['flex-direction'];
+                                var row = model.components().models[0];
+
+                                var className = 'col-lg-12';
+                                var Device = VjEditor.getDevice();
+
+                                if (Device == 'Mobile')
+                                    className = 'col-12';
+                                else if (Device == 'Tablet')
+                                    className = 'col-sm-12';
+
+                                if (typeof flexDirection == 'undefined') {
+
+                                    flexDirection = 'row';
+
+                                    var style = model.getStyle();
+                                    style['flex-direction'] = 'row';
+                                    model.setStyle(style);
+                                }
+
+                                jQuery.each(row.components().models, function (i, column) {
+                                    if (column.getEl().classList.contains(className)) {
+
+                                        if (flexDirection.indexOf('reverse') >= 0)
+                                            flexDirection = 'column-reverse';
+                                        else
+                                            flexDirection = 'column';
+
+                                        return false;
+                                    }
+                                });
+
+                                row.setStyle({ 'flex-direction': flexDirection });
+                            }
+
+                            VjEditor.on('component:styleUpdate:border-position', (model, argument) => {
+                                FilterBorderOptions(model, event.target.value);
+                                model.removeStyle('border-position');
+                            });
 
                             VjEditor.on('component:selected', (model, argument) => {
 
@@ -1835,32 +1874,28 @@ $(document).ready(function () {
                                     if (flexProperty == null) {
 
                                         VjEditor.StyleManager.addProperty(Responsive, {
-                                            type: 'radio',
+                                            type: 'customradio',
                                             name: 'Reverse Columns',
                                             property: 'flex-direction',
-                                            defaults: 'false',
+                                            defaults: 'row',
                                             list: [{
-                                                value: 'true',
+                                                value: 'row-reverse',
                                                 name: 'Yes',
                                             }, {
-                                                value: 'false',
+                                                value: 'row',
                                                 name: 'No',
                                             }],
+                                            UpdateStyles: true,
                                         });
 
                                         flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
                                     }
 
                                     if (model.components().length) {
-
                                         $(model.components().models[0].getEl()).addClass('gjs-dashed');
 
-                                        var flexDirection = model.components().models[0].getStyle()['flex-direction'];
-
-                                        if (typeof flexDirection == 'undefined' || flexDirection.indexOf('reverse') <= 0)
-                                            flexProperty.view.setValue('false');
-                                        else
-                                            flexProperty.view.setValue('true');
+                                        if (flexProperty != null)
+                                            ReverseColums(model);
                                     }
                                 }
                                 else {
@@ -2081,34 +2116,8 @@ $(document).ready(function () {
 
                             VjEditor.on('component:styleUpdate:flex-direction', (model) => {
 
-                                if (model.attributes.type == "grid" && event.target.name == 'flex-direction') {
-
-                                    var style = model.getStyle()['flex-direction'];
-                                    var row = VjEditor.getSelected().components().models[0];
-
-                                    model.removeStyle('flex-direction');
-
-                                    var flexDirection = 'row';
-                                    var className = 'col-lg-12';
-                                    var Device = VjEditor.getDevice();
-
-                                    if (Device == 'Mobile')
-                                        className = 'col-12';
-                                    else if (Device == 'Tablet')
-                                        className = 'col-sm-12';
-
-                                    jQuery.each(row.components().models, function (i, column) {
-                                        if (column.getEl().classList.contains(className)) {
-                                            flexDirection = 'column';
-                                            return false;
-                                        }
-                                    });
-
-                                    if (style == 'true')
-                                        flexDirection += '-reverse';
-
-                                    row.setStyle({ 'flex-direction': flexDirection });
-                                }
+                                if (model.attributes.type == "grid")
+                                    ReverseColums(model);
                             });
 
                             VjEditor.on('component:styleUpdate:float', (model) => {
