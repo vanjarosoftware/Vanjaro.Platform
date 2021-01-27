@@ -1110,6 +1110,7 @@
 											</providers>
 										</mail>
 									</node>
+                  <node path="/configuration/dotnetnuke/htmlEditor" action="remove"/>
 								</nodes>
 							</configuration>
 						</install>
