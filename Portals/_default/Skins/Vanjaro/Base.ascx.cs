@@ -162,7 +162,7 @@ namespace Vanjaro.Skin
             }
             HandleUXM();
             ResetModulePanes();
-            InitGuidedTours();
+            //InitGuidedTours();
             AccessDenied();
             InjectAnalyticsScript();
         }
