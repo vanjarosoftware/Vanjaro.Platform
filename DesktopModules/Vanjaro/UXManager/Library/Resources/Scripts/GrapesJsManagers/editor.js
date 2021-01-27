@@ -1478,6 +1478,17 @@ $(document).ready(function () {
                                         $tools.show();
                                     }, 250));
                                 });
+
+                                $('.gjs-sm-sector').on('click', function () {
+                                    var $this = $(this);
+                                    var sectorName = $this.attr('id').replace("gjs-sm-", "");
+                                    if ($this.find('.gjs-sm-properties').is(':visible')) {
+                                        $.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
+                                            model.set('open', false);
+                                        });
+                                        VjEditor.StyleManager.getSector(sectorName).set('open', true);
+                                    }
+                                });
                             });
 
 
@@ -1662,6 +1673,7 @@ $(document).ready(function () {
                                 else
                                     FilterBorderOptions(model, 'sm-border');
                             });
+
 
                             VjEditor.on('component:selected', (model, argument) => {
 
@@ -2829,28 +2841,8 @@ $(document).ready(function () {
 
     var Stylemanager = function () {
 
-        $("#BlockManager").hide();
-        $(".panel-top").hide();
-        $("#ContentBlocks").hide();
-        $(".block-set").hide();
-        $("#Notification").hide();
-        $("#iframeHolder").hide();
-        $('#SettingButton,#DeviceManager,.ntoolbox').hide();
-        $("#StyleToolManager").show();
-        $('.ssmanager').show();
-
-        VjEditor.StyleManager.render();
-
-        $('.gjs-sm-sector').click(function () {
-            var $this = $(this);
-            var sectorName = $this.attr('id').replace("gjs-sm-", "");
-            if ($this.find('.gjs-sm-properties').is(':visible')) {
-                $.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
-                    model.set('open', false);
-                });
-                VjEditor.StyleManager.getSector(sectorName).set('open', true);
-            }
-        });
+        $("#BlockManager, #ContentBlocks, #Notification, #iframeHolder, #SettingButton, #DeviceManager,.ntoolbox, .panel-top, .block-set").hide();    
+        $("#StyleToolManager, .ssmanager").show();
     }
 
     $('.jsPanel-content').on("mousedown", function () {
