@@ -62,11 +62,11 @@
 
             selected.set(property, val);
 
-            $(this.$el).find('.gjs-sm-clear').show();
-        },
-        setValue(value) {
-            var model = this.model;
-            model.view.$el.find('input[value="' + value + '"]').prop('checked', true);
+			model.setValue(val);
+		},
+		setValue(value) {
+			var model = this.model;
+			model.view.$el.find('input[value="' + value + '"]').prop('checked', true);
 
             if (value == model.getDefaultValue())
                 $(this.$el).find('.gjs-sm-clear').hide();
