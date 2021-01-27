@@ -616,64 +616,74 @@ export default (editor, config = {}) => {
 
 			var href = '';
 
-			function setURL() {
+			var val = $(elInput).find('.option-block input:checked').attr("data-type");
+
+			switch (val) {
+				case 'url':
+					href = elInput.querySelector('.url').value;
+					break;
+				case 'page':
+					var pid = $(elInput.querySelector('.page')).children("option:selected").attr('pid');
+					if (pid) {
+						var sf = $.ServicesFramework(-1);
+						$.ajax({
+							type: "GET",
+							url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Page/GetPageUrl?TabID=" + parseInt(pid),
+							headers: {
+								'ModuleId': parseInt(sf.getModuleId()),
+								'TabId': parseInt(sf.getTabId()),
+								'RequestVerificationToken': sf.getAntiForgeryValue()
+							},
+							success: function (response) {
+								var valPage = response;
+
+								href = `${valPage}`;
+								component.set({ 'pid': pid });
+
+								if (typeof href != '')
+									setURL();
+							}
+						});
+					}
+					break;
+				case 'email':
+					var ID = elInput.querySelector('.email').value;
+					var Sub = elInput.querySelector('.subject').value;
+					href = `mailto:${ID}${Sub ? `?subject=${Sub}` : ''}`;
+					break;
+				case 'phone':
+					var num = elInput.querySelector('.phone').value;
+					href = `tel:${num}`;
+					break;
+			}
+
+			var SetURL = function () {
+
 				component.set({ href: href });
 
 				if (component.attributes.type == 'carousel-image')
 					component.parent().parent().addAttributes({ href: href });
 				else if (component.attributes.type == 'icon') {
-					component.set('tagName', 'a');
-					component.addAttributes({ href: href });
+
+					if (href == "") {
+						component.set('tagName', 'span');
+
+						const attr = component.getAttributes();
+						delete attr.href;
+						component.setAttributes(attr);
+					}
+					else {
+						component.set('tagName', 'a');
+						component.addAttributes({ href: href });
+					}
 				}
 				else
 					component.addAttributes({ href: href });
 			}
 
-			function changeURL() {
-
-				var val = $(".link-wrapper .option-block").find("input:checked").attr("data-type");
-
-				switch (val) {
-					case 'url':
-						href = elInput.querySelector('.url').value;
-						break;
-					case 'page':
-						var pid = $(elInput.querySelector('.page')).children("option:selected").attr('pid');
-						if (pid) {
-							var sf = $.ServicesFramework(-1);
-							$.ajax({
-								type: "GET",
-								url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Page/GetPageUrl?TabID=" + parseInt(pid),
-								headers: {
-									'ModuleId': parseInt(sf.getModuleId()),
-									'TabId': parseInt(sf.getTabId()),
-									'RequestVerificationToken': sf.getAntiForgeryValue()
-								},
-								success: function (response) {
-									var valPage = response;
-
-									href = `${valPage}`;
-									component.set({ 'pid': pid });
-
-									if (typeof href != '')
-										setURL();
-								}
-							});
-						}
-						break;
-					case 'email':
-						var ID = elInput.querySelector('.email').value;
-						var Sub = elInput.querySelector('.subject').value;
-						href = `mailto:${ID}${Sub ? `?subject=${Sub}` : ''}`;
-						break;
-					case 'phone':
-						var num = elInput.querySelector('.phone').value;
-						href = `tel:${num}`;
-						break;
-				}
-			}
-
-			changeURL();
+			var UXManager_Search = this.debounce(function () {
+				SetURL(component, href);
+			}, 500);
 
 			if (event.target.name == "LinkType") {
 
@@ -692,19 +702,9 @@ export default (editor, config = {}) => {
 					this.loadPages(val, 0);
 				}
 
-				setURL();
+				SetURL();
 			}
-
-			if (href != '') {
-
-				var UXManager_Search = this.debounce(function () {
-					setURL();
-				}, 500);
-
-				$(".link-wrapper").find("input").off('keyup').on('keyup', UXManager_Search);
-			}
-
-			if (event.target.name == "target") {
+			else if (event.target.name == "target") {
 				if (event.target.id == "yes") {
 					component.addAttributes({ 'target': '_blank', 'rel': 'noopener' });
 				}
@@ -715,7 +715,9 @@ export default (editor, config = {}) => {
 					component.setAttributes(attr);
 				}
 			}
-
+			else {
+				$(".link-wrapper").find("input").off('keyup').on('keyup', UXManager_Search);
+			}
 		}
 	});
 
