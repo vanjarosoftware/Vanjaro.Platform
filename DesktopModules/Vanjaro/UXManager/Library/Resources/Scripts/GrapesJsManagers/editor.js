@@ -176,7 +176,7 @@ $(document).ready(function () {
 
                 var image = optImages[0];
 
-                if (typeof sizes != 'undefined' && sizes.length > 0) {
+                if (typeof sizes != 'undefined' && sizes.length > 0 && image) {
 
                     var size = sizes.shift();
 
@@ -185,9 +185,16 @@ $(document).ready(function () {
                     waitForEl('.gjs-frame', size, function () {
 
                         //Calc Sizes
-                        var imgWidth = $(image.getEl()).width();
-                        var calcWidth = Math.round((imgWidth / size) * 100);
-                        calcSizes += '(min-width:' + size + 'px) ' + calcWidth + 'vw,';
+                        var imgEl = image.getEl();
+
+                        if (imgEl) {
+                            var imgWidth = $(imgEl).width();
+
+                            if (imgWidth && imgWidth > 0) {
+                                var calcWidth = Math.round((imgWidth / size) * 100);
+                                calcSizes += '(min-width:' + size + 'px) ' + calcWidth + 'vw,';
+                            }
+                        }
 
                         OptimizeImages(optImages, sizes);
                     });
@@ -1533,7 +1540,11 @@ $(document).ready(function () {
 
                                 if (typeof model != 'undefined' && typeof model.modelToDrop != 'undefined') {
 
-                                    if (typeof model.modelToDrop.parent != 'undefined' && model.modelToDrop.parent() && model.modelToDrop.parent().attributes.type == "column")
+                                    if (typeof model.modelToDrop.attributes != 'undefined' && model.modelToDrop.attributes.type == "videobox") {
+                                        model.modelToDrop.components().models.find(t => t.attributes.type == 'video').set({ 'src': model.modelToDrop.attributes.src });
+                                        $(model.modelToDrop.getEl()).find('iframe').attr('src', model.modelToDrop.attributes.src);
+                                    }
+                                    else if (typeof model.modelToDrop.parent != 'undefined' && model.modelToDrop.parent() && model.modelToDrop.parent().attributes.type == "column")
                                         $(model.modelToDrop.parent().getEl()).removeAttr("data-empty");
 
                                     if (parentRemove != '' && parentClone != '') {
@@ -2570,7 +2581,12 @@ $(document).ready(function () {
                                 if (model.parent() != undefined && model.parent().attributes.type == "column" && model.parent().components().length == 0)
                                     $(model.parent().getEl()).attr("data-empty", "true");
 
-								if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
+                                var CheckIcon = false;
+
+                                if (typeof event == "undefined" && (model.attributes.type == "icon" || model.attributes.type == "svg" || model.attributes.type == "svg-in"))
+                                    CheckIcon = true;
+
+                                if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || CheckIcon || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
 									return false;
 								else {
 									if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(vjEditorSettings.RevisionGUID) < 0)
