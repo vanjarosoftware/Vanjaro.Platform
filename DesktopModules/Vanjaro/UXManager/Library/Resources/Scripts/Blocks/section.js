@@ -259,7 +259,8 @@
 			},
 			handleTypeChange() {
 				if (typeof this.attributes.tag != 'undefined' && this.attributes.tag != "")
-					this.set('tagName', this.attributes.tag);
+                    this.attributes.tagName = this.attributes.tag;
+                    this.view.reset();  
 			},
 			handleGradientChange() {
 				if (typeof this.attributes.gradient != 'undefined' && this.attributes.gradient != "") {
