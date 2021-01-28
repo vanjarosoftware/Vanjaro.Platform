@@ -1533,8 +1533,6 @@ $(document).ready(function () {
 
                                 if (typeof model != 'undefined' && typeof model.modelToDrop != 'undefined') {
 
-									if (typeof model.modelToDrop.parent != 'undefined' && model.modelToDrop.parent() && model.modelToDrop.parent().attributes.type == "column")
-										$(model.modelToDrop.parent().getEl()).removeAttr("data-empty");
                                     if (typeof model.modelToDrop.attributes != 'undefined' && model.modelToDrop.attributes.type == "videobox") {
                                         model.modelToDrop.components().models.find(t => t.attributes.type == 'video').set({ 'src': model.modelToDrop.attributes.src });
                                         $(model.modelToDrop.getEl()).find('iframe').attr('src', model.modelToDrop.attributes.src);
