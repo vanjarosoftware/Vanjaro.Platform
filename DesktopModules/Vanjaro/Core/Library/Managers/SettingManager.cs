@@ -1,4 +1,4 @@
-﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Modules;
@@ -624,9 +624,7 @@ namespace Vanjaro.Core
                 TabInfo ProfileTab = TabController.Instance.GetTabByName("Profile", pinfo.PortalID);
                 Layout Profilelayout = pageLayouts.Where(a => a.Name == "Profile").FirstOrDefault();
                 if (ProfileTab != null && Profilelayout != null && portalSettings != null)
-                {
-                    ProfileTab.ParentId = TabController.Instance.GetTabByName("User", pinfo.PortalID).TabID;
-                    TabController.Instance.UpdateTab(ProfileTab);
+                {                   
                     ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
                     pinfo.UserTabId = ProfileTab.TabID;
                     if (portalSettings.ActiveTab == null)

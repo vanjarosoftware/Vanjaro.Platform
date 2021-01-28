@@ -79,6 +79,7 @@ copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Toolbar.Undo.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Toolbar.ViewLayout.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.Migrate.dll bin\ >NUL
+copy ..\..\..\..\bin\Vanjaro.Core.Providers.Mail.VanjaroMailProvider.dll bin\ >NUL
 
 
 copy ..\..\..\..\bin\Vanjaro.Core.Extensions.Workflow.Review.dll bin\ >NUL
