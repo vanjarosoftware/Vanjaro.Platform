@@ -665,14 +665,16 @@ export default (editor, config = {}) => {
 				else if (component.attributes.type == 'icon') {
 
 					if (href == "") {
-						component.set('tagName', 'span');
+						component.attributes.tagName = 'span';
+						component.view.reset();
 
 						const attr = component.getAttributes();
 						delete attr.href;
 						component.setAttributes(attr);
 					}
 					else {
-						component.set('tagName', 'a');
+						component.attributes.tagName = 'a';
+						component.view.reset();
 						component.addAttributes({ href: href });
 					}
 				}

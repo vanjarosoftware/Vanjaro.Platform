@@ -95,6 +95,32 @@
 			}
 
 			selected.set(property, defaultValue);
+
+			if (property == "border-style" || property == "border-top-style" || property == "border-right-style" || property == "border-bottom-style" || property == "border-left-style") {
+
+				var borderWidth;
+
+				switch (property) {
+					case "border-top-style":
+						borderWidth = "border-top-width"
+						break;
+					case "border-right-style":
+						borderWidth = "border-right-width"
+						break;
+					case "border-bottom-style":
+						borderWidth = "border-bottom-width"
+						break;
+					case "border-left-style":
+						borderWidth = "border-left-width"
+						break;
+					default:
+						borderWidth = "border-width"
+				}
+
+				var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();
+				VjEditor.StyleManager.getProperty(Border, borderWidth).setValue(0);
+
+			}
 		}
 	});
 
@@ -306,19 +332,6 @@
 				if (typeof model.attributes.units != 'undefined')
 					unit = model.view.$el.find('select').val();
 
-				if (val == 'auto') {
-					if (typeof selected != 'undefined') {
-						if (property == 'width')
-							val = parseInt(selected.view.$el.css('width'));
-						else if (property == 'height')
-							val = parseInt(selected.view.$el.css('height'));
-						else
-							val = '0';
-
-						unit = 'px';
-					}
-				}
-
 				if (unit == null || unit == '') {
 					if (typeof model.attributes.unit != 'undefined')
 						unit = model.attributes.unit;
@@ -348,8 +361,7 @@
 		},
 		setValue(value) {
 
-			var selected = editor.getSelected(),
-				model = this.model,
+			var model = this.model,
 				unit = '';
 
 			if (value == '')
@@ -357,35 +369,32 @@
 
 			var inputvalue = value;
 
-			if (typeof selected != 'undefined') {
+			if (value == 'auto')
+				model.view.$el.find('select').prop('disabled', 'disabled');
+			else {
 
-				if (value == 'auto')
-					model.view.$el.find('select').prop('disabled', 'disabled');
-				else {
+				if (typeof value == "string") {
+					inputvalue = value.replace(/[^-\d\.]/g, '');
 
-					if (typeof value == "string") {
-						inputvalue = value.replace(/[^-\d\.]/g, '');
+					if (typeof model.attributes.units != 'undefined') {
+						$(model.attributes.units).each(function (index, option) {
 
-						if (typeof model.attributes.units != 'undefined') {
-							$(model.attributes.units).each(function (index, option) {
-
-								if (value.indexOf(option.name) >= 0) {
-									unit = option.name
-									return false;
-								}
-							});
-						}
+							if (value.indexOf(option.name) >= 0) {
+								unit = option.name
+								return false;
+							}
+						});
 					}
-
-					if (unit == '' && typeof model.attributes.unit != 'undefined')
-						unit = model.attributes.unit;
-
-					if (typeof model.attributes.units != 'undefined')
-						LoadAttr(model, unit);
-
-					model.view.$el.find('select').prop('disabled', false);
 				}
+
+				model.view.$el.find('select').prop('disabled', false);
 			}
+
+			if (unit == '' && typeof model.attributes.unit != 'undefined')
+				unit = model.attributes.unit;
+
+			if (typeof model.attributes.units != 'undefined')
+				LoadAttr(model, unit);
 
 			model.view.$el.find('input').val(inputvalue);
 			model.view.$el.find('select').val(unit);
@@ -405,37 +414,63 @@
 
 			$(this.$el).find('.gjs-sm-clear').hide();
 
-			if (value == 'auto')
-				model.view.$el.find('select').prop('disabled', 'disabled');
-			else {
-				if (typeof model.attributes.unit != 'undefined') {
+			if (typeof model.attributes.unit != 'undefined') {
 
-					unit = model.attributes.unit;
+				unit = model.attributes.unit;
 
-					if (typeof model.attributes.units != 'undefined')
-						LoadAttr(model, unit);
-				}
+				if (typeof model.attributes.units != 'undefined')
+					LoadAttr(model, unit);
 			}
 
 			model.view.$el.find('input').val(value);
 			model.view.$el.find('select').val(unit);
 
 			var selected = VjEditor.getSelected();
-			var style = selected.getStyle();
-			style[property] = value + unit;
 
-			selected.setStyle(style);
+			if (value == 'auto') {
+				selected.removeStyle(property);
+				model.view.$el.find('select').prop('disabled', 'disabled');
+			}
+			else {
+				var style = selected.getStyle();
+				style[property] = value + unit;
+				selected.setStyle(style);
+			}
+
+			var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();
+			var Size = VjLocalized.Size.replace(/ /g, '_').toLowerCase();
 
 			if (property == "border-width" || property == "border-top-width" || property == "border-right-width" || property == "border-bottom-width" || property == "border-left-width") {
 
 				selected.removeStyle(property);
 
-				var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();
-				if (typeof style['border-width'] != 'undefined')
-					VjEditor.StyleManager.getProperty(Border, property).setValue(style['border-width']);
-				else
-					VjEditor.StyleManager.getProperty(Border, property).setValue('3px');
+				var borderStyle;
+
+				switch (property) {
+					case "border-top-width":
+						borderStyle = "border-top-style"
+						break;
+					case "border-right-width":
+						borderStyle = "border-right-style"
+						break;
+					case "border-bottom-width":
+						borderStyle = "border-bottom-style"
+						break;
+					case "border-left-width":
+						borderStyle = "border-left-style"
+						break;
+					default:
+						borderStyle = "border-style"
+				}
+
+				VjEditor.StyleManager.getProperty(Border, borderStyle).setValue('none');
+				VjEditor.StyleManager.getProperty(Border, borderStyle).view.$el.find('input').prop('checked', false);
+
 			}
+			else if (property == "width" && value == "auto") 
+				$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('width')));
+			else if (property == "height" && value == "auto")
+				$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('height')));
 		}
 	});
 };
