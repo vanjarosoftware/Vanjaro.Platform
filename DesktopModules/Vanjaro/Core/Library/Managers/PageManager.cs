@@ -96,11 +96,12 @@ namespace Vanjaro.Core
                         int TabId = PortalSettings.ActiveTab.TabID;
                         Pages page = new Pages();
                         Pages pageVersion = GetLatestVersion(PortalSettings.ActiveTab.TabID, PortalSettings.UserInfo);
-
+                        var aliases = from PortalAliasInfo pa in PortalAliasController.Instance.GetPortalAliasesByPortalId(PortalSettings.PortalId)
+                                      select pa.HTTPAlias;
                         page.TabID = TabId;
                         page.Style = Data["gjs-css"].ToString();
-                        page.Content = ResetModuleMarkup(PortalSettings.PortalId, Data["gjs-html"].ToString(), PortalSettings.UserId);
-                        page.ContentJSON = Data["gjs-components"].ToString();
+                        page.Content = AbsoluteToRelativeUrls(ResetModuleMarkup(PortalSettings.PortalId, Data["gjs-html"].ToString(), PortalSettings.UserId), aliases);
+                        page.ContentJSON = AbsoluteToRelativeUrls(Data["gjs-components"].ToString(), aliases);
                         page.StyleJSON = Data["gjs-styles"].ToString();
 
                         if (Data["IsPublished"] != null && Convert.ToBoolean(Data["IsPublished"].ToString()) && (pageVersion != null && pageVersion.IsPublished))
@@ -180,7 +181,18 @@ namespace Vanjaro.Core
                 }
                 return result;
             }
+            private static string AbsoluteToRelativeUrls(string content, IEnumerable<string> aliases)
+            {
+                if (string.IsNullOrWhiteSpace(content))
+                    return string.Empty;
 
+                foreach (string portalAlias in aliases)
+                {
+                    content = content.Replace("href=\"http://" + portalAlias, "href=\"").Replace("href=\"https://" + portalAlias, "href=\"").Replace("src=\"http://" + portalAlias, "src=\"").Replace("src=\"https://" + portalAlias, "src=\"");
+                    content = content.Replace("href\":\"http://" + portalAlias, "href\":\"").Replace("href\":\"https://" + portalAlias, "href\":\"").Replace("src\":\"http://" + portalAlias, "src\":\"").Replace("src\":\"https://" + portalAlias, "src\":\"");
+                }
+                return content;
+            }
             public static void MigrateToVanjaro(PortalSettings PortalSettings)
             {
                 PageFactory.MigrateToVanjaro(PortalSettings);
@@ -908,7 +920,7 @@ namespace Vanjaro.Core
                     string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
                     string tempNewUrl = newurl;
                     int count = 1;
-                    Find:
+                Find:
                     if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
                     {
                         tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;
