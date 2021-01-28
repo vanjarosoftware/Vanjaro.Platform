@@ -108,11 +108,9 @@ namespace Vanjaro.Core
                     {
                         using (VanjaroRepo db = new VanjaroRepo())
                         {
-                            string Query = "Select top 1 [ID], [PortalID], [TabID], [Content], [Style], [Version], [CreatedBy], [CreatedOn], [UpdatedBy], [UpdatedOn], [IsPublished], [PublishedBy], [PublishedOn], [Locale], [StateID] FROM " + CommonScript.TablePrefix + "VJ_Core_Pages Where ";
-                            Query += "TabID =@0 and IsPublished=@2 ";
-                            Query += string.IsNullOrEmpty(Locale) ? "and Locale is null " : "and Locale=@1";
-                            Query += " order by Version desc";
-                            _Pages = db.Fetch<Pages>(Query, TabID, Locale, true).ToList();
+                            _Pages = db.Fetch<Pages>(PageScript.GetPublishPage(Locale), TabID, Locale, true).ToList();
+                            if (_Pages.Count == 0)
+                                _Pages = db.Fetch<Pages>(PageScript.GetPublishPage(Null.NullString), TabID, Locale, true).ToList();
                         }
                     }
                     CacheFactory.Set(CacheKey, _Pages);

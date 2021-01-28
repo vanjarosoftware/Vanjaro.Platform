@@ -23,5 +23,14 @@ namespace Vanjaro.Core.Data.Scripts
                 return sb;
             }
         }
+
+        internal static string GetPublishPage(string Locale)
+        {
+            string Query = "Select top 1 [ID], [PortalID], [TabID], [Content], [Style], [Version], [CreatedBy], [CreatedOn], [UpdatedBy], [UpdatedOn], [IsPublished], [PublishedBy], [PublishedOn], [Locale], [StateID] FROM " + CommonScript.TablePrefix + "VJ_Core_Pages Where ";
+            Query += "TabID =@0 and IsPublished=@2 ";
+            Query += string.IsNullOrEmpty(Locale) ? "and Locale is null " : "and Locale=@1";
+            Query += " order by Version desc";
+            return Query;
+        }
     }
 }
