@@ -1497,7 +1497,6 @@ $(document).ready(function () {
                                 });
                             });
 
-
                             var parentClone = "";
                             var parentRemove = "";
                             var sortermarup = '';
@@ -1649,6 +1648,7 @@ $(document).ready(function () {
                             var FilterBorderOptions = function (target, position) {
 
                                 setTimeout(function () {
+
                                     var val;
 
                                     switch (position) {
@@ -1678,6 +1678,14 @@ $(document).ready(function () {
                                     $(sm.getProperty(Border, val + '-style').view.el).show();
                                     $(sm.getProperty(Border, val + '-color').view.el).show();
                                     $(sm.getProperty(Border, val + '-width').view.el).show();
+
+                                    var style = val + '-style';
+
+                                    if (typeof target.getStyle()[style] == "undefined") 
+                                        sm.getProperty(Border, val + '-style').view.$el.find('input').prop('checked', false);
+
+                                    if (typeof target.getStyle()['border-width'] == "undefined")
+                                        sm.getProperty(Border, 'border-width').setValue(0);
 
                                 });
                             }
@@ -1718,11 +1726,6 @@ $(document).ready(function () {
 
                                 row.setStyle({ 'flex-direction': flexDirection });
                             }
-
-                            VjEditor.on('component:styleUpdate:border-position', (model, argument) => {
-                                FilterBorderOptions(model, event.target.value);
-                                model.removeStyle('border-position');
-                            });
 
                             VjEditor.on('component:selected', (model, argument) => {
 
@@ -1771,6 +1774,20 @@ $(document).ready(function () {
                                             v.attributes['title'] = VjLocalized.Delete;
                                     });
                                 }
+
+                                setTimeout(function () {
+
+                                    var width = model.getStyle()['width'];
+
+                                    if (typeof width == "undefined")
+                                        $(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(model.view.$el.css('width')));
+
+                                    var height = model.getStyle()['height'];
+
+                                    if (typeof height == "undefined")
+                                        $(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(model.view.$el.css('height')));
+
+                                });
 
                                 var desktop = 'd-desktop-none';
                                 var tablet = 'd-tablet-none';
@@ -2120,9 +2137,41 @@ $(document).ready(function () {
                                         model.removeClass(classes);
                                     }
                                 }
+                                else if (property == "border-style" || property == "border-top-style" || property == "border-right-style" || property == "border-bottom-style" || property == "border-left-style") {
+
+                                    if (model.getStyle()[property] != "none") {
+
+                                        var borderWidth;
+
+                                        switch (property) {
+                                            case "border-top-style":
+                                                borderWidth = "border-top-width"
+                                                break;
+                                            case "border-right-style":
+                                                borderWidth = "border-right-width"
+                                                break;
+                                            case "border-bottom-style":
+                                                borderWidth = "border-bottom-width"
+                                                break;
+                                            case "border-left-style":
+                                                borderWidth = "border-left-width"
+                                                break;
+                                            default:
+                                                borderWidth = "border-width"
+                                        }
+
+                                        if (typeof model.getStyle()[borderWidth] == "undefined")
+                                            VjEditor.StyleManager.getProperty(Border, borderWidth).setValue(3);
+                                    }
+                                }
 
                                 if (typeof event != "undefined" && event.target.className == "gjs-sm-clear")
                                     model.removeStyle(property);
+                            });
+
+                            VjEditor.on('component:styleUpdate:border-position', (model, argument) => {
+                                FilterBorderOptions(model, event.target.value);
+                                model.removeStyle('border-position');
                             });
 
                             VjEditor.on('component:styleUpdate:flex-direction', (model) => {
@@ -2143,39 +2192,6 @@ $(document).ready(function () {
                                     style['float'] = model.getStyle()['float'];
                                     model.parent().parent().setStyle(style);
                                 }
-                            });
-
-                            var UpdateBorderStyle = function (target, property) {
-
-                                var style = target.getStyle();
-
-                                if (typeof style[property] == 'undefined' && typeof style['border-width'] == 'undefined') {
-
-                                    VjEditor.StyleManager.getProperty(Border, property).setValue('3px');
-                                    style[property] = '3px';
-                                }
-
-                                target.setStyle(style);
-                            }
-
-                            VjEditor.on('component:update:border-style', (model) => {
-                                UpdateBorderStyle(model, 'border-width');
-                            });
-
-                            VjEditor.on('component:update:border-top-style', (model) => {
-                                UpdateBorderStyle(model, 'border-top-width');
-                            });
-
-                            VjEditor.on('component:update:VjEditor.getSelected()border-right-style', (model) => {
-                                UpdateBorderStyle(model, 'border-right-width');
-                            });
-
-                            VjEditor.on('component:update:border-bottom-style', (model) => {
-                                UpdateBorderStyle(model, 'border-bottom-width');
-                            });
-
-                            VjEditor.on('component:update:border-left-style', (model) => {
-                                UpdateBorderStyle(model, 'border-left-width');
                             });
 
                             VjEditor.Commands.add('global-delete', {
