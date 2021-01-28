@@ -742,3 +742,8 @@ ul.vj_authenticationtab {
     -ms-flex-pack: center !important;
     justify-content: center !important;
 }
+
+.video-box{
+    display:inline-block;
+    width:100%;
+}

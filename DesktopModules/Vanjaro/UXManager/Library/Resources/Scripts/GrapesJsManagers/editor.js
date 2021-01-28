@@ -1484,7 +1484,7 @@ $(document).ready(function () {
 
 								$('.tlb-app-setting-panel').hide();
 
-								if (typeof bmodel != 'undefined' && typeof bmodel.parent != 'undefined') {
+                                if (typeof bmodel != 'undefined' && typeof bmodel.parent != 'undefined') {
 
 									if (bmodel.parent().attributes.type == "column" && bmodel.parent().components().length == 1)
 										$(bmodel.parent().getEl()).attr("data-empty", "true");
@@ -1516,7 +1516,13 @@ $(document).ready(function () {
 
 							VjEditor.on('sorter:drag:end', function (model, bmodel) {
 
-								if (typeof model != 'undefined' && typeof model.modelToDrop != 'undefined') {
+                                if (typeof model != 'undefined' && typeof model.modelToDrop != 'undefined') {
+
+                                    if (typeof model.modelToDrop.parent != 'undefined' && model.modelToDrop && model.modelToDrop.attributes.type == "videobox") {
+                                        var videoID = model.modelToDrop.attributes.src;
+                                        model.modelToDrop.findType('video')[0].attributes.src = videoID;
+                                        $(model.modelToDrop.findType('video')[0].getEl())[0].children[0].attributes[0].nodeValue = videoID;                                                       
+                                    }
 
 									if (typeof model.modelToDrop.parent != 'undefined' && model.modelToDrop.parent() && model.modelToDrop.parent().attributes.type == "column")
 										$(model.modelToDrop.parent().getEl()).removeAttr("data-empty");
