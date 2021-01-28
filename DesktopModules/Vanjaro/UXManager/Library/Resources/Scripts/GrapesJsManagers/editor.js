@@ -2573,29 +2573,33 @@ $(document).ready(function () {
 
                             VjEditor.on('component:remove', function (model) {
 
-                                if (typeof event != "undefined" && event.keyCode == 46) {
+                                if (typeof event != "undefined") {
 
-                                    if (model.attributes.type == 'carousel-image')
-                                        VjEditor.runCommand('slide-delete', { target: model });
+                                    if (event.keyCode == 46) {
 
-                                    if (model.attributes.type == 'button' || model.attributes.type == 'list' || model.attributes.type == 'icon' || model.attributes.type == 'image' || model.attributes.type == 'image-gallery-item')
-                                        VjEditor.runCommand('vj-delete', { target: model });
+                                        if (model.attributes.type == 'carousel-image')
+                                            VjEditor.runCommand('slide-delete', { target: model });
+
+                                        if (model.attributes.type == 'button' || model.attributes.type == 'list' || model.attributes.type == 'icon' || model.attributes.type == 'image' || model.attributes.type == 'image-gallery-item')
+                                            VjEditor.runCommand('vj-delete', { target: model });
+                                    }
+
+                                    var mouseEvent = false;
+                                    var keyboardEvent = false;
+
+                                    if (typeof event.target != "undefined" && event.target.classList.length > 0 && event.target.classList.contains('gjs-toolbar-item') && event.target.classList.contains('fa-trash-o'))
+                                        mouseEvent = true;
+
+                                    if (typeof event.key != "undefined" && event.key == "Delete")
+                                        keyboardEvent = true;
+
+                                    if (mouseEvent || keyboardEvent)
+                                        ShowBlockUI();
                                 }
 
                                 if (model.parent() != undefined && model.parent().attributes.type == "column" && model.parent().components().length == 0)
                                     $(model.parent().getEl()).attr("data-empty", "true");
 
-                                var CheckIcon = false;
-
-                                if (typeof event == "undefined" && (model.attributes.type == "icon" || model.attributes.type == "svg" || model.attributes.type == "svg-in"))
-                                    CheckIcon = true;
-
-                                if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || CheckIcon || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
-									return false;
-								else {
-									if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(vjEditorSettings.RevisionGUID) < 0)
-										ShowBlockUI();
-								}
 							});
 
                             //Tooltip
