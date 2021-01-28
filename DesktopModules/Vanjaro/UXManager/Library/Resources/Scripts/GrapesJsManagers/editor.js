@@ -176,7 +176,7 @@ $(document).ready(function () {
 
                 var image = optImages[0];
 
-                if (typeof sizes != 'undefined' && sizes.length > 0) {
+                if (typeof sizes != 'undefined' && sizes.length > 0 && image) {
 
                     var size = sizes.shift();
 
@@ -185,9 +185,16 @@ $(document).ready(function () {
                     waitForEl('.gjs-frame', size, function () {
 
                         //Calc Sizes
-                        var imgWidth = $(image.getEl()).width();
-                        var calcWidth = Math.round((imgWidth / size) * 100);
-                        calcSizes += '(min-width:' + size + 'px) ' + calcWidth + 'vw,';
+                        var imgEl = image.getEl();
+
+                        if (imgEl) {
+                            var imgWidth = $(imgEl).width();
+
+                            if (imgWidth && imgWidth > 0) {
+                                var calcWidth = Math.round((imgWidth / size) * 100);
+                                calcSizes += '(min-width:' + size + 'px) ' + calcWidth + 'vw,';
+                            }
+                        }
 
                         OptimizeImages(optImages, sizes);
                     });
