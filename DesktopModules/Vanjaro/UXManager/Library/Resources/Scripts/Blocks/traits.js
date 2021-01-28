@@ -513,13 +513,7 @@ export default (editor, config = {}) => {
 			$(el).find(".link-type").hide();
 
 			if (typeof href != 'undefined') {
-
-				if (href.indexOf('http') >= 0) {
-					$(options).find("#URL").prop('checked', true);
-					$(wrapper).find("#url").show();
-					$(wrapper).find("#url input").val(href);
-				}
-				else if (href.indexOf('mailto') >= 0) {
+                if (href.indexOf('mailto') >= 0) {
 					$(options).find("#Mail").prop('checked', true);
 					$(wrapper).find("#email").show();
 					$(target).hide();
@@ -553,6 +547,11 @@ export default (editor, config = {}) => {
 					$(wrapper).find("#phone").show();
 					$(target).hide();
 					$(wrapper).find("#phone input").val(href.replace('tel:', ''));
+				}
+				else if (href.indexOf('/') >= 0) {
+					$(options).find("#URL").prop('checked', true);
+					$(wrapper).find("#url").show();
+					$(wrapper).find("#url input").val(href);
 				}
 				else {
 					$(options).find("#Page").prop('checked', true);
