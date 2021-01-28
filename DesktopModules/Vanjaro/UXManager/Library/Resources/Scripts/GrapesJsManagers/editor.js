@@ -1540,12 +1540,6 @@ $(document).ready(function () {
 
                                 if (typeof model != 'undefined' && typeof model.modelToDrop != 'undefined') {
 
-                                    if (typeof model.modelToDrop.parent != 'undefined' && model.modelToDrop && model.modelToDrop.attributes.type == "videobox") {
-                                        var videoID = model.modelToDrop.attributes.src;
-                                        model.modelToDrop.findType('video')[0].attributes.src = videoID;
-                                        $(model.modelToDrop.findType('video')[0].getEl())[0].children[0].attributes[0].nodeValue = videoID;                                                       
-                                    }
-
 									if (typeof model.modelToDrop.parent != 'undefined' && model.modelToDrop.parent() && model.modelToDrop.parent().attributes.type == "column")
 										$(model.modelToDrop.parent().getEl()).removeAttr("data-empty");
                                     if (typeof model.modelToDrop.attributes != 'undefined' && model.modelToDrop.attributes.type == "videobox") {
