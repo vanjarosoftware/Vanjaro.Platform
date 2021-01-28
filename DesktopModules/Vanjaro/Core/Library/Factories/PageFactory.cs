@@ -108,9 +108,7 @@ namespace Vanjaro.Core
                     {
                         using (VanjaroRepo db = new VanjaroRepo())
                         {
-                            _Pages = db.Fetch<Pages>(PageScript.GetPublishPage(Locale), TabID, Locale, true).ToList();
-                            if (_Pages.Count == 0)
-                                _Pages = db.Fetch<Pages>(PageScript.GetPublishPage(Null.NullString), TabID, Locale, true).ToList();
+                            _Pages = db.Query<Pages>(PageScript.GetPublishPage(Locale), TabID, Locale, true).ToList();
                         }
                     }
                     CacheFactory.Set(CacheKey, _Pages);
