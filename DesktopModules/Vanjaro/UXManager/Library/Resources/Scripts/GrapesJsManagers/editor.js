@@ -1461,20 +1461,14 @@ $(document).ready(function () {
                                 else
                                     $('.gjs-cv-canvas__frames').removeClass('lockcanvas');
 
-                                setTimeout(function () {
-                                    VjEditor.StorageManager.setStepsBeforeSave(1);
-                                    if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true') && (VJLandingPage.components == '' || VJLandingPage.components == '[]')) {
-                                        VjEditor.runCommand("save");
-                                        VjEditor.destroy();
-                                        // Remove All Managers
-                                        $('#ContentBlocks, .stylemanager, .traitsmanager').empty();
-                                        VjLayerpanel.close();
-                                        VjInit();
-                                    }
-                                    else {
-                                        setTimeout(function () { $($(window.parent.document.body).find('#dnn_ContentPane')[0]).find('.optimizing-overlay').remove(); }, 1000);
-                                    }
-                                }, 500);
+                                if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true') && (VJLandingPage.components == '' || VJLandingPage.components == '[]')) {
+                                    VjEditor.runCommand("save");
+                                    VjEditor.destroy();
+                                    // Remove All Managers
+                                    $('#ContentBlocks, .stylemanager, .traitsmanager').empty();
+                                    VjLayerpanel.close();
+                                    VjInit();
+                                }
 
                                 $('.gjs-frame').contents().find("#wrapper").scroll(function () {
                                     var $tools = $('#gjs-cv-tools')
@@ -2488,29 +2482,23 @@ $(document).ready(function () {
                             });
 
                             VjEditor.on('change:changesCount', e => {
+
                                 if (e != undefined && e.changed != undefined && e.changed.changesCount > 0) {
-                                    //if (VJIsModeratorEditPermission != 'True')
-                                    //    $('#VJBtnPublish').removeClass('disabled');
-
-
+                         
                                     if (VJAutoSaveTimeOutid) {
                                         clearTimeout(VJAutoSaveTimeOutid);
                                     }
-
 
                                     if (VJIsSaveCall && e.changed.changesCount >= VjEditor.StorageManager.getStepsBeforeSave()) {
                                         VJAutoSaveTimeOutid = setTimeout(function () {
                                             if ($('.sidebar-open.settingclosebtn').length == 0) {
                                                 VjEditor.runCommand("save");
-                                                //VJIsSaveCall = false;
                                             }
-
                                         }, 1000)
                                     }
                                     else
                                         VJIsSaveCall = true;
                                 }
-
                             });
 
                             VjEditor.on('storage:error', (err) => {
