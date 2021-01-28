@@ -176,7 +176,7 @@ $(document).ready(function () {
 
                 var image = optImages[0];
 
-                if (typeof sizes != 'undefined' && sizes.length > 0) {
+                if (typeof sizes != 'undefined' && sizes.length > 0 && image) {
 
                     var size = sizes.shift();
 
@@ -185,9 +185,16 @@ $(document).ready(function () {
                     waitForEl('.gjs-frame', size, function () {
 
                         //Calc Sizes
-                        var imgWidth = $(image.getEl()).width();
-                        var calcWidth = Math.round((imgWidth / size) * 100);
-                        calcSizes += '(min-width:' + size + 'px) ' + calcWidth + 'vw,';
+                        var imgEl = image.getEl();
+
+                        if (imgEl) {
+                            var imgWidth = $(imgEl).width();
+
+                            if (imgWidth && imgWidth > 0) {
+                                var calcWidth = Math.round((imgWidth / size) * 100);
+                                calcSizes += '(min-width:' + size + 'px) ' + calcWidth + 'vw,';
+                            }
+                        }
 
                         OptimizeImages(optImages, sizes);
                     });
@@ -1533,7 +1540,11 @@ $(document).ready(function () {
 
                                 if (typeof model != 'undefined' && typeof model.modelToDrop != 'undefined') {
 
-                                    if (typeof model.modelToDrop.parent != 'undefined' && model.modelToDrop.parent() && model.modelToDrop.parent().attributes.type == "column")
+                                    if (typeof model.modelToDrop.attributes != 'undefined' && model.modelToDrop.attributes.type == "videobox") {
+                                        model.modelToDrop.components().models.find(t => t.attributes.type == 'video').set({ 'src': model.modelToDrop.attributes.src });
+                                        $(model.modelToDrop.getEl()).find('iframe').attr('src', model.modelToDrop.attributes.src);
+                                    }
+                                    else if (typeof model.modelToDrop.parent != 'undefined' && model.modelToDrop.parent() && model.modelToDrop.parent().attributes.type == "column")
                                         $(model.modelToDrop.parent().getEl()).removeAttr("data-empty");
 
                                     if (parentRemove != '' && parentClone != '') {
@@ -1563,7 +1574,6 @@ $(document).ready(function () {
 
                             VjEditor.Keymaps.add('ns:redo', 'ctrl+y', editor => { console.log('redo call'); VjEditor.UndoManager.redo(); });
                             //VjEditor.Keymaps.add('ns:undo', 'ctrl+z', editor => { console.log('undo call'); VjEditor.UndoManager.undo(); });
-
 
                             //Adding TabModules
                             VjEditor.on('block:drag:stop', function (model, bmodel) {
@@ -1638,41 +1648,81 @@ $(document).ready(function () {
 
                             var FilterBorderOptions = function (target, position) {
 
-                                var val;
-                                switch (position) {
-                                    case "sm-border-top":
-                                        val = "border-top"
-                                        break;
-                                    case "sm-border-right":
-                                        val = "border-right"
-                                        break;
-                                    case "sm-border-bottom":
-                                        val = "border-bottom"
-                                        break;
-                                    case "sm-border-left":
-                                        val = "border-left"
-                                        break;
-                                    default:
-                                        val = "border"
-                                }
+                                setTimeout(function () {
+                                    var val;
 
-                                $(VjEditor.StyleManager.getProperties('border').models).each(function () {
-                                    if (this.attributes.name != 'Border Postion')
-                                        this.view.$el.hide();
+                                    switch (position) {
+                                        case "sm-border-top":
+                                            val = "border-top"
+                                            break;
+                                        case "sm-border-right":
+                                            val = "border-right"
+                                            break;
+                                        case "sm-border-bottom":
+                                            val = "border-bottom"
+                                            break;
+                                        case "sm-border-left":
+                                            val = "border-left"
+                                            break;
+                                        default:
+                                            val = "border"
+                                    }
+
+                                    var sm = VjEditor.StyleManager;
+
+                                    $(sm.getProperties('border').models).each(function () {
+                                        if (this.attributes.name != 'Border Postion')
+                                            this.view.$el.hide();
+                                    });
+
+                                    $(sm.getProperty(Border, val + '-style').view.el).show();
+                                    $(sm.getProperty(Border, val + '-color').view.el).show();
+                                    $(sm.getProperty(Border, val + '-width').view.el).show();
+
                                 });
-
-                                $(VjEditor.StyleManager.getProperty(Border, val + '-style').view.el).show();
-                                $(VjEditor.StyleManager.getProperty(Border, val + '-color').view.el).show();
-                                $(VjEditor.StyleManager.getProperty(Border, val + '-width').view.el).show();
                             }
 
-                            VjEditor.on('component:update:border-position', (model, argument) => {
-                                if (typeof event != "undefined")
-                                    FilterBorderOptions(model, event.target.value);
-                                else
-                                    FilterBorderOptions(model, 'sm-border');
-                            });
+                            var ReverseColums = function (model) {
 
+                                var flexDirection = model.getStyle()['flex-direction'];
+                                var row = model.components().models[0];
+
+                                var className = 'col-lg-12';
+                                var Device = VjEditor.getDevice();
+
+                                if (Device == 'Mobile')
+                                    className = 'col-12';
+                                else if (Device == 'Tablet')
+                                    className = 'col-sm-12';
+
+                                if (typeof flexDirection == 'undefined') {
+
+                                    flexDirection = 'row';
+
+                                    var style = model.getStyle();
+                                    style['flex-direction'] = 'row';
+                                    model.setStyle(style);
+                                }
+
+                                jQuery.each(row.components().models, function (i, column) {
+                                    if (column.getEl().classList.contains(className)) {
+
+                                        if (flexDirection.indexOf('reverse') >= 0)
+                                            flexDirection = 'column-reverse';
+                                        else
+                                            flexDirection = 'column';
+
+                                        return false;
+                                    }
+                                });
+
+                                row.setStyle({ 'flex-direction': flexDirection });
+                            }
+
+                            VjEditor.on('component:styleUpdate:border-position', (model, argument) => {
+                                FilterBorderOptions(model, event.target.value);
+                                model.removeStyle('border-position');
+                            });
 
                             VjEditor.on('component:selected', (model, argument) => {
 
@@ -1835,32 +1885,28 @@ $(document).ready(function () {
                                     if (flexProperty == null) {
 
                                         VjEditor.StyleManager.addProperty(Responsive, {
-                                            type: 'radio',
+                                            type: 'customradio',
                                             name: 'Reverse Columns',
                                             property: 'flex-direction',
-                                            defaults: 'false',
+                                            defaults: 'row',
                                             list: [{
-                                                value: 'true',
+                                                value: 'row-reverse',
                                                 name: 'Yes',
                                             }, {
-                                                value: 'false',
+                                                value: 'row',
                                                 name: 'No',
                                             }],
+                                            UpdateStyles: true,
                                         });
 
                                         flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
                                     }
 
                                     if (model.components().length) {
-
                                         $(model.components().models[0].getEl()).addClass('gjs-dashed');
 
-                                        var flexDirection = model.components().models[0].getStyle()['flex-direction'];
-
-                                        if (typeof flexDirection == 'undefined' || flexDirection.indexOf('reverse') <= 0)
-                                            flexProperty.view.setValue('false');
-                                        else
-                                            flexProperty.view.setValue('true');
+                                        if (flexProperty != null)
+                                            ReverseColums(model);
                                     }
                                 }
                                 else {
@@ -2081,34 +2127,8 @@ $(document).ready(function () {
 
                             VjEditor.on('component:styleUpdate:flex-direction', (model) => {
 
-                                if (model.attributes.type == "grid" && event.target.name == 'flex-direction') {
-
-                                    var style = model.getStyle()['flex-direction'];
-                                    var row = VjEditor.getSelected().components().models[0];
-
-                                    model.removeStyle('flex-direction');
-
-                                    var flexDirection = 'row';
-                                    var className = 'col-lg-12';
-                                    var Device = VjEditor.getDevice();
-
-                                    if (Device == 'Mobile')
-                                        className = 'col-12';
-                                    else if (Device == 'Tablet')
-                                        className = 'col-sm-12';
-
-                                    jQuery.each(row.components().models, function (i, column) {
-                                        if (column.getEl().classList.contains(className)) {
-                                            flexDirection = 'column';
-                                            return false;
-                                        }
-                                    });
-
-                                    if (style == 'true')
-                                        flexDirection += '-reverse';
-
-                                    row.setStyle({ 'flex-direction': flexDirection });
-                                }
+                                if (model.attributes.type == "grid")
+                                    ReverseColums(model);
                             });
 
                             VjEditor.on('component:styleUpdate:float', (model) => {
@@ -2561,7 +2581,12 @@ $(document).ready(function () {
                                 if (model.parent() != undefined && model.parent().attributes.type == "column" && model.parent().components().length == 0)
                                     $(model.parent().getEl()).attr("data-empty", "true");
 
-								if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
+                                var CheckIcon = false;
+
+                                if (typeof event == "undefined" && (model.attributes.type == "icon" || model.attributes.type == "svg" || model.attributes.type == "svg-in"))
+                                    CheckIcon = true;
+
+                                if ((typeof model.getAttributes() != "undefined" && model.getAttributes()["data-bg-video"] == "true") || CheckIcon || (model.attributes.type == "video" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model.attributes.type == "section" && (typeof event == "undefined" || event.currentTarget.className == "gjs-trt-trait__wrp")) || (model && model.view && model.view.el && model.view.el.classList && (model.view.el.classList.contains('carousel-control') || model.view.el.classList.contains('carousel-indicators') || model.view.el.classList.contains('carousel-indicator'))))
 									return false;
 								else {
 									if ($('#iframeHolder iframe').attr('src') == undefined || $('#iframeHolder iframe').attr('src').indexOf(vjEditorSettings.RevisionGUID) < 0)
