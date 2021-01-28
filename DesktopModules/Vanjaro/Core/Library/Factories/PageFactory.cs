@@ -93,7 +93,12 @@ namespace Vanjaro.Core
 
             internal static List<Pages> GetAllByTabID(int TabID, bool HasTabEditPermission = true)
             {
-                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Page + "GetAllByTabID", TabID, HasTabEditPermission);
+
+                string Locale = string.Empty;
+                if (!HasTabEditPermission)
+                    Locale = PageManager.GetCultureCode(PortalController.Instance.GetCurrentSettings() as PortalSettings);
+
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Page + "GetAllByTabID", TabID, HasTabEditPermission, Locale);
                 List<Pages> _Pages = CacheFactory.Get(CacheKey) as List<Pages>;
                 if (_Pages == null)
                 {
@@ -103,7 +108,11 @@ namespace Vanjaro.Core
                     {
                         using (VanjaroRepo db = new VanjaroRepo())
                         {
-                            _Pages = db.Fetch<Pages>("Select [ID], [PortalID], [TabID], [Content], [Style], [Version], [CreatedBy], [CreatedOn], [UpdatedBy], [UpdatedOn], [IsPublished], [PublishedBy], [PublishedOn], [Locale], [StateID] FROM " + CommonScript.TablePrefix + "VJ_Core_Pages Where TabID=@0 order by Version desc", TabID).ToList();
+                            string Query = "Select top 1 [ID], [PortalID], [TabID], [Content], [Style], [Version], [CreatedBy], [CreatedOn], [UpdatedBy], [UpdatedOn], [IsPublished], [PublishedBy], [PublishedOn], [Locale], [StateID] FROM " + CommonScript.TablePrefix + "VJ_Core_Pages Where ";
+                            Query += "TabID =@0 and IsPublished=@2 ";
+                            Query += string.IsNullOrEmpty(Locale) ? "and Locale is null " : "and Locale=@1";
+                            Query += " order by Version desc";
+                            _Pages = db.Fetch<Pages>(Query, TabID, Locale, true).ToList();
                         }
                     }
                     CacheFactory.Set(CacheKey, _Pages);
