@@ -380,7 +380,7 @@
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Toolbar.Fullscreen.dll</name>
-							<version>01.00.04/version>
+							<version>01.00.04</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
