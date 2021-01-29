@@ -1469,6 +1469,8 @@ $(document).ready(function () {
 									$('#ContentBlocks, .stylemanager, .traitsmanager').empty();
 									VjLayerpanel.close();
 									VjInit();
+								}else if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
+									setTimeout(function () { $($(window.parent.document.body).find('#dnn_ContentPane')[0]).find('.optimizing-overlay').remove(); }, 1000);
 								}
 
 								$('.gjs-frame').contents().find("#wrapper").scroll(function () {
