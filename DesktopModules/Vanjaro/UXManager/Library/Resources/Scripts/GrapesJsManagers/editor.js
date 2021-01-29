@@ -1442,9 +1442,10 @@ $(document).ready(function () {
 							// Fixed editor is not defined with absolute mode
 							window.editor = VjEditor;
 
-							VjEditor.on('load', function () {
-
-								$('#BlockManager').find('.block-search').val('');
+                            VjEditor.on('load', function () {
+                                try { $.ServicesFramework(-1); }
+                                catch (err) { window.parent.location.reload(); }
+                                $('#BlockManager').find('.block-search').val('');
 
 								if (vjEditorSettings.EditPage) {
 									LoadApps();
@@ -2784,7 +2785,7 @@ $(document).ready(function () {
 			InjectLinksAndScripts(Scripts_Links, window.document);
 			setCookie("vj_InitUX", "true");
 			if (window.location.href.indexOf('#') > 0 && window.location.href.split("#")[0] != CurrentTabUrl) {
-				window.location.href = CurrentTabUrl;
+                window.location.href = CurrentTabUrl.split('/uxmode')[0];
 			}
 			$(this).find("em").addClass("fa-chevron-left").removeClass("fa-chevron-right");
 			$('#dnn_ContentPane').addClass("sidebar-open").removeClass('sidebar-close');
