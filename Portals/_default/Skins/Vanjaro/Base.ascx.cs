@@ -618,8 +618,7 @@ namespace Vanjaro.Skin
                     {
                         if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value == "Logo" && page != null)
                         {
-                            dynamic contentJSON = JsonConvert.DeserializeObject<dynamic>(page.ContentJSON.ToString());
-                            BuildLogoBlock(contentJSON, response, item, isGlobalBlockCall);
+                            BuildLogoBlock(response, item);
                         }
                         else
                         {
@@ -695,97 +694,26 @@ namespace Vanjaro.Skin
             }
         }
 
-        private static void BuildLogoBlock(dynamic contentJSON, ThemeTemplateResponse Response, HtmlNode Node, bool isGlobalBlockCall)
+        private static void BuildLogoBlock(ThemeTemplateResponse Response, HtmlNode Node)
         {
-            if (Node.Attributes["id"] != null)
+            HtmlDocument LogoHtml = new HtmlDocument();
+            LogoHtml.LoadHtml(Response.Markup);
+            IEnumerable<HtmlNode> LogoImg = LogoHtml.DocumentNode.Descendants("img");
+            if ((Node.Attributes["data-style"] == null || LogoImg == null || LogoImg.FirstOrDefault<HtmlNode>() == null ? false : LogoImg.FirstOrDefault<HtmlNode>().Attributes != null))
             {
-                string id = Node.Attributes["id"].Value;
-                if (contentJSON != null)
+                if ((
+                    from a in LogoImg.FirstOrDefault<HtmlNode>().Attributes
+                    where a.Name == "style"
+                    select a).FirstOrDefault<HtmlAttribute>() == null)
                 {
-                    foreach (dynamic con in contentJSON)
-                    {
-                        if (con.attributes != null && con.attributes["data-block-guid"] != null && con.attributes["data-block-guid"] != "" && con.attributes["data-block-type"] == "Logo" && con.attributes["id"] != null && con.attributes["id"] == id)
-                        {
-                            HtmlDocument contentJSONHtml = new HtmlDocument();
-                            contentJSONHtml.LoadHtml(con["content"].Value.ToString());
-                            IEnumerable<HtmlNode> contentJSONQuery = contentJSONHtml.DocumentNode.Descendants("img");
-                            if (contentJSONQuery != null && contentJSONQuery.FirstOrDefault() != null && contentJSONQuery.FirstOrDefault().Attributes != null && contentJSONQuery.FirstOrDefault().Attributes.Where(a => a.Name == "style").FirstOrDefault() != null)
-                            {
-                                HtmlDocument LogoHtml = new HtmlDocument();
-                                LogoHtml.LoadHtml(Response.Markup);
-                                IEnumerable<HtmlNode> LogoImg = LogoHtml.DocumentNode.Descendants("img");
-                                if (LogoImg != null && LogoImg.FirstOrDefault() != null && LogoImg.FirstOrDefault().Attributes != null)
-                                {
-                                    if (LogoImg.FirstOrDefault().Attributes.Where(a => a.Name == "style").FirstOrDefault() != null)
-                                    {
-                                        LogoImg.FirstOrDefault().Attributes["style"].Value = contentJSONQuery.FirstOrDefault().Attributes.Where(a => a.Name == "style").FirstOrDefault().Value;
-                                    }
-                                    else
-                                    {
-                                        LogoImg.FirstOrDefault().Attributes.Add("style", contentJSONQuery.FirstOrDefault().Attributes.Where(a => a.Name == "style").FirstOrDefault().Value);
-                                    }
-                                }
-                                Node.InnerHtml = LogoHtml.DocumentNode.OuterHtml;
-                            }
-                            else if (Node.Attributes["data-style"] != null)
-                            {
-                                HtmlDocument LogoHtml = new HtmlDocument();
-                                LogoHtml.LoadHtml(Response.Markup);
-                                IEnumerable<HtmlNode> LogoImg = LogoHtml.DocumentNode.Descendants("img");
-                                if (LogoImg != null && LogoImg.FirstOrDefault() != null && LogoImg.FirstOrDefault().Attributes != null)
-                                {
-                                    if (LogoImg.FirstOrDefault().Attributes.Where(a => a.Name == "style").FirstOrDefault() != null)
-                                    {
-                                        LogoImg.FirstOrDefault().Attributes["style"].Value = Node.Attributes["data-style"].Value;
-                                    }
-                                    else
-                                    {
-                                        LogoImg.FirstOrDefault().Attributes.Add("style", Node.Attributes["data-style"].Value);
-                                    }
-                                }
-                                Node.InnerHtml = LogoHtml.DocumentNode.OuterHtml;
-                            }
-                            else
-                            {
-                                Node.InnerHtml = Response.Markup;
-                            }
-                        }
-                        else if (con.components != null)
-                        {
-                            BuildLogoBlock(con.components, Response, Node, isGlobalBlockCall);
-                        }
-                    }
+                    LogoImg.FirstOrDefault<HtmlNode>().Attributes.Add("style", Node.Attributes["data-style"].Value);
+                }
+                else
+                {
+                    LogoImg.FirstOrDefault<HtmlNode>().Attributes["style"].Value = Node.Attributes["data-style"].Value;
                 }
             }
-            else if (isGlobalBlockCall)
-            {
-                HtmlDocument LogoHtml = new HtmlDocument();
-                LogoHtml.LoadHtml(Response.Markup);
-                IEnumerable<HtmlNode> LogoImg = LogoHtml.DocumentNode.Descendants("img");
-                if (LogoImg != null && LogoImg.FirstOrDefault() != null && LogoImg.FirstOrDefault().Attributes != null && Node.Attributes["data-style"] != null)
-                {
-                    if (LogoImg.FirstOrDefault().Attributes.Where(a => a.Name == "style").FirstOrDefault() != null)
-                    {
-                        LogoImg.FirstOrDefault().Attributes["style"].Value = Node.Attributes["data-style"].Value;
-                    }
-                    else
-                    {
-                        LogoImg.FirstOrDefault().Attributes.Add("style", Node.Attributes["data-style"].Value);
-                    }
-                }
-                else if (LogoImg != null && LogoImg.FirstOrDefault() != null && LogoImg.FirstOrDefault().Attributes != null && LogoHtml.DocumentNode.ChildNodes[0].Attributes["data-style"] != null)
-                {
-                    if (LogoImg.FirstOrDefault().Attributes.Where(a => a.Name == "style").FirstOrDefault() != null)
-                    {
-                        LogoImg.FirstOrDefault().Attributes["style"].Value = LogoHtml.DocumentNode.ChildNodes[0].Attributes["data-style"].Value;
-                    }
-                    else
-                    {
-                        LogoImg.FirstOrDefault().Attributes.Add("style", LogoHtml.DocumentNode.ChildNodes[0].Attributes["data-style"].Value);
-                    }
-                }
-                Node.InnerHtml = LogoHtml.DocumentNode.OuterHtml;
-            }
+            Node.InnerHtml = LogoHtml.DocumentNode.OuterHtml;
         }
 
         private string InjectModules(string sb)
@@ -899,7 +827,7 @@ namespace Vanjaro.Skin
 
         private Pages GetPage()
         {
-            Pages page=new Pages();
+            Pages page;
             if (!string.IsNullOrEmpty(Request.QueryString["revisionversion"]) && TabPermissionController.HasTabPermission("EDIT"))
             {
                 page = PageManager.GetByVersion(PortalSettings.ActiveTab.TabID, Convert.ToInt32(Request.QueryString["revisionversion"]), PageManager.GetCultureCode(PortalSettings));
@@ -911,8 +839,6 @@ namespace Vanjaro.Skin
             else
             {
                 page = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, true, PageManager.GetCultureCode(PortalSettings), true);
-                page.ContentJSON = string.Empty;
-                page.StyleJSON = string.Empty;
             }
 
             return page;

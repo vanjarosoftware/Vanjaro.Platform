@@ -58,7 +58,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.Controllers
             Settings.Add("ThemeEditor", new UIData { Name = "ThemeEditor", Options = te });
             Settings.Add("ControlTypes", new UIData { Name = "ControlTypes", Options = Core.Managers.ThemeManager.GetControlTypes() });
             Settings.Add("IsNew", new UIData { Name = "IsNew", Value = string.IsNullOrEmpty(Guid) ? "true" : "false" });
-            Settings.Add("Fonts", new UIData { Name = "Fonts", OptionsText = "Name", OptionsValue = "Value", Options = Core.Managers.ThemeManager.GetDDLFonts(CatGuid), Value = "0" });
+            Settings.Add("Fonts", new UIData { Name = "Fonts", OptionsText = "Name", OptionsValue = "Value", Options = Core.Managers.ThemeManager.GetDDLFonts("all"), Value = "0" });
             Settings.Add("Category", new UIData { Name = "Category", Value = Category });
             Settings.Add("Type", new UIData { Name = "Type", Value = Type });
 
