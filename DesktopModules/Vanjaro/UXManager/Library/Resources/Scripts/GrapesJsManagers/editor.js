@@ -3294,6 +3294,3 @@ global.ChangeToWebp = function (target, URLs) {
 		});
 	}
 }
-
-
-
