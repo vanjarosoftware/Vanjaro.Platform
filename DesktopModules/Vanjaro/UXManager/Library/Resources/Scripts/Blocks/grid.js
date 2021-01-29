@@ -52,7 +52,7 @@ export default (editor, config = {}) => {
 	cmd.add('add-column', ed => {
 		var Selected = VjEditor.getSelected();
 		var Row = '<div class="row"></div>';
-		var Column = '<div class="col-lg-1 col-sm-1 col-1"></div>';
+		var Column = '<div class="col-lg-1 col-sm-1 col-12"></div>';
 		if (Selected.attributes.type == 'grid') {
 			if (typeof Selected.components().models[0] != 'undefined')
 				Selected.components().models[0].components().add(Column);

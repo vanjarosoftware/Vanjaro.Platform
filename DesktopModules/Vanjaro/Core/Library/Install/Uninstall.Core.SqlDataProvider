@@ -42,3 +42,5 @@ GO
 Delete from {databaseOwner}[{objectQualifier}PortalSettings] where SettingName='IsVanjaroInstalled'
 GO
 
+update {databaseOwner}[{objectQualifier}Schedule] set TypeFullName='DotNetNuke.Services.Search.SearchEngineScheduler, DOTNETNUKE' where TypeFullName='Vanjaro.Core.Services.Search.SearchEngineScheduler,Vanjaro.Core'
+GO

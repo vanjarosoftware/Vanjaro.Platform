@@ -504,7 +504,9 @@ namespace Vanjaro.Core
                         }
                     }
                 }
-                return Fonts;
+                return Fonts.GroupBy(t => t.Name)
+                        .Select(g => g.First())
+                        .ToList();
             }
             public static List<StringTextNV> GetDDLFonts(string CategoryGuid)
             {
