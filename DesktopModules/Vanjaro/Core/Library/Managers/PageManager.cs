@@ -219,9 +219,9 @@ namespace Vanjaro.Core
                 return result;
             }
 
-            public static List<Pages> GetPages(int TabID)
+            public static List<Pages> GetPages(int TabID, bool HasTabEditPermission = true)
             {
-                return PageFactory.GetAllByTabID(TabID).ToList();
+                return PageFactory.GetAllByTabID(TabID, HasTabEditPermission).ToList();
             }
 
             public static string ResetModuleMarkup(int PortalId, string Markup, int UserId)
@@ -287,10 +287,11 @@ namespace Vanjaro.Core
             public static Pages GetLatestVersion(int TabID, bool IgnoreDraft, string Locale, bool GetDefaultLocale)
             {
                 UserInfo UserInfo = (PortalController.Instance.GetCurrentSettings() as PortalSettings).UserInfo;
-                List<Pages> pages = GetPages(TabID).Where(a => a.Locale == Locale).ToList();
+                bool HasTabEditPermission = TabPermissionController.HasTabPermission("EDIT") || WorkflowManager.HasReviewPermission(UserInfo);
+                List<Pages> pages = GetPages(TabID, HasTabEditPermission).Where(a => a.Locale == Locale).ToList();
                 Pages page = new Pages();
 
-                if (!IgnoreDraft && (TabPermissionController.HasTabPermission("EDIT") || WorkflowManager.HasReviewPermission(UserInfo)))
+                if (!IgnoreDraft && HasTabEditPermission)
                 {
                     page = pages.OrderByDescending(a => a.Version).FirstOrDefault();
                 }

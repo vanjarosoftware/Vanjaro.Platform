@@ -91,13 +91,26 @@ namespace Vanjaro.Core
                 return Page;
             }
 
-            internal static List<Pages> GetAllByTabID(int TabID)
+            internal static List<Pages> GetAllByTabID(int TabID, bool HasTabEditPermission = true)
             {
-                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Page + "GetAllByTabID", TabID);
+
+                string Locale = string.Empty;
+                if (!HasTabEditPermission)
+                    Locale = PageManager.GetCultureCode(PortalController.Instance.GetCurrentSettings() as PortalSettings);
+
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Page + "GetAllByTabID", TabID, HasTabEditPermission, Locale);
                 List<Pages> _Pages = CacheFactory.Get(CacheKey) as List<Pages>;
                 if (_Pages == null)
                 {
-                    _Pages = Pages.Query("Where TabID=@0", TabID).ToList();
+                    if (HasTabEditPermission)
+                        _Pages = Pages.Query("Where TabID=@0", TabID).ToList();
+                    else
+                    {
+                        using (VanjaroRepo db = new VanjaroRepo())
+                        {
+                            _Pages = db.Query<Pages>(PageScript.GetPublishPage(Locale), TabID, Locale, true).ToList();
+                        }
+                    }
                     CacheFactory.Set(CacheKey, _Pages);
                 }
                 return _Pages;

@@ -2,7 +2,7 @@
 @if (@Model.Languages.Count > 0)
 {
     <div class="vj_language_wrapper">
-        <label for="language" class="sr-only"></label>
+        <label for="language" class="sr-only">language</label>
         <select id="language" name="language" class="select_language" onchange="vjselectlanguage()">
             @foreach (var Language in Model.Languages)
             {
@@ -24,11 +24,12 @@
 }
 else if (@Model.InitGrapejs == "true")
 {
-    <div class="vj_language_wrapper">
-        <select class="select_language">
-            <option url="@Model.DefaultLanguage.URL" selected value="@Model.DefaultLanguage.NativeName">
-                @Model.DefaultLanguage.NativeName
-            </option>
-        </select>
-    </div>
+<div class="vj_language_wrapper">
+    <label for="language" class="sr-only">language</label>
+    <select id="language" class="select_language">
+        <option url="@Model.DefaultLanguage.URL" selected value="@Model.DefaultLanguage.NativeName">
+            @Model.DefaultLanguage.NativeName
+        </option>
+    </select>
+</div>
 }
