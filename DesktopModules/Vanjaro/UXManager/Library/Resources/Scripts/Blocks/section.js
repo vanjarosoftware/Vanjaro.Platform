@@ -258,13 +258,14 @@
 				this.listenTo(this, 'change:gradient', this.handleGradientChange);
 			},
 			handleTypeChange() {
-				if (typeof this.attributes.tag != 'undefined' && this.attributes.tag != "")
+                if (typeof this.attributes.tag != 'undefined' && this.attributes.tag != "") {
                     this.attributes.tagName = this.attributes.tag;
-                    this.view.reset();  
+                    this.view.reset();
+                    VjEditor.runCommand("save");
+                }
 			},
 			handleGradientChange() {
 				if (typeof this.attributes.gradient != 'undefined' && this.attributes.gradient != "") {
-
 					var gradient = this.attributes.gradient
 					var style = this.getStyle();
 					style["background-image"] = gradient;

@@ -114,7 +114,8 @@ export default (editor, config = {}) => {
 			handleTypeChange() {
 				if (typeof this.attributes.importance != 'undefined' && this.attributes.importance != "") {
 					this.attributes.tagName = this.attributes.importance;
-					this.view.reset();
+                    this.view.reset();
+                    VjEditor.runCommand("save");
 				}
 			},
 		},
