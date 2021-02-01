@@ -316,8 +316,12 @@ global.BuildAppComponent = function (vjcomps) {
     $.each(vjcomps, function (k, v) {
         if (v.attributes != undefined && v.attributes.mid != undefined && v.attributes.mid != '') {
             if (v.components[0] != undefined) {
-                if ($('#dnn_vj_' + v.attributes.mid)[0] != undefined)
-                    v.components[0].content = $('#dnn_vj_' + v.attributes.mid)[0].outerHTML;
+                if ($('#dnn_vj_' + v.attributes.mid)[0] != undefined) {
+                    if ($('#dnn_vj_' + v.attributes.mid).find('[ng-controller="Controller"]').length > 0 && $('#dnn_vj_' + v.attributes.mid).find('[ng-controller="Controller"]').html().indexOf('ngView:') > 0)
+                        v.components[0].content = "<div class='alert alert-info' role='alert'>" + v.attributes.fname + " will appear here when this page is previewed or published.</div>";
+                    else
+                        v.components[0].content = $('#dnn_vj_' + v.attributes.mid)[0].outerHTML;
+                }
                 else {
                     v.include = false;
                 }

@@ -159,16 +159,7 @@
     <Content Include="Cleanup\00.05.03.txt" />
     <Content Include="DistributionAddList.txt" />
     <Content Include="EULA.txt" />
-    <Content Include="Images\1209008.jpg" />
-    <Content Include="Images\Banner.png" />
-    <Content Include="Images\Greynob.png" />
-    <Content Include="Images\img-1.jpg" />
-    <Content Include="Images\img-2.jpg" />
-    <Content Include="Images\img-3.jpg" />
-    <Content Include="Images\img-4.jpg" />
-    <Content Include="Images\img-5.jpg" />
     <Content Include="Images\Logo.svg" />
-    <Content Include="Images\office-865091_640.jpg" />
     <Content Include="Images\vanjaro_home.png" />
     <Content Include="Images\vanjaro_logo.png" />
     <Content Include="Images\vanjaro_social.png" />
@@ -467,6 +458,7 @@
     <Content Include="Packager\Vanjaro\bin\x86\sass.snapshot" />
     <Content Include="Themes\Basic\templates\website\Privacy.json" />
     <Content Include="Themes\Basic\templates\website\Terms.json" />
+    <Content Include="Images\Banner_1280w.webp" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
