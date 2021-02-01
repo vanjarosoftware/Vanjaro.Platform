@@ -1482,16 +1482,6 @@ $(document).ready(function () {
 									}, 250));
 								});
 
-								$('.gjs-sm-sector').on('click', function () {
-									var $this = $(this);
-									var sectorName = $this.attr('id').replace("gjs-sm-", "");
-									if ($this.find('.gjs-sm-properties').is(':visible')) {
-										$.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
-											model.set('open', false);
-										});
-										VjEditor.StyleManager.getSector(sectorName).set('open', true);
-									}
-								});
 							});
 
 							var parentClone = "";
@@ -2125,6 +2115,17 @@ $(document).ready(function () {
 								}
 								else if (typeof VjEditor.StyleManager.getSector(Text) != 'undefined')
 									VjEditor.StyleManager.removeSector(Text);
+
+								$('.gjs-sm-sector').on('click', function () {
+									var $this = $(this);
+									var sectorName = $this.attr('id').replace("gjs-sm-", "");
+									if ($this.find('.gjs-sm-properties').is(':visible')) {
+										$.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
+											model.set('open', false);
+										});
+										VjEditor.StyleManager.getSector(sectorName).set('open', true);
+									}
+								});
 
 								$(VjEditor.StyleManager.getSectors().models).each(function (index, value) {
 									$(value.attributes.properties.models).each(function (subIndex, subValue) {
