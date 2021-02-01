@@ -460,11 +460,11 @@ export default (editor, config = {}) => {
 
 	//Link 
 	tm.addType('href', {
-		createInput({ trait }) {
-			const el = document.createElement('div');
-			el.classList.add("link-wrapper");
-			el.id = trait.attributes.name;
-			el.innerHTML = `
+        createInput({ trait }) {
+            const el = document.createElement('div');
+            el.classList.add("link-wrapper");
+            el.id = trait.attributes.name;
+            el.innerHTML = `
 				<hr />
 				<div class="option-block">
 					<input type="radio" id="URL" name="LinkType" data-type="url">
@@ -504,66 +504,61 @@ export default (editor, config = {}) => {
 				</div>
 			`;
 
-			var pid = trait.target.attributes.pid;
-			var href = trait.attributes.href || trait.target.attributes.href;
-			var options = el.querySelector('.option-block');
-			var wrapper = el.querySelector('.link-block');
-			var target = el.querySelector('.target-block');
+            var pid = trait.target.attributes.pid;
+            var href = trait.attributes.href || trait.target.attributes.href;
+            var options = el.querySelector('.option-block');
+            var wrapper = el.querySelector('.link-block');
+            var target = el.querySelector('.target-block');
 
-			$(el).find(".link-type").hide();
+            $(el).find(".link-type").hide();
 
-			if (typeof href != 'undefined') {
+            if (typeof pid == 'undefined' || pid == null) {
                 if (href.indexOf('mailto') >= 0) {
-					$(options).find("#Mail").prop('checked', true);
-					$(wrapper).find("#email").show();
-					$(target).hide();
+                    $(options).find("#Mail").prop('checked', true);
+                    $(wrapper).find("#email").show();
+                    $(target).hide();
 
-					if (href.indexOf('?subject') || href.indexOf('&subject')) {
+                    if (href.indexOf('?subject') || href.indexOf('&subject')) {
 
-						var email = '';
-						var subject = '';
+                        var email = '';
+                        var subject = '';
 
-						if (href.indexOf('?subject') >= 0) {
-							email = href.substr(0, href.indexOf('?subject'));
-							subject = href.substr(href.indexOf('?subject')).replace('?subject=', '');
-						}
-						else if (href.indexOf('&subject') >= 0 && href.indexOf('?') >= 0) {
-							email = href.substr(0, href.indexOf('?'));
-							subject = href.substr(href.indexOf('&subject')).replace('&subject=', '');
-						}
-						else if (href.indexOf('&subject') >= 0) {
-							email = href.substr(0, href.indexOf('&subject'));
-							subject = href.substr(href.indexOf('&subject')).replace('&subject=', '')
-						}
+                        if (href.indexOf('?subject') >= 0) {
+                            email = href.substr(0, href.indexOf('?subject'));
+                            subject = href.substr(href.indexOf('?subject')).replace('?subject=', '');
+                        }
+                        else if (href.indexOf('&subject') >= 0 && href.indexOf('?') >= 0) {
+                            email = href.substr(0, href.indexOf('?'));
+                            subject = href.substr(href.indexOf('&subject')).replace('&subject=', '');
+                        }
+                        else if (href.indexOf('&subject') >= 0) {
+                            email = href.substr(0, href.indexOf('&subject'));
+                            subject = href.substr(href.indexOf('&subject')).replace('&subject=', '')
+                        }
 
-						$(wrapper).find("#email input.email").val(email.replace('mailto:', ''));
-						$(wrapper).find("#email input.subject").val(subject);
-					}
-					else
-						$(wrapper).find("#email input.email").val(href.replace('mailto:', ''));
-				}
-				else if (href.indexOf('tel') >= 0) {
-					$(options).find("#Phone").prop('checked', true);
-					$(wrapper).find("#phone").show();
-					$(target).hide();
-					$(wrapper).find("#phone input").val(href.replace('tel:', ''));
-				}
-				else if (href.indexOf('/') >= 0) {
-					$(options).find("#URL").prop('checked', true);
-					$(wrapper).find("#url").show();
-					$(wrapper).find("#url input").val(href);
-				}
-				else {
-					$(options).find("#Page").prop('checked', true);
-					$(wrapper).find("#page").show();
-					this.loadPages('page', pid);
-				}
-			}
-			else {
-				$(options).find("#URL").prop('checked', true);
-				$(wrapper).find("#url").show();
-				$(wrapper).find("#url input").val(href);
-			}
+                        $(wrapper).find("#email input.email").val(email.replace('mailto:', ''));
+                        $(wrapper).find("#email input.subject").val(subject);
+                    }
+                    else
+                        $(wrapper).find("#email input.email").val(href.replace('mailto:', ''));
+                }
+                else if (href.indexOf('tel') >= 0) {
+                    $(options).find("#Phone").prop('checked', true);
+                    $(wrapper).find("#phone").show();
+                    $(target).hide();
+                    $(wrapper).find("#phone input").val(href.replace('tel:', ''));
+                }
+                else {
+                    $(options).find("#URL").prop('checked', true);
+                    $(wrapper).find("#url").show();
+                    $(wrapper).find("#url input").val(href);
+                }
+            }
+            else {
+                $(options).find("#Page").prop('checked', true);
+                $(wrapper).find("#page").show();
+                this.loadPages('page', pid);
+            }
 
 			if (typeof trait.target.getAttributes().target == 'undefined')
 				$(target).find("input#no").prop('checked', true);
@@ -640,7 +635,7 @@ export default (editor, config = {}) => {
 								component.set({ 'pid': pid });
 
 								if (typeof href != '')
-									setURL();
+									SetURL();
 							}
 						});
 					}
@@ -672,10 +667,14 @@ export default (editor, config = {}) => {
 						delete attr.href;
 						component.setAttributes(attr);
 					}
-					else {
+                    else {
+
 						component.attributes.tagName = 'a';
-						component.view.reset();
-						component.addAttributes({ href: href });
+                        component.view.reset();
+                        component.addAttributes({ href: href });
+
+                        if (val != "page")   
+                            component.set({ 'pid': null });
 					}
 				}
 				else
