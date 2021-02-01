@@ -512,7 +512,8 @@ export default (editor, config = {}) => {
 
             $(el).find(".link-type").hide();
 
-            if (typeof pid == 'undefined' || pid == null) {
+            if (typeof href != 'undefined' && (typeof pid == 'undefined' || pid == null)) {
+
                 if (href.indexOf('mailto') >= 0) {
                     $(options).find("#Mail").prop('checked', true);
                     $(wrapper).find("#email").show();
@@ -554,7 +555,7 @@ export default (editor, config = {}) => {
                     $(wrapper).find("#url input").val(href);
                 }
             }
-            else {
+            else if (typeof pid != 'undefined') {
                 $(options).find("#Page").prop('checked', true);
                 $(wrapper).find("#page").show();
                 this.loadPages('page', pid);
