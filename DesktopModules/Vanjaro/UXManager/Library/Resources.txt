@@ -1,6 +1,10 @@
 ﻿App_LocalResources\*.resx
 Resources\Images
-Resources\Scripts
+Resources\Scripts\GrapesJs
+Resources\Scripts\GrapesJsManagers\css
+Resources\Scripts\jsPanel
+Resources\Scripts\Localization
+Resources\Scripts\uxmanager.min.js
 Resources\StyleSheets
 Resources\tui
 Resources\extension.html
