@@ -2170,14 +2170,24 @@ $(document).ready(function () {
 								});
 							});
 
-							VjEditor.on('rte:enable', (model, argument) => {
-								if (model.model.attributes.type == 'button-text') {
-									const rte = editor.RichTextEditor;
-									rte.actionbar.parentNode.hidden = true;
-								}
-								else
-									rte.actionbar.parentNode.hidden = false;
-							});
+                            VjEditor.on('rte:enable', (model, argument) => {
+                                if (model.model.attributes.type == 'button-text') {
+                                    const rte = editor.RichTextEditor;
+                                    rte.actionbar.parentNode.hidden = true;
+                                }
+
+                                else {
+
+                                    rte.actionbar.parentNode.hidden = false;
+
+                                    if (model.model.closest('[data-gjs-type="link"]'))
+                                        $(rte.actionbar).find('.fa.fa-link').parent().hide();
+
+                                    else
+                                        $(rte.actionbar).find('.fa.fa-link').parent().show();
+                                }
+
+                            });
 
 							VjEditor.on('component:deselected', (model, argument) => {
 
