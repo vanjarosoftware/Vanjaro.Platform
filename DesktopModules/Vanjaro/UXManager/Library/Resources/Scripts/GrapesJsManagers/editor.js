@@ -1442,9 +1442,10 @@ $(document).ready(function () {
 							// Fixed editor is not defined with absolute mode
 							window.editor = VjEditor;
 
-							VjEditor.on('load', function () {
-
-								$('#BlockManager').find('.block-search').val('');
+                            VjEditor.on('load', function () {
+                                try { $.ServicesFramework(-1); }
+                                catch (err) { window.parent.location.reload(); }
+                                $('#BlockManager').find('.block-search').val('');
 
 								if (vjEditorSettings.EditPage) {
 									LoadApps();
@@ -1468,6 +1469,8 @@ $(document).ready(function () {
 									$('#ContentBlocks, .stylemanager, .traitsmanager').empty();
 									VjLayerpanel.close();
 									VjInit();
+								}else if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
+									setTimeout(function () { $($(window.parent.document.body).find('#dnn_ContentPane')[0]).find('.optimizing-overlay').remove(); }, 1000);
 								}
 
 								$('.gjs-frame').contents().find("#wrapper").scroll(function () {
@@ -1479,16 +1482,6 @@ $(document).ready(function () {
 									}, 250));
 								});
 
-								$('.gjs-sm-sector').on('click', function () {
-									var $this = $(this);
-									var sectorName = $this.attr('id').replace("gjs-sm-", "");
-									if ($this.find('.gjs-sm-properties').is(':visible')) {
-										$.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
-											model.set('open', false);
-										});
-										VjEditor.StyleManager.getSector(sectorName).set('open', true);
-									}
-								});
 							});
 
 							var parentClone = "";
@@ -1771,6 +1764,7 @@ $(document).ready(function () {
 
 								setTimeout(function () {
 
+									var sm = VjEditor.StyleManager;
 									var target = model;
 
 									if (model.attributes.type == "icon")
@@ -1780,64 +1774,97 @@ $(document).ready(function () {
 									var width = target.getStyle()['width'];
 
 									if (typeof width == "undefined") {
-										$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val('auto');
-										$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(target.view.$el.css('width')));
+
+										$(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val('auto');
+										$(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(target.view.$el.css('width')));
 
 										if (target.getAttributes()['data-block-type'] == "Logo")
-											$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input')).val($(target.getEl()).find('img').width());
+											$(sm.getProperty(Size, 'width').view.$el.find('input')).val($(target.getEl()).find('img').width());
 
 									}
 									else {
 										if (model.attributes.type == "icon")
-											$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input')).val(parseInt(target.view.$el.css('width')));
+											$(sm.getProperty(Size, 'width').view.$el.find('input')).val(parseInt(target.view.$el.css('width')));
 									}
+
+									var clearWidth = $(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear');
+
+									if ($(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val() != "auto")
+										$(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear').show();
+									else
+										$(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear').hide();
 
 									//Height
 									var height = target.getStyle()['height'];
 
 									if (typeof height == "undefined") {
-										$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val('auto');
-										$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(target.view.$el.css('height')));
+										$(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val('auto');
+										$(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(target.view.$el.css('height')));
 
 										if (target.getAttributes()['data-block-type'] == "Logo")
-											$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input')).val($(target.getEl()).find('img').height());
+											$(sm.getProperty(Size, 'height').view.$el.find('input')).val($(target.getEl()).find('img').height());
 									}
 									else {
 										if (model.attributes.type == "icon")
-											$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input')).val(parseInt(target.view.$el.css('height')));
+											$(sm.getProperty(Size, 'height').view.$el.find('input')).val(parseInt(target.view.$el.css('height')));
 									}
+
+									if ($(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val() != "auto")
+										$(sm.getProperty(Size, 'height').view.$el).find('.gjs-sm-clear').show();
+									else
+										$(sm.getProperty(Size, 'height').view.$el).find('.gjs-sm-clear').hide();
 
 									//Min Width
 									var minWidth = target.getStyle()['min-width'];
 
 									if (typeof minWidth == "undefined")
-										$(VjEditor.StyleManager.getProperty(Size, 'min-width').view.$el.find('input')).val('auto');
+										$(sm.getProperty(Size, 'min-width').view.$el.find('input')).val('auto');
 									else
-										$(VjEditor.StyleManager.getProperty(Size, 'min-width').view.$el.find('input')).val(parseInt(minWidth));
+										$(sm.getProperty(Size, 'min-width').view.$el.find('input')).val(parseInt(minWidth));
+
+									if ($(sm.getProperty(Size, 'min-width').view.$el.find('input[type="text"]')).val() != "auto")
+										$(sm.getProperty(Size, 'min-width').view.$el).find('.gjs-sm-clear').show();
+									else
+										$(sm.getProperty(Size, 'min-width').view.$el).find('.gjs-sm-clear').hide();
 
 									//Max Width
 									var maxWidth = target.getStyle()['max-width'];
 
 									if (typeof maxWidth == "undefined")
-										$(VjEditor.StyleManager.getProperty(Size, 'max-width').view.$el.find('input')).val('auto');
+										$(sm.getProperty(Size, 'max-width').view.$el.find('input')).val('auto');
 									else
-										$(VjEditor.StyleManager.getProperty(Size, 'max-width').view.$el.find('input')).val(parseInt(maxWidth));
+										$(sm.getProperty(Size, 'max-width').view.$el.find('input')).val(parseInt(maxWidth));
+
+									if ($(sm.getProperty(Size, 'max-width').view.$el.find('input[type="text"]')).val() != "auto")
+										$(sm.getProperty(Size, 'max-width').view.$el).find('.gjs-sm-clear').show();
+									else
+										$(sm.getProperty(Size, 'max-width').view.$el).find('.gjs-sm-clear').hide();
 
 									//Min Height
 									var minHeight = target.getStyle()['min-height'];
 
 									if (typeof minHeight == "undefined")
-										$(VjEditor.StyleManager.getProperty(Size, 'min-height').view.$el.find('input')).val('auto');
+										$(sm.getProperty(Size, 'min-height').view.$el.find('input')).val('auto');
 									else
-										$(VjEditor.StyleManager.getProperty(Size, 'min-height').view.$el.find('input')).val(parseInt(minHeight));
+										$(sm.getProperty(Size, 'min-height').view.$el.find('input')).val(parseInt(minHeight));
+
+									if ($(sm.getProperty(Size, 'min-height').view.$el.find('input[type="text"]')).val() != "auto")
+										$(sm.getProperty(Size, 'min-height').view.$el).find('.gjs-sm-clear').show();
+									else
+										$(sm.getProperty(Size, 'min-height').view.$el).find('.gjs-sm-clear').hide();
 
 									//Max Height
 									var maxHeight = target.getStyle()['max-height'];
 
 									if (typeof maxHeight == "undefined")
-										$(VjEditor.StyleManager.getProperty(Size, 'max-height').view.$el.find('input')).val('auto');
+										$(sm.getProperty(Size, 'max-height').view.$el.find('input')).val('auto');
 									else
-										$(VjEditor.StyleManager.getProperty(Size, 'max-height').view.$el.find('input')).val(parseInt(maxHeight));
+										$(sm.getProperty(Size, 'max-height').view.$el.find('input')).val(parseInt(maxHeight));
+
+									if ($(sm.getProperty(Size, 'max-height').view.$el.find('input[type="text"]')).val() != "auto")
+										$(sm.getProperty(Size, 'max-height').view.$el).find('.gjs-sm-clear').show();
+									else
+										$(sm.getProperty(Size, 'max-height').view.$el).find('.gjs-sm-clear').hide();
 
 								});
 
@@ -2123,6 +2150,17 @@ $(document).ready(function () {
 								else if (typeof VjEditor.StyleManager.getSector(Text) != 'undefined')
 									VjEditor.StyleManager.removeSector(Text);
 
+								$('.gjs-sm-sector').on('click', function () {
+									var $this = $(this);
+									var sectorName = $this.attr('id').replace("gjs-sm-", "");
+									if ($this.find('.gjs-sm-properties').is(':visible')) {
+										$.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
+											model.set('open', false);
+										});
+										VjEditor.StyleManager.getSector(sectorName).set('open', true);
+									}
+								});
+
 								$(VjEditor.StyleManager.getSectors().models).each(function (index, value) {
 									$(value.attributes.properties.models).each(function (subIndex, subValue) {
 										if (subValue.attributes.type == "slider")
@@ -2132,14 +2170,24 @@ $(document).ready(function () {
 								});
 							});
 
-							VjEditor.on('rte:enable', (model, argument) => {
-								if (model.model.attributes.type == 'button-text') {
-									const rte = editor.RichTextEditor;
-									rte.actionbar.parentNode.hidden = true;
-								}
-								else
-									rte.actionbar.parentNode.hidden = false;
-							});
+                            VjEditor.on('rte:enable', (model, argument) => {
+                                if (model.model.attributes.type == 'button-text') {
+                                    const rte = editor.RichTextEditor;
+                                    rte.actionbar.parentNode.hidden = true;
+                                }
+
+                                else {
+
+                                    rte.actionbar.parentNode.hidden = false;
+
+                                    if (model.model.closest('[data-gjs-type="link"]'))
+                                        $(rte.actionbar).find('.fa.fa-link').parent().hide();
+
+                                    else
+                                        $(rte.actionbar).find('.fa.fa-link').parent().show();
+                                }
+
+                            });
 
 							VjEditor.on('component:deselected', (model, argument) => {
 
@@ -2222,8 +2270,10 @@ $(document).ready(function () {
 									var style = model.getStyle()[property];
 									var svg = model.components().models[0];
 
-									if (property == "width")
+									if (property == "width") {
 										svg.addStyle({ 'width': style });
+										svg.addStyle({ 'height': style });
+									}
 
 									else if (property == "min-width")
 										svg.addStyle({ 'min-width': style });
@@ -2231,8 +2281,10 @@ $(document).ready(function () {
 									else if (property == "max-width")
 										svg.addStyle({ 'max-width': style });
 
-									else if (property == "height")
+									else if (property == "height") {
+										svg.addStyle({ 'width': style });
 										svg.addStyle({ 'height': style });
+									}
 
 									else if (property == "min-height")
 										svg.addStyle({ 'min-height': style });
@@ -2784,7 +2836,7 @@ $(document).ready(function () {
 			InjectLinksAndScripts(Scripts_Links, window.document);
 			setCookie("vj_InitUX", "true");
 			if (window.location.href.indexOf('#') > 0 && window.location.href.split("#")[0] != CurrentTabUrl) {
-				window.location.href = CurrentTabUrl;
+                window.location.href = CurrentTabUrl.split('/uxmode')[0];
 			}
 			$(this).find("em").addClass("fa-chevron-left").removeClass("fa-chevron-right");
 			$('#dnn_ContentPane').addClass("sidebar-open").removeClass('sidebar-close');
