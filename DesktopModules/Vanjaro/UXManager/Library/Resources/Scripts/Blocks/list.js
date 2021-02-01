@@ -204,7 +204,8 @@ export default (editor, config = {}) => {
 			handleTypeChange() {
 				if (typeof this.attributes.list_type != 'undefined' && this.attributes.list_type != "") {
 					this.attributes.tagName = this.attributes.list_type;
-					this.view.reset();
+                    this.view.reset();
+                    VjEditor.runCommand("save");
 				}
 			}
 		}, {
