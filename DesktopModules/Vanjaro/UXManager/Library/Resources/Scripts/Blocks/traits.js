@@ -1067,55 +1067,70 @@ export default (editor, config = {}) => {
 				}
 			}
 
-			if (component.attributes.type == "video") {
+			if (component.attributes.type == "videobox") {
 
 				var trait = component.getTrait(event.target.name);
 				trait.set({
 					'value': event.target.id
 				});
 
+				var video = component.components().models[0];
+
 				if (component.getTrait("provider").getInitValue() == 'so') {
+
 					if (event.target.name == "autoplay") {
+
 						if (event.target.value == "yes") {
+
 							component.set({ 'autoplay': 'autoplaytrue' });
-							component.components().models[0].set({ 'autoplay': 1 });
-							component.components().models[0].addAttributes({ 'autoplay': true, 'muted': true });
+							video.set({ 'autoplay': 1 });
+							video.addAttributes({ 'autoplay': true, 'muted': true });
 						}
 						else {
+
 							component.set({ 'autoplay': 'autoplayfalse' });
-							component.components().models[0].set('autoplay', 0);
-							var attr = component.components().models[0].attributes;
+							video.set('autoplay', 0);
+
+							var attr = video.getAttributes();
 							delete attr.autoplay;
-							component.components().models[0].setAttributes(attr);
+							video.setAttributes(attr);
 						}
 					}
 					else if (event.target.name == "loop") {
+
 						if (event.target.value == "yes") {
+
 							component.set({ 'loop': 'looptrue' });
-							component.components().models[0].set({ 'loop': 1 });
-							component.components().models[0].addAttributes({ 'loop': true });
+							video.set({ 'loop': 1 });
+							video.addAttributes({ 'loop': true });
 						}
 						else {
+
 							component.set({ 'loop': 'loopfalse' });
-							component.components().models[0].set('loop', 0);
-							var attr = component.components().models[0].attributes;
+							video.set('loop', 0);
+
+							var attr = video.getAttributes();
 							delete attr.loop;
-							component.components().models[0].setAttributes(attr);
+							video.setAttributes(attr);
 						}
 					}
 					else if (event.target.name == "controls") {
+
 						if (event.target.value == "yes") {
+
 							component.set({ 'controls': 'controlstrue' });
-							component.components().models[0].set({ 'controls': 1 });
-							component.components().models[0].addAttributes({ 'controls': true });
+							video.set({ 'controls': 1 });
+							video.addAttributes({ 'controls': true });
 						}
 						else {
+
 							component.set({ 'controls': 'controlsfalse' });
-							component.components().models[0].set('controls', 0);
-							component.components().models[0].addAttributes({ 'controls': false });
-							var attr = component.components().models[0].attributes;
+							video.set('controls', 0);
+							video.addAttributes({ 'controls': false });
+
+							var attr = video.getAttributes();
 							delete attr.controls;
-							component.components().models[0].setAttributes(attr);
+							video.setAttributes(attr);
 						}
 					}
 				}
@@ -1124,103 +1139,137 @@ export default (editor, config = {}) => {
 					var src = component.attributes.src;
 
 					if (event.target.name == "autoplay") {
+
 						if (event.target.value == "yes") {
+
 							if (src.indexOf('mute') < 0) {
+
 								if (src.indexOf('?') > 0)
 									src += "&mute=1&autoplay=1";
 								else
 									src += "?mute=1&autoplay=1";
 							}
+
 							component.set({ 'autoplay': 'autoplaytrue' });
-							component.components().models[0].set({ 'autoplay': 1 });
+							video.set({ 'autoplay': 1 });
 						}
 						else {
+
 							if (src.indexOf('mute') > 0) {
+
 								if (src.indexOf('?mute') > 0 && src.match(/&/g) != null && src.match(/&/g).length == 1)
 									src = src.replace('?mute=1&autoplay=1', '');
+
 								else if (src.indexOf('&mute') > 0)
 									src = src.replace('&mute=1&autoplay=1', '');
+
 								else
 									src = src.replace('mute=1&autoplay=1', '');
 							}
+
 							component.set({ 'autoplay': 'autoplayfalse' });
-							component.components().models[0].set({ 'autoplay': 0 });
+							video.set({ 'autoplay': 0 });
 						}
 					}
 					else if (event.target.name == 'loop') {
+
 						var vId = component.attributes.videoId;
 
 						if (event.target.value == 'yes') {
+
 							if (src.indexOf('loop') < 0) {
+
 								if (src.indexOf('?') > 0)
 									src += '&loop=1&playlist=' + vId;
 								else
 									src += '?loop=1&playlist=' + vId;
 							}
+
 							component.set({ 'loop': 'looptrue' });
-							component.components().models[0].set({ 'loop': 0 });
+							video.set({ 'loop': 0 });
 						}
 						else {
+
 							if (src.indexOf('loop') > 0) {
+
 								if (src.indexOf('?') > 0 && src.match(/&/g) != null && src.match(/&/g).length == 1)
 									src = src.replace('?loop=1&playlist=' + vId, '');
+
 								else if (src.indexOf('&loop') > 0)
 									src = src.replace('&loop=1&playlist=' + vId, '');
+
 								else
 									src = src.replace('loop=1&playlist=' + vId, '');
 							}
+
 							component.set({ 'loop': 'loopfalse' });
-							component.components().models[0].set({ 'loop': 0 });
+							video.set({ 'loop': 0 });
 						}
 					}
+					else if (event.target.name == "rel") {
 
-					if (event.target.name == "rel") {
 						if (event.target.value == "yes") {
+
 							if (src.indexOf('rel') > 0) {
+
 								if (src.indexOf('?rel') > 0 && src.match(/&/g) != null && src.match(/&/g).length == 0)
 									src = src.replace('?rel=0', '');
+
 								else if (src.indexOf('&rel') > 0)
 									src = src.replace('&rel=0', '');
+
 								else
 									src = src.replace('rel=0', '');
 							}
+
 							component.set({ 'rel': 'reltrue' });
-							component.components().models[0].set({ 'rel': 1 });
+							video.set({ 'rel': 1 });
 						}
 						else {
+
 							if (src.indexOf('rel') < 0) {
+
 								if (src.indexOf('?') > 0)
 									src += '&rel=0';
 								else
 									src += '?rel=0';
 							}
+
 							component.set({ 'rel': 'relfalse' });
-							component.components().models[0].set({ 'rel': 0 });
+							video.set({ 'rel': 0 });
 						}
 					}
+					else if (event.target.name == "logo") {
 
-					if (event.target.name == "logo") {
 						if (event.target.value == "yes") {
+
 							if (src.indexOf('modestbranding') > 0) {
+
 								if (src.indexOf('?modestbranding') > 0 && src.match(/&/g) != null && src.match(/&/g).length == 0)
 									src = src.replace('?modestbranding=1', '');
+
 								else if (src.indexOf('&modestbranding') > 0)
 									src = src.replace('&modestbranding=1', '');
+
 								else
 									src = src.replace('modestbranding=1', '');
 							}
+
 							component.set({ 'logo': 'logotrue' });
-							component.components().models[0].set({ 'logo': 1 });
+							video.set({ 'logo': 1 });
 						}
 						else {
+
 							if (src.indexOf('modestbranding') < 0) {
+
 								if (src.indexOf('?') > 0)
 									src += '&modestbranding=1';
 								else
 									src += '?modestbranding=1';
 							}
+
 							component.set({ 'logo': 'logofalse' });
-							component.components().models[0].set({ 'logo': 0 });
+							video.set({ 'logo': 0 });
 						}
 					}
 
@@ -1230,11 +1279,14 @@ export default (editor, config = {}) => {
 						src = src.replace('?', '');
 
 					component.set({ 'src': src });
-					component.components().models[0].set({ 'src': src, 'controls': 1 });
-					component.components().models[0].addAttributes({ 'allow': 'autoplay' });;
-					$(component.components().models[0].getEl()).find('iframe').attr('src', src);
+
+					video.set({ 'src': src, 'controls': 1 });
+					video.addAttributes({ 'allow': 'autoplay' });;
+
+					$(video.getEl()).find('iframe').attr('src', src);
 				}
 
+				VjEditor.runCommand("save");
 			}
 
 			var model = component;
@@ -1723,7 +1775,7 @@ export default (editor, config = {}) => {
 				model = component.findType(trait.attributes.selector);
 
 			$(model).each(function (index, item) {
-				if (item.attributes.type == 'video')
+				if (item.attributes.type == 'videobox')
 					if (event.target.value == 'yt')
 						item.set({ 'provider': 'yt', 'videoId': '' });
 					else
