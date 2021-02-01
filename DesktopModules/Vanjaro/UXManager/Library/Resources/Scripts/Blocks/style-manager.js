@@ -1,6 +1,8 @@
 ﻿export default (editor, config = {}) => {
 
 	var sm = editor.StyleManager;
+	var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();
+	var Size = VjLocalized.Size.replace(/ /g, '_').toLowerCase();
 
 	sm.addType('customradio', {
 		create({ props, change }) {
@@ -358,6 +360,15 @@
 			selected.setStyle(style);
 
 			model.setValue(val + unit);
+
+			if (selected.attributes.type == "icon") {
+
+				if (property == "width")
+					VjEditor.StyleManager.getProperty(Size, 'height').setValue(val + unit);
+
+				else if (property == "height")
+					VjEditor.StyleManager.getProperty(Size, 'width').setValue(val + unit);
+			}
 		},
 		setValue(value) {
 
@@ -427,18 +438,55 @@
 
 			var selected = VjEditor.getSelected();
 
+			if (selected.attributes.type == "icon" && (property == "width" || property == "min-width" || property == "max-width" || property == "height" || property == "min-height" || property == "max-height"))
+				selected = selected.components().models[0];
+
+			else if (selected.getAttributes()['data-block-type'] == "Logo") {
+
+				var img = $(selected.getEl()).find('img');
+
+				if (property == "width")
+					img.css('width', '100%');
+
+				else if (property == "height")
+					img.css('height', 'auto');
+
+				var width = img.width();
+				var height = img.height();
+
+				var attr = selected.getAttributes();
+				attr['data-style'] = 'width:' + width + 'px; height:' + height + 'px;';
+				selected.setAttributes(attr);
+
+			}
+
 			if (value == 'auto') {
+
 				selected.removeStyle(property);
 				model.view.$el.find('select').prop('disabled', 'disabled');
+
+				if (selected.attributes.type == "svg" && selected.parent().attributes.type == "icon") {
+
+					if (property == "width") {
+
+						selected.removeStyle('height');
+						VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input').val(value);
+						$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('height')));
+					}
+
+					else if (property == "height") {
+
+						selected.removeStyle('width');
+						VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input').val(value);
+						$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('width')));
+					}
+				}
 			}
 			else {
 				var style = selected.getStyle();
 				style[property] = value + unit;
 				selected.setStyle(style);
 			}
-
-			var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();
-			var Size = VjLocalized.Size.replace(/ /g, '_').toLowerCase();
 
 			if (property == "border-width" || property == "border-top-width" || property == "border-right-width" || property == "border-bottom-width" || property == "border-left-width") {
 
@@ -467,7 +515,7 @@
 				VjEditor.StyleManager.getProperty(Border, borderStyle).view.$el.find('input').prop('checked', false);
 
 			}
-			else if (property == "width" && value == "auto") 
+			else if (property == "width" && value == "auto")
 				$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('width')));
 			else if (property == "height" && value == "auto")
 				$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('height')));

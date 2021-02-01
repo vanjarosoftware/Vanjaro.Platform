@@ -1482,16 +1482,6 @@ $(document).ready(function () {
 									}, 250));
 								});
 
-								$('.gjs-sm-sector').on('click', function () {
-									var $this = $(this);
-									var sectorName = $this.attr('id').replace("gjs-sm-", "");
-									if ($this.find('.gjs-sm-properties').is(':visible')) {
-										$.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
-											model.set('open', false);
-										});
-										VjEditor.StyleManager.getSector(sectorName).set('open', true);
-									}
-								});
 							});
 
 							var parentClone = "";
@@ -1774,6 +1764,7 @@ $(document).ready(function () {
 
 								setTimeout(function () {
 
+									var sm = VjEditor.StyleManager;
 									var target = model;
 
 									if (model.attributes.type == "icon")
@@ -1783,64 +1774,97 @@ $(document).ready(function () {
 									var width = target.getStyle()['width'];
 
 									if (typeof width == "undefined") {
-										$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val('auto');
-										$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(target.view.$el.css('width')));
+
+										$(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val('auto');
+										$(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(target.view.$el.css('width')));
 
 										if (target.getAttributes()['data-block-type'] == "Logo")
-											$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input')).val($(target.getEl()).find('img').width());
+											$(sm.getProperty(Size, 'width').view.$el.find('input')).val($(target.getEl()).find('img').width());
 
 									}
 									else {
 										if (model.attributes.type == "icon")
-											$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input')).val(parseInt(target.view.$el.css('width')));
+											$(sm.getProperty(Size, 'width').view.$el.find('input')).val(parseInt(target.view.$el.css('width')));
 									}
+
+									var clearWidth = $(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear');
+
+									if ($(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val() != "auto")
+										$(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear').show();
+									else
+										$(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear').hide();
 
 									//Height
 									var height = target.getStyle()['height'];
 
 									if (typeof height == "undefined") {
-										$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val('auto');
-										$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(target.view.$el.css('height')));
+										$(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val('auto');
+										$(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(target.view.$el.css('height')));
 
 										if (target.getAttributes()['data-block-type'] == "Logo")
-											$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input')).val($(target.getEl()).find('img').height());
+											$(sm.getProperty(Size, 'height').view.$el.find('input')).val($(target.getEl()).find('img').height());
 									}
 									else {
 										if (model.attributes.type == "icon")
-											$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input')).val(parseInt(target.view.$el.css('height')));
+											$(sm.getProperty(Size, 'height').view.$el.find('input')).val(parseInt(target.view.$el.css('height')));
 									}
+
+									if ($(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val() != "auto")
+										$(sm.getProperty(Size, 'height').view.$el).find('.gjs-sm-clear').show();
+									else
+										$(sm.getProperty(Size, 'height').view.$el).find('.gjs-sm-clear').hide();
 
 									//Min Width
 									var minWidth = target.getStyle()['min-width'];
 
 									if (typeof minWidth == "undefined")
-										$(VjEditor.StyleManager.getProperty(Size, 'min-width').view.$el.find('input')).val('auto');
+										$(sm.getProperty(Size, 'min-width').view.$el.find('input')).val('auto');
 									else
-										$(VjEditor.StyleManager.getProperty(Size, 'min-width').view.$el.find('input')).val(parseInt(minWidth));
+										$(sm.getProperty(Size, 'min-width').view.$el.find('input')).val(parseInt(minWidth));
+
+									if ($(sm.getProperty(Size, 'min-width').view.$el.find('input[type="text"]')).val() != "auto")
+										$(sm.getProperty(Size, 'min-width').view.$el).find('.gjs-sm-clear').show();
+									else
+										$(sm.getProperty(Size, 'min-width').view.$el).find('.gjs-sm-clear').hide();
 
 									//Max Width
 									var maxWidth = target.getStyle()['max-width'];
 
 									if (typeof maxWidth == "undefined")
-										$(VjEditor.StyleManager.getProperty(Size, 'max-width').view.$el.find('input')).val('auto');
+										$(sm.getProperty(Size, 'max-width').view.$el.find('input')).val('auto');
 									else
-										$(VjEditor.StyleManager.getProperty(Size, 'max-width').view.$el.find('input')).val(parseInt(maxWidth));
+										$(sm.getProperty(Size, 'max-width').view.$el.find('input')).val(parseInt(maxWidth));
+
+									if ($(sm.getProperty(Size, 'max-width').view.$el.find('input[type="text"]')).val() != "auto")
+										$(sm.getProperty(Size, 'max-width').view.$el).find('.gjs-sm-clear').show();
+									else
+										$(sm.getProperty(Size, 'max-width').view.$el).find('.gjs-sm-clear').hide();
 
 									//Min Height
 									var minHeight = target.getStyle()['min-height'];
 
 									if (typeof minHeight == "undefined")
-										$(VjEditor.StyleManager.getProperty(Size, 'min-height').view.$el.find('input')).val('auto');
+										$(sm.getProperty(Size, 'min-height').view.$el.find('input')).val('auto');
 									else
-										$(VjEditor.StyleManager.getProperty(Size, 'min-height').view.$el.find('input')).val(parseInt(minHeight));
+										$(sm.getProperty(Size, 'min-height').view.$el.find('input')).val(parseInt(minHeight));
+
+									if ($(sm.getProperty(Size, 'min-height').view.$el.find('input[type="text"]')).val() != "auto")
+										$(sm.getProperty(Size, 'min-height').view.$el).find('.gjs-sm-clear').show();
+									else
+										$(sm.getProperty(Size, 'min-height').view.$el).find('.gjs-sm-clear').hide();
 
 									//Max Height
 									var maxHeight = target.getStyle()['max-height'];
 
 									if (typeof maxHeight == "undefined")
-										$(VjEditor.StyleManager.getProperty(Size, 'max-height').view.$el.find('input')).val('auto');
+										$(sm.getProperty(Size, 'max-height').view.$el.find('input')).val('auto');
 									else
-										$(VjEditor.StyleManager.getProperty(Size, 'max-height').view.$el.find('input')).val(parseInt(maxHeight));
+										$(sm.getProperty(Size, 'max-height').view.$el.find('input')).val(parseInt(maxHeight));
+
+									if ($(sm.getProperty(Size, 'max-height').view.$el.find('input[type="text"]')).val() != "auto")
+										$(sm.getProperty(Size, 'max-height').view.$el).find('.gjs-sm-clear').show();
+									else
+										$(sm.getProperty(Size, 'max-height').view.$el).find('.gjs-sm-clear').hide();
 
 								});
 
@@ -2126,6 +2150,17 @@ $(document).ready(function () {
 								else if (typeof VjEditor.StyleManager.getSector(Text) != 'undefined')
 									VjEditor.StyleManager.removeSector(Text);
 
+								$('.gjs-sm-sector').on('click', function () {
+									var $this = $(this);
+									var sectorName = $this.attr('id').replace("gjs-sm-", "");
+									if ($this.find('.gjs-sm-properties').is(':visible')) {
+										$.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
+											model.set('open', false);
+										});
+										VjEditor.StyleManager.getSector(sectorName).set('open', true);
+									}
+								});
+
 								$(VjEditor.StyleManager.getSectors().models).each(function (index, value) {
 									$(value.attributes.properties.models).each(function (subIndex, subValue) {
 										if (subValue.attributes.type == "slider")
@@ -2225,8 +2260,10 @@ $(document).ready(function () {
 									var style = model.getStyle()[property];
 									var svg = model.components().models[0];
 
-									if (property == "width")
+									if (property == "width") {
 										svg.addStyle({ 'width': style });
+										svg.addStyle({ 'height': style });
+									}
 
 									else if (property == "min-width")
 										svg.addStyle({ 'min-width': style });
@@ -2234,8 +2271,10 @@ $(document).ready(function () {
 									else if (property == "max-width")
 										svg.addStyle({ 'max-width': style });
 
-									else if (property == "height")
+									else if (property == "height") {
+										svg.addStyle({ 'width': style });
 										svg.addStyle({ 'height': style });
+									}
 
 									else if (property == "min-height")
 										svg.addStyle({ 'min-height': style });
