@@ -323,9 +323,7 @@
   <ItemGroup>
     <Content Include="Resources\Images\image.webp" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Scripts\GrapesJsManagers\img\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="web.config" />
     <Content Include="Resources\Scripts\uxmanager.min.js.map" />
