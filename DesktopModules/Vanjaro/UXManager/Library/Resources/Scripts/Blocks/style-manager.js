@@ -94,7 +94,10 @@
 				});
 			}
 
-			selected.set(property, defaultValue);
+			if (selected.attributes.type == "grid")
+				selected.attributes.components.models[0].setStyle(property, defaultValue);
+			else
+				selected.setStyle(property, defaultValue);
 
 			if (property == "border-style" || property == "border-top-style" || property == "border-right-style" || property == "border-bottom-style" || property == "border-left-style") {
 
