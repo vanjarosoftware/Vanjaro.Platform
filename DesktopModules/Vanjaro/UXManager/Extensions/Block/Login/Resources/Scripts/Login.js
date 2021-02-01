@@ -60,7 +60,7 @@
 
         if (response.HasErrors) {
 
-            
+
             if (response.Errors["MUSTAGREETOTERMS"] != null && typeof response.Errors["MUSTAGREETOTERMS"] != "undefined") {
                 $(obj).closest('.Login').find('#loginbtn').html(signinText);
                 $('<div class="show-message alert alert-warning">' + response.Message + '</div>').insertAfter($(obj).closest('.login-container').find('.dataconsent').find('.loginhead'));
@@ -264,6 +264,6 @@ $(document).ready(function () {
         }
     });
 
-    Login.UserLoginAPIUri = window.location.origin + $.ServicesFramework(-1).getServiceRoot("Login") + "Login/UserLogin" + window.location.search;
-    
+    setTimeout(function () { Login.UserLoginAPIUri = window.location.origin + $.ServicesFramework(-1).getServiceRoot("Login") + "Login/UserLogin" + window.location.search; });
+
 });
