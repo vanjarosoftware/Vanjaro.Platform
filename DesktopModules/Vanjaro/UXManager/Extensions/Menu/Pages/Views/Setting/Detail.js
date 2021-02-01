@@ -679,7 +679,6 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                     common.webApi.post('pages/removeallmodule', 'PageId=' + $scope.pid, '').success(function (Response) {
                         if (Response.IsSuccess) {
                             $scope.ui.data.DeletedModules.Options = [];
-                            $scope.ui.data.DeletedModules.Options = Response.Data.DeletedModules;
                             if ($scope.ui.data.DeletedModules.Options.length <= 0)
                                 $scope.Click_ShowTab('Page_details');
                         }

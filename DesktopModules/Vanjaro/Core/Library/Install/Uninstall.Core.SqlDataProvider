@@ -44,3 +44,6 @@ GO
 
 update {databaseOwner}[{objectQualifier}Schedule] set TypeFullName='DotNetNuke.Services.Search.SearchEngineScheduler, DOTNETNUKE' where TypeFullName='Vanjaro.Core.Services.Search.SearchEngineScheduler,Vanjaro.Core'
 GO
+
+Delete from {databaseOwner}[{objectQualifier}Schedule] where TypeFullName='Vanjaro.Common.Components.Scheduler,Vanjaro.Common'
+GO
