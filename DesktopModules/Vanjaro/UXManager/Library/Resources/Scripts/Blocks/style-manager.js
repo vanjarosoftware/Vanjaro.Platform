@@ -84,8 +84,11 @@
 			model.view.$el.find('input').prop('checked', false);
 			model.view.$el.find('input[value="' + defaultValue + '"]').prop('checked', true);
 
-			if (model.attributes.UpdateStyles)
+			if (model.attributes.UpdateStyles) {
 				selected.removeStyle(property);
+				if (selected.attributes.type == "grid")
+					selected.attributes.components.models[0].removeStyle(property);
+            }
 			else {
 				var classes = model.attributes.list.map(opt => opt.value);
 
@@ -94,10 +97,7 @@
 				});
 			}
 
-			if (selected.attributes.type == "grid")
-				selected.attributes.components.models[0].setStyle(property, defaultValue);
-			else
-				selected.setStyle(property, defaultValue);
+			selected.set(property, defaultValue);
 
 			if (property == "border-style" || property == "border-top-style" || property == "border-right-style" || property == "border-bottom-style" || property == "border-left-style") {
 
