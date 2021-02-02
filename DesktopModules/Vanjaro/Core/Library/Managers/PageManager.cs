@@ -442,7 +442,7 @@ namespace Vanjaro.Core
                                                 desktopModuleInfo.BusinessControllerClass,
                                                 desktopModuleInfo.BusinessControllerClass);
                                             var controller = businessController as IPortable;
-                                            controller?.ImportModule(objModule.ModuleID, File.ReadAllText(portableModulesPath + "/" + oldMid + ".json"), desktopModuleInfo.Version, userInfo.UserID);
+                                            controller?.ImportModule(objModule.ModuleID, File.ReadAllText(portableModulesPath + "/" + oldMid + ".json", Encoding.Unicode), desktopModuleInfo.Version, userInfo.UserID);
                                         }
                                     }
                                 }
@@ -881,7 +881,14 @@ namespace Vanjaro.Core
                     try
                     {
                         string matchurl = match.Value.Replace("url(\"", "").Replace("\")", "").Replace("url(\\\"", "").Replace("\\\")", "");
-                        content = content.Replace(matchurl, GetNewLink(matchurl, Assets));
+                        string newlink = GetNewLink(matchurl, Assets);
+                        if (matchurl != newlink)
+                        {
+                            if (matchurl.EndsWith("\\") || matchurl.EndsWith(@"\"))
+                                content = content.Replace(matchurl, newlink + @"\");
+                            else
+                                content = content.Replace(matchurl, newlink);
+                        }
                     }
                     catch { }
                 }
@@ -921,7 +928,7 @@ namespace Vanjaro.Core
                     string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
                     string tempNewUrl = newurl;
                     int count = 1;
-                Find:
+                    Find:
                     if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
                     {
                         tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;
