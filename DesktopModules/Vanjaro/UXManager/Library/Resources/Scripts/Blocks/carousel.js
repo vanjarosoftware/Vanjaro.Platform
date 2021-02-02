@@ -32,14 +32,14 @@
 					var tb = [];
 
 					tb.push({
-                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddSlide },
+						attributes: { class: 'fa fa-plus', title: VjLocalized.AddSlide },
 						command: function (t) {
 							return t.runCommand("add-slide");
 						}
 					});
 
 					tb.push({
-                        attributes: { class: 'fa fa-arrow-left', title: VjLocalized.PrevSlide  },
+						attributes: { class: 'fa fa-arrow-left', title: VjLocalized.PrevSlide },
 						command: function (t) {
 							const target = this;
 							return t.runCommand("slider-prev", { target });
@@ -47,7 +47,7 @@
 					});
 
 					tb.push({
-                        attributes: { class: 'fa fa-arrow-right', title: VjLocalized.NextSlide },
+						attributes: { class: 'fa fa-arrow-right', title: VjLocalized.NextSlide },
 						command: function (t) {
 							const target = this;
 							return t.runCommand("slider-next", { target });
@@ -247,42 +247,43 @@
 					var modelId = this.model.getId();
 
 					comps.add(`
-                <ol class="carousel-indicators">
-                    <li data-target="#`+ modelId + `" data-slide-to="0" class="carousel-indicator active"></li>
-                    <li data-target="#`+ modelId + `" data-slide-to="1" class="carousel-indicator"></li>
-                    <li data-target="#`+ modelId + `" data-slide-to="2" class="carousel-indicator"></li>
-                </ol>   
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <a class="carousel-link">
-                            <picture class="picture-box">
-					            <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png"/>
-				            </picture>
+						<ol class="carousel-indicators">
+                            <li data-target="#`+ modelId + `" data-slide-to="0" class="carousel-indicator active"></li>
+                            <li data-target="#`+ modelId + `" data-slide-to="1" class="carousel-indicator"></li>
+                            <li data-target="#`+ modelId + `" data-slide-to="2" class="carousel-indicator"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a class="carousel-link">
+                                    <picture class="picture-box">
+                                        <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png" />
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="carousel-link">
+                                    <picture class="picture-box">
+                                        <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png" />
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="carousel-link">
+                                    <picture class="picture-box">
+                                        <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png" />
+                                    </picture>
+                                </a>
+                            </div>
+                        </div>
+                        <a class="carousel-control carousel-control-prev" href="#`+ modelId + `" role="button" data-slide="prev">
+                            <span data-gjs-selectable="false" class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="carousel-control sr-only">Previous</span>
                         </a>
-                    </div>
-                    <div class="carousel-item">
-                        <a class="carousel-link">
-                            <picture class="picture-box">
-					            <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png"/>
-				            </picture>
+                        <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-slide="next">
+                            <span data-gjs-selectable="false" class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="carousel-control sr-only">Next</span>
                         </a>
-                    </div>
-                    <div class="carousel-item">
-                        <a class="carousel-link">
-                            <picture class="picture-box">
-					            <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png"/>
-				            </picture>
-                        </a>
-                    </div>
-                </div>
- <a class="carousel-control carousel-control-prev" href="#`+ modelId + `" role="button" data-slide="prev">
-    <span class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="carousel-control sr-only">Previous</span>
-  </a>
-  <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-slide="next">
-    <span class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="carousel-control sr-only">Next</span>
-  </a>`);
+					`);
 				}
 			},
 		}),
@@ -379,7 +380,7 @@
 					var tb = [];
 
 					tb.push({
-                        attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
+						attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
 						command: 'custom-tui-image-editor',
 					});
 
@@ -393,8 +394,8 @@
 					});
 
 					if (model.get('copyable')) {
-                        tb.push({
-                            attributes: { class: 'fa fa-clone', title: VjLocalized.CopyCarouselImage },
+						tb.push({
+							attributes: { class: 'fa fa-clone', title: VjLocalized.CopyCarouselImage },
 							command: 'slide-clone',
 						});
 					}
