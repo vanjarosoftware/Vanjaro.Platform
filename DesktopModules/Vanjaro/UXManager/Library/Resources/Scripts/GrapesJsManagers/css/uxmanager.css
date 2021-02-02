@@ -2665,9 +2665,9 @@ span.notificationname {
     text-align: center;
     margin: 0px;
     padding: 6px 12px;
-    border: 1px solid #333;
+    border: 1px solid #666;
     border-radius: 4px;
-    background-color: #333;
+    background-color: #666;
     color: #fff;
     font-size: 16px;
     white-space: normal;
