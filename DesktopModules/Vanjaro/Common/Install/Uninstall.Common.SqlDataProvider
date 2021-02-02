@@ -18,3 +18,6 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_MailQueue_Log]') AND type in (N'U'))
 DROP TABLE {databaseOwner}[VJ_Common_MailQueue_Log]
 GO
+
+Delete from {databaseOwner}[{objectQualifier}Schedule] where TypeFullName='Vanjaro.Common.Components.Scheduler,Vanjaro.Common'
+GO
