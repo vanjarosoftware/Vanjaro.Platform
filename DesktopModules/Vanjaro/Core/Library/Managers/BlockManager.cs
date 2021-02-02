@@ -398,9 +398,9 @@ namespace Vanjaro.Core
                         {
                             using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                             {
-                                AddZipItem("Template.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
+                                AddZipItem("Template.json", Encoding.Unicode.GetBytes(serializedExportTemplate), zip);
                                 foreach (var exportedModuleContent in ExportedModulesContent)
-                                    AddZipItem("PortableModules/" + exportedModuleContent.Key + ".json", Encoding.ASCII.GetBytes(exportedModuleContent.Value), zip);
+                                    AddZipItem("PortableModules/" + exportedModuleContent.Key + ".json", Encoding.Unicode.GetBytes(exportedModuleContent.Value), zip);
                                 if (Assets != null && Assets.Count > 0)
                                 {
                                     foreach (KeyValuePair<string, string> asset in Assets)

@@ -30,28 +30,28 @@ namespace Vanjaro.UXManager.Library.Controllers
     public class BlockController : UIEngineController
     {
         [HttpPost]
-        [DnnAdmin]
+        [AuthorizeAccessRoles(AccessRoles = "admin")]
         public dynamic AddCustomBlock(CustomBlock CustomBlock)
         {
             return Core.Managers.BlockManager.Add(PortalSettings, CustomBlock);
         }
 
         [HttpPost]
-        [DnnAdmin]
+        [AuthorizeAccessRoles(AccessRoles = "admin")]
         public dynamic EditCustomBlock(CustomBlock CustomBlock)
         {
             return Core.Managers.BlockManager.Edit(PortalSettings, CustomBlock);
         }
 
         [HttpPost]
-        [DnnAdmin]
+        [AuthorizeAccessRoles(AccessRoles = "admin")]
         public dynamic DeleteCustomBlock(string CustomBlockGuid)
         {
             return Core.Managers.BlockManager.Delete(PortalSettings.ActiveTab.PortalID, CustomBlockGuid);
         }
 
         [HttpGet]
-        [DnnAdmin]
+        [AuthorizeAccessRoles(AccessRoles = "admin")]
         public HttpResponseMessage ExportCustomBlock(string CustomBlockGuid)
         {
             return Core.Managers.BlockManager.ExportCustomBlock(PortalSettings.ActiveTab.PortalID, CustomBlockGuid);

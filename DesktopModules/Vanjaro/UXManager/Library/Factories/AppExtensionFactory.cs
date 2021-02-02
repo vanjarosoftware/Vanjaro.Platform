@@ -34,6 +34,10 @@ namespace Vanjaro.UXManager.Library
                 {
                     AccessRoles.Add("pageedit");
                 }
+                if (UserInfo.IsInRole("Administrators"))
+                {
+                    AccessRoles.Add("admin");
+                }
                 return string.Join(",", AccessRoles.Distinct());
             }
         }
