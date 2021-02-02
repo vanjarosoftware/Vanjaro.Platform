@@ -1727,13 +1727,13 @@ $(document).ready(function () {
 									});
 									return;
 								}
-								else if (model.attributes.type == 'prev' || model.closest('[data-gjs-type="prev"]')) {
+								else if (model.attributes.type == 'prev') {
 									var slider = model.closest('[data-gjs-type="carousel"]');
 									VjEditor.select(slider);
 									VjEditor.runCommand("slider-prev", { slider });
 									return;
 								}
-								else if (model.attributes.type == 'next' || model.closest('[data-gjs-type="next"]')) {
+								else if (model.attributes.type == 'next') {
 									var slider = model.closest('[data-gjs-type="carousel"]');
 									VjEditor.select(slider);
 									VjEditor.runCommand("slider-next", { slider });
@@ -1776,7 +1776,7 @@ $(document).ready(function () {
 									if (typeof width == "undefined") {
 
 										$(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val('auto');
-										$(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(target.view.$el.css('width')));
+										$(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('width')));
 
 										if (target.getAttributes()['data-block-type'] == "Logo")
 											$(sm.getProperty(Size, 'width').view.$el.find('input')).val($(target.getEl()).find('img').width());
@@ -1784,7 +1784,7 @@ $(document).ready(function () {
 									}
 									else {
 										if (model.attributes.type == "icon")
-											$(sm.getProperty(Size, 'width').view.$el.find('input')).val(parseInt(target.view.$el.css('width')));
+											$(sm.getProperty(Size, 'width').view.$el.find('input')).val(parseInt($(target.getEl()).css('width')));
 									}
 
 									var clearWidth = $(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear');
@@ -1799,14 +1799,14 @@ $(document).ready(function () {
 
 									if (typeof height == "undefined") {
 										$(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val('auto');
-										$(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(target.view.$el.css('height')));
+										$(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('height')));
 
 										if (target.getAttributes()['data-block-type'] == "Logo")
 											$(sm.getProperty(Size, 'height').view.$el.find('input')).val($(target.getEl()).find('img').height());
 									}
 									else {
 										if (model.attributes.type == "icon")
-											$(sm.getProperty(Size, 'height').view.$el.find('input')).val(parseInt(target.view.$el.css('height')));
+											$(sm.getProperty(Size, 'height').view.$el.find('input')).val(parseInt($(target.getEl()).css('height')));
 									}
 
 									if ($(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val() != "auto")

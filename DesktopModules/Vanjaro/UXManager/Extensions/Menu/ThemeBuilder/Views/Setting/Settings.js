@@ -60,6 +60,10 @@
             change: function (color) {
                 $(this).val(color.toRgbString());
                 $scope.ApplyChanges(this);
+            },
+            hide: function (color) {
+                $(this).val(color.toRgbString());
+                $scope.ApplyChanges(this);
             }
         });
     };
