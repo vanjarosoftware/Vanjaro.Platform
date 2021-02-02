@@ -262,9 +262,6 @@ namespace Vanjaro.Core
                 }
 
                 #region Copy Vthemes in portal folder
-
-                string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrent(pinfo.PortalID).Name + "/editor");
-                Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", pinfo.PortalID.ToString()));
                 try
                 {
                     ThemeManager.ProcessScss(pinfo.PortalID, false);
@@ -624,7 +621,7 @@ namespace Vanjaro.Core
                 TabInfo ProfileTab = TabController.Instance.GetTabByName("Profile", pinfo.PortalID);
                 Layout Profilelayout = pageLayouts.Where(a => a.Name == "Profile").FirstOrDefault();
                 if (ProfileTab != null && Profilelayout != null && portalSettings != null)
-                {                   
+                {
                     ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
                     pinfo.UserTabId = ProfileTab.TabID;
                     if (portalSettings.ActiveTab == null)

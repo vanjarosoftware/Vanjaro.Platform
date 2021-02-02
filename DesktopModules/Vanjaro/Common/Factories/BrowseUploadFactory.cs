@@ -1233,7 +1233,7 @@ namespace Vanjaro.Common.Factories
             if (Security.IsAllowedExtension(FileExtension, FileTypes) && FileSize <= maxsize)
             {
                 int count = 1;
-            Find:
+                Find:
                 if (FileManager.Instance.FileExists(folderInfo, TempFileName))
                 {
                     TempFileName = FileName.Remove(FileName.Length - FileExtension.Length) + count + FileExtension;
@@ -1623,7 +1623,7 @@ namespace Vanjaro.Common.Factories
                 {
                     result = imagefolderpath + "fa-file-code.jpg";
                 }
-                else if (file.Extension.ToLower().Contains("jpg") || file.Extension.ToLower().Contains("jpeg") || file.Extension.ToLower().Contains("gif") || file.Extension.ToLower().Contains("bmp") || file.Extension.ToLower().Contains("png") || file.Extension.ToLower().Contains("svg") || file.Extension.ToLower().Contains("ico"))
+                else if (file.Extension.ToLower().Contains("jpg") || file.Extension.ToLower().Contains("jpeg") || file.Extension.ToLower().Contains("gif") || file.Extension.ToLower().Contains("bmp") || file.Extension.ToLower().Contains("png") || file.Extension.ToLower().Contains("svg") || file.Extension.ToLower().Contains("ico") || file.Extension.ToLower().Contains("webp"))
                 {
                     result = FileManager.Instance.GetUrl(file);
                 }

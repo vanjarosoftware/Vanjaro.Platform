@@ -670,7 +670,7 @@ namespace Vanjaro.Core
                                 {
                                     sb.Append("<div class=\"field fieldcolor optioncontrol\" id=" + item.Guid + "><label>" + colorPicker.Title + " </label>");
                                     string value = GetGuidValue(themeEditorValues, colorPicker);
-                                    sb.Append("<span class=\"input-wrapper\"><input class=\"color\" guid=" + colorPicker.Guid + " type=\"text\" value=" + value + ">");
+                                    sb.Append("<span class=\"input-wrapper\"><input class=\"color\" guid=" + colorPicker.Guid + " type=\"text\" value=\"" + value + "\">");
                                     sb.Append("<span class=\"units\">" + colorPicker.Suffix + "</span>");
                                     sb.Append(GetCssMarkup(colorPicker.Guid, colorPicker.CustomCSS, colorPicker.PreviewCSS, colorPicker.LessVariable, item.Sass) + "</span>" + GetPvNotAvailableMarkup(colorPicker.PreviewCSS) + "</div>");
                                 }
