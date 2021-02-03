@@ -174,7 +174,7 @@ namespace Vanjaro.Core
                     ThemeEditorWrapper editors = GetThemeEditors(PortalID, category.Guid, CheckVisibilityPermission);
                     if (editors != null && editors.ThemeEditors != null)
                     {
-                        foreach (IGrouping<string, ThemeEditor> themeEditorGroup in GetThemeEditors(PortalID, category.Guid, CheckVisibilityPermission).ThemeEditors.GroupBy(g => g.Category).OrderBy(a => a.Key).ToList())
+                        foreach (IGrouping<string, ThemeEditor> themeEditorGroup in GetEditorGroups(PortalID, category.Guid, CheckVisibilityPermission))
                         {
                             foreach (ThemeEditor item in themeEditorGroup.OrderBy(a => a.Title).ToList())
                             {
@@ -192,16 +192,17 @@ namespace Vanjaro.Core
                                         DefaultValue = editorValue.Value;
                                     }
 
+                                    if (!string.IsNullOrEmpty(DefaultValue) && !string.IsNullOrEmpty(variable) && variable.StartsWith("$"))
+                                    {
+                                        Css.Add(variable + ":" + DefaultValue + " !default;");
+                                    }
+
                                     if (!string.IsNullOrEmpty(DefaultValue) && !string.IsNullOrEmpty(css))
                                     {
                                         string[] strings = new string[] { variable };
                                         strings = css.Split(strings, StringSplitOptions.None);
                                         css = string.Join(DefaultValue, strings);
                                         Css.Add(css + ';');
-                                    }
-                                    else if (!string.IsNullOrEmpty(DefaultValue) && !string.IsNullOrEmpty(variable) && variable.StartsWith("$"))
-                                    {
-                                        Css.Add(variable + ":" + DefaultValue + " !default;");
                                     }
 
                                     if (!string.IsNullOrEmpty(sass))
@@ -589,7 +590,7 @@ namespace Vanjaro.Core
                 if (editors != null && editors.ThemeEditors != null)
                 {
                     List<ThemeEditorValue> themeEditorValues = GetThemeEditorValues(PortalSettings.Current.PortalId, Guid);
-                    foreach (IGrouping<string, ThemeEditor> item in GetThemeEditors(PortalSettings.Current.PortalId, Guid).ThemeEditors.GroupBy(g => g.Category).OrderBy(a => a.Key).ToList())
+                    foreach (IGrouping<string, ThemeEditor> item in GetEditorGroups(PortalSettings.Current.PortalId, Guid))
                     {
                         sb.Append(GetMarkUp(identifier, item, themeEditorValues, editors.DeveloperMode, Guid));
                     }
@@ -856,6 +857,20 @@ namespace Vanjaro.Core
 
                 return OAuthClient.Count > 0;
 
+            }
+            private static IEnumerable<IGrouping<string, ThemeEditor>> GetEditorGroups(int PortalID, string Guid, bool CheckVisibilityPermission = true)
+            {
+                List<IGrouping<string, ThemeEditor>> themeEditorGroups = GetThemeEditors(PortalID, Guid, CheckVisibilityPermission).ThemeEditors.GroupBy(g => g.Category).OrderBy(a => a.Key).ToList();
+                if (themeEditorGroups != null && themeEditorGroups.Count > 0)
+                {
+                    IGrouping<string, ThemeEditor> siteItem = themeEditorGroups.Where(a => a.Key == "Site").FirstOrDefault();
+                    if (siteItem != null)
+                    {
+                        themeEditorGroups.Remove(siteItem);
+                        themeEditorGroups.Insert(0, siteItem);
+                    }
+                }
+                return themeEditorGroups;
             }
 
 

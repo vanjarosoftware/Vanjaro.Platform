@@ -20,23 +20,23 @@
         {
           "Guid": "71d1572f-b319-4a5a-b444-eb885d89d9d6",
           "Title": "Hover Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".DefaultMenu > ul > li:hover > a {\n  color:$navhovercolor !important;\n}",
           "PreviewCSS": ".DefaultMenu > ul > li:hover > a {\n  color:$navhovercolor !important;\n}",
           "LessVariable": "$navhovercolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "044da7f5-b02d-4722-ae6e-03e94842c7f3",
           "Title": "Active Color",
-          "DefaultValue": "#000000",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".DefaultMenu li.selected a{\n  color:$navactivecolor !important;\n}",
           "PreviewCSS": ".DefaultMenu li.selected a{\n  color:$navactivecolor !important;\n}",
           "LessVariable": "$navactivecolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -67,7 +67,7 @@
         {
           "Guid": "1c55d5b4-a527-4654-adf7-9c0ff04c1ca8",
           "Title": "Active border bottom color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".DefaultMenu > ul > li.selected > a,\n.DefaultMenu > ul > li:hover > a {\n  Border-color:$navbordercolor !important;\n}",
           "PreviewCSS": ".DefaultMenu > ul > li.selected > a,\n.DefaultMenu > ul > li:hover > a {\n  Border-color:$navbordercolor !important;\n}",
@@ -486,7 +486,7 @@
           "CustomCSS": ".DefaultMenu .dropdown ul li a.menu-item:hover {\n\tcolor:$colorhover !important;\n}",
           "PreviewCSS": ".DefaultMenu .dropdown ul li a.menu-item:hover {\n\tcolor:$colorhover !important;\n}",
           "LessVariable": "$colorhover",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -497,18 +497,18 @@
           "CustomCSS": "@media (min-width: 992px) {\n.DefaultMenu .dropdown ul li a.menu-item {\n\tbackground: $submenubackground !important;\n}\n}",
           "PreviewCSS": "@media (min-width: 992px) {\n.DefaultMenu .dropdown ul li a.menu-item {\n\tbackground: $submenubackground !important;\n}\n}",
           "LessVariable": "$submenubackground",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "dfbe9c64-58a8-4d2d-9edd-0155a105545a",
           "Title": "Background Hover ",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".DefaultMenu .dropdown ul li a.menu-item:hover {\n\tbackground:$backgroundhover !important;\n}",
           "PreviewCSS": ".DefaultMenu .dropdown ul li a.menu-item:hover {\n\tbackground:$backgroundhover !important;\n}",
           "LessVariable": "$backgroundhover",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -781,17 +781,18 @@
         {
           "Guid": "967ffedc-a123-480f-b6b6-948288eb2a58",
           "Title": "Color",
-          "DefaultValue": "#777777",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": " a.loginuser {\n    color: $signincolor !important;\n\n}",
           "PreviewCSS": " a.loginuser {\n    color: $signincolor !important;\n\n}",
           "LessVariable": "$signincolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "ea0de0fd-a08e-4d75-8ed7-e9911be48fdb",
           "Title": "Font Size",
           "DefaultValue": "14",
@@ -799,6 +800,7 @@
           "CustomCSS": " a.loginuser{\n    font-size: $signinfontsizepx !important;\n\n}",
           "PreviewCSS": " a.loginuser{\n    font-size: $signinfontsizepx !important;\n\n}",
           "LessVariable": "$signinfontsize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -809,6 +811,7 @@
           "CustomCSS": " a.loginuser *{\n    font-family: $signinfontstyle !important;\n\n}",
           "PreviewCSS": " a.loginuser *{\n    font-family: $signinfontstyle !important;\n\n}",
           "LessVariable": "$signinfontstyle",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
@@ -827,6 +830,7 @@
           "CustomCSS": " a.loginuser {\n    font-style: $signinfontstyle !important;\n\n}",
           "PreviewCSS": " a.loginuser {\n    font-style: $signinfontstyle !important;\n\n}",
           "LessVariable": "$signinfontstyle",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
@@ -851,12 +855,23 @@
         {
           "Guid": "6c4a3d19-0ca1-43b7-b279-09b88c2c4293",
           "Title": "Active Color",
-          "DefaultValue": "#ffffff",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".vj-breadcrumb .breadcrumb .active{\n    color: $breadactivecolor  !important;\n}",
           "PreviewCSS": ".vj-breadcrumb .breadcrumb .active{\n    color: $breadactivecolor  !important;\n}",
           "LessVariable": "$breadactivecolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "ba78a2d9-424b-48d8-9475-8561e5ba6113",
+          "Title": "Hover color",
+          "DefaultValue": "#000000",
+          "Suffix": "",
+          "CustomCSS": ".vj-breadcrumb .breadcrumb .breadcrumb-item a:hover span{\n  color:$bchcolor !important;\n}",
+          "PreviewCSS": ".vj-breadcrumb .breadcrumb .breadcrumb-item a:hover span{\n  color:$bchcolor !important;\n}",
+          "LessVariable": "$bchcolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -969,17 +984,6 @@
           "LessVariable": "$breadletterspacing",
           "JavascriptVariable": null,
           "Type": "Slider"
-        },
-        {
-          "Guid": "ba78a2d9-424b-48d8-9475-8561e5ba6113",
-          "Title": "Hover color",
-          "DefaultValue": "#000000",
-          "Suffix": "",
-          "CustomCSS": ".vj-breadcrumb .breadcrumb .breadcrumb-item a:hover span{\n  color:$bchcolor !important;\n}",
-          "PreviewCSS": ".vj-breadcrumb .breadcrumb .breadcrumb-item a:hover span{\n  color:$bchcolor !important;\n}",
-          "LessVariable": "$bchcolor",
-          "JavascriptVariable": "",
-          "Type": "Color Picker"
         }
       ],
       "Sass": ".vj-breadcrumb .breadcrumb {\n\tbackground-color: transparent;\n\tmargin: 0;\n\tborder-radius: 0;\n\tpadding-left: 0;\n\tpadding-right: 0;\n}\n\n.vj-breadcrumb > nav {\n\tdisplay: inline-block;\n}"
@@ -1047,12 +1051,12 @@
         {
           "Guid": "ee7335a8-d1fe-4399-8b1a-5ede19e050ed",
           "Title": "color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Login .loginhead{\n    color:$headcolor !important;\n}",
           "PreviewCSS": ".Vj-Login .loginhead{\n    color:$headcolor !important;\n}",
           "LessVariable": "$headcolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1183,7 +1187,7 @@
         {
           "Guid": "4d6816fd-951a-4d4c-9d91-7cea1e65e11f",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\ncolor:$labelcolor !important;\n}\n",
           "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\ncolor:$labelcolor !important;\n}\n",
@@ -1293,6 +1297,7 @@
           "CustomCSS": ".Vj-Login #loginbtn {\ncolor:$buttoncolor;\n}",
           "PreviewCSS": ".Vj-Login #loginbtn {\ncolor:$buttoncolor;\n}",
           "LessVariable": "$buttoncolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -1303,16 +1308,18 @@
           "CustomCSS": ".Vj-Login #loginbtn:hover {\ncolor: $signinformBtnTexth;\n}",
           "PreviewCSS": ".Vj-Login #loginbtn:hover {\ncolor: $signinformBtnTexth;\n}",
           "LessVariable": "$signinformBtnTexth",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
           "Guid": "e651de8c-1f7e-40fa-bf6c-458317f62c8d",
           "Title": "Background",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
-          "CustomCSS": ".Vj-Login #loginbtn {\nbackground:$buttonbackground;\n}",
-          "PreviewCSS": ".Vj-Login #loginbtn {\nbackground:$buttonbackground;\n}",
+          "CustomCSS": ".Vj-Login #loginbtn {\n\tbackground: $buttonbackground;\n\tborder-color: $buttonbackground;\n}",
+          "PreviewCSS": ".Vj-Login #loginbtn {\n\tbackground: $buttonbackground;\n \tborder-color: $buttonbackground;\n}",
           "LessVariable": "$buttonbackground",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1320,9 +1327,10 @@
           "Title": "Background Hover Color",
           "DefaultValue": "#555555",
           "Suffix": "",
-          "CustomCSS": ".Vj-Login #loginbtn:hover {\nbackground:$signinbtnbgHoverColor;\n}",
-          "PreviewCSS": ".Vj-Login #loginbtn:hover {\nbackground:$signinbtnbgHoverColor;\n}",
+          "CustomCSS": ".Vj-Login #loginbtn:hover {\nbackground:$signinbtnbgHoverColor;\n  border-color: $signinbtnbgHoverColor;\n}",
+          "PreviewCSS": ".Vj-Login #loginbtn:hover {\nbackground:$signinbtnbgHoverColor;\n  border-color: $signinbtnbgHoverColor;\n}",
           "LessVariable": "$signinbtnbgHoverColor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1333,6 +1341,7 @@
           "CustomCSS": ".Vj-Login #loginbtn {\nfont-family: $signInFormBtnff !important;\n}",
           "PreviewCSS": ".Vj-Login #loginbtn {\nfont-family: $signInFormBtnff !important;\n}",
           "LessVariable": "$signInFormBtnff",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
@@ -1346,6 +1355,7 @@
           "CustomCSS": ".Vj-Login #loginbtn {\nfont-size:$buttonfontsizepx;\n}",
           "PreviewCSS": ".Vj-Login #loginbtn {\nfont-size:$buttonfontsizepx ;\n}",
           "LessVariable": "$buttonfontsize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -1359,6 +1369,7 @@
           "CustomCSS": ".Vj-Login #loginbtn {\nletter-spacing:$buttonspacingpx ;\n}",
           "PreviewCSS": ".Vj-Login #loginbtn {\nletter-spacing:$buttonspacingpx ;\n}",
           "LessVariable": "$buttonspacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         }
       ],
@@ -1390,12 +1401,12 @@
         {
           "Guid": "143d928f-c677-4a92-a84b-0de6a14e126e",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".select_language{\ncolor:$langcolor;\n}",
           "PreviewCSS": ".select_language{\ncolor:$langcolor;\n}",
           "LessVariable": "$langcolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1445,12 +1456,12 @@
         {
           "Guid": "7f51d24d-5b7e-4e89-ad3b-5f594cec48a9",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Register .Registerhead{\n  color:$signUpHeadingColor !important;\n}",
           "PreviewCSS": ".Vj-Register .Registerhead{\n  color:$signUpHeadingColor !important;\n}",
           "LessVariable": "$signUpHeadingColor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1581,12 +1592,12 @@
         {
           "Guid": "e6f1478a-ae79-4eae-84c2-d5366af44742",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Register span,\n.Vj-Register label,\n.Vj-Register .registerterms .vj-text a{\n color:$signUpLablecolor !important;\n}\n.registerterms a:hover{\n color:$signUpLablecolor !important;\n}",
           "PreviewCSS": ".Vj-Register span,\n.Vj-Register label,\n.Vj-Register .registerterms .vj-text a{\n color:$signUpLablecolor !important;\n}\n.registerterms a:hover{\n color:$signUpLablecolor !important;\n}",
           "LessVariable": "$signUpLablecolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1691,6 +1702,7 @@
           "CustomCSS": ".registered #registerbtn{\n  color:$signUpFormColor;\n}",
           "PreviewCSS": ".registered #registerbtn{\n  color:$signUpFormColor;\n}",
           "LessVariable": "$signUpFormColor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -1701,16 +1713,18 @@
           "CustomCSS": ".registered #registerbtn:hover {\ncolor: $signUpFormbtnTextHcolor;\n}",
           "PreviewCSS": ".registered #registerbtn:hover {\ncolor: $signUpFormbtnTextHcolor;\n}",
           "LessVariable": "$signUpFormbtnTextHcolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
           "Guid": "c5777b2d-a676-4713-86b3-e140fa02211f",
           "Title": "Background",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".registered a {\n  background-color:$Signupbuttonbackground ;\n}",
           "PreviewCSS": ".registered a {\n  background-color:$Signupbuttonbackground ;\n}",
           "LessVariable": "$Signupbuttonbackground",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1721,6 +1735,7 @@
           "CustomCSS": ".registered a:hover {\n    background-color: $signUpbtnHovercolor;\n}",
           "PreviewCSS": ".registered a:hover {\n    background-color: $signUpbtnHovercolor;\n}",
           "LessVariable": "$signUpbtnHovercolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -1731,6 +1746,7 @@
           "CustomCSS": ".registered #registerbtn {\nfont-family: $signUpFormbtnFontF !important;\n}",
           "PreviewCSS": ".registered #registerbtn {\nfont-family: $signUpFormbtnFontF !important;\n}",
           "LessVariable": "$signUpFormbtnFontF",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
@@ -1744,6 +1760,7 @@
           "CustomCSS": ".Vj-Register .registered a{\n  font-size:$signUpFontSizepx ;\n}",
           "PreviewCSS": ".Vj-Register .registered a{\n  font-size:$signUpFontSizepx ;\n}",
           "LessVariable": "$signUpFontSize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -1757,6 +1774,7 @@
           "CustomCSS": ".Vj-Register .registered a{\n  letter-spacing:$signUpFormbuttonspacingpx ;\n}",
           "PreviewCSS": ".Vj-Register .registered a{\n  letter-spacing:$signUpFormbuttonspacingpx ;\n}",
           "LessVariable": "$signUpFormbuttonspacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         }
       ],
@@ -1788,17 +1806,18 @@
         {
           "Guid": "106959a3-87b9-45a1-beb9-ccd3b27e8931",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".searchhead{\ncolor:$searchheadcolor;\n}",
           "PreviewCSS": ".searchhead{\ncolor:$searchheadcolor;\n}",
           "LessVariable": "$searchheadcolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "41a7c8d2-fbc2-44e2-ad6b-6148e4cdda63",
           "Title": "Font Size",
           "DefaultValue": "24",
@@ -1806,12 +1825,13 @@
           "CustomCSS": ".searchhead{\nfont-size:$searchresultfontsizepx !important;\n}",
           "PreviewCSS": ".searchhead{\nfont-size:$searchresultfontsizepx !important;\n}",
           "LessVariable": "$searchresultfontsize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": -5,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": -5.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "c871cd1b-b770-4dd7-a048-568e9cd0ecc1",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -1819,6 +1839,7 @@
           "CustomCSS": ".searchhead{\nfont-size:$searchresultspacingpx;\n}",
           "PreviewCSS": ".searchhead{\nfont-size:$searchresultspacingpx;\n}",
           "LessVariable": "$searchresultspacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -1843,6 +1864,7 @@
           "CustomCSS": ".searchhead{\ntext-transform:$searchresulttransform;\n}",
           "PreviewCSS": ".searchhead{\ntext-transform:$searchresulttransform;\n}",
           "LessVariable": "$searchresulttransform",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
@@ -2031,17 +2053,18 @@
         {
           "Guid": "79c205f6-2e57-4cde-b5b4-571e771d9b68",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".editprofile h4{\ncolor:$profileHeadingColor !important;\n}",
           "PreviewCSS": ".editprofile h4{\ncolor:$profileHeadingColor !important;\n}",
           "LessVariable": "$profileHeadingColor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 1,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 1.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "6646a5ae-6000-49d8-a61c-5e2447f73a69",
           "Title": "Font Size",
           "DefaultValue": "32",
@@ -2049,12 +2072,13 @@
           "CustomCSS": ".editprofile h4{\nfont-size:$profileHeadingFontSizepx !important;\n}",
           "PreviewCSS": ".editprofile h4{\nfont-size:$profileHeadingFontSizepx !important;\n}",
           "LessVariable": "$profileHeadingFontSize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 10,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 10.0,
+          "Increment": 1.0,
           "Guid": "c678e930-e91a-4aab-8e02-6a7ecfb9c043",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -2062,6 +2086,7 @@
           "CustomCSS": ".editprofile h4{\nletter-spacing:$profileHeadingLetterSpacingpx !important;\n}",
           "PreviewCSS": ".editprofile h4{\nletter-spacing:$profileHeadingLetterSpacingpx !important;\n}",
           "LessVariable": "$profileHeadingLetterSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -2086,6 +2111,7 @@
           "CustomCSS": ".editprofile h4{\ntext-transform:$profileHeadingTextTransform !important;\n}",
           "PreviewCSS": ".editprofile h4{\ntext-transform:$profileHeadingTextTransform !important;\n}",
           "LessVariable": "$profileHeadingTextTransform",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
@@ -2099,17 +2125,18 @@
         {
           "Guid": "2ad401aa-7dcc-4041-9986-c767538501af",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".usernamebox text,\n.userdescription strong{\ncolor:$profileLabelColor !important;\n}",
           "PreviewCSS": ".usernamebox text,\n.userdescription strong{\ncolor:$profileLabelColor !important;\n}",
           "LessVariable": "$profileLabelColor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "b4e6743b-ac40-40d2-aca2-04966aed8b9a",
           "Title": "Font Size",
           "DefaultValue": "16",
@@ -2117,12 +2144,13 @@
           "CustomCSS": ".usernamebox text,\n.userdescription strong{\nfont-size:$profileLabelFontSizepx!important;\n}",
           "PreviewCSS": ".usernamebox text,\n.userdescription strong{\nfont-size:$profileLabelFontSizepx!important;\n}",
           "LessVariable": "$profileLabelFontSize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": -5,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": -5.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "9e44de97-4ba6-4b1e-a78a-fb3ea5961732",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -2130,6 +2158,7 @@
           "CustomCSS": ".usernamebox text,\n.userdescription strong{\nletter-spacing:$profileLabelLetterpacingpx!important;\n}",
           "PreviewCSS": ".usernamebox text,\n.userdescription strong{\nletter-spacing:$profileLabelLetterpacingpx!important;\n}",
           "LessVariable": "$profileLabelLetterpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -2154,6 +2183,7 @@
           "CustomCSS": ".usernamebox text,\n.userdescription strong{\ntext-transform:$profileLabelTextTransform!important;\n}",
           "PreviewCSS": ".usernamebox text,\n.userdescription strong{\ntext-transform:$profileLabelTextTransform!important;\n}",
           "LessVariable": "$profileLabelTextTransform",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
@@ -2242,41 +2272,45 @@
         {
           "Guid": "fe5745d2-d4db-48bb-8f0c-3a7c37a3d0a3",
           "Title": "Primary",
-          "DefaultValue": "#007bff",
+          "DefaultValue": "#000000",
           "Suffix": "",
           "CustomCSS": ".bg-frameprimary,\n.bg-colorprimary {\n\tbackground-color: $primarycolor !important;\n}\n\n$blue: $primarycolor",
           "PreviewCSS": "",
           "LessVariable": "$primarycolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "6bd3311b-64cb-4600-94b2-3fbe4282b2c0",
           "Title": "Secondary",
-          "DefaultValue": "#6c757d",
+          "DefaultValue": "#fa255e",
           "Suffix": "",
           "CustomCSS": ".bg-framesecondary,\n.bg-colorsecondary {\n\tbackground-color: $secondarycolor !important;\n}\n\n$gray-600: $secondarycolor",
           "PreviewCSS": "",
           "LessVariable": "$secondarycolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "0a29462a-8e27-4a76-b855-50c838eb0661",
           "Title": "Tertiary",
-          "DefaultValue": "#da70d6",
+          "DefaultValue": "#c39ea0",
           "Suffix": "",
           "CustomCSS": ".bg-frametertiary,\n.bg-colortertiary {\n\tbackground-color: $tertiary;\n}\n\n$orchid: $tertiary",
           "PreviewCSS": "",
           "LessVariable": "$tertiary",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "cf51aed0-62ef-484b-bfb7-331fccd8046c",
           "Title": "Quaternary",
-          "DefaultValue": "#fa8072",
+          "DefaultValue": "#f8e5e5",
           "Suffix": "",
           "CustomCSS": ".bg-framequaternary,\n.bg-colorquaternary {\n\tbackground-color: $quaternary;\n}\n\n$salmon: $quaternary",
           "PreviewCSS": "",
           "LessVariable": "$quaternary",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -2287,6 +2321,7 @@
           "CustomCSS": ".bg-framesuccess,\n.bg-colorsuccess {\n\tbackground-color: $successcolor !important;\n}\n\n$success: $successcolor",
           "PreviewCSS": "",
           "LessVariable": "$successcolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -2297,6 +2332,7 @@
           "CustomCSS": ".bg-frameinfo,\n.bg-colorinfo {\n\tbackground-color: $infocolor !important;\n}\n\n$info: $infocolor",
           "PreviewCSS": "",
           "LessVariable": "$infocolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -2307,6 +2343,7 @@
           "CustomCSS": ".bg-framewarning,\n.bg-colorwarning {\n\tbackground-color: $warningcolor !important;\n}\n\n$warning: $warningcolor",
           "PreviewCSS": "",
           "LessVariable": "$warningcolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -2317,6 +2354,7 @@
           "CustomCSS": ".bg-framedanger,\n.bg-colordanger {\n\tbackground-color: $dangercolor !important;\n}\n\n$danger: $dangercolor",
           "PreviewCSS": "",
           "LessVariable": "$dangercolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -2327,6 +2365,7 @@
           "CustomCSS": ".bg-framelight,\n.bg-colorlight {\n\tbackground-color: $lightcolor !important;\n}\n\n$light: $lightcolor",
           "PreviewCSS": "",
           "LessVariable": "$lightcolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -2337,6 +2376,7 @@
           "CustomCSS": ".bg-framedark,\n.bg-colordark {\n\tbackground-color: $darkcolor !important;\n}\n\n$dark: $darkcolor",
           "PreviewCSS": "",
           "LessVariable": "$darkcolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         }
       ],
@@ -2355,6 +2395,7 @@
           "CustomCSS": ".cookiemessage{\n  color:$ccTextColor !important;\n}",
           "PreviewCSS": ".cookiemessage{\n  color:$ccTextColor  !important;\n}",
           "LessVariable": "$ccTextColor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -2365,16 +2406,18 @@
           "CustomCSS": ".cookieconsent{\n  background : $ccBackgroundcolor !important;\n}",
           "PreviewCSS": ".cookieconsent{\n  background : $ccBackgroundcolor !important;\n}",
           "LessVariable": "$ccBackgroundcolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "9778863b-8bbe-4496-a213-7262440ef01b",
           "Title": "Link Color",
-          "DefaultValue": "#0088cc",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".cookiemessage a{\ncolor:$cclinkColor !important;\n}",
           "PreviewCSS": ".cookiemessage a{\ncolor:$cclinkColor !important;\n}",
           "LessVariable": "$cclinkColor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -2385,12 +2428,13 @@
           "CustomCSS": ".cookiemessage a:hover{\ncolor:$cclinkHoverColor !important;\n}",
           "PreviewCSS": ".cookiemessage a:hover{\ncolor:$cclinkHoverColor !important;\n}",
           "LessVariable": "$cclinkHoverColor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "0afc33b3-0300-4ac8-a8e4-6346aee9722d",
           "Title": "Font Size",
           "DefaultValue": "14",
@@ -2398,6 +2442,7 @@
           "CustomCSS": ".cookiemessage{\n font-size: $ccFontSizepx  !important; \n}",
           "PreviewCSS": ".cookiemessage{\n font-size: $ccFontSizepx !important; \n}",
           "LessVariable": "$ccFontSize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -2422,17 +2467,8 @@
           "CustomCSS": "#dnn_CookieConsentPane ~ #dnn_ContentPane,\n#dnn_CookieConsentPane ~ .actionmenu-wrapper {\n   @if($ccPosition == 'Top'){\n   margin-top: 71px;\n  \t}\n}\n\n.cookiestatus{\n   @if($ccPosition == 'BottomLeft'){\n   \t        padding: 9px 0px;\n  \t} \n   @if($ccPosition == 'BottomRight'){\n   \t         padding: 9px 0px;\n  \t}  \n  \n}\n.cookiestatus a {\n    @if($ccPosition == 'BottomLeft'){\n   \t     width: -webkit-fill-available;\n  \t} \n   @if($ccPosition == 'BottomRight'){\n   \t     width: -webkit-fill-available;\n  \t}  \n}\n.cookieconsent{\n\n  \t@if($ccPosition == 'Bottom'){\n   \t   bottom : 0px ;\n       display: flex;\n  \t}\n  @if($ccPosition == 'Top'){\n    \t display: flex;\n   \t   top : 0px ;\n    \theight : 71px ;\n  \t}\n  @if($ccPosition == 'BottomLeft'){\n    display: block;\n   \t      bottom: 20px !important;\n    \t  left: 20px ;\n        padding:12px 18px !important; \n        box-shadow: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23) ;\n        width: 390px !important;\n        height: auto ;\n  \t}\n  @if($ccPosition == 'BottomRight'){\n    display: block;\n   \t    bottom: 20px !important;\n    \t  right: 20px ;\n     padding:12px 18px !important; \n    left:auto !important;\n        box-shadow: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23) ;\n        width: 390px !important;\n        height: auto ;\n  \t}\n}\n\n\n.cookiestatus{\n  @if($ccPosition == 'Top'){\n   \t   top : 0px ;    \t\n  \t}\n   @if($ccPosition == 'Bottom'){\n   \t   top : 0px ;   \t\n  \t}\n}",
           "PreviewCSS": "",
           "LessVariable": "$ccPosition",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
-        },
-        {
-          "Guid": "9778863b-8bbe-4496-a213-7262440ef01b",
-          "Title": "Link Color",
-          "DefaultValue": "#0088cc",
-          "Suffix": "",
-          "CustomCSS": ".cookiemessage a{\ncolor:$cclinkColor !important;\n}",
-          "PreviewCSS": ".cookiemessage a{\ncolor:$cclinkColor !important;\n}",
-          "LessVariable": "$cclinkColor",
-          "Type": "Color Picker"
         }
       ],
       "Sass": ".cookieconsent {\n    position: fixed;\n    padding: 18px;\n    z-index: 1;\n    bottom: 0px;\n    background: red;\n    width: 100%;\n    align-items: center;\n    z-index: 9;\n}\n.cookiemessage{\nflex-grow: 1;\njustify-content: flex-start;\n}\n\n.cookiestatus a{\n  width: -webkit-fill-available;\n}\n\n"
@@ -2450,16 +2486,18 @@
           "CustomCSS": ".cookiestatus a{\ncolor: $ccbuttonColor !important;\n}",
           "PreviewCSS": ".cookiestatus a{\ncolor: $ccbuttonColor !important;\n}",
           "LessVariable": "$ccbuttonColor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
           "Guid": "c0d73a3f-a0bd-4039-b91a-a6ebd6e8c7a8",
           "Title": "Background",
-          "DefaultValue": "#0088cc",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".cookiestatus a{\nbackground-color: $ccbuttonbgcolor !important;\n}",
           "PreviewCSS": ".cookiestatus a{\nbackground-color: $ccbuttonbgcolor !important;\n}",
           "LessVariable": "$ccbuttonbgcolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -2470,12 +2508,13 @@
           "CustomCSS": ".cookiestatus a:hover{\nbackground-color: $ccBackgroundHovercolor !important;\n}",
           "PreviewCSS": ".cookiestatus a:hover{\nbackground-color: $ccBackgroundHovercolor !important;\n}",
           "LessVariable": "$ccBackgroundHovercolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "6b391f00-daf0-44b1-a4f5-45784c99082c",
           "Title": "Font Size",
           "DefaultValue": "14",
@@ -2483,6 +2522,7 @@
           "CustomCSS": ".cookiestatus a{\n\tfont-size: $ccbtnFontSizepx !important;\n}",
           "PreviewCSS": ".cookiestatus a{\n\tfont-size: $ccbtnFontSizepx !important;\n}",
           "LessVariable": "$ccbtnFontSize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         }
       ],
@@ -2496,12 +2536,12 @@
         {
           "Guid": "816c9e87-165c-421b-8c96-4b8b64be3f68",
           "Title": "Color",
-          "DefaultValue": "#212529",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".Register-container .already-registerd span,\n.Register-container .already-registerd a{\n\tcolor : $lable1color;\n}",
           "PreviewCSS": ".Register-container .already-registerd span,\n.Register-container .already-registerd a{\n\tcolor : $lable1color;\n}",
           "LessVariable": "$lable1color",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -2598,12 +2638,12 @@
         {
           "Guid": "4e228571-158e-4214-8829-fb65289da672",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  color : $loginNotRegColor;\n}",
           "PreviewCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  color : $loginNotRegColor;\n}",
           "LessVariable": "$loginNotRegColor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -5079,6 +5119,7 @@
           "CustomCSS": ".paragraph-style-7 {\n    font-weight: $psSevFontWeight;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    font-weight: $psSevFontWeight;\n}",
           "LessVariable": "$psSevFontWeight",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
@@ -5089,6 +5130,7 @@
           "CustomCSS": ".paragraph-style-7 {\n    font-family: $psSevFontFamily;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    font-family: $psSevFontFamily;\n}",
           "LessVariable": "$psSevFontFamily",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
@@ -5107,32 +5149,35 @@
           "CustomCSS": ".paragraph-style-7 {\n    font-style: $psSevFontStyle;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    font-style: $psSevFontStyle;\n}",
           "LessVariable": "$psSevFontStyle",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "a84301ba-e145-464f-9983-faa0503d4795",
           "Title": "Letter Spacing",
-          "DefaultValue": "4",
+          "DefaultValue": "0",
           "Suffix": "px",
           "CustomCSS": ".paragraph-style-7 {\n    letter-spacing: $psoneLetterSpacingpx;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    letter-spacing: $psoneLetterSpacingpx;\n}",
           "LessVariable": "$psoneLetterSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "702b87e2-645f-4ce1-901f-82a88ca23640",
           "Title": "Word Spacing",
-          "DefaultValue": "5",
+          "DefaultValue": "0",
           "Suffix": "px",
           "CustomCSS": ".paragraph-style-7 {\n    word-spacing: $psSevWordSpacingpx;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    word-spacing: $psSevWordSpacingpx;\n}",
           "LessVariable": "$psSevWordSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
@@ -5157,6 +5202,7 @@
           "CustomCSS": ".paragraph-style-7 {\n    text-transform: $psSevTextTransform;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    text-transform: $psSevTextTransform;\n}",
           "LessVariable": "$psSevTextTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -5181,10 +5227,11 @@
           "CustomCSS": ".paragraph-style-7 {\n    text-decoration: $psoneTextDecoration;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    text-decoration: $psoneTextDecoration;\n}",
           "LessVariable": "$psoneTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
-      "Sass": ""
+      "Sass": ".paragraph-style-7 {\n    line-height: 34px;\n}"
     },
     {
       "Guid": "2f3a702e-a98c-4f82-97ea-2a16ff934fdf",
