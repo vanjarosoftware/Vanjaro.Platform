@@ -1320,7 +1320,7 @@ $(document).ready(function () {
 										width: '360px', // this value will be used on canvas width
 										widthMedia: '767px', // this value will be used in CSS @media
 									}]
-								},
+								}, 
 								storageManager: {
 									type: 'remote',
 									autosave: false,
