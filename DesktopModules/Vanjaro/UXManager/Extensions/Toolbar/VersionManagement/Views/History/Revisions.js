@@ -37,20 +37,20 @@
                     common.webApi.get('Revisions/GetVersion', 'Version=' + $scope.SelectedVersion + '&Locale=' + window.parent.VJLocal).success(function (response) {
                         if (response != undefined) {
                             $scope.ui.data.Versions.Options = response.Version;
-                            html = response.html;
                             $(window.parent.document.body).find('.revisionloaderimg').remove();
-                            var css = response.css;
                             var mids = [];
                             $.each($(data).find('[mid]'), function (key, val) {
                                 mids.push($(val).attr('mid'));
                             }).promise().done(function () {
-                                var Css = css;
+                                var Css = '';
                                 $.each($(data).find('style'), function (sk, sv) {
                                     if (Css.indexOf(sv.innerHTML) <= 0)
                                         Css += sv.innerHTML;
                                 }).promise().done(function () {
-                                    window.parent.window.VjEditor.setComponents(html);
-                                    window.parent.window.VjEditor.setStyle(Css);
+                                    window.parent.window.VjEditor.setComponents(eval(response.components));
+                                    window.parent.window.VjEditor.setStyle(eval(response.style));
+                                    if (Css.length > 0)
+                                        window.parent.window.VjEditor.addComponents('<style>' + Css + '</style>');
                                     if (mids.length > 0) {
                                         $.each(mids, function (midkey, mid) {
                                             var existinghtml = $(window.parent.window.VjEditor.Canvas.getDocument()).find('[mid=' + mid + ']>[vjmod]')[0];
@@ -139,6 +139,7 @@
                                     window.parent.window.VjEditor.LayerManager.render();
                                 });
                             });
+                            window.parent.window.VjEditor.runCommand("save");
                         }
                     });
                 }
