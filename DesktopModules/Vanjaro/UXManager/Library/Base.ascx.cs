@@ -43,10 +43,10 @@ namespace Vanjaro.UXManager.Library
         protected override void OnInit(EventArgs e)
         {
 #if RELEASE
-            TemplateLibraryURL = "https://library.vanjaro.com/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower();
+            TemplateLibraryURL = "https://library.vanjaro.com/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower() + "/type/block";
             ExtensionStoreURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
 # else
-            TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower();
+            TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower()+"/type/block";
             ExtensionStoreURL = "http://store.vanjaro.local/store";
 #endif
             ExtensionURL = ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/') + MenuManager.GetURL() + "mid=0&icp=true&guid=54caeff2-9fac-42ae-8594-40312867d56a#/installpackage";
