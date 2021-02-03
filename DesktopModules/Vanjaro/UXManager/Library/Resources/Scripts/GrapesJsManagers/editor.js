@@ -1762,6 +1762,15 @@ $(document).ready(function () {
 									});
 								}
 
+								$('.gjs-field-color-picker').on('show.spectrum', function () {
+
+									var stylemanager = this.closest('.stylemanager');
+
+									$(stylemanager).click(function (event) {
+										event.stopPropagation();
+									});
+								});
+
 								setTimeout(function () {
 
 									var sm = VjEditor.StyleManager;

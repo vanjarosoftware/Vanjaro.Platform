@@ -1358,11 +1358,22 @@ export default (editor, config = {}) => {
 			var colorField = el.querySelectorAll('.colorPicker .gjs-field-color-picker');
 
 			$(colorField).click(function () {
+
 				$(this).parents(".color-wrapper").find("input:checked").prop('checked', false);
 				$(this).parents(".color-wrapper").find(".active").removeClass("active");
 
 				var BGcolor = $(this).css("background-color");
 				$(this).parents(".color-wrapper").find(".colorPicker").css("background-color", BGcolor).addClass('active');
+			});
+
+			$(editor.TraitManager.getType('color').prototype.getInputEl.apply(that, arguments)).on('show.spectrum', function (e, color) {
+
+				var traitsmanager = this.closest('.traitsmanager');
+
+				$(traitsmanager).click(function (event) {
+					event.stopPropagation();
+				});
+				
 			});
 
 			$(editor.TraitManager.getType('color').prototype.getInputEl.apply(that, arguments)).on('move.spectrum change.spectrum', function (e, color) {
