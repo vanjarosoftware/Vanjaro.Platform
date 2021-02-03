@@ -2208,9 +2208,7 @@ $(document).ready(function () {
 
 									if ($globalblockwrapper.length) {
 
-										var result = VjEditor.runCommand("export-css", {
-											target: model
-										});
+                                        var result = VjEditor.CodeManager.getCode(model, 'css', { cssc: VjEditor.CssComposer });
 
 										var style = $globalblockwrapper.find('style:contains(' + result.split("{")[0] + '{)');
 
