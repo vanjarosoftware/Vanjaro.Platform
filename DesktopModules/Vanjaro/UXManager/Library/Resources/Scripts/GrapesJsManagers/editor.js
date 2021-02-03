@@ -1314,18 +1314,18 @@ $(document).ready(function () {
 									}, {
 										name: 'Tablet',
 										width: '768px', // this value will be used on canvas width
-										widthMedia: '768px', // this value will be used in CSS @media
+										widthMedia: '1023px', // this value will be used in CSS @media
 									}, {
 										name: 'Mobile',
 										width: '360px', // this value will be used on canvas width
-										widthMedia: '360px', // this value will be used in CSS @media
+										widthMedia: '767px', // this value will be used in CSS @media
 									}]
 								},
 								storageManager: {
 									type: 'remote',
 									autosave: false,
 									autoload: false,
-									stepsBeforeSave: 2,
+									stepsBeforeSave: 1,
 									urlStore: eval(vjEditorSettings.UpdateContentUrl),
 									onComplete(jqXHR, status) {
 										if (jqXHR.IsSuccess) {
@@ -2208,9 +2208,7 @@ $(document).ready(function () {
 
 									if ($globalblockwrapper.length) {
 
-										var result = VjEditor.runCommand("export-css", {
-											target: model
-										});
+                                        var result = VjEditor.CodeManager.getCode(model, 'css', { cssc: VjEditor.CssComposer });
 
 										var style = $globalblockwrapper.find('style:contains(' + result.split("{")[0] + '{)');
 
@@ -2496,145 +2494,13 @@ $(document).ready(function () {
 											html: "",
 											css: ""
 										}
-										, i = n.component || t.getSelected();
-									return (i = Array.isArray(i) ? i : [i]).forEach(function (e) {
-										e && (r.html += e.toHTML({
-											attributes: function (e, r) {
-												var i = e.get("type")
-													, o = r.id;
 
-												$.each(e.attributes.traits.models, function (a, b) {
-													r["data-gjs-" + b.attributes.name] = b.getInitValue();
-												});
+                                    const model = n.component || t.getSelected();
+                                    r.html = model.toHTML();
+                                    r.css = t.CodeManager.getCode(model, 'css', { cssc: t.CssComposer });
 
-												(i && (r["data-gjs-type"] = i),
-													n.cleanIds && o && "i" === o[0]) && (t.CssComposer.getAll().filter(function (t) {
-														return t.get("selectors").getFullString() === "#".concat(o) && !Gt()(t.getStyle())
-													}).length || delete r.id);
-												return n.cleanClasses && r.class && (r.class = e.get("classes").filter(function (t) {
-													return !t.get("private")
-												}).map(function (t) {
-													return t.get("name")
-												}).join(" "),
-													r.class || delete r.class),
-													r
-											}
-										}),
-											r.css += t.runCommand("export-css", {
-												target: e
-											}))
-									}),
-										r.html = CleanGjAttrs(r.html),
-										r.css = r.css,
-										r
+                                    return r;
 								},
-								cleanHtmlIds: function (t, tc) {
-									tc = tc.split('vjbrk');
-									var elements = $(t);
-									if (elements != undefined) {
-										var atid = elements.attr('id');
-										if (atid != undefined && atid.length > 0) {
-											var grp = $.grep(tc, function (i) {
-												return i.startsWith('#' + atid);
-											});
-											if (grp != undefined && grp.length > 0)
-												elements.attr('style', grp[0].replace('#' + atid + '{', '').replace('}', ''));
-											elements.removeAttr('id');
-										}
-										$.each(elements.find('*'), function (k, v) {
-											v = $(v);
-											var atid = v.attr('id');
-											if (atid != undefined && atid.length > 0) {
-												var grp = $.grep(tc, function (i) {
-													return i.startsWith('#' + atid);
-												});
-												if (grp != undefined && grp.length > 0)
-													v.attr('style', grp[0].replace('#' + atid + '{', '').replace('}', ''));
-												v.removeAttr('id');
-											}
-										});
-										return elements[0].outerHTML;
-									}
-									else
-										return "";
-								},
-							});
-
-							VjEditor.Commands.add("export-css", {
-								run: function (t, e) {
-									var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}
-										, r = n.target || t.getWrapper()
-										, i = t.CssComposer
-										, o = i.getAll()
-										, a = ""
-										, s = this.splitRules(this.matchedRules(r, o))
-										, c = s.atRules
-										, l = s.notAtRules;
-
-									return l.forEach(function (t) {
-										var css = t.toCSS();
-										if (css.startsWith('#'))
-											return a += (css.substr(0, 0) + '#' + css.substr(0 + 1));
-										else
-											return a;
-									}),
-										a
-								},
-								matchedRules: function (t, e) {
-									var n = this
-										, r = t.getEl()
-										, i = [];
-									return e.forEach(function (t) {
-										try {
-											t.selectorsToString().split(",").some(function (t) {
-												return r.matches(n.cleanSelector(t))
-											}) && i.push(t)
-										} catch (t) { }
-									}),
-										t.components().forEach(function (t) {
-											i = i.concat(n.matchedRules(t, e))
-										}),
-										i
-								},
-								cleanSelector: function (t) {
-									return t.split(" ").map(function (t) {
-										return t.split(":")[0]
-									}).join(" ")
-								},
-								splitRules: function (t) {
-									var e = {}
-										, n = [];
-									return t.forEach(function (t) {
-										var r = t.getAtRule();
-										if (r) {
-											var i = e[r];
-											i ? i.push(t) : e[r] = [t]
-										} else
-											n.push(t)
-									}),
-									{
-										atRules: e,
-										notAtRules: n
-									}
-								},
-								getQueryLength: function (t) {
-									var e = /(-?\d*\.?\d+)\w{0,}/.exec(t);
-									return e ? parseFloat(e[1]) : Number.MAX_VALUE
-								},
-								sortMediaObject: function () {
-									var t = this
-										, e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}
-										, n = [];
-									return Zt()(e, function (t, e) {
-										return n.push({
-											key: e,
-											value: t
-										})
-									}),
-										n.sort(function (e, n) {
-											return t.getQueryLength(n.key) - t.getQueryLength(e.key)
-										})
-								}
 							});
 
 							$(VjEditor.Canvas.getBody()).on("paste", '[contenteditable="true"]', function (e) {
@@ -2744,7 +2610,7 @@ $(document).ready(function () {
 									var mouseEvent = false;
 									var keyboardEvent = false;
 
-									if (typeof event.target != "undefined" && event.target.classList.length > 0 && event.target.classList.contains('gjs-toolbar-item') && event.target.classList.contains('fa-trash-o'))
+									if (typeof event.target != "undefined" && typeof event.target.classList != "undefined" && event.target.classList.length > 0 && event.target.classList.contains('gjs-toolbar-item') && event.target.classList.contains('fa-trash-o'))
 										mouseEvent = true;
 
 									if (typeof event.key != "undefined" && event.key == "Delete")

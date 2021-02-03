@@ -410,6 +410,14 @@ export default (editor, config = {}) => {
 
 		if (componentType == 'grid')
 			component.components().models[0].setStyle(style);
+		else if (componentType == 'image-gallery-item') {
+
+			var models = component.closest('[data-gjs-type="image-gallery"]').findType('image-gallery-item');
+
+			$(models).each(function (index, item) {
+				item.setStyle(style);
+			});
+		}
 		else
 			component.setStyle(style);
 	};
@@ -1459,7 +1467,7 @@ export default (editor, config = {}) => {
 			var model = component;
 			var trait = component.getTrait(event.target.name);
 
-			if (typeof trait.attributes.selector != 'undefined')
+			if (typeof trait != 'undefined' && typeof trait.attributes.selector != 'undefined')
 				model = component.findType(trait.attributes.selector);
 
 			$(model).each(function (index, item) {
