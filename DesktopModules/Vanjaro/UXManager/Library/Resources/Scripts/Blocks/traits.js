@@ -1467,7 +1467,7 @@ export default (editor, config = {}) => {
 			var model = component;
 			var trait = component.getTrait(event.target.name);
 
-			if (typeof trait.attributes.selector != 'undefined')
+			if (typeof trait != 'undefined' && typeof trait.attributes.selector != 'undefined')
 				model = component.findType(trait.attributes.selector);
 
 			$(model).each(function (index, item) {
