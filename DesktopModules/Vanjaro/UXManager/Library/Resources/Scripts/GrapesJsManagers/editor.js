@@ -1314,18 +1314,18 @@ $(document).ready(function () {
 									}, {
 										name: 'Tablet',
 										width: '768px', // this value will be used on canvas width
-										widthMedia: '768px', // this value will be used in CSS @media
+										widthMedia: '1023px', // this value will be used in CSS @media
 									}, {
 										name: 'Mobile',
 										width: '360px', // this value will be used on canvas width
-										widthMedia: '360px', // this value will be used in CSS @media
+										widthMedia: '767px', // this value will be used in CSS @media
 									}]
 								},
 								storageManager: {
 									type: 'remote',
 									autosave: false,
 									autoload: false,
-									stepsBeforeSave: 2,
+									stepsBeforeSave: 1,
 									urlStore: eval(vjEditorSettings.UpdateContentUrl),
 									onComplete(jqXHR, status) {
 										if (jqXHR.IsSuccess) {
