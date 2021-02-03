@@ -2610,7 +2610,7 @@ $(document).ready(function () {
 									var mouseEvent = false;
 									var keyboardEvent = false;
 
-									if (typeof event.target != "undefined" && event.target.classList.length > 0 && event.target.classList.contains('gjs-toolbar-item') && event.target.classList.contains('fa-trash-o'))
+									if (typeof event.target != "undefined" && typeof event.target.classList != "undefined" && event.target.classList.length > 0 && event.target.classList.contains('gjs-toolbar-item') && event.target.classList.contains('fa-trash-o'))
 										mouseEvent = true;
 
 									if (typeof event.key != "undefined" && event.key == "Delete")
