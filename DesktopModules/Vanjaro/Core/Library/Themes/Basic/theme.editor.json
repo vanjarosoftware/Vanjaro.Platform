@@ -91,11 +91,21 @@
         },
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "950a13cb-7a0f-4727-88a6-4f14518930c6",
           "Title": "Font Weight",
@@ -120,8 +130,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "ee25c5fe-0dd5-4d6c-85e3-7fd00cc403c5",
           "Title": "Font Style",
@@ -149,10 +163,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "5b561e36-0a0e-44bf-86d6-7d16d556e3ad",
           "Title": "Text Transform",
@@ -505,11 +527,21 @@
         },
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "1a4434cf-9664-46c6-b07e-efacfedef414",
           "Title": "Font Weight",
@@ -534,8 +566,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "905284c0-4ff9-4823-85c3-513fdb16df71",
           "Title": "Font Style",
@@ -549,10 +585,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "9bcdecd5-412f-4cda-9567-c64bdaaf47eb",
           "Title": "Text Transform",
@@ -663,8 +707,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "c9a91db8-f0ce-40b3-b3e1-bf80ce33289b",
           "Title": "Font Style",
@@ -733,7 +781,7 @@
         {
           "Guid": "967ffedc-a123-480f-b6b6-948288eb2a58",
           "Title": "Color",
-          "DefaultValue": "$primarycolor",
+          "DefaultValue": "#777777",
           "Suffix": "",
           "CustomCSS": " a.loginuser {\n    color: $signincolor !important;\n\n}",
           "PreviewCSS": " a.loginuser {\n    color: $signincolor !important;\n\n}",
@@ -768,8 +816,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "1bbf66bc-5cb6-4520-a80e-da9bf7703988",
           "Title": "Font Style",
@@ -849,8 +901,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "0018869b-f437-429a-8cc9-cf4518359b43",
           "Title": "Font Style",
@@ -864,10 +920,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "0022be06-2172-4ebc-ae74-38041e7c6168",
           "Title": "Text Transform",
@@ -881,11 +945,21 @@
         },
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "9d3cf99f-a47b-4b64-a0a4-1257f01e2c74",
           "Title": "Font Weight",
@@ -1001,11 +1075,21 @@
         },
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "3e5d1dd3-57e7-4f4e-a8b5-a5f906f0a764",
           "Title": "Font Weight",
@@ -1044,10 +1128,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "e444d6fc-a23a-4fb5-b000-6a49b0d7d25a",
           "Title": "Text Transform",
@@ -1061,10 +1153,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "7f84db98-a0e7-4e7f-8ea4-e4509f2621ce",
           "Title": "Text Decoration",
@@ -1122,8 +1222,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "ee71b437-c311-4415-8e80-c6a92e11e259",
           "Title": "Font Style",
@@ -1151,11 +1255,21 @@
         },
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "e29ad829-42c3-422c-803b-287722555144",
           "Title": "Font Weight",
@@ -1366,11 +1480,21 @@
         },
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "634e8458-0680-4560-be5b-223208426f36",
           "Title": "Font Weight",
@@ -1409,10 +1533,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "5b81dde4-4a66-4cc7-87a7-59eba51c299e",
           "Title": "Text Transform",
@@ -1426,10 +1558,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "ccc116c1-0696-4dad-b5a1-021bc8b71da4",
           "Title": "Text Decoration",
@@ -1487,8 +1627,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "c3190dd5-5b9c-4fd3-b9f8-cc21e960d787",
           "Title": "Font Style",
@@ -1516,11 +1660,21 @@
         },
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "e6d0d702-3218-4c65-bf02-19bde392b8a2",
           "Title": "Font Weight",
@@ -1690,10 +1844,18 @@
         },
         {
           "Options": [
-            { "None": "None" },
-            { "Uppercase": "Uppercase" },
-            { "Lowercase": "Lowercase" },
-            { "Capitalize": "Capitalize" }
+            {
+              "None": "None"
+            },
+            {
+              "Uppercase": "Uppercase"
+            },
+            {
+              "Lowercase": "Lowercase"
+            },
+            {
+              "Capitalize": "Capitalize"
+            }
           ],
           "Guid": "72d09556-c2b0-4b16-9602-7227c70ffcb8",
           "Title": "Text Transform",
@@ -1826,8 +1988,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "c107f6f9-6a8d-4280-af2c-0c7e8d0e2cfc",
           "Title": "Font Style",
@@ -1925,10 +2091,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "5f053b9c-54ed-4ea2-b02f-c25c56427a65",
           "Title": "Text Transform",
@@ -1989,10 +2163,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "d68b342c-5202-4e8c-a6c4-97e71aa01ada",
           "Title": "Text Transform",
@@ -2265,10 +2447,18 @@
         },
         {
           "Options": [
-            { "Top": "Top" },
-            { "Bottom": "Bottom" },
-            { "BottomLeft": "Bottom Left" },
-            { "BottomRight": "Bottom Right" }
+            {
+              "Top": "Top"
+            },
+            {
+              "Bottom": "Bottom"
+            },
+            {
+              "BottomLeft": "Bottom Left"
+            },
+            {
+              "BottomRight": "Bottom Right"
+            }
           ],
           "Guid": "40cfc586-79b1-47a5-89c2-7162c57a3501",
           "Title": "Position",
@@ -2381,8 +2571,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "493c8d18-ed2f-4b5b-a2d8-bfb468514b07",
           "Title": "Font Style",
@@ -2410,10 +2604,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "22ff70e2-9e4a-4933-84c5-61c4cfe13d5b",
           "Title": "Text Transform",
@@ -2471,8 +2673,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "b0fe40eb-5051-43e4-960f-9c454a3bcf47",
           "Title": "Font Style",
@@ -2500,10 +2706,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "d9370389-26c3-4299-998a-1bae54fcc02f",
           "Title": "Text Transform",
@@ -2522,7 +2736,8 @@
       "Guid": "5e2e8985-adb4-461b-b27f-c7e8c0f96f43",
       "Category": "Styles: Heading",
       "Title": null,
-      "Controls": [],
+      "Controls": [
+      ],
       "Sass": ""
     },
     {
@@ -2532,12 +2747,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "d086c14f-61b2-499d-963a-ce4361b97d24",
           "Title": "Font Weight",
@@ -2562,8 +2789,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "847f3b77-69c3-4dea-8bdc-db72a5b957cc",
           "Title": "Font Style",
@@ -2605,10 +2836,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "92a6de0f-a303-4454-99da-0603fd42af12",
           "Title": "Text Transform",
@@ -2622,10 +2861,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "ebe78833-d593-4044-9a09-58659a027fac",
           "Title": "Text Decoration",
@@ -2647,12 +2894,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "69b4efd7-5f91-442c-b12e-72e0a9601729",
           "Title": "Font Weight",
@@ -2677,8 +2936,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "f924ee05-62b8-4b38-9a54-be617a42eee7",
           "Title": "Font Style",
@@ -2720,10 +2983,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "4e1c30b4-e70d-4b4c-9b2e-1d198d0db0be",
           "Title": "Text Transform",
@@ -2737,10 +3008,18 @@
         },
         {
           "Options": [
-            { "none ": " none" },
-            { "underline ": " underline" },
-            { "overline ": " overline" },
-            { "line-through ": " Strikethrough" }
+            {
+              "none ": " none"
+            },
+            {
+              "underline ": " underline"
+            },
+            {
+              "overline ": " overline"
+            },
+            {
+              "line-through ": " Strikethrough"
+            }
           ],
           "Guid": "a16cc095-4831-420b-b6e0-1e127ca017ad",
           "Title": "Text Decoration",
@@ -2762,12 +3041,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "654bf786-2dc8-427f-a9a4-c5a965b87a7e",
           "Title": "Font Weight",
@@ -2792,8 +3083,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "4b8dc7ab-baa7-4af5-87c2-2ef3805cd799",
           "Title": "Font Style",
@@ -2835,10 +3130,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "2d02a3fa-fad8-47fe-8921-7b5deb4afa75",
           "Title": "Text Transform",
@@ -2852,10 +3155,18 @@
         },
         {
           "Options": [
-            { "none ": " none" },
-            { "underline ": " underline" },
-            { "overline ": " overline" },
-            { "line-through ": " Strikethrough" }
+            {
+              "none ": " none"
+            },
+            {
+              "underline ": " underline"
+            },
+            {
+              "overline ": " overline"
+            },
+            {
+              "line-through ": " Strikethrough"
+            }
           ],
           "Guid": "414cffc0-b53b-4f03-8fc0-c9f43fabcbec",
           "Title": "Text Decoration",
@@ -2877,12 +3188,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "84d3ca8a-c490-42ec-bd11-3744c7565f99",
           "Title": "Font Weight",
@@ -2907,8 +3230,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "30e9571c-8ce4-4a63-95a4-a8336d4acba7",
           "Title": "Font Style",
@@ -2950,10 +3277,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "62f04fba-f570-4d5c-bf3a-8390de4cc91f",
           "Title": "Text Transform",
@@ -2967,10 +3302,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "733f54df-6fcf-4cbb-aa75-cdffc9070d92",
           "Title": "Text Decoration",
@@ -2992,12 +3335,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "d0b36c23-63b5-42d4-b11a-46834b392fd5",
           "Title": "Font Weight",
@@ -3022,8 +3377,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "7d2e8a56-c7e8-405a-aa92-15dbf941eec5",
           "Title": "Font Style",
@@ -3065,10 +3424,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "c0647ecf-aed6-4b3f-90e4-1e954f419211",
           "Title": "Text Transform",
@@ -3082,10 +3449,18 @@
         },
         {
           "Options": [
-            { "none ": " none" },
-            { "underline ": " underline" },
-            { "overline ": " overline" },
-            { "line-through ": " Strikethrough" }
+            {
+              "none ": " none"
+            },
+            {
+              "underline ": " underline"
+            },
+            {
+              "overline ": " overline"
+            },
+            {
+              "line-through ": " Strikethrough"
+            }
           ],
           "Guid": "e4de2bca-25da-4b5c-ae2a-59e08cce17e3",
           "Title": "Text Decoration",
@@ -3107,12 +3482,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "7544de04-ae2d-473c-9367-4660b4ec88f1",
           "Title": "Font Weight",
@@ -3137,8 +3524,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "86338f6e-0f68-4ef4-aca0-a21824f9c839",
           "Title": "Font Style",
@@ -3180,10 +3571,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "2efb7f55-90f0-4717-8420-bf369ec4fe8a",
           "Title": "Text Transform",
@@ -3197,10 +3596,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "9bf60fc9-d945-4e2f-a698-92ced4255b0b",
           "Title": "Text Decoration",
@@ -3222,12 +3629,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "91182979-3927-4f59-af26-cde5f19e0c56",
           "Title": "Font Weight",
@@ -3252,8 +3671,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "67bd3b64-a00d-4f5d-9e56-7defd7856559",
           "Title": "Font Style",
@@ -3295,10 +3718,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "5011d4d9-962a-4495-8277-6bb0a62f2de8",
           "Title": "Text Transform",
@@ -3312,10 +3743,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "8300d998-9b3f-420e-b54f-82814694cb1c",
           "Title": "Text Decoration",
@@ -3337,12 +3776,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "8dc9876a-4202-49fe-a0ec-7e310f0ec794",
           "Title": "Font Weight",
@@ -3367,8 +3818,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "7f8fd028-fde3-4d24-b2cf-3b0c3af63c10",
           "Title": "Font Style",
@@ -3410,10 +3865,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "b5d6d553-b04d-42b3-9ba2-687b9b420a92",
           "Title": "Text Transform",
@@ -3427,10 +3890,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "4ad11e1f-81ee-4439-a4b4-78c68cf3844f",
           "Title": "Text Decoration",
@@ -3452,12 +3923,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "b9952f3d-4928-458f-a172-1aa3e485a95b",
           "Title": "Font Weight",
@@ -3482,8 +3965,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "d4180e0c-a916-4048-b4e2-a2dccb93c111",
           "Title": "Font Style",
@@ -3525,10 +4012,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "4ca3b5c2-4a2c-4ac0-a176-17610beb073a",
           "Title": "Text Transform",
@@ -3542,10 +4037,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "13276c45-5cd2-4696-ae01-9f84a6dd6692",
           "Title": "Text Decoration",
@@ -3567,12 +4070,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "69038e77-eb19-4739-8f6a-fe0430b20aeb",
           "Title": "Font Weight",
@@ -3597,8 +4112,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "0979c336-f8b7-44af-8005-7ddfd8f7c2e4",
           "Title": "Font Style",
@@ -3640,10 +4159,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "213153da-3344-49a3-88d9-43f32304b03c",
           "Title": "Text Transform",
@@ -3657,10 +4184,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "93df67d9-6e79-4aae-9425-ad55c1c4c887",
           "Title": "Text Decoration",
@@ -3679,7 +4214,8 @@
       "Guid": "d8a12c05-6e56-4692-8ae2-e906bda60c80",
       "Category": "Styles: Text",
       "Title": null,
-      "Controls": [],
+      "Controls": [
+      ],
       "Sass": ""
     },
     {
@@ -3689,12 +4225,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "3cfccf9e-c577-49c2-8205-26a467e38cf4",
           "Title": "Font Weight",
@@ -3717,8 +4265,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "f1817890-3ed0-4d7b-883e-3c50222f728a",
           "Title": "Font Style",
@@ -3757,10 +4309,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "676143ba-393e-4324-831b-f8d0a2d6e26d",
           "Title": "Text Transform",
@@ -3773,10 +4333,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "9b40907d-5e03-4058-b66f-384fa5e89aa9",
           "Title": "Text Decoration",
@@ -3797,12 +4365,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "78d427e4-3c9c-4693-a903-515f599f6f60",
           "Title": "Font Weight",
@@ -3827,8 +4407,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "0d3321f4-f588-4aab-936c-69f0af26ad78",
           "Title": "Font Style",
@@ -3870,10 +4454,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "815e1932-0c31-4429-b49f-37e7b2ea7ae6",
           "Title": "Text Transform",
@@ -3887,10 +4479,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "1dd5385c-e6dc-4602-9548-161bd8e8868b",
           "Title": "Text Decoration",
@@ -3912,12 +4512,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "91767487-c559-4f3f-8ff1-159dda1bb03c",
           "Title": "Font Weight",
@@ -3940,8 +4552,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "f7ebb4cf-4d04-4747-b523-e45a9894fbcb",
           "Title": "Font Style",
@@ -3980,10 +4596,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "949ca44d-7609-43e4-98d2-4fe458b874fc",
           "Title": "Text Transform",
@@ -3996,10 +4620,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "1e28480a-38f6-4b72-8426-44a3fbf41c22",
           "Title": "Text Decoration",
@@ -4020,12 +4652,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "cd029610-fdeb-44df-b06b-cedb81700dcb",
           "Title": "Font Weight",
@@ -4050,8 +4694,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "da9b0684-853e-4c70-b407-f02c6513ca6a",
           "Title": "Font Style",
@@ -4093,10 +4741,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "0cde392f-c6db-42de-9580-0c663ad4c8e3",
           "Title": "Text Transform",
@@ -4110,10 +4766,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "7c3c1b1b-8c31-4e03-8e46-21c9926b8274",
           "Title": "Text Decoration",
@@ -4135,12 +4799,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "ca651306-6bba-4179-84e0-af349025f23f",
           "Title": "Font Weight",
@@ -4165,8 +4841,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "64f1f510-d819-4390-937d-b8079f036a18",
           "Title": "Font Style",
@@ -4208,10 +4888,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "78ffa0f7-8ca4-40e4-ab96-ba80b806cd75",
           "Title": "Text Transform",
@@ -4225,10 +4913,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "357edc66-40b9-46a8-a0b6-4a657fbbaf75",
           "Title": "Text Decoration",
@@ -4250,12 +4946,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "c7d7bdce-edb5-4e8e-ba0e-b940b30cab98",
           "Title": "Font Weight",
@@ -4280,8 +4988,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "121fdb8f-ac7a-4141-93fc-2de96ce1b53e",
           "Title": "Font Style",
@@ -4323,10 +5035,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "1ac68813-e0b5-4304-9091-957b5e407f13",
           "Title": "Text Transform",
@@ -4340,10 +5060,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "8db1198d-1bc2-41f2-89f3-869d21fda63a",
           "Title": "Text Decoration",
@@ -4365,12 +5093,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "10ba1513-f180-4ba1-b382-eb087ecfffa1",
           "Title": "Font Weight",
@@ -4395,8 +5135,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "14e0a6b6-0009-4738-afb2-6aa950f88cc7",
           "Title": "Font Style",
@@ -4438,10 +5182,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "de155c64-9489-4e85-a12f-aefa2b7f0713",
           "Title": "Text Transform",
@@ -4455,10 +5207,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "fcbd3fde-c8bd-40df-a46f-a04429250666",
           "Title": "Text Decoration",
@@ -4480,12 +5240,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "0ba16c98-5450-4a5c-878d-f3cfe7b05ac7",
           "Title": "Font Weight",
@@ -4510,8 +5282,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "832d6e06-2d7f-4d6e-a46d-3b426b48a1c1",
           "Title": "Font Style",
@@ -4553,10 +5329,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "b6d08660-061d-4d0b-b7f0-9c5cf3144d30",
           "Title": "Text Transform",
@@ -4570,10 +5354,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "45a7fbaa-07d4-4eff-aebb-cd408193624e",
           "Title": "Text Decoration",
@@ -4595,12 +5387,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "e04755ce-f497-4d97-8416-78d63fd15996",
           "Title": "Font Weight",
@@ -4625,8 +5429,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "bbf1af1d-147d-4848-bc13-ce6577f9a07a",
           "Title": "Font Style",
@@ -4668,10 +5476,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "ffda9697-9f4a-4af7-b21a-2a2b3140a134",
           "Title": "Text Transform",
@@ -4685,10 +5501,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "c89f013f-f908-4caa-8062-0d9fc85ca031",
           "Title": "Text Decoration",
@@ -4707,14 +5531,16 @@
       "Guid": "8b1e5bee-e27a-4709-86b3-3b06713abcfd",
       "Category": "Styles: Text",
       "Title": null,
-      "Controls": [],
+      "Controls": [
+      ],
       "Sass": ""
     },
     {
       "Guid": "69dcdee5-47f6-467c-9144-34dfc3d1c6ef",
       "Category": "Styles: Button",
       "Title": null,
-      "Controls": [],
+      "Controls": [
+      ],
       "Sass": ""
     },
     {
@@ -4724,12 +5550,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "57c89a0a-604b-4c8b-ba62-7a6d7a2bdbf8",
           "Title": "Font Weight",
@@ -4752,8 +5590,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "01f879c5-0d5f-4f6c-b2bd-b5e7f3545ab3",
           "Title": "Font Style",
@@ -4792,10 +5634,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "826ffe7c-42d4-450f-ad04-d3ff0a156c2e",
           "Title": "Text Transform",
@@ -4808,10 +5658,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "1e716e6c-6e4d-4aa3-ad0b-f3bb21bd9458",
           "Title": "Text Decoration",
@@ -4832,12 +5690,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "7ef85088-232c-4af4-b6ff-9a1033eaf42b",
           "Title": "Font Weight",
@@ -4862,8 +5732,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "681a2634-aa14-4d33-849b-5bb5c642a00a",
           "Title": "Font Style",
@@ -4905,10 +5779,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "9b1c7958-4aa5-4a31-86ef-285adcd471b3",
           "Title": "Text Transform",
@@ -4922,10 +5804,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "54df2601-2cc4-47ba-b461-9c4fb62b9c18",
           "Title": "Text Decoration",
@@ -4947,12 +5837,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "41b35c60-544e-47ae-bb04-2caf6827664a",
           "Title": "Font Weight",
@@ -4977,8 +5879,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "6c69f2dc-d784-4b6e-ba04-2039422ffd44",
           "Title": "Font Style",
@@ -5020,10 +5926,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "644b2239-4d95-4d87-8a7f-4341dd3cb768",
           "Title": "Text Transform",
@@ -5037,10 +5951,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "06df7bc0-4722-40da-bfc6-9e537c2db991",
           "Title": "Text Decoration",
@@ -5062,12 +5984,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "f19b4007-e56a-4332-bad7-7875b98badc4",
           "Title": "Font Weight",
@@ -5092,8 +6026,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "157d2138-0c99-4514-a4ca-52fd6da26b5f",
           "Title": "Font Style",
@@ -5135,10 +6073,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "b85e0376-3743-4acc-b104-100ceaa9bd14",
           "Title": "Text Transform",
@@ -5152,10 +6098,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "9bbe9774-77f6-466e-8c1b-024583fdde7f",
           "Title": "Text Decoration",
@@ -5177,12 +6131,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "70383cd1-1cfe-4623-b8ba-6a10bb2456a8",
           "Title": "Font Weight",
@@ -5207,8 +6173,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "92cf54b6-3f8e-4bd1-a32e-ffb3d0217289",
           "Title": "Font Style",
@@ -5250,10 +6220,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "3c246b10-9e83-457e-ae07-c0ae408bcce2",
           "Title": "Text Transform",
@@ -5267,10 +6245,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "9093d5ac-51b9-4490-beb0-c6d0fad2ea93",
           "Title": "Text Decoration",
@@ -5292,12 +6278,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "66a33e36-5166-4fee-acab-5e631a134310",
           "Title": "Font Weight",
@@ -5322,8 +6320,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "32fa4a54-0655-41e9-82cd-49a11cbbdc45",
           "Title": "Font Style",
@@ -5365,10 +6367,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "bda6f2b4-5f01-4141-a1d1-0374c8f93051",
           "Title": "Text Transform",
@@ -5382,10 +6392,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "f82d1226-4eb0-4ca4-a8d2-b7f59f134bb3",
           "Title": "Text Decoration",
@@ -5407,12 +6425,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "e8c8581b-8714-45e2-a68b-8eddc96d7511",
           "Title": "Font Weight",
@@ -5437,8 +6467,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "9dec87bd-b789-4788-b1de-1113dcfdf939",
           "Title": "Font Style",
@@ -5480,10 +6514,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "f4155e7f-3c12-4d3b-b9ee-674fabba751f",
           "Title": "Text Transform",
@@ -5497,10 +6539,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "bc1f132d-8169-4fa6-aca4-6a0efbe0ecc9",
           "Title": "Text Decoration",
@@ -5522,12 +6572,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "f5a9d43b-9fba-49a1-b0ab-70968799ceaa",
           "Title": "Font Weight",
@@ -5552,8 +6614,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "cd2cd87a-32e0-4254-9b3a-e2dee8510e5f",
           "Title": "Font Style",
@@ -5595,10 +6661,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "dffdc066-c9e4-4cf2-a945-03b503effec9",
           "Title": "Text Transform",
@@ -5612,10 +6686,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "f6491fb0-4e84-4ea0-a405-567719dd1c28",
           "Title": "Text Decoration",
@@ -5637,12 +6719,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "72d29dd7-f48b-45fb-aec0-2914bc52a7f6",
           "Title": "Font Weight",
@@ -5667,8 +6761,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "478f93de-2218-4034-bb71-9a7449b355a3",
           "Title": "Font Style",
@@ -5710,10 +6808,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "80b8e1af-625a-450b-bd6c-8160467eecb7",
           "Title": "Text Transform",
@@ -5727,10 +6833,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "db997c82-d279-4218-92ba-b744ecb81a23",
           "Title": "Text Decoration",
@@ -5752,12 +6866,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "0c7c980d-7d67-4002-b717-d4be968aeed4",
           "Title": "Font Weight",
@@ -5782,8 +6908,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "e4bfe3e0-090c-47cf-b241-f321d17817b7",
           "Title": "Font Style",
@@ -5825,10 +6955,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "1cb85756-1678-43fd-85c5-e06cb952d889",
           "Title": "Text Transform",
@@ -5842,10 +6980,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "7a5b4faa-94cc-454e-acdb-4a4030300d90",
           "Title": "Text Decoration",
@@ -5867,12 +7013,24 @@
       "Controls": [
         {
           "Options": [
-            { "100": "Thin" },
-            { "300": "Light" },
-            { "400": "Normal" },
-            { "500": "Medium" },
-            { "700": "Bold" },
-            { "900": "Ultra Bold" }
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
           ],
           "Guid": "b41d2467-4f50-4cdc-88e9-2489f4312b10",
           "Title": "Font Weight",
@@ -5897,8 +7055,12 @@
         },
         {
           "Options": [
-            { "normal": "normal" },
-            { "italic": "italic" }
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
           ],
           "Guid": "3d705781-70bf-41d1-a959-4a8b57aa9744",
           "Title": "Font Style",
@@ -5940,10 +7102,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "uppercase": "uppercase" },
-            { "lowercase": "lowercase" },
-            { "capitalize": "capitalize" }
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
           ],
           "Guid": "44343188-3b0e-4cb4-aaca-1e57ef76cb40",
           "Title": "Text Transform",
@@ -5957,10 +7127,18 @@
         },
         {
           "Options": [
-            { "none": "none" },
-            { "underline": "underline" },
-            { "overline": "overline" },
-            { "line-through": "Strikethrough" }
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
           ],
           "Guid": "d87014f0-9fa9-44e3-ba67-3983ecad40ee",
           "Title": "Text Decoration",
