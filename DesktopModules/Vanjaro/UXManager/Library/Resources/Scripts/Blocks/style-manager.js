@@ -86,20 +86,18 @@
 			model.view.$el.find('input').prop('checked', false);
 			model.view.$el.find('input[value="' + defaultValue + '"]').prop('checked', true);
 
-			if (model.attributes.UpdateStyles) {
-				selected.removeStyle(property);
-				if (selected.attributes.type == "grid")
-					selected.attributes.components.models[0].removeStyle(property);
-            }
-			else {
-				var classes = model.attributes.list.map(opt => opt.value);
+			var classes = model.attributes.list.map(opt => opt.value);
 
-				$(classes).each(function (index, className) {
-					selected.removeClass(className);
-				});
-			}
+			$(classes).each(function (index, className) {
+				selected.removeClass(className);
+			});
 
 			selected.set(property, defaultValue);
+
+			selected.removeStyle(property);
+
+			if (selected.attributes.type == "grid")
+				selected.attributes.components.models[0].removeStyle(property);
 
 			if (property == "border-style" || property == "border-top-style" || property == "border-right-style" || property == "border-bottom-style" || property == "border-left-style") {
 
@@ -465,7 +463,6 @@
 
 			if (value == 'auto') {
 
-				selected.removeStyle(property);
 				model.view.$el.find('select').prop('disabled', 'disabled');
 
 				if (selected.attributes.type == "svg" && selected.parent().attributes.type == "icon") {
@@ -485,15 +482,10 @@
 					}
 				}
 			}
-			else {
-				var style = selected.getStyle();
-				style[property] = value + unit;
-				selected.setStyle(style);
-			}
+
+			selected.removeStyle(property);
 
 			if (property == "border-width" || property == "border-top-width" || property == "border-right-width" || property == "border-bottom-width" || property == "border-left-width") {
-
-				selected.removeStyle(property);
 
 				var borderStyle;
 
