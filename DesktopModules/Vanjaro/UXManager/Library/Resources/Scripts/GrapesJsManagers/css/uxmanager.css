@@ -3481,6 +3481,6 @@ body.resp-mode.mobile .vj-wrapper {
         outline: none;
     }
 
-.select_language {
+.sidebar-open .select_language {
     pointer-events: none;
 }
