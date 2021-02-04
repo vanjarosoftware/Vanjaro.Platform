@@ -293,13 +293,17 @@ global.UpdateGlobalBlock = function (model) {
             if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
                 var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));
                 if (Block != undefined) {
+                    var css = '';
+                    $.each($(VjEditor.Canvas.getDocument()).find('#' + model.ccid + '>style'), function (sk, sv) {
+                        css += sv.innerHTML;
+                    });
                     var CustomBlock = {
                         ID: Block.attributes.attributes.id,
                         Guid: Block.attributes.attributes.guid,
                         Name: Block.attributes.label,
                         Category: Block.attributes.category.id || Block.attributes.category,
                         Html: content.html,
-                        Css: content.css,
+                        Css: css,
                         IsGlobal: true
                     };
                     UpdateCustomBlock(VjEditor, CustomBlock);
@@ -489,6 +493,9 @@ global.RenderBlock = function (model, bmodel, render) {
 
                     model.view.$el[0].innerHTML = '';
                     model.append($(response.Markup)[0].innerHTML);
+                    if (response.Style != undefined && response.Style != '') {
+                        $(VjEditor.Canvas.getDocument()).find('#' + model.ccid).append('<style>' + response.Style + '</style>');
+                    }
                     const newcomponents = getAllComponents(model);
                     $.each(newcomponents, function (k, v) {
                         if (v.attributes != undefined && v.attributes.type != undefined && v.attributes.type == 'blockwrapper')
@@ -534,7 +541,7 @@ global.RenderBlock = function (model, bmodel, render) {
                     script_tag.text = response.Script;
                     $(window.parent.window.VjEditor.Canvas.getDocument()).find('head')[0].appendChild(script_tag);
                 }
-                if (response.Style != undefined && response.Style != '') {
+                if (response.Style != undefined && response.Style != '' && model.attributes.attributes["data-block-type"].toLowerCase() != "global") {
                     var style_tag = $(window.parent.window.VjEditor.Canvas.getDocument().createElement('style'))[0];
                     style_tag.type = 'text/css';
                     style_tag.text = response.Style;
