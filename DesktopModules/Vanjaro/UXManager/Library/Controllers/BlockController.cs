@@ -22,6 +22,7 @@ using Vanjaro.UXManager.Library.Entities;
 using static Vanjaro.Core.Managers;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
+using System.Text;
 
 namespace Vanjaro.UXManager.Library.Controllers
 {
@@ -124,7 +125,7 @@ namespace Vanjaro.UXManager.Library.Controllers
                     }
                     if (File.Exists(path + "/Template.json"))
                     {
-                        ExportTemplate exportTemplate = JsonConvert.DeserializeObject<ExportTemplate>(File.ReadAllText(path + "/Template.json"));
+                        ExportTemplate exportTemplate = JsonConvert.DeserializeObject<ExportTemplate>(File.ReadAllText(path + "/Template.json", Encoding.Unicode));
                         if (exportTemplate != null && exportTemplate.ThemeGuid.ToLower() == ThemeManager.CurrentTheme.GUID.ToLower())
                         {
                             Layout pagelayout = exportTemplate.Templates.FirstOrDefault();
@@ -144,34 +145,37 @@ namespace Vanjaro.UXManager.Library.Controllers
                                     Result.Css = PageManager.DeTokenizeLinks(pagelayout.Style.ToString(), PortalSettings.ActiveTab.PortalID);
                                 }
 
-                                List<string> assets = Directory.GetFiles(path + "/Assets", "*", SearchOption.AllDirectories).ToList();
-                                if (assets != null && assets.Count > 0)
+                                if (Directory.Exists(path + "/Assets"))
                                 {
-                                    Parallel.ForEach(assets,
-                                    new ParallelOptions { MaxDegreeOfParallelism = Convert.ToInt32(Math.Ceiling((Environment.ProcessorCount * 0.50) * 1.0)) },
-                                    asset =>
+                                    List<string> assets = Directory.GetFiles(path + "/Assets", "*", SearchOption.AllDirectories).ToList();
+                                    if (assets != null && assets.Count > 0)
                                     {
-                                        if (fi == null)
-                                            fi = FolderManager.Instance.AddFolder(PortalSettings.ActiveTab.PortalID, "Images");
-                                        if (fi != null)
+                                        Parallel.ForEach(assets,
+                                        new ParallelOptions { MaxDegreeOfParallelism = Convert.ToInt32(Math.Ceiling((Environment.ProcessorCount * 0.50) * 1.0)) },
+                                        asset =>
                                         {
-                                            string fileName = Path.GetFileName(asset);
-                                            if (fileName.ToLower().EndsWith("w.webp") || fileName.ToLower().EndsWith("w.png") || fileName.ToLower().EndsWith("w.jpeg"))
+                                            if (fi == null)
+                                                fi = FolderManager.Instance.AddFolder(PortalSettings.ActiveTab.PortalID, "Images");
+                                            if (fi != null)
                                             {
-                                                using (FileStream fs = File.OpenRead(asset))
+                                                string fileName = Path.GetFileName(asset);
+                                                if (fileName.ToLower().EndsWith("w.webp") || fileName.ToLower().EndsWith("w.png") || fileName.ToLower().EndsWith("w.jpeg"))
                                                 {
-                                                    FileManager.Instance.AddFile(foldersizeinfo, fileName, fs);
+                                                    using (FileStream fs = File.OpenRead(asset))
+                                                    {
+                                                        FileManager.Instance.AddFile(foldersizeinfo, fileName, fs);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    using (FileStream fs = File.OpenRead(asset))
+                                                    {
+                                                        FileManager.Instance.AddFile(fi, fileName, fs);
+                                                    }
                                                 }
                                             }
-                                            else
-                                            {
-                                                using (FileStream fs = File.OpenRead(asset))
-                                                {
-                                                    FileManager.Instance.AddFile(fi, fileName, fs);
-                                                }
-                                            }
-                                        }
-                                    });
+                                        });
+                                    }
                                 }
                             }
                         }
