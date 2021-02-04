@@ -52,7 +52,7 @@ $(document).ready(function () {
 						var LibraryUrl = TemplateLibraryURL.split('/templates/')[0];
 						if (event.origin.startsWith(LibraryUrl) && event.data != undefined) {
 							if (typeof event.data.path != 'undefined') {
-								if (!event.data.path.startsWith(LibraryUrl)) {
+								if (!event.origin.startsWith(LibraryUrl)) {
 									templatePath = LibraryUrl + event.data.path;
 									templateHash = event.data.hash;
 								}
