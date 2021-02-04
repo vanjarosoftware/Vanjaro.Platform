@@ -281,7 +281,6 @@
     <Content Include="Themes\Basic\Blocks\Search Input\search input.html" />
     <Content Include="Themes\Basic\Blocks\Search Result\search result.html" />
     <Content Include="Themes\Basic\Layout.Edit.html" />
-    <Content Include="Themes\Basic\Theme.css" />
     <Content Include="Themes\Resources.txt" />
     <Content Include="UserControls\Login.ascx" />
   </ItemGroup>
@@ -428,9 +427,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Vanjaro.dnn" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Themes\Basic\editor\921af5fa-3030-4bae-aaec-0e353b9489ff\theme.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="VanjaroDistribution.dnn" />

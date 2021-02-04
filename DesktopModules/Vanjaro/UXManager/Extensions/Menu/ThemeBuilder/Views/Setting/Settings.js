@@ -53,11 +53,23 @@
             showAlpha: true,
             palette: [],
             chooseText: "Ok",
+            show: function (color) {
+
+                var body = this.closest('body');
+
+                $(body).click(function (event) {
+                    event.stopPropagation();
+                });
+            },
             move: function (color) {
                 $(this).val(color.toRgbString());
                 $scope.ApplyChanges(this);
             },
             change: function (color) {
+                $(this).val(color.toRgbString());
+                $scope.ApplyChanges(this);
+            },
+            hide: function (color) {
                 $(this).val(color.toRgbString());
                 $scope.ApplyChanges(this);
             }

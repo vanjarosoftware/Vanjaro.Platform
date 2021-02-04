@@ -20,23 +20,23 @@
         {
           "Guid": "71d1572f-b319-4a5a-b444-eb885d89d9d6",
           "Title": "Hover Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".DefaultMenu > ul > li:hover > a {\n  color:$navhovercolor !important;\n}",
           "PreviewCSS": ".DefaultMenu > ul > li:hover > a {\n  color:$navhovercolor !important;\n}",
           "LessVariable": "$navhovercolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "044da7f5-b02d-4722-ae6e-03e94842c7f3",
           "Title": "Active Color",
-          "DefaultValue": "#000000",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".DefaultMenu li.selected a{\n  color:$navactivecolor !important;\n}",
           "PreviewCSS": ".DefaultMenu li.selected a{\n  color:$navactivecolor !important;\n}",
           "LessVariable": "$navactivecolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -67,7 +67,7 @@
         {
           "Guid": "1c55d5b4-a527-4654-adf7-9c0ff04c1ca8",
           "Title": "Active border bottom color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".DefaultMenu > ul > li.selected > a,\n.DefaultMenu > ul > li:hover > a {\n  Border-color:$navbordercolor !important;\n}",
           "PreviewCSS": ".DefaultMenu > ul > li.selected > a,\n.DefaultMenu > ul > li:hover > a {\n  Border-color:$navbordercolor !important;\n}",
@@ -486,7 +486,7 @@
           "CustomCSS": ".DefaultMenu .dropdown ul li a.menu-item:hover {\n\tcolor:$colorhover !important;\n}",
           "PreviewCSS": ".DefaultMenu .dropdown ul li a.menu-item:hover {\n\tcolor:$colorhover !important;\n}",
           "LessVariable": "$colorhover",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -497,18 +497,18 @@
           "CustomCSS": "@media (min-width: 992px) {\n.DefaultMenu .dropdown ul li a.menu-item {\n\tbackground: $submenubackground !important;\n}\n}",
           "PreviewCSS": "@media (min-width: 992px) {\n.DefaultMenu .dropdown ul li a.menu-item {\n\tbackground: $submenubackground !important;\n}\n}",
           "LessVariable": "$submenubackground",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "dfbe9c64-58a8-4d2d-9edd-0155a105545a",
           "Title": "Background Hover ",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".DefaultMenu .dropdown ul li a.menu-item:hover {\n\tbackground:$backgroundhover !important;\n}",
           "PreviewCSS": ".DefaultMenu .dropdown ul li a.menu-item:hover {\n\tbackground:$backgroundhover !important;\n}",
           "LessVariable": "$backgroundhover",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -786,12 +786,13 @@
           "CustomCSS": " a.loginuser {\n    color: $signincolor !important;\n\n}",
           "PreviewCSS": " a.loginuser {\n    color: $signincolor !important;\n\n}",
           "LessVariable": "$signincolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "ea0de0fd-a08e-4d75-8ed7-e9911be48fdb",
           "Title": "Font Size",
           "DefaultValue": "14",
@@ -799,6 +800,7 @@
           "CustomCSS": " a.loginuser{\n    font-size: $signinfontsizepx !important;\n\n}",
           "PreviewCSS": " a.loginuser{\n    font-size: $signinfontsizepx !important;\n\n}",
           "LessVariable": "$signinfontsize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -809,6 +811,7 @@
           "CustomCSS": " a.loginuser *{\n    font-family: $signinfontstyle !important;\n\n}",
           "PreviewCSS": " a.loginuser *{\n    font-family: $signinfontstyle !important;\n\n}",
           "LessVariable": "$signinfontstyle",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
@@ -827,6 +830,7 @@
           "CustomCSS": " a.loginuser {\n    font-style: $signinfontstyle !important;\n\n}",
           "PreviewCSS": " a.loginuser {\n    font-style: $signinfontstyle !important;\n\n}",
           "LessVariable": "$signinfontstyle",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
@@ -856,7 +860,18 @@
           "CustomCSS": ".vj-breadcrumb .breadcrumb .active{\n    color: $breadactivecolor  !important;\n}",
           "PreviewCSS": ".vj-breadcrumb .breadcrumb .active{\n    color: $breadactivecolor  !important;\n}",
           "LessVariable": "$breadactivecolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "ba78a2d9-424b-48d8-9475-8561e5ba6113",
+          "Title": "Hover color",
+          "DefaultValue": "#000000",
+          "Suffix": "",
+          "CustomCSS": ".vj-breadcrumb .breadcrumb .breadcrumb-item a:hover span{\n  color:$bchcolor !important;\n}",
+          "PreviewCSS": ".vj-breadcrumb .breadcrumb .breadcrumb-item a:hover span{\n  color:$bchcolor !important;\n}",
+          "LessVariable": "$bchcolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -969,17 +984,6 @@
           "LessVariable": "$breadletterspacing",
           "JavascriptVariable": null,
           "Type": "Slider"
-        },
-        {
-          "Guid": "ba78a2d9-424b-48d8-9475-8561e5ba6113",
-          "Title": "Hover color",
-          "DefaultValue": "#000000",
-          "Suffix": "",
-          "CustomCSS": ".vj-breadcrumb .breadcrumb .breadcrumb-item a:hover span{\n  color:$bchcolor !important;\n}",
-          "PreviewCSS": ".vj-breadcrumb .breadcrumb .breadcrumb-item a:hover span{\n  color:$bchcolor !important;\n}",
-          "LessVariable": "$bchcolor",
-          "JavascriptVariable": "",
-          "Type": "Color Picker"
         }
       ],
       "Sass": ".vj-breadcrumb .breadcrumb {\n\tbackground-color: transparent;\n\tmargin: 0;\n\tborder-radius: 0;\n\tpadding-left: 0;\n\tpadding-right: 0;\n}\n\n.vj-breadcrumb > nav {\n\tdisplay: inline-block;\n}"
@@ -1037,7 +1041,7 @@
           "Type": "Fonts"
         }
       ],
-      "Sass": "input.search_box {\nborder: 1px solid #ccc;\npadding: 10px;\nwidth: 100%;\nmargin-bottom: 10px;\n}\n\ninput.search_box {\nfont-size: 12px;\nmargin: 0;\nline-height: 20px;\nborder-radius: 5px;\npadding: 6px 8px;\n}\n\n.vanjarosearchinput {\nposition: relative;\n}\n\n.vanjarosearchinput .searchicon {\nposition: absolute;\nright: 0px;\ntop: 0;\npadding: 8px 6px;\nz-index: 9;\nheight: 100%;\n}\n\n.vanjarosearchinput span.input-group-text {\nbackground: #fff;\n}\n\n.vanjarosearchinput .searchicon svg {\nfill: #a4afb7;\nvertical-align: top;\n}\n\n.vanjarosearchinput {\nmargin-left: 10px;\nmargin-right: 10px;\ndisplay: inline-block;\n}"
+      "Sass": "input.search_box {\nborder: 1px solid #ccc;\npadding: 10px;\nwidth: 100%;\nmargin-bottom: 10px;\n}\n\ninput.search_box {\nfont-size: 12px;\nmargin: 0;\nline-height: 20px;\nborder-radius: 5px;\npadding: 6px 8px;\n}\n\n.vanjarosearchinput {\nposition: relative;\n}\n\n.vanjarosearchinput .searchicon {\nposition: absolute;\nright: 0px;\ntop: 0;\npadding: 8px 6px;\nz-index: 9;\nheight: 100%;\n}\n\n.vanjarosearchinput span.input-group-text {\nbackground: #fff;\n}\n\n.vanjarosearchinput .searchicon svg {\nfill: #a4afb7;\nvertical-align: top;\n}\n\n.vanjarosearchinput {\ndisplay: inline-block;\n}"
     },
     {
       "Guid": "8661cbae-2047-433e-8646-95579bde85df",
@@ -1047,12 +1051,12 @@
         {
           "Guid": "ee7335a8-d1fe-4399-8b1a-5ede19e050ed",
           "Title": "color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Login .loginhead{\n    color:$headcolor !important;\n}",
           "PreviewCSS": ".Vj-Login .loginhead{\n    color:$headcolor !important;\n}",
           "LessVariable": "$headcolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1173,7 +1177,7 @@
           "Type": "Dropdown"
         }
       ],
-      "Sass": ".Vj-Login,\n.ResetPassword,\n.dataconsent {\n    padding: 20px;\n    border: 1px solid #ccc;\n    max-width: 350px;\n    margin: 10px auto;\n    border-radius: 4px;\n}\n\n.dataconsent {\n    max-width: 450px;\n}\n\n.loginhead {\n    text-align: center !important;\n    margin-bottom: 20px;\n}\n\n.Vj-Login input {\n    border: 1px solid #ccc;\n    padding: 10px;\n    width: 100%;\n    margin-bottom: 10px;\n}\n\n.loginlink {\n    color: #212529;\n    text-decoration: underline;\n}\n\n.loginlink:hover {\n    color: #444;\n    text-decoration: underline;\n}\n\n.ResetPassword input {\n    border: 1px solid #ccc;\n    padding: 10px;\n    width: 100%;\n    margin-bottom: 10px;\n}\n\n.Resethead {\n    text-align: center !important;\n    margin-bottom: 20px;\n}\n\n.form-ResetPassword .resetbtn {\n    color: #fff !important;\n    background: #444;\n    border-color: #444;\n}\n\n.resetpass {\n    margin-top: 15px;\n}\n\n.Vj-Login,\n.ResetPassword,\n.dataconsent {\n    -webkit-box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62);\n    -moz-box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62);\n    box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62);\n}\n\n.Vj-Login label.error,\n.ResetPassword label.error {\n    color: #ee0a0a;\n    font-size: 12px;\n}\n\n.form-ResetPassword .resetbtn:hover,\n.form-ResetPassword .Login-link:hover {\n    background: #000 !important;\n    border-color: #000 !important;\n}\n\n.text-justify > a.btn {\n    width: 100%;\n}\n"
+      "Sass": ".Vj-Login,\n.ResetPassword,\n.dataconsent {\n    padding: 20px;\n    border: 1px solid #ccc;\n    max-width: 350px;\n    margin: 10px auto;\n    border-radius: 4px;\n}\n\n.dataconsent {\n    max-width: 450px;\n}\n\n.loginhead {\n    text-align: center !important;\n    margin-bottom: 20px;\n}\n\n.Vj-Login input {\n    border: 1px solid #ccc;\n    padding: 10px;\n    width: 100%;\n    margin-bottom: 10px;\n}\n\n.loginlink {\n    color: #212529;\n    text-decoration: underline;\n}\n\n.loginlink:hover {\n    color: #444;\n    text-decoration: underline;\n}\n\n.ResetPassword input {\n    border: 1px solid #ccc;\n    padding: 10px;\n    width: 100%;\n    margin-bottom: 10px;\n}\n\n.Resethead {\n    text-align: center !important;\n    margin-bottom: 20px;\n}\n\n.form-ResetPassword .resetbtn {\n    color: #fff !important;\n    background: #444;\n    border-color: #444;\n}\n\n.resetpass {\n    margin-top: 15px;\n}\n\n.Vj-Login,\n.ResetPassword,\n.dataconsent {\n    -webkit-box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62);\n    -moz-box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62);\n    box-shadow: 1px 6px 27px -13px rgba(0, 0, 0, 0.62);\n}\n\n.Vj-Login label.error,\n.ResetPassword label.error {\n  \tcolor: #ee0a0a !important;\n    font-size: 12px;\n    margin-top: -5px;\n    display: block;\n}\n\n.form-ResetPassword .resetbtn:hover,\n.form-ResetPassword .Login-link:hover {\n    background: #000 !important;\n    border-color: #000 !important;\n}\n\n.text-justify > a.btn {\n    width: 100%;\n}\n"
     },
     {
       "Guid": "a672e8b0-d54a-44a3-8761-7331929ce786",
@@ -1183,7 +1187,7 @@
         {
           "Guid": "4d6816fd-951a-4d4c-9d91-7cea1e65e11f",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\ncolor:$labelcolor !important;\n}\n",
           "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\ncolor:$labelcolor !important;\n}\n",
@@ -1293,6 +1297,7 @@
           "CustomCSS": ".Vj-Login #loginbtn {\ncolor:$buttoncolor;\n}",
           "PreviewCSS": ".Vj-Login #loginbtn {\ncolor:$buttoncolor;\n}",
           "LessVariable": "$buttoncolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -1303,16 +1308,18 @@
           "CustomCSS": ".Vj-Login #loginbtn:hover {\ncolor: $signinformBtnTexth;\n}",
           "PreviewCSS": ".Vj-Login #loginbtn:hover {\ncolor: $signinformBtnTexth;\n}",
           "LessVariable": "$signinformBtnTexth",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
           "Guid": "e651de8c-1f7e-40fa-bf6c-458317f62c8d",
           "Title": "Background",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
-          "CustomCSS": ".Vj-Login #loginbtn {\nbackground:$buttonbackground;\n}",
-          "PreviewCSS": ".Vj-Login #loginbtn {\nbackground:$buttonbackground;\n}",
+          "CustomCSS": ".Vj-Login #loginbtn {\n\tbackground: $buttonbackground;\n\tborder-color: $buttonbackground;\n}",
+          "PreviewCSS": ".Vj-Login #loginbtn {\n\tbackground: $buttonbackground;\n \tborder-color: $buttonbackground;\n}",
           "LessVariable": "$buttonbackground",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1320,9 +1327,10 @@
           "Title": "Background Hover Color",
           "DefaultValue": "#555555",
           "Suffix": "",
-          "CustomCSS": ".Vj-Login #loginbtn:hover {\nbackground:$signinbtnbgHoverColor;\n}",
-          "PreviewCSS": ".Vj-Login #loginbtn:hover {\nbackground:$signinbtnbgHoverColor;\n}",
+          "CustomCSS": ".Vj-Login #loginbtn:hover {\nbackground:$signinbtnbgHoverColor;\n  border-color: $signinbtnbgHoverColor;\n}",
+          "PreviewCSS": ".Vj-Login #loginbtn:hover {\nbackground:$signinbtnbgHoverColor;\n  border-color: $signinbtnbgHoverColor;\n}",
           "LessVariable": "$signinbtnbgHoverColor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1333,6 +1341,7 @@
           "CustomCSS": ".Vj-Login #loginbtn {\nfont-family: $signInFormBtnff !important;\n}",
           "PreviewCSS": ".Vj-Login #loginbtn {\nfont-family: $signInFormBtnff !important;\n}",
           "LessVariable": "$signInFormBtnff",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
@@ -1346,6 +1355,7 @@
           "CustomCSS": ".Vj-Login #loginbtn {\nfont-size:$buttonfontsizepx;\n}",
           "PreviewCSS": ".Vj-Login #loginbtn {\nfont-size:$buttonfontsizepx ;\n}",
           "LessVariable": "$buttonfontsize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -1359,6 +1369,7 @@
           "CustomCSS": ".Vj-Login #loginbtn {\nletter-spacing:$buttonspacingpx ;\n}",
           "PreviewCSS": ".Vj-Login #loginbtn {\nletter-spacing:$buttonspacingpx ;\n}",
           "LessVariable": "$buttonspacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         }
       ],
@@ -1395,6 +1406,7 @@
           "CustomCSS": ".select_language{\ncolor:$langcolor;\n}",
           "PreviewCSS": ".select_language{\ncolor:$langcolor;\n}",
           "LessVariable": "$langcolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1405,6 +1417,7 @@
           "CustomCSS": ".select_language{\nbackground:$langbackground;\n}",
           "PreviewCSS": ".select_language{\nbackground:$langbackground;\n}",
           "LessVariable": "$langbackground",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -1415,12 +1428,13 @@
           "CustomCSS": ".select_language, .select_language option{\nfont-family:$langfontfamily;\n}",
           "PreviewCSS": ".select_language, .select_language option{\nfont-family:$langfontfamily;\n}",
           "LessVariable": "$langfontfamily",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "c789d409-e7c3-44d7-b5af-4052a74237e9",
           "Title": "Border Radius",
           "DefaultValue": "5",
@@ -1428,10 +1442,11 @@
           "CustomCSS": ".select_language{\nborder-radius:$langradiuspx;\n}",
           "PreviewCSS": ".select_language{\nborder-radius:$langradiuspx;\n}",
           "LessVariable": "$langradius",
+          "JavascriptVariable": null,
           "Type": "Slider"
         }
       ],
-      "Sass": ".select_language {\n\tpadding: 6px 8px;\n\tfont-size: 12px;\n\tborder: 1px solid #ccc;\n\toutline: none;\n}\n\n\t.select_language option {\n\t\tpadding: 10px;\n\t}\n\n.select_language option {\n\tdisplay: block;\n\ttext-align: left;\n\tfont-size: 12px;\n\tfont-family: Poppins;\n\tfont-weight: 400;\n  \tcolor:#444444 !important;\n}\n\n .vj_language_wrapper {\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}"
+      "Sass": ".select_language {\n\tpadding: 6px 8px;\n\tfont-size: 12px;\n\tborder: 1px solid #ccc;\n\toutline: none;\n}\n\n\t.select_language option {\n\t\tpadding: 10px;\n\t}\n\n.select_language option {\n\tdisplay: block;\n\ttext-align: left;\n\tfont-size: 12px;\n\tfont-family: Poppins;\n\tfont-weight: 400;\n  \tcolor:#444444 !important;\n}\n\n"
     },
     {
       "Guid": "672e8a22-0c8c-413d-aef5-480979d39589",
@@ -1441,12 +1456,12 @@
         {
           "Guid": "7f51d24d-5b7e-4e89-ad3b-5f594cec48a9",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Register .Registerhead{\n  color:$signUpHeadingColor !important;\n}",
           "PreviewCSS": ".Vj-Register .Registerhead{\n  color:$signUpHeadingColor !important;\n}",
           "LessVariable": "$signUpHeadingColor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1567,7 +1582,7 @@
           "Type": "Dropdown"
         }
       ],
-      "Sass": ".Vj-Register input{\n\tborder: 1px solid #ccc;\n\tpadding: 10px;\n\twidth: 100%;\n\tmargin-bottom: 10px;\n}\n\n\n.Vj-Register{\n\tpadding: 20px;\n\tborder: 1px solid #ccc;\n\tmax-width: 350px;\n\tmargin: 10px auto;\n\tborder-radius: 4px;\n\tbackground: #fff;\n}\n\n.Vj-Register {\n\t-webkit-box-shadow: 1px 6px 27px -13px rgba(0,0,0,0.62);\n\t-moz-box-shadow: 1px 6px 27px -13px rgba(0,0,0,0.62);\n\tbox-shadow: 1px 6px 27px -13px rgba(0,0,0,0.62);\n}\n\n\n.Vj-Register label.error {\n\tcolor: #ee0a0a;\n\tfont-size: 12px;\n}\n\n\n.Register-container {\n\tpadding: 20px 0;\n}\n\n\n.Registerhead {\n\ttext-align: center !important;\n\tmargin-bottom: 20px;\n}\n\n.text-justify > a.btn {\n    width: 100%;\n}\n"
+      "Sass": ".Vj-Register input{\n\tborder: 1px solid #ccc;\n\tpadding: 10px;\n\twidth: 100%;\n\tmargin-bottom: 10px;\n}\n\n\n.Vj-Register{\n\tpadding: 20px;\n\tborder: 1px solid #ccc;\n\tmax-width: 350px;\n\tmargin: 10px auto;\n\tborder-radius: 4px;\n\tbackground: #fff;\n}\n\n.Vj-Register {\n\t-webkit-box-shadow: 1px 6px 27px -13px rgba(0,0,0,0.62);\n\t-moz-box-shadow: 1px 6px 27px -13px rgba(0,0,0,0.62);\n\tbox-shadow: 1px 6px 27px -13px rgba(0,0,0,0.62);\n}\n\n\n.Vj-Register label.error {\n\tcolor: #ee0a0a !important;\n    font-size: 12px;\n    margin-top: -5px;\n    display: block;\n}\n\n.registerterms #checktermcondition-error {\n    float: right;\n    position: absolute;\n    bottom: -16px;\n}\n\n.Register-container {\n\tpadding: 20px 0;\n}\n\n\n.Registerhead {\n\ttext-align: center !important;\n\tmargin-bottom: 20px;\n}\n\n.text-justify > a.btn {\n    width: 100%;\n}\n"
     },
     {
       "Guid": "63f4759e-7030-4536-8fb6-d7db6c2fac66",
@@ -1577,12 +1592,12 @@
         {
           "Guid": "e6f1478a-ae79-4eae-84c2-d5366af44742",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Register span,\n.Vj-Register label,\n.Vj-Register .registerterms .vj-text a{\n color:$signUpLablecolor !important;\n}\n.registerterms a:hover{\n color:$signUpLablecolor !important;\n}",
           "PreviewCSS": ".Vj-Register span,\n.Vj-Register label,\n.Vj-Register .registerterms .vj-text a{\n color:$signUpLablecolor !important;\n}\n.registerterms a:hover{\n color:$signUpLablecolor !important;\n}",
           "LessVariable": "$signUpLablecolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1672,7 +1687,7 @@
           "Type": "Dropdown"
         }
       ],
-      "Sass": ".registerterms  {\n  display:flex;\n  position: relative;\n  text-align: left;\n  color: #aaa;\n  margin-bottom: 20px;\n}\n.registerterms .termsofuse {\n    top: 5px;\n\n}\n\n.registerterms label{\nmargin-bottom:0 !important;\n}\n\n.registerterms a {\n\tcolor: #444;\n\ttext-decoration: underline;\n}\n\n.registerterms a:hover {\n\n\ttext-decoration: none !important;\n}\n\n.registerterms .termsofuse {\n\twidth: auto !important;\n\tmargin-right: 10px;\n\t/*margin-bottom: 30px !important;*/\n\tposition: relative;\n}\n\n.Vj-Login .rememberme {\n\twidth: auto !important;\n\tmargin-right: 10px;\n\t/*margin-bottom: 30px !important;*/\n\ttop: 5px;\n\tposition: relative;\n}\n"
+      "Sass": ".registerterms  {\n  display:flex;\n  position: relative;\n  text-align: left;\n  color: #aaa;\n  margin-bottom: 20px !important;\n}\n.registerterms .termsofuse {\n    top: 5px;\n\n}\n\n.registerterms label{\nmargin-bottom:0 !important;\n}\n\n.registerterms a {\n\tcolor: #444;\n\ttext-decoration: underline;\n}\n\n.registerterms a:hover {\n\n\ttext-decoration: none !important;\n}\n\n.registerterms .termsofuse {\n\twidth: auto !important;\n\tmargin-right: 10px;\n\t/*margin-bottom: 30px !important;*/\n\tposition: relative;\n}\n\n.Vj-Login .rememberme {\n\twidth: auto !important;\n\tmargin-right: 10px;\n\t/*margin-bottom: 30px !important;*/\n\ttop: 5px;\n\tposition: relative;\n}\n"
     },
     {
       "Guid": "dca8ddd9-5ed3-41ee-9f9b-e144f73094de",
@@ -1687,6 +1702,7 @@
           "CustomCSS": ".registered #registerbtn{\n  color:$signUpFormColor;\n}",
           "PreviewCSS": ".registered #registerbtn{\n  color:$signUpFormColor;\n}",
           "LessVariable": "$signUpFormColor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -1697,16 +1713,18 @@
           "CustomCSS": ".registered #registerbtn:hover {\ncolor: $signUpFormbtnTextHcolor;\n}",
           "PreviewCSS": ".registered #registerbtn:hover {\ncolor: $signUpFormbtnTextHcolor;\n}",
           "LessVariable": "$signUpFormbtnTextHcolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
           "Guid": "c5777b2d-a676-4713-86b3-e140fa02211f",
           "Title": "Background",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".registered a {\n  background-color:$Signupbuttonbackground ;\n}",
           "PreviewCSS": ".registered a {\n  background-color:$Signupbuttonbackground ;\n}",
           "LessVariable": "$Signupbuttonbackground",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1717,6 +1735,7 @@
           "CustomCSS": ".registered a:hover {\n    background-color: $signUpbtnHovercolor;\n}",
           "PreviewCSS": ".registered a:hover {\n    background-color: $signUpbtnHovercolor;\n}",
           "LessVariable": "$signUpbtnHovercolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -1727,6 +1746,7 @@
           "CustomCSS": ".registered #registerbtn {\nfont-family: $signUpFormbtnFontF !important;\n}",
           "PreviewCSS": ".registered #registerbtn {\nfont-family: $signUpFormbtnFontF !important;\n}",
           "LessVariable": "$signUpFormbtnFontF",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
@@ -1740,6 +1760,7 @@
           "CustomCSS": ".Vj-Register .registered a{\n  font-size:$signUpFontSizepx ;\n}",
           "PreviewCSS": ".Vj-Register .registered a{\n  font-size:$signUpFontSizepx ;\n}",
           "LessVariable": "$signUpFontSize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -1753,6 +1774,7 @@
           "CustomCSS": ".Vj-Register .registered a{\n  letter-spacing:$signUpFormbuttonspacingpx ;\n}",
           "PreviewCSS": ".Vj-Register .registered a{\n  letter-spacing:$signUpFormbuttonspacingpx ;\n}",
           "LessVariable": "$signUpFormbuttonspacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         }
       ],
@@ -1784,17 +1806,18 @@
         {
           "Guid": "106959a3-87b9-45a1-beb9-ccd3b27e8931",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".searchhead{\ncolor:$searchheadcolor;\n}",
           "PreviewCSS": ".searchhead{\ncolor:$searchheadcolor;\n}",
           "LessVariable": "$searchheadcolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "41a7c8d2-fbc2-44e2-ad6b-6148e4cdda63",
           "Title": "Font Size",
           "DefaultValue": "24",
@@ -1802,12 +1825,13 @@
           "CustomCSS": ".searchhead{\nfont-size:$searchresultfontsizepx !important;\n}",
           "PreviewCSS": ".searchhead{\nfont-size:$searchresultfontsizepx !important;\n}",
           "LessVariable": "$searchresultfontsize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": -5,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": -5.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "c871cd1b-b770-4dd7-a048-568e9cd0ecc1",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -1815,6 +1839,7 @@
           "CustomCSS": ".searchhead{\nfont-size:$searchresultspacingpx;\n}",
           "PreviewCSS": ".searchhead{\nfont-size:$searchresultspacingpx;\n}",
           "LessVariable": "$searchresultspacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -1839,6 +1864,7 @@
           "CustomCSS": ".searchhead{\ntext-transform:$searchresulttransform;\n}",
           "PreviewCSS": ".searchhead{\ntext-transform:$searchresulttransform;\n}",
           "LessVariable": "$searchresulttransform",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
@@ -2027,17 +2053,18 @@
         {
           "Guid": "79c205f6-2e57-4cde-b5b4-571e771d9b68",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".editprofile h4{\ncolor:$profileHeadingColor !important;\n}",
           "PreviewCSS": ".editprofile h4{\ncolor:$profileHeadingColor !important;\n}",
           "LessVariable": "$profileHeadingColor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 1,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 1.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "6646a5ae-6000-49d8-a61c-5e2447f73a69",
           "Title": "Font Size",
           "DefaultValue": "32",
@@ -2045,12 +2072,13 @@
           "CustomCSS": ".editprofile h4{\nfont-size:$profileHeadingFontSizepx !important;\n}",
           "PreviewCSS": ".editprofile h4{\nfont-size:$profileHeadingFontSizepx !important;\n}",
           "LessVariable": "$profileHeadingFontSize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 10,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 10.0,
+          "Increment": 1.0,
           "Guid": "c678e930-e91a-4aab-8e02-6a7ecfb9c043",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -2058,6 +2086,7 @@
           "CustomCSS": ".editprofile h4{\nletter-spacing:$profileHeadingLetterSpacingpx !important;\n}",
           "PreviewCSS": ".editprofile h4{\nletter-spacing:$profileHeadingLetterSpacingpx !important;\n}",
           "LessVariable": "$profileHeadingLetterSpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -2082,6 +2111,7 @@
           "CustomCSS": ".editprofile h4{\ntext-transform:$profileHeadingTextTransform !important;\n}",
           "PreviewCSS": ".editprofile h4{\ntext-transform:$profileHeadingTextTransform !important;\n}",
           "LessVariable": "$profileHeadingTextTransform",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
@@ -2095,17 +2125,18 @@
         {
           "Guid": "2ad401aa-7dcc-4041-9986-c767538501af",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".usernamebox text,\n.userdescription strong{\ncolor:$profileLabelColor !important;\n}",
           "PreviewCSS": ".usernamebox text,\n.userdescription strong{\ncolor:$profileLabelColor !important;\n}",
           "LessVariable": "$profileLabelColor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "b4e6743b-ac40-40d2-aca2-04966aed8b9a",
           "Title": "Font Size",
           "DefaultValue": "16",
@@ -2113,12 +2144,13 @@
           "CustomCSS": ".usernamebox text,\n.userdescription strong{\nfont-size:$profileLabelFontSizepx!important;\n}",
           "PreviewCSS": ".usernamebox text,\n.userdescription strong{\nfont-size:$profileLabelFontSizepx!important;\n}",
           "LessVariable": "$profileLabelFontSize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": -5,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": -5.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "9e44de97-4ba6-4b1e-a78a-fb3ea5961732",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -2126,6 +2158,7 @@
           "CustomCSS": ".usernamebox text,\n.userdescription strong{\nletter-spacing:$profileLabelLetterpacingpx!important;\n}",
           "PreviewCSS": ".usernamebox text,\n.userdescription strong{\nletter-spacing:$profileLabelLetterpacingpx!important;\n}",
           "LessVariable": "$profileLabelLetterpacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -2150,6 +2183,7 @@
           "CustomCSS": ".usernamebox text,\n.userdescription strong{\ntext-transform:$profileLabelTextTransform!important;\n}",
           "PreviewCSS": ".usernamebox text,\n.userdescription strong{\ntext-transform:$profileLabelTextTransform!important;\n}",
           "LessVariable": "$profileLabelTextTransform",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
@@ -2238,41 +2272,45 @@
         {
           "Guid": "fe5745d2-d4db-48bb-8f0c-3a7c37a3d0a3",
           "Title": "Primary",
-          "DefaultValue": "#007bff",
+          "DefaultValue": "#000000",
           "Suffix": "",
           "CustomCSS": ".bg-frameprimary,\n.bg-colorprimary {\n\tbackground-color: $primarycolor !important;\n}\n\n$blue: $primarycolor",
           "PreviewCSS": "",
           "LessVariable": "$primarycolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "6bd3311b-64cb-4600-94b2-3fbe4282b2c0",
           "Title": "Secondary",
-          "DefaultValue": "#6c757d",
+          "DefaultValue": "#fa255e",
           "Suffix": "",
           "CustomCSS": ".bg-framesecondary,\n.bg-colorsecondary {\n\tbackground-color: $secondarycolor !important;\n}\n\n$gray-600: $secondarycolor",
           "PreviewCSS": "",
           "LessVariable": "$secondarycolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "0a29462a-8e27-4a76-b855-50c838eb0661",
           "Title": "Tertiary",
-          "DefaultValue": "#da70d6",
+          "DefaultValue": "#c39ea0",
           "Suffix": "",
           "CustomCSS": ".bg-frametertiary,\n.bg-colortertiary {\n\tbackground-color: $tertiary;\n}\n\n$orchid: $tertiary",
           "PreviewCSS": "",
           "LessVariable": "$tertiary",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "cf51aed0-62ef-484b-bfb7-331fccd8046c",
           "Title": "Quaternary",
-          "DefaultValue": "#fa8072",
+          "DefaultValue": "#f8e5e5",
           "Suffix": "",
           "CustomCSS": ".bg-framequaternary,\n.bg-colorquaternary {\n\tbackground-color: $quaternary;\n}\n\n$salmon: $quaternary",
           "PreviewCSS": "",
           "LessVariable": "$quaternary",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -2283,6 +2321,7 @@
           "CustomCSS": ".bg-framesuccess,\n.bg-colorsuccess {\n\tbackground-color: $successcolor !important;\n}\n\n$success: $successcolor",
           "PreviewCSS": "",
           "LessVariable": "$successcolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -2293,6 +2332,7 @@
           "CustomCSS": ".bg-frameinfo,\n.bg-colorinfo {\n\tbackground-color: $infocolor !important;\n}\n\n$info: $infocolor",
           "PreviewCSS": "",
           "LessVariable": "$infocolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -2303,6 +2343,7 @@
           "CustomCSS": ".bg-framewarning,\n.bg-colorwarning {\n\tbackground-color: $warningcolor !important;\n}\n\n$warning: $warningcolor",
           "PreviewCSS": "",
           "LessVariable": "$warningcolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -2313,6 +2354,7 @@
           "CustomCSS": ".bg-framedanger,\n.bg-colordanger {\n\tbackground-color: $dangercolor !important;\n}\n\n$danger: $dangercolor",
           "PreviewCSS": "",
           "LessVariable": "$dangercolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -2323,6 +2365,7 @@
           "CustomCSS": ".bg-framelight,\n.bg-colorlight {\n\tbackground-color: $lightcolor !important;\n}\n\n$light: $lightcolor",
           "PreviewCSS": "",
           "LessVariable": "$lightcolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
@@ -2333,6 +2376,7 @@
           "CustomCSS": ".bg-framedark,\n.bg-colordark {\n\tbackground-color: $darkcolor !important;\n}\n\n$dark: $darkcolor",
           "PreviewCSS": "",
           "LessVariable": "$darkcolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         }
       ],
@@ -2351,6 +2395,7 @@
           "CustomCSS": ".cookiemessage{\n  color:$ccTextColor !important;\n}",
           "PreviewCSS": ".cookiemessage{\n  color:$ccTextColor  !important;\n}",
           "LessVariable": "$ccTextColor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -2361,32 +2406,35 @@
           "CustomCSS": ".cookieconsent{\n  background : $ccBackgroundcolor !important;\n}",
           "PreviewCSS": ".cookieconsent{\n  background : $ccBackgroundcolor !important;\n}",
           "LessVariable": "$ccBackgroundcolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "9778863b-8bbe-4496-a213-7262440ef01b",
           "Title": "Link Color",
-          "DefaultValue": "#0088cc",
+          "DefaultValue": "#ffffff",
           "Suffix": "",
           "CustomCSS": ".cookiemessage a{\ncolor:$cclinkColor !important;\n}",
           "PreviewCSS": ".cookiemessage a{\ncolor:$cclinkColor !important;\n}",
           "LessVariable": "$cclinkColor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "7f31e9d0-77a3-465a-9ab3-c112860ece1d",
           "Title": "Link Hover Color",
-          "DefaultValue": "#286090",
+          "DefaultValue": "#eeeeee",
           "Suffix": "",
           "CustomCSS": ".cookiemessage a:hover{\ncolor:$cclinkHoverColor !important;\n}",
           "PreviewCSS": ".cookiemessage a:hover{\ncolor:$cclinkHoverColor !important;\n}",
           "LessVariable": "$cclinkHoverColor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "0afc33b3-0300-4ac8-a8e4-6346aee9722d",
           "Title": "Font Size",
           "DefaultValue": "14",
@@ -2394,6 +2442,7 @@
           "CustomCSS": ".cookiemessage{\n font-size: $ccFontSizepx  !important; \n}",
           "PreviewCSS": ".cookiemessage{\n font-size: $ccFontSizepx !important; \n}",
           "LessVariable": "$ccFontSize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -2418,17 +2467,8 @@
           "CustomCSS": "#dnn_CookieConsentPane ~ #dnn_ContentPane,\n#dnn_CookieConsentPane ~ .actionmenu-wrapper {\n   @if($ccPosition == 'Top'){\n   margin-top: 71px;\n  \t}\n}\n\n.cookiestatus{\n   @if($ccPosition == 'BottomLeft'){\n   \t        padding: 9px 0px;\n  \t} \n   @if($ccPosition == 'BottomRight'){\n   \t         padding: 9px 0px;\n  \t}  \n  \n}\n.cookiestatus a {\n    @if($ccPosition == 'BottomLeft'){\n   \t     width: -webkit-fill-available;\n  \t} \n   @if($ccPosition == 'BottomRight'){\n   \t     width: -webkit-fill-available;\n  \t}  \n}\n.cookieconsent{\n\n  \t@if($ccPosition == 'Bottom'){\n   \t   bottom : 0px ;\n       display: flex;\n  \t}\n  @if($ccPosition == 'Top'){\n    \t display: flex;\n   \t   top : 0px ;\n    \theight : 71px ;\n  \t}\n  @if($ccPosition == 'BottomLeft'){\n    display: block;\n   \t      bottom: 20px !important;\n    \t  left: 20px ;\n        padding:12px 18px !important; \n        box-shadow: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23) ;\n        width: 390px !important;\n        height: auto ;\n  \t}\n  @if($ccPosition == 'BottomRight'){\n    display: block;\n   \t    bottom: 20px !important;\n    \t  right: 20px ;\n     padding:12px 18px !important; \n    left:auto !important;\n        box-shadow: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23) ;\n        width: 390px !important;\n        height: auto ;\n  \t}\n}\n\n\n.cookiestatus{\n  @if($ccPosition == 'Top'){\n   \t   top : 0px ;    \t\n  \t}\n   @if($ccPosition == 'Bottom'){\n   \t   top : 0px ;   \t\n  \t}\n}",
           "PreviewCSS": "",
           "LessVariable": "$ccPosition",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
-        },
-        {
-          "Guid": "9778863b-8bbe-4496-a213-7262440ef01b",
-          "Title": "Link Color",
-          "DefaultValue": "#0088cc",
-          "Suffix": "",
-          "CustomCSS": ".cookiemessage a{\ncolor:$cclinkColor !important;\n}",
-          "PreviewCSS": ".cookiemessage a{\ncolor:$cclinkColor !important;\n}",
-          "LessVariable": "$cclinkColor",
-          "Type": "Color Picker"
         }
       ],
       "Sass": ".cookieconsent {\n    position: fixed;\n    padding: 18px;\n    z-index: 1;\n    bottom: 0px;\n    background: red;\n    width: 100%;\n    align-items: center;\n    z-index: 9;\n}\n.cookiemessage{\nflex-grow: 1;\njustify-content: flex-start;\n}\n\n.cookiestatus a{\n  width: -webkit-fill-available;\n}\n\n"
@@ -2446,32 +2486,35 @@
           "CustomCSS": ".cookiestatus a{\ncolor: $ccbuttonColor !important;\n}",
           "PreviewCSS": ".cookiestatus a{\ncolor: $ccbuttonColor !important;\n}",
           "LessVariable": "$ccbuttonColor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
           "Guid": "c0d73a3f-a0bd-4039-b91a-a6ebd6e8c7a8",
           "Title": "Background",
-          "DefaultValue": "#0088cc",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".cookiestatus a{\nbackground-color: $ccbuttonbgcolor !important;\n}",
           "PreviewCSS": ".cookiestatus a{\nbackground-color: $ccbuttonbgcolor !important;\n}",
           "LessVariable": "$ccbuttonbgcolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "a7a10653-d920-4468-8061-55e39d18d78e",
           "Title": "Background Hover Color",
-          "DefaultValue": "#286090",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".cookiestatus a:hover{\nbackground-color: $ccBackgroundHovercolor !important;\n}",
           "PreviewCSS": ".cookiestatus a:hover{\nbackground-color: $ccBackgroundHovercolor !important;\n}",
           "LessVariable": "$ccBackgroundHovercolor",
+          "JavascriptVariable": null,
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "6b391f00-daf0-44b1-a4f5-45784c99082c",
           "Title": "Font Size",
           "DefaultValue": "14",
@@ -2479,6 +2522,7 @@
           "CustomCSS": ".cookiestatus a{\n\tfont-size: $ccbtnFontSizepx !important;\n}",
           "PreviewCSS": ".cookiestatus a{\n\tfont-size: $ccbtnFontSizepx !important;\n}",
           "LessVariable": "$ccbtnFontSize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         }
       ],
@@ -2492,12 +2536,12 @@
         {
           "Guid": "816c9e87-165c-421b-8c96-4b8b64be3f68",
           "Title": "Color",
-          "DefaultValue": "#212529",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".Register-container .already-registerd span,\n.Register-container .already-registerd a{\n\tcolor : $lable1color;\n}",
           "PreviewCSS": ".Register-container .already-registerd span,\n.Register-container .already-registerd a{\n\tcolor : $lable1color;\n}",
           "LessVariable": "$lable1color",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -2594,12 +2638,12 @@
         {
           "Guid": "4e228571-158e-4214-8829-fb65289da672",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  color : $loginNotRegColor;\n}",
           "PreviewCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  color : $loginNotRegColor;\n}",
           "LessVariable": "$loginNotRegColor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -5075,6 +5119,7 @@
           "CustomCSS": ".paragraph-style-7 {\n    font-weight: $psSevFontWeight;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    font-weight: $psSevFontWeight;\n}",
           "LessVariable": "$psSevFontWeight",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
@@ -5085,6 +5130,7 @@
           "CustomCSS": ".paragraph-style-7 {\n    font-family: $psSevFontFamily;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    font-family: $psSevFontFamily;\n}",
           "LessVariable": "$psSevFontFamily",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         },
         {
@@ -5103,32 +5149,35 @@
           "CustomCSS": ".paragraph-style-7 {\n    font-style: $psSevFontStyle;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    font-style: $psSevFontStyle;\n}",
           "LessVariable": "$psSevFontStyle",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "a84301ba-e145-464f-9983-faa0503d4795",
           "Title": "Letter Spacing",
-          "DefaultValue": "4",
+          "DefaultValue": "0",
           "Suffix": "px",
           "CustomCSS": ".paragraph-style-7 {\n    letter-spacing: $psoneLetterSpacingpx;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    letter-spacing: $psoneLetterSpacingpx;\n}",
           "LessVariable": "$psoneLetterSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "702b87e2-645f-4ce1-901f-82a88ca23640",
           "Title": "Word Spacing",
-          "DefaultValue": "5",
+          "DefaultValue": "0",
           "Suffix": "px",
           "CustomCSS": ".paragraph-style-7 {\n    word-spacing: $psSevWordSpacingpx;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    word-spacing: $psSevWordSpacingpx;\n}",
           "LessVariable": "$psSevWordSpacing",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
@@ -5153,6 +5202,7 @@
           "CustomCSS": ".paragraph-style-7 {\n    text-transform: $psSevTextTransform;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    text-transform: $psSevTextTransform;\n}",
           "LessVariable": "$psSevTextTransform",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
@@ -5177,10 +5227,11 @@
           "CustomCSS": ".paragraph-style-7 {\n    text-decoration: $psoneTextDecoration;\n}",
           "PreviewCSS": ".paragraph-style-7 {\n    text-decoration: $psoneTextDecoration;\n}",
           "LessVariable": "$psoneTextDecoration",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         }
       ],
-      "Sass": ""
+      "Sass": ".paragraph-style-7 {\n    line-height: 34px;\n}"
     },
     {
       "Guid": "2f3a702e-a98c-4f82-97ea-2a16ff934fdf",
@@ -5522,8 +5573,8 @@
           "Title": "Font Weight",
           "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-1 {\n    font-weight: $bsoneFontWeight;\n}",
-          "PreviewCSS": ".btn.button-style-1 {\n    font-weight: $bsoneFontWeight;\n}",
+          "CustomCSS": ".button-style-1 , .btn.button-style-1 {\n    font-weight: $bsoneFontWeight;\n}",
+          "PreviewCSS": ".button-style-1 , .btn.button-style-1 {\n    font-weight: $bsoneFontWeight;\n}",
           "LessVariable": "$bsoneFontWeight",
           "Type": "Dropdown"
         },
@@ -5532,8 +5583,8 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-1 {\n    font-family: $bsoneFontFamily;\n}",
-          "PreviewCSS": ".btn.button-style-1 {\n    font-family: $bsoneFontFamily;\n}",
+          "CustomCSS": ".button-style-1 , .btn.button-style-1 {\n    font-family: $bsoneFontFamily;\n}",
+          "PreviewCSS": ".button-style-1 , .btn.button-style-1 {\n    font-family: $bsoneFontFamily;\n}",
           "LessVariable": "$bsoneFontFamily",
           "Type": "Fonts"
         },
@@ -5550,8 +5601,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-1 {\n    font-style: $bsoneFontStyle;\n}",
-          "PreviewCSS": ".btn.button-style-1 {\n    font-style: $bsoneFontStyle;\n}",
+          "CustomCSS": ".button-style-1 , .btn.button-style-1 {\n    font-style: $bsoneFontStyle;\n}",
+          "PreviewCSS": ".button-style-1 , .btn.button-style-1 {\n    font-style: $bsoneFontStyle;\n}",
           "LessVariable": "$bsoneFontStyle",
           "Type": "Dropdown"
         },
@@ -5563,8 +5614,8 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".btn.button-style-1 {\n    letter-spacing: $bsoneLetterSpacingpx;\n}",
-          "PreviewCSS": ".btn.button-style-1 {\n    letter-spacing: $bsoneLetterSpacingpx;\n}",
+          "CustomCSS": ".button-style-1 , .btn.button-style-1 {\n    letter-spacing: $bsoneLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-1 , .btn.button-style-1 {\n    letter-spacing: $bsoneLetterSpacingpx;\n}",
           "LessVariable": "$bsoneLetterSpacing",
           "Type": "Slider"
         },
@@ -5576,8 +5627,8 @@
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".btn.button-style-1 {\n    word-spacing: $bsoneWordSpacingpx;\n}",
-          "PreviewCSS": ".btn.button-style-1 {\n    word-spacing: $bsoneWordSpacingpx;\n}",
+          "CustomCSS": ".button-style-1 , .btn.button-style-1 {\n    word-spacing: $bsoneWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-1 , .btn.button-style-1 {\n    word-spacing: $bsoneWordSpacingpx;\n}",
           "LessVariable": "$bsoneWordSpacing",
           "Type": "Slider"
         },
@@ -5600,8 +5651,8 @@
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-1 {\n    text-transform: $bsoneTextTransform;\n}",
-          "PreviewCSS": ".btn.button-style-1 {\n    text-transform: $bsoneTextTransform;\n}",
+          "CustomCSS": ".button-style-1 , .btn.button-style-1 {\n    text-transform: $bsoneTextTransform;\n}",
+          "PreviewCSS": ".button-style-1 , .btn.button-style-1 {\n    text-transform: $bsoneTextTransform;\n}",
           "LessVariable": "$bsoneTextTransform",
           "Type": "Dropdown"
         },
@@ -5624,8 +5675,8 @@
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-1 {\n    text-decoration: $bsoneTextDecoration;\n}",
-          "PreviewCSS": ".btn.button-style-1 {\n    text-decoration: $bsoneTextDecoration;\n}",
+          "CustomCSS": ".button-style-1 , .btn.button-style-1 {\n    text-decoration: $bsoneTextDecoration;\n}",
+          "PreviewCSS": ".button-style-1 , .btn.button-style-1 {\n    text-decoration: $bsoneTextDecoration;\n}",
           "LessVariable": "$bsoneTextDecoration",
           "Type": "Dropdown"
         }
@@ -5662,8 +5713,8 @@
           "Title": "Font Weight",
           "DefaultValue": "700",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-2 {\n    font-weight: $bsTwoFontWeight ;\n}",
-          "PreviewCSS": ".btn.button-style-2 {\n    font-weight: $bsTwoFontWeight ;\n}",
+          "CustomCSS": ".button-style-2 , .btn.button-style-2 {\n    font-weight: $bsTwoFontWeight ;\n}",
+          "PreviewCSS": ".button-style-2 , .btn.button-style-2 {\n    font-weight: $bsTwoFontWeight ;\n}",
           "LessVariable": "$bsTwoFontWeight",
           "JavascriptVariable": "",
           "Type": "Dropdown"
@@ -5673,8 +5724,8 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-2 {\n    font-family: $bsTwoFontFamily;\n}",
-          "PreviewCSS": ".btn.button-style-2 {\n    font-family: $bsTwoFontFamily;\n}",
+          "CustomCSS": ".button-style-2 , .btn.button-style-2 {\n    font-family: $bsTwoFontFamily;\n}",
+          "PreviewCSS": ".button-style-2 , .btn.button-style-2 {\n    font-family: $bsTwoFontFamily;\n}",
           "LessVariable": "$bsTwoFontFamily",
           "JavascriptVariable": "",
           "Type": "Fonts"
@@ -5692,8 +5743,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-2 {\n    font-style: $bsTwoFontStyle;\n}",
-          "PreviewCSS": ".btn.button-style-2 {\n    font-style: $bsTwoFontStyle;\n}",
+          "CustomCSS": ".button-style-2 , .btn.button-style-2 {\n    font-style: $bsTwoFontStyle;\n}",
+          "PreviewCSS": ".button-style-2 , .btn.button-style-2 {\n    font-style: $bsTwoFontStyle;\n}",
           "LessVariable": "$bsTwoFontStyle",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -5706,8 +5757,8 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".btn.button-style-2 {\n    letter-spacing: $bsTwoLetterSpacingpx;\n}",
-          "PreviewCSS": ".btn.button-style-2 {\n    letter-spacing: $bsTwoLetterSpacingpx;\n}",
+          "CustomCSS": ".button-style-2 , .btn.button-style-2 {\n    letter-spacing: $bsTwoLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-2 , .btn.button-style-2 {\n    letter-spacing: $bsTwoLetterSpacingpx;\n}",
           "LessVariable": "$bsTwoLetterSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -5720,8 +5771,8 @@
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".btn.button-style-2 {\n    word-spacing: $bsTwoWordSpacingpx;\n}",
-          "PreviewCSS": ".btn.button-style-2 {\n    word-spacing: $bsTwoWordSpacingpx;\n}",
+          "CustomCSS": ".button-style-2 , .btn.button-style-2 {\n    word-spacing: $bsTwoWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-2 , .btn.button-style-2 {\n    word-spacing: $bsTwoWordSpacingpx;\n}",
           "LessVariable": "$bsTwoWordSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -5745,8 +5796,8 @@
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-2 {\n    text-transform: $bsTwoTextTransform;\n}",
-          "PreviewCSS": ".btn.button-style-2 {\n    text-transform: $bsTwoTextTransform;\n}",
+          "CustomCSS": ".button-style-2 , .btn.button-style-2 {\n    text-transform: $bsTwoTextTransform;\n}",
+          "PreviewCSS": ".button-style-2 , .btn.button-style-2 {\n    text-transform: $bsTwoTextTransform;\n}",
           "LessVariable": "$bsTwoTextTransform",
           "JavascriptVariable": "",
           "Type": "Dropdown"
@@ -5770,8 +5821,8 @@
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-2 {\n    text-decoration: $bsTwoTextDecoration;\n}",
-          "PreviewCSS": ".btn.button-style-2 {\n    text-decoration: $bsTwoTextDecoration;\n}",
+          "CustomCSS": ".button-style-2 , .btn.button-style-2 {\n    text-decoration: $bsTwoTextDecoration;\n}",
+          "PreviewCSS": ".button-style-2 , .btn.button-style-2 {\n    text-decoration: $bsTwoTextDecoration;\n}",
           "LessVariable": "$bsTwoTextDecoration",
           "JavascriptVariable": "",
           "Type": "Dropdown"
@@ -5809,8 +5860,8 @@
           "Title": "Font Weight",
           "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-3 {\n    font-weight: $bsThreeFontWeight;\n}",
-          "PreviewCSS": ".btn.button-style-3 {\n    font-weight: $bsThreeFontWeight;\n}",
+          "CustomCSS": ".button-style-3 , .btn.button-style-3 {\n    font-weight: $bsThreeFontWeight;\n}",
+          "PreviewCSS": ".button-style-3 , .btn.button-style-3 {\n    font-weight: $bsThreeFontWeight;\n}",
           "LessVariable": "$bsThreeFontWeight",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -5820,8 +5871,8 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-3 {\n    font-family: $bsThreeFontFamily;\n}",
-          "PreviewCSS": ".btn.button-style-3 {\n    font-family: $bsThreeFontFamily;\n}",
+          "CustomCSS": ".button-style-3 , .btn.button-style-3 {\n    font-family: $bsThreeFontFamily;\n}",
+          "PreviewCSS": ".button-style-3 , .btn.button-style-3 {\n    font-family: $bsThreeFontFamily;\n}",
           "LessVariable": "$bsThreeFontFamily",
           "JavascriptVariable": null,
           "Type": "Fonts"
@@ -5839,8 +5890,8 @@
           "Title": "Font Style",
           "DefaultValue": "italic",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-3 {\n    font-style: $bsThreeFontStyle;\n}",
-          "PreviewCSS": ".btn.button-style-3 {\n    font-style: $bsThreeFontStyle;\n}",
+          "CustomCSS": ".button-style-3 , .btn.button-style-3 {\n    font-style: $bsThreeFontStyle;\n}",
+          "PreviewCSS": ".button-style-3 , .btn.button-style-3 {\n    font-style: $bsThreeFontStyle;\n}",
           "LessVariable": "$bsThreeFontStyle",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -5853,8 +5904,8 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".btn.button-style-3 {\n    letter-spacing: $bsThreeLetterSpacingpx;\n}",
-          "PreviewCSS": ".btn.button-style-3 {\n    letter-spacing: $bsThreeLetterSpacingpx;\n}",
+          "CustomCSS": ".button-style-3 , .btn.button-style-3 {\n    letter-spacing: $bsThreeLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-3 , .btn.button-style-3 {\n    letter-spacing: $bsThreeLetterSpacingpx;\n}",
           "LessVariable": "$bsThreeLetterSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -5867,8 +5918,8 @@
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".btn.button-style-3 {\n    word-spacing: $bsThreeWordSpacingpx;\n}",
-          "PreviewCSS": ".btn.button-style-3 {\n    word-spacing: $bsThreeWordSpacingpx;\n}",
+          "CustomCSS": ".button-style-3 , .btn.button-style-3 {\n    word-spacing: $bsThreeWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-3 , .btn.button-style-3 {\n    word-spacing: $bsThreeWordSpacingpx;\n}",
           "LessVariable": "$bsThreeWordSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -5892,8 +5943,8 @@
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-3 {\n    text-transform: $bsThreeTextTransform;\n}",
-          "PreviewCSS": ".btn.button-style-3 {\n    text-transform: $bsThreeTextTransform;\n}",
+          "CustomCSS": ".button-style-3 , .btn.button-style-3 {\n    text-transform: $bsThreeTextTransform;\n}",
+          "PreviewCSS": ".button-style-3 , .btn.button-style-3 {\n    text-transform: $bsThreeTextTransform;\n}",
           "LessVariable": "$bsThreeTextTransform",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -5917,8 +5968,8 @@
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-3 {\n    text-decoration: $bsThreeTextDecoration;\n}",
-          "PreviewCSS": ".btn.button-style-3 {\n    text-decoration: $bsThreeTextDecoration;\n}",
+          "CustomCSS": ".button-style-3 , .btn.button-style-3 {\n    text-decoration: $bsThreeTextDecoration;\n}",
+          "PreviewCSS": ".button-style-3 , .btn.button-style-3 {\n    text-decoration: $bsThreeTextDecoration;\n}",
           "LessVariable": "$bsThreeTextDecoration",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -5956,8 +6007,8 @@
           "Title": "Font Weight",
           "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-4 {\n    font-weight: $bsFourFontWeight;\n}",
-          "PreviewCSS": ".btn.button-style-4 {\n    font-weight: $bsFourFontWeight;\n}",
+          "CustomCSS": ".button-style-4 , .btn.button-style-4 {\n    font-weight: $bsFourFontWeight;\n}",
+          "PreviewCSS": ".button-style-4 , .btn.button-style-4 {\n    font-weight: $bsFourFontWeight;\n}",
           "LessVariable": "$bsFourFontWeight",
           "JavascriptVariable": "",
           "Type": "Dropdown"
@@ -5967,8 +6018,8 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-4 {\n    font-family: $bsFourFontFamily;\n}",
-          "PreviewCSS": ".btn.button-style-4 {\n    font-family: $bsFourFontFamily;\n}",
+          "CustomCSS": ".button-style-4 , .btn.button-style-4 {\n    font-family: $bsFourFontFamily;\n}",
+          "PreviewCSS": ".button-style-4 , .btn.button-style-4 {\n    font-family: $bsFourFontFamily;\n}",
           "LessVariable": "$bsFourFontFamily",
           "JavascriptVariable": null,
           "Type": "Fonts"
@@ -5986,8 +6037,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-4 {\n    font-style: $bsFourFontStyle;\n}",
-          "PreviewCSS": ".btn.button-style-4 {\n    font-style: $bsFourFontStyle;\n}",
+          "CustomCSS": ".button-style-4 , .btn.button-style-4 {\n    font-style: $bsFourFontStyle;\n}",
+          "PreviewCSS": ".button-style-4 , .btn.button-style-4 {\n    font-style: $bsFourFontStyle;\n}",
           "LessVariable": "$bsFourFontStyle",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6000,8 +6051,8 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".btn.button-style-4 {\n    letter-spacing: $bsFourLetterSpacingpx;\n}",
-          "PreviewCSS": ".btn.button-style-4 {\n    letter-spacing: $bsFourLetterSpacingpx;\n}",
+          "CustomCSS": ".button-style-4 , .btn.button-style-4 {\n    letter-spacing: $bsFourLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-4 , .btn.button-style-4 {\n    letter-spacing: $bsFourLetterSpacingpx;\n}",
           "LessVariable": "$bsFourLetterSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -6014,8 +6065,8 @@
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".btn.button-style-4 {\n    word-spacing: $bsFourWordSpacingpx;\n}",
-          "PreviewCSS": ".btn.button-style-4 {\n    word-spacing: $bsFourWordSpacingpx;\n}",
+          "CustomCSS": ".button-style-4 , .btn.button-style-4 {\n    word-spacing: $bsFourWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-4 , .btn.button-style-4 {\n    word-spacing: $bsFourWordSpacingpx;\n}",
           "LessVariable": "$bsFourWordSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -6039,8 +6090,8 @@
           "Title": "Text Transform",
           "DefaultValue": "uppercase",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-4 {\n    text-transform: $bsFourTextTransform;\n}",
-          "PreviewCSS": ".btn.button-style-4 {\n    text-transform: $bsFourTextTransform;\n}",
+          "CustomCSS": ".button-style-4 , .btn.button-style-4 {\n    text-transform: $bsFourTextTransform;\n}",
+          "PreviewCSS": ".button-style-4 , .btn.button-style-4 {\n    text-transform: $bsFourTextTransform;\n}",
           "LessVariable": "$bsFourTextTransform",
           "JavascriptVariable": "",
           "Type": "Dropdown"
@@ -6064,8 +6115,8 @@
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-4 {\n    text-decoration: $bsFourTextDecoration;\n}",
-          "PreviewCSS": ".btn.button-style-4 {\n    text-decoration: $bsFourTextDecoration;\n}",
+          "CustomCSS": ".button-style-4 , .btn.button-style-4 {\n    text-decoration: $bsFourTextDecoration;\n}",
+          "PreviewCSS": ".button-style-4 , .btn.button-style-4 {\n    text-decoration: $bsFourTextDecoration;\n}",
           "LessVariable": "$bsFourTextDecoration",
           "JavascriptVariable": "",
           "Type": "Dropdown"
@@ -6103,8 +6154,8 @@
           "Title": "Font Weight",
           "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-5 {\n    font-weight: $bsFiveFontWeight;\n}",
-          "PreviewCSS": ".btn.button-style-5 {\n    font-weight: $bsFiveFontWeight;\n}",
+          "CustomCSS": ".button-style-5 , .btn.button-style-5 {\n    font-weight: $bsFiveFontWeight;\n}",
+          "PreviewCSS": ".button-style-5 , .btn.button-style-5 {\n    font-weight: $bsFiveFontWeight;\n}",
           "LessVariable": "$bsFiveFontWeight",
           "JavascriptVariable": "",
           "Type": "Dropdown"
@@ -6114,8 +6165,8 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-5 {\n    font-family: $bsFiveFontFamily;\n}",
-          "PreviewCSS": ".btn.button-style-5 {\n    font-family: $bsFiveFontFamily;\n}",
+          "CustomCSS": ".button-style-5 , .btn.button-style-5 {\n    font-family: $bsFiveFontFamily;\n}",
+          "PreviewCSS": ".button-style-5 , .btn.button-style-5 {\n    font-family: $bsFiveFontFamily;\n}",
           "LessVariable": "$bsFiveFontFamily",
           "JavascriptVariable": null,
           "Type": "Fonts"
@@ -6133,8 +6184,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-5 {\n    font-style: $bsFiveFontStyle;\n}",
-          "PreviewCSS": ".btn.button-style-5 {\n    font-style: $bsFiveFontStyle;\n}",
+          "CustomCSS": ".button-style-5 , .btn.button-style-5 {\n    font-style: $bsFiveFontStyle;\n}",
+          "PreviewCSS": ".button-style-5 , .btn.button-style-5 {\n    font-style: $bsFiveFontStyle;\n}",
           "LessVariable": "$bsFiveFontStyle",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6147,8 +6198,8 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".btn.button-style-5 {\n    letter-spacing: $bsFiveLetterSpacingpx;\n}",
-          "PreviewCSS": ".btn.button-style-5 {\n    letter-spacing: $bsFiveLetterSpacingpx;\n}",
+          "CustomCSS": ".button-style-5 , .btn.button-style-5 {\n    letter-spacing: $bsFiveLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-5 , .btn.button-style-5 {\n    letter-spacing: $bsFiveLetterSpacingpx;\n}",
           "LessVariable": "$bsFiveLetterSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -6161,8 +6212,8 @@
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".btn.button-style-5 {\n    word-spacing: $bsFiveWordSpacingpx;\n}",
-          "PreviewCSS": ".btn.button-style-5 {\n    word-spacing: $bsFiveWordSpacingpx;\n}",
+          "CustomCSS": ".button-style-5 , .btn.button-style-5 {\n    word-spacing: $bsFiveWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-5 , .btn.button-style-5 {\n    word-spacing: $bsFiveWordSpacingpx;\n}",
           "LessVariable": "$bsFiveWordSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -6186,8 +6237,8 @@
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-5 {\n    text-transform: $bsFiveTextTransform;\n}",
-          "PreviewCSS": ".btn.button-style-5 {\n    text-transform: $bsFiveTextTransform;\n}",
+          "CustomCSS": ".button-style-5 , .btn.button-style-5 {\n    text-transform: $bsFiveTextTransform;\n}",
+          "PreviewCSS": ".button-style-5 , .btn.button-style-5 {\n    text-transform: $bsFiveTextTransform;\n}",
           "LessVariable": "$bsFiveTextTransform",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6211,14 +6262,14 @@
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".btn.button-style-5 {\n    text-decoration: $bsFiveTextDecoration;\n}",
-          "PreviewCSS": ".btn.button-style-5 {\n    text-decoration: $bsFiveTextDecoration;\n}",
+          "CustomCSS": ".button-style-5 , .btn.button-style-5 {\n    text-decoration: $bsFiveTextDecoration;\n}",
+          "PreviewCSS": ".button-style-5 , .btn.button-style-5 {\n    text-decoration: $bsFiveTextDecoration;\n}",
           "LessVariable": "$bsFiveTextDecoration",
           "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
-      "Sass": ".button-style-5 {\n     text-shadow:  2px 2px 2px #000000;\n}"
+      "Sass": ".button-style-5 , .btn.button-style-5 {\n     text-shadow:  2px 2px 2px #000000;\n}"
     },
     {
       "Guid": "d117654c-7a56-45af-a343-d95883a597fa",
@@ -6250,8 +6301,8 @@
           "Title": "Font Weight",
           "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".button-style-6 {\n    font-weight: $bsSixFontWeight;\n}",
-          "PreviewCSS": ".button-style-6 {\n    font-weight: $bsSixFontWeight;\n}",
+          "CustomCSS": ".button-style-6 , .btn.button-style-6 {\n    font-weight: $bsSixFontWeight;\n}",
+          "PreviewCSS": ".button-style-6 , .btn.button-style-6 {\n    font-weight: $bsSixFontWeight;\n}",
           "LessVariable": "$bsSixFontWeight",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6261,8 +6312,8 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".button-style-6 {\n    font-family: $bsSixFontFamily;\n}",
-          "PreviewCSS": ".button-style-6 {\n    font-family: $bsSixFontFamily;\n}",
+          "CustomCSS": ".button-style-6 , .btn.button-style-6 {\n    font-family: $bsSixFontFamily;\n}",
+          "PreviewCSS": ".button-style-6 , .btn.button-style-6 {\n    font-family: $bsSixFontFamily;\n}",
           "LessVariable": "$bsSixFontFamily",
           "JavascriptVariable": null,
           "Type": "Fonts"
@@ -6280,8 +6331,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".button-style-6 {\n    font-style: $bsSixFontStyle;\n}",
-          "PreviewCSS": ".button-style-6 {\n    font-style: $bsSixFontStyle;\n}",
+          "CustomCSS": ".button-style-6 , .btn.button-style-6 {\n    font-style: $bsSixFontStyle;\n}",
+          "PreviewCSS": ".button-style-6 , .btn.button-style-6 {\n    font-style: $bsSixFontStyle;\n}",
           "LessVariable": "$bsSixFontStyle",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6294,8 +6345,8 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-6 {\n    letter-spacing: $bsSixLetterSpacingpx;\n}",
-          "PreviewCSS": ".button-style-6 {\n    letter-spacing: $bsSixLetterSpacingpx;\n}",
+          "CustomCSS": ".button-style-6 , .btn.button-style-6 {\n    letter-spacing: $bsSixLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-6 , .btn.button-style-6 {\n    letter-spacing: $bsSixLetterSpacingpx;\n}",
           "LessVariable": "$bsSixLetterSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -6308,8 +6359,8 @@
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-6 {\n    word-spacing: $bsSixWordSpacingpx;\n}",
-          "PreviewCSS": ".button-style-6 {\n    word-spacing: $bsSixWordSpacingpx;\n}",
+          "CustomCSS": ".button-style-6 , .btn.button-style-6 {\n    word-spacing: $bsSixWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-6 , .btn.button-style-6 {\n    word-spacing: $bsSixWordSpacingpx;\n}",
           "LessVariable": "$bsSixWordSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -6333,8 +6384,8 @@
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-6 {\n    text-transform: $bsSixTextTransform;\n}",
-          "PreviewCSS": ".button-style-6 {\n    text-transform: $bsSixTextTransform;\n}",
+          "CustomCSS": ".button-style-6 , .btn.button-style-6 {\n    text-transform: $bsSixTextTransform;\n}",
+          "PreviewCSS": ".button-style-6 , .btn.button-style-6 {\n    text-transform: $bsSixTextTransform;\n}",
           "LessVariable": "$bsSixTextTransform",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6358,14 +6409,14 @@
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-6 {\n    text-decoration: $bsSixTextDecoration;\n}",
-          "PreviewCSS": ".button-style-6 {\n    text-decoration: $bsSixTextDecoration;\n}",
+          "CustomCSS": ".button-style-6 , .btn.button-style-6 {\n    text-decoration: $bsSixTextDecoration;\n}",
+          "PreviewCSS": ".button-style-6 , .btn.button-style-6 {\n    text-decoration: $bsSixTextDecoration;\n}",
           "LessVariable": "$bsSixTextDecoration",
           "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
-      "Sass": ".button-style-6 {\n    text-shadow: 3px 3px 0px rgba(0,0,0,0.2);\n}"
+      "Sass": ".button-style-6 , .btn.button-style-6 {\n    text-shadow: 3px 3px 0px rgba(0,0,0,0.2);\n}"
     },
     {
       "Guid": "064caf31-91e3-447b-a92e-fd9eddc187e3",
@@ -6397,8 +6448,8 @@
           "Title": "Font Weight",
           "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".button-style-7 {\n    font-weight: $bsSevFontWeight;\n}",
-          "PreviewCSS": ".button-style-7 {\n    font-weight: $bsSevFontWeight;\n}",
+          "CustomCSS": ".button-style-7 , .btn.button-style-7 {\n    font-weight: $bsSevFontWeight;\n}",
+          "PreviewCSS": ".button-style-7 , .btn.button-style-7 {\n    font-weight: $bsSevFontWeight;\n}",
           "LessVariable": "$bsSevFontWeight",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6408,8 +6459,8 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".button-style-7 {\n    font-family: $bsSevFontFamily;\n}",
-          "PreviewCSS": ".button-style-7 {\n    font-family: $bsSevFontFamily;\n}",
+          "CustomCSS": ".button-style-7 , .btn.button-style-7 {\n    font-family: $bsSevFontFamily;\n}",
+          "PreviewCSS": ".button-style-7 , .btn.button-style-7 {\n    font-family: $bsSevFontFamily;\n}",
           "LessVariable": "$bsSevFontFamily",
           "JavascriptVariable": null,
           "Type": "Fonts"
@@ -6427,8 +6478,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".button-style-7 {\n    font-style: $bsSevFontStyle;\n}",
-          "PreviewCSS": ".button-style-7 {\n    font-style: $bsSevFontStyle;\n}",
+          "CustomCSS": ".button-style-7 , .btn.button-style-7 {\n    font-style: $bsSevFontStyle;\n}",
+          "PreviewCSS": ".button-style-7 , .btn.button-style-7 {\n    font-style: $bsSevFontStyle;\n}",
           "LessVariable": "$bsSevFontStyle",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6441,8 +6492,8 @@
           "Title": "Letter Spacing",
           "DefaultValue": "5",
           "Suffix": "px",
-          "CustomCSS": ".button-style-7 {\n    letter-spacing: $bsSevLetterSpacingpx;\n}",
-          "PreviewCSS": ".button-style-7 {\n    letter-spacing: $bsSevLetterSpacingpx;\n}",
+          "CustomCSS": ".button-style-7 , .btn.button-style-7 {\n    letter-spacing: $bsSevLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-7 , .btn.button-style-7 {\n    letter-spacing: $bsSevLetterSpacingpx;\n}",
           "LessVariable": "$bsSevLetterSpacing",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -6455,8 +6506,8 @@
           "Title": "Word Spacing",
           "DefaultValue": "5",
           "Suffix": "px",
-          "CustomCSS": ".button-style-7 {\n    word-spacing: $bsSevWordSpacingpx;\n}",
-          "PreviewCSS": ".button-style-7 {\n    word-spacing: $bsSevWordSpacingpx;\n}",
+          "CustomCSS": ".button-style-7 , .btn.button-style-7 {\n    word-spacing: $bsSevWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-7 , .btn.button-style-7 {\n    word-spacing: $bsSevWordSpacingpx;\n}",
           "LessVariable": "$bsSevWordSpacing",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -6480,8 +6531,8 @@
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-7 {\n    text-transform: $bsSevTextTransform;\n}",
-          "PreviewCSS": ".button-style-7 {\n    text-transform: $bsSevTextTransform;\n}",
+          "CustomCSS": ".button-style-7 , .btn.button-style-7 {\n    text-transform: $bsSevTextTransform;\n}",
+          "PreviewCSS": ".button-style-7 , .btn.button-style-7 {\n    text-transform: $bsSevTextTransform;\n}",
           "LessVariable": "$bsSevTextTransform",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6505,8 +6556,8 @@
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-7 {\n    text-decoration: $bsSevTextDecoration;\n}",
-          "PreviewCSS": ".button-style-7 {\n    text-decoration: $bsSevTextDecoration;\n}",
+          "CustomCSS": ".button-style-7 , .btn.button-style-7 {\n    text-decoration: $bsSevTextDecoration;\n}",
+          "PreviewCSS": ".button-style-7 , .btn.button-style-7 {\n    text-decoration: $bsSevTextDecoration;\n}",
           "LessVariable": "$bsSevTextDecoration",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6544,8 +6595,8 @@
           "Title": "Font Weight",
           "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".button-style-8 {\n    font-weight: $bsEtFontWeight;\n}",
-          "PreviewCSS": ".button-style-8 {\n    font-weight: $bsEtFontWeight;\n}",
+          "CustomCSS": ".button-style-8 , .btn.button-style-8 {\n    font-weight: $bsEtFontWeight;\n}",
+          "PreviewCSS": ".button-style-8 , .btn.button-style-8 {\n    font-weight: $bsEtFontWeight;\n}",
           "LessVariable": "$bsEtFontWeight",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6555,8 +6606,8 @@
           "Title": "Font Family",
           "DefaultValue": "Lucida Sans Unicode, Lucida Grande, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".button-style-8 {\n    font-family: $bsEtFontFamily;\n}",
-          "PreviewCSS": ".button-style-8 {\n    font-family: $bsEtFontFamily;\n}",
+          "CustomCSS": ".button-style-8 , .btn.button-style-8 {\n    font-family: $bsEtFontFamily;\n}",
+          "PreviewCSS": ".button-style-8 , .btn.button-style-8 {\n    font-family: $bsEtFontFamily;\n}",
           "LessVariable": "$bsEtFontFamily",
           "JavascriptVariable": "",
           "Type": "Fonts"
@@ -6574,8 +6625,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".button-style-8 {\n    font-style: $bsEtFontStyle;\n}",
-          "PreviewCSS": ".button-style-8 {\n    font-style: $bsEtFontStyle;\n}",
+          "CustomCSS": ".button-style-8 , .btn.button-style-8 {\n    font-style: $bsEtFontStyle;\n}",
+          "PreviewCSS": ".button-style-8 , .btn.button-style-8 {\n    font-style: $bsEtFontStyle;\n}",
           "LessVariable": "$bsEtFontStyle",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6588,8 +6639,8 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-8 {\n    letter-spacing: $bsEtLetterSpacingpx;\n}",
-          "PreviewCSS": ".button-style-8 {\n    letter-spacing: $bsEtLetterSpacingpx;\n}",
+          "CustomCSS": ".button-style-8 , .btn.button-style-8 {\n    letter-spacing: $bsEtLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-8 , .btn.button-style-8 {\n    letter-spacing: $bsEtLetterSpacingpx;\n}",
           "LessVariable": "$bsEtLetterSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -6602,8 +6653,8 @@
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-8 {\n    word-spacing: $bsEtWordSpacingpx;\n}",
-          "PreviewCSS": ".button-style-8 {\n    word-spacing: $bsEtWordSpacingpx;\n}",
+          "CustomCSS": ".button-style-8 , .btn.button-style-8 {\n    word-spacing: $bsEtWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-8 , .btn.button-style-8 {\n    word-spacing: $bsEtWordSpacingpx;\n}",
           "LessVariable": "$bsEtWordSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -6627,8 +6678,8 @@
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-8 {\n    text-transform: $bsEtTextTransform;\n}",
-          "PreviewCSS": ".button-style-8 {\n    text-transform: $bsEtTextTransform;\n}",
+          "CustomCSS": ".button-style-8 , .btn.button-style-8 {\n    text-transform: $bsEtTextTransform;\n}",
+          "PreviewCSS": ".button-style-8 , .btn.button-style-8 {\n    text-transform: $bsEtTextTransform;\n}",
           "LessVariable": "$bsEtTextTransform",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6652,8 +6703,8 @@
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-8 {\n    text-decoration: $bsEtTextDecoration;\n}",
-          "PreviewCSS": ".button-style-8 {\n    text-decoration: $bsEtTextDecoration;\n}",
+          "CustomCSS": ".button-style-8 , .btn.button-style-8 {\n    text-decoration: $bsEtTextDecoration;\n}",
+          "PreviewCSS": ".button-style-8 , .btn.button-style-8 {\n    text-decoration: $bsEtTextDecoration;\n}",
           "LessVariable": "$bsEtTextDecoration",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6691,8 +6742,8 @@
           "Title": "Font Weight",
           "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".button-style-9 {\n    font-weight: $bsNnFontWeight;\n}",
-          "PreviewCSS": ".button-style-9 {\n    font-weight: $bsNnFontWeight;\n}",
+          "CustomCSS": ".button-style-9 , .btn.button-style-9 {\n    font-weight: $bsNnFontWeight;\n}",
+          "PreviewCSS": ".button-style-9 , .btn.button-style-9 {\n    font-weight: $bsNnFontWeight;\n}",
           "LessVariable": "$bsNnFontWeight",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6702,8 +6753,8 @@
           "Title": "Font Family",
           "DefaultValue": "Tahoma, Geneva, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".button-style-9 {\n    font-family: $bsNnFontFamily;\n}",
-          "PreviewCSS": ".button-style-9 {\n    font-family: $bsNnFontFamily;\n}",
+          "CustomCSS": ".button-style-9 , .btn.button-style-9 {\n    font-family: $bsNnFontFamily;\n}",
+          "PreviewCSS": ".button-style-9 , .btn.button-style-9 {\n    font-family: $bsNnFontFamily;\n}",
           "LessVariable": "$bsNnFontFamily",
           "JavascriptVariable": "",
           "Type": "Fonts"
@@ -6721,8 +6772,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".button-style-9 {\n    font-style: $bsNnFontStyle;\n}",
-          "PreviewCSS": ".button-style-9 {\n    font-style: $bsNnFontStyle;\n}",
+          "CustomCSS": ".button-style-9 , .btn.button-style-9 {\n    font-style: $bsNnFontStyle;\n}",
+          "PreviewCSS": ".button-style-9 , .btn.button-style-9 {\n    font-style: $bsNnFontStyle;\n}",
           "LessVariable": "$bsNnFontStyle",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6735,8 +6786,8 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-9 {\n    letter-spacing: $bsNnLetterSpacingpx;\n}",
-          "PreviewCSS": ".button-style-9 {\n    letter-spacing: $bsNnLetterSpacingpx;\n}",
+          "CustomCSS": ".button-style-9 , .btn.button-style-9 {\n    letter-spacing: $bsNnLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-9 , .btn.button-style-9 {\n    letter-spacing: $bsNnLetterSpacingpx;\n}",
           "LessVariable": "$bsNnLetterSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -6749,8 +6800,8 @@
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-9 {\n    word-spacing: $bsNnWordSpacingpx;\n}",
-          "PreviewCSS": ".button-style-9 {\n    word-spacing: $bsNnWordSpacingpx;\n}",
+          "CustomCSS": ".button-style-9 , .btn.button-style-9 {\n    word-spacing: $bsNnWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-9 , .btn.button-style-9 {\n    word-spacing: $bsNnWordSpacingpx;\n}",
           "LessVariable": "$bsNnWordSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -6774,8 +6825,8 @@
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-9 {\n    text-transform: $bsNnTextTransform;\n}",
-          "PreviewCSS": ".button-style-9 {\n    text-transform: $bsNnTextTransform;\n}",
+          "CustomCSS": ".button-style-9 , .btn.button-style-9 {\n    text-transform: $bsNnTextTransform;\n}",
+          "PreviewCSS": ".button-style-9 , .btn.button-style-9 {\n    text-transform: $bsNnTextTransform;\n}",
           "LessVariable": "$bsNnTextTransform",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6799,8 +6850,8 @@
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-9 {\n    text-decoration: $bsNnTextDecoration;\n}",
-          "PreviewCSS": ".button-style-9 {\n    text-decoration: $bsNnTextDecoration;\n}",
+          "CustomCSS": ".button-style-9 , .btn.button-style-9 {\n    text-decoration: $bsNnTextDecoration;\n}",
+          "PreviewCSS": ".button-style-9 , .btn.button-style-9 {\n    text-decoration: $bsNnTextDecoration;\n}",
           "LessVariable": "$bsNnTextDecoration",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6838,8 +6889,8 @@
           "Title": "Font Weight",
           "DefaultValue": "400",
           "Suffix": "",
-          "CustomCSS": ".button-style-10 {\n    font-weight: $bsTenFontWeight;\n}",
-          "PreviewCSS": ".button-style-10 {\n    font-weight: $bsTenFontWeight;\n}",
+          "CustomCSS": ".button-style-10 , .btn.button-style-10 {\n    font-weight: $bsTenFontWeight;\n}",
+          "PreviewCSS": ".button-style-10 , .btn.button-style-10 {\n    font-weight: $bsTenFontWeight;\n}",
           "LessVariable": "$bsTenFontWeight",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6849,8 +6900,8 @@
           "Title": "Font Family",
           "DefaultValue": "Verdana, Geneva, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".button-style-10 {\n    font-family: $bsTenFontFamily;\n}",
-          "PreviewCSS": ".button-style-10 {\n    font-family: $bsTenFontFamily;\n}",
+          "CustomCSS": ".button-style-10 , .btn.button-style-10 {\n    font-family: $bsTenFontFamily;\n}",
+          "PreviewCSS": ".button-style-10 , .btn.button-style-10 {\n    font-family: $bsTenFontFamily;\n}",
           "LessVariable": "$bsTenFontFamily",
           "JavascriptVariable": "",
           "Type": "Fonts"
@@ -6868,8 +6919,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".button-style-10 {\n    font-style: $bsTenFontStyle;\n}",
-          "PreviewCSS": ".button-style-10 {\n    font-style: $bsTenFontStyle;\n}",
+          "CustomCSS": ".button-style-10 , .btn.button-style-10 {\n    font-style: $bsTenFontStyle;\n}",
+          "PreviewCSS": ".button-style-10 , .btn.button-style-10 {\n    font-style: $bsTenFontStyle;\n}",
           "LessVariable": "$bsTenFontStyle",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6882,8 +6933,8 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-10 {\n    letter-spacing: $bsTenLetterSpacingpx;\n}",
-          "PreviewCSS": ".button-style-10 {\n    letter-spacing: $bsTenLetterSpacingpx;\n}",
+          "CustomCSS": ".button-style-10 , .btn.button-style-10 {\n    letter-spacing: $bsTenLetterSpacingpx;\n}",
+          "PreviewCSS": ".button-style-10 , .btn.button-style-10 {\n    letter-spacing: $bsTenLetterSpacingpx;\n}",
           "LessVariable": "$bsTenLetterSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -6896,8 +6947,8 @@
           "Title": "Word Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".button-style-10 {\n    word-spacing: $bsTenWordSpacingpx;\n}",
-          "PreviewCSS": ".button-style-10 {\n    word-spacing: $bsTenWordSpacingpx;\n}",
+          "CustomCSS": ".button-style-10 , .btn.button-style-10 {\n    word-spacing: $bsTenWordSpacingpx;\n}",
+          "PreviewCSS": ".button-style-10 , .btn.button-style-10 {\n    word-spacing: $bsTenWordSpacingpx;\n}",
           "LessVariable": "$bsTenWordSpacing",
           "JavascriptVariable": null,
           "Type": "Slider"
@@ -6921,8 +6972,8 @@
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-10 {\n    text-transform: $bsTenTextTransform;\n}",
-          "PreviewCSS": ".button-style-10 {\n    text-transform: $bsTenTextTransform;\n}",
+          "CustomCSS": ".button-style-10 , .btn.button-style-10 {\n    text-transform: $bsTenTextTransform;\n}",
+          "PreviewCSS": ".button-style-10 , .btn.button-style-10 {\n    text-transform: $bsTenTextTransform;\n}",
           "LessVariable": "$bsTenTextTransform",
           "JavascriptVariable": null,
           "Type": "Dropdown"
@@ -6946,8 +6997,8 @@
           "Title": "Text Decoration",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".button-style-10 {\n    text-decoration: $bsTenTextDecoration;\n}",
-          "PreviewCSS": ".button-style-10 {\n    text-decoration: $bsTenTextDecoration;\n}",
+          "CustomCSS": ".button-style-10 , .btn.button-style-10 {\n    text-decoration: $bsTenTextDecoration;\n}",
+          "PreviewCSS": ".button-style-10 , .btn.button-style-10 {\n    text-decoration: $bsTenTextDecoration;\n}",
           "LessVariable": "$bsTenTextDecoration",
           "JavascriptVariable": null,
           "Type": "Dropdown"

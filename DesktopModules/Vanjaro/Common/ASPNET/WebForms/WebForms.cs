@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.Entities.Host;
+using DotNetNuke.Entities.Portals;
 using DotNetNuke.Framework.Providers;
 using DotNetNuke.UI.Skins;
 using DotNetNuke.Web.Client.ClientResourceManagement;
@@ -92,7 +93,9 @@ namespace Vanjaro.Common.ASPNET
 
             if (Page.Header.FindControl(ID) == null)
             {
-                string cdv = "cdv=" + Host.CrmVersion.ToString();
+                int PortalID = PortalSettings.Current.PortalId;
+                string CrmVersion = PortalController.GetPortalSetting("CrmVersion", PortalID, string.Empty);
+                string cdv = "cdv=" + CrmVersion;
 
                 if (URL.Contains("?"))
                     cdv = "&" + cdv;

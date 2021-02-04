@@ -4,6 +4,7 @@ using Dnn.PersonaBar.Pages.Components.Security;
 using Dnn.PersonaBar.Pages.Services.Dto;
 using Dnn.PersonaBar.SiteSettings.Services.Dto;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
@@ -248,6 +249,19 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
             {
                 Data = Managers.PagesManager.UpdatePageWorkflow(WorkflowID, PageID)
             };
+            return actionresult;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveAllModule(int PageId)
+        {
+            ActionResult actionresult = new ActionResult();
+            Managers.PagesManager.GetAllDeletedModules(PageId, PortalSettings.Current.CultureCode);
+            foreach (AppItem Minfo in Managers.PagesManager.GetAllDeletedModules(PageId, PortalSettings.Current.CultureCode))
+            {
+                ModuleController.Instance.DeleteTabModule(PageId, Minfo.TabModuleId, false);
+            }
             return actionresult;
         }
 

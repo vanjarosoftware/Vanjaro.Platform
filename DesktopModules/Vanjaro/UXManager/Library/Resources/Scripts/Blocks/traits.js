@@ -218,7 +218,7 @@ export default (editor, config = {}) => {
 		});
 	};
 
-	//Component Styling
+	//Changing Styling
 	global.UpdateStyles = function (elInput, component, event, mainComponent) {
 
 		var trait = mainComponent.getTrait(event.target.name);
@@ -410,10 +410,19 @@ export default (editor, config = {}) => {
 
 		if (componentType == 'grid')
 			component.components().models[0].setStyle(style);
+		else if (componentType == 'image-gallery-item') {
+
+			var models = component.closest('[data-gjs-type="image-gallery"]').findType('image-gallery-item');
+
+			$(models).each(function (index, item) {
+				item.setStyle(style);
+			});
+		}
 		else
 			component.setStyle(style);
 	};
 
+	//Textarea
 	tm.addType('textarea', {
 		createInput({ trait }) {
 
@@ -460,11 +469,11 @@ export default (editor, config = {}) => {
 
 	//Link 
 	tm.addType('href', {
-        createInput({ trait }) {
-            const el = document.createElement('div');
-            el.classList.add("link-wrapper");
-            el.id = trait.attributes.name;
-            el.innerHTML = `
+		createInput({ trait }) {
+			const el = document.createElement('div');
+			el.classList.add("link-wrapper");
+			el.id = trait.attributes.name;
+			el.innerHTML = `
 				<hr />
 				<div class="option-block">
 					<input type="radio" id="URL" name="LinkType" data-type="url">
@@ -504,62 +513,62 @@ export default (editor, config = {}) => {
 				</div>
 			`;
 
-            var pid = trait.target.attributes.pid;
-            var href = trait.attributes.href || trait.target.attributes.href;
-            var options = el.querySelector('.option-block');
-            var wrapper = el.querySelector('.link-block');
-            var target = el.querySelector('.target-block');
+			var pid = trait.target.attributes.pid;
+			var href = trait.attributes.href || trait.target.attributes.href;
+			var options = el.querySelector('.option-block');
+			var wrapper = el.querySelector('.link-block');
+			var target = el.querySelector('.target-block');
 
-            $(el).find(".link-type").hide();
+			$(el).find(".link-type").hide();
 
-            if (typeof href != 'undefined' && (typeof pid == 'undefined' || pid == null)) {
+			if (typeof href != 'undefined' && (typeof pid == 'undefined' || pid == null)) {
 
-                if (href.indexOf('mailto') >= 0) {
-                    $(options).find("#Mail").prop('checked', true);
-                    $(wrapper).find("#email").show();
-                    $(target).hide();
+				if (href.indexOf('mailto') >= 0) {
+					$(options).find("#Mail").prop('checked', true);
+					$(wrapper).find("#email").show();
+					$(target).hide();
 
-                    if (href.indexOf('?subject') || href.indexOf('&subject')) {
+					if (href.indexOf('?subject') || href.indexOf('&subject')) {
 
-                        var email = '';
-                        var subject = '';
+						var email = '';
+						var subject = '';
 
-                        if (href.indexOf('?subject') >= 0) {
-                            email = href.substr(0, href.indexOf('?subject'));
-                            subject = href.substr(href.indexOf('?subject')).replace('?subject=', '');
-                        }
-                        else if (href.indexOf('&subject') >= 0 && href.indexOf('?') >= 0) {
-                            email = href.substr(0, href.indexOf('?'));
-                            subject = href.substr(href.indexOf('&subject')).replace('&subject=', '');
-                        }
-                        else if (href.indexOf('&subject') >= 0) {
-                            email = href.substr(0, href.indexOf('&subject'));
-                            subject = href.substr(href.indexOf('&subject')).replace('&subject=', '')
-                        }
+						if (href.indexOf('?subject') >= 0) {
+							email = href.substr(0, href.indexOf('?subject'));
+							subject = href.substr(href.indexOf('?subject')).replace('?subject=', '');
+						}
+						else if (href.indexOf('&subject') >= 0 && href.indexOf('?') >= 0) {
+							email = href.substr(0, href.indexOf('?'));
+							subject = href.substr(href.indexOf('&subject')).replace('&subject=', '');
+						}
+						else if (href.indexOf('&subject') >= 0) {
+							email = href.substr(0, href.indexOf('&subject'));
+							subject = href.substr(href.indexOf('&subject')).replace('&subject=', '')
+						}
 
-                        $(wrapper).find("#email input.email").val(email.replace('mailto:', ''));
-                        $(wrapper).find("#email input.subject").val(subject);
-                    }
-                    else
-                        $(wrapper).find("#email input.email").val(href.replace('mailto:', ''));
-                }
-                else if (href.indexOf('tel') >= 0) {
-                    $(options).find("#Phone").prop('checked', true);
-                    $(wrapper).find("#phone").show();
-                    $(target).hide();
-                    $(wrapper).find("#phone input").val(href.replace('tel:', ''));
-                }
-                else {
-                    $(options).find("#URL").prop('checked', true);
-                    $(wrapper).find("#url").show();
-                    $(wrapper).find("#url input").val(href);
-                }
-            }
-            else if (typeof pid != 'undefined') {
-                $(options).find("#Page").prop('checked', true);
-                $(wrapper).find("#page").show();
-                this.loadPages('page', pid);
-            }
+						$(wrapper).find("#email input.email").val(email.replace('mailto:', ''));
+						$(wrapper).find("#email input.subject").val(subject);
+					}
+					else
+						$(wrapper).find("#email input.email").val(href.replace('mailto:', ''));
+				}
+				else if (href.indexOf('tel') >= 0) {
+					$(options).find("#Phone").prop('checked', true);
+					$(wrapper).find("#phone").show();
+					$(target).hide();
+					$(wrapper).find("#phone input").val(href.replace('tel:', ''));
+				}
+				else {
+					$(options).find("#URL").prop('checked', true);
+					$(wrapper).find("#url").show();
+					$(wrapper).find("#url input").val(href);
+				}
+			}
+			else if (typeof pid != 'undefined') {
+				$(options).find("#Page").prop('checked', true);
+				$(wrapper).find("#page").show();
+				this.loadPages('page', pid);
+			}
 
 			if (typeof trait.target.getAttributes().target == 'undefined')
 				$(target).find("input#no").prop('checked', true);
@@ -668,14 +677,14 @@ export default (editor, config = {}) => {
 						delete attr.href;
 						component.setAttributes(attr);
 					}
-                    else {
+					else {
 
 						component.attributes.tagName = 'a';
-                        component.view.reset();
-                        component.addAttributes({ href: href });
+						component.view.reset();
+						component.addAttributes({ href: href });
 
-                        if (val != "page")   
-                            component.set({ 'pid': null });
+						if (val != "page")
+							component.set({ 'pid': null });
 					}
 				}
 				else
@@ -1349,6 +1358,7 @@ export default (editor, config = {}) => {
 			var colorField = el.querySelectorAll('.colorPicker .gjs-field-color-picker');
 
 			$(colorField).click(function () {
+
 				$(this).parents(".color-wrapper").find("input:checked").prop('checked', false);
 				$(this).parents(".color-wrapper").find(".active").removeClass("active");
 
@@ -1356,7 +1366,18 @@ export default (editor, config = {}) => {
 				$(this).parents(".color-wrapper").find(".colorPicker").css("background-color", BGcolor).addClass('active');
 			});
 
-			$(editor.TraitManager.getType('color').prototype.getInputEl.apply(that, arguments)).on('move.spectrum change.spectrum', function (e, tinycolor) {
+			$(editor.TraitManager.getType('color').prototype.getInputEl.apply(that, arguments)).on('show.spectrum', function (e, color) {
+
+				var traitsmanager = this.closest('.traitsmanager');
+
+				$(traitsmanager).click(function (event) {
+					event.stopPropagation();
+				});
+				
+			});
+
+			$(editor.TraitManager.getType('color').prototype.getInputEl.apply(that, arguments)).on('move.spectrum change.spectrum', function (e, color) {
+
 				CustomColor();
 
 				var BGcolor = $(this).find(".gjs-field-color-picker").css("background-color");
@@ -1393,6 +1414,16 @@ export default (editor, config = {}) => {
 						item.removeClass(className);
 					});
 				});
+			});
+
+			$(editor.TraitManager.getType('color').prototype.getInputEl.apply(that, arguments)).on('hide.spectrum', function (e, color) {
+
+				CustomColor();
+
+				var orignalColor = $(el).find('.gjs-field-color-picker').css('background-color');
+				$(el).find(".colorPicker").css("background-color", orignalColor);
+
+				VjEditor.runCommand("save");
 			});
 
 			var input = el.getElementsByTagName('input');
@@ -1447,7 +1478,7 @@ export default (editor, config = {}) => {
 			var model = component;
 			var trait = component.getTrait(event.target.name);
 
-			if (typeof trait.attributes.selector != 'undefined')
+			if (typeof trait != 'undefined' && typeof trait.attributes.selector != 'undefined')
 				model = component.findType(trait.attributes.selector);
 
 			$(model).each(function (index, item) {
@@ -1462,6 +1493,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Sliders
 	tm.addType('custom_range', {
 		createInput({ trait }) {
 
@@ -1612,6 +1644,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Number
 	tm.addType('custom_number', {
 		createInput({ trait }) {
 
@@ -1649,6 +1682,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Uploader
 	tm.addType('uploader', {
 		createInput({ trait }) {
 
@@ -1725,6 +1759,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Select
 	tm.addType('dropdown', {
 		createInput({ trait }) {
 
@@ -1786,6 +1821,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Gradient
 	tm.addType('gradient', {
 		createInput({ trait }) {
 
@@ -1823,13 +1859,14 @@ export default (editor, config = {}) => {
 						handler.setColor(color.toRgbString());
 					},
 					move(color) {
-						handler.setColor(color.toRgbString(), 0);
+						handler.setColor(color.toRgbString());
+					},
+					hide(color) {
+						handler.setColor(color.toRgbString());
+						VjEditor.runCommand("save");
 					}
 				});
 			});
-
-			//gp.addHandler(1, '#085078', 0);
-			//gp.addHandler(99, '#85D8CE', 0);
 
 			return el;
 		},
@@ -1844,6 +1881,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Styles
 	tm.addType('preset_radio', {
 		createInput({ trait }) {
 

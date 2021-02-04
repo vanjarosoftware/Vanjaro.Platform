@@ -678,6 +678,9 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
                                     }
                                 }
                             });
+                            if (content.css != undefined && content.css != "") {
+                                VjEditor.addComponents('<style>' + content.css + '</style>');
+                            }                            
                             VjEditor.runCommand("save");
                             window.parent.location.reload();
                         }

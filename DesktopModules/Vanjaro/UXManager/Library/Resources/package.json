@@ -1,7 +1,7 @@
 {
   "name": "uxmanager",
-  "version": "1.0.0",
-  "description": "GrapesJS Plugin VJ Preset",
+  "version": "1.0.4",
+  "description": "Vanjaro Preset",
   "main": "Scripts/uxmanager.min.js",
   "scripts": {
     "lint": "eslint src",
@@ -10,8 +10,8 @@
     "start": "webpack-dev-server --open --progress --colors & npm run build:css -- -w",
     "build:css": "node-sass src/style/main.scss dist/grapesjs-preset-webpage.min.css --output-style compressed"
   },
-  "author": "Mandeeps.com",
-  "license": "BSD-3-Clause",
+  "author": "Vanjaro",
+  "license": "MIT",
   "babel": {
     "presets": [
       "env"

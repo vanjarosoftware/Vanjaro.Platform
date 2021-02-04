@@ -464,7 +464,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register
                     if (string.IsNullOrEmpty(redirectUrl))
                     {
                         //redirect to current page 
-                        redirectUrl = ServiceProvider.NavigationManager.NavigateURL();
+                        redirectUrl = ServiceProvider.NavigationManager.NavigateURL(PortalSettings.Current.HomeTabId);
                     }
                 }
 

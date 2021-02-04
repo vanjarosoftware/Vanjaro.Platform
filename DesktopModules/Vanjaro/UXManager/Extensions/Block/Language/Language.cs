@@ -1,6 +1,7 @@
 ﻿using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Localization;
 using System;
 using System.Collections.Generic;
@@ -102,9 +103,9 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage
                 dynObjects.Add("DefaultLanguage", LanguageManager.GetCultureListItems(true).Where(a => a.Code == PortalSettings.Current.DefaultLanguage).FirstOrDefault());
                 dynObjects.Add("Languages", Managers.LanguageManager.GetCultureListItems(false));
                 string InitGrapejs = "false";
-                if (HttpContext.Current != null && HttpContext.Current.Request.Cookies["vj_InitUX"] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies["vj_InitUX"].Value))
+                if (HttpContext.Current != null && (HttpContext.Current.Request.Cookies["vj_IsPageEdit"] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies["vj_IsPageEdit"].Value)) && string.IsNullOrEmpty(HttpContext.Current.Request.QueryString["pv"]) && TabPermissionController.HasTabPermission("EDIT"))
                 {
-                    InitGrapejs = HttpContext.Current.Request.Cookies["vj_InitUX"].Value;
+                    InitGrapejs = HttpContext.Current.Request.Cookies["vj_IsPageEdit"].Value;
                 }
 
                 dynObjects.Add("InitGrapejs", InitGrapejs);
