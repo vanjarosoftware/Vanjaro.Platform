@@ -102,7 +102,7 @@ namespace Vanjaro.Core
                         page.Style = Data["gjs-css"].ToString();
                         page.Content = AbsoluteToRelativeUrls(ResetModuleMarkup(PortalSettings.PortalId, Data["gjs-html"].ToString(), PortalSettings.UserId), aliases);
                         page.ContentJSON = AbsoluteToRelativeUrls(Data["gjs-components"].ToString(), aliases);
-                        page.StyleJSON = Data["gjs-styles"].ToString();
+                        page.StyleJSON = string.Empty;
 
                         if (Data["IsPublished"] != null && Convert.ToBoolean(Data["IsPublished"].ToString()) && (pageVersion != null && pageVersion.IsPublished))
                         {
