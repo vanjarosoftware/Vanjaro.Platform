@@ -267,13 +267,15 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
                     var contentitems = $(this.model.attributes.components.models[0].attributes.content);
                     if (contentitems != undefined && contentitems.length > 0) {
                         var contentmarkup = '';
+                        var contentcss = '';
                         $.each(contentitems, function (ind, itm) {
                             if (itm.localName == 'style')
-                                contentmarkup += itm.outerHTML;
+                                contentcss += itm.outerHTML;
                             else
                                 contentmarkup += itm.innerHTML;
                         });
                         this.model.components(contentmarkup);
+                        this.model.view.$el[0].innerHTML += contentcss;
                     }
                     $.each(getAllComponents(this.model), function (k, v) {
                         if (v.attributes.type == 'blockwrapper') {
