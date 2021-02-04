@@ -2272,7 +2272,7 @@ $(document).ready(function () {
 									}
 								}
 
-								if (model.attributes.type == "icon") {
+								if (model.attributes.type == "icon" && (property == "width" || property == "min-width" || property == "max-width" || property == "height" || property == "min-height" || property == "max-height")) {
 
 									var style = model.getStyle()[property];
 									var svg = model.components().models[0];

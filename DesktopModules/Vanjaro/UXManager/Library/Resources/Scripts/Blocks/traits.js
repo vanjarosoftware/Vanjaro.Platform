@@ -1487,7 +1487,8 @@ export default (editor, config = {}) => {
 				$(event.target).parents(".color-wrapper").find(".active").removeClass("active");
 				$(event.target.nextElementSibling).addClass("active");
 
-				SwitchClass(elInput, item, event, component);
+				if (typeof trait != 'undefined')
+					SwitchClass(elInput, item, event, component);
 
 			});
 		}
