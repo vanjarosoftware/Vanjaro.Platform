@@ -47,10 +47,14 @@
                                     if (Css.indexOf(sv.innerHTML) <= 0)
                                         Css += sv.innerHTML;
                                 }).promise().done(function () {
-                                    window.parent.window.VjEditor.setComponents(eval(response.components));
-                                    window.parent.window.VjEditor.setStyle(eval(response.style));
-                                    if (Css.length > 0)
-                                        window.parent.window.VjEditor.addComponents('<style>' + Css + '</style>');
+                                    var vjcomps = eval(response.components);
+                                    window.parent.BuildBlockComponent(vjcomps, data);
+                                    window.parent.window.VjEditor.setComponents(vjcomps);
+                                    window.parent.window.VjEditor.setStyle(response.css);
+                                    if (Css.length > 0) {
+                                        var canvasBody = window.parent.window.VjEditor.Canvas.getBody();
+                                        $(canvasBody).append('<style>' + Css + '</style>');
+                                    }
                                     if (mids.length > 0) {
                                         $.each(mids, function (midkey, mid) {
                                             var existinghtml = $(window.parent.window.VjEditor.Canvas.getDocument()).find('[mid=' + mid + ']>[vjmod]')[0];
@@ -62,35 +66,35 @@
                                             }
                                         });
                                     }
-                                    if (response.BlocksMarkUp != undefined) {
-                                        var blockdom = $(response.BlocksMarkUp);
-                                        $.each(blockdom, function (k, v) {
-                                            if ($(v).attr('data-block-guid') != undefined) {
-                                                var blocksattributes = "";
-                                                $.each(v.attributes, function (k, v) {
-                                                    blocksattributes += "[" + v.nodeName + '=' + '"' + v.nodeValue + '"' + ']';
-                                                });
-                                                var existinghtmls = $(window.parent.window.VjEditor.Canvas.getDocument()).find(blocksattributes);
-                                                $.each(existinghtmls, function (ind, va) {
-                                                    if ($(va).attr('data-block-type') == "Logo") {
-                                                        $scope.BuildLogo(JSON.parse(response.components), $(va).attr('id'), va, v);
-                                                    }
-                                                    if ($(va).attr('data-block-type') == "global") {
-                                                        var GlobalMarkUp = $(v.innerHTML);
-                                                        $.each(GlobalMarkUp.find('[data-block-type="Logo"]'), function (k, v) {
-                                                            var style = $(v).attr('data-style');
-                                                            if (style != undefined) {
-                                                                $(v).find('img').attr('style', style);
-                                                            }
-                                                        });
-                                                        $(va).html(GlobalMarkUp);
-                                                    }
-                                                    else
-                                                        $(va).html(v.innerHTML);
-                                                });
-                                            }
-                                        });
-                                    }
+                                    //if (response.BlocksMarkUp != undefined) {
+                                    //    var blockdom = $(response.BlocksMarkUp);
+                                    //    $.each(blockdom, function (k, v) {
+                                    //        if ($(v).attr('data-block-guid') != undefined) {
+                                    //            var blocksattributes = "";
+                                    //            $.each(v.attributes, function (k, v) {
+                                    //                blocksattributes += "[" + v.nodeName + '=' + '"' + v.nodeValue + '"' + ']';
+                                    //            });
+                                    //            var existinghtmls = $(window.parent.window.VjEditor.Canvas.getDocument()).find(blocksattributes);
+                                    //            $.each(existinghtmls, function (ind, va) {
+                                    //                if ($(va).attr('data-block-type') == "Logo") {
+                                    //                    $scope.BuildLogo(JSON.parse(response.components), $(va).attr('id'), va, v);
+                                    //                }
+                                    //                if ($(va).attr('data-block-type') == "global") {
+                                    //                    var GlobalMarkUp = $(v.innerHTML);
+                                    //                    $.each(GlobalMarkUp.find('[data-block-type="Logo"]'), function (k, v) {
+                                    //                        var style = $(v).attr('data-style');
+                                    //                        if (style != undefined) {
+                                    //                            $(v).find('img').attr('style', style);
+                                    //                        }
+                                    //                    });
+                                    //                    $(va).html(GlobalMarkUp);
+                                    //                }
+                                    //                else
+                                    //                    $(va).html(v.innerHTML);
+                                    //            });
+                                    //        }
+                                    //    });
+                                    //}
                                     if (response.Scripts != undefined) {
                                         $.each(response.Scripts, function (k, v) {
                                             var script = $(window.parent.window.VjEditor.Canvas.getDocument().createElement('script'))[0];
@@ -158,7 +162,7 @@
     $scope.BuildLogo = function (components, id, existinghtml, blockdom) {
         $.each(components, function (k, v) {
             if (v.attributes != undefined && v.attributes.id != undefined && v.attributes.id == id) {
-                var style = $(v.content).find('img').attr('style');
+                var style = v.attributes["data-style"];
                 var contentdom = $(blockdom.innerHTML);
                 $(contentdom).find('img').attr('style', style);
                 $.each(window.parent.window.VjEditor.getComponents().models, function (key, model) {

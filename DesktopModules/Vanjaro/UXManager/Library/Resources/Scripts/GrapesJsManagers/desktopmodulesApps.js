@@ -294,7 +294,7 @@ global.UpdateGlobalBlock = function (model) {
                 var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));
                 if (Block != undefined) {
                     var css = '';
-                    $.each($(VjEditor.Canvas.getDocument()).find('#' + model.ccid + '>style'), function (sk, sv) {
+                    $.each($(VjEditor.Canvas.getBody()).find('#' + model.ccid + ''), function (sk, sv) {
                         css += sv.innerHTML;
                     });
                     var CustomBlock = {
@@ -396,7 +396,7 @@ global.BuildAppComponentFromHtml = function (vjcomps, html) {
     });
 };
 
-global.BuildBlockComponent = function (vjcomps) {
+global.BuildBlockComponent = function (vjcomps, version) {
     $.each(vjcomps, function (k, v) {
         if (v.attributes != undefined && v.attributes["data-block-guid"] != undefined && v.attributes["data-block-guid"] != '') {
             var attr = '';
@@ -404,6 +404,9 @@ global.BuildBlockComponent = function (vjcomps) {
                 attr += '[' + key + '="' + value + '"]';
             });
             var $this = $(attr)[0];
+            if ($this == undefined && version != undefined) {
+                $this = $(version).find(attr)[0];
+            }
             if ($this != undefined) {
                 if (v.components == undefined || v.components[0] == undefined) {
                     var component = { components: [], content: '' };
@@ -416,6 +419,9 @@ global.BuildBlockComponent = function (vjcomps) {
                         var contentstyle = '';
                         if ($('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0] != undefined)
                             contentstyle = $('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0].outerHTML;
+                        else if (version != undefined && $(version).find('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0] != undefined) {
+                            contentstyle = $(version).find('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0].outerHTML;
+                        }
                         v.components[0].content = contentstyle + $this.outerHTML;
                     }
                     else {

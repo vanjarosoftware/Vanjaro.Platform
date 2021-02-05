@@ -270,12 +270,13 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
                         var contentcss = '';
                         $.each(contentitems, function (ind, itm) {
                             if (itm.localName == 'style')
-                                contentcss += itm.outerHTML;
+                                contentcss += itm.innerHTML;
                             else
                                 contentmarkup += itm.innerHTML;
                         });
                         this.model.components(contentmarkup);
-                        this.model.view.$el[0].innerHTML += contentcss;
+                        var canbody = VjEditor.Canvas.getBody();
+                        $(canbody).append('<style id=' + this.model.ccid + '>' + contentcss + '</style>');
                     }
                     $.each(getAllComponents(this.model), function (k, v) {
                         if (v.attributes.type == 'blockwrapper') {
