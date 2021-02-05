@@ -2215,18 +2215,18 @@ $(document).ready(function () {
 
 									var $globalblockwrapper = $(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]');
 
-									if ($globalblockwrapper.length) {
+                                    if ($globalblockwrapper.length && !$.isEmptyObject(model.getStyle())) {
 
                                         var result = VjEditor.CodeManager.getCode(model, 'css', { cssc: VjEditor.CssComposer });
-
-										var style = $globalblockwrapper.find('style:contains(' + result.split("{")[0] + '{)');
-
-										if (style.length <= 0)
-											$globalblockwrapper.append('<style>' + result + '</style>');
+                                        var canvasBody = $(VjEditor.Canvas.getBody());
+                                        var style = canvasBody.find('style#' + model.ccid + ':contains(' + result.split("{")[0] + '{)');
+                                        
+                                        if (style.length <= 0)
+                                            canvasBody.append('<style id=' + model.ccid + '>' + result + '</style>');
 										else
-											style.replaceWith('<style>' + result + '</style>');
+                                            style.replaceWith('<style id=' + model.ccid + '>' + result + '</style>');
 
-										model.removeStyle();
+                                        model.setStyle('');
 									}
 								}
 							});
