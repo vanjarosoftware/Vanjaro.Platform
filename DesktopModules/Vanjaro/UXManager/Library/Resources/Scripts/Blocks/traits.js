@@ -253,6 +253,8 @@ export default (editor, config = {}) => {
 
 			if (event.target.classList.contains('unit')) {
 
+				$(event.target).prop('checked', true)
+
 				unit = event.target.value;
 				var inputControl = elInput.querySelectorAll('.input-control');
 
@@ -266,8 +268,7 @@ export default (editor, config = {}) => {
 						});
 
 						$(inputControl).val(option.value);
-						trait.setTargetValue(option.value);
-
+						
 						$(property).each(function (index, item) {
 							style[item.name] = option.value + unit;
 						})
