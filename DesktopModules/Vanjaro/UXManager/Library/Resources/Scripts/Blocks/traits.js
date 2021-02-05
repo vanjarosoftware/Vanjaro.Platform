@@ -568,7 +568,9 @@ export default (editor, config = {}) => {
 				$(options).find("#Page").prop('checked', true);
 				$(wrapper).find("#page").show();
 				this.loadPages('page', pid);
-			}
+            }
+            else
+                $(wrapper).find("#url").show();
 
 			if (typeof trait.target.getAttributes().target == 'undefined')
 				$(target).find("input#no").prop('checked', true);
