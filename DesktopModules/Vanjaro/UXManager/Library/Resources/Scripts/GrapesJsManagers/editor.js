@@ -2531,7 +2531,7 @@ $(document).ready(function () {
 
 							VjEditor.on('change:changesCount', e => {
 
-								if (e != undefined && e.changed != undefined && e.changed.changesCount > 0) {
+                                if (e != undefined && e.changed != undefined && e.changed.changesCount > 0 && VJIsLocked == 'False') {
 
 									if (VJAutoSaveTimeOutid) {
 										clearTimeout(VJAutoSaveTimeOutid);
