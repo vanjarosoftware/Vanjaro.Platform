@@ -328,6 +328,7 @@ namespace Vanjaro.Core
 
                         cb.Html = CustomBlock.Html;
                         cb.Css = CustomBlock.Css;
+                        cb.ContentJSON = CustomBlock.IsGlobal ? CustomBlock.ContentJSON : null;
                         cb.IsGlobal = CustomBlock.IsGlobal;
                         cb.UpdatedBy = PortalSettings.Current.UserId;
                         cb.UpdatedOn = DateTime.UtcNow;
@@ -460,7 +461,10 @@ namespace Vanjaro.Core
                 }
                 return Result;
             }
-
+            public static CustomBlock GetByGuid(int PortalID, string GUID)
+            {
+                return BlockFactory.GetAll(PortalID).Where(b => b.Guid.ToLower() == GUID.ToLower()).FirstOrDefault();
+            }
             public static CustomBlock GetByLocale(int PortalID, string GUID, string Locale)
             {
                 CustomBlock cb = BlockFactory.GetAll(PortalID).Where(b => b.Guid.ToLower() == GUID.ToLower() && b.Locale == Locale).FirstOrDefault();

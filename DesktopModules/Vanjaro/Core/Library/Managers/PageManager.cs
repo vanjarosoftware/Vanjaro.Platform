@@ -93,7 +93,7 @@ namespace Vanjaro.Core
                 {
                     foreach (dynamic con in contentJSON)
                     {
-                        if (con.type.Value == "globalblockwrapper")
+                        if (con.type != null && con.type.Value == "globalblockwrapper")
                         {
                             (con as JObject).Remove("components");
                         }
@@ -121,7 +121,8 @@ namespace Vanjaro.Core
                         page.Content = AbsoluteToRelativeUrls(ResetModuleMarkup(PortalSettings.PortalId, Data["gjs-html"].ToString(), PortalSettings.UserId), aliases);
                         
                         var test = JsonConvert.DeserializeObject(Data["gjs-components"].ToString());
-                        RemoveGlobalBlockComponents(test);
+                        
+                        //RemoveGlobalBlockComponents(test);
 
                         string check = JsonConvert.SerializeObject(test);
 
@@ -1101,6 +1102,46 @@ namespace Vanjaro.Core
                                 }
                             }
                         }
+                    }
+                }
+            }
+
+            public static void ApplyGlobalBlockJSON(Pages page)
+            {
+                if (page.ContentJSON != null)
+                {
+                    var contentJSON = JsonConvert.DeserializeObject(page.ContentJSON);
+
+                    if (contentJSON != null)
+                    {
+                        try
+                        {
+                            UpdateGlobalBlockJSON(contentJSON);
+
+                            page.ContentJSON = JsonConvert.SerializeObject(contentJSON);
+                        }
+                        catch (Exception ex) { ExceptionManager.LogException(ex); }
+                    }
+                }
+            }
+
+            private static void UpdateGlobalBlockJSON(dynamic contentJSON)
+            {
+                foreach (dynamic con in contentJSON)
+                {
+                    if (con.type != null && con.type.Value == "globalblockwrapper" && con.attributes != null && con.attributes["data-guid"] != null)
+                    {
+                        CustomBlock block = BlockManager.GetByGuid(PortalSettings.Current.PortalId, con.attributes["data-guid"].Value);
+
+                        if (block != null)
+                        {
+                            con.components = JsonConvert.DeserializeObject(block.ContentJSON);
+                        }
+
+                    }
+                    else if (con.components != null)
+                    {
+                        UpdateGlobalBlockJSON(con.components);
                     }
                 }
             }
