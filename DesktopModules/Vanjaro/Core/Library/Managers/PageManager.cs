@@ -86,6 +86,24 @@ namespace Vanjaro.Core
                 return Markup;
             }
 
+            private static void RemoveGlobalBlockComponents(dynamic contentJSON)
+            {
+
+                if (contentJSON != null)
+                {
+                    foreach (dynamic con in contentJSON)
+                    {
+                        if (con.type.Value == "globalblockwrapper")
+                        {
+                            (con as JObject).Remove("components");
+                        }
+                        else if (con.components != null)
+                        {
+                            RemoveGlobalBlockComponents(con.components);
+                        }
+                    }
+                }
+            }
             public static dynamic Update(PortalSettings PortalSettings, dynamic Data)
             {
                 dynamic result = new ExpandoObject();
@@ -101,7 +119,15 @@ namespace Vanjaro.Core
                         page.TabID = TabId;
                         page.Style = Data["gjs-css"].ToString();
                         page.Content = AbsoluteToRelativeUrls(ResetModuleMarkup(PortalSettings.PortalId, Data["gjs-html"].ToString(), PortalSettings.UserId), aliases);
-                        page.ContentJSON = AbsoluteToRelativeUrls(Data["gjs-components"].ToString(), aliases);
+                        
+                        var test = JsonConvert.DeserializeObject(Data["gjs-components"].ToString());
+                        RemoveGlobalBlockComponents(test);
+
+                        string check = JsonConvert.SerializeObject(test);
+
+                        page.ContentJSON = AbsoluteToRelativeUrls(check, aliases);
+
+
                         page.StyleJSON = string.Empty;
 
                         if (Data["IsPublished"] != null && Convert.ToBoolean(Data["IsPublished"].ToString()) && (pageVersion != null && pageVersion.IsPublished))
