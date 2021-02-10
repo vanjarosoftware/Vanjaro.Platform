@@ -300,6 +300,11 @@ namespace Vanjaro.Core
                     page = pages.Where(a => a.IsPublished == true).OrderByDescending(a => a.Version).FirstOrDefault();
                 }
 
+                if (page != null && !TabPermissionController.HasTabPermission("EDIT") && !WorkflowManager.HasReviewPermission(page.StateID.Value, UserInfo))
+                {
+                    page = pages.Where(a => a.IsPublished == true).OrderByDescending(a => a.Version).FirstOrDefault();
+                }
+
                 if (page == null && !string.IsNullOrEmpty(Locale) && GetDefaultLocale)
                 {
                     return GetLatestVersion(TabID, IgnoreDraft, null, false);
@@ -928,7 +933,7 @@ namespace Vanjaro.Core
                     string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
                     string tempNewUrl = newurl;
                     int count = 1;
-                    Find:
+                Find:
                     if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
                     {
                         tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;
