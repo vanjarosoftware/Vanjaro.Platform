@@ -24,7 +24,7 @@ namespace Vanjaro.Core.Data.Scripts
             Sql sb = new Sql();
             if (WorkflowReviewType.ToLower() == Enum.WorkflowType.Page.ToString().ToLower())
             {
-                sb.Append("select * from (SELECT ROW_NUMBER() OVER (ORDER BY p.ID desc) AS Row_Number, p.ID,p.TabID as EntityID,p.Version,p.StateID,p.IsPublished,'Page' as EntityName,t.Title,t.Description,ps.Name as State,w.Name as Workflow");
+                sb.Append("select * from (SELECT ROW_NUMBER() OVER (ORDER BY p.ID desc) AS Row_Number, p.ID,p.TabID as EntityID,p.Version,p.StateID,p.IsPublished,'Page' as EntityName,t.TabName as Title,t.Description,ps.Name as State,w.Name as Workflow");
                 sb.Append("FROM  " + CommonScript.TablePrefix + "vj_core_pages p JOIN (SELECT tabid, Max(version) AS Version FROM   " + CommonScript.TablePrefix + "vj_core_pages WHERE  ispublished = 0 GROUP  BY tabid) p_LatestVersion ON ( p.tabid = p_LatestVersion.tabid AND p.version = p_LatestVersion.version ) ");
                 sb.Append("LEFT JOIN " + CommonScript.DnnTablePrefix + "tabs t ON p.tabid = t.tabid ");
                 sb.Append("LEFT JOIN " + CommonScript.TablePrefix + "VJ_Core_WorkflowState as ps on ps.StateID=p.StateID");
