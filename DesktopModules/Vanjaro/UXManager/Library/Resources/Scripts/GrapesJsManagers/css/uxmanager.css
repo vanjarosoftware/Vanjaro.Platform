@@ -272,6 +272,12 @@ ul.Shortcuts {
     height: 30px;
 }
 
+.closeabout .aboutlink {
+    float: left;
+    margin-left: 5px;
+    margin-top: -2px;
+}
+
 a.closeaboutbtn {
     float: right;
     cursor: pointer;
