@@ -96,10 +96,29 @@
 
 			selected.removeStyle(property);
 
+			model.setValue(defaultValue);
+
 			if (selected.attributes.type == "grid")
 				selected.attributes.components.models[0].removeStyle(property);
 
-			if (property == "border-style" || property == "border-top-style" || property == "border-right-style" || property == "border-bottom-style" || property == "border-left-style") {
+			if (property == "border-position") {
+
+				var BorderWidth = ['border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width'];
+				var BorderColor = ['border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color'];
+				var BorderStyle = ['border-top-style', 'border-right-style', 'border-bottom-style', 'border-left-style'];
+
+				$.each([BorderWidth, BorderColor, BorderStyle], function () {
+
+					$.each(this, function (i) {
+
+						var DefaultValue = VjEditor.StyleManager.getProperty(Border, this).getDefaultValue();
+
+						VjEditor.StyleManager.getProperty(Border, this).setValue(DefaultValue);
+					});
+
+				});
+			}
+			else if (property == "border-style" || property == "border-top-style" || property == "border-right-style" || property == "border-bottom-style" || property == "border-left-style") {
 
 				var borderWidth;
 
@@ -120,7 +139,6 @@
 						borderWidth = "border-width"
 				}
 
-				var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();
 				VjEditor.StyleManager.getProperty(Border, borderWidth).setValue(0);
 
 			}
