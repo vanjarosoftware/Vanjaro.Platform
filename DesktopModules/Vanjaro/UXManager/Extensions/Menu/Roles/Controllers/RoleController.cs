@@ -17,6 +17,7 @@ using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.Common.Permissions;
 using Vanjaro.UXManager.Extensions.Menu.Roles.Entities;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 using static Vanjaro.UXManager.Extensions.Menu.Roles.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Roles.Controllers
@@ -178,7 +179,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Roles.Controllers
             }
             catch (Exception ex)
             {
-                Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 actionResult.AddError("HttpStatusCode.InternalServerError", ex.Message);
             }
 

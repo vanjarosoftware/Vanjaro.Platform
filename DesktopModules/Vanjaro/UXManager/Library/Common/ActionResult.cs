@@ -1,6 +1,7 @@
 ﻿using DotNetNuke.Services.Localization;
 using System;
 using System.Collections.Generic;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Library.Common
 {
@@ -50,7 +51,7 @@ namespace Vanjaro.UXManager.Library.Common
 
                 this.Message = LocalizedMessage;
             }
-            DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+            ExceptionManager.LogException(ex);
         }
 
 

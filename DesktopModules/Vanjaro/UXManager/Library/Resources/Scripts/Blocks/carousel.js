@@ -32,14 +32,14 @@
 					var tb = [];
 
 					tb.push({
-						attributes: { class: 'fa fa-plus' },
+						attributes: { class: 'fa fa-plus', title: VjLocalized.AddSlide },
 						command: function (t) {
 							return t.runCommand("add-slide");
 						}
 					});
 
 					tb.push({
-						attributes: { class: 'fa fa-arrow-left' },
+						attributes: { class: 'fa fa-arrow-left', title: VjLocalized.PrevSlide },
 						command: function (t) {
 							const target = this;
 							return t.runCommand("slider-prev", { target });
@@ -47,7 +47,7 @@
 					});
 
 					tb.push({
-						attributes: { class: 'fa fa-arrow-right' },
+						attributes: { class: 'fa fa-arrow-right', title: VjLocalized.NextSlide },
 						command: function (t) {
 							const target = this;
 							return t.runCommand("slider-next", { target });
@@ -98,7 +98,7 @@
 							{ id: 'controlstrue', name: 'Yes' },
 							{ id: 'controlsfalse', name: 'No' },
 						],
-						value: 'controlstrue',
+						default: 'controlstrue',
 						changeProp: 1,
 						UpdateStyles: true,
 					},
@@ -110,7 +110,7 @@
 							{ id: 'indicatorstrue', name: 'Yes' },
 							{ id: 'indicatorsfalse', name: 'No' },
 						],
-						value: 'indicatorstrue',
+						default: 'indicatorstrue',
 						changeProp: 1,
 						UpdateStyles: true,
 					},
@@ -123,7 +123,7 @@
 							{ id: 'slide', name: 'Slide', class: '' },
 							{ id: 'fade', name: 'Fade', class: 'carousel-fade' },
 						],
-						value: 'slide',
+						default: 'slide',
 						changeProp: 1,
 					},
 					{
@@ -135,15 +135,15 @@
 							{ id: 'automaticallytrue', name: 'Yes' },
 							{ id: 'automaticallyfalse', name: 'No' },
 						],
-						value: 'automaticallytrue',
+						default: 'automaticallytrue',
 						changeProp: 1,
 					},
 					{
-                        type: 'custom_number',
+						type: 'custom_number',
 						label: 'Interval',
-                        name: 'datainterval',
-                        value: '5000',
-                        changeProp: 1,
+						name: 'datainterval',
+						default: '5000',
+						changeProp: 1,
 					},
 				],
 			}),
@@ -151,23 +151,23 @@
 				this.listenTo(this, 'change:controls', this.ChangeControl);
 				this.listenTo(this, 'change:indicators', this.ChangeIndicators);
 				this.listenTo(this, 'change:animation', this.ChangeAnimation);
-                this.listenTo(this, 'change:automatically', this.ChangeAutomatically);
-                this.listenTo(this, 'change:datainterval', this.ChangeInterval);
+				this.listenTo(this, 'change:automatically', this.ChangeAutomatically);
+				this.listenTo(this, 'change:datainterval', this.ChangeInterval);
 			},
 			ChangeAutomatically() {
 
-                if (this.attributes.automatically == 'automaticallyfalse') {
-                    this.addAttributes({ 'data-interval': 'false' });
-                    $(this.getTrait('datainterval').el.closest('.gjs-trt-trait__wrp')).hide();
-                }
-                else {
-                    this.addAttributes({ 'data-interval': this.attributes.datainterval });
-                    $(this.getTrait('datainterval').el.closest('.gjs-trt-trait__wrp')).show();
-                }
-            },
-            ChangeInterval() {
-                this.addAttributes({ 'data-interval': this.attributes.datainterval });
-            },
+				if (this.attributes.automatically == 'automaticallyfalse') {
+					this.addAttributes({ 'data-interval': 'false' });
+					$(this.getTrait('datainterval').el.closest('.gjs-trt-trait__wrp')).hide();
+				}
+				else {
+					this.addAttributes({ 'data-interval': this.attributes.datainterval });
+					$(this.getTrait('datainterval').el.closest('.gjs-trt-trait__wrp')).show();
+				}
+			},
+			ChangeInterval() {
+				this.addAttributes({ 'data-interval': this.attributes.datainterval });
+			},
 			ChangeAnimation() {
 				$('.gjs-frame').contents().find('#' + this.getId()).carousel('dispose').carousel({ interval: false });
 			},
@@ -231,12 +231,12 @@
 				comps.add(markup);
 			},
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('carousel')) {
-						return { type: 'carousel' };
-					}
-				},
-			}),
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('carousel')) {
+					return { type: 'carousel' };
+				}
+			},
+		}),
 		view: defaultView.extend({
 			init() {
 
@@ -247,42 +247,43 @@
 					var modelId = this.model.getId();
 
 					comps.add(`
-                <ol class="carousel-indicators">
-                    <li data-target="#`+ modelId + `" data-slide-to="0" class="carousel-indicator active"></li>
-                    <li data-target="#`+ modelId + `" data-slide-to="1" class="carousel-indicator"></li>
-                    <li data-target="#`+ modelId + `" data-slide-to="2" class="carousel-indicator"></li>
-                </ol>   
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <a class="carousel-link">
-                            <picture class="picture-box">
-					            <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png"/>
-				            </picture>
+						<ol class="carousel-indicators">
+                            <li data-target="#`+ modelId + `" data-slide-to="0" class="carousel-indicator active"></li>
+                            <li data-target="#`+ modelId + `" data-slide-to="1" class="carousel-indicator"></li>
+                            <li data-target="#`+ modelId + `" data-slide-to="2" class="carousel-indicator"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a class="carousel-link">
+                                    <picture class="picture-box">
+                                        <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png" />
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="carousel-link">
+                                    <picture class="picture-box">
+                                        <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png" />
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="carousel-link">
+                                    <picture class="picture-box">
+                                        <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png" />
+                                    </picture>
+                                </a>
+                            </div>
+                        </div>
+                        <a class="carousel-control carousel-control-prev" href="#`+ modelId + `" role="button" data-slide="prev">
+                            <span data-gjs-selectable="false" class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="carousel-control sr-only">Previous</span>
                         </a>
-                    </div>
-                    <div class="carousel-item">
-                        <a class="carousel-link">
-                            <picture class="picture-box">
-					            <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png"/>
-				            </picture>
+                        <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-slide="next">
+                            <span data-gjs-selectable="false" class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="carousel-control sr-only">Next</span>
                         </a>
-                    </div>
-                    <div class="carousel-item">
-                        <a class="carousel-link">
-                            <picture class="picture-box">
-					            <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png"/>
-				            </picture>
-                        </a>
-                    </div>
-                </div>
- <a class="carousel-control carousel-control-prev" href="#`+ modelId + `" role="button" data-slide="prev">
-    <span class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="carousel-control sr-only">Previous</span>
-  </a>
-  <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-slide="next">
-    <span class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="carousel-control sr-only">Next</span>
-  </a>`);
+					`);
 				}
 			},
 		}),
@@ -300,10 +301,10 @@
 				highlightable: false,
 			}),
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('carousel-inner')) return { type: 'carousel-inner' };
-				},
-			}),
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('carousel-inner')) return { type: 'carousel-inner' };
+			},
+		}),
 
 		view: defaultView
 	});
@@ -327,10 +328,10 @@
 				hoverable: false,
 			}),
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('carousel-item')) return { type: 'carousel-item' };
-				},
-			}),
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('carousel-item')) return { type: 'carousel-item' };
+			},
+		}),
 
 		view: defaultView
 	});
@@ -379,7 +380,7 @@
 					var tb = [];
 
 					tb.push({
-						attributes: { class: 'fa fa-pencil' },
+						attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
 						command: 'custom-tui-image-editor',
 					});
 
@@ -394,7 +395,7 @@
 
 					if (model.get('copyable')) {
 						tb.push({
-							attributes: { class: 'fa fa-clone' },
+							attributes: { class: 'fa fa-clone', title: VjLocalized.CopyCarouselImage },
 							command: 'slide-clone',
 						});
 					}
@@ -543,10 +544,10 @@
 				propagate: ['removable', 'draggable', 'droppable', 'badgable', 'stylable', 'highlightable', 'copyable', 'resizable', 'editable', 'layerable', 'hoverable'],
 			}),
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('carousel-caption')) return { type: 'carousel-caption' };
-				},
-			}),
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('carousel-caption')) return { type: 'carousel-caption' };
+			},
+		}),
 
 		view: defaultType.view
 	});
@@ -570,10 +571,10 @@
 				hoverable: false,
 			}),
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('carousel-heading')) return { type: 'carousel-heading' };
-				},
-			}),
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('carousel-heading')) return { type: 'carousel-heading' };
+			},
+		}),
 
 		view: defaultType.view
 	});
@@ -596,10 +597,10 @@
 				hoverable: false,
 			}),
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('carousel-text')) return { type: 'carousel-text' };
-				},
-			}),
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('carousel-text')) return { type: 'carousel-text' };
+			},
+		}),
 
 		view: defaultType.view
 	});
@@ -624,10 +625,10 @@
 				propagate: ['removable', 'draggable', 'droppable', 'badgable', 'stylable', 'highlightable', 'copyable', 'resizable', 'editable', 'layerable', 'selectable', 'hoverable'],
 			}),
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('carousel-control-next')) return { type: 'next' };
-				},
-			}),
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('carousel-control-next')) return { type: 'next' };
+			},
+		}),
 
 		view: defaultType.view
 	});
@@ -646,16 +647,16 @@
 				copyable: false,
 				resizable: false,
 				layerable: false,
-                selectable: true,
+				selectable: true,
 				editable: false,
 				hoverable: false,
 				propagate: ['removable', 'draggable', 'droppable', 'badgable', 'stylable', 'highlightable', 'copyable', 'resizable', 'editable', 'layerable', 'selectable', 'hoverable'],
 			}),
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('carousel-control-prev')) return { type: 'prev' };
-				},
-			}),
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('carousel-control-prev')) return { type: 'prev' };
+			},
+		}),
 
 		view: defaultType.view
 	});
@@ -674,45 +675,45 @@
 				copyable: false,
 				resizable: false,
 				layerable: false,
-                selectable: false,
+				selectable: false,
 				editable: false,
 				hoverable: false,
 			}),
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('carousel-indicators')) return { type: 'indicators' };
-				},
-			}),
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('carousel-indicators')) return { type: 'indicators' };
+			},
+		}),
 
 		view: defaultType.view
-    });
+	});
 
-    dc.addType('indicator', {
+	dc.addType('indicator', {
 
-        model: defaultModel.extend({
-            defaults: Object.assign({}, defaultModel.prototype.defaults, {
-                name: 'Indicator',
-                removable: false,
-                draggable: false,
-                droppable: false,
-                badgable: false,
-                stylable: false,
-                highlightable: false,
-                copyable: false,
-                resizable: false,
-                layerable: false,
-                selectable: true,
-                editable: false,
-                hoverable: false,
-            }),
-        }, {
-                isComponent(el) {
-                    if (el && el.classList && el.classList.contains('carousel-indicator')) return { type: 'indicator' };
-                },
-            }),
+		model: defaultModel.extend({
+			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+				name: 'Indicator',
+				removable: false,
+				draggable: false,
+				droppable: false,
+				badgable: false,
+				stylable: false,
+				highlightable: false,
+				copyable: false,
+				resizable: false,
+				layerable: false,
+				selectable: true,
+				editable: false,
+				hoverable: false,
+			}),
+		}, {
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('carousel-indicator')) return { type: 'indicator' };
+			},
+		}),
 
-        view: defaultType.view
-    });
+		view: defaultType.view
+	});
 
 	const cmd = editor.Commands;
 

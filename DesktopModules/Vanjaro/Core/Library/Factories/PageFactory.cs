@@ -2,14 +2,17 @@
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Services.Exceptions;
+using DotNetNuke.Entities.Users;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Data.PetaPoco;
 using Vanjaro.Core.Data.Scripts;
+using static Vanjaro.Core.Components.Enum;
 using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core
@@ -18,33 +21,55 @@ namespace Vanjaro.Core
     {
         public class PageFactory
         {
+            public static ReviewContentInfo GetReviewContentInfo(int Version, string Entity, int EntityID, UserInfo UserInfo)
+            {
+                ReviewContentInfo rinfo = new ReviewContentInfo();
+                if (Entity == WorkflowType.Page.ToString())
+                {
+                    Pages Pages = Version > 0 ? GetByVersion(EntityID, Version, null) : PageManager.GetLatestVersion(EntityID, UserInfo);
+                    if (Pages != null)
+                    {
+                        rinfo.Entity = WorkflowType.Page.ToString();
+                        rinfo.EntityID = Pages.TabID;
+                        rinfo.IsPublished = Pages.IsPublished;
+                        rinfo.StateID = Pages.StateID.Value;
+                        rinfo.Version = Pages.Version;
+                        return rinfo;
+                    }
+                }
+                return null;
+
+            }
             public static void Update(Pages page, int UserID)
             {
-                if (page.ID == 0)
+                if (page != null && page.StateID.HasValue)
                 {
-                    page.CreatedBy = UserID;
-                    page.UpdatedBy = UserID;
-                    page.CreatedOn = DateTime.UtcNow;
-                    page.UpdatedOn = DateTime.UtcNow;
-                    page.Insert();
-                    CacheFactory.Clear(CacheFactory.Keys.Page);
-                    RemoveHistory(page.TabID, WorkflowManager.GetMaxRevisions(page.TabID));
-                }
-                else
-                {
-                    page.UpdatedBy = UserID;
-                    page.UpdatedOn = DateTime.UtcNow;
-                    page.Update();
-                    CacheFactory.Clear(CacheFactory.Keys.Page);
-                }
-
-                //For TabIndexer
-                if (page.IsPublished)
-                {
-                    TabInfo tabinfo = TabController.Instance.GetTab(page.TabID, page.PortalID);
-                    if (tabinfo != null)
+                    if (page.ID == 0)
                     {
-                        TabController.Instance.UpdateTab(tabinfo);
+                        page.CreatedBy = UserID;
+                        page.UpdatedBy = UserID;
+                        page.CreatedOn = DateTime.UtcNow;
+                        page.UpdatedOn = DateTime.UtcNow;
+                        page.Insert();
+                        CacheFactory.Clear(CacheFactory.Keys.Page);
+                        RemoveHistory(page.TabID, WorkflowManager.GetMaxRevisions(page.TabID));
+                    }
+                    else
+                    {
+                        page.UpdatedBy = UserID;
+                        page.UpdatedOn = DateTime.UtcNow;
+                        page.Update();
+                        CacheFactory.Clear(CacheFactory.Keys.Page);
+                    }
+
+                    //For TabIndexer
+                    if (page.IsPublished)
+                    {
+                        TabInfo tabinfo = TabController.Instance.GetTab(page.TabID, page.PortalID);
+                        if (tabinfo != null)
+                        {
+                            TabController.Instance.UpdateTab(tabinfo);
+                        }
                     }
                 }
             }
@@ -66,13 +91,26 @@ namespace Vanjaro.Core
                 return Page;
             }
 
-            internal static List<Pages> GetAllByTabID(int TabID)
+            internal static List<Pages> GetAllByTabID(int TabID, bool HasTabEditPermission = true)
             {
-                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Page + "GetAllByTabID", TabID);
+
+                string Locale = string.Empty;
+                if (!HasTabEditPermission)
+                    Locale = PageManager.GetCultureCode(PortalController.Instance.GetCurrentSettings() as PortalSettings);
+
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Page + "GetAllByTabID", TabID, HasTabEditPermission, Locale);
                 List<Pages> _Pages = CacheFactory.Get(CacheKey) as List<Pages>;
                 if (_Pages == null)
                 {
-                    _Pages = Pages.Query("Where TabID=@0", TabID).ToList();
+                    if (HasTabEditPermission)
+                        _Pages = Pages.Query("Where TabID=@0", TabID).ToList();
+                    else
+                    {
+                        using (VanjaroRepo db = new VanjaroRepo())
+                        {
+                            _Pages = db.Query<Pages>(PageScript.GetPublishPage(Locale), TabID, Locale, true).ToList();
+                        }
+                    }
                     CacheFactory.Set(CacheKey, _Pages);
                 }
                 return _Pages;
@@ -89,6 +127,7 @@ namespace Vanjaro.Core
                 List<int> pages = GetAllByTabID(TabID).OrderByDescending(a => a.Version).Select(a => a.Version).Distinct().Take(MaxVersion).ToList();
                 if (pages.Count > 0)
                 {
+                    RemoveSectionPermissions(TabID, pages);
                     Pages.Delete("Where TabID=@0 and Version not in (" + string.Join(",", pages) + ")", TabID);
                     CacheFactory.Clear(CacheFactory.Keys.Page);
 
@@ -114,6 +153,33 @@ namespace Vanjaro.Core
                 }
             }
 
+            private static void RemoveSectionPermissions(int TabID, List<int> pages)
+            {
+                List<int> EntityIDs = new List<int>();
+                List<Pages> PagesToDelete = Pages.Query("Where TabID=@0 and Version not in (" + string.Join(",", pages) + ")", TabID).ToList();
+                if (PagesToDelete != null)
+                {
+                    foreach (Pages _page in PagesToDelete)
+                    {
+                        HtmlDocument html = new HtmlDocument();
+                        html.LoadHtml(_page.Content);
+                        IEnumerable<HtmlNode> query = html.DocumentNode.SelectNodes("//*[@perm]");
+                        if (query != null)
+                        {
+                            foreach (HtmlNode item in query.ToList())
+                            {
+                                if (!string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "perm").FirstOrDefault().Value))
+                                    EntityIDs.Add(int.Parse(item.Attributes.Where(a => a.Name == "perm").FirstOrDefault().Value));
+                            }
+                        }
+                    }
+                }
+                if (EntityIDs.Count > 0)
+                {
+                    SectionPermissionFactory.DeletePermissions(EntityIDs);
+                }
+            }
+
             public static void DeleteModule(int TabID, int ModuleID)
             {
                 try
@@ -123,7 +189,7 @@ namespace Vanjaro.Core
                 }
                 catch (Exception ex)
                 {
-                    Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
             }
 
@@ -201,7 +267,7 @@ namespace Vanjaro.Core
                     {
                         Tab.SkinSrc = "[g]skins/vanjaro/base.ascx";
                         Tab.ContainerSrc = "[g]containers/vanjaro/base.ascx";
-                        
+
                         using (VanjaroRepo db = new VanjaroRepo())
                         {
                             db.Execute(PortalScript.UpdateTabContainerSrc(PortalSettings.Current.PortalId, Tab.TabID));

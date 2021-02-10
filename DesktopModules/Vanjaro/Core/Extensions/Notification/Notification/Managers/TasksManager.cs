@@ -13,6 +13,7 @@ using System.Text;
 using Vanjaro.Core.Entities;
 using Vanjaro.Core.Entities.Interface;
 using static Vanjaro.Core.Factories;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Extensions.Notification.Notification.Managers
 {
@@ -112,13 +113,22 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Managers
                 {
                     UserInfo user = UserController.Instance.GetUser(PortalId, notification.SenderUserID);
                     string displayName = (user != null ? user.DisplayName : "");
-
+                    StringBuilder sb = new StringBuilder();
+                    foreach (string s in notification.Body.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
+                    {
+                        string[] markup = s.Split(':');
+                        if (!string.IsNullOrEmpty(s) && markup.Length > 1)
+                        {
+                            sb.Append("<div class=\"notification-details notification-" + markup[0].ToLower() + "\"><span class=\"heading " + markup[0].ToLower() + "\">" + markup[0] + ":</span>");
+                            sb.Append("<span>" + markup[1] + "</span></div>" + Environment.NewLine);
+                        }
+                    }
                     NotificationViewModel notificationViewModel = new NotificationViewModel
                     {
                         NotificationId = notification.NotificationID,
                         Subject = notification.Subject,
                         From = notification.From,
-                        Body = notification.Body,
+                        Body = sb.ToString(),
                         DisplayDate = DotNetNuke.Common.Utilities.DateUtils.CalculateDateForDisplay(notification.CreatedOnDate),
                         SenderAvatar = Vanjaro.Common.Utilities.UserUtils.GetProfileImage(PortalId, notification.SenderUserID),
                         SenderProfileUrl = Globals.UserProfileURL(notification.SenderUserID),
@@ -159,7 +169,7 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Managers
             }
             catch (Exception exc)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(exc);
+                ExceptionManager.LogException(exc);
             }
             return Result;
         }

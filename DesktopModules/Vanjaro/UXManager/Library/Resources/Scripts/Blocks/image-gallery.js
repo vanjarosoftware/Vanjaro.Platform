@@ -1,13 +1,13 @@
 ﻿export default (editor, config = {}) => {
-    const c = config;
-    let bm = editor.BlockManager;
+	const c = config;
+	let bm = editor.BlockManager;
 
-    if (c.blocks.imageGallery) {
-        bm.add('image-gallery', {
-            label: VjLocalized.ImageGallery,
-            category: VjLocalized.Basic,
-            attributes: { class: 'fas fa-images' },
-            content: `
+	if (c.blocks.imageGallery) {
+		bm.add('image-gallery', {
+			label: VjLocalized.ImageGallery,
+			category: VjLocalized.Basic,
+			attributes: { class: 'fas fa-images' },
+			content: `
             <div class="vj-image-gallery">
 				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
 					<img onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
@@ -22,322 +22,317 @@
 					<img onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
 				</picture>
 			</div>`,
-            activate: 1
-        });
-    }
+			activate: 1
+		});
+	}
 
-    const cmd = editor.Commands;
+	const cmd = editor.Commands;
 
-    cmd.add('add-image', ed => {
-        var Selected = VjEditor.getSelected();
+	cmd.add('add-image', ed => {
+		var Selected = VjEditor.getSelected();
 
 		if (Selected.attributes.type == 'image-gallery') {
-            var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
-            var Img = `
+			var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
+			var Img = `
 				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
 					<img onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" style="width:` + Selected.components().models[0].getStyle().width + `; height:` + Selected.components().models[0].getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
 				</picture>
 			`;
-            Selected.components().add(Img);
+			Selected.components().add(Img);
 
-            VjEditor.select(Selected.components().last());
-        }
-        else {
-            var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
-            var Img = `
+			VjEditor.select(Selected.components().last());
+		}
+		else {
+			var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
+			var Img = `
 				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
 				<img onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" style="width:` + Selected.getStyle().width + `; height:` + Selected.getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
 				</picture>
 			`;
-            Selected.parent().parent().components().add(Img);
+			Selected.parent().parent().components().add(Img);
 
-            VjEditor.select(Selected.parent().parent().components().last());
-        }
+			VjEditor.select(Selected.parent().parent().components().last());
+		}
 
-        var target = VjEditor.getSelected();
-        window.document.vj_image_target = target;
-        OpenPopUp(null, 900, 'right', 'Image', url, '', true);
-    });
+		var target = VjEditor.getSelected();
+		window.document.vj_image_target = target;
+		OpenPopUp(null, 900, 'right', 'Image', url, '', true);
+	});
 
-    let domc = editor.DomComponents;
-    const defaultType = domc.getType('default');
-    const defaultModel = defaultType.model;
-    const defaultView = defaultType.view;
+	let domc = editor.DomComponents;
+	const defaultType = domc.getType('default');
+	const defaultModel = defaultType.model;
+	const defaultView = defaultType.view;
 
-    domc.addType('image-gallery', {
-        model: defaultModel.extend({
-            initToolbar() {
-                var model = this;
-                if (!model.get('toolbar')) {
-                    var tb = [];
+	domc.addType('image-gallery', {
+		model: defaultModel.extend({
+			initToolbar() {
+				var model = this;
+				if (!model.get('toolbar')) {
+					var tb = [];
 
                     tb.push({
-                        attributes: { class: 'fa fa-plus' },
+                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddImage },
                         command: 'add-image',
                     });
 
+					tb.push({
+						attributes: { class: 'fa fa-arrow-up' },
+						command: function (t) {
+							return t.runCommand("core:component-exit", {
+								force: 1
+							})
+						}
+					});
+
+					if (model.get('draggable')) {
+						tb.push({
+							attributes: { class: 'fa fa-arrows' },
+							command: 'tlb-move',
+						});
+					}
+
+					if (model.get('copyable')) {
+						tb.push({
+							attributes: { class: 'fa fa-clone' },
+							command: 'tlb-clone',
+						});
+					}
+
+					if (model.get('removable')) {
+						tb.push({
+							attributes: { class: 'fa fa-trash-o' },
+							command: 'tlb-delete',
+						});
+					}
+
+					model.set('toolbar', tb);
+				}
+			},
+			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+				'custom-name': 'Image Gallery',
+				droppable: '.vj-image-gallery-item',
+				tagName: 'div',
+				traits: [
+					{
+						label: 'Alignment',
+						type: 'toggle_radio',
+						name: 'alignment',
+						UpdateStyles: true,
+						cssproperties: [{ name: "text-align" }],
+						options: [
+							{ id: 'left', name: 'left', image: 'align-left' },
+							{ id: 'center', name: 'center', image: 'align-center' },
+							{ id: 'right', name: 'right', image: 'align-right' },
+						],
+						default: 'left',
+						changeProp: 1,
+					},
+				]
+			}),
+		},
+			{
+				isComponent(el) {
+					if (el && el.classList && el.classList.contains('vj-image-gallery')) {
+						return { type: 'image-gallery' };
+					}
+				}
+			}),
+		view: defaultView
+	});
+
+	const imageType = domc.getType('image');
+	const imageModel = imageType.model;
+	const imageView = imageType.view;
+
+	domc.addType('image-gallery-item', {
+		model: imageModel.extend({
+			initToolbar() {
+				var model = this;
+				if (!model.get('toolbar')) {
+					var tb = [];
+
                     tb.push({
-                        attributes: { class: 'fa fa-arrow-up' },
-                        command: function (t) {
-                            return t.runCommand("core:component-exit", {
-                                force: 1
-                            })
-                        }
-                    });
-
-                    if (model.get('draggable')) {
-                        tb.push({
-                            attributes: { class: 'fa fa-arrows' },
-                            command: 'tlb-move',
-                        });
-                    }
-
-                    if (model.get('copyable')) {
-                        tb.push({
-                            attributes: { class: 'fa fa-clone' },
-                            command: 'tlb-clone',
-                        });
-                    }
-
-                    if (model.get('removable')) {
-                        tb.push({
-                            attributes: { class: 'fa fa-trash-o' },
-                            command: 'tlb-delete',
-                        });
-                    }
-
-                    model.set('toolbar', tb);
-                }
-            },
-            defaults: Object.assign({}, defaultModel.prototype.defaults, {
-                'custom-name': 'Image Gallery',
-                droppable: '.vj-image-gallery-item',
-                tagName: 'div',
-                traits: [
-                    {
-                        label: 'Alignment',
-                        type: 'toggle_radio',
-                        name: 'alignment',
-                        UpdateStyles: true,
-                        cssproperties: [{ name: "text-align" }],
-                        options: [
-                            { id: 'left', name: 'left', image: 'align-left' },
-                            { id: 'center', name: 'center', image: 'align-center' },
-                            { id: 'right', name: 'right', image: 'align-right' },
-                        ],
-                        value: 'left',
-                        changeProp: 1,
-                    },
-                ]
-            }),
-        },
-            {
-                isComponent(el) {
-                    if (el && el.classList && el.classList.contains('vj-image-gallery')) {
-                        return { type: 'image-gallery' };
-                    }
-                }
-            }),
-        view: defaultView
-    });
-
-    const imageType = domc.getType('image');
-    const imageModel = imageType.model;
-    const imageView = imageType.view;
-
-    domc.addType('image-gallery-item', {
-
-        model: imageModel.extend({
-            initToolbar() {
-                var model = this;
-                if (!model.get('toolbar')) {
-                    var tb = [];
-
-                    tb.push({
-                        attributes: { class: 'fa fa-plus' },
+                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddImage },
                         command: 'add-image',
                     });
 
-                    tb.push({
-                        attributes: { class: 'fa fa-pencil' },
-                        command: 'custom-tui-image-editor',
-                    });
+					tb.push({
+						attributes: { class: 'fa fa-pencil' },
+						command: 'custom-tui-image-editor',
+					});
 
-                    tb.push({
-                        attributes: { class: 'fa fa-arrow-up' },
-                        command: function (t) {
-                            return t.runCommand("core:component-exit", {
-                                force: 1
-                            })
-                        }
-                    });
+					tb.push({
+						attributes: { class: 'fa fa-arrow-up' },
+						command: function (t) {
+							return t.runCommand("core:component-exit", {
+								force: 1
+							})
+						}
+					});
 
-                    if (model.get('draggable')) {
-                        tb.push({
-                            attributes: { class: 'fa fa-arrows' },
-                            command: 'tlb-move',
-                        });
-                    }
+					if (model.get('draggable')) {
+						tb.push({
+							attributes: { class: 'fa fa-arrows' },
+							command: 'tlb-move',
+						});
+					}
 
-                    if (model.get('copyable')) {
-                        tb.push({
-                            attributes: { class: 'fa fa-clone' },
-                            command: 'vj-copy',
-                        });
-                    }
+					if (model.get('copyable')) {
+						tb.push({
+							attributes: { class: 'fa fa-clone' },
+							command: 'vj-copy',
+						});
+					}
 
-                    if (model.get('removable')) {
-                        tb.push({
-                            attributes: { class: 'fa fa-trash-o' },
-                            command: 'vj-delete',
-                        });
-                    }
+					if (model.get('removable')) {
+						tb.push({
+							attributes: { class: 'fa fa-trash-o' },
+							command: 'vj-delete',
+						});
+					}
 
-                    model.set('toolbar', tb);
-                }
-            },
-            defaults: Object.assign({}, imageModel.prototype.defaults, {
-                'custom-name': 'Gallery Item',
-                draggable: '.vj-image-gallery',
-                droppable: false,
-                tagName: 'img',
-                traits: [{
-                    type: 'text',
-                    name: 'title',
-                    label: 'Title',
-                }, {
-                    type: 'text',
-                    name: 'alt',
-                    label: 'Alt',
-                }, {
-                    label: "Width",
-                    name: "width",
-                    type: "custom_range",
-                    cssproperties: [
-                        { name: "width" }
-                    ],
-                    min: "1",
-                    max: "1920",
-                    value: "128",
-                    changeProp: 1,
-                }, {
-                    label: "Height",
-                    name: "height",
-                    type: "custom_range",
-                    cssproperties: [
-                        { name: "height" }
-                    ],
-                    min: "1",
-                    max: "1000",
-                    value: "128",
-                    changeProp: 1,
-                }],
-                resizable: {
-                    tc: 0,
-                    cl: 0,
-                    cr: 0,
-                    bc: 0,
-                    ratioDefault: 1,
-                    onMove: function (e) {
+					model.set('toolbar', tb);
+				}
+			},
+			defaults: Object.assign({}, imageModel.prototype.defaults, {
+				'custom-name': 'Gallery Item',
+				draggable: '.vj-image-gallery',
+				droppable: false,
+				tagName: 'img',
+				traits: [{
+					type: 'text',
+					name: 'title',
+					label: 'Title',
+				}, {
+					type: 'text',
+					name: 'alt',
+					label: 'Alt',
+				}, {
+					label: "Width",
+					name: "width",
+					type: "custom_range",
+					cssproperties: [{ name: "width" }],
+					min: "1",
+					max: "1920",
+					default: "128",
+					changeProp: 1,
+				}, {
+					label: "Height",
+					name: "height",
+					type: "custom_range",
+					cssproperties: [{ name: "height" }],
+					min: "1",
+					max: "1000",
+					default: "128",
+					changeProp: 1,
+				}],
+				resizable: {
+					tc: 0,
+					cl: 0,
+					cr: 0,
+					bc: 0,
+					ratioDefault: 1,
+					onMove: function (e) {
 
-                        var SelectedCol = VjEditor.getSelected();
-                        var width = "";
-                        var height = "";
+						var SelectedCol = VjEditor.getSelected();
+						var width = "";
+						var height = "";
 
-                        if (typeof SelectedCol.getStyle().width == 'undefined')
-                            width = SelectedCol.components().models[0].components().models[0].getStyle().width;
-                        else
-                            width = SelectedCol.getStyle().width;
+						if (typeof SelectedCol.getStyle().width == 'undefined')
+							width = SelectedCol.components().models[0].components().models[0].getStyle().width;
+						else
+							width = SelectedCol.getStyle().width;
 
-                        if (typeof SelectedCol.getStyle().height == 'undefined')
-                            height = SelectedCol.components().models[0].components().models[0].getStyle().height;
-                        else
-                            height = SelectedCol.getStyle().height;
+						if (typeof SelectedCol.getStyle().height == 'undefined')
+							height = SelectedCol.components().models[0].components().models[0].getStyle().height;
+						else
+							height = SelectedCol.getStyle().height;
 
-                        $(SelectedCol.parent().components().models).each(function () {
-                            this.setStyle('width:' + width + '; height:' + height + ';');
-                        });
-                    },
-                    onEnd: function (e) {
+						$(SelectedCol.parent().parent().parent().find('img')).each(function () {
+							this.setStyle('width:' + width + '; height:' + height + ';');
+						});
+					},
+					onEnd: function (e) {
 
-                        var SelectedCol = VjEditor.getSelected();
-                        var width = "";
-                        var height = "";
+						var SelectedCol = VjEditor.getSelected();
+						var width = "";
+						var height = "";
 
-                        if (typeof SelectedCol.getStyle().width == 'undefined')
-                            width = SelectedCol.components().models[0].components().models[0].getStyle().width;
-                        else
-                            width = SelectedCol.getStyle().width;
+						if (typeof SelectedCol.getStyle().width == 'undefined')
+							width = SelectedCol.components().models[0].components().models[0].getStyle().width;
+						else
+							width = SelectedCol.getStyle().width;
 
-                        if (typeof SelectedCol.getStyle().height == 'undefined')
-                            height = SelectedCol.components().models[0].components().models[0].getStyle().height;
-                        else
-                            height = SelectedCol.getStyle().height;
+						if (typeof SelectedCol.getStyle().height == 'undefined')
+							height = SelectedCol.components().models[0].components().models[0].getStyle().height;
+						else
+							height = SelectedCol.getStyle().height;
 
-                        $(SelectedCol.parent().components().models).each(function () {
+						$(SelectedCol.parent().parent().parent().find('img')).each(function () {
 
-                            //Updating Trait on resize
-                            if (typeof this.view != 'undefined') {
+							//Updating Trait on resize
+							if (typeof this.view != 'undefined') {
 
-                                var valWidth = parseInt(width);
-                                var valHeight = parseInt(height);
+								var valWidth = parseInt(width);
+								var valHeight = parseInt(height);
 
-                                this.getTrait('width').set({
-                                    value: valWidth
-                                });
+								this.getTrait('width').set({
+									value: valWidth
+								});
 
-                                this.getTrait('height').set({
-                                    value: valHeight
-                                });
+								this.getTrait('height').set({
+									value: valHeight
+								});
 
-                                if (typeof this.getTrait('width').el != 'undefined') {
-                                    this.getTrait('width').el.children[0].value = valWidth
-                                    this.getTrait('width').el.children[1].value = valWidth
-                                }
+								if (typeof this.getTrait('width').el != 'undefined') {
+									this.getTrait('width').el.children[0].value = valWidth
+									this.getTrait('width').el.children[1].value = valWidth
+								}
 
-                                if (typeof this.getTrait('height').el != 'undefined') {
-                                    this.getTrait('height').el.children[0].value = valHeight
-                                    this.getTrait('height').el.children[1].value = valHeight
-                                }
+								if (typeof this.getTrait('height').el != 'undefined') {
+									this.getTrait('height').el.children[0].value = valHeight
+									this.getTrait('height').el.children[1].value = valHeight
+								}
 
-                                this.set({ 'width': valWidth });
-                                this.set({ 'height': valHeight });
-                            }
-                        });
-                    }
-                }
-            }),
-        },
-            {
-                isComponent(el) {
-                    if (el && el.classList && el.classList.contains('vj-image-gallery-item')) {
-                        return { type: 'image-gallery-item' };
-                    }
-                }
-            }),
-        view: imageView.extend({
-            events: {
-                dblclick: function () {
-                    this.ShowModal()
-                },
-            },
-            init() {
-                this.listenTo(this.model.parent(), 'active', this.ActivateModal); // listen for active event
-            },
-            ActivateModal() {
-                var Selected = this.model.collection.first();
-                VjEditor.select(Selected);
-                var target = Selected;
-                window.document.vj_image_target = target;
-                var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
-                OpenPopUp(null, 900, 'right', 'Image', url, '', true);
-            },
-            ShowModal() {
-                var target = VjEditor.getSelected() || this.model;
-                window.document.vj_image_target = target;
-                var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
-                OpenPopUp(null, 900, 'right', 'Image', url, '', true);
-            },
-        }),
-    });
+								this.set({ 'width': valWidth });
+								this.set({ 'height': valHeight });
+							}
+						});
+					}
+				}
+			}),
+		},
+			{
+				isComponent(el) {
+					if (el && el.classList && el.classList.contains('vj-image-gallery-item')) {
+						return { type: 'image-gallery-item' };
+					}
+				}
+			}),
+		view: imageView.extend({
+			events: {
+				dblclick: function () {
+					this.ShowModal()
+				},
+			},
+			init() {
+				this.listenTo(this.model.parent(), 'active', this.ActivateModal); // listen for active event
+			},
+			ActivateModal() {
+				var Selected = this.model.collection.first();
+				VjEditor.select(Selected);
+				var target = Selected;
+				window.document.vj_image_target = target;
+				var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
+				OpenPopUp(null, 900, 'right', 'Image', url, '', true);
+			},
+			ShowModal() {
+				var target = VjEditor.getSelected() || this.model;
+				window.document.vj_image_target = target;
+				var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
+				OpenPopUp(null, 900, 'right', 'Image', url, '', true);
+			},
+		}),
+	});
 }

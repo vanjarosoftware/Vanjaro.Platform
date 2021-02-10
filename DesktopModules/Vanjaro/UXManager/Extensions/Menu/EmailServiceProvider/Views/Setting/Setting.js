@@ -42,7 +42,8 @@
                 Host_Username: $scope.ui.data.Host_Username.Value,
                 Host_Password: $scope.ui.data.Host_Password.Value,
                 Host_Email: $scope.ui.data.Host_Email.Value,
-                Host_EnableSSL: $scope.ui.data.Host_EnableSSL.Options
+                Host_EnableSSL: $scope.ui.data.Host_EnableSSL.Options,
+                Host_PurgeLogsAfter: $scope.ui.data.Host_PurgeLogsAfter.Value
             }    
         }
         else {

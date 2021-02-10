@@ -1,4 +1,4 @@
-﻿export default (editor, config = {}) => {
+export default (editor, config = {}) => {
 	const c = config;
 	let bm = editor.BlockManager;
 
@@ -12,7 +12,7 @@
 				<div class="gjs-block-label">`+ VjLocalized.Button + `</div>
 			`,
 			category: VjLocalized.Basic,
-            content: '<div class="button-box"><a role="button" href="" class="btn btn-primary button-style-1"><span class="button-text">Button</span></a></div>',
+			content: '<div class="button-box"><a role="button" href="" class="btn btn-primary button-style-1"><span class="button-text">Button</span></a></div>',
 		});
 	}
 
@@ -81,7 +81,7 @@
 			},
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				droppable: false,
-                classes: ['btn', 'btn-primary', 'button-style-1'],
+				classes: ['btn', 'btn-primary', 'button-style-1'],
 				resizable: {
 					tl: 0, // Top left
 					tc: 0, // Top center
@@ -102,7 +102,7 @@
 							{ id: 'fill', name: 'fill', class: '' },
 							{ id: 'outline', name: 'outline', class: 'outline-' },
 						],
-						value: 'fill',
+						default: 'fill',
 						changeProp: 1,
 					}, {
 						label: "Size",
@@ -114,7 +114,7 @@
 							{ id: 'md', name: 'medium', class: '' },
 							{ id: 'lg', name: 'large', class: 'btn-lg' },
 						],
-						value: 'md',
+						default: 'md',
 						changeProp: 1,
 					}, {
 						label: 'Alignment',
@@ -132,19 +132,12 @@
 						label: "Font Size",
 						name: "fontsize",
 						type: "custom_range",
-						cssproperties: [
-							{ name: "font-size" }
-						],
-						unitOptions: true,
+						cssproperties: [{ name: "font-size" }],
 						units: [
-							{ name: 'px' },
-							{ name: '%' },
-							{ name: 'em' }
+							{ name: 'px', min: 10, max: 100, step: 1, value: 16 },
+							{ name: 'vw', min: 0.5, max: 10, step: 0.1, value: 1 },
 						],
 						unit: "px",
-						min: "10",
-						max: "100",
-						value: "16",
 						changeProp: 1,
 					}, {
 						label: "Color",
@@ -166,7 +159,7 @@
 							{ id: 'light', color: 'bg-light', name: 'Light', class: 'light' },
 							{ id: 'dark', color: 'bg-dark', name: 'Dark', class: 'dark' }
 						],
-						value: 'primary',
+						default: 'primary',
 						changeProp: 1,
 					}, {
 						label: " ",
@@ -184,8 +177,13 @@
 							{ id: 'button-style-3', name: 'Style 3', class: 'button-style-3' },
 							{ id: 'button-style-4', name: 'Style 4', class: 'button-style-4' },
 							{ id: 'button-style-5', name: 'Style 5', class: 'button-style-5' },
+							{ id: 'button-style-6', name: 'Style 6', class: 'button-style-6' },
+							{ id: 'button-style-7', name: 'Style 7', class: 'button-style-7' },
+							{ id: 'button-style-8', name: 'Style 8', class: 'button-style-8' },
+							{ id: 'button-style-9', name: 'Style 9', class: 'button-style-9' },
+							{ id: 'button-style-10', name: 'Style 10', class: 'button-style-10' },
 						],
-						value: 'Normal',
+						default: 'Style 1',
 						changeProp: 1,
 					}
 				]

@@ -1,7 +1,6 @@
 ﻿using Dnn.PersonaBar.Prompt.Components.Commands.Host;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Web.Client.ClientResourceManagement;
-using LibSassHost;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -15,8 +14,10 @@ using System.Web;
 using System.Web.UI;
 using Vanjaro.Common.ASPNET;
 using Vanjaro.Core.Components;
+using Vanjaro.Core.Components.Interfaces;
 using Vanjaro.Core.Entities.Interface;
 using Vanjaro.Core.Entities.Theme;
+using Vanjaro.Core.Services.Authentication.OAuth;
 using static Vanjaro.Core.Factories;
 
 namespace Vanjaro.Core
@@ -65,7 +66,48 @@ namespace Vanjaro.Core
                     return null;
                 }
             }
-            public static List<IThemeEditor> GetCategories()
+
+            public static string GetGUID(string name)
+            {
+                ITheme theme = GetThemes().Where(s => s.Name.ToLower() == name.ToLower()).FirstOrDefault();
+                if (theme != null)
+                    return theme.GUID.ToString();
+                else
+                    return string.Empty;
+            }
+
+            public static List<ITheme> GetThemes()
+            {
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Theme, "AllIThemes");
+                List<ITheme> Items = CacheFactory.Get(CacheKey);
+                if (Items == null || Items.Count == 0)
+                {
+                    Items = new List<ITheme>();
+                    string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll")).ToArray();
+                    foreach (string Path in binAssemblies)
+                    {
+                        try
+                        {
+                            Items.AddRange((from t in System.Reflection.Assembly.LoadFrom(Path).GetTypes()
+                                            where t != (typeof(ITheme)) && (typeof(ITheme).IsAssignableFrom(t))
+                                            select Activator.CreateInstance(t) as ITheme).ToList());
+                        }
+                        catch { continue; }
+                    }
+                    CacheFactory.Set(CacheKey, Items);
+                }
+                return Items;
+            }
+
+            public static List<IThemeEditor> GetCategories(bool CheckVisibilityPermission)
+            {
+                if (CheckVisibilityPermission)
+                    return GetCategories().Where(x => x.IsVisible).ToList();
+                else
+                    return GetCategories();
+            }
+
+            private static List<IThemeEditor> GetCategories()
             {
                 string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeCategory, "AllPortals");
                 List<IThemeEditor> Items = CacheFactory.Get(CacheKey);
@@ -103,15 +145,16 @@ namespace Vanjaro.Core
                 index = -1;
                 return null;
             }
-            public static void ProcessScss(int PortalID)
+            public static void ProcessScss(int PortalID, bool CheckVisibilityPermission)
             {
                 StringBuilder sb = new StringBuilder();
+                StringBuilder themeEditorJs = new StringBuilder();
                 string ThemeName = GetCurrent(PortalID).Name;
                 string BootstrapPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/bootstrap.scss");
                 string BeforePath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Before.scss");
                 string AfterPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/After.scss");
 
-                foreach (ThemeFont font in GetFonts(PortalID, "all"))
+                foreach (ThemeFont font in GetFonts(PortalID, "all", CheckVisibilityPermission))
                 {
                     if (!string.IsNullOrEmpty(font.Css))
                     {
@@ -125,13 +168,13 @@ namespace Vanjaro.Core
                 }
 
                 List<string> Css = new List<string>();
-                foreach (IThemeEditor category in GetCategories())
+                foreach (IThemeEditor category in GetCategories(CheckVisibilityPermission))
                 {
                     List<ThemeEditorValue> themeEditorValues = GetThemeEditorValues(PortalID, category.Guid);
-                    ThemeEditorWrapper editors = GetThemeEditors(PortalID, category.Guid);
+                    ThemeEditorWrapper editors = GetThemeEditors(PortalID, category.Guid, CheckVisibilityPermission);
                     if (editors != null && editors.ThemeEditors != null)
                     {
-                        foreach (IGrouping<string, ThemeEditor> themeEditorGroup in GetThemeEditors(PortalID, category.Guid).ThemeEditors.GroupBy(g => g.Category).OrderBy(a => a.Key).ToList())
+                        foreach (IGrouping<string, ThemeEditor> themeEditorGroup in GetEditorGroups(PortalID, category.Guid, CheckVisibilityPermission))
                         {
                             foreach (ThemeEditor item in themeEditorGroup.OrderBy(a => a.Title).ToList())
                             {
@@ -149,6 +192,11 @@ namespace Vanjaro.Core
                                         DefaultValue = editorValue.Value;
                                     }
 
+                                    if (!string.IsNullOrEmpty(DefaultValue) && !string.IsNullOrEmpty(variable) && variable.StartsWith("$"))
+                                    {
+                                        Css.Add(variable + ":" + DefaultValue + " !default;");
+                                    }
+
                                     if (!string.IsNullOrEmpty(DefaultValue) && !string.IsNullOrEmpty(css))
                                     {
                                         string[] strings = new string[] { variable };
@@ -156,14 +204,14 @@ namespace Vanjaro.Core
                                         css = string.Join(DefaultValue, strings);
                                         Css.Add(css + ';');
                                     }
-                                    else if (!string.IsNullOrEmpty(DefaultValue) && !string.IsNullOrEmpty(variable) && variable.StartsWith("$"))
-                                    {
-                                        Css.Add(variable + ":" + DefaultValue + " !default;");
-                                    }
 
                                     if (!string.IsNullOrEmpty(sass))
                                     {
                                         Css.Add(sass + ';');
+                                    }
+                                    if (ctl.JavascriptVariable != null && !string.IsNullOrEmpty(ctl.JavascriptVariable.Value) && !string.IsNullOrEmpty(DefaultValue))
+                                    {
+                                        themeEditorJs.Append(ctl.JavascriptVariable.ToString() + ":'" + DefaultValue + "',");
                                     }
                                 }
                             }
@@ -190,44 +238,56 @@ namespace Vanjaro.Core
                     sb.Append(File.ReadAllText(AfterPath));
                 }
 
+                bool IncrementCrmVersion = false;
                 if (sb.Length > 0)
                 {
+                    string ThemeScss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + ThemeName + "/Theme.scss");
+                    if (!File.Exists(ThemeScss))
+                        File.Create(ThemeScss).Dispose();
+                    File.WriteAllText(ThemeScss, sb.ToString());
+
                     string ThemeCss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + ThemeName + "/Theme.css");
-                    if (!File.Exists(ThemeCss))
+                    if (File.Exists(ThemeCss))
+                        File.Copy(ThemeCss, ThemeCss.Replace("Theme.css", "Theme.backup.css"), true);
+
+                    string _out = "";
+                    Process _process = new Process();
+                    _process.StartInfo.UseShellExecute = false;
+                    _process.StartInfo.RedirectStandardInput = true;
+                    _process.StartInfo.RedirectStandardError = true;
+                    _process.StartInfo.RedirectStandardOutput = true;
+                    _process.StartInfo.CreateNoWindow = true;
+                    _process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    _process.StartInfo.FileName = HttpContext.Current.Server.MapPath("~/bin/dart.exe");
+                    _process.StartInfo.Arguments = " " + HttpContext.Current.Server.MapPath("~/bin/sass.snapshot") + " " + "" + ThemeScss + " " + ThemeScss.Replace("scss", "css") + " --load-path=" + HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/");
+                    if (_process.Start())
                     {
-                        File.Create(ThemeCss).Dispose();
+                        _out = _process.StandardOutput.ReadToEnd();
+                        _process.WaitForExit(30000);
+                        if (!_process.HasExited)
+                            _process.Kill();
+                    }
+                    IncrementCrmVersion = true;
+                }
+
+                if (themeEditorJs.Length > 0)
+                {
+                    string ThemeJs = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + ThemeName + "/theme.editor.js");
+                    if (!File.Exists(ThemeJs))
+                    {
+                        File.Create(ThemeJs).Dispose();
                     }
                     else
                     {
-                        File.Copy(ThemeCss, ThemeCss.Replace("Theme.css", "Theme.backup.css"), true);
+                        File.Copy(ThemeJs, ThemeJs.Replace("theme.editor.js", "theme.editor.backup.js"), true);
                     }
+                    string themeEditorJsStr = "var vjthemeeditor={" + themeEditorJs.ToString().TrimEnd(',') + "};";
+                    File.WriteAllText(ThemeJs, themeEditorJsStr);
+                    IncrementCrmVersion = true;
+                }
 
-                    CompilationResult result = SassCompiler.Compile(sb.ToString(), HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/"));
-                    File.WriteAllText(ThemeCss, result.CompiledContent);
+                if (IncrementCrmVersion)
                     PortalController.IncrementCrmVersion(PortalID);
-                }
-            }
-
-            [DllImport("kernel32")]
-            private static extern bool FreeLibrary(IntPtr hModule);
-            /// <summary>
-            /// Frees libsass.dll so it can be replaced in Vanjaro Package Update. 
-            /// </summary>
-            public static void UnloadSassCompiler()
-            {
-                try
-                {
-                    foreach (ProcessModule mod in Process.GetCurrentProcess().Modules)
-                    {
-                        if (mod.ModuleName.ToLower() == "libsass.dll")
-                        {
-                            FreeLibrary(mod.BaseAddress);
-                            break;
-                        }
-                    }
-                }
-                catch { }
-
             }
 
             public static void Save(string CategoryGuid, List<ThemeEditorValue> ThemeEditorValues)
@@ -259,7 +319,7 @@ namespace Vanjaro.Core
                     }
                     return true;
                 }
-                catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); return false; }
+                catch (Exception ex) { ExceptionManager.LogException(ex); return false; }
             }
             private static void UpdateThemeEditorJson(string CategoryGuid, ThemeEditorWrapper ThemeEditorWrapper)
             {
@@ -277,6 +337,7 @@ namespace Vanjaro.Core
             {
                 try
                 {
+                    themeEditor.Sass = themeEditor.Sass.Replace("\"", "'");
                     if (string.IsNullOrEmpty(themeEditor.Guid))
                     {
                         themeEditor.Guid = Guid.NewGuid().ToString();
@@ -288,7 +349,15 @@ namespace Vanjaro.Core
                         ThemeEditor existingThemeEditor = GetThemeEditor(ThemeEditorWrapper.ThemeEditors, themeEditor.Guid, ref index);
                         if (existingThemeEditor != null && index >= 0)
                         {
+                            string oldcat = ThemeEditorWrapper.ThemeEditors[index].Category;
                             ThemeEditorWrapper.ThemeEditors[index] = themeEditor;
+                            if (string.IsNullOrEmpty(themeEditor.Title))
+                            {
+                                foreach (ThemeEditor ete in ThemeEditorWrapper.ThemeEditors.Where(t => !string.IsNullOrEmpty(t.Title) && t.Category == oldcat))
+                                {
+                                    ete.Category = themeEditor.Category;
+                                }
+                            }
                         }
                         else
                         {
@@ -310,7 +379,7 @@ namespace Vanjaro.Core
                     UpdateThemeEditorJson(categoryGuid, ThemeEditorWrapper);
                     return true;
                 }
-                catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); return false; }
+                catch (Exception ex) { ExceptionManager.LogException(ex); return false; }
             }
             public static void BuildThemeEditor(ThemeEditor themeEditor)
             {
@@ -326,7 +395,8 @@ namespace Vanjaro.Core
                             {
                                 slider.Guid = Guid.NewGuid().ToString();
                             }
-
+                            slider.CustomCSS = slider.CustomCSS.Replace("\"", "'");
+                            slider.PreviewCSS = slider.PreviewCSS.Replace("\"", "'");
                             NewControls.Add(slider);
                         }
                     }
@@ -339,7 +409,8 @@ namespace Vanjaro.Core
                             {
                                 dropdown.Guid = Guid.NewGuid().ToString();
                             }
-
+                            dropdown.CustomCSS = dropdown.CustomCSS.Replace("\"", "'");
+                            dropdown.PreviewCSS = dropdown.PreviewCSS.Replace("\"", "'");
                             NewControls.Add(dropdown);
                         }
                     }
@@ -352,7 +423,8 @@ namespace Vanjaro.Core
                             {
                                 colorPicker.Guid = Guid.NewGuid().ToString();
                             }
-
+                            colorPicker.CustomCSS = colorPicker.CustomCSS.Replace("\"", "'");
+                            colorPicker.PreviewCSS = colorPicker.PreviewCSS.Replace("\"", "'");
                             NewControls.Add(colorPicker);
                         }
                     }
@@ -365,7 +437,8 @@ namespace Vanjaro.Core
                             {
                                 fonts.Guid = Guid.NewGuid().ToString();
                             }
-
+                            fonts.CustomCSS = fonts.CustomCSS.Replace("\"", "'");
+                            fonts.PreviewCSS = fonts.PreviewCSS.Replace("\"", "'");
                             NewControls.Add(fonts);
                         }
                     }
@@ -373,14 +446,15 @@ namespace Vanjaro.Core
                 themeEditor.Controls = new List<dynamic>();
                 themeEditor.Controls.AddRange(NewControls);
             }
-            public static ThemeEditorWrapper GetThemeEditors(int PortalID, string CategoryGuid)
+            public static ThemeEditorWrapper GetThemeEditors(int PortalID, string CategoryGuid, bool CheckVisibilityPermission = true)
             {
-                string ThemeEditorJsonPath = GetThemeEditorJsonPath(PortalID, CategoryGuid);
+                string ThemeEditorJsonPath = GetThemeEditorJsonPath(PortalID, CategoryGuid, CheckVisibilityPermission);
+                List<string> RemoveFeatureAccess = new List<string>() { };
+                if (!HasAccessIOAuthClient(PortalID))
+                    RemoveFeatureAccess.Add("Social Authentication Buttons");
 
                 if (!File.Exists(ThemeEditorJsonPath))
-                {
                     File.Create(ThemeEditorJsonPath).Dispose();
-                }
 
                 string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, PortalID, CategoryGuid);
                 ThemeEditorWrapper result = CacheFactory.Get(CacheKey);
@@ -389,18 +463,33 @@ namespace Vanjaro.Core
                     result = JsonConvert.DeserializeObject<ThemeEditorWrapper>(File.ReadAllText(ThemeEditorJsonPath));
                     CacheFactory.Set(CacheKey, result);
                 }
-                return result;
+
+                ThemeEditorWrapper themeEditors = null;
+                if (result != null)
+                {
+                    themeEditors = new ThemeEditorWrapper() { DeveloperMode = result.DeveloperMode, Fonts = result.Fonts, ThemeEditors = new List<ThemeEditor>() };
+                    if (result.ThemeEditors != null)
+                    {
+                        foreach (ThemeEditor te in result.ThemeEditors)
+                        {
+                            if (!RemoveFeatureAccess.Contains(te.Category))
+                                themeEditors.ThemeEditors.Add(te);
+                        }
+                    }
+                }
+                return themeEditors;
             }
-            public static List<ThemeFont> GetFonts(int PortalID, string CategoryGuid)
+
+            public static List<ThemeFont> GetFonts(int PortalID, string CategoryGuid, bool CheckVisibilityPermission = true)
             {
                 List<ThemeFont> Fonts = new List<ThemeFont>();
                 if (!string.IsNullOrEmpty(CategoryGuid))
                 {
                     if (CategoryGuid.ToLower() == "all")
                     {
-                        foreach (IThemeEditor te in GetCategories())
+                        foreach (IThemeEditor te in GetCategories(CheckVisibilityPermission))
                         {
-                            ThemeEditorWrapper ThemeEditorWrapper = GetThemeEditors(PortalID, te.Guid);
+                            ThemeEditorWrapper ThemeEditorWrapper = GetThemeEditors(PortalID, te.Guid, CheckVisibilityPermission);
                             if (ThemeEditorWrapper != null && ThemeEditorWrapper.Fonts != null)
                             {
                                 Fonts.AddRange(ThemeEditorWrapper.Fonts);
@@ -409,14 +498,16 @@ namespace Vanjaro.Core
                     }
                     else
                     {
-                        ThemeEditorWrapper ThemeEditorWrapper = GetThemeEditors(PortalID, CategoryGuid);
+                        ThemeEditorWrapper ThemeEditorWrapper = GetThemeEditors(PortalID, CategoryGuid, CheckVisibilityPermission);
                         if (ThemeEditorWrapper != null && ThemeEditorWrapper.Fonts != null)
                         {
                             Fonts.AddRange(ThemeEditorWrapper.Fonts);
                         }
                     }
                 }
-                return Fonts;
+                return Fonts.GroupBy(t => t.Name)
+                        .Select(g => g.First())
+                        .ToList();
             }
             public static List<StringTextNV> GetDDLFonts(string CategoryGuid)
             {
@@ -447,12 +538,12 @@ namespace Vanjaro.Core
                     {
                         ThemeFont.Name = data.Name;
                         ThemeFont.Family = data.Family;
-                        ThemeFont.Css = data.Css;
+                        ThemeFont.Css = data.Css.Replace("\"", "'");
                     }
                 }
                 else
                 {
-                    ThemeEditorWrapper.Fonts.Add(new ThemeFont { Guid = GUID, Name = data.Name.ToString(), Family = data.Family.ToString(), Css = data.Css.ToString() });
+                    ThemeEditorWrapper.Fonts.Add(new ThemeFont { Guid = GUID, Name = data.Name.ToString(), Family = data.Family.ToString(), Css = data.Css.ToString().Replace("\"", "'") });
                 }
 
                 UpdateThemeEditorJson(CategoryGuid, ThemeEditorWrapper);
@@ -499,7 +590,7 @@ namespace Vanjaro.Core
                 if (editors != null && editors.ThemeEditors != null)
                 {
                     List<ThemeEditorValue> themeEditorValues = GetThemeEditorValues(PortalSettings.Current.PortalId, Guid);
-                    foreach (IGrouping<string, ThemeEditor> item in GetThemeEditors(PortalSettings.Current.PortalId, Guid).ThemeEditors.GroupBy(g => g.Category).OrderBy(a => a.Key).ToList())
+                    foreach (IGrouping<string, ThemeEditor> item in GetEditorGroups(PortalSettings.Current.PortalId, Guid))
                     {
                         sb.Append(GetMarkUp(identifier, item, themeEditorValues, editors.DeveloperMode, Guid));
                     }
@@ -580,7 +671,7 @@ namespace Vanjaro.Core
                                 {
                                     sb.Append("<div class=\"field fieldcolor optioncontrol\" id=" + item.Guid + "><label>" + colorPicker.Title + " </label>");
                                     string value = GetGuidValue(themeEditorValues, colorPicker);
-                                    sb.Append("<span class=\"input-wrapper\"><input class=\"color\" guid=" + colorPicker.Guid + " type=\"text\" value=" + value + ">");
+                                    sb.Append("<span class=\"input-wrapper\"><input class=\"color\" guid=" + colorPicker.Guid + " type=\"text\" value=\"" + value + "\">");
                                     sb.Append("<span class=\"units\">" + colorPicker.Suffix + "</span>");
                                     sb.Append(GetCssMarkup(colorPicker.Guid, colorPicker.CustomCSS, colorPicker.PreviewCSS, colorPicker.LessVariable, item.Sass) + "</span>" + GetPvNotAvailableMarkup(colorPicker.PreviewCSS) + "</div>");
                                 }
@@ -592,7 +683,7 @@ namespace Vanjaro.Core
                                 {
                                     sb.Append("<div class=\"dropdownselect optioncontrol\" id=" + item.Guid + "><div class=\"dropdownlabel\" ><label>" + fonts.Title + ":</label></div>");
                                     sb.Append("<div class=\"dropdownOption\"><select  guid=" + fonts.Guid + ">");
-                                    foreach (StringTextNV opt in GetDDLFonts(Guid))
+                                    foreach (StringTextNV opt in GetDDLFonts("all"))
                                     {
                                         string value = GetGuidValue(themeEditorValues, fonts);
                                         if (opt.Value == value)
@@ -661,7 +752,10 @@ namespace Vanjaro.Core
                     sb.Append("<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuLink\">");
                     if (themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count == 0).FirstOrDefault() != null)
                     {
-                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/new')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
+                        string type = themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count == 0).FirstOrDefault().Guid;
+                        if (string.IsNullOrEmpty(type))
+                            type = "new";
+                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/" + type + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
                     }
                     else if (themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count > 0).FirstOrDefault() != null)
                     {
@@ -669,7 +763,10 @@ namespace Vanjaro.Core
                     }
                     else
                     {
-                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/new')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
+                        string type = "new";
+                        if (themeEditorGroup != null && themeEditorGroup.FirstOrDefault() != null)
+                            type = themeEditorGroup.FirstOrDefault().Guid;
+                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/" + type + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
                     }
 
                     sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/newsub')\"><em class=\"fas fa-plus mr-xs\"></em><span>Add Subcategory</span></a>");
@@ -702,12 +799,12 @@ namespace Vanjaro.Core
             {
                 return "<input type=\"hidden\" id=" + Guid + " value=\"" + LessVariable + "\" css=\"" + CustomCSS + "\" prevcss=\"" + PreviewCSS + "\" sass=\"" + Sass + "\">";
             }
-            private static string GetThemeEditorJsonPath(int PortalID, string CategoryGuid)
+            private static string GetThemeEditorJsonPath(int PortalID, string CategoryGuid, bool CheckVisibilityPermission = true)
             {
-                IThemeEditor themeEditor = GetCategories().Where(c => c.Guid.ToLower() == CategoryGuid.ToLower()).FirstOrDefault();
+                IThemeEditor themeEditor = GetCategories(CheckVisibilityPermission).Where(c => c.Guid.ToLower() == CategoryGuid.ToLower()).FirstOrDefault();
                 if (themeEditor != null)
                 {
-                    string path = themeEditor.JsonPath.Replace("{{PortalID}}", PortalID.ToString()).Replace("{{ThemeName}}", Core.Managers.ThemeManager.CurrentTheme.Name);
+                    string path = themeEditor.JsonPath.Replace("{{PortalID}}", PortalID.ToString()).Replace("{{ThemeName}}", GetCurrent(PortalID).Name);
                     string folder = Path.GetDirectoryName(path);
                     if (!Directory.Exists(folder))
                         Directory.CreateDirectory(folder);
@@ -717,7 +814,7 @@ namespace Vanjaro.Core
             }
             private static string GetThemeEditorValueJsonPath(int PortalId, string CategoryGuid)
             {
-                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalId + "/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/editor/" + CategoryGuid);
+                string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalId + "/vThemes/" + GetCurrent(PortalId).Name + "/editor/" + CategoryGuid);
 
                 if (!Directory.Exists(FolderPath))
                 {
@@ -730,6 +827,50 @@ namespace Vanjaro.Core
                 }
 
                 return FolderPath + "\\theme.json";
+            }
+
+            private static bool HasAccessIOAuthClient(int PortalID)
+            {
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.IOAuthClient_Extension, PortalID);
+                List<IOAuthClient> OAuthClient = CacheFactory.Get(CacheKey);
+                if (OAuthClient == null)
+                {
+                    string[] binAssemblies = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")).Where(c => c.EndsWith(".dll")).ToArray();
+                    List<IOAuthClient> ServiceInterfaceAssemblies = new List<IOAuthClient>();
+                    foreach (string Path in binAssemblies)
+                    {
+                        try
+                        {
+
+                            //get all assemblies 
+                            IEnumerable<IOAuthClient> AssembliesToAdd = from t in System.Reflection.Assembly.LoadFrom(Path).GetTypes()
+                                                                        where t != (typeof(IOAuthClient)) && (typeof(IOAuthClient).IsAssignableFrom(t))
+                                                                        select Activator.CreateInstance(t) as IOAuthClient;
+
+                            ServiceInterfaceAssemblies.AddRange(AssembliesToAdd.ToList<IOAuthClient>());
+                        }
+                        catch { continue; }
+                    }
+                    OAuthClient = ServiceInterfaceAssemblies;
+                    CacheFactory.Set(CacheKey, ServiceInterfaceAssemblies);
+                }
+
+                return OAuthClient.Count > 0;
+
+            }
+            private static IEnumerable<IGrouping<string, ThemeEditor>> GetEditorGroups(int PortalID, string Guid, bool CheckVisibilityPermission = true)
+            {
+                List<IGrouping<string, ThemeEditor>> themeEditorGroups = GetThemeEditors(PortalID, Guid, CheckVisibilityPermission).ThemeEditors.GroupBy(g => g.Category).OrderBy(a => a.Key).ToList();
+                if (themeEditorGroups != null && themeEditorGroups.Count > 0)
+                {
+                    IGrouping<string, ThemeEditor> siteItem = themeEditorGroups.Where(a => a.Key == "Site").FirstOrDefault();
+                    if (siteItem != null)
+                    {
+                        themeEditorGroups.Remove(siteItem);
+                        themeEditorGroups.Insert(0, siteItem);
+                    }
+                }
+                return themeEditorGroups;
             }
 
 

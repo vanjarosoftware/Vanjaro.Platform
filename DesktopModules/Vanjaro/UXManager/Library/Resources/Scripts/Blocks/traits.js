@@ -1,4 +1,4 @@
-﻿import _ from 'underscore';
+import _ from 'underscore';
 import Grapick from 'grapick';
 export default (editor, config = {}) => {
 
@@ -87,30 +87,17 @@ export default (editor, config = {}) => {
 				style["color"] = mainComponent.getTrait("color").getInitValue();
 				component.setStyle(style);
 				component.removeStyle("background-color");
-				$(mainComponent.getTrait('styles').el).find('label').css({
-					"color": mainComponent.getTrait("color").getInitValue(),
-					"background-color": ""
-				});
 			}
 			else if (event.target.id == 'fill') {
 				var style = component.getStyle();
 				style["background-color"] = mainComponent.getTrait("color").getInitValue();
 				component.setStyle(style);
 				component.removeStyle("color");
-				$(mainComponent.getTrait('styles').el).find('label').css({
-					"background-color": mainComponent.getTrait("color").getInitValue(),
-					"color": ""
-				});;
 			}
 			else {
 				component.removeStyle("color");
 				component.removeStyle("border-color");
 				component.removeStyle("background-color");
-				$(mainComponent.getTrait('styles').el).find('label').css({
-					"background-color": "",
-					"border-color": "",
-					"color": ""
-				});
 			}
 
 			var btnStart = 'btn-';
@@ -152,10 +139,8 @@ export default (editor, config = {}) => {
 					if (classes_i_a[j].length > 0) {
 						if (comp == 'grid' && event.target.name == 'horizontalalignment')
 							component.components().models[0].removeClass(classes_i_a[j]);
-						else if (comp == 'button' && (event.target.name == 'color' || event.target.name == 'stylee' || event.target.name == 'size')) {
+						else if (comp == 'button' && (event.target.name == 'color' || event.target.name == 'stylee' || event.target.name == 'size'))
 							component.removeClass(classes_i_a[j]);
-							$(mainComponent.getTrait('styles').el).find('label').removeClass(classes_i_a[j]);
-						}
 						else
 							component.removeClass(classes_i_a[j]);
 					}
@@ -168,10 +153,8 @@ export default (editor, config = {}) => {
 			for (let i = 0; i < value_a.length; i++) {
 				if (comp == 'grid' && event.target.name == 'horizontalalignment')
 					component.components().models[0].addClass(value_a[i]);
-				else if (comp == 'button' && (event.target.name == 'color' || event.target.name == 'stylee' || event.target.name == 'size')) {
+				else if (comp == 'button' && (event.target.name == 'color' || event.target.name == 'stylee' || event.target.name == 'size'))
 					component.addClass(value_a[i]);
-					$(mainComponent.getTrait('styles').el).find('label').addClass(value_a[i]);
-				}
 				else
 					component.addClass(value_a[i]);
 			}
@@ -205,18 +188,18 @@ export default (editor, config = {}) => {
 				}
 
 				if (comp.getTrait("stylee").getInitValue() == "outline") {
-					style["border-color"] = color + " !important";
-					style["color"] = color + " !important";
+					style["border-color"] = color;
+					style["color"] = color;
 				}
 				else if (comp.getTrait("stylee").getInitValue() == "fill") {
 					$(property).each(function (index, value) {
-						style[value.name] = color + " !important";
+						style[value.name] = color;
 					});
 				}
 			}
 			else {
 				$(property).each(function (index, value) {
-					style[value.name] = color + " !important";
+					style[value.name] = color;
 				});
 			}
 
@@ -235,7 +218,7 @@ export default (editor, config = {}) => {
 		});
 	};
 
-	//Component Styling
+	//Changing Styling
 	global.UpdateStyles = function (elInput, component, event, mainComponent) {
 
 		var trait = mainComponent.getTrait(event.target.name);
@@ -258,92 +241,50 @@ export default (editor, config = {}) => {
 			var inputRange = elInput.querySelector('.range-wrapper .range');
 			var inputNumber = elInput.querySelector('.range-wrapper .number');
 
-			if (componentType == 'divider' || componentType == 'heading' || componentType == 'text' || componentType == 'button' || componentType == 'list') {
+			if (event.target.classList.contains('range'))
+				inputNumber.value = inputRange.value;
+			else if (event.target.classList.contains('number'))
+				inputRange.value = inputNumber.value;
 
-				if (event.target.name == "width" || event.target.name == "fontsize") {
-					unit = $(".unit-wrapper input.choose-unit:checked").val();
-					component.set({ 'unit': unit });
-				}
+			if (typeof trait.attributes.units != "undefined") {
+				unit = $(".unit-wrapper input.unit:checked").val();
+				component.set({ 'unit': unit });
+			}
 
-				if (event.target.classList.contains('choose-unit')) {
+			if (event.target.classList.contains('unit')) {
 
-					if (unit == "px") {
-						if (componentType == 'divider') {
-							$(inputRange).attr("max", "1920");
-							style["width"] = "100px";
-							inputNumber.value = inputRange.value = "100";
-							trait.setTargetValue('100');
-						}
-						else if (componentType == 'heading') {
-							$(inputRange).attr({ "min": "10", "max": "100", "step": "1" });
-							style["font-size"] = "32px";
-							inputNumber.value = inputRange.value = "32";
-							trait.setTargetValue('32');
-						}
-						else if (componentType == 'text' || componentType == 'button' || componentType == 'list') {
-							$(inputRange).attr({ "min": "10", "max": "100", "step": "1" });
-							style["font-size"] = "16px";
-							inputNumber.value = inputRange.value = "16";
-							trait.setTargetValue('16');
-						}
+				$(event.target).prop('checked', true)
+
+				unit = event.target.value;
+				var inputControl = elInput.querySelectorAll('.input-control');
+
+				$(trait.attributes.units).each(function (index, option) {
+					if (option.name == unit) {
+						$(inputControl).attr({
+							'value': option.value,
+							'min': option.min,
+							'max': option.max,
+							'step': option.step
+						});
+
+						$(inputControl).val(option.value);
+						
+						$(property).each(function (index, item) {
+							style[item.name] = option.value + unit;
+						})
 					}
-					else if (unit == "%") {
-						$(inputRange).attr({ "min": "0", "max": "100", "step": "1" });
-						style["font-size"] = "100%";
-						inputNumber.value = inputRange.value = "100";
-						trait.setTargetValue('100');
-					}
-					else if (unit == "em") {
-						$(inputRange).attr({ "min": ".1", "max": "10", "step": ".1" });
-						style["font-size"] = "1em";
-						inputNumber.value = inputRange.value = "1";
-						trait.setTargetValue('1');
-					}
-				}
-				else {
-					$(property).each(function (index, value) {
-						style[value.name] = val + unit;
-					});
-				}
+				});
+
 			}
 			else {
 				$(property).each(function (index, value) {
 					style[value.name] = val + unit;
 				});
 			}
-
-			if (event.target.className == "range")
-				inputNumber.value = inputRange.value;
-			else if (event.target.className == "number")
-				inputRange.value = inputNumber.value;
-
-			if (componentType == 'image-gallery-item' && (event.target.name == "width" || event.target.name == "height")) {
-
-				var width = "";
-				var height = "";
-
-				if (event.target.name == 'width') {
-					width = inputNumber.value;
-					height = mainComponent.getTrait('height').getInitValue();
-				}
-				else {
-					width = mainComponent.getTrait('width').getInitValue();
-					height = inputNumber.value;
-				}
-
-				$(component.parent().components().models).each(function () {
-					var traitGalleryItem = this.getTrait(event.target.name);
-					traitGalleryItem.set({
-						'value': event.target.value
-					});
-
-					this.setStyle('width:' + width + '; height:' + height + ';');
-				});
-			}
 		}
 		else {
 
-			unit = ""
+			unit = "";
 
 			$(property).each(function (index, value) {
 				style[value.name] = val + unit;
@@ -372,8 +313,6 @@ export default (editor, config = {}) => {
 						style["width"] = "100%";
 						style["display"] = "block";
 						component.set({ 'resizable': false });
-
-						$(mainComponent.getTrait('styles').el).find('label').css('width', '100%');
 					}
 					else {
 						style["width"] = component.attributes["width"];
@@ -390,14 +329,6 @@ export default (editor, config = {}) => {
 								br: 0, // Bottom right
 							}
 						});
-
-						$(mainComponent.getTrait('styles').el).css('text-align', val);
-
-						if (typeof component.attributes["width"] != "undefined")
-							$(mainComponent.getTrait('styles').el).find('label').css('width', component.attributes["width"]);
-						else
-							$(mainComponent.getTrait('styles').el).find('label').css('width', 'auto');
-
 					}
 				}
 				else if (componentType == 'divider') {
@@ -480,10 +411,19 @@ export default (editor, config = {}) => {
 
 		if (componentType == 'grid')
 			component.components().models[0].setStyle(style);
-		else if (componentType != 'image-gallery-item')
+		else if (componentType == 'image-gallery-item') {
+
+			var models = component.closest('[data-gjs-type="image-gallery"]').findType('image-gallery-item');
+
+			$(models).each(function (index, item) {
+				item.setStyle(style);
+			});
+		}
+		else
 			component.setStyle(style);
 	};
 
+	//Textarea
 	tm.addType('textarea', {
 		createInput({ trait }) {
 
@@ -582,14 +522,9 @@ export default (editor, config = {}) => {
 
 			$(el).find(".link-type").hide();
 
-			if (typeof href != 'undefined') {
+			if (typeof href != 'undefined' && (typeof pid == 'undefined' || pid == null)) {
 
-				if (href.indexOf('http') >= 0) {
-					$(options).find("#URL").prop('checked', true);
-					$(wrapper).find("#url").show();
-					$(wrapper).find("#url input").val(href);
-				}
-				else if (href.indexOf('mailto') >= 0) {
+				if (href.indexOf('mailto') >= 0) {
 					$(options).find("#Mail").prop('checked', true);
 					$(wrapper).find("#email").show();
 					$(target).hide();
@@ -625,16 +560,18 @@ export default (editor, config = {}) => {
 					$(wrapper).find("#phone input").val(href.replace('tel:', ''));
 				}
 				else {
-					$(options).find("#Page").prop('checked', true);
-					$(wrapper).find("#page").show();
-					this.loadPages('page', pid);
+					$(options).find("#URL").prop('checked', true);
+					$(wrapper).find("#url").show();
+					$(wrapper).find("#url input").val(href);
 				}
 			}
-			else {
-				$(options).find("#URL").prop('checked', true);
-				$(wrapper).find("#url").show();
-				$(wrapper).find("#url input").val(href);
-			}
+			else if (typeof pid != 'undefined') {
+				$(options).find("#Page").prop('checked', true);
+				$(wrapper).find("#page").show();
+				this.loadPages('page', pid);
+            }
+            else
+                $(wrapper).find("#url").show();
 
 			if (typeof trait.target.getAttributes().target == 'undefined')
 				$(target).find("input#no").prop('checked', true);
@@ -686,60 +623,80 @@ export default (editor, config = {}) => {
 
 			var href = '';
 
-			function setURL() {
+			var val = $(elInput).find('.option-block input:checked').attr("data-type");
+
+			switch (val) {
+				case 'url':
+					href = elInput.querySelector('.url').value;
+					break;
+				case 'page':
+					var pid = $(elInput.querySelector('.page')).children("option:selected").attr('pid');
+					if (pid) {
+						var sf = $.ServicesFramework(-1);
+						$.ajax({
+							type: "GET",
+							url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Page/GetPageUrl?TabID=" + parseInt(pid),
+							headers: {
+								'ModuleId': parseInt(sf.getModuleId()),
+								'TabId': parseInt(sf.getTabId()),
+								'RequestVerificationToken': sf.getAntiForgeryValue()
+							},
+							success: function (response) {
+								var valPage = response;
+
+								href = `${valPage}`;
+								component.set({ 'pid': pid });
+
+								if (typeof href != '')
+									SetURL();
+							}
+						});
+					}
+					break;
+				case 'email':
+					var ID = elInput.querySelector('.email').value;
+					var Sub = elInput.querySelector('.subject').value;
+					href = `mailto:${ID}${Sub ? `?subject=${Sub}` : ''}`;
+					break;
+				case 'phone':
+					var num = elInput.querySelector('.phone').value;
+					href = `tel:${num}`;
+					break;
+			}
+
+			var SetURL = function () {
+
 				component.set({ href: href });
 
 				if (component.attributes.type == 'carousel-image')
 					component.parent().parent().addAttributes({ href: href });
+				else if (component.attributes.type == 'icon') {
+
+					if (href == "") {
+						component.attributes.tagName = 'span';
+						component.view.reset();
+
+						const attr = component.getAttributes();
+						delete attr.href;
+						component.setAttributes(attr);
+					}
+					else {
+
+						component.attributes.tagName = 'a';
+						component.view.reset();
+						component.addAttributes({ href: href });
+
+						if (val != "page")
+							component.set({ 'pid': null });
+					}
+				}
 				else
 					component.addAttributes({ href: href });
 			}
 
-			function changeURL() {
-
-				var val = $(".link-wrapper .option-block").find("input:checked").attr("data-type");
-
-				switch (val) {
-					case 'url':
-						href = elInput.querySelector('.url').value;
-						break;
-					case 'page':
-						var pid = $(elInput.querySelector('.page')).children("option:selected").attr('pid');
-						if (pid) {
-							var sf = $.ServicesFramework(-1);
-							$.ajax({
-								type: "GET",
-								url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Page/GetPageUrl?TabID=" + parseInt(pid),
-								headers: {
-									'ModuleId': parseInt(sf.getModuleId()),
-									'TabId': parseInt(sf.getTabId()),
-									'RequestVerificationToken': sf.getAntiForgeryValue()
-								},
-								success: function (response) {
-									var valPage = response;
-
-									href = `${valPage}`;
-									component.set({ 'pid': pid });
-
-									if (typeof href != '')
-										setURL();
-								}
-							});
-						}
-						break;
-					case 'email':
-						var ID = elInput.querySelector('.email').value;
-						var Sub = elInput.querySelector('.subject').value;
-						href = `mailto:${ID}${Sub ? `?subject=${Sub}` : ''}`;
-						break;
-					case 'phone':
-						var num = elInput.querySelector('.phone').value;
-						href = `tel:${num}`;
-						break;
-				}
-			}
-
-			changeURL();
+			var UXManager_Search = this.debounce(function () {
+				SetURL(component, href);
+			}, 500);
 
 			if (event.target.name == "LinkType") {
 
@@ -758,19 +715,9 @@ export default (editor, config = {}) => {
 					this.loadPages(val, 0);
 				}
 
-				setURL();
+				SetURL();
 			}
-
-			if (href != '') {
-
-				var UXManager_Search = this.debounce(function () {
-					setURL();
-				}, 500);
-
-				$(".link-wrapper").find("input").off('keyup').on('keyup', UXManager_Search);
-			}
-
-			if (event.target.name == "target") {
+			else if (event.target.name == "target") {
 				if (event.target.id == "yes") {
 					component.addAttributes({ 'target': '_blank', 'rel': 'noopener' });
 				}
@@ -781,7 +728,9 @@ export default (editor, config = {}) => {
 					component.setAttributes(attr);
 				}
 			}
-
+			else {
+				$(".link-wrapper").find("input").off('keyup').on('keyup', UXManager_Search);
+			}
 		}
 	});
 
@@ -840,10 +789,20 @@ export default (editor, config = {}) => {
 
 			$(event.target.parentElement).find("input:checked").not(event.target).prop('checked', false);
 
-			if (component.getTrait(event.target.name).attributes.UpdateStyles)
-				UpdateStyles(elInput, component, event, component);
-			else if (component.getTrait(event.target.name).attributes.SwitchClass)
-				SwitchClass(elInput, component, event, component);
+			var model = component;
+			var trait = component.getTrait(event.target.name);
+
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector);
+
+			$(model).each(function (index, item) {
+
+				if (trait.attributes.UpdateStyles)
+					UpdateStyles(elInput, item, event, component);
+				else if (trait.attributes.SwitchClass)
+					SwitchClass(elInput, item, event, component);
+
+			});
 		}
 	});
 
@@ -1120,55 +1079,70 @@ export default (editor, config = {}) => {
 				}
 			}
 
-			if (component.attributes.type == "video") {
+			if (component.attributes.type == "videobox") {
 
 				var trait = component.getTrait(event.target.name);
 				trait.set({
 					'value': event.target.id
 				});
 
+				var video = component.components().models[0];
+
 				if (component.getTrait("provider").getInitValue() == 'so') {
+
 					if (event.target.name == "autoplay") {
+
 						if (event.target.value == "yes") {
+
 							component.set({ 'autoplay': 'autoplaytrue' });
-							component.components().models[0].set({ 'autoplay': 1 });
-							component.components().models[0].addAttributes({ 'autoplay': true, 'muted': true });
+							video.set({ 'autoplay': 1 });
+							video.addAttributes({ 'autoplay': true, 'muted': true });
 						}
 						else {
+
 							component.set({ 'autoplay': 'autoplayfalse' });
-							component.components().models[0].set('autoplay', 0);
-							var attr = component.components().models[0].attributes;
+							video.set('autoplay', 0);
+
+							var attr = video.getAttributes();
 							delete attr.autoplay;
-							component.components().models[0].setAttributes(attr);
+							video.setAttributes(attr);
 						}
 					}
 					else if (event.target.name == "loop") {
+
 						if (event.target.value == "yes") {
+
 							component.set({ 'loop': 'looptrue' });
-							component.components().models[0].set({ 'loop': 1 });
-							component.components().models[0].addAttributes({ 'loop': true });
+							video.set({ 'loop': 1 });
+							video.addAttributes({ 'loop': true });
 						}
 						else {
+
 							component.set({ 'loop': 'loopfalse' });
-							component.components().models[0].set('loop', 0);
-							var attr = component.components().models[0].attributes;
+							video.set('loop', 0);
+
+							var attr = video.getAttributes();
 							delete attr.loop;
-							component.components().models[0].setAttributes(attr);
+							video.setAttributes(attr);
 						}
 					}
 					else if (event.target.name == "controls") {
+
 						if (event.target.value == "yes") {
+
 							component.set({ 'controls': 'controlstrue' });
-							component.components().models[0].set({ 'controls': 1 });
-							component.components().models[0].addAttributes({ 'controls': true });
+							video.set({ 'controls': 1 });
+							video.addAttributes({ 'controls': true });
 						}
 						else {
+
 							component.set({ 'controls': 'controlsfalse' });
-							component.components().models[0].set('controls', 0);
-							component.components().models[0].addAttributes({ 'controls': false });
-							var attr = component.components().models[0].attributes;
+							video.set('controls', 0);
+							video.addAttributes({ 'controls': false });
+
+							var attr = video.getAttributes();
 							delete attr.controls;
-							component.components().models[0].setAttributes(attr);
+							video.setAttributes(attr);
 						}
 					}
 				}
@@ -1177,103 +1151,137 @@ export default (editor, config = {}) => {
 					var src = component.attributes.src;
 
 					if (event.target.name == "autoplay") {
+
 						if (event.target.value == "yes") {
+
 							if (src.indexOf('mute') < 0) {
+
 								if (src.indexOf('?') > 0)
 									src += "&mute=1&autoplay=1";
 								else
 									src += "?mute=1&autoplay=1";
 							}
+
 							component.set({ 'autoplay': 'autoplaytrue' });
-							component.components().models[0].set({ 'autoplay': 1 });
+							video.set({ 'autoplay': 1 });
 						}
 						else {
+
 							if (src.indexOf('mute') > 0) {
+
 								if (src.indexOf('?mute') > 0 && src.match(/&/g) != null && src.match(/&/g).length == 1)
 									src = src.replace('?mute=1&autoplay=1', '');
+
 								else if (src.indexOf('&mute') > 0)
 									src = src.replace('&mute=1&autoplay=1', '');
+
 								else
 									src = src.replace('mute=1&autoplay=1', '');
 							}
+
 							component.set({ 'autoplay': 'autoplayfalse' });
-							component.components().models[0].set({ 'autoplay': 0 });
+							video.set({ 'autoplay': 0 });
 						}
 					}
 					else if (event.target.name == 'loop') {
+
 						var vId = component.attributes.videoId;
 
 						if (event.target.value == 'yes') {
+
 							if (src.indexOf('loop') < 0) {
+
 								if (src.indexOf('?') > 0)
 									src += '&loop=1&playlist=' + vId;
 								else
 									src += '?loop=1&playlist=' + vId;
 							}
+
 							component.set({ 'loop': 'looptrue' });
-							component.components().models[0].set({ 'loop': 0 });
+							video.set({ 'loop': 0 });
 						}
 						else {
+
 							if (src.indexOf('loop') > 0) {
+
 								if (src.indexOf('?') > 0 && src.match(/&/g) != null && src.match(/&/g).length == 1)
 									src = src.replace('?loop=1&playlist=' + vId, '');
+
 								else if (src.indexOf('&loop') > 0)
 									src = src.replace('&loop=1&playlist=' + vId, '');
+
 								else
 									src = src.replace('loop=1&playlist=' + vId, '');
 							}
+
 							component.set({ 'loop': 'loopfalse' });
-							component.components().models[0].set({ 'loop': 0 });
+							video.set({ 'loop': 0 });
 						}
 					}
+					else if (event.target.name == "rel") {
 
-					if (event.target.name == "rel") {
 						if (event.target.value == "yes") {
+
 							if (src.indexOf('rel') > 0) {
+
 								if (src.indexOf('?rel') > 0 && src.match(/&/g) != null && src.match(/&/g).length == 0)
 									src = src.replace('?rel=0', '');
+
 								else if (src.indexOf('&rel') > 0)
 									src = src.replace('&rel=0', '');
+
 								else
 									src = src.replace('rel=0', '');
 							}
+
 							component.set({ 'rel': 'reltrue' });
-							component.components().models[0].set({ 'rel': 1 });
+							video.set({ 'rel': 1 });
 						}
 						else {
+
 							if (src.indexOf('rel') < 0) {
+
 								if (src.indexOf('?') > 0)
 									src += '&rel=0';
 								else
 									src += '?rel=0';
 							}
+
 							component.set({ 'rel': 'relfalse' });
-							component.components().models[0].set({ 'rel': 0 });
+							video.set({ 'rel': 0 });
 						}
 					}
+					else if (event.target.name == "logo") {
 
-					if (event.target.name == "logo") {
 						if (event.target.value == "yes") {
+
 							if (src.indexOf('modestbranding') > 0) {
+
 								if (src.indexOf('?modestbranding') > 0 && src.match(/&/g) != null && src.match(/&/g).length == 0)
 									src = src.replace('?modestbranding=1', '');
+
 								else if (src.indexOf('&modestbranding') > 0)
 									src = src.replace('&modestbranding=1', '');
+
 								else
 									src = src.replace('modestbranding=1', '');
 							}
+
 							component.set({ 'logo': 'logotrue' });
-							component.components().models[0].set({ 'logo': 1 });
+							video.set({ 'logo': 1 });
 						}
 						else {
+
 							if (src.indexOf('modestbranding') < 0) {
+
 								if (src.indexOf('?') > 0)
 									src += '&modestbranding=1';
 								else
 									src += '?modestbranding=1';
 							}
+
 							component.set({ 'logo': 'logofalse' });
-							component.components().models[0].set({ 'logo': 0 });
+							video.set({ 'logo': 0 });
 						}
 					}
 
@@ -1283,17 +1291,30 @@ export default (editor, config = {}) => {
 						src = src.replace('?', '');
 
 					component.set({ 'src': src });
-					component.components().models[0].set({ 'src': src, 'controls': 1 });
-					component.components().models[0].addAttributes({ 'allow': 'autoplay' });;
-					$(component.components().models[0].getEl()).find('iframe').attr('src', src);
+
+					video.set({ 'src': src, 'controls': 1 });
+					video.addAttributes({ 'allow': 'autoplay' });;
+
+					$(video.getEl()).find('iframe').attr('src', src);
 				}
 
+				VjEditor.runCommand("save");
 			}
 
-			if (component.getTrait(event.target.name).attributes.UpdateStyles)
-				UpdateStyles(elInput, component, event, component);
-			else if (component.getTrait(event.target.name).attributes.SwitchClass)
-				SwitchClass(elInput, component, event, component);
+			var model = component;
+			var trait = component.getTrait(event.target.name);
+
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector);
+
+			$(model).each(function (index, item) {
+
+				if (trait.attributes.UpdateStyles)
+					UpdateStyles(elInput, item, event, component);
+				else if (trait.attributes.SwitchClass)
+					SwitchClass(elInput, item, event, component);
+
+			});
 
 			if (component.attributes.type == "column" && component.components().length == 0)
 				$(component.getEl()).attr("data-empty", "true");
@@ -1340,6 +1361,7 @@ export default (editor, config = {}) => {
 			var colorField = el.querySelectorAll('.colorPicker .gjs-field-color-picker');
 
 			$(colorField).click(function () {
+
 				$(this).parents(".color-wrapper").find("input:checked").prop('checked', false);
 				$(this).parents(".color-wrapper").find(".active").removeClass("active");
 
@@ -1347,25 +1369,22 @@ export default (editor, config = {}) => {
 				$(this).parents(".color-wrapper").find(".colorPicker").css("background-color", BGcolor).addClass('active');
 			});
 
-			$(editor.TraitManager.getType('color').prototype.getInputEl.apply(that, arguments)).on('move.spectrum change.spectrum', function (e, tinycolor) {
+			$(editor.TraitManager.getType('color').prototype.getInputEl.apply(that, arguments)).on('show.spectrum', function (e, color) {
+
+				var traitsmanager = this.closest('.traitsmanager');
+
+				$(traitsmanager).click(function (event) {
+					event.stopPropagation();
+				});
+				
+			});
+
+			$(editor.TraitManager.getType('color').prototype.getInputEl.apply(that, arguments)).on('move.spectrum change.spectrum', function (e, color) {
+
 				CustomColor();
 
 				var BGcolor = $(this).find(".gjs-field-color-picker").css("background-color");
 				$(this).parents(".color-wrapper").find(".colorPicker").css("background-color", BGcolor);
-
-				if (typeof trait.target.getTrait('styles') != 'undefined') {
-
-					$(trait.attributes.cssproperties).each(function (index, property) {
-
-						if (property.name == 'color') {
-							$(trait.target.getTrait('styles').el).find('label').css("color", BGcolor);
-
-							$(trait.target.getTrait('styles').el).find('label').removeClass(function (index, className) {
-								return (className.match(/\btext-\S+/g) || []).join(' ');
-							});
-						}
-					});
-				}
 
 				var classes = [];
 				var model = trait.target;
@@ -1398,42 +1417,17 @@ export default (editor, config = {}) => {
 						item.removeClass(className);
 					});
 				});
-
-				if (trait.target.attributes.type == 'button') {
-
-					var className = $(trait.target.getTrait('styles').el).find('label').attr('class').match(/\bbtn-\S+/g);
-
-					$(trait.target.getTrait('styles').el).find('label').removeClass(className);
-
-					if (trait.target.getTrait("stylee").getInitValue() == "outline") {
-						$(trait.target.getTrait('styles').el).find('label').css({
-							'color': BGcolor,
-							'border-color': BGcolor,
-						});
-					}
-					else if (trait.target.getTrait("stylee").getInitValue() == "fill") {
-						$(trait.target.getTrait('styles').el).find('label').css({
-							'background-color': BGcolor,
-							'border-color': BGcolor,
-							'color': "",
-						});
-					}
-				}
-
 			});
 
-			var attr = trait.attributes.cssproperties[0].name;
+			$(editor.TraitManager.getType('color').prototype.getInputEl.apply(that, arguments)).on('hide.spectrum', function (e, color) {
 
-			if (typeof VjEditor.getSelected().getStyle()[attr] != "undefined") {
+				CustomColor();
 
-				var customColor = VjEditor.getSelected().getStyle()[attr].replace("!important", "");
+				var orignalColor = $(el).find('.gjs-field-color-picker').css('background-color');
+				$(el).find(".colorPicker").css("background-color", orignalColor);
 
-				if (customColor != "transparent") {
-					el.querySelector('.gjs-field-color-picker').style.backgroundColor = customColor;
-					el.querySelector('.colorPicker').style.backgroundColor = customColor;
-					editor.$(el.querySelector('.gjs-field-color-picker')).spectrum("set", customColor);
-				}
-			}
+				VjEditor.runCommand("save");
+			});
 
 			var input = el.getElementsByTagName('input');
 
@@ -1448,13 +1442,25 @@ export default (editor, config = {}) => {
 				}
 			});
 
-			var getCustomColor = $(el).find('.colorPicker .gjs-field-color-picker').css('background-color');
-			if (!$(el).find('input:checked').length)
-				$(el).find('.colorPicker').addClass('active').css('background-color', getCustomColor);
-
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
+
+			var property = trait.attributes.cssproperties[0].name;
+
+			if (typeof component.getStyle()[property] != "undefined") {
+
+				var customColor = component.getStyle()[property].replace("!important", "");
+
+				if (customColor != "transparent") {
+					elInput.querySelector('.gjs-field-color-picker').style.backgroundColor = customColor;
+					elInput.parentElement.style.backgroundColor = customColor
+					editor.$(elInput.querySelector('.gjs-field-color-picker')).spectrum("set", customColor);
+
+					$(elInput.parentElement).addClass('active').css('background-color', customColor);
+				}
+			}
+
 			if (component.attributes.type == 'icon') {
 
 				if (elInput.parentElement.parentElement.firstElementChild.name == "framecolor" && component.getTrait('frame').getInitValue() == "none")
@@ -1475,42 +1481,23 @@ export default (editor, config = {}) => {
 			var model = component;
 			var trait = component.getTrait(event.target.name);
 
-			if (typeof trait.attributes.selector != 'undefined')
+			if (typeof trait != 'undefined' && typeof trait.attributes.selector != 'undefined')
 				model = component.findType(trait.attributes.selector);
 
 			$(model).each(function (index, item) {
-
-				if (typeof component.getTrait('styles') != 'undefined') {
-
-					$(trait.attributes.cssproperties).each(function (index, property) {
-
-						if (property.name == 'color') {
-							var className = event.target.nextElementSibling.className;
-							className = className.replace('bg', 'text');
-
-							$(component.getTrait('styles').el).find('label').removeClass(function (index, css) {
-								return (css.match(/\btext-\S+/g) || []).join(' ');
-							});
-
-							$(component.getTrait('styles').el).find('label').addClass(className);
-						}
-					});
-				}
 
 				$(event.target).parents(".color-wrapper").find(".colorPicker").css("background-color", "transparent");
 				$(event.target).parents(".color-wrapper").find(".active").removeClass("active");
 				$(event.target.nextElementSibling).addClass("active");
 
-				//var style = item.getStyle();
-				//style["background-color"] = "transparent";
-				//item.setStyle(style);
-
-				SwitchClass(elInput, item, event, component);
+				if (typeof trait != 'undefined')
+					SwitchClass(elInput, item, event, component);
 
 			});
 		}
 	});
 
+	//Sliders
 	tm.addType('custom_range', {
 		createInput({ trait }) {
 
@@ -1521,80 +1508,97 @@ export default (editor, config = {}) => {
 			el.id = trait.attributes.name;
 
 			el.innerHTML = `
-				<input type="range" value="`+ traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="range" /> 
-				<input type="number" value="`+ traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="number" />
+				<input type="range" value="`+ traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="input-control range" /> 
+				<input type="number" value="`+ traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="input-control number" />
 			`;
+			if (typeof trait.attributes.units != "undefined" && trait.attributes.units.length) {
 
-			if (trait.attributes.unitOptions) {
-
-				var div = document.createElement('div');
+				var div = document.createElement("div");
 				div.setAttribute("class", "unit-wrapper");
 
-				$(trait.attributes.units).each(function (index, value) {
+				$(trait.attributes.units).each(function (index, option) {
 					var input = document.createElement('input');
 					var label = document.createElement("label");
 
-					input.setAttribute('class', 'choose-unit');
-					input.setAttribute('type', 'radio');
-					input.setAttribute('name', trait.attributes.name);
-					input.setAttribute('id', 'width' + value.name);
-					input.setAttribute('value', value.name);
+					input.setAttribute("class", "unit");
+					input.setAttribute("type", "radio");
+					input.setAttribute("name", trait.attributes.name);
+					input.setAttribute("id", trait.attributes.name + option.name);
+					input.setAttribute("value", option.name);
 
-					label.setAttribute('for', 'width' + value.name);
-					label.innerHTML = value.name;
+					label.setAttribute("for", trait.attributes.name + option.name);
+					label.innerHTML = option.name;
 
 					div.appendChild(input);
 					div.appendChild(label);
-
 				});
 
 				el.appendChild(div);
-
-				var unitVal = trait.target.attributes.unit;
-
-				if (typeof unitVal == "undefined") {
-					if (trait.target.attributes.type == 'heading' || trait.target.attributes.type == 'text' || trait.target.attributes.type == 'button' || trait.target.attributes.type == 'list')
-						unitVal = "px";
-					else if (trait.target.attributes.type == "divider")
-						unitVal = "%";
-				}
-
-
-				var unitInput = el.querySelectorAll('.range-wrapper input.choose-unit');
-				var input = el.querySelectorAll('.range-wrapper>input');
-
-				$(unitInput).each(function () {
-					if (unitVal == "%") {
-						if (trait.target.attributes.type == "divider")
-							$(this).parents('.range-wrapper').find('input').attr("max", "100");
-						else if (trait.target.attributes.type == 'heading' || trait.target.attributes.type == 'text')
-							$(this).parents('.range-wrapper').find('input').attr("min", "1").attr("max", "100").attr("step", "1");
-					}
-					else if (unitVal == "em") {
-						if (trait.target.attributes.type == 'heading' || trait.target.attributes.type == 'text')
-							$(this).parents('.range-wrapper').find('input').attr("min", ".1").attr("max", "10").attr("step", ".1");
-					}
-					else {
-						if (trait.target.attributes.type == "divider")
-							$(this).parents('.range-wrapper').find('input').attr("max", "1920");
-						else if (trait.target.attributes.type == 'heading' || trait.target.attributes.type == 'text')
-							$(this).parents('.range-wrapper').find('input').attr("min", "10").attr("max", "100").attr("step", "1");
-					}
-				});
-
-				$(unitInput).each(function () {
-					if ($(this).attr("value") == unitVal)
-						$(this).prop('checked', true);
-				});
-
-				$(input).each(function () {
-					$(this).attr("value", trait.getInitValue());
-				});
 			}
 
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
+
+			if (typeof event != 'undefined' && !event.target.classList.contains('input-control')) {
+				var inputvalue = '', unit = '', property = '', value = '';
+
+				if (typeof trait.attributes.cssproperties != 'undefined')
+					property = trait.attributes.cssproperties[0].name;
+
+				if (typeof component.getStyle()[property] != 'undefined')
+					value = component.getStyle()[property].replace('!important', '');
+				else
+					value = trait.getInitValue();
+
+				if (typeof value == "string" && value != "") {
+
+					inputvalue = value.replace(/[^-\d\.]/g, '');
+
+					if (typeof trait.attributes.units != 'undefined') {
+						$(trait.attributes.units).each(function (index, option) {
+
+							if (value.indexOf(option.name) >= 0) {
+								unit = option.name
+								return false;
+							}
+						});
+					}
+				}
+				else {
+					inputvalue = trait.attributes.value;
+				}
+
+				if (unit == '' && typeof trait.attributes.unit != 'undefined')
+					unit = trait.attributes.unit;
+
+				if (typeof trait.attributes.units != 'undefined') {
+
+					var inputControl = trait.view.el.querySelectorAll('.input-control');
+
+					$(trait.attributes.units).each(function (index, option) {
+
+						if (option.name == unit) {
+
+							$(inputControl).attr({
+								'value': option.value,
+								'min': option.min,
+								'max': option.max,
+								'step': option.step
+							});
+
+							if (inputvalue == '')
+								inputvalue = option.value;
+
+							return false;
+						}
+					});
+				}
+
+				trait.view.$el.find('input.input-control').val(inputvalue);
+				trait.view.$el.find('input[value="' + unit + '"]').prop('checked', true);
+			}
+
 			if (component.attributes.type == 'icon') {
 				if ((elInput.firstElementChild.name == "framewidth" || elInput.firstElementChild.name == "framegap") && component.getTrait('frame').getInitValue() == "none")
 					$(elInput).parents(".gjs-trt-trait__wrp").hide();
@@ -1612,6 +1616,7 @@ export default (editor, config = {}) => {
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);
+			var size = component.getStyle()['font-size'];
 
 			if (typeof trait.attributes.selector != 'undefined')
 				model = component.findType(trait.attributes.selector);
@@ -1638,15 +1643,12 @@ export default (editor, config = {}) => {
 					}
 				}
 
-				var size = item.getStyle()['font-size'];
-
-				if (item.attributes.type == 'heading' || item.attributes.type == 'text' || item.attributes.type == 'button')
-					$(item.getTrait('styles').el).find('label').css('font-size', size);
-
+				size = item.getStyle()['font-size'];
 			});
 		}
 	});
 
+	//Number
 	tm.addType('custom_number', {
 		createInput({ trait }) {
 
@@ -1684,6 +1686,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Uploader
 	tm.addType('uploader', {
 		createInput({ trait }) {
 
@@ -1760,6 +1763,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Select
 	tm.addType('dropdown', {
 		createInput({ trait }) {
 
@@ -1810,7 +1814,7 @@ export default (editor, config = {}) => {
 				model = component.findType(trait.attributes.selector);
 
 			$(model).each(function (index, item) {
-				if (item.attributes.type == 'video')
+				if (item.attributes.type == 'videobox')
 					if (event.target.value == 'yt')
 						item.set({ 'provider': 'yt', 'videoId': '' });
 					else
@@ -1821,6 +1825,7 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Gradient
 	tm.addType('gradient', {
 		createInput({ trait }) {
 
@@ -1858,13 +1863,14 @@ export default (editor, config = {}) => {
 						handler.setColor(color.toRgbString());
 					},
 					move(color) {
-						handler.setColor(color.toRgbString(), 0);
+						handler.setColor(color.toRgbString());
+					},
+					hide(color) {
+						handler.setColor(color.toRgbString());
+						VjEditor.runCommand("save");
 					}
 				});
 			});
-
-			//gp.addHandler(1, '#085078', 0);
-			//gp.addHandler(99, '#85D8CE', 0);
 
 			return el;
 		},
@@ -1879,8 +1885,8 @@ export default (editor, config = {}) => {
 		}
 	});
 
+	//Styles
 	tm.addType('preset_radio', {
-
 		createInput({ trait }) {
 
 			var targetName = trait.target.attributes.type;
@@ -1905,7 +1911,7 @@ export default (editor, config = {}) => {
 				input.setAttribute("value", value.name);
 
 				label.setAttribute("for", value.id);
-				label.setAttribute("class", value.class + ' text-primary');
+				label.setAttribute("class", value.class);
 				label.innerHTML = trait.target.getEl().textContent;
 
 				div.appendChild(input);
@@ -1926,61 +1932,20 @@ export default (editor, config = {}) => {
 		},
 		onUpdate({ elInput, component }) {
 
-			var compClass = component.getClasses();
+			var model = component;
+			var trait = component.getTrait('styles');
 
-			compClass = jQuery.grep(compClass, function (className, index) {
-				return (className.match(/\btext-\S+/g) || []).join(' ');
-			});
+			if (typeof trait.attributes.selector != 'undefined')
+				model = component.findType(trait.attributes.selector)[0];
 
-			$(elInput).find('label').removeClass(function (index, className) {
-				return (className.match(/\btext-\S+/g) || []).join(' ');
-			});
-
-			$(elInput).find('label').addClass(compClass[0]).css('font-size', component.getStyle()['font-size']);
-
-			if (typeof component.getStyle()['color'] != 'undefined') {
-				var color = component.getStyle()['color'].replace('!important', '');
-				$(elInput).find('label').css('color', color);
-			}
-
-			var text = component.getEl().textContent;
+			var text = model.getEl().textContent;
 			text = text.split(/\s+/).slice(0, 20).join(" ");
 			$(elInput).find('label').text(text);
 
-
-			if (component.attributes.type == 'button') {
-
-				if (typeof component.getStyle()['background-color'] != "undefined") {
-					var bgcolor = component.getStyle()['background-color'].replace('!important', '');
-					$(elInput).find('label').css('background-color', bgcolor);
-				}
-
-				if (typeof component.getStyle()['border-color'] != "undefined") {
-					var bgcolor = component.getStyle()['border-color'].replace('!important', '');
-					$(elInput).find('label').css('border-color', bgcolor);
-				}
-
-				$(elInput).css(component.parent().getStyle());
-
-				$(component.getClasses()).each(function (index, className) {
-					$(elInput).find('label').addClass(className);
-				})
-
-				if (typeof component.getStyle()['width'] != "undefined") {
-					if ($(component.getEl()).outerWidth() < $(".sidebar .panel").outerWidth())
-						$(elInput).find('label').css('width', $(component.getEl()).css('width'));
-					else
-						$(elInput).find('label').css('width', '100%');
-				}
-
-			}
-
-			var font = component.view.$el.css('font-family');
-			$(elInput).find('label').css('font-family', font);
 		},
 		onEvent({ elInput, component }) {
 
-			$(event.target).parents('.preset-wrapper').find('.active').removeClass('active');
+			$(event.target).parents('.preset-wrapper').find('div.active').removeClass('active');
 			$(event.target).parent().addClass('active');
 
 			component.getTrait('styles').set({
@@ -1997,28 +1962,40 @@ export default (editor, config = {}) => {
 
 				var className = event.target.className;
 				var classes = item.getClasses();
+				var $el = $(item.getEl());
 
-				if (item.attributes.type == 'heading') {
+				item.removeStyle('font-family');
+				item.removeStyle('font-style');
+				item.removeStyle('line-height');
+				item.removeStyle('letter-spacing');
+				item.removeStyle('word-spacing');
+				item.removeStyle('font-weight');
+				item.removeStyle('text-transform');
+				item.removeStyle('text-decoration');
+				item.removeStyle('text-shadow');
+
+				if ($el.is('[class*="head-style-"]')) {
 					classes = jQuery.grep(classes, function (className, index) {
 						return (className.match(/\bhead-style-\S+/g) || []).join(' ');
 					});
 				}
-				else if (item.attributes.type == 'text') {
+				else if ($el.is('[class*="paragraph-style-"]')) {
 					classes = jQuery.grep(classes, function (className, index) {
 						return (className.match(/\bparagraph-style-\S+/g) || []).join(' ');
 					});
 				}
-				else if (item.attributes.type == 'button') {
+				else if ($el.is('[class*="button-style-"]')) {
 					classes = jQuery.grep(classes, function (className, index) {
 						return (className.match(/\bbutton-style-\S+/g) || []).join(' ');
 					});
 				}
+				else
+					classes = "";
 
 				item.removeClass(classes);
 
 				if (className != 'none')
 					item.addClass(className);
-
 			});
 		}
 	});

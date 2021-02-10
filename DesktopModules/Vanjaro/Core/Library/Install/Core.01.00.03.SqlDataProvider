@@ -1,0 +1,11 @@
+IF Not EXISTS (SELECT * FROM sys.columns WHERE  object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_WorkflowLog]') AND name = 'EntityID')
+BEGIN
+EXEC sp_rename '{databaseOwner}VJ_Core_WorkflowLog.TabID', 'EntityID','Column' 
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='VJ_Core_WorkflowLog' and COLUMN_NAME='Entity')
+BEGIN
+ALTER TABLE {databaseOwner}[VJ_Core_WorkflowLog] ADD
+ [Entity] [nvarchar](100) NULL
+END
+GO

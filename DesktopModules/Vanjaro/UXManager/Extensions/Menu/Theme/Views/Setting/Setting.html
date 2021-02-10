@@ -16,20 +16,38 @@
         </uilayout>
         <uilayout name="default">
             <uitemplate>
-                <div mn-ng-repeat="option in ui.data.Theme.Options" class="theme">
+                <div mn-ng-repeat="option in ui.data.Theme.Options" class="theme">                    
                     <div class="row m-none theme-image selected-theme" style="background-image: url('{{option.Thumbnail}}');" mn-ng-if="option.Value == ui.data.Theme.Options[0].Value">
-                        <div class="pr-none">
-                            <span class="author_name">{{option.Value}} </span>
-                        </div>
-                        <div class="theme-settings pl-none text-right" ng-click="Open_ThemeBuilder()">
-                            <p class="date m-none">
-                                <em class="fas fa-cog"></em>
-                            </p>
+                        <span class="author_name">{{option.Value}} </span>
+                        <div class="theme-settings pl-none text-right">
+                            <div class="pr-none">
+                                <div class="dropdown show float-right dropbtn">
+                                    <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <em class="fas fa-ellipsis-v"></em>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item box-icon" ng-click="Open_ThemeBuilder()"><em class="fas fa-cog"></em><span>[LS:Settings]</span></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row m-none theme-image normal-theme" style="background-image: url('{{option.Thumbnail}}');" ng-click="ChangeTheme(option.Value)" mn-ng-if="option.Value != ui.data.Theme.Options[0].Value">
+                    <div class="row m-none theme-image normal-theme" style="background-image: url('{{option.Thumbnail}}');" mn-ng-if="option.Value != ui.data.Theme.Options[0].Value">
                         <div class="pr-none">
                             <span class="author_name">{{option.Value}} </span>
+                            <div class="theme-settings pl-none text-right">
+                            <div class="pr-none">
+                                <div class="dropdown show float-right dropbtn">
+                                    <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <em class="fas fa-ellipsis-v"></em>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item box-icon" ng-click="ChangeTheme(option.Value)"><em class="fas fa-cog"></em><span>[LS:Apply]</span></a>
+                                        <a class="dropdown-item box-icon" ng-click="Open_ThemeBuilder()"><em class="fas fa-cog"></em><span>[LS:Settings]</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>

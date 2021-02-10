@@ -174,6 +174,11 @@ namespace Vanjaro.Common.Foundation
                 FrameworkManager.Load(this, "BootstrapDatepicker");
             }
 
+            if (Dependencies.Contains(JavaScriptPlugins.EnjoyHint.ToString()))
+            {
+                FrameworkManager.Load(this, "EnjoyHint");
+            }
+
             if (Dependencies.Contains(AngularPlugins.Grid.ToString()))
             {
                 FrameworkManager.LoadPlugin(this, "AngularJS", "SmartTable", "smart-table.min.js");
@@ -235,7 +240,10 @@ namespace Vanjaro.Common.Foundation
                 WebForms.LinkCSS(Page, "AngularJS" + "-autocomplete-css", FrameworkManager.Request("AngularJs", "Plugins", "autocomplete/css/autocomplete.css"));
             }
 
-
+            if (Dependencies.Contains(JavaScriptPlugins.jQueryMoment.ToString()))
+            {
+                FrameworkManager.Load(this, "jQueryMoment");
+            }
 
             //Load Bootstrap
             FrameworkManager.Load(this, "Bootstrap");

@@ -206,6 +206,10 @@ namespace Vanjaro.Core
                 dynamic Result = new ExpandoObject();
                 try
                 {
+                    if (!string.IsNullOrEmpty(CustomBlock.Html))
+                        CustomBlock.Html = PageManager.DeTokenizeLinks(CustomBlock.Html, PortalSettings.PortalId);
+                    if (!string.IsNullOrEmpty(CustomBlock.Css))
+                        CustomBlock.Css = PageManager.DeTokenizeLinks(CustomBlock.Css, PortalSettings.PortalId);
                     if (BlockFactory.Get(PortalSettings.PortalId, CustomBlock.Name) == null)
                     {
                         if (ForceCount == 0)
@@ -248,7 +252,7 @@ namespace Vanjaro.Core
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message.ToString();
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
                 return Result;
             }
@@ -340,7 +344,7 @@ namespace Vanjaro.Core
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message.ToString();
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
                 return Result;
             }
@@ -350,6 +354,7 @@ namespace Vanjaro.Core
                 CustomBlock customBlock = BlockManager.GetByLocale(PortalID, GUID, null);
                 if (customBlock != null)
                 {
+                    Dictionary<int, string> ExportedModulesContent = new Dictionary<int, string>();
                     string Theme = Core.Managers.ThemeManager.CurrentTheme.Name;
                     ExportTemplate exportTemplate = new ExportTemplate
                     {
@@ -368,9 +373,12 @@ namespace Vanjaro.Core
                         foreach (CustomBlock block in layout.Blocks)
                         {
                             if (!string.IsNullOrEmpty(block.Html))
+                            {
                                 block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
+                                PageManager.ProcessPortableModules(PortalID, block.Html, ExportedModulesContent);
+                            }
                             if (!string.IsNullOrEmpty(block.Css))
-                                block.Css = PageManager.DeTokenizeLinks(block.Css, PortalID);
+                                block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, PortalID), false, Assets);
                         }
                         CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
                     }
@@ -390,8 +398,9 @@ namespace Vanjaro.Core
                         {
                             using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                             {
-                                AddZipItem("Template.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
-
+                                AddZipItem("Template.json", Encoding.Unicode.GetBytes(serializedExportTemplate), zip);
+                                foreach (var exportedModuleContent in ExportedModulesContent)
+                                    AddZipItem("PortableModules/" + exportedModuleContent.Key + ".json", Encoding.Unicode.GetBytes(exportedModuleContent.Value), zip);
                                 if (Assets != null && Assets.Count > 0)
                                 {
                                     foreach (KeyValuePair<string, string> asset in Assets)
@@ -402,7 +411,11 @@ namespace Vanjaro.Core
                                         {
                                             FileUrl = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, FileUrl);
                                         }
-                                        AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                        try
+                                        {
+                                            AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                        }
+                                        catch (Exception ex) { ExceptionManager.LogException(ex); }
                                     }
                                 }
                             }
@@ -443,7 +456,7 @@ namespace Vanjaro.Core
                 catch (Exception ex)
                 {
                     Result.Status = ex.Message.ToString();
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
                 return Result;
             }
@@ -458,7 +471,6 @@ namespace Vanjaro.Core
 
                 return cb;
             }
-
             public static List<CustomBlock> GetAll(PortalSettings PortalSettings)
             {
                 List<CustomBlock> CustomBlocks = BlockFactory.GetAll(PortalSettings.PortalId).Where(c => c.Locale == null).ToList();
@@ -468,7 +480,7 @@ namespace Vanjaro.Core
                     List<CustomBlock> CustomBlocksByLocale = BlockFactory.GetAll(PortalSettings.PortalId).Where(c => c.Locale == Locale).ToList();
                     if (CustomBlocksByLocale == null || CustomBlocksByLocale.Count <= 0)
                     {
-                        return CustomBlocks;
+                        return CustomBlocks.OrderBy(o => o.Category).OrderBy(o => o.Name).ToList();
                     }
                     else
                     {
@@ -479,12 +491,12 @@ namespace Vanjaro.Core
                                 CustomBlocksByLocale.Add(item);
                             }
                         }
-                        return CustomBlocksByLocale;
+                        return CustomBlocksByLocale.OrderBy(o => o.Category).OrderBy(o => o.Name).ToList();
                     }
                 }
                 else
                 {
-                    return CustomBlocks;
+                    return CustomBlocks.OrderBy(o => o.Category).OrderBy(o => o.Name).ToList();
                 }
             }
         }

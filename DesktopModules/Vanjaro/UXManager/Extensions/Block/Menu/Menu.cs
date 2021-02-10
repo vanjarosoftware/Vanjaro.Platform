@@ -14,6 +14,7 @@ using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Extensions.Block.Menu.Entities;
 using Vanjaro.UXManager.Extensions.Block.Menu.Factories;
 using Vanjaro.UXManager.Library.Entities.Interface;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Block.Menu
 {
@@ -122,7 +123,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Menu
 
                 MenuSetting menuSetting = new MenuSetting
                 {
-                    NodeSelector = Attributes["data-block-nodeselector"],
+                    NodeSelector = Attributes["data-block-nodeselector"]?.TrimStart('.'),
                     IncludeHidden = Convert.ToBoolean(Attributes["data-block-includehidden"]),
                 };
 
@@ -148,7 +149,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Menu
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message;
             }
         }

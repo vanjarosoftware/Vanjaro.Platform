@@ -1,4 +1,4 @@
-﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Modules;
@@ -10,6 +10,7 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.FileSystem;
+using DotNetNuke.Web.Client;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,13 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Configuration;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Data.Scripts;
 using Vanjaro.Core.Entities;
+using Vanjaro.Core.Services;
 using static Vanjaro.Core.Factories;
 
 namespace Vanjaro.Core
@@ -36,7 +39,7 @@ namespace Vanjaro.Core
                 HostController hostController = new HostController();
                 if (Secure)
                     return hostController.GetEncryptedString(Name, Config.GetDecryptionkey());
-                return hostController.GetString(Name,defaultValue);
+                return hostController.GetString(Name, defaultValue);
             }
             public static bool GetHostSettingAsBoolean(string Name, bool defaultValue = false)
             {
@@ -67,7 +70,7 @@ namespace Vanjaro.Core
                     PortalController.UpdateEncryptedString(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, Config.GetDecryptionkey());
                 else
                     PortalController.UpdatePortalSetting(PortalController.Instance.GetCurrentSettings().PortalId, Name, Value, true);
-            }           
+            }
 
             public static void UpdateValue(int PortalID, int TabID, string Identifier, string Name, string Value)
             {
@@ -97,6 +100,8 @@ namespace Vanjaro.Core
                             DeleteTabs();
                             MoveFavicon();
                             DeleteDefaultMemberProfileProperties();
+                            if (Managers.SettingManager.IsDistribution(0))
+                                Managers.SettingManager.UpdateConfig("system.web/membership", "requiresUniqueEmail", "true");
                         }
 
 
@@ -107,7 +112,7 @@ namespace Vanjaro.Core
                     }
                     catch (Exception ex)
                     {
-                        DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                        ExceptionManager.LogException(ex);
                     }
 
                     Index++;
@@ -146,6 +151,24 @@ namespace Vanjaro.Core
                             HostController.Instance.Update("DisableEditBar", "False");
                         }
                         break;
+                }
+            }
+
+            internal static void UpdateSettingWebConfig()
+            {
+                int Index = 0;
+                foreach (PortalInfo pinfo in PortalController.Instance.GetPortals())
+                {
+                    try
+                    {
+                        if (Index == 0 && IsDistribution(pinfo.PortalID))
+                            UpdateConfig("system.web/membership", "requiresUniqueEmail", "true");
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionManager.LogException(ex);
+                    }
+                    Index++;
                 }
             }
 
@@ -233,16 +256,17 @@ namespace Vanjaro.Core
                 UserInfo uInfo = UserController.Instance.GetCurrentUserInfo();
 
                 IFolderInfo fi = FolderManager.Instance.GetFolder(pinfo.PortalID, "Images/");
+                if (fi == null)
+                {
+                    fi = FolderManager.Instance.AddFolder(pinfo.PortalID, "Images/");
+                }
 
                 #region Copy Vthemes in portal folder
-
-                string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.GetCurrent(pinfo.PortalID).Name + "/editor");
-                Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", pinfo.PortalID.ToString()));
                 try
                 {
-                    ThemeManager.ProcessScss(pinfo.PortalID);
+                    ThemeManager.ProcessScss(pinfo.PortalID, false);
                 }
-                catch (Exception ex) { DotNetNuke.Services.Exceptions.Exceptions.LogException(ex); }
+                catch (Exception ex) { ExceptionManager.LogException(ex); }
 
                 string UXManagervDefaultPath = HttpContext.Current.Request.PhysicalApplicationPath + "DesktopModules\\Vanjaro\\Core\\Library\\Images";
                 if (Directory.Exists(UXManagervDefaultPath) && fi != null)
@@ -288,7 +312,7 @@ namespace Vanjaro.Core
                     {
                         List<Layout> pageLayouts = GetLayouts(pinfo);
                         ApplyDefaultLayouts(pinfo, uInfo, pageLayouts);
-                        pinfo.LogoFile = fi.FolderPath + "vanjaro_logo.png";
+                        pinfo.LogoFile = fi.FolderPath + "Logo.svg";
                     }
 
                     #region Update SEO Settings
@@ -463,6 +487,10 @@ namespace Vanjaro.Core
 
                 if (fi != null)
                     UpdateValue(pinfo.PortalID, 0, "security_settings", "Picture_DefaultFolder", fi.FolderID.ToString());
+
+                PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.EnableCompositeFilesKey, "True");
+                PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.MinifyCssKey, "True");
+                PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.MinifyJsKey, "True");
             }
             public static void ApplyDefaultLayouts(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts)
             {
@@ -594,8 +622,6 @@ namespace Vanjaro.Core
                 Layout Profilelayout = pageLayouts.Where(a => a.Name == "Profile").FirstOrDefault();
                 if (ProfileTab != null && Profilelayout != null && portalSettings != null)
                 {
-                    ProfileTab.ParentId = TabController.Instance.GetTabByName("User", pinfo.PortalID).TabID;
-                    TabController.Instance.UpdateTab(ProfileTab);
                     ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
                     pinfo.UserTabId = ProfileTab.TabID;
                     if (portalSettings.ActiveTab == null)
@@ -671,14 +697,90 @@ namespace Vanjaro.Core
 
                 }
 
+                TabInfo TermsTab = TabController.Instance.GetTabByName("Terms", pinfo.PortalID);
+                Layout Termslayout = pageLayouts.Where(a => a.Name == "Terms").FirstOrDefault();
+                if (TermsTab != null && Termslayout != null && portalSettings != null)
+                {
+                    ProcessBlocks(pinfo.PortalID, Termslayout.Blocks);
+                    if (portalSettings.ActiveTab == null)
+                    {
+                        portalSettings.ActiveTab = new TabInfo();
+                    }
+
+                    portalSettings.ActiveTab.TabID = TermsTab.TabID;
+                    Dictionary<string, object> LayoutData = new Dictionary<string, object>
+                    {
+                        ["IsPublished"] = false,
+                        ["Comment"] = string.Empty,
+                        ["gjs-assets"] = string.Empty,
+                        ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Termslayout.Style.ToString(), pinfo.PortalID),
+                        ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Termslayout.Content.ToString(), pinfo.PortalID),
+                        ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Termslayout.ContentJSON.ToString(), pinfo.PortalID),
+                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Termslayout.StyleJSON.ToString(), pinfo.PortalID)
+                    };
+                    Core.Managers.PageManager.Update(portalSettings, LayoutData);
+
+                    Pages Page = Managers.PageManager.GetPages(TermsTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
+                    UpdateValue(pinfo.PortalId, TermsTab.TabID, "setting_detail", "ReplaceTokens", "true");
+
+                    if (Page != null && uInfo != null)
+                    {
+                        WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
+                        Page.Version = 1;
+                        Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
+                        Page.IsPublished = true;
+                        Page.PublishedBy = uInfo.UserID;
+                        Page.PublishedOn = DateTime.UtcNow;
+                        PageFactory.Update(Page, uInfo.UserID);
+                    }
+                }
+
+                TabInfo PrivacyTab = TabController.Instance.GetTabByName("Privacy", pinfo.PortalID);
+                Layout Privacylayout = pageLayouts.Where(a => a.Name == "Privacy").FirstOrDefault();
+                if (PrivacyTab != null && Privacylayout != null && portalSettings != null)
+                {
+                    ProcessBlocks(pinfo.PortalID, Privacylayout.Blocks);
+                    if (portalSettings.ActiveTab == null)
+                    {
+                        portalSettings.ActiveTab = new TabInfo();
+                    }
+
+                    portalSettings.ActiveTab.TabID = PrivacyTab.TabID;
+                    Dictionary<string, object> LayoutData = new Dictionary<string, object>
+                    {
+                        ["IsPublished"] = false,
+                        ["Comment"] = string.Empty,
+                        ["gjs-assets"] = string.Empty,
+                        ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.Style.ToString(), pinfo.PortalID),
+                        ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.Content.ToString(), pinfo.PortalID),
+                        ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.ContentJSON.ToString(), pinfo.PortalID),
+                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.StyleJSON.ToString(), pinfo.PortalID)
+                    };
+                    Core.Managers.PageManager.Update(portalSettings, LayoutData);
+
+                    Pages Page = Managers.PageManager.GetPages(PrivacyTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
+                    UpdateValue(pinfo.PortalId, PrivacyTab.TabID, "setting_detail", "ReplaceTokens", "true");
+
+                    if (Page != null && uInfo != null)
+                    {
+                        WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
+                        Page.Version = 1;
+                        Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
+                        Page.IsPublished = true;
+                        Page.PublishedBy = uInfo.UserID;
+                        Page.PublishedOn = DateTime.UtcNow;
+                        PageFactory.Update(Page, uInfo.UserID);
+                    }
+                }
 
                 #endregion
 
-                #region Update Default SignUp Tab and Search Results page
+                #region Update Default SignUp Tab, Search Results,Terms of Service and Privacy Policy page
 
                 pinfo.RegisterTabId = SignUpTab != null && !SignUpTab.IsDeleted ? SignUpTab.TabID : Null.NullInteger;
                 pinfo.SearchTabId = SearchResultTab != null && !SearchResultTab.IsDeleted ? SearchResultTab.TabID : Null.NullInteger;
-
+                pinfo.TermsTabId = TermsTab != null && !TermsTab.IsDeleted ? TermsTab.TabID : Null.NullInteger;
+                pinfo.PrivacyTabId = PrivacyTab != null && !PrivacyTab.IsDeleted ? PrivacyTab.TabID : Null.NullInteger;
                 #endregion
             }
 
@@ -768,6 +870,33 @@ namespace Vanjaro.Core
             public static bool IsDistribution(int PortalID)
             {
                 return "[G]Skins/Vanjaro/Base.ascx" == PortalController.GetPortalSetting("DefaultPortalSkin", PortalID, Null.NullString);
+            }
+
+            public static bool IsVanjaroExtensionInstalled()
+            {
+                return SettingFactory.IsVanjaroExtensionInstalled();
+            }
+
+            public static bool IsVanjaroInstalled()
+            {
+                bool IsVanjaroInstalled = false;
+                foreach (PortalInfo pinfo in PortalController.Instance.GetPortals())
+                {
+                    if (!IsVanjaroInstalled)
+                        IsVanjaroInstalled = PortalController.Instance.GetPortalSettings(pinfo.PortalID).ContainsKey("IsVanjaroInstalled");
+                }
+                return IsVanjaroInstalled;
+            }
+
+            public static void UpdateConfig(string Section, string Key, string Value)
+            {
+                var config = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
+                var section = (MembershipSection)config.GetSection(Section);
+
+                var defaultProvider = section.DefaultProvider;
+                var providerSettings = section.Providers[defaultProvider];
+                providerSettings.Parameters.Set(Key, Value.ToLower());
+                config.Save();
             }
 
         }

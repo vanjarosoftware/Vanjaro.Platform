@@ -555,7 +555,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Vanjaro Installer"
         "ProductCode" = "8:{42F623CA-DB89-4F7D-91A1-20AD3F08636C}"
-        "PackageCode" = "8:{F536D5D9-B5DA-406B-8408-303E12F3656A}"
+        "PackageCode" = "8:{DF4957FE-57DA-4190-A031-75026509A889}"
         "UpgradeCode" = "8:{BC9A88B5-81D6-43FA-B707-6858CE83BDD9}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

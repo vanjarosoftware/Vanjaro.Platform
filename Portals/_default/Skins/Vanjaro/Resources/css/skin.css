@@ -1,8 +1,4 @@
-﻿#Modeiframe {
-    width: 100%;
-}
-
-/*Modal*/
+﻿/*Modal*/
 .modal .modal-dialog.modal-right {
     right: 0;
 }
@@ -31,13 +27,16 @@
     background-color: #f0f2f4;
 }
 
+#toast-container {
+    font-family: Arial,sans-serif;
+}
+
 #toast-container > .toast-info {
     background-color: #e6e9ec;
     color: #000;
     background-image: none !important;
     width: 325px;
 }
-
 
 
     #toast-container > .toast-info:before {
@@ -143,6 +142,10 @@
         color: #e6e9ec;
     }
 
+    .modal-toggle:focus {
+       outline: none;
+    }
+
     .modal-toggle.modalclosebtn {
         position: fixed;
         background: #0088cc;
@@ -206,7 +209,7 @@ a, a:hover, a:focus, a:active {
         word-break: break-word;
     }
 
-.modal-open .modal.fullwidth {
+.modal.fullwidth {
     padding-left: 1.75rem;
     padding-right: 1.75rem;
 }
@@ -214,6 +217,14 @@ a, a:hover, a:focus, a:active {
 .modal .modal-dialog:not(.modal-right).fullheight {
     height: calc(100% - 3.50rem);
 }
+
+.modal .modal-dialog.modal-right {
+    height: 100%;
+    position: fixed;
+    margin: 0;
+    right: 0;
+}
+
 
 #UXRender {
     padding: 0;
@@ -397,19 +408,22 @@ div.actionMenu ul {
 
 /*Menu Alignment*/
 
-div[alignment="left"] [data-block-type="Menu"] nav .collapse .navbar-nav,
-div[alignment="left"] [data-block-type="Menu"] nav.navbar.navbar-expand-lg {
+div[alignment="left"][data-block-type="Menu"] nav .collapse .navbar-nav,
+div[alignment="left"][data-block-type="Menu"] nav.navbar.navbar-expand-lg {
     justify-content: flex-start;
+    display: inline-flex;
 }
 
-div[alignment="center"] [data-block-type="Menu"] nav .collapse .navbar-nav,
-div[alignment="center"] [data-block-type="Menu"] nav.navbar.navbar-expand-lg {
+div[alignment="center"][data-block-type="Menu"] nav .collapse .navbar-nav,
+div[alignment="center"][data-block-type="Menu"] nav.navbar.navbar-expand-lg {
     justify-content: center;
+    display: inline-flex;
 }
 
-div[alignment="right"] [data-block-type="Menu"] nav .collapse .navbar-nav,
-div[alignment="right"] [data-block-type="Menu"] nav.navbar.navbar-expand-lg {
+div[alignment="right"][data-block-type="Menu"] nav .collapse .navbar-nav,
+div[alignment="right"][data-block-type="Menu"] nav.navbar.navbar-expand-lg {
     justify-content: flex-end;
+    display: inline-flex;
 }
 
 .embed-container {
@@ -480,18 +494,6 @@ body,
     margin-top: -2px;
 }
 
-/*User Profile*/
-
-
-
-.registerterms #checktermcondition-error {
-    float: right;
-    position: absolute;
-    bottom: -20px;
-    margin-left: -22px;
-}
-
-
 
 /*
 Theme.css end
@@ -537,16 +539,12 @@ Theme.css end
     display: block;
     text-align: left;
     font-size: 32px;
-    font-family: Poppins, sans-serif;
-    font-weight: 500;
 }
 
 .vj-text {
     display: block;
     text-align: left;
     font-size: 16px;
-    font-family: Poppins, sans-serif;
-    font-weight: 400;
 }
 
 .vj-image-gallery-item {
@@ -731,4 +729,9 @@ ul.vj_authenticationtab {
     -webkit-box-pack: center !important;
     -ms-flex-pack: center !important;
     justify-content: center !important;
+}
+
+.video-box{
+    display:inline-block;
+    width:100%;
 }

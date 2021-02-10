@@ -118,10 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CheckLicences.Text" xml:space="preserve">
-    <value>Please review the license and check the Accept License check box for all modules.</value>
+    <value>Must accept terms of the license for all products to continue.</value>
+  </data>
+  <data name="Email.Text" xml:space="preserve">
+    <value>Email</value>
   </data>
   <data name="Finish.Text" xml:space="preserve">
     <value>Install</value>
+  </data>
+  <data name="InstalledSuccessfully.Text" xml:space="preserve">
+    <value>Installed Successfully</value>
+  </data>
+  <data name="Products.Text" xml:space="preserve">
+    <value>Products</value>
   </data>
   <data name="TermsCenter.Text" xml:space="preserve">
     <value>terms of the license</value>

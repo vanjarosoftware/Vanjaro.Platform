@@ -35,7 +35,7 @@
 					var GetBlockMenus = function () {
 						var Result = [];
 						if (IsAdmin)
-							Result.push({ 'Title': 'Save As Block', 'Command': 'custom-block' });
+                            Result.push({ 'Title': VjLocalized.SaveBlock, 'Command': 'custom-block' });
 						return Result;
 					};
 
@@ -43,7 +43,7 @@
 
 					if (GetBlockMenus().length > 0) {
 						tb.push({
-							attributes: { class: 'fa fa-bars' },
+                            attributes: { class: 'fa fa-bars', title: VjLocalized.Menu },
 							command: function (t) {
 								return t.runCommand("tlb-app-actions", {
 									BlockMenus: GetBlockMenus()
@@ -75,6 +75,11 @@
 						});
 					}
 
+					tb.push({
+                        attributes: { class: 'fa fa-cog', title: VjLocalized.Settings },
+						command: 'tlb-app-personalization',
+					});
+
 					if (model.get('removable')) {
 						tb.push({
 							attributes: { class: 'fa fa-trash-o' },
@@ -88,7 +93,6 @@
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				droppable: true,
 				tagName: 'section',
-				unstylable: ['background-color', 'background'],
 				resizable: {
 					tl: 0, // Top left
 					tr: 0, // Top right
@@ -99,18 +103,21 @@
 					keyHeight: 'min-height',
 				},
 				traits: [{
+					label: "Id",
+					name: "id",
+					type: 'text',
+				}, {
 					label: "Type",
-					name: "type",
+					name: "tag",
 					type: 'select',
 					options: [
 						{ id: 'article', name: 'Article' },
 						{ id: 'div', name: 'Div' },
 						{ id: 'footer', name: 'Footer' },
 						{ id: 'header', name: 'Header' },
-						{ id: 'nav', name: 'Nav' },
 						{ id: 'section', name: 'Section' },
 					],
-					value: 'section',
+					default: 'section',
 					changeProp: 1,
 				}, {
 					label: "Gap",
@@ -121,8 +128,8 @@
 						{ name: "padding-bottom" }
 					],
 					min: "0",
-					max: "100",
-					value: "50",
+					max: "200",
+					default: "50",
 					changeProp: 1,
 				}, {
 					label: "Background",
@@ -135,15 +142,13 @@
 						{ id: 'gradient', name: 'gradient', icon: "fas fa-fill", class: '' },
 						{ id: 'video', name: 'video', icon: "fas fa-video", class: '' },
 					],
-					value: 'none',
+					default: 'none',
 					changeProp: 1,
 				}, {
 					label: "Color",
 					name: "backgroundcolor",
 					type: "custom_color",
-					cssproperties: [
-						{ name: "background-color" }
-					],
+					cssproperties: [{ name: "background-color" }],
 					options: [
 						{ id: 'colorprimary', color: 'bg-primary', name: 'Primary', class: 'bg-primary' },
 						{ id: 'colorsecondary', color: 'bg-secondary', name: 'Secondary', class: 'bg-secondary' },
@@ -156,15 +161,15 @@
 						{ id: 'colorlight', color: 'bg-light', name: 'Light', class: 'bg-light' },
 						{ id: 'colordark', color: 'bg-dark', name: 'Dark', class: 'bg-dark' }
 					],
-					value: "primary",
+					default: "primary",
 					changeProp: 1,
 				}, {
-					label: "Image",
+					label: " ",
 					name: "backgroundimage",
 					type: "uploader",
 					changeProp: 1,
 				}, {
-					label: "Video",
+					label: " ",
 					name: "backgroundvideo",
 					type: "uploader",
 					changeProp: 1,
@@ -172,9 +177,7 @@
 					label: "Position",
 					name: "imageposition",
 					type: 'dropdown',
-					cssproperties: [
-						{ name: "background-position" }
-					],
+					cssproperties: [{ name: "background-position" }],
 					options: [
 						{ id: 'top left', name: 'Top Left' },
 						{ id: 'top center', name: 'Top Center' },
@@ -186,49 +189,43 @@
 						{ id: 'bottom center', name: 'Bottom Center' },
 						{ id: 'bottom right', name: 'Bottom Right' },
 					],
-					value: 'center center',
+					default: 'center center',
 					changeProp: 1,
 				}, {
 					label: "Attachment",
 					name: "imageattachment",
 					type: 'dropdown',
-					cssproperties: [
-						{ name: "background-attachment" }
-					],
+					cssproperties: [{ name: "background-attachment" }],
 					options: [
 						{ id: 'scroll', name: 'Scroll' },
 						{ id: 'fixed', name: 'Fixed' },
 					],
-					value: 'scroll',
+					default: 'scroll',
 					changeProp: 1,
 				}, {
 					label: "Repeat",
 					name: "imagerepeat",
 					type: 'dropdown',
-					cssproperties: [
-						{ name: "background-repeat" }
-					],
+					cssproperties: [{ name: "background-repeat" }],
 					options: [
 						{ id: 'no-repeat', name: 'No-repeat' },
 						{ id: 'repeat', name: 'Repeat' },
 						{ id: 'repeat-x', name: 'Repeat-x' },
 						{ id: 'repeat-y', name: 'Repeat-y' },
 					],
-					value: 'no-repeat',
+					default: 'no-repeat',
 					changeProp: 1,
 				}, {
 					label: "Size",
 					name: "imagesize",
 					type: 'dropdown',
-					cssproperties: [
-						{ name: "background-size" }
-					],
+					cssproperties: [{ name: "background-size" }],
 					options: [
 						{ id: 'auto', name: 'Auto' },
 						{ id: 'cover', name: 'Cover' },
 						{ id: 'contain', name: 'Contain' },
 					],
-					value: 'auto',
+					default: 'auto',
 					changeProp: 1,
 				}, {
 					label: "Gradient",
@@ -244,7 +241,7 @@
 						{ id: 'linear', name: 'linear', class: '' },
 						{ id: 'radial', name: 'radial', class: '' },
 					],
-					value: 'linear',
+					default: 'linear',
 					changeProp: 1,
 				}, {
 					label: "Angle",
@@ -252,23 +249,23 @@
 					type: "custom_range",
 					min: "0",
 					max: "360",
-					value: "90",
+					default: "90",
 					changeProp: 1,
 				}]
 			}),
 			init() {
-				this.listenTo(this, 'change:type', this.handleTypeChange);
+				this.listenTo(this, 'change:tag', this.handleTypeChange);
 				this.listenTo(this, 'change:gradient', this.handleGradientChange);
 			},
 			handleTypeChange() {
-				if (typeof this.attributes.type != 'undefined' && this.attributes.type != "") {
-					this.attributes.tagName = this.attributes.type;
-					this.view.reset();
-				}
+                if (typeof this.attributes.tag != 'undefined' && this.attributes.tag != "") {
+                    this.attributes.tagName = this.attributes.tag;
+                    this.view.reset();
+                    VjEditor.runCommand("save");
+                }
 			},
 			handleGradientChange() {
-				if (typeof this.attributes.gradient != 'undefined' && this.attributes.type != "") {
-
+				if (typeof this.attributes.gradient != 'undefined' && this.attributes.gradient != "") {
 					var gradient = this.attributes.gradient
 					var style = this.getStyle();
 					style["background-image"] = gradient;
@@ -278,7 +275,6 @@
 		},
 			{
 				isComponent(el) {
-					//if (el && el.tagName && (el.tagName.toLowerCase() == 'section' || (el.tagName.toLowerCase() == 'div' && el.classList && !el.classList.contains('row') && el.attributes.dmid == undefined && el.attributes['data-block-type'] == undefined) || el.tagName.toLowerCase() == 'header' || el.tagName.toLowerCase() == 'footer' || el.tagName.toLowerCase() == 'nav' || el.tagName.toLowerCase() == 'article')) {
 					if (el && el.tagName && (el.tagName.toLowerCase() == 'section' || el.tagName.toLowerCase() == 'header' || el.tagName.toLowerCase() == 'footer' || (el.tagName.toLowerCase() == 'nav' && el.classList && !el.classList.contains('nav-breadcrumb')) || el.tagName.toLowerCase() == 'article')) {
 						return { type: 'section' };
 					}

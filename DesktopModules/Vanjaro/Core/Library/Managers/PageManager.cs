@@ -1,8 +1,11 @@
 ﻿using DotNetNuke.Abstractions;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Framework;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.FileSystem;
@@ -14,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -22,6 +26,7 @@ using Vanjaro.Common.ASPNET;
 using Vanjaro.Common.Factories;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Components;
+using Vanjaro.Core.Components.Interfaces;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Data.Scripts;
 using static Vanjaro.Core.Components.Enum;
@@ -31,7 +36,7 @@ namespace Vanjaro.Core
 {
     public static partial class Managers
     {
-        public class PageManager
+        public class PageManager : IReviewComment
         {
 
             private const string PortalRootToken = "{{PortalRoot}}";
@@ -64,6 +69,7 @@ namespace Vanjaro.Core
                 if (State != null)
                 {
                     string URL = ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=33d8efed-0f1d-471e-80a4-6a7f10e87a42");
+                    URL += "#/moderator?version=" + page.Version + "&entity=" + WorkflowType.Page.ToString() + "&entityid=" + page.TabID;
                     string ReviewChangesBtn = ShowReview ? "ReviewChangeMarkup.append(ReviewChangesBtn);" : string.Empty;
                     string Subject = ShowReview ? State.Name : DotNetNuke.Services.Localization.Localization.GetString("PendingReview", Components.Constants.LocalResourcesFile);
                     string Message = !ShowReview ? "ReviewChangeMarkup.append('" + DotNetNuke.Services.Localization.Localization.GetString("ThisPageIsWaiting", Components.Constants.LocalResourcesFile) + "');" : string.Empty;
@@ -90,12 +96,13 @@ namespace Vanjaro.Core
                         int TabId = PortalSettings.ActiveTab.TabID;
                         Pages page = new Pages();
                         Pages pageVersion = GetLatestVersion(PortalSettings.ActiveTab.TabID, PortalSettings.UserInfo);
-
+                        var aliases = from PortalAliasInfo pa in PortalAliasController.Instance.GetPortalAliasesByPortalId(PortalSettings.PortalId)
+                                      select pa.HTTPAlias;
                         page.TabID = TabId;
                         page.Style = Data["gjs-css"].ToString();
-                        page.Content = ResetModuleMarkup(PortalSettings.PortalId, Data["gjs-html"].ToString(), PortalSettings.UserId);
-                        page.ContentJSON = Data["gjs-components"].ToString();
-                        page.StyleJSON = Data["gjs-styles"].ToString();
+                        page.Content = AbsoluteToRelativeUrls(ResetModuleMarkup(PortalSettings.PortalId, Data["gjs-html"].ToString(), PortalSettings.UserId), aliases);
+                        page.ContentJSON = AbsoluteToRelativeUrls(Data["gjs-components"].ToString(), aliases);
+                        page.StyleJSON = string.Empty;
 
                         if (Data["IsPublished"] != null && Convert.ToBoolean(Data["IsPublished"].ToString()) && (pageVersion != null && pageVersion.IsPublished))
                         {
@@ -135,7 +142,7 @@ namespace Vanjaro.Core
                         }
 
                         page.PortalID = PortalSettings.PortalId;
-                        WorkflowManager.AddComment(PortalSettings, "publish", Data["Comment"].ToString(), page);
+                        AddComment(PortalSettings, "publish", Data["Comment"].ToString(), page);
 
                         ReviewSettings ReviewSettings = GetPageReviewSettings(PortalSettings);
                         if (!string.IsNullOrEmpty(Data["Comment"].ToString()) || ReviewSettings.IsPageDraft)
@@ -157,7 +164,8 @@ namespace Vanjaro.Core
                                 result.RedirectAfterm2v = null;
                             }
                         }
-                        catch (Exception ex) {
+                        catch (Exception ex)
+                        {
                             result.IsSuccess = false;
                             result.Message = ex.Message;
                         }
@@ -173,7 +181,18 @@ namespace Vanjaro.Core
                 }
                 return result;
             }
+            private static string AbsoluteToRelativeUrls(string content, IEnumerable<string> aliases)
+            {
+                if (string.IsNullOrWhiteSpace(content))
+                    return string.Empty;
 
+                foreach (string portalAlias in aliases)
+                {
+                    content = content.Replace("href=\"http://" + portalAlias, "href=\"").Replace("href=\"https://" + portalAlias, "href=\"").Replace("src=\"http://" + portalAlias, "src=\"").Replace("src=\"https://" + portalAlias, "src=\"");
+                    content = content.Replace("href\":\"http://" + portalAlias, "href\":\"").Replace("href\":\"https://" + portalAlias, "href\":\"").Replace("src\":\"http://" + portalAlias, "src\":\"").Replace("src\":\"https://" + portalAlias, "src\":\"");
+                }
+                return content;
+            }
             public static void MigrateToVanjaro(PortalSettings PortalSettings)
             {
                 PageFactory.MigrateToVanjaro(PortalSettings);
@@ -200,9 +219,9 @@ namespace Vanjaro.Core
                 return result;
             }
 
-            public static List<Pages> GetPages(int TabID)
+            public static List<Pages> GetPages(int TabID, bool HasTabEditPermission = true)
             {
-                return PageFactory.GetAllByTabID(TabID).ToList();
+                return PageFactory.GetAllByTabID(TabID, HasTabEditPermission).ToList();
             }
 
             public static string ResetModuleMarkup(int PortalId, string Markup, int UserId)
@@ -268,14 +287,20 @@ namespace Vanjaro.Core
             public static Pages GetLatestVersion(int TabID, bool IgnoreDraft, string Locale, bool GetDefaultLocale)
             {
                 UserInfo UserInfo = (PortalController.Instance.GetCurrentSettings() as PortalSettings).UserInfo;
-                List<Pages> pages = GetPages(TabID).Where(a => a.Locale == Locale).ToList();
+                bool HasTabEditPermission = TabPermissionController.HasTabPermission("EDIT") || WorkflowManager.HasReviewPermission(UserInfo);
+                List<Pages> pages = GetPages(TabID, HasTabEditPermission).Where(a => a.Locale == Locale).ToList();
                 Pages page = new Pages();
 
-                if (!IgnoreDraft && (TabPermissionController.HasTabPermission("EDIT") || WorkflowManager.HasReviewPermission(UserInfo)))
+                if (!IgnoreDraft && HasTabEditPermission)
                 {
                     page = pages.OrderByDescending(a => a.Version).FirstOrDefault();
                 }
                 else
+                {
+                    page = pages.Where(a => a.IsPublished == true).OrderByDescending(a => a.Version).FirstOrDefault();
+                }
+
+                if (page != null && !TabPermissionController.HasTabPermission("EDIT") && !WorkflowManager.HasReviewPermission(page.StateID.Value, UserInfo))
                 {
                     page = pages.Where(a => a.IsPublished == true).OrderByDescending(a => a.Version).FirstOrDefault();
                 }
@@ -344,6 +369,98 @@ namespace Vanjaro.Core
             public static List<Pages> GetLatestLocaleVersion(int TabID)
             {
                 return GetPages(TabID).Where(a => a.IsPublished == true).OrderByDescending(a => a.Version).GroupBy(g => g.Version).FirstOrDefault()?.ToList() ?? new List<Pages>();
+            }
+
+            public static void AddModules(PortalSettings PortalSettings, Dictionary<string, object> LayoutData, UserInfo userInfo, string portableModulesPath)
+            {
+                string Markup = LayoutData["gjs-html"].ToString();
+                string MarkupJson = string.Empty;
+                if (LayoutData.ContainsKey("gjs-components"))
+                    MarkupJson = LayoutData["gjs-components"].ToString();
+                if (!string.IsNullOrEmpty(Markup))
+                {
+                    HtmlDocument html = new HtmlDocument();
+                    html.LoadHtml(Markup);
+                    IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
+                    foreach (HtmlNode item in query.ToList())
+                    {
+                        if (item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "mid").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "fname").FirstOrDefault() != null)
+                        {
+                            ModuleDefinitionInfo moduleDefinition = ModuleDefinitionController.GetModuleDefinitionByFriendlyName(item.Attributes.Where(a => a.Name == "fname").FirstOrDefault().Value);
+                            if (moduleDefinition != null)
+                            {
+                                ModuleInfo objModule = new ModuleInfo();
+                                objModule.Initialize(PortalSettings.ActiveTab.PortalID);
+                                objModule.PortalID = PortalSettings.ActiveTab.PortalID;
+                                objModule.TabID = PortalSettings.ActiveTab.TabID;
+                                objModule.ModuleOrder = -1;
+                                objModule.ModuleTitle = moduleDefinition.FriendlyName;
+                                objModule.PaneName = "ContentPane";
+                                objModule.ModuleDefID = moduleDefinition.ModuleDefID;
+                                objModule.ContainerSrc = "[g]containers/vanjaro/base.ascx";
+                                objModule.DisplayTitle = true;
+
+                                if (moduleDefinition.DefaultCacheTime > 0)
+                                {
+                                    objModule.CacheTime = moduleDefinition.DefaultCacheTime;
+                                    if (PortalSettings.DefaultModuleId > Null.NullInteger && PortalSettings.DefaultTabId > Null.NullInteger)
+                                    {
+                                        ModuleInfo defaultModule = ModuleController.Instance.GetModule(PortalSettings.DefaultModuleId, PortalSettings.DefaultTabId, true);
+                                        if ((defaultModule != null))
+                                            objModule.CacheTime = defaultModule.CacheTime;
+                                    }
+                                }
+                                ModuleController.Instance.InitialModulePermission(objModule, objModule.TabID, 0);
+                                for (int i = 0; i < objModule.ModulePermissions.Count; i++)
+                                {
+                                    if (objModule.ModulePermissions[i].RoleID == 0)
+                                        objModule.ModulePermissions[i].RoleID = PortalSettings.AdministratorRoleId;
+
+                                }
+                                if (PortalSettings.ContentLocalizationEnabled)
+                                {
+                                    Locale defaultLocale = LocaleController.Instance.GetDefaultLocale(PortalSettings.PortalId);
+                                    //set the culture of the module to that of the tab
+                                    TabInfo tabInfo = TabController.Instance.GetTab(objModule.TabID, PortalSettings.PortalId, false);
+                                    objModule.CultureCode = tabInfo != null ? tabInfo.CultureCode : defaultLocale.Code;
+                                }
+                                else
+                                    objModule.CultureCode = Null.NullString;
+                                objModule.AllTabs = false;
+                                ModuleController.Instance.AddModule(objModule);
+                                int oldDmid = int.Parse(item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault().Value);
+                                int oldMid = int.Parse(item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value);
+                                int newDmid = moduleDefinition.DesktopModuleID;
+                                int newMid = objModule.ModuleID;
+                                item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault().Value = newDmid.ToString();
+                                item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value = newMid.ToString();
+                                item.InnerHtml = "<div vjmod=\"true\"><app id=\"" + newMid + "\"></app>";
+                                MarkupJson = MarkupJson.Replace("\"dmid\":\"" + oldDmid + "\",\"mid\":" + oldMid + "", "\"dmid\":\"" + newDmid + "\",\"mid\":" + newMid);
+                                if (Directory.Exists(portableModulesPath) && File.Exists(portableModulesPath + "/" + oldMid + ".json"))
+                                {
+                                    var desktopModuleInfo = DesktopModuleController.GetDesktopModule(newDmid, PortalSettings.PortalId);
+                                    if (!string.IsNullOrEmpty(desktopModuleInfo?.BusinessControllerClass))
+                                    {
+                                        if (!objModule.IsDeleted && !string.IsNullOrEmpty(desktopModuleInfo.BusinessControllerClass) && desktopModuleInfo.IsPortable)
+                                        {
+                                            var businessController = Reflection.CreateObject(
+                                                desktopModuleInfo.BusinessControllerClass,
+                                                desktopModuleInfo.BusinessControllerClass);
+                                            var controller = businessController as IPortable;
+                                            controller?.ImportModule(objModule.ModuleID, File.ReadAllText(portableModulesPath + "/" + oldMid + ".json", Encoding.Unicode), desktopModuleInfo.Version, userInfo.UserID);
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                                item.InnerHtml = "";
+                        }
+                    }
+                    Markup = html.DocumentNode.OuterHtml;
+                }
+                LayoutData["gjs-html"] = Markup;
+                if (LayoutData.ContainsKey("gjs-components"))
+                    LayoutData["gjs-components"] = MarkupJson;
             }
 
             internal static List<Pages> GetAllByState(int State)
@@ -419,10 +536,10 @@ namespace Vanjaro.Core
                 if (string.IsNullOrEmpty(Action) && IsHaveReviewPermission && !WorkflowManager.IsFirstState(wState.WorkflowID, wState.StateID))
                 {
                     string SystemLog = "System Log: Changes made by user";
-                    WorkflowLog log = WorkflowManager.GetPagesWorkflowLogs(Page.TabID, Page.Version).LastOrDefault();
+                    WorkflowLog log = WorkflowManager.GetEntityWorkflowLogs(WorkflowType.Page.ToString(), Page.TabID, Page.Version).LastOrDefault();
                     if (log == null || (log != null && (!log.Comment.Contains(SystemLog) || log.ReviewedBy != UserInfo.UserID)))
                     {
-                        WorkflowFactory.AddWorkflowLog(PortalSettings.PortalId, 0, UserInfo.UserID, Page, "approve", "System Log: Changes made by user");
+                        WorkflowFactory.AddWorkflowLog(PortalSettings.PortalId, 0, UserInfo.UserID, WorkflowType.Page.ToString(), Page.TabID, Page.StateID.Value, Page.Version, "approve", "System Log: Changes made by user");
 
                     }
                 }
@@ -754,7 +871,31 @@ namespace Vanjaro.Core
                             node.Attributes["srcset"].Value = GetNewLink(node.Attributes["srcset"].Value, Assets);
                         }
                     }
+                    HtmlNodeCollection NodeCollectionThumb = html.DocumentNode.SelectNodes("//*[@thumbnail]");
+                    if (NodeCollectionThumb != null)
+                    {
+                        foreach (HtmlNode node in NodeCollectionThumb)
+                        {
+                            node.Attributes["thumbnail"].Value = GetNewLink(node.Attributes["thumbnail"].Value, Assets);
+                        }
+                    }
                     content = html.DocumentNode.OuterHtml;
+                }
+                foreach (Match match in Regex.Matches(content, "url\\(([^)]*)\\)"))
+                {
+                    try
+                    {
+                        string matchurl = match.Value.Replace("url(\"", "").Replace("\")", "").Replace("url(\\\"", "").Replace("\\\")", "");
+                        string newlink = GetNewLink(matchurl, Assets);
+                        if (matchurl != newlink)
+                        {
+                            if (matchurl.EndsWith("\\") || matchurl.EndsWith(@"\"))
+                                content = content.Replace(matchurl, newlink + @"\");
+                            else
+                                content = content.Replace(matchurl, newlink);
+                        }
+                    }
+                    catch { }
                 }
                 return content;
             }
@@ -779,6 +920,8 @@ namespace Vanjaro.Core
 
             private static string ExtractAndProcessLink(string url, Dictionary<string, string> Assets)
             {
+                if (url.StartsWith("http"))
+                    return url;
                 url = url.Split('?')[0];
                 string newurl = ExportTemplateRootToken + (url.ToLower().Contains(".versions") ? ".versions/" : "") + System.IO.Path.GetFileName(url);
                 if (!Assets.ContainsKey(newurl))
@@ -790,7 +933,7 @@ namespace Vanjaro.Core
                     string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
                     string tempNewUrl = newurl;
                     int count = 1;
-                    Find:
+                Find:
                     if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
                     {
                         tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;
@@ -813,7 +956,7 @@ namespace Vanjaro.Core
             {
                 foreach (JProperty prop in arr.Properties())
                 {
-                    if ((prop.Name == "src" || prop.Name == "srcset") && !string.IsNullOrEmpty(prop.Value.ToString()))
+                    if ((prop.Name == "src" || prop.Name == "srcset" || prop.Name == "thumbnail") && !string.IsNullOrEmpty(prop.Value.ToString()))
                     {
                         prop.Value = GetNewLink(prop.Value.ToString(), Assets);
                     }
@@ -822,7 +965,7 @@ namespace Vanjaro.Core
                 {
                     foreach (dynamic prop in arr.attributes)
                     {
-                        if ((prop.Name == "src" || prop.Name == "srcset") && !string.IsNullOrEmpty(prop.Value.ToString()))
+                        if ((prop.Name == "src" || prop.Name == "srcset" || prop.Name == "thumbnail") && !string.IsNullOrEmpty(prop.Value.ToString()))
                         {
                             prop.Value = GetNewLink(prop.Value.ToString(), Assets);
                         }
@@ -865,6 +1008,80 @@ namespace Vanjaro.Core
                 }
 
                 return portalRoot;
+            }
+
+            public static void AddComment(PortalSettings PortalSettings, string Action, string Comment, Pages Page)
+            {
+                if ((Page.ID == 0 || !Page.IsPublished || WorkflowManager.HasReviewPermission(Page.StateID.Value, PortalSettings.UserInfo)) && string.IsNullOrEmpty(Comment))
+                {
+                    ModeratePage(Page.IsPublished ? Action : string.Empty, Page, PortalSettings);
+                }
+                else if (Page.IsPublished)
+                {
+                    AddComment(PortalSettings, Action, Comment);
+                }
+            }
+
+            public static void AddComment(PortalSettings PortalSettings, string Action, string Comment)
+            {
+                Pages Page = GetLatestVersion(PortalSettings.ActiveTab.TabID, PortalSettings.UserInfo);
+                if (Page != null)
+                {
+                    UserInfo userinfo = PortalSettings.UserInfo;
+                    int PortalID = PortalSettings.PortalId;
+                    bool wfper = WorkflowManager.HasReviewPermission(Page.StateID.Value, userinfo);
+                    WorkflowState State = WorkflowManager.GetStateByID(Page.StateID.Value);
+
+                    if (wfper || (TabPermissionController.CanManagePage(PortalSettings.ActiveTab) && WorkflowManager.IsFirstState(State.WorkflowID, Page.StateID.Value)))
+                    {
+                        ModeratePage(Action, Page, PortalSettings);
+                        WorkflowManager.SendWorkflowNotification(PortalID, Page, Comment, Action);
+                        WorkflowFactory.AddWorkflowLog(PortalID, 0, userinfo.UserID, WorkflowType.Page.ToString(), Page.TabID, Page.StateID.Value, Page.Version, Action, Comment);
+                    }
+                }
+
+            }
+
+            public void AddComment(string Entity, int EntityID, string Action, string Comment, PortalSettings PortalSettings)
+            {
+                if (Entity == WorkflowType.Page.ToString())
+                    AddComment(PortalSettings, Action, Comment);
+            }
+
+            public static void ProcessPortableModules(int PortalID, string Content, Dictionary<int, string> ExportedModulesContent)
+            {
+                if (!string.IsNullOrEmpty(Content))
+                {
+                    HtmlDocument html = new HtmlDocument();
+                    html.LoadHtml(Content);
+                    IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
+                    foreach (HtmlNode item in query.ToList())
+                    {
+                        if (item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "mid").FirstOrDefault() != null)
+                        {
+                            int mid = int.Parse(item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value);
+                            ModuleInfo module = ModuleController.Instance.GetModule(mid, Null.NullInteger, false);
+                            if (module != null)
+                            {
+                                var moduleDef = ModuleDefinitionController.GetModuleDefinitionByID(module.ModuleDefID);
+                                var desktopModuleInfo = DesktopModuleController.GetDesktopModule(moduleDef.DesktopModuleID, PortalID);
+                                if (!string.IsNullOrEmpty(desktopModuleInfo?.BusinessControllerClass))
+                                {
+                                    if (!module.IsDeleted && !string.IsNullOrEmpty(module.DesktopModule.BusinessControllerClass) && module.DesktopModule.IsPortable)
+                                    {
+                                        var businessController = Reflection.CreateObject(
+                                            module.DesktopModule.BusinessControllerClass,
+                                            module.DesktopModule.BusinessControllerClass);
+                                        var controller = businessController as IPortable;
+                                        var content = controller?.ExportModule(module.ModuleID);
+                                        if (!string.IsNullOrEmpty(content))
+                                            ExportedModulesContent.Add(module.ModuleID, content);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

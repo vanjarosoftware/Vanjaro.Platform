@@ -62,10 +62,10 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.PageSetting
                 {
                     Event = new Dictionary<MenuAction, dynamic>
                     {
-                        { MenuAction.onClick, "parent.OpenPopUp(event, " + Width + ",\"right\",\"\", \"" + Editor.Options.SettingsUrl + "\")" }
+                        { MenuAction.onClick, "parent.OpenPopUp(event,\"900\",\"right\",\"\", \"" + Editor.Options.SettingsUrl + "\")" }
                     };
                 }
-                
+
                 return Event;
             }
         }

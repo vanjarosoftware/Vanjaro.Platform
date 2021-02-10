@@ -44,6 +44,7 @@ namespace Vanjaro.Common
             {"ContextMenu","2.8.0"},
             {"BootstrapDatepicker","1.9.0"},
             {"SpectrumColorPicker","1.8.0"},
+            {"EnjoyHint",""},
         };
 
         /// <summary>
@@ -224,7 +225,7 @@ namespace Vanjaro.Common
                         WebForms.RegisterClientScriptInclude(Page, "VJ-" + Framework + "-JS", Request(Framework, "webAPI.min.js"), Composite);
                         break;
                     }
-                
+
                 case "Ckeditor":
                     {
                         WebForms.RegisterClientScriptInclude(Page, "VJ-" + Framework + "-JS", Request(Framework, "ckeditor.js"), Composite);
@@ -315,6 +316,14 @@ namespace Vanjaro.Common
 
                         break;
                     }
+                case "EnjoyHint":
+                    {
+                        WebForms.RegisterClientScriptInclude(Page, "VJ-" + Framework + "-JS", Request(Framework, "kinetic.js"), Composite);
+                        WebForms.RegisterClientScriptInclude(Page, "VJ-" + Framework + "-JS", Request(Framework, "jquery.scrollTo.min.js"), Composite);
+                        WebForms.RegisterClientScriptInclude(Page, "VJ-" + Framework + "-JS", Request(Framework, "enjoyhint.min.js"), Composite);
+                        WebForms.LinkCSS(Page, "VJ-" + Framework + "-CSS", Request(Framework, "enjoyhint.css"));
+                        break;
+                    }
                 default:
                     break;
             }
@@ -350,7 +359,9 @@ namespace Vanjaro.Common
             Toastr = 9,
             ContextMenu = 10,
             BootstrapDatepicker = 11,
-            SpectrumColorPicker = 12
+            SpectrumColorPicker = 12,
+            jQueryMoment = 13,
+            EnjoyHint = 14
         }
         public enum AngularPlugins
         {

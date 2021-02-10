@@ -19,6 +19,7 @@ using System.Web;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Services.Authentication.OAuth;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 using Localization = DotNetNuke.Services.Localization.Localization;
 
 namespace Vanjaro.UXManager.Extensions.Block.Login
@@ -47,11 +48,16 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
                         if (auth != null)
                         {
-                            auth.Client.ProcessResources(HttpContext.Current.Request.QueryString["state"]);
+                            auth.Client.ProcessResources(HttpContext.Current.Request.QueryString["code"]);
 
                             if (auth.Client.User.Id != null && auth.Client.User.Name != null && auth.Client.User.Email != null)
                             {
-                                string username = auth.ProviderName + "-" + auth.Client.User.Id;
+                                string username;
+
+                                if (MembershipProviderConfig.RequiresUniqueEmail) //Username as Email
+                                    username = auth.Client.User.Email;
+                                else
+                                    username = auth.ProviderName + "-" + auth.Client.User.Id;
 
                                 var loginStatus = UserLoginStatus.LOGIN_SUCCESS;
 
@@ -100,15 +106,20 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
 
                                 actionResult = UserAuthenticated(eventArgs);
 
-                                if (!string.IsNullOrEmpty(actionResult.RedirectURL))
+                                if (eventArgs.LoginStatus == UserLoginStatus.LOGIN_SUCCESS && !string.IsNullOrEmpty(actionResult.RedirectURL))
                                     HttpContext.Current.Response.Redirect(actionResult.RedirectURL, true);
+                                else
+                                {
+                                    actionResult.AddError("OAuthClientError", Localization.GetString("OAuthClientError", Components.Constants.LocalResourcesFile));
+                                }
                             }
                         }
                     }
                 }
-                catch (Exception ex )
+                catch (Exception ex)
                 {
                     actionResult.AddError("OAuthClientError", Localization.GetString("OAuthClientError", Components.Constants.LocalResourcesFile));
+                    ExceptionManager.LogException(ex);
                 }
 
                 return actionResult;
@@ -121,7 +132,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                 if (HttpContext.Current.Request.QueryString["returnurl"] != null)
                 {
                     redirectUrl = HttpUtility.UrlDecode(HttpContext.Current.Request.QueryString["returnurl"]);
-                    
+
                     //clean the return url to avoid possible XSS attack.
                     redirectUrl = UrlUtils.ValidReturnUrl(redirectUrl);
 

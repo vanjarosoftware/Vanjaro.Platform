@@ -1,5 +1,6 @@
 ﻿[data-gjs-type='modulewrapper'] > [vjmod] {
     pointer-events: none;
+    min-height: 25px;
 }
 
 .cell {
@@ -32,16 +33,20 @@
     opacity: 0.2;
 }
 
+    .lockcanvas .gjs-frame {
+        pointer-events: none !important;
+    }
 
     .lockcanvas:before {
         content: "\f023";
         z-index: 99999;
         color: black;
-        position: relative;
+        position: absolute;
         font-size: 200px;
         left: calc(50% - 100px);
         top: calc(50% - 150px);
         opacity: 0.9;
+        font-family: 'Font Awesome 5 Free';
     }
 
 .swal-wide {

@@ -148,6 +148,10 @@
       <Project>{cc6eb7b7-a071-4dcb-ae59-473aa5d0bd68}</Project>
       <Name>Azure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Pages\Pages.csproj">
+      <Project>{61695de8-e5b1-4cb7-8476-5d601f8be990}</Project>
+      <Name>Pages</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />

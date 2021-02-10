@@ -9,6 +9,7 @@ namespace Vanjaro.Core.Entities.Interface
     {
         string Guid { get; }
         string Name { get; }
+        bool IsVisible { get; }
         int ViewOrder { get; }
         string JsonPath { get; }
     }

@@ -4,6 +4,8 @@
 
     $scope.UploadFile = new FileUploader();
     $scope.FileAttachments = new FileUploader();
+    $scope.dblclickFired = false;
+    $scope.targetParent;
 
     $scope.onInit = function () {
         window.parent.window.VJIsSaveCall = false;
@@ -78,7 +80,7 @@
         if (newValue != undefined && newValue != null && newValue.length > 0) {
             setTimeout(function () {
                 $('[fid]').on("dblclick", function (e) {
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                    $scope.dblclickFired = true;
                 });
             }, 100);
         }
@@ -110,7 +112,7 @@
                 var Link = data.Url;
 
                 var target = window.parent.document.vj_image_target;
-                
+
                 if (target != undefined) {
 
                     var url = Link;
@@ -119,12 +121,13 @@
                     if (typeof target.attributes.type != 'undefined') {
 
                         target.set('src', url);
-
+                        if ($scope.targetParent == undefined)
+                            $scope.targetParent = target.parent();
                         if (data.Urls.length)
-                            parent.ChangeToWebp(target.parent(), data.Urls);
+                            parent.ChangeToWebp($scope.targetParent, data.Urls);
                         else {
                             target.removeStyle('max-width');
-                            $(target.parent().components().models).each(function (index, component) {
+                            $($scope.targetParent.components().models).each(function (index, component) {
                                 if (component.getName() == "Source")
                                     component.remove();
                             });
@@ -139,6 +142,8 @@
             else {
                 window.parent.ShowNotification('Error', data.Status, 'error');
             }
+            if ($scope.dblclickFired)
+                $(window.parent.document.body).find('[data-dismiss="modal"]').click();
         });
     };
 });

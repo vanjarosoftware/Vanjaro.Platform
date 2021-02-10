@@ -1,9 +1,10 @@
 ﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Services.Exceptions;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Web.Script.Serialization;
 using System.Xml;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Entities.Interface;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Providers
 {
@@ -27,7 +29,14 @@ namespace Vanjaro.Core.Providers
 
         public string Link => "https://www.youtube.com";
 
-        private string Key => PortalController.GetEncryptedString("Vanjaro.Integration.YouTube", PortalSettings.Current.PortalId, Config.GetDecryptionkey());
+        private string Key
+        {
+            get
+            {
+                string YouTube_key = SettingManager.GetPortalSetting("Vanjaro.Integration.YouTube", true);
+                return string.IsNullOrEmpty(YouTube_key) ? SettingManager.GetHostSetting("Vanjaro.Integration.YouTube", true) : YouTube_key;
+            }
+        }
 
         public static bool IsValid(string Key)
         {
@@ -47,7 +56,7 @@ namespace Vanjaro.Core.Providers
             }
             catch (Exception ex)
             {
-                Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
             }
             return result;
         }
@@ -162,7 +171,7 @@ namespace Vanjaro.Core.Providers
                     errorTemplate += string.Format("domain: {0}, reason: {1}, message: {2}, extendedHelp: {3}", err["domain"].Value, err["reason"].Value, err["message"].Value, err["extendedHelp"].Value);
                     errorTemplate += Environment.NewLine + Environment.NewLine;
                 }
-                Exceptions.LogException(new Exception(errorTemplate)); throw wex;
+                ExceptionManager.LogException(new Exception(errorTemplate)); throw wex;
             }
             return searchListResponse;
         }

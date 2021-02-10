@@ -12,6 +12,7 @@ using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 using static Vanjaro.UXManager.Extensions.Block.SearchInput.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Block.SearchInput.Controllers
@@ -31,7 +32,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput.Controllers
         public ActionResult Preview(string keywords)
         {
             ActionResult actionResult = new ActionResult();
-            string culture = PortalSettings.CultureCode; int forceWild = 1; int portal = -1;
+            string culture = PortalSettings.CultureCode; int portal = -1;
             keywords = (keywords ?? string.Empty).Trim();
             IList<string> tags = SearchQueryStringParser.Instance.GetTags(keywords, out string cleanedKeywords);
             DateTime beginModifiedTimeUtc = SearchQueryStringParser.Instance.GetLastModifiedDate(cleanedKeywords, out cleanedKeywords);
@@ -63,7 +64,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput.Controllers
                     TitleSnippetLength = 40,
                     BodySnippetLength = 100,
                     CultureCode = culture,
-                    WildCardSearch = forceWild > 0
+                    WildCardSearch = SearchInputManager.IsWildCardEnabled()
                 };
 
                 try
@@ -86,7 +87,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput.Controllers
                         new GroupedBasicView(new BasicView { Description = Localization.GetString("NoSearchResultFound", Components.Constants.LocalResourcesFile), Title = "NoSearchResultFound" })
                     };
                     results = NotFound;
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                 }
             }
             actionResult.Data = results;

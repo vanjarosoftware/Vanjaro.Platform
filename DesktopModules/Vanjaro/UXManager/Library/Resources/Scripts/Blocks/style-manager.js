@@ -1,304 +1,152 @@
 ﻿export default (editor, config = {}) => {
 
-	const sm = editor.StyleManager;
-	const cmd = editor.Commands;
+	var sm = editor.StyleManager;
+	var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();
+	var Size = VjLocalized.Size.replace(/ /g, '_').toLowerCase();
 
 	sm.addType('customradio', {
-		model: {
-		},
-		view: {
-			templateInput() {
-				const pfx = this.pfx;
-				const ppfx = this.ppfx;
-				return `
-      <div class="${ppfx}field ${ppfx}field-radio">
-      </div>
-    `;
-			},
+		create({ props, change }) {
 
-			events() {
-				return {
-					'change [type=radio]': 'inputradioChanged',
-					'input [type=radio]': 'inputradioChanged',
-					change: ''
-				};
-			},
+			const el = document.createElement('div');
+			el.classList.add("sm-radio-wrapper");
 
-			onRender() {
-				const pfx = this.pfx;
-				const ppfx = this.ppfx;
-				const itemCls = `${ppfx}radio-item-label`;
-				const model = this.model;
-				const prop = model.get('property');
-				const options = model.get('list') || model.get('options') || [];
+			$(props.list).each(function (index, item) {
 
-				if (!this.input) {
-					if (options && options.length) {
-						let inputStr = '';
+				var input = document.createElement('input');
+				var label = document.createElement("label");
 
-						options.forEach(el => {
-							let cl = el.className ? `${el.className} ${pfx}icon ${itemCls}` : '';
-							let id = `${prop}-${el.value}`;
-							let labelTxt = el.name || el.value;
-							let titleAttr = el.title ? `title="${el.title}"` : '';
-							inputStr += `
-							<div class="${ppfx}radio-item">
-								<input type="radio" class="${pfx}radio" id="${id}" name="${prop}" value="${el.value}"/>
-								<label class="${cl || itemCls}" ${titleAttr} for="${id}">${cl ? '' : labelTxt}</label>
-							</div>
-							`;
-						});
+				input.setAttribute("type", "radio");
+				input.setAttribute("name", props.property);
+				input.setAttribute("id", item.name + '-' + props.property);
+				input.setAttribute("value", item.value);
 
-						const inputHld = this.el.querySelector(`.${ppfx}field`);
-						inputHld.innerHTML = `<div class="${ppfx}radio-items">${inputStr}</div>`;
-						this.input = inputHld.firstChild;
-					}
+				label.setAttribute("for", item.name + '-' + props.property);
+
+				if (typeof item.img != 'undefined') {
+
+					var img = document.createElement("img");
+
+					img.setAttribute("src", VjDefaultPath + item.img);
+					label.appendChild(img);
 				}
-			},
-
-			getInputValue() {
-				const inputChk = this.getCheckedEl();
-				return inputChk ? inputChk.value : '';
-			},
-			inputradioChanged() {
-				var property = this.property;
-				if (this.getInputValue() == 'true')
-					VjEditor.getSelected().addClass(property);
 				else
-					VjEditor.getSelected().removeClass(property);
-			},
+					label.innerHTML = item.name;
 
-			getCheckedEl() {
-				const input = this.getInputEl();
-				return input ? input.querySelector('input:checked') : '';
-			},
+				el.appendChild(input);
+				el.appendChild(label);
 
-			setValue(value) {
+				input.addEventListener('change', event => change({ event }));
+			});
 
-				const model = this.model;
-				let val = value || model.get('value') || model.getDefaultValue();
-				const input = this.getInputEl();
-				const inputIn = input ? input.querySelector(`[value="${val}"]`) : '';
+			return el;
+		},
+		emit({ props, updateStyle }, { event, complete }) {
 
-				if (inputIn) {
-					inputIn.checked = true;
-				} else {
-					const inputChk = this.getCheckedEl();
-					inputChk && (inputChk.checked = true);
+			var model = this.model;
+			var selected = VjEditor.getSelected();
+			var val = event.target.value;
+			var property = model.attributes.property;
+
+			if (model.attributes.UpdateStyles) {
+				var style = selected.getStyle();
+				style[property] = event.target.value;
+				selected.setStyle(style);
+			}
+			else {
+				var classes = model.attributes.list.map(opt => opt.value);
+
+				$(classes).each(function (index, className) {
+					selected.removeClass(className);
+				});
+
+				selected.addClass(val);
+			}
+
+			selected.set(property, val);
+
+			model.setValue(val);
+		},
+		setValue(value) {
+			var model = this.model;
+			model.view.$el.find('input[value="' + value + '"]').prop('checked', true);
+
+			if (value == model.getDefaultValue())
+				$(this.$el).find('.gjs-sm-clear').hide();
+			else
+				$(this.$el).find('.gjs-sm-clear').show();
+		},
+		clear() {
+
+			var model = this.model;
+			var selected = VjEditor.getSelected();
+			var property = model.attributes.property;
+			var defaultValue = model.getDefaultValue();
+
+			$(this.$el).find('.gjs-sm-clear').hide();
+			model.view.$el.find('input').prop('checked', false);
+			model.view.$el.find('input[value="' + defaultValue + '"]').prop('checked', true);
+
+			var classes = model.attributes.list.map(opt => opt.value);
+
+			$(classes).each(function (index, className) {
+				selected.removeClass(className);
+			});
+
+			selected.set(property, defaultValue);
+
+			selected.removeStyle(property);
+
+			model.setValue(defaultValue);
+
+			if (selected.attributes.type == "grid")
+				selected.attributes.components.models[0].removeStyle(property);
+
+			if (property == "border-position") {
+
+				var BorderWidth = ['border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width'];
+				var BorderColor = ['border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color'];
+				var BorderStyle = ['border-top-style', 'border-right-style', 'border-bottom-style', 'border-left-style'];
+
+				$.each([BorderWidth, BorderColor, BorderStyle], function () {
+
+					$.each(this, function (i) {
+
+						var DefaultValue = VjEditor.StyleManager.getProperty(Border, this).getDefaultValue();
+
+						VjEditor.StyleManager.getProperty(Border, this).setValue(DefaultValue);
+					});
+
+				});
+			}
+			else if (property == "border-style" || property == "border-top-style" || property == "border-right-style" || property == "border-bottom-style" || property == "border-left-style") {
+
+				var borderWidth;
+
+				switch (property) {
+					case "border-top-style":
+						borderWidth = "border-top-width"
+						break;
+					case "border-right-style":
+						borderWidth = "border-right-width"
+						break;
+					case "border-bottom-style":
+						borderWidth = "border-bottom-width"
+						break;
+					case "border-left-style":
+						borderWidth = "border-left-width"
+						break;
+					default:
+						borderWidth = "border-width"
 				}
+
+				VjEditor.StyleManager.getProperty(Border, borderWidth).setValue(0);
+
 			}
 		}
 	});
 
-	sm.addType('custom-styleslider', {
-		model: {
-
-		},
-		view: {
-			templateInput(model) {
-				const ppfx = this.ppfx;
-				const el = document.createElement('div');
-				el.setAttribute('class', 'diffmargin');
-               
-
-				$(model.attributes.properties).each(function (index, value) {
-					const input = document.createElement('input');
-					input.setAttribute('type', 'number');
-					input.setAttribute('class', 'custominput');
-					input.setAttribute('changeProperty', value.CSS);
-					input.setAttribute('value', 0);
-
-					const selectunit = document.createElement('select');
-					selectunit.setAttribute('class', 'unitselect');
-
-					$(model.attributes.units).each(function (index, value) {
-						const unitoption =  document.createElement('option');
-						unitoption.innerHTML = value;
-						selectunit.appendChild(unitoption);
-					});
-
-					const label = document.createElement('label');
-					label.innerHTML = value.name;
-
-					const inputdiv = document.createElement('div');
-					inputdiv.setAttribute('class', 'inputdiv');
-
-					inputdiv.appendChild(input);
-					inputdiv.appendChild(selectunit);
-					inputdiv.appendChild(label); 
-               
-
-					el.appendChild(inputdiv);
-				});
-				return `
-                        <div class="styleslider-wrapper">
-                            
-                                <div class="d-flex">
-                                    <div class="${ppfx}field ${ppfx}field-range custom-range-sliderInput">
-                                        <input class="sliderange" type="range" id="vol" name="vol" min="${model.get('min')}" max="${model.get('max')}" value="${model.get('value')}"></input>
-                                    </div>
-                                    <div class="${ppfx}field ${ppfx}field-integer custom-range-sliderText">
-                                        <input class="rangeinput" type="number" name="rangeinput" value="${model.get('value')}"></input>
-                                        <div>
-                                            <select class="sliderSelect">
-                                                <option>px</option>
-                                                <option>%</option>
-                                                <option>vh</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    `+ el.outerHTML + `
-                                </div>
-                            </div>
-                        
-                        </div>
-                       `;
-			},
-
-			events() {
-				return {
-					'change [type=range]': 'inputValueChanged',
-					'input [type=range]': 'inputValueChangedSoft',
-					'change [class=rangeinput]': 'inputValueChanged',
-					'input [class=rangeinput]': 'inputValueChangedSoft',
-					'change [class=custominput]': 'inputMarginChanged',
-					'input [class=custominput]': 'inputMarginChanged',
-					'change [class=sliderSelect]': 'optionSelectChanged',
-					'change [class=unitselect]': 'optionMarginChanged',
-					'click [class=gjs-sm-clear]': 'clear',
-					change:''
-				};
-			},
-
-			getSliderEl() {
-				if (!this.slider) {
-					this.slider = this.el.querySelector('input[type=range]');
-				}
-
-				return this.slider;
-			},
-
-			clear(ev) {
-				ev && ev.stopPropagation();
-				this.model.clearValue();
-				setTimeout(() => this.targetUpdated());
-			},
-
-			inputMarginChanged(){
-				var style = VjEditor.getSelected().getStyle();
-				var unit = $(event.target.parentNode).find('select').val();
-				style[event.target.attributes.changeproperty.value] = event.target.value + unit;
-				VjEditor.getSelected().setStyle(style);
-			},
-
-			optionMarginChanged(){
-				var style = VjEditor.getSelected().getStyle();
-				var value = $(event.target.parentNode).find('input').val();
-				var unit = event.target.value;
-				style[$(event.target.parentNode).find('input').attr('changeproperty')] = value + unit;
-				VjEditor.getSelected().setStyle(style);
-			},
-
-			optionSelectChanged(){
-				const model = this.model;
-				const value = this.getInputValue();
-				const  unit = this.el.querySelector('.sliderSelect').value;
-				this.$el.find('select').val(unit);
-				model.set('value', value, { avoidStore: 1 }).set('value', value + unit);
-
-				this.elementUpdated();
-			},
-
-
-			inputValueChanged() {
-				const model = this.model;
-				const step = model.get('step');
-
-              
-				if(event.target.type == 'slider')
-					this.getInputEl().value = this.getSliderEl().value;
-				else
-					this.getInputEl().value = event.target.value;
-
-				const value = this.getInputValue();
-				const unit = this.el.querySelector('.sliderSelect').value;
-				model.set('value', value, { avoidStore: 1 }).set('value', value + unit);
-				this.$el.find('input[type=number]').val(value);
-				this.elementUpdated();
-			},
-			inputValueChangedSoft() {
-				if (event.target.type == 'slider')
-					this.getInputEl().value = this.getSliderEl().value;
-				else
-					this.getInputEl().value = event.target.value;
-
-				$( this.model.attributes.properties).each(function (index, value) {
-					VjEditor.getSelected().removeStyle(value.CSS);
-				});
-
-				this.model.set('value', this.getInputValue() + this.el.querySelector('.sliderSelect').value , { avoidStore: 1 });
-				this.$el.find('input[type=number]').val(this.getInputValue());
-				this.elementUpdated();
-			},
-
-			setValue(value) {
-				//const parsed = this.model.parseValue(value);
-				const model = this.model;
-				const unit = this.el.querySelector('.sliderSelect').value;
-				//this.getSliderEl().value = parseFloat(parsed.value);
-				this.$el.find('.sliderSelect').val(unit);
-				var inputmodel = this.$el;
-
-				var Selected = VjEditor.getSelected();
-				if (typeof Selected != "undefined") {
-
-					var compVal = parseInt(VjEditor.getSelected().view.$el.css(this.model.attributes.property));
-					this.$el.find('input[type=number]').val(compVal);
-					this.$el.find('input[type=range]').val(compVal);
-
-					$(model.attributes.properties).each(function (index, v) {
-
-						if (typeof Selected != "undefined" ){
-							var style = Selected.getStyle();
-							var styleval = style[v.CSS];
-							var stylename =  inputmodel.find('input[changeproperty="'+ v.CSS +'"]');
-							if (styleval == undefined) {
-								stylename.val(parseInt(VjEditor.getSelected().view.$el.css(v.CSS)));
-								stylename.parent().find("select").val(unit);
-							}
-							else {
-								var styleunit = styleval.replace(/[0-9]/g, '');
-								stylename.val(parseFloat(styleval));
-								stylename.parent().find("select").val(styleunit);
-							}
-						}
-					});
-				}
-
-			},
-
-			onRender() {
-				if (!this.model.get('showInput')) {
-					//this.inputInst.el.style.display = 'none';
-				}
-			},
-
-			clearCached() {
-				this.slider = null;
-				this.$el.find('input[type=number]').val('');
-				this.$el.find('select').val('');
-			}
-
-
-		},
-	})
-
 	sm.addType('custom_slider', {
-		model: {
-
-		},
+		model: {},
 		view: {
 			templateInput(model) {
 				const ppfx = this.ppfx;
@@ -328,7 +176,7 @@
 
 				$(el).find(".sm-unit-wrapper").append(select);
 
-				return ``+ el.outerHTML + ``;
+				return `` + el.outerHTML + ``;
 			},
 			events() {
 				return {
@@ -351,29 +199,29 @@
 
 				if (event.target.className == "sm-range")
 					inputNumber.value = value;
-				else if (event.target.className == "sm-number") 
+				else if (event.target.className == "sm-number")
 					inputRange.value = value;
 
 				if (propArr.length == 0 && typeof Selected.getStyle()[propertyName] != "undefined") {
 
 					var prop = Selected.getStyle()[propertyName].split(" ");
-					
-					$(prop).each( function(index, value) {
+
+					$(prop).each(function (index, value) {
 						if (value != "")
 							propArr.push(value + " ");
 					});
 				}
-				
-				var search = new RegExp(property , 'i'); 
+
+				var search = new RegExp(property, 'i');
 				let removeItem = propArr.filter(item => search.test(item));
-				
-				propArr = jQuery.grep(propArr, function(value) {
+
+				propArr = jQuery.grep(propArr, function (value) {
 					return value != removeItem;
 				});
 
 				propArr.push(property + "(" + value + unit + ") ");
 
-				$(propArr).each(function(index, value) {
+				$(propArr).each(function (index, value) {
 					properties += value;
 				});
 
@@ -394,9 +242,9 @@
 				this.$el.find('input[type=range]').val(val);
 				this.$el.find('input[type=number]').val(val);
 
-				if (value== "true")
+				if (value == "true")
 					this.$el.find('.gjs-sm-clear').css('display', 'inline-block');
-					
+
 			},
 			clear(ev) {
 
@@ -409,17 +257,281 @@
 				$(this.$el).find('.gjs-sm-clear').hide();
 
 				var string = $.trim(style[model.attributes.cssproperty]),
-				preString = this.model.attributes.property,
-				preIndex = string.indexOf(preString),
-				subString = string.substring(preIndex),
-				searchString = subString.slice(subString.indexOf(preString), subString.indexOf(')') + 1).replace(/\s\s+/g, ' ');
+					preString = this.model.attributes.property,
+					preIndex = string.indexOf(preString),
+					subString = string.substring(preIndex),
+					searchString = subString.slice(subString.indexOf(preString), subString.indexOf(')') + 1).replace(/\s\s+/g, ' ');
 
 				style[model.attributes.cssproperty] = string.replace(searchString, '');
 				Selected.setStyle(style);
 
 			},
-
 		}
-	})
+	});
 
+	var LoadAttr = function (model, unit) {
+
+		var inputControl = model.view.el.querySelectorAll('.sm-input-control.range');
+
+		$(model.attributes.units).each(function (index, option) {
+			if (option.name == unit) {
+				$(inputControl).attr({
+					'min': option.min,
+					'max': option.max,
+					'step': option.step
+				});
+			}
+		});
+	}
+
+	sm.addType('customrange', {
+		create({ props, change }) {
+
+			const el = document.createElement('div');
+			el.classList.add("sm-range-wrapper");
+
+			el.innerHTML = `
+				<input type="range" value="`+ props.defaults + `" name="` + props.property + `" min="` + props.min + `" max="` + props.max + `" class="sm-input-control range" /> 
+				<input type="text" value="`+ props.defaults + `" name="` + props.property + `" class="sm-input-control text" />
+				<span class="sm-unit-wrapper"></span>
+			`;
+
+			var inputRange = el.querySelector('.range');
+			var inputText = el.querySelector('.text');
+
+			inputRange.addEventListener('change', event => change({ event }));
+			inputRange.addEventListener('input', event => change({ event }));
+			inputText.addEventListener('change', event => change({ event }));
+			inputText.addEventListener('input', event => change({ event }));
+			inputText.addEventListener('keydown', event => change({ event }));
+
+			if (typeof props.units != "undefined" && props.units.length) {
+
+				var select = document.createElement('select');
+				select.setAttribute("class", "unit-list");
+				select.setAttribute("name", props.property);
+
+				$(props.units).each(function (index, item) {
+					var option = document.createElement("option");
+					option.setAttribute("name", item.name);
+					option.setAttribute("value", item.name);
+					option.text = item.name;
+					select.append(option);
+				})
+
+				$(el).find(".sm-unit-wrapper").append(select);
+
+				select.addEventListener('change', event => change({ event }));
+			}
+			else if (typeof props.unit != 'undefined')
+				$(el).find(".sm-unit-wrapper").append(props.unit);
+
+			return el;
+		},
+		emit({ props, updateStyle }, { event, complete }) {
+
+			var selected = editor.getSelected(),
+				model = this.model,
+				property = model.attributes.property,
+				val = '',
+				unit = '',
+				style = selected.getStyle();
+
+			var inputRange = model.view.el.querySelector('.sm-range-wrapper .range');
+			var inputText = model.view.el.querySelector('.sm-range-wrapper .text');
+
+			if (model.view.$el.find('select').prop('disabled')) {
+
+				unit = 'px';
+				model.view.$el.find('select').prop('disabled', false);
+			}
+
+			if (event.target.classList.contains('range') || event.target.classList.contains('text')) {
+
+				val = event.target.value;
+
+				if (typeof model.attributes.units != 'undefined')
+					unit = model.view.$el.find('select').val();
+
+				if (unit == null || unit == '') {
+					if (typeof model.attributes.unit != 'undefined')
+						unit = model.attributes.unit;
+					else
+						unit = '';
+				}
+
+				if (event.keyCode === 38)
+					val = parseInt(val) + 1;
+				else if (event.keyCode === 40)
+					val = parseInt(val) - 1;
+
+			}
+			else if (event.target.classList.contains('unit-list')) {
+				val = inputText.value;
+				unit = event.target.value;
+				LoadAttr(model, unit);
+
+			}
+
+			inputRange.value = inputText.value = val;
+
+			style[property] = val + unit;
+			selected.setStyle(style);
+
+			model.setValue(val + unit);
+
+			if (selected.attributes.type == "icon") {
+
+				if (property == "width")
+					VjEditor.StyleManager.getProperty(Size, 'height').setValue(val + unit);
+
+				else if (property == "height")
+					VjEditor.StyleManager.getProperty(Size, 'width').setValue(val + unit);
+			}
+		},
+		setValue(value) {
+
+			var model = this.model,
+				unit = '';
+
+			if (value == '')
+				value = model.getDefaultValue();
+
+			var inputvalue = value;
+
+			if (value == 'auto')
+				model.view.$el.find('select').prop('disabled', 'disabled');
+			else {
+
+				if (typeof value == "string") {
+					inputvalue = value.replace(/[^-\d\.]/g, '');
+
+					if (typeof model.attributes.units != 'undefined') {
+						$(model.attributes.units).each(function (index, option) {
+
+							if (value.indexOf(option.name) >= 0) {
+								unit = option.name
+								return false;
+							}
+						});
+					}
+				}
+
+				model.view.$el.find('select').prop('disabled', false);
+			}
+
+			if (unit == '' && typeof model.attributes.unit != 'undefined')
+				unit = model.attributes.unit;
+
+			if (typeof model.attributes.units != 'undefined')
+				LoadAttr(model, unit);
+
+			model.view.$el.find('input').val(inputvalue);
+			model.view.$el.find('select').val(unit);
+
+			if (value == model.getDefaultValue())
+				$(this.$el).find('.gjs-sm-clear').hide();
+			else
+				$(this.$el).find('.gjs-sm-clear').show();
+
+		},
+		clear() {
+
+			var model = this.model,
+				property = model.attributes.property,
+				value = model.getDefaultValue(),
+				unit = '';
+
+			$(this.$el).find('.gjs-sm-clear').hide();
+
+			if (typeof model.attributes.unit != 'undefined') {
+
+				unit = model.attributes.unit;
+
+				if (typeof model.attributes.units != 'undefined')
+					LoadAttr(model, unit);
+			}
+
+			model.view.$el.find('input').val(value);
+			model.view.$el.find('select').val(unit);
+
+			var selected = VjEditor.getSelected();
+
+			if (selected.attributes.type == "icon" && (property == "width" || property == "min-width" || property == "max-width" || property == "height" || property == "min-height" || property == "max-height"))
+				selected = selected.components().models[0];
+
+			else if (selected.getAttributes()['data-block-type'] == "Logo") {
+
+				var img = $(selected.getEl()).find('img');
+
+				if (property == "width")
+					img.css('width', '100%');
+
+				else if (property == "height")
+					img.css('height', 'auto');
+
+				var width = img.width();
+				var height = img.height();
+
+				var attr = selected.getAttributes();
+				attr['data-style'] = 'width:' + width + 'px; height:' + height + 'px;';
+				selected.setAttributes(attr);
+
+			}
+
+			if (value == 'auto') {
+
+				model.view.$el.find('select').prop('disabled', 'disabled');
+
+				if (selected.attributes.type == "svg" && selected.parent().attributes.type == "icon") {
+
+					if (property == "width") {
+
+						selected.removeStyle('height');
+						VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input').val(value);
+						$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('height')));
+					}
+
+					else if (property == "height") {
+
+						selected.removeStyle('width');
+						VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input').val(value);
+						$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('width')));
+					}
+				}
+			}
+
+			selected.removeStyle(property);
+
+			if (property == "border-width" || property == "border-top-width" || property == "border-right-width" || property == "border-bottom-width" || property == "border-left-width") {
+
+				var borderStyle;
+
+				switch (property) {
+					case "border-top-width":
+						borderStyle = "border-top-style"
+						break;
+					case "border-right-width":
+						borderStyle = "border-right-style"
+						break;
+					case "border-bottom-width":
+						borderStyle = "border-bottom-style"
+						break;
+					case "border-left-width":
+						borderStyle = "border-left-style"
+						break;
+					default:
+						borderStyle = "border-style"
+				}
+
+				VjEditor.StyleManager.getProperty(Border, borderStyle).setValue('none');
+				VjEditor.StyleManager.getProperty(Border, borderStyle).view.$el.find('input').prop('checked', false);
+
+			}
+			else if (property == "width" && value == "auto")
+				$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('width')));
+			else if (property == "height" && value == "auto")
+				$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('height')));
+		}
+	});
 };

@@ -226,3 +226,4 @@ CREATE TABLE {databaseOwner}[VJ_Core_WorkflowPermission](
 ) ON [PRIMARY]
 END
 GO
+

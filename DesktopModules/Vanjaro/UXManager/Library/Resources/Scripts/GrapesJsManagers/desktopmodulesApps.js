@@ -22,10 +22,20 @@ global.LoadApps = function () {
                     content: '<div dmid="' + value.ModuleID + '" mid="" uid="' + value.UniqueID + '" fname="' + value.ModuleName + '"><div vjmod="true">[Module]</div></div>'
                 })
             });
-            setTimeout(function () {
+            if (VjEditor != undefined && VjEditor.Canvas != undefined && VjEditor.Canvas.getBody() != undefined) {
                 const body = VjEditor.Canvas.getBody();
                 $(body).append('<script>' + VjScript + '</script>');
-            }, 2000);
+                if (VjStyle != undefined && VjStyle.length > 0)
+                    $(body).append('<style>' + VjStyle + '</style>');
+            }
+            else {
+                setTimeout(function () {
+                    const body = VjEditor.Canvas.getBody();
+                    $(body).append('<script>' + VjScript + '</script>');
+                    if (VjStyle != undefined && VjStyle.length > 0)
+                        $(body).append('<style>' + VjStyle + '</style>');
+                }, 2000);
+            }
         }
     });
 };
@@ -142,22 +152,15 @@ global.AddCustomBlock = function (editor, CustomBlock) {
 }
 
 var AddCustom_Block = function (CustomBlock, ID, Guid) {
-    var Content = CustomBlock.Html;
-    if (CustomBlock.IsGlobal && !Content.includes("7a4be0f2-56ab-410a-9422-6bc91b488150"))
-        Content = "<div data-block-type=\"global\" data-block-guid=\"7a4be0f2-56ab-410a-9422-6bc91b488150\" data-guid=\"" + CustomBlock.Guid + "\">" + Content + "</div>";
-    VjEditor.BlockManager.add(CustomBlock.Name, {
-        attributes: { class: 'fa fa-th-large', id: ID, type: 'VjCustomBlock', isGlobalBlock: CustomBlock.IsGlobal, guid: CustomBlock.Guid },
-        label: CustomBlock.Name,
-        category: CustomBlock.Category.toUpperCase(),
-        content: '<style>' + CustomBlock.Css + '</style>' + Content,
-        render: ({ el }) => {
-            const updateblock = document.createElement("span");
-            updateblock.className = "update-custom-block";
-            if (IsAdmin)
-                updateblock.innerHTML = "<div class='addpage-blocks dropdown pull-right dropbtn'><a id='dropdownMenuLink' class='dropdownmenu Customblockdropdown' data-toggle='dropdown' aria-haspopup='true'  aria-expanded='false'><em class='fas fa-ellipsis-v'></em></a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'><li><a class='edit-block' onclick='VjEditor.runCommand(\"edit-custom-block\", { name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\" })'><em class='fas fa-pencil-alt'></em><span>Edit</span></a></li><li><a class='export-block' onclick='VjEditor.runCommand(\"export-custom-block\",{ name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\"  })'><em class='fas fa-file-export'></em><span>Export</span></a></li><li><a class='delete-block' onclick='VjEditor.runCommand(\"delete-custom-block\",{ name: \"" + CustomBlock.Name + "\",id: \"" + Guid + "\"  })'><em class='fas fa-trash-alt'></em><span>Delete</span></a></li></ul></div>";
-            el.appendChild(updateblock);
-        }
-    });
+    var blocksToRemove = [];
+    $.each(VjEditor.BlockManager.getAll().models, function (key, value) {
+        if (value != undefined && value.attributes != undefined && value.attributes.attributes != undefined && value.attributes.attributes.guid != undefined && value.attributes.attributes.type == 'VjCustomBlock')
+            blocksToRemove.push(value.cid);
+    })
+    $.each(blocksToRemove, function (key, value) {
+        VjEditor.BlockManager.remove(value);
+    })
+    LoadCustomBlocks();
 }
 
 global.UpdateCustomBlock = function (editor, CustomBlock) {
@@ -281,25 +284,34 @@ global.StyleGlobal = function (model) {
 
 global.UpdateGlobalBlock = function (model) {
     if (model != undefined) {
-        if (model.attributes != undefined)
-            model.attributes.content = '';
-        var content = VjEditor.runCommand("export-component", {
-            component: model
-        });
-        if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
-            var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));
-            if (Block != undefined) {
-                var CustomBlock = {
-                    ID: Block.attributes.attributes.id,
-                    Guid: Block.attributes.attributes.guid,
-                    Name: Block.attributes.label,
-                    Category: Block.attributes.category.id,
-                    Html: $(content.html)[0].innerHTML,
-                    Css: content.css,
-                    IsGlobal: true
-                };
-                UpdateCustomBlock(VjEditor, CustomBlock);
+        try {
+            if (model.attributes != undefined)
+                model.attributes.content = '';
+            var content = VjEditor.runCommand("export-component", {
+                component: model.attributes.components.models[0]
+            });
+            if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
+                var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));
+                if (Block != undefined) {
+                    var css = '';
+                    $.each($(VjEditor.Canvas.getBody()).find('#' + model.ccid + ''), function (sk, sv) {
+                        css += sv.innerHTML;
+                    });
+                    var CustomBlock = {
+                        ID: Block.attributes.attributes.id,
+                        Guid: Block.attributes.attributes.guid,
+                        Name: Block.attributes.label,
+                        Category: Block.attributes.category.id || Block.attributes.category,
+                        Html: content.html,
+                        Css: css,
+                        IsGlobal: true
+                    };
+                    UpdateCustomBlock(VjEditor, CustomBlock);
+                }
             }
+        }
+        catch (err) {
+            console.log(err);
         }
     }
 }
@@ -308,8 +320,12 @@ global.BuildAppComponent = function (vjcomps) {
     $.each(vjcomps, function (k, v) {
         if (v.attributes != undefined && v.attributes.mid != undefined && v.attributes.mid != '') {
             if (v.components[0] != undefined) {
-                if ($('#dnn_vj_' + v.attributes.mid)[0] != undefined)
-                    v.components[0].content = $('#dnn_vj_' + v.attributes.mid)[0].outerHTML;
+                if ($('#dnn_vj_' + v.attributes.mid)[0] != undefined) {
+                    if ($('#dnn_vj_' + v.attributes.mid).find('[ng-controller="Controller"]').length > 0 && $('#dnn_vj_' + v.attributes.mid).find('[ng-controller="Controller"]').html().indexOf('ngView:') > 0)
+                        v.components[0].content = "<div class='alert alert-info' role='alert'>" + v.attributes.fname + " will appear here when this page is previewed or published.</div>";
+                    else
+                        v.components[0].content = $('#dnn_vj_' + v.attributes.mid)[0].outerHTML;
+                }
                 else {
                     v.include = false;
                 }
@@ -380,7 +396,7 @@ global.BuildAppComponentFromHtml = function (vjcomps, html) {
     });
 };
 
-global.BuildBlockComponent = function (vjcomps) {
+global.BuildBlockComponent = function (vjcomps, version) {
     $.each(vjcomps, function (k, v) {
         if (v.attributes != undefined && v.attributes["data-block-guid"] != undefined && v.attributes["data-block-guid"] != '') {
             var attr = '';
@@ -388,6 +404,9 @@ global.BuildBlockComponent = function (vjcomps) {
                 attr += '[' + key + '="' + value + '"]';
             });
             var $this = $(attr)[0];
+            if ($this == undefined && version != undefined) {
+                $this = $(version).find(attr)[0];
+            }
             if ($this != undefined) {
                 if (v.components == undefined || v.components[0] == undefined) {
                     var component = { components: [], content: '' };
@@ -397,7 +416,13 @@ global.BuildBlockComponent = function (vjcomps) {
                 if (v.components != undefined && v.components[0] != undefined) {
                     v.components[0].components = [];
                     if (v.attributes["data-block-type"].toLowerCase() == "global") {
-                        v.components[0].content = $this.outerHTML;
+                        var contentstyle = '';
+                        if ($('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0] != undefined)
+                            contentstyle = $('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0].outerHTML;
+                        else if (version != undefined && $(version).find('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0] != undefined) {
+                            contentstyle = $(version).find('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0].outerHTML;
+                        }
+                        v.components[0].content = contentstyle + $this.outerHTML;
                     }
                     else {
                         if (v.attributes["data-block-type"] == "Logo") {
@@ -456,7 +481,7 @@ global.RenderBlock = function (model, bmodel, render) {
     model.view.$el[0].innerHTML = '<img class="centerloader" src=' + VjDefaultPath + 'loading.gif>';
     $.ajax({
         type: "POST",
-        url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/Render",
+        url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/RenderItem",
         data: model.attributes.attributes,
         headers: {
             'ModuleId': parseInt(sf.getModuleId()),
@@ -474,6 +499,9 @@ global.RenderBlock = function (model, bmodel, render) {
 
                     model.view.$el[0].innerHTML = '';
                     model.append($(response.Markup)[0].innerHTML);
+                    if (response.Style != undefined && response.Style != '') {
+                        $(VjEditor.Canvas.getDocument()).find('#' + model.ccid).append('<style>' + response.Style + '</style>');
+                    }
                     const newcomponents = getAllComponents(model);
                     $.each(newcomponents, function (k, v) {
                         if (v.attributes != undefined && v.attributes.type != undefined && v.attributes.type == 'blockwrapper')
@@ -519,7 +547,7 @@ global.RenderBlock = function (model, bmodel, render) {
                     script_tag.text = response.Script;
                     $(window.parent.window.VjEditor.Canvas.getDocument()).find('head')[0].appendChild(script_tag);
                 }
-                if (response.Style != undefined && response.Style != '') {
+                if (response.Style != undefined && response.Style != '' && model.attributes.attributes["data-block-type"].toLowerCase() != "global") {
                     var style_tag = $(window.parent.window.VjEditor.Canvas.getDocument().createElement('style'))[0];
                     style_tag.type = 'text/css';
                     style_tag.text = response.Style;
@@ -548,3 +576,28 @@ global.RenderBlock = function (model, bmodel, render) {
         }
     });
 };
+
+global.CleanGjAttrs = function (html) {
+    var result = '';
+    var compHtml = $(html)[0];
+    if (compHtml != undefined) {
+        var attrsList = [];
+        $.each(compHtml.attributes, function (k, v) { attrsList.push(v.name); });
+        $.each(attrsList, function (k, v) {
+            if (v != undefined && v.startsWith('data-gjs')) {
+                $(compHtml).removeAttr(v);
+            }
+        });
+        $.each(compHtml.querySelectorAll('*'), function (k, v) {
+            var attrsList = [];
+            $.each(v.attributes, function (i, va) { attrsList.push(va.name); });
+            $.each(attrsList, function (kk, vv) {
+                if (vv != undefined && vv.startsWith('data-gjs')) {
+                    $(v).removeAttr(vv);
+                }
+            });
+        });
+        result = compHtml.outerHTML;
+    }
+    return result;
+}

@@ -9,7 +9,7 @@ SET /P Version=Please Enter Package Version:
 CLS
 echo Creating Extension Packages...
 xcopy /e /i ..\DesktopModules\Vanjaro\Common\Install\* ..\DesktopModules\Vanjaro\Core\Library\Install\*  /Y >NUL
-xcopy /e /i ..\DesktopModules\Vanjaro\URL\Install\* ..\DesktopModules\Vanjaro\Core\Library\Install\*  /Y >NUL
+xcopy /e /i ..\DesktopModules\Vanjaro\URLManager\Install\* ..\DesktopModules\Vanjaro\Core\Library\Install\*  /Y >NUL
 xcopy /e /i ..\DesktopModules\Vanjaro\UXManager\Extensions\Migrate\Install\* ..\DesktopModules\Vanjaro\Core\Library\Install\*  /Y >NUL
 
 cd ..\DesktopModules\Vanjaro\UXManager\Library\ >NUL
@@ -18,6 +18,7 @@ md bin >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Library.dll bin\  >NUL
 
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Apps.About.dll bin\ >NUL
+copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Apps.SectionSettings.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Apps.Icon.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Apps.Image.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Apps.Link.dll bin\ >NUL
@@ -43,6 +44,7 @@ copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.dll 
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.GoogleAnalytics.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.Pixabay.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.YouTube.dll bin\ >NUL
+copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.dll bin\ >NUL
 
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.Assets.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.CustomCSS.dll bin\ >NUL
@@ -77,6 +79,7 @@ copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Toolbar.Undo.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Toolbar.ViewLayout.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.Migrate.dll bin\ >NUL
+copy ..\..\..\..\bin\Vanjaro.Core.Providers.Mail.VanjaroMailProvider.dll bin\ >NUL
 
 
 copy ..\..\..\..\bin\Vanjaro.Core.Extensions.Workflow.Review.dll bin\ >NUL
@@ -91,7 +94,6 @@ copy ..\..\..\..\bin\Vanjaro.URL.dll bin\ >NUL
 
 copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\HtmlAgilityPack.dll bin\ >NUL
 
-copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\LibSassHost.dll bin\ >NUL
 copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\AdvancedStringBuilder.dll bin\ >NUL
 copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\System.Buffers.dll bin\ >NUL
 copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\ImageProcessor.dll bin\ >NUL
@@ -103,6 +105,10 @@ del library-uxmanager-resources.zip >NUL 2>&1
 cd ..\Extensions\Apps\About\ >NUL
 del apps-about-resources.zip >NUL 2>&1
 "C:\Program Files\7-Zip\7z.exe" a apps-about-resources.zip @Resources.txt -xr!?svn\ >NUL
+
+cd ..\SectionSettings\ >NUL
+del apps-sectionsettings-resources.zip >NUL 2>&1
+"C:\Program Files\7-Zip\7z.exe" a apps-sectionsettings-resources.zip @Resources.txt -xr!?svn\ >NUL
 
 cd ..\Icon\ >NUL
 del apps-icon-resources.zip >NUL 2>&1
@@ -184,6 +190,10 @@ del menu-integrations-emailserviceprovider-resources.zip >NUL 2>&1
 cd ..\GoogleAnalytics >NUL
 del menu-integrations-googleanalytics-resources.zip >NUL 2>&1
 "C:\Program Files\7-Zip\7z.exe" a menu-integrations-googleanalytics-resources.zip @Resources.txt -xr!?svn\ >NUL
+
+cd ..\GoogleReCaptcha >NUL
+del menu-integrations-googlerecaptcha-resources.zip >NUL 2>&1
+"C:\Program Files\7-Zip\7z.exe" a menu-integrations-googlerecaptcha-resources.zip @Resources.txt -xr!?svn\ >NUL
 
 cd ..\Pixabay >NUL
 del menu-integrations-pixabay-resources.zip >NUL 2>&1
@@ -365,7 +375,7 @@ cd ..\..\..\..\DesktopModules\Vanjaro\Common\ >NUL
 del common-library-resources.zip >NUL 2>&1
 "C:\Program Files\7-Zip\7z.exe" a common-library-resources.zip @Resources.txt -xr!?svn\ >NUL
 
-cd ..\URL\ >NUL
+cd ..\URLManager\ >NUL
 del url-resources.zip >NUL 2>&1
 "C:\Program Files\7-Zip\7z.exe" a url-resources.zip @Resources.txt -xr!?svn\ >NUL
 
@@ -376,26 +386,44 @@ del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Fo
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip >NUL 2>&1
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Install.zip >NUL 2>&1
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Install.zip >NUL 2>&1
-del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_Install.zip >NUL 2>&1
-del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_Upgrade.zip >NUL 2>&1
+del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip >NUL 2>&1
+del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip >NUL 2>&1
+del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip >NUL 2>&1
+del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip >NUL 2>&1
 
 
 :: Vanjaro for DNN
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip @PackageList.txt >NUL
 :: Copy it for Vanjaro Platform
-copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_Install.zip >NUL
+copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip >NUL
+copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip >NUL
 
-"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.dll >NUL
-"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\libsass.dll bin\libsass.dll >NUL
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.exe >NUL
+"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\dart.exe bin\dart.exe >NUL
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.snapshot >NUL
+"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\sass.snapshot bin\sass.snapshot >NUL
 
 "C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip @PackageList.txt >NUL
-"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\*.dll >NUL
-"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\libsass.dll bin\libsass.dll >NUL
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\*.exe >NUL
+"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\dart.exe bin\dart.exe >NUL
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\*.snapshot >NUL
+"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\sass.snapshot bin\sass.snapshot >NUL
 
-:: Vanjaro Platform 
-"C:\Program Files\7-Zip\7z.exe" d -r ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_Install.zip @DistrubtionRemoveList.txt >NUL
-"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_"%Version%"_Install.zip @DistrubtionAddList.txt >NUL
+:: Vanjaro Platform
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.exe >NUL
+"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\dart.exe bin\dart.exe >NUL
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\*.snapshot >NUL
+"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip Packager\Vanjaro\bin\x64\sass.snapshot bin\sass.snapshot >NUL
 
+"C:\Program Files\7-Zip\7z.exe" d -r ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip @DistributionRemoveList.txt >NUL
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip @DistributionAddList.txt >NUL
+
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\*.exe >NUL
+"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\dart.exe bin\dart.exe >NUL
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\*.snapshot >NUL
+"C:\Program Files\7-Zip\7z.exe" rn ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip Packager\Vanjaro\bin\x86\sass.snapshot bin\sass.snapshot >NUL
+"C:\Program Files\7-Zip\7z.exe" d -r ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip @DistributionRemoveList.txt >NUL
+"C:\Program Files\7-Zip\7z.exe" a ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip @DistributionAddList.txt >NUL
 
 cd ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\ 
 del Temp_DNN /Q >NUL 2>&1
@@ -502,24 +530,27 @@ copy Install\Install.aspx.cs ..\Temp_DNN\Install\Install.aspx.cs >NUL
 copy Install\Install.aspx.designer.cs ..\Temp_DNN\Install\Install.aspx.designer.cs >NUL
 copy Install\Install.htm ..\Temp_DNN\Install\Install.htm >NUL
 copy "vcustom.css" ..\Temp_DNN\Resources\Shared\stylesheets\ >NUL
-copy Images\*.* ..\Temp_DNN\Images >NUL
-copy "Images\Branding\Vanjaro_logo.png" ..\Temp_DNN\Images\Branding\ >NUL
+xcopy Images\* ..\Temp_DNN\Images\*   /E /H /C /I /Y >NUL
+
 
 cd ..\Releases >NUL
-copy Vanjaro_Platform_"%Version%"_Install.zip ..\Temp_DNN\Install\Module\ >NUL
+copy Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip ..\Temp_DNN\Install\Module\ >NUL
+copy Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip ..\Temp_DNN\Install\Module\ >NUL
 
 cd ..\Temp_DNN 
 
 
-::Need to copy the libsass.dll for install Package x64
-copy ..\Vanjaro\bin\x64\libsass.dll ..\Temp_DNN\bin\ >NUL
+::Need to copy the dart.exe and sass.snapshot for install Package x64
+
 "C:\Program Files\7-Zip\7z.exe" a Vanjaro_Platform_"%Version%"_x64_Install.zip -xr!?svn >NUL
+"C:\Program Files\7-Zip\7z.exe" d -r Vanjaro_Platform_"%Version%"_x64_Install.zip ..\..\..\..\Install\module\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip >NUL
 move Vanjaro_Platform_"%Version%"_x64_Install.zip ..\Releases\ >NUL
 
 
-::Need to copy the libsass.dll for install Package x86
-copy ..\Vanjaro\bin\x86\libsass.dll ..\Temp_DNN\bin\ >NUL
+::Need to copy the dart.exe and sass.snapshot for install Package x86
+
 "C:\Program Files\7-Zip\7z.exe" a Vanjaro_Platform_"%Version%"_x86_Install.zip -xr!?svn >NUL
+"C:\Program Files\7-Zip\7z.exe" d -r Vanjaro_Platform_"%Version%"_x86_Install.zip ..\..\..\..\Install\module\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip >NUL
 move Vanjaro_Platform_"%Version%"_x86_Install.zip ..\Releases\ >NUL
 
 
@@ -624,27 +655,39 @@ copy Images\*.* ..\UpgradeTemp_DNN\Images >NUL
 copy "Images\Branding\Vanjaro_logo.png" ..\UpgradeTemp_DNN\Images\Branding\ >NUL
 
 cd ..\Releases\
-copy Vanjaro_Platform_"%Version%"_Install.zip ..\UpgradeTemp_DNN\Install\Module\ >NUL
+copy Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip ..\UpgradeTemp_DNN\Install\Module\ >NUL
+copy Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip ..\UpgradeTemp_DNN\Install\Module\ >NUL
 
 cd ..\UpgradeTemp_DNN\
 
-"C:\Program Files\7-Zip\7z.exe" a Vanjaro_Platform_"%Version%"_Upgrade.zip -xr!?svn >NUL
+"C:\Program Files\7-Zip\7z.exe" a Vanjaro_Platform_"%Version%"_x64_Upgrade.zip -xr!?svn >NUL
+"C:\Program Files\7-Zip\7z.exe" a Vanjaro_Platform_"%Version%"_x86_Upgrade.zip -xr!?svn >NUL
 
-move Vanjaro_Platform_"%Version%"_Upgrade.zip ..\Releases\ >NUL
+"C:\Program Files\7-Zip\7z.exe" d -r Vanjaro_Platform_"%Version%"_x64_Upgrade.zip ..\..\..\..\Install\module\Vanjaro_Platform_Extension_"%Version%"_x86_Install.zip >NUL
+move Vanjaro_Platform_"%Version%"_x64_Upgrade.zip ..\Releases\ >NUL
+"C:\Program Files\7-Zip\7z.exe" d -r Vanjaro_Platform_"%Version%"_x86_Upgrade.zip ..\..\..\..\Install\module\Vanjaro_Platform_Extension_"%Version%"_x64_Install.zip >NUL
+"C:\Program Files\7-Zip\7z.exe" d -r Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro_Platform_"%Version%"_x64_Upgrade.zip >NUL
+move Vanjaro_Platform_"%Version%"_x86_Upgrade.zip ..\Releases\ >NUL
 
 cd ..\
 rmdir UpgradeTemp_DNN /s /q >NUL 2>&1
 rmdir Temp_DNN /s /q >NUL 2>&1
 
 
-"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_Upgrade.zip Vanjaro\Install\Upgrade.aspx >NUL
-"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_Upgrade.zip Vanjaro\install\Upgrade.aspx Install/Upgrade.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\Install\Upgrade.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\install\Upgrade.aspx Install/Upgrade.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\Install\Upgrade.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\install\Upgrade.aspx Install/Upgrade.aspx >NUL
 
-"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_Upgrade.zip Vanjaro\Install\Upgrade.aspx.cs >NUL
-"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_Upgrade.zip Vanjaro\install\Upgrade.aspx.cs Install/Upgrade.aspx.cs >NUL
+"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\Install\Upgrade.aspx.cs >NUL
+"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\install\Upgrade.aspx.cs Install/Upgrade.aspx.cs >NUL
+"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\Install\Upgrade.aspx.cs >NUL
+"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\install\Upgrade.aspx.cs Install/Upgrade.aspx.cs >NUL
 
-"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_Upgrade.zip Vanjaro\Install\UpgradeWizard.aspx >NUL
-"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_Upgrade.zip Vanjaro\install\UpgradeWizard.aspx Install/UpgradeWizard.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\Install\UpgradeWizard.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x64_Upgrade.zip Vanjaro\install\UpgradeWizard.aspx Install/UpgradeWizard.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" a Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\Install\UpgradeWizard.aspx >NUL
+"C:\Program Files\7-Zip\7z.exe" rn Releases\Vanjaro_Platform_"%Version%"_x86_Upgrade.zip Vanjaro\install\UpgradeWizard.aspx Install/UpgradeWizard.aspx >NUL
 
 
 

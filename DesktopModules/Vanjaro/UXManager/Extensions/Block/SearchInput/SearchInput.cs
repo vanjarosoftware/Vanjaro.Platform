@@ -12,6 +12,7 @@ using Vanjaro.Common.Manager;
 using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Extensions.Block.SearchInput.Factories;
 using Vanjaro.UXManager.Library.Entities.Interface;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Block.SearchInput
 {
@@ -24,7 +25,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput
         public string Icon => "fas fa-search";
 
         public Guid Guid => Guid.Parse(ExtensionInfo.GUID);
-        public bool Visible { get; set; } = false;
+        public bool Visible { get; set; } = true;
 
         public Dictionary<string, string> Attributes
         {
@@ -101,7 +102,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message;
             }
         }

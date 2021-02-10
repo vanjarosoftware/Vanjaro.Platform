@@ -3,17 +3,17 @@
 	let bm = editor.BlockManager;
 
 	if (c.blocks.icon) {
-        bm.add('icon', {
-            label: VjLocalized.Icon,
-            category: VjLocalized.Basic,
+		bm.add('icon', {
+			label: VjLocalized.Icon,
+			category: VjLocalized.Basic,
 			attributes: { class: 'far fa-gem' },
 			content: `
 				<div class="icon-box">
-					<a class="vj-icon text-primary border-primary">
+					<span class="vj-icon text-primary border-primary">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
 							<path d="M464 0H112c-4 0-7.8 2-10 5.4L2 152.6c-2.9 4.4-2.6 10.2.7 14.2l276 340.8c4.8 5.9 13.8 5.9 18.6 0l276-340.8c3.3-4.1 3.6-9.8.7-14.2L474.1 5.4C471.8 2 468.1 0 464 0zm-19.3 48l63.3 96h-68.4l-51.7-96h56.8zm-202.1 0h90.7l51.7 96H191l51.6-96zm-111.3 0h56.8l-51.7 96H68l63.3-96zm-43 144h51.4L208 352 88.3 192zm102.9 0h193.6L288 435.3 191.2 192zM368 352l68.2-160h51.4L368 352z"/>
 						</svg>
-					</a>
+					</span>
 				</div>`,
 			activate: 1
 		});
@@ -123,16 +123,14 @@
 							{ id: 'center', name: 'center', image: 'align-center' },
 							{ id: 'right', name: 'right', image: 'align-right' },
 						],
-						value: "none",
+						default: "none",
 						changeProp: 1,
 
 					}, {
 						label: "Color",
 						name: "color",
 						type: "custom_color",
-						cssproperties: [
-							{ name: "color" }
-						],
+						cssproperties: [{ name: "color" }],
 						options: [
 							{ id: 'primary', color: 'bg-primary', name: 'Primary', class: 'text-primary' },
 							{ id: 'secondary', color: 'bg-secondary', name: 'Secondary', class: 'text-secondary' },
@@ -145,7 +143,7 @@
 							{ id: 'light', color: 'bg-light', name: 'Light', class: 'text-light' },
 							{ id: 'dark', color: 'bg-dark', name: 'Dark', class: 'text-dark' }
 						],
-						value: "primary",
+						default: "primary",
 						changeProp: 1,
 					}, {
 						label: "Background",
@@ -156,15 +154,13 @@
 							{ id: 'empty', name: 'empty', icon: "fas fa-ban", class: '' },
 							{ id: 'fill', name: 'fill', icon: "fas fa-fill", class: '' },
 						],
-						value: 'empty',
+						default: 'empty',
 						changeProp: 1,
 					}, {
 						label: "Color",
 						name: "backgroundcolor",
 						type: "custom_color",
-						cssproperties: [
-							{ name: "background-color" }
-						],
+						cssproperties: [{ name: "background-color" }],
 						options: [
 							{ id: 'colorprimary', color: 'bg-primary', name: 'Primary', class: 'bg-primary' },
 							{ id: 'colorsecondary', color: 'bg-secondary', name: 'Secondary', class: 'bg-secondary' },
@@ -177,68 +173,63 @@
 							{ id: 'colorlight', color: 'bg-light', name: 'Light', class: 'bg-light' },
 							{ id: 'colordark', color: 'bg-dark', name: 'Dark', class: 'bg-dark' }
 						],
-						value: "none",
+						default: "none",
 						changeProp: 1,
 					}, {
 						label: "Border",
 						name: "frame",
 						type: "toggle_radio",
 						UpdateStyles: true,
-						cssproperties: [
-							{ name: "border-radius" }
-						],
+						cssproperties: [{ name: "border-radius" }],
 						options: [
 							{ id: 'none', name: 'none', icon: "fas fa-ban" },
 							{ id: 'square', name: 'square', icon: "far fa-square" },
 							{ id: 'circle', name: 'circle', icon: "far fa-circle" },
 						],
-						value: "none",
+						default: "none",
 						changeProp: 1,
 					}, {
 						label: "Width",
 						name: "framewidth",
 						type: "custom_range",
-						cssproperties: [
-							{ name: "border-width" }
-						],
+						cssproperties: [{ name: "border-width" }],
 						min: "0",
 						max: "100",
-						value: "10",
+						default: "10",
 						changeProp: 1,
 					}, {
 						label: "Gap",
 						name: "framegap",
 						type: "custom_range",
 						cssproperties: [
-							{ name: "padding" }
+							{ name: "padding-top" },
+							{ name: "padding-bottom" },
+							{ name: "padding-left" },
+							{ name: "padding-right" }
 						],
 						min: "0",
-						max: "100",
-						value: "10",
+						max: "200",
+						default: "10",
 						changeProp: 1,
 					}, {
 						label: "Style",
 						name: "framestyle",
 						type: "toggle_radio",
 						UpdateStyles: true,
-						cssproperties: [
-							{ name: "border-style" }
-						],
+						cssproperties: [{ name: "border-style" }],
 						options: [
 							{ id: 'solid', name: 'solid', image: 'border-solid' },
 							{ id: 'double', name: 'double', image: 'border-double' },
 							{ id: 'dotted', name: 'dotted', image: 'border-dotted' },
 							{ id: 'dashed', name: 'dashed', image: 'border-dashed' },
 						],
-						value: "solid",
+						default: "solid",
 						changeProp: 1,
 					}, {
 						label: "Color",
 						name: "framecolor",
 						type: "custom_color",
-						cssproperties: [
-							{ name: "border-color" }
-						],
+						cssproperties: [{ name: "border-color" }],
 						options: [
 							{ id: 'frameprimary', color: 'bg-primary', name: 'Primary', class: 'border-primary' },
 							{ id: 'framesecondary', color: 'bg-secondary', name: 'Secondary', class: 'border-secondary' },
@@ -251,7 +242,7 @@
 							{ id: 'framelight', color: 'bg-light', name: 'Light', class: 'border-light' },
 							{ id: 'framedark', color: 'bg-dark', name: 'Dark', class: 'border-dark' }
 						],
-						value: "primary",
+						default: "primary",
 						changeProp: 1,
 					}, {
 						label: " ",

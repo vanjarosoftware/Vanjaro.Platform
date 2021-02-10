@@ -1,11 +1,11 @@
-﻿export default (editor, config = {}) => {
+export default (editor, config = {}) => {
 	const c = config;
 	let bm = editor.BlockManager;
-  
+
 	if (c.blocks.list) {
-        bm.add('list', {
-            label: VjLocalized.List,
-            category: VjLocalized.Basic,
+		bm.add('list', {
+			label: VjLocalized.List,
+			category: VjLocalized.Basic,
 			attributes: { class: 'fas fa-list-ol' },
 			content: `
 				<div class="list-box">
@@ -41,7 +41,7 @@
 	const defaultType = domc.getType('default');
 	const defaultModel = defaultType.model;
 	const defaultView = defaultType.view;
-	
+
 	domc.addType('list-box', {
 		model: defaultModel.extend({
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
@@ -49,14 +49,14 @@
 				droppable: false,
 				traits: []
 			}),
-		}, 
-		{
-			isComponent(el) {
-				if (el && el.classList && el.classList.contains('list-box')) {
-					return { type: 'list-box' };
+		},
+			{
+				isComponent(el) {
+					if (el && el.classList && el.classList.contains('list-box')) {
+						return { type: 'list-box' };
+					}
 				}
-			}
-		}),
+			}),
 		view: defaultView
 	});
 
@@ -68,7 +68,7 @@
 					var tb = [];
 
 					tb.push({
-						attributes: { class: 'fa fa-plus' },
+                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddListItem },
 						command: 'add-list-item',
 					});
 
@@ -113,10 +113,10 @@
 					type: 'toggle_radio',
 					SwitchClass: true,
 					options: [
-                        { id: 'ul', name: 'ul', class: 'unordered-list', icon: "fas fa-list-ul" },
-                        { id: 'ol', name: 'ol', class: 'ordered-list', icon: "fas fa-list-ol" },
+						{ id: 'ul', name: 'ul', class: 'unordered-list', icon: "fas fa-list-ul" },
+						{ id: 'ol', name: 'ol', class: 'ordered-list', icon: "fas fa-list-ol" },
 					],
-					value: 'ul',
+					default: 'ul',
 					changeProp: 1,
 				}, {
 					label: 'List Style',
@@ -125,12 +125,12 @@
 					UpdateStyles: true,
 					cssproperties: [{ name: "list-style-type" }],
 					options: [
-                        { id: 'none', name: 'none', icon: 'fas fa-ban' },
-                        { id: 'circle', name: 'circle', icon: 'far fa-circle' },
-                        { id: 'disc', name: 'disc', icon: 'fas fa-circle' },
-                        { id: 'square', name: 'square', icon: 'fas fa-square' },
+						{ id: 'none', name: 'none', icon: 'fas fa-ban' },
+						{ id: 'circle', name: 'circle', icon: 'far fa-circle' },
+						{ id: 'disc', name: 'disc', icon: 'fas fa-circle' },
+						{ id: 'square', name: 'square', icon: 'fas fa-square' },
 					],
-					value: 'disc',
+					default: 'disc',
 					changeProp: 1,
 				}, {
 					label: 'List Style',
@@ -139,13 +139,13 @@
 					UpdateStyles: true,
 					cssproperties: [{ name: "list-style-type" }],
 					options: [
-                        { id: 'decimal', name: '1' },
-                        { id: 'lower-alpha', name: 'a' },
-                        { id: 'upper-alpha', name: 'A' },
-                        { id: 'lower-roman', name: 'i' },
+						{ id: 'decimal', name: '1' },
+						{ id: 'lower-alpha', name: 'a' },
+						{ id: 'upper-alpha', name: 'A' },
+						{ id: 'lower-roman', name: 'i' },
 						{ id: 'upper-roman', name: 'I' },
 					],
-					value: 'decimal',
+					default: 'decimal',
 					changeProp: 1,
 				}, {
 					label: 'Start',
@@ -153,41 +153,36 @@
 					type: "custom_number",
 					min: "1",
 					max: "100",
-					value: "1",
+					default: "1",
 				}, {
 					label: "Alignment",
 					type: "toggle_checkbox",
 					name: "alignment",
 					UpdateStyles: true,
-					options: [ 
+					options: [
 						{ id: 'left', name: 'left', image: 'align-left' },
 						{ id: 'center', name: 'center', image: 'align-center' },
 						{ id: 'right', name: 'right', image: 'align-right' },
 					],
-					value: "none",
+					default: "none",
 					changeProp: 1,
 				}, {
 					label: "Font Size",
 					name: "fontsize",
 					type: "custom_range",
 					cssproperties: [{ name: "font-size" }],
-					unitOptions: true,
 					units: [
-						{ name: 'px' },
-						{ name: '%' },
-						{ name: 'em' }
+						{ name: 'px', min: 10, max: 100, step: 1, value: 16 },
+						{ name: 'vw', min: 0.5, max: 10, step: 0.1, value: 1 },
 					],
 					unit: "px",
-					min: "10",
-					max: "100",
-					value: "16",
 					changeProp: 1,
 				}, {
 					label: "Color",
 					name: "color",
 					type: 'custom_color',
 					cssproperties: [{ name: "color" }],
-					options: [ 
+					options: [
 						{ id: 'primary', color: 'bg-primary', name: 'Primary', class: 'text-primary' },
 						{ id: 'secondary', color: 'bg-secondary', name: 'Secondary', class: 'text-secondary' },
 						{ id: 'tertiary', color: 'bg-tertiary', name: 'Tertiary', class: 'text-tertiary' },
@@ -199,7 +194,7 @@
 						{ id: 'light', color: 'bg-light', name: 'Light', class: 'text-light' },
 						{ id: 'dark', color: 'bg-dark', name: 'Dark', class: 'text-dark' }
 					],
-					value: 'primary',
+					default: 'primary',
 					changeProp: 1,
 				}]
 			}),
@@ -209,7 +204,8 @@
 			handleTypeChange() {
 				if (typeof this.attributes.list_type != 'undefined' && this.attributes.list_type != "") {
 					this.attributes.tagName = this.attributes.list_type;
-					this.view.reset();
+                    this.view.reset();
+                    VjEditor.runCommand("save");
 				}
 			}
 		}, {
@@ -230,7 +226,7 @@
 					var tb = [];
 
 					tb.push({
-						attributes: { class: 'fa fa-plus' },
+                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddListItem },
 						command: 'add-list-item',
 					});
 
@@ -302,13 +298,13 @@
 				traits: [],
 			}),
 		},
-            {
-            	isComponent(el) {
-            		if (el && el.classList && el.classList.contains('list-text')) {
-            			return { type: 'list-text' };
-            		}
-            	}
-            }),
+			{
+				isComponent(el) {
+					if (el && el.classList && el.classList.contains('list-text')) {
+						return { type: 'list-text' };
+					}
+				}
+			}),
 		view: textView
 	});
 }

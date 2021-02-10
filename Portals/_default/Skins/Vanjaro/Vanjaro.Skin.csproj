@@ -57,6 +57,7 @@
     <Compile Include="Base.ascx.designer.cs">
       <DependentUpon>Base.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Managers\URLManager.cs" />
     <Compile Include="Managers\MigrateManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

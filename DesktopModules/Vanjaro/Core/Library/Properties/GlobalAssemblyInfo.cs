@@ -1,4 +1,4 @@
 ﻿using System.Reflection;
 
 [assembly: AssemblyCopyright("Copyright ©  2020")]
-[assembly: AssemblyVersion("0.5.2")]
+[assembly: AssemblyVersion("1.0.4")]

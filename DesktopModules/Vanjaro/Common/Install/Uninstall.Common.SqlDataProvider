@@ -14,3 +14,10 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_HTMLEditor_Profile]') AND type in (N'U'))
 DROP TABLE {databaseOwner}[VJ_Common_HTMLEditor_Profile]
 GO
+/****** Object:  Table {databaseOwner}[VJ_Common_MailQueue_Log]    Script Date: 8/10/2017 7:10:53 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_MailQueue_Log]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[VJ_Common_MailQueue_Log]
+GO
+
+Delete from {databaseOwner}[{objectQualifier}Schedule] where TypeFullName='Vanjaro.Common.Components.Scheduler,Vanjaro.Common'
+GO

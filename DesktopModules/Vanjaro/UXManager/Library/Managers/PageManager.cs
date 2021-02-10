@@ -6,7 +6,6 @@ using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Security.Permissions;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Installer.Packages;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Url.FriendlyUrl;
@@ -23,6 +22,7 @@ using System.Web;
 using Vanjaro.Common.Components;
 using Vanjaro.Common.Factories;
 using Vanjaro.UXManager.Library.Entities;
+using static Vanjaro.Core.Managers;
 using static Vanjaro.UXManager.Library.Factories;
 
 namespace Vanjaro.UXManager.Library
@@ -196,7 +196,7 @@ namespace Vanjaro.UXManager.Library
                     }
                     catch (Exception ex)
                     {
-                        Exceptions.LogException(ex);
+                        ExceptionManager.LogException(ex);
                     }
                     CacheFactory.Set(CacheKey, ModuleDefDTOs);
                 }
@@ -296,10 +296,12 @@ namespace Vanjaro.UXManager.Library
                     string param = string.Empty;
                     foreach (string q in Context.Request.QueryString.AllKeys)
                     {
-
-                        if (!string.IsNullOrEmpty(q) && q.ToLower() != "language" && q.ToLower() != "tabid")
+                        if ((!string.IsNullOrEmpty(q) && q.ToLower() != "language" && q.ToLower() != "tabid") || string.IsNullOrEmpty(q))
                         {
-                            param += ("&" + q + "=" + Context.Request.QueryString[q]);
+                            if (string.IsNullOrEmpty(q))
+                                param += ("&" + Context.Request.QueryString[q]);
+                            else
+                                param += ("&" + q + "=" + Context.Request.QueryString[q]);
                         }
                     }
                     QueryParameters = param + QueryParameters;

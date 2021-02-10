@@ -16,6 +16,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Caching;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 using DotNetNukeSearch = DotNetNuke.Services.Search.Entities;
 
 namespace Vanjaro.UXManager.Extensions.Block.SearchResult
@@ -63,7 +64,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchResult
                         TitleSnippetLength = 120,
                         BodySnippetLength = 300,
                         CultureCode = culture,
-                        WildCardSearch = IsWildCardEnabledForModule(Attributes)
+                        WildCardSearch = IsWildCardEnabled()
                     };
 
                     try
@@ -72,7 +73,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchResult
                     }
                     catch (Exception ex)
                     {
-                        DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                        ExceptionManager.LogException(ex);
                     }
                 }
                 actionResult.Data = new { results, totalHits, more, results.Count };
@@ -226,17 +227,13 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchResult
 
                 return list;
             }
-            private static bool IsWildCardEnabledForModule(Dictionary<string, string> Attributes)
-            {
-                Hashtable searchModuleSettings = GetSearchModuleSettings(PortalSettings.Current, Attributes);
-                bool enableWildSearch = true;
-                if (!string.IsNullOrEmpty(Convert.ToString(searchModuleSettings["EnableWildSearch"])))
-                {
-                    enableWildSearch = Convert.ToBoolean(searchModuleSettings["EnableWildSearch"]);
-                }
 
-                return enableWildSearch;
+
+            private static bool IsWildCardEnabled()
+            {
+                return !(HostController.Instance.GetString("Search_AllowLeadingWildcard", "N") == "Y") ? false : true;
             }
+
             private static readonly int HtmlModuleDefitionId = -1;
             internal static IEnumerable<GroupedDetailView> GetGroupedDetailViews(SearchQuery searchQuery, int userSearchTypeId, out int totalHits, out bool more)
             {

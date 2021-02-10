@@ -49,15 +49,28 @@
         $('#dvMarkUp').find('.color').spectrum({
             showInput: true,
             preferredFormat: "hex",
-            showPalette: true,
-            showSelectionPalette: true, // true by default
+            showPalette: false,
+            showAlpha: true,
             palette: [],
             chooseText: "Ok",
+            show: function (color) {
+
+                var body = this.closest('body');
+
+                $(body).click(function (event) {
+                    event.stopPropagation();
+                });
+            },
             move: function (color) {
-                $(this).val(color);
+                $(this).val(color.toRgbString());
                 $scope.ApplyChanges(this);
             },
             change: function (color) {
+                $(this).val(color.toRgbString());
+                $scope.ApplyChanges(this);
+            },
+            hide: function (color) {
+                $(this).val(color.toRgbString());
                 $scope.ApplyChanges(this);
             }
         });

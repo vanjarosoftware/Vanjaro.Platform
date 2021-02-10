@@ -15,14 +15,13 @@ using System.Text;
 using System.Web;
 using Vanjaro.Common.Permissions;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
 {
     public class ExtensionsManager
     {
 
-        private static readonly string[] SpecialModuleFolders = new[] { "mvc" };
-        private static readonly string[] Remove_Ext = new[] { "Vanjaro", "DotNetNuke", "jQuery", "jQuery-Migrate", "Dnn.PersonaBar", "Mandeeps", "DefaultAuthentication", "DotNetNuke.Authentication", "DotNetNuke.Registration", "DotNetNuke.SearchResults", "DotNetNuke.Security", "DotNetNuke.ViewProfile", "DotNetNuke.Providers.FolderProviders" };
 
         #region Extensions Lists
 
@@ -121,26 +120,25 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
                     foreach (PackageInfoSlimDto PackageInfo in ExtensionsController.GetInstalledPackages(UserInfo.IsSuperUser ? -1 : PortalId, packageType.PackageType).ToList())
                     {
 
-                        if (Remove_Ext.Where(ext => PackageInfo.Name.ToLower().Contains(ext.ToLower())).FirstOrDefault() == null)
+
+                        Pinfo = new PackageExtensionInfo
                         {
-                            Pinfo = new PackageExtensionInfo
-                            {
-                                PackageId = PackageInfo.PackageId,
-                                Type = packageType.PackageType,
-                                FriendlyName = PackageInfo.FriendlyName,
-                                Name = PackageInfo.Name,
-                                FileName = PackageInfo.FileName,
-                                Description = PackageInfo.Description,
-                                Version = PackageInfo.Version,
-                                IsInUse = PackageInfo.IsInUse,
-                                PackageIcon = VirtualPathUtility.ToAbsolute(PackageInfo.PackageIcon),
-                                UpgradeUrl = PackageInfo.UpgradeUrl,
-                                UpgradeIndicator = PackageInfo.UpgradeIndicator,
-                                CanDelete = PackageInfo.CanDelete,
-                                ReadOnly = PackageInfo.ReadOnly
-                            };
-                            Extensions.Add(Pinfo);
-                        }
+                            PackageId = PackageInfo.PackageId,
+                            Type = packageType.PackageType,
+                            FriendlyName = PackageInfo.FriendlyName,
+                            Name = PackageInfo.Name,
+                            FileName = PackageInfo.FileName,
+                            Description = PackageInfo.Description,
+                            Version = PackageInfo.Version,
+                            IsInUse = PackageInfo.IsInUse,
+                            PackageIcon = VirtualPathUtility.ToAbsolute(PackageInfo.PackageIcon),
+                            UpgradeUrl = PackageInfo.UpgradeUrl,
+                            UpgradeIndicator = PackageInfo.UpgradeIndicator,
+                            CanDelete = PackageInfo.CanDelete,
+                            ReadOnly = PackageInfo.ReadOnly
+                        };
+                        Extensions.Add(Pinfo);
+
                     }
                 }
                 else
@@ -366,7 +364,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
             }
             return TotalPortals;
         }
@@ -387,7 +385,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
                         }
                         catch (Exception ex)
                         {
-                            DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                            ExceptionManager.LogException(ex);
                         }
                     }
                 }

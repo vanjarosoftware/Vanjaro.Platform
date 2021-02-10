@@ -4,8 +4,11 @@ using DotNetNuke.Abstractions.Portals;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
+using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
+using DotNetNuke.Framework;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
@@ -24,6 +27,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
 using Vanjaro.Core.Entities;
+using Vanjaro.UXManager.Extensions.Menu.Pages.Entities;
 using Vanjaro.UXManager.Library.Common;
 using static Vanjaro.Core.Factories;
 using static Vanjaro.Core.Managers;
@@ -52,7 +56,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                         pinfo.PortalId,
                         pinfo.PortalName,
                         PortalAliases = sitecontroller.FormatPortalAliases(pinfo.PortalId),
-                        allowDelete = (pinfo.PortalId != PortalID && !PortalController.IsMemberOfPortalGroup(pinfo.PortalId))
+                        allowDelete = (pinfo.PortalId != PortalID && !PortalController.IsMemberOfPortalGroup(pinfo.PortalId)),
+                        IsVjToursGuided = PortalController.Instance.GetPortalSettings(pinfo.PortalId).ContainsKey("VanjaroToursGuided")
                     };
                     PortalsInfo.Add(portalInfo);
                 }
@@ -116,13 +121,88 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 Assets.Add(exportTemplate.SocialSharingLogo, SocialSharingLogourl);
             if (!string.IsNullOrEmpty(exportTemplate.HomeScreenIcon) && !Assets.ContainsKey(exportTemplate.HomeScreenIcon))
                 Assets.Add(exportTemplate.HomeScreenIcon, HomeScreenIcon);
-
-            foreach (Core.Data.Entities.Pages page in Core.Managers.PageManager.GetAllPublishedPages(PortalID, null))
+            Dictionary<int, string> ExportedModulesContent = new Dictionary<int, string>();
+            PortalSettings ps = new PortalSettings(PortalID);
+            List<Pages.Entities.PagesTreeView> PagesTreeView = Pages.Managers.PagesManager.GetPagesTreeView(new PortalSettings(PortalID), null);
+            exportTemplate.Templates.AddRange(ConvertToLayouts(PortalID, Assets, ExportedModulesContent, ps, PagesTreeView));
+            string serializedExportTemplate = JsonConvert.SerializeObject(exportTemplate);
+            if (!string.IsNullOrEmpty(serializedExportTemplate))
             {
-                Dnn.PersonaBar.Pages.Services.Dto.PageSettings pageSettings = Dnn.PersonaBar.Pages.Components.PagesController.Instance.GetPageSettings(page.TabID);
+                byte[] fileBytes = null;
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                    {
+                        AddZipItem("Template.json", Encoding.Unicode.GetBytes(serializedExportTemplate), zip);
+                        foreach (var exportedModuleContent in ExportedModulesContent)
+                            AddZipItem("PortableModules/" + exportedModuleContent.Key + ".json", Encoding.Unicode.GetBytes(exportedModuleContent.Value), zip);
+
+                        //AddZipItem(ScreenShotFileInfo.FileName, ToByteArray(FileManager.Instance.GetFileContent(ScreenShotFileInfo)), zip);
+
+                        if (Assets != null && Assets.Count > 0)
+                        {
+                            List<string> FileNames = new List<string>();
+                            foreach (KeyValuePair<string, string> asset in Assets)
+                            {
+                                string FileName = asset.Key.Replace(Vanjaro.Core.Managers.PageManager.ExportTemplateRootToken, "");
+                                string FileUrl = asset.Value;
+                                if (FileUrl.StartsWith("/"))
+                                {
+                                    FileUrl = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, FileUrl);
+                                }
+                                if (!FileNames.Contains(FileName))
+                                {
+                                    try
+                                    {
+                                        AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                    }
+                                    catch (Exception ex) { ExceptionManager.LogException(ex); }
+                                }
+                                FileNames.Add(FileName);
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(Theme))
+                        {
+                            string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + Theme);
+                            if (Directory.Exists(FolderPath))
+                            {
+                                foreach (string file in Directory.EnumerateFiles(FolderPath, "*", SearchOption.AllDirectories))
+                                {
+                                    if (!file.ToLower().Contains("theme.css") && !file.ToLower().Contains("theme.backup.css") && !file.ToLower().Contains("theme.editor.js"))
+                                        AddZipItem("Theme" + file.Replace(FolderPath, "").Replace("\\", "/"), File.ReadAllBytes(file), zip);
+                                }
+                            }
+                        }
+                    }
+                    fileBytes = memoryStream.ToArray();
+                }
+                string fileName = Name + "_Site.zip";
+                Response.Content = new ByteArrayContent(fileBytes.ToArray());
+                Response.Content.Headers.Add("x-filename", fileName);
+                Response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                Response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = fileName
+                };
+                Response.StatusCode = HttpStatusCode.OK;
+            }
+            return Response;
+        }
+
+        private static List<Layout> ConvertToLayouts(int PortalID, Dictionary<string, string> Assets, Dictionary<int, string> ExportedModulesContent, PortalSettings ps, List<PagesTreeView> PagesTreeView)
+        {
+            List<Layout> result = new List<Layout>();
+            int ctr = 1;
+            foreach (Pages.Entities.PagesTreeView page in PagesTreeView)
+            {
+                Dnn.PersonaBar.Pages.Services.Dto.PageSettings pageSettings = Dnn.PersonaBar.Pages.Components.PagesController.Instance.GetPageSettings(page.Value);
+                TabInfo tab = TabController.Instance.GetTab(page.Value, PortalID);
+                if (!CanExport(pageSettings, tab))
+                    continue;
+                var version = PageManager.GetLatestVersion(page.Value, PageManager.GetCultureCode(ps));
                 Layout layout = new Layout
                 {
-                    Content = Core.Managers.PageManager.TokenizeTemplateLinks(page.Content, false, Assets)
+                    Content = PageManager.TokenizeTemplateLinks(version.Content, false, Assets)
                 };
 
                 HtmlDocument html = new HtmlDocument();
@@ -149,72 +229,62 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                     foreach (Core.Data.Entities.CustomBlock block in layout.Blocks)
                     {
                         if (!string.IsNullOrEmpty(block.Html))
-                            block.Html = Core.Managers.PageManager.TokenizeTemplateLinks(Core.Managers.PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
+                            block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
                         if (!string.IsNullOrEmpty(block.Css))
-                            block.Css = Core.Managers.PageManager.DeTokenizeLinks(block.Css, PortalID);
+                            block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, PortalID), false, Assets);
                     }
                     CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
                 }
                 layout.Name = pageSettings.Name;
                 layout.Content = html.DocumentNode.OuterHtml;
                 layout.SVG = "";
-                layout.ContentJSON = Core.Managers.PageManager.TokenizeTemplateLinks(page.ContentJSON, true, Assets);
-                layout.Style = page.Style;
-                layout.StyleJSON = page.StyleJSON;
+                layout.ContentJSON = PageManager.TokenizeTemplateLinks(version.ContentJSON, true, Assets);
+                layout.Style = PageManager.TokenizeTemplateLinks(version.Style, false, Assets);
+                layout.StyleJSON = PageManager.TokenizeTemplateLinks(version.StyleJSON, true, Assets);
                 layout.Type = pageSettings.PageType = pageSettings.PageType.ToLower() == "url" ? "URL" : (pageSettings.DisableLink && pageSettings.IncludeInMenu) ? "Folder" : "Standard";
-                exportTemplate.Templates.Add(layout);
+                layout.Children = ConvertToLayouts(PortalID, Assets, ExportedModulesContent, ps, page.children);
+                layout.SortOrder = ctr;
+                ProcessPortableModules(PortalID, tab, ExportedModulesContent);
+                result.Add(layout);
+                ctr++;
             }
-            string serializedExportTemplate = JsonConvert.SerializeObject(exportTemplate);
-            if (!string.IsNullOrEmpty(serializedExportTemplate))
+            return result;
+        }
+
+        private static void ProcessPortableModules(int PortalID, TabInfo tab, Dictionary<int, string> ExportedModulesContent)
+        {
+            foreach (var tabmodule in ModuleController.Instance.GetTabModules(tab.TabID).Values)
             {
-                byte[] fileBytes = null;
-                using (MemoryStream memoryStream = new MemoryStream())
+                var moduleDef = ModuleDefinitionController.GetModuleDefinitionByID(tabmodule.ModuleDefID);
+                var desktopModuleInfo = DesktopModuleController.GetDesktopModule(moduleDef.DesktopModuleID, PortalID);
+                if (!string.IsNullOrEmpty(desktopModuleInfo?.BusinessControllerClass))
                 {
-                    using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                    var module = ModuleController.Instance.GetModule(tabmodule.ModuleID, tab.TabID, true);
+                    if (!module.IsDeleted && !string.IsNullOrEmpty(module.DesktopModule.BusinessControllerClass) && module.DesktopModule.IsPortable)
                     {
-                        AddZipItem("Template.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
-
-                        //AddZipItem(ScreenShotFileInfo.FileName, ToByteArray(FileManager.Instance.GetFileContent(ScreenShotFileInfo)), zip);
-
-                        if (Assets != null && Assets.Count > 0)
-                        {
-                            foreach (KeyValuePair<string, string> asset in Assets)
-                            {
-                                string FileName = asset.Key.Replace(Vanjaro.Core.Managers.PageManager.ExportTemplateRootToken, "");
-                                string FileUrl = asset.Value;
-                                if (FileUrl.StartsWith("/"))
-                                {
-                                    FileUrl = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, FileUrl);
-                                }
-                                AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
-                            }
-                        }
-                        if (!string.IsNullOrEmpty(Theme))
-                        {
-                            string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + Theme);
-                            if (Directory.Exists(FolderPath))
-                            {
-                                foreach (string file in Directory.EnumerateFiles(FolderPath, "*", SearchOption.AllDirectories))
-                                {
-                                    if (!file.ToLower().Contains("theme.backup.css"))
-                                        AddZipItem("Theme" + file.Replace(FolderPath, "").Replace("\\", "/"), File.ReadAllBytes(file), zip);
-                                }
-                            }
-                        }
+                        var businessController = Reflection.CreateObject(
+                            module.DesktopModule.BusinessControllerClass,
+                            module.DesktopModule.BusinessControllerClass);
+                        var controller = businessController as IPortable;
+                        var content = controller?.ExportModule(module.ModuleID);
+                        if (!string.IsNullOrEmpty(content))
+                            ExportedModulesContent.Add(tabmodule.ModuleID, content);
                     }
-                    fileBytes = memoryStream.ToArray();
                 }
-                string fileName = Name + "_Site.zip";
-                Response.Content = new ByteArrayContent(fileBytes.ToArray());
-                Response.Content.Headers.Add("x-filename", fileName);
-                Response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                Response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = fileName
-                };
-                Response.StatusCode = HttpStatusCode.OK;
             }
-            return Response;
+        }
+
+        private static bool CanExport(Dnn.PersonaBar.Pages.Services.Dto.PageSettings pageSettings, TabInfo tab)
+        {
+            if (tab.IsDeleted)
+                return false;
+            string Name = pageSettings.Name.ToLower().Replace(" ", "");
+            if (Name == "home" || Name == "signup" || Name == "notfoundpage" || Name == "profile" || Name == "searchresults" || Name == "404errorpage" || Name == "signin")
+                return true;
+            if (tab.IsVisible && tab.TabPermissions.Where(t => t != null && t.RoleName == "All Users").FirstOrDefault() != null && tab.TabPermissions.Where(t => t != null && t.RoleName == "All Users").FirstOrDefault().AllowAccess)
+                return true;
+            else
+                return false;
         }
 
         private static void AddZipItem(string zipItemName, byte[] zipData, ZipArchive zip)
@@ -272,7 +342,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 actionResult.AddError("exceptions", ex.Message);
                 return actionResult;
             }

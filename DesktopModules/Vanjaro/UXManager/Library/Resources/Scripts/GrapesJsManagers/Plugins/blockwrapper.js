@@ -35,7 +35,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 
                     if (model.attributes.attributes["data-block-allow-customization"] != undefined && model.attributes.attributes["data-block-allow-customization"] == "true") {
                         tb.push({
-                            attributes: { class: 'fa fa-cog', guid: ((typeof model.attributes.attributes["data-block-setting-guid"] != 'undefined') ? model.attributes.attributes["data-block-setting-guid"] : model.attributes.attributes["data-block-guid"]), width: model.attributes.attributes["data-block-width"] },
+                            attributes: { class: 'fa fa-cog', guid: ((typeof model.attributes.attributes["data-block-setting-guid"] != 'undefined') ? model.attributes.attributes["data-block-setting-guid"] : model.attributes.attributes["data-block-guid"]), width: model.attributes.attributes["data-block-width"], title: VjLocalized.Settings },
                             command: 'tlb-vjblock-setting',
                         });
                     }
@@ -66,7 +66,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
             }),
             init() {
                 //Trait - Alignment
-                if (typeof this.getAttributes()["data-block-alignment"] != 'undefined' && this.getAttributes()["data-block-alignment"] == "true") {
+                if (typeof this.getTrait() == "undefined" && typeof this.getAttributes()["data-block-alignment"] != 'undefined' && this.getAttributes()["data-block-alignment"] == "true") {
                     //this.setStyle({ "display": "inline-block" });
                     this.addTrait({
                         label: "Alignment",
@@ -131,11 +131,16 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
                 this.model.set('custom-name', this.model.attributes.attributes["data-block-display-name"] != undefined ? this.model.attributes.attributes["data-block-display-name"] : this.model.attributes.attributes["data-block-type"]);
                 this.model.set('name', this.model.attributes.attributes["data-block-display-name"] != undefined ? this.model.attributes.attributes["data-block-display-name"] : this.model.attributes.attributes["data-block-type"]);
                 if (this.model.attributes != undefined && this.model.attributes.components != undefined && this.model.attributes.components.models[0] != undefined && this.model.attributes.components.models[0].attributes.content != '') {
-                    if (this.model.attributes.attributes["data-block-type"].toLowerCase() == 'logo' && !this.model.attributes.components.models[0].attributes.content.startsWith('<div data-block')) {
-                        this.model.attributes.components.models[0].replaceWith(this.model.attributes.components.models[0].attributes.content);
-                    }
+
+                    var compHtml = null;
+                    if (this.model.attributes.attributes["data-block-type"].toLowerCase() == 'logo' && !this.model.attributes.components.models[0].attributes.content.startsWith('<div data-block'))
+                        compHtml = this.model.attributes.components.models[0].attributes.content;
                     else
-                        this.model.attributes.components.models[0].replaceWith($(this.model.attributes.components.models[0].attributes.content).html());
+                        compHtml = $(this.model.attributes.components.models[0].attributes.content).html();
+
+                    this.model.components('');
+                    this.model.set('content', CleanGjAttrs(compHtml));
+
                     this.model.set({
                         removable: true,
                         draggable: true,
@@ -259,15 +264,34 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
             render: function () {
                 defaultType.view.prototype.render.apply(this, arguments);
                 if (this.model.attributes != undefined && this.model.attributes.components != undefined && this.model.attributes.components.models[0] != undefined && this.model.attributes.components.models[0].attributes.content != '') {
-                    this.model.components($(this.model.attributes.components.models[0].attributes.content).html());
+                    var contentitems = $(this.model.attributes.components.models[0].attributes.content);
+                    if (contentitems != undefined && contentitems.length > 0) {
+                        var contentmarkup = '';
+                        var contentcss = '';
+                        $.each(contentitems, function (ind, itm) {
+                            if (itm.localName == 'style')
+                                contentcss += itm.innerHTML;
+                            else
+                                contentmarkup += itm.innerHTML;
+                        });
+                        this.model.components(contentmarkup);
+                        var canbody = VjEditor.Canvas.getBody();
+                        $(canbody).append('<style id=' + this.model.ccid + '>' + contentcss + '</style>');
+                    }
                     $.each(getAllComponents(this.model), function (k, v) {
                         if (v.attributes.type == 'blockwrapper') {
                             v.set('custom-name', v.attributes.attributes["data-block-display-name"] != undefined ? v.attributes.attributes["data-block-display-name"] : v.attributes.attributes["data-block-type"]);
                             v.set('name', v.attributes.attributes["data-block-display-name"] != undefined ? v.attributes.attributes["data-block-display-name"] : v.attributes.attributes["data-block-type"]);
+
+                            var compHtml = null;
                             if ($(v.view.$el[0].innerHTML).attr('data-gjs-type') == 'blockwrapper')
-                                v.components($(v.view.$el[0].innerHTML).html());
+                                compHtml = $(v.view.$el[0].innerHTML).html();
                             else
-                                v.components(v.view.$el[0].innerHTML);
+                                compHtml = v.view.$el[0].innerHTML;
+
+                            v.components('');
+                            v.set('content', CleanGjAttrs(compHtml));
+
 
                             if (v.attributes.attributes["data-block-type"].toLowerCase() == "logo") {
                                 var style = v.attributes.attributes["data-style"];

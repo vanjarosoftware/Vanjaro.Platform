@@ -6,6 +6,7 @@ using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Api;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -57,11 +58,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Privacy.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdatePrivacySettings(UpdatePrivacySettingsRequest request)
+        public ActionResult UpdatePrivacySettings(dynamic settingsData)
         {
             ActionResult actionResult = new ActionResult();
             try
             {
+                UpdatePrivacySettingsRequest request = JsonConvert.DeserializeObject<UpdatePrivacySettingsRequest>(settingsData.PrivacySettingsRequest.ToString());
                 int pid = request.PortalId ?? PortalSettings.PortalId;
                 if (!UserInfo.IsSuperUser && PortalSettings.PortalId != pid)
                 {
@@ -73,7 +75,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Privacy.Controllers
                 //HostController.Instance.Update("Copyright", request.DisplayCopyright ? "Y" : "N", false);
                 PortalController.UpdatePortalSetting(pid, "CookieMoreLink", request.CookieMoreLink, false, request.CultureCode);
                 HostController.Instance.Update("CheckUpgrade", request.CheckUpgrade ? "Y" : "N", false);
-                HostController.Instance.Update("DnnImprovementProgram", request.DnnImprovementProgram ? "Y" : "N", false);
+                HostController.Instance.Update("VJImprovementProgram", settingsData.CustomSettingsRequest.VJImprovementProgram.Value.ToString(), true);
                 PortalController.UpdatePortalSetting(pid, "DataConsentActive", request.DataConsentActive.ToString(), false);
                 PortalController.UpdatePortalSetting(pid, "DataConsentUserDeleteAction", request.DataConsentUserDeleteAction.ToString(), false);
                 PortalController.UpdatePortalSetting(pid, "DataConsentConsentRedirect", ValidateTabId(request.DataConsentConsentRedirect, pid).ToString(), false);
@@ -116,7 +118,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Privacy.Controllers
                         portalSettings.CookieMoreLink,
                         CheckUpgrade = HostController.Instance.GetBoolean("CheckUpgrade", true),
                         //DisplayCopyright = HostController.Instance.GetBoolean("Copyright", true),
-                        DnnImprovementProgram = HostController.Instance.GetBoolean("DnnImprovementProgram", true),
+                        VJImprovementProgram = HostController.Instance.GetBoolean("VJImprovementProgram", true),
                         portalSettings.DataConsentActive,
                         DataConsentUserDeleteAction = (int)portalSettings.DataConsentUserDeleteAction,
                         DataConsentConsentRedirect = !string.IsNullOrEmpty(actionResult.Data) ? TabSanitizer(portalSettings.DataConsentConsentRedirect, pid)?.TabID : portalSettings.DataConsentConsentRedirect,

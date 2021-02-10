@@ -20,6 +20,7 @@ using Vanjaro.Common.Factories;
 using Vanjaro.Common.Utilities;
 using Vanjaro.UXManager.Extensions.Menu.Assets.Components;
 using Vanjaro.UXManager.Extensions.Menu.Assets.Factories;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Assets.Controllers
 {
@@ -67,7 +68,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message.ToString();
             }
         }
@@ -82,7 +83,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message.ToString();
             }
         }
@@ -97,7 +98,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message.ToString();
             }
         }
@@ -113,7 +114,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message.ToString();
             }
         }
@@ -128,7 +129,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message.ToString();
             }
         }
@@ -143,7 +144,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message.ToString();
             }
         }
@@ -181,7 +182,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message.ToString();
             }
         }
@@ -196,7 +197,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message.ToString();
             }
         }
@@ -234,7 +235,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message.ToString();
             }
         }
@@ -249,7 +250,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message.ToString();
             }
         }
@@ -269,7 +270,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 return ex.Message.ToString();
             }
         }

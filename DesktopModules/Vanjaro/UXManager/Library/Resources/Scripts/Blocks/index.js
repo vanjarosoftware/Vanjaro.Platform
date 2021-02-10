@@ -178,6 +178,35 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
                 'submenu.normalIcon.path': VjDefaultPath + '/svg/icon-d.svg',
                 'submenu.activeIcon.path': VjDefaultPath + '/svg/icon-c.svg',
             },
+            onApply: function (imageEditor, imageModel) {
+                if (!$('.optimizing-overlay').length)
+                    $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Optimizing Images . . .</h1></div>');
+                var sf = $.ServicesFramework(-1);
+                var ImageData = {
+                    PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
+                    ImageByte: imageEditor.toDataURL()
+                };
+                $.ajax({
+                    type: "POST",
+                    url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Image") + "Image/Convert",
+                    data: ImageData,
+                    headers: {
+                        'ModuleId': parseInt(sf.getModuleId()),
+                        'TabId': parseInt(sf.getTabId()),
+                        'RequestVerificationToken': sf.getAntiForgeryValue()
+                    },
+                    success: function (response) {
+                        if (response != "failed") {
+                            imageModel.set('src', response.Url);
+                            var parentmodel = imageModel.parent();
+                            ChangeToWebp(parentmodel, response.Urls);
+                            $('.gjs-toolbar').hide();
+                            VjEditor.Modal.close();
+                        }
+                        $('.vj-wrapper').find('.optimizing-overlay').remove();
+                    }
+                });
+            }
         },
 
         touchOpts: {},
@@ -649,6 +678,9 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
                                     }
                                 }
                             });
+                            if (content.css != undefined && content.css != "") {
+                                VjEditor.addComponents('<style>' + content.css + '</style>');
+                            }                            
                             VjEditor.runCommand("save");
                             window.parent.location.reload();
                         }

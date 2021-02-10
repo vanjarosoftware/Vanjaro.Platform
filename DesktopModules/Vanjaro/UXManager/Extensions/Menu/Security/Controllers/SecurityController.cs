@@ -1,5 +1,4 @@
 ﻿using Dnn.PersonaBar.Security.Components;
-using Dnn.PersonaBar.Security.Services.Dto;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Host;
@@ -21,6 +20,7 @@ using Vanjaro.Common.Factories;
 using Vanjaro.Common.Utilities;
 using Vanjaro.UXManager.Extensions.Menu.Security.Factories;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 using static Vanjaro.UXManager.Extensions.Menu.Security.Factories.AppFactory;
 using static Vanjaro.UXManager.Extensions.Menu.Security.Managers;
 using DataCache = DotNetNuke.Common.Utilities.DataCache;
@@ -114,7 +114,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 actionResult.AddError("", ex.Message);
             }
             return actionResult;
@@ -214,6 +214,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
                     ActionResult.AddError("userEmailAsUsername", DotNetNuke.Services.Localization.Localization.GetString(Constants.ContainsDuplicateAddresses, Constants.LocalResourcesFile));
                     return ActionResult;
                 }
+
                 string setting = request.RegistrationFields;
                 PortalInfo portalInfo = PortalController.Instance.GetPortal(portalSettings.PortalId);
                 portalInfo.UserRegistration = Convert.ToInt32(request.UserRegistration);

@@ -4,6 +4,7 @@ using DotNetNuke.Entities.Portals;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using Vanjaro.Common.Utilities;
 using Vanjaro.UXManager.Library.Entities.Interface;
@@ -17,17 +18,19 @@ namespace Vanjaro.UXManager.Library
         public class MenuManager
         {
             #region Sync Menu Extensions
-            public static List<IMenuItem> GetExtentions(bool CheckVisibilityPermisstion = true)
+            public static List<IMenuItem> GetExtentions(bool CheckVisibilityPermission = true)
             {
-                return MenuFactory.GetExtentions(CheckVisibilityPermisstion).ToList();
+                return MenuFactory.GetExtentions(CheckVisibilityPermission).ToList();
             }
-
 
             public static string RenderMenu(List<CategoryTree> tree, string SearchKeyword)
             {
                 StringBuilder sb = new StringBuilder();
                 tree.RemoveAll(x => string.IsNullOrEmpty(x.Name));
-                return GenerateUL(tree.Where(x => x.ParentID == null).ToList(), tree, sb, SearchKeyword);
+                GenerateUL(tree.Where(x => x.ParentID == null).ToList(), tree, sb, SearchKeyword);
+
+                //Replace Multiple breakline <br > to single breakline.
+                return Regex.Replace(sb.ToString(), @"(<br ?/?>)+", "<br />");
             }
 
             private static string GenerateUL(List<CategoryTree> menu, List<CategoryTree> table, StringBuilder sb, string SearchKeyword)
@@ -61,6 +64,9 @@ namespace Vanjaro.UXManager.Library
                         {
                             icon = "<em class=\"" + dr.Icon + "\"></em>";
                         }
+
+
+
 
                         if (dr.AboveBreakLine)
                         {

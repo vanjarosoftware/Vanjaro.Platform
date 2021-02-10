@@ -1,6 +1,7 @@
 ﻿using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
@@ -414,6 +415,11 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput
 
                 ModuleInfo searchModule = GetSearchModule();
                 return searchModule?.ModuleSettings;
+            }
+
+            internal static bool IsWildCardEnabled()
+            {
+                return !(HostController.Instance.GetString("Search_AllowLeadingWildcard", "N") == "Y") ? false : true;
             }
             private static ModuleInfo GetSearchModule()
             {

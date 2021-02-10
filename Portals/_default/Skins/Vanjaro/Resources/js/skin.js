@@ -57,14 +57,12 @@ ShowNotification = function (heading, msg, type, url, autoHide, tapToDismiss) {
         $toast = toastr[type](msg, heading);
     }
 };
+
 InitAppActionMenu = function () {
+
     var AppMenusScript = $('[data-actionmid]');
-    var grapesjsCookie = '';
 
-    if (typeof getCookie != 'undefined')
-        grapesjsCookie = getCookie('InitGrapejs');
-
-    if (((grapesjsCookie == null || grapesjsCookie == '' || grapesjsCookie == 'false') || (typeof GrapesjsInitData != 'undefined' && !vjEditorSettings.EditPage)) && AppMenusScript.length > 0) {
+    if ((!isEditPage() || (typeof vjEditorSettings == 'undefined')) && AppMenusScript.length > 0) {
         AppMenusScript.each(function () {
             var mid = $(this).data('actionmid');
             $('.DnnModule-' + mid).vjModuleActions({
@@ -73,6 +71,20 @@ InitAppActionMenu = function () {
         });
     }
 };
+
+isEditPage = function () {
+
+    var grapesjsCookie;
+
+    if (typeof getCookie != 'undefined')
+        grapesjsCookie = getCookie('vj_InitUX');
+
+    if (grapesjsCookie == null || grapesjsCookie == '' || grapesjsCookie == 'false')
+        return false;
+    else
+        return true;
+};
+
 DestroyAppActionMenu = function () {
     $('[data-actionmid]').each(function () {
         $('#moduleActions-' + $(this).data('actionmid')).remove();
@@ -109,7 +121,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     var fullwidth = '';
     var scrolling;
     var modalclass = '';
-    var modalstyle = ' style=';
+    var modalstyle = ' style="';
 
     if (typeof scrollbars != 'undefined') {
         if (scrollbars)
@@ -147,8 +159,10 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     if (typeof ModuleId != 'undefined')
         edit = 'data-edit="edit_module" data-mid="' + ModuleId + '"';
 
-    if (modalstyle == ' style=')
+    if (modalstyle == ' style="')
         modalstyle = '';
+    else
+        modalstyle += '"';
 
     var modal = `<div id="` + id + `"  class="uxmanager-modal modal fade ` + fullwidth + `" tabindex="-1" ` + edit + ` role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
         <div class="modal-dialog` + modalclass + `"` + modalstyle + `>
@@ -181,7 +195,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
         });
     }
 
-    if (position == 'right' && width == "100%" && showtogglebtn) {
+    if (position == 'right' && showtogglebtn) {
 
         if ($modal.find(".modal-toggle").length == 0)
             $modal.append('<button type="button" class="modal-toggle" style="right: ' + (width - 1) + 'px;"><em class="fas fa-chevron-right"></em></a>');
@@ -288,7 +302,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
 
     $modal.modal('show');
 
-    $(window.parent.document.body).find('[data-dismiss="modal"]').on("click", function (e) {
+    $(window.parent.document.body).find('[data-dismiss="modal"]').on("click", function (e, reload) {
         if ($(window.document.body).find('.uxmanager-modal').data('edit') == 'edit_module') {
             var mid = $(window.document.body).find('.uxmanager-modal').data('mid');
             if ($('.gjs-frame').contents().find('#dnn_vj_' + mid).length > 0) {
@@ -299,7 +313,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
                     framesrc = framesrc + "&mid=" + mid + "&icp=true";
                 $('.gjs-frame').contents().find('#dnn_vj_' + mid).html("<img class=\"centerloader moduleloader\" src='" + VjDefaultPath + "loading.gif'><iframe id=\"Appframe\" scrolling=\"no\" onload=\"window.parent.RenderApp(this);\" src='" + framesrc + "' style=\"width:100%;height:auto;\"></iframe>");
             }
-            else
+            else if (typeof reload == 'undefined' || reload)
                 window.parent.location.reload();
         }
     });
@@ -606,12 +620,13 @@ $(window).resize(function () {
 
 var vj_recaptcha_responsetoken = "";
 
-function validateCaptcha(el, action, callback) {
+function validateCaptcha(el, action, callback, input) {
     if (typeof grecaptcha !== "undefined") {
         var sitekey = $('#vjrecaptcha').data('sitekey');
         grecaptcha.ready(function () {
             grecaptcha.execute(sitekey, { action: action }).then(function (token) {
                 vj_recaptcha_responsetoken = token;
+                $(input).val(token);
                 callback(el);
             });
         });
@@ -624,3 +639,5 @@ $(document).on("ajaxSend", function (event, xhr, settings) {
     xhr.setRequestHeader('vj-recaptcha', vj_recaptcha_responsetoken);
 });
 
+$.fn.dnnModuleActions = function (options) {
+};

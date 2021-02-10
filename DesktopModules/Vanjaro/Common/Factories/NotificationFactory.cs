@@ -11,15 +11,16 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using Vanjaro.Common.Data.Entities;
+using Vanjaro.Common.Data.Scripts;
 
 namespace Vanjaro.Common.Factories
 {
     internal class NotificationFactory
     {
 
-        internal static void QueueMail(int ModuleID, string Subject, string Content, string ToEmail, List<Data.Entities.Attachment> Attachments, string FromName, string FromEmail, string FromEmailPrefix, string ReplyEmail)
+        internal static void QueueMail(int PortalID, int ModuleID, string Subject, string Content, string ToEmail, List<Data.Entities.Attachment> Attachments, string FromName, string FromEmail, string FromEmailPrefix, string ReplyEmail)
         {
-            QueueMail(ProcessMailQueue(ModuleID, Subject, Content, ToEmail, Attachments, FromName, FromEmail, FromEmailPrefix, ReplyEmail));
+            QueueMail(ProcessMailQueue(PortalID, ModuleID, Subject, Content, ToEmail, Attachments, FromName, FromEmail, FromEmailPrefix, ReplyEmail));
         }
 
         internal static void QueueMail(MailQueue MailQueue)
@@ -133,7 +134,7 @@ namespace Vanjaro.Common.Factories
             {
                 if (smtp != null && !string.IsNullOrEmpty(ToEmail) && !string.IsNullOrEmpty(FromEmail) && !string.IsNullOrEmpty(FromName))
                 {
-                    SmtpClient client = Connect(smtp.Server,smtp.Port,smtp.Authentication, smtp.Username, smtp.Password, smtp.SSL);
+                    SmtpClient client = Connect(smtp.Server, smtp.Port, smtp.Authentication, smtp.Username, smtp.Password, smtp.SSL);
 
                     var msg = new MailQueue
                     {
@@ -141,11 +142,11 @@ namespace Vanjaro.Common.Factories
                         FromEmail = FromEmail,
                         ToEmail = ToEmail,
                         ReplyEmail = ReplyTo,
-                        Subject =  !string.IsNullOrEmpty(FriendlyName) ? FriendlyName + " Notification Email SMTP Configuration Test" : "Notification Email SMTP Configuration Test",
+                        Subject = !string.IsNullOrEmpty(FriendlyName) ? FriendlyName + " Notification Email SMTP Configuration Test" : "Notification Email SMTP Configuration Test",
                     };
 
                     SendMail(client, msg);
-                    
+
                     SuccessfulMessage = "Email Sent Successfully from " + FromEmail.Trim().ToLower() + " to " + ToEmail.Trim().ToLower();
                 }
             }
@@ -322,13 +323,14 @@ namespace Vanjaro.Common.Factories
             return smInfo;
         }
 
-        private static MailQueue ProcessMailQueue(int ModuleID, string Subject, string Content, string ToEmail, List<Data.Entities.Attachment> Attachments, string FromName, string FromEmail, string FromEmailPrefix, string ReplyEmail)
+        private static MailQueue ProcessMailQueue(int PortalID, int ModuleID, string Subject, string Content, string ToEmail, List<Data.Entities.Attachment> Attachments, string FromName, string FromEmail, string FromEmailPrefix, string ReplyEmail)
         {
             MailQueue mailQueue = null;
             if (!string.IsNullOrEmpty(Subject) && !string.IsNullOrEmpty(Content) && !string.IsNullOrEmpty(ToEmail))
             {
                 mailQueue = new MailQueue
                 {
+                    PortalID = PortalID,
                     ModuleID = ModuleID,
                     Subject = Subject,
                     Content = Content,
@@ -430,7 +432,7 @@ namespace Vanjaro.Common.Factories
             table.Columns.Add("RetryAttempt", typeof(int));
             foreach (MailQueue item in MailQueues)
             {
-                MailQueue mq = ProcessMailQueue(item.ModuleID, item.Subject, item.Content, item.ToEmail, null, item.FromName, item.FromEmail, null, item.ReplyEmail);
+                MailQueue mq = ProcessMailQueue(item.PortalID, item.ModuleID, item.Subject, item.Content, item.ToEmail, null, item.FromName, item.FromEmail, null, item.ReplyEmail);
                 if (mq != null)
                 {
                     table.Rows.Add(0, mq.ToEmail, mq.Subject, mq.Content, mq.FromName, mq.FromEmail, mq.ReplyEmail, mq.SmtpUniqueId, mq.ModuleID, item.Attachment, mq.Status, mq.RetryDateTime, mq.RetryAttempt);
@@ -438,5 +440,28 @@ namespace Vanjaro.Common.Factories
             }
             return table;
         }
+
+
+        #region MailQueue Log
+
+        internal static void Log(MailQueue_Log Log)
+        {
+            if (Log != null)
+            {
+                Log.CreatedOn = DateTime.UtcNow;
+                Log.Insert();
+            }
+        }
+
+        internal static void SMTPPurgeLogs()
+        {
+            string Days = SettingFactory.GetHostSetting("SMTPPurgeLogsAfter", false, "60");
+            MailQueue_Log.Delete("WHERE DATEDIFF(DAY, CAST(CreatedOn as DATETIME), GETUTCDATE())>@0", Days);
+        }
+
+
+
+
+        #endregion
     }
 }

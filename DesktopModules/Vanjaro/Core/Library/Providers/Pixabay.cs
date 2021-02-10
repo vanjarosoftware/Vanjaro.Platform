@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Script.Serialization;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Entities;
 using Vanjaro.Core.Entities.Interface;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core.Providers
 {
@@ -23,7 +25,15 @@ namespace Vanjaro.Core.Providers
 
         public string Link => "https://pixabay.com";
         public bool IsSupportBackground => true;
-        private string Key => PortalController.GetEncryptedString("Vanjaro.Integration.Pixabay", PortalSettings.Current.PortalId, Config.GetDecryptionkey());
+
+        private string Key
+        {
+            get
+            {
+                string Pixabay_Key = SettingManager.GetPortalSetting("Vanjaro.Integration.Pixabay", true);
+                return string.IsNullOrEmpty(Pixabay_Key) ? SettingManager.GetHostSetting("Vanjaro.Integration.Pixabay", true) : Pixabay_Key;
+            }
+        }
 
         public static bool IsValid(string Key)
         {
@@ -43,7 +53,7 @@ namespace Vanjaro.Core.Providers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
             }
             return result;
         }

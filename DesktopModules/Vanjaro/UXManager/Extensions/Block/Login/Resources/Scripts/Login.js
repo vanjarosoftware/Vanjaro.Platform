@@ -43,8 +43,10 @@
     },
     processResponse: function (response) {
 
-        var signinText = $($(obj).closest('.Login').find('#loginbtn')).attr('attr-localize-signin-text');
         var obj = $('#loginbtn');
+        var signinText = $($(obj).closest('.Login').find('#loginbtn')).attr('attr-localize-signin-text');
+        if ($.trim(signinText) == "" || signinText == null)
+            signinText = "Sign in";
 
         if (response.IsSuccess) {
             if (response.IsRedirect) {
@@ -58,7 +60,7 @@
 
         if (response.HasErrors) {
 
-            
+
             if (response.Errors["MUSTAGREETOTERMS"] != null && typeof response.Errors["MUSTAGREETOTERMS"] != "undefined") {
                 $(obj).closest('.Login').find('#loginbtn').html(signinText);
                 $('<div class="show-message alert alert-warning">' + response.Message + '</div>').insertAfter($(obj).closest('.login-container').find('.dataconsent').find('.loginhead'));
@@ -243,12 +245,12 @@
     ShowResetPassword: function (obj) {
         $(obj).closest('.Login').find('.show-message').remove();
         $(obj).closest('.Login').find('#Password').val('');
-        $(".Login").hide();
+        $(".login-box").hide();
         $(".ResetPassword").show();
         $(".reset-control").show();
     },
     HideResetPassword: function (obj) {
-        $(".Login").show();
+        $(".login-box").show();
         $(".ResetPassword").hide();
         $(obj).closest('.ResetPassword').find('.show-message').remove();
     }
@@ -262,6 +264,6 @@ $(document).ready(function () {
         }
     });
 
-    Login.UserLoginAPIUri = window.location.origin + $.ServicesFramework(-1).getServiceRoot("Login") + "Login/UserLogin" + window.location.search;
-    
+    setTimeout(function () { Login.UserLoginAPIUri = window.location.origin + $.ServicesFramework(-1).getServiceRoot("Login") + "Login/UserLogin" + window.location.search; });
+
 });

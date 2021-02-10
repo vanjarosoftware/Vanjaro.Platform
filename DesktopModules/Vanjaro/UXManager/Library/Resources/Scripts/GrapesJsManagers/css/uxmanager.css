@@ -272,6 +272,12 @@ ul.Shortcuts {
     height: 30px;
 }
 
+.closeabout .aboutlink {
+    float: left;
+    margin-left: 5px;
+    margin-top: -2px;
+}
+
 a.closeaboutbtn {
     float: right;
     cursor: pointer;
@@ -325,10 +331,6 @@ div#MenuSettings .parent-menu-hide {
     color: #fff;
 }
 
-#Modeiframe {
-    width: 100%;
-}
-
 /*Modal*/
 
 .uxmanager-modal * {
@@ -338,33 +340,6 @@ div#MenuSettings .parent-menu-hide {
 
 .uxmanager-modal .fas {
     font-family: 'Font Awesome 5 Free';
-}
-
-.modal .modal-dialog.modal-right {
-    height: 100%;
-    position: fixed;
-    margin: 0;
-    right: 0;
-}
-
-.modal .modal-dialog iframe {
-    height: 100%;
-    width: 100%;
-    border: none;
-}
-
-    .modal .modal-dialog iframe body {
-        background: #fff !important;
-    }
-
-.modal-body {
-    overflow: hidden;
-}
-
-.modal-content {
-    border-radius: 0 !important;
-    height: 100%;
-    overflow: auto;
 }
 
 /*Sidebar Open/Close*/
@@ -558,9 +533,13 @@ div#MenuSettings .parent-menu-hide {
             height: 28px;
         }
 
-    .sidebar .block-manager .gjs-blocks-cs .gjs-fonts:before {
-        font-size: 28px;
-    }
+.sidebar .block-manager .fas {
+    font-weight: 900 !important;
+}
+
+.sidebar .block-manager .gjs-blocks-cs .gjs-fonts:before {
+    font-size: 28px;
+}
 
 .sidebar .block-manager .gjs-block .gjs-block-label {
     font-size: 11px;
@@ -1785,9 +1764,11 @@ html.responsive {
     border: 1px solid #ddd;
     border-radius: 3px;
 }
-.traitsmanager .gjs-field-href .link-wrapper .link-block input{
-    padding-right:30px;
+
+.traitsmanager .gjs-field-href .link-wrapper .link-block input {
+    padding-right: 30px;
 }
+
 .traitsmanager .gjs-field-href .link-wrapper .link-block .email {
     margin-bottom: 15px;
 }
@@ -2062,6 +2043,7 @@ img#uploaded_image {
 .traitsmanager .color-wrapper .colorPicker .sp-input-container .sp-input {
     display: block;
     width: auto;
+    color: #333333;
 }
 
 .traitsmanager .color-wrapper label,
@@ -2218,7 +2200,76 @@ span.notificationname {
 }
 
 
-.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+.col.gjs-selected,
+.col-1.gjs-selected,
+.col-10.gjs-selected,
+.col-11.gjs-selected,
+.col-12.gjs-selected,
+.col-2.gjs-selected,
+.col-3.gjs-selected,
+.col-4.gjs-selected,
+.col-5.gjs-selected,
+.col-6.gjs-selected,
+.col-7.gjs-selected,
+.col-8.gjs-selected,
+.col-9.gjs-selected,
+.col-auto.gjs-selected,
+.col-lg.gjs-selected,
+.col-lg-1.gjs-selected,
+.col-lg-10.gjs-selected,
+.col-lg-11.gjs-selected,
+.col-lg-12.gjs-selected,
+.col-lg-2.gjs-selected,
+.col-lg-3.gjs-selected,
+.col-lg-4.gjs-selected,
+.col-lg-5.gjs-selected,
+.col-lg-6.gjs-selected,
+.col-lg-7.gjs-selected,
+.col-lg-8.gjs-selected,
+.col-lg-9.gjs-selected,
+.col-lg-auto.gjs-selected,
+.col-md.gjs-selected,
+.col-md-1.gjs-selected,
+.col-md-10.gjs-selected,
+.col-md-11.gjs-selected,
+.col-md-12.gjs-selected,
+.col-md-2.gjs-selected,
+.col-md-3.gjs-selected,
+.col-md-4.gjs-selected,
+.col-md-5.gjs-selected,
+.col-md-6.gjs-selected,
+.col-md-7.gjs-selected,
+.col-md-8.gjs-selected,
+.col-md-9.gjs-selected,
+.col-md-auto.gjs-selected,
+.col-sm.gjs-selected,
+.col-sm-1.gjs-selected,
+.col-sm-10.gjs-selected,
+.col-sm-11.gjs-selected,
+.col-sm-12.gjs-selected,
+.col-sm-2.gjs-selected,
+.col-sm-3.gjs-selected,
+.col-sm-4.gjs-selected,
+.col-sm-5.gjs-selected,
+.col-sm-6.gjs-selected,
+.col-sm-7.gjs-selected,
+.col-sm-8.gjs-selected,
+.col-sm-9.gjs-selected,
+.col-sm-auto.gjs-selected,
+.col-xl.gjs-selected,
+.col-xl-1.gjs-selected,
+.col-xl-10.gjs-selected,
+.col-xl-11.gjs-selected,
+.col-xl-12.gjs-selected,
+.col-xl-2.gjs-selected,
+.col-xl-3.gjs-selected,
+.col-xl-4.gjs-selected,
+.col-xl-5.gjs-selected,
+.col-xl-6.gjs-selected,
+.col-xl-7.gjs-selected,
+.col-xl-8.gjs-selected,
+.col-xl-9.gjs-selected,
+.col-xl-auto.gjs-selected {
     max-width: none !important;
 }
 
@@ -2340,8 +2391,8 @@ span.notificationname {
     }
 
 .centerloader {
-    height: 25px;
-    width: 25px;
+    height: 25px !important;
+    width: 25px !important;
     margin: 0 auto;
     display: table;
 }
@@ -2400,14 +2451,13 @@ span.notificationname {
     width: 278px;
     height: 164px;
     background: #d5dadf;
-    margin-top: 6px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
     .traitsmanager .uploader-wrapper:after {
-        content: "Choose File";
+        content: "Choose Background Image";
         position: absolute;
         left: 0;
         bottom: 0;
@@ -2417,12 +2467,11 @@ span.notificationname {
         font-size: 11px;
         text-align: center;
         background: rgba(109,120,130,.95);
-        opacity: 0;
         transition: all .3s;
     }
 
-    .traitsmanager .uploader-wrapper:hover:after {
-        opacity: 1;
+    .traitsmanager .uploader-wrapper#backgroundvideo:after {
+        content: "Choose Background Video";
     }
 
     .traitsmanager .uploader-wrapper .btn-delete {
@@ -2449,6 +2498,7 @@ span.notificationname {
         bottom: 0;
         left: 0;
         right: 0;
+        cursor: pointer;
     }
 
     .traitsmanager .uploader-wrapper label em {
@@ -2535,6 +2585,11 @@ span.notificationname {
 
 .sp-picker-container .sp-input {
     border: 1px solid #bbb;
+    color: #333333;
+}
+
+.sp-picker-container {
+    width: 180px;
 }
 
 [data-gjs-type="module"] iframe {
@@ -2556,7 +2611,7 @@ span.notificationname {
 }
 
 
-.stylemanager  .gjs-field.gjs-field-range {
+.stylemanager .gjs-field.gjs-field-range {
     border: none;
     width: 0%; /*value changed from 75% to 0%*/
     margin-right: 10px;
@@ -2575,6 +2630,7 @@ span.notificationname {
 }
 
 .traitsmanager .preset-wrapper div.styles {
+    width: 278px;
     padding: 6px 0;
     border-top: 1px solid transparent;
     border-bottom: 1px solid #eee;
@@ -2584,41 +2640,43 @@ span.notificationname {
         border-color: #ccc;
     }
 
+.traitsmanager .preset-wrapper label {
+    display: block;
+    width: 278px;
+    overflow: hidden;
+    margin: 10px 0px;
+    font-size: 16px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
 .traitsmanager .preset-wrapper.heading label {
     display: flex;
     align-items: center;
-    width: 278px;
-    overflow: hidden;
-    white-space: nowrap;
     margin: 0px;
-    cursor: pointer;
+    color: #333;
     font-size: 32px;
 }
 
 .traitsmanager .preset-wrapper.text label {
-    display: block;
-    overflow: hidden;
-    width: 278px;
-    word-break: break-word;
     margin: 10px 0px;
-    cursor: pointer;
+    color: #333;
     font-size: 16px;
-}
-
-.traitsmanager .preset-wrapper div.styles {
-    width: 278px;
+    white-space: normal;
 }
 
 .traitsmanager .preset-wrapper.button label {
     display: inline-block;
-    /*width: 100%;*/
+    width: auto;
     text-align: center;
-    /*font-size: 16px;*/
-    /*padding: .375rem .75rem;
-    border-radius: .25rem;*/
     margin: 0px;
-    cursor: pointer;
-    word-break: break-word;
+    padding: 6px 12px;
+    border: 1px solid #666;
+    border-radius: 4px;
+    background-color: #666;
+    color: #fff;
+    font-size: 16px;
+    white-space: normal;
 }
 
 .gjs-rte-active .fa-link:before {
@@ -2791,10 +2849,6 @@ span.notificationname {
     padding-right: 30px;
 }
 
-#gjs-sm-top, #gjs-sm-right, #gjs-sm-left, #gjs-sm-bottom {
-    width: 25%;
-}
-
 .gjs-sm-sector .gjs-sm-property .gjs-sm-layer, .gjs-clm-tags .gjs-sm-property .gjs-sm-layer {
     padding: 0px;
 }
@@ -2872,10 +2926,6 @@ input.rangeinput {
         position: relative;
         top: -12px;
     }
-
-div#gjs-sm-top, div#gjs-sm-right, div#gjs-sm-left, div#gjs-sm-bottom {
-    text-align: center;
-}
 
 
 #gjs-sm-margin .diffmargin,
@@ -3239,4 +3289,204 @@ div#gjs-sm-top, div#gjs-sm-right, div#gjs-sm-left, div#gjs-sm-bottom {
 
 .gjs-frames {
     height: 100%;
+}
+
+iframe#UXpagerender.preview-open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: #fff;
+}
+
+.sm-radio-wrapper {
+    display: flex;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+    .sm-radio-wrapper input {
+        display: none;
+    }
+
+    .sm-radio-wrapper label {
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+        padding: 5px 0;
+        margin: 0;
+        border: 1px solid #ccc;
+        border-radius: 0;
+        font-size: 12px;
+        line-height: 18px;
+        cursor: pointer;
+    }
+
+        .sm-radio-wrapper label:first-of-type {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .sm-radio-wrapper label:last-of-type {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+    .sm-radio-wrapper input:checked + label {
+        color: #fff;
+        background-color: #a4afb7;
+        border-color: #a4afb7;
+    }
+
+body.resp-mode.mobile,
+body.resp-mode.tablet {
+    background: #333;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.sidebar-open .vj-wrapper {
+    transition: width 0.35s ease,height 0.35s ease;
+    width: 100%;
+}
+
+body.resp-mode.mobile .vj-wrapper,
+body.resp-mode.tablet .vj-wrapper {
+    border-style: solid;
+    border-width: 40px 10px 70px;
+    border-color: #000;
+    border-radius: 30px;
+    margin: auto;
+    background: #fff;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+body.resp-mode.tablet .vj-wrapper {
+    width: 768px;
+}
+
+body.resp-mode.mobile .vj-wrapper {
+    width: 360px;
+    height: 700px;
+}
+
+
+.stylemanager .sm-range-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+    .stylemanager .sm-range-wrapper input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        color: inherit;
+        border: none;
+        background-color: transparent;
+        box-sizing: border-box;
+        position: relative;
+        padding: 5px;
+        z-index: 1;
+    }
+
+        .stylemanager .sm-range-wrapper input[type="text"] {
+            width: 30%;
+            padding-right: 25px;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .stylemanager .sm-range-wrapper input[type="range"] {
+            width: 65%;
+        }
+
+            .stylemanager .sm-range-wrapper input[type="range"]:focus {
+                outline: none;
+            }
+
+            .stylemanager .sm-range-wrapper input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                margin-top: -4px;
+                height: 10px;
+                width: 10px;
+                border: 1px solid rgba(0,0,0,0.2);
+                border-radius: 100%;
+                background-color: #ddd;
+                cursor: pointer;
+            }
+
+            .stylemanager .sm-range-wrapper input[type="range"]::-moz-range-thumb {
+                height: 10px;
+                width: 10px;
+                border: 1px solid rgba(0,0,0,0.2);
+                border-radius: 100%;
+                background-color: #ddd;
+                cursor: pointer;
+            }
+
+            .stylemanager .sm-range-wrapper input[type="range"]::-ms-thumb {
+                height: 10px;
+                width: 10px;
+                border: 1px solid rgba(0,0,0,0.2);
+                border-radius: 100%;
+                background-color: #ddd;
+                cursor: pointer;
+            }
+
+            .stylemanager .sm-range-wrapper input[type="range"]::-moz-range-track {
+                background-color: rgba(0,0,0,0.2);
+                border-radius: 1px;
+                margin-top: 3px;
+                height: 3px;
+            }
+
+            .stylemanager .sm-range-wrapper input[type="range"]::-webkit-slider-runnable-track {
+                background-color: rgba(0,0,0,0.2);
+                border-radius: 1px;
+                margin-top: 3px;
+                height: 3px;
+            }
+
+            .stylemanager .sm-range-wrapper input[type="range"]::-ms-track {
+                background-color: rgba(0,0,0,0.2);
+                border-radius: 1px;
+                margin-top: 3px;
+                height: 3px;
+            }
+
+.stylemanager .sm-unit-wrapper {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    padding: 6px;
+}
+
+    .stylemanager .sm-unit-wrapper select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        color: inherit;
+        border: none;
+        background-color: transparent;
+        box-sizing: border-box;
+        width: 100%;
+        position: relative;
+        padding: 0;
+        z-index: 1;
+        outline: none;
+    }
+
+.sidebar-open .select_language {
+    pointer-events: none;
 }

@@ -24,12 +24,15 @@ using Vanjaro.UXManager.Library.Entities;
 using Vanjaro.UXManager.Library.Entities.Enum;
 using static Vanjaro.UXManager.Library.Managers;
 using System.Net;
+using Vanjaro.Common.Utilities;
 
 namespace Vanjaro.UXManager.Library
 {
     public partial class Base : ControlPanelBase
     {
         private string TemplateLibraryURL = string.Empty;
+        private string ExtensionStoreURL = string.Empty;
+        private string ExtensionURL = string.Empty;
         private bool? m2v = null;
 
 #if DEBUG
@@ -40,10 +43,13 @@ namespace Vanjaro.UXManager.Library
         protected override void OnInit(EventArgs e)
         {
 #if RELEASE
-            TemplateLibraryURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
-#else
-            TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/49A70BA1-206B-471F-800A-679799FF09DF";
+            TemplateLibraryURL = "https://library.vanjaro.cloud/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower() + "/type/block";
+            ExtensionStoreURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
+# else
+            TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower()+"/type/block";
+            ExtensionStoreURL = "http://store.vanjaro.local/store";
 #endif
+            ExtensionURL = ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/') + MenuManager.GetURL() + "mid=0&icp=true&guid=54caeff2-9fac-42ae-8594-40312867d56a#/installpackage";
 
             base.OnInit(e);
             if (CanShowUXManager())
@@ -101,28 +107,23 @@ namespace Vanjaro.UXManager.Library
 
                     WebForms.LinkCSS(Page, "UXManagerAppCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/StyleSheets/app.css"));
 
-                    if (InjectEditor())
-                    {
-                        WebForms.LinkCSS(Page, "GrapesJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapes.min.css"));
-                        WebForms.LinkCSS(Page, "GrapickJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapick.min.css"));
-                        WebForms.LinkCSS(Page, "GrapesJsPanelCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/jsPanel/jspanel.min.css"));
-                    }
+
+                    WebForms.LinkCSS(Page, "GrapesJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapes.min.css"));
+                    WebForms.LinkCSS(Page, "GrapickJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapick.min.css"));
+                    WebForms.LinkCSS(Page, "GrapesJsPanelCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/jsPanel/jspanel.min.css"));
+
 
                     WebForms.RegisterClientScriptInclude(Page, "GrapesJsJs", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/uxmanager.min.js"), false);
                     WebForms.LinkCSS(Page, "GrapesJspluginCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJsManagers/css/uxmanager.css"));
                     WebForms.LinkCSS(Page, "FontawesomeV4Css", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/fontawesome/v4.css"));
 
-                    if (!CanShowUXManager())
-                    {
-                        WebForms.RegisterClientScriptBlock(Page, "MenuSettingsBlocks", "$(document).ready(function(){$('[href=\"#MenuSettings\"]').click();$('#mode-switcher').remove();setTimeout(function(){$('.gjs-cv-canvas__frames').css('pointer-events','none');}, 100); });", true);
-                    }
-
                     LocalizeGrapeJS();
 
+                    FrameworkManager.Load(this, "Bootstrap");
                     FrameworkManager.Load(this, "FontAwesome");
                 }
                 string NavigateURL = PageManager.GetCurrentTabUrl(PortalSettings);
-                string ClientScript = "var AppMenus=" + JsonConvert.SerializeObject(AppManager.GetAll(AppType.Module)) + "; var m2vPageTabUrl='" + NavigateURL + "'; var CurrentTabUrl ='" + NavigateURL + "'; var IsAdmin=" + PortalSettings.UserInfo.IsInRole("Administrators").ToString().ToLower() + ";";
+                string ClientScript = "var AppMenus=" + JsonConvert.SerializeObject(AppManager.GetAll(AppType.Module)) + "; var m2vPageTabUrl='" + NavigateURL + "'; var CurrentTabUrl ='" + NavigateURL + "'; var IsAdmin=" + PortalSettings.UserInfo.IsInRole("Administrators").ToString().ToLower() + ";var vjProductSKU='" + Core.Components.Product.SKU + "';";
                 WebForms.RegisterClientScriptBlock(Page, "GrapesJsAppsExts", ClientScript, true);
 
                 if (TabPermissionController.HasTabPermission("EDIT") && !Request.QueryString.AllKeys.Contains("mid"))
@@ -144,6 +145,9 @@ namespace Vanjaro.UXManager.Library
                     }
                 }
             }
+            else
+                WebForms.RegisterClientScriptBlock(Page, "MenuSettingsBlocks", "$(document).ready(function(){$('[href=\"#MenuSettings\"]').click();$('#mode-switcher').remove();setTimeout(function(){$('.gjs-cv-canvas__frames').css('pointer-events','none');}, 100); });", true);
+
 
         }
 
@@ -152,7 +156,8 @@ namespace Vanjaro.UXManager.Library
         {
 
             if (InjectEditor())
-                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined') GrapesjsInit(" + JsonConvert.SerializeObject(Editor.Options) + "); });", true);
+                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var vjEditorSettings =" + JsonConvert.SerializeObject(Editor.Options) + "; var  TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; var ExtensionStoreURL = \"" + ExtensionStoreURL + "\"; var ExtensionURL = \"" + ExtensionURL + "\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined' && getCookie('vj_InitUX') == 'true') GrapesjsInit(); });", true);
+
         }
 
         private BaseModel GetBaseModel()
@@ -176,7 +181,7 @@ namespace Vanjaro.UXManager.Library
                 item.HasTabEditPermission = TabPermissionController.HasTabPermission("EDIT");
 
             item.EditPage = Editor.Options.EditPage;
-            item.ShowUXManager = string.IsNullOrEmpty(Core.Managers.CookieManager.GetValue("InitGrapejs")) ? false : Convert.ToBoolean(Core.Managers.CookieManager.GetValue("InitGrapejs"));
+            item.ShowUXManager = string.IsNullOrEmpty(Core.Managers.CookieManager.GetValue("vj_InitUX")) ? false : Convert.ToBoolean(Core.Managers.CookieManager.GetValue("vj_InitUX"));
             return item;
         }
 

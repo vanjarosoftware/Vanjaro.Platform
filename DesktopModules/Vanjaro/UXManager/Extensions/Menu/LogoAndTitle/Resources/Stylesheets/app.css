@@ -100,12 +100,16 @@
     padding: 10px;
 }
 
-
-.uploaddefault.uploadinput-button .upld .fas {
-    padding: 5px;
-    margin-top: 45px;
-    color: #000 !important;
+.FaviconBox #uploaded_image {
+    width: auto;
 }
+
+
+    .uploaddefault.uploadinput-button .upld .fas {
+        padding: 5px;
+        margin-top: 45px;
+        color: #000 !important;
+    }
 
 .uploaddefault .upld .buttons {
     position: absolute;

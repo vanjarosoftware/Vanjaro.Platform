@@ -9,6 +9,7 @@
                     <div class="col-md-9 left_border">
                         [uilayout:TabsCookieConsent]
                         [uilayout:TabsDataConsent]
+                        [uilayout:TabsImprovementProgram]
                     </div>
                 </div>
             </uitemplate>
@@ -18,6 +19,7 @@
                 <ul class="nav nav-pills nav-stacked tab-line">
                     <li id="CookieConsent" class="nav-item"><a class="nav-link active" mn-ng-click="Click_ShowTab('CookieConsent')">[L:CookieConsent]</a></li>
                     <li id="DataConsent" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('DataConsent')">[L:DataConsent]</a></li>
+                    <li id="ImprovementProgram" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('ImprovementProgram')">[L:ImprovementProgram]</a></li>
                 </ul>
             </uitemplate>
         </uilayout>
@@ -59,16 +61,35 @@
                 </div>
             </uitemplate>
         </uilayout>
+        <uilayout name="TabsImprovementProgram" attr-ng-show="ShowImprovementProgramTab">
+            <uitemplate>
+                <div id="accordionImprovementProgram">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionImprovementProgram" data-target="#ImprovementProgramSettings">
+                                [L:ImprovementProgram]
+                                <em class="fas fa-caret-down float-right"></em>
+                            </a>
+                        </div>
+                        <div id="ImprovementProgramSettings" class="collapse show" data-parent="#accordionImprovementProgram">
+                            <div class="card-body">
+                                [uilayout:Program]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
         <!--<uilayout name="default">
-            <uielement name="CommunicationSettings" control="label" label="false"></uielement>
-            <uielement name="line" control="line" label="false"></uielement>
-            <uielement name="CheckforSoftwareUpgrades" attr-class="toggle_right" ngmodel="ui.data.GetPrivacy.Options.Settings.CheckUpgrade" control="checkboxtoggle"></uielement>
-            <uielement name="DisplayCopyright" attr-class="toggle_right" ngmodel="ui.data.GetPrivacy.Options.Settings.DisplayCopyright" control="checkboxtoggle"></uielement>
-            <uielement name="DNNImprovementProgram" attr-class="toggle_right" ngmodel="ui.data.GetPrivacy.Options.Settings.DnnImprovementProgram" control="checkboxtoggle"></uielement>
-            <uielement name="CookieConsentSettings" control="label" label="false"></uielement>
-            <uielement name="line" control="line" label="false"></uielement>
-            <uielement name="CookieConsentUrl" control="textbox" attr-ng-disabled="!ui.data.GetPrivacy.Options.Settings.ShowCookieConsent" ngmodel="ui.data.GetPrivacy.Options.Settings.CookieMoreLink"></uielement>
-        </uilayout>-->
+        <uielement name="CommunicationSettings" control="label" label="false"></uielement>
+        <uielement name="line" control="line" label="false"></uielement>
+        <uielement name="CheckforSoftwareUpgrades" attr-class="toggle_right" ngmodel="ui.data.GetPrivacy.Options.Settings.CheckUpgrade" control="checkboxtoggle"></uielement>
+        <uielement name="DisplayCopyright" attr-class="toggle_right" ngmodel="ui.data.GetPrivacy.Options.Settings.DisplayCopyright" control="checkboxtoggle"></uielement>
+        <uielement name="DNNImprovementProgram" attr-class="toggle_right" ngmodel="ui.data.GetPrivacy.Options.Settings.DnnImprovementProgram" control="checkboxtoggle"></uielement>
+        <uielement name="CookieConsentSettings" control="label" label="false"></uielement>
+        <uielement name="line" control="line" label="false"></uielement>
+        <uielement name="CookieConsentUrl" control="textbox" attr-ng-disabled="!ui.data.GetPrivacy.Options.Settings.ShowCookieConsent" ngmodel="ui.data.GetPrivacy.Options.Settings.CookieMoreLink"></uielement>
+    </uilayout>-->
         <uilayout name="Default">
             <uitemplate>
                 <div class="text-right fixed-footer">
@@ -112,6 +133,9 @@
             </uitemplate>
             <uielement name="ButtonConsent" attr-class="buttonconsent" control="label" label="false"></uielement>
             <uielement name="ResetTerms" control="button" attr-ng-click="Click_ResetTerms()" attr-access-roles="host" label="false" attr-class="text-right button-left width-200"></uielement>
+        </uilayout>
+        <uilayout name="Program" attr-class="tab-pane active">
+            <uielement name="VJImprovementProgram" attr-class="toggle_right" ngmodel="ui.data.GetPrivacy.Options.Settings.VJImprovementProgram" control="checkboxtoggle"></uielement>
         </uilayout>
     </uiengine>
 </div>

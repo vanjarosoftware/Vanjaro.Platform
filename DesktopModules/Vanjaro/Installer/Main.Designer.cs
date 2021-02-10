@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tabs = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.bBrowsePhysicalPath = new MetroFramework.Controls.MetroButton();
             this.bOtherSettings = new MetroFramework.Controls.MetroLink();
             this.lProgressBar = new MetroFramework.Controls.MetroLabel();
             this.tbPhysicalPath = new MetroFramework.Controls.MetroTextBox();
@@ -55,11 +57,12 @@
             this.lUpgradeVersion = new MetroFramework.Controls.MetroLabel();
             this.cbUpgradeVersion = new MetroFramework.Controls.MetroComboBox();
             this.fbdPhysicalPath = new System.Windows.Forms.FolderBrowserDialog();
-            this.bBrowsePhysicalPath = new MetroFramework.Controls.MetroButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabs.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabs
@@ -103,6 +106,15 @@
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "New Installation";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
+            // 
+            // bBrowsePhysicalPath
+            // 
+            this.bBrowsePhysicalPath.Location = new System.Drawing.Point(342, 156);
+            this.bBrowsePhysicalPath.Name = "bBrowsePhysicalPath";
+            this.bBrowsePhysicalPath.Size = new System.Drawing.Size(28, 23);
+            this.bBrowsePhysicalPath.TabIndex = 17;
+            this.bBrowsePhysicalPath.Text = "...";
+            this.bBrowsePhysicalPath.Click += new System.EventHandler(this.bBrowsePhysicalPath_Click);
             // 
             // bOtherSettings
             // 
@@ -349,26 +361,27 @@
             this.cbUpgradeVersion.Size = new System.Drawing.Size(370, 29);
             this.cbUpgradeVersion.TabIndex = 5;
             // 
-            // bBrowsePhysicalPath
+            // pictureBox1
             // 
-            this.bBrowsePhysicalPath.Location = new System.Drawing.Point(342, 156);
-            this.bBrowsePhysicalPath.Name = "bBrowsePhysicalPath";
-            this.bBrowsePhysicalPath.Size = new System.Drawing.Size(28, 23);
-            this.bBrowsePhysicalPath.TabIndex = 17;
-            this.bBrowsePhysicalPath.Text = "...";
-            this.bBrowsePhysicalPath.Click += new System.EventHandler(this.bBrowsePhysicalPath_Click);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(158, 14);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(423, 470);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tabs);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";
             this.Resizable = false;
-            this.Text = "Vanjaro";
             this.TextAlign = System.Windows.Forms.VisualStyles.HorizontalAlign.Center;
             this.Load += new System.EventHandler(this.Main_Load);
             this.tabs.ResumeLayout(false);
@@ -377,6 +390,7 @@
             this.metroTabPage2.ResumeLayout(false);
             this.metroTabPage2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -411,5 +425,6 @@
         private MetroFramework.Controls.MetroButton bDeleteSite;
         private MetroFramework.Controls.MetroButton bBrowsePhysicalPath;
         private System.Windows.Forms.FolderBrowserDialog fbdPhysicalPath;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

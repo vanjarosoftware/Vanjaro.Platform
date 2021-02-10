@@ -214,7 +214,7 @@ namespace Vanjaro.Common.Factories
         public static List<TreeView> GetDnnPages(int PortalID)
         {
             List<TreeView> result = new List<TreeView>();
-            List<TabInfo> TabCollection = TabController.GetPortalTabs(PortalID, -1, false, null, false, false, true, true, false);
+            List<TabInfo> TabCollection = TabController.GetPortalTabs(PortalID, -1, false, null, true, false, true, true, false);
             if (TabCollection != null && TabCollection.Count > 0)
             {
                 foreach (TabInfo Item in TabCollection.Where(t => t.ParentId == -1))
@@ -313,7 +313,7 @@ namespace Vanjaro.Common.Factories
                 if (hasPermission)
                 {
                     TreeView FolderItem = new TreeView();
-                    
+
                     if (string.IsNullOrEmpty(parentFolder.FolderPath))
                     {
                         if (PortalId == -1)
@@ -519,7 +519,7 @@ namespace Vanjaro.Common.Factories
 
                         if (!flag)
                         {
-                            flaggedUrl =  DotNetNuke.Common.Globals.FriendlyUrl(tab, DotNetNuke.Common.Globals.ApplicationURL(tab.TabID), PortalSettings as IPortalSettings);
+                            flaggedUrl = DotNetNuke.Common.Globals.FriendlyUrl(tab, DotNetNuke.Common.Globals.ApplicationURL(tab.TabID), PortalSettings as IPortalSettings);
                         }
                         else
                         {
@@ -674,7 +674,7 @@ namespace Vanjaro.Common.Factories
             {
                 IFolderInfo folder = FolderManager.Instance.GetFolder(folderId);
                 result.FolderName = "";
-                
+
                 if (string.IsNullOrEmpty(folder.FolderPath))
                 {
                     if (folder.PortalID == -1)
@@ -948,7 +948,7 @@ namespace Vanjaro.Common.Factories
                 }
             }
             Result.Status = "Success";
-            Result.Url = FileManager.Instance.GetUrl(file);
+            Result.Url = GetEscapedFileName(FileManager.Instance.GetUrl(file));
             Result.Urls = GetUrls(file);
             return Result;
         }
@@ -1023,7 +1023,7 @@ namespace Vanjaro.Common.Factories
             {
                 result.Name = file.RelativePath;
                 result.FileId = file.FileId;
-                result.FileUrl = FileManager.Instance.GetUrl(file);
+                result.FileUrl = GetEscapedFileName(FileManager.Instance.GetUrl(file));
                 return result;
             }
             return result;
@@ -1047,7 +1047,7 @@ namespace Vanjaro.Common.Factories
                             {
                                 ImageUrl imgUrl = new ImageUrl
                                 {
-                                    Url = FileManager.Instance.GetUrl(finfo),
+                                    Url = GetEscapedFileName(FileManager.Instance.GetUrl(finfo)),
                                     Width = finfo.Width,
                                     Type = "image"
                                 };
@@ -1057,7 +1057,7 @@ namespace Vanjaro.Common.Factories
                                 {
                                     imgUrl = new ImageUrl
                                     {
-                                        Url = FileManager.Instance.GetUrl(webpfileinfo),
+                                        Url = GetEscapedFileName(FileManager.Instance.GetUrl(webpfileinfo)),
                                         Width = finfo.Width,
                                         Type = "webp"
                                     };
@@ -1463,7 +1463,7 @@ namespace Vanjaro.Common.Factories
         {
             if (!string.IsNullOrEmpty(fileName))
             {
-                fileName = Uri.EscapeUriString(fileName);
+                fileName = fileName.Replace(" ", "%20");
             }
 
             return fileName;
@@ -1487,7 +1487,7 @@ namespace Vanjaro.Common.Factories
             foreach (IFolderInfo item in FolderManager.Instance.GetFolders(PortalId))
             {
                 string foldername = item.FolderPath;
-                
+
                 if (string.IsNullOrEmpty(foldername))
                 {
                     foldername = "Site Root";
@@ -1623,7 +1623,7 @@ namespace Vanjaro.Common.Factories
                 {
                     result = imagefolderpath + "fa-file-code.jpg";
                 }
-                else if (file.Extension.ToLower().Contains("jpg") || file.Extension.ToLower().Contains("jpeg") || file.Extension.ToLower().Contains("gif") || file.Extension.ToLower().Contains("bmp") || file.Extension.ToLower().Contains("png") || file.Extension.ToLower().Contains("svg") || file.Extension.ToLower().Contains("ico"))
+                else if (file.Extension.ToLower().Contains("jpg") || file.Extension.ToLower().Contains("jpeg") || file.Extension.ToLower().Contains("gif") || file.Extension.ToLower().Contains("bmp") || file.Extension.ToLower().Contains("png") || file.Extension.ToLower().Contains("svg") || file.Extension.ToLower().Contains("ico") || file.Extension.ToLower().Contains("webp"))
                 {
                     result = FileManager.Instance.GetUrl(file);
                 }

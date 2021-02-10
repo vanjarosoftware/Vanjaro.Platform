@@ -41,20 +41,24 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\..\..\bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Components\Constants.cs" />
+    <Compile Include="Components\Interfaces\IReviewComment.cs" />
+    <Compile Include="Components\Interfaces\ITheme.cs" />
     <Compile Include="Components\NotificationItem.cs" />
+    <Compile Include="Components\Product.cs" />
+    <Compile Include="Components\ReviewContentInfo.cs" />
     <Compile Include="Components\ReviewSettings.cs" />
     <Compile Include="Components\StringText.cs" />
     <Compile Include="Components\StringValue.cs" />
     <Compile Include="Components\Enum.cs" />
     <Compile Include="Data\Entities\Pages.cs" />
     <Compile Include="Data\Entities\PropertyLocalization.cs" />
-    <Compile Include="Data\Entities\WorkflowPage.cs" />
+    <Compile Include="Data\Entities\WorkflowContent.cs" />
     <Compile Include="Data\Entities\WorkflowPermissionInfo.cs" />
     <Compile Include="Components\PageWorkflowPermission.cs" />
     <Compile Include="Data\Entities\Setting.cs" />
@@ -91,13 +95,17 @@
     <Compile Include="Entities\Interface\IVideoProvider.cs" />
     <Compile Include="Factories\CacheFactory.cs" />
     <Compile Include="Factories\BlockFactory.cs" />
+    <Compile Include="Factories\SectionPermissionFactory.cs" />
     <Compile Include="Factories\LocalizationFactory.cs" />
     <Compile Include="Factories\NotificationTaskFactory.cs" />
     <Compile Include="Factories\PageFactory.cs" />
     <Compile Include="Factories\PortalFactory.cs" />
     <Compile Include="Factories\SettingFactory.cs" />
     <Compile Include="Factories\WorkflowFactory.cs" />
+    <Compile Include="Managers\AnalyticsManager.cs" />
     <Compile Include="Managers\CookieManager.cs" />
+    <Compile Include="Managers\ExceptionManager.cs" />
+    <Compile Include="Managers\SectionPermissionManager.cs" />
     <Compile Include="Managers\SignatureManager.cs" />
     <Compile Include="Packager\Vanjaro\Install\Upgrade.aspx.cs">
       <DependentUpon>Upgrade.aspx</DependentUpon>
@@ -112,6 +120,7 @@
     <Compile Include="Managers\LocalizationManager.cs" />
     <Compile Include="Managers\ThemeManager.cs" />
     <Compile Include="Managers\NotificationManager.cs" />
+    <Compile Include="Services\Analytics\AnalyticsStartup.cs" />
     <Compile Include="Services\Captcha\Captcha.cs" />
     <Compile Include="Providers\Youtube.cs" />
     <Compile Include="Providers\Pixabay.cs" />
@@ -132,9 +141,11 @@
     <Compile Include="Services\Authentication\OAuth\OAuthClient.cs" />
     <Compile Include="Services\Authentication\OAuth\OAuthUser.cs" />
     <Compile Include="Services\PageContext\PageContext.cs" />
+    <Compile Include="Services\Analytics\Analytics.cs" />
     <Compile Include="Services\Search\SearchEngine.cs" />
     <Compile Include="Services\Search\SearchEngineScheduler.cs" />
     <Compile Include="Services\Search\TabIndexer.cs" />
+    <Compile Include="Themes\Basic\Theme.cs" />
     <Compile Include="UserControls\Login.ascx.cs">
       <DependentUpon>Login.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -144,16 +155,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DistrubtionAddList.txt" />
+    <Content Include="Cleanup\01.00.04.txt" />
+    <Content Include="Cleanup\00.05.03.txt" />
+    <Content Include="DistributionAddList.txt" />
     <Content Include="EULA.txt" />
-    <Content Include="Images\1209008.jpg" />
-    <Content Include="Images\Greynob.png" />
-    <Content Include="Images\img-1.jpg" />
-    <Content Include="Images\img-2.jpg" />
-    <Content Include="Images\img-3.jpg" />
-    <Content Include="Images\img-4.jpg" />
-    <Content Include="Images\img-5.jpg" />
-    <Content Include="Images\office-865091_640.jpg" />
+    <Content Include="Images\Logo.svg" />
     <Content Include="Images\vanjaro_home.png" />
     <Content Include="Images\vanjaro_logo.png" />
     <Content Include="Images\vanjaro_social.png" />
@@ -161,7 +167,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database.cs</LastGenOutput>
     </Content>
-    <Content Include="DistrubtionRemoveList.txt" />
+    <Content Include="DistributionRemoveList.txt" />
     <Content Include="PackageList.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -170,9 +176,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Dnn.PersonaBar.Extensions, Version=9.5.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -203,10 +206,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\bin\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="LibSassHost, Version=1.2.10.0, Culture=neutral, PublicKeyToken=3e24e88796a38e46, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\bin\LibSassHost.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="Vanjaro.Common, Version=3.3.8.0, Culture=neutral, processorArchitecture=MSIL">
@@ -243,18 +243,22 @@
     <Content Include="Packager\documentation.txt" />
     <Content Include="Packager\Licenses\Resources.txt" />
     <Content Include="Packager\Releases\placeholder.txt" />
-    <Content Include="Packager\Vanjaro\bin\x86\libsass.dll" />
+    <Content Include="Packager\Vanjaro\bin\x64\dart.exe" />
+    <Content Include="Packager\Vanjaro\bin\x86\dart.exe" />
+    <Content Include="Packager\Vanjaro\Images\icon_authentication.png" />
+    <Content Include="Packager\Vanjaro\Images\Branding\Vanjaro_Icon.png" />
+    <Content Include="Packager\Vanjaro\Images\icon_extensions_32px.png" />
+    <Content Include="Packager\Vanjaro\Images\icon_library.png" />
     <Content Include="Packager\Vanjaro\Images\Branding\Vanjaro_logo.png" />
     <Content Include="Packager\Vanjaro\Images\checkbox.png" />
     <Content Include="Packager\Vanjaro\Images\favicon.ico" />
-    <Content Include="Packager\Vanjaro\Images\icon_library.png" />
+    <Content Include="Packager\Vanjaro\Images\icon_module.png" />
+    <Content Include="Packager\Vanjaro\Images\icon_provider.gif" />
     <Content Include="Packager\Vanjaro\Images\radiobutton.png" />
     <Content Include="Packager\Vanjaro\bin\AdvancedStringBuilder.dll" />
     <Content Include="Packager\Vanjaro\bin\HtmlAgilityPack.dll" />
     <Content Include="Packager\Vanjaro\bin\ImageProcessor.dll" />
     <Content Include="Packager\Vanjaro\bin\ImageProcessor.Plugins.WebP.dll" />
-    <Content Include="Packager\Vanjaro\bin\x64\libsass.dll" />
-    <Content Include="Packager\Vanjaro\bin\LibSassHost.dll" />
     <Content Include="Packager\Vanjaro\bin\System.Buffers.dll" />
     <Content Include="Packager\Vanjaro\Install\Upgrade.aspx" />
     <Content Include="Packager\Vanjaro\Install\Install.htm" />
@@ -277,12 +281,13 @@
     <Content Include="Themes\Basic\Blocks\Search Input\search input.html" />
     <Content Include="Themes\Basic\Blocks\Search Result\search result.html" />
     <Content Include="Themes\Basic\Layout.Edit.html" />
-    <Content Include="Themes\Basic\Theme.css" />
     <Content Include="Themes\Resources.txt" />
     <Content Include="UserControls\Login.ascx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\Shared.resx" />
+    <Content Include="App_LocalResources\Shared.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Install\Core.01.00.00.SqlDataProvider" />
@@ -424,10 +429,7 @@
     <Content Include="Vanjaro.dnn" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Themes\Basic\editor\921af5fa-3030-4bae-aaec-0e353b9489ff\theme.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="VanjaroDistrubtion.dnn" />
+    <Content Include="VanjaroDistribution.dnn" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Themes\Basic\scss\Bootstrap\utilities\_interactions.scss" />
@@ -446,6 +448,13 @@
     <Content Include="Install\Core.01.00.01.SqlDataProvider" />
     <Content Include="Packager\Packager.bat" />
     <Content Include="Install\Core.01.00.02.SqlDataProvider" />
+    <Content Include="Install\Core.01.00.03.SqlDataProvider" />
+    <Content Include="Install\Core.01.00.04.SqlDataProvider" />
+    <Content Include="Packager\Vanjaro\bin\x64\sass.snapshot" />
+    <Content Include="Packager\Vanjaro\bin\x86\sass.snapshot" />
+    <Content Include="Themes\Basic\templates\website\Privacy.json" />
+    <Content Include="Themes\Basic\templates\website\Terms.json" />
+    <Content Include="Images\Banner_1280w.webp" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -465,6 +474,7 @@
     <EmbeddedResource Include="Packager\Licenses\ColorPicker %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\ContextMenu %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Cookie %28MIT%29.txt.resources" />
+    <EmbeddedResource Include="Packager\Licenses\Dart Sass %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Grapesjs %28BSD 3%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Dialog %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Fabric %28MIT%29.txt.resources" />
@@ -474,8 +484,6 @@
     <EmbeddedResource Include="Packager\Licenses\JQuery Autocomplete %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\JQuery SweetAlert %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\JsonViewer %28MIT%29.txt.resources" />
-    <EmbeddedResource Include="Packager\Licenses\libsass.txt %28SOS%29.resources" />
-    <EmbeddedResource Include="Packager\Licenses\LibSassHost %28Apache%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Loading-Bar %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Mark %28MIT%29.txt.resources" />
     <EmbeddedResource Include="Packager\Licenses\Moment %28MIT%29.txt.resources" />

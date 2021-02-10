@@ -28,8 +28,10 @@
                     var Comment = $('#VJReviewComment', parent.document).val();
                     var Data = {
                         Action: Action,
-                        PageID: $scope.ui.data.Page.Options.ID,
-                        Comment: Comment
+                        EntityID: $scope.ui.data.ReviewContentInfo.Options.EntityID,
+                        Comment: Comment,
+                        Entity: $scope.ui.data.ReviewContentInfo.Options.Entity,
+                        Version: $scope.ui.data.ReviewContentInfo.Options.Version,
                     };
                     if (Comment != undefined && Comment != '') {
                         common.webApi.post('moderator/addcomment', '', Data).success(function (data) {
@@ -41,7 +43,7 @@
                                 parent.toastr.clear();
                                 if (data.Data.NextState.Options == null)
                                     $('.gjs-cv-canvas__frames', parent.document).removeClass('lockcanvas')
-                                if ($scope.getCookie("InitGrapejs") == "" || $scope.getCookie("InitGrapejs") == "true") {
+                                if ($scope.getCookie("vj_InitUX") == "" || $scope.getCookie("vj_InitUX") == "true") {
                                     $scope.RenderMarkup('Register Link');
                                 }
                                 else {

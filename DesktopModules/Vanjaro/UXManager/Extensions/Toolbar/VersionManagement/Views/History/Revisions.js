@@ -37,20 +37,24 @@
                     common.webApi.get('Revisions/GetVersion', 'Version=' + $scope.SelectedVersion + '&Locale=' + window.parent.VJLocal).success(function (response) {
                         if (response != undefined) {
                             $scope.ui.data.Versions.Options = response.Version;
-                            html = response.html;
                             $(window.parent.document.body).find('.revisionloaderimg').remove();
-                            var css = response.css;
                             var mids = [];
                             $.each($(data).find('[mid]'), function (key, val) {
                                 mids.push($(val).attr('mid'));
                             }).promise().done(function () {
-                                var Css = css;
+                                var Css = '';
                                 $.each($(data).find('style'), function (sk, sv) {
                                     if (Css.indexOf(sv.innerHTML) <= 0)
                                         Css += sv.innerHTML;
                                 }).promise().done(function () {
-                                    window.parent.window.VjEditor.setComponents(html);
-                                    window.parent.window.VjEditor.setStyle(Css);
+                                    var vjcomps = eval(response.components);
+                                    window.parent.BuildBlockComponent(vjcomps, data);
+                                    window.parent.window.VjEditor.setComponents(vjcomps);
+                                    window.parent.window.VjEditor.setStyle(response.css);
+                                    if (Css.length > 0) {
+                                        var canvasBody = window.parent.window.VjEditor.Canvas.getBody();
+                                        $(canvasBody).append('<style>' + Css + '</style>');
+                                    }
                                     if (mids.length > 0) {
                                         $.each(mids, function (midkey, mid) {
                                             var existinghtml = $(window.parent.window.VjEditor.Canvas.getDocument()).find('[mid=' + mid + ']>[vjmod]')[0];
@@ -62,35 +66,35 @@
                                             }
                                         });
                                     }
-                                    if (response.BlocksMarkUp != undefined) {
-                                        var blockdom = $(response.BlocksMarkUp);
-                                        $.each(blockdom, function (k, v) {
-                                            if ($(v).attr('data-block-guid') != undefined) {
-                                                var blocksattributes = "";
-                                                $.each(v.attributes, function (k, v) {
-                                                    blocksattributes += "[" + v.nodeName + '=' + '"' + v.nodeValue + '"' + ']';
-                                                });
-                                                var existinghtmls = $(window.parent.window.VjEditor.Canvas.getDocument()).find(blocksattributes);
-                                                $.each(existinghtmls, function (ind, va) {
-                                                    if ($(va).attr('data-block-type') == "Logo") {
-                                                        $scope.BuildLogo(JSON.parse(response.components), $(va).attr('id'), va, v);
-                                                    }
-                                                    if ($(va).attr('data-block-type') == "global") {
-                                                        var GlobalMarkUp = $(v.innerHTML);
-                                                        $.each(GlobalMarkUp.find('[data-block-type="Logo"]'), function (k, v) {
-                                                            var style = $(v).attr('data-style');
-                                                            if (style != undefined) {
-                                                                $(v).find('img').attr('style', style);
-                                                            }
-                                                        });
-                                                        $(va).html(GlobalMarkUp);
-                                                    }
-                                                    else
-                                                        $(va).html(v.innerHTML);
-                                                });
-                                            }
-                                        });
-                                    }
+                                    //if (response.BlocksMarkUp != undefined) {
+                                    //    var blockdom = $(response.BlocksMarkUp);
+                                    //    $.each(blockdom, function (k, v) {
+                                    //        if ($(v).attr('data-block-guid') != undefined) {
+                                    //            var blocksattributes = "";
+                                    //            $.each(v.attributes, function (k, v) {
+                                    //                blocksattributes += "[" + v.nodeName + '=' + '"' + v.nodeValue + '"' + ']';
+                                    //            });
+                                    //            var existinghtmls = $(window.parent.window.VjEditor.Canvas.getDocument()).find(blocksattributes);
+                                    //            $.each(existinghtmls, function (ind, va) {
+                                    //                if ($(va).attr('data-block-type') == "Logo") {
+                                    //                    $scope.BuildLogo(JSON.parse(response.components), $(va).attr('id'), va, v);
+                                    //                }
+                                    //                if ($(va).attr('data-block-type') == "global") {
+                                    //                    var GlobalMarkUp = $(v.innerHTML);
+                                    //                    $.each(GlobalMarkUp.find('[data-block-type="Logo"]'), function (k, v) {
+                                    //                        var style = $(v).attr('data-style');
+                                    //                        if (style != undefined) {
+                                    //                            $(v).find('img').attr('style', style);
+                                    //                        }
+                                    //                    });
+                                    //                    $(va).html(GlobalMarkUp);
+                                    //                }
+                                    //                else
+                                    //                    $(va).html(v.innerHTML);
+                                    //            });
+                                    //        }
+                                    //    });
+                                    //}
                                     if (response.Scripts != undefined) {
                                         $.each(response.Scripts, function (k, v) {
                                             var script = $(window.parent.window.VjEditor.Canvas.getDocument().createElement('script'))[0];
@@ -139,6 +143,7 @@
                                     window.parent.window.VjEditor.LayerManager.render();
                                 });
                             });
+                            window.parent.window.VjEditor.runCommand("save");
                         }
                     });
                 }
@@ -151,13 +156,13 @@
 
     $scope.Click_ViewLogs = function (Data) {
         if (Data.IsLogsExist)
-            window.parent.OpenPopUp(null, 600, 'right', 'Logs', window.parent.CurrentExtTabUrl + '&guid=33d8efed-0f1d-471e-80a4-6a7f10e87a42#moderator/' + Data.Version);
+            window.parent.OpenPopUp(null, 600, 'right', 'Logs', window.parent.CurrentExtTabUrl + '&guid=33d8efed-0f1d-471e-80a4-6a7f10e87a42#moderator?version=' + Data.Version + '&entity=Page&entityid=' + Data.TabID);
     };
 
     $scope.BuildLogo = function (components, id, existinghtml, blockdom) {
         $.each(components, function (k, v) {
             if (v.attributes != undefined && v.attributes.id != undefined && v.attributes.id == id) {
-                var style = $(v.content).find('img').attr('style');
+                var style = v.attributes["data-style"];
                 var contentdom = $(blockdom.innerHTML);
                 $(contentdom).find('img').attr('style', style);
                 $.each(window.parent.window.VjEditor.getComponents().models, function (key, model) {

@@ -318,7 +318,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                 }
                 catch (Exception ex)
                 {
-                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                    ExceptionManager.LogException(ex);
                     actionResult.IsSuccess = false;
                 }
                 return actionResult;
@@ -525,6 +525,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                 Layout baseLayout = GetLayouts().Where(l => l.IsSystem == isSystem && l.Name.ToLower() == name.ToLower()).FirstOrDefault();
                 if (baseLayout != null)
                 {
+                    Dictionary<int, string> ExportedModulesContent = new Dictionary<int, string>();
                     string Theme = Core.Managers.ThemeManager.CurrentTheme.Name;
                     ExportTemplate exportTemplate = new ExportTemplate
                     {
@@ -566,7 +567,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                             if (!string.IsNullOrEmpty(block.Html))
                                 block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, portalID), false, Assets);
                             if (!string.IsNullOrEmpty(block.Css))
-                                block.Css = PageManager.DeTokenizeLinks(block.Css, portalID);
+                                block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, portalID), false, Assets);
                         }
                         Core.Factories.CacheFactory.Clear(Core.Factories.CacheFactory.GetCacheKey(Core.Factories.CacheFactory.Keys.CustomBlock + "ALL", portalID));
                     }
@@ -574,10 +575,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     layout.Content = html.DocumentNode.OuterHtml;
                     layout.SVG = "";
                     layout.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.ContentJSON, portalID), true, Assets);
-                    layout.Style = PageManager.DeTokenizeLinks(baseLayout.Style.ToString(), portalID);
-                    layout.StyleJSON = PageManager.DeTokenizeLinks(baseLayout.StyleJSON.ToString(), portalID);
+                    layout.Style = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.Style.ToString(), portalID), false, Assets);
+                    layout.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.StyleJSON.ToString(), portalID), true, Assets);
                     layout.Type = baseLayout.Type;
                     exportTemplate.Templates.Add(layout);
+                    PageManager.ProcessPortableModules(portalID, layout.Content, ExportedModulesContent);
                     string serializedExportTemplate = JsonConvert.SerializeObject(exportTemplate);
                     if (!string.IsNullOrEmpty(serializedExportTemplate))
                     {
@@ -586,8 +588,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         {
                             using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                             {
-                                AddZipItem("Template.json", Encoding.ASCII.GetBytes(serializedExportTemplate), zip);
-
+                                AddZipItem("Template.json", Encoding.Unicode.GetBytes(serializedExportTemplate), zip);
+                                foreach (var exportedModuleContent in ExportedModulesContent)
+                                    AddZipItem("PortableModules/" + exportedModuleContent.Key + ".json", Encoding.Unicode.GetBytes(exportedModuleContent.Value), zip);
                                 if (Assets != null && Assets.Count > 0)
                                 {
                                     foreach (KeyValuePair<string, string> asset in Assets)
@@ -595,10 +598,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                                         string FileName = asset.Key.Replace(PageManager.ExportTemplateRootToken, "");
                                         string FileUrl = asset.Value;
                                         if (FileUrl.StartsWith("/"))
-                                        {
                                             FileUrl = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, FileUrl);
+
+                                        try
+                                        {
+                                            AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
                                         }
-                                        AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+                                        catch (Exception ex) { ExceptionManager.LogException(ex); }
                                     }
                                 }
                             }
@@ -819,14 +825,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
 
             public static List<PagesTreeView> GetPagesTreeView()
             {
-                return GetPagesTreeView(null);
+                return GetPagesTreeView(PortalSettings.Current, null);
             }
 
-            public static List<PagesTreeView> GetPagesTreeView(IEnumerable<TabInfo> TabInfo)
+            public static List<PagesTreeView> GetPagesTreeView(PortalSettings portalSettings, IEnumerable<TabInfo> tabInfo)
             {
-                PortalSettings portalSettings = PortalController.Instance.GetCurrentSettings() as PortalSettings;
                 List<PagesTreeView> result = new List<PagesTreeView>();
-                IEnumerable<TabInfo> AvailablePages = TabInfo ?? Core.Managers.PageManager.GetPageList(PortalSettings.Current).ToList();
+                IEnumerable<TabInfo> AvailablePages = tabInfo ?? PageManager.GetPageList(portalSettings).ToList();
                 if (AvailablePages != null)
                 {
                     foreach (TabInfo c in AvailablePages)
@@ -843,7 +848,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
 
                         if (c.TabID > Null.NullInteger)
                         {
-                            result.Add(new PagesTreeView { HasContent = Core.Managers.PageManager.GetAllTabIdByPortalID(PortalSettings.Current.PortalId).Where(x => x == c.TabID).FirstOrDefault() > 0 ? true : false, label = c.TabName.TrimStart('.'), Value = c.TabID, selected = false, children = TabInfo == null ? GetPageTreeChildrens(c.TabID, portalSettings) : new List<PagesTreeView>(), usedbyCount = 0, PageUrl = c.FullUrl, FolderPage = IsFolder, LinkNewWindow = LinkNewWindow, HasBeenPublished = HasBeenPublished, IsVisible = c.IsVisible, IsRedirectPage = IsRedirectPage, HasEditPermission = HasEditPermission });
+                            result.Add(new PagesTreeView { HasContent = Core.Managers.PageManager.GetAllTabIdByPortalID(PortalSettings.Current.PortalId).Where(x => x == c.TabID).FirstOrDefault() > 0 ? true : false, label = c.TabName.TrimStart('.'), Value = c.TabID, selected = false, children = tabInfo == null ? GetPageTreeChildrens(c.TabID, portalSettings) : new List<PagesTreeView>(), usedbyCount = 0, PageUrl = c.FullUrl, FolderPage = IsFolder, LinkNewWindow = LinkNewWindow, HasBeenPublished = HasBeenPublished, IsVisible = c.IsVisible, IsRedirectPage = IsRedirectPage, HasEditPermission = HasEditPermission });
                         }
                     }
                 }

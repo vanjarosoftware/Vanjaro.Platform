@@ -21,6 +21,7 @@ using System.Web;
 using Vanjaro.Common.Utilities;
 using Vanjaro.UXManager.Extensions.Block.Register.Entities;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 using DataCache = DotNetNuke.Common.Utilities.DataCache;
 using Localization = DotNetNuke.Services.Localization.Localization;
 
@@ -366,7 +367,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register
 
                         //HS Skin Messages 
                         //actionResult.AddError("SendMail_Error", string.Format(Localization.GetString("SendMail.Error", Localization.SharedResourceFile), newUser.Email));
-                        Exceptions.LogException(new Exception("Skin Messages : " + string.Format(Localization.GetString("SendMail.Error", Localization.SharedResourceFile), newUser.Email)));
+                        ExceptionManager.LogException(new Exception("Skin Messages : " + string.Format(Localization.GetString("SendMail.Error", Localization.SharedResourceFile), newUser.Email)));
                         actionResult.Message = strMessage;
                     }
                     else
@@ -463,7 +464,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register
                     if (string.IsNullOrEmpty(redirectUrl))
                     {
                         //redirect to current page 
-                        redirectUrl = ServiceProvider.NavigationManager.NavigateURL();
+                        redirectUrl = ServiceProvider.NavigationManager.NavigateURL(PortalSettings.Current.HomeTabId);
                     }
                 }
 

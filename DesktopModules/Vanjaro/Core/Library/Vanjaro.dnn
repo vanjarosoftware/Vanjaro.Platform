@@ -1,92 +1,107 @@
 <dotnetnuke type="Package" version="6.0">
-  <packages>
-    <package name="Vanjaro" type="Library" version="00.05.02">
-      <friendlyName>Vanjaro</friendlyName>
-      <description>Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN.</description>
-      <dependencies>
-        <dependency type="CoreVersion">09.07.02</dependency>
-        <dependency type="ManagedPackage" version="01.00.00">Dnn.PersonaBar.UI</dependency>
-      </dependencies>
-      <owner>
-        <name>Vanjaro</name>
-        <organization>Vanjaro</organization>
-        <url>http://www.vanjaro.com</url>
-        <email>support@vanjaro.com</email>
-      </owner>
-      <license src="license.txt" />
-      <releaseNotes src="release.txt" />
-      <azureCompatible>true</azureCompatible>
-      <components>
-        <component type="Script">
-          <scripts>
-            <basePath>DesktopModules\Vanjaro\Core\Library</basePath>
-            <script type="Install">
-              <path>Install</path>
-              <name>Core.01.00.00.SqlDataProvider</name>
-              <version>01.00.00</version>
-            </script>
-            <script type="Install">
-              <path>Install</path>
-              <name>Core.01.00.01.SqlDataProvider</name>
-              <version>01.00.01</version>
-            </script>
-            <script type="Install">
-              <path>Install</path>
-              <name>Core.01.00.02.SqlDataProvider</name>
-              <version>01.00.02</version>
-            </script>
-            <script type="UnInstall">
-              <path>Install</path>
-              <name>Uninstall.Core.SqlDataProvider</name>
-              <version>00.05.00</version>
-            </script>
-          </scripts>
-        </component>
-        <component type="Script">
-          <scripts>
-            <basePath>DesktopModules\Vanjaro\Common</basePath>
-            <script type="Install">
-              <path>Install</path>
-              <name>Common.01.00.00.SqlDataProvider</name>
-              <version>01.00.00</version>
-            </script>
-            <script type="UnInstall">
-              <path>Install</path>
-              <name>Uninstall.Common.SqlDataProvider</name>
-              <version>00.05.00</version>
-            </script>
-          </scripts>
-        </component>
-        <component type="Script">
-          <scripts>
-            <basePath>DesktopModules\Vanjaro\URL</basePath>
-            <script type="Install">
-              <path>Install</path>
-              <name>URL.01.00.00.SqlDataProvider</name>
-              <version>01.00.00</version>
-            </script>
-            <script type="UnInstall">
-              <path>Install</path>
-              <name>Uninstall.URL.SqlDataProvider</name>
-              <version>00.05.00</version>
-            </script>
-          </scripts>
-        </component>
-        <component type="Script">
-          <scripts>
-            <basePath>DesktopModules\Vanjaro\UXManager\Extensions\Migrate</basePath>
-            <script type="Install">
-              <path>Install</path>
-              <name>Migrate.01.00.00.SqlDataProvider</name>
-              <version>01.00.00</version>
-            </script>
-            <script type="UnInstall">
-              <path>Install</path>
-              <name>Uninstall.Migrate.SqlDataProvider</name>
-              <version>00.05.00</version>
-            </script>
-          </scripts>
-        </component>
+	<packages>
+		<package name="Vanjaro" type="Library" version="01.00.04">
+			<friendlyName>Vanjaro</friendlyName>
+			<description>Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN.</description>
+			<dependencies>
+				<dependency type="CoreVersion">09.08.01</dependency>
+				<dependency type="ManagedPackage" version="01.00.00">Dnn.PersonaBar.UI</dependency>
+			</dependencies>
+			<owner>
+				<name>Vanjaro</name>
+				<organization>Vanjaro</organization>
+				<url>http://www.vanjaro.com</url>
+				<email>support@vanjaro.com</email>
+			</owner>
+			<license src="license.txt" />
+			<releaseNotes src="release.txt" />
+			<azureCompatible>true</azureCompatible>
+			<components>
+				<component type="Script">
+					<scripts>
+						<basePath>DesktopModules\Vanjaro\Core\Library</basePath>
+						<script type="Install">
+							<path>Install</path>
+							<name>Core.01.00.00.SqlDataProvider</name>
+							<version>01.00.00</version>
+						</script>
+						<script type="Install">
+							<path>Install</path>
+							<name>Core.01.00.01.SqlDataProvider</name>
+							<version>01.00.01</version>
+						</script>
+						<script type="Install">
+							<path>Install</path>
+							<name>Core.01.00.02.SqlDataProvider</name>
+							<version>01.00.02</version>
+						</script>
+						<script type="Install">
+							<path>Install</path>
+							<name>Core.01.00.03.SqlDataProvider</name>
+							<version>01.00.03</version>
+						</script>
+						<script type="Install">
+							<path>Install</path>
+							<name>Core.01.00.04.SqlDataProvider</name>
+							<version>01.00.04</version>
+						</script>
+						<script type="UnInstall">
+							<path>Install</path>
+							<name>Uninstall.Core.SqlDataProvider</name>
+							<version>00.05.00</version>
+						</script>
+					</scripts>
+				</component>
+				<component type="Script">
+					<scripts>
+						<basePath>DesktopModules\Vanjaro\Common</basePath>
+						<script type="Install">
+							<path>Install</path>
+							<name>Common.01.00.00.SqlDataProvider</name>
+							<version>01.00.00</version>
+						</script>
+						<script type="Install">
+							<path>Install</path>
+							<name>Common.01.00.01.SqlDataProvider</name>
+							<version>01.00.01</version>
+						</script>
+						<script type="UnInstall">
+							<path>Install</path>
+							<name>Uninstall.Common.SqlDataProvider</name>
+							<version>00.05.00</version>
+						</script>
+					</scripts>
+				</component>
+				<component type="Script">
+					<scripts>
+						<basePath>DesktopModules\Vanjaro\URLManager</basePath>
+						<script type="Install">
+							<path>Install</path>
+							<name>URL.01.00.00.SqlDataProvider</name>
+							<version>01.00.00</version>
+						</script>
+						<script type="UnInstall">
+							<path>Install</path>
+							<name>Uninstall.URL.SqlDataProvider</name>
+							<version>00.05.00</version>
+						</script>
+					</scripts>
+				</component>
+				<component type="Script">
+					<scripts>
+						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Migrate</basePath>
+						<script type="Install">
+							<path>Install</path>
+							<name>Migrate.01.00.00.SqlDataProvider</name>
+							<version>01.00.00</version>
+						</script>
+						<script type="UnInstall">
+							<path>Install</path>
+							<name>Uninstall.Migrate.SqlDataProvider</name>
+							<version>00.05.00</version>
+						</script>
+					</scripts>
+				</component>
 
 				<component type="AuthenticationSystem">
 					<authenticationService>
@@ -100,8 +115,13 @@
 					<assemblies>
 						<assembly>
 							<path>bin</path>
+							<name>Vanjaro.Core.Providers.Mail.VanjaroMailProvider.dll</name>
+							<version>01.00.04</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
 							<name>Vanjaro.Core.dll</name>
-							<version>00.05.02</version>
+							<version>01.00.04</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
@@ -126,6 +146,11 @@
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.About.dll</name>
+							<version>01.00.00</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Vanjaro.UXManager.Extensions.Apps.SectionSettings.dll</name>
 							<version>01.00.00</version>
 						</assembly>
 						<assembly>
@@ -226,6 +251,11 @@
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.GoogleAnalytics.dll</name>
+							<version>01.00.00</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.dll</name>
 							<version>01.00.00</version>
 						</assembly>
 						<assembly>
@@ -332,15 +362,6 @@
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.dll</name>
 							<version>01.00.00</version>
-						</assembly>
-						<assembly>
-							<path>bin</path>
-							<name>libsass.dll</name>
-						</assembly>
-						<assembly>
-							<path>bin</path>
-							<name>LibSassHost.dll</name>
-							<version>1.3.1.0</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
@@ -489,7 +510,7 @@
 				</component>
 				<component type="ResourceFile">
 					<resourceFiles>
-						<basePath>DesktopModules\Vanjaro\URL</basePath>
+						<basePath>DesktopModules\Vanjaro\URLManager</basePath>
 						<resourceFile>
 							<name>url-resources.zip</name>
 						</resourceFile>
@@ -500,6 +521,14 @@
 						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Apps\About</basePath>
 						<resourceFile>
 							<name>apps-about-resources.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Apps\SectionSettings</basePath>
+						<resourceFile>
+							<name>apps-sectionsettings-resources.zip</name>
 						</resourceFile>
 					</resourceFiles>
 				</component>
@@ -660,6 +689,14 @@
 						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Menu\GoogleAnalytics</basePath>
 						<resourceFile>
 							<name>menu-integrations-googleanalytics-resources.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Menu\GoogleReCaptcha</basePath>
+						<resourceFile>
+							<name>menu-integrations-googlerecaptcha-resources.zip</name>
 						</resourceFile>
 					</resourceFiles>
 				</component>
@@ -1007,25 +1044,38 @@
 						</resourceFile>
 					</resourceFiles>
 				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\AuthenticationServices\Vanjaro</basePath>
+						<file>
+							<name>Login.ascx</name>
+							<sourceFileName>AuthenticationViews\Login.ascx</sourceFileName>
+						</file>
+						<file>
+							<name>Settings.ascx</name>
+							<sourceFileName>AuthenticationViews\Settings.ascx</sourceFileName>
+						</file>
+					</files>
+				</component>
+				<component type="File">
+					<files>
+						<basePath>DesktopModules\AuthenticationServices\Vanjaro\App_LocalResources</basePath>
+						<file>
+							<name>Login.ascx.resx</name>
+							<sourceFileName>AuthenticationViews\App_LocalResources\Login.ascx.resx</sourceFileName>
+						</file>
+					</files>
+				</component>
         <component type="File">
           <files>
-            <basePath>DesktopModules\AuthenticationServices\Vanjaro</basePath>
+            <basePath>bin</basePath>
             <file>
-              <name>Login.ascx</name>
-              <sourceFileName>AuthenticationViews\Login.ascx</sourceFileName>
+              <name>dart.exe</name>
+              <sourceFileName>bin\dart.exe</sourceFileName>
             </file>
             <file>
-              <name>Settings.ascx</name>
-              <sourceFileName>AuthenticationViews\Settings.ascx</sourceFileName>
-            </file>
-          </files>
-        </component>
-        <component type="File">
-          <files>
-            <basePath>DesktopModules\AuthenticationServices\Vanjaro\App_LocalResources</basePath>
-            <file>
-              <name>Login.ascx.resx</name>
-              <sourceFileName>AuthenticationViews\App_LocalResources\Login.ascx.resx</sourceFileName>
+              <name>sass.snapshot</name>
+              <sourceFileName>bin\sass.snapshot</sourceFileName>
             </file>
           </files>
         </component>
@@ -1079,7 +1129,7 @@
 									</node>
 									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
 										<add name="VanjaroCommonLibrary" type="Vanjaro.Common.Components.HttpModule, Vanjaro.Common" preCondition="managedHandler" />
-									</node>
+									</node>									
 									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
 										<add name="VanjaroMigrate" type="Vanjaro.Migrate.Components.HttpModule,Vanjaro.Migrate" preCondition="managedHandler" />
 									</node>
@@ -1100,13 +1150,15 @@
 					<urlProvider>
 						<name>Vanjaro URL Provider</name>
 						<type>Vanjaro.URL.Providers.URLProvider</type>
-						<settingsControlSrc>DesktopModules/Vanjaro/URL/Views/Settings.ascx</settingsControlSrc>
+						<settingsControlSrc>DesktopModules/Vanjaro/URLManager/Views/Settings.ascx</settingsControlSrc>
 						<redirectAllUrls>false</redirectAllUrls>
 						<replaceAllUrls>true</replaceAllUrls>
 						<rewriteAllUrls>true</rewriteAllUrls>
 						<desktopModule>Vanjaro Url Library</desktopModule>
 					</urlProvider>
 				</component>
+				<component type="Cleanup" version="00.05.03" fileName="Cleanup\00.05.03.txt" />
+        <component type="Cleanup" version="01.00.04" fileName="Cleanup\01.00.04.txt" />
 			</components>
 			<eventMessage>
 				<processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>

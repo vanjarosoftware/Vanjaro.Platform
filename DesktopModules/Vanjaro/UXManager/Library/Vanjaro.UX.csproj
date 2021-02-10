@@ -99,7 +99,6 @@
     <Compile Include="Managers\MenuManager.cs" />
     <Compile Include="Managers\PageManager.cs" />
     <Compile Include="Managers\ToolbarManager.cs" />
-    <Compile Include="Managers\ThemeManager.cs" />
     <Compile Include="Managers\VideoManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extension.ascx.cs">
@@ -122,10 +121,15 @@
     <Content Include="Resources\Images\align-right.png" />
     <Content Include="Release.txt" />
     <Content Include="Resources\Images\align-top.png" />
+    <Content Include="Resources\Images\border-bottom.svg" />
     <Content Include="Resources\Images\border-dashed.png" />
     <Content Include="Resources\Images\border-dotted.png" />
     <Content Include="Resources\Images\border-double.png" />
+    <Content Include="Resources\Images\border-left.svg" />
+    <Content Include="Resources\Images\border-right.svg" />
     <Content Include="Resources\Images\border-solid.png" />
+    <Content Include="Resources\Images\border-top.svg" />
+    <Content Include="Resources\Images\border.svg" />
     <Content Include="Resources\Images\col-12.png" />
     <Content Include="Resources\Images\col-2.png" />
     <Content Include="Resources\Images\col-3.6.3.png" />
@@ -319,9 +323,7 @@
   <ItemGroup>
     <Content Include="Resources\Images\image.webp" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Scripts\GrapesJsManagers\img\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="web.config" />
     <Content Include="Resources\Scripts\uxmanager.min.js.map" />

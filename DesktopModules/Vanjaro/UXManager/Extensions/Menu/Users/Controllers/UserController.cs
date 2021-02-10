@@ -36,6 +36,7 @@ using Vanjaro.UXManager.Extensions.Menu.Users.Entities;
 using Vanjaro.UXManager.Library.Common;
 using static DotNetNuke.Common.Lists.CachedCountryList;
 using static DotNetNuke.Web.InternalServices.CountryRegionController;
+using static Vanjaro.Core.Managers;
 using static Vanjaro.UXManager.Extensions.Menu.Users.Managers;
 using DataCache = DotNetNuke.Common.Utilities.DataCache;
 using Localization = DotNetNuke.Services.Localization.Localization;
@@ -627,7 +628,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
             }
             catch (Exception ex)
             {
-                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                ExceptionManager.LogException(ex);
                 actionResult.AddError("UpdateUserBasicInfo_Exception", ex.Message);
                 if (actionResult.Message.Contains("Violation of UNIQUE KEY constraint 'IX_Users'. Cannot insert duplicate key in object 'dbo.Users'"))
                 {

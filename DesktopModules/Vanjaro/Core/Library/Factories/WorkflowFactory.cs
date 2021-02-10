@@ -1,21 +1,22 @@
 ﻿using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Security.Roles;
-using DotNetNuke.Services.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Vanjaro.Common.Permissions;
 using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Data.PetaPoco;
 using Vanjaro.Core.Data.Scripts;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.Core
 {
     public static partial class Factories
     {
-        internal class WorkflowFactory
+        public class WorkflowFactory
         {
             internal static List<Workflow> GetAll(int PortalID, bool IncludeDeleted)
             {
@@ -238,7 +239,7 @@ namespace Vanjaro.Core
                         }
                     }
                 }
-                catch (Exception ex) { Exceptions.LogException(ex); }
+                catch (Exception ex) { ExceptionManager.LogException(ex); }
             }
 
             internal static int UpdateSatesOrder(List<WorkflowState> wStates, Workflow wflow, bool IncrementOrder, int? DeletedWorkflowStateOrder)
@@ -285,19 +286,19 @@ namespace Vanjaro.Core
                 CacheFactory.Clear(CacheFactory.Keys.Workflow);
             }
 
-            internal static List<WorkflowLog> GetPagesWorkflowLogs(int TabID, int Version)
+            internal static List<WorkflowLog> GetEntityWorkflowLogs(string Entity, int EntityID, int Version)
             {
-                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Workflow + "GetPagesWorkflowLogs", TabID, Version);
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Workflow + "GetEntityWorkflowLogs", Entity, EntityID, Version);
                 List<WorkflowLog> WorkflowLogs = CacheFactory.Get(CacheKey) as List<WorkflowLog>;
                 if (WorkflowLogs == null)
                 {
-                    WorkflowLogs = WorkflowLog.Query("Where Tabid=@0 and Version=@1", TabID, Version).ToList();
+                    WorkflowLogs = WorkflowLog.Query("Where Entity=@0 and EntityID=@1 and Version=@2", Entity, EntityID, Version).ToList();
                     CacheFactory.Set(CacheKey, WorkflowLogs);
                 }
                 return WorkflowLogs;
             }
 
-            internal static void AddWorkflowLog(int PortalID, int ModuleID, int UserID, Pages Page, string Action, string Comment)
+            public static void AddWorkflowLog(int PortalID, int ModuleID, int UserID, string Entity, int EntityID, int StateID, int Version, string Action, string Comment)
             {
                 if (!string.IsNullOrEmpty(Comment))
                 {
@@ -307,10 +308,11 @@ namespace Vanjaro.Core
                         ModuleID = ModuleID,
                         ReviewedBy = UserID,
                         ReviewedOn = DateTime.UtcNow,
-                        StateID = Page.StateID.Value,
+                        StateID = StateID,
                         Comment = Comment,
-                        TabID = Page.TabID,
-                        Version = Page.Version
+                        Entity = Entity,
+                        EntityID = EntityID,
+                        Version = Version
                     };
                     if (Action.ToLower() == "approve" || Action.ToLower() == "publish")
                     {
@@ -324,6 +326,19 @@ namespace Vanjaro.Core
                     wlog.Insert();
                     CacheFactory.Clear(CacheFactory.Keys.Workflow);
                 }
+            }
+            public static void AddWorkflowLog(int PortalID, int ModuleID, int UserID, string Entity, int EntityID, int StateID, int Version, bool IsApproved, string Comment)
+            {
+                string Action = string.Empty;
+                if (IsApproved)
+                {
+                    Action = "approve";
+                }
+                else if (Action.ToLower() == "reject")
+                {
+                    Action = "reject";
+                }
+                AddWorkflowLog(PortalID, ModuleID, UserID, Entity, EntityID, StateID, Version, Action, Comment);
             }
 
             internal static bool HasReviewPermission(UserInfo userInfo)
@@ -360,16 +375,16 @@ namespace Vanjaro.Core
                 return false;
             }
 
-            internal static List<WorkflowPage> GetPagesbyUserID(int PortalID, int UserID)
+            internal static List<WorkflowContent> GetPagesbyUserID(int PortalID, int UserID)
             {
                 string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Workflow + "GetPagesbyUserID" + "PortalID", UserID, PortalID);
-                List<WorkflowPage> WorkflowPages = CacheFactory.Get(CacheKey) as List<WorkflowPage>;
+                List<WorkflowContent> WorkflowPages = CacheFactory.Get(CacheKey) as List<WorkflowContent>;
                 if (WorkflowPages == null)
                 {
                     Sql Query = WorkflowScript.GetPagesByUserID(PortalID, UserID);
                     using (VanjaroRepo db = new VanjaroRepo())
                     {
-                        WorkflowPages = db.Fetch<WorkflowPage>(Query).ToList();
+                        WorkflowPages = db.Fetch<WorkflowContent>(Query).ToList();
                     }
 
                     CacheFactory.Set(CacheKey, WorkflowPages);
@@ -377,30 +392,30 @@ namespace Vanjaro.Core
                 return WorkflowPages;
             }
 
-            internal static List<WorkflowPage> GetReviewPagesbyUserID(int UserID, int Page, int PageSize, int StateID)
+            internal static List<WorkflowContent> GetReviewContentbyUserID(int UserID, int Page, int PageSize, int StateID, string WorkflowReviewType)
             {
-                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Workflow + "GetReviewPagesbyUserID", UserID, Page, PageSize, StateID);
-                List<WorkflowPage> Pages = CacheFactory.Get(CacheKey) as List<WorkflowPage>;
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Workflow + "GetReviewPagesbyUserID", UserID, Page, PageSize, StateID, WorkflowReviewType);
+                List<WorkflowContent> Pages = CacheFactory.Get(CacheKey) as List<WorkflowContent>;
                 if (Pages == null)
                 {
-                    Sql Query = WorkflowScript.GetPagesByUserID(UserID, Page, PageSize, StateID);
+                    Sql Query = WorkflowScript.GetReviewContentByUserID(UserID, Page, PageSize, StateID, WorkflowReviewType);
                     using (VanjaroRepo db = new VanjaroRepo())
                     {
-                        Pages = db.Fetch<WorkflowPage>(Query).ToList();
+                        Pages = db.Fetch<WorkflowContent>(Query).ToList();
                     }
                     CacheFactory.Set(CacheKey, Pages);
                 }
                 return Pages;
             }
 
-            internal static int GetReviewPagesCountByUserID(int UserID, int Page, int PageSize, int StateID)
+            internal static int GetReviewCountByUserID(int UserID, int Page, int PageSize, int StateID, string WorkflowReviewType)
             {
-                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Workflow + "GetReviewPagesCountByUserID", UserID, Page, PageSize, StateID);
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Workflow + "GetReviewPagesCountByUserID", UserID, Page, PageSize, StateID, WorkflowReviewType);
                 int? Count = CacheFactory.Get(CacheKey);
                 if (Count == null)
                 {
                     Count = 0;
-                    Sql Query = WorkflowScript.GetPagesCountByUserID(UserID, StateID);
+                    Sql Query = WorkflowScript.GetReviewCountByUserID(UserID, StateID, WorkflowReviewType);
                     using (VanjaroRepo db = new VanjaroRepo())
                     {
                         Count = db.Fetch<int>(Query).FirstOrDefault();
@@ -420,13 +435,13 @@ namespace Vanjaro.Core
                 CacheFactory.Clear(CacheFactory.Keys.Workflow);
             }
 
-            internal static List<StringValue> GetStatesforReview(int PortalID, int UserID)
+            internal static List<StringValue> GetStatesforReview(int PortalID, int UserID, string ReviewType)
             {
                 string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Workflow + "GetStatesforReview" + "PortalID", UserID, PortalID);
                 List<StringValue> result = CacheFactory.Get(CacheKey) as List<StringValue>;
                 if (result == null)
                 {
-                    Sql Query = WorkflowScript.GetStatesforPendingReview(PortalID, UserID);
+                    Sql Query = WorkflowScript.GetStatesforPendingReview(PortalID, UserID, ReviewType);
                     using (VanjaroRepo db = new VanjaroRepo())
                     {
                         result = db.Fetch<StringValue>(Query).ToList();

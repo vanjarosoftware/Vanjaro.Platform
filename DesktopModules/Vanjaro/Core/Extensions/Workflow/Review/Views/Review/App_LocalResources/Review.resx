@@ -123,10 +123,19 @@
   <data name="ReviewPages_Columns_Action.Text" xml:space="preserve">
     <value> </value>
   </data>
+  <data name="ReviewPages_Columns_Name.Text" xml:space="preserve">
+    <value>Page</value>
+  </data>
   <data name="ReviewPages_Columns_State.Text" xml:space="preserve">
     <value>State</value>
   </data>
   <data name="ReviewPages_Columns_TabName.Text" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="ReviewPages_Columns_vjblog.Text" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="ReviewPages_Columns_vjpage.Text" xml:space="preserve">
     <value>Page</value>
   </data>
   <data name="ReviewPages_Columns_Workflow.Text" xml:space="preserve">

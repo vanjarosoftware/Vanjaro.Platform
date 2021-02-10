@@ -95,6 +95,7 @@
         $scope.CustomCSSStyle.setValue('');
         $scope.PreviewCSSStyle.setValue('');
         $('input.LessVariable').val('');
+        $('input.JavascriptVariable').val('');
     };
 
     $scope.Click_Edit = function (row) {
@@ -115,6 +116,7 @@
             $scope.CustomCSSStyle.setValue(row.CustomCSS != undefined ? row.CustomCSS : '');
             $scope.PreviewCSSStyle.setValue(row.PreviewCSS != undefined ? row.PreviewCSS : '');
             $('input.LessVariable').val(row.LessVariable != undefined ? row.LessVariable : '');
+            $('input.JavascriptVariable').val(row.JavascriptVariable != undefined ? row.JavascriptVariable : '');
         }
         else if ($scope.EditControltype == "Dropdown") {
             $('input.Title').val(row.Title != undefined ? row.Title : '');
@@ -130,6 +132,7 @@
             $scope.CustomCSSStyle.setValue(row.CustomCSS != undefined ? row.CustomCSS : '');
             $scope.PreviewCSSStyle.setValue(row.PreviewCSS != undefined ? row.PreviewCSS : '');
             $('input.LessVariable').val(row.LessVariable != undefined ? row.LessVariable : '');
+            $('input.JavascriptVariable').val(row.JavascriptVariable != undefined ? row.JavascriptVariable : '');
         }
         else if ($scope.EditControltype == "Color Picker") {
             $('input.Title').val(row.Title != undefined ? row.Title : '');
@@ -138,6 +141,7 @@
             $scope.CustomCSSStyle.setValue(row.CustomCSS != undefined ? row.CustomCSS : '');
             $scope.PreviewCSSStyle.setValue(row.PreviewCSS != undefined ? row.PreviewCSS : '');
             $('input.LessVariable').val(row.LessVariable != undefined ? row.LessVariable : '');
+            $('input.JavascriptVariable').val(row.JavascriptVariable != undefined ? row.JavascriptVariable : '');
         }
         else if (row.Type == "Fonts") {
             $('input.Title').val(row.Title != undefined ? row.Title : '');
@@ -146,6 +150,7 @@
             $scope.CustomCSSStyle.setValue(row.CustomCSS != undefined ? row.CustomCSS : '');
             $scope.PreviewCSSStyle.setValue(row.PreviewCSS != undefined ? row.PreviewCSS : '');
             $('input.LessVariable').val(row.LessVariable != undefined ? row.LessVariable : '');
+            $('input.JavascriptVariable').val(row.JavascriptVariable != undefined ? row.JavascriptVariable : '');
         }
     };
 
@@ -203,6 +208,7 @@
                     $scope.ui.data.ThemeEditor.Options.Controls[index].CustomCSS = control.CustomCSS;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].PreviewCSS = control.PreviewCSS;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].LessVariable = control.LessVariable;
+                    $scope.ui.data.ThemeEditor.Options.Controls[index].JavascriptVariable = control.JavascriptVariable;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].Type = control.Type;
                 }
                 else if ($scope.EditControltype == "Dropdown") {
@@ -212,6 +218,7 @@
                     $scope.ui.data.ThemeEditor.Options.Controls[index].CustomCSS = control.CustomCSS;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].PreviewCSS = control.PreviewCSS;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].LessVariable = control.LessVariable;
+                    $scope.ui.data.ThemeEditor.Options.Controls[index].JavascriptVariable = control.JavascriptVariable;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].Type = control.Type;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].Options = control.Options;
                 }
@@ -222,6 +229,7 @@
                     $scope.ui.data.ThemeEditor.Options.Controls[index].CustomCSS = control.CustomCSS;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].PreviewCSS = control.PreviewCSS;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].LessVariable = control.LessVariable;
+                    $scope.ui.data.ThemeEditor.Options.Controls[index].JavascriptVariable = control.JavascriptVariable;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].Type = control.Type;
                 }
                 else if ($scope.EditControltype == "Fonts") {
@@ -231,6 +239,7 @@
                     $scope.ui.data.ThemeEditor.Options.Controls[index].CustomCSS = control.CustomCSS;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].PreviewCSS = control.PreviewCSS;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].LessVariable = control.LessVariable;
+                    $scope.ui.data.ThemeEditor.Options.Controls[index].JavascriptVariable = control.JavascriptVariable;
                     $scope.ui.data.ThemeEditor.Options.Controls[index].Type = control.Type;
                 }
             }
@@ -267,6 +276,7 @@
                         CustomCSS: $scope.CustomCSSStyle.getValue(),
                         PreviewCSS: $scope.PreviewCSSStyle.getValue(),
                         LessVariable: $('input.LessVariable').val(),
+                        JavascriptVariable: $('input.JavascriptVariable').val(),
                         Type: $scope.EditControltype
                     };
                     $scope.AddUpdateControl($scope.EditControltype, slider);
@@ -280,6 +290,7 @@
                         CustomCSS: $scope.CustomCSSStyle.getValue(),
                         PreviewCSS: $scope.PreviewCSSStyle.getValue(),
                         LessVariable: $('input.LessVariable').val(),
+                        JavascriptVariable: $('input.JavascriptVariable').val(),
                         Type: $scope.EditControltype,
                         Options: $scope.GetOptions($('textarea.Options').val())
                     };
@@ -294,6 +305,7 @@
                         CustomCSS: $scope.CustomCSSStyle.getValue(),
                         PreviewCSS: $scope.PreviewCSSStyle.getValue(),
                         LessVariable: $('input.LessVariable').val(),
+                        JavascriptVariable: $('input.JavascriptVariable').val(),
                         Type: $scope.EditControltype
                     };
                     $scope.AddUpdateControl($scope.EditControltype, colorpicker);
@@ -307,6 +319,7 @@
                         CustomCSS: $scope.CustomCSSStyle.getValue(),
                         PreviewCSS: $scope.PreviewCSSStyle.getValue(),
                         LessVariable: $('input.LessVariable').val(),
+                        JavascriptVariable: $('input.JavascriptVariable').val(),
                         Type: $scope.EditControltype
                     };
                     $scope.AddUpdateControl($scope.EditControltype, fonts);

@@ -291,8 +291,8 @@
   <data name="Background&amp;Shadow.Text" xml:space="preserve">
     <value>Background &amp; Shadow</value>
   </data>
-  <data name="Borders.Text" xml:space="preserve">
-    <value>Borders</value>
+  <data name="Border.Text" xml:space="preserve">
+    <value>Border</value>
   </data>
   <data name="CSS.Text" xml:space="preserve">
     <value>CSS</value>
@@ -312,8 +312,8 @@
   <data name="HTML.Text" xml:space="preserve">
     <value>HTML</value>
   </data>
-  <data name="Layout&amp;Dimensions.Text" xml:space="preserve">
-    <value>Layout &amp; Dimensions</value>
+  <data name="Size.Text" xml:space="preserve">
+    <value>Size</value>
   </data>
   <data name="Local.Text" xml:space="preserve">
     <value>Local</value>
@@ -336,8 +336,8 @@
   <data name="Options.Text" xml:space="preserve">
     <value>Options</value>
   </data>
-  <data name="Positioning.Text" xml:space="preserve">
-    <value>Positioning</value>
+  <data name="Position.Text" xml:space="preserve">
+    <value>Position</value>
   </data>
   <data name="Preview360px.Text" xml:space="preserve">
     <value>Preview for 360px</value>
@@ -392,5 +392,62 @@
   </data>
   <data name="Yes.Text" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="Margin.Text" xml:space="preserve">
+    <value>Margin</value>
+  </data>
+  <data name="BorderRadius.Text" xml:space="preserve">
+    <value>Border Radius</value>
+  </data>
+  <data name="Padding.Text" xml:space="preserve">
+    <value>Padding</value>
+  </data>
+  <data name="Extra.Text" xml:space="preserve">
+    <value>Extra</value>
+  </data>
+  <data name="AddSlide.Text" xml:space="preserve">
+    <value>Add Slide</value>
+  </data>
+  <data name="AddColumn.Text" xml:space="preserve">
+    <value>Add Column</value>
+  </data>
+  <data name="AddListItem.Text" xml:space="preserve">
+    <value>Add List Item</value>
+  </data>
+  <data name="Copy.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="CopyCarouselImage.Text" xml:space="preserve">
+    <value>Copy Carousel Image</value>
+  </data>
+  <data name="EditImage.Text" xml:space="preserve">
+    <value>Edit Image</value>
+  </data>
+  <data name="Menu.Text" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Move.Text" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="NextSlide.Text" xml:space="preserve">
+    <value>Next Slide</value>
+  </data>
+  <data name="Notifications.Text" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="PrevSlide.Text" xml:space="preserve">
+    <value>Prev Slide</value>
+  </data>
+  <data name="SaveBlock.Text" xml:space="preserve">
+    <value>Save As Block</value>
+  </data>
+  <data name="SelectParent.Text" xml:space="preserve">
+    <value>Select Parent</value>
+  </data>
+  <data name="Settings.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Shortcuts.Text" xml:space="preserve">
+    <value>Shortcuts</value>
   </data>
 </root>
