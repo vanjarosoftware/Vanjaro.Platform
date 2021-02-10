@@ -1657,7 +1657,7 @@ $(document).ready(function () {
 
 									var sm = VjEditor.StyleManager;
 
-									$(sm.getProperties('border').models).each(function () {
+									$(sm.getProperties(Border).models).each(function () {
 										if (this.attributes.name != 'Border Postion')
 											this.view.$el.hide();
 									});
@@ -1791,13 +1791,9 @@ $(document).ready(function () {
 											$(sm.getProperty(Size, 'width').view.$el.find('input')).val($(target.getEl()).find('img').width());
 
 									}
-									else {
-										if (model.attributes.type == "icon")
-											$(sm.getProperty(Size, 'width').view.$el.find('input')).val(parseInt($(target.getEl()).css('width')));
-									}
-
-									var clearWidth = $(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear');
-
+									else
+										$(sm.getProperty(Size, 'width').view.$el.find('input')).val(parseInt($(target.getEl()).css('width')));
+									
 									if ($(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val() != "auto")
 										$(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear').show();
 									else
@@ -1813,10 +1809,9 @@ $(document).ready(function () {
 										if (target.getAttributes()['data-block-type'] == "Logo")
 											$(sm.getProperty(Size, 'height').view.$el.find('input')).val($(target.getEl()).find('img').height());
 									}
-									else {
-										if (model.attributes.type == "icon")
-											$(sm.getProperty(Size, 'height').view.$el.find('input')).val(parseInt($(target.getEl()).css('height')));
-									}
+									else
+										$(sm.getProperty(Size, 'height').view.$el.find('input')).val(parseInt($(target.getEl()).css('height')));
+									
 
 									if ($(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val() != "auto")
 										$(sm.getProperty(Size, 'height').view.$el).find('.gjs-sm-clear').show();
@@ -2631,6 +2626,12 @@ $(document).ready(function () {
 
 								if (model.parent() != undefined && model.parent().attributes.type == "column" && model.parent().components().length == 0)
 									$(model.parent().getEl()).attr("data-empty", "true");
+
+								if (model.parent() != undefined && model.parent().attributes.type == "row" && model.parent().components().length == 0) {
+
+									if (model.parent().parent() != undefined && model.parent().parent().attributes.type == "grid")
+										model.parent().parent().remove();
+								}
 
 							});
 
