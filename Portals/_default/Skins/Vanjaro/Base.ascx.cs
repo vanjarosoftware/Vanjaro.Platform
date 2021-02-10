@@ -832,7 +832,7 @@ namespace Vanjaro.Skin
             {
                 page = PageManager.GetByVersion(PortalSettings.ActiveTab.TabID, Convert.ToInt32(Request.QueryString["revisionversion"]), PageManager.GetCultureCode(PortalSettings));
             }
-            else if ((Request.Cookies["vj_IsPageEdit"] != null && Request.Cookies["vj_IsPageEdit"].Value == "true") || (m2v.HasValue && Request.Cookies["vj_InitUX"] != null && Request.Cookies["vj_InitUX"].Value == "true"))
+            else if ((WorkflowManager.HasReviewPermission(PortalSettings.UserInfo) && !TabPermissionController.HasTabPermission("EDIT")) || (Request.Cookies["vj_IsPageEdit"] != null && Request.Cookies["vj_IsPageEdit"].Value == "true") || (m2v.HasValue && Request.Cookies["vj_InitUX"] != null && Request.Cookies["vj_InitUX"].Value == "true"))
             {
                 page = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, PageManager.GetCultureCode(PortalSettings));
             }
