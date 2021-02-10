@@ -164,6 +164,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                             if (PageSettingLayout.EntityID == 0)
                             {
                                 Managers.PagesManager.UpdatePageWorkflow(DefaultWorkflow, tab.TabID);
+                                if (PageSettingLayout.MakePublic)
+                                    UpdatePagePermission(tab.TabID);
                             }
                             else
                             {
@@ -444,6 +446,38 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                 return data;
             }
 
+            internal static void UpdatePagePermission(int TabID, bool AllowAccess = true)
+            {
+                if (TabID > 0)
+                {
+                    TabInfo tabinfo = TabController.Instance.GetTab(TabID, PortalSettings.Current.PortalId);
+                    TabPermissionInfo tabPermissionInfo = null;
+                    if (tabinfo.TabPermissions.Where(t => t != null && t.RoleName == "All Users").FirstOrDefault() != null)
+                    {
+                        foreach (TabPermissionInfo p in tabinfo.TabPermissions.Where(t => t != null && t.RoleName == "All Users"))
+                        {
+                            if (AllowAccess && p.PermissionKey.ToLower() == "view")
+                                p.AllowAccess = true;
+                            else
+                                tabPermissionInfo = p;
+                        }
+                    }
+                    else
+                    {
+                        tabinfo.TabPermissions.Add(new TabPermissionInfo
+                        {
+                            PermissionID = 3,
+                            TabID = tabinfo.TabID,
+                            AllowAccess = true,
+                            RoleID = -1,
+                            RoleName = "All Users",
+                        });
+                    }
+                    if (tabPermissionInfo != null)
+                        tabinfo.TabPermissions.Remove(tabPermissionInfo);
+                    TabPermissionController.SaveTabPermissions(tabinfo);
+                }
+            }
             internal static void ApplyLayout(int PortalId, Layout layout, ActionResult ActionResult)
             {
                 ApplyLayout(PortalId, layout, ActionResult, true);

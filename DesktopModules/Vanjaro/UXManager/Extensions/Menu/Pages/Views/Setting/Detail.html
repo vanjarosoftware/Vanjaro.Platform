@@ -154,6 +154,7 @@
         </uilayout>
         <uilayout name="NavMenu">
             <uielement name="DisplayInMenu" container-attr-ng-if="ui.data.IsDefaultLocale.Options" container-attr-ng-show="ShowPage_detailsTab && Show_Tab" ngmodel="ui.data.PagesTemplate.Options.includeInMenu" attr-class="toggle_right" control="toggle"></uielement>
+            <uielement name="MakePublic" container-attr-ng-if="ui.data.IsDefaultLocale.Options && ShowPage_detailsTab && Show_Tab && pid==0" attr-class="toggle_right" control="toggle"></uielement>
             <uitemplate>
                 <div class="form-group" mn-ng-if="ui.data.IsDefaultLocale.Options" mn-ng-show="ShowPage_detailsTab&&Show_Tab &&(ui.data.PagesTemplate.Options.pageType=='Standard'||ui.data.PagesTemplate.Options.pageType=='Folder')">
                     <label>[L:ParentPage]</label>
@@ -302,7 +303,11 @@
                     </uitemplate>
                 </column>
                 <column name="Actions" width="6">
+                    <
+                    d
                     <uitemplate>
+                        <
+                        d
                         <div class="dropdown float-right dropbtn" mn-ng-if="row.id != -1">
                             <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
