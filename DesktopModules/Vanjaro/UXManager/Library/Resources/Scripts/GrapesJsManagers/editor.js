@@ -385,7 +385,7 @@ $(document).ready(function () {
 									backdrop: 0
 								},
 								components: vjcomps || VJLandingPage.html,
-								style: VJLandingPage.css,
+								style: eval(VJLandingPage.style) || VJLandingPage.css,
 								showOffsets: 1,
 								avoidInlineStyle: 1,
 								noticeOnUnload: 0,
