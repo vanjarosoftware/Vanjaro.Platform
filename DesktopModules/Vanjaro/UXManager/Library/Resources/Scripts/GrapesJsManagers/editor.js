@@ -1934,6 +1934,12 @@ $(document).ready(function () {
 
 									if (model.getStyle()['transform'].indexOf('scaleZ') != -1)
 										VjEditor.StyleManager.getProperty(Transform, 'scaleZ').view.setValue('true');
+
+									if (model.getStyle()['transform'].indexOf('skewX') != -1)
+										VjEditor.StyleManager.getProperty(Transform, 'skewX').view.setValue('true');
+
+									if (model.getStyle()['transform'].indexOf('skewY') != -1)
+										VjEditor.StyleManager.getProperty(Transform, 'skewY').view.setValue('true');
 								}
 
 								$('.tlb-app-setting-panel').hide();
