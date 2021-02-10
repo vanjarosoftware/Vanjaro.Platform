@@ -299,7 +299,8 @@ global.UpdateGlobalBlock = function (model) {
                         Name: Block.attributes.label,
                         Category: Block.attributes.category.id || Block.attributes.category,
                         Html: content.html,
-                        Css: content.css,
+                        ContentJSON: JSON.stringify(model.toJSON().components),
+                        Css: css,
                         IsGlobal: true
                     };
                     UpdateCustomBlock(VjEditor, CustomBlock);
