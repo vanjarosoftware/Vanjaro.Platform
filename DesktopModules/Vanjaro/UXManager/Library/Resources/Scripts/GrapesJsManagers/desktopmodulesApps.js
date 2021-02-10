@@ -293,17 +293,13 @@ global.UpdateGlobalBlock = function (model) {
             if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
                 var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));
                 if (Block != undefined) {
-                    var css = '';
-                    $.each($(VjEditor.Canvas.getBody()).find('#' + model.ccid + ''), function (sk, sv) {
-                        css += sv.innerHTML;
-                    });
                     var CustomBlock = {
                         ID: Block.attributes.attributes.id,
                         Guid: Block.attributes.attributes.guid,
                         Name: Block.attributes.label,
                         Category: Block.attributes.category.id || Block.attributes.category,
                         Html: content.html,
-                        Css: css,
+                        Css: content.css,
                         IsGlobal: true
                     };
                     UpdateCustomBlock(VjEditor, CustomBlock);
@@ -396,7 +392,7 @@ global.BuildAppComponentFromHtml = function (vjcomps, html) {
     });
 };
 
-global.BuildBlockComponent = function (vjcomps, version) {
+global.BuildBlockComponent = function (vjcomps) {
     $.each(vjcomps, function (k, v) {
         if (v.attributes != undefined && v.attributes["data-block-guid"] != undefined && v.attributes["data-block-guid"] != '') {
             var attr = '';
@@ -404,9 +400,6 @@ global.BuildBlockComponent = function (vjcomps, version) {
                 attr += '[' + key + '="' + value + '"]';
             });
             var $this = $(attr)[0];
-            if ($this == undefined && version != undefined) {
-                $this = $(version).find(attr)[0];
-            }
             if ($this != undefined) {
                 if (v.components == undefined || v.components[0] == undefined) {
                     var component = { components: [], content: '' };
@@ -419,9 +412,6 @@ global.BuildBlockComponent = function (vjcomps, version) {
                         var contentstyle = '';
                         if ($('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0] != undefined)
                             contentstyle = $('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0].outerHTML;
-                        else if (version != undefined && $(version).find('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0] != undefined) {
-                            contentstyle = $(version).find('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0].outerHTML;
-                        }
                         v.components[0].content = contentstyle + $this.outerHTML;
                     }
                     else {
@@ -499,9 +489,6 @@ global.RenderBlock = function (model, bmodel, render) {
 
                     model.view.$el[0].innerHTML = '';
                     model.append($(response.Markup)[0].innerHTML);
-                    if (response.Style != undefined && response.Style != '') {
-                        $(VjEditor.Canvas.getDocument()).find('#' + model.ccid).append('<style>' + response.Style + '</style>');
-                    }
                     const newcomponents = getAllComponents(model);
                     $.each(newcomponents, function (k, v) {
                         if (v.attributes != undefined && v.attributes.type != undefined && v.attributes.type == 'blockwrapper')
@@ -547,7 +534,7 @@ global.RenderBlock = function (model, bmodel, render) {
                     script_tag.text = response.Script;
                     $(window.parent.window.VjEditor.Canvas.getDocument()).find('head')[0].appendChild(script_tag);
                 }
-                if (response.Style != undefined && response.Style != '' && model.attributes.attributes["data-block-type"].toLowerCase() != "global") {
+                if (response.Style != undefined && response.Style != '') {
                     var style_tag = $(window.parent.window.VjEditor.Canvas.getDocument().createElement('style'))[0];
                     style_tag.type = 'text/css';
                     style_tag.text = response.Style;
