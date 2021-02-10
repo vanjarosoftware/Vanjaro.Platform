@@ -55,11 +55,6 @@
     padding: 0px;
 }
 
-.theme .selected-theme .fas {
-    color: #fff;
-    font-size: 14px !important;
-}
-
 .theme .selected-theme {
     background: #495157;
 }
@@ -76,8 +71,7 @@
     right: 0;
     position: absolute;
     padding: 15px !important;
-    top: 0;
-    background: #999;
+    top: 0;    
     cursor: pointer;
     line-height: normal;
 }

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Apply.Text" xml:space="preserve">
+    <value>Apply</value>
+  </data>
   <data name="ApplyThemeText.Text" xml:space="preserve">
     <value>Please confirm you want to apply this theme.</value>
   </data>
@@ -128,6 +131,9 @@
   </data>
   <data name="SearchKeywords.Text" xml:space="preserve">
     <value>theme,themes,design,layout,skin,skins,template,templates,layouts</value>
+  </data>
+  <data name="Settings.Text" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="Theme.Text" xml:space="preserve">
     <value>Themes</value>
