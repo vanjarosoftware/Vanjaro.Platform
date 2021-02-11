@@ -127,10 +127,10 @@
     <value>Display All Pages</value>
   </data>
   <data name="Global.OFF" xml:space="preserve">
-    <value>No</value>
+    <value>Customize This Block Only</value>
   </data>
   <data name="Global.ON" xml:space="preserve">
-    <value>Yes</value>
+    <value>Site Settings</value>
   </data>
   <data name="Global.Text" xml:space="preserve">
     <value>Global</value>
@@ -144,6 +144,12 @@
   <data name="IncludeHiddenPageNo.Text" xml:space="preserve">
     <value>Include Hidden Pages</value>
   </data>
+  <data name="IsAdminAlert.Text" xml:space="preserve">
+    <value>&lt;strong&gt;&lt;em class="fas fa-exclamation-triangle"&gt;&lt;/em&gt; Warning&lt;/strong&gt;: This is a theme block. Changes will apply to all pages.</value>
+  </data>
+  <data name="IsPageAdminAlert.Text" xml:space="preserve">
+    <value>&lt;strong&gt;&lt;em class="fa fa-info-circle"&gt;&lt;/em&gt; Info&lt;/strong&gt;: This is a theme block. Only administrators can make changes to Site Settings. You may customize this block only.</value>
+  </data>
   <data name="LimitDepth.OFF" xml:space="preserve">
     <value>No</value>
   </data>
@@ -152,6 +158,15 @@
   </data>
   <data name="LimitDepth.Text" xml:space="preserve">
     <value>Limit Depth</value>
+  </data>
+  <data name="LinkTarget.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="LinkTarget.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="LinkTarget.Text" xml:space="preserve">
+    <value>Open in new tab</value>
   </data>
   <data name="NoOfDepth.Text" xml:space="preserve">
     <value>Number of depth</value>
@@ -165,6 +180,9 @@
   <data name="RootPages.Text" xml:space="preserve">
     <value>Root Pages</value>
   </data>
+  <data name="SettingTitle.Text" xml:space="preserve">
+    <value>Search Input</value>
+  </data>
   <data name="SkipPages.OFF" xml:space="preserve">
     <value>No</value>
   </data>
@@ -173,5 +191,8 @@
   </data>
   <data name="SkipPages.Text" xml:space="preserve">
     <value>Skip Pages</value>
+  </data>
+  <data name="Template.Text" xml:space="preserve">
+    <value>Style</value>
   </data>
 </root>
