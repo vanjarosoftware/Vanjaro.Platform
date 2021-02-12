@@ -358,35 +358,6 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
         editor.runCommand("search-filter");
     });
 
-    //Code Mirror 
-    var codeViewerHTML = editor.CodeManager.getViewer("CodeMirror").clone();
-    codeViewerHTML.set({
-        codeName: 'htmlmixed',
-        readOnly: 0,
-        theme: 'hopscotch',
-        autoBeautify: true,
-        autoCloseTags: true,
-        autoCloseBrackets: true,
-        lineWrapping: true,
-        styleActiveLine: true,
-        smartIndent: true,
-        indentWithTabs: true
-    });
-
-    var codeViewerCSS = editor.CodeManager.getViewer("CodeMirror").clone();
-    codeViewerCSS.set({
-        codeName: 'css',
-        readOnly: 0,
-        theme: 'hopscotch',
-        autoBeautify: true,
-        autoCloseTags: true,
-        autoCloseBrackets: true,
-        lineWrapping: true,
-        styleActiveLine: true,
-        smartIndent: true,
-        indentWithTabs: true
-    });
-
     var modalContent = document.getElementById('ModalContent');
     var saveButton = document.getElementById("btn-save");
 
@@ -396,16 +367,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
             $("#ModalContent").show();
 
-            var HTMLComponent = document.getElementById("HTML");
-            var CSSComponent = document.getElementById("CSS");
-
-            if (typeof opts != 'undefined' && opts.bind) {
-                var Block = VjEditor.runCommand("export-component");
-                HTMLComponent.value = Block.html;
-                CSSComponent.value = Block.css;
-            }
-            else
-                HTMLComponent.value = "<div class='my-block-class'>\nMy new block example\n</div>";
+            var Block = VjEditor.runCommand("export-component");
 
             document.getElementById("input-name").value = "";
             document.getElementById("input-category").value = "";
@@ -413,25 +375,15 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
             $('.cbglobal > button:first').attr('class', 'btn btn-default');
             $('.cbglobal > button:last').attr('class', 'btn btn-primary disabled');
 
-            if (codeViewerHTML.editor == null)
-                codeViewerHTML.init(HTMLComponent);
-            else
-                codeViewerHTML.setContent(HTMLComponent.value);
-
-            if (codeViewerCSS.editor == null)
-                codeViewerCSS.init(CSSComponent);
-            else
-                codeViewerCSS.setContent(CSSComponent.value);
-
             //Update Button
             saveButton.onclick = function (e) {
 
                 e.preventDefault();
-
+                
                 var blockLabel = $("#ModalContent").find("#input-name").val();
                 var blockCategory = $("#ModalContent").find("#input-category").val();
-                var blockContent = codeViewerHTML.editor.getValue();
-                var blockCSS = codeViewerCSS.editor.getValue();
+                var blockContent = Block.html;
+                var blockCSS = Block.css;
 
                 if (blockLabel == "") {
                     swal({
@@ -473,16 +425,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
             };
 
             editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
-
-            setTimeout(function () {
-                codeViewerHTML.setContent(HTMLComponent.value);
-                codeViewerCSS.setContent(CSSComponent.value);
-            }, 100);
         }
-    });
-
-    $(".add-custom-block").click(function () {
-        editor.runCommand("custom-block");
     });
 
     //Edit Custom Block
@@ -492,8 +435,6 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
             $("#ModalContent").show();
 
             const editblock = editor.BlockManager.get(block.name);
-            var HTML = document.getElementById("HTML");
-            var CSS = document.getElementById("CSS");
             var Name = document.getElementById("input-name");
             var Category = document.getElementById("input-category");
 
@@ -502,8 +443,6 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
             //Need Improvement
             var str = editblock.attributes.content.split("</style>");
 
-            HTML.value = ($(str[1]).attr('data-block-type') != undefined ? $(str[1]).html() : str[1]);
-            CSS.value = str[0].replace("<style>", "");
             Name.value = editblock.attributes.label;
 
             if (editblock.attributes.category.id != undefined)
@@ -520,24 +459,12 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
                 $('.cbglobal > button:last').attr('class', 'btn btn-primary disabled');
             }
 
-            if (codeViewerHTML.editor == null)
-                codeViewerHTML.init(HTML);
-            else
-                codeViewerHTML.setContent(HTML.value);
-
-            if (codeViewerCSS.editor == null)
-                codeViewerCSS.init(CSS);
-            else
-                codeViewerCSS.setContent(CSS.value);
-
             saveButton.onclick = function (e, block) {
 
                 e.preventDefault();
 
                 var blockLabel = $("#ModalContent").find("#input-name").val();
                 var blockCategory = $("#ModalContent").find("#input-category").val();
-                var blockContent = codeViewerHTML.editor.getValue();
-                var blockCSS = codeViewerCSS.editor.getValue();
 
                 if (blockLabel == "") {
                     swal({
@@ -557,21 +484,10 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
                     return false;
                 }
 
-                if (blockContent == "") {
-                    swal({
-                        title: "HTML is required",
-                        type: "warning",
-                        closeOnCancel: true
-                    });
-                    return false;
-                }
-
                 var CustomBlock = {
                     Guid: BlockID,
                     Name: blockLabel,
                     Category: blockCategory,
-                    Html: blockContent,
-                    Css: blockCSS,
                     IsGlobal: $('.cbglobal > button').hasClass('btn-primary active')
 
                 };
