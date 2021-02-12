@@ -47,5 +47,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Entities
             LocaleProperties = LocalizationManager.RemoveLocaleProperty(LocaleProperties, Language, PropertyName);
         }
         public bool ReplaceTokens { get; set; }
+        public bool MakePublic { get; set; }
     }
 }
