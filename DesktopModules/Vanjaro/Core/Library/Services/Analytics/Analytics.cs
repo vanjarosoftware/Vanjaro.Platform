@@ -50,7 +50,7 @@ namespace Vanjaro.Core.Services
             {
                 foreach (Event e in (List<Event>)HttpContext.Current.Application["AnalyticsEvents"])
                 {
-                    if (!string.IsNullOrEmpty(e.name) && e.parameter.Count > 0)
+                    if (e != null && !string.IsNullOrEmpty(e.name) && e.parameter.Count > 0)
                     {
                         StringBuilder s = new StringBuilder();
                         s.Append("gtag(\"event\",\"" + ((e.name.Length <= 40) ? e.name : e.name.Substring(0, 40)) + "\",{");

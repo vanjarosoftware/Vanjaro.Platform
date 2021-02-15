@@ -241,8 +241,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
 
         [HttpGet]
         public ActionResult GetUsers(string searchText, UserFilters filter, int pageIndex, int pageSize,
-            string sortColumn,
-            bool sortAscending)
+                    string sortColumn,
+                    bool sortAscending)
         {
             ActionResult actionResult = new ActionResult();
             try
@@ -265,7 +265,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                     displayName = d.Displayname,
                     userName = d.Username,
                     email = d.Email,
-                    avatar = DotNetNuke.Entities.Users.UserController.GetUserById((PortalController.Instance.GetCurrentSettings() as PortalSettings).PortalId, d.UserId).Profile.PhotoURL.Contains("no_avatar.gif") ? Vanjaro.Common.Utilities.UserUtils.GetProfileImage(PortalSettings.Current.PortalId, d.UserId, d.Email) : d.AvatarUrl,
+                    avatar = DotNetNuke.Entities.Users.UserController.GetUserById((PortalController.Instance.GetCurrentSettings() as PortalSettings).PortalId, d.UserId).Profile.PhotoURL.Contains("no_avatar.gif") ? UserUtils.GetProfileImage(PortalSettings.PortalId, d.UserId, d.Email) : DotNetNuke.Entities.Users.UserController.GetUserById(PortalSettings.PortalId, d.UserId).Profile.PhotoURL,
                     firstName = d.Firstname,
                     lastName = d.Lastname,
                     createdOnDate = d.CreatedOnDate,
@@ -556,7 +556,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                 Validate(userBasicDto);
                 int UserID = UserInfo.IsInRole("Administrators") || UserInfo.IsSuperUser ? userBasicDto.UserId : UserInfo.UserID;
                 UserInfo user = UsersController.GetUser(UserID, PortalSettings, UserInfo, out response);
-                
+
                 //for update Super User  profile picture need Photo Member profile property
                 if (user.IsSuperUser)
                     Managers.UserManager.AddProfileProperties(ref user, UserInfo, ref profileProperties, ref response);

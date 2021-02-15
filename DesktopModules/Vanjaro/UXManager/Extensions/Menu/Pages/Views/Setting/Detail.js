@@ -350,7 +350,8 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                     PageSettings: $scope.ui.data.PagesTemplate.Options,
                     PageLayout: $scope.Layout,
                     LocaleProperties: $scope.Localization.Properties,
-                    ReplaceTokens: $scope.ui.data.ReplaceTokens.Value
+                    ReplaceTokens: $scope.ui.data.ReplaceTokens.Value,
+                    MakePublic: $scope.ui.data.MakePublic.Value
                 }
                 var TabID = $scope.ui.data.PagesTemplate.Options.tabId;
                 common.webApi.post('pages/savepagedetails', 'DefaultWorkflow=' + $scope.ui.data.ddlWorkFlows.Value + '&MaxRevisions=' + $scope.ui.data.MaxRevisions.Value + '&Copy=' + IsCopy, formdata).success(function (data) {
