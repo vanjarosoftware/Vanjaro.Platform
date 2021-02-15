@@ -15,15 +15,15 @@
                                 <uilayout name="TabsContentGeneral" mn-ng-if="ShowGeneralTab">
                                     <uitemplate>
                                         <div id="accordion1" class="theme-builder-accordion">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseone">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseone">
                                                         [LS:General]
-                                                        <em class="fas fa-caret-down float-right"></em>
+                                                        <em class="fas fa-caret-down float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapseone" class="collapse show scrollbar" data-parent="#accordion1">
-                                                    <div class="card-body">
+                                                <div id="collapseone" class="accordion-collapse collapse show scrollbar" data-bs-parent="#accordion1">
+                                                    <div class="accordion-body">
                                                         <a href="#" mn-ng-click="AddEditSetting('edit')" class="ux-btn ux-btn-hover float-right" title="[L:AddEdit]" mn-ng-if="ui.data.DeveloperMode.Value">
                                                             <em class="fas fa-plus"></em>
                                                         </a>
@@ -40,15 +40,15 @@
                                     <uitemplate>
                                         <label style="padding: 12px;font-weight: normal;width: 100%;" class="alert alert-info">[L:Info]</label>
                                         <div id="accordion2">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapsetwo">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapsetwo">
                                                         [LS:Fonts]
-                                                        <em class="fas fa-caret-down float-right"></em>
+                                                        <em class="fas fa-caret-down float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapsetwo" class="collapse show" data-parent="#accordion2">
-                                                    <div class="card-body">
+                                                <div id="collapsetwo" class="accordion-collapse collapse show" data-bs-parent="#accordion2">
+                                                    <div class="accordion-body">
                                                         [uilayout:Fonts]
                                                         <div class="text-end fixed-footer" ng-show="AddNewFonts">
                                                             <button type="button" class="btn btn-sm btn-primary" id="Update" mn-ng-click="Click_Save('Update')" mn-ng-if="ui.data.DeveloperMode.Value">
@@ -76,15 +76,15 @@
             <uielement name="FontFamily" control="textbox" attr-ng-model="ui.data.Font.Options.Family" attr-required="true" container-attr-ng-show="AddNewFonts" attr-placeholder="'Spartan', sans-serif"></uielement>
             <uielement name="FontCss" control="textarea" attr-ng-model="ui.data.Font.Options.Css" container-attr-ng-show="AddNewFonts" attr-rows="6"></uielement>
             <uitemplate>
-                <a role="button" ng-hide="AddNewFonts" class="float-right" ng-click="Change_AddNew()" mn-ng-if="ui.data.DeveloperMode.Value"><em class="fas fa-plus"></em></a>
+                <a role="button" ng-hide="AddNewFonts" class="float-end" ng-click="Change_AddNew()" mn-ng-if="ui.data.DeveloperMode.Value"><em class="fas fa-plus"></em></a>
             </uitemplate>
             <uielement name="Fonts" attr-ng-hide="AddNewFonts" pagesize="9999" paged="true" displayedpages="5" control="grid" label="false" style="overflow-x:unset;" ngoptions="ui.data.Fonts.Options" attr-class="table-grid">
                 <column name="FontName" data="Name" width="25"></column>
                 <column name="FontFamily" data="Family" width="64"></column>
                 <column name="Action" width="6">
                     <uitemplate>
-                        <div class="dropdown float-right dropbtn">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown float-end dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

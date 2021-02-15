@@ -498,6 +498,7 @@ span.fileiconname {
 .permission_grid .permission-icon {
     cursor: pointer;
     margin-bottom: 10px;
+    color: inherit;
 }
 
 .permission_grid select {

@@ -427,7 +427,7 @@
     left: 6px !important;
 }
 
-.RightSideMenu .card .firstblock .child-wrapper .optioncontrol {
+.RightSideMenu .accordion-item .firstblock .child-wrapper .optioncontrol {
     padding: 0px !important;
     border-bottom: 1px solid #ccc;
 }
