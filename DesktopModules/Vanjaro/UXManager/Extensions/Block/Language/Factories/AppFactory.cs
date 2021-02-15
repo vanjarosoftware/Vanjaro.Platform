@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.Entities.Users;
+using DotNetNuke.Security.Permissions;
 using System.Collections.Generic;
 using System.Linq;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
@@ -13,7 +14,18 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage.Factories
         internal static List<AngularView> GetViews()
         {
             List<AngularView> Views = new List<AngularView>();
-
+            AngularView setting_language = new AngularView
+            {
+                AccessRoles = "editpage",
+                UrlPaths = new List<string> {
+                  "language"
+                },
+                IsDefaultTemplate = true,
+                TemplatePath = "setting/language.html",
+                Identifier = Identifier.setting_language.ToString(),
+                Defaults = new Dictionary<string, string> { }
+            };
+            Views.Add(setting_language);
             return Views;
         }
 
@@ -25,12 +37,19 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage.Factories
             {
                 AccessRoles.Add("user");
             }
-
-            AccessRoles.Add("anonymous");
+            else
+            {
+                AccessRoles.Add("anonymous");
+            }
 
             if (UserInfo.IsSuperUser)
             {
                 AccessRoles.Add("host");
+            }
+
+            if (TabPermissionController.HasTabPermission("EDIT"))
+            {
+                AccessRoles.Add("editpage");
             }
 
             if (UserInfo.UserID > -1 && (UserInfo.IsInRole("Administrators")))
@@ -74,8 +93,8 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage.Factories
         }
 
         internal enum Identifier
-        {
-            setting_registered_link
+        {            
+            setting_language
         }
     }
 }

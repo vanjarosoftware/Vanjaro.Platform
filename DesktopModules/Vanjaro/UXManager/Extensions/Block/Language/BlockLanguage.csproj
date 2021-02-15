@@ -49,12 +49,14 @@
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Components\Constants.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\ServiceRouteMapper.cs" />
     <Compile Include="Controllers\UIController.cs" />
     <Compile Include="Entities\Language.cs" />
     <Compile Include="Entities\LanguageSettings.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Entities\StringText.cs" />
     <Compile Include="ExtensionInfo.cs" />
     <Compile Include="Factories\AppFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,6 +110,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Setting\Language.html" />
+    <Content Include="Views\Setting\Language.js" />
     <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -115,6 +119,9 @@
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Setting\App_LocalResources\Language.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

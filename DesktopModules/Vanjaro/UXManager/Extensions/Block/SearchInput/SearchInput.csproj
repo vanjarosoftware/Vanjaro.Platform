@@ -54,6 +54,7 @@
     <Compile Include="Controllers\ServiceRouteMapper.cs" />
     <Compile Include="Controllers\UIController.cs" />
     <Compile Include="Entities\SearchInput.cs" />
+    <Compile Include="Entities\StringText.cs" />
     <Compile Include="ExtensionInfo.cs" />
     <Compile Include="Factories\AppFactory.cs" />
     <Compile Include="Managers\SearchInputManager.cs" />
