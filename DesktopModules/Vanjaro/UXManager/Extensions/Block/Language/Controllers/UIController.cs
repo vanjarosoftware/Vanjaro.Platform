@@ -11,6 +11,8 @@ namespace Vanjaro.UXManager.Extensions.Block.BlockLanguage.Controllers
         {
             switch ((AppFactory.Identifier)Enum.Parse(typeof(AppFactory.Identifier), Identifier))
             {
+                case AppFactory.Identifier.setting_language:
+                    return LanguageController.GetData(UserInfo,Identifier, Parameters, PortalSettings);
                 default:
                     break;
             }

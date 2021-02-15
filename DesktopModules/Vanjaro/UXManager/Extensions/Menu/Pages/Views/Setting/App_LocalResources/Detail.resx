@@ -471,4 +471,13 @@
   <data name="ExportLayout.Text" xml:space="preserve">
     <value>Export</value>
   </data>
+  <data name="MakePublic.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="MakePublic.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="MakePublic.Text" xml:space="preserve">
+    <value>Make Public</value>
+  </data>
 </root>
