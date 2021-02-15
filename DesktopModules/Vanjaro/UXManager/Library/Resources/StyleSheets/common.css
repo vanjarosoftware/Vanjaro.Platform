@@ -174,6 +174,7 @@ html, body, form {
     cursor: pointer;
     border-bottom-left-radius: 2px;
     border-top-right-radius: 4px;
+    color: #7b7b7b;
 }
 
     .vj-ux-manager .dropdown.dropbtn .dropdownmenu:hover {
@@ -253,10 +254,16 @@ html, body, form {
 
 .vj-ux-manager .table-striped tbody tr:nth-of-type(odd) {
     background-color: #f9f9f9;
+    --bs-table-accent-bg: #f9f9f9 ;
+}
+
+.vj-ux-manager .table > :not(:last-child) > :last-child > * {
+    border-bottom-color: none;
 }
 
 .vj-ux-manager .table-grid .table td {
     padding: 8px;
+    border-bottom-width: 0;
 }
 
 /*Info Message*/

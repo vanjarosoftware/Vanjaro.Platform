@@ -2642,7 +2642,7 @@ $(document).ready(function () {
 							});
 
 							//Tooltip
-							$('[data-toggle="tooltip"]').tooltip();
+							$('[data-bs-toggle="tooltip"]').tooltip();
 
 							$('.block-elements .blockItem').on("click", function (e) {
 								var messagesrc = CurrentExtTabUrl + "&guid=" + $(this).attr('guid');

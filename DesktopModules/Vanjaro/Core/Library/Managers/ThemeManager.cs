@@ -728,7 +728,7 @@ namespace Vanjaro.Core
             private static string GetSubCategoryEditClick(ThemeEditor item, bool developerMode, string Guid)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append("<div class=\"dropdown float-right dropbtn\">");
+                sb.Append("<div class=\"dropdown float-end dropbtn\">");
                 sb.Append("<a id=\"dropdownMenuLink\" class=\"dropdownmenu\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><em class=\"fas fa-ellipsis-v\"></em></a>");
                 sb.Append("<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuLink\">");
                 sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + item.Guid + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
@@ -747,7 +747,7 @@ namespace Vanjaro.Core
 
                 if (developerMode)
                 {
-                    sb.Append("<div class=\"dropdown float-right dropbtn\">");
+                    sb.Append("<div class=\"dropdown float-end dropbtn\">");
                     sb.Append("<a id=\"dropdownMenuLink\" class=\"dropdownmenu\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><em class=\"fas fa-ellipsis-v\"></em></a>");
                     sb.Append("<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuLink\">");
                     if (themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count == 0).FirstOrDefault() != null)
@@ -777,7 +777,7 @@ namespace Vanjaro.Core
                 }
                 else if (!developerMode && themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count > 0).FirstOrDefault() != null)
                 {
-                    sb.Append("<div class=\"dropdown float-right dropbtn\">");
+                    sb.Append("<div class=\"dropdown float-end dropbtn\">");
                     sb.Append("<a id=\"dropdownMenuLink\" class=\"dropdownmenu\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><em class=\"fas fa-ellipsis-v\"></em></a>");
                     sb.Append("<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuLink\">");
                     sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count > 0).FirstOrDefault().Guid + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
