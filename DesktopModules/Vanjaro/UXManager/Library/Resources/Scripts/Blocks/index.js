@@ -376,6 +376,8 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 			var categories = VjEditor.BlockManager.getCategories();
 
+			categories.remove(['Basic', 'Apps', 'Design']);
+
 			if (categories.length > 0) {
 
 				$BlockCategory.hide();
@@ -392,15 +394,8 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 				$(categories.models).each(function (index, category) {
 
 					var option = document.createElement("option");
-
-					if (index == 0) {
-						option.text = "Select Category";
-						option.value = "";
-					}
-					else {
-						option.text = category.attributes.label;
-						option.value = category.attributes.id;
-					}
+					option.text = category.attributes.label;
+					option.value = category.attributes.id;
 
 					select.append(option);
 
@@ -414,9 +409,10 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 				else
 					$(inputGroup).insertAfter($BlockCategory);
 
-				$(select).on('change', function () {
-					var selected = $(this).val();
-					$BlockCategory.val(selected);
+				var $CategoryDropdown = $("#ModalContent").find("#CategoryDropdown");
+
+				$CategoryDropdown.on('change', function () {
+					$BlockCategory.val($(this).val());
 				});
 
 				$("#ModalContent").find(".btn-add").click(function () {
@@ -425,9 +421,9 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 						{
 							title: 'Title',
 							html: true,
-							text: '<input class="form-control" style="display:block;" type="text" id="Category" placeholder="Category"/>',
-							confirmButtonText: 'Add',
-							cancelButtonText: 'Cancel',
+							text: '<input class="form-control" style="display:block;" type="text" id="Category" placeholder="' + VjLocalized.BlockCategory + '"/>',
+							confirmButtonText: VjLocalized.Add,
+							cancelButtonText: VjLocalized.Cancel,
 							showCancelButton: true,
 							closeOnConfirm: false,
 						},
@@ -442,20 +438,26 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 								$(categories.models).each(function (index, item) {
 
 									if (item.attributes.label == category) {
-										swal.showInputError('Category already exists');
+
 										count = 1;
+										swal.showInputError(VjLocalized.CategoryExists);
+										
 										return false;
 									}
 								});
 
 								if (count == 0) {
+
+									$CategoryDropdown.append('<option value="' + category + '">' + category + '</option>');
+									$CategoryDropdown.val(category);
+
 									$BlockCategory.val(category);
 									swal.close();
 								}
 
 							}
 							else {
-								swal.showInputError('Category is required');
+								swal.showInputError(VjLocalized.CategoryRequired);
 								return false;
 							}
 						}

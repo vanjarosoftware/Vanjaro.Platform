@@ -77,6 +77,10 @@
     Copy: "[LS:Copy]",
     Delete: "[LS:Delete]",
     CopyCarouselImage: "[LS:CopyCarouselImage]",
+    Add: "[LS:Add]",
+    BlockCategory: "[LS:BlockCategory]",
+    CategoryExists: "[LS:CategoryExists]",
+    CategoryRequired: "[LS:CategoryRequired]"
 };
 
 $.fn.dnnModuleDragDrop = function (options) {
