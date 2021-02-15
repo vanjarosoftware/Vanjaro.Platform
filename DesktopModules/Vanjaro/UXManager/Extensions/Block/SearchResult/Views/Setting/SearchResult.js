@@ -10,9 +10,11 @@
             $scope.ui.data.Global.Value = $scope.CurrentSearchresult.attributes.attributes["data-block-global"] == "false" ? false : true;
             if ($scope.ui.data.Global.Value) {
                 $scope.ui.data.LinkTarget.Value = $scope.ui.data.GlobalConfigs.Options['data-block-linktarget'] == "false" ? false : true;
+                $scope.ui.data.Template.Value = $scope.ui.data.GlobalConfigs.Options["data-block-template"];
             }
             else {
                 $scope.ui.data.LinkTarget.Value = $scope.CurrentSearchresult.attributes.attributes['data-block-linktarget'] == "false" ? false : true;
+                $scope.ui.data.Template.Value = $scope.CurrentSearchresult.attributes.attributes["data-block-template"];
             }
         }
         $scope.Loaded = true;
@@ -27,6 +29,14 @@
         else
             window.parent.RenderBlock(searchresult);
     };
+
+    $scope.$watch('ui.data.Template.Value', function (newValue, oldValue) {
+        if (newValue != undefined && oldValue != undefined) {
+            var searchresult = window.parent.VjEditor.getSelected();
+            searchresult.addAttributes({ 'data-block-template': newValue });
+            $scope.ApplyChanges(searchresult);
+        }
+    });
 
     $scope.$watch('ui.data.Global.Value', function (newValue, oldValue) {
         if (newValue != undefined && oldValue != undefined) {
