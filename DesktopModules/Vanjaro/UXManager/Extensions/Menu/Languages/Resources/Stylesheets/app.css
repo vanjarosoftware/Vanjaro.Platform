@@ -119,6 +119,7 @@ span.indentspace {
         font-weight: 900;
         color: #ccc;
         display: inherit;
+        margin-left: 14px;
     }
 
 .foldersdiv {

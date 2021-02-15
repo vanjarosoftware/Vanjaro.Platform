@@ -169,7 +169,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title ` + titleposition + `" id="defaultModalLabel"></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body" id="UXRender">
 <img class="loader" alt="Loading" src="` + VjDefaultPath + `loading.gif" />

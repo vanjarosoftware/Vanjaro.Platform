@@ -1033,3 +1033,9 @@ uploadinput-button {
 .form-group {
     margin-bottom: 1rem;
 }
+.accordion-body .form-control {
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    appearance: auto;
+}
+
