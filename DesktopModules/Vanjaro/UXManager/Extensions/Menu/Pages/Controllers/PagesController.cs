@@ -144,6 +144,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
                             Settings.Add("IsDefaultLocale", new UIData { Name = "IsDefaultLocale", Options = pid > 0 ? DefaultLocale.Code == PortalSettings.Current.CultureCode : true, Value = DefaultLocale.Code });
                             Settings.Add("LocalizedPage", new UIData { Name = "LocalizedPage", Options = Managers.PagesManager.AddDefaultLocalization(pid, pageSettings) });
                             Settings.Add("Languages", new UIData { Name = "Languages", Value = PortalSettings.Current.CultureCode, Options = LocalizationManager.GetActiveLocale(PortalSettings.Current.PortalId).Where(a => a.Value.ToLower() == PortalSettings.Current.CultureCode.ToLower()), OptionsText = "Text", OptionsValue = "Value" });
+                            Settings.Add("MakePublic", new UIData { Name = "MakePublic", Value = bool.TrueString });
                         }
 
                         return Settings.Values.ToList();
@@ -368,32 +369,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
 
             if (request.Key.Value == "HasBeenPublished")
             {
-                if (tabinfo.TabPermissions.Where(t => t != null && t.RoleName == "All Users").FirstOrDefault() != null)
-                {
-                    foreach (TabPermissionInfo p in tabinfo.TabPermissions.Where(t => t != null && t.RoleName == "All Users"))
-                    {
-                        if (request.Value.Value && p.PermissionKey.ToLower() == "view")
-                        {
-                            p.AllowAccess = true;
-                        }
-                        else
-                        {
-                            p.AllowAccess = false;
-                        }
-                    }
-                }
-                else
-                {
-                    tabinfo.TabPermissions.Add(new TabPermissionInfo
-                    {
-                        PermissionID = 3,
-                        TabID = tabinfo.TabID,
-                        AllowAccess = true,
-                        RoleID = -1,
-                        RoleName = "All Users",
-                    });
-                }
-                TabPermissionController.SaveTabPermissions(tabinfo);
+                Managers.PagesManager.UpdatePagePermission(tabinfo.TabID, request.Value.Value);                
             }
             tab.UpdateTab(tabinfo);
             if (actionResult.IsSuccess)

@@ -4,13 +4,17 @@ using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Search.Entities;
 using DotNetNuke.Services.Search.Internals;
 using DotNetNuke.Web.Api;
+using DotNetNuke.Web.Api.Internal;
 using DotNetNuke.Web.InternalServices.Views.Search;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
+using Vanjaro.Core.Components;
 using Vanjaro.UXManager.Library.Common;
 using static Vanjaro.Core.Managers;
 using static Vanjaro.UXManager.Extensions.Block.SearchInput.Managers;
@@ -23,7 +27,15 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput.Controllers
     {
         internal static List<IUIData> GetData(string identifier, Dictionary<string, string> parameters, UserInfo userInfo, PortalSettings portalSettings)
         {
-            Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
+            List<StringText> templates = GetTemplates();
+            Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>
+            {
+                { "Global", new UIData { Name = "Global", Value = "true" } },                
+                { "EnableWildSearch", new UIData { Name = "EnableWildSearch", Value = "true" } },
+                { "GlobalConfigs", new UIData { Name = "GlobalConfigs", Options = Core.Managers.BlockManager.GetGlobalConfigs(portalSettings, "search result") } },
+                { "IsAdmin", new UIData { Name = "IsAdmin", Value = userInfo.IsInRole("Administrators").ToString().ToLower() } },
+                { "Template", new UIData { Name = "Template", Options = templates, OptionsText = "Text", OptionsValue = "Value" } }
+            };
             return Settings.Values.ToList();
         }
 
@@ -94,6 +106,38 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput.Controllers
 
             return actionResult;
         }
+
+        [HttpPost]
+        [DnnPageEditor]
+        [AuthorizeAccessRoles(AccessRoles = "admin")]
+        public void Update(Dictionary<string, string> Attributes)
+        {
+            Core.Managers.BlockManager.UpdateDesignElement(PortalSettings, Attributes);
+        }
+
+        private static List<StringText> GetTemplates()
+        {
+            string TemplatesPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.CurrentTheme.Name + "/blocks/search input/Templates");
+            List<StringText> Templates = new List<StringText>();
+            if (Directory.Exists(TemplatesPath))
+            {
+                foreach (string file in Directory.GetFiles(TemplatesPath))
+                {
+                    string FileName = Path.GetFileName(file);
+                    if (!string.IsNullOrEmpty(FileName))
+                    {
+                        if (FileName.EndsWith(".cshtml"))
+                        {
+                            FileName = FileName.Replace(".cshtml", "");
+                            Templates.Add(new StringText() { Value = FileName.ToString(), Text = FileName.ToString() });
+                        }
+                    }
+                }
+            }
+
+            return Templates;
+        }
+
 
         public override string AccessRoles()
         {
