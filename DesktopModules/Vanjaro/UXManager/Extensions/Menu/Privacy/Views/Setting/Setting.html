@@ -26,15 +26,15 @@
         <uilayout name="TabsCookieConsent" attr-ng-show="ShowCookieConsentTab">
             <uitemplate>
                 <div id="accordionCookieConsent">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionCookieConsent" data-target="#CookieSettings">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionCookieConsent" data-bs-target="#CookieSettings">
                                 [L:CookieSetting]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="CookieSettings" class="collapse show" data-parent="#accordionCookieConsent">
-                            <div class="card-body">
+                        <div id="CookieSettings" class="accordion-collapse collapse show" data-bs-parent="#accordionCookieConsent">
+                            <div class="accordion-body">
                                 [uilayout:Cookie]
                             </div>
                         </div>
@@ -45,15 +45,15 @@
         <uilayout name="TabsDataConsent" attr-ng-show="ShowDataConsentTab">
             <uitemplate>
                 <div id="accordionDataConsent">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionDataConsent" data-target="#DataConsentSettings">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionDataConsent" data-bs-target="#DataConsentSettings">
                                 [L:DataConsent]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="DataConsentSettings" class="collapse show" data-parent="#accordionDataConsent">
-                            <div class="card-body">
+                        <div id="DataConsentSettings" class="accordion-collapse collapse show" data-bs-parent="#accordionDataConsent">
+                            <div class="accordion-body">
                                 [uilayout:Data]
                             </div>
                         </div>
@@ -64,15 +64,15 @@
         <uilayout name="TabsImprovementProgram" attr-ng-show="ShowImprovementProgramTab">
             <uitemplate>
                 <div id="accordionImprovementProgram">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionImprovementProgram" data-target="#ImprovementProgramSettings">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionImprovementProgram" data-bs-target="#ImprovementProgramSettings">
                                 [L:ImprovementProgram]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="ImprovementProgramSettings" class="collapse show" data-parent="#accordionImprovementProgram">
-                            <div class="card-body">
+                        <div id="ImprovementProgramSettings" class="accordion-collapse collapse show" data-bs-parent="#accordionImprovementProgram">
+                            <div class="accordion-body">
                                 [uilayout:Program]
                             </div>
                         </div>
@@ -92,7 +92,7 @@
     </uilayout>-->
         <uilayout name="Default">
             <uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button class="btn btn-sm btn-primary" type="button" id="Update" ng-click="Click_Save('Update')">[L:Update]</button>
                 </div>
             </uitemplate>

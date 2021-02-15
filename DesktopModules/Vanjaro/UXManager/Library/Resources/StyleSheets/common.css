@@ -255,6 +255,14 @@ html, body, form {
     background-color: #f9f9f9;
 }
 
+.vj-ux-manager .table-striped > tbody > tr:nth-of-type(odd) {
+    --bs-table-accent-bg: transparent;
+}
+
+.vj-ux-manager .table > :not(caption) > * > * {
+    border-bottom-width: 0px;
+}
+
 .vj-ux-manager .table-grid .table td {
     padding: 8px;
 }
@@ -897,47 +905,78 @@ uploadinput-button {
         width: 100%;
     }
 
-.vj-ux-manager .card-header {
-    padding: 10px 15px 7px;
+.vj-ux-manager .accordion-header {
     border-bottom: 1px solid transparent;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    background-color: rgba(0,0,0,.03);
+}
+.vj-ux-manager .accordion-button:not(.collapsed) {
+    background-color: transparent;
 }
 
-    .vj-ux-manager .card-header .card-link {
-        font-size: 16px;
-        color: #333;
-        line-height: 20px;
-    }
+.accordion-button:focus {
+    z-index: 3;
+    border-color: rgba(0,0,0,.125);
+    outline: 0;
+    box-shadow: none;
+}
+.vj-ux-manager .accordion-header .accordion-button {
+    font-size: 16px;
+    color: #333;
+    line-height: 20px;
+    padding: 10px 15px 7px;
+    border-bottom: 1px solid transparent;
+    background-color: transparent;
+    display: inline-block;
+}
 
-.vj-ux-manager .card-link .fa-caret-right,
-.vj-ux-manager .card-link .fa-caret-down {
+.vj-ux-manager .accordion-item {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}
+.accordion-item:last-of-type .accordion-collapse {
+     border-bottom-width:0px; 
+  
+}
+
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+    border-bottom-width: 0px;
+    border-bottom-color: rgba(0,0,0,.125);
+}
+
+.vj-ux-manager .accordion-button::after {
+    content: none;
+}
+    .vj-ux-manager .accordion-button .fa-caret-right, .vj-ux-manager .accordion-button .fa-caret-down {
     transform: rotate(0deg);
     transition: .5s transform ease-in-out;
     font-size: 20px;
 }
 
-.vj-ux-manager .card-link.collapsed .fa-caret-right {
+.vj-ux-manager .accordion-button.collapsed .fa-caret-right {
     transform: rotate(0deg);
     transition: .5s transform ease-in-out;
 }
 
-.vj-ux-manager .card-link[aria-expanded="true"] .fa-caret-right {
+.vj-ux-manager .accordion-button[aria-expanded="true"] .fa-caret-right {
     transform: rotate(90deg);
     transition: .5s transform ease-in-out;
 }
 
-.vj-ux-manager .card-link[aria-expanded="true"] .fa-caret-down {
+.vj-ux-manager .accordion-button[aria-expanded="true"] .fa-caret-down {
     transform: rotate(0deg);
     transition: .5s transform ease-in-out;
 }
 
-.vj-ux-manager .card-link.collapsed .fa-caret-down {
+.vj-ux-manager .accordion-button.collapsed .fa-caret-down {
     transform: rotate(-90deg);
     transition: .5s transform ease-in-out;
 }
 
-.vj-ux-manager .card + .card {
+.vj-ux-manager .accordion-item + .accordion-item{
     margin-top: 5px;
 }
 
@@ -983,3 +1022,7 @@ uploadinput-button {
         font-weight: bold !important;
         background: #fff;
     }
+
+.form-group {
+    margin-bottom: 1rem;
+}

@@ -10,31 +10,31 @@
                     </div>
                     <div class="col-md-9 left_border">
                         <div id="accordion">
-                            <div class="card" mn-ng-if="ShowAccordion">
-                                <div class="card-header">
-                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseFour">
+                            <div class="accordion-item" mn-ng-if="ShowAccordion">
+                                <div class="accordion-header" id="headingfour">
+                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
                                         [L:Settings]
-                                        <em class="fas fa-caret-down float-right"></em>
+                                        <em class="fas fa-caret-down float-end"></em>
                                     </a>
                                 </div>
-                                <div id="collapseFour" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingfour" data-bs-parent="#accordion">
+                                    <div class="accordion-body">
                                         [uilayout:WorkflowTab]
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="accordion">
-                            <div class="card" mn-ng-if="ShowAccordion">
-                                <div class="card-header">
-                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseFive">
+                            <div class="accordion-item" mn-ng-if="ShowAccordion">
+                                <div class="accordion-header" id="headerFive">
+                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse"  aria-expanded="true" aria-controls="collapseFive" data-bs-target="#collapseFive">
                                         [L:WorkflowTable]
-                                        <em class="fas fa-caret-right float-right"></em>
+                                        <em class="fas fa-caret-right float-end"></em>
                                     </a>
                                 </div>
-                                <div id="collapseFive" class="collapse" data-parent="#accordion">
-                                    <a role="button" mn-ng-show="ShowWorkflowTab" class="float-right addworkflowbtn" ng-click="Change_Workflow(-1)"><em class="fas fa-plus"></em></a>
-                                    <div class="card-body">
+                                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"  data-bs-parent="#accordion">
+                                    <a role="button" mn-ng-show="ShowWorkflowTab" class="float-end addworkflowbtn" ng-click="Change_Workflow(-1)"><em class="fas fa-plus"></em></a>
+                                    <div class="accordion-body">
                                         [uilayout:WorkflowTable]
                                     </div>
                                 </div>
@@ -58,8 +58,8 @@
                 </column>
                 <column name="Action" width="8">
                     <uitemplate>
-                        <div class="dropdown float-right dropbtn">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown float-end dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -84,7 +84,7 @@
             <uielement name="Description" control="textarea" tooltip="false" attr-required="true" ngmodel="ui.data.Workflow.Options.Description"></uielement>
             <uielement name="line" control="line" label="false" container-attr-ng-hide="WorkflowID=='-1'"></uielement>
             <uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button id="submit" class="btn btn-sm btn-primary button-left " type="button" ng-click="Click_Add('submit')">[L:Update]</button>
 
                     <a class="btn btn-link button-left" ng-click="Click_Cancel()"><span>[L:Cancel]</span></a>
@@ -95,41 +95,41 @@
         <uilayout name="EditWorkflowId" attr-ng-show="WorkflowID!='-1' && ShowEditWorkflow">
             <uitemplate>
                 <div id="waccordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#waccordion" data-target="#collapseone" aria-expanded="true">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#waccordion" data-bs-target="#collapseone" aria-expanded="true">
                                 [L:ManageState]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseone" class="collapse show" data-parent="#waccordion">
-                            <div class="card-body">
+                        <div id="collapseone" class="accordion-collapse collapse show" data-bs-parent="#waccordion">
+                            <div class="accordion-body">
                                 [uilayout:ManageState]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#waccordion" data-target="#collapsethree">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button collapsed" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#waccordion" data-bs-target="#collapsethree">
                                 [L:PagePermissions]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="collapsethree" class="collapse" data-parent="#waccordion">
-                            <div class="card-body">
+                        <div id="collapsethree" class="accordion-collapse collapse" data-bs-parent="#waccordion">
+                            <div class="accordion-body">
                                 [uilayout:PermissionSetting]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#waccordion" data-target="#collapsetwo">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button collapsed" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#waccordion" data-bs-target="#collapsetwo">
                                 [L:Revisions]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="collapsetwo" class="collapse" data-parent="#waccordion">
-                            <div class="card-body">
+                        <div id="collapsetwo" class="accordion-collapse collapse" data-bs-parent="#waccordion">
+                            <div class="accordion-body">
                                 [uilayout:RevisionsTab]
                             </div>
                         </div>
@@ -146,7 +146,7 @@
             <uielement name="Notify" tooltip="false" ngmodel="Notify" attr-class="ToggleRight" control="toggle"></uielement>
             <uielement name="line" control="line" label="false"></uielement>
             <uitemplate>
-                <div class="float-right text-right fixed-footer">
+                <div class="float-end text-end fixed-footer">
                     <button class="btn btn-sm btn-primary button-left" type="button" ng-click="Click_UpdateState()">[L:Update]</button>
                     <a class="btn btn-link button-left" ng-click="Click_CancleState()">[L:Cancel]</a>
                 </div>
@@ -160,7 +160,7 @@
         </uilayout>
         <uilayout name="default" attr-ng-hide="ShowEditWorkflow || ShowState || ShowAdvancedTab">
             <uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button class="btn btn-sm btn-primary button-left " type="button" ng-click="Change_UpdateWorkID()">[L:Update]</button>
                 </div>
             </uitemplate>
@@ -201,7 +201,7 @@
                 <column name="Actions" width="5">
                     <uitemplate>
                         <div class="dropdown float-right dropbtn">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">

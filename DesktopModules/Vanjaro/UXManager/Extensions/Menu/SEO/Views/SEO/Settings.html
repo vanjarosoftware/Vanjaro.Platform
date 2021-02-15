@@ -28,28 +28,28 @@
         <uilayout name="TabsContentSite" attr-ng-show="ShowSiteTab">
             <uitemplate>
                 <div id="accordionSite">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionSite" data-target="#SiteSettings">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionSite" data-bs-target="#SiteSettings">
                                 [L:SiteSetting]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="SiteSettings" class="collapse show" data-parent="#accordionSite">
-                            <div class="card-body">
+                        <div id="SiteSettings" class="accordion-collapse collapse show" data-bs-parent="#accordionSite">
+                            <div class="accordion-body">
                                 [uilayout:Site]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionSite" data-target="#AdvanceSetting">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionSite" data-bs-target="#AdvanceSetting">
                                 [L:AdvanceSetting]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="AdvanceSetting" class="collapse" data-parent="#accordionSite">
-                            <div class="card-body">
+                        <div id="AdvanceSetting" class="accordion-collapse collapse" data-bs-parent="#accordionSite">
+                            <div class="accordion-body">
                                 [uilayout:Advanced]
                             </div>
                         </div>
@@ -60,54 +60,54 @@
         <uilayout name="TabsContentURLs" attr-ng-show="ShowURLsTab">
             <uitemplate>
                 <div id="accordionurls">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionurls" data-target="#urlredirects">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionurls" data-bs-target="#urlredirects">
                                 [L:URLRedirects]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="urlredirects" class="collapse show" data-parent="#accordionurls">
-                            <div class="card-body">
+                        <div id="urlredirects" class="accordion-collapse collapse show" data-bs-parent="#accordionurls">
+                            <div class="accordion-body">
                                 [uilayout:URLRedirects]
                             </div>
                         </div>
                     </div>
-                    <div class="card" access-roles="host">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionurls" data-target="#expressions">
+                    <div class="accordion-item" access-roles="host">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionurls" data-bs-target="#expressions">
                                 [L:Expressions]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="expressions" class="collapse" data-parent="#accordionurls">
-                            <div class="card-body">
+                        <div id="expressions" class="accordion-collapse collapse" data-bs-parent="#accordionurls">
+                            <div class="accordion-body">
                                 [uilayout:Expressions]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionurls" data-target="#testurl">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionurls" data-bs-target="#testurl">
                                 [L:TestURL]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="testurl" class="collapse" data-parent="#accordionurls">
-                            <div class="card-body">
+                        <div id="testurl" class="accordion-collapse collapse" data-bs-parent="#accordionurls">
+                            <div class="accordion-body">
                                 [uilayout:TestURL]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionurls" data-target="#testurlRewriting">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionurls" data-bs-target="#testurlRewriting">
                                 [L:TestURLRewriting]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="testurlRewriting" class="collapse" data-parent="#accordionurls">
-                            <div class="card-body">
+                        <div id="testurlRewriting" class="accordion-collapse collapse" data-bs-parent="#accordionurls">
+                            <div class="accordion-body">
                                 [uilayout:TestURLRewriting]
                             </div>
                         </div>
@@ -118,15 +118,15 @@
         <uilayout name="TabsContentSitemap" attr-ng-show="ShowSitemapTab">
             <uitemplate>
                 <div id="accordionSitemap">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionSitemap" data-target="#SitemapSettings">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionSitemap" data-bs-target="#SitemapSettings">
                                 [L:Sitemap]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="SitemapSettings" class="collapse show" data-parent="#accordionSitemap">
-                            <div class="card-body">
+                        <div id="SitemapSettings" class="accordion-collapse collapse show" data-bs-parent="#accordionSitemap">
+                            <div class="accordion-body">
                                 [uilayout:Sitemap]
                             </div>
                         </div>
@@ -137,41 +137,41 @@
         <uilayout name="TabsContentSiteSearch" attr-ng-show="SiteSearchTab">
             <uitemplate>
                 <div id="accordionSiteSearch">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionSiteSearch" data-target="#BasicSettings">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionSiteSearch" data-bs-target="#BasicSettings">
                                 [L:Basic]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="BasicSettings" class="collapse show" data-parent="#accordionSiteSearch">
-                            <div class="card-body">
+                        <div id="BasicSettings" class="accordion-collapse collapse show" data-bs-parent="#accordionSiteSearch">
+                            <div class="accordion-body">
                                 [uilayout:Basic]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionSiteSearch" data-target="#SynonymsSettings">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionSiteSearch" data-bs-target="#SynonymsSettings">
                                 [L:Synonyms]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="SynonymsSettings" class="collapse" data-parent="#accordionSiteSearch">
-                            <div class="card-body">
+                        <div id="SynonymsSettings" class="accordion-collapse collapse" data-bs-parent="#accordionSiteSearch">
+                            <div class="accordion-body">
                                 [uilayout:Synonyms]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionSiteSearch" data-target="#IgnoreWordsSettings">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionSiteSearch" data-bs-target="#IgnoreWordsSettings">
                                 [L:IgnoreWords]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="IgnoreWordsSettings" class="collapse" data-parent="#accordionSiteSearch">
-                            <div class="card-body">
+                        <div id="IgnoreWordsSettings" class="accordion-collapse collapse" data-bs-parent="#accordionSiteSearch">
+                            <div class="accordion-body">
                                 [uilayout:IgnoreWords]
                             </div>
                         </div>
@@ -182,7 +182,7 @@
         <uilayout name="Default">
             <uitemplate>
                 <div class="text-right fixed-footer">
-                    <button type="button" class="btn btn-sm btn-primary float-right" id="Update" mn-ng-click="Click_Save('update')">
+                    <button type="button" class="btn btn-sm btn-primary float-end" id="Update" mn-ng-click="Click_Save('update')">
                         [L:Update]
                     </button>
                 </div>
@@ -298,7 +298,7 @@
         </uilayout>
         <uilayout name="Synonyms">
             <uitemplate>
-                <a title="[L:AddGroup]" mn-ng-click="Click_Add()" class="addGroup ux-btn ux-btn-hover float-right">
+                <a title="[L:AddGroup]" mn-ng-click="Click_Add()" class="addGroup ux-btn ux-btn-hover float-end">
                     <em class="fas fa-plus"></em>
                 </a>
             </uitemplate>

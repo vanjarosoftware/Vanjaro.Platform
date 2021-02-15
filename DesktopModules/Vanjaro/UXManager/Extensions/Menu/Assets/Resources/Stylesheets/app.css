@@ -148,6 +148,10 @@ a.assetIsList {
     /*border-bottom: 1px solid #ccc;*/
 }
 
+.buttondiv .uploaderui{
+    position:relative;
+} 
+
 .uploaddefault .table thead th {
     padding-top: 0;
 }

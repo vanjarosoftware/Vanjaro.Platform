@@ -4,12 +4,12 @@
             <uitemplate>
                 <div class="form-group" data-datatype="dropdownlist" data-label="[L] Role Group" data-name="RoleGroup">
                     <!--<div class="col-sm-12 col-xs-12">
-                        <a mn-ng-click="Click_AddGroup()" class="ux-btn ux-btn-hover float-right" role="button" title="[LS:AddGroups]" id="Submit">
+                        <a mn-ng-click="Click_AddGroup()" class="ux-btn ux-btn-hover float-end" role="button" title="[LS:AddGroups]" id="Submit">
                             <em class="fas fa-plus"></em>
                         </a>
                     </div>-->
                     <div>
-                        <a mn-ng-click="Click_AddGroup()" class="ux-btn ux-btn-hover float-right" role="button" title="[LS:AddGroups]" id="Submit">
+                        <a mn-ng-click="Click_AddGroup()" class="ux-btn ux-btn-hover float-end" role="button" title="[LS:AddGroups]" id="Submit">
                             <em class="fas fa-plus"></em>
                         </a>
                     </div>
@@ -28,7 +28,7 @@
             <uielement name="AutoAssignment" container-attr-ng-hide="true" control="checkboxtoggle" ngmodel="ui.data.Working_RoleDto.Options.autoAssign" attr-class="toggle_right"></uielement>
             <uitemplate>
                 <div class="text-right fixed-footer">
-                    <button type="button" id="save" mn-ng-click="Click_SaveRole('update')" mn-ng-disabled="isDisabled" class="btn btn-sm btn-primary float-right">
+                    <button type="button" id="save" mn-ng-click="Click_SaveRole('update')" mn-ng-disabled="isDisabled" class="btn btn-sm btn-primary float-end">
                         [L:Save]
                     </button>
                 </div>
