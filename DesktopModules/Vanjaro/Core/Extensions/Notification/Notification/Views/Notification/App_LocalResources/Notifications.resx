@@ -120,6 +120,12 @@
   <data name="Dismiss.Text" xml:space="preserve">
     <value>Dismiss</value>
   </data>
+  <data name="DismissAll.Text" xml:space="preserve">
+    <value>Dismiss All</value>
+  </data>
+  <data name="DismissAllNotification.Text" xml:space="preserve">
+    <value>You will not be able to recove this anymore!</value>
+  </data>
   <data name="Messages.Text" xml:space="preserve">
     <value>Messages</value>
   </data>

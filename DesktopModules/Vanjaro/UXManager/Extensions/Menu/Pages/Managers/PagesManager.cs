@@ -1117,6 +1117,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                             TermsTabName = TabSanitizer(portal.TermsTabId, pid)?.TabName,
                             PrivacyTabId = TabSanitizer(portal.PrivacyTabId, pid)?.TabID,
                             PrivacyTabName = TabSanitizer(portal.PrivacyTabId, pid)?.TabName,
+                            RedirectAfterLoginTabId = TabSanitizer(portalSettings.Registration.RedirectAfterLogin, pid)?.TabID,
+                            RedirectAfterLoginTabName = TabSanitizer(portalSettings.Registration.RedirectAfterLogin, pid)?.TabName,
+                            RedirectAfterLogoutTabId = TabSanitizer(portalSettings.Registration.RedirectAfterLogout, pid)?.TabID,
+                            RedirectAfterLogoutTabName = TabSanitizer(portalSettings.Registration.RedirectAfterLogout, pid)?.TabName,
+                            RedirectAfterRegistrationTabId = TabSanitizer(portalSettings.Registration.RedirectAfterRegistration, pid)?.TabID,
+                            RedirectAfterRegistrationTabName = TabSanitizer(portalSettings.Registration.RedirectAfterRegistration, pid)?.TabName,
+
                             portalSettings.PageHeadText
                         };
                     }
@@ -1163,6 +1170,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         portalInfo.Custom500TabId = ValidateTabId(request.Custom500TabId, pid);
                         portalInfo.TermsTabId = ValidateTabId(request.TermsTabId, pid);
                         portalInfo.PrivacyTabId = ValidateTabId(request.PrivacyTabId, pid);
+
+                        PortalController.UpdatePortalSetting(pid, "Redirect_AfterLogin", request.RedirectAfterLoginTabId.ToString(), true, cultureCode);
+                        PortalController.UpdatePortalSetting(pid, "Redirect_AfterLogout", request.RedirectAfterLogoutTabId.ToString(), true, cultureCode);
+                        PortalController.UpdatePortalSetting(pid, "Redirect_AfterRegistration", request.RedirectAfterRegistrationTabId.ToString(), true, cultureCode);
 
                         PortalController.Instance.UpdatePortalInfo(portalInfo);
                         PortalController.UpdatePortalSetting(pid, "PageHeadText", string.IsNullOrEmpty(request.PageHeadText) ? "false" : request.PageHeadText);

@@ -204,6 +204,21 @@
   <data name="SplashPage.Text" xml:space="preserve">
     <value>Splash Page</value>
   </data>
+  <data name="RedirectAfterRegistration.Text" xml:space="preserve">
+    <value>Redirect After Registration</value>
+  </data>
+  <data name="RedirectAfterLogin.Text" xml:space="preserve">
+    <value>Redirect After Login</value>
+  </data>
+  <data name="RedirectAfterLogout.Text" xml:space="preserve">
+    <value>Redirect After Logout</value>
+  </data>
+  <data name="Terms.Text" xml:space="preserve">
+    <value>Terms</value>
+  </data>
+  <data name="Privacy.Text" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
   <data name="UserProfilePage.Text" xml:space="preserve">
     <value>User Profile</value>
   </data>
