@@ -1001,9 +1001,8 @@ div#MenuSettings .parent-menu-hide {
 }
 
 #ModalContent input,
+#ModalContent select,
 .gjs-custom-code input {
-    width: 100%;
-    margin-bottom: 10px;
     border: 1px solid #d3d0d0;
     border-radius: 3px;
     padding: 5px 10px;
@@ -1014,7 +1013,14 @@ div#MenuSettings .parent-menu-hide {
     opacity: 0.6;
 }
 
+#ModalContent input,
+.gjs-custom-code input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
     #ModalContent input:focus,
+    #ModalContent select:focus,
     .gjs-custom-code input:focus {
         border: 1px solid #0088cc;
     }
@@ -1025,6 +1031,11 @@ div#MenuSettings .parent-menu-hide {
     font-size: 14px;
     padding: 6px 12px;
     margin-top: 10px;
+}
+
+#ModalContent .btn-add {
+    font-size: 14px;
+    padding: 6px 12px;
 }
 
 #ModalContent .btn-primary {
