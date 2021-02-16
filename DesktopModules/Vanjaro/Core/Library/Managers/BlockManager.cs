@@ -389,8 +389,8 @@ namespace Vanjaro.Core
                             CustomBlock.Html = html.DocumentNode.OuterHtml;
                         }
 
-                        cb.Html = CustomBlock.Html;
-                        cb.Css = CustomBlock.Css;
+                        //cb.Html = CustomBlock.Html;
+                        //cb.Css = CustomBlock.Css;
                         cb.IsGlobal = CustomBlock.IsGlobal;
                         cb.UpdatedBy = PortalSettings.Current.UserId;
                         cb.UpdatedOn = DateTime.UtcNow;
