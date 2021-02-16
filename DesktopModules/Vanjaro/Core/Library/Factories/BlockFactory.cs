@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Vanjaro.Core.Data.Entities;
 
@@ -22,9 +23,29 @@ namespace Vanjaro.Core
                 }
                 else
                 {
+                    int Version = GetAllByGUID(CustomBlock.PortalID, CustomBlock.Guid).Where(a => a.IsPublished == true).Count() + 1;
+                    CustomBlock.Version = Version;
+                    CustomBlock.IsPublished = false;
+                    CustomBlock.PublishedBy = null;
+                    CustomBlock.PublishedOn = null;
                     CustomBlock.Insert();
+                    RemoveRevisions(CustomBlock.PortalID, CustomBlock.Guid);
                 }
 
+                CacheFactory.Clear(CacheFactory.Keys.CustomBlock);
+            }
+
+            private static void RemoveRevisions(int PortalID, string Guid)
+            {
+                int Version = 5;
+                Setting setting = SettingFactory.GetSetting(PortalID, 0, "setting_workflow", "MaxRevisions");
+                if (setting != null)
+                {
+                    Version = int.Parse(setting.Value);
+                }
+
+                List<CustomBlock> CustomBlocks = GetAllByGUID(PortalID, Guid).OrderByDescending(a => a.Version).Select(a => a.Version).Distinct().Take(Version).ToList();
+                CustomBlock.Delete("Where PortalID=@0 Guid=@1 and Version not in (" + string.Join(",", CustomBlocks) + ")", PortalID, Guid);
                 CacheFactory.Clear(CacheFactory.Keys.CustomBlock);
             }
 
@@ -61,6 +82,20 @@ namespace Vanjaro.Core
                 }
                 return Custom_Block;
             }
+
+            internal static List<CustomBlock> GetAllByGUID(int PortalID, string Guid)
+            {
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "AllByGUID", PortalID, Guid);
+                List<CustomBlock> Custom_Block = CacheFactory.Get(CacheKey);
+                if (Custom_Block == null)
+                {
+                    Custom_Block = CustomBlock.Query("where PortalID=@0 and Guid=@1", PortalID, Guid).ToList();
+                    CacheFactory.Set(CacheKey, Custom_Block);
+                }
+                return Custom_Block;
+            }
+
+
         }
     }
 }

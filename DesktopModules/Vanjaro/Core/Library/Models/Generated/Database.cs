@@ -63,6 +63,10 @@ namespace Vanjaro.Core.Data.Entities
         [Column] public DateTime CreatedOn { get; set; }
         [Column] public int UpdatedBy { get; set; }
         [Column] public DateTime UpdatedOn { get; set; }
+        [Column] public int Version { get; set; }
+        [Column] public bool IsPublished { get; set; }
+        [Column] public int? PublishedBy { get; set; }
+        [Column] public DateTime? PublishedOn { get; set; }
     }
 
     [TableName("VJ_Core_Setting")]
