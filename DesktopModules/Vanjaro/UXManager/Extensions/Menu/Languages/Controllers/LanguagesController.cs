@@ -44,6 +44,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Languages.Controllers
                     //remove language from portal
                     Localization.RemoveLanguageFromPortal(PortalSettings.PortalId, language.LanguageId);
                     LanguagesManager.SetTabUrlsActiveToRedirect(language.LanguageId);
+
+                    Locale defaultLocale = LocaleController.Instance.GetDefaultLocale(PortalSettings.PortalId);
+                    actionResult.RedirectURL = Common.Utilities.ServiceProvider.NavigationManager.NavigateURL(this.PortalSettings.ActiveTab.TabID,
+                                this.PortalSettings.ActiveTab.IsSuperTab,
+                                this.PortalSettings, "", defaultLocale.Code);
                 }
                 else
                 {
@@ -52,9 +57,14 @@ namespace Vanjaro.UXManager.Extensions.Menu.Languages.Controllers
                     LanguagesManager.UpdateTabUrlsDefaultLocale();
                 }
             }
-            actionResult.Data = LanguagesManager.GetLanguages(PortalSettings, UserInfo);
+
+            List<LanguageRequest> languageRequests = LanguagesManager.GetLanguages(PortalSettings, UserInfo);
+            if (languageRequests.Where(x => x.Enabled).Count() > 1)
+                actionResult.RedirectURL = Common.Utilities.ServiceProvider.NavigationManager.NavigateURL();
+            actionResult.Data = languageRequests;
             actionResult.IsSuccess = true;
             return actionResult;
+
         }
 
         [HttpGet]

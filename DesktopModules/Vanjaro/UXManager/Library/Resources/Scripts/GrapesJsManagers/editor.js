@@ -4,7 +4,7 @@ import { jsPanel } from 'jspanel4/es6module/jspanel.js';
 global.VjEditor = null;
 global.VjLayerpanel = null;
 global.VJLandingPage = { components: '', html: '', style: '', css: '' };
-global.VJIsSaveCall = true;
+global.VJIsSaveCall  = false;
 global.VJLocalBlocksMarkup = '';
 global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
@@ -92,7 +92,7 @@ $(document).ready(function () {
 										}
 									});
 
-									var block = VjEditor.BlockManager.render(LibraryBlock);
+                                    var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
 									$(window.document.body).append(block).find('[data-dismiss="modal"]').trigger('click', [false]);
 								}
 							}
@@ -1750,7 +1750,7 @@ $(document).ready(function () {
 									return;
 								}
 
-								if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
+                                if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
 
 									$.each(model.attributes.toolbar, function (k, v) {
 
@@ -2517,15 +2517,13 @@ $(document).ready(function () {
 										clearTimeout(VJAutoSaveTimeOutid);
 									}
 
-									if (VJIsSaveCall && e.changed.changesCount >= VjEditor.StorageManager.getStepsBeforeSave()) {
+									if (e.changed.changesCount >= VjEditor.StorageManager.getStepsBeforeSave()) {
 										VJAutoSaveTimeOutid = setTimeout(function () {
-											if ($('.sidebar-open.settingclosebtn').length == 0) {
+                                            if ($('.sidebar-open.settingclosebtn').length == 0 && !VJIsSaveCall) {
 												VjEditor.runCommand("save");
 											}
 										}, 1000)
 									}
-									else
-										VJIsSaveCall = true;
 								}
 							});
 
@@ -2558,9 +2556,16 @@ $(document).ready(function () {
 
 							VjEditor.on('storage:error', (err) => {
 								swal({ title: "Error", text: `${err}`, type: "error", });
-							});
+                            });
 
-							VjEditor.on('storage:end:store', function (Data) {
+                            VjEditor.on('storage:start:store', function (Data) {
+                                VJIsSaveCall = true;
+                            });
+
+                            VjEditor.on('storage:end:store', function (Data) {
+
+                                VJIsSaveCall = false;
+
 								if (Data != '' && Data.PageReviewSettings != undefined && Data.PageReviewSettings) {
 									VJIsContentApproval = Data.PageReviewSettings.IsContentApproval ? "True" : "False";
 									VJNextStateName = Data.PageReviewSettings.NextStateName;
@@ -2822,11 +2827,8 @@ $(document).ready(function () {
 			$(this).parent().addClass('active');
 			ChangeBlockType();
 		}
-		else if ($this.hasClass('librarytab')) {
-			$('.blockstab').removeClass('active');
-			$(this).parent().addClass('active');
+		else if ($this.hasClass('librarytab'))
 			parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%', true, false, null, false);
-		}
 		else {
 			$('.blockstab').removeClass('active');
 			$(this).parent().addClass('active');

@@ -270,4 +270,34 @@
   <data name="Confirm.Text" xml:space="preserve">
     <value>Are you sure?</value>
   </data>
+  <data name="RemoveFrom_PrivacyTabId.Text" xml:space="preserve">
+    <value>Remove from Privacy Page</value>
+  </data>
+  <data name="RemoveFrom_RedirectAfterLogin.Text" xml:space="preserve">
+    <value>Remove from Redirect After Login Page</value>
+  </data>
+  <data name="RemoveFrom_RedirectAfterLogout.Text" xml:space="preserve">
+    <value>Remove from Redirect After Logout Page</value>
+  </data>
+  <data name="RemoveFrom_RedirectAfterRegistration.Text" xml:space="preserve">
+    <value>Remove from Redirect After Registration Page</value>
+  </data>
+  <data name="RemoveFrom_TermsTabId.Text" xml:space="preserve">
+    <value>Remove from Terms Page</value>
+  </data>
+  <data name="SetAs_PrivacyTabId.Text" xml:space="preserve">
+    <value>Set as Privacy Page</value>
+  </data>
+  <data name="SetAs_RedirectAfterLogin.Text" xml:space="preserve">
+    <value>Set as Redirect After Login Page</value>
+  </data>
+  <data name="SetAs_RedirectAfterLogout.Text" xml:space="preserve">
+    <value>Set as Redirect After Logout Page</value>
+  </data>
+  <data name="SetAs_RedirectAfterRegistration.Text" xml:space="preserve">
+    <value>Set as Redirect After Registration Page</value>
+  </data>
+  <data name="SetAs_TermsTabId.Text" xml:space="preserve">
+    <value>Set as Terms Page</value>
+  </data>
 </root>

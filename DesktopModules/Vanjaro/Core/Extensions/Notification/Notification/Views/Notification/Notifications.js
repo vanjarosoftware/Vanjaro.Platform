@@ -37,10 +37,37 @@
             if (data.IsSuccess) {
                 $("#VJnotifycount", parent.document).text(parseInt($("#VJnotifycount", parent.document).text()) - 1);
                 $('#Notification .Messagetab a>span', window.document).html(parseInt($('#Notification .Messagetab a>span', window.document).html()) - 1);
-                //$scope.ui.data.NotificationsCount.Value = data.NotificationsCount;
+                $('.registerlink-notification > sup > strong', parent.document).text(parseInt($('#Notification .Messagetab a>span', window.document).html()) - 1);
                 $scope.Pipe_NotificationsPages($scope.NotificationsPagestableState);
             }
         });
+    };
+
+    $scope.Click_DismissAll = function () {
+        window.parent.swal({
+            title: "[LS:AreYouSure]",
+            text: "[L:DismissAllNotification]",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55", confirmButtonText: "[L:DismissAll]",
+            cancelButtonText: "[LS:Cancel]",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    common.webApi.post('Notification/DismissAll', '',).success(function (data) {
+                        if (data.IsSuccess) {
+                            $("#VJnotifycount", parent.document).text(parseInt($("#VJnotifycount", parent.document).text()) - data.TotalNotifications);
+                            $('#Notification .Messagetab a>span', window.document).html(parseInt($('#Notification .Messagetab a>span', window.document).html()) - data.TotalNotifications);
+                            $('.registerlink-notification > sup > strong', parent.document).text(parseInt($('#Notification .Messagetab a>span', window.document).html()) - data.TotalNotifications);
+                            $scope.Pipe_NotificationsPages($scope.NotificationsPagestableState);
+                        }
+                    });
+                }
+            }
+        );
+
     };
 
     $scope.to_trusted = function (html_code) {

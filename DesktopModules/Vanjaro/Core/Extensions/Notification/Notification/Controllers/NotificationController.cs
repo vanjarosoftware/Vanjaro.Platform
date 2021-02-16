@@ -12,6 +12,7 @@ using DotNetNuke.Services.Social.Notifications;
 using DotNetNuke.Services.Social.Messaging.Internal;
 using Vanjaro.Core.Extensions.Notification.Notification.Managers;
 using static Vanjaro.Core.Managers;
+using static Vanjaro.Core.Factories;
 
 namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
 {
@@ -47,14 +48,36 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
             response.IsSuccess = false;
             try
             {
-                var recipient = InternalMessagingController.Instance.GetMessageRecipient(postData.NotificationId, this.UserInfo.UserID);
-                if (recipient != null)
+                NotificationManager.Dismiss(postData.NotificationId, this.UserInfo.UserID);
+                response.NotifyCount = Core.Managers.NotificationManager.RenderNotificationsCount(PortalSettings.PortalId);
+                response.NotificationsCount = NotificationsController.Instance.CountNotifications(this.UserInfo.UserID, PortalSettings.PortalId);
+                response.IsSuccess = true;
+                CacheFactory.Clear(CacheFactory.Keys.NotificationTask + "PortalID" + PortalSettings.PortalId);
+            }
+            catch (Exception exc)
+            {
+                ExceptionManager.LogException(exc);
+            }
+            return response;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public dynamic DismissAll()
+        {
+            dynamic response = new ExpandoObject();
+            response.IsSuccess = false;
+            try
+            {
+                int TotalNotifications = NotificationsController.Instance.CountNotifications(UserInfo.UserID, this.PortalSettings.PortalId);
+                IEnumerable<DotNetNuke.Services.Social.Notifications.Notification> notificationsDomainModel = NotificationsController.Instance.GetNotifications(UserInfo.UserID, this.PortalSettings.PortalId, -1, TotalNotifications);
+                foreach (DotNetNuke.Services.Social.Notifications.Notification Notification in notificationsDomainModel)
                 {
-                    NotificationsController.Instance.DeleteNotificationRecipient(postData.NotificationId, this.UserInfo.UserID);
-                    response.NotifyCount = Core.Managers.NotificationManager.RenderNotificationsCount(PortalSettings.PortalId);
-                    response.NotificationsCount = NotificationsController.Instance.CountNotifications(this.UserInfo.UserID, PortalSettings.PortalId);
-                    response.IsSuccess = true;
+                    NotificationManager.Dismiss(Notification.NotificationID, this.UserInfo.UserID);
                 }
+                response.TotalNotifications = TotalNotifications;
+                response.IsSuccess = true;
+                CacheFactory.Clear(CacheFactory.Keys.NotificationTask + "PortalID" + PortalSettings.PortalId);
             }
             catch (Exception exc)
             {
