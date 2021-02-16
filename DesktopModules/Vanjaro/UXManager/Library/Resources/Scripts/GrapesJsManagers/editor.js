@@ -9,6 +9,7 @@ global.VJLocalBlocksMarkup = '';
 global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
 global.IsVJEditorSaveCall;
+global.IsVJCBRendered = false;
 
 $(document).ready(function () {
 
@@ -358,267 +359,267 @@ $(document).ready(function () {
                                     }
                                 },
 
-                                onclosed: function () {
-                                    VjLayerpanel = null;
-                                },
-                                callback: function () {
-                                    this.content.style.padding = '0';
-                                },
-                            });
-                            var vjcomps = eval(VJLandingPage.components);
-                            BuildAppComponent(vjcomps);
-                            BuildAppComponentFromHtml(vjcomps, VJLandingPage.html);
-                            BuildBlockComponent(vjcomps);
-                            vjcomps = FilterComponents(vjcomps);
-                            if (typeof LoadThemeBlocks != 'undefined')
-                                LoadThemeBlocks(grapesjs);
-                            VjEditor = grapesjs.init({
-                                protectedCss: '',
-                                allowScripts: 1,
-                                panels: {
-                                    defaults: []
-                                },
-                                canvas: {
-                                    styles: VjLinks, scripts: VjScriptTags
-                                },
-                                modal: {
-                                    backdrop: 0
-                                },
-                                components: vjcomps || VJLandingPage.html,
-                                style: VJLandingPage.css,
-                                showOffsets: 1,
-                                avoidInlineStyle: 1,
-                                noticeOnUnload: 0,
-                                container: vjEditorSettings.ContainerID,
-                                height: '100%',
-                                fromElement: vjcomps != undefined ? false : true,
-                                plugins: ['modulewrapper', 'blockwrapper', 'vjpreset', 'ThemeBlocks'],
-                                pluginsOpts: {
-                                    'vj-preset': {
-                                        colorPicker: 'default',
-                                        grapickOpts: {
-                                            min: 1,
-                                            max: 99,
-                                        }
-                                    }
-                                },
-                                selectorManager: {
-                                    appendTo: '.stylemanager',
-                                },
-                                styleManager: {
-                                    clearProperties: true,
-                                    appendTo: '.stylemanager',
-                                    sectors: [{
-                                        name: VjLocalized.Margin,
-                                        open: false,
-                                        properties: [
-                                            {
-                                                type: 'customrange',
-                                                name: 'Margin Left',
-                                                property: 'margin-left',
-                                                units: [
-                                                    { name: 'px', min: -50, max: 200, step: 1 },
-                                                    { name: '%', min: -100, max: 100, step: 1 },
-                                                    { name: 'vw', min: -100, max: 100, step: 1 },
-                                                    { name: 'vh', min: -100, max: 100, step: 1 }
-                                                ],
-                                                unit: 'px',
-                                                defaults: 0,
-                                            },
-                                            {
-                                                type: 'customrange',
-                                                name: 'Margin Right',
-                                                property: 'margin-right',
-                                                units: [
-                                                    { name: 'px', min: -50, max: 200, step: 1 },
-                                                    { name: '%', min: -100, max: 100, step: 1 },
-                                                    { name: 'vw', min: -100, max: 100, step: 1 },
-                                                    { name: 'vh', min: -100, max: 100, step: 1 }
-                                                ],
-                                                unit: 'px',
-                                                defaults: 0,
-                                            },
-                                            {
-                                                type: 'customrange',
-                                                name: 'Margin Top',
-                                                property: 'margin-top',
-                                                units: [
-                                                    { name: 'px', min: -50, max: 200, step: 1 },
-                                                    { name: '%', min: -100, max: 100, step: 1 },
-                                                    { name: 'vw', min: -100, max: 100, step: 1 },
-                                                    { name: 'vh', min: -100, max: 100, step: 1 }
-                                                ],
-                                                unit: 'px',
-                                                defaults: 0,
-                                            },
-                                            {
-                                                type: 'customrange',
-                                                name: 'Margin Bottom',
-                                                property: 'margin-bottom',
-                                                units: [
-                                                    { name: 'px', min: -50, max: 200, step: 1 },
-                                                    { name: '%', min: -100, max: 100, step: 1 },
-                                                    { name: 'vw', min: -100, max: 100, step: 1 },
-                                                    { name: 'vh', min: -100, max: 100, step: 1 }
-                                                ],
-                                                unit: 'px',
-                                                defaults: 0,
-                                            }
-                                        ]
-                                    }, {
-                                        name: VjLocalized.Padding,
-                                        open: false,
-                                        properties: [
-                                            {
-                                                type: 'customrange',
-                                                name: 'Padding Left',
-                                                property: 'padding-left',
-                                                units: [
-                                                    { name: 'px', min: 0, max: 200, step: 1 },
-                                                    { name: '%', min: 0, max: 100, step: 1 },
-                                                    { name: 'vw', min: 0, max: 100, step: 1 },
-                                                    { name: 'vh', min: 0, max: 100, step: 1 }
-                                                ],
-                                                unit: 'px',
-                                                defaults: 0,
-                                            },
-                                            {
-                                                type: 'customrange',
-                                                name: 'Padding Right',
-                                                property: 'padding-right',
-                                                units: [
-                                                    { name: 'px', min: 0, max: 200, step: 1 },
-                                                    { name: '%', min: 0, max: 100, step: 1 },
-                                                    { name: 'vw', min: 0, max: 100, step: 1 },
-                                                    { name: 'vh', min: 0, max: 100, step: 1 }
-                                                ],
-                                                unit: 'px',
-                                                defaults: 0,
-                                            },
-                                            {
-                                                type: 'customrange',
-                                                name: 'Padding Top',
-                                                property: 'padding-top',
-                                                units: [
-                                                    { name: 'px', min: 0, max: 200, step: 1 },
-                                                    { name: '%', min: 0, max: 100, step: 1 },
-                                                    { name: 'vw', min: 0, max: 100, step: 1 },
-                                                    { name: 'vh', min: 0, max: 100, step: 1 }
-                                                ],
-                                                unit: 'px',
-                                                defaults: 0,
-                                            },
-                                            {
-                                                type: 'customrange',
-                                                name: 'Padding Bottom',
-                                                property: 'padding-bottom',
-                                                units: [
-                                                    { name: 'px', min: 0, max: 200, step: 1 },
-                                                    { name: '%', min: 0, max: 100, step: 1 },
-                                                    { name: 'vw', min: 0, max: 100, step: 1 },
-                                                    { name: 'vh', min: 0, max: 100, step: 1 }
-                                                ],
-                                                unit: 'px',
-                                                defaults: 0,
-                                            }
-                                        ]
-                                    }, {
-                                        name: VjLocalized.Size,
-                                        open: false,
-                                        properties: [
-                                            {
-                                                type: 'customrange',
-                                                name: 'Width',
-                                                property: 'width',
-                                                units: [
-                                                    { name: 'px', min: 0, max: 1920, step: 1 },
-                                                    { name: '%', min: 0, max: 100, step: 1 },
-                                                    { name: 'vw', min: 0, max: 100, step: 1 },
-                                                ],
-                                                unit: 'px',
-                                                defaults: 'auto',
-                                            }, {
-                                                type: 'customrange',
-                                                name: 'Min Width',
-                                                property: 'min-width',
-                                                units: [
-                                                    { name: 'px', min: 0, max: 1920, step: 1 },
-                                                    { name: '%', min: 0, max: 100, step: 1 },
-                                                    { name: 'vw', min: 0, max: 100, step: 1 },
-                                                ],
-                                                unit: 'px',
-                                                defaults: 'auto',
-                                            }, {
-                                                type: 'customrange',
-                                                name: 'Max Width',
-                                                property: 'max-width',
-                                                units: [
-                                                    { name: 'px', min: 0, max: 1920, step: 1 },
-                                                    { name: '%', min: 0, max: 100, step: 1 },
-                                                    { name: 'vw', min: 0, max: 100, step: 1 },
-                                                ],
-                                                unit: 'px',
-                                                defaults: 'auto',
-                                            }, {
-                                                type: 'customrange',
-                                                name: 'Height',
-                                                property: 'height',
-                                                units: [
-                                                    { name: 'px', min: 0, max: 1080, step: 1 },
-                                                    { name: '%', min: 0, max: 100, step: 1 },
-                                                    { name: 'vh', min: 0, max: 100, step: 1 },
-                                                ],
-                                                unit: 'px',
-                                                defaults: 'auto',
-                                            }, {
-                                                type: 'customrange',
-                                                name: 'Min Height',
-                                                property: 'min-height',
-                                                units: [
-                                                    { name: 'px', min: 0, max: 1080, step: 1 },
-                                                    { name: '%', min: 0, max: 100, step: 1 },
-                                                    { name: 'vh', min: 0, max: 100, step: 1 },
-                                                ],
-                                                unit: 'px',
-                                                defaults: 'auto',
-                                            }, {
-                                                type: 'customrange',
-                                                name: 'Max Height',
-                                                property: 'max-height',
-                                                units: [
-                                                    { name: 'px', min: 0, max: 1080, step: 1 },
-                                                    { name: '%', min: 0, max: 100, step: 1 },
-                                                    { name: 'vh', min: 0, max: 100, step: 1 },
-                                                ],
-                                                unit: 'px',
-                                                defaults: 'auto',
-                                            }
-                                        ]
-                                    }, {
-                                        name: VjLocalized.Responsive,
-                                        open: false,
-                                        properties: [
-                                            {
-                                                type: 'customradio',
-                                                name: 'Hide in Mobile',
-                                                property: 'd-mobile-none',
-                                                defaults: 'd-mobile-show',
-                                                list: [{
-                                                    name: 'Yes',
-                                                    value: 'd-mobile-none'
-                                                },
-                                                {
-                                                    name: 'No',
-                                                    value: 'd-mobile-show'
-                                                }],
-                                            }, {
-                                                type: 'customradio',
-                                                name: 'Hide in Tablet',
-                                                property: 'd-tablet-none',
-                                                defaults: 'd-tablet-show',
-                                                list: [{
-                                                    name: 'Yes',
-                                                    value: 'd-tablet-none'
+								onclosed: function () {
+									VjLayerpanel = null;
+								},
+								callback: function () {
+									this.content.style.padding = '0';
+								},
+							});
+							var vjcomps = eval(VJLandingPage.components);
+							BuildAppComponent(vjcomps);
+							BuildAppComponentFromHtml(vjcomps, VJLandingPage.html);
+							BuildBlockComponent(vjcomps);
+							vjcomps = FilterComponents(vjcomps);
+							if (typeof LoadThemeBlocks != 'undefined')
+								LoadThemeBlocks(grapesjs);
+							VjEditor = grapesjs.init({
+								protectedCss: '',
+								allowScripts: 1,
+								panels: {
+									defaults: []
+								},
+								canvas: {
+									styles: VjLinks, scripts: VjScriptTags
+								},
+								modal: {
+									backdrop: 0
+								},
+								components: vjcomps || VJLandingPage.html,
+								style: eval(VJLandingPage.style) || VJLandingPage.css,
+								showOffsets: 1,
+								avoidInlineStyle: 1,
+								noticeOnUnload: 0,
+								container: vjEditorSettings.ContainerID,
+								height: '100%',
+								fromElement: vjcomps != undefined ? false : true,
+								plugins: ['modulewrapper', 'blockwrapper', 'vjpreset', 'ThemeBlocks'],
+								pluginsOpts: {
+									'vj-preset': {
+										colorPicker: 'default',
+										grapickOpts: {
+											min: 1,
+											max: 99,
+										}
+									}
+								},
+								selectorManager: {
+									appendTo: '.stylemanager',
+								},
+								styleManager: {
+									clearProperties: true,
+									appendTo: '.stylemanager',
+									sectors: [{
+										name: VjLocalized.Margin,
+										open: false,
+										properties: [
+											{
+												type: 'customrange',
+												name: 'Margin Left',
+												property: 'margin-left',
+												units: [
+													{ name: 'px', min: -50, max: 200, step: 1 },
+													{ name: '%', min: -100, max: 100, step: 1 },
+													{ name: 'vw', min: -100, max: 100, step: 1 },
+													{ name: 'vh', min: -100, max: 100, step: 1 }
+												],
+												unit: 'px',
+												defaults: 0,
+											},
+											{
+												type: 'customrange',
+												name: 'Margin Right',
+												property: 'margin-right',
+												units: [
+													{ name: 'px', min: -50, max: 200, step: 1 },
+													{ name: '%', min: -100, max: 100, step: 1 },
+													{ name: 'vw', min: -100, max: 100, step: 1 },
+													{ name: 'vh', min: -100, max: 100, step: 1 }
+												],
+												unit: 'px',
+												defaults: 0,
+											},
+											{
+												type: 'customrange',
+												name: 'Margin Top',
+												property: 'margin-top',
+												units: [
+													{ name: 'px', min: -50, max: 200, step: 1 },
+													{ name: '%', min: -100, max: 100, step: 1 },
+													{ name: 'vw', min: -100, max: 100, step: 1 },
+													{ name: 'vh', min: -100, max: 100, step: 1 }
+												],
+												unit: 'px',
+												defaults: 0,
+											},
+											{
+												type: 'customrange',
+												name: 'Margin Bottom',
+												property: 'margin-bottom',
+												units: [
+													{ name: 'px', min: -50, max: 200, step: 1 },
+													{ name: '%', min: -100, max: 100, step: 1 },
+													{ name: 'vw', min: -100, max: 100, step: 1 },
+													{ name: 'vh', min: -100, max: 100, step: 1 }
+												],
+												unit: 'px',
+												defaults: 0,
+											}
+										]
+									}, {
+										name: VjLocalized.Padding,
+										open: false,
+										properties: [
+											{
+												type: 'customrange',
+												name: 'Padding Left',
+												property: 'padding-left',
+												units: [
+													{ name: 'px', min: 0, max: 200, step: 1 },
+													{ name: '%', min: 0, max: 100, step: 1 },
+													{ name: 'vw', min: 0, max: 100, step: 1 },
+													{ name: 'vh', min: 0, max: 100, step: 1 }
+												],
+												unit: 'px',
+												defaults: 0,
+											},
+											{
+												type: 'customrange',
+												name: 'Padding Right',
+												property: 'padding-right',
+												units: [
+													{ name: 'px', min: 0, max: 200, step: 1 },
+													{ name: '%', min: 0, max: 100, step: 1 },
+													{ name: 'vw', min: 0, max: 100, step: 1 },
+													{ name: 'vh', min: 0, max: 100, step: 1 }
+												],
+												unit: 'px',
+												defaults: 0,
+											},
+											{
+												type: 'customrange',
+												name: 'Padding Top',
+												property: 'padding-top',
+												units: [
+													{ name: 'px', min: 0, max: 200, step: 1 },
+													{ name: '%', min: 0, max: 100, step: 1 },
+													{ name: 'vw', min: 0, max: 100, step: 1 },
+													{ name: 'vh', min: 0, max: 100, step: 1 }
+												],
+												unit: 'px',
+												defaults: 0,
+											},
+											{
+												type: 'customrange',
+												name: 'Padding Bottom',
+												property: 'padding-bottom',
+												units: [
+													{ name: 'px', min: 0, max: 200, step: 1 },
+													{ name: '%', min: 0, max: 100, step: 1 },
+													{ name: 'vw', min: 0, max: 100, step: 1 },
+													{ name: 'vh', min: 0, max: 100, step: 1 }
+												],
+												unit: 'px',
+												defaults: 0,
+											}
+										]
+									}, {
+										name: VjLocalized.Size,
+										open: false,
+										properties: [
+											{
+												type: 'customrange',
+												name: 'Width',
+												property: 'width',
+												units: [
+													{ name: 'px', min: 0, max: 1920, step: 1 },
+													{ name: '%', min: 0, max: 100, step: 1 },
+													{ name: 'vw', min: 0, max: 100, step: 1 },
+												],
+												unit: 'px',
+												defaults: 'auto',
+											}, {
+												type: 'customrange',
+												name: 'Min Width',
+												property: 'min-width',
+												units: [
+													{ name: 'px', min: 0, max: 1920, step: 1 },
+													{ name: '%', min: 0, max: 100, step: 1 },
+													{ name: 'vw', min: 0, max: 100, step: 1 },
+												],
+												unit: 'px',
+												defaults: 'auto',
+											}, {
+												type: 'customrange',
+												name: 'Max Width',
+												property: 'max-width',
+												units: [
+													{ name: 'px', min: 0, max: 1920, step: 1 },
+													{ name: '%', min: 0, max: 100, step: 1 },
+													{ name: 'vw', min: 0, max: 100, step: 1 },
+												],
+												unit: 'px',
+												defaults: 'auto',
+											}, {
+												type: 'customrange',
+												name: 'Height',
+												property: 'height',
+												units: [
+													{ name: 'px', min: 0, max: 1080, step: 1 },
+													{ name: '%', min: 0, max: 100, step: 1 },
+													{ name: 'vh', min: 0, max: 100, step: 1 },
+												],
+												unit: 'px',
+												defaults: 'auto',
+											}, {
+												type: 'customrange',
+												name: 'Min Height',
+												property: 'min-height',
+												units: [
+													{ name: 'px', min: 0, max: 1080, step: 1 },
+													{ name: '%', min: 0, max: 100, step: 1 },
+													{ name: 'vh', min: 0, max: 100, step: 1 },
+												],
+												unit: 'px',
+												defaults: 'auto',
+											}, {
+												type: 'customrange',
+												name: 'Max Height',
+												property: 'max-height',
+												units: [
+													{ name: 'px', min: 0, max: 1080, step: 1 },
+													{ name: '%', min: 0, max: 100, step: 1 },
+													{ name: 'vh', min: 0, max: 100, step: 1 },
+												],
+												unit: 'px',
+												defaults: 'auto',
+											}
+										]
+									}, {
+										name: VjLocalized.Responsive,
+										open: false,
+										properties: [
+											{
+												type: 'customradio',
+												name: 'Hide in Mobile',
+												property: 'd-mobile-none',
+												defaults: 'd-mobile-show',
+												list: [{
+													name: 'Yes',
+													value: 'd-mobile-none'
+												},
+												{
+													name: 'No',
+													value: 'd-mobile-show'
+												}],
+											}, {
+												type: 'customradio',
+												name: 'Hide in Tablet',
+												property: 'd-tablet-none',
+												defaults: 'd-tablet-show',
+												list: [{
+													name: 'Yes',
+													value: 'd-tablet-none'
 
                                                 },
                                                 {
@@ -1622,15 +1623,17 @@ $(document).ready(function () {
                                             model.attributes.name = VjLocalized.PrefixAppName + bmodel.id;
                                             VjEditor.LayerManager.render();
 
-                                            setTimeout(function () {
-                                                VjEditor.runCommand("save");
-                                            }, 500);
-                                        }
-                                    });
-                                }
-                                else if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes["data-block-type"] != undefined)
-                                    RenderBlock(model, bmodel);
-                            });
+											setTimeout(function () {
+												VjEditor.runCommand("save");
+											}, 500);
+										}
+									});
+								}
+								else if (bmodel != undefined && bmodel.attributes != undefined && bmodel.attributes.attributes != undefined && bmodel.attributes.attributes.type == 'VjCustomBlock')
+									RenderCustomBlock(model, bmodel);
+								else if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes["data-block-type"] != undefined)
+									RenderBlock(model, bmodel);
+							});
 
                             var FilterBorderOptions = function (target, position) {
 
@@ -2208,31 +2211,7 @@ $(document).ready(function () {
                                     $(model.components().models[0].getEl()).removeClass('gjs-dashed');
                             });
 
-                            VjEditor.on('styleable:change', () => {
-
-                                var model = VjEditor.getSelected();
-
-                                if (typeof model != 'undefined') {
-
-                                    var $globalblockwrapper = $(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]');
-
-                                    if ($globalblockwrapper.length && !$.isEmptyObject(model.getStyle())) {
-
-                                        var result = VjEditor.CodeManager.getCode(model, 'css', { cssc: VjEditor.CssComposer });
-                                        var canvasBody = $(VjEditor.Canvas.getBody());
-                                        var style = canvasBody.find('style#' + model.ccid + ':contains(' + result.split("{")[0] + '{)');
-
-                                        if (style.length <= 0)
-                                            canvasBody.append('<style id=' + model.ccid + '>' + result + '</style>');
-                                        else
-                                            style.replaceWith('<style id=' + model.ccid + '>' + result + '</style>');
-
-                                        model.setStyle('');
-                                    }
-                                }
-                            });
-
-                            VjEditor.on('component:styleUpdate', (model, property) => {
+							VjEditor.on('component:styleUpdate', (model, property) => {
 
                                 if (property == "color" && typeof event != "undefined" && $(event.target).parents(".gjs-sm-property.gjs-sm-color").length) {
                                     if (model.attributes.type == "heading" || model.attributes.type == "text" || model.attributes.type == "button" || model.attributes.type == "list") {
@@ -2548,6 +2527,33 @@ $(document).ready(function () {
 								}
 							});
 
+							VjEditor.on('storage:start:store', function (Data) {
+								if (Data != undefined && Data != '') {
+									var globalblocks = [];
+									$.each(getAllComponents(), function (k, v) {
+										if (v.attributes.type == "globalblockwrapper" && $(v.getEl()).find('.fa-unlock').length <= 0) {
+											try {
+												if (v.attributes != undefined)
+													v.attributes.content = '';
+												var content = VjEditor.runCommand("export-component", {
+													component: v.attributes.components.models[0]
+												});
+												if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
+													var item = {
+														guid: v.attributes.attributes['data-guid'],
+														html: content.html,
+														css: content.css,
+													};
+													globalblocks.push(item);
+												}
+											}
+											catch (err) { console.log(err); }
+										}
+									});
+									Data.globalblocks = JSON.stringify(globalblocks);
+								}
+							});
+
 							VjEditor.on('storage:error', (err) => {
 								swal({ title: "Error", text: `${err}`, type: "error", });
                             });
@@ -2586,10 +2592,11 @@ $(document).ready(function () {
 
                                 }
 
-                                if (Data != null && Data != '' && Data.RedirectAfterm2v != null && typeof Data.RedirectAfterm2v != "undefined")
-                                    window.location.href = Data.RedirectAfterm2v;
-
-                            });
+								if (Data != null && Data != '' && Data.RedirectAfterm2v != null && typeof Data.RedirectAfterm2v != "undefined")
+									window.location.href = Data.RedirectAfterm2v;
+								if (IsVJCBRendered)
+									window.parent.location.reload();
+							});
 
                             var iframeBody = VjEditor.Canvas.getBody();
                             $(iframeBody).on("keydown", "[contenteditable]", e => {
@@ -3037,19 +3044,15 @@ global.ChangeBlockType = function (query) {
 };
 
 function RunSaveCommand() {
-    $.each(getAllComponents(), function (k, v) {
-        if (v.attributes.type == "globalblockwrapper" && $(v.getEl()).find('.fa-unlock').length <= 0)
-            UpdateGlobalBlock(v);
-    });
-    editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
-    if (GetParameterByName('m2v', parent.window.location) != null)
-        editor.StorageManager.getStorages().remote.attributes.params.m2v = true;
-    editor.runCommand("save");
-    editor.StorageManager.getStorages().remote.attributes.params.IsPublished = false;
-    $('#VJBtnPublish').addClass('disabled');
-    $($('.panelheader .blockItem')[1]).click();
-    editor.StorageManager.getStorages().remote.attributes.params.Comment = "";
-    $('#VJReviewComment', parent.document).val('');
+	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
+	if (GetParameterByName('m2v', parent.window.location) != null)
+		editor.StorageManager.getStorages().remote.attributes.params.m2v = true;
+	editor.runCommand("save");
+	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = false;
+	$('#VJBtnPublish').addClass('disabled');
+	$($('.panelheader .blockItem')[1]).click();
+	editor.StorageManager.getStorages().remote.attributes.params.Comment = "";
+	$('#VJReviewComment', parent.document).val('');
 };
 
 global.ToggleBlockType = function (e, type) {
