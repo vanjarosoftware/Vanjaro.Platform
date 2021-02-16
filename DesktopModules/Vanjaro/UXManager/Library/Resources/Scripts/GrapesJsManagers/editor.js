@@ -91,7 +91,7 @@ $(document).ready(function () {
 										}
 									});
 
-									var block = VjEditor.BlockManager.render(LibraryBlock);
+                                    var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
 									$(window.document.body).append(block).find('[data-dismiss="modal"]').trigger('click', [false]);
 								}
 							}
@@ -2820,11 +2820,8 @@ $(document).ready(function () {
 			$(this).parent().addClass('active');
 			ChangeBlockType();
 		}
-		else if ($this.hasClass('librarytab')) {
-			$('.blockstab').removeClass('active');
-			$(this).parent().addClass('active');
+		else if ($this.hasClass('librarytab'))
 			parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%', true, false, null, false);
-		}
 		else {
 			$('.blockstab').removeClass('active');
 			$(this).parent().addClass('active');
