@@ -956,6 +956,8 @@ uploadinput-button {
     border-bottom: 1px solid transparent;
     background-color: transparent;
     display: inline-block;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
 .vj-ux-manager .accordion-item {

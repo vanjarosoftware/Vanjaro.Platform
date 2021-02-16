@@ -15,10 +15,10 @@
 }
 
 .vj-ux-manager .buttontesturl {
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
-.vj-ux-manager .input-group-append .btn-group-sm > .btn, .btn-sm {
+.vj-ux-manager .input-group-append .btn-sm  {
     padding: .47rem .5rem !important;
     border-radius: 0 .2rem .2rem 0 !important;
 }
