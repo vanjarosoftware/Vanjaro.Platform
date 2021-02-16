@@ -112,6 +112,10 @@ html, body, form {
     margin: 2px 0;
 }
 
+.vj-ux-manager hr {
+    opacity: 0.1;
+}
+
 .vj-ux-manager .menuextension .heading {
     padding: 20px 15px;
     margin-bottom: 20px;
