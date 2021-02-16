@@ -41,7 +41,7 @@ export default (editor, config = {}) => {
             init() {
                 this.listenTo(this, `change:${keyCustomCode}`, this.onCustomCodeChange);
                 const initialCode = this.get(keyCustomCode) || config.placeholderContent;
-                !this.components().length && this.components(initialCode);
+                this.attributes.content == '' && this.set('content', initialCode);
                 const toolbar = this.get('toolbar');
                 const id = 'custom-code';
 
@@ -61,7 +61,7 @@ export default (editor, config = {}) => {
              * Callback to launch on keyCustomCode change
              */
             onCustomCodeChange() {
-                this.components(this.get(keyCustomCode));
+                this.set('content', this.get(keyCustomCode));
             },
         }, {
                 /**
@@ -78,7 +78,7 @@ export default (editor, config = {}) => {
             },
 
             init() {
-                this.listenTo(this.model.components(), 'add remove reset', this.onComponentsChange);
+                //this.listenTo(this.model.components(), 'add remove reset', this.onComponentsChange);
                 this.onComponentsChange();
             },
 
@@ -207,12 +207,12 @@ export default (editor, config = {}) => {
             const code = this.getCodeViewer().getContent();
             target.set(keyCustomCode, code);
             target.trigger(`change:${keyCustomCode}`);
-            var nestedComp = getAllComponents(target);
-            if (nestedComp.length > 0) {
-                $(nestedComp).each(function (index, value) {
-                    value.set({ removable: false, draggable: false, droppable: false, badgable: false, stylable: false, highlightable: false, copyable: false, resizable: false, layerable: false, selectable: false, editable: false, hoverable: false });
-                });
-            }
+            //var nestedComp = getAllComponents(target);
+            //if (nestedComp.length > 0) {
+            //    $(nestedComp).each(function (index, value) {
+            //        value.set({ removable: false, draggable: false, droppable: false, badgable: false, stylable: false, highlightable: false, copyable: false, resizable: false, layerable: false, selectable: false, editable: false, hoverable: false });
+            //    });
+            //}
             editor.Modal.close();
         },
 
