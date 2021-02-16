@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
 
-                                <button class="btn btn-primary float-right" id="Update" mn-ng-click="CreateFolder()">
+                                <button class="btn btn-primary float-end" id="Update" mn-ng-click="CreateFolder()">
                                     [LS:Update]
                                 </button>
                             </div>
@@ -77,10 +77,10 @@
                                         <span class="fas fa-folder" mn-ng-click="MoveCopyToFolder(folder.Value)"></span>
                                         <span class="folders" style="font-weight: bold;" mn-ng-if="IconsFolders.Value==folder.Value" id="folders{{folder.Value}}" mn-ng-click="MoveCopyToFolder(folder.Value)">{{folder.Text}}</span>
                                         <span class="folders" mn-ng-if="IconsFolders.Value!=folder.Value" id="folders{{folder.Value}}" mn-ng-click="MoveCopyToFolder(folder.Value)">{{folder.Text}}</span>
-                                        <span class="action-icon pull-right arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='DatabaseFolderProvider'"><em class="fas fa-database"></em></span>
-                                        <span class="action-icon pull-right arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='AzureFolderProvider'"><em class="fab fa-microsoft"></em></span>
-                                        <span class="action-icon pull-right arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Type=='secure'"><em class="fas fa-shield-alt"></em></span>
-                                        <span class="action-icon pull-right arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Lock"><em class="fas fa-lock"></em></span>
+                                        <span class="action-icon float-end arrowicon" data-bs-toggle="tooltip" data-bs-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='DatabaseFolderProvider'"><em class="fas fa-database"></em></span>
+                                        <span class="action-icon float-end arrowicon" data-bs-toggle="tooltip" data-bs-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='AzureFolderProvider'"><em class="fab fa-microsoft"></em></span>
+                                        <span class="action-icon float-end arrowicon" data-bs-toggle="tooltip" data-bs-placement="top" ng-if="folder.Type=='secure'"><em class="fas fa-shield-alt"></em></span>
+                                        <span class="action-icon float-end arrowicon" data-bs-toggle="tooltip" data-bs-placement="top" ng-if="folder.Lock"><em class="fas fa-lock"></em></span>
                                     </div>
                                     <ul class="rootfolder" mn-ng-class="{show: IconsFolders.Value==folder.Value}">
                                         <li mn-ng-repeat="folder in folder.children" mn-ng-include="'Basefolders_renderer.html'">
@@ -93,7 +93,7 @@
                                     </ul>
                                 </div>
                                 <div class="fixed-footer">
-                                    <div class="text-right">
+                                    <div class="text-end">
                                         <button class="btn btn-sm btn-primary button-left mr-xs cpymv" type="button" id="save" ng-click="SelectUpdateFolder()">[LS:Update]</button>
                                     </div>
                                 </div>

@@ -39,7 +39,7 @@
                         <div class="card-header">
                             <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapse_{{cname.Key| removeSpacesThenLowercase}}">
                                 {{cname.Value}}
-                                <em mn-ng-class="$index != 0  ? 'fa fa-caret-right float-right' : 'fa fa-caret-down float-right'"></em>
+                                <em mn-ng-class="$index != 0  ? 'fa fa-caret-right float-end' : 'fa fa-caret-down float-end'"></em>
                             </a>
                         </div>
                         <div id="collapse_{{cname.Key| removeSpacesThenLowercase}}" mn-ng-class="$index != 0 ? 'collapse':'collapse show'" data-parent="#accordion">
@@ -155,7 +155,7 @@
         <uilayout name="default">
             <uitemplate>
                 <div mn-ng-bind-html="OnLoaded()"></div>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button attr-id="update" type="button" mn-ng-click="Click_Update('update',ui.data.UserDetails.Options)" class="btn btn-sm btn-primary">
                         [L:Update]
                     </button>

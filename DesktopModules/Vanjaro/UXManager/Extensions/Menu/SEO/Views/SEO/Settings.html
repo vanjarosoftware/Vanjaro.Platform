@@ -228,7 +228,7 @@
             <uielement name="ResultingURLs" attr-rows="4" control="textarea" attr-disabled="true" attr-class="maxwidth"></uielement>
             <uitemplate>
                 <div class="text-right buttontesturl">
-                    <button type="button" class="btn btn-sm btn-default float-right" id="buttonTesturl" mn-ng-click="Click_TestUrl()" ng-disabled="ui.data.PageToTest.Value=='-1'">
+                    <button type="button" class="btn btn-sm btn-default float-end" id="buttonTesturl" mn-ng-click="Click_TestUrl()" ng-disabled="ui.data.PageToTest.Value=='-1'">
                         [L:ButtonTestURL]
                     </button>
                 </div>
@@ -244,7 +244,7 @@
                 <div class="input-group urltotest">
                     <input type="text" class="form-control" mn-ng-model="ui.data.URLToTest.Value" value="{{ui.data.URLToTest.Value}}">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-sm btn-default float-right" id="URLToTest" mn-ng-click="Click_URLToTest()" ng-disabled="!ui.data.URLToTest.Value">
+                        <button type="button" class="btn btn-sm btn-default float-end" id="URLToTest" mn-ng-click="Click_URLToTest()" ng-disabled="!ui.data.URLToTest.Value">
                             [L:URLRewriting]
                         </button>
                     </div>
@@ -269,7 +269,7 @@
                         <option value="{{option.Key}}" mn-ng-repeat="option in ui.data.SitemapCacheDays.Options">{{option.Value}}</option>
                     </select>
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-sm btn-default float-right" id="ClearCache" mn-ng-click="Click_Clearcache()">
+                        <button type="button" class="btn btn-sm btn-default float-end" id="ClearCache" mn-ng-click="Click_Clearcache()">
                             [L:ClearCache]
                         </button>
                     </div>
