@@ -175,7 +175,12 @@
             <label>[LS:Name]</label><input type='text' name='name' id='input-name' required />
         </div>
         <div class='col-6'>
-            <label>[LS:ModalCategory]</label><input type='text' name='category' id='input-category' required />
+            <label>[LS:ModalCategory]</label>
+            <input type='text' name='category' id='input-category' required />
+            <div id="CategoryGroup">
+                <a class="btn btn-add"><em class="fa fa-plus"></em></a>
+                <select class="form-control" id="CategoryDropdown"></select>
+            </div>
         </div>
     </div>
     <hr />
