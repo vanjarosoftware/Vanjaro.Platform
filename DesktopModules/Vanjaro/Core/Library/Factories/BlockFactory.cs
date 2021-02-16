@@ -20,19 +20,24 @@ namespace Vanjaro.Core
                 if (CustomBlock.ID > 0)
                 {
                     CustomBlock.Update();
+                    CacheFactory.Clear(CacheFactory.Keys.CustomBlock);
                 }
                 else
                 {
-                    int Version = GetAllByGUID(CustomBlock.PortalID, CustomBlock.Guid).Where(a => a.IsPublished == true).Count() + 1;
+                    int Version = 1;
+                    CustomBlock _CustomBlock = GetAllByGUID(CustomBlock.PortalID, CustomBlock.Guid).Where(a => a.IsPublished == true).OrderByDescending(a => a.Version).FirstOrDefault();
+                    if (_CustomBlock != null)
+                        Version = _CustomBlock.Version + 1;
                     CustomBlock.Version = Version;
                     CustomBlock.IsPublished = false;
                     CustomBlock.PublishedBy = null;
                     CustomBlock.PublishedOn = null;
                     CustomBlock.Insert();
+                    CacheFactory.Clear(CacheFactory.Keys.CustomBlock);
                     RemoveRevisions(CustomBlock.PortalID, CustomBlock.Guid);
                 }
 
-                CacheFactory.Clear(CacheFactory.Keys.CustomBlock);
+
             }
 
             private static void RemoveRevisions(int PortalID, string Guid)
@@ -47,7 +52,7 @@ namespace Vanjaro.Core
                 List<int> CustomBlocks = GetAllByGUID(PortalID, Guid).OrderByDescending(a => a.Version).Select(a => a.Version).Distinct().Take(Version).ToList();
                 if (CustomBlocks.Count > 0)
                 {
-                    CustomBlock.Delete("Where PortalID=@0 Guid=@1 and Version not in (" + string.Join(",", CustomBlocks) + ")", PortalID, Guid);
+                    CustomBlock.Delete("Where PortalID=@0 and Guid=@1 and Version not in (" + string.Join(",", CustomBlocks) + ")", PortalID, Guid);
                     CacheFactory.Clear(CacheFactory.Keys.CustomBlock);
                 }
             }

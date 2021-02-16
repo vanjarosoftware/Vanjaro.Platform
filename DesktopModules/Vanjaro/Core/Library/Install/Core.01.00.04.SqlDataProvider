@@ -41,3 +41,21 @@ GO
 ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
 	StyleJSON nvarchar(MAX) NULL
 GO
+
+ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
+	[IsPublished] [bit] NOT NULL CONSTRAINT DF_VJ_Core_CustomBlock_IsPublished DEFAULT '1'
+GO
+
+ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
+	[PublishedBy] [int] NULL 
+GO
+
+ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
+	[PublishedOn] [datetime] NULL
+GO
+
+ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
+	[Version] [int] NULL
+GO
+
+Update {databaseOwner}[VJ_Core_CustomBlock] set Version=1,PublishedBy=-1,PublishedOn=GETDATE() where Version is null

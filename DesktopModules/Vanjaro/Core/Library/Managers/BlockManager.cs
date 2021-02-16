@@ -325,6 +325,11 @@ namespace Vanjaro.Core
                 }
             }
 
+            public static void Update(CustomBlock CustomBlock)
+            {
+                BlockFactory.AddUpdate(CustomBlock);
+            }
+
             public static dynamic Edit(PortalSettings PortalSettings, CustomBlock CustomBlock)
             {
                 dynamic Result = new ExpandoObject();
@@ -530,7 +535,7 @@ namespace Vanjaro.Core
             }
             public static CustomBlock GetByGuid(int PortalID, string GUID)
             {
-                return BlockFactory.GetAll(PortalID).Where(b => b.Guid.ToLower() == GUID.ToLower()).FirstOrDefault();
+                return BlockFactory.GetAll(PortalID).Where(b => b.Guid.ToLower() == GUID.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
             }
             public static CustomBlock GetByLocale(int PortalID, string GUID, string Locale)
             {

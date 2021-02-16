@@ -4,6 +4,7 @@ using DotNetNuke.Security.Permissions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using Vanjaro.Common.Utilities;
 using Vanjaro.UXManager.Library;
 using Vanjaro.UXManager.Library.Entities.Interface;
@@ -39,7 +40,11 @@ namespace Vanjaro.UXManager.Extensions.Block.Custom
         {
             Core.Entities.Menu.ThemeTemplateResponse response = new Core.Entities.Menu.ThemeTemplateResponse();
             string blockguid = Attributes["data-guid"];
-            Core.Data.Entities.CustomBlock block = Core.Managers.BlockManager.GetAll(PortalSettings.Current).Where(c => c.Guid.ToLower() == blockguid.ToLower()).FirstOrDefault();
+            Core.Data.Entities.CustomBlock block;
+            if (HttpContext.Current.Request.Cookies["vj_IsPageEdit"] != null && HttpContext.Current.Request.Cookies["vj_IsPageEdit"].Value == "true")
+                block = Core.Managers.BlockManager.GetAll(PortalSettings.Current).Where(c => c.Guid.ToLower() == blockguid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
+            else
+                block = Core.Managers.BlockManager.GetAll(PortalSettings.Current).Where(c => c.Guid.ToLower() == blockguid.ToLower() && c.IsPublished == true).OrderByDescending(a => a.Version).FirstOrDefault();
             if (block != null)
             {
                 response.Markup = block.Html;

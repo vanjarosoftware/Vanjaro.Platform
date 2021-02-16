@@ -377,7 +377,7 @@ namespace Vanjaro.Core
                         result.IsSuccess = true;
                         result.ShowNotification = Data["IsPublished"];
 
-                        UpdateGlobalBlocks(GlobalKeyValuePairs, GlobalStyleKeyValuePairs, DeserializedGlobalBlocksJSON);
+                        UpdateGlobalBlocks(GlobalKeyValuePairs, GlobalStyleKeyValuePairs, DeserializedGlobalBlocksJSON, Convert.ToBoolean(Data["IsPublished"].ToString()));
                     }
                 }
                 catch (Exception ex)
@@ -424,7 +424,7 @@ namespace Vanjaro.Core
                 }
             }
 
-            private static void UpdateGlobalBlocks(Dictionary<string, dynamic> globalKeyValuePairs, Dictionary<string, dynamic> globalStyleKeyValuePairs, dynamic blocksJSON)
+            private static void UpdateGlobalBlocks(Dictionary<string, dynamic> globalKeyValuePairs, Dictionary<string, dynamic> globalStyleKeyValuePairs, dynamic blocksJSON, bool IsPublished)
             {
                 foreach (var item in globalKeyValuePairs)
                 {
@@ -445,7 +445,15 @@ namespace Vanjaro.Core
                                 }
                             }
                         }
-                        block.Update();
+                        if (block.IsPublished)
+                            block.ID = 0;
+                        if (IsPublished)
+                        {
+                            block.PublishedBy = PortalSettings.Current.UserInfo.UserID;
+                            block.IsPublished = IsPublished;
+                            block.PublishedOn = DateTime.UtcNow;
+                        }
+                        BlockManager.Update(block);
                     }
                 }
             }
@@ -1214,7 +1222,7 @@ namespace Vanjaro.Core
                     string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
                     string tempNewUrl = newurl;
                     int count = 1;
-                    Find:
+                Find:
                     if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
                     {
                         tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;
