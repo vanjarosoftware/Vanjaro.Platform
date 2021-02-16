@@ -42,11 +42,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
             {
                 Settings.Add("UpdateBasicLoginSettingsRequest", new UIData { Name = "UpdateBasicLoginSettingsRequest", Options = basicLoginSettings.UpdateBasicLoginSettingsRequest });
                 Settings.Add("DefaultAuthProvider", new UIData { Name = "DefaultAuthProvider", Options = basicLoginSettings.AuthProviders, OptionsText = "Name", OptionsValue = "Value", Value = basicLoginSettings.Settings.DefaultAuthProvider });
-                Settings.Add("RedirectAfterLogin", new UIData { Name = "RedirectAfterLogin", Options = PageList, OptionsText = "TabName", OptionsValue = "TabID", Value = basicLoginSettings.Settings.RedirectAfterLoginTabId.ToString() });
-                Settings.Add("RedirectAfterLogout", new UIData { Name = "RedirectAfterLogout", Options = PageList, OptionsText = "TabName", OptionsValue = "TabID", Value = basicLoginSettings.Settings.RedirectAfterLogoutTabId.ToString() });
             }
             Settings.Add("UserRegistration", new UIData { Name = "UserRegistration", Options = Results });
-            Settings.Add("RedirectAfterRegistration", new UIData { Name = "RedirectAfterRegistration", Options = PageList, OptionsText = "TabName", OptionsValue = "TabID", Value = Results.Settings.RedirectAfterRegistrationTabId.ToString() });
             Settings.Add("UpdateSslSettingsRequest", new UIData { Name = "UpdateSslSettingsRequest", Options = Managers.SecurityManager.GetSslSettings(portalSettings, userInfo) });
 
             List<TreeView> DefaultFolders = new List<TreeView>
@@ -142,8 +139,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
                     portalInfo.AdministratorId = Convert.ToInt32(request.PrimaryAdministratorId);
                     PortalController.Instance.UpdatePortalInfo(portalInfo);
                     PortalController.UpdatePortalSetting(PortalId, "DefaultAuthProvider", request.DefaultAuthProvider.ToString());
-                    PortalController.UpdatePortalSetting(PortalId, "Redirect_AfterLogin", request.RedirectAfterLoginTabId.ToString(), false, cultureCode, false);
-                    PortalController.UpdatePortalSetting(PortalId, "Redirect_AfterLogout", request.RedirectAfterLogoutTabId.ToString(), false, cultureCode, false);
                     PortalController.UpdatePortalSetting(PortalId, "Security_RequireValidProfileAtLogin", request.RequireValidProfileAtLogin.ToString(), false);
                     PortalController.UpdatePortalSetting(PortalId, "Security_CaptchaLogin", request.CaptchaLogin.ToString(), false);
                     PortalController.UpdatePortalSetting(PortalId, "Security_CaptchaRetrivePassword", request.CaptchaRetrivePassword.ToString(), false);
@@ -234,7 +229,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
                 PortalController.UpdatePortalSetting(portalSettings.PortalId, "Registration_RequireConfirmPassword", request.RequirePasswordConfirmation.ToString(), true);
                 PortalController.UpdatePortalSetting(portalSettings.PortalId, "Security_RequireValidProfile", request.RequireValidProfile.ToString(), false);
                 PortalController.UpdatePortalSetting(portalSettings.PortalId, "Security_CaptchaRegister", request.UseCaptchaRegister.ToString(), false);
-                PortalController.UpdatePortalSetting(portalSettings.PortalId, "Redirect_AfterRegistration", request.RedirectAfterRegistrationTabId.ToString(), false, LocaleController.Instance.GetCurrentLocale(portalSettings.PortalId).Code, false);
             }
             catch (Exception ex)
             {

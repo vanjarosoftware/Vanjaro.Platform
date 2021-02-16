@@ -1,6 +1,9 @@
 ﻿<div ng-controller="notification_notifications" class="vj-ux-manager">
     <uiengine provider="AngularBootstrap" identifier="notification_notifications" layout="admin">
         <uilayout name="default">
+            <uitemplate>
+                <a class="ux-btn ux-btn-hover" style="float: right;" ng-hide="Notifications.length <= 0" role="button" mn-ng-click="Click_DismissAll()" access-roles="host" title="[L:DismissAll]"><em class="fas fa-eraser "></em></a>
+            </uitemplate>
             <uielement name="Notifications" control="grid" label="false" attr-ng-hide="Notifications.length <= 0" attr-class="table-grid Notifications GrayTh" ngoptions="Notifications" pagesize="10" paged="true" displayedpages="5" attr-st-pipe="Pipe_NotificationsPages">
                 <column name="UserName" width="100" attr-style="padding:0;">
                     <uitemplate>

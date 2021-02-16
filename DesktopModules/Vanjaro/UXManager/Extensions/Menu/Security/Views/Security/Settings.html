@@ -161,26 +161,6 @@
 
         <uilayout name="Login">
             <!--<uielement name="DefaultAuthProvider" attr-ng-model="ui.data.UpdateBasicLoginSettingsRequest.Options.DefaultAuthProvider" control="dropdownlist" container-attr-access-roles="host"></uielement>-->
-            <uitemplate>
-                <div class="form-group">
-                    <label>[L:RedirectAfterLogin]</label>
-                    <div class="input-group">
-                        <select class="form-control" mn-ng-model="ui.data.UpdateBasicLoginSettingsRequest.Options.RedirectAfterLoginTabId">
-                            <option value="-1">[L:SelectOption]</option>
-                            <option value="{{option.TabID}}" mn-ng-repeat="option in ui.data.RedirectAfterLogin.Options" ng-class="option.DisableLink?'disablelink':''" ng-disabled="option.DisableLink">{{option.TabName}}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>[L:RedirectAfterLogout]</label>
-                    <div class="input-group">
-                        <select class="form-control" mn-ng-model="ui.data.UpdateBasicLoginSettingsRequest.Options.RedirectAfterLogoutTabId">
-                            <option value="-1">[L:SelectOption]</option>
-                            <option value="{{option.TabID}}" mn-ng-repeat="option in ui.data.RedirectAfterLogout.Options" ng-class="option.DisableLink?'disablelink':''" ng-disabled="option.DisableLink">{{option.TabName}}</option>
-                        </select>
-                    </div>
-                </div>
-            </uitemplate>
             <uielement name="RequireValidProfileAtLogin" ngmodel="ui.data.UpdateBasicLoginSettingsRequest.Options.RequireValidProfileAtLogin" control="checkboxtoggle" attr-class="toggle_right" container-attr-access-roles="host"></uielement>
             <!--<uielement name="HideLoginControl" ngmodel="ui.data.UpdateBasicLoginSettingsRequest.Options.HideLoginControl" control="checkboxtoggle" attr-class="toggle_right" container-attr-access-roles="host"></uielement>-->
         </uilayout>
@@ -197,17 +177,6 @@
                                 <option value="{{row.Value}}" mn-ng-repeat="row in ui.data.UserRegistration.Options.UserRegistrationOptions">{{row.Key}}</option>
                             </select>
                         </div>
-                    </div>
-                </div>
-            </uitemplate>
-            <uitemplate>
-                <div class="form-group">
-                    <label>[L:RedirectAfterRegistration]</label>
-                    <div class="input-group">
-                        <select class="form-control" mn-ng-model="ui.data.UserRegistration.Options.Settings.RedirectAfterRegistrationTabId">
-                            <option value="-1">[L:SelectOption]</option>
-                            <option value="{{option.TabID}}" mn-ng-repeat="option in ui.data.RedirectAfterRegistration.Options" mn-ng-class="option.DisableLink?'disablelink':''" mn-ng-disabled="option.DisableLink">{{option.TabName}}</option>
-                        </select>
                     </div>
                 </div>
             </uitemplate>

@@ -198,6 +198,9 @@
         $scope.ui.data.DefaultPagesSettingsRequest.Options.TermsTabId = $scope.ui.data.PageSetting.Options.TermsTabId;
         $scope.ui.data.DefaultPagesSettingsRequest.Options.PrivacyTabId = $scope.ui.data.PageSetting.Options.PrivacyTabId;
         $scope.ui.data.DefaultPagesSettingsRequest.Options.PageHeadText = $scope.ui.data.PageSetting.Options.PageHeadText;
+        $scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterLoginTabId = $scope.ui.data.PageSetting.Options.RedirectAfterLoginTabId;
+        $scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterLogoutTabId = $scope.ui.data.PageSetting.Options.RedirectAfterLogoutTabId;
+        $scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterRegistrationTabId = $scope.ui.data.PageSetting.Options.RedirectAfterRegistrationTabId;
         switch (type) {
             case "splashpage":
                 if ($scope.ui.data.DefaultPagesSettingsRequest.Options.SplashTabId == node.Value) {
@@ -276,6 +279,56 @@
                 }
                 else {
                     $scope.ui.data.DefaultPagesSettingsRequest.Options.Custom500TabId = node.Value;
+                    type = 'SetAs_' + type;
+                }
+                break;
+            case "PrivacyTabId":
+                if ($scope.ui.data.DefaultPagesSettingsRequest.Options.PrivacyTabId == node.Value) {
+                    $scope.ui.data.DefaultPagesSettingsRequest.Options.PrivacyTabId = null;
+                    type = 'RemoveFrom_' + type;
+                }
+                else {
+                    $scope.ui.data.DefaultPagesSettingsRequest.Options.PrivacyTabId = node.Value;
+                    type = 'SetAs_' + type;
+                }
+                break;
+            case "TermsTabId":
+                if ($scope.ui.data.DefaultPagesSettingsRequest.Options.TermsTabId == node.Value) {
+                    $scope.ui.data.DefaultPagesSettingsRequest.Options.TermsTabId = null;
+                    type = 'RemoveFrom_' + type;
+                }
+                else {
+                    $scope.ui.data.DefaultPagesSettingsRequest.Options.TermsTabId = node.Value;
+                    type = 'SetAs_' + type;
+                }
+                break;
+            case "RedirectAfterRegistration":
+                if ($scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterRegistrationTabId == node.Value) {
+                    $scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterRegistrationTabId = null;
+                    type = 'RemoveFrom_' + type;
+                }
+                else {
+                    $scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterRegistrationTabId = node.Value;
+                    type = 'SetAs_' + type;
+                }
+                break;
+            case "RedirectAfterLogin":
+                if ($scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterLoginTabId == node.Value) {
+                    $scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterLoginTabId = null;
+                    type = 'RemoveFrom_' + type;
+                }
+                else {
+                    $scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterLoginTabId = node.Value;
+                    type = 'SetAs_' + type;
+                }
+                break;
+            case "RedirectAfterLogout":
+                if ($scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterLogoutTabId == node.Value) {
+                    $scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterLogoutTabId = null;
+                    type = 'RemoveFrom_' + type;
+                }
+                else {
+                    $scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterLogoutTabId = node.Value;
                     type = 'SetAs_' + type;
                 }
                 break;
