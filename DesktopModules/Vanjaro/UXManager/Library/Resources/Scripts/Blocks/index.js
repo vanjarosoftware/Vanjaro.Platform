@@ -382,9 +382,14 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 				$BlockCategory.hide();
 
-				var inputGroup = document.createElement('div');
-				inputGroup.id = 'CategoryInputGroup';
-				inputGroup.className = 'input-group';
+				var categoryGroup = document.createElement('div');
+				categoryGroup.id = 'CategoryGroup';
+
+				var anchor = document.createElement('a');
+				anchor.className = 'btn btn-add';
+				anchor.innerHTML = '<em class="fa fa-plus"></em>'
+
+				categoryGroup.append(anchor);
 
 				var select = document.createElement('select');
 				select.id = 'CategoryDropdown';
@@ -401,15 +406,16 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 				});
 
-				inputGroup.append(select);
-				inputGroup.innerHTML += '<div class="input-group-append"><button class="btn btn-primary btn-add" type="button">Add</button></div>';
+				categoryGroup.append(select);
 
-				if ($("#ModalContent").find("#CategoryInputGroup").length)
-					$("#ModalContent").find("#CategoryInputGroup").replaceWith(inputGroup);
+				if ($("#ModalContent").find("#CategoryGroup").length) 
+					$("#ModalContent").find("#CategoryGroup").replaceWith(categoryGroup);
 				else
-					$(inputGroup).insertAfter($BlockCategory);
+					$(categoryGroup).insertAfter($BlockCategory);
 
 				var $CategoryDropdown = $("#ModalContent").find("#CategoryDropdown");
+
+				$BlockCategory.val($CategoryDropdown.val());
 
 				$CategoryDropdown.on('change', function () {
 					$BlockCategory.val($(this).val());
@@ -419,9 +425,9 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 					swal(
 						{
-							title: 'Title',
+							title: VjLocalized.BlockCategory,
 							html: true,
-							text: '<input class="form-control" style="display:block;" type="text" id="Category" placeholder="' + VjLocalized.BlockCategory + '"/>',
+							text: '<input class="form-control" style="display:block;" type="text" id="Category" placeholder="' + VjLocalized.AddCategory + '"/>',
 							confirmButtonText: VjLocalized.Add,
 							cancelButtonText: VjLocalized.Cancel,
 							showCancelButton: true,

@@ -79,6 +79,7 @@
     CopyCarouselImage: "[LS:CopyCarouselImage]",
     Add: "[LS:Add]",
     BlockCategory: "[LS:BlockCategory]",
+    AddCategory: "[LS:AddCategory]",
     CategoryExists: "[LS:CategoryExists]",
     CategoryRequired: "[LS:CategoryRequired]"
 };

@@ -967,20 +967,8 @@ div#MenuSettings .parent-menu-hide {
     color: #495157;
 }
 
-#ModalContent .CodeMirror,
-.gjs-custom-code .CodeMirror {
-    border: 1px solid #d3d0d0;
-    background: #fff;
-}
-
-#ModalContent #HTML + .CodeMirror,
-#ModalContent #CSS + .CodeMirror {
-    width: 395px;
-}
-
-#ModalContent .CodeMirror-gutters,
-.gjs-custom-code .CodeMirror-gutters {
-    background: #fafafa;
+#ModalContent #CategoryGroup {
+    position: relative;
 }
 
 #ModalContent label,
@@ -1011,6 +999,7 @@ div#MenuSettings .parent-menu-hide {
     -webkit-transition: border-color .25s;
     transition: border-color .25s;
     opacity: 0.6;
+    text-transform: capitalize;
 }
 
 #ModalContent input,
@@ -1034,8 +1023,13 @@ div#MenuSettings .parent-menu-hide {
 }
 
 #ModalContent .btn-add {
+    position: absolute;
+    top: -34px;
+    right: 0;
+    color: #495157;
     font-size: 14px;
-    padding: 6px 12px;
+    padding: 6px;
+    z-index: 9;
 }
 
 #ModalContent .btn-primary {

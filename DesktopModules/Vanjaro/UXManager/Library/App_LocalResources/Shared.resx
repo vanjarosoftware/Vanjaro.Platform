@@ -457,9 +457,12 @@
     <value>Category</value>
   </data>
   <data name="CategoryExists.Text" xml:space="preserve">
-    <value>Category already exists</value>
+    <value>Category name already exists</value>
   </data>
   <data name="CategoryRequired.Text" xml:space="preserve">
-    <value>Category is required</value>
+    <value>Category name is required</value>
+  </data>
+  <data name="AddCategory.Text" xml:space="preserve">
+    <value>Add New Category</value>
   </data>
 </root>
