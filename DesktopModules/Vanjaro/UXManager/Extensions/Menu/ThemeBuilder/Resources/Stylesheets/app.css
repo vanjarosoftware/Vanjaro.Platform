@@ -482,7 +482,10 @@
         border-radius: 0;
         margin-bottom: 5px;
         border: 1px solid #ccc;
+        padding: .75rem 1.25rem;
     }
+
+
 
 .contentdefault {
     background-color: #e6e9ec!important;
