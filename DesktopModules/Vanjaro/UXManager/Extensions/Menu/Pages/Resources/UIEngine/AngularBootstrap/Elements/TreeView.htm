@@ -99,6 +99,21 @@
                                 </a>
                             </li>
                             <li>
+                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'RedirectAfterRegistration')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
+                                    <em class="fas fa-external-link-square-alt  "></em><span>[L:RedirectAfterRegistration]</span><em ng-class="ui.data.PageSetting.Options.RedirectAfterRegistrationTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'RedirectAfterLogin')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
+                                    <em class="fas fa-external-link-square-alt  "></em><span>[L:RedirectAfterLogin]</span><em ng-class="ui.data.PageSetting.Options.RedirectAfterLoginTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'RedirectAfterLogout')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
+                                    <em class="fas fa-external-link-square-alt  "></em><span>[L:RedirectAfterLogout]</span><em ng-class="ui.data.PageSetting.Options.RedirectAfterLogoutTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
+                                </a>
+                            </li>
+                            <li>
                                 <hr class="m-none" />
                             </li>
                             <li>
@@ -113,6 +128,16 @@
                             </li>
                             <li>
                                 <hr class="m-none" />
+                            </li>
+                            <li>
+                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'TermsTabId')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
+                                    <em class="fas fa-user-shield"></em><span>[L:Terms]</span><em ng-class="ui.data.PageSetting.Options.TermsTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'PrivacyTabId')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
+                                    <em class="fas fa-file-contract"></em><span>[L:Privacy]</span><em ng-class="ui.data.PageSetting.Options.PrivacyTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
+                                </a>
                             </li>
                             <li>
                                 <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'404errorpage')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
