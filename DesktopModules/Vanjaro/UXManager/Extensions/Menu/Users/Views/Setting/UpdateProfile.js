@@ -116,7 +116,7 @@
                     }
                     else {
                         $(window.parent.document.body).find(".Gravitar").remove();
-                        $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                        $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     }
                 }
                 if (data.HasErrors) {

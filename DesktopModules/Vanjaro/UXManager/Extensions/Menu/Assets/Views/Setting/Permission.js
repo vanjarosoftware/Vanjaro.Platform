@@ -34,7 +34,7 @@
                 });
 
                 setTimeout(function () {
-                    $(window.parent.document.body).find('.uxmanager-modal [data-dismiss="modal"]').click();
+                    $(window.parent.document.body).find('.uxmanager-modal [data-bs-dismiss="modal"]').click();
                 }, 100);
             }
             else if (Response.HasErrors)

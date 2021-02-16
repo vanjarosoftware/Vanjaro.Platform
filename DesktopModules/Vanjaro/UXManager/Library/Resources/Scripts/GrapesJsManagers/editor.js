@@ -92,7 +92,7 @@ $(document).ready(function () {
 									});
 
 									var block = VjEditor.BlockManager.render(LibraryBlock);
-									$(window.document.body).append(block).find('[data-dismiss="modal"]').trigger('click', [false]);
+									$(window.document.body).append(block).find('[data-bs-dismiss="modal"]').trigger('click', [false]);
 								}
 							}
 						});
@@ -116,7 +116,7 @@ $(document).ready(function () {
 								'RequestVerificationToken': sf.getAntiForgeryValue()
 							},
 							success: function (data) {
-								$(window.parent.document.body).find('[data-dismiss="modal"]').click();
+								$(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
 								parent.OpenPopUp(null, 600, 'center', 'Install', ExtensionURL, 800);
 							}
 						});

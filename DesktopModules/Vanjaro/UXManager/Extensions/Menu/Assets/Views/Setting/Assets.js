@@ -276,7 +276,7 @@
             common.webApi.post('Upload/CreateNewFolder', 'folderparentID=' + folderid + '&folderName=' + encodeURIComponent(FolderName) + '&FolderType=' + FolderType).success(function (data) {
                 if (data === 'Success') {
                     $scope.Syncfolder(true, folderid);
-                    $('[data-dismiss="modal"]').click();
+                    $('[data-bs-dismiss="modal"]').click();
                 }
                 else {
                     $scope.ShowErrorMessage = true;
@@ -392,7 +392,7 @@
             else if ($scope.CopyFileValue)
                 method = "Upload/CopyFile?fileid=" + fileid + '&overwrite=' + false;
             common.webApi.get(method + '&destinationFolderId=' + $scope.SelectedFolder).success(function (Data) {
-                $(window.document.body).find('[data-dismiss="modal"]').click();
+                $(window.document.body).find('[data-bs-dismiss="modal"]').click();
                 $scope.ClosePopUp();
                 if (Data === "Success") {
                     $scope.Syncfolder(true, $scope.IconsFolders[0].Value);
@@ -441,7 +441,7 @@
                 Type = 'Copy';
             }
             common.webApi.get(method + '&destinationFolderId=' + $scope.SelectedFolder).success(function (Data) {
-                $(window.document.body).find('[data-dismiss="modal"]').click();
+                $(window.document.body).find('[data-bs-dismiss="modal"]').click();
                 $scope.ClosePopUp();
                 if (Data === "Success") {
                     $scope.Syncfolder(true, $scope.IconsFolders[0].Value);

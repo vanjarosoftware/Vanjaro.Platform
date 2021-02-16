@@ -184,7 +184,7 @@
     $scope.Click_Cancel = function (type) {
         var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
         Parentscope.Click_IsInstall(true);
-        $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+        $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
     };
 
     $scope.Click_Email = function () {
