@@ -4,7 +4,7 @@ import { jsPanel } from 'jspanel4/es6module/jspanel.js';
 global.VjEditor = null;
 global.VjLayerpanel = null;
 global.VJLandingPage = { components: '', html: '', style: '', css: '' };
-global.VJIsSaveCall = true;
+global.VJIsSaveCall  = false;
 global.VJLocalBlocksMarkup = '';
 global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
@@ -91,40 +91,40 @@ $(document).ready(function () {
                                         }
                                     });
 
-                                    var block = VjEditor.BlockManager.render(LibraryBlock);
-                                    $(window.document.body).append(block).find('[data-dismiss="modal"]').trigger('click', [false]);
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-            else if (ExtensionStoreURL.startsWith(event.origin)) {
-                if (typeof event.data != 'undefined') {
-                    if (typeof event.data.action != 'undefined' && event.data.action == 'DownloadPackage') {
-                        var sf = $.ServicesFramework(-1);
-                        var PackageData = {
-                            Packages: JSON.stringify(event.data.data)
-                        };
-                        $.ajax({
-                            type: "POST",
-                            url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Extensions") + "InstallPackage/Download",
-                            data: PackageData,
-                            headers: {
-                                'ModuleId': parseInt(sf.getModuleId()),
-                                'TabId': parseInt(sf.getTabId()),
-                                'RequestVerificationToken': sf.getAntiForgeryValue()
-                            },
-                            success: function (data) {
-                                $(window.parent.document.body).find('[data-dismiss="modal"]').click();
-                                parent.OpenPopUp(null, 600, 'center', 'Install', ExtensionURL, 800);
-                            }
-                        });
-                    }
-                }
-            }
-        });
-    }
+                                    var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
+									$(window.document.body).append(block).find('[data-dismiss="modal"]').trigger('click', [false]);
+								}
+							}
+						});
+					}
+				}
+			}
+			else if (ExtensionStoreURL.startsWith(event.origin)) {
+				if (typeof event.data != 'undefined') {
+					if (typeof event.data.action != 'undefined' && event.data.action == 'DownloadPackage') {
+						var sf = $.ServicesFramework(-1);
+						var PackageData = {
+							Packages: JSON.stringify(event.data.data)
+						};
+						$.ajax({
+							type: "POST",
+							url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Extensions") + "InstallPackage/Download",
+							data: PackageData,
+							headers: {
+								'ModuleId': parseInt(sf.getModuleId()),
+								'TabId': parseInt(sf.getTabId()),
+								'RequestVerificationToken': sf.getAntiForgeryValue()
+							},
+							success: function (data) {
+								$(window.parent.document.body).find('[data-dismiss="modal"]').click();
+								parent.OpenPopUp(null, 600, 'center', 'Install', ExtensionURL, 800);
+							}
+						});
+					}
+				}
+			}
+		});
+	}
 
     $(".pubish-btn").click(function (e) {
         e.preventDefault();
@@ -1747,7 +1747,7 @@ $(document).ready(function () {
                                     return;
                                 }
 
-                                if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
+                                if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
 
                                     $.each(model.attributes.toolbar, function (k, v) {
 
@@ -2538,29 +2538,34 @@ $(document).ready(function () {
                                         clearTimeout(VJAutoSaveTimeOutid);
                                     }
 
-                                    if (VJIsSaveCall && e.changed.changesCount >= VjEditor.StorageManager.getStepsBeforeSave()) {
-                                        VJAutoSaveTimeOutid = setTimeout(function () {
-                                            if ($('.sidebar-open.settingclosebtn').length == 0) {
-                                                VjEditor.runCommand("save");
-                                            }
-                                        }, 1000)
-                                    }
-                                    else
-                                        VJIsSaveCall = true;
-                                }
+									if (e.changed.changesCount >= VjEditor.StorageManager.getStepsBeforeSave()) {
+										VJAutoSaveTimeOutid = setTimeout(function () {
+                                            if ($('.sidebar-open.settingclosebtn').length == 0 && !VJIsSaveCall) {
+												VjEditor.runCommand("save");
+											}
+										}, 1000)
+									}
+								}
+							});
+
+							VjEditor.on('storage:error', (err) => {
+								swal({ title: "Error", text: `${err}`, type: "error", });
                             });
 
-                            VjEditor.on('storage:error', (err) => {
-                                swal({ title: "Error", text: `${err}`, type: "error", });
+                            VjEditor.on('storage:start:store', function (Data) {
+                                VJIsSaveCall = true;
                             });
 
                             VjEditor.on('storage:end:store', function (Data) {
-                                if (Data != '' && Data.PageReviewSettings != undefined && Data.PageReviewSettings) {
-                                    VJIsContentApproval = Data.PageReviewSettings.IsContentApproval ? "True" : "False";
-                                    VJNextStateName = Data.PageReviewSettings.NextStateName;
-                                    VJIsPageDraft = Data.PageReviewSettings.IsPageDraft ? "True" : "False";;
-                                    VJIsLocked = Data.PageReviewSettings.IsLocked ? "True" : "False";;
-                                    VJIsModeratorEditPermission = Data.PageReviewSettings.IsModeratorEditPermission;
+
+                                VJIsSaveCall = false;
+
+								if (Data != '' && Data.PageReviewSettings != undefined && Data.PageReviewSettings) {
+									VJIsContentApproval = Data.PageReviewSettings.IsContentApproval ? "True" : "False";
+									VJNextStateName = Data.PageReviewSettings.NextStateName;
+									VJIsPageDraft = Data.PageReviewSettings.IsPageDraft ? "True" : "False";;
+									VJIsLocked = Data.PageReviewSettings.IsLocked ? "True" : "False";;
+									VJIsModeratorEditPermission = Data.PageReviewSettings.IsModeratorEditPermission;
 
                                     if (VJIsPageDraft == "True")
                                         $('#VJBtnPublish').removeClass('disabled');
@@ -2805,30 +2810,27 @@ $(document).ready(function () {
     $(".blockstabview a").click(function () {
         var $this = $(this).parent();
 
-        if ($this.hasClass('elementtab')) {
-            $('.blockstab').removeClass('active');
-            $(this).parent().addClass('active');
-            ChangeBlockType();
-        }
-        else if ($this.hasClass('customtab')) {
-            $('.blockstab').removeClass('active');
-            $(this).parent().addClass('active');
-            ChangeBlockType();
-        }
-        else if ($this.hasClass('librarytab')) {
-            $('.blockstab').removeClass('active');
-            $(this).parent().addClass('active');
-            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%', true, false, null, false);
-        }
-        else {
-            $('.blockstab').removeClass('active');
-            $(this).parent().addClass('active');
-            ChangeBlockType();
-        }
-    });
-    //Show Publish Options 
-    //$(".draft-btn").click(function (e) {
-    //    $('#DeviceManager').hide();
+		if ($this.hasClass('elementtab')) {
+			$('.blockstab').removeClass('active');
+			$(this).parent().addClass('active');
+			ChangeBlockType();
+		}
+		else if ($this.hasClass('customtab')) {
+			$('.blockstab').removeClass('active');
+			$(this).parent().addClass('active');
+			ChangeBlockType();
+		}
+		else if ($this.hasClass('librarytab'))
+			parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%', true, false, null, false);
+		else {
+			$('.blockstab').removeClass('active');
+			$(this).parent().addClass('active');
+			ChangeBlockType();
+		}
+	});
+	//Show Publish Options 
+	//$(".draft-btn").click(function (e) {
+	//    $('#DeviceManager').hide();
 
     //    if ($("#dnn_ContentPane").find(".gjs-frame").attr("style") == undefined)
     //        $("#dnn_ContentPane").find(".gjs-cv-canvas").removeAttr("style");

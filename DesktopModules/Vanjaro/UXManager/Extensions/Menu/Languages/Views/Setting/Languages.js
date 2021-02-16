@@ -30,16 +30,18 @@
             closeOnConfirm: true,
             closeOnCancel: true
         },
-        function (isConfirm) {
-            if (isConfirm) {
-                common.webApi.get('languages/Enabled', 'lid=' + row.LanguageId).success(function (Response) {
-                    if (Response.IsSuccess) {
-                        $scope.RenderMarkup();
-                        $scope.ui.data.Languages.Options = Response.Data;
-                    }
-                });
-            }
-        });
+            function (isConfirm) {
+                if (isConfirm) {
+                    common.webApi.get('languages/Enabled', 'lid=' + row.LanguageId).success(function (Response) {
+                        if (Response.IsSuccess) {
+                            if (Response.RedirectURL != null && Response.RedirectURL.length > 0)
+                                window.parent.location.href = Response.RedirectURL;
+                                $scope.RenderMarkup();
+                            $scope.ui.data.Languages.Options = Response.Data;
+                        }
+                    });
+                }
+            });
     }
 
     $scope.RenderMarkup = function () {

@@ -494,55 +494,15 @@ namespace Vanjaro.Core
             }
             public static void ApplyDefaultLayouts(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts)
             {
-                #region Applying Home and Signup layout
+                #region Applying Layouts
 
-                TabInfo HomeTab = TabController.Instance.GetTabByName("Home", pinfo.PortalID);
-                Layout homelayout = pageLayouts.Where(a => a.Name == "Home").FirstOrDefault();
-                PortalSettings portalSettings = new PortalSettings(pinfo);
-                if (HomeTab != null && homelayout != null && portalSettings != null)
-                {
-                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
-
-                    if (portalSettings.ActiveTab == null)
-                    {
-                        portalSettings.ActiveTab = new TabInfo();
-                    }
-
-                    portalSettings.ActiveTab.TabID = HomeTab.TabID;
-                    PortalController.UpdatePortalSetting(pinfo.PortalID, "Redirect_AfterLogin", HomeTab.TabID.ToString(), false, portalSettings.CultureCode, false);
-                    Dictionary<string, object> LayoutData = new Dictionary<string, object>
-                    {
-                        ["IsPublished"] = false,
-                        ["Comment"] = string.Empty,
-                        ["gjs-assets"] = string.Empty,
-                        ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(homelayout.Style.ToString(), pinfo.PortalID),
-                        ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(homelayout.Content.ToString(), pinfo.PortalID),
-                        ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(homelayout.ContentJSON.ToString(), pinfo.PortalID),
-                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(homelayout.StyleJSON.ToString(), pinfo.PortalID)
-                    };
-                    Core.Managers.PageManager.Update(portalSettings, LayoutData);
-
-                    Pages Page = Managers.PageManager.GetPages(HomeTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
-
-                    if (Page != null && uInfo != null)
-                    {
-                        WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
-                        Page.Version = 1;
-                        Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
-                        Page.IsPublished = true;
-                        Page.PublishedBy = uInfo.UserID;
-                        Page.PublishedOn = DateTime.UtcNow;
-                        PageFactory.Update(Page, uInfo.UserID);
-                    }
-                    pinfo.HomeTabId = HomeTab != null && !HomeTab.IsDeleted ? HomeTab.TabID : Null.NullInteger;
-
-                }
+                PortalSettings portalSettings = new PortalSettings(pinfo);                
 
                 TabInfo SignUpTab = TabController.Instance.GetTabByName("Signup", pinfo.PortalID);
                 Layout Signuplayout = pageLayouts.Where(a => a.Name == "Signup").FirstOrDefault();
                 if (SignUpTab != null && Signuplayout != null && portalSettings != null)
                 {
-                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+                    ProcessBlocks(pinfo.PortalID, Signuplayout.Blocks);
 
                     if (portalSettings.ActiveTab == null)
                     {
@@ -581,7 +541,7 @@ namespace Vanjaro.Core
                 Layout NotFoundPagelayout = pageLayouts.Where(a => a.Name == "NotFoundPage").FirstOrDefault();
                 if (NotFoundTab != null && NotFoundPagelayout != null && portalSettings != null)
                 {
-                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+                    ProcessBlocks(pinfo.PortalID, NotFoundPagelayout.Blocks);
 
                     if (portalSettings.ActiveTab == null)
                     {
@@ -622,7 +582,7 @@ namespace Vanjaro.Core
                 Layout Profilelayout = pageLayouts.Where(a => a.Name == "Profile").FirstOrDefault();
                 if (ProfileTab != null && Profilelayout != null && portalSettings != null)
                 {
-                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+                    ProcessBlocks(pinfo.PortalID, Profilelayout.Blocks);
                     pinfo.UserTabId = ProfileTab.TabID;
                     if (portalSettings.ActiveTab == null)
                     {
@@ -662,7 +622,7 @@ namespace Vanjaro.Core
                 Layout SearchResultlayout = pageLayouts.Where(a => a.Name == "SearchResults").FirstOrDefault();
                 if (SearchResultTab != null && SearchResultlayout != null && portalSettings != null)
                 {
-                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+                    ProcessBlocks(pinfo.PortalID, SearchResultlayout.Blocks);
                     if (portalSettings.ActiveTab == null)
                     {
                         portalSettings.ActiveTab = new TabInfo();
@@ -773,6 +733,45 @@ namespace Vanjaro.Core
                     }
                 }
 
+                TabInfo HomeTab = TabController.Instance.GetTabByName("Home", pinfo.PortalID);
+                Layout homelayout = pageLayouts.Where(a => a.Name == "Home").FirstOrDefault();
+                if (HomeTab != null && homelayout != null && portalSettings != null)
+                {
+                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+
+                    if (portalSettings.ActiveTab == null)
+                    {
+                        portalSettings.ActiveTab = new TabInfo();
+                    }
+
+                    portalSettings.ActiveTab.TabID = HomeTab.TabID;
+                    PortalController.UpdatePortalSetting(pinfo.PortalID, "Redirect_AfterLogin", HomeTab.TabID.ToString(), false, portalSettings.CultureCode, false);
+                    Dictionary<string, object> LayoutData = new Dictionary<string, object>
+                    {
+                        ["IsPublished"] = false,
+                        ["Comment"] = string.Empty,
+                        ["gjs-assets"] = string.Empty,
+                        ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(homelayout.Style.ToString(), pinfo.PortalID),
+                        ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(homelayout.Content.ToString(), pinfo.PortalID),
+                        ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(homelayout.ContentJSON.ToString(), pinfo.PortalID),
+                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(homelayout.StyleJSON.ToString(), pinfo.PortalID)
+                    };
+                    Core.Managers.PageManager.Update(portalSettings, LayoutData);
+
+                    Pages Page = Managers.PageManager.GetPages(HomeTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
+
+                    if (Page != null && uInfo != null)
+                    {
+                        WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
+                        Page.Version = 1;
+                        Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
+                        Page.IsPublished = true;
+                        Page.PublishedBy = uInfo.UserID;
+                        Page.PublishedOn = DateTime.UtcNow;
+                        PageFactory.Update(Page, uInfo.UserID);
+                    }
+                    pinfo.HomeTabId = HomeTab != null && !HomeTab.IsDeleted ? HomeTab.TabID : Null.NullInteger;
+                }
                 #endregion
 
                 #region Update Default SignUp Tab, Search Results,Terms of Service and Privacy Policy page

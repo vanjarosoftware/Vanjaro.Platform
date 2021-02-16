@@ -276,11 +276,11 @@ ul.Shortcuts {
     height: 30px;
 }
 
-.closeabout .aboutlink {
-    float: left;
-    margin-left: 5px;
-    margin-top: -2px;
-}
+    .closeabout .aboutlink {
+        float: left;
+        margin-left: 5px;
+        margin-top: -2px;
+    }
 
 a.closeaboutbtn {
     float: right;
@@ -3493,4 +3493,31 @@ body.resp-mode.mobile .vj-wrapper {
 
 .sidebar-open .select_language {
     pointer-events: none;
+}
+
+.stylemanager .gjs-field.gjs-field-integer input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.stylemanager .gjs-field.gjs-field-integer input[type="number"]:hover,
+.stylemanager .gjs-field.gjs-field-integer input[type="number"]:focus {
+    -moz-appearance: auto;
+}
+
+.stylemanager .sm-range-wrapper {
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
+.traitsmanager .range-wrapper {
+    display: flex;
+}
+
+.traitsmanager .range-wrapper input[type="number"] {
+    -moz-appearance: textfield;
+}
+.traitsmanager .range-wrapper input[type="number"]:hover,
+.traitsmanager .range-wrapper input[type="number"]:focus {
+    -moz-appearance: auto;
 }
