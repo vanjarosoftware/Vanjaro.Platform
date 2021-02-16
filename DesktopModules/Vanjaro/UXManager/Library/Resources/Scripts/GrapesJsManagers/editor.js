@@ -4,7 +4,7 @@ import { jsPanel } from 'jspanel4/es6module/jspanel.js';
 global.VjEditor = null;
 global.VjLayerpanel = null;
 global.VJLandingPage = { components: '', html: '', style: '', css: '' };
-global.VJIsSaveCall = true;
+global.VJIsSaveCall  = false;
 global.VJLocalBlocksMarkup = '';
 global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
@@ -1747,7 +1747,7 @@ $(document).ready(function () {
 									return;
 								}
 
-								if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
+                                if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
 
 									$.each(model.attributes.toolbar, function (k, v) {
 
@@ -2538,23 +2538,28 @@ $(document).ready(function () {
 										clearTimeout(VJAutoSaveTimeOutid);
 									}
 
-									if (VJIsSaveCall && e.changed.changesCount >= VjEditor.StorageManager.getStepsBeforeSave()) {
+									if (e.changed.changesCount >= VjEditor.StorageManager.getStepsBeforeSave()) {
 										VJAutoSaveTimeOutid = setTimeout(function () {
-											if ($('.sidebar-open.settingclosebtn').length == 0) {
+                                            if ($('.sidebar-open.settingclosebtn').length == 0 && !VJIsSaveCall) {
 												VjEditor.runCommand("save");
 											}
 										}, 1000)
 									}
-									else
-										VJIsSaveCall = true;
 								}
 							});
 
 							VjEditor.on('storage:error', (err) => {
 								swal({ title: "Error", text: `${err}`, type: "error", });
-							});
+                            });
 
-							VjEditor.on('storage:end:store', function (Data) {
+                            VjEditor.on('storage:start:store', function (Data) {
+                                VJIsSaveCall = true;
+                            });
+
+                            VjEditor.on('storage:end:store', function (Data) {
+
+                                VJIsSaveCall = false;
+
 								if (Data != '' && Data.PageReviewSettings != undefined && Data.PageReviewSettings) {
 									VJIsContentApproval = Data.PageReviewSettings.IsContentApproval ? "True" : "False";
 									VJNextStateName = Data.PageReviewSettings.NextStateName;
