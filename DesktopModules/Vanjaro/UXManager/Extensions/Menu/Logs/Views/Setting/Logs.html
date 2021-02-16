@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-xs-12 text-right">
                         <div class="btn-group">
-                            <a class="ux-btn ux-btn-hover dropdown-toggle" role="button" data-toggle="dropdown" title="[L:Types]"><em class="fas fa-filter"></em></a>
+                            <a class="ux-btn ux-btn-hover dropdown-toggle" role="button" data-bs-toggle="dropdown" title="[L:Types]"><em class="fas fa-filter"></em></a>
                             <div id="vjLogTypes" style="height: auto;overflow:auto;" class="dropdown-menu">
                                 <a class="dropdown-item" style="cursor: pointer;" mn-ng-repeat="x in ui.data.GetLogTypes.Options" mn-ng-click="ChangeGetLogTypes($event,x.LogTypeKey)" id="{{x.LogTypeKey}}">{{x.LogTypeFriendlyName}}</a>
                             </div>
