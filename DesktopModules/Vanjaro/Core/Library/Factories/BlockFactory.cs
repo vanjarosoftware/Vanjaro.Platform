@@ -44,9 +44,12 @@ namespace Vanjaro.Core
                     Version = int.Parse(setting.Value);
                 }
 
-                List<CustomBlock> CustomBlocks = GetAllByGUID(PortalID, Guid).OrderByDescending(a => a.Version).Select(a => a.Version).Distinct().Take(Version).ToList();
-                CustomBlock.Delete("Where PortalID=@0 Guid=@1 and Version not in (" + string.Join(",", CustomBlocks) + ")", PortalID, Guid);
-                CacheFactory.Clear(CacheFactory.Keys.CustomBlock);
+                List<int> CustomBlocks = GetAllByGUID(PortalID, Guid).OrderByDescending(a => a.Version).Select(a => a.Version).Distinct().Take(Version).ToList();
+                if (CustomBlocks.Count > 0)
+                {
+                    CustomBlock.Delete("Where PortalID=@0 Guid=@1 and Version not in (" + string.Join(",", CustomBlocks) + ")", PortalID, Guid);
+                    CacheFactory.Clear(CacheFactory.Keys.CustomBlock);
+                }
             }
 
             internal static void Delete(int PortalID, string Guid)

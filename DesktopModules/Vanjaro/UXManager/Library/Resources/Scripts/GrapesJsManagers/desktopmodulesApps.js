@@ -279,7 +279,7 @@ global.GetGlobalBlockName = function (guid) {
 global.StyleGlobal = function (model) {
     var modelEl = $(model.getEl());
     if (!modelEl.find('global-tools').length)
-        modelEl.append('<div class="global-tools"><div class="backdrop"></div><em title="Global" class="fa fa-globe"></em><div class="toolbar"><em title="Unlock" class="fa fa-unlock" onclick="window.parent.UnlockGlobalBlock($(this))"></em><em title="Unlink from Global" class="fa fa-unlink" onclick="window.parent.VjEditor.runCommand(\'custom-block-globaltolocal\')"></em><em title="Move" class="fa fa-arrows" onclick="window.parent.VjEditor.runCommand(\'tlb-move\')"></em><em title="Delete" class="fa fa-trash-o" onclick="window.parent.VjEditor.runCommand(\'global-delete\')"></em>');
+        modelEl.append('<div class="global-tools"><div class="backdrop"></div><em title="Global" class="fa fa-globe"></em><div class="toolbar"><em title="Unlock" class="fa fa-unlock" onclick="window.parent.UnlockGlobalBlock($(this))"></em><em title="revisions" class="fa fa-history" onclick="window.parent.ViewBlockRevisions(\'' + model.attributes.attributes["data-guid"] + '\')"></em><em title="Unlink from Global" class="fa fa-unlink" onclick="window.parent.VjEditor.runCommand(\'custom-block-globaltolocal\')"></em><em title="Move" class="fa fa-arrows" onclick="window.parent.VjEditor.runCommand(\'tlb-move\')"></em><em title="Delete" class="fa fa-trash-o" onclick="window.parent.VjEditor.runCommand(\'global-delete\')"></em>');
 }
 
 global.UpdateGlobalBlock = function (model) {

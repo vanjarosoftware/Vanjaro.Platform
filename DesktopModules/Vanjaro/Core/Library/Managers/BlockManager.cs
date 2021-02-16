@@ -76,6 +76,11 @@ namespace Vanjaro.Core
                 }).ToList();
             }
 
+            public static List<CustomBlock> GetAllByGUID(int PortalID, string Guid)
+            {
+                return BlockFactory.GetAllByGUID(PortalID, Guid);
+            }
+
             public static ThemeTemplateResponse Render(Dictionary<string, string> Attributes)
             {
                 ThemeTemplateResponse result = null;

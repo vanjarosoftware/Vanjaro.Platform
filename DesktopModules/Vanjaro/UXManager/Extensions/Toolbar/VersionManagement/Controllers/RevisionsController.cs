@@ -19,16 +19,27 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
     [AuthorizeAccessRoles(AccessRoles = "editpage")]
     public class RevisionsController : UIEngineController
     {
-        public static List<IUIData> GetData(PortalSettings PortalSettings)
+        public static List<IUIData> GetData(PortalSettings PortalSettings, Dictionary<string, string> Parameters)
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
+            string guid = string.Empty;
+            if (Parameters.Count > 0)
+            {
+                try
+                {
+                    guid = Parameters["bguid"];
+                }
+                catch { }
+            }
+
+            Settings.Add("BlockGuid", new UIData { Name = "BlockGuid", Value = guid });
             return Settings.Values.ToList();
         }
 
         [HttpGet]
-        public dynamic GetDate(string Locale)
+        public dynamic GetDate(string Locale, string BlockGuid)
         {
-            return RevisionsManager.GetData(PortalSettings, Locale);
+            return RevisionsManager.GetData(PortalSettings, Locale, BlockGuid);
         }
 
         [HttpPost]
@@ -48,7 +59,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
         }
 
         [HttpGet]
-        public dynamic GetVersion(int Version, string Locale)
+        public dynamic GetVersion(int Version, string Locale, string BlockGuid)
         {
             dynamic Result = new ExpandoObject();
             Locale = PortalSettings.DefaultLanguage == Locale ? null : Locale;
@@ -63,8 +74,14 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
                 Result.components = page.ContentJSON.ToString();
                 Result.style = page.StyleJSON.ToString();
             }
-            Result.Version = RevisionsManager.GetAllVersionByTabID(PortalSettings.PortalId, PortalSettings.ActiveTab.TabID, Locale);
+            Result.Version = RevisionsManager.GetAllVersionByTabID(PortalSettings.PortalId, PortalSettings.ActiveTab.TabID, Locale, BlockGuid);
             return Result;
+        }
+
+        [HttpGet]
+        public dynamic GetBlockVersion(int Version, string BlockGuid)
+        {
+            return Core.Managers.BlockManager.GetAllByGUID(this.PortalSettings.PortalId, BlockGuid).Where(a => a.Version == Version).FirstOrDefault();
         }
         private void InjectBlocks(HtmlDocument html, dynamic Result)
         {
