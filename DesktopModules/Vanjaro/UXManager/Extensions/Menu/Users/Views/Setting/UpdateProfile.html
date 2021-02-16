@@ -35,15 +35,15 @@
             <uitemplate>
                 <div class="vj-alert-message"></div>
                 <div id="accordion">
-                    <div mn-ng-repeat="cname in ui.data.ProfilePropertiesByCategories.Options" class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapse_{{cname.Key| removeSpacesThenLowercase}}">
+                    <div mn-ng-repeat="cname in ui.data.ProfilePropertiesByCategories.Options" class="accordion">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapse_{{cname.Key| removeSpacesThenLowercase}}">
                                 {{cname.Value}}
                                 <em mn-ng-class="$index != 0  ? 'fa fa-caret-right float-end' : 'fa fa-caret-down float-end'"></em>
                             </a>
                         </div>
-                        <div id="collapse_{{cname.Key| removeSpacesThenLowercase}}" mn-ng-class="$index != 0 ? 'collapse':'collapse show'" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapse_{{cname.Key| removeSpacesThenLowercase}}" mn-ng-class="$index != 0 ? 'accordion-collapse collapse':'accordion-collapse collapse show'" data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 <div mn-ng-repeat="option in ui.data.ProfileProperties.Options">
                                     <div class="form-group" data-datatype="textbox" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(option.ProfilePropertyDefinition.Visible && !option.ProfilePropertyDefinition.ReadOnly)&&(option.ControlType== 'Text'|| option.ControlType== 'Unknown')&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
                                         <label class="" for="setting_setting1textbox1_{{option.ProfilePropertyDefinition.PropertyName}}" data-bs-toggle="tooltip" title="" data-bs-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>

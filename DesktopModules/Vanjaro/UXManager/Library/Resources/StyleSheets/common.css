@@ -881,6 +881,7 @@ uploadinput-button {
 
     .vj-ux-manager .nav-stacked .nav-item .nav-link {
         font-size: 14px;
+        color: #212529;
     }
 
         .vj-ux-manager .nav-stacked .nav-item .nav-link.active,
@@ -1034,7 +1035,8 @@ uploadinput-button {
 .form-group {
     margin-bottom: 1rem;
 }
-.accordion-body .form-control {
+
+.accordion-body .form-control, .vj-ux-manager select {
     -webkit-appearance: auto;
     -moz-appearance: auto;
     appearance: auto;

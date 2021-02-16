@@ -15,7 +15,7 @@
                         <p class="{{log.Type}}">{{log.Type}} {{log.Description}}</p>
                     </div>
                 </div>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button type="button" ng-click="Click_ErrorCancel()" class="btn btn-sm btn-default">
                         [L:Cancel]
                     </button>
@@ -40,20 +40,20 @@
                         <br />
                         <span>{{Organization}}</span>
                         <br />
-                        <span class="pdescription" data-bs-toggle="tooltip" data-bs-placement="top" data-original-title="{{DescriptionTitle}}" ng-bind-html="Description"></span>
+                        <span class="pdescription" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{DescriptionTitle}}" ng-bind-html="Description"></span>
                     </div>
                 </div>
                 <hr />
                 <div id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseOne">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseOne">
                                 [L:ReleaseLog]
                                 <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseOne" class="collapse show releaselog scrollbar" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapseOne" class="accordion-collapse collapse show releaselog scrollbar" data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 <div ng-bind-html="ReleaseLog"></div>
                             </div>
                         </div>

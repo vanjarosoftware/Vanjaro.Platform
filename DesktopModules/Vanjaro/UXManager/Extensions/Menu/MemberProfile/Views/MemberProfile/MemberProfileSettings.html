@@ -14,15 +14,15 @@
                                 <uilayout name="TabsContentUserProfileFields">
                                     <uitemplate>
                                         <div id="accordion">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-bs-toggle="collapse" data-target="#collapseone">
+                                            <div class="accordion">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseone">
                                                         {{(ShowPropertyLocalization?'[L:PropertyLocalization]':Show_ListEntryTab?'[L:ListEntry]':'[L:UserProfileFields]')}}
                                                         <em class="fas fa-caret-down float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapseone" class="collapse show" data-parent="#accordion">
-                                                    <div class="card-body">
+                                                <div id="collapseone" class="accordion-collapse collapse show" data-bs-parent="#accordion">
+                                                    <div class="accordion-body">
                                                         [uilayout:UserProfileFields]
                                                         [uilayout:PropertyLocalization]
                                                         [uilayout:ListEntry]
