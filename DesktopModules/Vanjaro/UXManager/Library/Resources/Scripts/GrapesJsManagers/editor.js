@@ -1747,7 +1747,7 @@ $(document).ready(function () {
 									return;
 								}
 
-								if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
+                                if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
 
 									$.each(model.attributes.toolbar, function (k, v) {
 
