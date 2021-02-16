@@ -51,10 +51,10 @@
 
                         </div>
                     </div>
-                    <span class="action-icon float-end arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='DatabaseFolderProvider'"><em class="fas fa-database"></em></span>
-                    <span class="action-icon float-end arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='AzureFolderProvider'"><em class="fab fa-microsoft"></em></span>
-                    <span class="action-icon float-end arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Type=='secure'"><em class="fas fa-shield-alt"></em></span>
-                    <span class="action-icon float-end arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Lock"><em class="fas fa-lock"></em></span>
+                    <span class="action-icon float-end arrowicon" data-bs-toggle="tooltip" data-bs-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='DatabaseFolderProvider'"><em class="fas fa-database"></em></span>
+                    <span class="action-icon float-end arrowicon" data-bs-toggle="tooltip" data-bs-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='AzureFolderProvider'"><em class="fab fa-microsoft"></em></span>
+                    <span class="action-icon float-end arrowicon" data-bs-toggle="tooltip" data-bs-placement="top" ng-if="folder.Type=='secure'"><em class="fas fa-shield-alt"></em></span>
+                    <span class="action-icon float-end arrowicon" data-bs-toggle="tooltip" data-bs-placement="top" ng-if="folder.Lock"><em class="fas fa-lock"></em></span>
                 </div>
                 <ul class="rootfolder" ng-class="{show: [name]Folders[0].Value==folder.Value}">
                     <li ng-repeat="folder in folder.children" ng-include="'[name]folders_renderer.html'">

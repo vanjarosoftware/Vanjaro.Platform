@@ -49,8 +49,8 @@
     };
 
     $scope.RegsiterTooltip = function () {
-        if ($('[data-toggle="tooltip"]').tooltip != undefined) { }
-        $('[data-toggle="tooltip"]').tooltip()
+        if ($('[data-bs-toggle="tooltip"]').tooltip != undefined) { }
+        $('[data-bs-toggle="tooltip"]').tooltip()
     };
     $scope.getDefaultVisibilityIcon = function (row) {
         if (row != undefined && row.DefaultVisibility != undefined) {

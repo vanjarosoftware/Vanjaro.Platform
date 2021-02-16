@@ -117,7 +117,7 @@
         }
 
         //Tooltip
-        $('[data-toggle="tooltip"]').tooltip('disable');
+        $('[data-bs-toggle="tooltip"]').tooltip('disable');
     };
 
     $scope.Click_Finish = function () {

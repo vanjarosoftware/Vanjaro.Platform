@@ -227,7 +227,7 @@
             <uielement name="CustomPageName" control="textbox" tooltip="false"></uielement>
             <uielement name="ResultingURLs" attr-rows="4" control="textarea" attr-disabled="true" attr-class="maxwidth"></uielement>
             <uitemplate>
-                <div class="text-right buttontesturl">
+                <div class="text-end buttontesturl">
                     <button type="button" class="btn btn-sm btn-default float-end" id="buttonTesturl" mn-ng-click="Click_TestUrl()" ng-disabled="ui.data.PageToTest.Value=='-1'">
                         [L:ButtonTestURL]
                     </button>
@@ -292,9 +292,9 @@
             <uielement name="AuthorBoost" control="textbox" attr-ng-model="ui.data.BasicSettings.Options.AuthorBoost" container-attr-access-roles="host" attr-numeric="true"></uielement>
             <uielement name="line" control="line" label="false" container-attr-access-roles="host"></uielement>
             <uielement name="SearchIndex" control="label" label="false"></uielement>
-            <uielement name="HostSearchIndex" control="button" attr-ng-click="Click_HostSearchIndex()" attr-access-roles="host" label="false" attr-class="text-right button-left width-200"></uielement>
-            <uielement name="ReIndex" control="button" attr-ng-click="Click_ReIndex()" attr-access-roles="host,admin" label="false" attr-class="text-right button-left width-200"></uielement>
-            <uielement name="CompactIndex" control="button" attr-ng-click="Click_CompactIndex()" attr-access-roles="host" label="false" attr-class="text-right button-left width-200"></uielement>
+            <uielement name="HostSearchIndex" control="button" attr-ng-click="Click_HostSearchIndex()" attr-access-roles="host" label="false" attr-class="text-end button-left width-200"></uielement>
+            <uielement name="ReIndex" control="button" attr-ng-click="Click_ReIndex()" attr-access-roles="host,admin" label="false" attr-class="text-end button-left width-200"></uielement>
+            <uielement name="CompactIndex" control="button" attr-ng-click="Click_CompactIndex()" attr-access-roles="host" label="false" attr-class="text-end button-left width-200"></uielement>
         </uilayout>
         <uilayout name="Synonyms">
             <uitemplate>

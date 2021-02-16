@@ -14,15 +14,15 @@
                                 <uilayout name="TabsContentUserProfileFields">
                                     <uitemplate>
                                         <div id="accordion">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-bs-toggle="collapse" data-target="#collapseone">
+                                            <div class="accordion">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseone">
                                                         {{(ShowPropertyLocalization?'[L:PropertyLocalization]':Show_ListEntryTab?'[L:ListEntry]':'[L:UserProfileFields]')}}
                                                         <em class="fas fa-caret-down float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapseone" class="collapse show" data-parent="#accordion">
-                                                    <div class="card-body">
+                                                <div id="collapseone" class="accordion-collapse collapse show" data-bs-parent="#accordion">
+                                                    <div class="accordion-body">
                                                         [uilayout:UserProfileFields]
                                                         [uilayout:PropertyLocalization]
                                                         [uilayout:ListEntry]
@@ -121,7 +121,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group language" data-datatype="dropdownlist" data-label="[L:Languages]" data-name="Languages">
-                            <label class="" for="memberprofile_memberprofilesettings2dropdownlist0" data-toggle="tooltip" title="">[L:Languages]</label>
+                            <label class="" for="memberprofile_memberprofilesettings2dropdownlist0" data-bs-toggle="tooltip" title="">[L:Languages]</label>
                             <div class="input-group"><select class="form-control ng-pristine ng-valid valid ng-touched" ng-change="Change_Language()" ng-model="ui.data.ProfilePropertyLocalization.Options.Language" ng-options="option.Value as option.Text for option in ui.data.Languages.Options" aria-invalid="false"><option value="0" selected="selected" label="English (United States)">English (United States)</option></select></div>
                         </div>
                     </div>
