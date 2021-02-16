@@ -18,7 +18,7 @@
 }
 
 .vj-ux-manager .input-group-append {
-    margin-left: 5px;
+    margin-left: 5px !important;
     padding-top: 7px;
 }
 

@@ -63,11 +63,21 @@ html, body, form {
     cursor: pointer;
 }
 
+.vj-ux-manager a:not([href]) {
+    color: inherit;        
+}
+
 .vj-ux-manager .ux-btn {
     margin-left: 10px;
     color: #5e5e5e;
     padding: 2px;
     font-size: 15px;
+}
+
+.vj-ux-manager .theme-builder-accordion .ux-btn {
+    margin-left: 0;
+    padding: 0;
+
 }
 
 .vj-ux-manager .ux-btn-hover:hover {
@@ -353,7 +363,7 @@ html, body, form {
 }
 
 .vj-ux-manager .angular-ui-tree {
-    width: 270px;
+    width: 100%;   
 }
 
 .vj-ux-manager .input-group span.fas.fa-caret-down,
