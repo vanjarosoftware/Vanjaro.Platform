@@ -288,7 +288,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 
                             v.components('');
                             v.set('content', CleanGjAttrs(compHtml));
-
+                            v.view.render();
 
                             if (v.attributes.attributes["data-block-type"].toLowerCase() == "logo") {
                                 var style = v.attributes.attributes["data-style"];

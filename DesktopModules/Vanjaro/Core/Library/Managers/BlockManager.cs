@@ -5,6 +5,7 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -210,6 +211,19 @@ namespace Vanjaro.Core
                         CustomBlock.Html = PageManager.DeTokenizeLinks(CustomBlock.Html, PortalSettings.PortalId);
                     if (!string.IsNullOrEmpty(CustomBlock.Css))
                         CustomBlock.Css = PageManager.DeTokenizeLinks(CustomBlock.Css, PortalSettings.PortalId);
+                    if (!string.IsNullOrEmpty(CustomBlock.ContentJSON))
+                    {
+                        CustomBlock.ContentJSON = PageManager.DeTokenizeLinks(CustomBlock.ContentJSON, PortalSettings.PortalId);
+                        if (!string.IsNullOrEmpty(CustomBlock.StyleJSON))
+                        {
+                            List<string> StyleIds = new List<string>();
+                            var DeserializedContentJSON = JsonConvert.DeserializeObject(CustomBlock.ContentJSON);
+                            ExtractStyleIDs(DeserializedContentJSON, StyleIds);
+                            var DeserializedStyleJSON = JsonConvert.DeserializeObject(CustomBlock.StyleJSON);
+                            FilterStyles(DeserializedStyleJSON, StyleIds);
+                            CustomBlock.StyleJSON = JsonConvert.SerializeObject(DeserializedStyleJSON);
+                        }
+                    }
                     if (BlockFactory.Get(PortalSettings.PortalId, CustomBlock.Name) == null)
                     {
                         if (ForceCount == 0)
@@ -255,6 +269,55 @@ namespace Vanjaro.Core
                     ExceptionManager.LogException(ex);
                 }
                 return Result;
+            }
+
+            private static void FilterStyles(dynamic styleJSON, List<string> styleIds)
+            {
+                if (styleJSON != null)
+                {
+                    List<dynamic> itemsToRemove = new List<dynamic>();
+                    foreach (dynamic con in styleJSON)
+                    {
+                        if (con.selectors != null)
+                        {
+                            List<string> selectors = new List<string>();
+                            foreach (dynamic cons in con.selectors)
+                            {
+                                if (cons.name != null)
+                                    selectors.Add(cons.name.Value);
+                            }
+                            bool hasMatch = styleIds.Any(x => selectors.Any(y => y == x));
+                            if (!hasMatch)
+                                itemsToRemove.Add(con);
+                        }
+                    }
+                    foreach (var item in itemsToRemove)
+                        styleJSON.Remove(item);
+                }
+            }
+
+            private static void ExtractStyleIDs(dynamic contentJSON, List<string> styleIds)
+            {
+                if (contentJSON != null)
+                {
+                    if (contentJSON is JArray)
+                    {
+                        foreach (dynamic con in contentJSON)
+                        {
+                            if (con.attributes != null && con.attributes["id"] != null)
+                                styleIds.Add(con.attributes["id"].Value);
+                            if (con.components != null)
+                                ExtractStyleIDs(con.components, styleIds);
+                        }
+                    }
+                    else
+                    {
+                        if (contentJSON.attributes != null && contentJSON.attributes["id"] != null)
+                            styleIds.Add(contentJSON.attributes["id"].Value);
+                        if (contentJSON.components != null)
+                            ExtractStyleIDs(contentJSON.components, styleIds);
+                    }
+                }
             }
 
             public static dynamic Edit(PortalSettings PortalSettings, CustomBlock CustomBlock)
@@ -328,7 +391,6 @@ namespace Vanjaro.Core
 
                         cb.Html = CustomBlock.Html;
                         cb.Css = CustomBlock.Css;
-                        cb.ContentJSON = CustomBlock.IsGlobal ? CustomBlock.ContentJSON : null;
                         cb.IsGlobal = CustomBlock.IsGlobal;
                         cb.UpdatedBy = PortalSettings.Current.UserId;
                         cb.UpdatedOn = DateTime.UtcNow;

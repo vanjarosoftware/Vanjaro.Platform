@@ -66,14 +66,16 @@ global.LoadCustomBlocks = function () {
         dataType: "json",
         success: function (data) {
             $.each(data, function (key, value) {
-                var Content = (value.Html == null ? '' : value.Html);
+                var Content = '';
                 if (value.IsGlobal && !Content.includes("7a4be0f2-56ab-410a-9422-6bc91b488150"))
-                    Content = "<div data-block-type=\"global\" data-block-guid=\"7a4be0f2-56ab-410a-9422-6bc91b488150\" data-guid=\"" + value.Guid + "\">" + Content + "</div>";
+                    Content = "<div data-block-type=\"global\" data-block-guid=\"7a4be0f2-56ab-410a-9422-6bc91b488150\" data-guid=\"" + value.Guid + "\"></div>";
+                else
+                    Content = "<div data-custom-wrapper=\"true\" data-guid=\"" + value.Guid + "\"></div>";
                 VjEditor.BlockManager.add(value.Name, {
                     attributes: { class: 'fa fa-th-large', id: value.ID, type: 'VjCustomBlock', isGlobalBlock: value.IsGlobal, guid: value.Guid },
                     label: value.Name,
                     category: value.Category,
-                    content: '<style>' + (value.Css == null ? '' : value.Css) + '</style>' + Content,
+                    content: Content,
                     render: ({ el }) => {
                         const updateblock = document.createElement("span");
                         updateblock.className = "update-custom-block";
@@ -125,6 +127,11 @@ var GetBlockContent = function (Block) {
 }
 
 global.AddCustomBlock = function (editor, CustomBlock) {
+    var ContentJSON = JSON.stringify(VjEditor.getSelected().toJSON());
+    if (!ContentJSON.startsWith('['))
+        ContentJSON = '[' + ContentJSON + ']';
+    CustomBlock.ContentJSON = ContentJSON;
+    CustomBlock.StyleJSON = JSON.stringify(VjEditor.Css.getAll().toJSON());
     var sf = $.ServicesFramework(-1);
     $.ajax({
         type: "POST",
@@ -299,8 +306,7 @@ global.UpdateGlobalBlock = function (model) {
                         Name: Block.attributes.label,
                         Category: Block.attributes.category.id || Block.attributes.category,
                         Html: content.html,
-                        ContentJSON: JSON.stringify(model.toJSON().components),
-                        Css: css,
+                        Css: content.css,
                         IsGlobal: true
                     };
                     UpdateCustomBlock(VjEditor, CustomBlock);
@@ -395,7 +401,7 @@ global.BuildAppComponentFromHtml = function (vjcomps, html) {
 
 global.BuildBlockComponent = function (vjcomps) {
     $.each(vjcomps, function (k, v) {
-        if (v.attributes != undefined && v.attributes["data-block-guid"] != undefined && v.attributes["data-block-guid"] != '') {
+        if (v.attributes != undefined && v.attributes["data-block-guid"] != undefined && v.attributes["data-block-guid"] != '' && v.attributes["data-block-type"].toLowerCase() != "global") {
             var attr = '';
             $.each(v.attributes, function (key, value) {
                 attr += '[' + key + '="' + value + '"]';
@@ -409,28 +415,18 @@ global.BuildBlockComponent = function (vjcomps) {
                 }
                 if (v.components != undefined && v.components[0] != undefined) {
                     v.components[0].components = [];
-                    if (v.attributes["data-block-type"].toLowerCase() == "global") {
-                        var contentstyle = '';
-                        if ($('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0] != undefined)
-                            contentstyle = $('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0].outerHTML;
-                        v.components[0].content = contentstyle + $this.outerHTML;
+                    if (v.attributes["data-block-type"] == "Logo") {
+                        var style = $(v.components[0].content).find('img').attr('style');
+                        v.components[0].content = $this.innerHTML;
+                        var contentdom = $(v.components[0].content);
+                        $(contentdom).find('img').attr('style', style);
+                        v.components[0].content = contentdom[0].outerHTML;
                     }
-                    else {
-                        if (v.attributes["data-block-type"] == "Logo") {
-                            var style = $(v.components[0].content).find('img').attr('style');
-                            v.components[0].content = $this.innerHTML;
-                            var contentdom = $(v.components[0].content);
-                            $(contentdom).find('img').attr('style', style);
-                            v.components[0].content = contentdom[0].outerHTML;
-                        }
-                        else
-                            v.components[0].content = $this.outerHTML;
-                    }
-
+                    else
+                        v.components[0].content = $this.outerHTML;
                     var existingcomp = v.components[0];
                     v.components = [];
                     v.components.push(existingcomp);
-
                     v.content = '';
                 }
             }
@@ -465,6 +461,12 @@ global.FilterComponents = function (vjcomps) {
             if (o.include == undefined || o.include == true) return true;
         })
     }
+};
+
+global.RenderCustomBlock = function (model, bmodel) {
+    if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes["data-block-type"] != undefined && model.attributes.attributes["data-block-type"].toLowerCase() == "global")
+        model.attributes.name = "Global: " + bmodel.id;
+    IsVJCBRendered = true;
 };
 
 global.RenderBlock = function (model, bmodel, render) {
