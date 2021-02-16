@@ -693,9 +693,10 @@ html, body, form {
     display: block;
     border-top: 1px solid #ccc;
 }
-
-
-.vj-ux-manager .nav-tabs > li > a {
+    .vj-ux-manager .fixed-footer .btn-link {
+        text-decoration: none;
+    }
+    .vj-ux-manager .nav-tabs > li > a {
     cursor: pointer;
 }
 

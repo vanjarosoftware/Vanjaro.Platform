@@ -377,6 +377,10 @@
     height: max-content;
 }
 
+    #PagesUrldefaultModal .modal-dialog .modal-header .btn-close {
+        font-size:10px;
+    }
+
 .vj-ux-manager .select-template-icon svg {
     width: 86px;
     height: 86px;

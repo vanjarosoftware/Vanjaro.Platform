@@ -2,10 +2,10 @@
     <uiengine provider="AngularBootstrap" identifier="review_review" class="uiengine-wrapper scrollbar">
         <uilayout name="default">
             <uitemplate>
-                <!--<a class="ux-btn ux-btn-hover float-right" data-toggle="dropdown" ng-click="ClickShowStateDDL(true)">
+                <!--<a class="ux-btn ux-btn-hover float-end" data-toggle="dropdown" ng-click="ClickShowStateDDL(true)">
                     <em class="fas fa-filter "></em>
                 </a>-->
-                <a class="ux-btn ux-btn-hover dropdown-toggle  float-right" role="button" data-toggle="dropdown" title="[L:Types]"><em class="fas fa-filter"></em></a>
+                <a class="ux-btn ux-btn-hover dropdown-toggle  float-end" role="button" data-toggle="dropdown" title="[L:Types]"><em class="fas fa-filter"></em></a>
                 <div id="vjStatesTypes" class="dropdown-menu">
                     <a class="dropdown-item" style="cursor: pointer;" mn-ng-repeat="x in ui.data.States.Options"  mn-ng-click="BindReviewPages($event,x.Value)"  id="{{x.Value}}">{{x.Text}}</a>
                 </div>
