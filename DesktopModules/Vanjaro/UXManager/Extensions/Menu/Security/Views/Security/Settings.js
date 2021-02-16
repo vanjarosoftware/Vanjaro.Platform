@@ -25,12 +25,7 @@
         }
         if ($scope.ui.data.UserRegistration.Options.Settings.UserRegistration != null)
             $scope.ui.data.UserRegistration.Options.Settings.UserRegistration = $scope.ui.data.UserRegistration.Options.Settings.UserRegistration.toString();
-        if ($scope.ui.data.UserRegistration.Options.Settings.RedirectAfterRegistrationTabId != null)
-            $scope.ui.data.UserRegistration.Options.Settings.RedirectAfterRegistrationTabId = $scope.ui.data.UserRegistration.Options.Settings.RedirectAfterRegistrationTabId.toString();
-        if ($scope.ui.data.UpdateBasicLoginSettingsRequest.Options.RedirectAfterLoginTabId != null)
-            $scope.ui.data.UpdateBasicLoginSettingsRequest.Options.RedirectAfterLoginTabId = $scope.ui.data.UpdateBasicLoginSettingsRequest.Options.RedirectAfterLoginTabId.toString();
-        if ($scope.ui.data.UpdateBasicLoginSettingsRequest.Options.RedirectAfterLogoutTabId != null)
-            $scope.ui.data.UpdateBasicLoginSettingsRequest.Options.RedirectAfterLogoutTabId = $scope.ui.data.UpdateBasicLoginSettingsRequest.Options.RedirectAfterLogoutTabId.toString();
+       
         $scope.ShowGeneralTab = true;
         $scope.Show_Tab = false;
     };
