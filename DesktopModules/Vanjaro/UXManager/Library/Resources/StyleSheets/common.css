@@ -69,7 +69,7 @@ html, body, form {
 
 .vj-ux-manager .ux-btn {
     margin-left: 10px;
-    color: #5e5e5e;
+    color: #5e5e5e !important;
     padding: 2px;
     font-size: 15px;
 }
@@ -81,7 +81,8 @@ html, body, form {
 }
 
 .vj-ux-manager .ux-btn-hover:hover {
-    color: #000;
+
+    color: #000 !important;
     cursor: pointer;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
