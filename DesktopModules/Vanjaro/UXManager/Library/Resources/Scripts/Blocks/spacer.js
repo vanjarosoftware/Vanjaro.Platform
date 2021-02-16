@@ -11,9 +11,7 @@
 			category: VjLocalized.Basic,
 			content: {
 				type: 'spacer',
-				content: `<div class="spacer"></div>`,
 			}
-
 		});
 	}
 
@@ -26,7 +24,6 @@
 		model: defaultModel.extend({
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				droppable: false,
-				//stylable: ['height'],
 				classes: ['spacer'],
 				resizable: {
 					tl: 0, // Top left

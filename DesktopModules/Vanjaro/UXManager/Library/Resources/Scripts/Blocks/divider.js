@@ -9,7 +9,6 @@ export default (editor, config = {}) => {
 			category: VjLocalized.Basic,
 			content: {
 				type: 'divider',
-				content: '<div></div>'
 			}
 		});
 	}
@@ -23,7 +22,6 @@ export default (editor, config = {}) => {
 		model: defaultModel.extend({
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				droppable: false,
-				//stylable: ['width', 'height', 'margin', 'background-color'],
 				classes: ['vj-divider', 'border-primary'],
 				traits: [
 					{

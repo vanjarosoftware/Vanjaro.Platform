@@ -117,25 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Apply.Text" xml:space="preserve">
-    <value>Apply</value>
+  <data name="DisplayAllPages.OFF" xml:space="preserve">
+    <value>No</value>
   </data>
-  <data name="ApplyThemeText.Text" xml:space="preserve">
-    <value>Please confirm you want to apply this theme.</value>
+  <data name="DisplayAllPages.ON" xml:space="preserve">
+    <value>Yes</value>
   </data>
-  <data name="ApplyThemeTitle.Text" xml:space="preserve">
-    <value>Are you sure?</value>
+  <data name="DisplayAllPages.Text" xml:space="preserve">
+    <value>Show All Pages</value>
   </data>
-  <data name="Design.Text" xml:space="preserve">
-    <value>Design</value>
+  <data name="Global.OFF" xml:space="preserve">
+    <value>Customize This Block Only</value>
   </data>
-  <data name="SearchKeywords.Text" xml:space="preserve">
-    <value>theme,themes,design,layout,skin,skins,template,templates,layouts</value>
+  <data name="Global.ON" xml:space="preserve">
+    <value>Site Settings</value>
   </data>
-  <data name="Settings.Text" xml:space="preserve">
-    <value>Settings</value>
+  <data name="Global.Text" xml:space="preserve">
+    <value>Global</value>
   </data>
-  <data name="Theme.Text" xml:space="preserve">
-    <value>Themes</value>
+  <data name="IncludeHiddenPageNo.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="IncludeHiddenPageNo.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="IncludeHiddenPageNo.Text" xml:space="preserve">
+    <value>Include Hidden Pages</value>
+  </data>
+  <data name="IsAdminAlert.Text" xml:space="preserve">
+    <value>&lt;strong&gt;&lt;em class="fas fa-exclamation-triangle"&gt;&lt;/em&gt; Warning&lt;/strong&gt;: This is a theme block. Changes will apply to all pages.</value>
+  </data>
+  <data name="IsPageAdminAlert.Text" xml:space="preserve">
+    <value>&lt;strong&gt;&lt;em class="fa fa-info-circle"&gt;&lt;/em&gt; Info&lt;/strong&gt;: This is a theme block. Only administrators can make changes to Site Settings. You may customize this block only.</value>
+  </data>
+  <data name="LimitDepth.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="LimitDepth.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="LimitDepth.Text" xml:space="preserve">
+    <value>Limit Depth</value>
+  </data>
+  <data name="NoOfDepth.Text" xml:space="preserve">
+    <value>Number of depth</value>
+  </data>
+  <data name="NoOfPagesSkip.Text" xml:space="preserve">
+    <value>Number of pages to skip</value>
+  </data>
+  <data name="Pages.Text" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="RootPages.Text" xml:space="preserve">
+    <value>Root Pages</value>
+  </data>
+  <data name="SettingTitle.Text" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="SkipPages.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="SkipPages.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="SkipPages.Text" xml:space="preserve">
+    <value>Skip Pages</value>
+  </data>
+  <data name="Template.Text" xml:space="preserve">
+    <value>Style</value>
   </data>
 </root>

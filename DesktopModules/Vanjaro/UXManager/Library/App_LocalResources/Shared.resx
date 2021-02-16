@@ -450,4 +450,19 @@
   <data name="Shortcuts.Text" xml:space="preserve">
     <value>Shortcuts</value>
   </data>
+  <data name="Add.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="BlockCategory.Text" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="CategoryExists.Text" xml:space="preserve">
+    <value>Category name already exists</value>
+  </data>
+  <data name="CategoryRequired.Text" xml:space="preserve">
+    <value>Category name is required</value>
+  </data>
+  <data name="AddCategory.Text" xml:space="preserve">
+    <value>Add New Category</value>
+  </data>
 </root>

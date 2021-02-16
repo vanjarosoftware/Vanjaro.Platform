@@ -4,44 +4,44 @@
     border: 1px solid #ccc;
 }
 
-.theme.active {
-    background-color: #ddd;
-}
+    .theme.active {
+        background-color: #ddd;
+    }
 
-.theme .author_name,
-.theme .date {
-    font-size: 11px;
-    display: inline-block;
-}
+    .theme .author_name,
+    .theme .date {
+        font-size: 11px;
+        display: inline-block;
+    }
 
-.theme .author_name {
-    background: transparent;
-    opacity: 0.9;
-    border-radius: 4px;
-    color:#333;
-    font-size:15px;
-}
+    .theme .author_name {
+        background: transparent;
+        opacity: 0.9;
+        border-radius: 4px;
+        color: #333;
+        font-size: 15px;
+    }
 
-.theme .badge-success {
-    background-color: #47a447;
-}
+    .theme .badge-success {
+        background-color: #47a447;
+    }
 
-.theme .badge-light {
-    background-color: #cdcfd1;
-}
+    .theme .badge-light {
+        background-color: #cdcfd1;
+    }
 
-.theme .preview_pic {
-    width: 61px;
-    height: 61px;
-    z-index: 100;
-    margin-right: 5px;
-    border-right: 1px solid #e3e3e3;
-}
+    .theme .preview_pic {
+        width: 61px;
+        height: 61px;
+        z-index: 100;
+        margin-right: 5px;
+        border-right: 1px solid #e3e3e3;
+    }
 
-.theme.active.btn .custom {
-    font-size: .6rem;
-    line-height: .1;
-}
+    .theme.active.btn .custom {
+        font-size: .6rem;
+        line-height: .1;
+    }
 
 .theme-image {
     background-position: center;
@@ -51,33 +51,54 @@
     background-color: #f9f9f9;
     position: relative;
 }
-.theme-image .pr-none {
-    padding: 0px;
-}
-
-.theme .selected-theme .fas {
-    color: #fff;
-    font-size: 14px !important;
-}
 
 .theme .selected-theme {
     background: #495157;
 }
 
-.theme .selected-theme .author_name {
-    color: #fff;
-}
+    .theme .selected-theme .author_name {
+        color: #fff;
+    }
 
 .theme .normal-theme {
     cursor: pointer;
 }
 
-.theme-settings {
-    right: 0;
-    position: absolute;
-    padding: 15px !important;
-    top: 0;
-    background: #999;
-    cursor: pointer;
-    line-height: normal;
+.vj-ux-manager .theme-setting {
+    position: unset;
+}
+
+.theme-settings #dropdownMenuLink {
+    position: relative;
+    top: 0px;
+    padding: 14px 20px 15px;
+    right: -20px;
+    border-left: 1px solid #eee;
+    font-size: 15px;
+    border-radius: 0px;
+}
+
+.theme-settings #dropdownMenuLink em {
+    color: #333;
+}
+
+.theme-settings #dropdownMenuLink:hover {
+    background-color: #eee;
+}
+
+.theme-image.selected-theme .theme-settings #dropdownMenuLink {
+    border-left: 1px solid #fff;
+}
+
+.theme-image.selected-theme .theme-settings #dropdownMenuLink em {
+    color: #fff;
+}
+
+.theme-image.selected-theme .theme-settings #dropdownMenuLink:hover {
+    background-color: #444;
+}
+
+.theme-image .theme-settings .dropdown-menu {
+    top: 34px !important;
+    right: -20px !important;
 }

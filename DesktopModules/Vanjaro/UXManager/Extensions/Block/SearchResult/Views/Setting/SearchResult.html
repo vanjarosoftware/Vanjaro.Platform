@@ -13,6 +13,7 @@
         </uilayout>
         <uilayout name="default">
             <uielement name="LinkTarget" attr-class="toggle_right" control="toggle"></uielement>
-        </uilayout>
+            <uielement attr-ng-show="(ui.data.IsAdmin.Value||!ui.data.IsAdmin.Value && !ui.data.Global.Value)" name="Template" control="dropdownlist"></uielement>
+        </uilayout>        
     </uiengine>
 </div>

@@ -144,4 +144,7 @@
   <data name="SettingTitle.Text" xml:space="preserve">
     <value>Search Result</value>
   </data>
+  <data name="Template.Text" xml:space="preserve">
+    <value>Style</value>
+  </data>
 </root>
