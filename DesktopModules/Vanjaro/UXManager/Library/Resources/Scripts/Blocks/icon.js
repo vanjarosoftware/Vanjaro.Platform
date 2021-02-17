@@ -260,7 +260,7 @@
 				if (this.findType('text').length > 0)
 					this.findType('text')[0].set('content', this.getAttributes().title);
 				else
-					this.append('<span class="sr-only">' + this.getAttributes().title + '</span>');
+					this.append('<span class="visually-hidden">' + this.getAttributes().title + '</span>');
 			}
 		}, {
 			isComponent(el) {

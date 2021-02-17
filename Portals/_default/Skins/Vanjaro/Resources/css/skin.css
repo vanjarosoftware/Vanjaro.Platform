@@ -98,6 +98,10 @@
     padding: 6px 10px;
 }
 
+    .sweet-alert textarea::placeholder {
+        color: #797979;
+    }
+
 #toast-container.info {
     z-index: 999;
 }

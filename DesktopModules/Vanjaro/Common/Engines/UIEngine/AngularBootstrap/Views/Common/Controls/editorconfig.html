@@ -50,7 +50,7 @@
                         <button type="button" class="btn btn-primary " mn-ng-click="SaveEditorProfile('CurrentModule')">[L:Apply]</button>
                         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" mn-ng-if="ui.data.ModuleID.Value>0">
                             <span class="caret"></span>
-                            <span class="sr-only ">Toggle Dropdown</span>
+                            <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" style="right: 0;left: auto;top: 20px;" mn-ng-if="ui.data.ModuleID.Value>0">
                             <li class="ng-scope"><a mn-ng-click="SaveEditorProfileConfirm('PageModule')" class="ng-binding" style="cursor:pointer;">[L:PageModule]</a></li>

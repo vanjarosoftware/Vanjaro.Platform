@@ -164,6 +164,7 @@
     text-transform: capitalize;
     font-size: 12px;
     cursor: pointer;
+    height: auto;
 }
 
 .dropdownselect .dropdownOption {

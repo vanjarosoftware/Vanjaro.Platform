@@ -19,7 +19,7 @@
                             }
                             else
                             {
-                                <label class="loginlabel sr-only" for="UserId">[LS:Data.Block.Login.UsernameText]</label>
+                                <label class="loginlabel visually-hidden" for="UserId">[LS:Data.Block.Login.UsernameText]</label>
                             }
                             <input type="text" name="UserId" placeholder="[LS:Data.Block.Login.EmailAddressOrUsernamePlaceholderText]" id="UserId" required />
                         </div>
@@ -30,14 +30,14 @@
                             }
                             else
                             {
-                                <label class="loginlabel sr-only" for="Password">[LS:Data.Block.Login.PasswordText]</label>
+                                <label class="loginlabel visually-hidden" for="Password">[LS:Data.Block.Login.PasswordText]</label>
                             }
                             <input type="password" name="Password" placeholder="[LS:Data.Block.Login.PasswordPlaceholderText]" id="Password" required />
                         </div>
                         @if (Model.Login.ShowRememberPassword)
                         {
                             <div class="rememberlogin">
-                                <label class="sr-only" for="rememberpassword"></label>
+                                <label class="visually-hidden" for="rememberpassword"></label>
                                 <input type="checkbox" id="rememberpassword" name="rememberpassword" class="rememberme" /><span>[LS:Data.Block.Login.RememberLoginText]</span>
                             </div>
                         }
@@ -106,7 +106,7 @@
                         }
                         else
                         {
-                            <label class="loginlabel sr-only" for="loginemail">[LS:Data.Block.Login.EmailText]</label>
+                            <label class="loginlabel visually-hidden" for="loginemail">[LS:Data.Block.Login.EmailText]</label>
                         }
                         <input type="email" id="loginemail" name="loginemail" placeholder="[LS:Data.Block.Login.EmailAddressPlaceholderText]" class="Email" emailrequired="emailrequired" required />
                     </div>
