@@ -145,6 +145,8 @@ namespace Vanjaro.UXManager.Library.Controllers
                                     Result.Css = PageManager.DeTokenizeLinks(pagelayout.Style.ToString(), PortalSettings.ActiveTab.PortalID);
                                 }
 
+                                Result.ScreenshotPath = TemplatePath.Replace(".zip", ".png");
+
                                 if (Directory.Exists(path + "/Assets"))
                                 {
                                     List<string> assets = Directory.GetFiles(path + "/Assets", "*", SearchOption.AllDirectories).ToList();
@@ -194,6 +196,7 @@ namespace Vanjaro.UXManager.Library.Controllers
             }
             return Result;
         }
+
         private static void DownloadTemplate(string TemplateHash, string TemplatePath, string path)
         {
             new WebClient().DownloadFile(TemplatePath, path + ".zip");

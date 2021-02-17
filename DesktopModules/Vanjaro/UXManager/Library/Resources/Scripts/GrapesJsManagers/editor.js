@@ -84,9 +84,10 @@ $(document).ready(function () {
 										data.Html = data.Html.replace('<app id="' + mid + '"></app>', '<div id="dnn_vj_' + mid + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div>');
 									});
 									var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
-										content: data.Html + '<style>' + data.Css + '</style>',
+                                        content: data.Html + '<style>' + data.Css + '</style>',
+                                        label: '<img src="' + data.ScreenshotPath + '"/><div class="sub-label">Drag & Drop Me</div>',
 										attributes: {
-											class: 'fas fa-th-large floating',
+											class: 'floating',
 											id: 'LibraryBlock'
 										}
 									});
