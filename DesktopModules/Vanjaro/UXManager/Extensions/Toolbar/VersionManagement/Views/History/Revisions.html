@@ -4,7 +4,8 @@
             <uitemplate>
                 <div class="row">
                     <div class="col-12 extback">
-                        <span class="extname">[L:Revisions]</span>
+                        <span class="extname" ng-show="BlockGuid==''">[L:Revisions]</span>
+                        <span class="extname" ng-hide="BlockGuid==''">[L:GlobalBlockRevisions]</span>
                     </div>
                 </div>
             </uitemplate>

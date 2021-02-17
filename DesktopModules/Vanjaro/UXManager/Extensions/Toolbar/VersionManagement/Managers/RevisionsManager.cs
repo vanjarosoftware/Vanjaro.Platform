@@ -22,7 +22,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Managers
             Settings.Add("MaxVersion", new UIData { Name = "MaxVersion", Value = Data.Count > 0 && Data["MaxVersion"] != null ? Data["MaxVersion"].ToString() : "" });
             Settings.Add("Versions", new UIData { Name = "Versions", Options = Data.Count > 0 ? Data["Versions"] : new List<PageVersion>() });
             Settings.Add("Guid", new UIData { Name = "Guid", Value = ExtensionInfo.GUID.ToLower() });
-            Settings.Add("PublicVersion", new UIData { Name = "PublicVersion", Value = GetPublicVersion(PortalSettings.ActiveTab.TabID, Locale).ToString() });
+            Settings.Add("PublicVersion", new UIData { Name = "PublicVersion", Value = GetPublicVersion(PortalSettings.PortalId, PortalSettings.ActiveTab.TabID, Locale, BlockGuid).ToString() });
             return Settings;
         }
 
@@ -95,7 +95,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Managers
                 List<Core.Data.Entities.CustomBlock> CustomBlock = BlockManager.GetAllByGUID(PortalID, BlockGuid).OrderByDescending(a => a.Version).ToList();
                 if (CustomBlock.Count > 0)
                     MaxVersion = CustomBlock.FirstOrDefault().Version;
-                 
+
             }
             else
             {
@@ -114,13 +114,24 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Managers
             Core.Managers.PageManager.Rollback(TabID, Version, Locale, UserID);
         }
 
-        private static int GetPublicVersion(int TabID, string Locale)
+        private static int GetPublicVersion(int PortalID, int TabID, string Locale, string BlockGuid)
         {
             int result = 0;
-            Core.Data.Entities.Pages page = Core.Managers.PageManager.GetPages(TabID).Where(v => v.IsPublished == true && v.Locale == Locale).OrderByDescending(a => a.Version).FirstOrDefault();
-            if (page != null)
+            if (!string.IsNullOrEmpty(BlockGuid))
             {
-                result = page.Version;
+                Core.Data.Entities.CustomBlock CustomBlock = Core.Managers.BlockManager.GetAllByGUID(PortalID, BlockGuid).Where(v => v.IsPublished == true).OrderByDescending(a => a.Version).FirstOrDefault();
+                if (CustomBlock != null)
+                {
+                    result = CustomBlock.Version;
+                }
+            }
+            else
+            {
+                Core.Data.Entities.Pages page = Core.Managers.PageManager.GetPages(TabID).Where(v => v.IsPublished == true && v.Locale == Locale).OrderByDescending(a => a.Version).FirstOrDefault();
+                if (page != null)
+                {
+                    result = page.Version;
+                }
             }
 
             return result;
