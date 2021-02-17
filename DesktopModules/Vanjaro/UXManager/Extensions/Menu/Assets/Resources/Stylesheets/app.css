@@ -148,9 +148,9 @@ a.assetIsList {
     /*border-bottom: 1px solid #ccc;*/
 }
 
-.buttondiv .uploaderui{
-    position:relative;
-} 
+    .buttondiv .uploaderui {
+        position: relative;
+    }
 
 .uploaddefault .table thead th {
     padding-top: 0;
@@ -238,4 +238,26 @@ td.dropdownimgicon {
 
 .Iconsfilesdiv .empty_msg {
     margin-top: 0;
+}
+
+
+.SweetAlertBold {
+    font-weight: bold;
+}
+
+.sweet-alert .sa-error-container.show {
+    padding: 10px;
+    margin: 0;
+    text-align: left;
+    border-radius: 4px;
+}
+
+.sweet-alert .sa-input-error {
+    top: 84px;
+    right: 12px;
+}
+
+
+#CreateFolder .btn-close {
+    font-size: 10px;
 }
