@@ -3501,7 +3501,7 @@ body.resp-mode.mobile .vj-wrapper {
         outline: none;
     }
 
-.sidebar-open .select_language {
+:not(#dnn_ContentPane) .select_language {
     pointer-events: none;
 }
 
