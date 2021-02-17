@@ -259,6 +259,8 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
 
     $modal.find('#defaultModalLabel').text(title);
 
+    $.fn.modal.Constructor.prototype._enforceFocus = function () { }
+
     $modal.modal({
         backdrop: 'static', keyboard: true
     });
