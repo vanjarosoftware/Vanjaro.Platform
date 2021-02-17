@@ -689,7 +689,7 @@
         $('.ShowErrorMessage').hide();
         $('.NewFolderName').val("");
         $('.FolderType').val("0");
-        $('uiengine #CreateFolder').modal({ keyboard: false });
+        $('uiengine #CreateFolder').modal('show', { keyboard: false });
     };
 
     $scope.FolderType = function (Type) {

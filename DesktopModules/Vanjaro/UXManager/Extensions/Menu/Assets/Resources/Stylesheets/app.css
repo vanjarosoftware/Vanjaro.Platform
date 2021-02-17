@@ -148,9 +148,9 @@ a.assetIsList {
     /*border-bottom: 1px solid #ccc;*/
 }
 
-.buttondiv .uploaderui{
-    position:relative;
-} 
+    .buttondiv .uploaderui {
+        position: relative;
+    }
 
 .uploaddefault .table thead th {
     padding-top: 0;
@@ -258,3 +258,6 @@ td.dropdownimgicon {
 }
 
 
+#CreateFolder .btn-close {
+    font-size: 10px;
+}
