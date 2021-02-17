@@ -267,16 +267,13 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
                     var contentitems = $(this.model.attributes.components.models[0].attributes.content);
                     if (contentitems != undefined && contentitems.length > 0) {
                         var contentmarkup = '';
-                        var contentcss = '';
                         $.each(contentitems, function (ind, itm) {
                             if (itm.localName == 'style')
-                                contentcss += itm.innerHTML;
+                                contentmarkup += itm.outerHTML;
                             else
                                 contentmarkup += itm.innerHTML;
                         });
                         this.model.components(contentmarkup);
-                        var canbody = VjEditor.Canvas.getBody();
-                        $(canbody).append('<style id=' + this.model.ccid + '>' + contentcss + '</style>');
                     }
                     $.each(getAllComponents(this.model), function (k, v) {
                         if (v.attributes.type == 'blockwrapper') {
@@ -291,7 +288,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 
                             v.components('');
                             v.set('content', CleanGjAttrs(compHtml));
-
+                            v.view.render();
 
                             if (v.attributes.attributes["data-block-type"].toLowerCase() == "logo") {
                                 var style = v.attributes.attributes["data-style"];

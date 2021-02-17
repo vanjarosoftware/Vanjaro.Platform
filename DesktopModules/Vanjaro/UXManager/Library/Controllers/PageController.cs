@@ -24,7 +24,9 @@ namespace Vanjaro.UXManager.Library.Controllers
         [DnnPageEditor]
         public Pages Get()
         {
-            return Vanjaro.Core.Managers.PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, PortalSettings.CultureCode, true);
+            var page = Vanjaro.Core.Managers.PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, PortalSettings.CultureCode, true);
+            Core.Managers.PageManager.ApplyGlobalBlockJSON(page);
+            return page;
         }
 
         [HttpPost]

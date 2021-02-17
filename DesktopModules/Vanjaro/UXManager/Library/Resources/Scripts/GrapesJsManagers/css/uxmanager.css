@@ -967,20 +967,8 @@ div#MenuSettings .parent-menu-hide {
     color: #495157;
 }
 
-#ModalContent .CodeMirror,
-.gjs-custom-code .CodeMirror {
-    border: 1px solid #d3d0d0;
-    background: #fff;
-}
-
-#ModalContent #HTML + .CodeMirror,
-#ModalContent #CSS + .CodeMirror {
-    width: 395px;
-}
-
-#ModalContent .CodeMirror-gutters,
-.gjs-custom-code .CodeMirror-gutters {
-    background: #fafafa;
+#ModalContent #CategoryGroup {
+    position: relative;
 }
 
 #ModalContent label,
@@ -1001,6 +989,7 @@ div#MenuSettings .parent-menu-hide {
 }
 
 #ModalContent input,
+#ModalContent select,
 .gjs-custom-code input {
     width: 100%;
     margin-bottom: 10px;
@@ -1012,9 +1001,11 @@ div#MenuSettings .parent-menu-hide {
     -webkit-transition: border-color .25s;
     transition: border-color .25s;
     opacity: 0.6;
+    text-transform: capitalize;
 }
 
     #ModalContent input:focus,
+    #ModalContent select:focus,
     .gjs-custom-code input:focus {
         border: 1px solid #0088cc;
     }
@@ -1024,7 +1015,16 @@ div#MenuSettings .parent-menu-hide {
     float: right;
     font-size: 14px;
     padding: 6px 12px;
-    margin-top: 10px;
+}
+
+#ModalContent .btn-add {
+    position: absolute;
+    top: -34px;
+    right: 0;
+    color: #495157;
+    font-size: 14px;
+    padding: 6px;
+    z-index: 9;
 }
 
 #ModalContent .btn-primary {
@@ -1044,11 +1044,17 @@ div#MenuSettings .parent-menu-hide {
         box-shadow: 0 0 0 0.2rem rgba(40, 96, 144, 0.5);
     }
 
-#ModalContent .cbglobal button.btn {
-    font-size: 14px;
-    width: 75px;
-    box-shadow: none;
+#ModalContent .cbglobal {
+    display: flex;
 }
+
+    #ModalContent .cbglobal button.btn {
+        box-shadow: none;
+    }
+
+    #ModalContent .cbglobal #ToggelBlockGlobal {
+        opacity: 1;
+    }
 
 #ModalContent .custom-block-disabled {
     cursor: default;
@@ -3509,10 +3515,10 @@ body.resp-mode.mobile .vj-wrapper {
     -moz-appearance: textfield;
 }
 
-.stylemanager .gjs-field.gjs-field-integer input[type="number"]:hover,
-.stylemanager .gjs-field.gjs-field-integer input[type="number"]:focus {
-    -moz-appearance: auto;
-}
+    .stylemanager .gjs-field.gjs-field-integer input[type="number"]:hover,
+    .stylemanager .gjs-field.gjs-field-integer input[type="number"]:focus {
+        -moz-appearance: auto;
+    }
 
 .stylemanager .sm-range-wrapper {
     position: relative;
@@ -3524,10 +3530,11 @@ body.resp-mode.mobile .vj-wrapper {
     display: flex;
 }
 
-.traitsmanager .range-wrapper input[type="number"] {
-    -moz-appearance: textfield;
-}
-.traitsmanager .range-wrapper input[type="number"]:hover,
-.traitsmanager .range-wrapper input[type="number"]:focus {
-    -moz-appearance: auto;
-}
+    .traitsmanager .range-wrapper input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+        .traitsmanager .range-wrapper input[type="number"]:hover,
+        .traitsmanager .range-wrapper input[type="number"]:focus {
+            -moz-appearance: auto;
+        }
