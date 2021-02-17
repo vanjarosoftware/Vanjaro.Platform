@@ -170,29 +170,31 @@
     </div>
 </div>
 <div id='ModalContent' style='display:none;'>
-    <div class='row'>
-        <div class='col-6'>
-            <label>[LS:Name]</label><input type='text' name='name' id='input-name' required />
-        </div>
-        <div class='col-6'>
-            <label>[LS:ModalCategory]</label>
-            <input type='text' name='category' id='input-category' required />
-            <div id="CategoryGroup">
-                <a class="btn btn-add"><em class="fa fa-plus"></em></a>
-                <select class="form-control" id="CategoryDropdown"></select>
-            </div>
-        </div>
-    </div>
-    <hr />
-    <div class='row' style='margin-top:15px;'>
-        <div class='col'>
-            <div class='btn-group cbglobal'>
-                <button type='button' id="ToggelBlockGlobal" class='btn btn-default' onclick='ToggleBlockType(this,"yes")'>[LS:Global]</button>
-                <button type='button' id="ToggelBlockLocal" class='btn btn-primary disabled' onclick='ToggleBlockType(this,"no")'>[LS:Custom]</button>
-            </div>
-        </div>
-        <div class='col'>
-            <button class='btn btn-primary' type='button' id='btn-save'>[LS:Update]</button>
-        </div>
-    </div>
+	<div class="row justify-content-center">
+		<div class='col-6'>
+			<div class='btn-group cbglobal'>
+				<button type='button' id="ToggelBlockGlobal" class='btn btn-default' onclick='ToggleBlockType(this,"yes")'>[LS:Global]</button>
+				<button type='button' id="ToggelBlockLocal" class='btn btn-primary disabled' onclick='ToggleBlockType(this,"no")'>[LS:Custom]</button>
+			</div>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='col-6'>
+			<label>[LS:Name]</label><input type='text' name='name' id='input-name' required />
+		</div>
+		<div class='col-6'>
+			<label>[LS:ModalCategory]</label>
+			<input type='text' name='category' id='input-category' required />
+			<div id="CategoryGroup">
+				<a class="btn btn-add"><em class="fa fa-plus"></em></a>
+				<select class="form-control" id="CategoryDropdown"></select>
+			</div>
+		</div>
+	</div>
+	<hr />
+	<div class='row'>
+		<div class='col-12'>
+			<button class='btn btn-primary' type='button' id='btn-save'>[LS:Update]</button>
+		</div>
+	</div>
 </div>
