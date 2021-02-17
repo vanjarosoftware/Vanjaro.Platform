@@ -42,6 +42,7 @@ copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Block.SearchResult.dll bin\ >N
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.Azure.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.GoogleAnalytics.dll bin\ >NUL
+copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.GoogleTagManager.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.Pixabay.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.YouTube.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.dll bin\ >NUL
@@ -194,6 +195,10 @@ del menu-integrations-googleanalytics-resources.zip >NUL 2>&1
 cd ..\GoogleReCaptcha >NUL
 del menu-integrations-googlerecaptcha-resources.zip >NUL 2>&1
 "C:\Program Files\7-Zip\7z.exe" a menu-integrations-googlerecaptcha-resources.zip @Resources.txt -xr!?svn\ >NUL
+
+cd ..\GoogleTagManager >NUL
+del menu-integrations-googletagmanager-resources.zip >NUL 2>&1
+"C:\Program Files\7-Zip\7z.exe" a menu-integrations-googletagmanager-resources.zip @Resources.txt -xr!?svn\ >NUL
 
 cd ..\Pixabay >NUL
 del menu-integrations-pixabay-resources.zip >NUL 2>&1
