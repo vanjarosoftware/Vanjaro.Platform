@@ -4,7 +4,7 @@ import { jsPanel } from 'jspanel4/es6module/jspanel.js';
 global.VjEditor = null;
 global.VjLayerpanel = null;
 global.VJLandingPage = { components: '', html: '', style: '', css: '' };
-global.VJIsSaveCall  = false;
+global.VJIsSaveCall = false;
 global.VJLocalBlocksMarkup = '';
 global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
