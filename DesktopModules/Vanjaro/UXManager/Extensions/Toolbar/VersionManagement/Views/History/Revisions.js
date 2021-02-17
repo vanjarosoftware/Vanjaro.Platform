@@ -1,7 +1,7 @@
 ﻿app.controller('history_revisions', function ($scope, $attrs, $http, CommonSvc, SweetAlert) {
 
     var common = CommonSvc.getData($scope);
-    $scope.BlockGuid='';
+    $scope.BlockGuid = '';
     $scope.onInit = function () {
         if ($scope.ui.data.BlockGuid != undefined)
             $scope.BlockGuid = $scope.ui.data.BlockGuid.Value;
@@ -32,11 +32,13 @@
             if ($scope.BlockGuid != '') {
                 common.webApi.get('Revisions/GetBlockVersion', 'Version=' + $scope.SelectedVersion + '&BlockGuid=' + $scope.BlockGuid).success(function (response) {
                     if (response != undefined) {
-                        $(window.parent.document.body).find('.revisionloaderimg').remove();
+
                         window.parent.VjEditor.getSelected().components([]);
                         window.parent.VjEditor.getSelected().append('<style>' + response.Css + '</style');
-                        window.parent.VjEditor.getSelected().append(response.Html)
-
+                        $(window.parent.VjEditor.getSelected().getEl()).css('pointer-events', 'auto');
+                        $(window.parent.VjEditor.getSelected().getEl()).find('.global-tools').remove();
+                        $(window.parent.document.body).find('.revisionloaderimg').remove();
+                        window.parent.window.VjEditor.getSelected().components().add(eval(response.ContentJSON));
                     }
                 });
 
