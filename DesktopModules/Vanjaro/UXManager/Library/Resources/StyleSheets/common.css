@@ -1066,3 +1066,9 @@ uploadinput-button {
 .vj-ux-manager select {
     height: 38px;
 }
+
+
+.Dropablepage .dropbtn a{
+    color: #7c9eb2;
+    margin-left: 4px;
+}
