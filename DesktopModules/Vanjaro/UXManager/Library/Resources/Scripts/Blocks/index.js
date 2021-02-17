@@ -556,9 +556,9 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 			AddCategory();
 
 			//Need Improvement
-			var str = Block.attributes.content.split("</style>");
+			var blockType = $(Block.attributes.content).attr('data-block-type')
 
-			if ($(str[1]).attr('data-block-type') != undefined) {
+			if (blockType != undefined) {
 				$('.cbglobal > button:first').attr('class', 'btn btn-primary active');
 				$('.cbglobal > button:last').attr('class', 'btn btn-default');
 			}
