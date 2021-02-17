@@ -446,13 +446,20 @@ namespace Vanjaro.Core
                             }
                         }
                         if (block.IsPublished)
+                        {
                             block.ID = 0;
+                            block.CreatedOn = DateTime.UtcNow;
+                            block.CreatedBy= PortalSettings.Current.UserInfo.UserID;
+                        }
                         if (IsPublished)
                         {
                             block.PublishedBy = PortalSettings.Current.UserInfo.UserID;
                             block.IsPublished = IsPublished;
                             block.PublishedOn = DateTime.UtcNow;
                         }
+
+                        block.UpdatedOn = DateTime.UtcNow;
+                        block.UpdatedBy = PortalSettings.Current.UserInfo.UserID;
                         BlockManager.Update(block);
                     }
                 }
