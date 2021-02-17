@@ -296,7 +296,7 @@ namespace Vanjaro.Core
                 }
             }
 
-            private static void ExtractStyleIDs(dynamic contentJSON, List<string> styleIds)
+            internal static void ExtractStyleIDs(dynamic contentJSON, List<string> styleIds)
             {
                 if (contentJSON != null)
                 {

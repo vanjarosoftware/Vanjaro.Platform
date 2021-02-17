@@ -466,7 +466,12 @@ global.FilterComponents = function (vjcomps) {
 global.RenderCustomBlock = function (model, bmodel) {
     if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes["data-block-type"] != undefined && model.attributes.attributes["data-block-type"].toLowerCase() == "global")
         model.attributes.name = "Global: " + bmodel.id;
+    //setting style as empty to create id in html and json and pass in save api call
+    if (model != undefined)
+        model.setStyle('');
     IsVJCBRendered = true;
+    if (!$('.optimizing-overlay').length)
+        $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Please wait . . .</h1></div>');
 };
 
 global.RenderBlock = function (model, bmodel, render) {

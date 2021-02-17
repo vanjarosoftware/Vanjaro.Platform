@@ -10,7 +10,6 @@ using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
-using ExCSS;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -98,6 +97,7 @@ namespace Vanjaro.Core
                             CustomBlock block = BlockManager.GetByGuid(portalID, con.attributes["data-guid"].Value);
                             if (block != null)
                             {
+                                string prefix = con.attributes["id"] != null ? con.attributes["id"].Value : string.Empty;
                                 dynamic blockContentJSON = JsonConvert.DeserializeObject(block.ContentJSON);
                                 if (blockContentJSON != null)
                                 {
@@ -108,6 +108,7 @@ namespace Vanjaro.Core
                                         (con as JObject).Remove(prop);
                                     foreach (JProperty prop in blockContentJSON[0].Properties())
                                         (con as JObject).Add(prop.Name, prop.Value);
+                                    UpdateIds(con, prefix);
                                 }
                                 dynamic blockStyleJSON = JsonConvert.DeserializeObject(block.StyleJSON);
                                 if (blockStyleJSON != null)
@@ -115,7 +116,20 @@ namespace Vanjaro.Core
                                     foreach (dynamic style in blockStyleJSON)
                                     {
                                         if (!StyleExists(style, styleJSON))
+                                        {
+                                            if (!string.IsNullOrEmpty(prefix) && style.selectors != null)
+                                            {
+                                                foreach (dynamic st in style.selectors)
+                                                {
+                                                    if (st.name != null)
+                                                    {
+                                                        string val = st.name;
+                                                        st.name.Value = prefix + "-" + val.Split('-').Last();
+                                                    }
+                                                }
+                                            }
                                             styleJSON.Add(style);
+                                        }
                                     }
                                 }
                             }
@@ -392,36 +406,13 @@ namespace Vanjaro.Core
             {
                 if (styleIds.Count > 0)
                 {
-                    var parser = new StylesheetParser();
-                    var stylesheet = parser.Parse(css);
-                    List<string> nodesToRemove = new List<string>();
                     foreach (var item in styleIds)
                     {
                         foreach (string style in item.Value)
-                            RemoveSelector(stylesheet.Children, "#" + style, nodesToRemove);
+                            css = Regex.Replace(css, @"(#" + style + @"*\s*{[^}]*})|(#" + style + @":[^{]*\s*{[^}]*})", string.Empty);
                     }
-                    string result = stylesheet.ToCss();
-                    foreach (var node in nodesToRemove)
-                        result = result.Replace(node, string.Empty);
-                    return result;
                 }
                 return css;
-            }
-            private static void RemoveSelector(IEnumerable<IStylesheetNode> children, string selectorToRemove, List<string> nodesToRemove)
-            {
-                foreach (var child in children)
-                {
-                    if (child is IStyleRule)
-                    {
-                        if ((child as IStyleRule).SelectorText == selectorToRemove || (child as IStyleRule).SelectorText.StartsWith(selectorToRemove + ":"))
-                        {
-                            nodesToRemove.Add((child as IStyleRule).ToCss());
-                            continue;
-                        }
-                    }
-                    if (child.Children.Count() > 0)
-                        RemoveSelector(child.Children, selectorToRemove, nodesToRemove);
-                }
             }
 
             private static void UpdateGlobalBlocks(Dictionary<string, dynamic> globalKeyValuePairs, Dictionary<string, dynamic> globalStyleKeyValuePairs, dynamic blocksJSON)
@@ -1398,11 +1389,26 @@ namespace Vanjaro.Core
                         if (block != null && !string.IsNullOrEmpty(block.ContentJSON))
                         {
                             con.components = JsonConvert.DeserializeObject(block.ContentJSON);
+                            string prefix = con.attributes["id"] != null ? con.attributes["id"].Value : string.Empty;
+                            UpdateIds(con.components, prefix);
                             if (!string.IsNullOrEmpty(block.StyleJSON) && styleJSON != null)
                             {
                                 dynamic styles = JsonConvert.DeserializeObject(block.StyleJSON);
                                 foreach (var style in styles)
+                                {
+                                    if (!string.IsNullOrEmpty(prefix) && style.selectors != null)
+                                    {
+                                        foreach (dynamic st in style.selectors)
+                                        {
+                                            if (st.name != null)
+                                            {
+                                                string val = st.name;
+                                                st.name.Value = prefix + "-" + val.Split('-').Last();
+                                            }
+                                        }
+                                    }
                                     styleJSON.Add(style);
+                                }
                             }
                         }
 
@@ -1410,6 +1416,36 @@ namespace Vanjaro.Core
                     else if (con.components != null)
                     {
                         UpdateGlobalBlockJSON(con.components, styleJSON);
+                    }
+                }
+            }
+
+            private static void UpdateIds(dynamic contentJSON, string prefix)
+            {
+                if (!string.IsNullOrEmpty(prefix) && contentJSON != null)
+                {
+                    if (contentJSON is JArray)
+                    {
+                        foreach (dynamic con in contentJSON)
+                        {
+                            if (con.attributes != null && con.attributes["id"] != null)
+                            {
+                                string val = con.attributes["id"].Value;
+                                con.attributes["id"].Value = prefix + "-" + val.Split('-').Last();
+                            }
+                            if (con.components != null)
+                                UpdateIds(con.components, prefix);
+                        }
+                    }
+                    else
+                    {
+                        if (contentJSON.attributes != null && contentJSON.attributes["id"] != null)
+                        {
+                            string val = contentJSON.attributes["id"].Value;
+                            contentJSON.attributes["id"].Value = prefix + "-" + val.Split('-').Last();
+                        }
+                        if (contentJSON.components != null)
+                            UpdateIds(contentJSON.components, prefix);
                     }
                 }
             }
