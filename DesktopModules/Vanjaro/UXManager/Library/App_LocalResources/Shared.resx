@@ -160,7 +160,7 @@
     <value>Unlinking this block from global will let you edit content for this block only, without affecting all other linked blocks.</value>
   </data>
   <data name="GlobalBlockUnlocking.Text" xml:space="preserve">
-    <value>Changes to global content apply across entire site.</value>
+    <value>Changes to global content instantly apply across entire site.</value>
   </data>
   <data name="GlobalBlockUnlockingError.Text" xml:space="preserve">
     <value>You don't have permissions to edit this content</value>
