@@ -1131,8 +1131,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         {
                             PortalId = portal.PortalID,
                             portal.CultureCode,
-                            SplashTabId = TabSanitizer(portal.SplashTabId, pid)?.TabID,
-                            SplashTabName = TabSanitizer(portal.SplashTabId, pid)?.TabName,
                             HomeTabId = TabSanitizer(portal.HomeTabId, pid)?.TabID,
                             HomeTabName = TabSanitizer(portal.HomeTabId, pid)?.TabName,
                             LoginTabId = TabSanitizer(portal.LoginTabId, pid)?.TabID,
@@ -1194,7 +1192,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     {
                         PortalInfo portalInfo = PortalController.Instance.GetPortal(pid, cultureCode);
                         bool MoveLoginModule = portalInfo.LoginTabId != request.LoginTabId;
-                        portalInfo.SplashTabId = ValidateTabId(request.SplashTabId, pid);
                         portalInfo.HomeTabId = ValidateTabId(request.HomeTabId, pid);
                         portalInfo.LoginTabId = ValidateTabId(request.LoginTabId, pid);
                         portalInfo.RegisterTabId = ValidateTabId(request.RegisterTabId, pid);
