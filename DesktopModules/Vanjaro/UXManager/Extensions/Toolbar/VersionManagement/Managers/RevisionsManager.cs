@@ -26,7 +26,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Managers
             return Settings;
         }
 
-        internal static List<PageVersion> GetAllVersionByTabID(int PortalID, int TabID, string Locale, string BlockGuid)
+        internal static List<PageVersion> GetAllVersionByTabID(int PortalID, int TabID, string Locale, string BlockGuid = null)
         {
 
             List<PageVersion> versioncontent = new List<PageVersion>();

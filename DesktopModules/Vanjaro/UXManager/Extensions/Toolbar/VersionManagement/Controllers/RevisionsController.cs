@@ -59,7 +59,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
         }
 
         [HttpGet]
-        public dynamic GetVersion(int Version, string Locale, string BlockGuid)
+        public dynamic GetVersion(int Version, string Locale)
         {
             dynamic Result = new ExpandoObject();
             Locale = PortalSettings.DefaultLanguage == Locale ? null : Locale;
@@ -74,7 +74,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
                 Result.components = page.ContentJSON.ToString();
                 Result.style = page.StyleJSON.ToString();
             }
-            Result.Version = RevisionsManager.GetAllVersionByTabID(PortalSettings.PortalId, PortalSettings.ActiveTab.TabID, Locale, BlockGuid);
+            Result.Version = RevisionsManager.GetAllVersionByTabID(PortalSettings.PortalId, PortalSettings.ActiveTab.TabID, Locale);
             return Result;
         }
 
