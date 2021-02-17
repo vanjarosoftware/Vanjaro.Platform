@@ -178,13 +178,13 @@
     <value>Back</value>
   </data>
   <data name="404ErrorPage.Text" xml:space="preserve">
-    <value>404 Error Page</value>
+    <value>404 Error</value>
   </data>
   <data name="500ErrorPage.Text" xml:space="preserve">
-    <value>500 Error Page</value>
+    <value>500 Error</value>
   </data>
   <data name="HomePage.Text" xml:space="preserve">
-    <value>Home Page</value>
+    <value>Home</value>
   </data>
   <data name="LoginPage.Text" xml:space="preserve">
     <value>Sign In</value>
@@ -199,19 +199,19 @@
     <value>Signup</value>
   </data>
   <data name="SearchResultsPage.Text" xml:space="preserve">
-    <value>Search Results Page</value>
+    <value>Search Results</value>
   </data>
   <data name="SplashPage.Text" xml:space="preserve">
     <value>Splash Page</value>
   </data>
   <data name="RedirectAfterRegistration.Text" xml:space="preserve">
-    <value>Redirect After Registration</value>
+    <value>Show After Registration</value>
   </data>
   <data name="RedirectAfterLogin.Text" xml:space="preserve">
-    <value>Redirect After Login</value>
+    <value>Show After Login</value>
   </data>
   <data name="RedirectAfterLogout.Text" xml:space="preserve">
-    <value>Redirect After Logout</value>
+    <value>Show After Logout</value>
   </data>
   <data name="Terms.Text" xml:space="preserve">
     <value>Terms</value>
