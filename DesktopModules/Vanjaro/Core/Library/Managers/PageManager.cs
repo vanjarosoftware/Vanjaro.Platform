@@ -399,7 +399,7 @@ namespace Vanjaro.Core
                         result.IsSuccess = true;
                         result.ShowNotification = Data["IsPublished"];
 
-                        UpdateGlobalBlocks(PortalSettings, GlobalKeyValuePairs, GlobalStyleKeyValuePairs, DeserializedGlobalBlocksJSON, aliases);
+                        UpdateGlobalBlocks(PortalSettings, GlobalKeyValuePairs, GlobalStyleKeyValuePairs, DeserializedGlobalBlocksJSON, aliases, Convert.ToBoolean(Data["IsPublished"].ToString()));
                     }
                 }
                 catch (Exception ex)
@@ -470,7 +470,7 @@ namespace Vanjaro.Core
                 return css;
             }
 
-            private static void UpdateGlobalBlocks(PortalSettings portalSettings, Dictionary<string, dynamic> globalKeyValuePairs, Dictionary<string, dynamic> globalStyleKeyValuePairs, dynamic blocksJSON, IEnumerable<string> aliases)
+            private static void UpdateGlobalBlocks(PortalSettings portalSettings, Dictionary<string, dynamic> globalKeyValuePairs, Dictionary<string, dynamic> globalStyleKeyValuePairs, dynamic blocksJSON, IEnumerable<string> aliases, bool IsPublished)
             {
                 foreach (var item in globalKeyValuePairs)
                 {
@@ -505,7 +505,22 @@ namespace Vanjaro.Core
                                 }
                             }
                         }
-                        block.Update();
+                        if (block.IsPublished)
+                        {
+                            block.ID = 0;
+                            block.CreatedOn = DateTime.UtcNow;
+                            block.CreatedBy = PortalSettings.Current.UserInfo.UserID;
+                        }
+                        if (IsPublished)
+                        {
+                            block.PublishedBy = PortalSettings.Current.UserInfo.UserID;
+                            block.IsPublished = IsPublished;
+                            block.PublishedOn = DateTime.UtcNow;
+                        }
+
+                        block.UpdatedOn = DateTime.UtcNow;
+                        block.UpdatedBy = PortalSettings.Current.UserInfo.UserID;
+                        BlockManager.Update(block);
                     }
                 }
             }
@@ -1274,7 +1289,7 @@ namespace Vanjaro.Core
                     string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
                     string tempNewUrl = newurl;
                     int count = 1;
-                    Find:
+                Find:
                     if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
                     {
                         tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;

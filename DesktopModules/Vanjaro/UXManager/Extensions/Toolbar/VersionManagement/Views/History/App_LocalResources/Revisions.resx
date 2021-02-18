@@ -168,4 +168,7 @@
   <data name="NoRevisions.Text" xml:space="preserve">
     <value>No revisions found.</value>
   </data>
+  <data name="GlobalBlockRevisions.Text" xml:space="preserve">
+    <value>Global Block Revisions</value>
+  </data>
 </root>
