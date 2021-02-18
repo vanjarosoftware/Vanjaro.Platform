@@ -510,12 +510,14 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 				AddCustomBlock(editor, CustomBlock);
 			};
 
+			$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').css('max-width', 450);
 			editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
 		}
 	});
 
 	//Edit Custom Block
 	editor.Commands.add('edit-custom-block', {
+
 		run: function (editor, sender, block) {
 
 			$("#ModalContent").show();
@@ -603,6 +605,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 			};
 
+			$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').css('max-width', 450);
 			editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
 
 			$('#ToggelBlockGlobal').addClass('disabled');

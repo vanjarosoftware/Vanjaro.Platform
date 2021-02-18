@@ -1023,7 +1023,7 @@ div#MenuSettings .parent-menu-hide {
     right: 0;
     color: #495157;
     font-size: 14px;
-    padding: 6px;
+    padding: 6px 0;
     z-index: 9;
 }
 
@@ -1044,12 +1044,9 @@ div#MenuSettings .parent-menu-hide {
         box-shadow: 0 0 0 0.2rem rgba(40, 96, 144, 0.5);
     }
 
-#ModalContent .cbglobal {
-    display: flex;
-}
-
     #ModalContent .cbglobal button.btn {
         box-shadow: none;
+        font-size: 14px;
     }
 
     #ModalContent .cbglobal #ToggelBlockGlobal {
