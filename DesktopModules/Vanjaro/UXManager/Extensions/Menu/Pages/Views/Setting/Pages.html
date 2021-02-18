@@ -12,10 +12,10 @@
                         </a>
                     </div>
                     <div class="col-4 pl-none">
-                        <a href="#" onclick="parent.OpenPopUp(event, 800,'right', '[LS:Shortcut_Title]', '#detail')" mn-access-roles="admin" class="ux-btn ux-btn-hover float-right" mn-ng-hide="Show_RecycleBin" title="[L:AddPages]">
+                        <a href="#" onclick="parent.OpenPopUp(event, 800,'right', '[LS:Shortcut_Title]', '#detail')" mn-access-roles="admin" class="ux-btn ux-btn-hover float-end" mn-ng-hide="Show_RecycleBin" title="[L:AddPages]">
                             <em class="fas fa-plus"></em>
                         </a>
-                        <a class="ux-btn ux-btn-hover float-right" title="[LS:DeleteAllPages]" ng-click="Remove_All_Pages()" mn-ng-show="Show_RecycleBin && ui.data.DeletedPagesCount.Options >0">
+                        <a class="ux-btn ux-btn-hover float-end" title="[LS:DeleteAllPages]" ng-click="Remove_All_Pages()" mn-ng-show="Show_RecycleBin && ui.data.DeletedPagesCount.Options >0">
                             <em class="fas fa-eraser"></em>
                         </a>
                     </div>
@@ -33,8 +33,8 @@
                 </column>
                 <column name="Actions" width="15">
                     <uitemplate>
-                        <div class="dropdown show float-right dropbtn">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown show float-end dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -55,7 +55,7 @@
                 <div class="col-md-12 text-center">
                     <a href="#" mn-ng-hide="Show_RecycleBin||!Show_RecycleBin&&ui.data.DeletedPagesCount.Options<=0" ng-click="Show_RecycleBin =!(Show_RecycleBin);HeaderText='[LS:RecycleBin]'" class="badge badge-button position-relative" title="[L:Deleted]">
                         <span class="title">[L:Deleted]</span>
-                        <span class="badge badge-button-inverse float-right">{{ui.data.DeletedPagesCount.Options}}</span>
+                        <span class="badge badge-button-inverse float-end">{{ui.data.DeletedPagesCount.Options}}</span>
                     </a>
                 </div>
             </uitemplate>

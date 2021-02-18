@@ -8,7 +8,7 @@
                 <strong><em class="fas fa-check-circle"></em> <em>[LS:Status]</em></strong> <em>{{ui.data.ScheduleStatus.Options.Data.Status}}</em>
             </div>
         </div>
-        <div class="scheduler-btn text-right">
+        <div class="scheduler-btn text-end">
             <em ng-show="ui.data.ScheduleStatus.Options.Data.Status == 'RUNNING_TIMER_SCHEDULE'">
                 <a control="button" ng-click="StopSchedule()" label="false" ng-hide="ui.data.ScheduleStatus.Options.Data.ScheduleMode == 0" class="fa fa-stop" aria-hidden="true" title="[LS:StopSchedule]">
                 </a>

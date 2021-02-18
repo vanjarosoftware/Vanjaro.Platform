@@ -37,7 +37,7 @@
         else
             window.parent.ShowNotification('[L:Section]', '[L:PermissionUpdatedSuccess]', 'success');
         window.parent.document.callbacktype = type;
-        $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+        $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
     };
 
     $scope.$watch('PermissionsInherit', function (newValue, oldValue) {

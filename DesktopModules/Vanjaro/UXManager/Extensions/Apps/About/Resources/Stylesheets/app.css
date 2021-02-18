@@ -54,6 +54,7 @@ ul.About li:hover a {
 
 ul.About hr {
     margin: 5px 0;
+    opacity: 0.1;
 }
 
 
@@ -61,11 +62,11 @@ ul.About hr {
     color: #3a3a3a;
 }
 
-#signingOut{
-    display:flex;
+#signingOut {
+    display: flex;
 }
 
-#signingOut .spinner-grow {
-    margin-right: 4px;
-    margin-top: 2px;
-}
+    #signingOut .spinner-grow {
+        margin-right: 4px;
+        margin-top: 2px;
+    }

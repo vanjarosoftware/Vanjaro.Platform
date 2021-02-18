@@ -93,8 +93,8 @@ $(document).ready(function () {
 										}
 									});
 
-                                    var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
-									$(window.document.body).append(block).find('[data-dismiss="modal"]').trigger('click', [false]);
+									var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
+									$(window.document.body).append(block).find('[data-bs-dismiss="modal"]').trigger('click', [false]);
 								}
 							}
 						});
@@ -118,7 +118,7 @@ $(document).ready(function () {
 								'RequestVerificationToken': sf.getAntiForgeryValue()
 							},
 							success: function (data) {
-								$(window.parent.document.body).find('[data-dismiss="modal"]').click();
+								$(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
 								parent.OpenPopUp(null, 600, 'center', 'Install', ExtensionURL, 800);
 							}
 						});
@@ -203,6 +203,8 @@ $(document).ready(function () {
 				}
 				else {
 
+                    VJIsLocked = 'True';
+
 					//Set Sizes
 					//Trim last character of calcSizes to remove trailing comma
 					image.parent().components().models[0].addAttributes({ 'sizes': calcSizes.slice(0, -1) });
@@ -221,7 +223,7 @@ $(document).ready(function () {
 				setTimeout(function () {
 					$('.vj-wrapper').find('.optimizing-overlay').remove();
 					VjPublishChanges();
-				}, 500);
+                }, 500);
 			}
 		};
 		var optImages = jQuery.grep(getAllComponents(), function (n, i) {
@@ -2655,7 +2657,7 @@ $(document).ready(function () {
 							});
 
 							//Tooltip
-							$('[data-toggle="tooltip"]').tooltip();
+							$('[data-bs-toggle="tooltip"]').tooltip();
 
 							$('.block-elements .blockItem').on("click", function (e) {
 								var messagesrc = CurrentExtTabUrl + "&guid=" + $(this).attr('guid');
@@ -3047,7 +3049,8 @@ global.ChangeBlockType = function (query) {
 function RunSaveCommand() {
 	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
 	if (GetParameterByName('m2v', parent.window.location) != null)
-		editor.StorageManager.getStorages().remote.attributes.params.m2v = true;
+        editor.StorageManager.getStorages().remote.attributes.params.m2v = true;
+    VJIsLocked = 'False';
 	editor.runCommand("save");
 	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = false;
 	$('#VJBtnPublish').addClass('disabled');

@@ -151,7 +151,7 @@ namespace Vanjaro.Skin
                 //VjDefaultPath used in Skin.js for loading icon.
                 WebForms.RegisterClientScriptBlock(Page, "DefaultPath", "var VjThemePath='" + Page.ResolveUrl("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name) + "'; var VjDefaultPath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/") + "'; var VjSitePath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/") + "';", true);
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/js/skin.js"), 2, "DnnFormBottomProvider");
-                ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/DesktopModules/Vanjaro/Common/Frameworks/Bootstrap/4.5.0/js/bootstrap.min.js"), 1, "DnnFormBottomProvider");
+                ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/DesktopModules/Vanjaro/Common/Frameworks/Bootstrap/5.0.0/js/bootstrap.min.js"), 1, "DnnFormBottomProvider");
 
                 if ((TabPermissionController.HasTabPermission("EDIT") || (page != null && page.StateID.HasValue && HasReviewPermission)))
                     InjectThemeScripts();
@@ -956,7 +956,7 @@ namespace Vanjaro.Skin
             {
                 string script = @"$(document).ready(function () {                               
                                $('.dnnActions').click(function () {
-                                   $(window.parent.document.body).find('.uxmanager-modal [data-dismiss=" + @"modal" + @"]').click();
+                                   $(window.parent.document.body).find('.uxmanager-modal [data-bs-dismiss=" + @"modal" + @"]').click();
                                });
                                setTimeout(function () {$('[href=""#msSpecificSettings""]').click();},100);
                           });";

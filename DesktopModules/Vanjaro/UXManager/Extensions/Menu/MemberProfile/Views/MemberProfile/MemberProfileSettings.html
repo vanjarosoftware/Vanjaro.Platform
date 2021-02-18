@@ -14,15 +14,15 @@
                                 <uilayout name="TabsContentUserProfileFields">
                                     <uitemplate>
                                         <div id="accordion">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseone">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseone">
                                                         {{(ShowPropertyLocalization?'[L:PropertyLocalization]':Show_ListEntryTab?'[L:ListEntry]':'[L:UserProfileFields]')}}
-                                                        <em class="fas fa-caret-down float-right"></em>
+                                                        <em class="fas fa-caret-down float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapseone" class="collapse show" data-parent="#accordion">
-                                                    <div class="card-body">
+                                                <div id="collapseone" class="accordion-collapse collapse show" data-bs-parent="#accordion">
+                                                    <div class="accordion-body">
                                                         [uilayout:UserProfileFields]
                                                         [uilayout:PropertyLocalization]
                                                         [uilayout:ListEntry]
@@ -39,14 +39,14 @@
                 </uilayout>
             </uitemplate>
             <uitemplate>
-                <div class="text-right fixed-footer" mn-ng-hide="Show_ListEntryTab&&Show_ListSettingTab">
-                    <button type="button" mn-ng-if="ShowUserProfileFields" class="btn btn-sm btn-primary float-right" id="Next" mn-ng-click="Click_Next('update')">
+                <div class="text-end fixed-footer" mn-ng-hide="Show_ListEntryTab&&Show_ListSettingTab">
+                    <button type="button" mn-ng-if="ShowUserProfileFields" class="btn btn-sm btn-primary float-end" id="Next" mn-ng-click="Click_Next('update')">
                         [L:Next]
                     </button>
-                    <button type="button" mn-ng-if="Show_ListEntryTab&&!Show_ListSettingTab" class="btn btn-sm btn-primary float-right" id="ListNext" mn-ng-click="ListNext()">
+                    <button type="button" mn-ng-if="Show_ListEntryTab&&!Show_ListSettingTab" class="btn btn-sm btn-primary float-end" id="ListNext" mn-ng-click="ListNext()">
                         [L:Next]
                     </button>
-                    <button type="button" mn-ng-if="ShowPropertyLocalization" class="btn btn-sm btn-primary float-right" id="Update" mn-ng-click="Click_Save('update')">
+                    <button type="button" mn-ng-if="ShowPropertyLocalization" class="btn btn-sm btn-primary float-end" id="Update" mn-ng-click="Click_Save('update')">
                         [L:Update]
                     </button>
                 </div>
@@ -57,21 +57,21 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group" data-datatype="textbox" data-label="[L:FieldName]" data-name="FieldName">
-                            <label class="" for="memberprofile_memberprofilesettings1textbox0" data-toggle="tooltip" title="" data-original-title="">[L:FieldName]</label>
+                            <label class="" for="memberprofile_memberprofilesettings1textbox0" data-bs-toggle="tooltip" title="" data-original-title="">[L:FieldName]</label>
                             <div class="input-group">
                                 <input type="text" class="form-control control-background ng-pristine ng-invalid ng-invalid-required ng-touched" id="memberprofile_memberprofilesettings1textbox0" ng-disabled="IsUpdate" ng-model="ui.data.ProfileProperty.Options.ProfileProperty.PropertyName" aria-describedby="memberprofile_memberprofilesettings1textbox0-addon" required>
                             </div>
                             <span id="memberprofile_memberprofilesettings1textbox0-addon" class="help-block"></span>
                         </div>
                         <div class="form-group" data-datatype="textbox" data-label="[L:PropertyCategory]" data-name="PropertyCategory">
-                            <label class="" for="memberprofile_memberprofilesettings1textbox1" data-toggle="tooltip" title="" data-original-title="">[L:PropertyCategory]</label>
+                            <label class="" for="memberprofile_memberprofilesettings1textbox1" data-bs-toggle="tooltip" title="" data-original-title="">[L:PropertyCategory]</label>
                             <div class="input-group">
                                 <input type="text" class="form-control control-background ng-pristine ng-untouched ng-invalid ng-invalid-required" id="memberprofile_memberprofilesettings1textbox1" required ng-model="ui.data.ProfileProperty.Options.ProfileProperty.PropertyCategory" aria-describedby="memberprofile_memberprofilesettings1textbox1-addon">
                             </div>
                             <span id="memberprofile_memberprofilesettings1textbox1-addon" class="help-block"></span>
                         </div>
                         <div class="form-group" data-datatype="textbox" data-label="[L:DefaultValue]" data-name="DefaultValue">
-                            <label class="" for="memberprofile_memberprofilesettings1textbox3" data-toggle="tooltip" title="" data-original-title="">[L:DefaultValue]</label>
+                            <label class="" for="memberprofile_memberprofilesettings1textbox3" data-bs-toggle="tooltip" title="" data-original-title="">[L:DefaultValue]</label>
                             <div class="input-group">
                                 <input type="text" class="form-control control-background ng-pristine ng-untouched ng-valid" id="memberprofile_memberprofilesettings1textbox3" ng-model="ui.data.ProfileProperty.Options.ProfileProperty.DefaultValue" aria-describedby="memberprofile_memberprofilesettings1textbox3-addon">
                             </div>
@@ -89,21 +89,21 @@
                             </div>
                         </div>
                         <div class="form-group" data-datatype="integer" data-label="[L:Length]" data-name="Length" ng-if="ui.data.ProfileProperty.Options.ProfileProperty.DataType=='349'||ui.data.ProfileProperty.Options.ProfileProperty.DataType=='364'">
-                            <label class="" for="memberprofile_memberprofilesettings1integer2" data-toggle="tooltip" title="" data-original-title="">[L:Length]</label>
+                            <label class="" for="memberprofile_memberprofilesettings1integer2" data-bs-toggle="tooltip" title="" data-original-title="">[L:Length]</label>
                             <div class="input-group">
                                 <input type="number" class="form-control ng-pristine ng-untouched ng-invalid ng-valid-min ng-invalid-required" id="memberprofile_memberprofilesettings1integer2" min="1" required ng-model="ui.data.ProfileProperty.Options.ProfileProperty.Length" aria-describedby="memberprofile_memberprofilesettings1integer2-addon">
                             </div>
                             <span id="memberprofile_memberprofilesettings1integer2-addon" class="help-block"></span>
                         </div>
                         <div class="form-group" data-datatype="textbox" data-label="[L:ValidationExpression]" data-name="ValidationExpression">
-                            <label class="" for="memberprofile_memberprofilesettings1textbox4" data-toggle="tooltip" title="" data-original-title="">[L:ValidationExpression]</label>
+                            <label class="" for="memberprofile_memberprofilesettings1textbox4" data-bs-toggle="tooltip" title="" data-original-title="">[L:ValidationExpression]</label>
                             <div class="input-group">
                                 <input type="text" class="form-control control-background ng-pristine ng-untouched ng-valid" id="memberprofile_memberprofilesettings1textbox4" ng-model="ui.data.ProfileProperty.Options.ProfileProperty.ValidationExpression" aria-describedby="memberprofile_memberprofilesettings1textbox4-addon">
                             </div>
                             <span id="memberprofile_memberprofilesettings1textbox4-addon" class="help-block"></span>
                         </div>
                         <div class="form-group" data-datatype="dropdownlist" data-label="[L:DefaultVisibility]" data-name="DefaultVisibility">
-                            <label class="" for="memberprofile_memberprofilesettings1dropdownlist8" data-toggle="tooltip" title="" data-original-title="">[L:DefaultVisibility]</label>
+                            <label class="" for="memberprofile_memberprofilesettings1dropdownlist8" data-bs-toggle="tooltip" title="" data-original-title="">[L:DefaultVisibility]</label>
                             <div class="input-group">
                                 <select class="form-control ng-pristine ng-untouched ng-valid" ng-model="ui.data.ProfileProperty.Options.ProfileProperty.DefaultVisibility" ng-options="option.value as option.label for option in ui.data.DefaultVisibility.Options">
                                 </select>
@@ -121,7 +121,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group language" data-datatype="dropdownlist" data-label="[L:Languages]" data-name="Languages">
-                            <label class="" for="memberprofile_memberprofilesettings2dropdownlist0" data-toggle="tooltip" title="">[L:Languages]</label>
+                            <label class="" for="memberprofile_memberprofilesettings2dropdownlist0" data-bs-toggle="tooltip" title="">[L:Languages]</label>
                             <div class="input-group"><select class="form-control ng-pristine ng-valid valid ng-touched" ng-change="Change_Language()" ng-model="ui.data.ProfilePropertyLocalization.Options.Language" ng-options="option.Value as option.Text for option in ui.data.Languages.Options" aria-invalid="false"><option value="0" selected="selected" label="English (United States)">English (United States)</option></select></div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group " data-datatype="textbox" data-label="[L:PropertyNameString]" data-name="PropertyNameString">
-                            <label class="" for="memberprofile_memberprofilesettings2textbox1" data-toggle="tooltip" title="">[L:PropertyNameString]</label>
+                            <label class="" for="memberprofile_memberprofilesettings2textbox1" data-bs-toggle="tooltip" title="">[L:PropertyNameString]</label>
                             <div class="input-group">
                                 <input type="text" class="form-control control-background ng-pristine ng-invalid ng-invalid-required ng-touched error" id="memberprofile_memberprofilesettings2textbox1" required="true" ng-model="ui.data.ProfilePropertyLocalization.Options.PropertyNameString" aria-describedby="memberprofile_memberprofilesettings2textbox1-addon" aria-required="true" aria-invalid="true">
                             </div>
@@ -138,7 +138,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group " data-datatype="textbox" data-label="[L:PropertyHelpString]" data-name="PropertyHelpString">
-                            <label class="" for="memberprofile_memberprofilesettings2textbox2" data-toggle="tooltip" title="">[L:PropertyHelpString]</label>
+                            <label class="" for="memberprofile_memberprofilesettings2textbox2" data-bs-toggle="tooltip" title="">[L:PropertyHelpString]</label>
                             <div class="input-group">
                                 <input type="text" class="form-control control-background ng-pristine ng-untouched ng-valid valid" id="memberprofile_memberprofilesettings2textbox2" ng-model="ui.data.ProfilePropertyLocalization.Options.PropertyHelpString" aria-describedby="memberprofile_memberprofilesettings2textbox2-addon" aria-invalid="false">
                             </div>
@@ -149,7 +149,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group " data-datatype="textbox" data-label="[L:CategoryNameString]" data-name="CategoryNameString">
-                            <label class="" for="memberprofile_memberprofilesettings2textbox3" data-toggle="tooltip" title="">[L:CategoryNameString]</label>
+                            <label class="" for="memberprofile_memberprofilesettings2textbox3" data-bs-toggle="tooltip" title="">[L:CategoryNameString]</label>
                             <div class="input-group">
                                 <input type="text" class="form-control control-background ng-pristine ng-untouched ng-valid valid" id="memberprofile_memberprofilesettings2textbox3" ng-model="ui.data.ProfilePropertyLocalization.Options.CategoryNameString" aria-describedby="memberprofile_memberprofilesettings2textbox3-addon" aria-invalid="false">
                             </div>
@@ -158,7 +158,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group " data-datatype="textbox" data-label="[L:PropertyValidationString]" data-name="PropertyValidationString">
-                            <label class="" for="memberprofile_memberprofilesettings2textbox4" data-toggle="tooltip" title="">[L:PropertyValidationString]</label>
+                            <label class="" for="memberprofile_memberprofilesettings2textbox4" data-bs-toggle="tooltip" title="">[L:PropertyValidationString]</label>
                             <div class="input-group">
                                 <input type="text" class="form-control control-background ng-pristine ng-untouched ng-valid valid" id="memberprofile_memberprofilesettings2textbox4" ng-model="ui.data.ProfilePropertyLocalization.Options.PropertyValidationString" aria-describedby="memberprofile_memberprofilesettings2textbox4-addon" aria-invalid="false">
                             </div>
@@ -171,7 +171,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group " data-datatype="textbox" data-label="[L:PropertyRequiredString]" data-name="PropertyRequiredString">
-                            <label class="" for="memberprofile_memberprofilesettings2textbox5" data-toggle="tooltip" title="">[L:PropertyRequiredString]</label>
+                            <label class="" for="memberprofile_memberprofilesettings2textbox5" data-bs-toggle="tooltip" title="">[L:PropertyRequiredString]</label>
                             <div class="input-group">
                                 <input type="text" class="form-control control-background ng-pristine ng-untouched ng-valid valid" id="memberprofile_memberprofilesettings2textbox5" ng-model="ui.data.ProfilePropertyLocalization.Options.PropertyRequiredString" aria-describedby="memberprofile_memberprofilesettings2textbox5-addon" aria-invalid="false">
                             </div>
@@ -185,7 +185,7 @@
             <uitemplate>
                 <div class="row">
                     <div class="col-12 pl-none">
-                        <a title="[L:AddListEntryTitle]" mn-ng-if="Show_ListEntryTab&&!Show_ListSettingTab" mn-ng-click="ShowAdd_ListEntry()" class="ux-btn ux-btn-hover float-right">
+                        <a title="[L:AddListEntryTitle]" mn-ng-if="Show_ListEntryTab&&!Show_ListSettingTab" mn-ng-click="ShowAdd_ListEntry()" class="ux-btn ux-btn-hover float-end">
                             <em class="fas fa-plus"></em>
                         </a>
                     </div>
@@ -202,8 +202,8 @@
                 </column>               
                 <column name="Action" width="5">
                     <uitemplate>
-                        <div class="dropdown float-right dropbtn">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown float-end dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -224,7 +224,7 @@
             <uielement name="ListValue" tooltip="false" control="textbox" ngmodel="ui.data.ListEntryRequest.Options.Value" attr-required="true"></uielement>
             <!--<uielement name="EnableSortOrder" tooltip="false" control="toggle" ngmodel="ui.data.ListEntryRequest.Options.EnableSortOrder" attr-class="toggle_right"></uielement>-->
             <uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button id="ListSave" class="btn btn-sm btn-primary button-left " type="button" ng-click="AddUpdate_ListEntry()">[L:Update]</button>
                     <a class="btn btn-sm btn-link button-left" ng-click="Click_Cancel()"><span>[L:Cancel]</span></a>
                 </div>

@@ -37,6 +37,7 @@
     border: none;
     border-radius: 0;
     margin-bottom: 5px;
+    padding: .75rem 1.25rem;
 }
 
 .vj-ux-manager .role-list {
@@ -134,6 +135,7 @@
 
 .vj-ux-manager .permission-icon {
     margin-bottom: 10px;
+    color:inherit
 }
 
 
