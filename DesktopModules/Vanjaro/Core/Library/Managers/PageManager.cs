@@ -399,7 +399,7 @@ namespace Vanjaro.Core
                         result.IsSuccess = true;
                         result.ShowNotification = Data["IsPublished"];
 
-                        UpdateGlobalBlocks(GlobalKeyValuePairs, GlobalStyleKeyValuePairs, DeserializedGlobalBlocksJSON, aliases, Convert.ToBoolean(Data["IsPublished"].ToString()));
+                        UpdateGlobalBlocks(PortalSettings, GlobalKeyValuePairs, GlobalStyleKeyValuePairs, DeserializedGlobalBlocksJSON, aliases, Convert.ToBoolean(Data["IsPublished"].ToString()));
                     }
                 }
                 catch (Exception ex)
@@ -509,7 +509,7 @@ namespace Vanjaro.Core
                         {
                             block.ID = 0;
                             block.CreatedOn = DateTime.UtcNow;
-                            block.CreatedBy= PortalSettings.Current.UserInfo.UserID;
+                            block.CreatedBy = PortalSettings.Current.UserInfo.UserID;
                         }
                         if (IsPublished)
                         {
