@@ -207,20 +207,36 @@ namespace Vanjaro.Core
                 dynamic Result = new ExpandoObject();
                 try
                 {
+                    var aliases = from PortalAliasInfo pa in PortalAliasController.Instance.GetPortalAliasesByPortalId(PortalSettings.PortalId)
+                                  select pa.HTTPAlias;
                     if (!string.IsNullOrEmpty(CustomBlock.Html))
-                        CustomBlock.Html = PageManager.DeTokenizeLinks(CustomBlock.Html, PortalSettings.PortalId);
+                    {
+                        string Css = CustomBlock.Css;
+                        CustomBlock.Html = PageManager.DeTokenizeLinks(PageManager.AbsoluteToRelativeUrls(PageManager.ResetModuleMarkup(PortalSettings.PortalId, CustomBlock.Html, ref Css, PortalSettings.UserId), aliases), PortalSettings.PortalId);
+                        CustomBlock.Css = Css;
+                    }
                     if (!string.IsNullOrEmpty(CustomBlock.Css))
                         CustomBlock.Css = PageManager.DeTokenizeLinks(CustomBlock.Css, PortalSettings.PortalId);
                     if (!string.IsNullOrEmpty(CustomBlock.ContentJSON))
                     {
-                        CustomBlock.ContentJSON = PageManager.DeTokenizeLinks(CustomBlock.ContentJSON, PortalSettings.PortalId);
+                        List<string> Ids = new List<string>();
+                        Dictionary<string, List<string>> StyleIds = new Dictionary<string, List<string>>();
+                        Dictionary<string, dynamic> GlobalKeyValuePairs = new Dictionary<string, dynamic>();
+                        Dictionary<string, dynamic> GlobalStyleKeyValuePairs = new Dictionary<string, dynamic>();
+                        var DeserializedContentJSON = JsonConvert.DeserializeObject(CustomBlock.ContentJSON);
+                        var DeserializedStyleJSON = CustomBlock.StyleJSON != null ? JsonConvert.DeserializeObject(CustomBlock.StyleJSON) : string.Empty;
+                        PageManager.GetAllIds(DeserializedContentJSON, Ids);
+                        PageManager.FilterStyle(DeserializedStyleJSON, Ids);
+                        PageManager.RemoveGlobalBlockComponents(DeserializedContentJSON, StyleIds, GlobalKeyValuePairs, null);
+                        PageManager.RemoveGlobalBlockStyles(DeserializedStyleJSON, StyleIds, GlobalStyleKeyValuePairs);
+                        PageManager.BuildCustomBlocks(PortalSettings.PortalId, DeserializedContentJSON, DeserializedStyleJSON);
+                        CustomBlock.ContentJSON = PageManager.DeTokenizeLinks(PageManager.AbsoluteToRelativeUrls(JsonConvert.SerializeObject(DeserializedContentJSON), aliases), PortalSettings.PortalId);
+                        CustomBlock.Css = PageManager.FilterCss(CustomBlock.Css, StyleIds);
                         if (!string.IsNullOrEmpty(CustomBlock.StyleJSON))
                         {
-                            List<string> StyleIds = new List<string>();
-                            var DeserializedContentJSON = JsonConvert.DeserializeObject(CustomBlock.ContentJSON);
-                            ExtractStyleIDs(DeserializedContentJSON, StyleIds);
-                            var DeserializedStyleJSON = JsonConvert.DeserializeObject(CustomBlock.StyleJSON);
-                            FilterStyles(DeserializedStyleJSON, StyleIds);
+                            List<string> lstStyleIds = new List<string>();
+                            ExtractStyleIDs(DeserializedContentJSON, lstStyleIds);
+                            FilterStyles(DeserializedStyleJSON, lstStyleIds);
                             CustomBlock.StyleJSON = JsonConvert.SerializeObject(DeserializedStyleJSON);
                         }
                     }
@@ -442,6 +458,10 @@ namespace Vanjaro.Core
                             }
                             if (!string.IsNullOrEmpty(block.Css))
                                 block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, PortalID), false, Assets);
+                            if (!string.IsNullOrEmpty(block.ContentJSON))
+                                block.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.ContentJSON, PortalID), true, Assets);
+                            if (!string.IsNullOrEmpty(block.StyleJSON))
+                                block.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.StyleJSON, PortalID), true, Assets);
                         }
                         CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
                     }

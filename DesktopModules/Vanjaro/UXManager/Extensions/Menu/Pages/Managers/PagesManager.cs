@@ -602,6 +602,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                                 block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, portalID), false, Assets);
                             if (!string.IsNullOrEmpty(block.Css))
                                 block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, portalID), false, Assets);
+                            if (!string.IsNullOrEmpty(block.ContentJSON))
+                                block.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.ContentJSON, portalID), true, Assets);
+                            if (!string.IsNullOrEmpty(block.StyleJSON))
+                                block.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.StyleJSON, portalID), true, Assets);
                         }
                         Core.Factories.CacheFactory.Clear(Core.Factories.CacheFactory.GetCacheKey(Core.Factories.CacheFactory.Keys.CustomBlock + "ALL", portalID));
                     }
