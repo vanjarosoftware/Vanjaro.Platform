@@ -192,3 +192,8 @@ a.assetIsList {
     right: 0px;
     position: absolute !important;
 }
+
+
+.vj-ux-manager .page-item .page-link {
+    line-height: normal;
+}
