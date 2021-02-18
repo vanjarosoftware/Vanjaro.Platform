@@ -83,7 +83,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets
             ViewOrder = 80,
             URL = ExtensionInfo.GUID + "#detail",
             Title = Localization.Get("Shortcut_Title", "Text", Constants.LocalResourcesFile, Extension.ShowMissingKeysStatic, Localization.SharedMissingPrefix),
-            Breakline = true,
+            Breakline = false,
             Width = Width,
             Action = Event,
             Icon = "",

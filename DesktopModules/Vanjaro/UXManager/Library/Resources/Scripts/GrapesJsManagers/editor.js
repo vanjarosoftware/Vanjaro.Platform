@@ -4,11 +4,12 @@ import { jsPanel } from 'jspanel4/es6module/jspanel.js';
 global.VjEditor = null;
 global.VjLayerpanel = null;
 global.VJLandingPage = { components: '', html: '', style: '', css: '' };
-global.VJIsSaveCall = true;
+global.VJIsSaveCall  = false;
 global.VJLocalBlocksMarkup = '';
 global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
 global.IsVJEditorSaveCall;
+global.IsVJCBRendered = false;
 
 $(document).ready(function () {
 
@@ -84,14 +85,15 @@ $(document).ready(function () {
 										data.Html = data.Html.replace('<app id="' + mid + '"></app>', '<div id="dnn_vj_' + mid + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div>');
 									});
 									var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
-										content: data.Html + '<style>' + data.Css + '</style>',
+                                        content: data.Html + '<style>' + data.Css + '</style>',
+                                        label: '<img src="' + data.ScreenshotPath + '"/><div class="sub-label">Drag & Drop Me</div>',
 										attributes: {
-											class: 'fas fa-th-large floating',
+											class: 'floating',
 											id: 'LibraryBlock'
 										}
 									});
 
-									var block = VjEditor.BlockManager.render(LibraryBlock);
+									var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
 									$(window.document.body).append(block).find('[data-bs-dismiss="modal"]').trigger('click', [false]);
 								}
 							}
@@ -385,7 +387,7 @@ $(document).ready(function () {
 									backdrop: 0
 								},
 								components: vjcomps || VJLandingPage.html,
-								style: VJLandingPage.css,
+								style: eval(VJLandingPage.style) || VJLandingPage.css,
 								showOffsets: 1,
 								avoidInlineStyle: 1,
 								noticeOnUnload: 0,
@@ -1628,6 +1630,8 @@ $(document).ready(function () {
 										}
 									});
 								}
+								else if (bmodel != undefined && bmodel.attributes != undefined && bmodel.attributes.attributes != undefined && bmodel.attributes.attributes.type == 'VjCustomBlock')
+									RenderCustomBlock(model, bmodel);
 								else if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes["data-block-type"] != undefined)
 									RenderBlock(model, bmodel);
 							});
@@ -1747,7 +1751,7 @@ $(document).ready(function () {
 									return;
 								}
 
-								if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
+                                if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
 
 									$.each(model.attributes.toolbar, function (k, v) {
 
@@ -2208,30 +2212,6 @@ $(document).ready(function () {
 									$(model.components().models[0].getEl()).removeClass('gjs-dashed');
 							});
 
-							VjEditor.on('styleable:change', () => {
-
-								var model = VjEditor.getSelected();
-
-								if (typeof model != 'undefined') {
-
-									var $globalblockwrapper = $(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]');
-
-                                    if ($globalblockwrapper.length && !$.isEmptyObject(model.getStyle())) {
-
-                                        var result = VjEditor.CodeManager.getCode(model, 'css', { cssc: VjEditor.CssComposer });
-                                        var canvasBody = $(VjEditor.Canvas.getBody());
-                                        var style = canvasBody.find('style#' + model.ccid + ':contains(' + result.split("{")[0] + '{)');
-                                        
-                                        if (style.length <= 0)
-                                            canvasBody.append('<style id=' + model.ccid + '>' + result + '</style>');
-										else
-                                            style.replaceWith('<style id=' + model.ccid + '>' + result + '</style>');
-
-                                        model.setStyle('');
-									}
-								}
-							});
-
 							VjEditor.on('component:styleUpdate', (model, property) => {
 
 								if (property == "color" && typeof event != "undefined" && $(event.target).parents(".gjs-sm-property.gjs-sm-color").length) {
@@ -2538,23 +2518,55 @@ $(document).ready(function () {
 										clearTimeout(VJAutoSaveTimeOutid);
 									}
 
-									if (VJIsSaveCall && e.changed.changesCount >= VjEditor.StorageManager.getStepsBeforeSave()) {
+									if (e.changed.changesCount >= VjEditor.StorageManager.getStepsBeforeSave()) {
 										VJAutoSaveTimeOutid = setTimeout(function () {
-											if ($('.sidebar-open.settingclosebtn').length == 0) {
+                                            if ($('.sidebar-open.settingclosebtn').length == 0 && !VJIsSaveCall) {
 												VjEditor.runCommand("save");
 											}
 										}, 1000)
 									}
-									else
-										VJIsSaveCall = true;
+								}
+							});
+
+							VjEditor.on('storage:start:store', function (Data) {
+								if (Data != undefined && Data != '') {
+									var globalblocks = [];
+									$.each(getAllComponents(), function (k, v) {
+										if (v.attributes.type == "globalblockwrapper" && $(v.getEl()).find('.fa-unlock').length <= 0) {
+											try {
+												if (v.attributes != undefined)
+													v.attributes.content = '';
+												var content = VjEditor.runCommand("export-component", {
+													component: v.attributes.components.models[0]
+												});
+												if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
+													var item = {
+														guid: v.attributes.attributes['data-guid'],
+														html: content.html,
+														css: content.css,
+													};
+													globalblocks.push(item);
+												}
+											}
+											catch (err) { console.log(err); }
+										}
+									});
+									Data.globalblocks = JSON.stringify(globalblocks);
 								}
 							});
 
 							VjEditor.on('storage:error', (err) => {
 								swal({ title: "Error", text: `${err}`, type: "error", });
-							});
+                            });
 
-							VjEditor.on('storage:end:store', function (Data) {
+                            VjEditor.on('storage:start:store', function (Data) {
+                                VJIsSaveCall = true;
+                            });
+
+                            VjEditor.on('storage:end:store', function (Data) {
+
+                                VJIsSaveCall = false;
+
 								if (Data != '' && Data.PageReviewSettings != undefined && Data.PageReviewSettings) {
 									VJIsContentApproval = Data.PageReviewSettings.IsContentApproval ? "True" : "False";
 									VJNextStateName = Data.PageReviewSettings.NextStateName;
@@ -2583,7 +2595,8 @@ $(document).ready(function () {
 
 								if (Data != null && Data != '' && Data.RedirectAfterm2v != null && typeof Data.RedirectAfterm2v != "undefined")
 									window.location.href = Data.RedirectAfterm2v;
-
+								if (IsVJCBRendered)
+									window.parent.location.reload();
 							});
 
 							var iframeBody = VjEditor.Canvas.getBody();
@@ -2815,11 +2828,8 @@ $(document).ready(function () {
 			$(this).parent().addClass('active');
 			ChangeBlockType();
 		}
-		else if ($this.hasClass('librarytab')) {
-			$('.blockstab').removeClass('active');
-			$(this).parent().addClass('active');
+		else if ($this.hasClass('librarytab'))
 			parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%', true, false, null, false);
-		}
 		else {
 			$('.blockstab').removeClass('active');
 			$(this).parent().addClass('active');
@@ -3035,10 +3045,6 @@ global.ChangeBlockType = function (query) {
 };
 
 function RunSaveCommand() {
-	$.each(getAllComponents(), function (k, v) {
-		if (v.attributes.type == "globalblockwrapper" && $(v.getEl()).find('.fa-unlock').length <= 0)
-			UpdateGlobalBlock(v);
-	});
 	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
 	if (GetParameterByName('m2v', parent.window.location) != null)
 		editor.StorageManager.getStorages().remote.attributes.params.m2v = true;

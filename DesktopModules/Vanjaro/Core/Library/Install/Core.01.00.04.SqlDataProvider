@@ -33,3 +33,11 @@ CREATE TABLE {databaseOwner}[VJ_Core_BlockSectionPermission](
 ) ON [PRIMARY]
 END
 GO
+
+ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
+	ContentJSON nvarchar(MAX) NULL
+GO
+
+ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
+	StyleJSON nvarchar(MAX) NULL
+GO
