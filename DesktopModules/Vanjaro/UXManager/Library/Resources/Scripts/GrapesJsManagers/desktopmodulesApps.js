@@ -403,10 +403,17 @@ global.BuildBlockComponent = function (vjcomps) {
     $.each(vjcomps, function (k, v) {
         if (v.attributes != undefined && v.attributes["data-block-guid"] != undefined && v.attributes["data-block-guid"] != '' && v.attributes["data-block-type"].toLowerCase() != "global") {
             var attr = '';
+            var attr1 = '';
             $.each(v.attributes, function (key, value) {
                 attr += '[' + key + '="' + value + '"]';
+                if (key == 'id')
+                    attr1 += '[' + key + '="' + value.split('-')[value.split('-').length - 1] + '"]';
+                else
+                    attr1 += '[' + key + '="' + value + '"]';
             });
             var $this = $(attr)[0];
+            if ($this == undefined)
+                $this = $(attr1)[0];
             if ($this != undefined) {
                 if (v.components == undefined || v.components[0] == undefined) {
                     var component = { components: [], content: '' };
