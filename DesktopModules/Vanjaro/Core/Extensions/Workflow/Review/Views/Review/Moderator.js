@@ -38,7 +38,7 @@
                             if (data != null) {
                                 $scope.ui.data = data.Data;
                                 $("#VJnotifycount", parent.document).text(data.NotifyCount);
-                                $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                                $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                                 parent.swal.close();
                                 parent.toastr.clear();
                                 if (data.Data.NextState.Options == null)

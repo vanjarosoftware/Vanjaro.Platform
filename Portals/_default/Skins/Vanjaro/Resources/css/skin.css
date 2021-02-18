@@ -1,4 +1,13 @@
 ﻿/*Modal*/
+.modal .btn-close {
+    font-size: 10px;
+}
+
+.modal .modal-header {
+    align-items: center;
+}
+
+
 .modal .modal-dialog.modal-right {
     right: 0;
 }
@@ -56,6 +65,7 @@
         margin-top: 10px;
         margin-right: 10px;
         width: 120px;
+        color: #fff;
     }
 
     #toast-container > .toast-info .toast-close-button {
@@ -88,6 +98,10 @@
     border-radius: 4px;
     padding: 6px 10px;
 }
+
+    .sweet-alert textarea::placeholder {
+        color: #797979;
+    }
 
 #toast-container.info {
     z-index: 999;

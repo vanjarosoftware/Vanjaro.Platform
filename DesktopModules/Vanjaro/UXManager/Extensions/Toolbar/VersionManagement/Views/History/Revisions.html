@@ -19,17 +19,17 @@
                                 <div class="float-left"><img class="preview_pic" src="{{version.PhotoURL}}" /></div>
                                 <span class="author_name pt-sm">{{version.DisplayName}} </span>
                             </div>
-                            <div class="col-4 text-right p-none pt-xs revision_name">
+                            <div class="col-4 text-end p-none pt-xs revision_name">
                                 <div ng-click="Click_ViewLogs(version)">
                                     <p class="active" ng-show="version.IsLogsExist">
-                                        <span class="badge font-sm badge-success " data-toggle="tooltip" data-placement="bottom" data-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==true && ui.data.PublicVersion.Value==version.Version}}"><span class="chaticon"><em class="fas fa-comment-dots"></em></span> <span>{{version.State.Name}} </span></span>
-                                        <span class="badge font-sm badge-light" data-toggle="tooltip" data-placement="bottom" data-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==true && ui.data.PublicVersion.Value!=version.Version}}"><span class="chaticon"><em class="fas fa-comment-dots"></em></span><span>{{version.State.Name}}</span></span>
-                                        <span class="badge font-sm badge-primary" data-toggle="tooltip" data-placement="bottom" data-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==false}}"><span class="chaticon"><em class="fas fa-comment-dots"></em></span><span> {{version.State.Name}}</span></span>
+                                        <span class="badge font-sm badge-success " data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==true && ui.data.PublicVersion.Value==version.Version}}"><span class="chaticon"><em class="fas fa-comment-dots"></em></span> <span>{{version.State.Name}} </span></span>
+                                        <span class="badge font-sm badge-light" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==true && ui.data.PublicVersion.Value!=version.Version}}"><span class="chaticon"><em class="fas fa-comment-dots"></em></span><span>{{version.State.Name}}</span></span>
+                                        <span class="badge font-sm bg-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==false}}"><span class="chaticon"><em class="fas fa-comment-dots"></em></span><span> {{version.State.Name}}</span></span>
                                     </p>
                                     <p class="active" ng-hide="version.IsLogsExist">
-                                        <span class="badge font-sm badge-success " data-toggle="tooltip" data-placement="bottom" data-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==true && ui.data.PublicVersion.Value==version.Version}}"><span>{{version.State.Name}} </span></span>
-                                        <span class="badge font-sm badge-light" data-toggle="tooltip" data-placement="bottom" data-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==true && ui.data.PublicVersion.Value!=version.Version}}"><span>{{version.State.Name}}</span></span>
-                                        <span class="badge font-sm badge-primary" data-toggle="tooltip" data-placement="bottom" data-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==false}}"><span> {{version.State.Name}}</span></span>
+                                        <span class="badge font-sm badge-success " data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==true && ui.data.PublicVersion.Value==version.Version}}"><span>{{version.State.Name}} </span></span>
+                                        <span class="badge font-sm badge-light" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==true && ui.data.PublicVersion.Value!=version.Version}}"><span>{{version.State.Name}}</span></span>
+                                        <span class="badge font-sm bg-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="{{version.State.Name}}" ng-show="{{version.IsPublished==false}}"><span> {{version.State.Name}}</span></span>
                                     </p>
                                 </div>
                                 <p class="date m-none"><span>{{version.CreatedOn | date:'MMM dd hh:mm a'}} </span></p>

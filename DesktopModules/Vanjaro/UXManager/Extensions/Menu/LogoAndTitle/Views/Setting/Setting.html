@@ -39,15 +39,15 @@
         <uilayout name="TabsContentLogo" attr-ng-show="ShowLogo_TitleTab">
             <uitemplate>
                 <div id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseOne">
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="headingOne">
+                            <a class="accordion-button"  href="javascript:;"  data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 [L:LogoandTitle]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"  data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 [uilayout:LogoandTitle]
                             </div>
                         </div>
@@ -58,15 +58,15 @@
         <uilayout name="TabsContentIcon" attr-ng-show="ShowIconTab">
             <uitemplate>
                 <div id="accordion1">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseTwo">
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="headingTwo">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 [L:Icon]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseTwo" class="collapse show" data-parent="#accordion1">
-                            <div class="card-body">
+                        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordion1">
+                            <div class="accordion-body">
                                 [uilayout:Icon]
                             </div>
                         </div>
@@ -157,7 +157,7 @@
         </uilayout>
         <uilayout name="default">
             <uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button type="button" class="btn btn-sm btn-primary " id="Update" ng-click="Click_Save('Update')">[L:Update]</button>
                 </div>
             </uitemplate>

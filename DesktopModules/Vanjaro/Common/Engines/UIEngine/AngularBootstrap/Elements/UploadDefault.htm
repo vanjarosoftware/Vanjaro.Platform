@@ -33,8 +33,8 @@
                     <span class="fas fa-folder" ng-click="[name]Click_SelectGetFiles(folder)"></span>
                     <span class="folders" style="font-weight: bold;" ng-if="[name]Folders[0].Value==folder.Value" id="folders{{folder.Value}}" ng-click="[name]Click_SelectGetFiles(folder)">{{folder.Text}}</span>
                     <span class="folders" ng-if="[name]Folders[0].Value!=folder.Value" id="folders{{folder.Value}}" ng-click="[name]Click_SelectGetFiles(folder)">{{folder.Text}}</span>
-                    <div class="dropdown show float-right dropbtn" ng-if="ui.data.IsFileManager!=undefined">
-                        <a id="dropdownMenuLink" class="dropdownmenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="dropdown show float-end dropbtn" ng-if="ui.data.IsFileManager!=undefined">
+                        <a id="dropdownMenuLink" class="dropdownmenu " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <em class="fas fa-ellipsis-v "></em>
                         </a><div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item box-icon" ng-click="CreateFolderPopUp(folder.Value)"><em class="fas fa-folder "></em>[L:CreateFolder]</a>
@@ -51,10 +51,10 @@
 
                         </div>
                     </div>
-                    <span class="action-icon float-right arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='DatabaseFolderProvider'"><em class="fas fa-database"></em></span>
-                    <span class="action-icon float-right arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='AzureFolderProvider'"><em class="fab fa-microsoft"></em></span>
-                    <span class="action-icon float-right arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Type=='secure'"><em class="fas fa-shield-alt"></em></span>
-                    <span class="action-icon float-right arrowicon" data-toggle="tooltip" data-placement="top" ng-if="folder.Lock"><em class="fas fa-lock"></em></span>
+                    <span class="action-icon float-end arrowicon" data-bs-toggle="tooltip" data-bs-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='DatabaseFolderProvider'"><em class="fas fa-database"></em></span>
+                    <span class="action-icon float-end arrowicon" data-bs-toggle="tooltip" data-bs-placement="top" ng-if="folder.Type=='database' && folder.ProviderType=='AzureFolderProvider'"><em class="fab fa-microsoft"></em></span>
+                    <span class="action-icon float-end arrowicon" data-bs-toggle="tooltip" data-bs-placement="top" ng-if="folder.Type=='secure'"><em class="fas fa-shield-alt"></em></span>
+                    <span class="action-icon float-end arrowicon" data-bs-toggle="tooltip" data-bs-placement="top" ng-if="folder.Lock"><em class="fas fa-lock"></em></span>
                 </div>
                 <ul class="rootfolder" ng-class="{show: [name]Folders[0].Value==folder.Value}">
                     <li ng-repeat="folder in folder.children" ng-include="'[name]folders_renderer.html'">
@@ -86,8 +86,8 @@
                                         <input type="checkbox" class="chkfid" cbfid="{{row.Value}}" ng-click="ShowHideMenuItem()" />
                                     </td>
                                     <td class="r_file" st-ratio="37" style="width:37%;text-align: left;">
-                                        <span class="filenametext friendlyname" ng-if="![name]disableselectfile" fid="{{row.Value}}" title="{{row.Text}}" ng-click="[name]Click_SelectFile($event,row.Value)" label="{{row.Text}}"><em class="fas fa-file mr-sm-2"></em>{{row.Text}}</span>
-                                        <span class="filenametext friendlyname" ng-if="[name]disableselectfile" fid="{{row.Value}}" title="{{row.Text}}" label="{{row.Text}}"><em class="fas fa-file mr-sm-2"></em>{{row.Text}}</span>
+                                        <span class="filenametext friendlyname" ng-if="![name]disableselectfile" fid="{{row.Value}}" title="{{row.Text}}" ng-click="[name]Click_SelectFile($event,row.Value)" label="{{row.Text}}"><em class="fas fa-file me-2"></em>{{row.Text}}</span>
+                                        <span class="filenametext friendlyname" ng-if="[name]disableselectfile" fid="{{row.Value}}" title="{{row.Text}}" label="{{row.Text}}"><em class="fas fa-file me-2"></em>{{row.Text}}</span>
                                     </td>
                                     <td class="r_file" st-ratio="30" style="width:30%;">
                                         <span>{{row.DateModified}}</span>
@@ -96,8 +96,8 @@
                                         <span style="float:right;">{{row.Size}}</span>
                                     </td>
                                     <td class="r_file" st-ratio="10" style="width: 10%;">
-                                        <div class="dropdown show float-right dropbtn " ng-if="ui.data.IsFileManager!=undefined">
-                                            <a id="dropdownMenuLink" class="dropdownmenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="dropdown show float-end dropbtn " ng-if="ui.data.IsFileManager!=undefined">
+                                            <a id="dropdownMenuLink" class="dropdownmenu " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <em class="fas fa-ellipsis-v "></em>
                                             </a>
                                             <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
@@ -151,8 +151,8 @@
                                         </span>
                                     </td>
                                     <td ng-if="[name]disableselectfile" class="dropdownimgicon">
-                                        <div class="dropdown show float-right dropbtn " ng-if="ui.data.IsFileManager!=undefined">
-                                            <a id="dropdownMenuLink" class="dropdownmenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="dropdown show float-end dropbtn " ng-if="ui.data.IsFileManager!=undefined">
+                                            <a id="dropdownMenuLink" class="dropdownmenu " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <em class="fas fa-ellipsis-v "></em>
                                             </a>
                                             <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
@@ -180,7 +180,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row esc text-right d-none">
+            <div class="row esc text-end d-none">
                 <div class="col-12">
                     <strong>[SELECT]</strong> a file to save, or <strong style="cursor:pointer;" id="[name]ShowFileBrowseSpan" ng-click="[name]Click_FileUpoad()">[ESC]</strong><span> to cancel</span>
                 </div>
@@ -193,7 +193,7 @@
                     <div class="third_link">
                         <input type="text" id="[name]AddLink" ng-model="[value]" ng-keypress="enterLink($event)" validateurl="true" required="required" />
                         <div class="esc">
-                            <span class="float-right">
+                            <span class="float-end">
                                 Press <strong style="cursor:pointer;" id="[name]ShowFileLinkStrong" ng-click="[name]Click_AddLink('[name]')">[ENTER]</strong> to save, or <strong style="cursor:pointer;" id="[name]ShowFileLinkSpan" ng-click="[name]Click_FileUpoad()">[ESC]</strong><span> to cancel</span>
                             </span>
                         </div>

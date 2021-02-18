@@ -28,7 +28,7 @@
             });
         }
         else
-            window.parent.RenderBlock(searchresult);
+            window.parent.RenderBlock(searchinput);
     };
 
     $scope.$watch('ui.data.Template.Value', function (newValue, oldValue) {

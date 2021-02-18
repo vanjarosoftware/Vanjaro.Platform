@@ -9,6 +9,7 @@ global.VJLocalBlocksMarkup = '';
 global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
 global.IsVJEditorSaveCall;
+global.IsVJCBRendered = false;
 
 $(document).ready(function () {
 
@@ -92,8 +93,8 @@ $(document).ready(function () {
 										}
 									});
 
-                                    var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
-									$(window.document.body).append(block).find('[data-dismiss="modal"]').trigger('click', [false]);
+									var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
+									$(window.document.body).append(block).find('[data-bs-dismiss="modal"]').trigger('click', [false]);
 								}
 							}
 						});
@@ -117,7 +118,7 @@ $(document).ready(function () {
 								'RequestVerificationToken': sf.getAntiForgeryValue()
 							},
 							success: function (data) {
-								$(window.parent.document.body).find('[data-dismiss="modal"]').click();
+								$(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
 								parent.OpenPopUp(null, 600, 'center', 'Install', ExtensionURL, 800);
 							}
 						});
@@ -388,7 +389,7 @@ $(document).ready(function () {
 									backdrop: 0
 								},
 								components: vjcomps || VJLandingPage.html,
-								style: VJLandingPage.css,
+								style: eval(VJLandingPage.style) || VJLandingPage.css,
 								showOffsets: 1,
 								avoidInlineStyle: 1,
 								noticeOnUnload: 0,
@@ -1631,6 +1632,8 @@ $(document).ready(function () {
 										}
 									});
 								}
+								else if (bmodel != undefined && bmodel.attributes != undefined && bmodel.attributes.attributes != undefined && bmodel.attributes.attributes.type == 'VjCustomBlock')
+									RenderCustomBlock(model, bmodel);
 								else if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes["data-block-type"] != undefined)
 									RenderBlock(model, bmodel);
 							});
@@ -2211,30 +2214,6 @@ $(document).ready(function () {
 									$(model.components().models[0].getEl()).removeClass('gjs-dashed');
 							});
 
-							VjEditor.on('styleable:change', () => {
-
-								var model = VjEditor.getSelected();
-
-								if (typeof model != 'undefined') {
-
-									var $globalblockwrapper = $(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]');
-
-                                    if ($globalblockwrapper.length && !$.isEmptyObject(model.getStyle())) {
-
-                                        var result = VjEditor.CodeManager.getCode(model, 'css', { cssc: VjEditor.CssComposer });
-                                        var canvasBody = $(VjEditor.Canvas.getBody());
-                                        var style = canvasBody.find('style#' + model.ccid + ':contains(' + result.split("{")[0] + '{)');
-                                        
-                                        if (style.length <= 0)
-                                            canvasBody.append('<style id=' + model.ccid + '>' + result + '</style>');
-										else
-                                            style.replaceWith('<style id=' + model.ccid + '>' + result + '</style>');
-
-                                        model.setStyle('');
-									}
-								}
-							});
-
 							VjEditor.on('component:styleUpdate', (model, property) => {
 
 								if (property == "color" && typeof event != "undefined" && $(event.target).parents(".gjs-sm-property.gjs-sm-color").length) {
@@ -2551,6 +2530,33 @@ $(document).ready(function () {
 								}
 							});
 
+							VjEditor.on('storage:start:store', function (Data) {
+								if (Data != undefined && Data != '') {
+									var globalblocks = [];
+									$.each(getAllComponents(), function (k, v) {
+										if (v.attributes.type == "globalblockwrapper" && $(v.getEl()).find('.fa-unlock').length <= 0) {
+											try {
+												if (v.attributes != undefined)
+													v.attributes.content = '';
+												var content = VjEditor.runCommand("export-component", {
+													component: v.attributes.components.models[0]
+												});
+												if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
+													var item = {
+														guid: v.attributes.attributes['data-guid'],
+														html: content.html,
+														css: content.css,
+													};
+													globalblocks.push(item);
+												}
+											}
+											catch (err) { console.log(err); }
+										}
+									});
+									Data.globalblocks = JSON.stringify(globalblocks);
+								}
+							});
+
 							VjEditor.on('storage:error', (err) => {
 								swal({ title: "Error", text: `${err}`, type: "error", });
                             });
@@ -2591,7 +2597,8 @@ $(document).ready(function () {
 
 								if (Data != null && Data != '' && Data.RedirectAfterm2v != null && typeof Data.RedirectAfterm2v != "undefined")
 									window.location.href = Data.RedirectAfterm2v;
-
+								if (IsVJCBRendered)
+									window.parent.location.reload();
 							});
 
 							var iframeBody = VjEditor.Canvas.getBody();
@@ -2650,7 +2657,7 @@ $(document).ready(function () {
 							});
 
 							//Tooltip
-							$('[data-toggle="tooltip"]').tooltip();
+							$('[data-bs-toggle="tooltip"]').tooltip();
 
 							$('.block-elements .blockItem').on("click", function (e) {
 								var messagesrc = CurrentExtTabUrl + "&guid=" + $(this).attr('guid');
@@ -3040,10 +3047,6 @@ global.ChangeBlockType = function (query) {
 };
 
 function RunSaveCommand() {
-	$.each(getAllComponents(), function (k, v) {
-		if (v.attributes.type == "globalblockwrapper" && $(v.getEl()).find('.fa-unlock').length <= 0)
-			UpdateGlobalBlock(v);
-	});
 	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
 	if (GetParameterByName('m2v', parent.window.location) != null)
         editor.StorageManager.getStorages().remote.attributes.params.m2v = true;

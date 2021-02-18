@@ -11,7 +11,7 @@ using Vanjaro.UXManager.Library.Entities.Shortcut;
 
 namespace Vanjaro.UXManager.Extensions.Block.Custom
 {
-    public class Custom : Core.Entities.Interface.IBlock, IShortcut
+    public class Custom : Core.Entities.Interface.IBlock
     {
         public string Category => "Custom";
 

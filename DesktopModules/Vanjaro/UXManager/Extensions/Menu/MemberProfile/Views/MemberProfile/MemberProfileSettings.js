@@ -72,7 +72,7 @@
         if (mnValidationService.DoValidationAndSubmit('', 'memberprofile_memberprofilesettings')) {
             common.webApi.post('memberprofile/UpdateProfilePropertyLocalization', '', $scope.ui.data.ProfilePropertyLocalization.Options).success(function (Response) {
                 if (Response.IsSuccess) {
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                    $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     //window.parent.ShowNotification($scope.ui.data.ProfileProperty.Options.ProfileProperty.PropertyName, Response.Message, 'success');
                 }
                 else {
