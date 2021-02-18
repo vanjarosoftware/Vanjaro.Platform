@@ -41,15 +41,15 @@
         <uilayout name="TabsContentBasic" attr-access-roles="admin,user" attr-ng-show="ShowUser_accountTab">
             <uitemplate>
                 <div id="accordion2">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#BasicSetting">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#BasicSetting">
                                 [L:BasicSetting]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="BasicSetting" class="collapse show" data-parent="#accordion2">
-                            <div class="card-body">
+                        <div id="BasicSetting" class="accordion-collapse collapse show"  data-bs-parent="#accordion2">
+                            <div class="accordion-body">
                                 [uilayout:BasicSetting]
                             </div>
                         </div>
@@ -67,18 +67,18 @@
         <uilayout name="TabsContentProfile" attr-ng-show="ShowUser_profileTab">
             <uitemplate>
                 <div id="accordion">
-                    <div mn-ng-repeat="cname in ui.data.ProfilePropertiesByCategories.Options" class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapse_{{cname.Key| removeSpacesThenLowercase}}">
+                    <div mn-ng-repeat="cname in ui.data.ProfilePropertiesByCategories.Options" class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapse_{{cname.Key| removeSpacesThenLowercase}}">
                                 {{cname.Value}}
-                                <em mn-ng-class="$index != 0  ? 'fa fa-caret-right float-right' : 'fa fa-caret-down float-right'"></em>
+                                <em mn-ng-class="$index != 0  ? 'fa fa-caret-right float-end' : 'fa fa-caret-down float-end'"></em>
                             </a>
                         </div>
-                        <div id="collapse_{{cname.Key| removeSpacesThenLowercase}}" mn-ng-class="$index != 0 ? 'collapse':'collapse show'" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapse_{{cname.Key| removeSpacesThenLowercase}}" mn-ng-class="$index != 0 ? 'accordion-collapse collapse':'accordion-collapse collapse show'"  data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 <div mn-ng-repeat="option in ui.data.ProfileProperties.Options">
                                     <div class="form-group" data-datatype="textbox" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&(option.ControlType== 'Text'|| option.ControlType== 'Unknown')&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
-                                        <label class="" for="setting_setting1textbox1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <label class="" for="setting_setting1textbox1_{{option.ProfilePropertyDefinition.PropertyName}}"  data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control control-background ng-pristine ng-untouched ng-valid ng-valid-required" id="setting_setting1textbox1_{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue" aria-describedby="setting_setting1textbox1_{{option.ProfilePropertyDefinition.PropertyName}}-addon" maxlength="{{option.ProfilePropertyDefinition.Length}}">
                                         </div>
@@ -86,21 +86,21 @@
                                     </div>
 
                                     <div class="form-group" data-datatype="dropdownlist" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&option.ControlType== 'Country'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
-                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}"  data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
                                         <div class="input-group">
                                             <select class="form-control ng-pristine ng-valid ng-touched" mn-ng-options="country.Id as country.FullName for country in ui.data.Countries.Options" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue" mn-ng-change="Change_Country(option.ProfilePropertyDefinition,'true')"></select>
                                         </div>
                                     </div>
 
                                     <div class="form-group" data-datatype="dropdownlist" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&option.ControlType == 'Region'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
-                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}"  data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
                                         <div class="input-group">
                                             <select class="form-control ng-pristine ng-valid ng-touched {{option.ControlType}}" mn-ng-options="region.Value as region.Text for region in Regions" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue"></select>
                                         </div>
                                     </div>
 
                                     <div class="form-group" data-datatype="dropdownlist" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&(option.ControlType == 'TimeZoneInfo'||option.ControlType=='TimeZone')&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
-                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}"  data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
                                         <div class="input-group">
                                             <select class="form-control ng-pristine ng-valid ng-touched" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue">
                                                 <option mn-ng-repeat="x in ui.data.Time_Zones.Options" value="{{x.Id}}">{{x.DisplayName}}</option>
@@ -109,7 +109,7 @@
                                     </div>
 
                                     <div class="form-group" data-datatype="dropdownlist" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&option.ControlType == 'Locale'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
-                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}"  data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
                                         <div class="input-group">
                                             <select class="form-control ng-pristine ng-valid ng-touched" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue">
                                                 <option mn-ng-repeat="x in ui.data.Active_Locales.Options" value="{{x.Code}}">{{x.Text}}</option>
@@ -118,13 +118,13 @@
                                     </div>
 
                                     <div class="form-group" data-datatype="textarea" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&option.ControlType == 'Multi-line Text'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
-                                        <label class="" for="setting_setting1textarea2_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <label class="" for="setting_setting1textarea2_{{option.ProfilePropertyDefinition.PropertyName}}"  data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
                                         <textarea class="form-control ng-pristine ng-untouched ng-valid" id="setting_setting1textarea2_{{option.ProfilePropertyDefinition.PropertyName}}" rows="4" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue" maxlength="{{option.ProfilePropertyDefinition.Length}}"></textarea>
                                     </div>
 
                                     <!--Start Checkbox and TrueFalse-->
                                     <div class="form-group" data-datatype="toggle" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&(option.ControlType == 'TrueFalse'||option.ControlType == 'Checkbox')&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
-                                        <label class="" for="setting_setting1toggle1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <label class="" for="setting_setting1toggle1_{{option.ProfilePropertyDefinition.PropertyName}}"  data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
                                         <div class="btn-group truefalse" role="group" aria-label="...">
                                             <button type="button" class="btn " ng-click="option.ProfilePropertyDefinition.PropertyValue = !option.ProfilePropertyDefinition.PropertyValue" ng-class="option.ProfilePropertyDefinition.PropertyValue ? 'btn-primary active' : 'btn-default'">[L:ToggleYes]</button>
                                             <button type="button" class="btn " ng-click="option.ProfilePropertyDefinition.PropertyValue = !option.ProfilePropertyDefinition.PropertyValue" ng-class="!option.ProfilePropertyDefinition.PropertyValue ? 'btn-primary disabled' : 'btn-default'">[L:ToggleNo]</button>
@@ -133,7 +133,7 @@
                                     <!--End Checkbox and TrueFalse-->
                                     <!--Start List-->
                                     <div class="form-group" data-datatype="dropdownlist" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&option.ControlType == 'List'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
-                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <label class="" for="setting_setting1dropdownlist1_{{option.ProfilePropertyDefinition.PropertyName}}"  data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
                                         <div class="input-group">
                                             <select class="form-control ng-pristine ng-valid ng-touched" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue">
                                                 <option mn-ng-repeat="x in option.ListEntries" ng-selected="option.ProfilePropertyDefinition.PropertyValue==x.Value" value="{{x.Value}}">{{x.Text}}</option>
@@ -143,7 +143,7 @@
                                     <!--End List-->
                                     <!--Start Integer-->
                                     <div class="form-group" data-datatype="integer" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&option.ControlType == 'Integer'&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
-                                        <label class="" for="setting_setting1integer1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <label class="" for="setting_setting1integer1_{{option.ProfilePropertyDefinition.PropertyName}}"  data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
                                         <div class="input-group">
                                             <input type="number" class="form-control ng-pristine ng-invalid ng-valid-min ng-invalid-required ng-touched" id="setting_setting1integer1_{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue">
                                         </div>
@@ -151,7 +151,7 @@
                                     <!--End Integer-->
                                     <!--Start Date-->
                                     <div class="form-group {{option.ControlType}}" data-datatype="date" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(!option.ProfilePropertyDefinition.ReadOnly)&&(option.ControlType == 'Date' || option.ControlType == 'DateTime')&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
-                                        <label class="" for="setting_setting1date1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <label class="" for="setting_setting1date1_{{option.ProfilePropertyDefinition.PropertyName}}"  data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
                                         <div class="input-group date_picker font-datetime">
                                             <input type="text" class="form-control {{option.ControlType}}" placeholder="&#xf073;" mn-ng-model="option.ProfilePropertyDefinition.PropertyValue" value="{{row.startTime}}">
                                         </div>
@@ -164,7 +164,7 @@
                                     <!--End RichText-->
                                     <!--Start label control-->
                                     <div class="form-group {{option.ControlType}}" data-datatype="label" data-label="{{option.ProfilePropertyDefinition.PropertyName}}" data-name="{{option.ProfilePropertyDefinition.PropertyName}}" mn-ng-if="(option.ProfilePropertyDefinition.ReadOnly)&& option.ProfilePropertyDefinition.PropertyCategory==cname.Key">
-                                        <label class="" for="setting_setting1label1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                                        <label class="" for="setting_setting1label1_{{option.ProfilePropertyDefinition.PropertyName}}"  data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
                                         <div class="input-group date_picker font-datetime">
                                             <div mn-ng-bind-html="Parse(option)"></div>
                                         </div>
@@ -182,22 +182,22 @@
         <!--Permisssion-->
         <uilayout name="ControlRichText">
             <uitemplate>
-                <label class="richtextlabel" for="setting_setting1RichText1_{{option.ProfilePropertyDefinition.PropertyName}}" data-toggle="tooltip" data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
+                <label class="richtextlabel" for="setting_setting1RichText1_{{option.ProfilePropertyDefinition.PropertyName}}"  data-bs-toggle="tooltip" data-bs-placement="bottom"  data-original-title="{{option.PropertyHelpString}}">{{option.PropertyNameString}}</label>
             </uitemplate>
             <uielement name="RichText" attr-class="editorcontrol" attr-ng-model="option.ProfilePropertyDefinition.PropertyValue" control="texteditor" profile="Minimal"></uielement>
         </uilayout>
         <uilayout name="TabsContentPermission" attr-access-roles="admin" attr-class="user-roles" attr-ng-show="ShowPermissionsTab">
             <uitemplate>
                 <div id="accordion3">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#PermissionSetting">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#PermissionSetting">
                                 [L:PermissionSetting]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="PermissionSetting" class="collapse show" data-parent="#accordion3">
-                            <div class="card-body">
+                        <div id="PermissionSetting" class="accordion-collapse collapse show"  data-bs-parent="#accordion3">
+                            <div class="accordion-body">
                                 [uilayout:PermissionSetting]
                             </div>
                         </div>
@@ -209,7 +209,7 @@
             <uielement name="SendEmail" control="checkboxtoggle" container-attr-ng-show="false" attr-class="toggle_right" ngmodel="notifyUser"></uielement>
             <uitemplate>
                 <div ng-show="!ShowSearchByRole">
-                    <a ng-click="Click_ShowSearchByRole()" class="float-right permission-icon">
+                    <a ng-click="Click_ShowSearchByRole()" class="float-end permission-icon">
                         <em class="fas fa-plus"></em>
                     </a>
                 </div>
@@ -248,8 +248,8 @@
                 </column>
                 <column name="Actions" width="7">
                     <uitemplate>
-                        <div class="dropdown show float-right dropbtn" mn-ng-show="row.allowDelete">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown show float-end dropbtn" mn-ng-show="row.allowDelete">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -270,15 +270,15 @@
         <uilayout name="TabsContentAudit" attr-access-roles="admin" attr-ng-show="ShowAuditTab">
             <uitemplate>
                 <div id="accordion4">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#AuditSetting">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#AuditSetting">
                                 [L:AuditSetting]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="AuditSetting" class="collapse show" data-parent="#accordion4">
-                            <div class="card-body">
+                        <div id="AuditSetting" class="accordion-collapse collapse show"  data-bs-parent="#accordion4">
+                            <div class="accordion-body">
                                 [uilayout:AuditSetting]
                             </div>
                         </div>
@@ -389,7 +389,7 @@
         <uilayout name="default">
             <uitemplate>
                 <div mn-ng-bind-html="OnLoaded()"></div>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button attr-id="update" type="button" mn-ng-click="Click_Update('update',ui.data.UserDetails.Options)" class="btn btn-sm btn-primary">
                         [L:Update]
                     </button>

@@ -126,7 +126,7 @@
                         if (Response.IsRedirect) {
                             window.parent.location.href = Response.RedirectURL;
                         }
-                        $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                        $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     }
                     else {
                         window.parent.ShowNotification('[LS:SecuritySettings]', Response.Message, 'error');

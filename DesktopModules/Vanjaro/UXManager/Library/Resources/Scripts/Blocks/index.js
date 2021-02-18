@@ -180,7 +180,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 			},
 			onApply: function (imageEditor, imageModel) {
 				if (!$('.optimizing-overlay').length)
-					$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Optimizing Images . . .</h1></div>');
+					$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images</h1></div>');
 				var sf = $.ServicesFramework(-1);
 				var ImageData = {
 					PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
@@ -510,12 +510,14 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 				AddCustomBlock(editor, CustomBlock);
 			};
 
+			$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').css('max-width', 450);
 			editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
 		}
 	});
 
 	//Edit Custom Block
 	editor.Commands.add('edit-custom-block', {
+
 		run: function (editor, sender, block) {
 
 			$("#ModalContent").show();
@@ -603,6 +605,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 			};
 
+			$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').css('max-width', 450);
 			editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
 
 			$('#ToggelBlockGlobal').addClass('disabled');

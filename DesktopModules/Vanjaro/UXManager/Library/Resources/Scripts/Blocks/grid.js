@@ -520,5 +520,5 @@ global.DoubleClick = function (cols) {
 	clearTimeout(timer);
 	prevent = true;
 	ChangeGridColumns(cols);
-	$(window.document.body).find('[data-dismiss="modal"]').click();
+	$(window.document.body).find('[data-bs-dismiss="modal"]').click();
 }

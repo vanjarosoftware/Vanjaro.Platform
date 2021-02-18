@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-sm-2" mn-ng-repeat="option in ui.data.PageLayouts.Options">
                                 <div class="addpage-blocks dropdown pull-right dropbtn">
-                                    <a id="dropdownMenuLink" class="dropdownmenu layouticon" data-toggle="dropdown" aria-haspopup="true" data-nodrag="" aria-expanded="false">
+                                    <a id="dropdownMenuLink" class="dropdownmenu layouticon" data-bs-toggle="dropdown" aria-haspopup="true" data-nodrag="" aria-expanded="false">
                                         <em class="fas fa-ellipsis-v"></em>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -110,41 +110,41 @@
         <uilayout name="TabsContentBasic" attr-ng-show="ShowPage_detailsTab && Show_Tab && (ui.data.PagesTemplate.Options.pageType=='URL'||ui.data.PagesTemplate.Options.pageType=='Folder'||ui.data.PagesTemplate.Options.pageType=='Standard')">
             <uitemplate>
                 <div id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseOne">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseOne">
                                 [L:NavMenu]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapseOne" class="accordion-collapse collapse show"  data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 [uilayout:NavMenu]
                             </div>
                         </div>
                     </div>
-                    <div class="card" mn-ng-if="ui.data.IsDefaultLocale.Options" mn-ng-show="ui.data.PagesTemplate.Options.pageType=='Standard'">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo">
+                    <div class="accordion-item" mn-ng-if="ui.data.IsDefaultLocale.Options" mn-ng-show="ui.data.PagesTemplate.Options.pageType=='Standard'">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse"  data-bs-parent="#accordion" data-bs-target="#collapseTwo">
                                 [L:LiveEditing]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapseTwo" class="accordion-collapse collapse"  data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 [uilayout:LiveEditing]
                             </div>
                         </div>
                     </div>
-                    <div class="card" mn-ng-if="ui.data.IsDefaultLocale.Options" mn-ng-show="ui.data.PagesTemplate.Options.pageType=='Standard'">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree">
+                    <div class="accordion-item" mn-ng-if="ui.data.IsDefaultLocale.Options" mn-ng-show="ui.data.PagesTemplate.Options.pageType=='Standard'">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse"  data-bs-parent="#accordion" data-bs-target="#collapseThree">
                                 [L:Personalization]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseThree" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapseThree" class="accordion-collapse collapse"  data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 [uilayout:Personalization]
                             </div>
                         </div>
@@ -188,15 +188,15 @@
         <uilayout name="TabsContentPermission" attr-ng-if="ui.data.IsDefaultLocale.Options" attr-ng-show="ShowPermissionsTab && Show_Tab">
             <uitemplate>
                 <div id="accordion3">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#PermissionSetting">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#PermissionSetting">
                                 [L:PermissionSetting]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="PermissionSetting" class="collapse show" data-parent="#accordion3">
-                            <div class="card-body">
+                        <div id="PermissionSetting" class="accordion-collapse collapse show"  data-bs-parent="#accordion3">
+                            <div class="accordion-body">
                                 [uilayout:PermissionSetting]
                             </div>
                         </div>
@@ -212,41 +212,41 @@
         <uilayout name="TabsContentSEO" attr-ng-show="ShowSEOTab && Show_Tab">
             <uitemplate>
                 <div id="accordionseo">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#SearchResult">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#SearchResult">
                                 [L:SearchResult]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="SearchResult" class="collapse show" data-parent="#accordionseo">
-                            <div class="card-body">
+                        <div id="SearchResult" class="accordion-collapse collapse show"  data-bs-parent="#accordionseo">
+                            <div class="accordion-body">
                                 [uilayout:SearchResult]
                             </div>
                         </div>
                     </div>
-                    <div class="card" mn-ng-show="pid>0">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionseo" data-target="#URLs">
+                    <div class="accordion-item" mn-ng-show="pid>0">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse"  data-bs-parent="#accordionseo" data-bs-target="#URLs">
                                 [L:URLs]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="URLs" class="collapse" data-parent="#accordionseo">
-                            <div class="card-body">
+                        <div id="URLs" class="accordion-collapse collapse"  data-bs-parent="#accordionseo">
+                            <div class="accordion-body">
                                 [uilayout:URLs]
                             </div>
                         </div>
                     </div>
-                    <div class="card" mn-ng-if="ui.data.IsDefaultLocale.Options">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordionseo" data-target="#Advance">
+                    <div class="accordion-item" mn-ng-if="ui.data.IsDefaultLocale.Options">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse"  data-bs-parent="#accordionseo" data-bs-target="#Advance">
                                 [L:Advance]
-                                <em class="fas fa-caret-right float-right"></em>
+                                <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="Advance" class="collapse" data-parent="#accordionseo">
-                            <div class="card-body">
+                        <div id="Advance" class="accordion-collapse collapse"  data-bs-parent="#accordionseo">
+                            <div class="accordion-body">
                                 [uilayout:Advance]
                             </div>
                         </div>
@@ -283,8 +283,8 @@
         </uilayout>
         <uilayout name="URLs" attr-ng-if="ShowSEOTab && Show_Tab&& pid>0">
             <uitemplate>
-                <div class="float-right" mn-ng-show="ShowSEOTab && pid > 0 && Show_Tab">
-                    <a class="ux-btn ux-btn-hover" data-toggle="modal" data-target="#PagesUrldefaultModal" ng-click="Click_ShowAddURL()" title="[L:AddURL]">
+                <div class="float-end" mn-ng-show="ShowSEOTab && pid > 0 && Show_Tab">
+                    <a class="ux-btn ux-btn-hover" data-bs-toggle="modal" data-bs-target="#PagesUrldefaultModal" ng-click="Click_ShowAddURL()" title="[L:AddURL]">
                         <em class="fas fa-plus"></em>
                     </a>
                 </div>
@@ -304,12 +304,12 @@
                 </column>
                 <column name="Actions" width="6">
                     <uitemplate>
-                        <div class="dropdown float-right dropbtn" mn-ng-if="row.id != -1">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown float-end dropbtn" mn-ng-if="row.id != -1">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item box-icon" ng-click="Click_EditUrl(row)" data-toggle="modal" data-target="#PagesUrldefaultModal">
+                                <a class="dropdown-item box-icon" ng-click="Click_EditUrl(row)" data-bs-toggle="modal" data-bs-target="#PagesUrldefaultModal">
                                     <em class="fas fa-cog mr-xs"></em><span>[L:Edit]</span>
                                 </a>
                                 <a class="dropdown-item box-icon" ng-click="Click_DeleteUrl(row,'update')">
@@ -330,15 +330,15 @@
         <uilayout name="TabsContentScheduling" attr-ng-if="ui.data.IsDefaultLocale.Options" attr-ng-show="Scheduled && Show_Tab">
             <uitemplate>
                 <div id="accordion2">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#SchedulingSetting">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#SchedulingSetting">
                                 [L:SchedulingSetting]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="SchedulingSetting" class="collapse show" data-parent="#accordion2">
-                            <div class="card-body">
+                        <div id="SchedulingSetting" class="accordion-collapse collapse show"  data-bs-parent="#accordion2">
+                            <div class="accordion-body">
                                 [uilayout:SchedulingSetting]
                             </div>
                         </div>
@@ -357,7 +357,7 @@
         <uilayout name="TabsContentDelete" attr-ng-show="ShowDeletedModule&&Show_Tab">
             <uitemplate>
                 <div class="deleteallapps">
-                    <a class="ux-btn ux-btn-hover float-right" title="[LS:DeleteAllApps]" ng-click="Remove_All_Module()">
+                    <a class="ux-btn ux-btn-hover float-end" title="[LS:DeleteAllApps]" ng-click="Remove_All_Module()">
                         <em class="fas fa-eraser"></em>
                     </a>
                 </div>
@@ -370,8 +370,8 @@
                 </column>
                 <column name="Actions" width="8">
                     <uitemplate>
-                        <div class="dropdown show float-right dropbtn">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown show float-end dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -389,8 +389,8 @@
 
         <uilayout name="default" attr-ng-show="Show_Tab">
             <uitemplate>
-                <div class="text-right fixed-footer">
-                    <button type="button" class="btn btn-sm btn-primary float-right" id="Update" mn-ng-click="Click_Save('update')">
+                <div class="text-end fixed-footer">
+                    <button type="button" class="btn btn-sm btn-primary float-end" id="Update" mn-ng-click="Click_Save('update')">
                         [L:Update]
                     </button>
                 </div>
@@ -404,37 +404,37 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title" id="PagesUrldefaultModalLabel"></h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group " data-datatype="dropdownlist" data-label="[L:SiteAlias]" data-name="SiteAlias">
-                                    <label for="setting_detail5dropdownlist0" data-toggle="tooltip" title="" data-original-title="[L:SiteAlias.Tooltip]">[L:SiteAlias]</label>
+                                    <label for="setting_detail5dropdownlist0" data-bs-toggle="tooltip" title="" data-original-title="[L:SiteAlias.Tooltip]">[L:SiteAlias]</label>
                                     <div class="input-group">
                                         <select class="form-control" disabled="disabled" ng-model="ui.data.WorkingPageUrls.Options.saveUrl.SiteAliasKey" ng-options="option.Key as option.Value for option in ui.data.SiteAlias.Options"></select>
                                     </div>
                                 </div>
                                 <div class="form-group " data-datatype="dropdownlist" data-label="[L:URLType]" data-name="URLType">
-                                    <label class="" for="setting_detail5dropdownlist1" data-toggle="tooltip" title="" data-original-title="[L:URLType.Tooltip]" aria-describedby="tooltip921174">[L:URLType]</label>
+                                    <label class="" for="setting_detail5dropdownlist1" data-bs-toggle="tooltip" title="" data-original-title="[L:URLType.Tooltip]" aria-describedby="tooltip921174">[L:URLType]</label>
                                     <div class="input-group">
                                         <select class="form-control" ng-model="ui.data.WorkingPageUrls.Options.saveUrl.StatusCodeKey" ng-options="option.Key as option.Value for option in ui.data.URLType.Options"></select>
                                     </div>
                                 </div>
                                 <div class="form-group " data-datatype="textbox" data-label="[L:URLPath]" data-name="URLPath">
-                                    <label class="" for="setting_detail5textbox2" data-toggle="tooltip" title="" data-original-title="[L:URLPath.Tooltip]">[L:URLPath]</label>
+                                    <label class="" for="setting_detail5textbox2" data-bs-toggle="tooltip" title="" data-original-title="[L:URLPath.Tooltip]">[L:URLPath]</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control control-background ng-pristine ng-untouched ng-valid ng-valid-required" id="setting_detail5textbox2" ng-model="ui.data.WorkingPageUrls.Options.saveUrl.Path" aria-describedby="setting_detail5textbox2-addon">
                                     </div>
                                 </div>
                                 <div ng-show="ui.data.WorkingPageUrls.Options.saveUrl.StatusCodeKey==301" class="form-group " data-datatype="textbox" data-label="[L:QueryString]" data-name="QueryString">
-                                    <label class="" for="setting_detail5textbox3" data-toggle="tooltip" title="" data-original-title="[L:QueryString.Tooltip]" aria-describedby="tooltip438236">[L:QueryString]</label><div class="tooltip fade top" role="tooltip" id="tooltip438236" style="top: 271px; left: 0.78125px; display: block;"><div class="tooltip-arrow" style="left: 50%;"></div><div class="tooltip-inner">[L:QueryString.Tooltip]</div></div>
+                                    <label class="" for="setting_detail5textbox3" data-bs-toggle="tooltip" title="" data-original-title="[L:QueryString.Tooltip]" aria-describedby="tooltip438236">[L:QueryString]</label><div class="tooltip fade top" role="tooltip" id="tooltip438236" style="top: 271px; left: 0.78125px; display: block;"><div class="tooltip-arrow" style="left: 50%;"></div><div class="tooltip-inner">[L:QueryString.Tooltip]</div></div>
                                     <div class="input-group">
                                         <input type="text" class="form-control control-background ng-pristine ng-invalid ng-invalid-required ng-touched" id="setting_detail5textbox3" ng-model="ui.data.WorkingPageUrls.Options.saveUrl.QueryString" aria-describedby="setting_detail5textbox3-addon">
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <div class="text-right">
-                                    <button type="button" class="btn btn-sm btn-primary float-right" id="save" mn-ng-click="Click_UrlAddUpdate('update')">
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-sm btn-primary float-end" id="save" mn-ng-click="Click_UrlAddUpdate('update')">
                                         [L:UpdateUrl]
                                     </button>
                                 </div>

@@ -221,10 +221,14 @@ img.loading {
         margin: 0 5px;
     }
 
-.table-striped > tbody > tr {
-    border: 1px solid #ccc;
-    height: 50px;
-}
+    .scheduler-btn a {
+        color: #212529;
+    }
+
+    .table-striped > tbody > tr {
+        border: 1px solid #ccc;
+        height: 50px;
+    }
 
 /*.vj-ux-manager .table-grid .table > tbody > tr td {
     vertical-align: middle;
@@ -281,4 +285,10 @@ img.loading {
     height: 50px !important;
     margin-left: 0;
     margin-right: 0;
+}
+
+
+.form-control.control-background{
+    width:50%;
+    height:38px;
 }

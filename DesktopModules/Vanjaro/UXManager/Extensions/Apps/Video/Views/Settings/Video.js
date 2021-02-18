@@ -16,7 +16,7 @@
             $('[identifier="settings_video"]').find('.url-add .choosefile').html('<span style="font-family:Arial, Helvetica, sans-serif;">[L:Upload]</span>');
             $('[identifier="settings_video"]').find('.url-add .choosefile').addClass('fa fa-plus');
         }, 10);
-        $(window.parent.document.body).find('[data-dismiss="modal"]').on("click", function (e) {
+        $(window.parent.document.body).find('[data-bs-dismiss="modal"]').on("click", function (e) {
             window.parent.window.VJIsSaveCall = true;
             window.parent.VjEditor.runCommand("save");
         });
@@ -97,7 +97,7 @@
         if (newValue != undefined && newValue != null && newValue.length > 0) {
             setTimeout(function () {
                 $('[fid]').on("dblclick", function (e) {
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                    $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 });
             }, 100);
         }

@@ -478,7 +478,7 @@ global.RenderCustomBlock = function (model, bmodel) {
         model.setStyle('');
     IsVJCBRendered = true;
     if (!$('.optimizing-overlay').length)
-        $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Please wait . . .</h1></div>');
+        $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Please wait</h1></div>');
 };
 
 global.RenderBlock = function (model, bmodel, render) {

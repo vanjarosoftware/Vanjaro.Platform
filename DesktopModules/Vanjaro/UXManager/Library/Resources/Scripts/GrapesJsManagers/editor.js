@@ -85,15 +85,16 @@ $(document).ready(function () {
 										data.Html = data.Html.replace('<app id="' + mid + '"></app>', '<div id="dnn_vj_' + mid + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div>');
 									});
 									var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
-										content: data.Html + '<style>' + data.Css + '</style>',
+                                        content: data.Html + '<style>' + data.Css + '</style>',
+                                        label: '<img src="' + data.ScreenshotPath + '"/><div class="sub-label">Drag & Drop Me</div>',
 										attributes: {
-											class: 'fas fa-th-large floating',
+											class: 'floating',
 											id: 'LibraryBlock'
 										}
 									});
 
-                                    var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
-									$(window.document.body).append(block).find('[data-dismiss="modal"]').trigger('click', [false]);
+									var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
+									$(window.document.body).append(block).find('[data-bs-dismiss="modal"]').trigger('click', [false]);
 								}
 							}
 						});
@@ -117,7 +118,7 @@ $(document).ready(function () {
 								'RequestVerificationToken': sf.getAntiForgeryValue()
 							},
 							success: function (data) {
-								$(window.parent.document.body).find('[data-dismiss="modal"]').click();
+								$(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
 								parent.OpenPopUp(null, 600, 'center', 'Install', ExtensionURL, 800);
 							}
 						});
@@ -171,7 +172,7 @@ $(document).ready(function () {
 		var OptimizeImages = function (optImages, sizes) {
 
 			if (!$('.optimizing-overlay').length)
-				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Optimizing Images . . .</h1></div>');
+				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images</h1></div>');
 
 			if (typeof optImages != 'undefined' && optImages.length > 0) {
 
@@ -181,7 +182,7 @@ $(document).ready(function () {
 
 					var size = sizes.shift();
 
-					$('.gjs-frame').width(size).css('transition', 'none');
+					$('.gjs-frame').width(size).css('transition', 'none');0
 
 					waitForEl('.gjs-frame', size, function () {
 
@@ -202,6 +203,8 @@ $(document).ready(function () {
 				}
 				else {
 
+                    VJIsLocked = 'True';
+
 					//Set Sizes
 					//Trim last character of calcSizes to remove trailing comma
 					image.parent().components().models[0].addAttributes({ 'sizes': calcSizes.slice(0, -1) });
@@ -220,7 +223,7 @@ $(document).ready(function () {
 				setTimeout(function () {
 					$('.vj-wrapper').find('.optimizing-overlay').remove();
 					VjPublishChanges();
-				}, 500);
+                }, 500);
 			}
 		};
 		var optImages = jQuery.grep(getAllComponents(), function (n, i) {
@@ -230,7 +233,7 @@ $(document).ready(function () {
 		if (optImages != undefined && optImages.length > 0) {
 
 			if (!$('.optimizing-overlay').length)
-				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Optimizing Images . . .</h1></div>');
+				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images</h1></div>');
 
 			if ($('.gjs-frame').contents().find("html").hasClass('responsive'))
 				$(".device-manager .device-view#Desktop").trigger("click");
@@ -303,7 +306,7 @@ $(document).ready(function () {
 			}
 
 			if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
-				$(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Please Wait . . .</h1></div>');
+				$(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Please Wait</h1></div>');
 			}
 
 			if ($('#dnn_ContentPane').length > 0)
@@ -2654,7 +2657,7 @@ $(document).ready(function () {
 							});
 
 							//Tooltip
-							$('[data-toggle="tooltip"]').tooltip();
+							$('[data-bs-toggle="tooltip"]').tooltip();
 
 							$('.block-elements .blockItem').on("click", function (e) {
 								var messagesrc = CurrentExtTabUrl + "&guid=" + $(this).attr('guid');
@@ -3046,7 +3049,8 @@ global.ChangeBlockType = function (query) {
 function RunSaveCommand() {
 	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
 	if (GetParameterByName('m2v', parent.window.location) != null)
-		editor.StorageManager.getStorages().remote.attributes.params.m2v = true;
+        editor.StorageManager.getStorages().remote.attributes.params.m2v = true;
+    VJIsLocked = 'False';
 	editor.runCommand("save");
 	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = false;
 	$('#VJBtnPublish').addClass('disabled');

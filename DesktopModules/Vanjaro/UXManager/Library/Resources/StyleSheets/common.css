@@ -63,15 +63,26 @@ html, body, form {
     cursor: pointer;
 }
 
+.vj-ux-manager a:not([href]) {
+    color: inherit;        
+}
+
 .vj-ux-manager .ux-btn {
     margin-left: 10px;
-    color: #5e5e5e;
+    color: #5e5e5e !important;
     padding: 2px;
     font-size: 15px;
 }
 
+.vj-ux-manager .theme-builder-accordion .ux-btn {
+    margin-left: 0;
+    padding: 0;
+
+}
+
 .vj-ux-manager .ux-btn-hover:hover {
-    color: #000;
+
+    color: #000 !important;
     cursor: pointer;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
@@ -100,6 +111,10 @@ html, body, form {
 
 .vj-ux-manager hr.small {
     margin: 2px 0;
+}
+
+.vj-ux-manager hr {
+    opacity: 0.1;
 }
 
 .vj-ux-manager .menuextension .heading {
@@ -162,6 +177,7 @@ html, body, form {
     right: 0 !important;
     left: auto !important;
     transform: none !important;
+    height: fit-content;
 }
 
 .vj-ux-manager .dropdown.dropbtn .dropdownmenu {
@@ -253,10 +269,24 @@ html, body, form {
 
 .vj-ux-manager .table-striped tbody tr:nth-of-type(odd) {
     background-color: #f9f9f9;
+    --bs-table-accent-bg: #f9f9f9;
+}
+
+.vj-ux-manager .table > :not(:last-child) > :last-child > * {
+    border-bottom-color: none;
+}
+
+.vj-ux-manager .table-striped > tbody > tr:nth-of-type(odd) {
+    --bs-table-accent-bg: transparent;
+}
+
+.vj-ux-manager .table > :not(caption) > * > * {
+    border-bottom-width: 0px;
 }
 
 .vj-ux-manager .table-grid .table td {
     padding: 8px;
+    border-bottom-width: 0;
 }
 
 /*Info Message*/
@@ -338,7 +368,7 @@ html, body, form {
 }
 
 .vj-ux-manager .angular-ui-tree {
-    width: 270px;
+    width: 100%;   
 }
 
 .vj-ux-manager .input-group span.fas.fa-caret-down,
@@ -679,6 +709,9 @@ html, body, form {
     border-top: 1px solid #ccc;
 }
 
+    .vj-ux-manager .fixed-footer .btn-link {
+        text-decoration: none;
+    }
 
 .vj-ux-manager .nav-tabs > li > a {
     cursor: pointer;
@@ -865,6 +898,7 @@ uploadinput-button {
 
     .vj-ux-manager .nav-stacked .nav-item .nav-link {
         font-size: 14px;
+        color: #212529;
     }
 
         .vj-ux-manager .nav-stacked .nav-item .nav-link.active,
@@ -897,47 +931,83 @@ uploadinput-button {
         width: 100%;
     }
 
-.vj-ux-manager .card-header {
+.vj-ux-manager .accordion-header {
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: rgba(0,0,0,.03);
+}
+
+.vj-ux-manager .accordion-button:not(.collapsed) {
+    background-color: transparent;
+}
+
+.accordion-button:focus {
+    z-index: 3;
+    border-color: rgba(0,0,0,.125);
+    outline: 0;
+    box-shadow: none;
+}
+
+.vj-ux-manager .accordion-header .accordion-button {
+    font-size: 16px;
+    color: #333;
+    line-height: 20px;
     padding: 10px 15px 7px;
     border-bottom: 1px solid transparent;
+    background-color: transparent;
+    display: inline-block;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
 
-    .vj-ux-manager .card-header .card-link {
-        font-size: 16px;
-        color: #333;
-        line-height: 20px;
-    }
+.vj-ux-manager .accordion-item {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}
 
-.vj-ux-manager .card-link .fa-caret-right,
-.vj-ux-manager .card-link .fa-caret-down {
+.accordion-item:last-of-type .accordion-collapse {
+    border-bottom-width: 0px;
+}
+
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+    border-bottom-width: 0px;
+    border-bottom-color: rgba(0,0,0,.125);
+}
+
+.vj-ux-manager .accordion-button::after {
+    content: none;
+}
+
+.vj-ux-manager .accordion-button .fa-caret-right, .vj-ux-manager .accordion-button .fa-caret-down {
     transform: rotate(0deg);
     transition: .5s transform ease-in-out;
     font-size: 20px;
 }
 
-.vj-ux-manager .card-link.collapsed .fa-caret-right {
+.vj-ux-manager .accordion-button.collapsed .fa-caret-right {
     transform: rotate(0deg);
     transition: .5s transform ease-in-out;
 }
 
-.vj-ux-manager .card-link[aria-expanded="true"] .fa-caret-right {
+.vj-ux-manager .accordion-button[aria-expanded="true"] .fa-caret-right {
     transform: rotate(90deg);
     transition: .5s transform ease-in-out;
 }
 
-.vj-ux-manager .card-link[aria-expanded="true"] .fa-caret-down {
+.vj-ux-manager .accordion-button[aria-expanded="true"] .fa-caret-down {
     transform: rotate(0deg);
     transition: .5s transform ease-in-out;
 }
 
-.vj-ux-manager .card-link.collapsed .fa-caret-down {
+.vj-ux-manager .accordion-button.collapsed .fa-caret-down {
     transform: rotate(-90deg);
     transition: .5s transform ease-in-out;
 }
 
-.vj-ux-manager .card + .card {
+.vj-ux-manager .accordion-item + .accordion-item {
     margin-top: 5px;
 }
 
@@ -983,3 +1053,23 @@ uploadinput-button {
         font-weight: bold !important;
         background: #fff;
     }
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.accordion-body .form-control, .vj-ux-manager select {
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    appearance: auto;
+}
+
+.vj-ux-manager select {
+    height: 38px;
+}
+
+
+.Dropablepage .dropbtn a{
+    color: #7c9eb2;
+    margin-left: 4px;
+}

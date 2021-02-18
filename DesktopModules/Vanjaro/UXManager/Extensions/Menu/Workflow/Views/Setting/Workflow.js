@@ -77,7 +77,7 @@
             }
             common.webApi.post('workflow/UpdateAdvance', '', data).success(function (data) {
                 if (data != null) {
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                    $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 }
             });
         };
@@ -89,7 +89,7 @@
         }
         common.webApi.post('workflow/UpdateDefault', '', data).success(function (data) {
             if (data != null) {
-                $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
             }
         })
     }
@@ -161,7 +161,7 @@
                 }
                 else {
                     $scope.Click_Cancel();
-                    //$(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                    //$(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 }
 
                 if ($scope.WorkflowID != '0' || $scope.WorkflowID == "") {

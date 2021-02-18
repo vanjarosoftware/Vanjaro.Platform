@@ -16,7 +16,7 @@
                         ParentScope.element(".menuextension").scope().Search_PortalAliases = Response.Data.SiteAliases.PortalAliases;
                         ParentScope.element(".menuextension").scope().$apply();
                     }
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                    $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     window.parent.ShowNotification($scope.ui.data.UpdateSiteAliasRequest.Options.HTTPAlias, $scope.sid > 0 ? '[L:DomainUpdated]' : '[L:DomainAdded]', 'success');
                 }
                 else {
