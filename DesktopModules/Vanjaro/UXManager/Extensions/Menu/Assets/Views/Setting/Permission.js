@@ -25,7 +25,7 @@
                         var dom = $(v).parent();
                         if (Response.Data[foid]) {
                             if ($(dom).find('.arrowicon .fa-lock').length <= 0)
-                                $(dom).append('<span class="action-icon float-right arrowicon"><em class="fas fa-lock"></em></span>');
+                                $(dom).append('<span class="action-icon float-end arrowicon"><em class="fas fa-lock"></em></span>');
                         }
                         else {
                             $(dom).find('.arrowicon .fa-lock').remove();
@@ -34,7 +34,7 @@
                 });
 
                 setTimeout(function () {
-                    $(window.parent.document.body).find('.uxmanager-modal [data-dismiss="modal"]').click();
+                    $(window.parent.document.body).find('.uxmanager-modal [data-bs-dismiss="modal"]').click();
                 }, 100);
             }
             else if (Response.HasErrors)

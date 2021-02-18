@@ -11,14 +11,14 @@
             <uielement name="SyncBatchSize" control="textbox"></uielement>
             <uitemplate>
                 <div>
-                    <a ng-click="Click_AddContainer()" class="ux-btn ux-btn-hover float-right ">
+                    <a ng-click="Click_AddContainer()" class="ux-btn ux-btn-hover float-end ">
                         <em class="fas fa-plus"></em>
                     </a>
                 </div>
             </uitemplate>
             <uielement name="Containers" control="dropdownlist" attr-required="true"></uielement>
             <uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button type="button" ng-click="Click_Update()" class="btn btn-sm btn-primary">
                         {{loadcontainer?'[L:Update]':'[L:SelectContainer]'}}
                     </button>

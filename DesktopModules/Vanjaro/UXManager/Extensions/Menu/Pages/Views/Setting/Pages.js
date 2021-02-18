@@ -47,7 +47,7 @@
             $(".submenu").hide();
             return false;
         });
-        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-bs-toggle="tooltip"]').tooltip();
     };
 
 

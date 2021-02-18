@@ -109,9 +109,9 @@ GetPopupURL = function (TabUrl, Param) {
 
 ClosePopUp = function (closeall) {
     if (typeof closeall != 'undefined' && closeall)
-        $('.uxmanager-modal').find('[data-dismiss="modal"]').click();
+        $('.uxmanager-modal').find('[data-bs-dismiss="modal"]').click();
     else
-        $('.uxmanager-modal').last().find('[data-dismiss="modal"]').click();
+        $('.uxmanager-modal').last().find('[data-bs-dismiss="modal"]').click();
 };
 
 OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, removemodals, ModuleId, scrollbars, titleposition) {
@@ -169,7 +169,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title ` + titleposition + `" id="defaultModalLabel"></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body" id="UXRender">
 <img class="loader" alt="Loading" src="` + VjDefaultPath + `loading.gif" />
@@ -259,6 +259,8 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
 
     $modal.find('#defaultModalLabel').text(title);
 
+    $.fn.modal.Constructor.prototype._enforceFocus = function () { }
+
     $modal.modal({
         backdrop: 'static', keyboard: true
     });
@@ -302,7 +304,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
 
     $modal.modal('show');
 
-    $(window.parent.document.body).find('[data-dismiss="modal"]').on("click", function (e, reload) {
+    $(window.parent.document.body).find('[data-bs-dismiss="modal"]').on("click", function (e, reload) {
         if ($(window.document.body).find('.uxmanager-modal').data('edit') == 'edit_module') {
             var mid = $(window.document.body).find('.uxmanager-modal').data('mid');
             if ($('.gjs-frame').contents().find('#dnn_vj_' + mid).length > 0) {
@@ -334,7 +336,7 @@ $(document).keyup(function (e) {
             $modal = $(window.parent.document.body).find('.uxmanager-modal');
 
         if ($modal.length > 0)
-            $modal.find('[data-dismiss="modal"]').click();
+            $modal.find('[data-bs-dismiss="modal"]').click();
     }
 });
 
@@ -391,7 +393,7 @@ $(document).ready(function () {
 				<div class="modal-content">
 					<div class ="modal-header">
 						<h4 class="modal-title"></h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
 						<img class="img-fluid" src=""/>
@@ -403,7 +405,7 @@ $(document).ready(function () {
         $("body").append(modal);
     }
 
-    $('.uxmanager-modal [data-dismiss="modal"]').on("click", function (e) {
+    $('.uxmanager-modal [data-bs-dismiss="modal"]').on("click", function (e) {
         $('#UXpagerender').show().siblings().remove();
     });
 

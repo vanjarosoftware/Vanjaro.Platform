@@ -65,6 +65,20 @@
     left: 315px;
 }
 
-.vj-ux-manager .card {
+.vj-ux-manager .accordion-item {
     margin-top: 5px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    appearance: auto;
+}
+a:not([href]) {
+    color: inherit;
+}
+a:not([href]):hover {
+color: inherit;     
 }

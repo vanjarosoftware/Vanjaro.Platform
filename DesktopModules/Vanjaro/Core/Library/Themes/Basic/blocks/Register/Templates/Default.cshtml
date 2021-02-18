@@ -13,7 +13,7 @@
                     }
                     else
                     {
-                        <label class="registerlabel sr-only" for="displayname">[LS:Data.Block.Register.DisplayNameText]</label>
+                        <label class="registerlabel visually-hidden" for="displayname">[LS:Data.Block.Register.DisplayNameText]</label>
                     }
                     <input type="text" placeholder="[LS:Data.Block.Register.DisplayNamePlaceholderText]" class="displayname" name="displayname" id="displayname" required>
                 </div>
@@ -26,7 +26,7 @@
                         }
                         else
                         {
-                            <label class="registerlabel sr-only" for="username">[LS:Data.Block.Register.UsernameText]</label>
+                            <label class="registerlabel visually-hidden" for="username">[LS:Data.Block.Register.UsernameText]</label>
                         }
                         <input type="text" placeholder="[LS:Data.Block.Register.UsernamePlaceholderText]" name="username" class="username" id="username" required>
                     </div>
@@ -38,7 +38,7 @@
                     }
                     else
                     {
-                        <label class="registerlabel sr-only" for="email">[LS:Data.Block.Register.EmailAddressText]</label>
+                        <label class="registerlabel visually-hidden" for="email">[LS:Data.Block.Register.EmailAddressText]</label>
                     }
 
                     <input type="email" placeholder="[LS:Data.Block.Register.EmailAddressPlaceholderText]" name="email" class="email" id="email" emailrequired="emailrequired" required>
@@ -53,7 +53,7 @@
                         }
                         else
                         {
-                            <label class="registerlabel sr-only" for="password">[LS:Data.Block.Register.PasswordText]</label>
+                            <label class="registerlabel visually-hidden" for="password">[LS:Data.Block.Register.PasswordText]</label>
                         }
                         <input type="password" placeholder="[LS:Data.Block.Register.PasswordPlaceholderText]" name="password" class="password" id="password" required>
                     </div>
@@ -61,7 +61,7 @@
                 @if (Model.Register.TermsPrivacy)
                 {
                     <div class="registerterms form-group">
-                        <label class="sr-only" for="checktermcondition"></label>
+                        <label class="visually-hidden" for="checktermcondition"></label>
                         <input type="checkbox" id="checktermcondition" name="checktermcondition" class="checktermcondition termsofuse" cbrequired="true"><span>[LS:Data.Block.Login.RegisterTermsText] <a href="Terms" target="_blank">[LS:TermsofUse]</a> & <a href="Privacy" target="_blank">[LS:PrivacyPolicy]</a></span>
                     </div>
                 }

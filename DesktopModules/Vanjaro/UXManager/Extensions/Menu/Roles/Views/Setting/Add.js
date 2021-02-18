@@ -66,7 +66,7 @@
                         $scope.ParentScope.ui.data.RoleGroup.Options = data.Data.RoleGroups;
                         $scope.ParentScope.$apply();
                     }
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                    $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     window.parent.ShowNotification($scope.ui.data.Working_RoleDto.Options.name, $scope.rid > 0 ? '[LS:RoleUpdatedSuccess]' : '[LS:RoleCreatedSuccess]', 'success');
                 }
                 else {

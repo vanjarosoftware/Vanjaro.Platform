@@ -289,6 +289,7 @@ a.closeaboutbtn {
 
 #Shortcuts hr {
     margin: 5px 0;
+    opacity:0.1;
 }
 
 div#MenuSettings .sub-menu-hidden {
@@ -724,7 +725,7 @@ div#MenuSettings .parent-menu-hide {
     font-weight: bold;
     margin-left: 2px;
     position: absolute;
-    top: 5px;
+    top: 10px;
 }
 
 .blockItem.registerlink-notification {

@@ -11,11 +11,16 @@
 }
 
 .vj-ux-manager .input-group-append {
-    margin-left: 5px;
+    margin-left: 5px !important;
 }
 
 .vj-ux-manager .buttontesturl {
-    margin-bottom: 40px;
+    margin-bottom: 50px;
+}
+
+.vj-ux-manager .input-group-append .btn-sm  {
+    padding: .47rem .5rem !important;
+    border-radius: 0 .2rem .2rem 0 !important;
 }
 
 .vj-ux-manager tags-input .host {

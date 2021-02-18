@@ -12,7 +12,7 @@
                         </a>
                     </div>
                     <div class="col-4 pl-none">
-                        <a ng-click="Click_AddDomain()" class="ux-btn ux-btn-hover float-right" title="[L:AddDomain]">
+                        <a ng-click="Click_AddDomain()" class="ux-btn ux-btn-hover float-end" title="[L:AddDomain]">
                             <em class="fas fa-plus"></em>
                         </a>
                     </div>
@@ -24,23 +24,23 @@
                 <column name="HTTPAlias" width="85">
                     <uitemplate>
                         <div class="sitename">
-                            <div class="aliasname" data-toggle="tooltip" data-placement="top" data-original-title="{{row.HTTPAlias}}">{{row.HTTPAlias}}</div>
+                            <div class="aliasname" data-bs-toggle="tooltip" data-placement="top" data-original-title="{{row.HTTPAlias}}">{{row.HTTPAlias}}</div>
                             <div class="fontsmall">{{row.CultureCode==""?'[L:Default]':row.CultureCode}}</div>
                         </div>
-                        <div mn-ng-if="row.IsPrimary" class="float-right textinfo"><em class="far fa-check-square"></em></div>
+                        <div mn-ng-if="row.IsPrimary" class="float-end textinfo"><em class="far fa-check-square"></em></div>
                     </uitemplate>
                 </column>
                 <column name="Actions" width="15">
                     <uitemplate>
-                        <div class="dropdown show float-right dropbtn" mn-ng-if="row.HTTPAlias!=ui.data.PortalAliases.Value">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown show float-end dropbtn" mn-ng-if="row.HTTPAlias!=ui.data.PortalAliases.Value">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a ng-click="Click_UpdateSetting(row)" mn-ng-if="!row.IsPrimary" class="dropdown-item box-icon">
                                     <em mn-ng-class="row.IsPrimary? 'far fa-square':'far fa-check-square'"></em><span>[LS:MakePrimary]</span>
                                 </a>
-                                <a class="dropdown-item box-icon" ng-click="Click_Edit(row)" data-toggle="modal">
+                                <a class="dropdown-item box-icon" ng-click="Click_Edit(row)" data-bs-toggle="modal">
                                     <em class="fas fa-cog mr-xs"></em><span>[L:Edit]</span>
                                 </a>
                                 <hr class="m-none" mn-ng-if="row.Deletable">

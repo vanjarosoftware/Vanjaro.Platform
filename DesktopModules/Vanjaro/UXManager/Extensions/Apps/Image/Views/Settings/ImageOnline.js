@@ -12,7 +12,7 @@
 		$('.uiengine-wrapper a[data-target="#admin"]').removeClass("active");
 		$('.uiengine-wrapper a[data-target="#imageonline"]').addClass("active");
 		$scope.ChangeImageProviders();
-		$(window.parent.document.body).find('[data-dismiss="modal"]').on("click", function (e, popup) {
+		$(window.parent.document.body).find('[data-bs-dismiss="modal"]').on("click", function (e, popup) {
 			if (typeof popup === 'undefined') {
 				e.stopImmediatePropagation();
 				$scope.SaveImage();
@@ -78,12 +78,12 @@
 				if (data != "failed") {
 					window.parent.window.VJIsSaveCall = true;
 					$scope.SelectImage(data, true);
-					$(window.parent.document.body).find('[data-dismiss="modal"]').trigger('click', 'close');
+					$(window.parent.document.body).find('[data-bs-dismiss="modal"]').trigger('click', 'close');
 				}
 			});
 		}
 		else
-			$(window.parent.document.body).find('[data-dismiss="modal"]').trigger('click', 'close');
+			$(window.parent.document.body).find('[data-bs-dismiss="modal"]').trigger('click', 'close');
 	};
 
 	$scope.ChangeImageProviders = function () {

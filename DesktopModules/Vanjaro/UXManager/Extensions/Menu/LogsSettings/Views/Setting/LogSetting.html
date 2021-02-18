@@ -14,8 +14,8 @@
                 </column>
                 <column name="Action" width="6">
                     <uitemplate>
-                        <div class="dropdown float-right dropbtn">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown float-end dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -32,7 +32,7 @@
                 <div class="search-info-msg" mn-ng-show="LogSetting.length<=0">[LS:LogSettingsNotAvailable]</div>
             </uitemplate>
             <uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button type="button" ng-click="Click_CancelLogSettings()" class="btn btn-sm btn-default">
                         [L:Cancel]
                     </button>

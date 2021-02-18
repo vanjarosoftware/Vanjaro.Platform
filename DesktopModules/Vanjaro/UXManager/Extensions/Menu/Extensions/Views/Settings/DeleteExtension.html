@@ -2,12 +2,12 @@
     <uiengine provider="AngularBootstrap" identifier="settings_deleteextension" class="deleteextension">
         <uilayout name="default" attr-class="col-md-12">            
             <uitemplate>
-                <div class="float-right textright">
+                <div class="float-end textright">
                     <div class="displayprop">
-                        <a class="ux-btn ux-btn-hover" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:Email]" ng-click="Click_Email()">
+                        <a class="ux-btn ux-btn-hover" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="[L:Email]" ng-click="Click_Email()">
                             <em class="fas fa-envelope"></em>
                         </a>
-                        <a class="ux-btn ux-btn-hover" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:URL]" href="{{SiteURL}}" target="_blank">
+                        <a class="ux-btn ux-btn-hover" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="[L:URL]" href="{{SiteURL}}" target="_blank">
                             <em class="fas fa-link"></em>
                         </a>
                     </div>
@@ -18,14 +18,14 @@
                         <br />
                         <span>{{ui.data.packageDetail.Options.organization}}</span>
                         <br />
-                        <span class="pdescription" data-toggle="tooltip" data-placement="top" data-original-title="{{DescriptionTitle}}">{{ui.data.packageDetail.Options.description}}</span>
+                        <span class="pdescription" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{DescriptionTitle}}">{{ui.data.packageDetail.Options.description}}</span>
                     </div>
                 </div>
             </uitemplate>
             <uielement name="DeleteFiles" ngmodel="DeleteFiles" attr-class="toggle_right" control="checkboxtoggle"></uielement>
             <uitemplate>
                 <hr />
-                <div class="float-right">
+                <div class="float-end">
                     <button type="button" ng-click="Click_Delete()" class="btn btn-sm btn-primary">
                         [L:Delete]
                     </button>

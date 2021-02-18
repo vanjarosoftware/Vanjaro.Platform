@@ -93,8 +93,8 @@ $(document).ready(function () {
 										}
 									});
 
-                                    var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
-									$(window.document.body).append(block).find('[data-dismiss="modal"]').trigger('click', [false]);
+									var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
+									$(window.document.body).append(block).find('[data-bs-dismiss="modal"]').trigger('click', [false]);
 								}
 							}
 						});
@@ -118,7 +118,7 @@ $(document).ready(function () {
 								'RequestVerificationToken': sf.getAntiForgeryValue()
 							},
 							success: function (data) {
-								$(window.parent.document.body).find('[data-dismiss="modal"]').click();
+								$(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
 								parent.OpenPopUp(null, 600, 'center', 'Install', ExtensionURL, 800);
 							}
 						});
@@ -2655,7 +2655,7 @@ $(document).ready(function () {
 							});
 
 							//Tooltip
-							$('[data-toggle="tooltip"]').tooltip();
+							$('[data-bs-toggle="tooltip"]').tooltip();
 
 							$('.block-elements .blockItem').on("click", function (e) {
 								var messagesrc = CurrentExtTabUrl + "&guid=" + $(this).attr('guid');

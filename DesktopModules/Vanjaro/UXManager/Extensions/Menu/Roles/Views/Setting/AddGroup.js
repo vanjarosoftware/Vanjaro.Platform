@@ -15,7 +15,7 @@
                         ParentScope.element(".menuextension").scope().ui.data.RoleGroup.Options = data.Data.AllRoleGroup;
                         ParentScope.element(".menuextension").scope().$apply();
                     }
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                    $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     window.parent.ShowNotification($scope.ui.data.Working_RoleGroupDto.Options.name, '[L:RoleGroupUpdatedSuccess]', 'success');
                 }
                 else {
