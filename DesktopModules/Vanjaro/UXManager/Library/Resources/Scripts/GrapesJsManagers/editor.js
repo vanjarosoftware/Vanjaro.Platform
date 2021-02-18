@@ -172,7 +172,7 @@ $(document).ready(function () {
 		var OptimizeImages = function (optImages, sizes) {
 
 			if (!$('.optimizing-overlay').length)
-				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images . . .</h1></div>');
+				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images</h1></div>');
 
 			if (typeof optImages != 'undefined' && optImages.length > 0) {
 
@@ -231,7 +231,7 @@ $(document).ready(function () {
 		if (optImages != undefined && optImages.length > 0) {
 
 			if (!$('.optimizing-overlay').length)
-				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images . . .</h1></div>');
+				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images</h1></div>');
 
 			if ($('.gjs-frame').contents().find("html").hasClass('responsive'))
 				$(".device-manager .device-view#Desktop").trigger("click");
@@ -304,7 +304,7 @@ $(document).ready(function () {
 			}
 
 			if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
-				$(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Please Wait . . .</h1></div>');
+				$(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Please Wait</h1></div>');
 			}
 
 			if ($('#dnn_ContentPane').length > 0)
