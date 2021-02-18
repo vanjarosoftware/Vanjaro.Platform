@@ -203,6 +203,8 @@ $(document).ready(function () {
 				}
 				else {
 
+                    VJIsLocked = 'True';
+
 					//Set Sizes
 					//Trim last character of calcSizes to remove trailing comma
 					image.parent().components().models[0].addAttributes({ 'sizes': calcSizes.slice(0, -1) });
@@ -221,7 +223,7 @@ $(document).ready(function () {
 				setTimeout(function () {
 					$('.vj-wrapper').find('.optimizing-overlay').remove();
 					VjPublishChanges();
-				}, 500);
+                }, 500);
 			}
 		};
 		var optImages = jQuery.grep(getAllComponents(), function (n, i) {
@@ -3047,7 +3049,8 @@ global.ChangeBlockType = function (query) {
 function RunSaveCommand() {
 	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
 	if (GetParameterByName('m2v', parent.window.location) != null)
-		editor.StorageManager.getStorages().remote.attributes.params.m2v = true;
+        editor.StorageManager.getStorages().remote.attributes.params.m2v = true;
+    VJIsLocked = 'False';
 	editor.runCommand("save");
 	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = false;
 	$('#VJBtnPublish').addClass('disabled');
