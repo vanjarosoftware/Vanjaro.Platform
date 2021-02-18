@@ -968,6 +968,15 @@ div#MenuSettings .parent-menu-hide {
     color: #495157;
 }
 
+.gjs-custom-code .CodeMirror {
+    border: 1px solid #d3d0d0;
+    background: #fff;
+}
+
+.gjs-custom-code .CodeMirror-gutters {
+    background: #fafafa;
+}
+
 #ModalContent #CategoryGroup {
     position: relative;
 }
@@ -977,7 +986,7 @@ div#MenuSettings .parent-menu-hide {
     display: block;
     line-height: normal;
     color: #495157;
-    margin-top: 15px;
+    margin: 15px 0 10px;
 }
 
 #ModalContent .error,
@@ -1003,6 +1012,7 @@ div#MenuSettings .parent-menu-hide {
     transition: border-color .25s;
     opacity: 0.6;
     text-transform: capitalize;
+    appearance: auto;
 }
 
     #ModalContent input:focus,
@@ -1056,6 +1066,10 @@ div#MenuSettings .parent-menu-hide {
 
 #ModalContent .custom-block-disabled {
     cursor: default;
+}
+
+.gjs-custom-code .gjs-btn-prim {
+    margin-top: 15px;
 }
 
 .gjs-custom-code .gjs-btn-import__custom-code {

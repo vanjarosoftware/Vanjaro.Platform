@@ -42,6 +42,8 @@ namespace Vanjaro.Core.Providers
             {
                 if (!string.IsNullOrEmpty(Key))
                 {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
                     WebClient client = new WebClient();
                     Uri Link = new Uri("https://pixabay.com/api/?key=" + Key);
                     string jsonString = client.DownloadString(Link);

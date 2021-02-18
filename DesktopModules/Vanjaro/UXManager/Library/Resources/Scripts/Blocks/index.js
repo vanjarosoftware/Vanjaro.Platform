@@ -461,6 +461,10 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 				});
 
+				$(select).html($(select).find('option').sort(function (x, y) {
+					return $(x).text() > $(y).text() ? 1 : -1;
+				}));
+
 				$CategoryDropdown.val('none');
 				AddCategory();
 			}
@@ -508,7 +512,15 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 				};
 
 				AddCustomBlock(editor, CustomBlock);
+
+				setTimeout(function () {
+					$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
+				}, 500);
 			};
+
+			$('.gjs-mdl-dialog .gjs-mdl-btn-close').click(function () {
+				$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
+			});
 
 			$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').css('max-width', 450);
 			editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
@@ -545,6 +557,10 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 				select.append(option);
 
 			});
+
+			$(select).html($(select).find('option').sort(function (x, y) {
+				return $(x).text() > $(y).text() ? 1 : -1;
+			}));
 
 			if (Block.attributes.category.id != undefined) {
 				$BlockCategory.val(Block.attributes.category.id.toLowerCase());
@@ -603,7 +619,13 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 				UpdateCustomBlock(editor, CustomBlock);
 
+				$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
+
 			};
+
+			$('.gjs-mdl-dialog .gjs-mdl-btn-close').click(function () {
+				$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
+			});
 
 			$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').css('max-width', 450);
 			editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
