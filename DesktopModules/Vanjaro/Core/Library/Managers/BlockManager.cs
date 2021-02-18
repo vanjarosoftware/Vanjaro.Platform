@@ -424,7 +424,7 @@ namespace Vanjaro.Core
             public static HttpResponseMessage ExportCustomBlock(int PortalID, string GUID)
             {
                 HttpResponseMessage Response = new HttpResponseMessage();
-                CustomBlock customBlock = BlockManager.GetByLocale(PortalID, GUID, null);
+                CustomBlock customBlock = BlockManager.GetByLocale(PortalID, GUID, null, true);
                 if (customBlock != null)
                 {
                     Dictionary<int, string> ExportedModulesContent = new Dictionary<int, string>();
@@ -533,23 +533,27 @@ namespace Vanjaro.Core
                 }
                 return Result;
             }
-            public static CustomBlock GetByGuid(int PortalID, string GUID)
+            public static CustomBlock GetByGuid(int PortalID, string GUID, bool IsPublished = false)
             {
-                return BlockFactory.GetAll(PortalID).Where(b => b.Guid.ToLower() == GUID.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
+                List<CustomBlock> CustomBlocks = BlockFactory.GetAll(PortalID);
+                if (IsPublished)
+                    return CustomBlocks.Where(b => b.Guid.ToLower() == GUID.ToLower() && IsPublished == true).OrderByDescending(a => a.Version).FirstOrDefault();
+                else
+                    return CustomBlocks.Where(b => b.Guid.ToLower() == GUID.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
             }
-            public static CustomBlock GetByLocale(int PortalID, string GUID, string Locale)
+            public static CustomBlock GetByLocale(int PortalID, string GUID, string Locale, bool IsPublished = false)
             {
-                CustomBlock cb = BlockFactory.GetAll(PortalID).Where(b => b.Guid.ToLower() == GUID.ToLower() && b.Locale == Locale).FirstOrDefault();
+                CustomBlock cb = BlockFactory.GetAll(PortalID, IsPublished).Where(b => b.Guid.ToLower() == GUID.ToLower() && b.Locale == Locale).FirstOrDefault();
                 if (cb == null)
                 {
-                    cb = BlockFactory.GetAll(PortalID).Where(b => b.Guid.ToLower() == GUID.ToLower() && b.Locale == null).FirstOrDefault();
+                    cb = BlockFactory.GetAll(PortalID, IsPublished).Where(b => b.Guid.ToLower() == GUID.ToLower() && b.Locale == null).FirstOrDefault();
                 }
 
                 return cb;
             }
-            public static List<CustomBlock> GetAll(PortalSettings PortalSettings)
+            public static List<CustomBlock> GetAll(PortalSettings PortalSettings, bool IsPublished = false)
             {
-                List<CustomBlock> CustomBlocks = BlockFactory.GetAll(PortalSettings.PortalId).Where(c => c.Locale == null).ToList();
+                List<CustomBlock> CustomBlocks = BlockFactory.GetAll(PortalSettings.PortalId, IsPublished).Where(c => c.Locale == null).ToList();
                 string Locale = PageManager.GetCultureCode(PortalSettings);
                 if (!string.IsNullOrEmpty(Locale))
                 {

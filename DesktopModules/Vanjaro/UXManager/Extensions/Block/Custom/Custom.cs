@@ -44,7 +44,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Custom
             if (HttpContext.Current.Request.Cookies["vj_IsPageEdit"] != null && HttpContext.Current.Request.Cookies["vj_IsPageEdit"].Value == "true")
                 block = Core.Managers.BlockManager.GetAll(PortalSettings.Current).Where(c => c.Guid.ToLower() == blockguid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
             else
-                block = Core.Managers.BlockManager.GetAll(PortalSettings.Current).Where(c => c.Guid.ToLower() == blockguid.ToLower() && c.IsPublished == true).OrderByDescending(a => a.Version).FirstOrDefault();
+                block = Core.Managers.BlockManager.GetAll(PortalSettings.Current, true).Where(c => c.Guid.ToLower() == blockguid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
             if (block != null)
             {
                 response.Markup = block.Html;
