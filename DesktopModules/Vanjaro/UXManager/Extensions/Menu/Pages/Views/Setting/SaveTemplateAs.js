@@ -16,7 +16,7 @@
             common.webApi.post('pages/savelayoutas', 'pid=' + parseInt($scope.ui.data.PID.Value) + '&name=' + $scope.ui.data.Name.Value, data).success(function (data) {
                 if (data.IsSuccess) {
                     window.parent.ShowNotification($scope.ui.data.Name.Value, '[L:LayoutCreatedSuccess]', 'success');
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                    $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 }
                 else {
                     window.parent.ShowNotification('', data.Message, 'error');

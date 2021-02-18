@@ -21,14 +21,14 @@
         $scope.loaded = true;
     };
 
-    $scope.ApplyChanges = function (searchresult) {
+    $scope.ApplyChanges = function (language) {
         if ($scope.ui.data.Global.Value) {
-            common.webApi.post('language/update', '', searchresult.attributes.attributes).success(function () {
-                window.parent.RenderBlock(searchresult);
+            common.webApi.post('language/update', '', language.attributes.attributes).success(function () {
+                window.parent.RenderBlock(language);
             });
         }
         else
-            window.parent.RenderBlock(searchresult);
+            window.parent.RenderBlock(language);
     };
 
     $scope.$watch('ui.data.Template.Value', function (newValue, oldValue) {
@@ -41,12 +41,12 @@
 
     $scope.$watch('ui.data.Global.Value', function (newValue, oldValue) {
         if (newValue != undefined && oldValue != undefined) {
-            var searchresult = window.parent.VjEditor.getSelected();
+            var language = window.parent.VjEditor.getSelected();
             if (newValue)
-                searchresult.addAttributes({ 'data-block-global': 'true' });
+                language.addAttributes({ 'data-block-global': 'true' });
             else
-                searchresult.addAttributes({ 'data-block-global': 'false' });
-            $scope.ApplyChanges(searchresult);
+                language.addAttributes({ 'data-block-global': 'false' });
+            $scope.ApplyChanges(language);
         }
     });
 });

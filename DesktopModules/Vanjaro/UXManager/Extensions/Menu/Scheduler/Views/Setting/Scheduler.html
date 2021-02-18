@@ -13,7 +13,7 @@
 				</div>
 			</uitemplate>
 			<uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button id="Update" type="button" mn-ng-click="Click_Update('Update')" label="false" class="btn btn-sm btn-primary mr-sm">
                         [L:Update]
                     </button>
@@ -36,13 +36,13 @@
 			<uitemplate>
 				<div class="row scheduletask">
 					<div class="form-group search-name col-sm-6" data-datatype="textbox" data-label="Frequency *" data-name="Frequency">
-						<label class="" for="setting_scheduler2textbox1" data-toggle="tooltip" title="" data-original-title="">Frequency *</label>
+						<label class="" for="setting_scheduler2textbox1" data-bs-toggle="tooltip" title="" data-original-title="">Frequency *</label>
 						<div class="input-group">
 							<input type="text" class="form-control control-background search-name ng-pristine ng-valid ng-touched" id="setting_scheduler2textbox1" required="true" ng-model="ui.data.Frequency.Value" aria-describedby="setting_scheduler2textbox1-addon">
 						</div>
 					</div>
 					<div class="form-group search-name col-sm-6" data-datatype="dropdownlist" data-label="" data-name="FrequencyPeriod">
-						<label class="" for="setting_scheduler2dropdownlist2" data-toggle="tooltip" title="" data-original-title=""> </label>
+						<label class="" for="setting_scheduler2dropdownlist2" data-bs-toggle="tooltip" title="" data-original-title=""> </label>
 						<div class="input-group"><select class="form-control search-name  ng-pristine ng-untouched ng-valid" ng-model="ui.data.FrequencyPeriod.Value" ng-options="option.Value as option.Text for option in ui.data.FrequencyPeriod.Options"><option value="0" selected="selected" label="Seconds">Seconds</option><option value="1" label="Minutes">Minutes</option><option value="2" label="Hours">Hours</option><option value="3" label="Days">Days</option><option value="4" label="Weeks">Weeks</option><option value="5" label="Months">Months</option><option value="6" label="Years">Years</option></select></div>
 					</div>
 				</div>
@@ -51,13 +51,13 @@
 			<uitemplate>
 				<div class="row scheduletask">
 					<div class="form-group search-name col-sm-6 " data-datatype="textbox" data-label="Retry Time Lapse" data-name="RetryTimeLapse">
-						<label class="" for="setting_scheduler2textbox4" data-toggle="tooltip" title="" data-original-title="">Retry Time Lapse</label>
+						<label class="" for="setting_scheduler2textbox4" data-bs-toggle="tooltip" title="" data-original-title="">Retry Time Lapse</label>
 						<div class="input-group">
 							<input type="text" class="form-control control-background search-name ng-pristine ng-untouched ng-valid" id="setting_scheduler2textbox4" ng-model="ui.data.RetryTimeLapse.Value" aria-describedby="setting_scheduler2textbox4-addon">
 						</div>
 					</div>
 					<div class="form-group search-name col-sm-6 " data-datatype="dropdownlist" data-label="" data-name="RunTimeLapsePeriod">
-						<label class="" for="setting_scheduler2dropdownlist5" data-toggle="tooltip" title="" data-original-title=""> </label>
+						<label class="" for="setting_scheduler2dropdownlist5" data-bs-toggle="tooltip" title="" data-original-title=""> </label>
 						<div class="input-group">
 							<select class="form-control search-name ng-pristine ng-untouched ng-valid" ng-model="ui.data.RunTimeLapsePeriod.Value" ng-options="option.Value as option.Text for option in ui.data.RunTimeLapsePeriod.Options"><option value="0" selected="selected" label="Seconds">Seconds</option><option value="1" label="Minutes">Minutes</option><option value="2" label="Hours">Hours</option><option value="3" label="Days">Days</option><option value="4" label="Weeks">Weeks</option><option value="5" label="Months">Months</option><option value="6" label="Years">Years</option></select>
 						</div>
@@ -99,7 +99,7 @@
 				</column>
 			</uielement>
 			<uitemplate>
-				<div class="text-right fixed-footer">
+				<div class="text-end fixed-footer">
 					<a control="button" mn-ng-click="Click_CancelHistory()" label="false" class="btn btn-link">
 						[L:Cancel]
 					</a>
@@ -124,7 +124,7 @@
 				<column name="Action" width="8">
 					<uitemplate>
 						<div class="dropdown pull-right dropbtn">
-							<a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<em class="fas fa-ellipsis-v"></em>
 							</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

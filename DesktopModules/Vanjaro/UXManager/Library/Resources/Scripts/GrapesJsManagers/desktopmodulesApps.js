@@ -403,10 +403,17 @@ global.BuildBlockComponent = function (vjcomps) {
     $.each(vjcomps, function (k, v) {
         if (v.attributes != undefined && v.attributes["data-block-guid"] != undefined && v.attributes["data-block-guid"] != '' && v.attributes["data-block-type"].toLowerCase() != "global") {
             var attr = '';
+            var attr1 = '';
             $.each(v.attributes, function (key, value) {
                 attr += '[' + key + '="' + value + '"]';
+                if (key == 'id')
+                    attr1 += '[' + key + '="' + value.split('-')[value.split('-').length - 1] + '"]';
+                else
+                    attr1 += '[' + key + '="' + value + '"]';
             });
             var $this = $(attr)[0];
+            if ($this == undefined)
+                $this = $(attr1)[0];
             if ($this != undefined) {
                 if (v.components == undefined || v.components[0] == undefined) {
                     var component = { components: [], content: '' };
@@ -466,7 +473,12 @@ global.FilterComponents = function (vjcomps) {
 global.RenderCustomBlock = function (model, bmodel) {
     if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes["data-block-type"] != undefined && model.attributes.attributes["data-block-type"].toLowerCase() == "global")
         model.attributes.name = "Global: " + bmodel.id;
+    //setting style as empty to create id in html and json and pass in save api call
+    if (model != undefined)
+        model.setStyle('');
     IsVJCBRendered = true;
+    if (!$('.optimizing-overlay').length)
+        $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Please wait</h1></div>');
 };
 
 global.RenderBlock = function (model, bmodel, render) {

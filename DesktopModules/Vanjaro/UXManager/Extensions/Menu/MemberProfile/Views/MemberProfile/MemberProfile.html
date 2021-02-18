@@ -12,10 +12,10 @@
                         </a>
                     </div>
                     <div class="col-5 pl-none">
-                        <a href="#" title="[L:AddMemberProfileTitle]" mn-ng-click="Add_MemberProfile()" class="ux-btn ux-btn-hover float-right">
+                        <a href="#" title="[L:AddMemberProfileTitle]" mn-ng-click="Add_MemberProfile()" class="ux-btn ux-btn-hover float-end">
                             <em class="fas fa-plus"></em>
                         </a>
-                        <a href="#" title="[L:UserProfileSettingsTitle]" mn-ng-click="Click_MemberProfileSettings()" class="ux-btn ux-btn-hover float-right">
+                        <a href="#" title="[L:UserProfileSettingsTitle]" mn-ng-click="Click_MemberProfileSettings()" class="ux-btn ux-btn-hover float-end">
                             <em class="fas fa-cog"></em>
                         </a>
                     </div>
@@ -35,21 +35,21 @@
                 <column name="Visible " width="4">
                     <uitemplate>
                         <div class="vanjaro-memberprofile">
-                            <em ng-class="row.Visible?'':'fas fa-eye-slash'" data-toggle="tooltip" data-original-title="{{row.Visible?'':'[L:IsNotVisible]'}}"></em>
+                            <em ng-class="row.Visible?'':'fas fa-eye-slash'" data-bs-toggle="tooltip" data-original-title="{{row.Visible?'':'[L:IsNotVisible]'}}"></em>
                         </div>
                     </uitemplate>
                 </column>
                 <column name="DefaultVisibility" width="5">
                     <uitemplate>
                         <div class="vanjaro-memberprofile">
-                            <em ng-class="getDefaultVisibilityIcon(row)" class="mr-xs" data-toggle="tooltip" data-original-title="{{getDefaultVisibilitytitle(row)}}"></em>
+                            <em ng-class="getDefaultVisibilityIcon(row)" class="mr-xs" data-bs-toggle="tooltip" data-original-title="{{getDefaultVisibilitytitle(row)}}"></em>
                         </div>
                     </uitemplate>
                 </column>
                 <column name="Action" width="16">
                     <uitemplate>
-                        <div class="dropdown float-right dropbtn">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown float-end dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

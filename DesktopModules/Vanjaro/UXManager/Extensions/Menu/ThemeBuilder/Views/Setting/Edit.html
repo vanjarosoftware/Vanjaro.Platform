@@ -3,29 +3,29 @@
         <uilayout name="default">
             <uitemplate>
                 <div id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseOne">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseOne">
                                 [L:Basic]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 [uilayout:Basic]
                                 [uilayout:Footer]
                             </div>
                         </div>
                     </div>
-                    <div class="card" mn-ng-show="!EditControl">
-                        <div class="card-header" mn-ng-click="InitEditors()">
-                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseTwo">
+                    <div class="accordion-item" mn-ng-show="!EditControl">
+                        <div class="accordion-header" mn-ng-click="InitEditors()">
+                            <a class="collapsed accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
                                 [L:Sass]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 [uilayout:Sass]
                                 [uilayout:Footer]
                             </div>
@@ -38,8 +38,8 @@
             <uielement name="Category" control="textbox" attr-required="true" ngmodel="ui.data.ThemeEditor.Options.Category" container-attr-ng-hide="HideCategory"></uielement>
             <uielement name="Title" control="textbox" ngmodel="ui.data.ThemeEditor.Options.Title" attr-required="true" container-attr-ng-show="HideCategory"></uielement>
             <uitemplate>
-                <div class="dropdown show float-right dropbtn" mn-ng-if="ui.data.DeveloperMode.Value">
-                    <a id="dropdownMenuControlDef" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown show float-end dropbtn" mn-ng-if="ui.data.DeveloperMode.Value">
+                    <a id="dropdownMenuControlDef" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <em class="fas fa-plus"></em>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuControlDef">
@@ -63,8 +63,8 @@
                 </column>
                 <column name="Actions" width="6">
                     <uitemplate>
-                        <div class="dropdown show float-right dropbtn">
-                            <a id="dropdownMenuLinkDef" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown show float-end dropbtn">
+                            <a id="dropdownMenuLinkDef" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v "></em>
                             </a>
                             <div class="dropdown-menu " aria-labelledby="dropdownMenuLinkDef">
@@ -107,7 +107,7 @@
             <uielement name="CustomCSS" control="textarea" attr-class="CustomCSS" attr-placeholder=".myCustomClass { background: red; }"></uielement>
             <uielement name="PreviewCSS" control="textarea" attr-class="PreviewCSS" attr-placeholder=".myCustomClass { background: red; }"></uielement>
             <uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button type="button" id="UpdateControl" ng-click="Click_SaveControl('UpdateControl')" class="btn btn-sm btn-primary" mn-ng-if="ui.data.DeveloperMode.Value">
                         [L:Update]
                     </button>
@@ -210,7 +210,7 @@
         </uilayout>
         <uilayout name="Footer" attr-ng-show="!EditControl">
             <uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button type="button" id="Update" ng-click="Click_Save('Update')" class="btn btn-sm btn-primary" mn-ng-if="ui.data.DeveloperMode.Value">
                         [L:Update]
                     </button>

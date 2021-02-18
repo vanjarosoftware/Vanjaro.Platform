@@ -10,12 +10,12 @@
         <div class='panelheader'>
             <div class='row m-0'>
                 <div class='col-4' style='padding-left: 0;'>
-                    <a class='btn blockItem settings' href='#MenuSettings' data-toggle="tooltip" data-placement="bottom" title="[LS:Menu]" onclick="document.getElementById('uxm-search').value = ''">
+                    <a class='btn blockItem settings' href='#MenuSettings' data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="[LS:Menu]" onclick="document.getElementById('uxm-search').value = ''">
                         <em class='fa fa-bars'></em>
                     </a>
                     @if (Model.Setting.HasTabEditPermission)
                     {
-                        <a class='btn blockItem active' href='#ContentBlocks' data-toggle="tooltip" data-placement="bottom" title="[LS:Blocks]">
+                        <a class='btn blockItem active' href='#ContentBlocks' data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="[LS:Blocks]">
                             <em class='fas fa-cubes'></em>
                         </a>
                     }
@@ -26,13 +26,13 @@
                     </a>
                 </div>
                 <div class='col-4 block-elements text-left' style='padding-right: 0;padding-left: 0;'>
-                    <a class='btn blockItem Messages' guid='CD8C127F-DA66-4036-B107-90061361CF87' data-toggle="tooltip" data-placement="bottom" title="[LS:Notifications]">
+                    <a class='btn blockItem Messages' guid='CD8C127F-DA66-4036-B107-90061361CF87' data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="[LS:Notifications]">
                         <em class='fas fa-bell'></em>
                         <sup class='notifycount' id="VJnotifycount">@Model.Setting.NotificationCount</sup>
                     </a>
                     @if (Model.Setting.HasTabEditPermission && Model.Setting.HasShortcut)
                     {
-                        <a class='btn Shortcut' href='#Shortcuts' data-toggle="tooltip" data-placement="bottom" title="[LS:Shortcuts]">
+                        <a class='btn Shortcut' href='#Shortcuts' data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="[LS:Shortcuts]">
                             <em class='fa fa-plus'></em>
                         </a>
                     }
@@ -170,24 +170,32 @@
     </div>
 </div>
 <div id='ModalContent' style='display:none;'>
-    <div class='row'>
-        <div class='col-6'>
-            <label>[LS:Name]</label><input type='text' name='name' id='input-name' required />
-        </div>
-        <div class='col-6'>
-            <label>[LS:ModalCategory]</label><input type='text' name='category' id='input-category' required />
-        </div>
-    </div>
-    <hr />
-    <div class='row' style='margin-top:15px;'>
-        <div class='col'>
-            <div class='btn-group cbglobal'>
-                <button type='button' id="ToggelBlockGlobal" class='btn btn-default' onclick='ToggleBlockType(this,"yes")'>[LS:Global]</button>
-                <button type='button' id="ToggelBlockLocal" class='btn btn-primary disabled' onclick='ToggleBlockType(this,"no")'>[LS:Custom]</button>
-            </div>
-        </div>
-        <div class='col'>
-            <button class='btn btn-primary' type='button' id='btn-save'>[LS:Update]</button>
-        </div>
-    </div>
+	<div class="row">
+		<div class='col-12 cbglobal'>
+			
+		</div>
+	</div>
+	<div class='row'>
+		<div class='col-12'>
+			<label>[LS:ModalCategory]</label>
+			<input type='text' name='category' id='input-category' required />
+			<div id="CategoryGroup">
+				<a class="btn btn-add"><em class="fa fa-plus"></em></a>
+				<select class="form-control" id="CategoryDropdown"></select>
+			</div>
+		</div>
+		<div class='col-12'>
+			<label>[LS:Name]</label><input type='text' name='name' id='input-name' required />
+		</div>
+	</div>
+	<hr />
+	<div class='row'>
+		<div class='col-12'>
+			<div class='btn-group cbglobal'>
+				<button type='button' id="ToggelBlockGlobal" class='btn btn-default' onclick='ToggleBlockType(this,"yes")'>[LS:Global]</button>
+				<button type='button' id="ToggelBlockLocal" class='btn btn-primary disabled' onclick='ToggleBlockType(this,"no")'>[LS:Custom]</button>
+			</div>
+			<button class='btn btn-primary' type='button' id='btn-save'>[LS:Update]</button>
+		</div>
+	</div>
 </div>

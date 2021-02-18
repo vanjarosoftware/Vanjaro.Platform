@@ -14,15 +14,15 @@
                                 <uilayout name="TabsContentUserProfileSettings" access-roles="admin">
                                     <uitemplate>
                                         <div id="accordion2" mn-ng-if="ShowUserProfileSettingsTab">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseone">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseone">
                                                         [L:UserProfileSettings]
-                                                        <em class="fas fa-caret-down float-right"></em>
+                                                        <em class="fas fa-caret-down float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapseone" class="collapse show" data-parent="#accordion2">
-                                                    <div class="card-body">
+                                                <div id="collapseone" class="accordion-collapse collapse show" data-bs-parent="#accordion2">
+                                                    <div class="accordion-body">
                                                         [uilayout:UserProfileSettings]
                                                     </div>
                                                 </div>
@@ -36,8 +36,8 @@
                 </uilayout>
             </uitemplate>
             <uitemplate>
-                <div class="text-right fixed-footer">
-                    <button type="button" class="btn btn-sm btn-primary float-right" id="Update" mn-ng-click="Click_Save('update')">
+                <div class="text-end fixed-footer">
+                    <button type="button" class="btn btn-sm btn-primary float-end" id="Update" mn-ng-click="Click_Save('update')">
                         [L:Update]
                     </button>
                 </div>

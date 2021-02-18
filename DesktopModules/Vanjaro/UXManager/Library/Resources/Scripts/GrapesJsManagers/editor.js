@@ -74,58 +74,59 @@ $(document).ready(function () {
                             },
                             success: function (data) {
 
-                                if (data.Html != undefined && data.Html.length > 0) {
-                                    $.each($(data.Html).find('[mid]'), function (k, v) {
-                                        var mid = $(v).attr('mid');
-                                        var framesrc = CurrentTabUrl;
-                                        if (framesrc.indexOf("?") == -1)
-                                            framesrc = framesrc + "?mid=" + mid + "&icp=true";
-                                        else
-                                            framesrc = framesrc + "&mid=" + mid + "&icp=true";
-                                        data.Html = data.Html.replace('<app id="' + mid + '"></app>', '<div id="dnn_vj_' + mid + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div>');
-                                    });
-                                    var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
+								if (data.Html != undefined && data.Html.length > 0) {
+									$.each($(data.Html).find('[mid]'), function (k, v) {
+										var mid = $(v).attr('mid');
+										var framesrc = CurrentTabUrl;
+										if (framesrc.indexOf("?") == -1)
+											framesrc = framesrc + "?mid=" + mid + "&icp=true";
+										else
+											framesrc = framesrc + "&mid=" + mid + "&icp=true";
+										data.Html = data.Html.replace('<app id="' + mid + '"></app>', '<div id="dnn_vj_' + mid + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div>');
+									});
+									var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
                                         content: data.Html + '<style>' + data.Css + '</style>',
-                                        attributes: {
-                                            class: 'fas fa-th-large floating',
-                                            id: 'LibraryBlock'
-                                        }
-                                    });
+                                        label: '<img src="' + data.ScreenshotPath + '"/><div class="sub-label">Drag & Drop Me</div>',
+										attributes: {
+											class: 'floating',
+											id: 'LibraryBlock'
+										}
+									});
 
-                                    var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
-                                    $(window.document.body).append(block).find('[data-dismiss="modal"]').trigger('click', [false]);
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-            else if (ExtensionStoreURL.startsWith(event.origin)) {
-                if (typeof event.data != 'undefined') {
-                    if (typeof event.data.action != 'undefined' && event.data.action == 'DownloadPackage') {
-                        var sf = $.ServicesFramework(-1);
-                        var PackageData = {
-                            Packages: JSON.stringify(event.data.data)
-                        };
-                        $.ajax({
-                            type: "POST",
-                            url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Extensions") + "InstallPackage/Download",
-                            data: PackageData,
-                            headers: {
-                                'ModuleId': parseInt(sf.getModuleId()),
-                                'TabId': parseInt(sf.getTabId()),
-                                'RequestVerificationToken': sf.getAntiForgeryValue()
-                            },
-                            success: function (data) {
-                                $(window.parent.document.body).find('[data-dismiss="modal"]').click();
-                                parent.OpenPopUp(null, 600, 'center', 'Install', ExtensionURL, 800);
-                            }
-                        });
-                    }
-                }
-            }
-        });
-    }
+									var block = VjEditor.BlockManager.render(LibraryBlock, { external: true });
+									$(window.document.body).append(block).find('[data-bs-dismiss="modal"]').trigger('click', [false]);
+								}
+							}
+						});
+					}
+				}
+			}
+			else if (ExtensionStoreURL.startsWith(event.origin)) {
+				if (typeof event.data != 'undefined') {
+					if (typeof event.data.action != 'undefined' && event.data.action == 'DownloadPackage') {
+						var sf = $.ServicesFramework(-1);
+						var PackageData = {
+							Packages: JSON.stringify(event.data.data)
+						};
+						$.ajax({
+							type: "POST",
+							url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Extensions") + "InstallPackage/Download",
+							data: PackageData,
+							headers: {
+								'ModuleId': parseInt(sf.getModuleId()),
+								'TabId': parseInt(sf.getTabId()),
+								'RequestVerificationToken': sf.getAntiForgeryValue()
+							},
+							success: function (data) {
+								$(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
+								parent.OpenPopUp(null, 600, 'center', 'Install', ExtensionURL, 800);
+							}
+						});
+					}
+				}
+			}
+		});
+	}
 
     $(".pubish-btn").click(function (e) {
         e.preventDefault();
@@ -180,8 +181,8 @@ $(document).ready(function () {
         var resolutionSizes = [1920, 1600, 1366, 1200, 768, 320];
         var OptimizeImages = function (optImages, sizes) {
 
-            if (!$('.optimizing-overlay').length)
-                $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Optimizing Images . . .</h1></div>');
+			if (!$('.optimizing-overlay').length)
+				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images</h1></div>');
 
             if (typeof optImages != 'undefined' && optImages.length > 0) {
 
@@ -191,7 +192,7 @@ $(document).ready(function () {
 
                     var size = sizes.shift();
 
-                    $('.gjs-frame').width(size).css('transition', 'none');
+					$('.gjs-frame').width(size).css('transition', 'none');
 
                     waitForEl('.gjs-frame', size, function () {
 
@@ -212,10 +213,12 @@ $(document).ready(function () {
                 }
                 else {
 
-                    //Set Sizes
-                    //Trim last character of calcSizes to remove trailing comma
-                    image.parent().components().models[0].addAttributes({ 'sizes': calcSizes.slice(0, -1) });
-                    image.parent().components().models[1].addAttributes({ 'sizes': calcSizes.slice(0, -1) });
+                    VJIsLocked = 'True';
+
+					//Set Sizes
+					//Trim last character of calcSizes to remove trailing comma
+					image.parent().components().models[0].addAttributes({ 'sizes': calcSizes.slice(0, -1) });
+					image.parent().components().models[1].addAttributes({ 'sizes': calcSizes.slice(0, -1) });
 
                     calcSizes = '';
 
@@ -227,20 +230,20 @@ $(document).ready(function () {
 
                 $('.gjs-frame').removeAttr('style');
 
-                setTimeout(function () {
-                    $('.vj-wrapper').find('.optimizing-overlay').remove();
-                    VjPublishChanges();
+				setTimeout(function () {
+					$('.vj-wrapper').find('.optimizing-overlay').remove();
+					VjPublishChanges();
                 }, 500);
-            }
-        };
-        var optImages = jQuery.grep(getAllComponents(), function (n, i) {
-            return (n.attributes.type == 'image') && (typeof n.getStyle()['width'] == 'undefined') && (n.parent().attributes.type == 'picture-box') && (typeof n.parent().components().models[0] != 'undefined') && (typeof n.parent().components().models[1] != 'undefined');
-        });
+			}
+		};
+		var optImages = jQuery.grep(getAllComponents(), function (n, i) {
+			return (n.attributes.type == 'image') && (typeof n.getStyle()['width'] == 'undefined') && (n.parent().attributes.type == 'picture-box') && (typeof n.parent().components().models[0] != 'undefined') && (typeof n.parent().components().models[1] != 'undefined');
+		});
 
         if (optImages != undefined && optImages.length > 0) {
 
-            if (!$('.optimizing-overlay').length)
-                $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Optimizing Images . . .</h1></div>');
+			if (!$('.optimizing-overlay').length)
+				$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images</h1></div>');
 
             if ($('.gjs-frame').contents().find("html").hasClass('responsive'))
                 $(".device-manager .device-view#Desktop").trigger("click");
@@ -312,9 +315,9 @@ $(document).ready(function () {
                 });
             }
 
-            if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
-                $(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Please Wait . . .</h1></div>');
-            }
+			if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
+				$(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Please Wait</h1></div>');
+			}
 
             if ($('#dnn_ContentPane').length > 0)
                 $('#dnn_ContentPane').addClass("sidebar-open");
@@ -2663,8 +2666,8 @@ $(document).ready(function () {
 
                             });
 
-                            //Tooltip
-                            $('[data-toggle="tooltip"]').tooltip();
+							//Tooltip
+							$('[data-bs-toggle="tooltip"]').tooltip();
 
                             $('.block-elements .blockItem').on("click", function (e) {
                                 var messagesrc = CurrentExtTabUrl + "&guid=" + $(this).attr('guid');
@@ -3054,15 +3057,16 @@ global.ChangeBlockType = function (query) {
 };
 
 function RunSaveCommand() {
-    editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
-    if (GetParameterByName('m2v', parent.window.location) != null)
+	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
+	if (GetParameterByName('m2v', parent.window.location) != null)
         editor.StorageManager.getStorages().remote.attributes.params.m2v = true;
-    editor.runCommand("save");
-    editor.StorageManager.getStorages().remote.attributes.params.IsPublished = false;
-    $('#VJBtnPublish').addClass('disabled');
-    $($('.panelheader .blockItem')[1]).click();
-    editor.StorageManager.getStorages().remote.attributes.params.Comment = "";
-    $('#VJReviewComment', parent.document).val('');
+    VJIsLocked = 'False';
+	editor.runCommand("save");
+	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = false;
+	$('#VJBtnPublish').addClass('disabled');
+	$($('.panelheader .blockItem')[1]).click();
+	editor.StorageManager.getStorages().remote.attributes.params.Comment = "";
+	$('#VJReviewComment', parent.document).val('');
 };
 
 global.ToggleBlockType = function (e, type) {

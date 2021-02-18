@@ -32,7 +32,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput.Controllers
             {
                 { "Global", new UIData { Name = "Global", Value = "true" } },                
                 { "EnableWildSearch", new UIData { Name = "EnableWildSearch", Value = "true" } },
-                { "GlobalConfigs", new UIData { Name = "GlobalConfigs", Options = Core.Managers.BlockManager.GetGlobalConfigs(portalSettings, "search result") } },
+                { "GlobalConfigs", new UIData { Name = "GlobalConfigs", Options = Core.Managers.BlockManager.GetGlobalConfigs(portalSettings, "search input") } },
                 { "IsAdmin", new UIData { Name = "IsAdmin", Value = userInfo.IsInRole("Administrators").ToString().ToLower() } },
                 { "Template", new UIData { Name = "Template", Options = templates, OptionsText = "Text", OptionsValue = "Value" } }
             };

@@ -19,8 +19,8 @@
                 <div mn-ng-repeat="option in ui.data.Theme.Options" class="theme">
                     <div class="theme-image selected-theme" style="background-image: url('{{option.Thumbnail}}');" mn-ng-if="option.Value == ui.data.Theme.Options[0].Value">
                         <span class="author_name">{{option.Value}} </span>
-                        <div class="theme-settings dropdown dropbtn float-right">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="theme-settings dropdown dropbtn float-end">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -30,8 +30,8 @@
                     </div>
                     <div class=" theme-image normal-theme" style="background-image: url('{{option.Thumbnail}}');" mn-ng-if="option.Value != ui.data.Theme.Options[0].Value">
                         <span class="author_name">{{option.Value}} </span>
-                        <div class="theme-settings dropdown dropbtn float-right">                            
-                                <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="theme-settings dropdown dropbtn float-end">                            
+                                <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <em class="fas fa-ellipsis-v"></em>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

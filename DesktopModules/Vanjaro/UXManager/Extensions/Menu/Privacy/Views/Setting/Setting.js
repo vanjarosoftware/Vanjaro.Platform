@@ -53,7 +53,7 @@
                         }
                         else {
                             window.parent.document.callbacktype = type;
-                            $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                            $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                         }
                     });
                 }
@@ -81,7 +81,7 @@
             common.webApi.post('setting/UpdatePrivacySettings', '', settingsData).success(function (data) {
                 if (data.IsSuccess) {
                     //window.parent.document.callbacktype = type;
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                    $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 }
                 else {
                     window.parent.swal(data.Message);

@@ -66,6 +66,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
             Pages page = Core.Managers.PageManager.GetByVersion(PortalSettings.ActiveTab.TabID, Version, Locale);
             if (page != null)
             {
+                Core.Managers.PageManager.ApplyGlobalBlockJSON(page);
                 Result.html = page.Content.ToString();
                 HtmlDocument html = new HtmlDocument();
                 html.LoadHtml(Result.html);

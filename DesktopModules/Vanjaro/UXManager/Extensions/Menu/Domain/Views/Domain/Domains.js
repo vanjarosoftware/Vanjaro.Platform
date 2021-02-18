@@ -15,7 +15,7 @@
     };
 
     $scope.Register_Tooltip = function () {
-        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-bs-toggle="tooltip"]').tooltip();
     };
 
     $scope.Click_UpdateSetting = function (row) {

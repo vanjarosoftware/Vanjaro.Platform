@@ -7,10 +7,10 @@
 
             <input type="checkbox" ng-if="[enableselect]" ng-model="node.selected" ng-click="Click_SelectParent(node,ui.data.[name].Options)" />
             <span>{{node.label}}</span>
-            <button class="float-right btn btn-default btn-xs" data-nodrag="" ng-click="[removenode]" ng-if="[enableselect]==false && node.usedbyCount==0" onclick="return false;">
+            <button class="float-end btn btn-default btn-xs" data-nodrag="" ng-click="[removenode]" ng-if="[enableselect]==false && node.usedbyCount==0" onclick="return false;">
                 <span class="fas fa-times"></span>
             </button>
-            <button class="float-right btn btn-default btn-xs treeedit" data-nodrag="" ng-click="[editnode] " ng-if="[enableselect]==false" onclick="return false;">
+            <button class="float-end btn btn-default btn-xs treeedit" data-nodrag="" ng-click="[editnode] " ng-if="[enableselect]==false" onclick="return false;">
                 <span class="fas fa-pencil-alt"></span>
             </button>
         </div>
@@ -22,12 +22,12 @@
 
             <!--Special Page Icon-->
             <span class="quickInfo pageicon">
-                <em ng-class="gettreeicon(node)" class="mr-xs" data-toggle="tooltip" data-original-title="{{gettreeicontitle(node)}}"></em>{{node.label}}
+                <em ng-class="gettreeicon(node)" class="me-1" data-bs-toggle="tooltip" title="{{gettreeicontitle(node)}}"></em>{{node.label}}
             </span>
             <!--End Quick Info-->
             <!--Side Menu-->
-            <div class="dropdown float-right dropbtn" ng-if="node.HasEditPermission">
-                <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" data-nodrag="" aria-expanded="false">
+            <div class="dropdown float-end dropbtn" ng-if="node.HasEditPermission">
+                <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" data-nodrag="" aria-expanded="false">
                     <em class="fas fa-ellipsis-v"></em>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -71,17 +71,12 @@
                     <li ng-if="!node.FolderPage&&!node.IsRedirectPage" class="setaspage">
                         <a class="dropdown-item box-icon" data-nodrag="">
                             <em class="fas fa-bars"></em><span>[L:SetAsPage]</span>
-                            <em class="fas fa-chevron-right float-right toggle-arrow"></em>
+                            <em class="fas fa-chevron-right float-end toggle-arrow"></em>
                         </a>
                         <ul class="submenu">
                             <li>
                                 <a data-nodrag="" class="dropdown-item back-icon"><em class="fas fa-chevron-left"></em> [L:Back]</a>
                                 <hr class="small" />
-                            </li>
-                            <li>
-                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'splashpage')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
-                                    <em class="fas fa-tint"></em><span>[L:SplashPage]</span><em ng-class="ui.data.PageSetting.Options.SplashTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
-                                </a>
                             </li>
                             <li>
                                 <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'homepage')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
@@ -97,6 +92,29 @@
                                 <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'registrationpage')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
                                     <em class="fas fa-user-plus"></em><span>[L:RegistrationPage]</span><em ng-class="ui.data.PageSetting.Options.RegisterTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
                                 </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'userprofilepage')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
+                                    <em class="fas fa-user-tag"></em><span>[L:UserProfilePage]</span><em ng-class="ui.data.PageSetting.Options.UserTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'searchresultspage')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
+                                    <em class="fas fa-search"></em><span>[L:SearchResultsPage]</span><em ng-class="ui.data.PageSetting.Options.SearchTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'TermsTabId')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
+                                    <em class="fas fa-user-shield"></em><span>[L:Terms]</span><em ng-class="ui.data.PageSetting.Options.TermsTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'PrivacyTabId')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
+                                    <em class="fas fa-file-contract"></em><span>[L:Privacy]</span><em ng-class="ui.data.PageSetting.Options.PrivacyTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="m-none" />
                             </li>
                             <li>
                                 <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'RedirectAfterRegistration')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
@@ -116,29 +134,7 @@
                             <li>
                                 <hr class="m-none" />
                             </li>
-                            <li>
-                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'userprofilepage')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
-                                    <em class="fas fa-user-tag"></em><span>[L:UserProfilePage]</span><em ng-class="ui.data.PageSetting.Options.UserTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'searchresultspage')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
-                                    <em class="fas fa-search"></em><span>[L:SearchResultsPage]</span><em ng-class="ui.data.PageSetting.Options.SearchTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="m-none" />
-                            </li>
-                            <li>
-                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'TermsTabId')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
-                                    <em class="fas fa-user-shield"></em><span>[L:Terms]</span><em ng-class="ui.data.PageSetting.Options.TermsTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'PrivacyTabId')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
-                                    <em class="fas fa-file-contract"></em><span>[L:Privacy]</span><em ng-class="ui.data.PageSetting.Options.PrivacyTabId == node.Value?'far fa-check-square':'far fa-square'"></em>
-                                </a>
-                            </li>
+
                             <li>
                                 <a class="dropdown-item box-icon" data-nodrag="" ng-click="Update_DefaultPagesSetting(node,$event,'404errorpage')" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
                                     <em class="fas fa-exclamation"></em><span>[L:404ErrorPage]</span><em ng-class="ui.data.PageSetting.Options.Custom404TabId == node.Value?'far fa-check-square':'far fa-square'"></em>
@@ -165,11 +161,11 @@
 
             <!--End-->
 
-            <div class="float-right">
+            <div class="float-end">
                 <!--Quick Information Icon-->
                 <span class="quickInfo actioninfo">
-                    <em data-toggle="tooltip" data-original-title="[LS:PageDisplayInMenu]" ng-class="(!node.IsVisible)?'fas fa-eye-slash':''"></em>
-                    <em data-toggle="tooltip" data-original-title="[LS:PrivatePage]" ng-class="(!node.HasBeenPublished)?'fas fa-lock':''"></em>
+                    <em data-bs-toggle="tooltip" title="[LS:PageDisplayInMenu]" ng-class="(!node.IsVisible)?'fas fa-eye-slash':''"></em>
+                    <em data-bs-toggle="tooltip" title="[LS:PrivatePage]" ng-class="(!node.HasBeenPublished)?'fas fa-lock':''"></em>
                 </span>
                 <!--End-->
             </div>

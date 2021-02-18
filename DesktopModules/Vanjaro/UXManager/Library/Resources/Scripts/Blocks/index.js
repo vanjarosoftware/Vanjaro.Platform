@@ -180,7 +180,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 			},
 			onApply: function (imageEditor, imageModel) {
 				if (!$('.optimizing-overlay').length)
-					$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><span class="spinner-border text-light" role="status"></span>&nbsp;&nbsp;Optimizing Images . . .</h1></div>');
+					$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images</h1></div>');
 				var sf = $.ServicesFramework(-1);
 				var ImageData = {
 					PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
@@ -361,6 +361,69 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 	var modalContent = document.getElementById('ModalContent');
 	var saveButton = document.getElementById("btn-save");
 
+	var $BlockName = $("#ModalContent").find("#input-name");
+	var $BlockCategory = $("#ModalContent").find("#input-category");
+	var $CategoryDropdown = $("#ModalContent").find("#CategoryDropdown");
+
+	$CategoryDropdown.on('change', function () {
+		$BlockCategory.val($(this).val());
+	});
+
+	var AddCategory = function () {
+
+		$("#ModalContent").find(".btn-add").click(function () {
+
+			var categories = editor.BlockManager.getCategories();
+			categories.remove(['Basic', 'Apps', 'Design']);
+
+			swal(
+				{
+					title: VjLocalized.BlockCategory,
+					html: true,
+					text: '<input class="form-control" style="display:block;" type="text" id="Category" placeholder="' + VjLocalized.AddCategory + '"/>',
+					confirmButtonText: VjLocalized.Add,
+					cancelButtonText: VjLocalized.Cancel,
+					showCancelButton: true,
+					closeOnConfirm: false,
+				},
+				function (inputValue) {
+
+					var category = $('#Category').val();
+
+					if (category != '') {
+
+						var count = 0;
+
+						$(categories.models).each(function (index, item) {
+
+							if (item.attributes.label == category) {
+
+								count = 1;
+								swal.showInputError(VjLocalized.CategoryExists);
+
+								return false;
+							}
+						});
+
+						if (count == 0) {
+
+							$CategoryDropdown.append('<option value="' + category + '">' + category + '</option>');
+							$CategoryDropdown.val(category);
+
+							$BlockCategory.val(category);
+							swal.close();
+						}
+
+					}
+					else {
+						swal.showInputError(VjLocalized.CategoryRequired);
+						return false;
+					}
+				}
+			);
+		});
+	}
+
 	//Add Custom Block
 	editor.Commands.add('custom-block', {
 		run: function (editor, sender, opts) {
@@ -368,33 +431,25 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 			$("#ModalContent").show();
 
 			var Block = VjEditor.runCommand("export-component");
-			var $BlockName = $("#ModalContent").find("#input-name");
-			var $BlockCategory = $("#ModalContent").find("#input-category");
 
 			$BlockName.val('');
 			$BlockCategory.val('');
+			
 
-			var categories = VjEditor.BlockManager.getCategories();
+			$BlockCategory.hide();
+			$CategoryDropdown.parent().hide();
 
+			var categories = editor.BlockManager.getCategories();
 			categories.remove(['Basic', 'Apps', 'Design']);
 
 			if (categories.length > 0) {
 
-				$BlockCategory.hide();
+				$CategoryDropdown.parent().show();
 
-				var categoryGroup = document.createElement('div');
-				categoryGroup.id = 'CategoryGroup';
+				var select = document.getElementById("CategoryDropdown");
+				$(select).empty();
 
-				var anchor = document.createElement('a');
-				anchor.className = 'btn btn-add';
-				anchor.innerHTML = '<em class="fa fa-plus"></em>'
-
-				categoryGroup.append(anchor);
-
-				var select = document.createElement('select');
-				select.id = 'CategoryDropdown';
-				select.value == 'Select Category';
-				select.className = 'form-control';
+				select.innerHTML = '<option value="none" disabled>Select Category</option>';
 
 				$(categories.models).each(function (index, category) {
 
@@ -406,70 +461,11 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 				});
 
-				categoryGroup.append(select);
-
-				if ($("#ModalContent").find("#CategoryGroup").length) 
-					$("#ModalContent").find("#CategoryGroup").replaceWith(categoryGroup);
-				else
-					$(categoryGroup).insertAfter($BlockCategory);
-
-				var $CategoryDropdown = $("#ModalContent").find("#CategoryDropdown");
-
-				$BlockCategory.val($CategoryDropdown.val());
-
-				$CategoryDropdown.on('change', function () {
-					$BlockCategory.val($(this).val());
-				});
-
-				$("#ModalContent").find(".btn-add").click(function () {
-
-					swal(
-						{
-							title: VjLocalized.BlockCategory,
-							html: true,
-							text: '<input class="form-control" style="display:block;" type="text" id="Category" placeholder="' + VjLocalized.AddCategory + '"/>',
-							confirmButtonText: VjLocalized.Add,
-							cancelButtonText: VjLocalized.Cancel,
-							showCancelButton: true,
-							closeOnConfirm: false,
-						},
-						function (inputValue) {
-
-							var category = $('#Category').val();
-
-							if (category != '') {
-
-								var count = 0;
-
-								$(categories.models).each(function (index, item) {
-
-									if (item.attributes.label == category) {
-
-										count = 1;
-										swal.showInputError(VjLocalized.CategoryExists);
-										
-										return false;
-									}
-								});
-
-								if (count == 0) {
-
-									$CategoryDropdown.append('<option value="' + category + '">' + category + '</option>');
-									$CategoryDropdown.val(category);
-
-									$BlockCategory.val(category);
-									swal.close();
-								}
-
-							}
-							else {
-								swal.showInputError(VjLocalized.CategoryRequired);
-								return false;
-							}
-						}
-					);
-				});
+				$CategoryDropdown.val('none');
+				AddCategory();
 			}
+			else
+				$BlockCategory.show();
 
 			$('.cbglobal > button:first').attr('class', 'btn btn-default');
 			$('.cbglobal > button:last').attr('class', 'btn btn-primary disabled');
@@ -479,8 +475,8 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 				e.preventDefault();
 
-				var blockLabel = $("#ModalContent").find("#input-name").val();
-				var blockCategory = $("#ModalContent").find("#input-category").val();
+				var blockLabel = $BlockName.val();
+				var blockCategory = $BlockCategory.val();
 				var blockContent = Block.html;
 				var blockCSS = Block.css;
 
@@ -514,33 +510,57 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 				AddCustomBlock(editor, CustomBlock);
 			};
 
+			$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').css('max-width', 450);
 			editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
 		}
 	});
 
 	//Edit Custom Block
 	editor.Commands.add('edit-custom-block', {
+
 		run: function (editor, sender, block) {
 
 			$("#ModalContent").show();
 
-			const editblock = editor.BlockManager.get(block.name);
-			var Name = document.getElementById("input-name");
-			var Category = document.getElementById("input-category");
+			$BlockCategory.hide();
 
 			global.BlockID = block.id;
 
+			var Block = editor.BlockManager.get(block.name);
+
+			$BlockName.val(Block.attributes.label);
+
+			var categories = editor.BlockManager.getCategories();
+			categories.remove(['Basic', 'Apps', 'Design']);
+
+			var select = document.getElementById("CategoryDropdown");
+			$(select).empty();
+
+			$(categories.models).each(function (index, category) {
+
+				var option = document.createElement("option");
+				option.text = category.attributes.label;
+				option.value = category.attributes.id;
+
+				select.append(option);
+
+			});
+
+			if (Block.attributes.category.id != undefined) {
+				$BlockCategory.val(Block.attributes.category.id.toLowerCase());
+				$CategoryDropdown.val(Block.attributes.category.id.toLowerCase());
+			}
+			else {
+				$BlockCategory.val(Block.attributes.category.toLowerCase());
+				$CategoryDropdown.val(Block.attributes.category.toLowerCase());
+			}
+
+			AddCategory();
+
 			//Need Improvement
-			var str = editblock.attributes.content.split("</style>");
+			var blockType = $(Block.attributes.content).attr('data-block-type')
 
-			Name.value = editblock.attributes.label;
-
-			if (editblock.attributes.category.id != undefined)
-				Category.value = editblock.attributes.category.id.toLowerCase();
-			else
-				Category.value = editblock.attributes.category.toLowerCase();
-
-			if ($(str[1]).attr('data-block-type') != undefined) {
+			if (blockType != undefined) {
 				$('.cbglobal > button:first').attr('class', 'btn btn-primary active');
 				$('.cbglobal > button:last').attr('class', 'btn btn-default');
 			}
@@ -585,6 +605,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 			};
 
+			$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').css('max-width', 450);
 			editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
 
 			$('#ToggelBlockGlobal').addClass('disabled');
