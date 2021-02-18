@@ -289,7 +289,7 @@ a.closeaboutbtn {
 
 #Shortcuts hr {
     margin: 5px 0;
-    opacity:0.1;
+    opacity: 0.1;
 }
 
 div#MenuSettings .sub-menu-hidden {
@@ -2942,11 +2942,12 @@ input.rangeinput {
         margin: 0;
         color: #fff;
         text-transform: uppercase;
+        text-align: center;
+        font-size: 28px;
     }
 
-    .optimizing-overlay .spinner-border {
-        position: relative;
-        top: -12px;
+    .optimizing-overlay .centerloader {
+        margin-bottom: 10px;
     }
 
 

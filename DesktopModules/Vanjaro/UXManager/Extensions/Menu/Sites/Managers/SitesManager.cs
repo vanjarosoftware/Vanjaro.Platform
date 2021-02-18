@@ -232,6 +232,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                             block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
                         if (!string.IsNullOrEmpty(block.Css))
                             block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, PortalID), false, Assets);
+                        if (!string.IsNullOrEmpty(block.ContentJSON))
+                            block.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.ContentJSON, PortalID), true, Assets);
+                        if (!string.IsNullOrEmpty(block.StyleJSON))
+                            block.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.StyleJSON, PortalID), true, Assets);
                     }
                     CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
                 }
