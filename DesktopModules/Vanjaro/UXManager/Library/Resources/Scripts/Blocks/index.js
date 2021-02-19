@@ -619,7 +619,9 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 				UpdateCustomBlock(editor, CustomBlock);
 
-				$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
+				setTimeout(function () {
+					$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
+				}, 500);
 
 			};
 
