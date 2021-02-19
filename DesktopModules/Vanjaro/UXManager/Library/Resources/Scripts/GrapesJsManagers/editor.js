@@ -2887,8 +2887,6 @@ $(document).ready(function () {
         //Desktop
         if ($this.attr("id") == "Desktop") {
 
-            ChangeColumnResizeSpeed(0.075);
-
             if (vjEditorSettings.EditPage) {
                 $iframe.removeClass("fixed-height");
                 $iframe.contents().find("html").removeClass('responsive');
@@ -2901,8 +2899,6 @@ $(document).ready(function () {
         //Tablet Portrait
         else if ($this.attr("id") == "Tablet") {
 
-            ChangeColumnResizeSpeed(0.1);
-
             if (vjEditorSettings.EditPage) {
                 $iframe.removeClass("fixed-height");
                 $iframe.contents().find("html").addClass('responsive');
@@ -2914,8 +2910,6 @@ $(document).ready(function () {
         }
         //Mobile Portrait
         else if ($this.attr("id") == "Mobile") {
-
-            ChangeColumnResizeSpeed(0.2);
 
             if (vjEditorSettings.EditPage) {
                 $iframe.addClass("fixed-height");
