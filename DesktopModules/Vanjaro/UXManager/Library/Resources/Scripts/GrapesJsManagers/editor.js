@@ -2553,6 +2553,7 @@ $(document).ready(function () {
                                                 });
                                                 if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
                                                     var item = {
+                                                        ccid: v.attributes.attributes['id'],
                                                         guid: v.attributes.attributes['data-guid'],
                                                         html: content.html,
                                                         css: content.css,

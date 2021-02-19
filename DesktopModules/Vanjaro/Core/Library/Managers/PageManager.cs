@@ -192,7 +192,10 @@ namespace Vanjaro.Core
                         {
                             if (con.attributes != null && con.attributes["data-guid"] != null && !GlobalKeyValuePairs.ContainsKey(con.attributes["data-guid"].Value))
                             {
-                                if (IsGlobalBlockUnlocked(con.attributes["data-guid"].Value, DeserializedGlobalBlocksJSON))
+                                string ccid = string.Empty;
+                                if (con.attributes["id"] != null)
+                                    ccid = con.attributes["id"].Value;
+                                if (IsGlobalBlockUnlocked(ccid, con.attributes["data-guid"].Value, DeserializedGlobalBlocksJSON))
                                     GlobalKeyValuePairs.Add(con.attributes["data-guid"].Value, con.components);
                                 ExtractStyleIds(con.attributes["data-guid"].Value, con.components, StyleIds);
                                 (con as JObject).Remove("components");
@@ -206,14 +209,22 @@ namespace Vanjaro.Core
                 }
             }
 
-            private static bool IsGlobalBlockUnlocked(string guid, dynamic blocksJSON)
+            private static bool IsGlobalBlockUnlocked(string ccid, string guid, dynamic blocksJSON)
             {
                 if (blocksJSON != null && blocksJSON.Count > 0)
                 {
                     foreach (dynamic con in blocksJSON)
                     {
                         if (con.guid != null && con.guid.Value == guid)
-                            return true;
+                        {
+                            if (!string.IsNullOrEmpty(ccid) && con.ccid != null)
+                            {
+                                if (con.ccid.Value == ccid)
+                                    return true;
+                            }
+                            else
+                                return true;
+                        }
                     }
                 }
                 return false;
@@ -1289,7 +1300,7 @@ namespace Vanjaro.Core
                     string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
                     string tempNewUrl = newurl;
                     int count = 1;
-                Find:
+                    Find:
                     if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
                     {
                         tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;
