@@ -3023,6 +3023,10 @@ input.rangeinput {
         cursor: pointer !important;
     }
 
+        .global-tools .toolbar em.fa-arrows {
+            cursor: move !important;
+        }
+
         .global-tools .toolbar em + em {
             margin-left: 10px;
         }

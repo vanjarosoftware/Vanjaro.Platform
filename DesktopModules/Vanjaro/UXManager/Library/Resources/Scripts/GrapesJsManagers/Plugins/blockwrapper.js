@@ -127,7 +127,11 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
             }),
         view: defaultView.extend({
             render: function () {
+
                 defaultType.view.prototype.render.apply(this, arguments);
+
+                VJIsLocked = 'True';
+
                 this.model.set('custom-name', this.model.attributes.attributes["data-block-display-name"] != undefined ? this.model.attributes.attributes["data-block-display-name"] : this.model.attributes.attributes["data-block-type"]);
                 this.model.set('name', this.model.attributes.attributes["data-block-display-name"] != undefined ? this.model.attributes.attributes["data-block-display-name"] : this.model.attributes.attributes["data-block-type"]);
                 if (this.model.attributes != undefined && this.model.attributes.components != undefined && this.model.attributes.components.models[0] != undefined && this.model.attributes.components.models[0].attributes.content != '') {
@@ -170,6 +174,11 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
                         });
                     });
                 }
+
+                setTimeout(function () {
+                    VJIsLocked = 'False';
+                }, 1000);
+                
                 return this;
             },
             events: {
