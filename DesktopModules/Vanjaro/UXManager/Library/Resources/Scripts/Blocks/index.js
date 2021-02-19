@@ -424,6 +424,17 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 		});
 	}
 
+	var waitForChange = function (closed) {
+
+		if (closed) {
+			$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
+		} else {
+			setTimeout(function () {
+				waitForChange($(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').is(":hidden"));
+			}, 10);
+		}
+	};
+
 	//Add Custom Block
 	editor.Commands.add('custom-block', {
 		run: function (editor, sender, opts) {
@@ -513,9 +524,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 				AddCustomBlock(editor, CustomBlock);
 
-				setTimeout(function () {
-					$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
-				}, 500);
+				waitForChange($(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').is(":hidden"));
 			};
 
 			$('.gjs-mdl-dialog .gjs-mdl-btn-close').click(function () {
@@ -619,10 +628,8 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 				UpdateCustomBlock(editor, CustomBlock);
 
-				setTimeout(function () {
-					$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
-				}, 500);
-
+				waitForChange($(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').is(":hidden"));
+					
 			};
 
 			$('.gjs-mdl-dialog .gjs-mdl-btn-close').click(function () {
