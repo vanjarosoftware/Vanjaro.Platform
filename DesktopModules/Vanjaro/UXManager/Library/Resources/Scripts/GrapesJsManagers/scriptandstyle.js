@@ -24,7 +24,7 @@ global.BindLinksAndScripts = function () {
         }
     });
     $('style').each(function () {
-        if (this.innerHTML != undefined && this.innerHTML.length > 0)
+        if (typeof this.attributes.vj == 'undefined' && this.innerHTML != undefined && this.innerHTML.length > 0)
             VjStyle += this.innerHTML;
     });
 };
