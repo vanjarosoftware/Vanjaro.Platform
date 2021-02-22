@@ -82,7 +82,7 @@ namespace Vanjaro.Core.Extensions.Workflow.Review.Managers
                             sb.Append("<div class=\"col-8 user_imgname p-none\">");
                             sb.Append("<div class=\"float-left\"><img class=\"preview_pic\" src=\"" + UserUtils.GetProfileImage(UserInfo.PortalID, wlog.ReviewedBy) + "\"></div>");
                             sb.Append("<span class=\"author_name\">" + uf.DisplayName + "</span></div>");
-                            sb.Append("<div class=\"col-4 revision_info text-right\">");
+                            sb.Append("<div class=\"col-4 revision_info text-end\">");
                             sb.Append("" + IsAppRej + "");
                             sb.Append("<p class=\"date m-none\"><span>" + wlog.ReviewedOn + " </span></p></div></div>");
                             sb.Append("<div class=\"row m-none \"><div class=\"col-12 commentInfo\"><p>" + wlog.Comment + "</p></div></div></div></div>");

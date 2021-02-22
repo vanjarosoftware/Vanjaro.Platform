@@ -107,7 +107,7 @@
 
             common.webApi.post('seo/UpdateSettings', '', requestSettings).success(function (Response) {
                 if (Response.IsSuccess) {
-                    $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                    $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 }
                 else {
                     window.parent.ShowNotification('[L:SEOSettings]', Response.Message, 'error');
@@ -207,7 +207,7 @@
                         }
                         else {
                             window.parent.document.callbacktype = type;
-                            $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                            $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                         }
                     });
                 }
@@ -234,7 +234,7 @@
                         }
                         else {
                             window.parent.document.callbacktype = type;
-                            $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                            $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                         }
                     });
                 }
@@ -261,7 +261,7 @@
                         }
                         else {
                             window.parent.document.callbacktype = type;
-                            $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                            $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                         }
                     });
                 }

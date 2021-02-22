@@ -46,9 +46,9 @@
 
     $scope.doubleclick = function () {
         if (location.href.indexOf('ignoregj') > 0)
-            $(window.parent.document.body).find('.uxmanager-modal [data-dismiss="modal"]').click();
+            $(window.parent.document.body).find('.uxmanager-modal [data-bs-dismiss="modal"]').click();
         else
-            $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+            $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
     };
 
     $(document).ready(function () {

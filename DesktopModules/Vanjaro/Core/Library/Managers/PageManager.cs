@@ -86,6 +86,216 @@ namespace Vanjaro.Core
                 return Markup;
             }
 
+            internal static void BuildCustomBlocks(int portalID, dynamic contentJSON, dynamic styleJSON)
+            {
+                if (contentJSON != null)
+                {
+                    foreach (dynamic con in contentJSON)
+                    {
+                        if (con.attributes != null && con.attributes["data-custom-wrapper"] != null && con.attributes["data-guid"] != null)
+                        {
+                            CustomBlock block = BlockManager.GetByGuid(portalID, con.attributes["data-guid"].Value);
+                            if (block != null)
+                            {
+                                string prefix = con.attributes["id"] != null ? con.attributes["id"].Value : string.Empty;
+                                dynamic blockContentJSON = JsonConvert.DeserializeObject(block.ContentJSON);
+                                List<string> Ids = new List<string>();
+                                if (blockContentJSON != null)
+                                {
+                                    List<string> conKeys = new List<string>();
+                                    foreach (JProperty prop in con.Properties())
+                                        conKeys.Add(prop.Name);
+                                    foreach (string prop in conKeys)
+                                        (con as JObject).Remove(prop);
+                                    foreach (JProperty prop in blockContentJSON[0].Properties())
+                                        (con as JObject).Add(prop.Name, prop.Value);
+                                    UpdateIds(con, prefix, Ids);
+                                }
+                                dynamic blockStyleJSON = JsonConvert.DeserializeObject(block.StyleJSON);
+                                if (blockStyleJSON != null)
+                                {
+                                    foreach (dynamic style in blockStyleJSON)
+                                    {
+                                        if (!StyleExists(style, styleJSON))
+                                        {
+                                            if (!string.IsNullOrEmpty(prefix) && style.selectors != null)
+                                            {
+                                                foreach (dynamic st in style.selectors)
+                                                {
+                                                    if (st.name != null)
+                                                    {
+                                                        string val = st.name;
+                                                        if (!Ids.Contains(val))
+                                                            st.name.Value = prefix + "-" + val.Split('-').Last();
+                                                    }
+                                                }
+                                            }
+                                            styleJSON.Add(style);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else if (con.components != null)
+                        {
+                            BuildCustomBlocks(portalID, con.components, styleJSON);
+                        }
+                    }
+                }
+            }
+
+            private static bool StyleExists(dynamic style, dynamic styleJSON)
+            {
+                bool result = false;
+                if (styleJSON != null && style != null && style.selectors != null)
+                {
+                    foreach (dynamic con in styleJSON)
+                    {
+                        if (result)
+                            break;
+                        if (con.selectors != null)
+                        {
+                            foreach (dynamic cons in con.selectors)
+                            {
+                                if (result)
+                                    break;
+                                foreach (dynamic st in style.selectors)
+                                {
+                                    if (st.name != null && cons.name != null && cons.name.Value == st.name.Value)
+                                    {
+                                        result = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return result;
+            }
+
+            internal static void RemoveGlobalBlockComponents(dynamic contentJSON, Dictionary<string, List<string>> StyleIds, Dictionary<string, dynamic> GlobalKeyValuePairs, dynamic DeserializedGlobalBlocksJSON)
+            {
+                if (contentJSON != null)
+                {
+                    foreach (dynamic con in contentJSON)
+                    {
+                        if (con.type != null && con.type.Value == "module")
+                        {
+                            con.content = "";
+                        }
+                        else if (con.type != null && con.type.Value == "blockwrapper")
+                        {
+                            con.content = "";
+                        }
+                        else if (con.type != null && con.type.Value == "globalblockwrapper")
+                        {
+                            if (con.attributes != null && con.attributes["data-guid"] != null && !GlobalKeyValuePairs.ContainsKey(con.attributes["data-guid"].Value))
+                            {
+                                if (IsGlobalBlockUnlocked(con.attributes["data-guid"].Value, DeserializedGlobalBlocksJSON))
+                                    GlobalKeyValuePairs.Add(con.attributes["data-guid"].Value, con.components);
+                                ExtractStyleIds(con.attributes["data-guid"].Value, con.components, StyleIds);
+                                (con as JObject).Remove("components");
+                            }
+                        }
+                        else if (con.components != null)
+                        {
+                            RemoveGlobalBlockComponents(con.components, StyleIds, GlobalKeyValuePairs, DeserializedGlobalBlocksJSON);
+                        }
+                    }
+                }
+            }
+
+            private static bool IsGlobalBlockUnlocked(string guid, dynamic blocksJSON)
+            {
+                if (blocksJSON != null && blocksJSON.Count > 0)
+                {
+                    foreach (dynamic con in blocksJSON)
+                    {
+                        if (con.guid != null && con.guid.Value == guid)
+                            return true;
+                    }
+                }
+                return false;
+            }
+
+            internal static void RemoveGlobalBlockStyles(dynamic contentJSON, Dictionary<string, List<string>> StyleIds, Dictionary<string, dynamic> GlobalStyleKeyValuePairs)
+            {
+                if (contentJSON != null)
+                {
+                    Dictionary<string, List<dynamic>> itemsToRemove = new Dictionary<string, List<dynamic>>();
+                    foreach (dynamic con in contentJSON)
+                    {
+                        if (con.selectors != null)
+                        {
+                            foreach (dynamic cons in con.selectors)
+                            {
+                                bool breaked = false;
+                                foreach (var style in StyleIds)
+                                {
+                                    if (cons.name != null && style.Value.Contains(cons.name.Value))
+                                    {
+                                        if (itemsToRemove.ContainsKey(style.Key))
+                                        {
+                                            List<dynamic> existing = itemsToRemove[style.Key];
+                                            existing.Add(con);
+                                            itemsToRemove[style.Key] = existing;
+                                        }
+                                        else
+                                        {
+                                            List<dynamic> obj = new List<dynamic>();
+                                            obj.Add(con);
+                                            itemsToRemove.Add(style.Key, obj);
+                                        }
+                                        breaked = true;
+                                        break;
+                                    }
+                                }
+                                if (breaked)
+                                    break;
+                            }
+                        }
+                    }
+                    foreach (var item in itemsToRemove)
+                    {
+                        foreach (var con in item.Value)
+                        {
+                            contentJSON.Remove(con);
+                        }
+                        GlobalStyleKeyValuePairs.Add(item.Key, item.Value);
+                    }
+                }
+            }
+
+            private static void ExtractStyleIds(string guid, dynamic components, Dictionary<string, List<string>> styleIds)
+            {
+                if (components != null)
+                {
+                    foreach (dynamic con in components)
+                    {
+                        if (con.attributes != null && con.attributes["id"] != null)
+                        {
+                            if (styleIds.ContainsKey(guid))
+                            {
+                                List<string> existing = styleIds[guid];
+                                existing.Add(con.attributes["id"].Value);
+                                styleIds[guid] = existing;
+                            }
+                            else
+                            {
+                                List<string> obj = new List<string>();
+                                obj.Add(con.attributes["id"].Value);
+                                styleIds.Add(guid, obj);
+                            }
+                        }
+                        if (con.components != null)
+                        {
+                            ExtractStyleIds(guid, con.components, styleIds);
+                        }
+                    }
+                }
+            }
+
             public static dynamic Update(PortalSettings PortalSettings, dynamic Data)
             {
                 dynamic result = new ExpandoObject();
@@ -99,10 +309,26 @@ namespace Vanjaro.Core
                         var aliases = from PortalAliasInfo pa in PortalAliasController.Instance.GetPortalAliasesByPortalId(PortalSettings.PortalId)
                                       select pa.HTTPAlias;
                         page.TabID = TabId;
-                        page.Style = Data["gjs-css"].ToString();
-                        page.Content = AbsoluteToRelativeUrls(ResetModuleMarkup(PortalSettings.PortalId, Data["gjs-html"].ToString(), PortalSettings.UserId), aliases);
-                        page.ContentJSON = AbsoluteToRelativeUrls(Data["gjs-components"].ToString(), aliases);
-                        page.StyleJSON = string.Empty;
+                        string Css = Data["gjs-css"].ToString();
+                        page.Content = AbsoluteToRelativeUrls(ResetModuleMarkup(PortalSettings.PortalId, Data["gjs-html"].ToString(), ref Css, PortalSettings.UserId), aliases);
+
+                        List<string> Ids = new List<string>();
+                        Dictionary<string, List<string>> StyleIds = new Dictionary<string, List<string>>();
+                        Dictionary<string, dynamic> GlobalKeyValuePairs = new Dictionary<string, dynamic>();
+                        Dictionary<string, dynamic> GlobalStyleKeyValuePairs = new Dictionary<string, dynamic>();
+                        try { var globalblocks = Data["gjs-globalblocks"]; }
+                        catch { Data["gjs-globalblocks"] = ""; }
+                        var DeserializedGlobalBlocksJSON = Data["gjs-globalblocks"] != null ? JsonConvert.DeserializeObject(Data["gjs-globalblocks"].ToString()) : string.Empty;
+                        var DeserializedContentJSON = JsonConvert.DeserializeObject(Data["gjs-components"].ToString());
+                        var DeserializedStyleJSON = JsonConvert.DeserializeObject(Data["gjs-styles"].ToString());
+                        GetAllIds(DeserializedContentJSON, Ids);
+                        FilterStyle(DeserializedStyleJSON, Ids);
+                        RemoveGlobalBlockComponents(DeserializedContentJSON, StyleIds, GlobalKeyValuePairs, DeserializedGlobalBlocksJSON);
+                        RemoveGlobalBlockStyles(DeserializedStyleJSON, StyleIds, GlobalStyleKeyValuePairs);
+                        BuildCustomBlocks(PortalSettings.PortalId, DeserializedContentJSON, DeserializedStyleJSON);
+                        page.ContentJSON = AbsoluteToRelativeUrls(JsonConvert.SerializeObject(DeserializedContentJSON), aliases);
+                        page.StyleJSON = JsonConvert.SerializeObject(DeserializedStyleJSON);
+                        page.Style = FilterCss(Css, StyleIds);
 
                         if (Data["IsPublished"] != null && Convert.ToBoolean(Data["IsPublished"].ToString()) && (pageVersion != null && pageVersion.IsPublished))
                         {
@@ -172,6 +398,8 @@ namespace Vanjaro.Core
 
                         result.IsSuccess = true;
                         result.ShowNotification = Data["IsPublished"];
+
+                        UpdateGlobalBlocks(PortalSettings, GlobalKeyValuePairs, GlobalStyleKeyValuePairs, DeserializedGlobalBlocksJSON, aliases, Convert.ToBoolean(Data["IsPublished"].ToString()));
                     }
                 }
                 catch (Exception ex)
@@ -181,7 +409,123 @@ namespace Vanjaro.Core
                 }
                 return result;
             }
-            private static string AbsoluteToRelativeUrls(string content, IEnumerable<string> aliases)
+
+            internal static void FilterStyle(dynamic styleJSON, List<string> ids)
+            {
+                if (styleJSON != null)
+                {
+                    List<dynamic> itemsToRemove = new List<dynamic>();
+                    foreach (dynamic con in styleJSON)
+                    {
+                        List<string> selectorIds = new List<string>();
+                        if (con.selectors != null)
+                        {
+                            foreach (dynamic cons in con.selectors)
+                            {
+                                if (cons.name != null)
+                                    selectorIds.Add(cons.name.Value);
+                            }
+                        }
+                        bool delete = true;
+                        foreach (string selectorId in selectorIds)
+                        {
+                            if (ids.Contains(selectorId))
+                            {
+                                delete = false;
+                                break;
+                            }
+                        }
+                        if (delete)
+                            itemsToRemove.Add(con);
+                    }
+                    foreach (var item in itemsToRemove)
+                        styleJSON.Remove(item);
+                }
+            }
+
+            internal static void GetAllIds(dynamic contentJSON, List<string> ids)
+            {
+                if (contentJSON != null)
+                {
+                    foreach (dynamic con in contentJSON)
+                    {
+                        if (con.attributes != null && con.attributes["id"] != null)
+                            ids.Add(con.attributes["id"].Value);
+                        if (con.components != null)
+                            GetAllIds(con.components, ids);
+                    }
+                }
+            }
+
+            internal static string FilterCss(string css, Dictionary<string, List<string>> styleIds)
+            {
+                if (styleIds.Count > 0)
+                {
+                    foreach (var item in styleIds)
+                    {
+                        foreach (string style in item.Value)
+                            css = Regex.Replace(css, @"(#" + style + @"*\s*{[^}]*})|(#" + style + @":[^{]*\s*{[^}]*})", string.Empty);
+                    }
+                }
+                return css;
+            }
+
+            private static void UpdateGlobalBlocks(PortalSettings portalSettings, Dictionary<string, dynamic> globalKeyValuePairs, Dictionary<string, dynamic> globalStyleKeyValuePairs, dynamic blocksJSON, IEnumerable<string> aliases, bool IsPublished)
+            {
+                foreach (var item in globalKeyValuePairs)
+                {
+                    CustomBlock block = BlockManager.GetByGuid(portalSettings.PortalId, item.Key);
+                    if (block != null)
+                    {
+                        block.ContentJSON = PageManager.DeTokenizeLinks(JsonConvert.SerializeObject(item.Value), portalSettings.PortalId);
+                        if (globalStyleKeyValuePairs.ContainsKey(item.Key))
+                            block.StyleJSON = PageManager.DeTokenizeLinks(JsonConvert.SerializeObject(globalStyleKeyValuePairs[item.Key]), portalSettings.PortalId);
+                        if (blocksJSON != null && blocksJSON.Count > 0)
+                        {
+                            foreach (dynamic con in blocksJSON)
+                            {
+                                if (con.guid != null && con.guid.Value == item.Key)
+                                {
+                                    string Css = con.css.Value;
+                                    block.Html = DeTokenizeLinks(AbsoluteToRelativeUrls(ResetModuleMarkup(portalSettings.PortalId, con.html.Value, ref Css, portalSettings.UserId), aliases), portalSettings.PortalId);
+                                    List<string> Ids = new List<string>();
+                                    Dictionary<string, List<string>> StyleIds = new Dictionary<string, List<string>>();
+                                    Dictionary<string, dynamic> GlobalKeyValuePairs = new Dictionary<string, dynamic>();
+                                    Dictionary<string, dynamic> GlobalStyleKeyValuePairs = new Dictionary<string, dynamic>();
+                                    var DeserializedContentJSON = JsonConvert.DeserializeObject(block.ContentJSON);
+                                    var DeserializedStyleJSON = block.StyleJSON != null ? JsonConvert.DeserializeObject(block.StyleJSON) : string.Empty;
+                                    GetAllIds(DeserializedContentJSON, Ids);
+                                    FilterStyle(DeserializedStyleJSON, Ids);
+                                    RemoveGlobalBlockComponents(DeserializedContentJSON, StyleIds, GlobalKeyValuePairs, null);
+                                    RemoveGlobalBlockStyles(DeserializedStyleJSON, StyleIds, GlobalStyleKeyValuePairs);
+                                    BuildCustomBlocks(portalSettings.PortalId, DeserializedContentJSON, DeserializedStyleJSON);
+                                    block.ContentJSON = DeTokenizeLinks(AbsoluteToRelativeUrls(JsonConvert.SerializeObject(DeserializedContentJSON), aliases), portalSettings.PortalId);
+                                    block.Css = FilterCss(Css, StyleIds);
+                                    block.StyleJSON = DeTokenizeLinks(JsonConvert.SerializeObject(DeserializedStyleJSON), portalSettings.PortalId);
+                                }
+                            }
+                        }
+                        if (block.IsPublished)
+                        {
+                            block.ID = 0;
+                            block.CreatedOn = DateTime.UtcNow;
+                            block.CreatedBy = PortalSettings.Current.UserInfo.UserID;
+                        }
+                        if (IsPublished)
+                        {
+                            block.PublishedBy = PortalSettings.Current.UserInfo.UserID;
+                            block.IsPublished = IsPublished;
+                            block.PublishedOn = DateTime.UtcNow;
+                        }
+
+                        block.UpdatedOn = DateTime.UtcNow;
+                        block.UpdatedBy = PortalSettings.Current.UserInfo.UserID;
+                        BlockManager.Update(block);
+                    }
+                }
+            }
+
+            internal static string AbsoluteToRelativeUrls(string content, IEnumerable<string> aliases)
             {
                 if (string.IsNullOrWhiteSpace(content))
                     return string.Empty;
@@ -224,10 +568,11 @@ namespace Vanjaro.Core
                 return PageFactory.GetAllByTabID(TabID, HasTabEditPermission).ToList();
             }
 
-            public static string ResetModuleMarkup(int PortalId, string Markup, int UserId)
+            public static string ResetModuleMarkup(int PortalId, string Markup, ref string Css, int UserId)
             {
                 if (!string.IsNullOrEmpty(Markup))
                 {
+                    Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
                     HtmlDocument html = new HtmlDocument();
                     html.LoadHtml(Markup);
                     IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
@@ -248,8 +593,19 @@ namespace Vanjaro.Core
                                 item.InnerHtml = item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value;
                             }
                         }
+                        else if (item.Attributes.Where(a => a.Name == "data-custom-wrapper").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault() != null)
+                        {
+                            CustomBlock block = BlockManager.GetByGuid(PortalId, item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value);
+                            if (block != null)
+                            {
+                                keyValuePairs.Add(item.OuterHtml, block.Html);
+                                Css += block.Css;
+                            }
+                        }
                     }
                     Markup = html.DocumentNode.OuterHtml;
+                    foreach (var keyValue in keyValuePairs)
+                        Markup = Markup.Replace(keyValue.Key, keyValue.Value);
                 }
                 return Markup;
             }
@@ -1080,6 +1436,106 @@ namespace Vanjaro.Core
                                 }
                             }
                         }
+                    }
+                }
+            }
+
+            public static void ApplyGlobalBlockJSON(Pages page)
+            {
+                if (page != null && page.ContentJSON != null)
+                {
+                    var contentJSON = JsonConvert.DeserializeObject(page.ContentJSON);
+                    if (contentJSON != null)
+                    {
+                        try
+                        {
+                            if (string.IsNullOrEmpty(page.StyleJSON))
+                                page.StyleJSON = "";
+                            var styleJSON = JsonConvert.DeserializeObject(page.StyleJSON);
+                            UpdateGlobalBlockJSON(contentJSON, styleJSON);
+                            page.ContentJSON = JsonConvert.SerializeObject(contentJSON);
+                            if (styleJSON != null)
+                                page.StyleJSON = JsonConvert.SerializeObject(styleJSON);
+                        }
+                        catch (Exception ex) { ExceptionManager.LogException(ex); }
+                    }
+                }
+            }
+
+            private static void UpdateGlobalBlockJSON(dynamic contentJSON, dynamic styleJSON)
+            {
+                foreach (dynamic con in contentJSON)
+                {
+                    if (con.type != null && con.type.Value == "globalblockwrapper" && con.attributes != null && con.attributes["data-guid"] != null)
+                    {
+                        CustomBlock block = BlockManager.GetByGuid(PortalSettings.Current.PortalId, con.attributes["data-guid"].Value);
+
+                        if (block != null && !string.IsNullOrEmpty(block.ContentJSON))
+                        {
+                            con.components = JsonConvert.DeserializeObject(block.ContentJSON);
+                            string prefix = con.attributes["id"] != null ? con.attributes["id"].Value : string.Empty;
+                            List<string> Ids = new List<string>();
+                            UpdateIds(con.components, prefix, Ids);
+                            if (!string.IsNullOrEmpty(block.StyleJSON) && styleJSON != null)
+                            {
+                                dynamic styles = JsonConvert.DeserializeObject(block.StyleJSON);
+                                foreach (var style in styles)
+                                {
+                                    if (!string.IsNullOrEmpty(prefix) && style.selectors != null)
+                                    {
+                                        foreach (dynamic st in style.selectors)
+                                        {
+                                            if (st.name != null)
+                                            {
+                                                string val = st.name;
+                                                if (!Ids.Contains(val))
+                                                    st.name.Value = prefix + "-" + val.Split('-').Last();
+                                            }
+                                        }
+                                    }
+                                    styleJSON.Add(style);
+                                }
+                            }
+                        }
+
+                    }
+                    else if (con.components != null)
+                    {
+                        UpdateGlobalBlockJSON(con.components, styleJSON);
+                    }
+                }
+            }
+
+            private static void UpdateIds(dynamic contentJSON, string prefix, List<string> Ids)
+            {
+                if (!string.IsNullOrEmpty(prefix) && contentJSON != null)
+                {
+                    if (contentJSON is JArray)
+                    {
+                        foreach (dynamic con in contentJSON)
+                        {
+                            if (con.attributes != null && con.attributes["id"] != null && con.type != null && con.type.Value != "module" && con.type.Value != "blockwrapper")
+                            {
+                                string val = con.attributes["id"].Value;
+                                con.attributes["id"].Value = prefix + "-" + val.Split('-').Last();
+                            }
+                            else if (con.attributes != null && con.attributes["id"] != null)
+                                Ids.Add(con.attributes["id"].Value);
+                            if (con.components != null)
+                                UpdateIds(con.components, prefix, Ids);
+                        }
+                    }
+                    else
+                    {
+                        if (contentJSON.attributes != null && contentJSON.attributes["id"] != null && contentJSON.type != null && contentJSON.type.Value != "module" && contentJSON.type.Value != "blockwrapper")
+                        {
+                            string val = contentJSON.attributes["id"].Value;
+                            contentJSON.attributes["id"].Value = prefix + "-" + val.Split('-').Last();
+                        }
+                        else
+                            Ids.Add(contentJSON.attributes["id"].Value);
+                        if (contentJSON.components != null)
+                            UpdateIds(contentJSON.components, prefix, Ids);
                     }
                 }
             }

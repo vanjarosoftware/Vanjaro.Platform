@@ -38,7 +38,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Factories
             {
                 AccessRoles = "editpage",
                 UrlPaths = new List<string> {
-                  "revisions"
+                  "revisions",
                 },
                 IsDefaultTemplate = true,
                 TemplatePath = "history/revisions.html",
@@ -46,7 +46,17 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Factories
                 Defaults = new Dictionary<string, string> { }
             };
             Views.Add(revisions);
-
+            AngularView Revisions = new AngularView
+            {
+                AccessRoles = "editpage",
+                UrlPaths = new List<string> {
+                  "revisions/:bguid"
+                },
+                TemplatePath = "history/revisions.html",
+                Identifier = Identifier.history_revisions.ToString(),
+                Defaults = new Dictionary<string, string> { }
+            };
+            Views.Add(Revisions);
             return Views;
         }
 

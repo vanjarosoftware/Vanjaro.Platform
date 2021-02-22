@@ -22,7 +22,7 @@
                         if (has(data.Data, 'displayName'))
                             window.parent.ShowNotification(data.Data.displayName, '[L:UserCreatedSuccess]', 'success');
 
-                        $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                        $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                         //parent.OpenPopUp(null, 800, 'right', '', $scope.ui.data.RedirectUrl.Value + '#/setting?uid=' + data.Data.userId);
                     }
                     else {

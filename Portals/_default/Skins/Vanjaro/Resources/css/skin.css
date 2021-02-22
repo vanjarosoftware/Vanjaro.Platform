@@ -1,4 +1,13 @@
 ﻿/*Modal*/
+.modal .btn-close {
+    font-size: 10px;
+}
+
+.modal .modal-header {
+    align-items: center;
+}
+
+
 .modal .modal-dialog.modal-right {
     right: 0;
 }
@@ -31,40 +40,41 @@
     font-family: Arial,sans-serif;
 }
 
-#toast-container > .toast-info {
-    background-color: #e6e9ec;
-    color: #000;
-    background-image: none !important;
-    width: 325px;
-}
-
-
-    #toast-container > .toast-info:before {
-        font-family: "Font Awesome 5 Free";
-        font-size: 24px;
-        line-height: 18px;
-        color: #999;
-        content: "\f05a";
-        top: 50%;
-        position: absolute;
-        left: 15px;
-        margin-top: -9px;
-        font-weight: bold;
-    }
-
-    #toast-container > .toast-info .btn-success, #toast-container > .toast-info .btn-danger {
-        margin-top: 10px;
-        margin-right: 10px;
-        width: 120px;
-    }
-
-    #toast-container > .toast-info .toast-close-button {
+    #toast-container > .toast-info {
+        background-color: #e6e9ec;
         color: #000;
+        background-image: none !important;
+        width: 325px;
     }
 
-#toast-container > div.toast-info:hover {
-    box-shadow: 0 0 12px #6f6f6f;
-}
+
+        #toast-container > .toast-info:before {
+            font-family: "Font Awesome 5 Free";
+            font-size: 24px;
+            line-height: 18px;
+            color: #999;
+            content: "\f05a";
+            top: 50%;
+            position: absolute;
+            left: 15px;
+            margin-top: -9px;
+            font-weight: bold;
+        }
+
+        #toast-container > .toast-info .btn-success, #toast-container > .toast-info .btn-danger {
+            margin-top: 10px;
+            margin-right: 10px;
+            width: 120px;
+            color: #fff;
+        }
+
+        #toast-container > .toast-info .toast-close-button {
+            color: #000;
+        }
+
+    #toast-container > div.toast-info:hover {
+        box-shadow: 0 0 12px #6f6f6f;
+    }
 
 .SweetAlertBold {
     font-weight: bold;
@@ -88,6 +98,10 @@
     border-radius: 4px;
     padding: 6px 10px;
 }
+
+    .sweet-alert textarea::placeholder {
+        color: #797979;
+    }
 
 #toast-container.info {
     z-index: 999;
@@ -143,7 +157,7 @@
     }
 
     .modal-toggle:focus {
-       outline: none;
+        outline: none;
     }
 
     .modal-toggle.modalclosebtn {
@@ -731,7 +745,11 @@ ul.vj_authenticationtab {
     justify-content: center !important;
 }
 
-.video-box{
-    display:inline-block;
-    width:100%;
+.video-box {
+    display: inline-block;
+    width: 100%;
+}
+
+.align-ib {
+    display: inline-block;
 }

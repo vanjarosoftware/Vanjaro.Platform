@@ -12,13 +12,13 @@
                         </a>
                     </div>
                     <div class="col-5 pl-none" access-roles="admin">
-                        <a href="#" title="[L:AddUser]" onclick="parent.OpenPopUp(event, 450,'right', '[L:AddUser]', '#adduser')" class="ux-btn ux-btn-hover float-right adduser" mn-ng-hide="Show_RecycleBin">
+                        <a href="#" title="[L:AddUser]" onclick="parent.OpenPopUp(event, 450,'right', '[L:AddUser]', '#adduser')" class="ux-btn ux-btn-hover float-end adduser" mn-ng-hide="Show_RecycleBin">
                             <em class="fas fa-plus"></em>
                         </a>
-                        <a class="ux-btn ux-btn-hover float-right" mn-ng-click="Remove_Users()" title="[L:DeleteAllUsers]" mn-ng-show="Show_RecycleBin">
+                        <a class="ux-btn ux-btn-hover float-end" mn-ng-click="Remove_Users()" title="[L:DeleteAllUsers]" mn-ng-show="Show_RecycleBin">
                             <em class="fas fa-eraser"></em>
                         </a>
-                        <div class="user-group dropdown float-right" mn-ng-show="!Show_RecycleBin">
+                        <div class="user-group dropdown float-end" mn-ng-show="!Show_RecycleBin">
                             <div class="dropdown-menu">
                                 <div class="dropdown-item" mn-ng-click="Change_UserFilter(option)" mn-ng-repeat="option in ui.data.UserFilters.Options" ng-class="{'active':(ui.data.Select_UserFilters.Options.Value==option.Value)}">
                                     <hr class="m-none" mn-ng-if="option.Value == 3" />
@@ -26,11 +26,11 @@
                                     <span mn-ng-if="option.Value!=1">{{option.Key}}</span>
                                 </div>
                             </div>
-                            <a href="#" class="ux-btn ux-btn-hover float-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a href="#" class="ux-btn ux-btn-hover float-end dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-filter"></em>
                             </a>
                         </div>
-                        <a class="ux-btn ux-btn-hover float-right" mn-ng-click="Open_MemberProfile()" title="[L:MemberProfileSettings]" mn-ng-show="!Show_RecycleBin">
+                        <a class="ux-btn ux-btn-hover float-end" mn-ng-click="Open_MemberProfile()" title="[L:MemberProfileSettings]" mn-ng-show="!Show_RecycleBin">
                             <em class="fas fa-user-tag"></em>
                         </a>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="col-md-12 text-center">
                         <a href="#" mn-ng-hide="Show_RecycleBin || !ui.data.DeletedUsers.Value" ng-click="Show_RecycleBin =!(Show_RecycleBin);HeaderText='[L:RecycleBin]'" class="badge badge-button position-relative" title="[L:RecycleBin]">
                             <span class="title">[L:Deleted]</span>
-                            <span class="badge badge-button-inverse float-right">{{ui.data.DeletedUsers.Value}}</span>
+                            <span class="badge badge-button-inverse float-end">{{ui.data.DeletedUsers.Value}}</span>
                         </a>
                     </div>
                 </div>
@@ -65,8 +65,8 @@
                 </column>
                 <column name="Action" attr-style="text-align: right" width="15">
                     <uitemplate>
-                        <div class="dropdown float-right dropbtn">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown float-end dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div ng-if="!row.isDeleted" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -120,8 +120,8 @@
                 </column>
                 <column name="Action" attr-style="text-align: right" width="20">
                     <uitemplate>
-                        <div class="dropdown show float-right dropbtn">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown show float-end dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

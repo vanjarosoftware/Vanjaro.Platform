@@ -8,14 +8,14 @@
                 </div>
                 <div mn-ng-repeat="version in ui.data.ScheduleStatus.Options.Data.ScheduleQueue" class="revision_block">
                     <div class="row scheduletask m-none">
-                        <div class="col-xs-2 p-none">
-                            <div class="pull-left">
+                        <div class="col-sm-1 p-none me-2">
+                            <div class="float-start">
                                 <em class="far fa-clock" mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing.length == 0"></em>
                                 <em class="far fa-clock" mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing.length != 0  && ui.data.ScheduleStatus.Options.Data.ScheduleProcessing[0].ScheduleID != version.ScheduleID"></em>
                                 <img class="loading" src="{{ui.data.LoadingImage.Value}}" mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing.length != 0 && ui.data.ScheduleStatus.Options.Data.ScheduleProcessing[0].ScheduleID == version.ScheduleID" />
                             </div>
                         </div>
-                        <div class="col-xs-10 p-none pt-xs revision_name">
+                        <div class="col-sm-10 p-none pt-xs revision_name">
                             <p class="active">
                                 <span mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing.length == 0"><strong> {{version.FriendlyName}}</strong></span>
                                 <span mn-ng-show="ui.data.ScheduleStatus.Options.Data.ScheduleProcessing.length != 0  && ui.data.ScheduleStatus.Options.Data.ScheduleProcessing[0].ScheduleID != version.ScheduleID"><strong> {{version.FriendlyName}}</strong></span>

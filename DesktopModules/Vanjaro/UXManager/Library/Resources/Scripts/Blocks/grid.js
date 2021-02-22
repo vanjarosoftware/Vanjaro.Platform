@@ -112,7 +112,7 @@ export default (editor, config = {}) => {
 		else
 			SelectedCol.addClass(colClass + colSize);
 
-		SelectedCol.removeStyle('flex-basis');
+		SelectedCol.removeStyle('width');
 	};
 
 	dc.addType('row', {
@@ -208,10 +208,9 @@ export default (editor, config = {}) => {
 					bl: 0,
 					br: 0,
 					bc: 0,
-					keyWidth: 'flex-basis',
+					keyWidth: 'width',
 					currentUnit: 1,
 					minDim: 1,
-					step: 0.075,
 					onMove: function (e) {
 
 						var SelectedCol = VjEditor.getSelected();
@@ -223,17 +222,24 @@ export default (editor, config = {}) => {
 						$grid.find('.snap-grid-column').height($grid.height());
 						$grid.find('.snap-grid').fadeIn();
 
-						var colFlex = parseFloat(SelectedCol.attributes.style["flex-basis"]);
+						var SelectedColWidth = parseInt(SelectedCol.getStyle()['width']);
+						var ContainerWidth = $(VjEditor.getSelected().parent().getEl()).width();
 
-						if (colFlex <= 8.333333)
-							SelectedCol.addStyle({ 'flex-basis': '8.333333%' });
-						else if (colFlex >= 100)
-							SelectedCol.addStyle({ 'flex-basis': '100%' });
+						var width = parseFloat(SelectedColWidth, 10) / ContainerWidth * 100
+
+						if (width <= 8.333333)
+							SelectedCol.addStyle({ 'width': '8.333333%' });
+						else if (width >= 100)
+							SelectedCol.addStyle({ 'width': '100%' });
 					},
 					onEnd: function (e) {
 						var SelectedCol = VjEditor.getSelected();
 						$(SelectedCol.parent().parent().getEl()).find('.snap-grid').fadeOut();
-						var colSize = getColSize(parseInt(SelectedCol.getStyle()['flex-basis']));
+
+						var SelectedColWidth = parseInt(SelectedCol.getStyle()['width']);
+						var ContainerWidth = $(VjEditor.getSelected().parent().getEl()).width();
+
+						var colSize = getColSize(parseInt(SelectedColWidth, 10) / ContainerWidth * 100);
 						setColSize(colSize);
 					},
 				},
@@ -520,5 +526,5 @@ global.DoubleClick = function (cols) {
 	clearTimeout(timer);
 	prevent = true;
 	ChangeGridColumns(cols);
-	$(window.document.body).find('[data-dismiss="modal"]').click();
+	$(window.document.body).find('[data-bs-dismiss="modal"]').click();
 }

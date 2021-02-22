@@ -289,6 +289,7 @@ a.closeaboutbtn {
 
 #Shortcuts hr {
     margin: 5px 0;
+    opacity: 0.1;
 }
 
 div#MenuSettings .sub-menu-hidden {
@@ -724,7 +725,7 @@ div#MenuSettings .parent-menu-hide {
     font-weight: bold;
     margin-left: 2px;
     position: absolute;
-    top: 5px;
+    top: 10px;
 }
 
 .blockItem.registerlink-notification {
@@ -967,20 +968,17 @@ div#MenuSettings .parent-menu-hide {
     color: #495157;
 }
 
-#ModalContent .CodeMirror,
 .gjs-custom-code .CodeMirror {
     border: 1px solid #d3d0d0;
     background: #fff;
 }
 
-#ModalContent #HTML + .CodeMirror,
-#ModalContent #CSS + .CodeMirror {
-    width: 395px;
-}
-
-#ModalContent .CodeMirror-gutters,
 .gjs-custom-code .CodeMirror-gutters {
     background: #fafafa;
+}
+
+#ModalContent #CategoryGroup {
+    position: relative;
 }
 
 #ModalContent label,
@@ -988,7 +986,7 @@ div#MenuSettings .parent-menu-hide {
     display: block;
     line-height: normal;
     color: #495157;
-    margin-top: 15px;
+    margin: 15px 0 10px;
 }
 
 #ModalContent .error,
@@ -1001,6 +999,7 @@ div#MenuSettings .parent-menu-hide {
 }
 
 #ModalContent input,
+#ModalContent select,
 .gjs-custom-code input {
     width: 100%;
     margin-bottom: 10px;
@@ -1012,9 +1011,12 @@ div#MenuSettings .parent-menu-hide {
     -webkit-transition: border-color .25s;
     transition: border-color .25s;
     opacity: 0.6;
+    text-transform: capitalize;
+    appearance: auto;
 }
 
     #ModalContent input:focus,
+    #ModalContent select:focus,
     .gjs-custom-code input:focus {
         border: 1px solid #0088cc;
     }
@@ -1024,7 +1026,16 @@ div#MenuSettings .parent-menu-hide {
     float: right;
     font-size: 14px;
     padding: 6px 12px;
-    margin-top: 10px;
+}
+
+#ModalContent .btn-add {
+    position: absolute;
+    top: -34px;
+    right: 0;
+    color: #495157;
+    font-size: 14px;
+    padding: 6px 0;
+    z-index: 9;
 }
 
 #ModalContent .btn-primary {
@@ -1044,14 +1055,21 @@ div#MenuSettings .parent-menu-hide {
         box-shadow: 0 0 0 0.2rem rgba(40, 96, 144, 0.5);
     }
 
-#ModalContent .cbglobal button.btn {
-    font-size: 14px;
-    width: 75px;
-    box-shadow: none;
-}
+    #ModalContent .cbglobal button.btn {
+        box-shadow: none;
+        font-size: 14px;
+    }
+
+    #ModalContent .cbglobal #ToggelBlockGlobal {
+        opacity: 1;
+    }
 
 #ModalContent .custom-block-disabled {
     cursor: default;
+}
+
+.gjs-custom-code .gjs-btn-prim {
+    margin-top: 15px;
 }
 
 .gjs-custom-code .gjs-btn-import__custom-code {
@@ -2203,80 +2221,6 @@ span.notificationname {
     line-height: 20px;
 }
 
-
-.col.gjs-selected,
-.col-1.gjs-selected,
-.col-10.gjs-selected,
-.col-11.gjs-selected,
-.col-12.gjs-selected,
-.col-2.gjs-selected,
-.col-3.gjs-selected,
-.col-4.gjs-selected,
-.col-5.gjs-selected,
-.col-6.gjs-selected,
-.col-7.gjs-selected,
-.col-8.gjs-selected,
-.col-9.gjs-selected,
-.col-auto.gjs-selected,
-.col-lg.gjs-selected,
-.col-lg-1.gjs-selected,
-.col-lg-10.gjs-selected,
-.col-lg-11.gjs-selected,
-.col-lg-12.gjs-selected,
-.col-lg-2.gjs-selected,
-.col-lg-3.gjs-selected,
-.col-lg-4.gjs-selected,
-.col-lg-5.gjs-selected,
-.col-lg-6.gjs-selected,
-.col-lg-7.gjs-selected,
-.col-lg-8.gjs-selected,
-.col-lg-9.gjs-selected,
-.col-lg-auto.gjs-selected,
-.col-md.gjs-selected,
-.col-md-1.gjs-selected,
-.col-md-10.gjs-selected,
-.col-md-11.gjs-selected,
-.col-md-12.gjs-selected,
-.col-md-2.gjs-selected,
-.col-md-3.gjs-selected,
-.col-md-4.gjs-selected,
-.col-md-5.gjs-selected,
-.col-md-6.gjs-selected,
-.col-md-7.gjs-selected,
-.col-md-8.gjs-selected,
-.col-md-9.gjs-selected,
-.col-md-auto.gjs-selected,
-.col-sm.gjs-selected,
-.col-sm-1.gjs-selected,
-.col-sm-10.gjs-selected,
-.col-sm-11.gjs-selected,
-.col-sm-12.gjs-selected,
-.col-sm-2.gjs-selected,
-.col-sm-3.gjs-selected,
-.col-sm-4.gjs-selected,
-.col-sm-5.gjs-selected,
-.col-sm-6.gjs-selected,
-.col-sm-7.gjs-selected,
-.col-sm-8.gjs-selected,
-.col-sm-9.gjs-selected,
-.col-sm-auto.gjs-selected,
-.col-xl.gjs-selected,
-.col-xl-1.gjs-selected,
-.col-xl-10.gjs-selected,
-.col-xl-11.gjs-selected,
-.col-xl-12.gjs-selected,
-.col-xl-2.gjs-selected,
-.col-xl-3.gjs-selected,
-.col-xl-4.gjs-selected,
-.col-xl-5.gjs-selected,
-.col-xl-6.gjs-selected,
-.col-xl-7.gjs-selected,
-.col-xl-8.gjs-selected,
-.col-xl-9.gjs-selected,
-.col-xl-auto.gjs-selected {
-    max-width: none !important;
-}
-
 .select-layout .layout-header {
     padding: 10px;
     background-color: #f0f0f0;
@@ -2326,9 +2270,6 @@ span.notificationname {
 #wrapper [data-gjs-type="grid"] [data-empty="true"] {
     position: relative;
     padding: 0 !important;
-    min-height: 100px !important;
-    position: relative;
-    padding: 0 !important;
     min-height: 50px !important;
 }
 
@@ -2337,7 +2278,7 @@ span.notificationname {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0px;
+    font-size: 12px;
     color: #e6e9ec;
     position: absolute;
     top: 2px;
@@ -2346,12 +2287,6 @@ span.notificationname {
     right: 2px;
     background-color: rgba(238,238,238, 0.2);
     text-transform: uppercase;
-}
-
-@media (min-width: 576px) {
-    [data-empty="true"]:before {
-        font-size: 12px;
-    }
 }
 
 @media (min-width: 992px) {
@@ -2924,11 +2859,12 @@ input.rangeinput {
         margin: 0;
         color: #fff;
         text-transform: uppercase;
+        text-align: center;
+        font-size: 28px;
     }
 
-    .optimizing-overlay .spinner-border {
-        position: relative;
-        top: -12px;
+    .optimizing-overlay .centerloader {
+        margin-bottom: 10px;
     }
 
 
@@ -3086,6 +3022,10 @@ input.rangeinput {
         opacity: 0.5;
         cursor: pointer !important;
     }
+
+        .global-tools .toolbar em.fa-arrows {
+            cursor: move !important;
+        }
 
         .global-tools .toolbar em + em {
             margin-left: 10px;
@@ -3254,10 +3194,18 @@ input.rangeinput {
     }
 }
 
+#LibraryBlock img {
+    width: 100%;
+}
+
+#LibraryBlock .sub-label {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
 .gjs-block.floating {
     left: 50%;
     top: 50%;
-    width: 200px;
     position: fixed;
     z-index: 1000 !important;
     filter: alpha(opacity=100);
@@ -3265,9 +3213,7 @@ input.rangeinput {
     -webkit-box-sizing: content-box !important;
     -moz-box-sizing: content-box !important;
     box-sizing: content-box !important;
-    float: left;
-    width: 130px !important;
-    height: 130px !important;
+    width: 300px;
     background-color: #f3f7f8;
     list-style: none;
     border: 1px solid #fff;
@@ -3280,6 +3226,10 @@ input.rangeinput {
     -o-animation: driftBlock 4s linear infinite;
     animation: driftBlock 4s linear infinite;
 }
+
+    .gjs-block.floating:hover {
+        color: #ddd
+    }
 
     .gjs-block.floating:before {
         font-size: 125px;
@@ -3491,7 +3441,7 @@ body.resp-mode.mobile .vj-wrapper {
         outline: none;
     }
 
-.sidebar-open .select_language {
+:not(#dnn_ContentPane) .select_language {
     pointer-events: none;
 }
 
@@ -3499,10 +3449,10 @@ body.resp-mode.mobile .vj-wrapper {
     -moz-appearance: textfield;
 }
 
-.stylemanager .gjs-field.gjs-field-integer input[type="number"]:hover,
-.stylemanager .gjs-field.gjs-field-integer input[type="number"]:focus {
-    -moz-appearance: auto;
-}
+    .stylemanager .gjs-field.gjs-field-integer input[type="number"]:hover,
+    .stylemanager .gjs-field.gjs-field-integer input[type="number"]:focus {
+        -moz-appearance: auto;
+    }
 
 .stylemanager .sm-range-wrapper {
     position: relative;
@@ -3514,10 +3464,11 @@ body.resp-mode.mobile .vj-wrapper {
     display: flex;
 }
 
-.traitsmanager .range-wrapper input[type="number"] {
-    -moz-appearance: textfield;
-}
-.traitsmanager .range-wrapper input[type="number"]:hover,
-.traitsmanager .range-wrapper input[type="number"]:focus {
-    -moz-appearance: auto;
-}
+    .traitsmanager .range-wrapper input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+        .traitsmanager .range-wrapper input[type="number"]:hover,
+        .traitsmanager .range-wrapper input[type="number"]:focus {
+            -moz-appearance: auto;
+        }

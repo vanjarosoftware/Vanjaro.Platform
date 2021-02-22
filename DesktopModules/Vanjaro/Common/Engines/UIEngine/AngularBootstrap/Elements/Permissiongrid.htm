@@ -11,7 +11,7 @@
     </div>
     <div class="addroles">
         <div ng-show="Show[name]Role" class="filter_role">
-            <div class="float-right">
+            <div class="float-end">
                 <select class="form-control" id="FilterByGroup" ng-model="[name]RoleGroupsValue">
                     <option ng-repeat="option in [name]RoleGroupsOptions" value="{{option.Id}}">{{option.Name}}</option>
                 </select>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="" ng-show="!Show[name]Role">
-            <a ng-click="Click_[name]NewRole()" class="float-right permission-icon">
+            <a ng-click="Click_[name]NewRole()" class="float-end permission-icon">
                 <em class="fas fa-plus"></em>
             </a>
         </div>
@@ -72,7 +72,7 @@
 
         </div>
         <div class="" ng-show="!Show[name]User">
-            <a ng-click="Click_[name]NewUser()" class="float-right permission-icon">
+            <a ng-click="Click_[name]NewUser()" class="float-end permission-icon">
                 <em class="fas fa-plus"></em>
             </a>
         </div>

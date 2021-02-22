@@ -6,7 +6,7 @@
 // 
 //     Connection String Name: `SiteSql`
 //     Provider:               `System.Data.SqlClient`
-//     Connection String:      `Data Source=DESKTOP-9SGJF9E\SA;Initial Catalog=dev_vanjaro_local;User ID=sa;Password=20hybridSQL10`
+//     Connection String:      `Data Source=(local)\SQL2019;Initial Catalog=dev_vanjaro_local;User ID=sa;Password=20hybridSQL10`
 //     Schema:                 ``
 //     Include Views:          `False`
 
@@ -63,6 +63,12 @@ namespace Vanjaro.Core.Data.Entities
         [Column] public DateTime CreatedOn { get; set; }
         [Column] public int UpdatedBy { get; set; }
         [Column] public DateTime UpdatedOn { get; set; }
+        [Column] public int Version { get; set; }
+        [Column] public bool IsPublished { get; set; }
+        [Column] public int? PublishedBy { get; set; }
+        [Column] public DateTime? PublishedOn { get; set; }
+        [Column] public string ContentJSON { get; set; }
+        [Column] public string StyleJSON { get; set; }
     }
 
     [TableName("VJ_Core_Setting")]
@@ -143,33 +149,6 @@ namespace Vanjaro.Core.Data.Entities
         [Column] public string Entity { get; set; }
     }
 
-    [TableName("VJ_Core_BlockSection")]
-    [PrimaryKey("EntityID")]
-    [ExplicitColumns]
-    public partial class BlockSection : VanjaroRepo.Record<BlockSection>
-    {
-        [Column] public int EntityID { get; set; }
-        [Column] public int TabID { get; set; }
-        [Column] public bool? Inherit { get; set; }
-    }
-
-    [TableName("VJ_Core_BlockSectionPermission")]
-    [PrimaryKey("ID")]
-    [ExplicitColumns]
-    public partial class BlockSectionPermission : VanjaroRepo.Record<BlockSectionPermission>
-    {
-        [Column] public int ID { get; set; }
-        [Column] public int EntityID { get; set; }
-        [Column] public int PermissionID { get; set; }
-        [Column] public bool AllowAccess { get; set; }
-        [Column] public int? RoleID { get; set; }
-        [Column] public int? UserID { get; set; }
-        [Column] public int CreatedBy { get; set; }
-        [Column] public DateTime CreatedOn { get; set; }
-        [Column] public int? UpdatedBy { get; set; }
-        [Column] public DateTime? UpdatedOn { get; set; }
-    }
-
     [TableName("VJ_Core_Localization")]
     [PrimaryKey("LocalizationID")]
     [ExplicitColumns]
@@ -190,6 +169,33 @@ namespace Vanjaro.Core.Data.Entities
     {
         [Column] public int WorkflowPermissionID { get; set; }
         [Column] public int WorkflowID { get; set; }
+        [Column] public int PermissionID { get; set; }
+        [Column] public bool AllowAccess { get; set; }
+        [Column] public int? RoleID { get; set; }
+        [Column] public int? UserID { get; set; }
+        [Column] public int CreatedBy { get; set; }
+        [Column] public DateTime CreatedOn { get; set; }
+        [Column] public int? UpdatedBy { get; set; }
+        [Column] public DateTime? UpdatedOn { get; set; }
+    }
+
+    [TableName("VJ_Core_BlockSection")]
+    [PrimaryKey("EntityID")]
+    [ExplicitColumns]
+    public partial class BlockSection : VanjaroRepo.Record<BlockSection>
+    {
+        [Column] public int EntityID { get; set; }
+        [Column] public int TabID { get; set; }
+        [Column] public bool? Inherit { get; set; }
+    }
+
+    [TableName("VJ_Core_BlockSectionPermission")]
+    [PrimaryKey("ID")]
+    [ExplicitColumns]
+    public partial class BlockSectionPermission : VanjaroRepo.Record<BlockSectionPermission>
+    {
+        [Column] public int ID { get; set; }
+        [Column] public int EntityID { get; set; }
         [Column] public int PermissionID { get; set; }
         [Column] public bool AllowAccess { get; set; }
         [Column] public int? RoleID { get; set; }

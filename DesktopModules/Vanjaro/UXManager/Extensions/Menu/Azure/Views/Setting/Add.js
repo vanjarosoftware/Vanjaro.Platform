@@ -56,7 +56,7 @@
                     var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
                     Parentscope.GetAllConnector();
                     if ($scope.loadcontainer) {
-                        $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                        $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     } else {
                         $scope.ui.data.Connector.Options.Id = Response.Data;
                         $scope.Click_GetAllContainers()

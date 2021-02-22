@@ -13,7 +13,7 @@
 		$('.uiengine-wrapper a[data-target="#admin"]').removeClass("active");
 		$('.uiengine-wrapper a[data-target="#videoonline"]').addClass("active");
 		$scope.ChangeVideoProviders();
-		$(window.parent.document.body).find('[data-dismiss="modal"]').on("click", function (e) {
+		$(window.parent.document.body).find('[data-bs-dismiss="modal"]').on("click", function (e) {
 			$scope.SaveVideo();
 		});
 
@@ -29,7 +29,7 @@
 	};
 
 	$scope.SaveOndblClick = function () {
-		$(window.parent.document.body).find('[data-dismiss="modal"]').click();
+		$(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
 	};
 
 	var AutoSaveTimeOutid;
