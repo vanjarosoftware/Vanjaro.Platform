@@ -68,7 +68,7 @@ namespace Vanjaro.Core
 
             internal static void Delete(int PortalID, string Guid)
             {
-                foreach (CustomBlock item in GetAll(PortalID).Where(p => p.Guid.ToLower() == Guid.ToLower()).ToList())
+                foreach (CustomBlock item in GetAllByGUID(PortalID, Guid))
                 {
                     CustomBlock.Delete("where ID=@0", item.ID);
                 }
