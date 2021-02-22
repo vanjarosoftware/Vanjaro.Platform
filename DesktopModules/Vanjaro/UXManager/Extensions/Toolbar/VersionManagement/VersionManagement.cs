@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Common.Entities.Apps;
 using Vanjaro.Common.Utilities;
+using Vanjaro.Core.Entities;
 using Vanjaro.UXManager.Library;
 using Vanjaro.UXManager.Library.Entities;
 using Vanjaro.UXManager.Library.Entities.Interface;

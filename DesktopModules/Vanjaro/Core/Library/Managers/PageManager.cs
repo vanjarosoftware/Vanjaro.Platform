@@ -29,6 +29,7 @@ using Vanjaro.Core.Components;
 using Vanjaro.Core.Components.Interfaces;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Data.Scripts;
+using Vanjaro.Core.Entities;
 using static Vanjaro.Core.Components.Enum;
 using static Vanjaro.Core.Factories;
 
@@ -49,7 +50,13 @@ namespace Vanjaro.Core
                     WebForms.RegisterStartupScript(Page, "WorkflowReview", "<script type=\"text/javascript\" vanjarocore=\"true\">" + Markup + "</script>", false);
                 }
             }
-
+            public static bool InjectEditor(PortalSettings PortalSettings)
+            {
+                if (PortalSettings.UserId > 0 && TabPermissionController.CanViewPage() && (TabPermissionController.HasTabPermission("EDIT") || !Editor.Options.EditPage))
+                    return true;
+                else
+                    return false;
+            }
             public static string GetReviewToastMarkup(PortalSettings PortalSettings)
             {
                 string Markup = string.Empty;
@@ -1453,22 +1460,28 @@ namespace Vanjaro.Core
 
             public static void ApplyGlobalBlockJSON(Pages page)
             {
-                if (page != null && page.ContentJSON != null)
+                if (page != null)
                 {
-                    var contentJSON = JsonConvert.DeserializeObject(page.ContentJSON);
-                    if (contentJSON != null)
+                    string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Page + "ApplyGlobalBlockJSON", page.ID);
+                    string IsCached = CacheFactory.Get(CacheKey);
+                    if (string.IsNullOrEmpty(IsCached) && page.ContentJSON != null)
                     {
-                        try
+                        var contentJSON = JsonConvert.DeserializeObject(page.ContentJSON);
+                        if (contentJSON != null)
                         {
-                            if (string.IsNullOrEmpty(page.StyleJSON))
-                                page.StyleJSON = "";
-                            var styleJSON = JsonConvert.DeserializeObject(page.StyleJSON);
-                            UpdateGlobalBlockJSON(contentJSON, styleJSON);
-                            page.ContentJSON = JsonConvert.SerializeObject(contentJSON);
-                            if (styleJSON != null)
-                                page.StyleJSON = JsonConvert.SerializeObject(styleJSON);
+                            try
+                            {
+                                if (string.IsNullOrEmpty(page.StyleJSON))
+                                    page.StyleJSON = "";
+                                var styleJSON = JsonConvert.DeserializeObject(page.StyleJSON);
+                                UpdateGlobalBlockJSON(contentJSON, styleJSON);
+                                page.ContentJSON = JsonConvert.SerializeObject(contentJSON);
+                                if (styleJSON != null)
+                                    page.StyleJSON = JsonConvert.SerializeObject(styleJSON);
+                                CacheFactory.Set(CacheKey, "true");
+                            }
+                            catch (Exception ex) { ExceptionManager.LogException(ex); }
                         }
-                        catch (Exception ex) { ExceptionManager.LogException(ex); }
                     }
                 }
             }
