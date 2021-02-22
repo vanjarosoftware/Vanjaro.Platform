@@ -32,16 +32,92 @@
             if ($scope.BlockGuid != '') {
                 common.webApi.get('Revisions/GetBlockVersion', 'Version=' + $scope.SelectedVersion + '&BlockGuid=' + $scope.BlockGuid).success(function (response) {
                     if (response != undefined) {
-
-                        window.parent.VjEditor.getSelected().components([]);
-                        window.parent.VjEditor.getSelected().append('<style>' + response.Css + '</style');
-                        $(window.parent.VjEditor.getSelected().getEl()).css('pointer-events', 'auto');
-                        $(window.parent.VjEditor.getSelected().getEl()).find('.global-tools').remove();
+                        var revModel = window.parent.VjEditor.getSelected();
+                        revModel.components('');
+                        revModel.components(eval(response.components));
+                        revModel.setStyle('');
+                        revModel.setStyle(eval(response.style));
                         $(window.parent.document.body).find('.revisionloaderimg').remove();
-                        window.parent.window.VjEditor.getSelected().components().add(eval(response.ContentJSON));
+                        $(revModel.getEl()).find('.global-tools').remove();
+                        $(revModel.getEl()).css('pointer-events', 'auto');
+                        window.parent.window.VjEditor.runCommand("save");
+                        if (response.BlocksMarkUp != undefined) {
+                            var blockdom = $(response.BlocksMarkUp);
+                            $.each(blockdom, function (k, v) {
+                                if ($(v).attr('data-block-guid') != undefined) {
+                                    var blocksattributes = "";
+                                    $.each(v.attributes, function (k, v) {
+                                        blocksattributes += "[" + v.nodeName + '=' + '"' + v.nodeValue + '"' + ']';
+                                    });
+                                    var existinghtmls = $(window.parent.window.VjEditor.Canvas.getDocument()).find(blocksattributes);
+                                    $.each(existinghtmls, function (ind, va) {
+                                        if ($(va).attr('data-block-type') == "Logo") {
+                                            $scope.BuildLogo(JSON.parse(response.components), $(va).attr('id'), va, v);
+                                        }
+                                        if ($(va).attr('data-block-type') == "global") {
+                                            var GlobalMarkUp = $(v.innerHTML);
+                                            $.each(GlobalMarkUp.find('[data-block-type="Logo"]'), function (k, v) {
+                                                var style = $(v).attr('data-style');
+                                                if (style != undefined) {
+                                                    $(v).find('img').attr('style', style);
+                                                }
+                                            });
+                                            $(va).html(GlobalMarkUp);
+                                        }
+                                        else
+                                            $(va).html(v.innerHTML);
+                                    });
+                                }
+                            });
+                        }
+                        if (response.Scripts != undefined) {
+                            $.each(response.Scripts, function (k, v) {
+                                var script = $(window.parent.window.VjEditor.Canvas.getDocument().createElement('script'))[0];
+                                script.type = 'text/javascript';
+                                script.src = v;
+                                script.src = script.src.replace('~/', '');
+                                $(window.parent.window.VjEditor.Canvas.getDocument()).find('head')[0].appendChild(script);
+                            });
+                        }
+                        if (response.Styles != undefined) {
+                            $.each(response.Styles, function (k, v) {
+                                var link = $(window.parent.window.VjEditor.Canvas.getDocument().createElement('link'))[0];
+                                link.rel = 'stylesheet';
+                                link.type = 'text/css';
+                                link.href = v;
+                                link.href = link.href.replace('~/', '');
+                                $(window.parent.window.VjEditor.Canvas.getDocument()).find('head')[0].appendChild(link);
+                            });
+                        }
+                        if (response.Script != undefined) {
+                            var script_tag = $(window.parent.window.VjEditor.Canvas.getDocument().createElement('script'))[0];
+                            script_tag.type = 'text/javascript';
+                            script_tag.text = response.Script;
+                            $(window.parent.window.VjEditor.Canvas.getDocument()).find('head')[0].appendChild(script_tag);
+                        }
+                        $.each(window.parent.getAllComponents(), function (key, model) {
+                            if (model.attributes != undefined && model.attributes.type != undefined && model.attributes.type == "blockwrapper")
+                                model.attributes.name = model.attributes.attributes["data-block-type"];
+                            else if (model.attributes != undefined && model.attributes.type != undefined && model.attributes.type == "globalblockwrapper") {
+                                var Name = window.parent.GetGlobalBlockName(model.attributes.attributes["data-guid"]);
+                                if (Name != undefined && Name != '') {
+                                    model.attributes.name = "Global: " + Name;
+                                    window.parent.StyleGlobal(model);
+                                }
+                            }
+                            else if (model.attributes != undefined && model.attributes.type != undefined && model.attributes.type == "modulewrapper") {
+                                var classes = $(model.view.el).find('.dnnmodule').attr('class');
+                                if (classes != undefined) {
+                                    $.each(classes.split(' '), function (k, v) {
+                                        if (v.toLowerCase().startsWith('dnnmodule-') && !$.isNumeric(v.toLowerCase().split('dnnmodule-')[1]))
+                                            model.attributes.name = "App: " + v.replace('dnnmodule-', '').replace('DnnModule-', '');
+                                    });
+                                }
+                            }
+                        });
+                        window.parent.ViewBlockRevisions(response.Guid);
                     }
                 });
-
             }
             else
 
