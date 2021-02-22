@@ -1,5 +1,18 @@
-/*Tertiary Color*/
 
+/*Secondary color*/
+.btn-secondary {
+    color: #fff;
+}
+
+/*Secondary, Tertiary, Quaternary hover colors*/
+.btn-secondary:hover,
+.btn-tertiary:hover,
+.btn-quaternary:hover {
+    color: #fff;
+}
+
+
+/*Tertiary Color*/
 .btn-tertiary {
     background-color: $orchid;
     color: #fff;

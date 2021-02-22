@@ -2294,7 +2294,7 @@
         {
           "Guid": "0a29462a-8e27-4a76-b855-50c838eb0661",
           "Title": "Tertiary",
-          "DefaultValue": "#c39ea0",
+          "DefaultValue": "#C86E4C",
           "Suffix": "",
           "CustomCSS": ".bg-frametertiary,\n.bg-colortertiary {\n\tbackground-color: $tertiary;\n}\n\n$orchid: $tertiary",
           "PreviewCSS": "",
@@ -2305,7 +2305,7 @@
         {
           "Guid": "cf51aed0-62ef-484b-bfb7-331fccd8046c",
           "Title": "Quaternary",
-          "DefaultValue": "#f8e5e5",
+          "DefaultValue": "#734BA9",
           "Suffix": "",
           "CustomCSS": ".bg-framequaternary,\n.bg-colorquaternary {\n\tbackground-color: $quaternary;\n}\n\n$salmon: $quaternary",
           "PreviewCSS": "",
