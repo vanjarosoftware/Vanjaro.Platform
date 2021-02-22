@@ -162,6 +162,7 @@
     <Content Include="Cleanup\00.05.03.txt" />
     <Content Include="DistributionAddList.txt" />
     <Content Include="EULA.txt" />
+    <Content Include="Images\Banner.webp" />
     <Content Include="Images\Logo.svg" />
     <Content Include="Images\vanjaro_home.png" />
     <Content Include="Images\vanjaro_logo.png" />
@@ -419,7 +420,6 @@
     <Content Include="Packager\Vanjaro\bin\x86\sass.snapshot" />
     <Content Include="Themes\Basic\templates\website\Privacy.json" />
     <Content Include="Themes\Basic\templates\website\Terms.json" />
-    <Content Include="Images\Banner_1280w.webp" />
     <Content Include="Themes\Basic\scss\Bootstrap\forms\_floating-labels.scss" />
     <Content Include="Themes\Basic\scss\Bootstrap\forms\_form-check.scss" />
     <Content Include="Themes\Basic\scss\Bootstrap\forms\_form-control.scss" />
