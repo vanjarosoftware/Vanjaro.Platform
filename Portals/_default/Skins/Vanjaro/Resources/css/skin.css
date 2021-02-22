@@ -750,6 +750,6 @@ ul.vj_authenticationtab {
     width: 100%;
 }
 
-[data-block-alignment=true] {
+.align-ib {
     display: inline-block;
 }
