@@ -12,7 +12,6 @@
 		category: VjLocalized.Basic,
 		content: {
 			classes: ['carousel', 'vj-carousel', 'slide'],
-			style: { 'position': 'relative' },
 			attributes: { 'data-ride': 'carousel', 'data-interval': 'false' },
 			type: 'carousel'
 		}
