@@ -38,7 +38,7 @@
                         revModel.setStyle('');
                         revModel.setStyle(eval(response.style));
                         $(revModel.getEl()).find('.global-tools').remove();
-                        $(revModel.getEl()).css('pointer-events', 'auto');
+                        $(revModel.getEl()).css('pointer-events', 'auto');                        
                         window.parent.window.VjEditor.runCommand("save");
                     }
                 });
@@ -46,9 +46,10 @@
             else {
                 common.webApi.get('Revisions/GetVersion', 'Version=' + $scope.SelectedVersion + '&Locale=' + window.parent.VJLocal).success(function (response) {
                     if (response != undefined) {
-                        $scope.ui.data.Versions.Options = response.Version;                        
+                        $scope.ui.data.Versions.Options = response.Version;
                         window.parent.window.VjEditor.setComponents(eval(response.components));
                         window.parent.window.VjEditor.setStyle(eval(response.style));
+                        parent.setCookie("vj_UXLoad", window.location.href);
                         window.parent.window.VjEditor.runCommand("save");
                     }
                 });
