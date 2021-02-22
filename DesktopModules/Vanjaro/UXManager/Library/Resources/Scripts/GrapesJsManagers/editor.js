@@ -1496,6 +1496,13 @@ $(document).ready(function () {
                                     }, 250));
                                 });
 
+                                if (vjEditorSettings.EditPage && typeof getCookie("vj_UXLoad") != 'undefined' && getCookie("vj_UXLoad") != null) {
+                                    $("#BlockManager").hide();
+                                    $("#StyleToolManager").hide();
+                                    $("#iframeHolder").fadeIn();
+                                    $('#iframeHolder').find('iframe').attr('src', getCookie('vj_UXLoad'));
+                                    eraseCookie("vj_UXLoad");
+                                }
                             });
 
                             var parentClone = "";
@@ -2548,6 +2555,7 @@ $(document).ready(function () {
                                                 });
                                                 if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
                                                     var item = {
+                                                        ccid: v.attributes.attributes['id'],
                                                         guid: v.attributes.attributes['data-guid'],
                                                         html: content.html,
                                                         css: content.css,

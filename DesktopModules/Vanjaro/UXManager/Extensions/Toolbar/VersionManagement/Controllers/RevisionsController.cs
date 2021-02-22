@@ -82,7 +82,21 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
         [HttpGet]
         public dynamic GetBlockVersion(int Version, string BlockGuid)
         {
-            return Core.Managers.BlockManager.GetAllByGUID(this.PortalSettings.PortalId, BlockGuid).Where(a => a.Version == Version).FirstOrDefault();
+            dynamic Result = new ExpandoObject();
+
+            CustomBlock Block = Core.Managers.BlockManager.GetAllByGUID(this.PortalSettings.PortalId, BlockGuid).Where(a => a.Version == Version).FirstOrDefault();
+            if (Block != null)
+            {
+                Result.html = Block.Html.ToString();
+                HtmlDocument html = new HtmlDocument();
+                html.LoadHtml(Result.html);
+                InjectBlocks(html, Result);
+                Result.css = Block.Css.ToString();
+                Result.components = Block.ContentJSON.ToString();
+                Result.style = Block.StyleJSON.ToString();
+                Result.Guid = Block.Guid;
+            }
+            return Result;
         }
         private void InjectBlocks(HtmlDocument html, dynamic Result)
         {

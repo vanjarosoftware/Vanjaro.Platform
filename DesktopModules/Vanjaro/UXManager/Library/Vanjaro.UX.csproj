@@ -66,10 +66,8 @@
     <Compile Include="Controllers\BlockController.cs" />
     <Compile Include="Controllers\ServiceRouteMapper.cs" />
     <Compile Include="Controllers\PageController.cs" />
-    <Compile Include="Entities\Editor\Editor.cs" />
     <Compile Include="Entities\BaseModel.cs" />
     <Compile Include="Entities\DnnAdminAttribute.cs" />
-    <Compile Include="Entities\Editor\EditorOptions.cs" />
     <Compile Include="Entities\ImageEntity.cs" />
     <Compile Include="Entities\Interface\IShortcut.cs" />
     <Compile Include="Entities\Language.cs" />
