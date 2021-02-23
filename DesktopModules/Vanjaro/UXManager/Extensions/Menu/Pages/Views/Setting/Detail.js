@@ -425,7 +425,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                                 window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageUpdatedSuccess]', 'success');
                             }
                         }
-                        $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                        $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     }
                 });
             }
@@ -527,7 +527,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
             if (response.IsSuccess) {
                 $scope.ui.data.PageUrls.Options = [];
                 $scope.ui.data.PageUrls.Options = response.Data;
-                $('#PagesUrldefaultModal').find('[data-dismiss="modal"]').click();
+                $('#PagesUrldefaultModal').find('[data-bs-dismiss="modal"]').click();
             }
         });
     };
@@ -557,7 +557,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         if (response.IsSuccess) {
                             $scope.ui.data.PageUrls.Options = [];
                             $scope.ui.data.PageUrls.Options = response.Data;
-                            $('#PagesUrldefaultModal').find('[data-dismiss="modal"]').click();
+                            $('#PagesUrldefaultModal').find('[data-bs-dismiss="modal"]').click();
                         }
                     });
                 }

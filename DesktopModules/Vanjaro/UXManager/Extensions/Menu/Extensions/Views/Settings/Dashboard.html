@@ -12,14 +12,14 @@
                         </a>
                     </div>
                     <div class="col-6 pl-none">
-                        <a access-roles="host" ng-click="Click_InstallPackage()" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:Install]" class="ux-btn ux-btn-hover float-right">
-                            <em class="fas fa-plus"></em>
+                        <a access-roles="host" ng-click="Click_InstallPackage()"  class="ux-btn ux-btn-hover float-end">
+                            <em class="fas fa-plus" data-bs-toggle="tooltip" data-placement="bottom" title="[L:Install]"></em>
                         </a>
-                        <a access-roles="host" ng-click="Click_InstallExtension()" data-toggle="tooltip" data-placement="bottom" data-original-title="[L:InstallExtension]" class="ux-btn ux-btn-hover float-right">
-                            <em class="fas fa-upload"></em>
+                        <a access-roles="host" ng-click="Click_InstallExtension()" class="ux-btn ux-btn-hover float-end">
+                            <em class="fas fa-upload" data-bs-toggle="tooltip" data-placement="bottom" title="[L:InstallExtension]"></em>
                         </a>
-                        <div access-roles="host" class="dropdown show float-right">
-                            <a id="dropdownLink" class="dropdownmenu ux-btn ux-btn-hover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div access-roles="host" class="dropdown show float-end">
+                            <a id="dropdownLink" class="dropdownmenu ux-btn ux-btn-hover" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-filter"></em>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownLink">
@@ -44,12 +44,12 @@
                 </column>
                 <column name="Name" width="70">
                     <uitemplate>
-                        <div data-toggle="tooltip" data-placement="bottom" data-original-title="{{row.FriendlyName}}">
+                        <div data-bs-toggle="tooltip" data-placement="bottom" data-original-title="{{row.FriendlyName}}">
                             <div class="friendlyname">{{row.FriendlyName}}<span class="friendlynametooltip">{{row.FriendlyName}}</span></div>
                             <div class="fontsmall" style="color:#ccc;font-size:smaller">v{{row.Version}} - {{row.Type}}</div>
 
                         </div>
-                        <div mn-ng-show="row.PackageId>0" class="float-right textinfo">
+                        <div mn-ng-show="row.PackageId>0" class="float-end textinfo">
                             <a mn-ng-show="row.IsInUse=='Yes'" class="fontsmall inuse cursorpointer" ng-click="Click_IsInUse(row)"><em class="fa fa-retweet" aria-hidden="true"></em><span class="inusetooltip">in use</span></a>
 
                         </div>
@@ -57,8 +57,8 @@
                 </column>
                 <column name="Actions" attr-style="text-align: right" width="15">
                     <uitemplate>
-                        <div access-roles="host" class="dropdown float-right dropbtn">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div access-roles="host" class="dropdown float-end dropbtn">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

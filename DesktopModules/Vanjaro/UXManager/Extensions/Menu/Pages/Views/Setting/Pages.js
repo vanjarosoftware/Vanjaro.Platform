@@ -47,7 +47,7 @@
             $(".submenu").hide();
             return false;
         });
-        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-bs-toggle="tooltip"]').tooltip();
     };
 
 
@@ -82,9 +82,7 @@
     };
 
     $scope.gettreeicon = function (node) {
-        if (node.Value == $scope.ui.data.PageSetting.Options.SplashTabId)
-            return { 'fas fa-tint': true };
-        else if (node.Value == $scope.ui.data.PageSetting.Options.HomeTabId)
+        if (node.Value == $scope.ui.data.PageSetting.Options.HomeTabId)
             return { 'fas fa-home': true };
         else if (node.Value == $scope.ui.data.PageSetting.Options.LoginTabId)
             return { 'fas fa-user-circle': true };
@@ -107,9 +105,7 @@
     };
 
     $scope.gettreeicontitle = function (node) {
-        if (node.Value == $scope.ui.data.PageSetting.Options.SplashTabId)
-            return '[L:SplashPage]';
-        else if (node.Value == $scope.ui.data.PageSetting.Options.HomeTabId)
+        if (node.Value == $scope.ui.data.PageSetting.Options.HomeTabId)
             return '[L:HomePage]';
         else if (node.Value == $scope.ui.data.PageSetting.Options.LoginTabId)
             return '[L:LoginPage]';
@@ -131,9 +127,7 @@
             return '[L:Page]';
     };
     $scope.hidedeleteicon = function (node) {
-        if (node.Value == $scope.ui.data.PageSetting.Options.SplashTabId)
-            return false;
-        else if (node.Value == $scope.ui.data.PageSetting.Options.HomeTabId)
+        if (node.Value == $scope.ui.data.PageSetting.Options.HomeTabId)
             return false;
         else if (node.Value == $scope.ui.data.PageSetting.Options.LoginTabId)
             return false;
@@ -187,7 +181,6 @@
         event.preventDefault();
         $scope.ui.data.DefaultPagesSettingsRequest.Options.PortalId = $scope.ui.data.PageSetting.Options.PortalId;
         $scope.ui.data.DefaultPagesSettingsRequest.Options.CultureCode = $scope.ui.data.PageSetting.Options.CultureCode;
-        $scope.ui.data.DefaultPagesSettingsRequest.Options.SplashTabId = $scope.ui.data.PageSetting.Options.SplashTabId;
         $scope.ui.data.DefaultPagesSettingsRequest.Options.HomeTabId = $scope.ui.data.PageSetting.Options.HomeTabId;
         $scope.ui.data.DefaultPagesSettingsRequest.Options.LoginTabId = $scope.ui.data.PageSetting.Options.LoginTabId;
         $scope.ui.data.DefaultPagesSettingsRequest.Options.RegisterTabId = $scope.ui.data.PageSetting.Options.RegisterTabId;
@@ -202,16 +195,6 @@
         $scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterLogoutTabId = $scope.ui.data.PageSetting.Options.RedirectAfterLogoutTabId;
         $scope.ui.data.DefaultPagesSettingsRequest.Options.RedirectAfterRegistrationTabId = $scope.ui.data.PageSetting.Options.RedirectAfterRegistrationTabId;
         switch (type) {
-            case "splashpage":
-                if ($scope.ui.data.DefaultPagesSettingsRequest.Options.SplashTabId == node.Value) {
-                    $scope.ui.data.DefaultPagesSettingsRequest.Options.SplashTabId = null;
-                    type = 'RemoveFrom_' + type;
-                }
-                else {
-                    $scope.ui.data.DefaultPagesSettingsRequest.Options.SplashTabId = node.Value;
-                    type = 'SetAs_' + type;
-                }
-                break;
             case "homepage":
                 if ($scope.ui.data.DefaultPagesSettingsRequest.Options.HomeTabId == node.Value) {
                     $scope.ui.data.DefaultPagesSettingsRequest.Options.HomeTabId = null;

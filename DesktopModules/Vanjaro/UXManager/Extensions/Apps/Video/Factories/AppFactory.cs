@@ -102,7 +102,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Video.Factories
                 AccessRoles.Add("editpage");
             }
 
-            if (TabPermissionController.HasTabPermission("EDIT") || Editor.HasExtensionAccess())
+            if (TabPermissionController.HasTabPermission("EDIT") || Core.Entities.Editor.HasExtensionAccess())
             {
                 AccessRoles.Add("editpage");
             }

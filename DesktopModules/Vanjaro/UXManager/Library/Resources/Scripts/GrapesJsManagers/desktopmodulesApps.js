@@ -66,14 +66,16 @@ global.LoadCustomBlocks = function () {
         dataType: "json",
         success: function (data) {
             $.each(data, function (key, value) {
-                var Content = (value.Html == null ? '' : value.Html);
+                var Content = '';
                 if (value.IsGlobal && !Content.includes("7a4be0f2-56ab-410a-9422-6bc91b488150"))
-                    Content = "<div data-block-type=\"global\" data-block-guid=\"7a4be0f2-56ab-410a-9422-6bc91b488150\" data-guid=\"" + value.Guid + "\">" + Content + "</div>";
+                    Content = "<div data-block-type=\"global\" data-block-guid=\"7a4be0f2-56ab-410a-9422-6bc91b488150\" data-guid=\"" + value.Guid + "\"></div>";
+                else
+                    Content = "<div data-custom-wrapper=\"true\" data-guid=\"" + value.Guid + "\"></div>";
                 VjEditor.BlockManager.add(value.Name, {
                     attributes: { class: 'fa fa-th-large', id: value.ID, type: 'VjCustomBlock', isGlobalBlock: value.IsGlobal, guid: value.Guid },
                     label: value.Name,
                     category: value.Category,
-                    content: '<style>' + (value.Css == null ? '' : value.Css) + '</style>' + Content,
+                    content: Content,
                     render: ({ el }) => {
                         const updateblock = document.createElement("span");
                         updateblock.className = "update-custom-block";
@@ -125,6 +127,11 @@ var GetBlockContent = function (Block) {
 }
 
 global.AddCustomBlock = function (editor, CustomBlock) {
+    var ContentJSON = JSON.stringify(VjEditor.getSelected().toJSON());
+    if (!ContentJSON.startsWith('['))
+        ContentJSON = '[' + ContentJSON + ']';
+    CustomBlock.ContentJSON = ContentJSON;
+    CustomBlock.StyleJSON = JSON.stringify(VjEditor.Css.getAll().toJSON());
     var sf = $.ServicesFramework(-1);
     $.ajax({
         type: "POST",
@@ -279,7 +286,7 @@ global.GetGlobalBlockName = function (guid) {
 global.StyleGlobal = function (model) {
     var modelEl = $(model.getEl());
     if (!modelEl.find('global-tools').length)
-        modelEl.append('<div class="global-tools"><div class="backdrop"></div><em title="Global" class="fa fa-globe"></em><div class="toolbar"><em title="Unlock" class="fa fa-unlock" onclick="window.parent.UnlockGlobalBlock($(this))"></em><em title="Unlink from Global" class="fa fa-unlink" onclick="window.parent.VjEditor.runCommand(\'custom-block-globaltolocal\')"></em><em title="Move" class="fa fa-arrows" onclick="window.parent.VjEditor.runCommand(\'tlb-move\')"></em><em title="Delete" class="fa fa-trash-o" onclick="window.parent.VjEditor.runCommand(\'global-delete\')"></em>');
+        modelEl.append('<div class="global-tools"><div class="backdrop"></div><em title="Global" class="fa fa-globe"></em><div class="toolbar"><em title="Unlock" class="fa fa-unlock" onclick="window.parent.UnlockGlobalBlock($(this))"></em><em title="revisions" class="fa fa-history" onclick="window.parent.ViewBlockRevisions(\'' + model.attributes.attributes["data-guid"] + '\')"></em><em title="Unlink from Global" class="fa fa-unlink" onclick="window.parent.VjEditor.runCommand(\'custom-block-globaltolocal\')"></em><em title="Move" class="fa fa-arrows" onclick="window.parent.VjEditor.runCommand(\'tlb-move\')"></em><em title="Delete" class="fa fa-trash-o" onclick="window.parent.VjEditor.runCommand(\'global-delete\')"></em>');
 }
 
 global.UpdateGlobalBlock = function (model) {
@@ -293,17 +300,13 @@ global.UpdateGlobalBlock = function (model) {
             if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
                 var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));
                 if (Block != undefined) {
-                    var css = '';
-                    $.each($(VjEditor.Canvas.getBody()).find('#' + model.ccid + ''), function (sk, sv) {
-                        css += sv.innerHTML;
-                    });
                     var CustomBlock = {
                         ID: Block.attributes.attributes.id,
                         Guid: Block.attributes.attributes.guid,
                         Name: Block.attributes.label,
                         Category: Block.attributes.category.id || Block.attributes.category,
                         Html: content.html,
-                        Css: css,
+                        Css: content.css,
                         IsGlobal: true
                     };
                     UpdateCustomBlock(VjEditor, CustomBlock);
@@ -396,17 +399,21 @@ global.BuildAppComponentFromHtml = function (vjcomps, html) {
     });
 };
 
-global.BuildBlockComponent = function (vjcomps, version) {
+global.BuildBlockComponent = function (vjcomps) {
     $.each(vjcomps, function (k, v) {
-        if (v.attributes != undefined && v.attributes["data-block-guid"] != undefined && v.attributes["data-block-guid"] != '') {
+        if (v.attributes != undefined && v.attributes["data-block-guid"] != undefined && v.attributes["data-block-guid"] != '' && v.attributes["data-block-type"].toLowerCase() != "global") {
             var attr = '';
+            var attr1 = '';
             $.each(v.attributes, function (key, value) {
                 attr += '[' + key + '="' + value + '"]';
+                if (key == 'id')
+                    attr1 += '[' + key + '="' + value.split('-')[value.split('-').length - 1] + '"]';
+                else
+                    attr1 += '[' + key + '="' + value + '"]';
             });
             var $this = $(attr)[0];
-            if ($this == undefined && version != undefined) {
-                $this = $(version).find(attr)[0];
-            }
+            if ($this == undefined)
+                $this = $(attr1)[0];
             if ($this != undefined) {
                 if (v.components == undefined || v.components[0] == undefined) {
                     var component = { components: [], content: '' };
@@ -415,31 +422,18 @@ global.BuildBlockComponent = function (vjcomps, version) {
                 }
                 if (v.components != undefined && v.components[0] != undefined) {
                     v.components[0].components = [];
-                    if (v.attributes["data-block-type"].toLowerCase() == "global") {
-                        var contentstyle = '';
-                        if ($('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0] != undefined)
-                            contentstyle = $('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0].outerHTML;
-                        else if (version != undefined && $(version).find('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0] != undefined) {
-                            contentstyle = $(version).find('[vjdataguid="' + v.attributes["data-guid"].toLowerCase() + '"]')[0].outerHTML;
-                        }
-                        v.components[0].content = contentstyle + $this.outerHTML;
+                    if (v.attributes["data-block-type"] == "Logo") {
+                        var style = $(v.components[0].content).find('img').attr('style');
+                        v.components[0].content = $this.innerHTML;
+                        var contentdom = $(v.components[0].content);
+                        $(contentdom).find('img').attr('style', style);
+                        v.components[0].content = contentdom[0].outerHTML;
                     }
-                    else {
-                        if (v.attributes["data-block-type"] == "Logo") {
-                            var style = $(v.components[0].content).find('img').attr('style');
-                            v.components[0].content = $this.innerHTML;
-                            var contentdom = $(v.components[0].content);
-                            $(contentdom).find('img').attr('style', style);
-                            v.components[0].content = contentdom[0].outerHTML;
-                        }
-                        else
-                            v.components[0].content = $this.outerHTML;
-                    }
-
+                    else
+                        v.components[0].content = $this.outerHTML;
                     var existingcomp = v.components[0];
                     v.components = [];
                     v.components.push(existingcomp);
-
                     v.content = '';
                 }
             }
@@ -476,9 +470,20 @@ global.FilterComponents = function (vjcomps) {
     }
 };
 
+global.RenderCustomBlock = function (model, bmodel) {
+    if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes["data-block-type"] != undefined && model.attributes.attributes["data-block-type"].toLowerCase() == "global")
+        model.attributes.name = "Global: " + bmodel.id;
+    //setting style as empty to create id in html and json and pass in save api call
+    if (model != undefined)
+        model.setStyle('');
+    IsVJCBRendered = true;
+    if (!$('.optimizing-overlay').length)
+        $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Please wait</h1></div>');
+};
+
 global.RenderBlock = function (model, bmodel, render) {
     var sf = $.ServicesFramework(-1);
-    model.view.$el[0].innerHTML = '<img class="centerloader" src=' + VjDefaultPath + 'loading.gif>';
+    model.view.$el[0].innerHTML = '<img class="centerloader" src=' + VjDefaultPath + 'loading.svg>';
     $.ajax({
         type: "POST",
         url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/RenderItem",
@@ -499,9 +504,6 @@ global.RenderBlock = function (model, bmodel, render) {
 
                     model.view.$el[0].innerHTML = '';
                     model.append($(response.Markup)[0].innerHTML);
-                    if (response.Style != undefined && response.Style != '') {
-                        $(VjEditor.Canvas.getDocument()).find('#' + model.ccid).append('<style>' + response.Style + '</style>');
-                    }
                     const newcomponents = getAllComponents(model);
                     $.each(newcomponents, function (k, v) {
                         if (v.attributes != undefined && v.attributes.type != undefined && v.attributes.type == 'blockwrapper')
@@ -547,7 +549,7 @@ global.RenderBlock = function (model, bmodel, render) {
                     script_tag.text = response.Script;
                     $(window.parent.window.VjEditor.Canvas.getDocument()).find('head')[0].appendChild(script_tag);
                 }
-                if (response.Style != undefined && response.Style != '' && model.attributes.attributes["data-block-type"].toLowerCase() != "global") {
+                if (response.Style != undefined && response.Style != '') {
                     var style_tag = $(window.parent.window.VjEditor.Canvas.getDocument().createElement('style'))[0];
                     style_tag.type = 'text/css';
                     style_tag.text = response.Style;

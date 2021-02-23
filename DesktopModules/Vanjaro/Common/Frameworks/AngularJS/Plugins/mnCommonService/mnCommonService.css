@@ -498,6 +498,7 @@ span.fileiconname {
 .permission_grid .permission-icon {
     cursor: pointer;
     margin-bottom: 10px;
+    color: inherit;
 }
 
 .permission_grid select {
@@ -1002,15 +1003,15 @@ a.page-link.active {
 #loading-bar-spinner {
     top: 50% !important;
     margin-top: -12px;
-    margin-left: -12px;
+    margin-left: -20px;
 }
 
     #loading-bar-spinner .spinner-icon {
-        background-image: url('/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.gif') !important;
+        background-image: url('/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.svg') !important;
         position: fixed;
-        background-size: 24px !important;
-        width: 24px !important;
-        height: 24px !important;
+        background-size: 40px !important;
+        width: 40px !important;
+        height: 40px !important;
         background-repeat: no-repeat !important;
         background-position: center !important;
         border: none !important;

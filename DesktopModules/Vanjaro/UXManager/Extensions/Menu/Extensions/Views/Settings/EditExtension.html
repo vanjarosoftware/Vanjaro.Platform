@@ -12,54 +12,54 @@
         <uilayout name="default" attr-ng-show="ShowBasic&&!ShowModuleDefinition">
             <uitemplate>
                 <div id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseOne">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseOne">
                                 [L:PackageInformation]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 [uilayout:PackageInformation]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseTwo">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="collapsed accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
                                 [L:OwnerInformation]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapseTwo" class="accordion-collapse  collapse" data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 [uilayout:OwnerInformation]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseThree">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="collapsed accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseThree">
                                 [L:License]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseThree" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 [uilayout:License]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseFour">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="collapsed accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseFour">
                                 [L:ReleaseNotes]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseFour" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordion">
+                            <div class="accordion-body">
                                 [uilayout:ReleaseNotes]
                             </div>
                         </div>
@@ -107,28 +107,28 @@
         <uilayout name="default" attr-ng-show="ShowAdvance&&Auth_SystemType">
             <uitemplate>
                 <div id="accordionAuthsetting">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseAuthSettingOne">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseAuthSettingOne">
                                 [L:ExtensionSettings]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseAuthSettingOne" class="collapse show" data-parent="#accordionAuthsetting">
-                            <div class="card-body">
+                        <div id="collapseAuthSettingOne" class="accordion-collapse collapse show" data-bs-parent="#accordionAuthsetting">
+                            <div class="accordion-body">
                                 [uilayout:ExtensionAuthSettings]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseAuthSettingTwo">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="collapsed accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseAuthSettingTwo">
                                 [L:SiteSettings]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseAuthSettingTwo" class="collapse" data-parent="#accordionAuthsetting">
-                            <div class="card-body">
+                        <div id="collapseAuthSettingTwo" class="accordion-collapse collapse" data-bs-parent="#accordionAuthsetting">
+                            <div class="accordion-body">
                                 [uilayout:SiteAuthSettings]
                             </div>
                         </div>
@@ -183,41 +183,41 @@
         <uilayout name="default" attr-ng-show="ShowAdvance&&ModuleType&&!ShowModuleDefinition">
             <uitemplate>
                 <div id="accordionsetting">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseSettingOne">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseSettingOne">
                                 [L:ExtensionSettings]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseSettingOne" class="collapse show" data-parent="#accordionsetting">
-                            <div class="card-body">
+                        <div id="collapseSettingOne" class="accordion-collapse collapse show" data-bs-parent="#accordionsetting">
+                            <div class="accordion-body">
                                 [uilayout:ExtensionSettings]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseSettingTwo">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="collapsed accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseSettingTwo">
                                 [L:PremiumModule]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseSettingTwo" class="collapse" data-parent="#accordionsetting">
-                            <div class="card-body">
+                        <div id="collapseSettingTwo" class="accordion-collapse collapse" data-bs-parent="#accordionsetting">
+                            <div class="accordion-body">
                                 [uilayout:PremiumModule]
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="collapsed card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseSettingThree">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <a class="collapsed accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseSettingThree">
                                 [L:ModuleDefinitions]
-                                <em class="fas fa-caret-down float-right"></em>
+                                <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseSettingThree" class="collapse" data-parent="#accordionsetting">
-                            <div class="card-body">
+                        <div id="collapseSettingThree" class="accordion-collapse collapse" data-bs-parent="#accordionsetting">
+                            <div class="accordion-body">
                                 [uilayout:ModuleDefinitions]
                             </div>
                         </div>
@@ -240,19 +240,19 @@
             <uitemplate>
                 <div class="form-group">
                     <label>[L:IsPortable]</label>
-                    <div class="float-right">
+                    <div class="float-end">
                         <em class="far fa-{{ui.data.packageDetail.Options.portable?'check-square':'square'}}"></em>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>[L:IsSearchable]</label>
-                    <div class="float-right">
+                    <div class="float-end">
                         <em class="far fa-{{ui.data.packageDetail.Options.searchable?'check-square':'square'}}"></em>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>[L:IsUpgradable]</label>
-                    <div class="float-right">
+                    <div class="float-end">
                         <em class="far fa-{{ui.data.packageDetail.Options.upgradeable?'check-square':'square'}}"></em>
                     </div>
                 </div>
@@ -273,8 +273,8 @@
         <uilayout name="ModuleDefinitions" attr-ng-show="!ShowModuleDefinition">
             <uitemplate>
                 <div class="addmodulebtn">
-                    <a ng-click="Click_AddModuleDef()" data-toggle="tooltip" data-placement="left" data-original-title="[L:Addmodule]" class="ux-btn ux-btn-hover float-right">
-                        <em class="fas fa-plus"></em>
+                    <a ng-click="Click_AddModuleDef()" class="ux-btn ux-btn-hover float-end">
+                        <em class="fas fa-plus" data-bs-toggle="tooltip" data-bs-placement="left" title="[L:Addmodule]"></em>
                     </a>
                 </div>
             </uitemplate>
@@ -288,8 +288,8 @@
                 </column>
                 <column name="Actions" attr-style="text-align: right" width="6">
                     <uitemplate>
-                        <div class="dropdown float-right dropbtn">
-                            <a id="dropdownMenuLinkDef" class="dropdownmenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown float-end dropbtn">
+                            <a id="dropdownMenuLinkDef" class="dropdownmenu " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v "></em>
                             </a>
                             <div class="dropdown-menu " aria-labelledby="dropdownMenuLinkDef">
@@ -307,7 +307,7 @@
             <uielement name="DefaultCacheTime" attr-ng-model="DefaultCacheTime" control="integer" container-attr-ng-show="!ShowModuleControl"></uielement>
             <uitemplate>
                 <div mn-ng-show="DefinitionId!=-1&&!ShowModuleControl" class="addmodulebtn">
-                    <a ng-click="Click_AddModuleControl()" class="ux-btn ux-btn-hover float-right">
+                    <a ng-click="Click_AddModuleControl()" class="ux-btn ux-btn-hover float-end">
                         <em class="fas fa-plus"></em>
                     </a>
                     <div>[L:AppControls]</div>
@@ -320,8 +320,8 @@
                 </column>
                 <column name="Actions" attr-style="text-align: right" width="6">
                     <uitemplate>
-                        <div class="dropdown float-right dropbtn">
-                            <a id="dropdownMenuLinkControl" class="dropdownmenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown float-end dropbtn">
+                            <a id="dropdownMenuLinkControl" class="dropdownmenu " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v "></em>
                             </a>
                             <div class="dropdown-menu " aria-labelledby="dropdownMenuLinkControl">
@@ -334,7 +334,7 @@
             </uielement>
             <uitemplate>
                 <div mn-ng-show="ShowModuleControl">[uilayout:ModuleControl]</div>
-                <div mn-ng-show="!ShowModuleControl" class="text-right fixed-footer">
+                <div mn-ng-show="!ShowModuleControl" class="text-end fixed-footer">
                     <button type="button" ng-click="Click_SaveModuleDef()" class="btn btn-sm btn-primary">
                         [L:Update]
                     </button>
@@ -357,7 +357,7 @@
             <uielement name="ControlSupportsPopups" ngmodel="ControlSupportsPopups" attr-class="toggle_right" control="checkboxtoggle"></uielement>
             <uielement name="ControlSupportsPartialRendering" ngmodel="ControlSupportsPartialRendering" attr-class="toggle_right" control="checkboxtoggle"></uielement>
             <uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button type="button" ng-click="Click_SaveModuleControl()" class="btn btn-sm btn-primary">
                         [L:Update]
                     </button>
@@ -373,7 +373,7 @@
         </uilayout>
         <uilayout name="default" attr-ng-show="!ShowModuleDefinition">
             <uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button type="button" ng-click="Click_Save()" class="btn btn-sm btn-primary">
                         [L:Update]
                     </button>

@@ -12,7 +12,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
             switch ((AppFactory.Identifier)Enum.Parse(typeof(AppFactory.Identifier), Identifier))
             {
                 case AppFactory.Identifier.history_revisions:
-                    return RevisionsController.GetData(PortalSettings);
+                    return RevisionsController.GetData(PortalSettings, Parameters);
                 default:
                     break;
             }

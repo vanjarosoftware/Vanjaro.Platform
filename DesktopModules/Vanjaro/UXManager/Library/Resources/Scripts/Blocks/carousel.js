@@ -12,7 +12,6 @@
 		category: VjLocalized.Basic,
 		content: {
 			classes: ['carousel', 'vj-carousel', 'slide'],
-			style: { 'position': 'relative' },
 			attributes: { 'data-ride': 'carousel', 'data-interval': 'false' },
 			type: 'carousel'
 		}
@@ -202,11 +201,11 @@
 				var modelId = this.getId();
 				this.components().add(`<a class="carousel-control carousel-control-prev" href="#` + modelId + `" role="button" data-slide="prev">
     <span class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="carousel-control sr-only">Previous</span>
+    <span class="carousel-control visually-hidden">Previous</span>
   </a>
   <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-slide="next">
     <span class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="carousel-control sr-only">Next</span>
+    <span class="carousel-control visually-hidden">Next</span>
   </a>`);
 			},
 			AddIndicators() {
@@ -277,11 +276,11 @@
                         </div>
                         <a class="carousel-control carousel-control-prev" href="#`+ modelId + `" role="button" data-slide="prev">
                             <span data-gjs-selectable="false" class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="carousel-control sr-only">Previous</span>
+                            <span class="carousel-control visually-hidden">Previous</span>
                         </a>
                         <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-slide="next">
                             <span data-gjs-selectable="false" class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="carousel-control sr-only">Next</span>
+                            <span class="carousel-control visually-hidden">Next</span>
                         </a>
 					`);
 				}

@@ -5,7 +5,7 @@
                 <div ng-show="ui.data.IsSuperUser.Options">
                     <div class="form-group toggle_right">
                         <label>[L:ResourceMode]</label>
-                        <div class="btn-group float-right" role="group">
+                        <div class="btn-group float-end" role="group">
                             <button type="button" mn-ng-click="Click_ResourceMode('Host')" mn-ng-class="ResourceMode == 'Host'? 'btn btn-primary active' :'btn btn-default'">[L:Host]</button>
                             <button type="button" mn-ng-click="Click_ResourceMode('Portal')" mn-ng-class="ResourceMode == 'Portal' ? 'btn btn-primary active' :'btn btn-default'">{{ui.data.PortalName.Options}}</button>
                         </div>
@@ -68,7 +68,7 @@
         </uilayout>
         <uilayout name="default" attr-class="col-md-12">
             <uitemplate>
-                <div class="text-right fixed-footer">
+                <div class="text-end fixed-footer">
                     <button type="button" ng-click="Click_Update()" class="btn btn-sm btn-primary">
                         [L:Update]
                     </button>

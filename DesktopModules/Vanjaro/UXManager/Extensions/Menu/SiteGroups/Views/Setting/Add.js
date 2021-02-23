@@ -38,7 +38,7 @@
             common.webApi.post('add/update', '', $scope.ui.data.PortalGroupInfo.Options[0]).success(function (Response) {
                 var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
                 Parentscope.RefreshGrid();
-                $(window.parent.document.body).find('[data-dismiss="modal"]').click();
+                $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
             });
         }
     };

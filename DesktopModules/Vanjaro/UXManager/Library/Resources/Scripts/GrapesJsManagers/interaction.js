@@ -72,7 +72,7 @@ $(document).ready(function () {
     if (toolitems > 6) {
         var toolbar = $('.ToolbarItem').html();
         $('.ToolbarItem li:gt(4)').hide();
-        $('.ToolbarItem').prepend("<div class='ntoolbox'></div><ul class='more_icons'><li class='openbtn' data-toggle='tooltip'  data-placement='right'  data-original-title=\"" + VjLocalized.ShowHiddenIcons + "\"><em class='fas fa-chevron-up'></em></li></ul>");
+        $('.ToolbarItem').prepend("<div class='ntoolbox'></div><ul class='more_icons'><li class='openbtn'><em class='fas fa-chevron-up' data-bs-toggle='tooltip' data-bs-placement='right'  title=\"" + VjLocalized.ShowHiddenIcons + "\"></em></li></ul>");
         $('.ntoolbox').prepend(toolbar);
         $('.ntoolbox  li:lt(5)').hide();
     }

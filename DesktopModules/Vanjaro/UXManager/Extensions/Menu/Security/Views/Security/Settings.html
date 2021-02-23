@@ -18,15 +18,15 @@
                                 <uilayout name="TabsContentGeneral" access-roles="host">
                                     <uitemplate>
                                         <div id="accordion2" mn-ng-if="ShowGeneralTab">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseone">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseone">
                                                         [L:General]
-                                                        <em class="fas fa-caret-down float-right"></em>
+                                                        <em class="fas fa-caret-down float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapseone" class="collapse show" data-parent="#accordion2">
-                                                    <div class="card-body">
+                                                <div id="collapseone" class="accordion-collapse collapse show" data-bs-parent="#accordion2">
+                                                    <div class="accordion-body">
                                                         [uilayout:General]
                                                     </div>
                                                 </div>
@@ -37,15 +37,15 @@
                                 <uilayout name="TabsContentLogin" attr-ng-show="TabsContentLogin" access-roles="admin">
                                     <uitemplate>
                                         <div id="accordion3" mn-ng-show="ShowLoginTab">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapsetwo">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapsetwo">
                                                         [L:Login]
-                                                        <em class="fas fa-caret-down float-right"></em>
+                                                        <em class="fas fa-caret-down float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapsetwo" class="collapse show" data-parent="#accordion3">
-                                                    <div class="card-body">
+                                                <div id="collapsetwo" class="accordion-collapse  collapse show" data-bs-parent="#accordion3">
+                                                    <div class="accordion-body">
                                                         [uilayout:Login]
                                                     </div>
                                                 </div>
@@ -56,28 +56,28 @@
                                 <uilayout name="TabsContentRegistration" access-roles="admin">
                                     <uitemplate>
                                         <div id="accordion4" mn-ng-show="Registeration">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapsethree">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapsethree">
                                                         [L:Registeration]
-                                                        <em class="fas fa-caret-down float-right"></em>
+                                                        <em class="fas fa-caret-down float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapsethree" class="collapse show" data-parent="#accordion4">
-                                                    <div class="card-body">
+                                                <div id="collapsethree" class="accordion-collapse  collapse show" data-bs-parent="#accordion4">
+                                                    <div class="accordion-body">
                                                         [uilayout:Registeration]
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseven">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseven">
                                                         [L:Advance]
-                                                        <em class="fas fa-caret-right float-right"></em>
+                                                        <em class="fas fa-caret-right float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapseven" class="collapse" data-parent="#accordion4">
-                                                    <div class="card-body">
+                                                <div id="collapseven" class="accordion-collapse  collapse" data-bs-parent="#accordion4">
+                                                    <div class="accordion-body">
                                                         [uilayout:Advance]
                                                     </div>
                                                 </div>
@@ -88,28 +88,28 @@
                                 <uilayout name="TabsContentMedia">
                                     <uitemplate>
                                         <div id="accordion" mn-ng-show="ShowMediaTab">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapseFour">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseFour">
                                                         [L:Pictures]
-                                                        <em class="fas fa-caret-down float-right"></em>
+                                                        <em class="fas fa-caret-down float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapseFour" class="collapse show" data-parent="#accordion">
-                                                    <div class="card-body">
+                                                <div id="collapseFour" class="accordion-collapse collapse show" data-bs-parent="#accordion">
+                                                    <div class="accordion-body">
                                                         [uilayout:Pictures]
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseFive">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordion" data-bs-target="#collapseFive">
                                                         [L:Videos]
-                                                        <em class="fas fa-caret-right float-right"></em>
+                                                        <em class="fas fa-caret-right float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapseFive" class="collapse" data-parent="#accordion">
-                                                    <div class="card-body">
+                                                <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordion">
+                                                    <div class="accordion-body">
                                                         [uilayout:Videos]
                                                     </div>
                                                 </div>
@@ -120,15 +120,15 @@
                                 <uilayout name="TabsContentSSL">
                                     <uitemplate>
                                         <div id="accordion5" mn-ng-show="ShowSSLModule">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <a class="card-link" href="javascript:;" data-toggle="collapse" data-target="#collapsesix">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapsesix">
                                                         [L:SSL]
-                                                        <em class="fas fa-caret-down float-right"></em>
+                                                        <em class="fas fa-caret-down float-end"></em>
                                                     </a>
                                                 </div>
-                                                <div id="collapsesix" class="collapse show" data-parent="#accordion5">
-                                                    <div class="card-body">
+                                                <div id="collapsesix" class="accordion-collapse collapse show" data-bs-parent="#accordion5">
+                                                    <div class="accordion-body">
                                                         [uilayout:SSL]
                                                     </div>
                                                 </div>
@@ -143,8 +143,8 @@
 
             </uitemplate>
             <uitemplate>
-                <div class="text-right fixed-footer">
-                    <button type="button" class="btn btn-sm btn-primary float-right" id="Update" mn-ng-click="Click_Save('update')">
+                <div class="text-end fixed-footer">
+                    <button type="button" class="btn btn-sm btn-primary float-end" id="Update" mn-ng-click="Click_Save('update')">
                         [L:Update]
                     </button>
                 </div>
@@ -167,7 +167,7 @@
         <uilayout name="Registeration" attr-class="tab-pane active">
             <uitemplate>
                 <div class="form-group">
-                    <label class="" for="setting_registeration1textbox0" data-toggle="tooltip" title="" data-original-title="[L:UserRegistration.Tooltip]">[L:UserRegistration]</label>
+                    <label class="" for="setting_registeration1textbox0" data-bs-toggle="tooltip" title="[L:UserRegistration.Tooltip]">[L:UserRegistration]</label>
                     <div class="UserRegistration">
                         <!--<span class="radio-inline" mn-ng-repeat="row in ui.data.UserRegistration.Options.UserRegistrationOptions">
                             <input name="UserRegistration" mn-ng-model="ui.data.UserRegistration.Options.Settings.UserRegistration" type="radio" value="{{row.Value}}"><span>{{row.Key}}</span>

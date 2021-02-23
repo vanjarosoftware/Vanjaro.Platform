@@ -12,7 +12,7 @@
                         </a>
                     </div>
                     <div class="col-4 pl-none">
-                        <a href="#" onclick="parent.OpenPopUp(event, 700,'right', '[LS:Shortcut_Title]', '#add')" class="ux-btn ux-btn-hover float-right" role="button" title="[L:AddRole]" id="Submit">
+                        <a href="#" onclick="parent.OpenPopUp(event, 700,'right', '[LS:Shortcut_Title]', '#add')" class="ux-btn ux-btn-hover float-end" role="button" title="[L:AddRole]" id="Submit">
                             <em class="fas fa-plus"></em>
                         </a>
                     </div>
@@ -25,8 +25,8 @@
                 <ul class="role-group">
                     <li mn-ng-repeat="option in ui.data.RoleGroup.Options" class="list-group-item">
                         <a href="#" mn-ng-click="filterGroup(option)">{{option.Name}}</a>
-                        <div class="dropdown float-right dropbtn" mn-ng-if="option.GroupId != -1 && option.GroupId != -2">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown float-end dropbtn" mn-ng-if="option.GroupId != -1 && option.GroupId != -2">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -48,8 +48,8 @@
                 </column>
                 <column name="Actions" width="15">
                     <uitemplate>
-                        <div class="dropdown float-right dropbtn" mn-ng-if="row.id != 0">
-                            <a id="dropdownMenuLink" class="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown float-end dropbtn" mn-ng-if="row.id != 0">
+                            <a id="dropdownMenuLink" class="dropdownmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

@@ -160,7 +160,7 @@
     <value>Unlinking this block from global will let you edit content for this block only, without affecting all other linked blocks.</value>
   </data>
   <data name="GlobalBlockUnlocking.Text" xml:space="preserve">
-    <value>Changes to global content apply across entire site.</value>
+    <value>Changes to global content instantly apply across entire site.</value>
   </data>
   <data name="GlobalBlockUnlockingError.Text" xml:space="preserve">
     <value>You don't have permissions to edit this content</value>
@@ -449,5 +449,20 @@
   </data>
   <data name="Shortcuts.Text" xml:space="preserve">
     <value>Shortcuts</value>
+  </data>
+  <data name="Add.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="BlockCategory.Text" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="CategoryExists.Text" xml:space="preserve">
+    <value>Category name already exists</value>
+  </data>
+  <data name="CategoryRequired.Text" xml:space="preserve">
+    <value>Category name is required</value>
+  </data>
+  <data name="AddCategory.Text" xml:space="preserve">
+    <value>Add New Category</value>
   </data>
 </root>

@@ -4,17 +4,17 @@
             <uitemplate>
                 <div class="form-group" data-datatype="dropdownlist" data-label="[L] Role Group" data-name="RoleGroup">
                     <!--<div class="col-sm-12 col-xs-12">
-                        <a mn-ng-click="Click_AddGroup()" class="ux-btn ux-btn-hover float-right" role="button" title="[LS:AddGroups]" id="Submit">
+                        <a mn-ng-click="Click_AddGroup()" class="ux-btn ux-btn-hover float-end" role="button" title="[LS:AddGroups]" id="Submit">
                             <em class="fas fa-plus"></em>
                         </a>
                     </div>-->
                     <div>
-                        <a mn-ng-click="Click_AddGroup()" class="ux-btn ux-btn-hover float-right" role="button" title="[LS:AddGroups]" id="Submit">
+                        <a mn-ng-click="Click_AddGroup()" class="ux-btn ux-btn-hover float-end" role="button" title="[LS:AddGroups]" id="Submit">
                             <em class="fas fa-plus"></em>
                         </a>
                     </div>
 
-                    <label class="" for="setting_add0dropdownlist3" data-toggle="tooltip" title="" data-original-title="[L] RoleGroup.Tooltip" aria-describedby="tooltip430061">[L:RoleGroup]</label><div class="tooltip fade top" role="tooltip" id="tooltip430061" style="top: 295px; left: 0px; display: block;"><div class="tooltip-arrow" style="left: 49.6124%;"></div><div class="tooltip-inner">[L:RoleGroup.Tooltip]</div></div>
+                    <label class="" for="setting_add0dropdownlist3" data-bs-toggle="tooltip" title="[L] RoleGroup.Tooltip" aria-describedby="tooltip430061">[L:RoleGroup]</label><div class="tooltip fade top" role="tooltip" id="tooltip430061" style="top: 295px; left: 0px; display: block;"><div class="tooltip-arrow" style="left: 49.6124%;"></div><div class="tooltip-inner">[L:RoleGroup.Tooltip]</div></div>
                     <div class="input-group">
                         <select class="form-control control-background ng-pristine ng-invalid ng-invalid-required ng-touched dropdowntag roledropdown" ng-model="ui.data.Working_RoleDto.Options.groupId" attr-required="true" mn-ng-options="option.GroupId as option.Name for option in ui.data.RoleGroup.Options"></select>
                     </div>
@@ -27,8 +27,8 @@
             <uielement name="Public" container-attr-ng-hide="true" control="checkboxtoggle" ngmodel="ui.data.Working_RoleDto.Options.isPublic" attr-class="toggle_right"></uielement>
             <uielement name="AutoAssignment" container-attr-ng-hide="true" control="checkboxtoggle" ngmodel="ui.data.Working_RoleDto.Options.autoAssign" attr-class="toggle_right"></uielement>
             <uitemplate>
-                <div class="text-right fixed-footer">
-                    <button type="button" id="save" mn-ng-click="Click_SaveRole('update')" mn-ng-disabled="isDisabled" class="btn btn-sm btn-primary float-right">
+                <div class="text-end fixed-footer">
+                    <button type="button" id="save" mn-ng-click="Click_SaveRole('update')" mn-ng-disabled="isDisabled" class="btn btn-sm btn-primary float-end">
                         [L:Save]
                     </button>
                 </div>

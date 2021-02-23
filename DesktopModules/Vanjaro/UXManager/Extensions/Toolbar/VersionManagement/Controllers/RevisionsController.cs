@@ -19,16 +19,27 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
     [AuthorizeAccessRoles(AccessRoles = "editpage")]
     public class RevisionsController : UIEngineController
     {
-        public static List<IUIData> GetData(PortalSettings PortalSettings)
+        public static List<IUIData> GetData(PortalSettings PortalSettings, Dictionary<string, string> Parameters)
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
+            string guid = string.Empty;
+            if (Parameters.Count > 0)
+            {
+                try
+                {
+                    guid = Parameters["bguid"];
+                }
+                catch { }
+            }
+
+            Settings.Add("BlockGuid", new UIData { Name = "BlockGuid", Value = guid });
             return Settings.Values.ToList();
         }
 
         [HttpGet]
-        public dynamic GetDate(string Locale)
+        public dynamic GetDate(string Locale, string BlockGuid)
         {
-            return RevisionsManager.GetData(PortalSettings, Locale);
+            return RevisionsManager.GetData(PortalSettings, Locale, BlockGuid);
         }
 
         [HttpPost]
@@ -55,6 +66,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
             Pages page = Core.Managers.PageManager.GetByVersion(PortalSettings.ActiveTab.TabID, Version, Locale);
             if (page != null)
             {
+                Core.Managers.PageManager.ApplyGlobalBlockJSON(page);
                 Result.html = page.Content.ToString();
                 HtmlDocument html = new HtmlDocument();
                 html.LoadHtml(Result.html);
@@ -64,6 +76,26 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
                 Result.style = page.StyleJSON.ToString();
             }
             Result.Version = RevisionsManager.GetAllVersionByTabID(PortalSettings.PortalId, PortalSettings.ActiveTab.TabID, Locale);
+            return Result;
+        }
+
+        [HttpGet]
+        public dynamic GetBlockVersion(int Version, string BlockGuid)
+        {
+            dynamic Result = new ExpandoObject();
+
+            CustomBlock Block = Core.Managers.BlockManager.GetAllByGUID(this.PortalSettings.PortalId, BlockGuid).Where(a => a.Version == Version).FirstOrDefault();
+            if (Block != null)
+            {
+                Result.html = Block.Html.ToString();
+                HtmlDocument html = new HtmlDocument();
+                html.LoadHtml(Result.html);
+                InjectBlocks(html, Result);
+                Result.css = Block.Css.ToString();
+                Result.components = Block.ContentJSON.ToString();
+                Result.style = Block.StyleJSON.ToString();
+                Result.Guid = Block.Guid;
+            }
             return Result;
         }
         private void InjectBlocks(HtmlDocument html, dynamic Result)
