@@ -158,7 +158,7 @@
     <Content Include="Resources\Images\librarytemplates\slider.jpg" />
     <Content Include="Resources\Images\librarytemplates\team.jpg" />
     <Content Include="Resources\Images\librarytemplates\team3.jpg" />
-    <Content Include="Resources\Images\loading.gif" />
+    <Content Include="Resources\Images\loading.svg" />
     <Content Include="Resources\Images\svg\icon-a.svg" />
     <Content Include="Resources\Images\svg\icon-b.svg" />
     <Content Include="Resources\Images\svg\icon-c.svg" />

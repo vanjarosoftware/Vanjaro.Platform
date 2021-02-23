@@ -508,12 +508,12 @@ global.RenderCustomBlock = function (model, bmodel) {
         model.setStyle('');
     IsVJCBRendered = true;
     if (!$('.optimizing-overlay').length)
-        $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Please wait</h1></div>');
+        $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Please wait</h1></div>');
 };
 
 global.RenderBlock = function (model, bmodel, render) {
     var sf = $.ServicesFramework(-1);
-    model.view.$el[0].innerHTML = '<img class="centerloader" src=' + VjDefaultPath + 'loading.gif>';
+    model.view.$el[0].innerHTML = '<img class="centerloader" src=' + VjDefaultPath + 'loading.svg>';
     $.ajax({
         type: "POST",
         url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/RenderItem",
