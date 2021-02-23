@@ -16,6 +16,7 @@ namespace Vanjaro.Core
                 internal const string Prefix = "Vanjaro-Core-";
                 public const string Page = Prefix + "Page";
                 public const string CustomBlock = Prefix + "CustomBlock";
+                public const string GlobalBlock = Prefix + "GlobalBlock";
                 internal const string Settings = Prefix + "Settings";
                 internal const string Extensions = Prefix + "Extensions";
                 internal const string Workflow = Prefix + "Workflow";

@@ -76,10 +76,9 @@ namespace Vanjaro.Core
                     Attributes = (s.Attributes.ContainsKey("data-block-global") && s.Attributes["data-block-global"] == "true") ? GetGlobalConfigs(PortalSettings.Current, s.Name) : GetGlobalConfigs(PortalSettings.Current, s.Name, false)
                 }).ToList();
             }
-
-            public static List<CustomBlock> GetAllByGUID(int PortalID, string Guid)
+            public static List<GlobalBlock> GetAllGlobalBlocks(int PortalID, string Guid)
             {
-                return BlockFactory.GetAllByGUID(PortalID, Guid);
+                return GlobalBlockFactory.GetAllByGUID(PortalID, Guid);
             }
 
             public static ThemeTemplateResponse Render(Dictionary<string, string> Attributes)
@@ -162,6 +161,11 @@ namespace Vanjaro.Core
                 return result;
             }
 
+            public static void AddCustom(CustomBlock _customBlock)
+            {
+                BlockFactory.AddUpdate(_customBlock);
+            }
+
             public static string GetTheme(string ThemeName = "Basic")
             {
                 return "vThemes\\" + ThemeName + "\\";
@@ -207,80 +211,117 @@ namespace Vanjaro.Core
                 }
             }
 
-            public static dynamic Add(PortalSettings PortalSettings, CustomBlock CustomBlock, int ForceCount = 0)
+            public static dynamic Add(PortalSettings PortalSettings, GlobalBlock block, int ForceCount = 0)
             {
                 dynamic Result = new ExpandoObject();
                 try
                 {
                     var aliases = from PortalAliasInfo pa in PortalAliasController.Instance.GetPortalAliasesByPortalId(PortalSettings.PortalId)
                                   select pa.HTTPAlias;
-                    if (!string.IsNullOrEmpty(CustomBlock.Html))
+                    if (!string.IsNullOrEmpty(block.Html))
                     {
-                        string Css = CustomBlock.Css;
-                        CustomBlock.Html = PageManager.DeTokenizeLinks(PageManager.AbsoluteToRelativeUrls(PageManager.ResetModuleMarkup(PortalSettings.PortalId, CustomBlock.Html, ref Css, PortalSettings.UserId), aliases), PortalSettings.PortalId);
-                        CustomBlock.Css = Css;
+                        string Css = block.Css;
+                        block.Html = PageManager.DeTokenizeLinks(PageManager.AbsoluteToRelativeUrls(PageManager.ResetModuleMarkup(PortalSettings.PortalId, block.Html, ref Css, PortalSettings.UserId), aliases), PortalSettings.PortalId);
+                        block.Css = Css;
                     }
-                    if (!string.IsNullOrEmpty(CustomBlock.Css))
-                        CustomBlock.Css = PageManager.DeTokenizeLinks(CustomBlock.Css, PortalSettings.PortalId);
-                    if (!string.IsNullOrEmpty(CustomBlock.ContentJSON))
+                    if (!string.IsNullOrEmpty(block.Css))
+                        block.Css = PageManager.DeTokenizeLinks(block.Css, PortalSettings.PortalId);
+                    if (!string.IsNullOrEmpty(block.ContentJSON))
                     {
                         List<string> Ids = new List<string>();
                         Dictionary<string, List<string>> StyleIds = new Dictionary<string, List<string>>();
                         Dictionary<string, dynamic> GlobalKeyValuePairs = new Dictionary<string, dynamic>();
                         Dictionary<string, dynamic> GlobalStyleKeyValuePairs = new Dictionary<string, dynamic>();
-                        var DeserializedContentJSON = JsonConvert.DeserializeObject(CustomBlock.ContentJSON);
-                        var DeserializedStyleJSON = CustomBlock.StyleJSON != null ? JsonConvert.DeserializeObject(CustomBlock.StyleJSON) : string.Empty;
+                        var DeserializedContentJSON = JsonConvert.DeserializeObject(block.ContentJSON);
+                        var DeserializedStyleJSON = block.StyleJSON != null ? JsonConvert.DeserializeObject(block.StyleJSON) : string.Empty;
                         PageManager.GetAllIds(DeserializedContentJSON, Ids);
                         PageManager.FilterStyle(DeserializedStyleJSON, Ids);
                         PageManager.RemoveGlobalBlockComponents(DeserializedContentJSON, StyleIds, GlobalKeyValuePairs, null);
                         PageManager.RemoveGlobalBlockStyles(DeserializedStyleJSON, StyleIds, GlobalStyleKeyValuePairs);
                         PageManager.BuildCustomBlocks(PortalSettings.PortalId, DeserializedContentJSON, DeserializedStyleJSON);
-                        CustomBlock.ContentJSON = PageManager.DeTokenizeLinks(PageManager.AbsoluteToRelativeUrls(JsonConvert.SerializeObject(DeserializedContentJSON), aliases), PortalSettings.PortalId);
-                        CustomBlock.Css = PageManager.FilterCss(CustomBlock.Css, StyleIds);
-                        if (!string.IsNullOrEmpty(CustomBlock.StyleJSON))
+                        block.ContentJSON = PageManager.DeTokenizeLinks(PageManager.AbsoluteToRelativeUrls(JsonConvert.SerializeObject(DeserializedContentJSON), aliases), PortalSettings.PortalId);
+                        if (!string.IsNullOrEmpty(block.Css))
+                            block.Css = PageManager.FilterCss(block.Css, StyleIds);
+                        if (!string.IsNullOrEmpty(block.StyleJSON))
                         {
                             List<string> lstStyleIds = new List<string>();
                             ExtractStyleIDs(DeserializedContentJSON, lstStyleIds);
                             FilterStyles(DeserializedStyleJSON, lstStyleIds);
-                            CustomBlock.StyleJSON = JsonConvert.SerializeObject(DeserializedStyleJSON);
+                            block.StyleJSON = JsonConvert.SerializeObject(DeserializedStyleJSON);
                         }
                     }
-                    if (BlockFactory.Get(PortalSettings.PortalId, CustomBlock.Name) == null)
+                    if (string.IsNullOrEmpty(block.Html) && string.IsNullOrEmpty(block.Css))
                     {
-                        if (ForceCount == 0)
+                        CustomBlock _customBlock = new CustomBlock();
+                        _customBlock.ID = block.ID;
+                        _customBlock.Guid = block.Guid;
+                        _customBlock.Name = block.Name;
+                        _customBlock.Category = block.Category;
+                        _customBlock.ContentJSON = block.ContentJSON;
+                        _customBlock.StyleJSON = block.StyleJSON;
+                        if (BlockFactory.Get(PortalSettings.PortalId, _customBlock.Name) == null)
                         {
-                            CustomBlock.Guid = Guid.NewGuid().ToString().ToLower();
-                        }
-
-                        CustomBlock.PortalID = PortalSettings.PortalId;
-                        CustomBlock.CreatedBy = PortalSettings.UserId;
-                        CustomBlock.UpdatedBy = PortalSettings.UserId;
-                        CustomBlock.CreatedOn = DateTime.UtcNow;
-                        CustomBlock.UpdatedOn = DateTime.UtcNow;
-                        CustomBlock.Locale = PageManager.GetCultureCode(PortalSettings);
-                        BlockFactory.AddUpdate(CustomBlock);
-                        CustomBlock cb = BlockFactory.GetAll(PortalSettings.PortalId).Where(b => b.Guid.ToLower() == CustomBlock.Guid.ToLower() && b.Locale == null).FirstOrDefault();
-                        if (cb == null)
-                        {
-                            cb = CustomBlock;
-                            cb.Locale = null;
-                            cb.ID = 0;
-                            BlockFactory.AddUpdate(cb);
-                        }
-                        Result.Status = "Success";
-                        Result.Guid = CustomBlock.Guid;
-                    }
-                    else
-                    {
-                        if (ForceCount > 0)
-                        {
-                            CustomBlock.Name = CustomBlock.Name + ForceCount;
-                            ForceCount++;
-                            Result = Add(PortalSettings, CustomBlock, ForceCount);
+                            if (ForceCount == 0)
+                                _customBlock.Guid = Guid.NewGuid().ToString().ToLower();
+                            _customBlock.PortalID = PortalSettings.PortalId;
+                            _customBlock.CreatedBy = PortalSettings.UserId;
+                            _customBlock.UpdatedBy = PortalSettings.UserId;
+                            _customBlock.CreatedOn = DateTime.UtcNow;
+                            _customBlock.UpdatedOn = DateTime.UtcNow;
+                            BlockFactory.AddUpdate(_customBlock);
+                            Result.Status = "Success";
+                            Result.Guid = block.Guid;
                         }
                         else
                         {
-                            Result.Status = "Exist";
+                            if (ForceCount > 0)
+                            {
+                                block.Name = block.Name + ForceCount;
+                                ForceCount++;
+                                Result = Add(PortalSettings, block, ForceCount);
+                            }
+                            else
+                            {
+                                Result.Status = "Exist";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (GlobalBlockFactory.Get(PortalSettings.PortalId, block.Name) == null)
+                        {
+                            if (ForceCount == 0)
+                                block.Guid = Guid.NewGuid().ToString().ToLower();
+                            block.PortalID = PortalSettings.PortalId;
+                            block.CreatedBy = PortalSettings.UserId;
+                            block.UpdatedBy = PortalSettings.UserId;
+                            block.CreatedOn = DateTime.UtcNow;
+                            block.UpdatedOn = DateTime.UtcNow;
+                            block.Locale = PageManager.GetCultureCode(PortalSettings);
+                            GlobalBlockFactory.AddUpdate(block);
+                            GlobalBlock cb = GlobalBlockFactory.GetAll(PortalSettings.PortalId).Where(b => b.Guid.ToLower() == block.Guid.ToLower() && b.Locale == null).FirstOrDefault();
+                            if (cb == null)
+                            {
+                                cb = block;
+                                cb.Locale = null;
+                                cb.ID = 0;
+                                GlobalBlockFactory.AddUpdate(cb);
+                            }
+                            Result.Status = "Success";
+                            Result.Guid = block.Guid;
+                        }
+                        else
+                        {
+                            if (ForceCount > 0)
+                            {
+                                block.Name = block.Name + ForceCount;
+                                ForceCount++;
+                                Result = Add(PortalSettings, block, ForceCount);
+                            }
+                            else
+                            {
+                                Result.Status = "Exist";
+                            }
                         }
                     }
                 }
@@ -341,83 +382,25 @@ namespace Vanjaro.Core
                 }
             }
 
-            public static void Update(CustomBlock CustomBlock)
+            public static void UpdateCustomBlock(CustomBlock CustomBlock)
             {
                 BlockFactory.AddUpdate(CustomBlock);
             }
+            public static void UpdateGlobalBlock(GlobalBlock GlobalBlock)
+            {
+                GlobalBlockFactory.AddUpdate(GlobalBlock);
+            }
 
-            public static dynamic Edit(PortalSettings PortalSettings, CustomBlock CustomBlock)
+            public static dynamic EditCustomBlock(PortalSettings PortalSettings, CustomBlock CustomBlock)
             {
                 dynamic Result = new ExpandoObject();
                 try
                 {
-                    CustomBlock cb = BlockFactory.GetAll(PortalSettings.PortalId).Where(b => b.Guid.ToLower() == CustomBlock.Guid.ToLower() && b.Locale == PageManager.GetCultureCode(PortalSettings)).FirstOrDefault();
-                    if (cb == null)
-                    {
-                        cb = BlockFactory.GetAll(PortalSettings.PortalId).Where(b => b.Guid.ToLower() == CustomBlock.Guid.ToLower() && b.Locale == null).FirstOrDefault();
-                        if (cb != null)
-                        {
-                            cb.Locale = PageManager.GetCultureCode(PortalSettings);
-                            cb.ID = 0;
-                            BlockFactory.AddUpdate(cb);
-                        }
-                    }
+                    CustomBlock cb = BlockFactory.GetAll(PortalSettings.PortalId).Where(b => b.Guid.ToLower() == CustomBlock.Guid.ToLower()).FirstOrDefault();
                     if (cb != null)
                     {
                         cb.Name = CustomBlock.Name;
                         cb.Category = CustomBlock.Category;
-
-                        if (CustomBlock.IsGlobal && !string.IsNullOrEmpty(CustomBlock.Html))
-                        {
-                            HtmlDocument html = new HtmlDocument();
-                            html.LoadHtml(CustomBlock.Html);
-                            IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
-                            foreach (HtmlNode item in query.ToList())
-                            {
-                                if (item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "mid").FirstOrDefault() != null && !string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value))
-                                {
-                                    int mid = int.Parse(item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value);
-                                    ModuleInfo minfo = ModuleController.Instance.GetModule(mid, Null.NullInteger, false);
-                                    if (minfo != null && !minfo.AllTabs)
-                                    {
-                                        minfo.AllTabs = true;
-                                        ModuleController.Instance.UpdateModule(minfo);
-                                        List<TabInfo> listTabs = TabController.GetPortalTabs(minfo.PortalID, Null.NullInteger, false, true);
-                                        foreach (TabInfo destinationTab in listTabs)
-                                        {
-                                            ModuleInfo module = ModuleController.Instance.GetModule(minfo.ModuleID, destinationTab.TabID, false);
-                                            if (module != null)
-                                            {
-                                                if (module.IsDeleted)
-                                                {
-                                                    ModuleController.Instance.RestoreModule(module);
-                                                }
-                                            }
-                                            else
-                                            {
-                                                if (!PortalSettings.Current.ContentLocalizationEnabled || (minfo.CultureCode == destinationTab.CultureCode))
-                                                {
-                                                    ModuleController.Instance.CopyModule(minfo, destinationTab, minfo.PaneName, true);
-                                                }
-                                            }
-                                        }
-                                    }
-                                    item.InnerHtml = "<div vjmod=\"true\"><app id=\"" + mid + "\"></app>";
-                                }
-                                else if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault() != null)
-                                {
-                                    if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value.ToLower() != "global")
-                                    {
-                                        item.InnerHtml = item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value;
-                                    }
-                                }
-                            }
-                            CustomBlock.Html = html.DocumentNode.OuterHtml;
-                        }
-
-                        //cb.Html = CustomBlock.Html;
-                        //cb.Css = CustomBlock.Css;
-                        cb.IsGlobal = CustomBlock.IsGlobal;
                         cb.UpdatedBy = PortalSettings.Current.UserId;
                         cb.UpdatedOn = DateTime.UtcNow;
                         BlockFactory.AddUpdate(cb);
@@ -437,14 +420,53 @@ namespace Vanjaro.Core
                 }
                 return Result;
             }
+            public static dynamic EditGlobalBlock(PortalSettings PortalSettings, GlobalBlock GlobalBlock)
+            {
+                dynamic Result = new ExpandoObject();
+                try
+                {
+                    GlobalBlock cb = GlobalBlockFactory.GetAll(PortalSettings.PortalId).Where(b => b.Guid.ToLower() == GlobalBlock.Guid.ToLower() && b.Locale == PageManager.GetCultureCode(PortalSettings)).FirstOrDefault();
+                    if (cb == null)
+                    {
+                        cb = GlobalBlockFactory.GetAll(PortalSettings.PortalId).Where(b => b.Guid.ToLower() == GlobalBlock.Guid.ToLower() && b.Locale == null).FirstOrDefault();
+                        if (cb != null)
+                        {
+                            cb.Locale = PageManager.GetCultureCode(PortalSettings);
+                            cb.ID = 0;
+                            GlobalBlockFactory.AddUpdate(cb);
+                        }
+                    }
+                    if (cb != null)
+                    {
+                        cb.Name = GlobalBlock.Name;
+                        cb.Category = GlobalBlock.Category;
+                        cb.UpdatedBy = PortalSettings.Current.UserId;
+                        cb.UpdatedOn = DateTime.UtcNow;
+                        GlobalBlockFactory.AddUpdate(cb);
+                        Result.Status = "Success";
+                        Result.Guid = cb.Guid;
+                        Result.CustomBlock = cb;
+                    }
+                    else
+                    {
+                        Result.Status = "Not exist";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Result.Status = ex.Message.ToString();
+                    ExceptionManager.LogException(ex);
+                }
+                return Result;
+            }
             public static HttpResponseMessage ExportCustomBlock(int PortalID, string GUID)
             {
                 HttpResponseMessage Response = new HttpResponseMessage();
-                CustomBlock customBlock = BlockManager.GetByLocale(PortalID, GUID, null, true);
+                CustomBlock customBlock = GetCustomByGuid(PortalID, GUID);
                 if (customBlock != null)
                 {
                     Dictionary<int, string> ExportedModulesContent = new Dictionary<int, string>();
-                    string Theme = Core.Managers.ThemeManager.CurrentTheme.Name;
+                    string Theme = ThemeManager.CurrentTheme.Name;
                     ExportTemplate exportTemplate = new ExportTemplate
                     {
                         Name = customBlock.Name,
@@ -456,18 +478,23 @@ namespace Vanjaro.Core
                     };
                     Dictionary<string, string> Assets = new Dictionary<string, string>();
                     Layout layout = new Layout();
-                    layout.Blocks = new List<CustomBlock>() { customBlock };
+                    GlobalBlock globalBlock = new GlobalBlock();
+                    globalBlock.ID = customBlock.ID;
+                    globalBlock.Guid = customBlock.Guid;
+                    globalBlock.PortalID = customBlock.PortalID;
+                    globalBlock.Name = customBlock.Name;
+                    globalBlock.Category = customBlock.Category;
+                    globalBlock.ContentJSON = customBlock.ContentJSON;
+                    globalBlock.StyleJSON = customBlock.StyleJSON;
+                    globalBlock.CreatedBy = customBlock.CreatedBy;
+                    globalBlock.CreatedOn = customBlock.CreatedOn;
+                    globalBlock.UpdatedBy = customBlock.UpdatedBy;
+                    globalBlock.UpdatedOn = customBlock.UpdatedOn;
+                    layout.Blocks = new List<GlobalBlock>() { globalBlock };
                     if (layout.Blocks != null)
                     {
-                        foreach (CustomBlock block in layout.Blocks)
+                        foreach (GlobalBlock block in layout.Blocks)
                         {
-                            if (!string.IsNullOrEmpty(block.Html))
-                            {
-                                block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
-                                PageManager.ProcessPortableModules(PortalID, block.Html, ExportedModulesContent);
-                            }
-                            if (!string.IsNullOrEmpty(block.Css))
-                                block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, PortalID), false, Assets);
                             if (!string.IsNullOrEmpty(block.ContentJSON))
                                 block.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.ContentJSON, PortalID), true, Assets);
                             if (!string.IsNullOrEmpty(block.StyleJSON))
@@ -527,6 +554,97 @@ namespace Vanjaro.Core
                 }
                 return Response;
             }
+
+            //public static HttpResponseMessage ExportGlobalBlock(int PortalID, string GUID)
+            //{
+            //    HttpResponseMessage Response = new HttpResponseMessage();
+            //    CustomBlock customBlock = BlockManager.GetCustomByGuid(PortalID, GUID);
+            //    if (customBlock != null)
+            //    {
+            //        Dictionary<int, string> ExportedModulesContent = new Dictionary<int, string>();
+            //        string Theme = Core.Managers.ThemeManager.CurrentTheme.Name;
+            //        ExportTemplate exportTemplate = new ExportTemplate
+            //        {
+            //            Name = customBlock.Name,
+            //            Type = TemplateType.Block.ToString(),
+            //            UpdatedOn = DateTime.UtcNow,
+            //            Templates = new List<Layout>(),
+            //            ThemeName = Theme,
+            //            ThemeGuid = ThemeManager.CurrentTheme.GUID
+            //        };
+            //        Dictionary<string, string> Assets = new Dictionary<string, string>();
+            //        Layout layout = new Layout();
+            //        layout.Blocks = new List<CustomBlock>() { customBlock };
+            //        if (layout.Blocks != null)
+            //        {
+            //            foreach (CustomBlock block in layout.Blocks)
+            //            {
+            //                if (!string.IsNullOrEmpty(block.Html))
+            //                {
+            //                    block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
+            //                    PageManager.ProcessPortableModules(PortalID, block.Html, ExportedModulesContent);
+            //                }
+            //                if (!string.IsNullOrEmpty(block.Css))
+            //                    block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, PortalID), false, Assets);
+            //                if (!string.IsNullOrEmpty(block.ContentJSON))
+            //                    block.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.ContentJSON, PortalID), true, Assets);
+            //                if (!string.IsNullOrEmpty(block.StyleJSON))
+            //                    block.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.StyleJSON, PortalID), true, Assets);
+            //            }
+            //            CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
+            //        }
+            //        layout.Name = customBlock.Name;
+            //        layout.Content = "";
+            //        layout.SVG = "";
+            //        layout.ContentJSON = "";
+            //        layout.Style = "";
+            //        layout.StyleJSON = "";
+            //        layout.Type = "";
+            //        exportTemplate.Templates.Add(layout);
+            //        string serializedExportTemplate = JsonConvert.SerializeObject(exportTemplate);
+            //        if (!string.IsNullOrEmpty(serializedExportTemplate))
+            //        {
+            //            byte[] fileBytes = null;
+            //            using (MemoryStream memoryStream = new MemoryStream())
+            //            {
+            //                using (ZipArchive zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+            //                {
+            //                    AddZipItem("Template.json", Encoding.Unicode.GetBytes(serializedExportTemplate), zip);
+            //                    foreach (var exportedModuleContent in ExportedModulesContent)
+            //                        AddZipItem("PortableModules/" + exportedModuleContent.Key + ".json", Encoding.Unicode.GetBytes(exportedModuleContent.Value), zip);
+            //                    if (Assets != null && Assets.Count > 0)
+            //                    {
+            //                        foreach (KeyValuePair<string, string> asset in Assets)
+            //                        {
+            //                            string FileName = asset.Key.Replace(PageManager.ExportTemplateRootToken, "");
+            //                            string FileUrl = asset.Value;
+            //                            if (FileUrl.StartsWith("/"))
+            //                            {
+            //                                FileUrl = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, FileUrl);
+            //                            }
+            //                            try
+            //                            {
+            //                                AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
+            //                            }
+            //                            catch (Exception ex) { ExceptionManager.LogException(ex); }
+            //                        }
+            //                    }
+            //                }
+            //                fileBytes = memoryStream.ToArray();
+            //            }
+            //            string fileName = customBlock.Name + "_Block.zip";
+            //            Response.Content = new ByteArrayContent(fileBytes.ToArray());
+            //            Response.Content.Headers.Add("x-filename", fileName);
+            //            Response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            //            Response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            //            {
+            //                FileName = fileName
+            //            };
+            //            Response.StatusCode = HttpStatusCode.OK;
+            //        }
+            //    }
+            //    return Response;
+            //}
             private static void AddZipItem(string zipItemName, byte[] zipData, ZipArchive zip)
             {
                 ZipArchiveEntry zipItem = zip.CreateEntry(zipItemName);
@@ -538,7 +656,7 @@ namespace Vanjaro.Core
                     }
                 }
             }
-            public static dynamic Delete(int PortalID, string GUID)
+            public static dynamic DeleteCustom(int PortalID, string GUID)
             {
                 dynamic Result = new ExpandoObject();
                 try
@@ -553,38 +671,60 @@ namespace Vanjaro.Core
                 }
                 return Result;
             }
-            public static CustomBlock GetByGuid(int PortalID, string GUID, bool IsPublished = false)
+            public static dynamic DeleteGlobal(int PortalID, string GUID)
             {
-                List<CustomBlock> CustomBlocks = BlockFactory.GetAll(PortalID);
+                dynamic Result = new ExpandoObject();
+                try
+                {
+                    GlobalBlockFactory.Delete(PortalID, GUID);
+                    Result.Status = "Success";
+                }
+                catch (Exception ex)
+                {
+                    Result.Status = ex.Message.ToString();
+                    ExceptionManager.LogException(ex);
+                }
+                return Result;
+            }
+            public static CustomBlock GetCustomByGuid(int PortalID, string GUID, bool isLibrary = false)
+            {
+                return BlockFactory.GetByGUID(PortalID, GUID, isLibrary);
+            }
+            public static GlobalBlock GetGlobalByGuid(int PortalID, string GUID, bool IsPublished = false)
+            {
+                List<GlobalBlock> CustomBlocks = GlobalBlockFactory.GetAll(PortalID);
                 if (IsPublished)
                     return CustomBlocks.Where(b => b.Guid.ToLower() == GUID.ToLower() && IsPublished == true).OrderByDescending(a => a.Version).FirstOrDefault();
                 else
                     return CustomBlocks.Where(b => b.Guid.ToLower() == GUID.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
             }
-            public static CustomBlock GetByLocale(int PortalID, string GUID, string Locale, bool IsPublished = false)
+            public static GlobalBlock GetGlobalByLocale(int PortalID, string GUID, string Locale, bool IsPublished = false)
             {
-                CustomBlock cb = BlockFactory.GetAll(PortalID, IsPublished).Where(b => b.Guid.ToLower() == GUID.ToLower() && b.Locale == Locale).FirstOrDefault();
+                GlobalBlock cb = GlobalBlockFactory.GetAll(PortalID, IsPublished).Where(b => b.Guid.ToLower() == GUID.ToLower() && b.Locale == Locale).FirstOrDefault();
                 if (cb == null)
                 {
-                    cb = BlockFactory.GetAll(PortalID, IsPublished).Where(b => b.Guid.ToLower() == GUID.ToLower() && b.Locale == null).FirstOrDefault();
+                    cb = GlobalBlockFactory.GetAll(PortalID, IsPublished).Where(b => b.Guid.ToLower() == GUID.ToLower() && b.Locale == null).FirstOrDefault();
                 }
-
                 return cb;
             }
-            public static List<CustomBlock> GetAll(PortalSettings PortalSettings, bool IsPublished = false)
+            public static List<CustomBlock> GetAllCustomBlocks(PortalSettings PortalSettings)
             {
-                List<CustomBlock> CustomBlocks = BlockFactory.GetAll(PortalSettings.PortalId, IsPublished).Where(c => c.Locale == null).ToList();
+                return BlockFactory.GetAll(PortalSettings.PortalId).OrderBy(o => o.Category).OrderBy(o => o.Name).ToList(); ;
+            }
+            public static List<GlobalBlock> GetAllGlobalBlocks(PortalSettings PortalSettings, bool IsPublished = false)
+            {
+                List<GlobalBlock> GlobalBlocks = GlobalBlockFactory.GetAll(PortalSettings.PortalId, IsPublished).Where(c => c.Locale == null).ToList();
                 string Locale = PageManager.GetCultureCode(PortalSettings);
                 if (!string.IsNullOrEmpty(Locale))
                 {
-                    List<CustomBlock> CustomBlocksByLocale = BlockFactory.GetAll(PortalSettings.PortalId).Where(c => c.Locale == Locale).ToList();
+                    List<GlobalBlock> CustomBlocksByLocale = GlobalBlockFactory.GetAll(PortalSettings.PortalId).Where(c => c.Locale == Locale).ToList();
                     if (CustomBlocksByLocale == null || CustomBlocksByLocale.Count <= 0)
                     {
-                        return CustomBlocks.OrderBy(o => o.Category).OrderBy(o => o.Name).ToList();
+                        return GlobalBlocks.OrderBy(o => o.Category).OrderBy(o => o.Name).ToList();
                     }
                     else
                     {
-                        foreach (CustomBlock item in CustomBlocks)
+                        foreach (GlobalBlock item in GlobalBlocks)
                         {
                             if (CustomBlocksByLocale.Where(c => c.Guid.ToLower() == item.Guid.ToLower()).FirstOrDefault() == null)
                             {
@@ -596,7 +736,7 @@ namespace Vanjaro.Core
                 }
                 else
                 {
-                    return CustomBlocks.OrderBy(o => o.Category).OrderBy(o => o.Name).ToList();
+                    return GlobalBlocks.OrderBy(o => o.Category).OrderBy(o => o.Name).ToList();
                 }
             }
         }

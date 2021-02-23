@@ -32,44 +32,65 @@ namespace Vanjaro.UXManager.Library.Controllers
     {
         [HttpPost]
         [AuthorizeAccessRoles(AccessRoles = "admin")]
-        public dynamic AddCustomBlock(CustomBlock CustomBlock)
+        public dynamic AddCustomBlock(GlobalBlock CustomBlock)
         {
-            return Core.Managers.BlockManager.Add(PortalSettings, CustomBlock);
+            return BlockManager.Add(PortalSettings, CustomBlock);
         }
 
         [HttpPost]
         [AuthorizeAccessRoles(AccessRoles = "admin")]
         public dynamic EditCustomBlock(CustomBlock CustomBlock)
         {
-            return Core.Managers.BlockManager.Edit(PortalSettings, CustomBlock);
+            return BlockManager.EditCustomBlock(PortalSettings, CustomBlock);
+        }
+
+        [HttpPost]
+        [AuthorizeAccessRoles(AccessRoles = "admin")]
+        public dynamic EditGlobalBlock(GlobalBlock GlobalBlock)
+        {
+            return BlockManager.EditGlobalBlock(PortalSettings, GlobalBlock);
         }
 
         [HttpPost]
         [AuthorizeAccessRoles(AccessRoles = "admin")]
         public dynamic DeleteCustomBlock(string CustomBlockGuid)
         {
-            return Core.Managers.BlockManager.Delete(PortalSettings.ActiveTab.PortalID, CustomBlockGuid);
+            return BlockManager.DeleteCustom(PortalSettings.ActiveTab.PortalID, CustomBlockGuid);
+        }
+
+        [HttpPost]
+        [AuthorizeAccessRoles(AccessRoles = "admin")]
+        public dynamic DeleteGlobalBlock(string CustomBlockGuid)
+        {
+            return BlockManager.DeleteGlobal(PortalSettings.ActiveTab.PortalID, CustomBlockGuid);
         }
 
         [HttpGet]
         [AuthorizeAccessRoles(AccessRoles = "admin")]
         public HttpResponseMessage ExportCustomBlock(string CustomBlockGuid)
         {
-            return Core.Managers.BlockManager.ExportCustomBlock(PortalSettings.ActiveTab.PortalID, CustomBlockGuid);
+            return BlockManager.ExportCustomBlock(PortalSettings.ActiveTab.PortalID, CustomBlockGuid);
         }
 
         [HttpGet]
         [AuthorizeAccessRoles(AccessRoles = "pageedit")]
         public List<CustomBlock> GetAllCustomBlock()
         {
-            return Core.Managers.BlockManager.GetAll(PortalSettings);
+            return BlockManager.GetAllCustomBlocks(PortalSettings);
+        }
+
+        [HttpGet]
+        [AuthorizeAccessRoles(AccessRoles = "pageedit")]
+        public List<GlobalBlock> GetAllGlobalBlock()
+        {
+            return BlockManager.GetAllGlobalBlocks(PortalSettings);
         }
 
         [HttpGet]
         [AuthorizeAccessRoles(AccessRoles = "pageedit")]
         public List<Block> GetAll()
         {
-            return Core.Managers.BlockManager.GetAll();
+            return BlockManager.GetAll();
         }
 
         [HttpPost]
@@ -99,11 +120,13 @@ namespace Vanjaro.UXManager.Library.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public CustomBlock ImportCustomBlock(string TemplateHash, string TemplatePath)
+        public GlobalBlock ImportCustomBlock(string TemplateHash, string TemplatePath)
         {
-            CustomBlock Result = new CustomBlock();
+            GlobalBlock Result = new GlobalBlock();
             try
             {
+                var aliases = from PortalAliasInfo pa in PortalAliasController.Instance.GetPortalAliasesByPortalId(PortalSettings.PortalId)
+                              select pa.HTTPAlias;
                 IFolderInfo fi = FolderManager.Instance.GetFolder(PortalSettings.ActiveTab.PortalID, "Images/");
                 IFolderInfo foldersizeinfo = FolderManager.Instance.GetFolder(PortalSettings.ActiveTab.PortalID, fi.FolderPath + ".versions");
                 if (foldersizeinfo == null)
@@ -133,20 +156,54 @@ namespace Vanjaro.UXManager.Library.Controllers
                             {
                                 if (string.IsNullOrEmpty(pagelayout.Content))
                                 {
-                                    foreach (CustomBlock cb in pagelayout.Blocks)
+                                    GlobalBlock cb = pagelayout.Blocks.FirstOrDefault();
+                                    if (cb != null)
                                     {
-                                        Result.Html += cb.Html;
-                                        Result.Css += cb.Css;
+                                        CustomBlock cblock = new CustomBlock();
+                                        cblock.ID = 0;
+                                        cblock.Guid = Guid.NewGuid().ToString().ToLower();
+                                        cblock.PortalID = PortalSettings.ActiveTab.PortalID;
+                                        cblock.Name = cb.Name;
+                                        cblock.Category = cb.Category;
+                                        cblock.ContentJSON = PageManager.DeTokenizeLinks(PageManager.AbsoluteToRelativeUrls(cb.ContentJSON, aliases), PortalSettings.PortalId);
+                                        cblock.StyleJSON = PageManager.DeTokenizeLinks(PageManager.AbsoluteToRelativeUrls(cb.StyleJSON, aliases), PortalSettings.PortalId);
+                                        cblock.IsLibrary = true;
+                                        cblock.CreatedBy = PortalSettings.UserInfo.UserID;
+                                        cblock.CreatedOn = DateTime.UtcNow;
+                                        cblock.UpdatedBy = cblock.CreatedBy;
+                                        cblock.UpdatedOn = DateTime.UtcNow;
+                                        BlockManager.AddCustom(cblock);
+                                        Result.Html = "<div data-custom-wrapper='true' data-guid='" + cblock.Guid + "' data-islibrary='true'></div>";
                                     }
                                 }
                                 else
                                 {
-                                    Result.Html = PageManager.DeTokenizeLinks(pagelayout.Content.ToString(), PortalSettings.ActiveTab.PortalID);
-                                    Result.Css = PageManager.DeTokenizeLinks(pagelayout.Style.ToString(), PortalSettings.ActiveTab.PortalID);
+                                    SettingManager.ProcessBlocks(PortalSettings.ActiveTab.PortalID, pagelayout.Blocks);
+
+                                    Dictionary<string, object> LayoutData = new Dictionary<string, object>();
+                                    LayoutData.Add("gjs-html", pagelayout.Content);
+                                    LayoutData.Add("gjs-components", pagelayout.ContentJSON);
+                                    PageManager.AddModules(PortalSettings, LayoutData, PortalSettings.UserInfo, path + "/PortableModules");
+                                    pagelayout.Content = LayoutData["gjs-html"].ToString();
+                                    pagelayout.ContentJSON = LayoutData["gjs-components"].ToString();
+
+                                    CustomBlock cblock = new CustomBlock();
+                                    cblock.ID = 0;
+                                    cblock.Guid = Guid.NewGuid().ToString().ToLower();
+                                    cblock.PortalID = PortalSettings.ActiveTab.PortalID;
+                                    cblock.Name = cblock.Guid;
+                                    cblock.Category = cblock.Guid;
+                                    cblock.ContentJSON = PageManager.DeTokenizeLinks(PageManager.AbsoluteToRelativeUrls(pagelayout.ContentJSON, aliases), PortalSettings.PortalId);
+                                    cblock.StyleJSON = PageManager.DeTokenizeLinks(PageManager.AbsoluteToRelativeUrls(pagelayout.StyleJSON, aliases), PortalSettings.PortalId);
+                                    cblock.IsLibrary = true;
+                                    cblock.CreatedBy = PortalSettings.UserInfo.UserID;
+                                    cblock.CreatedOn = DateTime.UtcNow;
+                                    cblock.UpdatedBy = cblock.CreatedBy;
+                                    cblock.UpdatedOn = DateTime.UtcNow;
+                                    BlockManager.AddCustom(cblock);
+                                    Result.Html = "<div data-custom-wrapper='true' data-guid='" + cblock.Guid + "' data-islibrary='true'></div>";
                                 }
-
                                 Result.ScreenshotPath = TemplatePath.Replace(".zip", ".png");
-
                                 if (Directory.Exists(path + "/Assets"))
                                 {
                                     List<string> assets = Directory.GetFiles(path + "/Assets", "*", SearchOption.AllDirectories).ToList();
@@ -183,12 +240,6 @@ namespace Vanjaro.UXManager.Library.Controllers
                         }
                     }
                 }
-                Result.Html = PageManager.DeTokenizeLinks(Result.Html, PortalSettings.ActiveTab.PortalID);
-                Result.Css = PageManager.DeTokenizeLinks(Result.Css, PortalSettings.ActiveTab.PortalID);
-                Dictionary<string, object> LayoutData = new Dictionary<string, object>();
-                LayoutData.Add("gjs-html", Result.Html);
-                PageManager.AddModules(PortalSettings, LayoutData, PortalSettings.UserInfo, path + "/PortableModules");
-                Result.Html = LayoutData["gjs-html"].ToString();
             }
             catch (Exception ex)
             {

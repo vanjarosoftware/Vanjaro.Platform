@@ -91,8 +91,8 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
         [HttpGet]
         public void GetBlockVersion(int Version, string BlockGuid)
         {
-            CustomBlock Block = Core.Managers.BlockManager.GetAllByGUID(this.PortalSettings.PortalId, BlockGuid).Where(a => a.Version == Version).FirstOrDefault();
-            CustomBlock CurrentBlock = Core.Managers.BlockManager.GetAll(PortalSettings.Current).Where(c => c.Guid.ToLower() == Block.Guid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
+            CustomBlock Block = Core.Managers.BlockManager.GetAllGlobalBlocks(this.PortalSettings.PortalId, BlockGuid).Where(a => a.Version == Version).FirstOrDefault();
+            CustomBlock CurrentBlock = Core.Managers.BlockManager.GetAllGlobalBlocks(PortalSettings.Current).Where(c => c.Guid.ToLower() == Block.Guid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
             if (CurrentBlock.IsPublished)
             {
                 Block.ID = 0;
