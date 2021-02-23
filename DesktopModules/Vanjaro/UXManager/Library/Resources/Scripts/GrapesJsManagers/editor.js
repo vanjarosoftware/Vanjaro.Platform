@@ -75,17 +75,8 @@ $(document).ready(function () {
                             success: function (data) {
 
                                 if (data.Html != undefined && data.Html.length > 0) {
-                                    $.each($(data.Html).find('[mid]'), function (k, v) {
-                                        var mid = $(v).attr('mid');
-                                        var framesrc = CurrentTabUrl;
-                                        if (framesrc.indexOf("?") == -1)
-                                            framesrc = framesrc + "?mid=" + mid + "&icp=true";
-                                        else
-                                            framesrc = framesrc + "&mid=" + mid + "&icp=true";
-                                        data.Html = data.Html.replace('<app id="' + mid + '"></app>', '<div id="dnn_vj_' + mid + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div>');
-                                    });
                                     var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
-                                        content: data.Html + '<style>' + data.Css + '</style>',
+                                        content: data.Html,
                                         label: '<img src="' + data.ScreenshotPath + '"/><div class="sub-label">Drag & Drop Me</div>',
                                         attributes: {
                                             class: 'floating',
@@ -1497,7 +1488,7 @@ $(document).ready(function () {
                                 });
 
                                 if (vjEditorSettings.EditPage && typeof getCookie("vj_UXLoad") != 'undefined' && getCookie("vj_UXLoad") != null) {
-                                    
+
 
                                     if (getCookie("vj_UX_BlockRevision_Id") != 'undefined' && getCookie("vj_UX_BlockRevision_Id") != null) {
 
@@ -1614,8 +1605,12 @@ $(document).ready(function () {
 
                                 }
 
-                                if (typeof VjEditor.BlockManager.get('LibraryBlock') != 'undefined')
+                                if (typeof VjEditor.BlockManager.get('LibraryBlock') != 'undefined') {
+                                    if (bmodel != undefined && bmodel.attributes != undefined && bmodel.attributes.attributes != undefined && bmodel.attributes.attributes.id == 'LibraryBlock') {
+                                        IsVJCBRendered = true;
+                                    }
                                     VjEditor.BlockManager.remove('LibraryBlock');
+                                }
 
                                 if (!$('.borderlines').hasClass('active'))
                                     VjEditor.stopCommand('core:component-outline');
