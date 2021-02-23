@@ -84,7 +84,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
         {
             dynamic Result = new ExpandoObject();
 
-            CustomBlock Block = Core.Managers.BlockManager.GetAllByGUID(this.PortalSettings.PortalId, BlockGuid).Where(a => a.Version == Version).FirstOrDefault();
+            GlobalBlock Block = Core.Managers.BlockManager.GetAllGlobalBlocks(this.PortalSettings.PortalId, BlockGuid).Where(a => a.Version == Version).FirstOrDefault();
             if (Block != null)
             {
                 Result.html = Block.Html.ToString();

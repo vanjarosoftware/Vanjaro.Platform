@@ -66,13 +66,39 @@ global.LoadCustomBlocks = function () {
         dataType: "json",
         success: function (data) {
             $.each(data, function (key, value) {
-                var Content = '';
-                if (value.IsGlobal && !Content.includes("7a4be0f2-56ab-410a-9422-6bc91b488150"))
-                    Content = "<div data-block-type=\"global\" data-block-guid=\"7a4be0f2-56ab-410a-9422-6bc91b488150\" data-guid=\"" + value.Guid + "\"></div>";
-                else
-                    Content = "<div data-custom-wrapper=\"true\" data-guid=\"" + value.Guid + "\"></div>";
+                var Content = "<div data-custom-wrapper=\"true\" data-guid=\"" + value.Guid + "\"></div>";
                 VjEditor.BlockManager.add(value.Name, {
-                    attributes: { class: 'fa fa-th-large', id: value.ID, type: 'VjCustomBlock', isGlobalBlock: value.IsGlobal, guid: value.Guid },
+                    attributes: { class: 'fa fa-th-large', id: value.ID, type: 'VjCustomBlock', isGlobalBlock: false, guid: value.Guid },
+                    label: value.Name,
+                    category: value.Category,
+                    content: Content,
+                    render: ({ el }) => {
+                        const updateblock = document.createElement("span");
+                        updateblock.className = "update-custom-block";
+                        if (IsAdmin)
+                            updateblock.innerHTML = "<div class='addpage-blocks dropdown pull-right dropbtn'><a id='dropdownMenuLink' class='dropdownmenu Customblockdropdown' data-toggle='dropdown' aria-haspopup='true'  aria-expanded='false'><em class='fas fa-ellipsis-v'></em></a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'><li><a class='edit-block' onclick='VjEditor.runCommand(\"edit-custom-block\", { name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-pencil-alt'></em><span>Edit</span></a></li><li><a class='export-block' onclick='VjEditor.runCommand(\"export-custom-block\",{ name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-file-export'></em><span>Export</span></a></li><li><a class='delete-block' onclick='VjEditor.runCommand(\"delete-custom-block\",{ name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-trash-alt'></em><span>Delete</span></a></li></ul></div>";
+                        el.appendChild(updateblock);
+                    }
+                });
+            })
+            ChangeBlockType();
+        }
+    });
+    $.ajax({
+        type: "Get",
+        headers: {
+            'ModuleId': parseInt(sf.getModuleId()),
+            'TabId': parseInt(sf.getTabId()),
+            'RequestVerificationToken': sf.getAntiForgeryValue()
+        },
+        url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/GetAllGlobalBlock",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            $.each(data, function (key, value) {
+                var Content = "<div data-block-type=\"global\" data-block-guid=\"7a4be0f2-56ab-410a-9422-6bc91b488150\" data-guid=\"" + value.Guid + "\"></div>";
+                VjEditor.BlockManager.add(value.Name, {
+                    attributes: { class: 'fa fa-th-large', id: value.ID, type: 'VjCustomBlock', isGlobalBlock: true, guid: value.Guid },
                     label: value.Name,
                     category: value.Category,
                     content: Content,
@@ -133,6 +159,10 @@ global.AddCustomBlock = function (editor, CustomBlock) {
     CustomBlock.ContentJSON = ContentJSON;
     CustomBlock.StyleJSON = JSON.stringify(VjEditor.Css.getAll().toJSON());
     var sf = $.ServicesFramework(-1);
+    if (!CustomBlock.IsGlobal) {
+        CustomBlock.Html = '';
+        CustomBlock.Css = '';
+    }
     $.ajax({
         type: "POST",
         url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/AddCustomBlock",

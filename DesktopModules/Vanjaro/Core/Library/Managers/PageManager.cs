@@ -101,7 +101,14 @@ namespace Vanjaro.Core
                     {
                         if (con.attributes != null && con.attributes["data-custom-wrapper"] != null && con.attributes["data-guid"] != null)
                         {
-                            CustomBlock block = BlockManager.GetByGuid(portalID, con.attributes["data-guid"].Value);
+                            bool isLibrary = false;
+                            try
+                            {
+                                if (con.attributes["data-islibrary"] != null)
+                                    isLibrary = Convert.ToBoolean(con.attributes["data-islibrary"].Value);
+                            }
+                            catch { }
+                            CustomBlock block = BlockManager.GetCustomByGuid(portalID, con.attributes["data-guid"].Value, isLibrary);
                             if (block != null)
                             {
                                 string prefix = con.attributes["id"] != null ? con.attributes["id"].Value : string.Empty;
@@ -116,7 +123,16 @@ namespace Vanjaro.Core
                                         (con as JObject).Remove(prop);
                                     foreach (JProperty prop in blockContentJSON[0].Properties())
                                         (con as JObject).Add(prop.Name, prop.Value);
-                                    UpdateIds(con, prefix, Ids);
+                                    if (blockContentJSON.Count > 1)
+                                    {
+                                        (con as JObject).Add("type", "div");
+                                        (con as JObject).Add("components", blockContentJSON);
+                                    }
+                                    else
+                                    {
+                                        foreach (JProperty prop in blockContentJSON[0].Properties())
+                                            (con as JObject).Add(prop.Name, prop.Value);
+                                    }
                                 }
                                 dynamic blockStyleJSON = JsonConvert.DeserializeObject(block.StyleJSON);
                                 if (blockStyleJSON != null)
@@ -141,6 +157,8 @@ namespace Vanjaro.Core
                                         }
                                     }
                                 }
+                                if (isLibrary)
+                                    BlockManager.DeleteCustom(portalID, block.Guid);
                             }
                         }
                         else if (con.components != null)
@@ -492,7 +510,7 @@ namespace Vanjaro.Core
             {
                 foreach (var item in globalKeyValuePairs)
                 {
-                    CustomBlock block = BlockManager.GetByGuid(portalSettings.PortalId, item.Key);
+                    GlobalBlock block = BlockManager.GetGlobalByGuid(portalSettings.PortalId, item.Key);
                     if (block != null)
                     {
                         block.ContentJSON = PageManager.DeTokenizeLinks(JsonConvert.SerializeObject(item.Value), portalSettings.PortalId);
@@ -538,12 +556,12 @@ namespace Vanjaro.Core
 
                         block.UpdatedOn = DateTime.UtcNow;
                         block.UpdatedBy = PortalSettings.Current.UserInfo.UserID;
-                        BlockManager.Update(block);
+                        BlockManager.UpdateGlobalBlock(block);
                     }
                 }
             }
 
-            internal static string AbsoluteToRelativeUrls(string content, IEnumerable<string> aliases)
+            public static string AbsoluteToRelativeUrls(string content, IEnumerable<string> aliases)
             {
                 if (string.IsNullOrWhiteSpace(content))
                     return string.Empty;
@@ -613,12 +631,7 @@ namespace Vanjaro.Core
                         }
                         else if (item.Attributes.Where(a => a.Name == "data-custom-wrapper").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault() != null)
                         {
-                            CustomBlock block = BlockManager.GetByGuid(PortalId, item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value);
-                            if (block != null)
-                            {
-                                keyValuePairs.Add(item.OuterHtml, block.Html);
-                                Css += block.Css;
-                            }
+                            keyValuePairs.Add(item.OuterHtml, string.Empty);
                         }
                     }
                     Markup = html.DocumentNode.OuterHtml;
@@ -1028,16 +1041,15 @@ namespace Vanjaro.Core
                 string blockguid = item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value;
                 if (!string.IsNullOrEmpty(blockguid))
                 {
-                    CustomBlock customBlock = BlockManager.GetByLocale(PortalId, blockguid, GetCultureCode(PortalController.Instance.GetCurrentSettings() as PortalSettings));
+                    GlobalBlock customBlock = BlockManager.GetGlobalByLocale(PortalId, blockguid, GetCultureCode(PortalController.Instance.GetCurrentSettings() as PortalSettings));
                     if (customBlock == null)
                     {
-                        customBlock = new CustomBlock
+                        customBlock = new GlobalBlock
                         {
                             Guid = blockguid.ToLower(),
                             PortalID = PortalId,
                             Name = item.Attributes.Where(a => a.Name == "data-name").FirstOrDefault().Value,
                             Category = item.Attributes.Where(a => a.Name == "data-category").FirstOrDefault().Value,
-                            IsGlobal = true,
                             CreatedBy = UserId,
                             UpdatedBy = UserId,
                             CreatedOn = DateTime.UtcNow,
@@ -1054,7 +1066,7 @@ namespace Vanjaro.Core
                             customBlock.Html = str[0];
                         }
 
-                        BlockFactory.AddUpdate(customBlock);
+                        GlobalBlockFactory.AddUpdate(customBlock);
                     }
                     item.InnerHtml = item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value;
                     item.Attributes.Remove("data-category");
@@ -1492,7 +1504,7 @@ namespace Vanjaro.Core
                 {
                     if (con.type != null && con.type.Value == "globalblockwrapper" && con.attributes != null && con.attributes["data-guid"] != null)
                     {
-                        CustomBlock block = BlockManager.GetByGuid(PortalSettings.Current.PortalId, con.attributes["data-guid"].Value);
+                        GlobalBlock block = BlockManager.GetGlobalByGuid(PortalSettings.Current.PortalId, con.attributes["data-guid"].Value);
 
                         if (block != null && !string.IsNullOrEmpty(block.ContentJSON))
                         {
