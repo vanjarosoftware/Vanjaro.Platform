@@ -396,7 +396,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 						$(categories.models).each(function (index, item) {
 
-							if (item.attributes.label == category) {
+							if (item.attributes.label == category.toLowerCase()) {
 
 								count = 1;
 								swal.showInputError(VjLocalized.CategoryExists);
@@ -650,7 +650,6 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 	//Delete Custom Block
 	editor.Commands.add('delete-custom-block', {
 		run: function (editor, sender, block) {
-			var BlockIDDelete = block.id;
 			swal({
 				title: VjLocalized.AreYouSure,
 				text: VjLocalized.AreYouSureText,
@@ -665,7 +664,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 				function (isConfirm) {
 					if (isConfirm) {
-						DeleteCustomBlock(BlockIDDelete);
+                        DeleteCustomBlock(block);
 					}
 				});
 		}
