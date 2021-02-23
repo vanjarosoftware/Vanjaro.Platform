@@ -4,17 +4,17 @@
             <uitemplate>
                 <div class="row">
                     <div class="col-sm-4">
-                        <a class="global" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="[L:GlobalAssetsTitle]" access-roles="host" mn-ng-click="ChangeAssetMode()" mn-ng-class="!ui.data.AssetType.Value ? 'active' : ''"><i class="fas fa-globe-asia"></i></a>
+                        <a class="global" access-roles="host" mn-ng-click="ChangeAssetMode()" mn-ng-class="!ui.data.AssetType.Value ? 'active' : ''"><i class="fas fa-globe-asia" data-bs-toggle="tooltip" data-bs-placement="bottom" title="[L:GlobalAssetsTitle]"></i></a>
                     </div>
                     <div class="col-sm-4" style="text-align:center;">
-                        <a class="assetIsList" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="List" mn-ng-click="IconsIsList = !IconsIsList" mn-ng-class="IconsIsList ? 'active' : ''"><i class="fas fa-th-list"></i></a>
-                        <a class="assetIsList" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Grid" mn-ng-click="IconsIsList = !IconsIsList" mn-ng-class="!IconsIsList ? 'active' : ''"><i class="fas fa-th"></i></a>
+                        <a class="assetIsList" mn-ng-click="IconsIsList = !IconsIsList" mn-ng-class="IconsIsList ? 'active' : ''"><i class="fas fa-th-list" data-bs-toggle="tooltip" data-bs-placement="bottom" title="List"></i></a>
+                        <a class="assetIsList" mn-ng-click="IconsIsList = !IconsIsList" mn-ng-class="!IconsIsList ? 'active' : ''"><i class="fas fa-th" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Grid"></i></a>
                     </div>
                     <div class="cool-sm-4"></div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 uploaderui">
-                        <input type="checkbox" class="chkfidall" ng-click="ShowHideMenuItem(true)" ng-hide="IconsFiles.length<=0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="[L:ToggleAll]" />
+                        <input type="checkbox" class="chkfidall" ng-click="ShowHideMenuItem(true)" ng-hide="IconsFiles.length<=0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="[L:ToggleAll]" />
                         <span class="checkmark" ng-hide="IconsFiles.length<=0"></span>
                         [uilayout:AssetUpload]
                     </div>

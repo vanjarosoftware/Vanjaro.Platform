@@ -543,7 +543,7 @@ namespace Vanjaro.Core
                 }
             }
 
-            internal static string AbsoluteToRelativeUrls(string content, IEnumerable<string> aliases)
+            public static string AbsoluteToRelativeUrls(string content, IEnumerable<string> aliases)
             {
                 if (string.IsNullOrWhiteSpace(content))
                     return string.Empty;

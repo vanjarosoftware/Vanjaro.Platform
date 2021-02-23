@@ -161,6 +161,11 @@ namespace Vanjaro.Core
                 return result;
             }
 
+            public static void AddCustom(CustomBlock _customBlock)
+            {
+                BlockFactory.AddUpdate(_customBlock);
+            }
+
             public static string GetTheme(string ThemeName = "Basic")
             {
                 return "vThemes\\" + ThemeName + "\\";

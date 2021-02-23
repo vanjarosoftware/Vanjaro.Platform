@@ -180,7 +180,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 			},
 			onApply: function (imageEditor, imageModel) {
 				if (!$('.optimizing-overlay').length)
-					$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images</h1></div>');
+					$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Optimizing Images</h1></div>');
 				var sf = $.ServicesFramework(-1);
 				var ImageData = {
 					PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
