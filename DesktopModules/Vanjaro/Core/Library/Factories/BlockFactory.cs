@@ -11,6 +11,8 @@ namespace Vanjaro.Core
         {
             internal static void AddUpdate(CustomBlock CustomBlock)
             {
+                if (string.IsNullOrEmpty(CustomBlock.StyleJSON))
+                    CustomBlock.StyleJSON = "";
                 CustomBlock.Category = CustomBlock.Category.ToLower();
                 if (CustomBlock.ID > 0)
                     CustomBlock.Update();

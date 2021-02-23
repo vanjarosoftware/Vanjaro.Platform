@@ -11,6 +11,12 @@ namespace Vanjaro.Core
         {
             internal static void AddUpdate(GlobalBlock globalBlock)
             {
+                if (string.IsNullOrEmpty(globalBlock.StyleJSON))
+                    globalBlock.StyleJSON = "";
+                if (string.IsNullOrEmpty(globalBlock.Css))
+                    globalBlock.Css = "";
+                if (string.IsNullOrEmpty(globalBlock.Html))
+                    globalBlock.Html = "";
                 globalBlock.Category = globalBlock.Category.ToLower();
                 if (globalBlock.ID > 0)
                 {

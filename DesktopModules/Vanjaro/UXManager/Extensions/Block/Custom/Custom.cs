@@ -39,17 +39,23 @@ namespace Vanjaro.UXManager.Extensions.Block.Custom
         public Core.Entities.Menu.ThemeTemplateResponse Render(Dictionary<string, string> Attributes)
         {
             Core.Entities.Menu.ThemeTemplateResponse response = new Core.Entities.Menu.ThemeTemplateResponse();
-            //string blockguid = Attributes["data-guid"];
-            //Core.Data.Entities.CustomBlock block;
-            //if (HttpContext.Current.Request.Cookies["vj_IsPageEdit"] != null && HttpContext.Current.Request.Cookies["vj_IsPageEdit"].Value == "true")
-            //    block = Core.Managers.BlockManager.GetAll(PortalSettings.Current).Where(c => c.Guid.ToLower() == blockguid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
-            //else
-            //    block = Core.Managers.BlockManager.GetAll(PortalSettings.Current, true).Where(c => c.Guid.ToLower() == blockguid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
-            //if (block != null)
-            //{
-            //    response.Markup = block.Html;
-            //    response.Style = block.Css;
-            //}
+            if (Attributes != null && Attributes.Count > 0)
+            {
+                if (Attributes["data-block-type"] != null && Attributes["data-block-type"] == "global")
+                {
+                    string blockguid = Attributes["data-guid"];
+                    Core.Data.Entities.GlobalBlock block;
+                    if (HttpContext.Current.Request.Cookies["vj_IsPageEdit"] != null && HttpContext.Current.Request.Cookies["vj_IsPageEdit"].Value == "true")
+                        block = Core.Managers.BlockManager.GetAllGlobalBlocks(PortalSettings.Current).Where(c => c.Guid.ToLower() == blockguid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
+                    else
+                        block = Core.Managers.BlockManager.GetAllGlobalBlocks(PortalSettings.Current, true).Where(c => c.Guid.ToLower() == blockguid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
+                    if (block != null)
+                    {
+                        response.Markup = block.Html;
+                        response.Style = block.Css;
+                    }
+                }
+            }
             return response;
         }
 
