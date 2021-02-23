@@ -396,7 +396,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 						$(categories.models).each(function (index, item) {
 
-							if (item.attributes.label == category) {
+							if (item.attributes.label == category.toLowerCase()) {
 
 								count = 1;
 								swal.showInputError(VjLocalized.CategoryExists);
