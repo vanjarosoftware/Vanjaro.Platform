@@ -60,9 +60,9 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
         }
 
         [HttpGet]
-        public dynamic GetVersion(int Version, string Locale)
+        public void GetVersion(int Version, string Locale)
         {
-            dynamic Result = new ExpandoObject();
+            
             Locale = PortalSettings.DefaultLanguage == Locale ? null : Locale;
             Pages page = Core.Managers.PageManager.GetByVersion(PortalSettings.ActiveTab.TabID, Version, Locale);
             if (page != null)
@@ -86,14 +86,11 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
                 PageManager.ModeratePage(string.Empty, pageVersion, PortalSettings);
 
             }
-            return Result;
         }
 
         [HttpGet]
-        public dynamic GetBlockVersion(int Version, string BlockGuid)
+        public void GetBlockVersion(int Version, string BlockGuid)
         {
-            dynamic Result = new ExpandoObject();
-
             CustomBlock Block = Core.Managers.BlockManager.GetAllByGUID(this.PortalSettings.PortalId, BlockGuid).Where(a => a.Version == Version).FirstOrDefault();
             CustomBlock CurrentBlock = Core.Managers.BlockManager.GetAll(PortalSettings.Current).Where(c => c.Guid.ToLower() == Block.Guid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
             if (CurrentBlock.IsPublished)
@@ -110,7 +107,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
                 BlockManager.Update(CurrentBlock);
 
             }
-            return Result;
+            Core.Factories.CacheFactory.Clear(Core.Factories.CacheFactory.Keys.Page);
         }
         private void InjectBlocks(HtmlDocument html, dynamic Result)
         {

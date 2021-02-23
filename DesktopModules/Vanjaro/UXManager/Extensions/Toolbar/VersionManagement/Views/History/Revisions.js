@@ -33,7 +33,8 @@
                 common.webApi.get('Revisions/GetBlockVersion', 'Version=' + $scope.SelectedVersion + '&BlockGuid=' + $scope.BlockGuid).success(function (response) {
                     if (response != undefined) {
                         parent.setCookie("vj_UXLoad", window.location.href);
-                        parent.setCookie("vj_UX_BlockRevision_Id", window.parent.VjEditor.getSelected().ccid);
+                        if (window.parent.VjEditor.getSelected() != undefined)
+                            parent.setCookie("vj_UX_BlockRevision_Id", window.parent.VjEditor.getSelected().ccid);
                         window.parent.location.reload();
                     }
                 });
