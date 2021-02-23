@@ -796,7 +796,7 @@ namespace Vanjaro.Core
                     db.Execute(query);
                 }
             }
-            private static void ProcessBlocks(int PortalId, List<GlobalBlock> Blocks)
+            public static void ProcessBlocks(int PortalId, List<GlobalBlock> Blocks)
             {
                 if (Blocks != null)
                 {
