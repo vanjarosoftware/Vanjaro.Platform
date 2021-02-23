@@ -686,9 +686,9 @@ namespace Vanjaro.Core
                 }
                 return Result;
             }
-            public static CustomBlock GetCustomByGuid(int PortalID, string GUID)
+            public static CustomBlock GetCustomByGuid(int PortalID, string GUID, bool isLibrary = false)
             {
-                return BlockFactory.GetByGUID(PortalID, GUID);
+                return BlockFactory.GetByGUID(PortalID, GUID, isLibrary);
             }
             public static GlobalBlock GetGlobalByGuid(int PortalID, string GUID, bool IsPublished = false)
             {

@@ -101,7 +101,14 @@ namespace Vanjaro.Core
                     {
                         if (con.attributes != null && con.attributes["data-custom-wrapper"] != null && con.attributes["data-guid"] != null)
                         {
-                            CustomBlock block = BlockManager.GetCustomByGuid(portalID, con.attributes["data-guid"].Value);
+                            bool isLibrary = false;
+                            try
+                            {
+                                if (con.attributes["data-islibrary"] != null)
+                                    isLibrary = Convert.ToBoolean(con.attributes["data-islibrary"].Value);
+                            }
+                            catch { }
+                            CustomBlock block = BlockManager.GetCustomByGuid(portalID, con.attributes["data-guid"].Value, isLibrary);
                             if (block != null)
                             {
                                 string prefix = con.attributes["id"] != null ? con.attributes["id"].Value : string.Empty;
@@ -116,7 +123,16 @@ namespace Vanjaro.Core
                                         (con as JObject).Remove(prop);
                                     foreach (JProperty prop in blockContentJSON[0].Properties())
                                         (con as JObject).Add(prop.Name, prop.Value);
-                                    UpdateIds(con, prefix, Ids);
+                                    if (blockContentJSON.Count > 1)
+                                    {
+                                        (con as JObject).Add("type", "div");
+                                        (con as JObject).Add("components", blockContentJSON);
+                                    }
+                                    else
+                                    {
+                                        foreach (JProperty prop in blockContentJSON[0].Properties())
+                                            (con as JObject).Add(prop.Name, prop.Value);
+                                    }
                                 }
                                 dynamic blockStyleJSON = JsonConvert.DeserializeObject(block.StyleJSON);
                                 if (blockStyleJSON != null)
@@ -141,6 +157,8 @@ namespace Vanjaro.Core
                                         }
                                     }
                                 }
+                                if (isLibrary)
+                                    BlockManager.DeleteCustom(portalID, block.Guid);
                             }
                         }
                         else if (con.components != null)
