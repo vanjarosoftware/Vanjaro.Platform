@@ -82,7 +82,7 @@ $(document).ready(function () {
                                             framesrc = framesrc + "?mid=" + mid + "&icp=true";
                                         else
                                             framesrc = framesrc + "&mid=" + mid + "&icp=true";
-                                        data.Html = data.Html.replace('<app id="' + mid + '"></app>', '<div id="dnn_vj_' + mid + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div>');
+                                        data.Html = data.Html.replace('<app id="' + mid + '"></app>', '<div id="dnn_vj_' + mid + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div>');
                                     });
                                     var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
                                         content: data.Html + '<style>' + data.Css + '</style>',
@@ -182,7 +182,7 @@ $(document).ready(function () {
         var OptimizeImages = function (optImages, sizes) {
 
             if (!$('.optimizing-overlay').length)
-                $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images</h1></div>');
+                $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Optimizing Images</h1></div>');
 
             if (typeof optImages != 'undefined' && optImages.length > 0) {
 
@@ -243,7 +243,7 @@ $(document).ready(function () {
         if (optImages != undefined && optImages.length > 0) {
 
             if (!$('.optimizing-overlay').length)
-                $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images</h1></div>');
+                $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Optimizing Images</h1></div>');
 
             if ($('.gjs-frame').contents().find("html").hasClass('responsive'))
                 $(".device-manager .device-view#Desktop").trigger("click");
@@ -316,7 +316,7 @@ $(document).ready(function () {
             }
 
             if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
-                $(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Please Wait</h1></div>');
+                $(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Please Wait</h1></div>');
             }
 
             if ($('#dnn_ContentPane').length > 0)
@@ -1497,10 +1497,19 @@ $(document).ready(function () {
                                 });
 
                                 if (vjEditorSettings.EditPage && typeof getCookie("vj_UXLoad") != 'undefined' && getCookie("vj_UXLoad") != null) {
+                                    
+
+                                    if (getCookie("vj_UX_BlockRevision_Id") != 'undefined' && getCookie("vj_UX_BlockRevision_Id") != null) {
+
+                                        VjEditor.select(editor.getWrapper().find('#' + getCookie('vj_UX_BlockRevision_Id')));
+                                        eraseCookie("vj_UX_BlockRevision_Id");
+                                    }
+
                                     $("#BlockManager").hide();
                                     $("#StyleToolManager").hide();
-                                    $("#iframeHolder").fadeIn();
                                     $('#iframeHolder').find('iframe').attr('src', getCookie('vj_UXLoad'));
+                                    $("#iframeHolder").fadeIn();
+
                                     eraseCookie("vj_UXLoad");
                                 }
                             });
@@ -1612,7 +1621,7 @@ $(document).ready(function () {
                                     VjEditor.stopCommand('core:component-outline');
 
                                 if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes.mid != undefined) {
-                                    model.view.$el[0].innerHTML = '<img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />';
+                                    model.view.$el[0].innerHTML = '<img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />';
                                     var ModuleData = {
                                         UniqueID: model.attributes.attributes.uid != undefined ? parseInt(model.attributes.attributes.uid) : 0,
                                         DesktopModuleId: parseInt(model.attributes.attributes.dmid)
@@ -1635,7 +1644,7 @@ $(document).ready(function () {
                                                 framesrc = framesrc + "?mid=" + response + "&icp=true";
                                             else
                                                 framesrc = framesrc + "&mid=" + response + "&icp=true";
-                                            model.view.$el[0].innerHTML = '<div data-gjs-type="module" draggable="true" vjmod="true"><div id="dnn_vj_' + response + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div></div>';
+                                            model.view.$el[0].innerHTML = '<div data-gjs-type="module" draggable="true" vjmod="true"><div id="dnn_vj_' + response + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div></div>';
                                             bmodel.attributes.content = '<div dmid="' + parseInt(model.attributes.attributes.dmid) + '" mid="' + response + '" fname="' + model.attributes.attributes.fname + '"><div vjmod="true"><app id="' + response + '"></app></div></div>';
                                             model.attributes.components.models[0].attributes.content = '<app id="' + response + '"></app>';
                                             model.attributes.name = VjLocalized.PrefixAppName + bmodel.id;
@@ -2759,7 +2768,7 @@ $(document).ready(function () {
     $("#mode-switcher").click(function () {
 
         if ($(window.parent.document.body).find('.pageloader').length <= 0)
-            $(window.parent.document.body).append('<div class="pageloader"><div class="modal-backdrop fade show"></div><img class="revisionloader revisionloaderimg" src="' + window.parent.VjDefaultPath + 'loading.gif" /></div>');
+            $(window.parent.document.body).append('<div class="pageloader"><div class="modal-backdrop fade show"></div><img class="revisionloader revisionloaderimg" src="' + window.parent.VjDefaultPath + 'loading.svg" /></div>');
 
         if ($("#mode-switcher").offset().left > 0) {
             setCookie("vj_IsPageEdit", "false");

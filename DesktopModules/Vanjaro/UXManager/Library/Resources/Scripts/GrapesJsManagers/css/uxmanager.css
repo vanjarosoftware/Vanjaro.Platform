@@ -285,7 +285,12 @@ ul.Shortcuts {
 a.closeaboutbtn {
     float: right;
     cursor: pointer;
+    color: #495157;
 }
+    a.closeaboutbtn:hover {
+        color: #252522;
+    }
+
 
 #Shortcuts hr {
     margin: 5px 0;
@@ -314,9 +319,9 @@ div#MenuSettings .parent-menu-hide {
     position: absolute;
     top: 50%;
     left: 50%;
-    height: 25px;
-    width: 25px;
-    margin: -12px 0 0 -12px;
+    height: 40px;
+    width: 40px;
+    margin: -12px 0 0 -20px;
 }
 
 #iframeHolder iframe {
@@ -2330,8 +2335,8 @@ span.notificationname {
     }
 
 .centerloader {
-    height: 25px !important;
-    width: 25px !important;
+    height: 40px !important;
+    width: 40px !important;
     margin: 0 auto;
     display: table;
 }
