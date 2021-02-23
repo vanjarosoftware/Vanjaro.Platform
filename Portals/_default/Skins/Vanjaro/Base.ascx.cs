@@ -369,7 +369,7 @@ namespace Vanjaro.Skin
                 html.LoadHtml(sb.ToString());
                 CheckPermission(html);
                 InjectBlocks(page, html);
-                if (!PageManager.InjectEditor(PortalSettings))
+                if (!PageManager.InjectEditor(PortalSettings) || !string.IsNullOrEmpty(Request.QueryString["pv"]))
                     RemoveDataBlocks(html);
 
                 string ClassName = "vj-wrapper";
@@ -603,9 +603,14 @@ namespace Vanjaro.Skin
             {
                 if (item.Attributes == null)
                     continue;
+
                 List<dynamic> AttributesToRemove = new List<dynamic>();
+                if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value == "Language" && item.Attributes.Where(a => a.Name == "id").FirstOrDefault() != null && string.IsNullOrEmpty(item.InnerHtml))
+                    AttributesToRemove.Add(item.Attributes.Where(a => a.Name == "id").FirstOrDefault());
+
                 foreach (var Attribute in item.Attributes)
                 {
+
                     if (Attribute.Name.StartsWith("data-block-"))
                         AttributesToRemove.Add(Attribute);
                 }
