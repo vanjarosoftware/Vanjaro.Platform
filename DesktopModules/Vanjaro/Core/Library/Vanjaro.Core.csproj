@@ -98,6 +98,7 @@
     <Compile Include="Entities\Interface\IVideoProvider.cs" />
     <Compile Include="Factories\CacheFactory.cs" />
     <Compile Include="Factories\BlockFactory.cs" />
+    <Compile Include="Factories\GlobalBlockFactory.cs" />
     <Compile Include="Factories\SectionPermissionFactory.cs" />
     <Compile Include="Factories\LocalizationFactory.cs" />
     <Compile Include="Factories\NotificationTaskFactory.cs" />

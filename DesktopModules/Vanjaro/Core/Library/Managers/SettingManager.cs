@@ -496,7 +496,7 @@ namespace Vanjaro.Core
             {
                 #region Applying Layouts
 
-                PortalSettings portalSettings = new PortalSettings(pinfo);                
+                PortalSettings portalSettings = new PortalSettings(pinfo);
 
                 TabInfo SignUpTab = TabController.Instance.GetTabByName("Signup", pinfo.PortalID);
                 Layout Signuplayout = pageLayouts.Where(a => a.Name == "Signup").FirstOrDefault();
@@ -796,20 +796,35 @@ namespace Vanjaro.Core
                     db.Execute(query);
                 }
             }
-            private static void ProcessBlocks(int PortalId, List<CustomBlock> Blocks)
+            private static void ProcessBlocks(int PortalId, List<GlobalBlock> Blocks)
             {
                 if (Blocks != null)
                 {
-                    foreach (CustomBlock item in Blocks)
+                    foreach (GlobalBlock item in Blocks)
                     {
-                        if (Core.Managers.BlockManager.GetByLocale(PortalId, item.Guid, null) == null)
+                        if (string.IsNullOrEmpty(item.Html) && string.IsNullOrEmpty(item.Css))
                         {
-                            item.ID = 0;
-                            PortalSettings ps = new PortalSettings
+                            if (BlockManager.GetCustomByGuid(PortalId, item.Guid) == null)
                             {
-                                PortalId = PortalId
-                            };
-                            Core.Managers.BlockManager.Add(ps, item, 1);
+                                item.ID = 0;
+                                PortalSettings ps = new PortalSettings
+                                {
+                                    PortalId = PortalId
+                                };
+                                BlockManager.Add(ps, item, 1);
+                            }
+                        }
+                        else
+                        {
+                            if (BlockManager.GetGlobalByLocale(PortalId, item.Guid, null) == null)
+                            {
+                                item.ID = 0;
+                                PortalSettings ps = new PortalSettings
+                                {
+                                    PortalId = PortalId
+                                };
+                                BlockManager.Add(ps, item, 1);
+                            }
                         }
                     }
                 }

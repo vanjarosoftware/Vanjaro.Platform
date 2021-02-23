@@ -34,28 +34,58 @@ CREATE TABLE {databaseOwner}[VJ_Core_BlockSectionPermission](
 END
 GO
 
-ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
-	ContentJSON nvarchar(MAX) NULL
+DROP TABLE {databaseOwner}[VJ_Core_CustomBlock]
 GO
 
-ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
-	StyleJSON nvarchar(MAX) NULL
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_CustomBlock]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Core_CustomBlock](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Guid] [nvarchar](255) NOT NULL,
+	[PortalID] [int] NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[Category] [nvarchar](255) NOT NULL,
+	[ContentJSON] [nvarchar](MAX) NOT NULL,
+	[StyleJSON] [nvarchar](MAX) NOT NULL,
+	[IsLibrary] [bit] NOT NULL,
+	[CreatedBy] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[UpdatedBy] [int] NOT NULL,
+	[UpdatedOn] [datetime] NOT NULL,
+CONSTRAINT [PK_VJ_Core_CustomBlocks] PRIMARY KEY CLUSTERED 
+(
+[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
 GO
 
-ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
-	[IsPublished] [bit] NOT NULL CONSTRAINT DF_VJ_Core_CustomBlock_IsPublished DEFAULT '1'
-GO
 
-ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
-	[PublishedBy] [int] NULL 
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_GlobalBlock]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Core_GlobalBlock](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Guid] [nvarchar](255) NOT NULL,
+	[PortalID] [int] NOT NULL,
+	[Version] [int] NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[Category] [nvarchar](255) NOT NULL,
+	[Html] [nvarchar](max) NOT NULL,
+	[Css] [nvarchar](max) NOT NULL,
+	[ContentJSON] [nvarchar](MAX) NOT NULL,
+	[StyleJSON] [nvarchar](MAX) NOT NULL,
+	[Locale] [nvarchar](50) NULL,
+	[IsPublished] [bit] NOT NULL,
+	[CreatedBy] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[UpdatedBy] [int] NOT NULL,
+	[UpdatedOn] [datetime] NOT NULL,
+	[PublishedBy] [int] NULL,
+	[PublishedOn] [datetime] NULL,
+CONSTRAINT [PK_VJ_Core_GlobalBlocks] PRIMARY KEY CLUSTERED 
+(
+[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
 GO
-
-ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
-	[PublishedOn] [datetime] NULL
-GO
-
-ALTER TABLE {databaseOwner}[VJ_Core_CustomBlock] ADD
-	[Version] [int] NULL
-GO
-
-Update {databaseOwner}[VJ_Core_CustomBlock] set Version=1,PublishedBy=-1,PublishedOn=GETDATE() where Version is null

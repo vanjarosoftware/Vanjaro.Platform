@@ -277,12 +277,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                             if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault() != null && !string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value) && item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value.ToLower() == "global")
                             {
                                 string guid = item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value.ToLower();
-                                CustomBlock Block = Core.Managers.BlockManager.GetByLocale(PortalId, guid, null);
+                                GlobalBlock Block = Core.Managers.BlockManager.GetGlobalByLocale(PortalId, guid, null);
                                 if (Block != null)
                                 {
                                     if (layout.Blocks == null)
                                     {
-                                        layout.Blocks = new List<CustomBlock>();
+                                        layout.Blocks = new List<GlobalBlock>();
                                     }
 
                                     layout.Blocks.Add(Block);
@@ -583,12 +583,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault() != null && !string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value) && item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value.ToLower() == "global")
                         {
                             string guid = item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value.ToLower();
-                            CustomBlock Block = BlockManager.GetByLocale(portalID, guid, null);
+                            GlobalBlock Block = BlockManager.GetGlobalByLocale(portalID, guid, null);
                             if (Block != null)
                             {
                                 if (layout.Blocks == null)
                                 {
-                                    layout.Blocks = new List<CustomBlock>();
+                                    layout.Blocks = new List<GlobalBlock>();
                                 }
                                 layout.Blocks.Add(Block);
                             }
@@ -596,7 +596,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     }
                     if (layout.Blocks != null)
                     {
-                        foreach (CustomBlock block in layout.Blocks)
+                        foreach (GlobalBlock block in layout.Blocks)
                         {
                             if (!string.IsNullOrEmpty(block.Html))
                                 block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, portalID), false, Assets);
@@ -672,16 +672,27 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     }
                 }
             }
-            private static void ProcessBlocks(int PortalId, List<CustomBlock> Blocks)
+            private static void ProcessBlocks(int PortalId, List<GlobalBlock> Blocks)
             {
                 if (Blocks != null)
                 {
-                    foreach (CustomBlock item in Blocks)
+                    foreach (GlobalBlock item in Blocks)
                     {
-                        if (Core.Managers.BlockManager.GetByLocale(PortalId, item.Guid, null) == null)
+                        if (string.IsNullOrEmpty(item.Html) && string.IsNullOrEmpty(item.Css))
                         {
-                            item.ID = 0;
-                            Core.Managers.BlockManager.Add(PortalController.Instance.GetCurrentSettings() as PortalSettings, item, 1);
+                            if (BlockManager.GetCustomByGuid(PortalId, item.Guid) == null)
+                            {
+                                item.ID = 0;
+                                BlockManager.Add(PortalController.Instance.GetCurrentSettings() as PortalSettings, item, 1);
+                            }
+                        }
+                        else
+                        {
+                            if (BlockManager.GetGlobalByLocale(PortalId, item.Guid, null) == null)
+                            {
+                                item.ID = 0;
+                                BlockManager.Add(PortalController.Instance.GetCurrentSettings() as PortalSettings, item, 1);
+                            }
                         }
                     }
                 }

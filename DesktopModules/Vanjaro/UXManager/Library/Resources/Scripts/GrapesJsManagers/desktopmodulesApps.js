@@ -133,6 +133,10 @@ global.AddCustomBlock = function (editor, CustomBlock) {
     CustomBlock.ContentJSON = ContentJSON;
     CustomBlock.StyleJSON = JSON.stringify(VjEditor.Css.getAll().toJSON());
     var sf = $.ServicesFramework(-1);
+    if (!CustomBlock.IsGlobal) {
+        CustomBlock.Html = '';
+        CustomBlock.Css = '';
+    }
     $.ajax({
         type: "POST",
         url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/AddCustomBlock",
