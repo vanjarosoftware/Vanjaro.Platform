@@ -860,7 +860,7 @@ namespace Vanjaro.Core
                 return PortalSettings.DefaultLanguage != PortalSettings.CultureCode ? PortalSettings.CultureCode : null;
             }
 
-            internal static void ModeratePage(string Action, Pages Page, PortalSettings PortalSettings)
+            public static void ModeratePage(string Action, Pages Page, PortalSettings PortalSettings)
             {
 
                 UserInfo UserInfo = PortalSettings.UserInfo;
