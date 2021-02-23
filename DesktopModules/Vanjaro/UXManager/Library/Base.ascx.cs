@@ -164,7 +164,7 @@ namespace Vanjaro.UXManager.Library
         {
             BaseModel item = new BaseModel
             {
-                LoadingImage = Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.gif"),
+                LoadingImage = Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.svg"),
                 AboutUrl = AppManager.GetAboutUrl(),
                 Logo = Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/Vanjaro.png"),
                 MenuMarkUp = MenuManager.RenderMenu(MenuManager.ParseMenuCategoryTree(null), null),

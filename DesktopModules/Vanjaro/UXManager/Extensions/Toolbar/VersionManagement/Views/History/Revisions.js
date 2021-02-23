@@ -28,7 +28,7 @@
             $scope.SelectedVersion = Version;
             window.parent.IsVJCBRendered = true;
             if (!$(window.parent.document.body).find('.optimizing-overlay').length)
-                $(window.parent.document.body).find('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + window.parent.VjDefaultPath + 'loading.gif" />Please wait</h1></div>');
+                $(window.parent.document.body).find('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + window.parent.VjDefaultPath + 'loading.svg" />Please wait</h1></div>');
             if ($scope.BlockGuid != '') {
                 common.webApi.get('Revisions/GetBlockVersion', 'Version=' + $scope.SelectedVersion + '&BlockGuid=' + $scope.BlockGuid).success(function (response) {
                     if (response != undefined) {
@@ -38,7 +38,9 @@
                         revModel.setStyle('');
                         revModel.setStyle(eval(response.style));
                         $(revModel.getEl()).find('.global-tools').remove();
-                        $(revModel.getEl()).css('pointer-events', 'auto');                        
+                        $(revModel.getEl()).css('pointer-events', 'auto'); 
+                        parent.setCookie("vj_UXLoad", window.location.href);
+                        parent.setCookie("vj_UX_BlockRevision_Id", window.parent.VjEditor.getSelected().ccid);
                         window.parent.window.VjEditor.runCommand("save");
                     }
                 });
