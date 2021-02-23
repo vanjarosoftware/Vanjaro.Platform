@@ -176,9 +176,14 @@ var AddCustom_Block = function (CustomBlock, ID, Guid) {
 
 global.UpdateCustomBlock = function (editor, CustomBlock) {
     var sf = $.ServicesFramework(-1);
+    var EditBlock = 'EditCustomBlock';
+
+    if (CustomBlock.IsGlobal)
+        EditBlock = 'EditGlobalBlock';
+
     $.ajax({
         type: "POST",
-        url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/EditCustomBlock",
+        url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Block/" + EditBlock,
         data: CustomBlock,
         headers: {
             'ModuleId': parseInt(sf.getModuleId()),
