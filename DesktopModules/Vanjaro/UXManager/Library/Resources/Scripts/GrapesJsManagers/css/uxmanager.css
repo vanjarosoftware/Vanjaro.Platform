@@ -285,7 +285,12 @@ ul.Shortcuts {
 a.closeaboutbtn {
     float: right;
     cursor: pointer;
+    color: #495157;
 }
+    a.closeaboutbtn:hover {
+        color: #252522;
+    }
+
 
 #Shortcuts hr {
     margin: 5px 0;
