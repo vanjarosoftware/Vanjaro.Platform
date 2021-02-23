@@ -76,7 +76,7 @@ global.LoadCustomBlocks = function () {
                         const updateblock = document.createElement("span");
                         updateblock.className = "update-custom-block";
                         if (IsAdmin)
-                            updateblock.innerHTML = "<div class='addpage-blocks dropdown pull-right dropbtn'><a id='dropdownMenuLink' class='dropdownmenu Customblockdropdown' data-toggle='dropdown' aria-haspopup='true'  aria-expanded='false'><em class='fas fa-ellipsis-v'></em></a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'><li><a class='edit-block' onclick='VjEditor.runCommand(\"edit-custom-block\", { name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-pencil-alt'></em><span>Edit</span></a></li><li><a class='export-block' onclick='VjEditor.runCommand(\"export-custom-block\",{ name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-file-export'></em><span>Export</span></a></li><li><a class='delete-block' onclick='VjEditor.runCommand(\"delete-custom-block\",{ name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-trash-alt'></em><span>Delete</span></a></li></ul></div>";
+                            updateblock.innerHTML = "<div class='addpage-blocks dropdown pull-right dropbtn'><a id='dropdownMenuLink' class='dropdownmenu Customblockdropdown' data-toggle='dropdown' aria-haspopup='true'  aria-expanded='false'><em class='fas fa-ellipsis-v'></em></a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'><li><a class='edit-block' onclick='VjEditor.runCommand(\"edit-custom-block\", { name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-pencil-alt'></em><span>Edit</span></a></li><li><a class='export-block' onclick='VjEditor.runCommand(\"export-custom-block\",{ name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-file-export'></em><span>Export</span></a></li><li><a class='delete-block' onclick='VjEditor.runCommand(\"delete-custom-block\",{ name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\",IsGlobal: \"false\" })'><em class='fas fa-trash-alt'></em><span>Delete</span></a></li></ul></div>";
                         el.appendChild(updateblock);
                     }
                 });
@@ -106,7 +106,7 @@ global.LoadCustomBlocks = function () {
                         const updateblock = document.createElement("span");
                         updateblock.className = "update-custom-block";
                         if (IsAdmin)
-                            updateblock.innerHTML = "<div class='addpage-blocks dropdown pull-right dropbtn'><a id='dropdownMenuLink' class='dropdownmenu Customblockdropdown' data-toggle='dropdown' aria-haspopup='true'  aria-expanded='false'><em class='fas fa-ellipsis-v'></em></a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'><li><a class='edit-block' onclick='VjEditor.runCommand(\"edit-custom-block\", { name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-pencil-alt'></em><span>Edit</span></a></li><li><a class='export-block' onclick='VjEditor.runCommand(\"export-custom-block\",{ name: \"" + value.Name + "\" , id: \"" + value.Guid + "\", IsGlobal: \"" + value.IsGlobal + "\" })'><em class='fas fa-file-export'></em><span>Export</span></a></li><li><a class='delete-block' onclick='VjEditor.runCommand(\"delete-custom-block\",{ name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-trash-alt'></em><span>Delete</span></a></li></ul></div>";
+                            updateblock.innerHTML = "<div class='addpage-blocks dropdown pull-right dropbtn'><a id='dropdownMenuLink' class='dropdownmenu Customblockdropdown' data-toggle='dropdown' aria-haspopup='true'  aria-expanded='false'><em class='fas fa-ellipsis-v'></em></a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'><li><a class='edit-block' onclick='VjEditor.runCommand(\"edit-custom-block\", { name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\" })'><em class='fas fa-pencil-alt'></em><span>Edit</span></a></li><li><a class='export-block' onclick='VjEditor.runCommand(\"export-custom-block\",{ name: \"" + value.Name + "\" , id: \"" + value.Guid + "\", IsGlobal: \"" + value.IsGlobal + "\" })'><em class='fas fa-file-export'></em><span>Export</span></a></li><li><a class='delete-block' onclick='VjEditor.runCommand(\"delete-custom-block\",{ name: \"" + value.Name + "\" ,id: \"" + value.Guid + "\",IsGlobal: \"true\" })'><em class='fas fa-trash-alt'></em><span>Delete</span></a></li></ul></div>";
                         el.appendChild(updateblock);
                     }
                 });
@@ -243,7 +243,7 @@ global.DeleteCustomBlock = function (block) {
     var sf = $.ServicesFramework(-1);
     var ApiMethod = 'DeleteCustomBlock';
 
-    if (Block.IsGlobal)
+    if (block.IsGlobal == 'true')
         ApiMethod = 'DeleteGlobalBlock';
 
     $.ajax({
@@ -258,7 +258,7 @@ global.DeleteCustomBlock = function (block) {
         success: function (response) {
             if (response.Status == "Success") {
                 $.each(VjEditor.BlockManager.getAll().models, function (key, value) {
-                    if (value.attributes.attributes.guid != undefined && value.attributes.attributes.guid == CustomBlockGuid && value.attributes.attributes.type == 'VjCustomBlock')
+                    if (value.attributes.attributes.guid != undefined && value.attributes.attributes.guid == block.id && value.attributes.attributes.type == 'VjCustomBlock')
                         VjEditor.BlockManager.remove(value.cid);
                 })
                 //Render Block Manager for updating Categories
