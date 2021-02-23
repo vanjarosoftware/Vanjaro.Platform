@@ -12,6 +12,7 @@ using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Factories;
 using Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Managers;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
 {
@@ -67,15 +68,24 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
             if (page != null)
             {
                 Core.Managers.PageManager.ApplyGlobalBlockJSON(page);
-                Result.html = page.Content.ToString();
-                HtmlDocument html = new HtmlDocument();
-                html.LoadHtml(Result.html);
-                InjectBlocks(html, Result);
-                Result.css = page.Style.ToString();
-                Result.components = page.ContentJSON.ToString();
-                Result.style = page.StyleJSON.ToString();
             }
-            Result.Version = RevisionsManager.GetAllVersionByTabID(PortalSettings.PortalId, PortalSettings.ActiveTab.TabID, Locale);
+
+            Pages pageVersion = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, PortalSettings.UserInfo);
+            if (pageVersion.IsPublished)
+            {
+                page.StateID = WorkflowManager.GetFirstStateID(WorkflowManager.GetDefaultWorkflow(page.TabID)).StateID;
+                page.Version = PageManager.GetNextVersionByTabID(page.TabID);
+                PageManager.ModeratePage(string.Empty, page, PortalSettings);
+            }
+            else
+            {
+                pageVersion.Content = page.Content;
+                pageVersion.ContentJSON = page.ContentJSON;
+                pageVersion.Style = page.Style;
+                pageVersion.StyleJSON = page.StyleJSON;
+                PageManager.ModeratePage(string.Empty, pageVersion, PortalSettings);
+
+            }
             return Result;
         }
 
@@ -85,16 +95,20 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
             dynamic Result = new ExpandoObject();
 
             CustomBlock Block = Core.Managers.BlockManager.GetAllByGUID(this.PortalSettings.PortalId, BlockGuid).Where(a => a.Version == Version).FirstOrDefault();
-            if (Block != null)
+            CustomBlock CurrentBlock = Core.Managers.BlockManager.GetAll(PortalSettings.Current).Where(c => c.Guid.ToLower() == Block.Guid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
+            if (CurrentBlock.IsPublished)
             {
-                Result.html = Block.Html.ToString();
-                HtmlDocument html = new HtmlDocument();
-                html.LoadHtml(Result.html);
-                InjectBlocks(html, Result);
-                Result.css = Block.Css.ToString();
-                Result.components = Block.ContentJSON.ToString();
-                Result.style = Block.StyleJSON.ToString();
-                Result.Guid = Block.Guid;
+                Block.ID = 0;
+                BlockManager.Update(Block);
+            }
+            else
+            {
+                CurrentBlock.Html = Block.Html;
+                CurrentBlock.Css = Block.Css;
+                CurrentBlock.ContentJSON = Block.ContentJSON;
+                CurrentBlock.StyleJSON = Block.StyleJSON;
+                BlockManager.Update(CurrentBlock);
+
             }
             return Result;
         }

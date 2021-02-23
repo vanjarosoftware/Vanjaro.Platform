@@ -32,25 +32,17 @@
             if ($scope.BlockGuid != '') {
                 common.webApi.get('Revisions/GetBlockVersion', 'Version=' + $scope.SelectedVersion + '&BlockGuid=' + $scope.BlockGuid).success(function (response) {
                     if (response != undefined) {
-                        var revModel = window.parent.VjEditor.getSelected();
-                        revModel.components('');
-                        revModel.components(eval(response.components));
-                        revModel.setStyle('');
-                        revModel.setStyle(eval(response.style));
-                        $(revModel.getEl()).find('.global-tools').remove();
-                        $(revModel.getEl()).css('pointer-events', 'auto');                        
-                        window.parent.window.VjEditor.runCommand("save");
+                        parent.setCookie("vj_UXLoad", window.location.href);
+                        parent.setCookie("vj_UX_BlockRevision_Id", window.parent.VjEditor.getSelected().ccid);
+                        window.parent.location.reload();
                     }
                 });
             }
             else {
                 common.webApi.get('Revisions/GetVersion', 'Version=' + $scope.SelectedVersion + '&Locale=' + window.parent.VJLocal).success(function (response) {
                     if (response != undefined) {
-                        $scope.ui.data.Versions.Options = response.Version;
-                        window.parent.window.VjEditor.setComponents(eval(response.components));
-                        window.parent.window.VjEditor.setStyle(eval(response.style));
                         parent.setCookie("vj_UXLoad", window.location.href);
-                        window.parent.window.VjEditor.runCommand("save");
+                        window.parent.location.reload();
                     }
                 });
             }
