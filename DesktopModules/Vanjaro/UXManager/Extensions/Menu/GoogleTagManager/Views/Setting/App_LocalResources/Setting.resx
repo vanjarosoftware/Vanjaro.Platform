@@ -126,11 +126,17 @@
   <data name="ApplyTo.Text" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="Host_Tag.Text" xml:space="preserve">
-    <value>Tags</value>
+  <data name="Host_Body.Text" xml:space="preserve">
+    <value>Body Tags</value>
   </data>
-  <data name="Site_Tag.Text" xml:space="preserve">
-    <value>Tags</value>
+  <data name="Host_Head.Text" xml:space="preserve">
+    <value>Head Tags</value>
+  </data>
+  <data name="Site_Body.Text" xml:space="preserve">
+    <value>Body Tags</value>
+  </data>
+  <data name="Site_Head.Text" xml:space="preserve">
+    <value>Head Tags</value>
   </data>
   <data name="Success.Text" xml:space="preserve">
     <value>Save Successfully</value>

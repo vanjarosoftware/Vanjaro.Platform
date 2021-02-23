@@ -9,13 +9,15 @@
             if ($scope.ui.data.ApplyTo.Options) {
                 Data = {
                     ApplyTo: $scope.ui.data.ApplyTo.Options,
-                    Host_Tag: $scope.ui.data.Host_Tag.Value
+                    Host_Head: $scope.ui.data.Host_Head.Value,
+                    Host_Body: $scope.ui.data.Host_Body.Value
                 }
             }
             else {
                 Data = {
                     ApplyTo: $scope.ui.data.ApplyTo.Options,
-                    Site_Tag: $scope.ui.data.Site_Tag.Value
+                    Site_Head: $scope.ui.data.Site_Head.Value,
+                    Site_Body: $scope.ui.data.Site_Body.Value,
                 }
             }
             common.webApi.post('Setting/save', '', Data).success(function (Response) {
@@ -27,14 +29,7 @@
             });
         
     };
-    $scope.Click_Delete = function () {
-        common.webApi.post('Setting/delete', '', $scope.ui.data.ApplyTo.Options).success(function (Response) {
-            if ($scope.ui.data.ApplyTo.Options)
-                $scope.ui.data.Host_Tag.Value = Response;
-            else
-                $scope.ui.data.Site_Tag.Value = Response;
-        });
-    };
+
     $scope.Click_Cancel = function (type) {
         window.parent.document.callbacktype = type;
         $(window.parent.document.body).find('[data-dismiss="modal"]').click();
