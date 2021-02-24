@@ -1459,11 +1459,14 @@ $(document).ready(function () {
 
                                 LoadCustomBlocks();
                                 VjEditor.UndoManager.start();
-                                if (VJIsPageDraft == "False" || VJIsLocked == "True")
+
+                                if (VJIsPageDraft == "False")
                                     $('#VJBtnPublish').addClass('disabled');
 
-                                if (VJIsContentApproval == "True" && VJIsLocked == "True")
+                                if (VJIsContentApproval == "True" && VJIsLocked == "True") {
                                     $('.gjs-cv-canvas__frames').addClass('lockcanvas');
+                                    $('#VJBtnPublish').addClass('disabled');
+                                }
                                 else
                                     $('.gjs-cv-canvas__frames').removeClass('lockcanvas');
 
