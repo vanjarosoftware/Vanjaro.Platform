@@ -1463,7 +1463,7 @@ $(document).ready(function () {
                                 if (VJIsPageDraft == "False")
                                     $('#VJBtnPublish').addClass('disabled');
 
-                                if (VJIsContentApproval == "True" && VJIsLocked == "True") {
+                                if ((VJIsContentApproval == "True" && VJIsLocked == "True") && VJIsPageDraft == "False") {
                                     $('.gjs-cv-canvas__frames').addClass('lockcanvas');
                                     $('#VJBtnPublish').addClass('disabled');
                                 }
