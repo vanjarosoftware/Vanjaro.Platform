@@ -12,7 +12,7 @@ namespace Vanjaro.Core.Entities
         public string ContentJSON { get; set; }
         public string Style { get; set; }
         public string StyleJSON { get; set; }
-        public List<CustomBlock> Blocks { get; set; }
+        public List<GlobalBlock> Blocks { get; set; }
         public bool IsSystem { get; set; }
         public List<Layout> Children { get; set; }
         public int SortOrder { get; set; }

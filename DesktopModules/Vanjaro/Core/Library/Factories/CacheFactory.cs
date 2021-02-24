@@ -14,8 +14,9 @@ namespace Vanjaro.Core
                 internal static TimeSpan Cache_Time_Medium = new TimeSpan(0, 5, 0);
                 internal static TimeSpan Cache_Time_Heavy = new TimeSpan(0, 10, 0);
                 internal const string Prefix = "Vanjaro-Core-";
-                internal const string Page = Prefix + "Page";
+                public const string Page = Prefix + "Page";
                 public const string CustomBlock = Prefix + "CustomBlock";
+                public const string GlobalBlock = Prefix + "GlobalBlock";
                 internal const string Settings = Prefix + "Settings";
                 internal const string Extensions = Prefix + "Extensions";
                 internal const string Workflow = Prefix + "Workflow";

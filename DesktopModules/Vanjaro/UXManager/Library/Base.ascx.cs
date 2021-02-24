@@ -141,7 +141,7 @@ namespace Vanjaro.UXManager.Library
                     if (!string.IsNullOrEmpty(OpenPopup))
                     {
                         NavigateURL = PageManager.GetCurrentTabUrl(PortalSettings, "&mid=0&icp=true&guid=10E56C75-548E-4A10-822E-52E6AA2AB45F" + OpenPopup);
-                        WebForms.RegisterStartupScript(Page, "m2v", "<script type=\"text/javascript\" vanjarocore=\"true\">OpenPopUp(event, 800,'right','Choose Template', '" + NavigateURL + "')</script>", false);
+                        WebForms.RegisterStartupScript(Page, "m2v", "<script type=\"text/javascript\" vanjarocore=\"true\">$(document).ready(function(){OpenPopUp(event, 800,'right','Choose Template', '" + NavigateURL + "'); });</script>", false);
                     }
                 }
             }
@@ -155,8 +155,8 @@ namespace Vanjaro.UXManager.Library
         protected void Page_PreRender(object sender, EventArgs e)
         {
 
-            if (InjectEditor())
-                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var vjEditorSettings =" + JsonConvert.SerializeObject(Editor.Options) + "; var  TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; var ExtensionStoreURL = \"" + ExtensionStoreURL + "\"; var ExtensionURL = \"" + ExtensionURL + "\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined' && getCookie('vj_InitUX') == 'true') GrapesjsInit(); });", true);
+            if (Core.Managers.PageManager.InjectEditor(PortalSettings))
+                WebForms.RegisterClientScriptBlock(Page, "EditorInit", "var vjEditorSettings =" + JsonConvert.SerializeObject(Core.Entities.Editor.Options) + "; var  TemplateLibraryURL = \"" + TemplateLibraryURL + "\"; var ExtensionStoreURL = \"" + ExtensionStoreURL + "\"; var ExtensionURL = \"" + ExtensionURL + "\"; $(document).ready(function(){ if(typeof GrapesjsInit !='undefined' && getCookie('vj_InitUX') == 'true') GrapesjsInit(); });", true);
 
         }
 
@@ -164,7 +164,7 @@ namespace Vanjaro.UXManager.Library
         {
             BaseModel item = new BaseModel
             {
-                LoadingImage = Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.gif"),
+                LoadingImage = Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.svg"),
                 AboutUrl = AppManager.GetAboutUrl(),
                 Logo = Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/Vanjaro.png"),
                 MenuMarkUp = MenuManager.RenderMenu(MenuManager.ParseMenuCategoryTree(null), null),
@@ -175,12 +175,12 @@ namespace Vanjaro.UXManager.Library
             };
             item.ShortcutMarkUp = item.HasShortcut ? ShortcutManager.RenderShortcut() : string.Empty;
 
-            if (!Editor.Options.EditPage)
+            if (!Core.Entities.Editor.Options.EditPage)
                 item.HasTabEditPermission = true;
             else
                 item.HasTabEditPermission = TabPermissionController.HasTabPermission("EDIT");
 
-            item.EditPage = Editor.Options.EditPage;
+            item.EditPage = Core.Entities.Editor.Options.EditPage;
             item.ShowUXManager = string.IsNullOrEmpty(Core.Managers.CookieManager.GetValue("vj_InitUX")) ? false : Convert.ToBoolean(Core.Managers.CookieManager.GetValue("vj_InitUX"));
             return item;
         }
@@ -212,18 +212,6 @@ namespace Vanjaro.UXManager.Library
         private bool CanShowUXManager()
         {
             if (PortalSettings.UserId > 0 && TabPermissionController.CanViewPage() && (TabPermissionController.HasTabPermission("EDIT") || MenuManager.GetExtentions().Count > 0))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private bool InjectEditor()
-        {
-            if (PortalSettings.UserId > 0 && TabPermissionController.CanViewPage() && (TabPermissionController.HasTabPermission("EDIT") || !Editor.Options.EditPage))
             {
                 return true;
             }

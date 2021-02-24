@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Vanjaro.Core.Entities;
 using Vanjaro.UXManager.Library.Entities;
 using Vanjaro.UXManager.Library.Entities.Interface;
 

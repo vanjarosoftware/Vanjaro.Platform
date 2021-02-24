@@ -369,6 +369,8 @@ namespace Vanjaro.Skin
                 html.LoadHtml(sb.ToString());
                 CheckPermission(html);
                 InjectBlocks(page, html);
+                if (!PageManager.InjectEditor(PortalSettings) || !string.IsNullOrEmpty(Request.QueryString["pv"]))
+                    RemoveDataBlocks(html);
 
                 string ClassName = "vj-wrapper";
                 if (!string.IsNullOrEmpty(Request.QueryString["m2v"]) && string.IsNullOrEmpty(Request.QueryString["pv"]))
@@ -592,6 +594,28 @@ namespace Vanjaro.Skin
                             item.Remove();
                     }
                 }
+            }
+        }
+        private void RemoveDataBlocks(HtmlDocument html)
+        {
+            IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
+            foreach (HtmlNode item in query.ToList())
+            {
+                if (item.Attributes == null)
+                    continue;
+
+                List<dynamic> AttributesToRemove = new List<dynamic>();
+                if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value == "Language" && item.Attributes.Where(a => a.Name == "id").FirstOrDefault() != null && string.IsNullOrEmpty(item.InnerHtml))
+                    AttributesToRemove.Add(item.Attributes.Where(a => a.Name == "id").FirstOrDefault());
+
+                foreach (var Attribute in item.Attributes)
+                {
+
+                    if (Attribute.Name.StartsWith("data-block-"))
+                        AttributesToRemove.Add(Attribute);
+                }
+                foreach (var Attribute in AttributesToRemove)
+                    item.Attributes.Remove(Attribute);
             }
         }
         private void InjectBlocks(Pages page, HtmlDocument html, bool ignoreFirstDiv = false, bool isGlobalBlockCall = false)

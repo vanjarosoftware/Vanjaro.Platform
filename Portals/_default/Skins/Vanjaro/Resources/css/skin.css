@@ -177,9 +177,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    height: 25px;
-    width: 25px;
-    margin: -12px 0 0 -12px;
+    height: 40px;
+    width: 40px;
+    margin: -12px 0 0 -20px;
 }
 
 .uxmanager-modal #UXpagerender {
@@ -422,20 +422,20 @@ div.actionMenu ul {
 
 /*Menu Alignment*/
 
-div[alignment="left"][data-block-type="Menu"] nav .collapse .navbar-nav,
-div[alignment="left"][data-block-type="Menu"] nav.navbar.navbar-expand-lg {
+div[alignment="left"] nav .collapse .navbar-nav,
+div[alignment="left"] nav.navbar.navbar-expand-lg {
     justify-content: flex-start;
     display: inline-flex;
 }
 
-div[alignment="center"][data-block-type="Menu"] nav .collapse .navbar-nav,
-div[alignment="center"][data-block-type="Menu"] nav.navbar.navbar-expand-lg {
+div[alignment="center"] nav .collapse .navbar-nav,
+div[alignment="center"] nav.navbar.navbar-expand-lg {
     justify-content: center;
     display: inline-flex;
 }
 
-div[alignment="right"][data-block-type="Menu"] nav .collapse .navbar-nav,
-div[alignment="right"][data-block-type="Menu"] nav.navbar.navbar-expand-lg {
+div[alignment="right"] nav .collapse .navbar-nav,
+div[alignment="right"] nav.navbar.navbar-expand-lg {
     justify-content: flex-end;
     display: inline-flex;
 }
@@ -753,3 +753,4 @@ ul.vj_authenticationtab {
 .align-ib {
     display: inline-block;
 }
+

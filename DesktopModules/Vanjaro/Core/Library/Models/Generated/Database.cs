@@ -55,20 +55,38 @@ namespace Vanjaro.Core.Data.Entities
         [Column] public int PortalID { get; set; }
         [Column] public string Name { get; set; }
         [Column] public string Category { get; set; }
-        [Column] public string Html { get; set; }
-        [Column] public string Css { get; set; }
-        [Column] public bool IsGlobal { get; set; }
-        [Column] public string Locale { get; set; }
+        [Column] public string ContentJSON { get; set; }
+        [Column] public string StyleJSON { get; set; }
+        [Column] public bool IsLibrary { get; set; }
         [Column] public int CreatedBy { get; set; }
         [Column] public DateTime CreatedOn { get; set; }
         [Column] public int UpdatedBy { get; set; }
         [Column] public DateTime UpdatedOn { get; set; }
+    }
+
+    [TableName("VJ_Core_GlobalBlock")]
+    [PrimaryKey("ID")]
+    [ExplicitColumns]
+    public partial class GlobalBlock : VanjaroRepo.Record<GlobalBlock>
+    {
+        [Column] public int ID { get; set; }
+        [Column] public string Guid { get; set; }
+        [Column] public int PortalID { get; set; }
         [Column] public int Version { get; set; }
-        [Column] public bool IsPublished { get; set; }
-        [Column] public int? PublishedBy { get; set; }
-        [Column] public DateTime? PublishedOn { get; set; }
+        [Column] public string Name { get; set; }
+        [Column] public string Category { get; set; }
+        [Column] public string Html { get; set; }
+        [Column] public string Css { get; set; }
         [Column] public string ContentJSON { get; set; }
         [Column] public string StyleJSON { get; set; }
+        [Column] public string Locale { get; set; }
+        [Column] public bool IsPublished { get; set; }
+        [Column] public int CreatedBy { get; set; }
+        [Column] public DateTime CreatedOn { get; set; }
+        [Column] public int UpdatedBy { get; set; }
+        [Column] public DateTime UpdatedOn { get; set; }
+        [Column] public int? PublishedBy { get; set; }
+        [Column] public DateTime? PublishedOn { get; set; }
     }
 
     [TableName("VJ_Core_Setting")]

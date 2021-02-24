@@ -180,7 +180,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 			},
 			onApply: function (imageEditor, imageModel) {
 				if (!$('.optimizing-overlay').length)
-					$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.gif" />Optimizing Images</h1></div>');
+					$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Optimizing Images</h1></div>');
 				var sf = $.ServicesFramework(-1);
 				var ImageData = {
 					PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
@@ -396,7 +396,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 						$(categories.models).each(function (index, item) {
 
-							if (item.attributes.label == category) {
+							if (item.attributes.label == category.toLowerCase()) {
 
 								count = 1;
 								swal.showInputError(VjLocalized.CategoryExists);
@@ -650,7 +650,6 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 	//Delete Custom Block
 	editor.Commands.add('delete-custom-block', {
 		run: function (editor, sender, block) {
-			var BlockIDDelete = block.id;
 			swal({
 				title: VjLocalized.AreYouSure,
 				text: VjLocalized.AreYouSureText,
@@ -665,7 +664,7 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
 				function (isConfirm) {
 					if (isConfirm) {
-						DeleteCustomBlock(BlockIDDelete);
+                        DeleteCustomBlock(block);
 					}
 				});
 		}

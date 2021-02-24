@@ -4,11 +4,11 @@
             <uitemplate>
                 <div class="float-end textright">
                     <div class="displayprop">
-                        <a class="ux-btn ux-btn-hover" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="[L:Email]" ng-click="Click_Email()">
-                            <em class="fas fa-envelope"></em>
+                        <a class="ux-btn ux-btn-hover" ng-click="Click_Email()">
+                            <em class="fas fa-envelope" data-bs-toggle="tooltip" data-bs-placement="bottom" title="[L:Email]"></em>
                         </a>
-                        <a class="ux-btn ux-btn-hover" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="[L:URL]" href="{{SiteURL}}" target="_blank">
-                            <em class="fas fa-link"></em>
+                        <a class="ux-btn ux-btn-hover" href="{{SiteURL}}" target="_blank">
+                            <em class="fas fa-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="[L:URL]"></em>
                         </a>
                     </div>
                 </div>
@@ -18,7 +18,7 @@
                         <br />
                         <span>{{ui.data.packageDetail.Options.organization}}</span>
                         <br />
-                        <span class="pdescription" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{DescriptionTitle}}">{{ui.data.packageDetail.Options.description}}</span>
+                        <span class="pdescription" data-bs-toggle="tooltip" data-bs-placement="top" title="{{DescriptionTitle}}">{{ui.data.packageDetail.Options.description}}</span>
                     </div>
                 </div>
             </uitemplate>

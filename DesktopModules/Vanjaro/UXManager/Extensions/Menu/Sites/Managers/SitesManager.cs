@@ -137,6 +137,15 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                         foreach (var exportedModuleContent in ExportedModulesContent)
                             AddZipItem("PortableModules/" + exportedModuleContent.Key + ".json", Encoding.Unicode.GetBytes(exportedModuleContent.Value), zip);
 
+                        string PortalPageTemplatePath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + Theme + "/templates/pages/");
+                        if (Directory.Exists(PortalPageTemplatePath))
+                        {
+                            foreach (string layout in Directory.GetFiles(PortalPageTemplatePath, "*.json"))
+                            {
+                                AddZipItem("Templates/Pages/" + layout.Replace(PortalPageTemplatePath, string.Empty), File.ReadAllBytes(layout), zip);
+                            }
+                        }
+
                         //AddZipItem(ScreenShotFileInfo.FileName, ToByteArray(FileManager.Instance.GetFileContent(ScreenShotFileInfo)), zip);
 
                         if (Assets != null && Assets.Count > 0)
@@ -213,12 +222,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                     if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault() != null && !string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value) && item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value.ToLower() == "global")
                     {
                         string guid = item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value.ToLower();
-                        Core.Data.Entities.CustomBlock Block = Core.Managers.BlockManager.GetByLocale(PortalID, guid, null);
+                        Core.Data.Entities.GlobalBlock Block = Core.Managers.BlockManager.GetGlobalByLocale(PortalID, guid, null);
                         if (Block != null)
                         {
                             if (layout.Blocks == null)
                             {
-                                layout.Blocks = new List<Core.Data.Entities.CustomBlock>();
+                                layout.Blocks = new List<Core.Data.Entities.GlobalBlock>();
                             }
                             layout.Blocks.Add(Block);
                         }
@@ -226,7 +235,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 }
                 if (layout.Blocks != null)
                 {
-                    foreach (Core.Data.Entities.CustomBlock block in layout.Blocks)
+                    foreach (Core.Data.Entities.GlobalBlock block in layout.Blocks)
                     {
                         if (!string.IsNullOrEmpty(block.Html))
                             block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
