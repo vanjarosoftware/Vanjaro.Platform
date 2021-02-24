@@ -26,6 +26,9 @@ GO
 /****** Object:  Table {databaseOwner}[VJ_Core_CustomBlock]    Script Date: 9/4/2019 4:14:01 PM ******/
 DROP TABLE {databaseOwner}[VJ_Core_CustomBlock]
 GO
+/****** Object:  Table {databaseOwner}[VJ_Core_GlobalBlock]    Script Date: 9/4/2019 4:14:01 PM ******/
+DROP TABLE {databaseOwner}[VJ_Core_GlobalBlock]
+GO
 /****** Object:  Table {databaseOwner}[VJ_Core_Localization]    Script Date: 30-Jan-20 4:14:08 PM ******/
 DROP TABLE {databaseOwner}[VJ_Core_Localization]
 GO
