@@ -141,7 +141,7 @@ namespace Vanjaro.UXManager.Library
                     if (!string.IsNullOrEmpty(OpenPopup))
                     {
                         NavigateURL = PageManager.GetCurrentTabUrl(PortalSettings, "&mid=0&icp=true&guid=10E56C75-548E-4A10-822E-52E6AA2AB45F" + OpenPopup);
-                        WebForms.RegisterStartupScript(Page, "m2v", "<script type=\"text/javascript\" vanjarocore=\"true\">OpenPopUp(event, 800,'right','Choose Template', '" + NavigateURL + "')</script>", false);
+                        WebForms.RegisterStartupScript(Page, "m2v", "<script type=\"text/javascript\" vanjarocore=\"true\">$(document).ready(function(){OpenPopUp(event, 800,'right','Choose Template', '" + NavigateURL + "'); });</script>", false);
                     }
                 }
             }
