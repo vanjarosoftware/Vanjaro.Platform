@@ -62,7 +62,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
         [HttpGet]
         public void GetVersion(int Version, string Locale)
         {
-            
+
             Locale = PortalSettings.DefaultLanguage == Locale ? null : Locale;
             Pages page = Core.Managers.PageManager.GetByVersion(PortalSettings.ActiveTab.TabID, Version, Locale);
             if (page != null)
@@ -70,11 +70,15 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
                 Core.Managers.PageManager.ApplyGlobalBlockJSON(page);
             }
 
-            Pages pageVersion = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, PortalSettings.UserInfo);
+            Pages pageVersion = PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, Locale);
             if (pageVersion.IsPublished)
             {
-                page.StateID = WorkflowManager.GetFirstStateID(WorkflowManager.GetDefaultWorkflow(page.TabID)).StateID;
+                page.ID = 0;
+                page.StateID = 0;
                 page.Version = PageManager.GetNextVersionByTabID(page.TabID);
+                page.IsPublished = false;
+                page.PublishedBy = null;
+                page.PublishedOn = null;
                 PageManager.ModeratePage(string.Empty, page, PortalSettings);
             }
             else
