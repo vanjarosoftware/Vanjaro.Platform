@@ -66,6 +66,15 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                 Styles = new string[1] { ResourcesFolderPath + "Stylesheets/app.css" }
             };
 
+            if (HttpContext.Current != null && HttpContext.Current.Response != null)
+            {
+                // Save the return Url in the cookie
+                HttpContext.Current.Response.Cookies.Set(new HttpCookie("returnurl", Block.Login.Managers.LoginManager.GetRedirectUrl())
+                {
+                    Expires = DateTime.Now.AddMinutes(5),
+                    Path = !string.IsNullOrEmpty(Globals.ApplicationPath) ? Globals.ApplicationPath : "/",
+                });
+            }
             return response;
         }
 

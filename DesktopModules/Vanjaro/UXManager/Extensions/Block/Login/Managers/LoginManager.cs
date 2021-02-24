@@ -147,6 +147,15 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                     }
                 }
 
+                if (string.IsNullOrEmpty(redirectUrl) && HttpContext.Current.Request.Cookies["returnurl"] != null)
+                {
+                    // return to the url passed to signin
+                    redirectUrl = HttpUtility.UrlDecode(HttpContext.Current.Request.Cookies["returnurl"].Value);
+
+                    // clean the return url to avoid possible XSS attack.
+                    redirectUrl = UrlUtils.ValidReturnUrl(redirectUrl);
+                }
+
                 if (string.IsNullOrEmpty(redirectUrl) && checkSettings && redirectAfterLogin > 0) //redirect to after login page
                 {
                     redirectUrl = ServiceProvider.NavigationManager.NavigateURL(redirectAfterLogin);
@@ -427,58 +436,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                 }
                 return _user;
             }
-            //private static void UpdateProfile(UserInfo objUser, bool update)
-            //{
-            //    bool bUpdateUser = false;
-            //    if (ProfileProperties.Count > 0)
-            //    {
-            //        foreach (string key in ProfileProperties)
-            //        {
-            //            switch (key)
-            //            {
-            //                case "FirstName":
-            //                    if (objUser.FirstName != ProfileProperties[key])
-            //                    {
-            //                        objUser.FirstName = ProfileProperties[key];
-            //                        bUpdateUser = true;
-            //                    }
-            //                    break;
-            //                case "LastName":
-            //                    if (objUser.LastName != ProfileProperties[key])
-            //                    {
-            //                        objUser.LastName = ProfileProperties[key];
-            //                        bUpdateUser = true;
-            //                    }
-            //                    break;
-            //                case "Email":
-            //                    if (objUser.Email != ProfileProperties[key])
-            //                    {
-            //                        objUser.Email = ProfileProperties[key];
-            //                        bUpdateUser = true;
-            //                    }
-            //                    break;
-            //                case "DisplayName":
-            //                    if (objUser.DisplayName != ProfileProperties[key])
-            //                    {
-            //                        objUser.DisplayName = ProfileProperties[key];
-            //                        bUpdateUser = true;
-            //                    }
-            //                    break;
-            //                default:
-            //                    objUser.Profile.SetProfileProperty(key, ProfileProperties[key]);
-            //                    break;
-            //            }
-            //        }
-            //        if (update)
-            //        {
-            //            if (bUpdateUser)
-            //            {
-            //                UserController.UpdateUser(PortalSettings.Current.PortalId, objUser);
-            //            }
-            //            ProfileController.UpdateUserProfile(objUser);
-            //        }
-            //    }
-            //}
+            
 
 
             /// -----------------------------------------------------------------------------
@@ -551,8 +509,8 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                             }
                         }
 
-                        //redirect browser
-                        //var redirectUrl = RedirectURL;
+
+                        actionResult.RedirectURL = LoginManager.GetRedirectUrl();
 
                         //Clear the cookie
                         HttpContext.Current.Response.Cookies.Set(new HttpCookie("returnurl", "")
@@ -561,7 +519,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                             Path = (!string.IsNullOrEmpty(Globals.ApplicationPath) ? Globals.ApplicationPath : "/")
                         });
 
-                        actionResult.RedirectURL = GetRedirectUrl();
+                        
                         break;
                     case UserValidStatus.PASSWORDEXPIRED:
                         //strMessage = string.Format(Localization.GetString("PasswordExpired", LocalResourceFile), expiryDate.ToLongDateString());

@@ -260,7 +260,12 @@ ul.Shortcuts {
 
 #Shortcuts .closeshortcutbtn {
     cursor: pointer;
+    color: #495157;
 }
+
+    #Shortcuts .closeshortcutbtn:hover {
+        color: #252522;
+    }
 
 .closeabout h5 {
     display: inline-block;
@@ -3446,7 +3451,7 @@ body.resp-mode.mobile .vj-wrapper {
         outline: none;
     }
 
-:not(#dnn_ContentPane) .select_language {
+[data-gjs-type="wrapper"] .select_language {
     pointer-events: none;
 }
 

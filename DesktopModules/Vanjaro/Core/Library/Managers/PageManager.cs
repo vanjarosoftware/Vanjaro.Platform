@@ -121,8 +121,6 @@ namespace Vanjaro.Core
                                         conKeys.Add(prop.Name);
                                     foreach (string prop in conKeys)
                                         (con as JObject).Remove(prop);
-                                    foreach (JProperty prop in blockContentJSON[0].Properties())
-                                        (con as JObject).Add(prop.Name, prop.Value);
                                     if (blockContentJSON.Count > 1)
                                     {
                                         (con as JObject).Add("type", "div");
@@ -133,6 +131,7 @@ namespace Vanjaro.Core
                                         foreach (JProperty prop in blockContentJSON[0].Properties())
                                             (con as JObject).Add(prop.Name, prop.Value);
                                     }
+                                    UpdateIds(con, prefix, Ids);
                                 }
                                 dynamic blockStyleJSON = JsonConvert.DeserializeObject(block.StyleJSON);
                                 if (blockStyleJSON != null)
