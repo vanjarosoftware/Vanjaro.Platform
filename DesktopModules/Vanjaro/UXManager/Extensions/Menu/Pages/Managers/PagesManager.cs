@@ -218,8 +218,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     layouts = new List<Layout>();
                     List<string> FolderPaths = new List<string>
                     {
-                        HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.CurrentTheme.Name + "/templates/pages/"),
-                        HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/templates/pages/")
+                        HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/templates/pages/"),
+                        HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.CurrentTheme.Name + "/templates/pages/")
                     };
                     foreach (string FolderPath in FolderPaths)
                     {
@@ -236,7 +236,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                                         lay.Name = Path.GetFileNameWithoutExtension(layout);
                                         if (layout.ToLower().Contains("_default"))
                                             lay.IsSystem = true;
-                                        layouts.Add(lay);
+                                        if (layouts.Where(l => l.Name == lay.Name).FirstOrDefault() == null)
+                                            layouts.Add(lay);
                                     }
                                 }
                             }
@@ -244,6 +245,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     }
                     CacheFactory.Set(CacheKey, layouts);
                 }
+                if (layouts != null)
+                    layouts = layouts.OrderByDescending(o => o.IsSystem).ToList();
                 return layouts;
             }
             public static void DeleteLayout(string name)

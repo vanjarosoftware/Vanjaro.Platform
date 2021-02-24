@@ -137,6 +137,15 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                         foreach (var exportedModuleContent in ExportedModulesContent)
                             AddZipItem("PortableModules/" + exportedModuleContent.Key + ".json", Encoding.Unicode.GetBytes(exportedModuleContent.Value), zip);
 
+                        string PortalPageTemplatePath = HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/vThemes/" + Theme + "/templates/pages/");
+                        if (Directory.Exists(PortalPageTemplatePath))
+                        {
+                            foreach (string layout in Directory.GetFiles(PortalPageTemplatePath, "*.json"))
+                            {
+                                AddZipItem("Templates/Pages/" + layout.Replace(PortalPageTemplatePath, string.Empty), File.ReadAllBytes(layout), zip);
+                            }
+                        }
+
                         //AddZipItem(ScreenShotFileInfo.FileName, ToByteArray(FileManager.Instance.GetFileContent(ScreenShotFileInfo)), zip);
 
                         if (Assets != null && Assets.Count > 0)
