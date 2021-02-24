@@ -1490,10 +1490,10 @@ $(document).ready(function () {
                                     }, 250));
                                 });
 
-                                if (vjEditorSettings.EditPage && typeof getCookie("vj_UXLoad") != 'undefined' && getCookie("vj_UXLoad") != null) {
+                                if (vjEditorSettings.EditPage && typeof getCookie("vj_UXLoad") != 'undefined' && getCookie("vj_UXLoad") != null && getCookie("vj_UXLoad") != '') {
 
 
-                                    if (getCookie("vj_UX_BlockRevision_Id") != 'undefined' && getCookie("vj_UX_BlockRevision_Id") != null) {
+                                    if (getCookie("vj_UX_BlockRevision_Id") != 'undefined' && getCookie("vj_UX_BlockRevision_Id") != null && getCookie("vj_UX_BlockRevision_Id") != '') {
 
                                         VjEditor.select(editor.getWrapper().find('#' + getCookie('vj_UX_BlockRevision_Id')));
                                         eraseCookie("vj_UX_BlockRevision_Id");
