@@ -89,7 +89,6 @@ copy ..\..\..\..\bin\Vanjaro.Core.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.Skin.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.Container.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.Common.dll bin\ >NUL
-copy ..\..\..\..\bin\Mandeeps.DNN.Modules.Licensing.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.URL.dll bin\ >NUL
 
 copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\HtmlAgilityPack.dll bin\ >NUL
