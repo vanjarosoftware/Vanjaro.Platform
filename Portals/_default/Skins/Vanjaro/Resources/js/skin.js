@@ -426,9 +426,7 @@ $(document).ready(function () {
 
 InitHamburgerMenu = function ($this) {
 
-    var thislength = $this.hasClass("collapsed");
-
-    if (thislength) {
+    if ($this.parent().find(".DefaultMenu").length) {
         var thismenu = $this.parent().find(".DefaultMenu");
         var posoff = $this.offset().top;
         $(thismenu).appendTo("body");

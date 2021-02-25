@@ -60,7 +60,7 @@ namespace Vanjaro.Common.Engines
 
             try
             {
-                UIEngineInfo["InitScript"] += Environment.NewLine + "$('[data-toggle=\"tooltip\"]').tooltip();";
+                UIEngineInfo["InitScript"] += Environment.NewLine + "$('[data-bs-toggle=\"tooltip\"]').tooltip();";
                 //Get UI Markup From Cache
                 Dictionary<string, string> Markup = Vanjaro.Common.Utilities.DataCache.GetItemFromCache<Dictionary<string, string>>(Constants.UIFrameworkCacheKey + UIEngineInfo["appname"]);
 
