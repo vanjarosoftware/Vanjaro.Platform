@@ -93,7 +93,7 @@ ul.UlVersion {
 }
 
 .revision_name .badge {
-    max-width: 70px;
+    max-width: 80px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
