@@ -52,7 +52,7 @@
                                         $scope.SiteURL = response.Data.url;
                                         $scope.License = response.Data.license;
                                         $scope.Finish = response.Data.alreadyInstalled ? "[L:Repair]" : "[L:Finish]";
-                                        setTimeout(function () { $("[data-toggle='tooltip']").tooltip('enable'); }, 100);
+                                        setTimeout(function () { $("[data-bs-toggle='tooltip']").tooltip('enable'); }, 100);
                                     }
                                 }
                                 else {
