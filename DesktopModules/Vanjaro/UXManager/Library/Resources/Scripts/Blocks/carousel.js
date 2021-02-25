@@ -12,7 +12,7 @@
 		category: VjLocalized.Basic,
 		content: {
 			classes: ['carousel', 'vj-carousel', 'slide'],
-			attributes: { 'data-ride': 'carousel', 'data-interval': 'false' },
+			attributes: { 'data-bs-ride': 'carousel', 'data-bs-interval': 'false' },
 			type: 'carousel'
 		}
 	});
@@ -156,16 +156,16 @@
 			ChangeAutomatically() {
 
 				if (this.attributes.automatically == 'automaticallyfalse') {
-					this.addAttributes({ 'data-interval': 'false' });
+					this.addAttributes({ 'data-bs-interval': 'false' });
 					$(this.getTrait('datainterval').el.closest('.gjs-trt-trait__wrp')).hide();
 				}
 				else {
-					this.addAttributes({ 'data-interval': this.attributes.datainterval });
+					this.addAttributes({ 'data-bs-interval': this.attributes.datainterval });
 					$(this.getTrait('datainterval').el.closest('.gjs-trt-trait__wrp')).show();
 				}
 			},
 			ChangeInterval() {
-				this.addAttributes({ 'data-interval': this.attributes.datainterval });
+				this.addAttributes({ 'data-bs-interval': this.attributes.datainterval });
 			},
 			ChangeAnimation() {
 				$('.gjs-frame').contents().find('#' + this.getId()).carousel('dispose').carousel({ interval: false });
@@ -199,11 +199,11 @@
 			},
 			AddControl() {
 				var modelId = this.getId();
-				this.components().add(`<a class="carousel-control carousel-control-prev" href="#` + modelId + `" role="button" data-slide="prev">
+				this.components().add(`<a class="carousel-control carousel-control-prev" href="#` + modelId + `" role="button" data-bs-slide="prev">
     <span class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="carousel-control visually-hidden">Previous</span>
   </a>
-  <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-slide="next">
+  <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-bs-slide="next">
     <span class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
     <span class="carousel-control visually-hidden">Next</span>
   </a>`);
@@ -218,7 +218,7 @@
 
 				$.each(slides, function (k, v) {
 
-					markup += '<li class="carousel-indicator" data-target="#' + modelId + '" data-slide-to="' + k + '"';
+					markup += '<li class="carousel-indicator" data-bs-target="#' + modelId + '" data-bs-slide-to="' + k + '"';
 
 					if (k = 0)
 						markup += ' class="carousel-indicator active"';
@@ -247,9 +247,9 @@
 
 					comps.add(`
 						<ol class="carousel-indicators">
-                            <li data-target="#`+ modelId + `" data-slide-to="0" class="carousel-indicator active"></li>
-                            <li data-target="#`+ modelId + `" data-slide-to="1" class="carousel-indicator"></li>
-                            <li data-target="#`+ modelId + `" data-slide-to="2" class="carousel-indicator"></li>
+                            <li data-bs-target="#`+ modelId + `" data-bs-slide-to="0" class="carousel-indicator active"></li>
+                            <li data-bs-target="#`+ modelId + `" data-bs-slide-to="1" class="carousel-indicator"></li>
+                            <li data-bs-target="#`+ modelId + `" data-bs-slide-to="2" class="carousel-indicator"></li>
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
@@ -274,11 +274,11 @@
                                 </a>
                             </div>
                         </div>
-                        <a class="carousel-control carousel-control-prev" href="#`+ modelId + `" role="button" data-slide="prev">
+                        <a class="carousel-control carousel-control-prev" href="#`+ modelId + `" role="button" data-bs-slide="prev">
                             <span data-gjs-selectable="false" class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="carousel-control visually-hidden">Previous</span>
                         </a>
-                        <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-slide="next">
+                        <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-bs-slide="next">
                             <span data-gjs-selectable="false" class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="carousel-control visually-hidden">Next</span>
                         </a>
@@ -738,7 +738,7 @@
 			var Indicators = Selected.components().models.find(m => m.attributes.type == 'indicators');
 
 			if (typeof Indicators != 'undefined')
-				Indicators.components().add('<li data-target="#' + Selected.getId() + '" data-slide-to="' + Indicators.components().length + '"></li>');
+				Indicators.components().add('<li data-bs-target="#' + Selected.getId() + '" data-bs-slide-to="' + Indicators.components().length + '"></li>');
 
 			$.each(getAllComponents(slideInner.components().last()), function (i, n) {
 				if (n.attributes.type == 'carousel-image') {
@@ -760,7 +760,7 @@
 
 		var Indicators = slider.components().models.find(m => m.attributes.type == 'indicators');
 		if (typeof Indicators != 'undefined')
-			Indicators.components().add('<li data-target="#' + slider.getId() + '" data-slide-to="' + Indicators.components().length + '"></li>');
+			Indicators.components().add('<li data-bs-target="#' + slider.getId() + '" data-bs-slide-to="' + Indicators.components().length + '"></li>');
 
 		VjEditor.runCommand("slide-select", { slide: slideInner.components().last(), slideIndex: slideInner.components().models.length - 1 });
 	});
@@ -823,7 +823,7 @@
 
 			if (typeof Indicators != 'undefined') {
 				$.each(Indicators.components().models, function (i, n) {
-					n.addAttributes({ 'data-target': '#' + modelId });
+					n.addAttributes({ 'data-bs-target': '#' + modelId });
 				});
 			}
 
