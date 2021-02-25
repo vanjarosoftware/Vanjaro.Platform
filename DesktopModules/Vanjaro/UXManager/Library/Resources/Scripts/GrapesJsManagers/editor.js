@@ -8,7 +8,7 @@ global.VJIsSaveCall = false;
 global.VJLocalBlocksMarkup = '';
 global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
-global.IsVJEditorSaveCall;
+global.IsVJEditorSaveCall = true;
 global.IsVJCBRendered = false;
 
 $(document).ready(function () {
@@ -203,9 +203,7 @@ $(document).ready(function () {
                     });
                 }
                 else {
-
-                    VJIsLocked = 'True';
-
+                    IsVJEditorSaveCall = false;
                     //Set Sizes
                     //Trim last character of calcSizes to remove trailing comma
                     image.parent().components().models[0].addAttributes({ 'sizes': calcSizes.slice(0, -1) });
@@ -2533,7 +2531,7 @@ $(document).ready(function () {
 
                             VjEditor.on('change:changesCount', e => {
 
-                                if (e != undefined && e.changed != undefined && e.changed.changesCount > 0 && VJIsLocked == 'False') {
+                                if (e != undefined && e.changed != undefined && e.changed.changesCount > 0 && VJIsLocked == 'False' && IsVJEditorSaveCall) {
 
                                     if (VJAutoSaveTimeOutid) {
                                         clearTimeout(VJAutoSaveTimeOutid);
@@ -3064,7 +3062,7 @@ function RunSaveCommand() {
     editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
     if (GetParameterByName('m2v', parent.window.location) != null)
         editor.StorageManager.getStorages().remote.attributes.params.m2v = true;
-    VJIsLocked = 'False';
+    IsVJEditorSaveCall = true;
     editor.runCommand("save");
     editor.StorageManager.getStorages().remote.attributes.params.IsPublished = false;
     $('#VJBtnPublish').addClass('disabled');
