@@ -8,7 +8,7 @@ global.VJIsSaveCall = false;
 global.VJLocalBlocksMarkup = '';
 global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
-global.IsVJEditorSaveCall;
+global.IsVJEditorSaveCall = true;
 global.IsVJCBRendered = false;
 
 $(document).ready(function () {
@@ -203,9 +203,7 @@ $(document).ready(function () {
                     });
                 }
                 else {
-
-                    VJIsLocked = 'True';
-
+                    IsVJEditorSaveCall = false;
                     //Set Sizes
                     //Trim last character of calcSizes to remove trailing comma
                     image.parent().components().models[0].addAttributes({ 'sizes': calcSizes.slice(0, -1) });
@@ -1490,10 +1488,10 @@ $(document).ready(function () {
                                     }, 250));
                                 });
 
-                                if (vjEditorSettings.EditPage && typeof getCookie("vj_UXLoad") != 'undefined' && getCookie("vj_UXLoad") != null) {
+                                if (vjEditorSettings.EditPage && typeof getCookie("vj_UXLoad") != 'undefined' && getCookie("vj_UXLoad") != null && getCookie("vj_UXLoad") != '') {
 
 
-                                    if (getCookie("vj_UX_BlockRevision_Id") != 'undefined' && getCookie("vj_UX_BlockRevision_Id") != null) {
+                                    if (getCookie("vj_UX_BlockRevision_Id") != 'undefined' && getCookie("vj_UX_BlockRevision_Id") != null && getCookie("vj_UX_BlockRevision_Id") != '') {
 
                                         VjEditor.select(editor.getWrapper().find('#' + getCookie('vj_UX_BlockRevision_Id')));
                                         eraseCookie("vj_UX_BlockRevision_Id");
@@ -2533,7 +2531,7 @@ $(document).ready(function () {
 
                             VjEditor.on('change:changesCount', e => {
 
-                                if (e != undefined && e.changed != undefined && e.changed.changesCount > 0 && VJIsLocked == 'False') {
+                                if (e != undefined && e.changed != undefined && e.changed.changesCount > 0 && VJIsLocked == 'False' && IsVJEditorSaveCall) {
 
                                     if (VJAutoSaveTimeOutid) {
                                         clearTimeout(VJAutoSaveTimeOutid);
@@ -3064,7 +3062,7 @@ function RunSaveCommand() {
     editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
     if (GetParameterByName('m2v', parent.window.location) != null)
         editor.StorageManager.getStorages().remote.attributes.params.m2v = true;
-    VJIsLocked = 'False';
+    IsVJEditorSaveCall = true;
     editor.runCommand("save");
     editor.StorageManager.getStorages().remote.attributes.params.IsPublished = false;
     $('#VJBtnPublish').addClass('disabled');

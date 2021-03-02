@@ -19,10 +19,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Domain.Factories
             }
 
             return string.Empty;
-        }
-        public static List<AngularView> Views = new List<AngularView>();
+        }        
         public static List<AngularView> GetViews()
         {
+            List<AngularView> Views = new List<AngularView>();
             AngularView domains = new AngularView
             {
                 AccessRoles = "admin",

@@ -19,10 +19,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.MemberProfile.Factories
             }
 
             return string.Empty;
-        }
-        public static List<AngularView> Views = new List<AngularView>();
+        }        
         public static List<AngularView> GetViews()
         {
+            List<AngularView> Views = new List<AngularView>();
             AngularView memberprofile_memberprofile = new AngularView
             {
                 AccessRoles = "admin",

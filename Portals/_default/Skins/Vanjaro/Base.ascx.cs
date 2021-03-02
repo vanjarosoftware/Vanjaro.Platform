@@ -80,6 +80,7 @@ namespace Vanjaro.Skin
 
         protected override void OnInit(EventArgs e)
         {
+            RenderGoogleTagManagerScripts();
             ResetTheme();
             if (Request.QueryString["m2v"] != null)
                 m2v = Convert.ToBoolean(Request.QueryString["m2v"]);
@@ -165,6 +166,46 @@ namespace Vanjaro.Skin
             //InitGuidedTours();
             AccessDenied();
             InjectAnalyticsScript();
+        }
+
+        private void RenderGoogleTagManagerScripts()
+        {
+            string Site_Head = SettingManager.GetPortalSetting("Vanjaro.Integration.GoogleTagManager.Site_Head", true);
+            string Site_Body = SettingManager.GetPortalSetting("Vanjaro.Integration.GoogleTagManager.Site_Body", true);
+            string Host_Head = SettingManager.GetHostSetting("Vanjaro.Integration.GoogleTagManager.Host_Head", true);
+            string Host_Body = SettingManager.GetHostSetting("Vanjaro.Integration.GoogleTagManager.Host_Body", true);
+
+            HtmlGenericControl HeadScript = new HtmlGenericControl("script");
+            HtmlGenericControl BodyScript = new HtmlGenericControl("script");
+            HeadScript.Attributes.Add("type", "text/javascript");
+            BodyScript.Attributes.Add("type", "text/javascript");
+
+            if (!string.IsNullOrEmpty(Site_Head) || !string.IsNullOrEmpty(Site_Body))
+            {
+                if (!string.IsNullOrEmpty(Site_Head))
+                {
+                    HeadScript.InnerText = Site_Head;
+                    Page.FindControl("Head").Controls.AddAt(0, HeadScript);
+                }
+                if (!string.IsNullOrEmpty(Site_Body))
+                {
+                    BodyScript.InnerText = Site_Body;
+                    Page.FindControl("Body").Controls.AddAt(0, BodyScript);
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(Host_Head))
+                {
+                    HeadScript.InnerText = Host_Head;
+                    Page.FindControl("Head").Controls.AddAt(0, HeadScript);
+                }
+                if (!string.IsNullOrEmpty(Host_Body))
+                {
+                    BodyScript.InnerText = Host_Body;
+                    Page.FindControl("Body").Controls.AddAt(0, BodyScript);
+                }
+            }
         }
 
         private void AccessDenied()
@@ -455,13 +496,13 @@ namespace Vanjaro.Skin
                                 {
                                     string ResourceFile = Page.ResolveUrl("~/DesktopModules/AuthenticationServices") + "/Vanjaro/" + DotNetNuke.Services.Localization.Localization.LocalResourceDirectory + "/" + Path.GetFileNameWithoutExtension(authSystem.LoginControlSrc);
                                     createDiv.InnerHtml += "<ul class=\"vj_authenticationtab nav nav-tabs\" id=\"nav-tab\" role=\"tablist\">";
-                                    createDiv.InnerHtml += "<li class=\"nav-item\"><a class=\"nav-link active\" id=\"nav-tab-" + tab + "\" data-toggle=\"tab\" href=\"#dnn_navtab_" + tab + "\" role=\"tab\" aria-controls=\"dnn_navtab_" + tab + "\" aria-selected=\"true\">" + DotNetNuke.Services.Localization.Localization.GetString("Title", ResourceFile) + "</a></li>";
+                                    createDiv.InnerHtml += "<li class=\"nav-item\"><a class=\"nav-link active\" id=\"nav-tab-" + tab + "\" data-bs-toggle=\"tab\" href=\"#dnn_navtab_" + tab + "\" role=\"tab\" aria-controls=\"dnn_navtab_" + tab + "\" aria-selected=\"true\">" + DotNetNuke.Services.Localization.Localization.GetString("Title", ResourceFile) + "</a></li>";
 
                                     HtmlGenericControl homediv = new HtmlGenericControl("div");
                                     homediv.Attributes["class"] = "tab-pane fade show active vj_authenticationcontrol";
                                     homediv.Attributes["role"] = "tabpanel";
                                     homediv.Attributes["aria-labelledby"] = "nav-tab-" + tab;
-                                    homediv.Attributes["data-toggle"] = "tab";
+                                    homediv.Attributes["data-bs-toggle"] = "tab";
                                     homediv.ID = "navtab_" + tab;
 
                                     Control Login = FindControl("LoginControl");
@@ -475,12 +516,12 @@ namespace Vanjaro.Skin
                                     IsAuth = true;
                                 }
 
-                                createDiv.InnerHtml += "<li class=\"nav-item\"><a class=\"nav-link\" id=\"nav-tab-" + tab + "\" data-toggle=\"tab\" href=\"#dnn_navtab_" + tab + "\" role=\"tab\" aria-controls=\"dnn_navtab_" + tab + "\" aria-selected=\"false\">" + DotNetNuke.Services.Localization.Localization.GetString("Title", authLoginControl.LocalResourceFile) + "</a></li>";
+                                createDiv.InnerHtml += "<li class=\"nav-item\"><a class=\"nav-link\" id=\"nav-tab-" + tab + "\" data-bs-toggle=\"tab\" href=\"#dnn_navtab_" + tab + "\" role=\"tab\" aria-controls=\"dnn_navtab_" + tab + "\" aria-selected=\"false\">" + DotNetNuke.Services.Localization.Localization.GetString("Title", authLoginControl.LocalResourceFile) + "</a></li>";
                                 HtmlGenericControl tabdiv = new HtmlGenericControl("div");
                                 tabdiv.Attributes["class"] = "tab-pane fade vj_authenticationcontrol";
                                 tabdiv.Attributes["role"] = "tabpanel";
                                 tabdiv.Attributes["aria-labelledby"] = "nav-tab-" + tab;
-                                tabdiv.Attributes["data-toggle"] = "tab";
+                                tabdiv.Attributes["data-bs-toggle"] = "tab";
                                 tabdiv.ID = "navtab_" + tab;
                                 tabdiv.Controls.Add(authLoginControl);
                                 TabContent.Controls.Add(tabdiv);

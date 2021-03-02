@@ -58,7 +58,7 @@ namespace Vanjaro.Core.Services
                         {
                             if (!string.IsNullOrEmpty(p.Value))
                             {
-                                string Value = p.Value.Trim(' ').TrimEnd(new[] { '/', '\\' });
+                                string Value = p.Value.Replace("\n", "").Replace("\r", "").Trim(' ').TrimEnd(new[] { '/', '\\' });
                                 s.Append("\"" + ((p.Key.Length <= 25) ? p.Key : p.Key.Substring(0, 25)) + "\": \"" + ((Value.Length <= 100) ? Value : Value.Substring(0, 100)) + "\",");
                             }
                         }

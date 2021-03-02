@@ -215,9 +215,9 @@ $(document).ready(function () {
             $("#Notification").hide();
             $(".Menupanel-top").hide();
             //setTimeout(function () {
-                $(".panel-top , .block-set").fadeIn();
-                $("#ContentBlocks").fadeIn();
-                ChangeBlockType();
+            $(".panel-top , .block-set").fadeIn();
+            $("#ContentBlocks").fadeIn();
+            ChangeBlockType();
             //}, 300);
         }
 
@@ -303,5 +303,5 @@ global.setCookie = function (name, value, days) {
 }
 
 global.eraseCookie = function (name) {
-    document.cookie = name + '=; Max-Age=-99999999;';
+    this.setCookie(name, null, -1);
 }
