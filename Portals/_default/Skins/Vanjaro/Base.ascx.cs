@@ -80,6 +80,7 @@ namespace Vanjaro.Skin
 
         protected override void OnInit(EventArgs e)
         {
+            RenderGoogleTagManagerScripts();
             ResetTheme();
             if (Request.QueryString["m2v"] != null)
                 m2v = Convert.ToBoolean(Request.QueryString["m2v"]);
@@ -165,6 +166,46 @@ namespace Vanjaro.Skin
             //InitGuidedTours();
             AccessDenied();
             InjectAnalyticsScript();
+        }
+
+        private void RenderGoogleTagManagerScripts()
+        {
+            string Site_Head = SettingManager.GetPortalSetting("Vanjaro.Integration.GoogleTagManager.Site_Head", true);
+            string Site_Body = SettingManager.GetPortalSetting("Vanjaro.Integration.GoogleTagManager.Site_Body", true);
+            string Host_Head = SettingManager.GetHostSetting("Vanjaro.Integration.GoogleTagManager.Host_Head", true);
+            string Host_Body = SettingManager.GetHostSetting("Vanjaro.Integration.GoogleTagManager.Host_Body", true);
+
+            HtmlGenericControl HeadScript = new HtmlGenericControl("script");
+            HtmlGenericControl BodyScript = new HtmlGenericControl("script");
+            HeadScript.Attributes.Add("type", "text/javascript");
+            BodyScript.Attributes.Add("type", "text/javascript");
+
+            if (!string.IsNullOrEmpty(Site_Head) || !string.IsNullOrEmpty(Site_Body))
+            {
+                if (!string.IsNullOrEmpty(Site_Head))
+                {
+                    HeadScript.InnerText = Site_Head;
+                    Page.FindControl("Head").Controls.AddAt(0, HeadScript);
+                }
+                if (!string.IsNullOrEmpty(Site_Body))
+                {
+                    BodyScript.InnerText = Site_Body;
+                    Page.FindControl("Body").Controls.AddAt(0, BodyScript);
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(Host_Head))
+                {
+                    HeadScript.InnerText = Host_Head;
+                    Page.FindControl("Head").Controls.AddAt(0, HeadScript);
+                }
+                if (!string.IsNullOrEmpty(Host_Body))
+                {
+                    BodyScript.InnerText = Host_Body;
+                    Page.FindControl("Body").Controls.AddAt(0, BodyScript);
+                }
+            }
         }
 
         private void AccessDenied()

@@ -258,7 +258,12 @@
 							<name>Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.dll</name>
 							<version>01.00.00</version>
 						</assembly>
-						<assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Vanjaro.UXManager.Extensions.Menu.GoogleTagManager.dll</name>
+              <version>01.00.00</version>
+            </assembly>
+            <assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Pixabay.dll</name>
 							<version>01.00.00</version>
@@ -700,7 +705,15 @@
 						</resourceFile>
 					</resourceFiles>
 				</component>
-				<component type="ResourceFile">
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules\Vanjaro\UXManager\Extensions\Menu\GoogleTagManager</basePath>
+            <resourceFile>
+              <name>menu-integrations-googletagmanager-resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+        <component type="ResourceFile">
 					<resourceFiles>
 						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Menu\Pixabay</basePath>
 						<resourceFile>
