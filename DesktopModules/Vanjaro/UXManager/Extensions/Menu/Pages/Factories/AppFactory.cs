@@ -20,10 +20,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Factories
             }
 
             return string.Empty;
-        }
-        public static List<AngularView> Views = new List<AngularView>();
+        }        
         public static List<AngularView> GetViews()
         {
+            List<AngularView> Views = new List<AngularView>();
             AngularView setting_pages = new AngularView
             {
                 AccessRoles = "admin,edit",

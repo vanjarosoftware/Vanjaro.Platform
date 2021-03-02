@@ -20,9 +20,9 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.ViewLayout.Factories
 
             return string.Empty;
         }
-        public static List<AngularView> Views = new List<AngularView>();
         public static List<AngularView> GetViews()
         {
+            List<AngularView> Views = new List<AngularView>();
             AngularView setting = new AngularView
             {
                 AccessRoles = "user,anonymous",

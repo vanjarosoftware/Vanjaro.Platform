@@ -21,15 +21,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Theme.Factories
 
             return string.Empty;
         }
-
-        public static List<AngularView> Views = new List<AngularView>();
+                
         public static List<AngularView> GetViews()
         {
-            if (Views.Count > 0)
-            {
-                return Views;
-            }
-
+            List<AngularView> Views = new List<AngularView>();
             AngularView Default = new AngularView
             {
                 AccessRoles = "admin",
