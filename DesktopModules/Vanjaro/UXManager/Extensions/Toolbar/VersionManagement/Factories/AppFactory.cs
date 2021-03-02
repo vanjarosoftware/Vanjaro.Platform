@@ -30,10 +30,10 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Factories
             return VirtualPathUtility.ToAbsolute("~/DesktopModules/Vanjaro/UXManager/Extensions/Toolbar/VersionManagement/Views/App_LocalResources/Shared.resx");
         }
 
-        public static List<AngularView> Views = new List<AngularView>();
-
         public static List<AngularView> GetViews()
         {
+            List<AngularView> Views = new List<AngularView>();
+
             AngularView revisions = new AngularView
             {
                 AccessRoles = "editpage",
