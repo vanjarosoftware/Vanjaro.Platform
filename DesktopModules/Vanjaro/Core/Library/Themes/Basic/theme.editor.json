@@ -669,7 +669,7 @@
     },
     {
       "Guid": "dc2bcfb8-6d5c-4065-8206-e91774a50183",
-      "Category": "Signup & My Account",
+      "Category": "Sign In & My Account",
       "Title": null,
       "Controls": [
         {
@@ -728,7 +728,7 @@
     },
     {
       "Guid": "02beb436-0e62-41d4-805f-537d0d391294",
-      "Category": "Signup & My Account",
+      "Category": "Sign In & My Account",
       "Title": "Avatar",
       "Controls": [
         {

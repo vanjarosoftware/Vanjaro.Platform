@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="SettingTitle.Text" xml:space="preserve">
-    <value>Signup &amp; My Account</value>
+    <value>Sign In &amp; My Account</value>
   </data>
   <data name="ShowAvatar.OFF" xml:space="preserve">
     <value>No</value>
