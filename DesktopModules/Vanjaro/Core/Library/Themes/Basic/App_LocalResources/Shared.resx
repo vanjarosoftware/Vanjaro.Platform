@@ -148,7 +148,7 @@
     <value>Email Address or Username</value>
   </data>
   <data name="Data.Block.LoginLink.LoginText.Text" xml:space="preserve">
-    <value>Sign in</value>
+    <value>My Account</value>
   </data>
   <data name="Data.Block.LoginLink.LogoutText.Text" xml:space="preserve">
     <value>Sign out</value>

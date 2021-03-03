@@ -118,12 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DisplayName.Text" xml:space="preserve">
-    <value>Signup &amp; My Account</value>
+    <value>Sign In &amp; My Account</value>
   </data>
   <data name="Notification.Text" xml:space="preserve">
     <value>Notification</value>
   </data>
   <data name="Register.Text" xml:space="preserve">
     <value>Register here</value>
+  </data>
+  <data name="Template.Text" xml:space="preserve">
+    <value>Template</value>
   </data>
 </root>

@@ -20,10 +20,29 @@
         }
     </div>
 }
+
+
+
+@if (Model.RegisterLink.ShowSignInLink)
+{
+    <a href="@Model.LoginLink.Url" class="loginuser">
+        @if (Model.LoginLink.IsAuthenticated)
+        {
+            <span>[LS:Data.Block.LoginLink.LogoutText]</span>
+        }
+        else
+        {
+            <span>[LS:Data.Block.LoginLink.LoginText]</span>
+        }
+    </a>
+}
 else
 {
-    if (Model.RegisterLink.ShowRegisterLink && Model.RegisterLink.RegistrationMode > 1)
-    {
-        <a class="registeruser" href="@Model.RegisterLink.Url">[LS:Data.Block.RegisterLink.RegisterText]</a>
-    }
+    <a href="@Model.LoginLink.Url" class="loginuser">
+        @if (Model.LoginLink.IsAuthenticated)
+        {
+            <span>[LS:Data.Block.LoginLink.LogoutText]</span>
+        }
+    </a>
+
 }

@@ -138,13 +138,16 @@
   <data name="ShowNotification.Text" xml:space="preserve">
     <value>Show Notifications</value>
   </data>
-  <data name="ShowRegisterLink.OFF" xml:space="preserve">
+  <data name="ShowSignInLink.OFF" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="ShowRegisterLink.ON" xml:space="preserve">
+  <data name="ShowSignInLink.ON" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="ShowRegisterLink.Text" xml:space="preserve">
+  <data name="ShowSignInLink.Text" xml:space="preserve">
     <value>Show Signup Link</value>
+  </data>
+  <data name="Template.Text" xml:space="preserve">
+    <value>Template</value>
   </data>
 </root>
