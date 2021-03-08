@@ -146,7 +146,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
             actionResult.RedirectURL = ServiceProvider.NavigationManager.NavigateURL();
             return actionResult;
         }
-                
+
         public void OnDataConsentComplete(DataConsentEventArgs e)
         {
             DataConsentCompleted?.Invoke(this, e);
