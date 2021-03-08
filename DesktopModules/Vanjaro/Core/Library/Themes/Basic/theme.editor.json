@@ -7152,6 +7152,103 @@
         }
       ],
       "Sass": ""
+    },
+    {
+      "Guid": "0cccd178-cf48-46a0-ba60-f3cfed4027aa",
+      "Category": "Hamburger Menu",
+      "Title": null,
+      "Controls": [
+        {
+          "Guid": "b6fba61f-3681-4949-a8ba-22c53da07a6a",
+          "Title": "Color",
+          "DefaultValue": "#ffffff",
+          "Suffix": "",
+          "CustomCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler svg {\n    fill: $Hamurgermenucolor;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler svg {\n    fill: $Hamurgermenucolor;\n}\n}",
+          "LessVariable": "$Hamurgermenucolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "566b27e3-de70-480f-b648-97e147e90e89",
+          "Title": "Background Color",
+          "DefaultValue": "#444444",
+          "Suffix": "",
+          "CustomCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler {\n  background: $HamurgermenubgColor;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler {\n  background: $HamurgermenubgColor;\n}\n}",
+          "LessVariable": "$HamurgermenubgColor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "faa09dc6-2aa6-400c-ab82-701264269b44",
+          "Title": "Height",
+          "DefaultValue": "15",
+          "Suffix": "px",
+          "CustomCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler svg {\n  height: $HamurgermenuHeightpx;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler svg {\n  height: $HamurgermenuHeightpx;\n}\n}",
+          "LessVariable": "$HamurgermenuHeight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "3423384a-238e-4450-a288-6fdb3450b5d4",
+          "Title": "Width",
+          "DefaultValue": "13",
+          "Suffix": "px",
+          "CustomCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler svg {\n  width: $HamurgermenuWidthpx;\n}\n}\n",
+          "PreviewCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler svg{\n  width: $HamurgermenuWidthpx;\n}\n}",
+          "LessVariable": "$HamurgermenuWidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "9e8c7ac3-3827-4869-a5f2-d6bf0b5bdcc7",
+          "Title": "Border Width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler {\n  border-width: $HamurgermenuBwidthpx;\n}\n}\n",
+          "PreviewCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler {\n  border-width: $HamurgermenuBwidthpx;\n}\n}",
+          "LessVariable": "$HamurgermenuBwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "4a189049-afc2-4b4c-a55e-15561923690a",
+          "Title": "Border Color",
+          "DefaultValue": "#444444",
+          "Suffix": "",
+          "CustomCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler {\n  border-color: $HamurgermenuBcolor;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler {\n  border-color: $HamurgermenuBcolor;\n}\n}",
+          "LessVariable": "$HamurgermenuBcolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "65b1b994-e75c-447e-a75c-3884700e64b1",
+          "Title": "Border Radius",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler {\n  border-radius: $HamurgermenuBradiuspx;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.navbar-expand-lg .navbar-toggler {\n  border-radius: $HamurgermenuBradiuspx;\n}\n}",
+          "LessVariable": "$HamurgermenuBradius",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        }
+      ],
+      "Sass": ".navbar-expand-lg .navbar-toggler {\n  border-style: solid;\n}"
     }
   ],
   "Fonts": [
