@@ -2149,6 +2149,9 @@ $(document).ready(function () {
                                                 value: '300',
                                                 name: 'Light',
                                             }, {
+                                                value: '400',
+                                                name: 'Normal',
+                                            }, {
                                                 value: '500',
                                                 name: 'Medium',
                                             }, {
