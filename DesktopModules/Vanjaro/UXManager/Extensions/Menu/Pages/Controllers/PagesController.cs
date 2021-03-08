@@ -124,7 +124,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
                             Settings.Add("PagesTemplate", new UIData { Name = "PagesTemplate", Options = pageSettings });
                             Settings.Add("PageLayouts", new UIData { Name = "PageLayouts", Options = pageLayouts });
                             Settings.Add("Permissions", new UIData { Name = "Permissions", Options = Managers.PagesManager.GetPagePermission(pageSettings, PortalSettings.Current.PortalId) });
-                            Settings.Add("ParentPage", new UIData { Name = "ParentPage", Options = Library.Managers.PageManager.GetParentPages(PortalSettings.Current).Select(a => new { a.TabID, a.TabName }), OptionsText = "TabName", OptionsValue = "TabID", Value = ParentPageValue });
+                            Settings.Add("ParentPage", new UIData { Name = "ParentPage", Options = Library.Managers.PageManager.GetParentPages(PortalSettings.Current, true).Select(a => new { a.TabID, a.TabName }), OptionsText = "TabName", OptionsValue = "TabID", Value = ParentPageValue });
                             Settings.Add("SitemapPriority", new UIData { Name = "SitemapPriority", Options = "", OptionsText = "label", OptionsValue = "value", Value = SitemapPriorityValue });
                             Settings.Add("URLType", new UIData { Name = "URLType", Options = Managers.UrlManager.StatusCodes, OptionsText = "Value", OptionsValue = "Key", Value = "200" });
                             Settings.Add("WorkingPageUrls", new UIData { Name = "WorkingPageUrls", Options = new SeoUrl() { SaveUrl = new DotNetNuke.Entities.Urls.SaveUrlDto() } });
@@ -369,7 +369,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
 
             if (request.Key.Value == "HasBeenPublished")
             {
-                Managers.PagesManager.UpdatePagePermission(tabinfo.TabID, request.Value.Value);                
+                Managers.PagesManager.UpdatePagePermission(tabinfo.TabID, request.Value.Value);
             }
             tab.UpdateTab(tabinfo);
             if (actionResult.IsSuccess)

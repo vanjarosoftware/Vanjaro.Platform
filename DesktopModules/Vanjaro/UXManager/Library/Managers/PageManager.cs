@@ -203,7 +203,7 @@ namespace Vanjaro.UXManager.Library
                 return ModuleDefDTOs;
             }
 
-            public static List<dynamic> GetParentPages(PortalSettings portalSettings)
+            public static List<dynamic> GetParentPages(PortalSettings portalSettings, bool DisableLink)
             {
                 List<dynamic> RootCategory = new List<dynamic>();
                 List<TabInfo> AvailablePages = Core.Managers.PageManager.GetPageList(PortalSettings.Current).ToList();
@@ -214,16 +214,22 @@ namespace Vanjaro.UXManager.Library
                     tab.TabName = page.TabName;
                     tab.TabID = page.TabID;
                     RootCategory.Add(tab);
-                    RootCategory.AddRange(GetPagesChildPages(page.TabID, "-", portalSettings));
+                    RootCategory.AddRange(GetPagesChildPages(page.TabID, "-", portalSettings, DisableLink));
                 }
-
                 return RootCategory;
             }
-
+            public static List<dynamic> GetParentPages(PortalSettings portalSettings)
+            {
+                return GetParentPages(portalSettings, false);
+            }
             private static List<dynamic> GetPagesChildPages(int TabId, string NamePrefix, PortalSettings portalSettings)
             {
+                return GetPagesChildPages(TabId, NamePrefix, portalSettings, false);
+            }
+            private static List<dynamic> GetPagesChildPages(int TabId, string NamePrefix, PortalSettings portalSettings, bool DisableLink)
+            {
                 List<dynamic> ChildPages = new List<dynamic>();
-                List<TabInfo> PageChildrens = TabController.GetTabsByParent(TabId, portalSettings.PortalId).Where(a => a.IsDeleted == false && a.DisableLink == false).ToList();
+                List<TabInfo> PageChildrens = TabController.GetTabsByParent(TabId, portalSettings.PortalId).Where(a => a.IsDeleted == false && a.DisableLink == DisableLink).ToList();
                 foreach (TabInfo item in PageChildrens)
                 {
                     dynamic childTab = new ExpandoObject();
@@ -231,9 +237,8 @@ namespace Vanjaro.UXManager.Library
                     childTab.TabName = NamePrefix + " " + item.TabName.TrimStart('-');
                     childTab.TabID = item.TabID;
                     ChildPages.Add(childTab);
-                    ChildPages.AddRange(GetPagesChildPages(item.TabID, NamePrefix + "-", portalSettings));
+                    ChildPages.AddRange(GetPagesChildPages(item.TabID, NamePrefix + "-", portalSettings, DisableLink));
                 }
-
                 return ChildPages;
             }
 
