@@ -172,6 +172,25 @@ span.separator {
     bottom: 92px;
 }
 
+@media(max-width: 425px) {
+    .login-box.socialbutton {
+        display: grid !important;
+    }
+
+    .socialbutton .Vj-Login {
+        order: 3;
+    }
+
+    .authentication-btn {
+        order: 1;
+    }
+
+    .separator-box {
+        margin: 20px 2% !important;
+        order: 2;
+    }
+}
+
 
 @media(max-width: 991px) {
     .login-box.socialbutton {
