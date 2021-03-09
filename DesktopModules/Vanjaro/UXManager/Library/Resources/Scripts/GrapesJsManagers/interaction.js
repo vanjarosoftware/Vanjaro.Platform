@@ -145,26 +145,11 @@ $(document).ready(function () {
         event.stopPropagation();
     });
 
-    $(".sidebar .Shortcut").click(function (e) {
-        e.preventDefault();
-        $("#About").fadeOut();
-        $(".sidebar").find($(this).attr("href")).fadeToggle();
-    });
-
-    $(".sidebar .About").click(function (e) {
-        e.preventDefault();
-        $("#Shortcuts").fadeOut();
-        $(".sidebar").find($(this).attr("href")).fadeToggle();
-    });
-
-    $(".closeshortcutbtn").click(function (e) {
-        e.preventDefault();
-        $(".sidebar").find("#Shortcuts").fadeOut();
-    });
-
-    $(".closeaboutbtn").click(function (e) {
-        e.preventDefault();
-        $(".sidebar").find("#About").fadeOut();
+    $(window).resize(function () {
+        if ($(window).width() < 1000) 
+            $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('lockcanvas');
+        else 
+            $(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('lockcanvas');
     });
 
 
@@ -179,7 +164,7 @@ $(document).ready(function () {
     }
 
     // Show-Hide ContentBlocks & MenuSettings
-    $(".block-manager #MenuSettings , .Menupanel-top").hide();
+    $(".block-manager #MenuSettings , .Menupanel-top , #About, #Shortcuts").hide();
     $(".block-manager #MenuSettings ul ul").css("left", "100%");
 
     $(".panelheader .blockItem").click(function (e) {
@@ -196,6 +181,8 @@ $(document).ready(function () {
             $(".block-manager > div").not("#MenuSettings,.Menupanel-top").fadeOut();
             $("#StyleToolManager").hide();
             $("#Notification").hide();
+            $("#About").hide();
+            $("#Shortcuts").hide();
             $(".Searchresult ul").empty();
             setTimeout(function () {
                 $(".block-manager").find(ID).fadeIn();
@@ -214,11 +201,34 @@ $(document).ready(function () {
             $("#StyleToolManager").hide();
             $("#Notification").hide();
             $(".Menupanel-top").hide();
+            $("#About").hide();
+            $("#Shortcuts").hide();
             //setTimeout(function () {
             $(".panel-top , .block-set").fadeIn();
             $("#ContentBlocks").fadeIn();
             ChangeBlockType();
             //}, 300);
+        }
+
+        else if (ID == "#About") {
+            $(".block-manager #MenuSettings ,.Menupanel-top").hide();
+            $("#StyleToolManager").hide();
+            $("#Notification").hide();
+            $(".Menupanel-top").hide();
+            $(".panel-top , .block-set").hide();
+            $("#Shortcuts").hide();
+            $("#About").show();
+        }
+
+        else if (ID == "#Shortcuts") {
+            $(".block-manager #MenuSettings ,.Menupanel-top").hide();
+            $("#StyleToolManager").hide();
+            $("#Notification").hide();
+            $(".Menupanel-top").hide();
+            $(".panel-top , .block-set").hide();
+            $("#About").hide();
+            $("#Shortcuts").fadeIn();
+
         }
 
         $("#iframeHolder").find('iframe').attr('src', 'about:blank');
