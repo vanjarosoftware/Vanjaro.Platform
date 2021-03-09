@@ -1,5 +1,6 @@
 ﻿.vj-ux-manager .uiengine-wrapper {
     height: 100vh !important;
+    padding-top: 25px;
 }
 
 .extn-users .boxcontrols {
@@ -105,11 +106,11 @@
 }
 
 
-    .uploaddefault.uploadinput-button .upld .fas {
-        padding: 5px;
-        margin-top: 45px;
-        color: #000 !important;
-    }
+.uploaddefault.uploadinput-button .upld .fas {
+    padding: 5px;
+    margin-top: 45px;
+    color: #000 !important;
+}
 
 .uploaddefault .upld .buttons {
     position: absolute;
@@ -188,7 +189,7 @@
 .FavIconfoldersdiv ul,
 .SocialSharingLogofoldersdiv ul {
     padding-left: 0 !important;
-    margin-top: 15px;
+    margin-top: 8px;
 }
 
 .rootfolder {
@@ -273,6 +274,10 @@ span.label {
 }
 
 .uploadinput-button span.btn.btn-primary {
-    top: -15px;
+    top: -24px;
     right: 0px;
+}
+
+.empty_msg {
+    margin-top: 0px;
 }
