@@ -182,6 +182,11 @@
                         $(obj).closest('.dataconsent').find('.signbtn').html(signinText);
                         $(obj).closest('.dataconsent').find('.signbtn').removeClass('disabled');
                     }
+                },
+                error: function (textStatus, errorThrown) {
+                    $(obj).closest('.Login').find('#loginbtn').html(errorThrown);
+                    $('<div class="show-message alert alert-danger">' + response.Message + '</div>').insertAfter($(obj).closest('.Login').find('.loginhead'));
+                    $(obj).closest('.Login').find('#loginbtn').removeClass('disabled');
                 }
             });
         }

@@ -307,85 +307,92 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
             public static ActionResult UserAuthenticated(UserAuthenticatedEventArgs e)
             {
                 ActionResult actionResult = new ActionResult();
-                LoginStatus = e.LoginStatus;
-
-                //Check the Login Status
-                switch (LoginStatus)
+                try
                 {
-                    case UserLoginStatus.LOGIN_USERNOTAPPROVED:
-                        switch (e.Message)
-                        {
-                            case "UnverifiedUser":
-                                if (e.User != null)
-                                {
-                                    //First update the profile (if any properties have been passed)
-                                    AuthenticationType = e.AuthenticationType;
-                                    //ProfileProperties = e.Profile;
-                                    RememberMe = e.RememberMe;
-                                    //UpdateProfile(e.User, true);
-                                    actionResult = ValidateUser(e.User, false);
-                                }
-                                break;
-                            case "EnterCode":
-                                actionResult.AddError(e.Message.ToString(), Localization.GetString(e.Message, LocalResourceFile));
-                                break;
-                            case "InvalidCode":
-                            case "UserNotAuthorized":
-                                actionResult.AddError(e.Message.ToString(), Localization.GetString(e.Message, LocalResourceFile));
-                                break;
-                            default:
-                                actionResult.AddError(e.Message.ToString(), Localization.GetString(e.Message, LocalResourceFile));
-                                break;
-                        }
-                        break;
-                    case UserLoginStatus.LOGIN_USERLOCKEDOUT:
-                        if (Host.AutoAccountUnlockDuration > 0)
-                        {
-                            actionResult.AddError("UserLockedOut", string.Format(Localization.GetString("UserLockedOut", LocalResourceFile), Host.AutoAccountUnlockDuration));
-                        }
-                        else
-                        {
-                            actionResult.AddError("UserLockedOut_ContactAdmin", Localization.GetString("UserLockedOut_ContactAdmin", LocalResourceFile));
-                        }
-                        //notify administrator about account lockout ( possible hack attempt )
-                        ArrayList Custom = new ArrayList { e.UserToken };
+                    LoginStatus = e.LoginStatus;
 
-                        Message message = new Message
-                        {
-                            FromUserID = PortalSettings.Current.AdministratorId,
-                            ToUserID = PortalSettings.Current.AdministratorId,
-                            Subject = Localization.GetSystemMessage(PortalSettings.Current, "EMAIL_USER_LOCKOUT_SUBJECT", Localization.GlobalResourceFile, Custom),
-                            Body = Localization.GetSystemMessage(PortalSettings.Current, "EMAIL_USER_LOCKOUT_BODY", Localization.GlobalResourceFile, Custom),
-                            Status = MessageStatusType.Unread
-                        };
-                        //_messagingController.SaveMessage(_message);
+                    //Check the Login Status
+                    switch (LoginStatus)
+                    {
+                        case UserLoginStatus.LOGIN_USERNOTAPPROVED:
+                            switch (e.Message)
+                            {
+                                case "UnverifiedUser":
+                                    if (e.User != null)
+                                    {
+                                        //First update the profile (if any properties have been passed)
+                                        AuthenticationType = e.AuthenticationType;
+                                        //ProfileProperties = e.Profile;
+                                        RememberMe = e.RememberMe;
+                                        //UpdateProfile(e.User, true);
+                                        actionResult = ValidateUser(e.User, false);
+                                    }
+                                    break;
+                                case "EnterCode":
+                                    actionResult.AddError(e.Message.ToString(), Localization.GetString(e.Message, LocalResourceFile));
+                                    break;
+                                case "InvalidCode":
+                                case "UserNotAuthorized":
+                                    actionResult.AddError(e.Message.ToString(), Localization.GetString(e.Message, LocalResourceFile));
+                                    break;
+                                default:
+                                    actionResult.AddError(e.Message.ToString(), Localization.GetString(e.Message, LocalResourceFile));
+                                    break;
+                            }
+                            break;
+                        case UserLoginStatus.LOGIN_USERLOCKEDOUT:
+                            if (Host.AutoAccountUnlockDuration > 0)
+                            {
+                                actionResult.AddError("UserLockedOut", string.Format(Localization.GetString("UserLockedOut", LocalResourceFile), Host.AutoAccountUnlockDuration));
+                            }
+                            else
+                            {
+                                actionResult.AddError("UserLockedOut_ContactAdmin", Localization.GetString("UserLockedOut_ContactAdmin", LocalResourceFile));
+                            }
+                            //notify administrator about account lockout ( possible hack attempt )
+                            ArrayList Custom = new ArrayList { e.UserToken };
 
-                        Mail.SendEmail(PortalSettings.Current.Email, PortalSettings.Current.Email, message.Subject, message.Body);
-                        break;
-                    case UserLoginStatus.LOGIN_FAILURE:
-                        //A Login Failure can mean one of two things:
-                        //  1 - User was authenticated by the Authentication System but is not "affiliated" with a DNN Account
-                        //  2 - User was not authenticated
-                        if (string.IsNullOrEmpty(e.Message))
-                        {
-                            actionResult.AddError("LoginFailed", Localization.GetString("LoginFailed", LocalResourceFile));
-                        }
-                        else
-                        {
-                            actionResult.AddError(e.Message.ToString(), Localization.GetString(e.Message, LocalResourceFile));
-                        }
-                        break;
-                    default:
-                        if (e.User != null)
-                        {
-                            //First update the profile (if any properties have been passed)
-                            AuthenticationType = e.AuthenticationType;
-                            //ProfileProperties = e.Profile;
-                            RememberMe = e.RememberMe;
-                            //UpdateProfile(e.User, true);
-                            actionResult = ValidateUser(e.User, (e.AuthenticationType != "DNN"));
-                        }
-                        break;
+                            Message message = new Message
+                            {
+                                FromUserID = PortalSettings.Current.AdministratorId,
+                                ToUserID = PortalSettings.Current.AdministratorId,
+                                Subject = Localization.GetSystemMessage(PortalSettings.Current, "EMAIL_USER_LOCKOUT_SUBJECT", Localization.GlobalResourceFile, Custom),
+                                Body = Localization.GetSystemMessage(PortalSettings.Current, "EMAIL_USER_LOCKOUT_BODY", Localization.GlobalResourceFile, Custom),
+                                Status = MessageStatusType.Unread
+                            };
+                            //_messagingController.SaveMessage(_message);
+
+                            Mail.SendEmail(PortalSettings.Current.Email, PortalSettings.Current.Email, message.Subject, message.Body);
+                            break;
+                        case UserLoginStatus.LOGIN_FAILURE:
+                            //A Login Failure can mean one of two things:
+                            //  1 - User was authenticated by the Authentication System but is not "affiliated" with a DNN Account
+                            //  2 - User was not authenticated
+                            if (string.IsNullOrEmpty(e.Message))
+                            {
+                                actionResult.AddError("LoginFailed", Localization.GetString("LoginFailed", LocalResourceFile));
+                            }
+                            else
+                            {
+                                actionResult.AddError(e.Message.ToString(), Localization.GetString(e.Message, LocalResourceFile));
+                            }
+                            break;
+                        default:
+                            if (e.User != null)
+                            {
+                                //First update the profile (if any properties have been passed)
+                                AuthenticationType = e.AuthenticationType;
+                                //ProfileProperties = e.Profile;
+                                RememberMe = e.RememberMe;
+                                //UpdateProfile(e.User, true);
+                                actionResult = ValidateUser(e.User, (e.AuthenticationType != "DNN"));
+                            }
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    actionResult.AddError("userlogin_error", DotNetNuke.Services.Localization.Localization.GetString("UserLogin_Error", Core.Components.Constants.LocalResourcesFile));
                 }
                 return actionResult;
             }
@@ -436,7 +443,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                 }
                 return _user;
             }
-            
+
 
 
             /// -----------------------------------------------------------------------------
@@ -519,7 +526,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                             Path = (!string.IsNullOrEmpty(Globals.ApplicationPath) ? Globals.ApplicationPath : "/")
                         });
 
-                        
+
                         break;
                     case UserValidStatus.PASSWORDEXPIRED:
                         //strMessage = string.Format(Localization.GetString("PasswordExpired", LocalResourceFile), expiryDate.ToLongDateString());

@@ -144,6 +144,7 @@ span.separator {
     position: relative;
     top: 46%;
     color: #ccc;
+ 
 }
 
 .separator-box {
@@ -175,8 +176,15 @@ span.separator {
 
 @media(max-width: 991px) {
     .login-box.socialbutton {
-        display: block;
+        flex-direction:column-reverse;
     }
+    span.separator {
+        padding: 0px;
+        top: auto;
+      left: 50%;
+        transform: translateX(-50%);
+    }
+
 
     .socialbutton .Vj-Login {
         margin: auto;
@@ -188,10 +196,12 @@ span.separator {
     }
 
     .separator-box {
-        display: block;
-        text-align: center;
-        max-width: 350px;
-        margin: 20px auto;
+         display: flex;
+    text-align: center;
+    max-width: 350px;
+    margin: 20px auto;
+    width: 100%;
+    position: relative;
     }
 
     .topline {

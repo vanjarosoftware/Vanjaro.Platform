@@ -189,7 +189,7 @@ li.openbtn {
 #About iframe {
     border: 0;
     box-shadow: none;
-    height: calc(100% - 30px);
+    height: calc(100vh - 90px);
     width: 100%;
 }
 
@@ -210,11 +210,6 @@ ul.Shortcuts {
     left: 0;
     list-style: none;
     padding-left: 15px;
-}
-
-ul.Shortcuts {
-    background: #e6e9ec !important;
-    top: 48px !important;
 }
 
     ul.MenuItem li,
@@ -249,53 +244,6 @@ ul.Shortcuts {
             font-size: 15px;
             line-height: 20px;
         }
-
-#Shortcuts .closeshortcut {
-    text-align: right;
-    margin-right: 10px;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    margin-left: 10px;
-    padding-bottom: 13px;
-}
-
-#Shortcuts .closeshortcutbtn {
-    cursor: pointer;
-    color: #495157;
-}
-
-    #Shortcuts .closeshortcutbtn:hover {
-        color: #252522;
-    }
-
-.closeabout h5 {
-    display: inline-block;
-    font-size: 18px;
-}
-
-.closeabout {
-    text-align: right;
-    margin-right: 10px;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    margin-left: 10px;
-    padding-bottom: 30px;
-    height: 30px;
-}
-
-    .closeabout .aboutlink {
-        float: left;
-        margin-left: 5px;
-        margin-top: -2px;
-    }
-
-a.closeaboutbtn {
-    float: right;
-    cursor: pointer;
-    color: #495157;
-}
-    a.closeaboutbtn:hover {
-        color: #252522;
-    }
-
 
 #Shortcuts hr {
     margin: 5px 0;
@@ -1945,19 +1893,6 @@ html.responsive {
             border-color: #a4afb7;
         }
 
-.sidebar #Shortcuts, .sidebar #About {
-    opacity: 1;
-    position: absolute;
-    left: 100%;
-    top: 0;
-    z-index: 99;
-    width: 200px;
-    height: 100%;
-    border-left: 1px solid #ccc;
-    background: #e6e9ec;
-    padding: 10px 0;
-    display: none;
-}
 
 #uploaded_image {
     width: 100px;
