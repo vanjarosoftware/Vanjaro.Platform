@@ -677,8 +677,8 @@
           "Title": "Color",
           "DefaultValue": "#777777",
           "Suffix": "",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .dropdown-menu li font ,\n.mobile_registerbox .modal .modal-body font\n{\n    color: $registercolor !important;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .dropdown-menu li font ,\n.mobile_registerbox .modal .modal-body font\n{\n    color: $registercolor !important;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .dropdown-menu li span ,\n.mobile_registerbox .modal .modal-body p\n{\n    color: $registercolor !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .dropdown-menu li span ,\n.mobile_registerbox .modal .modal-body p\n{\n    color: $registercolor !important;\n}",
           "LessVariable": "$registercolor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -691,8 +691,8 @@
           "Title": "Font Size",
           "DefaultValue": "14",
           "Suffix": "px",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li font,\n.mobile_registerbox .modal .modal-body font{\n  font-size: $registerfontsizepx !important;\n}\n",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li font,\n.mobile_registerbox .modal .modal-body font{\n  font-size: $registerfontsizepx !important;\n}\n",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p{\n  font-size: $registerfontsizepx !important;\n}\n",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p{\n  font-size: $registerfontsizepx !important;\n}\n",
           "LessVariable": "$registerfontsize",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -702,8 +702,8 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li font,\n.mobile_registerbox .modal .modal-body font{\n    font-family: $signupfontfamily !important;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li font,\n.mobile_registerbox .modal .modal-body font{\n    font-family: $signupfontfamily !important;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p{\n    font-family: $signupfontfamily !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p{\n    font-family: $signupfontfamily !important;\n}",
           "LessVariable": "$signupfontfamily",
           "JavascriptVariable": "",
           "Type": "Fonts"
@@ -743,8 +743,8 @@
           "Title": "Border Color",
           "DefaultValue": "#00000026",
           "Suffix": "",
-          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n  \n}\n\n.desktop_registerbox .dropdown-menu li + li {\n    border-top-color: $profilebrColor;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n  \n}\n.desktop_registerbox .dropdown-menu li + li {\n    border-top-color: $profilebrColor;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n  \n}\n\n.desktop_registerbox .dropdown-menu li + li {\n    border-top-color: $profilebrColor;\n}\n\n.mobile_registerbox .modal-body hr{\n background-color :  $profilebrColor;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n  \n}\n.desktop_registerbox .dropdown-menu li + li {\n    border-top-color: $profilebrColor;\n}\n\n.mobile_registerbox .modal-body hr{\n background-color :  $profilebrColor;\n}",
           "LessVariable": "$profilebrColor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -786,7 +786,7 @@
           "Type": "Color Picker"
         }
       ],
-      "Sass": ".registerlinkbox {\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}\n\n.registerlink-notification svg {\n\tfill: #777;\n}\n\n.registeruser:hover {\n\tcolor: #444;\n}\n\n.registerlink-notification {\n    display: inline-block !important;\n\tcolor: #777 !important;\n    background-color: transparent !important;\n    border: 0 !important;\n\tpadding: 5px !important;\n\tpadding-bottom: 6px;\n\tpadding-left: 6px;\n}\n\n    .registerlinkbox .vj-text{\n\tdisplay: inline-block;\n    text-align: unset;\n    color: unset !important;\n    margin-left:5px;\n}\n\n\n\n.desktop_registerbox .dropdown-toggle {\n    display: block;\n}\n\n.desktop_registerbox span {\n    margin: 0;\n}\n.desktop_registerbox .dropdown-menu {\n    min-width: 235px;\n    padding: 0;\n    top: 0 !important;\n    right: 0 !important;\n    left: auto !important;\n}\n    .desktop_registerbox .dropdown-menu a {\n        display: block;\n        padding: 10px;\n        margin: 0;       \n        transition: all .15s ease-in-out;\n    }\n      \n.desktop_registerbox .dropdown-menu li + li{\n border-style:solid;\n   border-bottom:0px;\n  border-left:0px;\n  border-right:0px \n}\n\nmobile_registerbox .modal-dialog {\n    margin: 0;\n    max-width: 100% !important;\n    height: 100%  !important;\n}\n\n@media(min-width: 992px) {\n    .mobile_registerbox {\n        display: none;\n    }\n}\n@media(max-width: 991px) {\n    .desktop_registerbox {\n        display: none;\n    }\n    .mobile_registerbox img {\n        border-radius: 50%;\n    }\n}"
+      "Sass": ".registerlinkbox {\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}\n\n.registerlink-notification svg {\n\tfill: #777;\n}\n\n.registeruser:hover {\n\tcolor: #444;\n}\n\n.registerlink-notification {\n    display: inline-block !important;\n\tcolor: #777 !important;\n    background-color: transparent !important;\n    border: 0 !important;\n\tpadding: 5px !important;\n\tpadding-bottom: 6px;\n\tpadding-left: 6px;\n}\n\n    .registerlinkbox .vj-text{\n\tdisplay: inline-block;\n    text-align: unset;\n    color: unset !important;\n    margin-left:5px;\n}\n\n\n\n.desktop_registerbox .dropdown-toggle {\n    display: block;\n}\n\n.desktop_registerbox span {\n    margin: 0;\n}\n.desktop_registerbox .dropdown-menu {\n    min-width: 235px;\n    padding: 0;\n    top: 0 !important;\n    right: 0 !important;\n    left: auto !important;\n}\n    .desktop_registerbox .dropdown-menu a {\n        display: block;\n        padding: 10px;\n        margin: 0;       \n        transition: all .15s ease-in-out;\n    }\n      \n.desktop_registerbox .dropdown-menu li + li{\n border-style:solid;\n   border-bottom:0px;\n  border-left:0px;\n  border-right:0px \n}\n\n.mobile_registerbox .modal-dialog {\n    margin: 0;\n    max-width: 100% !important;\n    height: 100%  !important;\n}\n\n@media(min-width: 992px) {\n    .mobile_registerbox {\n        display: none;\n    }\n}\n@media(max-width: 991px) {\n    .desktop_registerbox {\n        display: none;\n    }\n    .mobile_registerbox img {\n        border-radius: 50%;\n    }\n}"
     },
     {
       "Guid": "02beb436-0e62-41d4-805f-537d0d391294",
