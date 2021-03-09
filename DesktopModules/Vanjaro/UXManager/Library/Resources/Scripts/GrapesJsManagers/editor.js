@@ -261,7 +261,7 @@ $(document).ready(function () {
             }
             else {
                 $('.sidebar').removeClass('settingclosebtn');
-            }
+                 }
         }
     }, 500);
 
@@ -1454,6 +1454,17 @@ $(document).ready(function () {
                                     LoadApps();
                                     LoadDesignBlocks();
                                 }
+
+                                if ($(window).width() < 1000) {
+                                        $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
+                                }
+
+                                $(window).resize(function () {
+                                    if ($(window).width() < 1000)
+                                        $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
+                                    else
+                                        $(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('deviceframe');
+                                });
 
                                 LoadCustomBlocks();
                                 VjEditor.UndoManager.start();
@@ -2757,6 +2768,11 @@ $(document).ready(function () {
             setCookie("vj_InitUX", "true");
             if (window.location.href.indexOf('#') > 0 && window.location.href.split("#")[0] != CurrentTabUrl) {
                 window.location.href = CurrentTabUrl.split('/uxmode')[0];
+            }
+            if ($(window).width() < 1000) {
+                setTimeout(function () {
+                    $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
+                }, 300);
             }
             $(this).find("em").addClass("fa-chevron-left").removeClass("fa-chevron-right");
             $('#dnn_ContentPane').addClass("sidebar-open").removeClass('sidebar-close');

@@ -26,28 +26,48 @@
 }
 
 
-.lockcanvas {
+.lockcanvas{
     pointer-events: none;
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     opacity: 0.2;
 }
 
-    .lockcanvas .gjs-frame {
+.deviceframe {
+    pointer-events: none;
+    background: #fff;
+}
+
+    .lockcanvas .gjs-frame, .deviceframe .gjs-frame {
         pointer-events: none !important;
     }
 
-    .lockcanvas:before {
-        content: "\f023";
-        z-index: 99999;
-        color: black;
-        position: absolute;
-        font-size: 200px;
-        left: calc(50% - 100px);
-        top: calc(50% - 150px);
-        opacity: 0.9;
-        font-family: 'Font Awesome 5 Free';
-    }
+.lockcanvas:before {
+    content: "\f023";
+    z-index: 99999;
+    color: black;
+    position: absolute;
+    font-size: 200px;
+    left: calc(50% - 100px);
+    top: calc(50% - 150px);
+    opacity: 0.9;
+    font-family: 'Font Awesome 5 Free';
+}
+
+.deviceframe:before {
+    content: "Sorry but your device is too small for editor.";
+    z-index: 99999;
+    color: black;
+    position: absolute;
+    background: #fff;
+    font-size: 18px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+}
 
 .swal-wide {
     width: 900px !important;

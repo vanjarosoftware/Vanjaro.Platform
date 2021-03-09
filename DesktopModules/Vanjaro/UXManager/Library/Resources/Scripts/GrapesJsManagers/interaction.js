@@ -145,14 +145,6 @@ $(document).ready(function () {
         event.stopPropagation();
     });
 
-    $(window).resize(function () {
-        if ($(window).width() < 1000) 
-            $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('lockcanvas');
-        else 
-            $(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('lockcanvas');
-    });
-
-
     OpenAbout = function (e, title, url) {
         $("#About").find("iframe").attr("src", url);
 
