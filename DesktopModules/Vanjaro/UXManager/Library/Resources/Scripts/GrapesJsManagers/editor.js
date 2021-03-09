@@ -1985,6 +1985,8 @@ $(document).ready(function () {
                                     $(".Menupanel-top").hide();
                                     $("#StyleToolManager").hide();
                                     $("#Notification").hide();
+                                    $("#About").hide();
+                                    $("#Shortcuts").hide();
                                     $('#DeviceManager,#LanguageManager,#MenuSettings,.ntoolbox').hide();
                                     $("#BlockManager").show();
                                     $(".panel-top").show();
@@ -2680,7 +2682,7 @@ $(document).ready(function () {
                             //Tooltip
                             $('[data-bs-toggle="tooltip"]').tooltip();
 
-                            $('.block-elements .blockItem').on("click", function (e) {
+                            $('.block-elements.blockItem').on("click", function (e) {
                                 var messagesrc = CurrentExtTabUrl + "&guid=" + $(this).attr('guid');
 
                                 $('#iframeHolder').find('iframe').attr('src', 'about:blank');
@@ -2712,7 +2714,7 @@ $(document).ready(function () {
     }
 
     var ShowBlockUI = function () {
-        $("#iframeHolder, #StyleToolManager, .Menupanel-top").hide();
+        $("#iframeHolder, #StyleToolManager, .Menupanel-top, #About, #Shortcuts").hide();
         $(".panel-top, #BlockManager, .block-set, #ContentBlocks").show();
     };
 
