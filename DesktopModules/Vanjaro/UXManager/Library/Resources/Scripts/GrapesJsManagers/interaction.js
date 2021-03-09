@@ -17,6 +17,12 @@ $(document).ready(function () {
         $iframe.css('display', 'block');
     });
 
+    if ($(window).width() < 1000) {
+        setTimeout(function () {
+            $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
+        }, 300);
+    }
+
     $('.device-view').click(function () {
         $('.device-view').removeClass('active');
         $(this).addClass('active');
@@ -146,12 +152,11 @@ $(document).ready(function () {
     });
 
     $(window).resize(function () {
-        if ($(window).width() < 1000) 
-            $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('lockcanvas');
-        else 
-            $(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('lockcanvas');
+        if ($(window).width() < 1000)
+            $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
+        else
+            $(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('deviceframe');
     });
-
 
     OpenAbout = function (e, title, url) {
         $("#About").find("iframe").attr("src", url);
