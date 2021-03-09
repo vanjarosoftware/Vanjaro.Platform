@@ -675,7 +675,7 @@
     },
     {
       "Guid": "dc2bcfb8-6d5c-4065-8206-e91774a50183",
-      "Category": "Signup & My Account",
+      "Category": "Sign In & My Account",
       "Title": null,
       "Controls": [
         {
@@ -683,22 +683,24 @@
           "Title": "Color",
           "DefaultValue": "#777777",
           "Suffix": "",
-          "CustomCSS": ".registeruser {\n    color: $registercolor !important;\n}",
-          "PreviewCSS": ".registeruser {\n    color: $registercolor !important;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .dropdown-menu li span ,\n.mobile_registerbox .modal .modal-body a,\n .registerlink-notification sup strong {\n    color: $registercolor ;\n}\n\n .registerlink-notification svg {\n  fill: $registercolor;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .dropdown-menu li span ,\n.mobile_registerbox .modal .modal-body a,\n.registerlink-notification sup strong {\n    color: $registercolor ;\n}\n\n.registerlink-notification svg {\n  fill: $registercolor;\n}",
           "LessVariable": "$registercolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "7f6108d1-188d-4b15-acc4-080bc2a570be",
           "Title": "Font Size",
           "DefaultValue": "14",
           "Suffix": "px",
-          "CustomCSS": ".registerlinkbox .registeruser text{\n  font-size: $registerfontsizepx !important;\n}",
-          "PreviewCSS": ".registerlinkbox .registeruser text{\n  font-size: $registerfontsizepx !important;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p{\n  font-size: $registerfontsizepx !important;\n}\n",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p{\n  font-size: $registerfontsizepx !important;\n}\n",
           "LessVariable": "$registerfontsize",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
@@ -706,9 +708,10 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".registerlinkbox *{\n    font-family: $signupfontfamily !important;\n}",
-          "PreviewCSS": ".registerlinkbox *{\n    font-family: $signupfontfamily !important;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p{\n    font-family: $signupfontfamily !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p{\n    font-family: $signupfontfamily !important;\n}",
           "LessVariable": "$signupfontfamily",
+          "JavascriptVariable": "",
           "Type": "Fonts"
         },
         {
@@ -724,74 +727,31 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".registeruser text {\n    font-style: $registerfontstyle !important;\n}",
-          "PreviewCSS": ".registeruser text {\n    font-style: $registerfontstyle !important;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle{\n    font-style: $registerfontstyle !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle{\n    font-style: $registerfontstyle !important;\n}",
           "LessVariable": "$registerfontstyle",
+          "JavascriptVariable": "",
           "Type": "Dropdown"
-        }
-      ],
-      "Sass": ".registerlinkbox {\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}\n\n.registerlink-notification svg {\n\tfill: #777;\n}\n\n.registeruser:hover {\n\tcolor: #444;\n}\n\n.registerlink-notification {\n\tcolor: #777 !important;\n    background-color: transparent !important;\n    border: 0 !important;\n\tpadding: 0;\n\tpadding-bottom: 6px;\n\tpadding-left: 6px;\n}\n\n    .registerlinkbox .vj-text{\n\tdisplay: inline-block;\n    text-align: unset;\n    color: unset !important;\n    margin-left:5px;\n}"
-    },
-    {
-      "Guid": "02beb436-0e62-41d4-805f-537d0d391294",
-      "Category": "Signup & My Account",
-      "Title": "Avatar",
-      "Controls": [
-        {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
-          "Guid": "3cd99cb1-8d47-45ff-a24d-ba374bf3739e",
-          "Title": "Width",
-          "DefaultValue": "34",
-          "Suffix": "px",
-          "CustomCSS": ".registeruser img{\nwidth:$avatarwidthpx!important;\n}",
-          "PreviewCSS": ".registeruser img{\nwidth:$avatarwidthpx!important;\n}",
-          "LessVariable": "$avatarwidth",
-          "Type": "Slider"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 0,
-          "Guid": "22a09c51-9058-4159-850c-f0493549a35c",
-          "Title": "Height",
-          "DefaultValue": "34",
-          "Suffix": "px",
-          "CustomCSS": ".registeruser img{\nheight:$avatarheightpx!important;\n}",
-          "PreviewCSS": ".registeruser img{\nheight:$avatarheightpx!important;\n}",
-          "LessVariable": "$avatarheight",
-          "Type": "Slider"
-        },
-        {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
-          "Guid": "ff8be1f8-d29e-442a-999c-93b49a133b8c",
-          "Title": "Border radius",
-          "DefaultValue": "5",
-          "Suffix": "px",
-          "CustomCSS": ".registeruser img{\nborder-radius:$avatarradiuspx!important;\n}",
-          "PreviewCSS": ".registeruser img{\nborder-radius:$avatarradiuspx!important;\n}",
-          "LessVariable": "$avatarradius",
-          "Type": "Slider"
-        }
-      ],
-      "Sass": ""
-    },
-    {
-      "Guid": "b5bc7645-634b-4e1e-a99d-d4d358986c55",
-      "Category": "Sign In & Out",
-      "Title": null,
-      "Controls": [
-        {
-          "Guid": "967ffedc-a123-480f-b6b6-948288eb2a58",
-          "Title": "Color",
-          "DefaultValue": "#777777",
+          "Guid": "77e9891e-28a3-4d56-823e-ce22150b9026",
+          "Title": "Background Color",
+          "DefaultValue": "#ffffff",
           "Suffix": "",
-          "CustomCSS": " a.loginuser {\n    color: $signincolor !important;\n\n}",
-          "PreviewCSS": " a.loginuser {\n    color: $signincolor !important;\n\n}",
-          "LessVariable": "$signincolor",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu,\n.mobile_registerbox .modal .modal-content{\n  background-color: $profilebgColor;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu,\n.mobile_registerbox .modal .modal-content{\n  background-color: $profilebgColor;\n}",
+          "LessVariable": "$profilebgColor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "3ba7b783-a6ee-4338-a038-8f8f9ddb85bd",
+          "Title": "Border Color",
+          "DefaultValue": "#00000026",
+          "Suffix": "",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n  \n}\n\n.desktop_registerbox .dropdown-menu li + li {\n    border-top-color: $profilebrColor;\n}\n\n.mobile_registerbox .modal-body hr{\n background-color :  $profilebrColor;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n  \n}\n.desktop_registerbox .dropdown-menu li + li {\n    border-top-color: $profilebrColor;\n}\n\n.mobile_registerbox .modal-body hr{\n background-color :  $profilebrColor;\n}",
+          "LessVariable": "$profilebrColor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
         },
@@ -799,48 +759,90 @@
           "RangeMin": 0.0,
           "RangeMax": 100.0,
           "Increment": 1.0,
-          "Guid": "ea0de0fd-a08e-4d75-8ed7-e9911be48fdb",
-          "Title": "Font Size",
-          "DefaultValue": "14",
+          "Guid": "83e4408a-af9a-425f-8518-a09497091ac1",
+          "Title": "Border Width",
+          "DefaultValue": "1",
           "Suffix": "px",
-          "CustomCSS": " a.loginuser{\n    font-size: $signinfontsizepx !important;\n\n}",
-          "PreviewCSS": " a.loginuser{\n    font-size: $signinfontsizepx !important;\n\n}",
-          "LessVariable": "$signinfontsize",
-          "JavascriptVariable": null,
+          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-width: $profiledDropdownbrWidthpx ;\n}\n\n.desktop_registerbox .dropdown-menu li + li{\n  border-top-width: $profiledDropdownbrWidthpx ;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-width: $profiledDropdownbrWidthpx ;\n}\n\n.desktop_registerbox .dropdown-menu li + li{\n  border-top-width: $profiledDropdownbrWidthpx ;\n}",
+          "LessVariable": "$profiledDropdownbrWidth",
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
-          "Guid": "b147b3cc-6074-461d-bb0e-d3e579e8a60b",
-          "Title": "Font Family",
-          "DefaultValue": "Poppins, sans-serif",
+          "Guid": "820f36b5-811f-4b91-8b52-a5dec4941d72",
+          "Title": "Background Hover Color",
+          "DefaultValue": "#EFEFEF",
           "Suffix": "",
-          "CustomCSS": " a.loginuser *{\n    font-family: $signinfontstyle !important;\n\n}",
-          "PreviewCSS": " a.loginuser *{\n    font-family: $signinfontstyle !important;\n\n}",
-          "LessVariable": "$signinfontstyle",
-          "JavascriptVariable": null,
-          "Type": "Fonts"
+          "CustomCSS": ".desktop_registerbox .dropdown-menu a:hover{\n  background-color:$profilebgHoveVolor;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu a:hover{\n  background-color:$profilebgHoveVolor;\n}",
+          "LessVariable": "$profilebgHoveVolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
         },
         {
-          "Options": [
-            {
-              "normal": "normal"
-            },
-            {
-              "italic": "italic"
-            }
-          ],
-          "Guid": "1bbf66bc-5cb6-4520-a80e-da9bf7703988",
-          "Title": "Font Style",
-          "DefaultValue": "normal",
+          "Guid": "1ccc1318-12c1-49df-80f0-508e7fd31451",
+          "Title": "Icon Color",
+          "DefaultValue": "#777777",
           "Suffix": "",
-          "CustomCSS": " a.loginuser {\n    font-style: $signinfontstyle !important;\n\n}",
-          "PreviewCSS": " a.loginuser {\n    font-style: $signinfontstyle !important;\n\n}",
-          "LessVariable": "$signinfontstyle",
-          "JavascriptVariable": null,
-          "Type": "Dropdown"
+          "CustomCSS": ".mobile_registerbox svg{\n  fill: $profileMobileIconClr;\n}",
+          "PreviewCSS": ".mobile_registerbox svg{\n  fill: $profileMobileIconClr;\n}",
+          "LessVariable": "$profileMobileIconClr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
         }
       ],
-      "Sass": "a.loginuser {\n    margin-left: 10px;\n    margin-right: 10px;\n}\n\n.loginuser .vj-text {\nfont-size: unset;\n    color: unset !important;\n    display: inherit;\n}"
+      "Sass": ".registerlinkbox {\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}\n\n.registeruser:hover {\n\tcolor: #444;\n}\n.desktop_registerbox .dropdown-menu li {\n position:relative;\n}\n\n.desktop_registerbox .registerlink-notification {\nbackground-color: transparent !important;\nposition: absolute;\nright: 5px;\ntop: 10px;\ndisplay: inline-block !important;\ncolor: #777 !important;\n  padding: 5px !important;\n\n}\n\n.mobile_registerbox .registerlink-notification {\n\tpadding: 5px !important;\n}\n\n\n    .registerlinkbox .vj-text{\n\tdisplay: inline-block;\n    text-align: unset;\n    color: unset !important;\n    margin-left:5px;\n}\n\n\n.desktop_registerbox .dropdown-toggle {\n    display: block;\n}\n\n.desktop_registerbox span {\n    margin: 0;\n}\n.desktop_registerbox .dropdown-menu {\n    min-width: 235px;\n    padding: 0;\n    top: 0 !important;\n    right: 0 !important;\n    left: auto !important;\n}\n    .desktop_registerbox .dropdown-menu a {\n        display: block;\n        padding: 10px;\n        margin: 0;       \n        transition: all .15s ease-in-out;\n    }\n\n\n.desktop_registerbox .dropdown-menu li + li{\n border-style:solid;\n   border-bottom:0px;\n  border-left:0px;\n  border-right:0px \n}\n.mobile_registerbox .modal-body div {\n    margin-bottom: 8px;\n}\n      \n.mobile_registerbox .modal-dialog {\n    margin: 0;\n    max-width: 100% !important;\n    height: 100%  !important;\n}\n\n@media(min-width: 992px) {\n    .mobile_registerbox {\n        display: none;\n    }\n}\n@media(max-width: 991px) {\n    .desktop_registerbox {\n        display: none;\n    }\n    .mobile_registerbox img {\n        border-radius: 50%;\n    }\n}"
+    },
+    {
+      "Guid": "02beb436-0e62-41d4-805f-537d0d391294",
+      "Category": "Sign In & My Account",
+      "Title": "Avatar",
+      "Controls": [
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "3cd99cb1-8d47-45ff-a24d-ba374bf3739e",
+          "Title": "Width",
+          "DefaultValue": "34",
+          "Suffix": "px",
+          "CustomCSS": ".desktop_registerbox img{\nwidth:$avatarwidthpx!important;\n}",
+          "PreviewCSS": ".desktop_registerbox img{\nwidth:$avatarwidthpx!important;\n}",
+          "LessVariable": "$avatarwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 0.0,
+          "Guid": "22a09c51-9058-4159-850c-f0493549a35c",
+          "Title": "Height",
+          "DefaultValue": "34",
+          "Suffix": "px",
+          "CustomCSS": ".desktop_registerbox img{\nheight:$avatarheightpx!important;\n}",
+          "PreviewCSS": ".desktop_registerbox img{\nheight:$avatarheightpx!important;\n}",
+          "LessVariable": "$avatarheight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "ff8be1f8-d29e-442a-999c-93b49a133b8c",
+          "Title": "Border radius",
+          "DefaultValue": "50",
+          "Suffix": "%",
+          "CustomCSS": ".desktop_registerbox img{\nborder-radius:$avatarradius%!important;\n}",
+          "PreviewCSS": ".desktop_registerbox img{\nborder-radius:$avatarradius%!important;\n}",
+          "LessVariable": "$avatarradius",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        }
+      ],
+      "Sass": ""
     },
     {
       "Guid": "dc5f49a8-3bdd-4e6e-a372-d90cf17ae7c9",
