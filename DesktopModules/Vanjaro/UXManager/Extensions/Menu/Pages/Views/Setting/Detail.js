@@ -88,7 +88,6 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
     $scope.PageFile = new FileUploader();
     $scope.PageFileDetails = [];
     $scope.Show_Tab = false;
-    $scope.Loaded = false;
     var common = CommonSvc.getData($scope);
     //Init Scope
     $scope.onInit = function () {
@@ -131,7 +130,6 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
             todayHighlight: true
         });
         $scope.TabName = $scope.ui.data.PagesTemplate.Options.name;
-        $scope.Loaded = true;
     };
 
     $scope.Click_Back = function () {
