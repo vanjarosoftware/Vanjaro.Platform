@@ -129,6 +129,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
             clearBtn: true,
             todayHighlight: true
         });
+        $scope.TabName = $scope.ui.data.PagesTemplate.Options.name;
     };
 
     $scope.Click_Back = function () {
@@ -359,6 +360,10 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         window.parent.ShowNotification('[LS:Pages]', data.Message, 'error');
                     }
                     if (data.IsSuccess) {
+                        if ($scope.pid > 0 && $scope.TabName != $scope.ui.data.PagesTemplate.Options.name) {
+                            parent.location.href = data.Data.url;
+                        }
+
                         if ($scope.ui.data.PagesTemplate.Options.tabId == parseInt($.ServicesFramework(-1).getTabId())) {
                             window.parent.VJIsContentApproval = data.Data.IsContentApproval ? "True" : "False";
                             window.parent.VJNextStateName = data.Data.NextStateName;
