@@ -52,6 +52,15 @@
                                 <a href="#" class="loginlink" onclick="Login.ShowResetPassword(this)">[LS:Data.Block.Login.ResetPasswordText]</a>
                             </div>
                         }
+
+                        @if (Model.Login.ShowRegister && Model.Login.RegistrationMode > 1)
+                        {
+                            <div>
+                                <div class="text-center not-registerd">
+                                    <span>[LS:Signupmessage]</span> <a class="Register-link" href="@Model.Login.RegisterUrl">[LS:Data.Block.Login.RegisterText]</a>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
                 @if (Model.OAuthClients.Count > 0)
@@ -118,14 +127,7 @@
                     <a href="#" class="btn btn-default" onclick="Login.HideResetPassword(this)">[LS:Data.Block.Login.SigninText]</a>
                 </div>
             </div>
-            @if (Model.Login.ShowRegister && Model.Login.RegistrationMode > 1)
-            {
-                <div>
-                    <div class="text-center not-registerd">
-                        <span>[LS:Signupmessage]</span> <a class="Register-link" href="@Model.Login.RegisterUrl">[LS:Data.Block.Login.RegisterText]</a>
-                    </div>
-                </div>
-            }
+           
         </div>
     </div>
 </div>
