@@ -1455,6 +1455,17 @@ $(document).ready(function () {
                                     LoadDesignBlocks();
                                 }
 
+                                if ($(window).width() < 1000) {
+                                        $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
+                                }
+
+                                $(window).resize(function () {
+                                    if ($(window).width() < 1000)
+                                        $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
+                                    else
+                                        $(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('deviceframe');
+                                });
+
                                 LoadCustomBlocks();
                                 VjEditor.UndoManager.start();
 
