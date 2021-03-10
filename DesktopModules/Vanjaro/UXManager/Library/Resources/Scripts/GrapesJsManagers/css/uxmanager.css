@@ -212,38 +212,59 @@ ul.Shortcuts {
     padding-left: 15px;
 }
 
-    ul.MenuItem li,
-    ul.Shortcuts li {
-        padding: 5px 0;
+ul.Shortcuts {
+    top: auto;
+}
+
+#Shortcuts h4 {
+    padding: 10px 0px;
+    margin: 0 15px;
+    border-bottom: 1px solid #d2d6d9;
+    font-size: 18px;
+    font-weight: 700;
+    color: #444;
+    line-height: 30px;
+    text-align: center;
+}
+
+ul.MenuItem li,
+ul.Shortcuts li {
+    padding: 5px 0;
+}
+
+    ul.MenuItem li a,
+    ul.Shortcuts li a {
+        display: block;
+        font-size: 20px;
+        font-weight: normal;
+        color: #313131;
+        text-decoration: none;
     }
 
-        ul.MenuItem li a,
-        ul.Shortcuts li a {
-            display: block;
-            font-size: 20px;
-            font-weight: normal;
-            color: #313131;
-            text-decoration: none;
-        }
-
-            ul.MenuItem li a em {
-                width: 25px;
-                color: #a4a4a4;
-                font-size: 14px;
-                text-align: center;
-            }
-
-    ul.MenuItem ul.MenuItem li,
-    ul.Shortcuts li {
-        padding: 8px 0;
+    ul.Shortcuts li a {
+        display: block;
+        font-size: 20px;
+        font-weight: normal;
+        color: #313131;
+        text-decoration: none;
     }
 
-        ul.MenuItem ul.MenuItem li a,
-        .Searchresult ul.MenuItem li a,
-        ul.Shortcuts li a {
-            font-size: 15px;
-            line-height: 20px;
+        ul.MenuItem li a em {
+            width: 25px;
+            color: #a4a4a4;
+            font-size: 14px;
+            text-align: center;
         }
+
+ul.MenuItem ul.MenuItem li{
+    padding: 8px 0;
+}
+
+    ul.MenuItem ul.MenuItem li a,
+    .Searchresult ul.MenuItem li a{
+        font-size: 15px;
+        line-height: 20px;
+    }
 
 #Shortcuts hr {
     margin: 5px 0;
@@ -1014,14 +1035,14 @@ div#MenuSettings .parent-menu-hide {
         box-shadow: 0 0 0 0.2rem rgba(40, 96, 144, 0.5);
     }
 
-    #ModalContent .cbglobal button.btn {
-        box-shadow: none;
-        font-size: 14px;
-    }
+#ModalContent .cbglobal button.btn {
+    box-shadow: none;
+    font-size: 14px;
+}
 
-    #ModalContent .cbglobal #ToggelBlockGlobal {
-        opacity: 1;
-    }
+#ModalContent .cbglobal #ToggelBlockGlobal {
+    opacity: 1;
+}
 
 #ModalContent .custom-block-disabled {
     cursor: default;
