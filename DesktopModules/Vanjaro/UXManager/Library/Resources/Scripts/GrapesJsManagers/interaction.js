@@ -176,11 +176,9 @@ $(document).ready(function () {
             $("#About").hide();
             $("#Shortcuts").hide();
             $(".Searchresult ul").empty();
-            setTimeout(function () {
-                $(".block-manager").find(ID).fadeIn();
-                $(".Menupanel-top").fadeIn();
-                $(".Menupanel-top input").focus();
-            }, 300);
+            $(".block-manager").find(ID).fadeIn();
+            $(".Menupanel-top").fadeIn();
+            $(".Menupanel-top input").focus();
 
             $(".box-content").find("ul, li").removeAttr("style");
             $("#MenuSettings").find("ul").removeClass("left-0 left-100 left-200 left-minus-100");

@@ -15,7 +15,7 @@
                     </a>
                     @if (Model.Setting.HasTabEditPermission)
                     {
-                        <a class='btn blockItem active' href='#ContentBlocks'>
+                        <a class='btn blockItem blocksmenu active' href='#ContentBlocks'>
                             <em class='fas fa-cubes' data-bs-toggle="tooltip" data-bs-placement="bottom" title="[LS:Blocks]"></em>
                         </a>
                     }
@@ -91,6 +91,7 @@
             @if (Model.Setting.HasShortcut)
             {
                 <div id='Shortcuts' class='box-content'>
+                    <h4>Shortcuts</h4>
                     @Html.Raw(Model.Setting.ShortcutMarkUp)
                 </div>
             }
