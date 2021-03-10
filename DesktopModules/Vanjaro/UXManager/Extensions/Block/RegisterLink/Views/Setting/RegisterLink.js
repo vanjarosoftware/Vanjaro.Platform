@@ -7,15 +7,17 @@
         $scope.CurrentRegistrationLink = window.parent.VjEditor.getSelected();
         if ($scope.CurrentRegistrationLink != undefined) {
             $scope.ui.data.Global.Value = $scope.CurrentRegistrationLink.attributes.attributes["data-block-global"] == "false" ? false : true;
-            if ($scope.ui.data.Global.Value) {
-                $scope.ui.data.ShowRegisterLink.Value = $scope.ui.data.GlobalConfigs.Options['data-block-showregisterlink'] == "false" ? false : true;
+            if ($scope.ui.data.Global.Value) {  
+                $scope.ui.data.ShowSignInLink.Value = $scope.ui.data.GlobalConfigs.Options['data-block-showsigninlink'] == "false" ? false : true;
                 $scope.ui.data.ShowAvatar.Value = $scope.ui.data.GlobalConfigs.Options['data-block-showavatar'] == "false" ? false : true;
                 $scope.ui.data.ShowNotification.Value = $scope.ui.data.GlobalConfigs.Options['data-block-shownotification'] == "false" ? false : true;
+                $scope.ui.data.Template.Value = $scope.ui.data.GlobalConfigs.Options["data-block-template"];        
             }
             else {
-                $scope.ui.data.ShowRegisterLink.Value = $scope.CurrentRegistrationLink.attributes.attributes['data-block-showregisterlink'] == "false" ? false : true;
+                $scope.ui.data.ShowSignInLink.Value = $scope.CurrentRegistrationLink.attributes.attributes['data-block-showsigninlink'] == "false" ? false : true;
                 $scope.ui.data.ShowAvatar.Value = $scope.CurrentRegistrationLink.attributes.attributes['data-block-showavatar'] == "false" ? false : true;
                 $scope.ui.data.ShowNotification.Value = $scope.CurrentRegistrationLink.attributes.attributes['data-block-shownotification'] == "false" ? false : true;
+                $scope.ui.data.Template.Value = $scope.CurrentRegistrationLink.attributes.attributes["data-block-template"];  
             }
         }
         $scope.Loaded = true;
@@ -31,13 +33,21 @@
             window.parent.RenderBlock(registered);
     };
 
-    $scope.$watch('ui.data.ShowRegisterLink.Value', function (newValue, oldValue) {
+    $scope.$watch('ui.data.Template.Value', function (newValue, oldValue) {
+        if (newValue != undefined && oldValue != undefined) {
+            var registered = window.parent.VjEditor.getSelected();
+            registered.addAttributes({ 'data-block-template': newValue });
+            $scope.ApplyChanges(registered);
+        }
+    });
+
+    $scope.$watch('ui.data.ShowSignInLink.Value', function (newValue, oldValue) {
         if (newValue != undefined && oldValue != undefined) {
             var registered = window.parent.VjEditor.getSelected();
             if (newValue)
-                registered.addAttributes({ 'data-block-showregisterlink': 'true' });
+                registered.addAttributes({ 'data-block-showsigninlink': 'true' });
             else
-                registered.addAttributes({ 'data-block-showregisterlink': 'false' });
+                registered.addAttributes({ 'data-block-showsigninlink': 'false' });
             $scope.ApplyChanges(registered);
         }
     });

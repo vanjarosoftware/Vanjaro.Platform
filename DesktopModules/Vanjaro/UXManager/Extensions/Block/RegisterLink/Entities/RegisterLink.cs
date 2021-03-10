@@ -9,8 +9,10 @@ namespace Vanjaro.UXManager.Extensions.Block.RegisterLink.Entities
     public class RegisterLink
     {
         public string Url { get; set; }
-        public bool IsAuthenticated { get; set; }
-        public bool ShowRegisterLink { get; set; }
+        public bool IsAuthenticated { get; set; }        
+
+        public bool ShowSignInLink { get; set; }
+        
         public bool ShowAvatar { get; set; }
         public bool ShowNotification { get; set; }
 

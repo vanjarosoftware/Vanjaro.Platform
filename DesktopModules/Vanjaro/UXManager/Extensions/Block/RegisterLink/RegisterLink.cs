@@ -125,12 +125,13 @@ namespace Vanjaro.UXManager.Extensions.Block.RegisterLink
                 {
                     Url = Globals.RegisterURL(HttpUtility.UrlEncode(ServiceProvider.NavigationManager.NavigateURL()), Null.NullString),
                     IsAuthenticated = HttpContext.Current.Request.IsAuthenticated,
-                    ShowRegisterLink = Convert.ToBoolean(Attributes["data-block-showregisterlink"]),
+                    ShowSignInLink = Convert.ToBoolean(Attributes["data-block-showsigninlink"]),
                     ShowNotification = Convert.ToBoolean(Attributes["data-block-shownotification"]),
                     ShowAvatar = Convert.ToBoolean(Attributes["data-block-showavatar"])
                 };
                 IDictionary<string, object> dynObjects = new ExpandoObject() as IDictionary<string, object>;
                 dynObjects.Add("RegisterLink", rl);
+                dynObjects.Add("LoginLink", GetModel());
                 string Template = RazorEngineManager.RenderTemplate(ExtensionInfo.GUID, BlockPath, Attributes["data-block-template"], dynObjects);
                 Template = new DNNLocalizationEngine(null, ResouceFilePath, false).Parse(Template);
                 return Template;
@@ -140,6 +141,28 @@ namespace Vanjaro.UXManager.Extensions.Block.RegisterLink
                 ExceptionManager.LogException(ex);
                 return ex.Message;
             }
+        }
+
+        private Entities.LoginLink GetModel()
+        {
+            Entities.LoginLink LoginLink = new Entities.LoginLink();
+            string returnUrl = HttpContext.Current?.Request.QueryString["returnurl"] != null ? HttpContext.Current?.Request.QueryString["returnurl"] : HttpContext.Current?.Request.RawUrl;
+
+            PortalSettings PortalSettings = PortalController.Instance.GetCurrentSettings() as PortalSettings;
+            bool Visible = (!PortalSettings.HideLoginControl || HttpContext.Current.Request.IsAuthenticated)
+                    && (!PortalSettings.InErrorPageRequest());
+
+            LoginLink.Url = Managers.LoginLinkManager.LoginURL(returnUrl, false);
+
+            if (Visible)
+            {
+                LoginLink.IsAuthenticated = HttpContext.Current.Request.IsAuthenticated;
+                if (LoginLink.IsAuthenticated)
+                {
+                    LoginLink.Url = Core.Managers.LoginManager.Logoff();
+                }
+            }
+            return LoginLink;
         }
     }
 }
