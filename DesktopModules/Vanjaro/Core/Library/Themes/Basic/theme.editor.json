@@ -681,10 +681,10 @@
         {
           "Guid": "bded6b29-283f-4620-b090-0e05be41abfb",
           "Title": "Color",
-          "DefaultValue": "#777777",
+          "DefaultValue": "#444444",
           "Suffix": "",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .dropdown-menu li span ,\n.mobile_registerbox .modal .modal-body a,\n .registerlink-notification sup strong,\n.desktop_registerbox .registerlink-notification{\n    color: $registercolor ;\n}\n\n .registerlink-notification svg path{\n  fill: $registercolor;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .dropdown-menu li span ,\n.mobile_registerbox .modal .modal-body a,\n.registerlink-notification sup strong,\n.desktop_registerbox .registerlink-notification{\n    color: $registercolor ;\n}\n\n.registerlink-notification svg path{\n  fill: $registercolor;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .dropdown-menu li span ,\n.mobile_registerbox .modal .modal-body a,\n .registerlink-notification sup strong,\n.desktop_registerbox .registerlink-notification,\n.loginuser span{\n    color: $registercolor ;\n}\n\n .registerlink-notification svg path{\n  fill: $registercolor;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .dropdown-menu li span ,\n.mobile_registerbox .modal .modal-body a,\n.registerlink-notification sup strong,\n.desktop_registerbox .registerlink-notification,\n.loginuser span{\n    color: $registercolor ;\n}\n\n.registerlink-notification svg path{\n  fill: $registercolor;\n}",
           "LessVariable": "$registercolor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -697,8 +697,8 @@
           "Title": "Font Size",
           "DefaultValue": "14",
           "Suffix": "px",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p{\n  font-size: $registerfontsizepx !important;\n}\n",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p{\n  font-size: $registerfontsizepx !important;\n}\n",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n  font-size: $registerfontsizepx !important;\n}\n",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n  font-size: $registerfontsizepx !important;\n}\n",
           "LessVariable": "$registerfontsize",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -708,8 +708,8 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p{\n    font-family: $signupfontfamily !important;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p{\n    font-family: $signupfontfamily !important;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n    font-family: $signupfontfamily !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n    font-family: $signupfontfamily !important;\n}",
           "LessVariable": "$signupfontfamily",
           "JavascriptVariable": "",
           "Type": "Fonts"
@@ -727,8 +727,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle{\n    font-style: $registerfontstyle !important;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle{\n    font-style: $registerfontstyle !important;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n    font-style: $registerfontstyle !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n    font-style: $registerfontstyle !important;\n}",
           "LessVariable": "$registerfontstyle",
           "JavascriptVariable": "",
           "Type": "Dropdown"
