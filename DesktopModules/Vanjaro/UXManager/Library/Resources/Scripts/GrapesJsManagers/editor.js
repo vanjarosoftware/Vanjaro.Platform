@@ -1457,19 +1457,19 @@ $(document).ready(function () {
 
                                 if ($(window).width() < 1000) {
                                     $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
-                                    $(".ToolbarItem li:not(.PageSettings),.toolmanager,.blockItem.blocksmenu ").hide();
+                                    $(".ToolbarItem li:not(.PageSettings),.toolmanager,.more_icons,.blockItem.blocksmenu ").hide();
                                     $("a.blockItem.settings").trigger("click");
                                 }
 
                                 $(window).resize(function () {
                                     if ($(window).width() < 1000) {
                                         $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
-                                        $(".ToolbarItem li:not(.PageSettings),.toolmanager, .blockItem.blocksmenu ").hide();
+                                        $(".ToolbarItem li:not(.PageSettings),.toolmanager,.more_icons, .blockItem.blocksmenu ").hide();
                                         $("a.blockItem.settings").trigger("click");
                                     }
                                     else {
                                         $(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('deviceframe');
-                                        $(".ToolbarItem li,.toolmanager,.blockItem.blocksmenu ").show();
+                                        $(".ToolbarItem li,.toolmanager,.more_icons,.blockItem.blocksmenu ").show();
                                         $('.ToolbarItem > li:gt(4)').hide();
                                         $('.ntoolbox > li:lt(5)').hide();
                                         $("a.blockItem.blocksmenu").trigger("click");
