@@ -843,8 +843,8 @@
           "Title": "Color",
           "DefaultValue": "#444444",
           "Suffix": "",
-          "CustomCSS": ".mobile_registerbox .mobile-registerbox-btn svg path{\n  fill: $profileMobileIconClr;\n}",
-          "PreviewCSS": ".mobile_registerbox .mobile-registerbox-btn svg path{\n  fill: $profileMobileIconClr;\n}",
+          "CustomCSS": ".mobile_registerbox .mobile-registerbox-btn svg path,\n.loginuser svg path{\n  fill: $profileMobileIconClr;\n}",
+          "PreviewCSS": ".mobile_registerbox .mobile-registerbox-btn svg path,\n.loginuser svg path{\n  fill: $profileMobileIconClr;\n}",
           "LessVariable": "$profileMobileIconClr",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -857,8 +857,8 @@
           "Title": "Height",
           "DefaultValue": "23",
           "Suffix": "px",
-          "CustomCSS": ".mobile_registerbox .mobile-registerbox-btn svg {\n    height: $userIconHeightpx;\n}",
-          "PreviewCSS": ".mobile_registerbox .mobile-registerbox-btn svg {\n    height: $userIconHeightpx;\n}",
+          "CustomCSS": ".mobile_registerbox .mobile-registerbox-btn svg,\n.loginuser svg {\n    height: $userIconHeightpx;\n}",
+          "PreviewCSS": ".mobile_registerbox .mobile-registerbox-btn svg,\n.loginuser svg {\n    height: $userIconHeightpx;\n}",
           "LessVariable": "$userIconHeight",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -871,8 +871,8 @@
           "Title": "Width",
           "DefaultValue": "30",
           "Suffix": "px",
-          "CustomCSS": ".mobile_registerbox .mobile-registerbox-btn svg {\n    width: $userIconWidthpx;\n}",
-          "PreviewCSS": ".mobile_registerbox .mobile-registerbox-btn svg {\n    width: $userIconWidthpx;\n}",
+          "CustomCSS": ".mobile_registerbox .mobile-registerbox-btn svg,\n.loginuser svg {\n    width: $userIconWidthpx;\n}",
+          "PreviewCSS": ".mobile_registerbox .mobile-registerbox-btn svg,\n.loginuser svg {\n    width: $userIconWidthpx;\n}",
           "LessVariable": "$userIconWidth",
           "JavascriptVariable": "",
           "Type": "Slider"
