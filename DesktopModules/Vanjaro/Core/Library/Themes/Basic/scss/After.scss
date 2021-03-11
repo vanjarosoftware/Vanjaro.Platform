@@ -1,16 +1,14 @@
 
-/*Secondary color*/
-.btn-secondary {
-    color: #fff;
-}
-
-/*Secondary, Tertiary, Quaternary hover colors*/
+.btn-primary,
+.btn-secondary,
+.btn-primary:hover,
 .btn-secondary:hover,
 .btn-tertiary:hover,
-.btn-quaternary:hover {
+.btn-quaternary:hover,
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover {
     color: #fff;
 }
-
 
 /*Tertiary Color*/
 .btn-tertiary {
@@ -23,6 +21,11 @@
     color: $orchid;
     border-color: $orchid;
 }
+.btn-outline-tertiary:hover {
+    color: #fff;
+    background-color: $orchid;
+}
+
 
 .border-tertiary {
     border-color: $orchid !important;
@@ -47,6 +50,11 @@
 .btn-outline-quaternary {
     color: $salmon;
     border-color: $salmon;
+}
+
+.btn-outline-quaternary:hover {
+    color: #fff;
+    background-color: $salmon;
 }
 
 .border-quaternary {
