@@ -1112,7 +1112,7 @@ namespace Vanjaro.Skin
         {
             get
             {
-                return Globals.ApplicationMapPath + @"\Portals\_default\" + Core.Managers.BlockManager.GetTheme() + "App_LocalResources\\Shared.resx";
+                return Globals.ApplicationMapPath + @"\Portals\_default\" + ThemeManager.CurrentTheme.Name + "\\App_LocalResources\\Shared.resx";
             }
         }
 
@@ -1120,7 +1120,7 @@ namespace Vanjaro.Skin
         {
             get
             {
-                return Core.Managers.BlockManager.GetVirtualPath() + Core.Managers.BlockManager.GetTheme() + "templates/design";
+                return Core.Managers.BlockManager.GetVirtualPath() + ThemeManager.CurrentTheme.Name + "/templates/design";
             }
         }
 
