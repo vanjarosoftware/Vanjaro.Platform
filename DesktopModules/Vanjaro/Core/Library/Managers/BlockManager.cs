@@ -118,7 +118,7 @@ namespace Vanjaro.Core
                 if (result == null)
                 {
                     result = new Dictionary<string, string>();
-                    string FolderPath = Globals.ApplicationMapPath + @"\portals\_default\" + GetTheme() + BlockDirectory + "\\" + Block + "\\";
+                    string FolderPath = Globals.ApplicationMapPath + @"\portals\_default\" + GetTheme(PortalSettings.PortalId) + BlockDirectory + "\\" + Block + "\\";
                     if (Directory.Exists(FolderPath))
                     {
                         string markup = string.Empty;
@@ -166,9 +166,9 @@ namespace Vanjaro.Core
                 BlockFactory.AddUpdate(_customBlock);
             }
 
-            public static string GetTheme(string ThemeName = "Basic")
+            public static string GetTheme(int PortalID)
             {
-                return "vThemes\\" + ThemeName + "\\";
+                return "vThemes\\" + ThemeManager.GetCurrent(PortalID).Name + "\\";
             }
             public static string GetVirtualPath()
             {
@@ -177,7 +177,7 @@ namespace Vanjaro.Core
 
             public static string GetTemplateDir(PortalSettings PortalSettings, string Block)
             {
-                return GetVirtualPath() + GetTheme(ThemeManager.CurrentTheme.Name) + "Blocks\\" + Block + "\\Templates\\";
+                return GetVirtualPath() + GetTheme(PortalSettings.PortalId) + "Blocks\\" + Block + "\\Templates\\";
             }
 
             public static void UpdateDesignElement(PortalSettings PortalSettings, Dictionary<string, string> Attributes)

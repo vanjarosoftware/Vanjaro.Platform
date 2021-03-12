@@ -75,7 +75,7 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchInput
             get
             {
 
-                return Globals.ApplicationMapPath + @"\Portals\_default\" + Core.Managers.BlockManager.GetTheme() + "App_LocalResources//Shared.resx";
+                return Globals.ApplicationMapPath + @"\Portals\_default\" + Core.Managers.BlockManager.GetTheme(PortalSettings.Current.PortalId) + "App_LocalResources//Shared.resx";
             }
         }
 

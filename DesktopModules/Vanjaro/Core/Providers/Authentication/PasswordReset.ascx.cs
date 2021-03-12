@@ -32,7 +32,7 @@ namespace Vanjaro.Core.Providers.Authentication
         {
             get
             {
-                return Globals.ApplicationMapPath + @"\portals\_default\" + Core.Managers.BlockManager.GetTheme() + "App_LocalResources\\Shared.resx";
+                return Globals.ApplicationMapPath + @"\portals\_default\" + Core.Managers.BlockManager.GetTheme(PortalId) + "App_LocalResources\\Shared.resx";
             }
         }
 
@@ -40,7 +40,7 @@ namespace Vanjaro.Core.Providers.Authentication
         {
             get
             {
-                return Core.Managers.BlockManager.GetVirtualPath() + Core.Managers.BlockManager.GetTheme() + "templates\\design\\Password Reset\\";
+                return Core.Managers.BlockManager.GetVirtualPath() + Core.Managers.BlockManager.GetTheme(PortalId) + "templates\\design\\Password Reset\\";
             }
         }
         public string LocalResourcesFile => "~/DesktopModules/Vanjaro/Core/Providers/Authentication/Resources/";
