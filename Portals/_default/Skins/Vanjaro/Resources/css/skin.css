@@ -16,6 +16,7 @@
     height: 100%;
     width: 100%;
     border: none;
+    position:absolute;
 }
 
     .modal .modal-dialog iframe body {
@@ -242,6 +243,7 @@ a, a:hover, a:focus, a:active {
 
 #UXRender {
     padding: 0;
+    position:relative;
 }
 
 .uxmanager-modal .modal-dialog {
