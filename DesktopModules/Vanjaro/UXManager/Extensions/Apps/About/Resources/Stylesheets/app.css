@@ -28,6 +28,9 @@ ul.About {
     bottom: 0;
     position: absolute;
     color: #777;
+    width: 100%;
+    text-align: center;
+    margin-left: -12px;
 }
 
 ul.About li {
@@ -35,13 +38,18 @@ ul.About li {
 }
 
     ul.About li a, ul.About li a span {
-        display: block;
+        display: inline-block;
         font-size: 15px;
         line-height: 20px;
         font-weight: normal;
         color: #313131;
         text-decoration: none;
     }
+
+        ul.About li a em.fa {
+            margin-right: 8px;
+            line-height: inherit;
+        }
 
 
 .vj-about .About .badge {
