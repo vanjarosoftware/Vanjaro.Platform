@@ -622,8 +622,8 @@
           "Title": "Padding Top",
           "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".DefaultMenu .dropdown-item a{\n    padding-top: $submenulinkPtpx;\n}",
-          "PreviewCSS": ".DefaultMenu .dropdown-item a{\n    padding-top: $submenulinkPtpx;\n}",
+          "CustomCSS": ".DefaultMenu .dropdown-item a,\n.DefaultMenu .dropdown-submenu a{\n    padding-top: $submenulinkPtpx;\n}",
+          "PreviewCSS": ".DefaultMenu .dropdown-item a,\n.DefaultMenu .dropdown-submenu a{\n    padding-top: $submenulinkPtpx;\n}",
           "LessVariable": "$submenulinkPt",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -636,8 +636,8 @@
           "Title": "Padding Bottom",
           "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".DefaultMenu .dropdown-item a{\n    padding-bottom: $submenulinkPbpx;\n}",
-          "PreviewCSS": ".DefaultMenu .dropdown-item a{\n    padding-bottom: $submenulinkPbpx;\n}",
+          "CustomCSS": ".DefaultMenu .dropdown-item a,\n.DefaultMenu .dropdown-submenu a{\n    padding-bottom: $submenulinkPbpx;\n}",
+          "PreviewCSS": ".DefaultMenu .dropdown-item a,\n.DefaultMenu .dropdown-submenu a{\n    padding-bottom: $submenulinkPbpx;\n}",
           "LessVariable": "$submenulinkPb",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -650,8 +650,8 @@
           "Title": "Padding Left",
           "DefaultValue": "25",
           "Suffix": "px",
-          "CustomCSS": ".DefaultMenu .dropdown-item a{\n    padding-left: $submenulinkPlpx;\n}",
-          "PreviewCSS": ".DefaultMenu .dropdown-item a{\n    padding-left: $submenulinkPlpx;\n}",
+          "CustomCSS": ".DefaultMenu .dropdown-item a,\n.DefaultMenu .dropdown-submenu a{\n    padding-left: $submenulinkPlpx;\n}",
+          "PreviewCSS": ".DefaultMenu .dropdown-item a,\n.DefaultMenu .dropdown-submenu a{\n    padding-left: $submenulinkPlpx;\n}",
           "LessVariable": "$submenulinkPl",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -664,8 +664,8 @@
           "Title": "Padding Right",
           "DefaultValue": "25",
           "Suffix": "px",
-          "CustomCSS": ".DefaultMenu .dropdown-item a{\n    padding-right: $submenulinkPrpx;\n}",
-          "PreviewCSS": ".DefaultMenu .dropdown-item a{\n    padding-right: $submenulinkPrpx;\n}",
+          "CustomCSS": ".DefaultMenu .dropdown-item a,\n.DefaultMenu .dropdown-submenu a{\n    padding-right: $submenulinkPrpx;\n}",
+          "PreviewCSS": ".DefaultMenu .dropdown-item a,\n.DefaultMenu .dropdown-submenu a{\n    padding-right: $submenulinkPrpx;\n}",
           "LessVariable": "$submenulinkPr",
           "JavascriptVariable": "",
           "Type": "Slider"
