@@ -229,7 +229,12 @@ namespace Vanjaro.UXManager.Library
             private static List<dynamic> GetPagesChildPages(int TabId, string NamePrefix, PortalSettings portalSettings, bool DisableLink)
             {
                 List<dynamic> ChildPages = new List<dynamic>();
-                List<TabInfo> PageChildrens = TabController.GetTabsByParent(TabId, portalSettings.PortalId).Where(a => a.IsDeleted == false && a.DisableLink == DisableLink).ToList();
+                List<TabInfo> PageChildrens;
+                if (DisableLink)
+                    PageChildrens = TabController.GetTabsByParent(TabId, portalSettings.PortalId).Where(a => a.IsDeleted == false).ToList();
+                else
+                    PageChildrens = TabController.GetTabsByParent(TabId, portalSettings.PortalId).Where(a => a.IsDeleted == false && a.DisableLink == DisableLink).ToList();
+
                 foreach (TabInfo item in PageChildrens)
                 {
                     dynamic childTab = new ExpandoObject();
