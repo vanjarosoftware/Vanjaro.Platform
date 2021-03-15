@@ -100,7 +100,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Roles
             Breakline = true,
             Width = Width,
             Action = Event,
-            Icon = "",
+            Icon = "fas fa-user-shield",
             Visibility = Visibility
         };
         #endregion

@@ -103,7 +103,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
             Breakline = false,
             Width = Width,
             Action = Event,
-            Icon = "",
+            Icon = "fa fa-file",
             Visibility = Factories.AppFactory.GetAccessRoles(UserController.Instance.GetCurrentUserInfo()).Contains("admin")
         };
         #endregion

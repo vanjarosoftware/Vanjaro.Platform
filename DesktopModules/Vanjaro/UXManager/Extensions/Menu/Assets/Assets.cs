@@ -86,7 +86,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Assets
             Breakline = false,
             Width = Width,
             Action = Event,
-            Icon = "",
+            Icon = "fa fa-folder",
             Visibility = Visibility
         };
         #endregion

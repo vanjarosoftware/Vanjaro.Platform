@@ -101,7 +101,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users
             Breakline = false,
             Width = Width,
             Action = Event,
-            Icon = "",
+            Icon = "fa fa-users",
             Visibility = Visibility
         };
         #endregion

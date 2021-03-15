@@ -220,11 +220,12 @@ ul.Shortcuts {
     padding: 10px 0px;
     margin: 0 15px;
     border-bottom: 1px solid #d2d6d9;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 700;
     color: #444;
     line-height: 30px;
     text-align: center;
+    text-transform: uppercase;
 }
 
 ul.MenuItem li,
@@ -249,12 +250,13 @@ ul.Shortcuts li {
         text-decoration: none;
     }
 
-        ul.MenuItem li a em {
-            width: 25px;
-            color: #a4a4a4;
-            font-size: 14px;
-            text-align: center;
-        }
+    ul.MenuItem li a em,
+    ul.Shortcuts li a em{
+        width: 25px;
+        color: #a4a4a4;
+        font-size: 14px;
+        text-align: center;
+    }
 
 ul.MenuItem ul.MenuItem li{
     padding: 8px 0;
