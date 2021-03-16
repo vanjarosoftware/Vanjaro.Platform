@@ -339,12 +339,6 @@
   <data name="Position.Text" xml:space="preserve">
     <value>Position</value>
   </data>
-  <data name="Preview360px.Text" xml:space="preserve">
-    <value>360px</value>
-  </data>
-  <data name="Preview768px.Text" xml:space="preserve">
-    <value>768px</value>
-  </data>
   <data name="Responsive.Text" xml:space="preserve">
     <value>Responsive</value>
   </data>
@@ -467,8 +461,5 @@
   </data>
   <data name="MobileLandscape.Text" xml:space="preserve">
     <value>Mobile Landscape</value>
-  </data>
-  <data name="Preview700px.Text" xml:space="preserve">
-    <value>700px</value>
   </data>
 </root>
