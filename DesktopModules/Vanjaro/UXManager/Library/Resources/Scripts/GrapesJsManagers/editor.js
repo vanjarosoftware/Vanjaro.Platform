@@ -1319,7 +1319,11 @@ $(document).ready(function () {
                                         width: '768px', // this value will be used on canvas width
                                         widthMedia: '991px', // this value will be used in CSS @media
                                     }, {
-                                        name: 'Mobile',
+                                        name: 'Mobile Landscape',
+                                        width: '700px', // this value will be used on canvas width
+                                        widthMedia: '767px', // this value will be used in CSS @media
+                                    }, {
+                                        name: 'Mobile Portrait',
                                         width: '360px', // this value will be used on canvas width
                                         widthMedia: '575px', // this value will be used in CSS @media
                                     }]
@@ -2929,23 +2933,26 @@ $(document).ready(function () {
             if (vjEditorSettings.EditPage) {
                 $iframe.removeClass("fixed-height");
                 $iframe.contents().find("html").removeClass('responsive');
+                $iframe.contents().find("html").removeClass('mobile-responsive');
+                $iframe.removeClass('mobile-landscape-height');
                 $iframe.contents().find("#wrapper").removeClass("scrollbar");
                 VjEditor.runCommand('set-device-desktop');
             }
             else
-                $body.removeClass('resp-mode tablet mobile').addClass('resp-mode');
+                $body.removeClass('resp-mode tablet mobile-portrait mobile-landscape').addClass('resp-mode');
         }
         //Tablet Portrait
         else if ($this.attr("id") == "Tablet") {
 
             if (vjEditorSettings.EditPage) {
-                $iframe.removeClass("fixed-height");
+                $iframe.removeClass("fixed-height mobile-landscape-height");
                 $iframe.contents().find("html").addClass('responsive');
                 $iframe.contents().find("#wrapper").addClass("scrollbar");
+                $iframe.contents().find("html").removeClass('mobile-responsive');                
                 VjEditor.runCommand('set-device-tablet');
             }
             else
-                $body.removeClass('mobile').addClass('resp-mode tablet');
+                $body.removeClass('mobile-portrait mobile-landscape').addClass('resp-mode tablet');
         }
         //Mobile Portrait
         else if ($this.attr("id") == "Mobile") {
@@ -2953,11 +2960,30 @@ $(document).ready(function () {
             if (vjEditorSettings.EditPage) {
                 $iframe.addClass("fixed-height");
                 $iframe.contents().find("html").addClass('responsive');
+                $iframe.contents().find("html").removeClass('mobile-responsive');
+                $iframe.removeClass('mobile-landscape-height');
                 $iframe.contents().find("#wrapper").addClass("scrollbar");
-                VjEditor.runCommand('set-device-mobile');
+                VjEditor.runCommand('set-device-mobile-portrait');
             }
             else
-                $body.removeClass('tablet').addClass('resp-mode mobile');
+                $body.removeClass('tablet mobile-landscape').addClass('resp-mode mobile-portrait');
+        }
+
+        //MobileLandscape
+        else if ($this.attr("id") == "MobileLandscape") {
+           
+            if (vjEditorSettings.EditPage) {
+                $iframe.removeClass("fixed-height");
+                $iframe.addClass("mobile-landscape-height");
+                $iframe.contents().find("html").addClass('mobile-responsive');
+                $iframe.contents().find("html").removeClass('responsive');
+                $iframe.contents().find("#wrapper").addClass("scrollbar");
+                VjEditor.runCommand('set-device-mobile-landscape');
+            }
+            else {
+                $body.removeClass('tablet mobile-portrait').addClass('resp-mode mobile-landscape');
+            }
+               
         }
 
         var selected = VjEditor.getSelected();

@@ -319,7 +319,7 @@
     <value>Local</value>
   </data>
   <data name="Mobile.Text" xml:space="preserve">
-    <value>Mobile</value>
+    <value>Mobile Portrait</value>
   </data>
   <data name="ModalCategory.Text" xml:space="preserve">
     <value>Category</value>
@@ -340,10 +340,10 @@
     <value>Position</value>
   </data>
   <data name="Preview360px.Text" xml:space="preserve">
-    <value>Preview for 360px</value>
+    <value>360px</value>
   </data>
   <data name="Preview768px.Text" xml:space="preserve">
-    <value>Preview for 768px</value>
+    <value>768px</value>
   </data>
   <data name="Responsive.Text" xml:space="preserve">
     <value>Responsive</value>
@@ -464,5 +464,11 @@
   </data>
   <data name="AddCategory.Text" xml:space="preserve">
     <value>Add New Category</value>
+  </data>
+  <data name="MobileLandscape.Text" xml:space="preserve">
+    <value>Mobile Landscape</value>
+  </data>
+  <data name="Preview700px.Text" xml:space="preserve">
+    <value>700px</value>
   </data>
 </root>

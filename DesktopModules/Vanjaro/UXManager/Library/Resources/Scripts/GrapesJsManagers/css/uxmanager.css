@@ -249,19 +249,19 @@ ul.Shortcuts li {
         text-decoration: none;
     }
 
-        ul.MenuItem li a em {
-            width: 25px;
-            color: #a4a4a4;
-            font-size: 14px;
-            text-align: center;
-        }
+    ul.MenuItem li a em {
+        width: 25px;
+        color: #a4a4a4;
+        font-size: 14px;
+        text-align: center;
+    }
 
-ul.MenuItem ul.MenuItem li{
+ul.MenuItem ul.MenuItem li {
     padding: 8px 0;
 }
 
     ul.MenuItem ul.MenuItem li a,
-    .Searchresult ul.MenuItem li a{
+    .Searchresult ul.MenuItem li a {
         font-size: 15px;
         line-height: 20px;
     }
@@ -1483,6 +1483,29 @@ html.responsive {
 
 .fixed-height {
     height: 700px;
+}
+
+.mobile-landscape-height {
+    height: 360px;
+}
+
+.mobile-responsive body {
+    border-style: solid;
+    border-width: 10px 40px 10px 70px;
+    border-color: #000;
+    border-radius: 30px;
+}
+
+.fa-mobilelandscape {
+    transform: rotate(90deg);
+}
+
+    .fa-mobilelandscape:before {
+        content: "\f3cd";
+    }
+
+html.mobile-responsive {
+    background: #333;
 }
 
 .sidebar .panelfooter .ToolbarItem .DeviceMode {
@@ -3263,7 +3286,8 @@ iframe#UXpagerender.preview-open {
         border-color: #a4afb7;
     }
 
-body.resp-mode.mobile,
+body.resp-mode.mobile-portrait,
+body.resp-mode.mobile-landscape,
 body.resp-mode.tablet {
     background: #333;
     width: 100%;
@@ -3276,7 +3300,9 @@ body.resp-mode.tablet {
     width: 100%;
 }
 
-body.resp-mode.mobile .vj-wrapper,
+
+body.resp-mode.mobile-portrait .vj-wrapper,
+body.resp-mode.mobile-landscape .vj-wrapper,
 body.resp-mode.tablet .vj-wrapper {
     border-style: solid;
     border-width: 40px 10px 70px;
@@ -3291,13 +3317,22 @@ body.resp-mode.tablet .vj-wrapper {
     right: 0;
 }
 
+body.resp-mode.mobile-landscape .vj-wrapper {
+    border-width: 10px 40px 10px 70px;
+}
+
 body.resp-mode.tablet .vj-wrapper {
     width: 768px;
 }
 
-body.resp-mode.mobile .vj-wrapper {
+body.resp-mode.mobile-portrait .vj-wrapper {
     width: 360px;
     height: 700px;
+}
+
+body.resp-mode.mobile-landscape .vj-wrapper {
+    width: 700px;
+    height: 360px;
 }
 
 
