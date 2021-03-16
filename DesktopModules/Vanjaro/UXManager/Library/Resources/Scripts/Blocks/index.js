@@ -316,9 +316,12 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 	editor.Commands.add('set-device-tablet', {
 		run: editor => editor.setDevice('Tablet')
 	});
-	editor.Commands.add('set-device-mobile', {
-		run: editor => editor.setDevice('Mobile')
-	});
+	editor.Commands.add('set-device-mobile-portrait', {
+        run: editor => editor.setDevice('Mobile Portrait')
+    });
+    editor.Commands.add('set-device-mobile-landscape', {
+        run: editor => editor.setDevice('Mobile Landscape')
+    });
 
 	editor.Commands.add('save', ed => {
 		ed.store();
