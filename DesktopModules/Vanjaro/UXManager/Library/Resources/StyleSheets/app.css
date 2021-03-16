@@ -90,8 +90,8 @@
     .deviceframe:before {
         font-size: 11px;
         margin-top: 0;
-        padding: 5px;
-        padding-bottom: 150px;
+        padding: 10px 5px;
         text-align: center;
+        align-items: initial;
     }
 }
