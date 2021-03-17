@@ -10,7 +10,7 @@
 {
     if (nodes.Count > 0)
     {
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" id="navbar-menu">
             @foreach (var node in nodes)
             {
                 var relAttr = node.IsRedirect ? "rel=\"noopener\"" : "";

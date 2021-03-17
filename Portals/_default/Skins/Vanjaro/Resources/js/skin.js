@@ -385,6 +385,38 @@ OpenImagePopup = function (img) {
 
 $(document).ready(function () {
 
+    $("#navbar-menu li.dropdown").hover(function () {
+        if ($(window).width() < 767)
+            return;
+        var menuItem = $(this);
+        var subMenu = $(this).find("> ul.dropdown-menu");
+        var screenWidth = $(window).width()
+            , menuItemWidth = menuItem.width()
+            , subMenuWidth = subMenu.width()
+            , menuItemPosRight = subMenu.offset().left + subMenu.width();
+        if (menuItemPosRight > screenWidth) {
+            subMenu.css("margin-left", "-" + ((subMenuWidth - menuItemWidth) + 10) + "px");
+            subMenu.css('border-radius', '0');
+        } else
+            subMenu.css("margin-left", '2px');
+    });
+
+    $("#navbar-menu li.dropdown-submenu").hover(function () {
+        if ($(window).width() < 767)
+            return;
+        var subMenu = $(this).find("ul.dropdown-menu");
+        if (!subMenu.get(0))
+            return;
+        var screenWidth = $(window).width()
+            , subMenuWidth = subMenu.width()
+            , subMenuParentWidth = $(this).parent().width()
+            , subMenuPosRight = subMenu.offset().left + subMenu.width();
+        if (subMenuPosRight > screenWidth)
+            subMenu.css("margin-left", "-" + (subMenuParentWidth + subMenuWidth + 10) + "px");
+        else
+            subMenu.css("margin-left", 0);
+    });
+
     if ($("body").find(".vj-image-gallery").length) {
 
         var modal = `
