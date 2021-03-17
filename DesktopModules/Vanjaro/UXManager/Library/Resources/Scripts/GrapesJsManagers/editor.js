@@ -1745,9 +1745,9 @@ $(document).ready(function () {
                                 var className = 'col-lg-12';
                                 var Device = VjEditor.getDevice();
 
-                                if (Device == 'Mobile')
+                                if (Device == 'Mobile Portrait')
                                     className = 'col-12';
-                                else if (Device == 'Tablet')
+                                else if (Device == 'Tablet' || Device == 'Mobile Landscape')
                                     className = 'col-sm-12';
 
                                 if (typeof flexDirection == 'undefined') {
