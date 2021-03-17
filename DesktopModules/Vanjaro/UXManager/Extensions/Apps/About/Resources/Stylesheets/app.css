@@ -39,16 +39,20 @@ ul.About li {
 
     ul.About li a, ul.About li a span {
         display: inline-block;
-        font-size: 15px;
         line-height: 20px;
-        font-weight: normal;
         color: #313131;
         text-decoration: none;
+        font-size: 20px;
+        font-weight: normal;
     }
 
         ul.About li a em.fa {
             margin-right: 8px;
             line-height: inherit;
+            width: 25px;
+            color: #a4a4a4;
+            font-size: 14px;
+            text-align: center;
         }
 
 

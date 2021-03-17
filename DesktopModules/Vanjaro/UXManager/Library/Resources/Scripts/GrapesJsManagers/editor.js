@@ -11,6 +11,17 @@ global.CurrentExtTabUrl = '';
 global.IsVJEditorSaveCall = true;
 global.IsVJCBRendered = false;
 
+$(window).load(function () {
+    if ($(window).width() < 1000) {
+        $(".ToolbarItem li:not(.PageSettings),.toolmanager,.more_icons,.blockItem.blocksmenu ").hide(0);
+        $(".block-manager > div").not("#MenuSettings,.Menupanel-top").hide(0);
+        $(".Searchresult ul").empty();
+        $(".block-manager").find("#MenuSettings").show();
+        $(".Menupanel-top").show();
+        $(".Menupanel-top input").focus();
+    }
+});
+
 $(document).ready(function () {
 
     var Responsive = VjLocalized.Responsive.replace(/ /g, '_').toLowerCase();
@@ -1457,8 +1468,6 @@ $(document).ready(function () {
 
                                 if ($(window).width() < 1000) {
                                     $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
-                                    $(".ToolbarItem li:not(.PageSettings),.toolmanager,.more_icons,.blockItem.blocksmenu ").hide();
-                                    $("a.blockItem.settings").trigger("click");
                                 }
 
                                 $(window).resize(function () {
@@ -2713,6 +2722,7 @@ $(document).ready(function () {
                                     $("#iframeHolder").fadeIn();
                                 }, 300);
                                 e.preventDefault();
+                                $(".About").css({ "pointer-events": "auto" });
                                 $('#iframeHolder').find('iframe').attr('src', messagesrc);
                             });
 
