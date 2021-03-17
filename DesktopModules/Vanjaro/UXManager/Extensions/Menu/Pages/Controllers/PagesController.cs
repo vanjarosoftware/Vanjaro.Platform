@@ -144,7 +144,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
                             Settings.Add("IsDefaultLocale", new UIData { Name = "IsDefaultLocale", Options = pid > 0 ? DefaultLocale.Code == PortalSettings.Current.CultureCode : true, Value = DefaultLocale.Code });
                             Settings.Add("LocalizedPage", new UIData { Name = "LocalizedPage", Options = Managers.PagesManager.AddDefaultLocalization(pid, pageSettings) });
                             Settings.Add("Languages", new UIData { Name = "Languages", Value = PortalSettings.Current.CultureCode, Options = LocalizationManager.GetActiveLocale(PortalSettings.Current.PortalId).Where(a => a.Value.ToLower() == PortalSettings.Current.CultureCode.ToLower()), OptionsText = "Text", OptionsValue = "Value" });
-                            Settings.Add("MakePublic", new UIData { Name = "MakePublic", Value = bool.TrueString });
+                            Settings.Add("MakePublic", new UIData { Name = "MakePublic", Value = bool.FalseString });
                         }
 
                         return Settings.Values.ToList();
