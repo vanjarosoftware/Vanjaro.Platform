@@ -120,18 +120,6 @@
 					default: 'section',
 					changeProp: 1,
 				}, {
-					label: "Gap",
-					name: "gap",
-					type: "custom_range",
-					cssproperties: [
-						{ name: "padding-top" },
-						{ name: "padding-bottom" }
-					],
-					min: "0",
-					max: "200",
-					default: "50",
-					changeProp: 1,
-				}, {
 					label: "Background",
 					name: "background",
 					type: "toggle_radio",
