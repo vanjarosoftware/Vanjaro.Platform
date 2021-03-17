@@ -96,9 +96,9 @@ export default (editor, config = {}) => {
 		var Device = VjEditor.getDevice();
 		var browserwidth = window.innerWidth - 325;
 
-		if (Device == 'Mobile' || browserwidth <= '360')
+        if (Device == 'Mobile Portrait' || browserwidth <= '360')
 			colClass = 'col-';
-		else if (Device == 'Tablet' || browserwidth <= '991')
+        else if (Device == 'Tablet' || browserwidth <= '991' || Device == 'Mobile Landscape')
 			colClass = 'col-sm-';
 
 		var re = new RegExp('(' + colClass + '(\\d+))', 'i');
