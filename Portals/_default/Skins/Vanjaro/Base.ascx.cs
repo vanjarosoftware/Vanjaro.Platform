@@ -406,9 +406,9 @@ namespace Vanjaro.Skin
 
 
                 HtmlDocument html = new HtmlDocument();
-                html.LoadHtml(sb.ToString());
-                CheckPermission(html);
+                html.LoadHtml(sb.ToString());                
                 InjectBlocks(page, html);
+                CheckPermission(html);
                 if (!PageManager.InjectEditor(PortalSettings) || !string.IsNullOrEmpty(Request.QueryString["pv"]))
                     RemoveDataBlocks(html);
 
