@@ -236,15 +236,7 @@ ul.Shortcuts li {
     ul.MenuItem li a,
     ul.Shortcuts li a {
         display: block;
-        font-size: 20px;
-        font-weight: normal;
-        color: #313131;
-        text-decoration: none;
-    }
-
-    ul.Shortcuts li a {
-        display: block;
-        font-size: 20px;
+        font-size: 17px;
         font-weight: normal;
         color: #313131;
         text-decoration: none;
