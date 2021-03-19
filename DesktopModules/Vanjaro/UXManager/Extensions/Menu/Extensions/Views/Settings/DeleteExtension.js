@@ -6,7 +6,7 @@
         $scope.DescriptionTitle = $scope.ui.data.packageDetail.Options.description ? String($scope.ui.data.packageDetail.Options.description).replace(/<[^>]+>/gm, '') : '';
         $scope.Email = $scope.ui.data.packageDetail.Options.email;
 
-    };    
+    };
     $scope.Click_Email = function () {
         window.location.href = "mailto:" + $scope.Email;
     };
@@ -26,6 +26,7 @@
                 if (isConfirm) {
                     common.webApi.post('DeleteExtension/deletepackage', '', $scope.ui.data.deletePackage.Options).success(function (Response) {
                         if (Response.IsSuccess) {
+                            window.parent.LoadApps();
                             $scope.Click_Cancel();
                             window.parent.ShowNotification($scope.ui.data.packageDetail.Options.friendlyName, '[L:DeletedSuccessfully]', 'success');
                         }
@@ -37,8 +38,10 @@
     };
 
     $scope.Click_Cancel = function () {
-        var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
-        Parentscope.Click_IsInstall(true);
+        if (typeof parent.document.getElementById("iframe").contentWindow.angular != 'undefined') {
+            var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
+            Parentscope.Click_IsInstall(true);
+        }
         $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
     };
 });

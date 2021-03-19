@@ -160,6 +160,7 @@
                     success: function (response) {
                         $scope.showpackagelog = false;
                         if (response.Data.success) {
+                            window.parent.LoadApps();
                             $scope.Click_Cancel();
                             window.parent.ShowNotification($scope.Name, '[L:InstalledSuccessfully]', 'success');
                         }
@@ -182,8 +183,10 @@
     };
 
     $scope.Click_Cancel = function (type) {
-        var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
-        Parentscope.Click_IsInstall(true);
+        if (typeof parent.document.getElementById("iframe").contentWindow.angular != 'undefined') {
+            var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
+            Parentscope.Click_IsInstall(true);
+        }
         $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
     };
 
