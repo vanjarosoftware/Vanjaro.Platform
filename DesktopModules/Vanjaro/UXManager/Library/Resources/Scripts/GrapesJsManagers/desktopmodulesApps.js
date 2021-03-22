@@ -14,6 +14,15 @@ global.LoadApps = function () {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
+            var apps = [];
+            $.each(VjEditor.BlockManager.getAll().models, function (key, value) {
+                if (typeof value.attributes != 'undefined' && typeof value.attributes.attributes != 'undefined' && typeof value.attributes.attributes.type != 'undefined' && value.attributes.attributes.type == 'apps') {
+                    apps.push(value);
+                }
+            });
+            if (apps.length > 0)
+                VjEditor.BlockManager.remove(apps);
+
             $.each(data, function (key, value) {
                 VjEditor.BlockManager.add(value.ModuleName, {
                     category: VjLocalized.Apps,

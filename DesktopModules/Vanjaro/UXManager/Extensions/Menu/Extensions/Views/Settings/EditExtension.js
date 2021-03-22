@@ -303,8 +303,10 @@
         if (IsValidate()) {
             MapSettingsData();
             common.webApi.post('editextension/save', '', $scope.ui.data.packageSettings.Options).success(function (Response) {
-                if (Response.IsSuccess)
+                if (Response.IsSuccess) {
+                    window.parent.LoadApps();
                     $scope.Click_Cancel();
+                }
                 else if (Response.HasErrors)
                     CommonSvc.SweetAlert.swal(Response.Message);
             });
@@ -318,7 +320,7 @@
         }
         return isval;
     };
-    var MapSettingsData = function (Type,ID) {
+    var MapSettingsData = function (Type, ID) {
 
         var Version = parseInt($scope.MajorVersion) + '.' + parseInt($scope.MinorVersion) + '.' + parseInt($scope.BuildVersion);
         $scope.ui.data.packageSettings.Options.settings = {
@@ -402,7 +404,7 @@
                         userPermissions += upermission;
                     }
                 });
-                
+
                 var assignPortal = '';
                 var unassignPortal = '';
                 $($scope.Assigns).each(function (index, Value) {
@@ -414,7 +416,7 @@
                     }
                 });
                 $scope.ui.data.packageSettings.Options.editorActions = {
-                    permissions: '{"desktopModuleId":' + $scope.ui.data.packageDetail.Options.desktopModuleId + ',"permissionDefinitions":[' + permissionDefinitions + '],"rolePermissions":[' + rolePermissions + '],"userPermissions":[' +userPermissions + ']}',
+                    permissions: '{"desktopModuleId":' + $scope.ui.data.packageDetail.Options.desktopModuleId + ',"permissionDefinitions":[' + permissionDefinitions + '],"rolePermissions":[' + rolePermissions + '],"userPermissions":[' + userPermissions + ']}',
                     assignPortal: '[' + assignPortal + ']',
                     businessController: $scope.ui.data.packageDetail.Options.businessController,
                     category: $scope.ui.data.packageDetail.Options.category,
@@ -455,8 +457,10 @@
     };
 
     $scope.Click_Cancel = function () {
-        var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
-        Parentscope.Click_IsInstall(true);
+        if (typeof parent.document.getElementById("iframe").contentWindow.angular != 'undefined') {
+            var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
+            Parentscope.Click_IsInstall(true);
+        }
         $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
     };
 
