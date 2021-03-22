@@ -116,7 +116,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.ModuleSettings.Managers
         {
             Permission Permission = new Permission
             {
-                AllowAccess = true,
+                AllowAccess = PermissionKey.ToLower() == "view" ? true : false,
                 PermissionName = PermissionKey,
                 PermissionId = PermissionID
             };
