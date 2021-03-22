@@ -117,46 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AnonymizeIp.Text" xml:space="preserve">
-    <value>Anonymize IP</value>
-  </data>
-  <data name="Delete.Text" xml:space="preserve">
-    <value>Remove Integration</value>
-  </data>
   <data name="Success.Text" xml:space="preserve">
     <value>Save Successfully</value>
-  </data>
-  <data name="TrackforAdministrators.OFF" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="TrackforAdministrators.ON" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="TrackforAdministrators.Text" xml:space="preserve">
-    <value>Track for Administrators</value>
-  </data>
-  <data name="TrackingID.Text" xml:space="preserve">
-    <value>Tracking ID</value>
-  </data>
-  <data name="TrackUserId.Text" xml:space="preserve">
-    <value>Track UserID</value>
   </data>
   <data name="Update.Text" xml:space="preserve">
     <value>Update</value>
   </data>
-  <data name="UrlParameter.Text" xml:space="preserve">
-    <value>Url Parameter</value>
-  </data>
-  <data name="AnonymizeIp.OFF" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="AnonymizeIp.ON" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="TrackUserId.OFF" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="TrackUserId.ON" xml:space="preserve">
-    <value>Yes</value>
+  <data name="MeasurementID.Text" xml:space="preserve">
+    <value>Measurement ID</value>
   </data>
 </root>
