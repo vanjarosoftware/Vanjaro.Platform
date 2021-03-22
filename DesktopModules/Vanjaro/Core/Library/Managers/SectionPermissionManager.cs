@@ -159,7 +159,7 @@ namespace Vanjaro.Core
             {
                 Permission Permission = new Permission
                 {
-                    AllowAccess = true,
+                    AllowAccess = PermissionKey.ToLower() == "view" ? true : false,
                     PermissionName = PermissionKey,
                     PermissionId = PermissionID
                 };
