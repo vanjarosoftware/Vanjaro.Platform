@@ -450,10 +450,7 @@
 
 				if (typeof model.attributes.units != 'undefined')
 					LoadAttr(model, unit);
-			}
-
-			model.view.$el.find('input').val(value);
-			model.view.$el.find('select').val(unit);
+            }			
 
 			var selected = VjEditor.getSelected();
 
@@ -501,7 +498,15 @@
 				}
 			}
 
-			selected.removeStyle(property);
+            selected.removeStyle(property);
+
+            var computedValue = $(selected.getEl()).css(property).replace(unit, '');
+
+            if (computedValue != value)
+                value = computedValue;
+
+            model.view.$el.find('input').val(value);
+            model.view.$el.find('select').val(unit);
 
 			if (property == "border-width" || property == "border-top-width" || property == "border-right-width" || property == "border-bottom-width" || property == "border-left-width") {
 
