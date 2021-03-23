@@ -366,19 +366,11 @@ namespace Vanjaro.Skin
                 if (page != null)
                 {
                     InjectStyle(page);
-                    if (page.ReplaceTokens)
-                    {
-                        sb.Append(new TokenReplace().ReplaceEnvironmentTokens(page.Content));
-                    }
-                    else
-                    {
-                        sb.Append(page.Content.ToString());
-                    }
+                    sb.Append(page.Content.ToString());
                 }
 
                 if (page != null && page.StateID.HasValue)
                     HasReviewPermission = WorkflowManager.HasReviewPermission(page.StateID.Value, PortalSettings.UserInfo);
-
 
                 if (TabPermissionController.HasTabPermission("EDIT") || (page != null && page.StateID.HasValue && HasReviewPermission))
                 {
@@ -404,13 +396,16 @@ namespace Vanjaro.Skin
                     catch (Exception) { }
                 }
 
-
                 HtmlDocument html = new HtmlDocument();
-                html.LoadHtml(sb.ToString());                
+                html.LoadHtml(sb.ToString());
                 InjectBlocks(page, html);
                 CheckPermission(html);
                 if (!PageManager.InjectEditor(PortalSettings) || !string.IsNullOrEmpty(Request.QueryString["pv"]))
                     RemoveDataBlocks(html);
+
+                string FinalMarkup = InjectModules(html.DocumentNode.OuterHtml);
+                if (page.ReplaceTokens)
+                    FinalMarkup = new TokenReplace().ReplaceEnvironmentTokens(FinalMarkup);
 
                 string ClassName = "vj-wrapper";
                 if (!string.IsNullOrEmpty(Request.QueryString["m2v"]) && string.IsNullOrEmpty(Request.QueryString["pv"]))
@@ -420,7 +415,7 @@ namespace Vanjaro.Skin
 
                 try
                 {
-                    ContentPane.Controls.Add(ParseControl("<div class=\"" + ClassName + "\"><div id=\"vjEditor\">" + InjectModules(html.DocumentNode.OuterHtml) + "</div></div>"));
+                    ContentPane.Controls.Add(ParseControl("<div class=\"" + ClassName + "\"><div id=\"vjEditor\">" + FinalMarkup + "</div></div>"));
                 }
                 catch (Exception ex)
                 {
@@ -658,17 +653,11 @@ namespace Vanjaro.Skin
                     item.Attributes.Remove(Attribute);
             }
         }
-        private void InjectBlocks(Pages page, HtmlDocument html, bool ignoreFirstDiv = false, bool isGlobalBlockCall = false)
+        private void InjectBlocks(Pages page, HtmlDocument html)
         {
             IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
-            int ctr = 1;
             foreach (HtmlNode item in query.ToList())
             {
-                if (ignoreFirstDiv && ctr == 1)
-                {
-                    ctr++;
-                    continue;
-                }
                 if (item.Attributes.Where(a => a.Name == "data-block-guid").FirstOrDefault() != null && !string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "data-block-guid").FirstOrDefault().Value))
                 {
                     Dictionary<string, string> Attributes = new Dictionary<string, string>();
@@ -701,7 +690,7 @@ namespace Vanjaro.Skin
                                 globalhtml.LoadHtml(item.InnerHtml);
                             }
 
-                            InjectBlocks(page, globalhtml, true, true);
+                            InjectBlocks(page, globalhtml);
                             item.InnerHtml = globalhtml.DocumentNode.OuterHtml;
                         }
                         else
@@ -748,7 +737,7 @@ namespace Vanjaro.Skin
                         if (!string.IsNullOrEmpty(response.Style))
                         {
                             if (item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault() != null && !string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value))
-                                WebForms.RegisterClientScriptBlock(Page, "BlocksStyle" + item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value, "<style type=\"text/css\" vj=\"true\" vjdataguid=" + item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value + ">" + response.Style + "</style>", false);
+                                WebForms.RegisterClientScriptBlock(Page, "BlocksStyle" + item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value, "<style type=\"text/css\" vj=\"true\" vjdataguid=\"" + item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value + "\">" + response.Style + "</style>", false);
                             else
                                 WebForms.RegisterClientScriptBlock(Page, "BlocksStyle" + item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value, "<style type=\"text/css\">" + response.Style + "</style>", false);
                         }

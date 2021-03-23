@@ -101,8 +101,12 @@ global.InjectLinksAndScripts = function (dom, document) {
                 if (value.innerHTML == v.innerHTML)
                     exist = true;
             });
-            if (!exist)
-                inlineStyleMarkup += v.innerHTML;
+            if (!exist) {
+                if (v.attributes.vjdataguid != undefined)
+                    document.head.appendChild(v);
+                else
+                    inlineStyleMarkup += v.innerHTML;
+            }
         }
     });
 

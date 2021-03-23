@@ -2767,6 +2767,10 @@ $(document).ready(function () {
                 $.each(dom, function (i, v) {
                     Scripts_Links.push(v);
                 });
+                $.each($(data).find('style'), function (i, v) {
+                    Scripts_Links.push(v);
+                });
+                $(window.parent.document).find('style[vjdataguid]').remove();
                 InjectLinksAndScripts(Scripts_Links, window.document);
                 InitAppActionMenu();
                 $(window.parent.document.body).find('.pageloader').remove();
@@ -2788,6 +2792,7 @@ $(document).ready(function () {
             $.each(dom, function (i, v) {
                 Scripts_Links.push(v);
             });
+            $(window.parent.document).find('style[vjdataguid]').remove();
             InjectLinksAndScripts(Scripts_Links, window.document);
             setCookie("vj_InitUX", "true");
             if (window.location.href.indexOf('#') > 0 && window.location.href.split("#")[0] != CurrentTabUrl) {
