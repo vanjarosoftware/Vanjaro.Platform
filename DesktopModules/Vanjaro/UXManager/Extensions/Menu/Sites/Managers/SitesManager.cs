@@ -53,11 +53,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 {
                     var portalInfo = new
                     {
-                        pinfo.PortalId,
+                        pinfo.PortalID,
                         pinfo.PortalName,
-                        PortalAliases = sitecontroller.FormatPortalAliases(pinfo.PortalId),
-                        allowDelete = (pinfo.PortalId != PortalID && !PortalController.IsMemberOfPortalGroup(pinfo.PortalId)),
-                        IsVjToursGuided = PortalController.Instance.GetPortalSettings(pinfo.PortalId).ContainsKey("VanjaroToursGuided")
+                        PortalAliases = sitecontroller.FormatPortalAliases(pinfo.PortalID),
+                        allowDelete = (pinfo.PortalID != PortalID && !PortalController.IsMemberOfPortalGroup(pinfo.PortalID)),
+                        IsVjToursGuided = PortalController.Instance.GetPortalSettings(pinfo.PortalID).ContainsKey("VanjaroToursGuided")
                     };
                     PortalsInfo.Add(portalInfo);
                 }
@@ -371,7 +371,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 PortalInfo portal = PortalController.Instance.GetPortal(portalId);
                 if (portal != null)
                 {
-                    if (portal.PortalId != portalSettings.PortalId && !PortalController.IsMemberOfPortalGroup(portal.PortalId))
+                    if (portal.PortalID != portalSettings.PortalId && !PortalController.IsMemberOfPortalGroup(portal.PortalID))
                     {
                         string strMessage = PortalController.DeletePortal(portal, portalSettings.HomeDirectoryMapPath);// need to check this line
                         if (string.IsNullOrEmpty(strMessage))
