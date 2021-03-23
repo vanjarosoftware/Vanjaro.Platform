@@ -236,27 +236,19 @@ ul.Shortcuts li {
     ul.MenuItem li a,
     ul.Shortcuts li a {
         display: block;
-        font-size: 20px;
+        font-size: 17px;
         font-weight: normal;
         color: #313131;
         text-decoration: none;
     }
 
-    ul.Shortcuts li a {
-        display: block;
-        font-size: 20px;
-        font-weight: normal;
-        color: #313131;
-        text-decoration: none;
-    }
-
-    ul.MenuItem li a em,
-    ul.Shortcuts li a em{
-        width: 25px;
-        color: #a4a4a4;
-        font-size: 14px;
-        text-align: center;
-    }
+        ul.MenuItem li a em,
+        ul.Shortcuts li a em {
+            width: 25px;
+            color: #a4a4a4;
+            font-size: 14px;
+            text-align: center;
+        }
 
 ul.MenuItem ul.MenuItem li {
     padding: 8px 0;
@@ -1114,6 +1106,10 @@ div#MenuSettings .parent-menu-hide {
     width: 36px;
     line-height: 14px;
 }
+
+    .sidebar .panelfooter ul.ToolbarItem li.PageSettings em {
+        margin-top: 1px;
+    }
 
 
 .View.Layout.active em,

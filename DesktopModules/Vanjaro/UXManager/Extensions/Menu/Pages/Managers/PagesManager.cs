@@ -934,7 +934,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     {
                         PermissionName = p.PermissionName,
                         PermissionId = p.PermissionId,
-                        AllowAccess = true
+                        AllowAccess = p.PermissionName.ToLower().Replace(" ", "") == "viewtab" ? true : false
                     };
                     if (permission.PermissionName.ToLower().Replace(" ", "") == "viewtab")
                     {

@@ -2,7 +2,7 @@
     <script type="text/ng-template" id="[name]nodes_renderer.html">
         <div ui-tree-handle ng-class="angular-ui-tree-handle" ng-if="[enableselect]==true">
             <button class="btn btn-xs btn_triangle" ng-if="node.children && node.children.length > 0" data-nodrag="" ng-click="toggle(this)" onclick="return false;">
-                <span class="fas fa-caret-right" ng-class="{'fas fa-caret-right': collapsed,'fas fa-caret-down': !collapsed}"></span>
+                <span ng-class="{'fas fa-caret-right': collapsed,'fas fa-caret-down': !collapsed}"></span>
             </button>
 
             <input type="checkbox" ng-if="[enableselect]" ng-model="node.selected" ng-click="Click_SelectParent(node,ui.data.[name].Options)" />
@@ -16,7 +16,7 @@
         </div>
         <div ui-tree-handle ng-class="angular-ui-tree-handle" ng-if="[enableselect]==false">
             <button class="btn btn-xs  btn_triangle" ng-if="node.children && node.children.length > 0" data-nodrag="" ng-click="toggle(this)" onclick="return false;">
-                <span class="fas fa-caret-right" ng-class="{'fas fa-caret-right': collapsed,'fas fa-caret-down': !collapsed}"></span>
+                <span ng-class="{'fas fa-caret-right': collapsed,'fas fa-caret-down': !collapsed}"></span>
             </button>
             <input type="checkbox" ng-if="[enableselect]" ng-model="node.selected" ng-click="Click_SelectParent(node,ui.data.[name].Options)" />
 
@@ -35,7 +35,7 @@
                         <a class="dropdown-item box-icon" data-nodrag="" ng-click="View_Page(node,$event)" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
                             <em class="fas fa-eye"></em><span>[L:View]</span>
                         </a>
-                    </li>                   
+                    </li>
                     <li>
                         <a class="dropdown-item box-icon" data-nodrag="" ng-click="Copy_Page(node, $event)" access-roles="admin" ng-if="[enableselect]==false">
                             <em class="fas fa-copy"></em><span>[L:CopyPage]</span>
@@ -171,8 +171,7 @@
             </div>
         </div>
         <ol ui-tree-nodes="" ng-model="node.children" ng-class="{hidden: collapsed}" class="angular-ui-tree-nodes">
-            <li ng-repeat="node in node.children" attr-ng-class="{{node.FolderPage?'disablepage':''}}" ui-tree-node ng-include="'[name]nodes_renderer.html'">
-            </li>
+            <li ng-repeat="node in node.children" attr-ng-class="{{node.FolderPage?'disablepage':''}}" collapsed="[collapsed]" ui-tree-node ng-include="'[name]nodes_renderer.html'"></li>
         </ol>
     </script>
     <div ui-tree="[name]treeOptions" [attributes]>
