@@ -60,6 +60,11 @@ div.uitab.notificationtab a {
     color: #777;
 }
 
+.Notification  .senderavatar {
+    padding: 0;
+    display: contents;
+}
+
 .Notification span.author_name.author_sub {
     width: 220px;
     height: 19px;
@@ -139,6 +144,7 @@ div.uitab.notificationtab a {
 /*Notification*/
 .Notification .senderinfo {
     width: calc(100% - 58px );
+    padding:0;
 }
 
 .Notification ul.Notifications {
