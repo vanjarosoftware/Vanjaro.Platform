@@ -12,7 +12,6 @@ namespace Vanjaro.Container
 {
     public partial class Base : DotNetNuke.UI.Containers.Container
     {
-        protected IModuleControlPipeline ModuleControlPipeline { get; }
         protected void Page_Load(object sender, EventArgs e)
         {
             Literal lit = new Literal();
@@ -64,7 +63,7 @@ namespace Vanjaro.Container
                 if (moduleControlInfo != null)
                 {
 
-                    Control _control = ModuleControlPipeline.LoadSettingsControl(Page, Module, moduleControlInfo.ControlSrc);
+                    Control _control = ModuleControlFactory.LoadSettingsControl(Page, Module, moduleControlInfo.ControlSrc);
                     ISettingsControl settingsControl = _control as ISettingsControl;
                     if (settingsControl != null)
                     {

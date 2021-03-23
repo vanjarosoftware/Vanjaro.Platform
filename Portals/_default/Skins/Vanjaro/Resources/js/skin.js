@@ -236,13 +236,13 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
         if (url.startsWith('~'))
             url = url.replace('~', '');
         else if (!url.startsWith('http')) {
-
-            if (existingurl.indexOf("?") == -1)
-                existingurl = existingurl + "?v=" + (new Date()).getTime();
-            else
-                existingurl = existingurl + "&v=" + (new Date()).getTime();
-
-            url = existingurl + url;
+            if (existingurl !== 'about:blank') {
+                if (existingurl.indexOf("?") == -1)
+                    existingurl = existingurl + "?v=" + (new Date()).getTime();
+                else
+                    existingurl = existingurl + "&v=" + (new Date()).getTime();
+                url = existingurl + url;
+            }
         }
         else {
             var urlArr = url.split('#');
