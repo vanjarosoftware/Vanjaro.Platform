@@ -164,6 +164,7 @@ namespace Vanjaro.Skin
             ResetModulePanes();
             //InitGuidedTours();
             AccessDenied();
+            InjectAnalyticsScript();
         }
 
         private void RenderGoogleTagManagerScripts()
@@ -261,6 +262,26 @@ namespace Vanjaro.Skin
                     CookieManager.AddValue("vj_InitUX", "false", new DateTime());
                 }
                 Response.Redirect(URLManager.RemoveQueryStringByKey(Request.Url.AbsoluteUri, "uxm"), true);
+            }
+        }
+
+        private void InjectAnalyticsScript()
+        {
+            if (HostController.Instance.GetBoolean("VJImprovementProgram", true))
+            {
+                AnalyticsManager.Post();
+
+                if (Analytics.RegisterScript)
+                {
+                    string PostEvent = Analytics.PostEvent();
+                    if (!string.IsNullOrEmpty(PostEvent))
+                    {
+                        WebForms.RegisterClientScriptBlock(Page, "GTagManager", "<script type='text/javascript' async src='https://www.googletagmanager.com/gtag/js?id=" + Analytics.MeasurementID + "'></script>", false);
+                        //WebForms.RegisterStartupScript(Page, "GTagManagerScript", "window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', '" + Analytics.MeasurementID + "', { 'send_page_view': false }); " + PostEvent, true);
+                        string script = @"$(document).ready(function () {window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', '" + Analytics.MeasurementID + "', { 'send_page_view': false }); " + PostEvent + "});";
+                        WebForms.RegisterStartupScript(Page, "AnalyticsPostEventScript", script, true);
+                    }
+                }
             }
         }
 
