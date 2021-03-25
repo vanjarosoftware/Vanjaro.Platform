@@ -1775,6 +1775,8 @@ $(document).ready(function () {
                             }
 
                             VjEditor.on('component:selected', (model, argument) => {
+                                var Componenttype = model.getName();
+                                $('.ssmanager .component-name').text(Componenttype);
 
                                 if (typeof model.attributes.type == 'undefined')
                                     return false;
