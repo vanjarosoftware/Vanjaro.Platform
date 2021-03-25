@@ -54,7 +54,7 @@
     };
 
     $scope.OpenPopUp = function (row) {
-        window.location.hash = '#/editlogsetting/' + row.ID;
+        window.location.hash = '#!/editlogsetting/' + row.ID;
     };
 
     $scope.RefreshGrid = function () {

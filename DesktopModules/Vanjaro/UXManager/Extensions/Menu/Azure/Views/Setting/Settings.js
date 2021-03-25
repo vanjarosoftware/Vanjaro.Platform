@@ -34,10 +34,10 @@
     };
 
     $scope.Click_New = function () {
-        parent.OpenPopUp(null, 700, 'right', 'Azure', "#/add");
+        parent.OpenPopUp(null, 700, 'right', 'Azure', "#!/add");
     };
 
     $scope.Click_Edit = function (row) {
-        parent.OpenPopUp(null, 700, 'right', 'Azure', "#/add/" + row.Id);
+        parent.OpenPopUp(null, 700, 'right', 'Azure', "#!/add/" + row.Id);
     };
 });

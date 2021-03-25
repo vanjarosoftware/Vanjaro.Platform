@@ -26,7 +26,7 @@
             if (!controller) {
                 controller = {
                     ModuleId: ModuleId,
-                    ModuleFolder: ModuleFolder,
+                    ModuleFolder: ModuleFolder.trim(),
                     webApi: {
                         get: function (controllerAction, params, data, preventAutoFail, returlUrl) {
                             return controller.webApi._action(controllerAction, params, data, preventAutoFail, "GET", returlUrl);
@@ -135,7 +135,7 @@
                                     });
                                 }
                                 else {
-                                    promise.error(function (data, status, headers, config) {
+                                    promise.catch(function (data, status, headers, config) {
 
                                         //Handle Licensing
                                         if (status == 403 && data.Message.length && data.Message.indexOf('#') == 0)
@@ -158,7 +158,7 @@
                             if (settings.controller.substring(0, 1) == "~")
                                 ActionUrl = sf.getServiceRoot("vjCommonAngularBootstrap") + settings.controller.replace('~', '') + "/" + settings.action;
                             else
-                                ActionUrl = sf.getServiceRoot(ModuleFolder) + settings.controller + "/" + settings.action;
+                                ActionUrl = sf.getServiceRoot(ModuleFolder).trim() + settings.controller + "/" + settings.action;
 
                             if (settings.params != null) {
                                 if (typeof settings.params == 'string')

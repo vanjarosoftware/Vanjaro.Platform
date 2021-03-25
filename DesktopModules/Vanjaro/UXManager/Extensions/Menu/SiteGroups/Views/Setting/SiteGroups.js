@@ -8,11 +8,11 @@
         window.location.href = $scope.ui.data.SitesUrl.Value;
     };
     $scope.Click_New = function () {
-        parent.OpenPopUp(null, 800, 'right', '[L:SiteGroups]', $scope.ui.data.SiteGroupUrl.Value + "#/add");
+        parent.OpenPopUp(null, 800, 'right', '[L:SiteGroups]', $scope.ui.data.SiteGroupUrl.Value + "#!/add");
     };
 
     $scope.Click_Edit = function (row) {
-        parent.OpenPopUp(null, 800, 'right', row.MasterPortal.PortalName, $scope.ui.data.SiteGroupUrl.Value + "#/add/" + row.PortalGroupId);
+        parent.OpenPopUp(null, 800, 'right', row.MasterPortal.PortalName, $scope.ui.data.SiteGroupUrl.Value + "#!/add/" + row.PortalGroupId);
     };
 
     $scope.Click_Delete = function (row) {

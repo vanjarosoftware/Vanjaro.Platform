@@ -437,11 +437,11 @@
     };
 
     $scope.Click_UserSettings = function (row) {
-        parent.OpenPopUp(null, 800, 'right', null, '#/setting?uid=' + row.userId);
+        parent.OpenPopUp(null, 800, 'right', null, '#!/setting?uid=' + row.userId);
     };
 
     $scope.Click_ManagePassword = function (row) {
-        parent.OpenPopUp(null, 400, 'center', '[L:ChangePassword]', '#/changepassword?uid=' + row.userId + '&uname=' + row.displayName, 350);
+        parent.OpenPopUp(null, 400, 'center', '[L:ChangePassword]', '#!/changepassword?uid=' + row.userId + '&uname=' + row.displayName, 350);
     };
 
 });

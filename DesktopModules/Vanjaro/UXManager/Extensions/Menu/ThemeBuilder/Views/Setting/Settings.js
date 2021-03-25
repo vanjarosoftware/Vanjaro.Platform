@@ -245,7 +245,7 @@
     $scope.OpenPopUp = function () {
         event.preventDefault();
         var url = window.location.href.split('#')[0];
-        url = url + "#/manage/" + $scope.ui.data.Guid.Value;
+        url = url + "#!/manage/" + $scope.ui.data.Guid.Value;
         parent.OpenPopUp(event, 900, 'right', '[LS:ThemeBuilder]', url);
         window.location.reload();
     };

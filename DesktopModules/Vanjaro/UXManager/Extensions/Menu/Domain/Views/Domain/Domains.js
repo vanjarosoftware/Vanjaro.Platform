@@ -11,7 +11,7 @@
     };
 
     $scope.Click_AddDomain = function () {
-        parent.OpenPopUp(null, 800, 'right', '[L:DomainTitle]', '#/setting');
+        parent.OpenPopUp(null, 800, 'right', '[L:DomainTitle]', '#!/setting');
     };
 
     $scope.Register_Tooltip = function () {
@@ -68,7 +68,7 @@
     };
 
     $scope.Click_Edit = function (row) {
-        parent.OpenPopUp(null, 800, 'right', '[LS:EditDomain]', '#/setting?sid=' + row.PortalAliasID);
+        parent.OpenPopUp(null, 800, 'right', '[LS:EditDomain]', '#!/setting?sid=' + row.PortalAliasID);
     };
 
     $scope.Click_Back = function () {

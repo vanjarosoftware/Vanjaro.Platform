@@ -76,7 +76,7 @@ namespace Vanjaro.Core
                 if (State != null)
                 {
                     string URL = ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=33d8efed-0f1d-471e-80a4-6a7f10e87a42");
-                    URL += "#/moderator?version=" + page.Version + "&entity=" + WorkflowType.Page.ToString() + "&entityid=" + page.TabID;
+                    URL += "#!/moderator?version=" + page.Version + "&entity=" + WorkflowType.Page.ToString() + "&entityid=" + page.TabID;
                     string ReviewChangesBtn = ShowReview ? "ReviewChangeMarkup.append(ReviewChangesBtn);" : string.Empty;
                     string Subject = ShowReview ? State.Name : DotNetNuke.Services.Localization.Localization.GetString("PendingReview", Components.Constants.LocalResourcesFile);
                     string Message = !ShowReview ? "ReviewChangeMarkup.append('" + DotNetNuke.Services.Localization.Localization.GetString("ThisPageIsWaiting", Components.Constants.LocalResourcesFile) + "');" : string.Empty;

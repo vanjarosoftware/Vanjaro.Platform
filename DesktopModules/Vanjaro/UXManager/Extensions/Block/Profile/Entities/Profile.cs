@@ -51,6 +51,6 @@ namespace Vanjaro.UXManager.Extensions.Block.Profile.Entities
                 return _Fields;
             }
         }
-        public string UserExtensionURL => ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=fa7ca744-1677-40ef-86b2-ca409c5c6ed3#/setting?uid=" + UserInfo.UserID);
+        public string UserExtensionURL => ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=fa7ca744-1677-40ef-86b2-ca409c5c6ed3#!/setting?uid=" + UserInfo.UserID);
     }
 }

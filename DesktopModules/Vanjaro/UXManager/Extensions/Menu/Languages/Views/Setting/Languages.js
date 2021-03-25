@@ -5,13 +5,13 @@
     }
 
     $scope.Click_New = function () {
-        parent.OpenPopUp(null, 500, 'right', '[L:NewLanguages]', "#/add");
+        parent.OpenPopUp(null, 500, 'right', '[L:NewLanguages]', "#!/add");
     }
     $scope.Click_Translator = function (row) {
-        parent.OpenPopUp(null, 800, 'right', '[L:Translators]', "#/translator/lid/" + row.LanguageId);
+        parent.OpenPopUp(null, 800, 'right', '[L:Translators]', "#!/translator/lid/" + row.LanguageId);
     }
     $scope.Click_Resources = function (row) {
-        parent.OpenPopUp(null, 900, 'right', '[L:TranslateResourceFile]', "#/resources/lid/" + row.LanguageId);
+        parent.OpenPopUp(null, 900, 'right', '[L:TranslateResourceFile]', "#!/resources/lid/" + row.LanguageId);
     }
     $scope.Click_Enabled = function (row) {
 

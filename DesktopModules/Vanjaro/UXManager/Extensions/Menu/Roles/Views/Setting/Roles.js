@@ -62,15 +62,15 @@
     };
 
     $scope.Click_EditRole = function (row) {
-        parent.OpenPopUp(null, 700, 'right', '[L:EditRoles]', '#/add?rid=' + row.Id);
+        parent.OpenPopUp(null, 700, 'right', '[L:EditRoles]', '#!/add?rid=' + row.Id);
     };
 
     $scope.Click_EditGroup = function (row) {
-        parent.OpenPopUp(null, 700, 'right', '[L:EditGroups]', '#/addgroup?gid=' + row.GroupId);
+        parent.OpenPopUp(null, 700, 'right', '[L:EditGroups]', '#!/addgroup?gid=' + row.GroupId);
     };
 
     $scope.Click_AddUser = function (row) {
-        parent.OpenPopUp(null, 700, 'right', '[L:AddUser]', '#/adduser?rid=' + row.Id);
+        parent.OpenPopUp(null, 700, 'right', '[L:AddUser]', '#!/adduser?rid=' + row.Id);
     };
 
     $scope.Click_DeleteRole = function (row, type) {

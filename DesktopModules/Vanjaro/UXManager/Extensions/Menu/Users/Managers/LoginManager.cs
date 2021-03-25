@@ -503,7 +503,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users
 
                         //When the user need update its profile to complete login, we need clear the login status because if the logrin is from
                         //3rd party login provider, it may call UserController.UserLogin because they doesn't check this situation.
-                        actionResult.Data = new { UserExtensionURL = ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=fa7ca744-1677-40ef-86b2-ca409c5c6ed3#/updateprofile?uid=" + objUser.UserID) };
+                        actionResult.Data = new { UserExtensionURL = ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=fa7ca744-1677-40ef-86b2-ca409c5c6ed3#!/updateprofile?uid=" + objUser.UserID) };
                         PortalSecurity.Instance.SignOut();
                         //Admin has forced profile update
                         actionResult.AddError("ProfileUpdate", Localization.GetString("ProfileUpdate", LocalResourceFile));

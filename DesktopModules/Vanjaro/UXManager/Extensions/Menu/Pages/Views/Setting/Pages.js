@@ -62,11 +62,11 @@
     }
 
     $scope.Edit_PagesTreeNode = function (node) {
-        parent.OpenPopUp(null, 800, 'right', node.label, '#/detail?pid=' + node.Value);
+        parent.OpenPopUp(null, 800, 'right', node.label, '#!/detail?pid=' + node.Value);
     };
 
     $scope.SaveTemplateAs = function (node, event) {
-        parent.OpenPopUp(null, 550, 'center', '[L:SaveTemplateAs]', '#/savetemplateas/' + node.Value, 350);
+        parent.OpenPopUp(null, 550, 'center', '[L:SaveTemplateAs]', '#!/savetemplateas/' + node.Value, 350);
     };
 
     $scope.View_Page = function (node, event) {
@@ -78,7 +78,7 @@
     };
 
     $scope.Copy_Page = function (node, event) {
-        parent.OpenPopUp(null, 800, 'right', '[L:CopyPages]' + node.label, '#/detail?pid=' + node.Value + '&copy=true');
+        parent.OpenPopUp(null, 800, 'right', '[L:CopyPages]' + node.label, '#!/detail?pid=' + node.Value + '&copy=true');
     };
 
     $scope.gettreeicon = function (node) {

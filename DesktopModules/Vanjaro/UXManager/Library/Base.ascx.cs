@@ -49,7 +49,7 @@ namespace Vanjaro.UXManager.Library
             TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower()+"/type/block";
             ExtensionStoreURL = "http://store.vanjaro.local/store";
 #endif
-            ExtensionURL = ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/') + MenuManager.GetURL() + "mid=0&icp=true&guid=54caeff2-9fac-42ae-8594-40312867d56a#/installpackage";
+            ExtensionURL = ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/') + MenuManager.GetURL() + "mid=0&icp=true&guid=54caeff2-9fac-42ae-8594-40312867d56a#!/installpackage";
 
             base.OnInit(e);
             if (CanShowUXManager())
@@ -131,7 +131,7 @@ namespace Vanjaro.UXManager.Library
                     string OpenPopup = string.Empty;
                     if (m2v.HasValue && !m2v.Value && (Vanjaro.Core.Managers.PageManager.GetPages(PortalSettings.ActiveTab.TabID).Count == 0))
                     {
-                        OpenPopup = "#/choosetemplate";
+                        OpenPopup = "#!/choosetemplate";
                     }
                     else if (Request.QueryString["m2vsetup"] != null && Request.QueryString["m2vsetup"] == "page")
                     {
