@@ -3470,3 +3470,18 @@ body.resp-mode.mobile-landscape .vj-wrapper {
         .traitsmanager .range-wrapper input[type="number"]:focus {
             -moz-appearance: auto;
         }
+
+.ssmanager .component-name-box {
+    background: #fff;
+    padding: 10px 10px 10px 10px !important;
+}
+
+.ssmanager .component-name {
+    font-size: 14px;
+    color: #495157;
+    font-weight: bold;
+}
+
+.gjs-clm-sels-info {
+    display: none;
+}
