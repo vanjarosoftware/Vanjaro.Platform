@@ -30,8 +30,8 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('Logs/ClearLog').success(function (data) {
-                        if (data === "Success") {
+                    common.webApi.get('Logs/ClearLog').then(function (data) {
+                        if (data.data === "Success") {
                             $scope.RefreshGrid();
                         }
                     })
@@ -60,8 +60,8 @@
             },
                 function (isConfirm) {
                     if (isConfirm) {
-                        common.webApi.post('Logs/DeleteLogItems', '', $scope.SelectedLogItems).success(function (data) {
-                            if (data === "success") {
+                        common.webApi.post('Logs/DeleteLogItems', '', $scope.SelectedLogItems).then(function (data) {
+                            if (data.data === "success") {
                                 $scope.SelectedLogItems = [];
                                 $scope.RefreshGrid();
                             }
@@ -115,10 +115,10 @@
 
     $scope.Pipe_LogItemsPagging = function (tableState) {
         $scope.LogItemsTableState = tableState;
-        common.webApi.get('Logs/GetLogItems', 'logType=' + $scope.ui.data.GetLogTypes.Value + '&pageSize=' + tableState.pagination.number + '&pageIndex=' + (tableState.pagination.start / tableState.pagination.number)).success(function (data) {
-            if (data) {
-                $scope.LogItems = data.Items;
-                $scope.LogItemsTableState.pagination.numberOfPages = data.NumberOfPages;
+        common.webApi.get('Logs/GetLogItems', 'logType=' + $scope.ui.data.GetLogTypes.Value + '&pageSize=' + tableState.pagination.number + '&pageIndex=' + (tableState.pagination.start / tableState.pagination.number)).then(function (data) {
+            if (data.data) {
+                $scope.LogItems = data.data.Items;
+                $scope.LogItemsTableState.pagination.numberOfPages = data.data.NumberOfPages;
             }
         })
     };

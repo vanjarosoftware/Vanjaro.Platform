@@ -21,16 +21,16 @@
                     Subject: $scope.ui.data.Subject.Value,
                     Message: Message
                 };
-                common.webApi.post('Email/EmailLogItems', '', EmailLog).success(function (data) {
+                common.webApi.post('Email/EmailLogItems', '', EmailLog).then(function (data) {
                     if (data !== undefined) {
-                        if (data.Success) {
-                            window.parent.parent.ShowNotification('[L:LogEmail]', data.ErrorMessage, 'success');
+                        if (data.data.Success) {
+                            window.parent.parent.ShowNotification('[L:LogEmail]', data.data.ErrorMessage, 'success');
                             parentscope.SelectedLogItems = [];
                             window.parent.angular.element('.vj-ux-manager .uiengine-wrapper.scrollbar input.select-log').prop('checked', false);
                             $scope.Click_Cancel();
                         }
                         else {
-                            window.parent.parent.ShowNotification('[LS:Error]', data.Status, 'error');
+                            window.parent.parent.ShowNotification('[LS:Error]', data.data.Status, 'error');
                         }
                     }
                 });

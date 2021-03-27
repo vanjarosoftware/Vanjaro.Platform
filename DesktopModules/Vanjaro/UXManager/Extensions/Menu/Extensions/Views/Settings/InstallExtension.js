@@ -124,9 +124,9 @@
         if ($scope.CheckLicence) {
             $scope.DisableFinish = true;
             if ($scope.ui.data.ParsePackageFile && $scope.ui.data.ParsePackageFile.Options) {
-                common.webApi.get('InstallExtension/InstallAvailablePackage', 'FileName=' + $scope.ui.data.FileName.Value + '&Type=' + $scope.ui.data.Type.Value).success(function (response) {
+                common.webApi.get('InstallExtension/InstallAvailablePackage', 'FileName=' + $scope.ui.data.FileName.Value + '&Type=' + $scope.ui.data.Type.Value).then(function (response) {
                     $scope.showpackagelog = false;
-                    if (response.Data.success) {
+                    if (response.data.Data.success) {
                         
                         $scope.Click_Cancel();
                         window.parent.ShowNotification($scope.Name, '[L:InstalledSuccessfully]', 'success');
@@ -134,7 +134,7 @@
                     else {
                         $scope.$apply(function () {
                             $scope.showerrorlog = true;
-                            $scope.Logs = response.Data.logs;
+                            $scope.Logs = response.data.Data.logs;
                             $('#extentionInstall').html('[L:Finish]');
                             $scope.CheckLicence = false;
                         });

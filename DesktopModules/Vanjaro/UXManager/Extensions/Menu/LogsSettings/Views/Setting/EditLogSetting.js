@@ -31,17 +31,17 @@
                 MailFromAddress: $scope.ui.data.MailFromAddress.Value
             };
             if ($scope.ui.data.ID.Value === "0") {
-                common.webApi.post('LogSetting/AddLogSetting', '', LogType).success(function (data) {
-                    if (data.Status !== 'Success')
-                        window.parent.parent.ShowNotification('[LS:Error]', data.Status, 'error');
+                common.webApi.post('LogSetting/AddLogSetting', '', LogType).then(function (data) {
+                    if (data.data.Status !== 'Success')
+                        window.parent.parent.ShowNotification('[LS:Error]', data.data.Status, 'error');
                     else
                         $scope.Click_Cancel();
                 })
             }
             else {
-                common.webApi.post('LogSetting/UpdateLogSetting', '', LogType).success(function (data) {
-                    if (data.Status !== 'Success')
-                        window.parent.parent.ShowNotification('[LS:Error]', data.Status, 'error');
+                common.webApi.post('LogSetting/UpdateLogSetting', '', LogType).then(function (data) {
+                    if (data.data.Status !== 'Success')
+                        window.parent.parent.ShowNotification('[LS:Error]', data.data.Status, 'error');
                     else
                         $scope.Click_Cancel();
                 });

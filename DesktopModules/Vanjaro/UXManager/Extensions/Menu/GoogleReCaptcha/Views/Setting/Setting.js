@@ -22,7 +22,7 @@
                 Site_Enabled: $scope.ui.data.Site_Enabled.Options
             };
         }
-        common.webApi.post('Setting/save', '', Data).success(function (Response) {
+        common.webApi.post('Setting/save', '', Data).then(function (Response) {
             $scope.Click_Cancel();
         });
 

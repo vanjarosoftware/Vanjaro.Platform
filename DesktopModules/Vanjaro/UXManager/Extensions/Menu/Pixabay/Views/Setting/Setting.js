@@ -19,7 +19,7 @@
                     Site_ApiKey: $scope.ui.data.Site_ApiKey.Value
                 }
             }
-            common.webApi.post('Setting/save', '', Data).success(function (Response) {
+            common.webApi.post('Setting/save', '', Data).then(function (Response) {
                 if (Response)
                     $scope.Click_Cancel();
                 else {
@@ -29,13 +29,13 @@
         }
     };
     $scope.Click_Delete = function () {
-        common.webApi.post('Setting/delete', '', $scope.ui.data.ApplyTo.Options).success(function (Response) {
+        common.webApi.post('Setting/delete', '', $scope.ui.data.ApplyTo.Options).then(function (Response) {
             if ($scope.ui.data.ApplyTo.Options) {
-                $scope.ui.data.Host_ApiKey.Value = Response;
+                $scope.ui.data.Host_ApiKey.Value = Response.data;
                 $scope.ui.data.Host_HasApiKey.Options = false;
             }
             else {
-                $scope.ui.data.Site_ApiKey.Value = Response;
+                $scope.ui.data.Site_ApiKey.Value = Response.data;
                 $scope.ui.data.Site_HasApiKey.Options = false;
             }
         });

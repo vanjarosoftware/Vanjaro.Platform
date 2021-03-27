@@ -14,9 +14,9 @@
         } else {
             $scope.avlinstall = true;
         }
-        common.webApi.get('dashboard/Extensions', 'isinstall=' + IsInstall).success(function (Response) {
-            if (Response.IsSuccess) {
-                $scope.Extensions = Response.Data;
+        common.webApi.get('dashboard/Extensions', 'isinstall=' + IsInstall).then(function (Response) {
+            if (Response.data.IsSuccess) {
+                $scope.Extensions = Response.data.Data;
                 $scope.Search_Extensions = $scope.Extensions;
             }
             else {
@@ -51,10 +51,10 @@
             parent.OpenPopUp(null, 600, 'center', 'Install Extension', "#!/install/type/" + row.Type + "/name/" + row.FileName, 700);
         }
         else if (row.Type === 'CoreLanguagePack') {
-            common.webApi.get('dashboard/ParseLanguagePackage', 'cultureCode=' + row.Description).success(function (Response) {
-                if (Response.IsSuccess && Response.Data.success) {
-                    common.webApi.get('dashboard/GetAvailablePackages').success(function (Response) {
-                        if (Response.IsSuccess) {
+            common.webApi.get('dashboard/ParseLanguagePackage', 'cultureCode=' + row.Description).then(function (Response) {
+                if (Response.data.IsSuccess && Response.data.Data.success) {
+                    common.webApi.get('dashboard/GetAvailablePackages').then(function (Response) {
+                        if (Response.data.IsSuccess) {
                             parent.OpenPopUp(null, 600, 'center', 'Install Extension', "#!/install/type/" + row.Type + "/name/installlanguage.resources", 700);
                         }
                     });

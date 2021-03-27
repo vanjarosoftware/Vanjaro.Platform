@@ -163,15 +163,15 @@
     $scope.Click_Save = function (sender) {
         if (mnValidationService.DoValidationAndSubmit(sender)) {
             $scope.ui.data.ThemeEditor.Options.Sass = $scope.SassStyle.getValue();
-            common.webApi.post('edit/Update', 'catguid=' + $scope.ui.data.CatGuid.Value, $scope.ui.data.ThemeEditor.Options).success(function (response) {
-                if (response != 'Failed') {
+            common.webApi.post('edit/Update', 'catguid=' + $scope.ui.data.CatGuid.Value, $scope.ui.data.ThemeEditor.Options).then(function (response) {
+                if (response.data != 'Failed') {
                     var parentScope = parent.document.getElementById("iframe").contentWindow.angular.element("#dvMarkUp").scope();
-                    parentScope.ui.data.MarkUp.Value = response;
+                    parentScope.ui.data.MarkUp.Value = response.data;
                     window.parent.document.getElementById("iframe").contentWindow.location.reload();
                     window.location.hash = 'manage/' + $scope.ui.data.CatGuid.Value;
                 }
                 else
-                    swal(response);
+                    swal(response.data);
             });
         }
     };

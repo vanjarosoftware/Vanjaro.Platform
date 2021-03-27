@@ -12,9 +12,9 @@
         });
     };
     $scope.Change_Portals = function () {
-        common.webApi.get('UsageExtension/GetPages', 'PortalID=' + $scope.ui.data.Portals.Value + '&PackageID=' + $scope.ui.data.PackageID.Options).success(function (response) {
-            if (response.IsSuccess) {
-                $scope.ui.data.Pages.Options = response.Data;
+        common.webApi.get('UsageExtension/GetPages', 'PortalID=' + $scope.ui.data.Portals.Value + '&PackageID=' + $scope.ui.data.PackageID.Options).then(function (response) {
+            if (response.data.IsSuccess) {
+                $scope.ui.data.Pages.Options = response.data.Data;
                 ParseMarkup();
             }
         });

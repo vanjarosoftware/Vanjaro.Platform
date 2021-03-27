@@ -145,15 +145,15 @@
             function (isConfirm) {
                 if (isConfirm) {
                     MapSettingsData('deletedefinition', row.id);
-                    common.webApi.post('editextension/save', '', $scope.ui.data.packageSettings.Options).success(function (Response) {
-                        if (Response.IsSuccess) {
-                            $scope.ui.data.packageDetail.Options = Response.Data;
+                    common.webApi.post('editextension/save', '', $scope.ui.data.packageSettings.Options).then(function (Response) {
+                        if (Response.data.IsSuccess) {
+                            $scope.ui.data.packageDetail.Options = Response.data.Data;
                             $scope.ModuleDefinitions = $scope.ui.data.packageDetail.Options.moduleDefinitions;
                             $scope.Click_CancelModuleControl();
                             $scope.Click_CancelModuleDef();
                         }
-                        else if (Response.HasErrors)
-                            CommonSvc.SweetAlert.swal(Response.Message);
+                        else if (Response.data.HasErrors)
+                            CommonSvc.SweetAlert.swal(Response.data.Message);
                     });
                 }
             });
@@ -161,14 +161,14 @@
     $scope.Click_SaveModuleDef = function () {
         if (IsValidateModuleDef()) {
             MapSettingsData('definition');
-            common.webApi.post('editextension/save', '', $scope.ui.data.packageSettings.Options).success(function (Response) {
-                if (Response.IsSuccess) {
-                    $scope.ui.data.packageDetail.Options = Response.Data;
+            common.webApi.post('editextension/save', '', $scope.ui.data.packageSettings.Options).then(function (Response) {
+                if (Response.data.IsSuccess) {
+                    $scope.ui.data.packageDetail.Options = Response.data.Data;
                     $scope.ModuleDefinitions = $scope.ui.data.packageDetail.Options.moduleDefinitions;
                     $scope.Click_CancelModuleDef();
                 }
                 else if (Response.HasErrors)
-                    CommonSvc.SweetAlert.swal(Response.Message);
+                    CommonSvc.SweetAlert.swal(Response.data.Message);
             });
         }
     };
@@ -203,9 +203,9 @@
         $scope.ControlHelpURL = "";
         $scope.ControlSupportsPopups = true;
         $scope.ControlSupportsPartialRendering = true;
-        common.webApi.get('editextension/GetSourceFolders').success(function (Response) {
-            if (Response.IsSuccess) {
-                $scope.ui.data.ControlSourceFolder.Options = Response.Data;
+        common.webApi.get('editextension/GetSourceFolders').then(function (Response) {
+            if (Response.data.IsSuccess) {
+                $scope.ui.data.ControlSourceFolder.Options = Response.data.Data;
             }
         });
         $scope.Change_ControlSourceFolder();
@@ -224,9 +224,9 @@
         $scope.ControlHelpURL = row.helpUrl;
         $scope.ControlSupportsPopups = row.supportPopups;
         $scope.ControlSupportsPartialRendering = row.supportPartialRendering;
-        common.webApi.get('editextension/GetSourceFolders').success(function (Response) {
-            if (Response.IsSuccess)
-                $scope.ui.data.ControlSourceFolder.Options = Response.Data;
+        common.webApi.get('editextension/GetSourceFolders').then(function (Response) {
+            if (Response.data.IsSuccess)
+                $scope.ui.data.ControlSourceFolder.Options = Response.data.Data;
         });
         $scope.Change_ControlSourceFolder(row);
     };
@@ -244,15 +244,15 @@
             function (isConfirm) {
                 if (isConfirm) {
                     MapSettingsData('deletecontrol', row.id);
-                    common.webApi.post('editextension/save', '', $scope.ui.data.packageSettings.Options).success(function (Response) {
-                        if (Response.IsSuccess) {
-                            $scope.ui.data.packageDetail.Options = Response.Data;
+                    common.webApi.post('editextension/save', '', $scope.ui.data.packageSettings.Options).then(function (Response) {
+                        if (Response.data.IsSuccess) {
+                            $scope.ui.data.packageDetail.Options = Response.data.Data;
                             $scope.ModuleDefinitions = $scope.ui.data.packageDetail.Options.moduleDefinitions;
                             $scope.Click_CancelModuleControl();
                             $scope.Click_CancelModuleDef();
                         }
-                        else if (Response.HasErrors)
-                            CommonSvc.SweetAlert.swal(Response.Message);
+                        else if (Response.data.HasErrors)
+                            CommonSvc.SweetAlert.swal(Response.data.Message);
                     });
                 }
             });
@@ -260,15 +260,15 @@
     $scope.Click_SaveModuleControl = function () {
         if (IsValidateModuleControl()) {
             MapSettingsData('control');
-            common.webApi.post('editextension/save', '', $scope.ui.data.packageSettings.Options).success(function (Response) {
-                if (Response.IsSuccess) {
-                    $scope.ui.data.packageDetail.Options = Response.Data;
+            common.webApi.post('editextension/save', '', $scope.ui.data.packageSettings.Options).then(function (Response) {
+                if (Response.data.IsSuccess) {
+                    $scope.ui.data.packageDetail.Options = Response.data.Data;
                     $scope.ModuleDefinitions = $scope.ui.data.packageDetail.Options.moduleDefinitions;
                     $scope.Click_CancelModuleControl();
                     $scope.Click_CancelModuleDef();
                 }
-                else if (Response.HasErrors)
-                    CommonSvc.SweetAlert.swal(Response.Message);
+                else if (Response.data.HasErrors)
+                    CommonSvc.SweetAlert.swal(Response.data.Message);
             });
         }
     };
@@ -284,15 +284,15 @@
         return isval;
     };
     $scope.Change_ControlSourceFolder = function (row) {
-        common.webApi.get('editextension/GetSourceFiles', 'root=' + encodeURIComponent($scope.ControlSourceFolder)).success(function (Response) {
-            if (Response.IsSuccess)
-                $scope.ui.data.ControlSourceFile.Options = Response.Data;
+        common.webApi.get('editextension/GetSourceFiles', 'root=' + encodeURIComponent($scope.ControlSourceFolder)).then(function (Response) {
+            if (Response.data.IsSuccess)
+                $scope.ui.data.ControlSourceFile.Options = Response.data.Data;
             if (row === undefined)
                 $scope.ControlSourceFile = "";
         });
-        common.webApi.get('editextension/GetIcons', 'controlpath=' + encodeURIComponent($scope.ControlSourceFolder)).success(function (Response) {
-            if (Response.IsSuccess)
-                $scope.ui.data.ControlIcon.Options = Response.Data;
+        common.webApi.get('editextension/GetIcons', 'controlpath=' + encodeURIComponent($scope.ControlSourceFolder)).then(function (Response) {
+            if (Response.data.IsSuccess)
+                $scope.ui.data.ControlIcon.Options = Response.data.Data;
             if (row === undefined)
                 $scope.ControlIcon = "";
         });
@@ -302,13 +302,13 @@
     $scope.Click_Save = function () {
         if (IsValidate()) {
             MapSettingsData();
-            common.webApi.post('editextension/save', '', $scope.ui.data.packageSettings.Options).success(function (Response) {
-                if (Response.IsSuccess) {
+            common.webApi.post('editextension/save', '', $scope.ui.data.packageSettings.Options).then(function (Response) {
+                if (Response.data.IsSuccess) {
                     window.parent.LoadApps();
                     $scope.Click_Cancel();
                 }
                 else if (Response.HasErrors)
-                    CommonSvc.SweetAlert.swal(Response.Message);
+                    CommonSvc.SweetAlert.swal(Response.data.Message);
             });
         }
     };

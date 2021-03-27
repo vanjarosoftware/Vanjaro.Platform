@@ -26,9 +26,9 @@
 
     $scope.Change_BindStates = function () {
         $scope.Pipe_ReviewPages($scope.ReviewPagestableState);
-        common.webApi.get('Review/GetStates', '').success(function (data) {
-            if (data) {
-                $scope.ui.data.States.Options = data.States;
+        common.webApi.get('Review/GetStates', '').then(function (data) {
+            if (data.data) {
+                $scope.ui.data.States.Options = data.data.States;
                 $scope.StateID = $scope.ui.data.States.Value;
             }
         });
@@ -45,9 +45,9 @@
         if ($('.ReviewPages [type="search"]').val() != undefined)
             $scope.ProgressKeyword = $('.ReviewPages [type="search"]').val();
 
-        common.webApi.get('Review/GetPages', 'skip=' + tableState.pagination.start + '&pagesize=' + tableState.pagination.number + '&StateID=' + $scope.StateID + '&WorkflowReviewType=' + $scope.ui.data.WorkflowReviewType.Value).success(function (data) {
-            if (data) {
-                tableState.pagination.numberOfPages = data.NumberOfPages;
+        common.webApi.get('Review/GetPages', 'skip=' + tableState.pagination.start + '&pagesize=' + tableState.pagination.number + '&StateID=' + $scope.StateID + '&WorkflowReviewType=' + $scope.ui.data.WorkflowReviewType.Value).then(function (data) {
+            if (data.data) {
+                tableState.pagination.numberOfPages = data.data.NumberOfPages;
                 $scope.ReviewPages = [];
                 $scope.ReviewPages = data.Data;
             }

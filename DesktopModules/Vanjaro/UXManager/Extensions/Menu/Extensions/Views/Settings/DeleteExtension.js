@@ -24,14 +24,14 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('DeleteExtension/deletepackage', '', $scope.ui.data.deletePackage.Options).success(function (Response) {
-                        if (Response.IsSuccess) {
+                    common.webApi.post('DeleteExtension/deletepackage', '', $scope.ui.data.deletePackage.Options).then(function (Response) {
+                        if (Response.data.IsSuccess) {
                             window.parent.LoadApps();
                             $scope.Click_Cancel();
                             window.parent.ShowNotification($scope.ui.data.packageDetail.Options.friendlyName, '[L:DeletedSuccessfully]', 'success');
                         }
-                        else if (Response.HasErrors)
-                            window.parent.swal(Response.Message);
+                        else if (Response.data.HasErrors)
+                            window.parent.swal(Response.data.Message);
                     });
                 }
             });
