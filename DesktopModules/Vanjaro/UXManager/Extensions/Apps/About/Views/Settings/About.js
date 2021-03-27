@@ -35,7 +35,7 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('About/EnableMode', 'IsEnabled=' + !$scope.ui.data.EnableMode.Options).success(function (data) {
+                    common.webApi.get('About/EnableMode', 'IsEnabled=' + !$scope.ui.data.EnableMode.Options).then(function (data) {
                         window.parent.location.reload();
                     });
                 }
@@ -56,7 +56,7 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('About/ClearCache').success(function (data) {
+                    common.webApi.post('About/ClearCache').then(function (data) {
                         window.parent.location.reload();
                     });
                 }
@@ -76,7 +76,7 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('About/IncrementCRMVersion').success(function (data) {
+                    common.webApi.post('About/IncrementCRMVersion').then(function (data) {
                         window.parent.location.reload();
                     });
                 }
@@ -97,7 +97,7 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('About/RestartApplication').success(function (data) {
+                    common.webApi.post('About/RestartApplication').then(function (data) {
                         window.parent.location.reload();
                     });
                 }
