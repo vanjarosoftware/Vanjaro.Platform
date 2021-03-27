@@ -135,7 +135,7 @@ namespace Vanjaro.UXManager.Library
                     }
                     else if (Request.QueryString["m2vsetup"] != null && Request.QueryString["m2vsetup"] == "page")
                     {
-                        OpenPopup = "#detail";
+                        OpenPopup = "#!/detail";
                     }
 
                     if (!string.IsNullOrEmpty(OpenPopup))

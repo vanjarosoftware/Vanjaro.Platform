@@ -119,7 +119,7 @@
         common.webApi.get('user/getdeleteduserlist', 'searchtext=' + SearchKeys.Search_Key + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize).then(function (data) {
             if (data != null && data.data.Data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 if (tableState != null && tableState != 'undefiend' && tableState != '') {
-                    tableState.pagination.numberOfPages = Math.ceil(data.Data.TotalResults / SearchKeys.pagesize);
+                    tableState.pagination.numberOfPages = Math.ceil(data.data.Data.TotalResults / SearchKeys.pagesize);
                 }
                 else {
                     $scope.pagginationData.pagination.numberOfPages = Math.ceil(data.data.Data.TotalResults / SearchKeys.pagesize);
