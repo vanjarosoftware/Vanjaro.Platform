@@ -10,9 +10,9 @@
             username: $('#UserId', window.parent.document).val(),
             password: $('#Password', window.parent.document).val()
         };
-        common.webApi.post('updateprofile/getsettings', '', formData).success(function (data) {
-            if (data != null && data.Data != null && data.IsSuccess) {
-                $.each(JSON.parse(data.Data), function (key, value) {
+        common.webApi.post('updateprofile/getsettings', '', formData).then(function (data) {
+            if (data.data != null && data.data.Data != null && data.data.IsSuccess) {
+                $.each(JSON.parse(data.data.Data), function (key, value) {
                     $scope.ui.data[value.Name] = value;
                 });
                 $scope.Click_ShowTab('User_profile');
@@ -42,13 +42,13 @@
                     }
                 });
                 $(window.parent.document.body).find(".Gravitar").css('display', 'block')
-                if (data.Message != null && data.Message != '')
-                    $('.vj-ux-manager.user-info .col-md-9.left_border.uiengine-wrapper.scrollbar').prepend('<div class="alert alert-warning" role="alert">' + data.Message + '</div>');
+                if (data.data.Message != null && data.data.Message != '')
+                    $('.vj-ux-manager.user-info .col-md-9.left_border.uiengine-wrapper.scrollbar').prepend('<div class="alert alert-warning" role="alert">' + data.data.Message + '</div>');
             }
             else {
-                if (data.IsRedirect && data.RedirectURL != null) {
+                if (data.data.IsRedirect && data.data.RedirectURL != null) {
                     $(window.parent.document.body).find(".Gravitar").remove();
-                    window.location.href = data.RedirectURL;
+                    window.location.href = data.data.RedirectURL;
                 }
             }
         });
@@ -109,26 +109,26 @@
             if (typeof fileID == 'undefined' && fileID == null)
                 fileID = -1;
 
-            common.webApi.post('updateprofile/updateuserbasicinfo', 'fileid=' + fileID, Data).success(function (data) {
-                if (data.IsSuccess) {
+            common.webApi.post('updateprofile/updateuserbasicinfo', 'fileid=' + fileID, Data).then(function (data) {
+                if (data.data.IsSuccess) {
                     if (data.IsRedirect) {
-                        window.parent.location.href = data.RedirectURL;
+                        window.parent.location.href = data.data.RedirectURL;
                     }
                     else {
                         $(window.parent.document.body).find(".Gravitar").remove();
                         $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     }
                 }
-                if (data.HasErrors) {
+                if (data.data.HasErrors) {
                     var errorMessages = "<div class='alert alert-danger summary'>";
-                    $.each(data.Errors, function (k, v) {
+                    $.each(data.data.Errors, function (k, v) {
                         if (v.Message != null && v.Message != "") {
                             errorMessages = errorMessages + v.Message + "<br/>";
                         }
                     });
                     errorMessages = errorMessages + "</div>";
                     $('.vj-ux-manager.user-info .col-md-9.left_border.uiengine-wrapper.scrollbar .vj-alert-message').prepend(errorMessages);
-                    parent.ShowNotification('[L:UsersError]', data.Message, 'error');
+                    parent.ShowNotification('[L:UsersError]', data.data.Message, 'error');
                 }
             });
         }

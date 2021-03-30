@@ -46,10 +46,10 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('setting/ResetTermsAgreement', '', '').success(function (data) {
-                        if (data.IsSuccess) {
-                            if (data.Message != null && data.Message == "")
-                                window.parent.swal(data.Message);
+                    common.webApi.post('setting/ResetTermsAgreement', '', '').then(function (data) {
+                        if (data.data.IsSuccess) {
+                            if (data.data.Message != null && data.data.Message == "")
+                                window.parent.swal(data.data.Message);
                         }
                         else {
                             window.parent.document.callbacktype = type;
@@ -78,13 +78,13 @@
                 PrivacySettingsRequest: $scope.ui.data.UpdatePrivacy.Options,
                 CustomSettingsRequest: customSettings
             };
-            common.webApi.post('setting/UpdatePrivacySettings', '', settingsData).success(function (data) {
-                if (data.IsSuccess) {
+            common.webApi.post('setting/UpdatePrivacySettings', '', settingsData).then(function (data) {
+                if (data.data.IsSuccess) {
                     //window.parent.document.callbacktype = type;
                     $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 }
                 else {
-                    window.parent.swal(data.Message);
+                    window.parent.swal(data.data.Message);
                 }
             });
         }

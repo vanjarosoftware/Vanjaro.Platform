@@ -5,8 +5,8 @@
 
     $scope.Click_Update = function () {
         if (mnValidationService.DoValidationAndSubmit('', 'setting_add') && IsValidate()) {
-            common.webApi.post('add/create', '', $scope.ui.data.CreatePortalRequest.Options).success(function (Response) {
-                if (Response.IsSuccess) {
+            common.webApi.post('add/create', '', $scope.ui.data.CreatePortalRequest.Options).then(function (Response) {
+                if (Response.data.IsSuccess) {
                     $scope.Click_Cancel();
                 }
             });

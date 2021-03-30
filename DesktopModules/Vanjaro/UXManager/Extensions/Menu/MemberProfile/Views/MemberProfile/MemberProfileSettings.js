@@ -38,17 +38,17 @@
         if (!IsDatatypeSelected)
             $('.vj-ux-manager.memberprofile-settings').find('.datatype-group .input-group').append('<label id="datatype_error" class="datatype error">This field is required.</label>');
         if (mnValidationService.DoValidationAndSubmit('', 'memberprofile_memberprofilesettings') && IsDatatypeSelected) {
-            common.webApi.post('memberprofile/AddUpdateMemberProfile', '', $scope.ui.data.ProfileProperty.Options.ProfileProperty).success(function (Response) {
-                if (Response.IsSuccess) {
+            common.webApi.post('memberprofile/AddUpdateMemberProfile', '', $scope.ui.data.ProfileProperty.Options.ProfileProperty).then(function (Response) {
+                if (Response.data.IsSuccess) {
                     if (parent.document.getElementById("iframe") != null) {
                         var ParentScope = parent.document.getElementById("iframe").contentWindow.angular;
                         if (ParentScope != undefined && ParentScope.element(".menuextension").scope() != undefined && ParentScope.element(".menuextension").scope().ui.data.MemberProfile != undefined) {
-                            ParentScope.element(".menuextension").scope().ui.data.MemberProfile.Options = Response.Data.MemberProfile;
+                            ParentScope.element(".menuextension").scope().ui.data.MemberProfile.Options = Response.data.Data.MemberProfile;
                             ParentScope.element(".menuextension").scope().$apply();
                         }
                     }
-                    $scope.ui.data.ProfilePropertyLocalization.Options = Response.Data.PropertyLocalization;
-                    $scope.ui.data.Entries.Options = Response.Data.Entries;
+                    $scope.ui.data.ProfilePropertyLocalization.Options = Response.data.Data.PropertyLocalization;
+                    $scope.ui.data.Entries.Options = Response.data.Data.Entries;
                     $scope.ShowUserProfileFields = false;
                     if ($scope.ui.data.ProfileProperty.Options.ProfileProperty.DataType == "358") {//358 is List Control
                         $scope.ShowPropertyLocalization = false;
@@ -62,7 +62,7 @@
                     }
                 }
                 else {
-                    window.parent.ShowNotification($scope.ui.data.ProfileProperty.Options.ProfileProperty.PropertyName, Response.Message, 'error');
+                    window.parent.ShowNotification($scope.ui.data.ProfileProperty.Options.ProfileProperty.PropertyName, Response.data.Message, 'error');
                 }
             });
         };
@@ -70,13 +70,13 @@
 
     $scope.Click_Save = function (type) {
         if (mnValidationService.DoValidationAndSubmit('', 'memberprofile_memberprofilesettings')) {
-            common.webApi.post('memberprofile/UpdateProfilePropertyLocalization', '', $scope.ui.data.ProfilePropertyLocalization.Options).success(function (Response) {
-                if (Response.IsSuccess) {
+            common.webApi.post('memberprofile/UpdateProfilePropertyLocalization', '', $scope.ui.data.ProfilePropertyLocalization.Options).then(function (Response) {
+                if (Response.data.IsSuccess) {
                     $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     //window.parent.ShowNotification($scope.ui.data.ProfileProperty.Options.ProfileProperty.PropertyName, Response.Message, 'success');
                 }
                 else {
-                    window.parent.ShowNotification($scope.ui.data.ProfileProperty.Options.ProfileProperty.PropertyName, Response.Message, 'error');
+                    window.parent.ShowNotification($scope.ui.data.ProfileProperty.Options.ProfileProperty.PropertyName, Response.data.Message, 'error');
                 }
             });
         };
@@ -86,9 +86,9 @@
         var cultureCode = $scope.ui.data.ProfilePropertyLocalization.Options.Language;
         var propertyName = $scope.ui.data.ProfilePropertyLocalization.Options.PropertyName;
         var propertyCategory = $scope.ui.data.ProfilePropertyLocalization.Options.PropertyCategory;
-        common.webApi.get('memberprofile/GetProfilePropertyLocalization', 'cultureCode=' + cultureCode + '&propertyName=' + propertyName + '&propertyCategory=' + propertyCategory).success(function (Response) {
-            if (Response.IsSuccess) {
-                $scope.ui.data.ProfilePropertyLocalization.Options = Response.Data;
+        common.webApi.get('memberprofile/GetProfilePropertyLocalization', 'cultureCode=' + cultureCode + '&propertyName=' + propertyName + '&propertyCategory=' + propertyCategory).then(function (Response) {
+            if (Response.data.IsSuccess) {
+                $scope.ui.data.ProfilePropertyLocalization.Options = Response.data.Data;
             }
         });
     };
@@ -111,15 +111,15 @@
     $scope.AddUpdate_ListEntry = function (row) {
         if (mnValidationService.DoValidationAndSubmit('', 'memberprofile_memberprofilesettings')) {
             $scope.ui.data.ListEntryRequest.Options.ListName = $scope.ui.data.ProfileProperty.Options.ProfileProperty.PropertyName;
-            common.webApi.post('memberprofile/updatelistentry', '', $scope.ui.data.ListEntryRequest.Options).success(function (Response) {
-                if (Response.IsSuccess) {
-                    $scope.ui.data.Entries.Options = Response.Data.Entries;
+            common.webApi.post('memberprofile/updatelistentry', '', $scope.ui.data.ListEntryRequest.Options).then(function (Response) {
+                if (Response.data.IsSuccess) {
+                    $scope.ui.data.Entries.Options = Response.data.Data.Entries;
                     $scope.Show_ListSettingTab = false;
                     if ($scope.ui.data.Entries.Options.length > 1)
                         window.setTimeout(function () { $scope.InitGridSortingEvent(); }, 2000);
                 }
                 else {
-                    window.parent.ShowNotification($scope.ui.data.ProfileProperty.Options.ProfileProperty.PropertyName, Response.Message, 'error');
+                    window.parent.ShowNotification($scope.ui.data.ProfileProperty.Options.ProfileProperty.PropertyName, Response.data.Message, 'error');
                 }
             });
         };
@@ -137,12 +137,12 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('memberprofile/DeleteListEntry', 'entryId=' + row.EntryID + '&propertyName=' + $scope.ui.data.ProfileProperty.Options.ProfileProperty.PropertyName, '').success(function (Response) {
-                        if (Response.IsSuccess) {
-                            $scope.ui.data.Entries.Options = Response.Data.Entries;
+                    common.webApi.post('memberprofile/DeleteListEntry', 'entryId=' + row.EntryID + '&propertyName=' + $scope.ui.data.ProfileProperty.Options.ProfileProperty.PropertyName, '').then(function (Response) {
+                        if (Response.data.IsSuccess) {
+                            $scope.ui.data.Entries.Options = Response.data.Data.Entries;
                         }
-                        if (Response.HasErrors) {
-                            window.parent.ShowNotification(row.PropertyName, Response.Message, 'error');
+                        if (Response.data.HasErrors) {
+                            window.parent.ShowNotification(row.PropertyName, Response.data.Message, 'error');
                         }
                     });
                 }
@@ -162,7 +162,7 @@
     };
     $scope.onGridSorted = function () {
         $scope.ui.data.TemplateListEntryOrdersRequest.Options.Entries = $scope.ui.data.Entries.Options;
-        common.webApi.post('memberprofile/UpdateListEntryOrders', '', $scope.ui.data.TemplateListEntryOrdersRequest.Options).success(function (Response) {
+        common.webApi.post('memberprofile/UpdateListEntryOrders', '', $scope.ui.data.TemplateListEntryOrdersRequest.Options).then(function (Response) {
         });
     };
 

@@ -10,9 +10,9 @@
     };
 
     $scope.LoadVersion = function () {
-        common.webApi.get('Revisions/GetDate', 'Locale=' + window.parent.VJLocal + '&BlockGuid=' + $scope.BlockGuid).success(function (data) {
-            if (data != null) {
-                $scope.ui.data = data;
+        common.webApi.get('Revisions/GetDate', 'Locale=' + window.parent.VJLocal + '&BlockGuid=' + $scope.BlockGuid).then(function (data) {
+            if (data.data != null) {
+                $scope.ui.data = data.data;
                 $scope.ui.data.MaxVersion.Value = parseInt($scope.ui.data.MaxVersion.Value);
                 $scope.ui.data.PublicVersion.Value = parseInt($scope.ui.data.PublicVersion.Value);
             }
@@ -30,8 +30,8 @@
             if (!$(window.parent.document.body).find('.optimizing-overlay').length)
                 $(window.parent.document.body).find('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + window.parent.VjDefaultPath + 'loading.svg" />Please wait</h1></div>');
             if ($scope.BlockGuid != '') {
-                common.webApi.get('Revisions/GetBlockVersion', 'Version=' + $scope.SelectedVersion + '&BlockGuid=' + $scope.BlockGuid).success(function (response) {
-                    if (response != undefined) {
+                common.webApi.get('Revisions/GetBlockVersion', 'Version=' + $scope.SelectedVersion + '&BlockGuid=' + $scope.BlockGuid).then(function (response) {
+                    if (response.data != undefined) {
                         parent.setCookie("vj_UXLoad", window.location.href);
                         if (window.parent.VjEditor.getSelected() != undefined)
                             parent.setCookie("vj_UX_BlockRevision_Id", window.parent.VjEditor.getSelected().ccid);
@@ -40,8 +40,8 @@
                 });
             }
             else {
-                common.webApi.get('Revisions/GetVersion', 'Version=' + $scope.SelectedVersion + '&Locale=' + window.parent.VJLocal).success(function (response) {
-                    if (response != undefined) {
+                common.webApi.get('Revisions/GetVersion', 'Version=' + $scope.SelectedVersion + '&Locale=' + window.parent.VJLocal).then(function (response) {
+                    if (response.data != undefined) {
                         parent.setCookie("vj_UXLoad", window.location.href);
                         window.parent.location.reload();
                     }
@@ -99,9 +99,9 @@
             },
                 function (isConfirm) {
                     if (isConfirm) {
-                        common.webApi.post('Revisions/rollback', 'Version=' + $scope.SelectedVersion + '&Locale=' + window.parent.VJLocal).success(function (data) {
-                            if (data != null) {
-                                $scope.ui.data = data;
+                        common.webApi.post('Revisions/rollback', 'Version=' + $scope.SelectedVersion + '&Locale=' + window.parent.VJLocal).then(function (data) {
+                            if (data.data != null) {
+                                $scope.ui.data = data.data;
                             }
                         });
                     }
@@ -124,9 +124,9 @@
             },
                 function (isConfirm) {
                     if (isConfirm) {
-                        common.webApi.post('Revisions/delete', 'Version=' + $scope.SelectedVersion + '&Locale=' + window.parent.VJLocal).success(function (data) {
-                            if (data != null) {
-                                $scope.ui.data = data;
+                        common.webApi.post('Revisions/delete', 'Version=' + $scope.SelectedVersion + '&Locale=' + window.parent.VJLocal).then(function (data) {
+                            if (data.data != null) {
+                                $scope.ui.data = data.data;
                             }
                         });
                     }

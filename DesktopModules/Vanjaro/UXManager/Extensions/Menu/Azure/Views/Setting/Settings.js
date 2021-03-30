@@ -23,11 +23,11 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('Settings/DeleteConnection', 'id=' + row.Id).success(function (Response) {
-                        if (Response.IsSuccess)
-                            $scope.ui.data.Connectors.Options = Response.Data;
-                        else if (Response.HasErrors)
-                            CommonSvc.SweetAlert.swal(Response.Message);
+                    common.webApi.get('Settings/DeleteConnection', 'id=' + row.Id).then(function (Response) {
+                        if (Response.data.IsSuccess)
+                            $scope.ui.data.Connectors.Options = Response.data.Data;
+                        else if (Response.data.HasErrors)
+                            CommonSvc.SweetAlert.swal(Response.data.Message);
                     });
                 }
             });

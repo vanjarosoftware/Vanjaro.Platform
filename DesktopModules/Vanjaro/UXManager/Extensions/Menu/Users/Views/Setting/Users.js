@@ -27,13 +27,13 @@
     };
 
     $scope.Click_LoginAs = function (userId) {
-        common.webApi.post('impersonation/handleimpersonation', 'iuserid=' + userId, '').success(function (data) {
+        common.webApi.post('impersonation/handleimpersonation', 'iuserid=' + userId, '').then(function (data) {
 
-            if (data != null && data.Data != null && data.IsSuccess) {
-                window.parent.location.href = data.Data;
+            if (data.data != null && data.data.Data != null && data.data.IsSuccess) {
+                window.parent.location.href = data.data.Data;
             }
             else {
-                window.parent.ShowNotification('[L:Users]', data.Message, 'error');
+                window.parent.ShowNotification('[L:Users]', data.data.Message, 'error');
             }
 
         });
@@ -69,16 +69,16 @@
         }
         SearchKeys.pagesize = parseInt($('#setting_users1grid0').attr('pagesize'));
 
-        common.webApi.get('user/getusers', 'searchtext=' + SearchKeys.Search_Key + '&filter=' + $scope.ui.data.UserFilters.Value + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize + '&sortcolumn=&sortascending=false').success(function (data) {
-            if (data != null && data.Data != null && data.IsSuccess && !data.HasErrors) {
+        common.webApi.get('user/getusers', 'searchtext=' + SearchKeys.Search_Key + '&filter=' + $scope.ui.data.UserFilters.Value + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize + '&sortcolumn=&sortascending=false').then(function (data) {
+            if (data.data != null && data.data.Data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 if (tableState != null && tableState != 'undefiend' && tableState != '') {
-                    tableState.pagination.numberOfPages = Math.ceil(data.Data.TotalResults / SearchKeys.pagesize);
+                    tableState.pagination.numberOfPages = Math.ceil(data.data.Data.TotalResults / SearchKeys.pagesize);
                 }
                 else {
-                    $scope.allUserPagginationData.pagination.numberOfPages = Math.ceil(data.Data.TotalResults / SearchKeys.pagesize);
+                    $scope.allUserPagginationData.pagination.numberOfPages = Math.ceil(data.data.Data.TotalResults / SearchKeys.pagesize);
                     $scope.allUserPagginationData.pagination.start = 0;
                 }
-                $scope.ui.data.AllUsers.Options = data.Data.Results;
+                $scope.ui.data.AllUsers.Options = data.data.Data.Results;
             }
         });
     };
@@ -116,39 +116,39 @@
                 SearchKeys.pagesize = $scope.pagginationData.pagination.number;
         }
         SearchKeys.pagesize = parseInt($('#setting_users2grid0').attr('pagesize'));
-        common.webApi.get('user/getdeleteduserlist', 'searchtext=' + SearchKeys.Search_Key + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize).success(function (data) {
-            if (data != null && data.Data != null && data.IsSuccess && !data.HasErrors) {
+        common.webApi.get('user/getdeleteduserlist', 'searchtext=' + SearchKeys.Search_Key + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize).then(function (data) {
+            if (data != null && data.data.Data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 if (tableState != null && tableState != 'undefiend' && tableState != '') {
-                    tableState.pagination.numberOfPages = Math.ceil(data.Data.TotalResults / SearchKeys.pagesize);
+                    tableState.pagination.numberOfPages = Math.ceil(data.data.Data.TotalResults / SearchKeys.pagesize);
                 }
                 else {
-                    $scope.pagginationData.pagination.numberOfPages = Math.ceil(data.Data.TotalResults / SearchKeys.pagesize);
+                    $scope.pagginationData.pagination.numberOfPages = Math.ceil(data.data.Data.TotalResults / SearchKeys.pagesize);
                     $scope.pagginationData.pagination.start = 0;
                 }
-                $scope.DeletedUsers = data.Data.Results;
-                $scope.ui.data.DeletedUsers.Value = data.Data.TotalResults;
+                $scope.DeletedUsers = data.data.Data.Results;
+                $scope.ui.data.DeletedUsers.Value = data.data.Data.TotalResults;
             }
         });
     };
 
     $scope.Click_ForceChangePassword = function (row) {
-        common.webApi.post('user/forcechangepassword', 'userid=' + row.userId, '').success(function (data) {
-            if (data != null && data.IsSuccess && !data.HasErrors) {
+        common.webApi.post('user/forcechangepassword', 'userid=' + row.userId, '').then(function (data) {
+            if (data.data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 window.parent.ShowNotification(row.displayName, '[L:Success_ForceChangePasswordMessage]', 'success');
             }
             else {
-                window.parent.ShowNotification(row.displayName, data.Message, 'error');
+                window.parent.ShowNotification(row.displayName, data.data.Message, 'error');
             }
         });
     };
 
     $scope.Click_SendPasswordResetLink = function (row) {
-        common.webApi.post('user/sendpasswordresetlink', 'userid=' + row.userId, '').success(function (data) {
-            if (data != null && data.IsSuccess && !data.HasErrors) {
+        common.webApi.post('user/sendpasswordresetlink', 'userid=' + row.userId, '').then(function (data) {
+            if (data.data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 window.parent.ShowNotification(row.displayName, '[L:PasswordSent]', 'success');
             }
             else {
-                window.parent.ShowNotification(row.displayName, data.Message, 'error');
+                window.parent.ShowNotification(row.displayName, data.data.Message, 'error');
             }
         });
     };
@@ -166,8 +166,8 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('user/softdeleteuser', 'userid=' + row.userId, '').success(function (data) {
-                        if (data != null && data.IsSuccess && !data.HasErrors) {
+                    common.webApi.post('user/softdeleteuser', 'userid=' + row.userId, '').then(function (data) {
+                        if (data != null && data.data.IsSuccess && !data.data.HasErrors) {
                             row.isDeleted = true;
                             var index = $scope.ui.data.AllUsers.Options.indexOf(row);
                             $scope.ui.data.AllUsers.Options.splice(index, 1);
@@ -180,7 +180,7 @@
                             window.parent.ShowNotification(row.displayName, '[L:Success_SoftDeleteMessage]', 'success');
                         }
                         else {
-                            window.parent.ShowNotification(row.displayName, data.Message, 'error');
+                            window.parent.ShowNotification(row.displayName, data.data.Message, 'error');
                         }
                     });
                 }
@@ -201,8 +201,8 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('user/harddeleteuser', 'userid=' + row.userId, '').success(function (data) {
-                        if (data != null && data.IsSuccess && !data.HasErrors) {
+                    common.webApi.post('user/harddeleteuser', 'userid=' + row.userId, '').then(function (data) {
+                        if (data.data != null && data.data.IsSuccess && !data.data.HasErrors) {
                             var index = $scope.ui.data.AllUsers.Options.indexOf(row);
                             $scope.ui.data.AllUsers.Options.splice(index, 1);
                             if ($scope.ui.data.AllUsers.Options.length == 0 && $scope.pagginationData.pagination.start != 0)
@@ -212,7 +212,7 @@
                             $scope.Pipe_DeletedUserPagging($scope.pagginationData);
                         }
                         else {
-                            window.parent.ShowNotification(row.displayName, data.Message, 'error');
+                            window.parent.ShowNotification(row.displayName, data.data.Message, 'error');
                         }
                     });
                 }
@@ -233,13 +233,13 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('user/removeusers', '').success(function (data) {
-                        if (data != null && data.IsSuccess) {
+                    common.webApi.post('user/removeusers', '').then(function (data) {
+                        if (data.data != null && data.data.IsSuccess) {
                             $scope.pagginationData.pagination.start = 0;
                             $scope.Pipe_DeletedUserPagging($scope.pagginationData);
                         }
                         else {
-                            window.parent.ShowNotification('[L:Users]', data.Message, 'error');
+                            window.parent.ShowNotification('[L:Users]', data.data.Message, 'error');
                         }
                     });
                 }
@@ -250,8 +250,8 @@
     $scope.Remove_User = function (row) {
         $scope.RemoveUsers = [];
         $scope.RemoveUsers.push(row);
-        common.webApi.post('user/removeuser', '', $scope.RemoveUsers).success(function (data) {
-            if (data != null && data.IsSuccess && !data.HasErrors && !data.Data.Status) {
+        common.webApi.post('user/removeuser', '', $scope.RemoveUsers).then(function (data) {
+            if (data.data != null && data.data.IsSuccess && !data.data.HasErrors && !data.data.Data.Status) {
                 //var index = $scope.ui.data.DeletedUsers.Options.indexOf(row);
                 //$scope.ui.data.DeletedUsers.Options.splice(index, 1);
                 //var index = $scope.DeletedUsers.indexOf(row);
@@ -264,7 +264,7 @@
                 $scope.Click_Back();
             }
             else {
-                window.parent.ShowNotification(row.DisplayName, data.Message, 'error');
+                window.parent.ShowNotification(row.DisplayName, data.data.Message, 'error');
             }
         });
     };
@@ -274,8 +274,8 @@
     $scope.Restore_User = function (row) {
         $scope.RestoreUsers = [];
         $scope.RestoreUsers.push(row);
-        common.webApi.post('user/restoreuser', '', $scope.RestoreUsers).success(function (data) {
-            if (data != null && data.IsSuccess && !data.HasErrors && !data.Data.Status) {
+        common.webApi.post('user/restoreuser', '', $scope.RestoreUsers).then(function (data) {
+            if (data.data != null && data.data.IsSuccess && !data.data.HasErrors && !data.data.Data.Status) {
                 //var index = $scope.ui.data.DeletedUsers.Options.indexOf(row);
                 //$scope.ui.data.DeletedUsers.Options.splice(index, 1);
                 //var index = $scope.DeletedUsers.indexOf(row);
@@ -290,14 +290,14 @@
                 window.parent.ShowNotification(row.DisplayName, '[L:Success_RestoreUserMessage]', 'success');
             }
             else {
-                window.parent.ShowNotification(row.DisplayName, data.Message, 'error');
+                window.parent.ShowNotification(row.DisplayName, data.data.Message, 'error');
             }
         });
     };
 
     $scope.Click_Restore = function (row) {
-        common.webApi.post('user/restoredeleteduser', 'userid=' + row.userId, '').success(function (data) {
-            if (data != null && data.IsSuccess && !data.HasErrors) {
+        common.webApi.post('user/restoredeleteduser', 'userid=' + row.userId, '').then(function (data) {
+            if (data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 row.isDeleted = false;
                 if ($scope.ui.data.UserFilters.Value == 2) {
                     var index = $scope.ui.data.AllUsers.Options.indexOf(row);
@@ -311,7 +311,7 @@
                 window.parent.ShowNotification(row.displayName, '[L:Success_RestoreUserMessage]', 'success');
             }
             else {
-                window.parent.ShowNotification(row.displayName, data.Message, 'error');
+                window.parent.ShowNotification(row.displayName, data.data.Message, 'error');
             }
         });
     };
@@ -347,8 +347,8 @@
             setAuthorized = false;
         if (!row.authorized)
             setAuthorized = true;
-        common.webApi.post('user/updateauthorizestatus', 'userid=' + row.userId + '&authorized=' + setAuthorized, '').success(function (data) {
-            if (data != null && data.IsSuccess && !data.HasErrors) {
+        common.webApi.post('user/updateauthorizestatus', 'userid=' + row.userId + '&authorized=' + setAuthorized, '').then(function (data) {
+            if (data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 row.authorized = setAuthorized;
                 if (row.authorized) {
                     if ($scope.ui.data.UserFilters.Value == 1) {
@@ -367,10 +367,10 @@
                 $scope.Pipe_AllUserPagging($scope.pagginationData);
                 $scope.pagginationData.pagination.start = 0;
                 $scope.Pipe_DeletedUserPagging($scope.pagginationData);
-                window.parent.ShowNotification(row.displayName, data.Message, 'success');
+                window.parent.ShowNotification(row.displayName, data.data.Message, 'success');
             }
             else {
-                window.parent.ShowNotification(row.displayName, data.Message, 'error');
+                window.parent.ShowNotification(row.displayName, data.data.Message, 'error');
             }
         });
     };
@@ -405,8 +405,8 @@
             setSuperUser = false;
         if (!row.isSuperUser)
             setSuperUser = true;
-        common.webApi.post('user/updatesuperuserstatus', 'userid=' + row.userId + '&setsuperuser=' + setSuperUser, '').success(function (data) {
-            if (data != null && data.IsSuccess && !data.HasErrors) {
+        common.webApi.post('user/updatesuperuserstatus', 'userid=' + row.userId + '&setsuperuser=' + setSuperUser, '').then(function (data) {
+            if (data.data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 row.isSuperUser = setSuperUser;
                 if (row.isSuperUser) {
                     if ($scope.ui.data.UserFilters.Value != 3 && $scope.ui.data.UserFilters.Value != 5) {
@@ -431,7 +431,7 @@
                     window.parent.ShowNotification(row.displayName, '[L:Success_StatusChangeRevoke]', 'success');
             }
             else {
-                window.parent.ShowNotification(row.displayName, data.Message, 'error');
+                window.parent.ShowNotification(row.displayName, data.data.Message, 'error');
             }
         });
     };

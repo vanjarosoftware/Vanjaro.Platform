@@ -11,22 +11,22 @@
             if ($scope.ui.data.UseEmailAsUsername.Options)
                 $scope.ui.data.UserTemplate.Options.userName = $scope.ui.data.UserTemplate.Options.email;
             if ($scope.ui.data.UserTemplate.Options.password == $scope.ui.data.UserTemplate.Options.confirmPassword) {
-                common.webApi.post('user/createuser', '', $scope.ui.data.UserTemplate.Options).success(function (data) {
-                    if (data != null && data.Data != null && data.IsSuccess) {
+                common.webApi.post('user/createuser', '', $scope.ui.data.UserTemplate.Options).then(function (data) {
+                    if (data.data != null && data.data.Data != null && data.data.IsSuccess) {
                         var ParentScope = parent.document.getElementById("iframe").contentWindow.angular;
                         if (ParentScope != undefined && ParentScope.element(".menuextension").scope() != undefined && has(ParentScope.element(".menuextension").scope(), 'ui.data.AllUsers')) {
-                            ParentScope.element(".menuextension").scope().ui.data.AllUsers.Options.push(data.Data);
+                            ParentScope.element(".menuextension").scope().ui.data.AllUsers.Options.push(data.data.Data);
                             ParentScope.element(".menuextension").scope().$apply();
                         }
 
-                        if (has(data.Data, 'displayName'))
-                            window.parent.ShowNotification(data.Data.displayName, '[L:UserCreatedSuccess]', 'success');
+                        if (has(data.data.Data, 'displayName'))
+                            window.parent.ShowNotification(data.data.Data.displayName, '[L:UserCreatedSuccess]', 'success');
 
                         $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                         //parent.OpenPopUp(null, 800, 'right', '', $scope.ui.data.RedirectUrl.Value + '#/setting?uid=' + data.Data.userId);
                     }
                     else {
-                        parent.ShowNotification('[LS:Shortcut_Title]', data.Message, 'error');
+                        parent.ShowNotification('[LS:Shortcut_Title]', data.data.Message, 'error');
                     }
                 });
             }

@@ -105,12 +105,12 @@
                 UpdateSearchData: UpdateSearchData
             };
 
-            common.webApi.post('seo/UpdateSettings', '', requestSettings).success(function (Response) {
-                if (Response.IsSuccess) {
+            common.webApi.post('seo/UpdateSettings', '', requestSettings).then(function (Response) {
+                if (Response.data.IsSuccess) {
                     $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 }
                 else {
-                    window.parent.ShowNotification('[L:SEOSettings]', Response.Message, 'error');
+                    window.parent.ShowNotification('[L:SEOSettings]', Response.data.Message, 'error');
                 }
             });
         };
@@ -118,12 +118,12 @@
 
     $scope.Click_TestUrl = function () {
         if ($scope.ui.data.PageToTest.Value != '' && $scope.ui.data.PageToTest.Value != "-1") {
-            common.webApi.post('seo/TestUrl', 'pageId=' + $scope.ui.data.PageToTest.Value + '&queryString=' + $scope.ui.data.AddQueryString.Value + '&customPageName=' + $scope.ui.data.CustomPageName.Value, '').success(function (Response) {
-                if (Response.IsSuccess) {
-                    $scope.ui.data.ResultingURLs.Value = Response.Data.Urls[0];
+            common.webApi.post('seo/TestUrl', 'pageId=' + $scope.ui.data.PageToTest.Value + '&queryString=' + $scope.ui.data.AddQueryString.Value + '&customPageName=' + $scope.ui.data.CustomPageName.Value, '').then(function (Response) {
+                if (Response.data.IsSuccess) {
+                    $scope.ui.data.ResultingURLs.Value = Response.data.Data.Urls[0];
                 }
                 else {
-                    window.parent.ShowNotification('[L:SEOSettings]', Response.Message, 'error');
+                    window.parent.ShowNotification('[L:SEOSettings]', Response.data.Message, 'error');
                 }
             });
         }
@@ -131,24 +131,24 @@
 
     $scope.Click_URLToTest = function () {
         if ($scope.ui.data.URLToTest.Value != '') {
-            common.webApi.post('seo/TestUrlRewrite', 'uri=' + $scope.ui.data.URLToTest.Value, '').success(function (Response) {
-                if (Response.IsSuccess) {
-                    $scope.ui.data.UrlRewritingResult.Options = Response.Data;
+            common.webApi.post('seo/TestUrlRewrite', 'uri=' + $scope.ui.data.URLToTest.Value, '').then(function (Response) {
+                if (Response.data.IsSuccess) {
+                    $scope.ui.data.UrlRewritingResult.Options = Response.data.Data;
                 }
                 else {
-                    window.parent.ShowNotification('[L:SEOSettings]', Response.OperationMessages, 'error');
+                    window.parent.ShowNotification('[L:SEOSettings]', Response.data.OperationMessages, 'error');
                 }
             });
         }
     };
 
     $scope.Click_Clearcache = function () {
-        common.webApi.post('seo/ResetCache', '', '').success(function (Response) {
-            if (Response.IsSuccess) {
+        common.webApi.post('seo/ResetCache', '', '').then(function (Response) {
+            if (Response.data.IsSuccess) {
                 window.parent.ShowNotification('[L:SEOSettings]', '[L:CacheClear]', 'success');
             }
             else {
-                window.parent.ShowNotification('[L:SEOSettings]', Response.Message, 'error');
+                window.parent.ShowNotification('[L:SEOSettings]', Response.data.Message, 'error');
             }
         });
     };
@@ -200,10 +200,10 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('seo/portalSearchReindex', '&PortalId=' + $scope.ui.data.IgnoreWord.Options.PortalId).success(function (data) {
-                        if (data.IsSuccess) {
-                            if (data.Message != null && data.Message == "")
-                                window.parent.swal(data.Message);
+                    common.webApi.post('seo/portalSearchReindex', '&PortalId=' + $scope.ui.data.IgnoreWord.Options.PortalId).then(function (data) {
+                        if (data.data.IsSuccess) {
+                            if (data.data.Message != null && data.data.Message == "")
+                                window.parent.swal(data.data.Message);
                         }
                         else {
                             window.parent.document.callbacktype = type;
@@ -227,10 +227,10 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('seo/CompactSearchIndex', '', '').success(function (data) {
-                        if (data.IsSuccess) {
-                            if (data.Message != null && data.Message == "")
-                                window.parent.swal(data.Message);
+                    common.webApi.post('seo/CompactSearchIndex', '', '').then(function (data) {
+                        if (data.data.IsSuccess) {
+                            if (data.data.Message != null && data.data.Message == "")
+                                window.parent.swal(data.data.Message);
                         }
                         else {
                             window.parent.document.callbacktype = type;
@@ -254,10 +254,10 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('seo/HostSearchReindex', '', '').success(function (data) {
-                        if (data.IsSuccess) {
-                            if (data.Message != null && data.Message == "")
-                                window.parent.swal(data.Message);
+                    common.webApi.post('seo/HostSearchReindex', '', '').then(function (data) {
+                        if (data.data.IsSuccess) {
+                            if (data.data.Message != null && data.data.Message == "")
+                                window.parent.swal(data.data.Message);
                         }
                         else {
                             window.parent.document.callbacktype = type;

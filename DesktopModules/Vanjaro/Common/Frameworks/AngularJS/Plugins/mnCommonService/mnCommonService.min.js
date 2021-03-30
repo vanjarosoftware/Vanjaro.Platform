@@ -9,6 +9,15 @@ if (typeof String.prototype.endsWith != 'function') {
     };
 }
 
+hasObject = function (obj, key) {
+    return key.split(".").every(function (x) {
+        if (typeof obj != "object" || obj === null || !x in obj || typeof obj[x] === "undefined")
+            return false;
+        obj = obj[x];
+        return true;
+    });
+};
+
 function getElementByScopeID(id) {
     var elem;
     $('.ng-scope').each(function () {
@@ -140,9 +149,9 @@ mnSvc.directive('accessRoles', ['CommonSvc', function (CommonSvc) {
             var hasPermission = CommonSvc.isInRole($attrs.accessRoles);
 
             if (hasPermission)
-                $element.removeClass('ms-hidden');
+                $element.removeClass('d-none');
             else
-                $element.addClass('ms-hidden');
+                $element.addClass('d-none');
         }
     }
 }]);
@@ -162,7 +171,7 @@ mnSvc.directive('showtab',
             link: function (scope, element, attrs) {
                 element.click(function (e) {
                     e.preventDefault();
-                    $(element).mstab('show');
+                    $(element).tab('show');
                 });
             }
         };
@@ -181,7 +190,6 @@ mnSvc.directive('ngaccept', function () {
 mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams', '$rootScope', '$route', function ($compile, $timeout, CommonSvc, $routeParams, $rootScope, $route) {
     var linker = function ($scope, $element, $attrs) {
         var common = CommonSvc.getData($scope);
-        //var layoutMarkup = JSON.stringify(html2json($element[0].outerHTML));
         var uienginepath = window[common.ModuleFolder + '_UIEngine' + $attrs.provider + 'Path'];
         var uitemplatepath = window[common.ModuleFolder + '_UITemplatePath'];
 
@@ -200,7 +208,7 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
             "showmissingkeys": $rootScope.showMissingKeys,
             "parameters": $routeParams,
             "uidata": '',
-            "FormData": $('[name="hfFormData"]').val(),
+            "FormData": $('[name="hfFormData"]').val()
         };
 
         var yourDate = new Date();  // for example
@@ -233,7 +241,7 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
             $scope.Cancel = function () {
                 common.webApi.get('ui/cancelurl').then(function (data) {
                     window.location.href = data;
-                },function (data) {
+                }, function (data) {
                     swal('error');
                 });
             };
@@ -269,10 +277,11 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
 
             setTimeout(function () { if ($scope.onInit) $scope.onInit(); eval(data.data.script); }, 2);
 
-
-            $element.find('[datepicker]').datepicker({
-                beforeShow: function (input, inst) { var $selector = $('#ui-datepicker-div'); if (!$selector.parent().hasClass('ms-container')) $selector.wrap('<div class=\'ms-container\' />') }
-            });
+            if ($.isFunction($element.find('[datepicker]').datepicker)) {
+                $element.find('[datepicker]').datepicker({
+                    beforeShow: function (input, inst) { var $selector = $('#ui-datepicker-div'); if (!$selector.parent().hasClass('container')) $selector.wrap('<div class=\'container\' />') }
+                });
+            }
 
             $element.attr("style", "display: block !important; opacity: 0;")
             $element.closest('.view-animate').parent().css('height', 'auto');
@@ -285,50 +294,6 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
             return common.webApi.get('~permissiosgrid/GetSuggestionUsers?count=10&keyword=' + userInputString);
         };
 
-        //$scope.ReviewContent = function (row) {
-        //    var IsReview = "unchecked";
-        //    if (row != undefined) {
-        //        $.each(row.Permissions, function (key, p) {
-        //            if (p.PermissionName == "Review Content" && p.AllowAccess) {
-        //                IsReview = "check";
-        //            }
-        //        });
-        //    }
-        //    return IsReview;
-        //};
-
-        //$scope.Click_AddUser = function (ControlName) {
-        //    if ($scope.SelectedUser.originalObject.Value != undefined) {
-        //        var User = $.extend(true, {}, $scope.ui.data.TemplateUserPermisssion.Options);
-        //        User.UserId = $scope.SelectedUser.originalObject.Value;
-        //        User.DisplayName = $scope.SelectedUser.originalObject.Label;
-        //        var IsAvl = false; Type.registerNamespace("mynamespace");
-        //        mynamespace.mycontrol = function (element) {
-        //            mynamespace.mycontrol.initializeBase(this, [element]);
-        //        }
-        //        mynamespace.mycontrol.prototype = {
-        //            initialize: function () {
-        //                mynamespace.mycontrol.callBaseMethod(this, 'initialize');
-        //            },
-        //            dispose: function () {
-        //                mynamespace.mycontrol.callBaseMethod(this, 'dispose');
-        //            }
-        //        }
-        //        mynamespace.mycontrol.registerClass('mynamespace.mycontrol', Sys.UI.Behavior);
-        //        $.each($scope.Users, function (key, u) {
-        //            if (u.UserId == $scope.SelectedUser.originalObject.Value)
-        //                IsAvl = true;
-        //        });
-        //        if (!IsAvl) {
-        //            var per = $.extend(true, {}, $scope.ui.data.TemplatePermission.Options);
-        //            User.Permissions.push(per);
-        //            $scope.Users.push(User);
-        //        }
-        //        $scope.SelectedUser.originalObject.Value == undefined;
-        //        $scope.SelectedUser = "";
-        //        $scope.$broadcast('angucomplete-alt:clearInput');
-        //    }
-        //};
 
         var timeout = null;
         var debounceAutoSave = function (newVal, oldVal) {
@@ -368,9 +333,9 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
                             Rows += "</div>";
 
                         if (IsFirst)
-                            Rows += "<div class=\"ms-panel-heading\" style=\"margin-top: 10px;border-left: 3px solid #337ab7;border-radius: 5px;\"><h4 class=\"ms-panel-title\" style=\"text-transform: capitalize;\"><a data-toggle=\"ms-collapse\" style=\"color: #337ab7;text-decoration: none;\" href=\"#" + Field.Name + "\" onClick=\"return false;\">" + Field.DisplayName + "</a></h4></div><div id=" + Field.Name + " class=\"ms-panel-collapse ms-collapse ms-in\">";
+                            Rows += "<div class=\"panel-heading\" style=\"margin-top: 10px;border-left: 3px solid #337ab7;border-radius: 5px;\"><h4 class=\"panel-title\" style=\"text-transform: capitalize;\"><a data-toggle=\"collapse\" style=\"color: #337ab7;text-decoration: none;\" href=\"#" + Field.Name + "\" onClick=\"return false;\">" + Field.DisplayName + "</a></h4></div><div id=" + Field.Name + " class=\"panel-collapse collapse in\">";
                         else
-                            Rows += "<div class=\"ms-panel-heading\" style=\"margin-top: 10px;border-left: 3px solid #337ab7;border-radius: 5px;\"><h4 class=\"ms-panel-title\" style=\"text-transform: capitalize;\"><a data-toggle=\"ms-collapse\" style=\"color: #337ab7;text-decoration: none;\" href=\"#" + Field.Name + "\" onClick=\"return false;\">" + Field.DisplayName + "</a></h4></div><div id=" + Field.Name + " class=\"ms-panel-collapse ms-collapse\">";
+                            Rows += "<div class=\"panel-heading\" style=\"margin-top: 10px;border-left: 3px solid #337ab7;border-radius: 5px;\"><h4 class=\"panel-title\" style=\"text-transform: capitalize;\"><a data-toggle=\"collapse\" style=\"color: #337ab7;text-decoration: none;\" href=\"#" + Field.Name + "\" onClick=\"return false;\">" + Field.DisplayName + "</a></h4></div><div id=" + Field.Name + " class=\"panel-collapse collapse\">";
 
                         IsFirst = false;
                     }
@@ -384,7 +349,7 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
                     }
                 });
             }
-            return "<div class=\"ms-container\"><div class=\"ms-panel-group\"><div class=\"ms-panel ms-panel-default\" style=\"border-color: white;\">" + Rows + "</div></div></div>";
+            return "<div class=\"container\"><div class=\"panel-group\"><div class=\"panel panel-default\" style=\"border-color: white;\">" + Rows + "</div></div></div>";
         };
 
         var ValidateMappings = function (allControls) {
@@ -414,7 +379,7 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
         };
 
         $scope.PreviewImport = function (IsSaveCall) {
-            var allControls = $('#ImportCsv .ms-container').find('select');
+            var allControls = $('#ImportCsv .container').find('select');
             if (ValidateMappings(allControls)) {
                 var MapFields = [];
                 $.each(allControls, function (key, Control) {
@@ -427,22 +392,22 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
                             }
                         }
                     });
-                });
+                })
 
                 var dImport = [];
                 $.each($scope.csv.result, function (key, Option) {
                     var Data = {};
                     $.each(MapFields, function (key, Field) {
                         if (Option[Field.FieldValue] != '') {
-                            Data[Field.FieldName] = Option[Field.FieldValue].replace(/""/g, '"').replace(/^"+|"+$/g, '');
+                            Data[Field.FieldName] = Option[Field.FieldValue].replace(/"/g, '');
                         }
-                    });
+                    })
                     if (!jQuery.isEmptyObject(Data))
                         dImport.push(Data);
-                });
+                })
 
                 if (!IsSaveCall) {
-                    $scope.PreviewImportResult = "<div class=\"ms-table-responsive\"><table class=\"ms-table\"><tbody>";
+                    $scope.PreviewImportResult = "<div class=\"table-responsive\"><table class=\"table\"><tbody>";
                     $scope.PreviewImportResult += "<tr>";
                     $.each(MapFields, function (key, Field) {
                         $scope.PreviewImportResult += "<th>" + Field.FieldDisplayName + "</th>";
@@ -487,7 +452,7 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
                     reader.onload = function (evt) {
                         var Result = JSON.parse(evt.target.result);
                         $.each(Result, function (k, Value) {
-                            $.each($('#ImportCsv .ms-container').find('select'), function (key, Control) {
+                            $.each($('#ImportCsv .container').find('select'), function (key, Control) {
                                 if (Value.ControlName == Control.name) {
                                     Control.value = Value.ControlValue;
                                 }
@@ -507,7 +472,7 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
 
         $scope.SaveMapping = function () {
             var Data = [];
-            $.each($('#ImportCsv .ms-container').find('select'), function (key, Control) {
+            $.each($('#ImportCsv .container').find('select'), function (key, Control) {
                 if (Control.value != '') {
                     var Field = { "ControlName": Control.name, "ControlValue": Control.value };
                     Data.push(Field);
@@ -534,7 +499,7 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
                             data.data += '?';
                         }
                         data.data += 'popUp=true&v=' + new Date().getTime();
-                        dnnModal.show(data.data + "#!/url/manage/" + ename + "/" + eid, false, 550, 950, false);
+                        parent.OpenPopUp(null, "1200", "center", "View History", data + "#!/url/manage/" + ename + "/" + eid, "600", "", true, "");
                     }
                 })
             }
@@ -564,10 +529,10 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
     var initUIHelpers = function () {
 
         //Automatically select a tab if its URL matches window.location
-        $('ul.ms-nav a').filter(function () {
+        $('ul.nav a').filter(function () {
             return $(this).prop("hash") == window.location.hash || ($(this).attr("hash-start") && window.location.hash.startsWith($(this).attr("hash-start")))
                 || ($(this).attr("hash-end") && window.location.hash.endsWith($(this).attr("hash-end")));
-        }).parent().addClass('ms-active');
+        }).parent().addClass('active');
     };
 
     return {

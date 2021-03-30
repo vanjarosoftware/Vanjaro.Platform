@@ -45,16 +45,16 @@
             GroupRoles.pageSize = $scope.pagginationData.pagination.number;
         }
         if ($scope.ui.data.GroupName.Value !== '' || typeof $scope.ui.data.GroupName.Value === "number") {
-            common.webApi.post('rolegroup/getGroupRoles', 'keyword=' + GroupRoles.keyword + '&startIndex=' + GroupRoles.startIndex + '&pageSize=' + GroupRoles.pageSize, GroupRoles).success(function (data) {
-                if (data !== null && data.Roles !== null) {
+            common.webApi.post('rolegroup/getGroupRoles', 'keyword=' + GroupRoles.keyword + '&startIndex=' + GroupRoles.startIndex + '&pageSize=' + GroupRoles.pageSize, GroupRoles).then(function (data) {
+                if (data !== null && data.data.Roles !== null) {
                     if (tableState !== null && tableState !== 'undefiend' && tableState !== '') {
-                        tableState.pagination.numberOfPages = Math.ceil(data.total / GroupRoles.pageSize);
+                        tableState.pagination.numberOfPages = Math.ceil(data.data.total / GroupRoles.pageSize);
                     }
                     else {
-                        $scope.pagginationData.pagination.numberOfPages = Math.ceil(data.total / GroupRoles.pageSize);
+                        $scope.pagginationData.pagination.numberOfPages = Math.ceil(data.data.total / GroupRoles.pageSize);
                         $scope.pagginationData.pagination.start = 0;
                     }
-                    $scope.Roles = data.Roles;
+                    $scope.Roles = data.data.Roles;
                     $scope.ShowGroup_Roles = true;
                 }
             });
@@ -87,13 +87,13 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('role/deleterole', '', $scope.ui.data.Working_RoleDto.Options).success(function (data) {
-                        if (data.Message !== null && data.Message.length > 0) {
+                    common.webApi.post('role/deleterole', '', $scope.ui.data.Working_RoleDto.Options).then(function (data) {
+                        if (data.data.Message !== null && data.data.Message.length > 0) {
                             window.parent.ShowNotification('Error!', data.Message, 'error');
                         }
-                        if (data.IsSuccess) {
+                        if (data.data.IsSuccess) {
                             $scope.Pipe_RolesPaging($scope.pagginationData);
-                            $scope.ui.data.RoleGroup.Options = data.Data.RoleGroups;
+                            $scope.ui.data.RoleGroup.Options = data.data.Data.RoleGroups;
                         }
                     });
                 }
@@ -114,12 +114,12 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('rolegroup/DeleteRoleGroup', '', $scope.ui.data.Working_RoleGroupDto.Options).success(function (data) {
-                        if (data.Message !== null && data.Message.length > 0) {
-                            window.parent.ShowNotification('Error!', data.Message, 'error');
+                    common.webApi.post('rolegroup/DeleteRoleGroup', '', $scope.ui.data.Working_RoleGroupDto.Options).then(function (data) {
+                        if (data.data.Message !== null && data.data.Message.length > 0) {
+                            window.parent.ShowNotification('Error!', data.data.Message, 'error');
                         }
                         if (data.IsSuccess) {
-                            $scope.ui.data.RoleGroup.Options = data.Data.AllRoleGroup;
+                            $scope.ui.data.RoleGroup.Options = data.data.Data.AllRoleGroup;
                         }
                     });
                 }

@@ -15,11 +15,11 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('LogSetting/DeleteLogSetting', 'LogTypeConfigId=' + row.ID).success(function (data) {
-                        if (data != undefined && data.Status == 'Success')
+                    common.webApi.get('LogSetting/DeleteLogSetting', 'LogTypeConfigId=' + row.ID).then(function (data) {
+                        if (data != undefined && data.data.Status == 'Success')
                             $scope.RefreshGrid();
                         else
-                            window.parent.ShowNotification('[LS:Error]', data.Status, 'error');
+                            window.parent.ShowNotification('[LS:Error]', data.data.Status, 'error');
                     })
                 }
             });
@@ -44,11 +44,11 @@
                 NotificationThresholdTimeType: row.NotificationThresholdTimeType,
                 MailToAddress: row.MailToAddress,
             };
-            common.webApi.post('LogSetting/UpdateLogSetting', '', LogType).success(function (data) {
-                if (data != undefined && data.Status == 'Success')
+            common.webApi.post('LogSetting/UpdateLogSetting', '', LogType).then(function (data) {
+                if (data != undefined && data.data.Status == 'Success')
                     $scope.RefreshGrid();
                 else
-                    window.parent.ShowNotification('[LS:Error]', data.Status, 'error');
+                    window.parent.ShowNotification('[LS:Error]', data.data.Status, 'error');
             })
         }
     };
@@ -73,13 +73,13 @@
         var str = '';
         if (tableState != undefined && tableState.search != undefined && tableState.search.predicateObject != undefined && tableState.search.predicateObject.$ != undefined)
             str = tableState.search.predicateObject.$;
-        common.webApi.get('LogSetting/GetLogSettings', 'pageSize=' + tableState.pagination.number + '&pageIndex=' + (tableState.pagination.start / tableState.pagination.number) + '&search=' + str).success(function (data) {
-            if (data != undefined && data.Status == 'Success') {
+        common.webApi.get('LogSetting/GetLogSettings', 'pageSize=' + tableState.pagination.number + '&pageIndex=' + (tableState.pagination.start / tableState.pagination.number) + '&search=' + str).then(function (data) {
+            if (data != undefined && data.data.Status == 'Success') {
                 $scope.LogSetting = data.Types;
-                $scope.LogSettingTableState.pagination.numberOfPages = data.NumberOfPages;
+                $scope.LogSettingTableState.pagination.numberOfPages = data.data.NumberOfPages;
             }
             else
-                window.parent.ShowNotification('[LS:Error]', data.Status, 'error');
+                window.parent.ShowNotification('[LS:Error]', data.data.Status, 'error');
         })
     };
 });

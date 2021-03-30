@@ -75,7 +75,7 @@
             var data = {
                 MaxRevisions: $scope.ui.data.MaxRevisions.Value
             }
-            common.webApi.post('workflow/UpdateAdvance', '', data).success(function (data) {
+            common.webApi.post('workflow/UpdateAdvance', '', data).then(function (data) {
                 if (data != null) {
                     $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 }
@@ -87,7 +87,7 @@
         var data = {
             WorkflowID: $scope.ui.data.ddlWorkFlows.Value,
         }
-        common.webApi.post('workflow/UpdateDefault', '', data).success(function (data) {
+        common.webApi.post('workflow/UpdateDefault', '', data).then(function (data) {
             if (data != null) {
                 $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
             }
@@ -98,12 +98,12 @@
 
     $scope.Change_Workflow = function (workflowid) {
         $scope.WorkflowID = workflowid;
-        common.webApi.get('workflow/getworkflow', 'workflowid=' + parseInt($scope.WorkflowID)).success(function (data) {
-            $scope.ui.data.Workflow.Options = data.Data.Workflow;
-            $scope.ui.data.WorkflowStates.Options = data.Data.WorkflowStates;
+        common.webApi.get('workflow/getworkflow', 'workflowid=' + parseInt($scope.WorkflowID)).then(function (data) {
+            $scope.ui.data.Workflow.Options = data.data.Data.Workflow;
+            $scope.ui.data.WorkflowStates.Options = data.data.Data.WorkflowStates;
             //$scope.ui.data.Permissions.Options.Permissions = data.Data.workflowPermission.Permissions
-            $scope.PermissionsRoles = data.Data.workflowPermission.Permissions.RolePermissions;
-            $scope.PermissionsUsers = data.Data.workflowPermission.Permissions.UserPermissions;
+            $scope.PermissionsRoles = data.data.Data.workflowPermission.Permissions.RolePermissions;
+            $scope.PermissionsUsers = data.data.Data.workflowPermission.Permissions.UserPermissions;
             //$scope.workflowPermissionRoles = data.Data.RolePermissions;
             //$scope.workflowPermissionUsers = data.Data.UserPermissions;
             $scope.ShowPermission = true;
@@ -130,12 +130,12 @@
                 if (isConfirm) {
                     $scope.ui.data.Workflow.Options = workflow;
                     $scope.ui.data.Workflow.Options.IsDeleted = true;
-                    common.webApi.post('workflow/delete', '', $scope.ui.data.Workflow.Options).success(function (data) {
+                    common.webApi.post('workflow/delete', '', $scope.ui.data.Workflow.Options).then(function (data) {
                         if ($scope.WorkflowID != '0' || $scope.WorkflowID == "") {
-                            if (!data.Data.IsDeleted == true)
+                            if (!data.data.Data.IsDeleted == true)
                                 window.parent.ShowNotification('[L:Warning]', '[L:WorkflowUsing]', 'warning');
-                            $scope.ui.data.Workflows.Options = data.Data.Workflows;
-                            $scope.ui.data.ddlWorkFlows.Options = data.Data.ddlWorkFlows;
+                            $scope.ui.data.Workflows.Options = data.data.Data.Workflows;
+                            $scope.ui.data.ddlWorkFlows.Options = data.data.Data.ddlWorkFlows;
                         }
                     });
                 }
@@ -155,7 +155,7 @@
                 PermissionsRoles: $scope.PermissionsRoles,
                 PermissionsUsers: $scope.PermissionsUsers,
             }
-            common.webApi.post('workflow/add', '', data).success(function (data) {
+            common.webApi.post('workflow/add', '', data).then(function (data) {
                 if ($scope.WorkflowID == '-1') {
                     $scope.ShowEditWorkflow = true;
                 }
@@ -165,11 +165,11 @@
                 }
 
                 if ($scope.WorkflowID != '0' || $scope.WorkflowID == "") {
-                    $scope.ui.data.Workflows.Options = data.Data.Workflows;
-                    $scope.WorkflowID = data.Data.WorkflowID.toString();
-                    $scope.ui.data.WorkflowStates.Options = data.Data.WorkflowStates;
-                    $scope.ui.data.Workflow.Options = data.Data.Workflow;
-                    $scope.ui.data.ddlWorkFlows.Options = data.Data.ddlWorkFlows;
+                    $scope.ui.data.Workflows.Options = data.data.Data.Workflows;
+                    $scope.WorkflowID = data.data.Data.WorkflowID.toString();
+                    $scope.ui.data.WorkflowStates.Options = data.data.Data.WorkflowStates;
+                    $scope.ui.data.Workflow.Options = data.data.Data.Workflow;
+                    $scope.ui.data.ddlWorkFlows.Options = data.data.Data.ddlWorkFlows;
                 }
 
             });
@@ -233,9 +233,9 @@
         $scope.IsActive = true;
         $scope.ShowState = true;
         $scope.ShowPermission = true;
-        common.webApi.get('workflow/statepermission', 'stateid=' + $scope.StateID).success(function (data) {
-            $scope.workflowPermissionRoles = data.Data.RolePermissions;
-            $scope.workflowPermissionUsers = data.Data.UserPermissions;
+        common.webApi.get('workflow/statepermission', 'stateid=' + $scope.StateID).then(function (data) {
+            $scope.workflowPermissionRoles = data.data.Data.RolePermissions;
+            $scope.workflowPermissionUsers = data.data.Data.UserPermissions;
         });
     };
 
@@ -271,9 +271,9 @@
         if (row.IsFirst || row.IsLast)
             $scope.ShowPermission = false;
         else {
-            common.webApi.get('workflow/statepermission', 'stateid=' + row.StateID).success(function (data) {
-                $scope.workflowPermissionRoles = data.Data.RolePermissions;
-                $scope.workflowPermissionUsers = data.Data.UserPermissions;
+            common.webApi.get('workflow/statepermission', 'stateid=' + row.StateID).then(function (data) {
+                $scope.workflowPermissionRoles = data.data.Data.RolePermissions;
+                $scope.workflowPermissionUsers = data.data.Data.UserPermissions;
                 $scope.ShowPermission = true;
             });
         }
@@ -288,9 +288,9 @@
                 RolePermissions: $scope.workflowPermissionRoles,
                 UserPermissions: $scope.workflowPermissionUsers
             };
-            common.webApi.post('workflow/updatestate', 'WorkflowID=' + parseInt($scope.WorkflowID), Data).success(function (data) {
-                $scope.ui.data.Workflow.Options = data.Data.Workflow;
-                $scope.ui.data.WorkflowStates.Options = data.Data.WorkflowStates;
+            common.webApi.post('workflow/updatestate', 'WorkflowID=' + parseInt($scope.WorkflowID), Data).then(function (data) {
+                $scope.ui.data.Workflow.Options = data.data.Data.Workflow;
+                $scope.ui.data.WorkflowStates.Options = data.data.Data.WorkflowStates;
                 $scope.Click_CancleState();
             });
         }
@@ -324,8 +324,8 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('workflow/delete', 'stateid=' + row.StateID).success(function (data) {
-                        if (data.Data.IsDeleted) {
+                    common.webApi.get('workflow/delete', 'stateid=' + row.StateID).then(function (data) {
+                        if (data.data.Data.IsDeleted) {
                             $scope.ui.data.WorkflowStates.Options = $scope.ui.data.WorkflowStates.Options.filter(function (s) {
                                 return s.StateID !== row.StateID;
                             });

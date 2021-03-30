@@ -15,12 +15,12 @@
 
     $scope.Click_Save = function (type) {
         if (mnValidationService.DoValidationAndSubmit('', 'memberprofile_settings')) {
-            common.webApi.post('memberprofile/UpdateProfileSettings', '', $scope.ui.data.ProfileSettings.Options).success(function (Response) {
-                if (Response.IsSuccess) {
+            common.webApi.post('memberprofile/UpdateProfileSettings', '', $scope.ui.data.ProfileSettings.Options).then(function (Response) {
+                if (Response.data.IsSuccess) {
                     $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 }
                 else {
-                    window.parent.ShowNotification('[LS:UserProfileSettings]', Response.Message, 'error');
+                    window.parent.ShowNotification('[LS:UserProfileSettings]', Response.data.Message, 'error');
                 }
             });
         };

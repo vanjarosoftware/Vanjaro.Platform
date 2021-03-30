@@ -6,12 +6,12 @@
     };
     
     $scope.Click_Update = function () {
-        common.webApi.post('Translator/UpdateRoles', 'lid=' + $scope.ui.data.LanguageID.Options, $scope.ui.data.SelectedRoles.Options).success(function (Response) {
-            if (Response.IsSuccess) {
+        common.webApi.post('Translator/UpdateRoles', 'lid=' + $scope.ui.data.LanguageID.Options, $scope.ui.data.SelectedRoles.Options).then(function (Response) {
+            if (Response.data.IsSuccess) {
                 $scope.Click_Cancel();
             }
             else if (Response.HasErrors)
-                CommonSvc.SweetAlert.swal(Response.Message);
+                CommonSvc.SweetAlert.swal(Response.data.Message);
         });
     };
     $scope.Click_Selected = function (row) {
@@ -30,12 +30,12 @@
     };
 
     $scope.Change_RoleGroup = function () {
-        common.webApi.get('Translator/GetRoles', 'groupid=' + $scope.RoleGroup + '&lid=' + $scope.ui.data.LanguageID.Options).success(function (Response) {
-            if (Response.IsSuccess) {
-                $scope.ui.data.Roles.Options = Response.Data;
+        common.webApi.get('Translator/GetRoles', 'groupid=' + $scope.RoleGroup + '&lid=' + $scope.ui.data.LanguageID.Options).then(function (Response) {
+            if (Response.data.IsSuccess) {
+                $scope.ui.data.Roles.Options = Response.data.Data;
             }
             else if (Response.HasErrors)
-                CommonSvc.SweetAlert.swal(Response.Message);
+                CommonSvc.SweetAlert.swal(Response.data.Message);
         });
     };
     $scope.Click_Cancel = function () {

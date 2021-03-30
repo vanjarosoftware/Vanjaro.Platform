@@ -34,26 +34,26 @@
                         Version: $scope.ui.data.ReviewContentInfo.Options.Version,
                     };
                     if (Comment != undefined && Comment != '') {
-                        common.webApi.post('moderator/addcomment', '', Data).success(function (data) {
-                            if (data != null) {
-                                $scope.ui.data = data.Data;
-                                $("#VJnotifycount", parent.document).text(data.NotifyCount);
+                        common.webApi.post('moderator/addcomment', '', Data).then(function (data) {
+                            if (data.data != null) {
+                                $scope.ui.data = data.data.Data;
+                                $("#VJnotifycount", parent.document).text(data.data.NotifyCount);
                                 $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                                 parent.swal.close();
                                 parent.toastr.clear();
-                                if (data.Data.NextState.Options == null)
+                                if (data.data.Data.NextState.Options == null)
                                     $('.gjs-cv-canvas__frames', parent.document).removeClass('lockcanvas')
                                 if ($scope.getCookie("vj_InitUX") == "" || $scope.getCookie("vj_InitUX") == "true") {
                                     $scope.RenderMarkup('Register Link');
                                 }
                                 else {
-                                    $('.registerlink-notification > sup > strong', parent.document).text(data.NotifyCount);
+                                    $('.registerlink-notification > sup > strong', parent.document).text(data.data.NotifyCount);
                                 }
-                                window.parent.VJIsContentApproval = data.ReviewVariable.IsContentApproval ? "True" : "False";
-                                window.parent.VJNextStateName = data.ReviewVariable.NextStateName;
-                                window.parent.VJIsPageDraft = data.ReviewVariable.IsPageDraft;
-                                window.parent.VJIsLocked = data.ReviewVariable.IsLocked ? "True" : "False";
-                                window.parent.VJIsModeratorEditPermission = data.ReviewVariable.IsModeratorEditPermission;
+                                window.parent.VJIsContentApproval = data.data.ReviewVariable.IsContentApproval ? "True" : "False";
+                                window.parent.VJNextStateName = data.data.ReviewVariable.NextStateName;
+                                window.parent.VJIsPageDraft = data.data.ReviewVariable.IsPageDraft;
+                                window.parent.VJIsLocked = data.data.ReviewVariable.IsLocked ? "True" : "False";
+                                window.parent.VJIsModeratorEditPermission = data.data.ReviewVariable.IsModeratorEditPermission;
 
                                 if ($(window.parent.document.body).find('.VersionManagement').length > 0)
                                     $(window.parent.document.body).find('.fa.fa-history').trigger('click');

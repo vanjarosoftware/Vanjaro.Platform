@@ -33,8 +33,8 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('sites/delete', 'PortalID=' + row.PortalId).success(function (Response) {
-                        if (Response.IsSuccess) {
+                    common.webApi.get('sites/delete', 'PortalID=' + row.PortalId).then(function (Response) {
+                        if (Response.data.IsSuccess) {
                             $scope.RefreshGrid();
                             window.parent.ShowNotification('[LS:Sites]', '[L:Success_DeleteMessage]', 'success');
                         }
@@ -44,10 +44,10 @@
     };
     $scope.Pipe_PortalsPagging = function (tableState) {
         $scope.PortalsTableState = tableState;
-        common.webApi.get('sites/getportals', 'pageSize=' + tableState.pagination.number + '&pageIndex=' + (tableState.pagination.start / tableState.pagination.number)).success(function (Response) {
-            if (Response.IsSuccess) {
-                $scope.Portals = Response.Data.Items;
-                $scope.PortalsTableState.pagination.numberOfPages = Response.Data.NumberOfPages;
+        common.webApi.get('sites/getportals', 'pageSize=' + tableState.pagination.number + '&pageIndex=' + (tableState.pagination.start / tableState.pagination.number)).then(function (Response) {
+            if (Response.data.IsSuccess) {
+                $scope.Portals = Response.data.Data.Items;
+                $scope.PortalsTableState.pagination.numberOfPages = Response.data.Data.NumberOfPages;
             }
         });
     };

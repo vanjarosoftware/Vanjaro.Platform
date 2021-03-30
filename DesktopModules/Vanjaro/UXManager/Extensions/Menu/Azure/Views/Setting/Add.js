@@ -22,14 +22,14 @@
                     return false
                 }
                 UpdateValue();
-                common.webApi.post('add/addcontainer', 'name=' + inputValue, $scope.ui.data.Connector.Options).success(function (Response) {
+                common.webApi.post('add/addcontainer', 'name=' + inputValue, $scope.ui.data.Connector.Options).then(function (Response) {
                     swal.close()
-                    if (Response.IsSuccess) {
+                    if (Response.data.IsSuccess) {
                         if ($scope.ui.data.Connector.Options.Id)
                             $scope.Click_GetAllContainers();                        
                     }
-                    else if (Response.HasErrors) {
-                        window.parent.swal(Response.Message);
+                    else if (Response.data.HasErrors) {
+                        window.parent.swal(Response.data.Message);
                     }
                 });
             });
@@ -51,19 +51,19 @@
     $scope.Click_Update = function () {
         if (mnValidationService.DoValidationAndSubmit('', 'setting_add')) {
             UpdateValue();
-            common.webApi.post('add/save', '', $scope.ui.data.Connector.Options).success(function (Response) {
-                if (Response.IsSuccess) {
+            common.webApi.post('add/save', '', $scope.ui.data.Connector.Options).then(function (Response) {
+                if (Response.data.IsSuccess) {
                     var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
                     Parentscope.GetAllConnector();
                     if ($scope.loadcontainer) {
                         $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     } else {
-                        $scope.ui.data.Connector.Options.Id = Response.Data;
+                        $scope.ui.data.Connector.Options.Id = Response.data.Data;
                         $scope.Click_GetAllContainers()
                     }
                 }
                 else if (Response.HasErrors)
-                    window.parent.swal(Response.Message);
+                    window.parent.swal(Response.data.Message);
             });
         }
     };

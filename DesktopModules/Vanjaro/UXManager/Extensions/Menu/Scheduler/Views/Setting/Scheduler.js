@@ -80,14 +80,14 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('Scheduler/DeleteSchedule', 'ScheduleID=' + scheduleid).success(function (data) {
-                        if (data.IsSuccess) {
-                            $scope.pagginationData.pagination.numberOfPages = data.Data.ScheduleItems.numberOfPages;
-                            $scope.ScheduleItems = data.Data.ScheduleItems.ScheduledItems;
-                            window.parent.ShowNotification('', data.Message, 'success');
+                    common.webApi.post('Scheduler/DeleteSchedule', 'ScheduleID=' + scheduleid).then(function (data) {
+                        if (data.data.IsSuccess) {
+                            $scope.pagginationData.pagination.numberOfPages = data.data.Data.ScheduleItems.numberOfPages;
+                            $scope.ScheduleItems = data.data.Data.ScheduleItems.ScheduledItems;
+                            window.parent.ShowNotification('', data.data.Message, 'success');
                         }
                         else {
-                            window.parent.ShowNotification('', data.Message, 'error');
+                            window.parent.ShowNotification('', data.data.Message, 'error');
                         }
                     });
                 }
@@ -116,62 +116,62 @@
             scheduleDto.ObjectDependencies = $scope.ui.data.ObjectDependencies.Value;
             scheduleDto.TypeFullName = $scope.ui.data.ClassNameAssembly.Value;
             scheduleDto.CatchUpEnabled = $scope.ui.data.CatchUpTasks.Value;
-            common.webApi.post('Scheduler/RunSchedule', '', scheduleDto).success(function (data) {
-                if (data.IsSuccess) {
+            common.webApi.post('Scheduler/RunSchedule', '', scheduleDto).then(function (data) {
+                if (data.data.IsSuccess) {
                     $scope.Click_Cancel();
-                    window.parent.ShowNotification('', data.Message, 'success');
+                    window.parent.ShowNotification('', data.data.Message, 'success');
                 }
                 else {
-                    window.parent.ShowNotification('', data.Message, 'error');
+                    window.parent.ShowNotification('', data.data.Message, 'error');
                 }
             });
         };
     };
 
     $scope.DirectRunTask = function (scheduleid) {
-    common.webApi.post('Scheduler/DirectRunSchedule', 'ScheduleID=' + scheduleid).success(function (data) {
-        if (data.IsSuccess) {
-            window.parent.ShowNotification('', data.Message, 'success');
+    common.webApi.post('Scheduler/DirectRunSchedule', 'ScheduleID=' + scheduleid).then(function (data) {
+        if (data.data.IsSuccess) {
+            window.parent.ShowNotification('', data.data.Message, 'success');
         }
         else {
-            window.parent.ShowNotification('', data.Message, 'error');
+            window.parent.ShowNotification('', data.data.Message, 'error');
         }
     });
     };
 
     $scope.GetScheduleStatus = function () {
-        common.webApi.get('Scheduler/GetScheduleStatus', '').success(function (data) {
-            if (data) {
-                $scope.ui.data.ScheduleStatus.Options.Data.Status = data.Data.Data.Status;
-                $scope.ui.data.ScheduleStatus.Options.Data.MaxThreadCount = data.Data.Data.MaxThreadCount;
-                $scope.ui.data.ScheduleStatus.Options.Data.ActiveThreadCount = data.Data.Data.ActiveThreadCount;
-                $scope.ui.data.ScheduleStatus.Options.Data.FreeThreadCount = data.Data.Data.FreeThreadCount;
-                $scope.ui.data.ScheduleStatus.Options.Data.ServerTime = data.Data.Data.ServerTime;
+        common.webApi.get('Scheduler/GetScheduleStatus', '').then(function (data) {
+            if (data.data) {
+                $scope.ui.data.ScheduleStatus.Options.Data.Status = data.data.Data.Data.Status;
+                $scope.ui.data.ScheduleStatus.Options.Data.MaxThreadCount = data.data.Data.Data.MaxThreadCount;
+                $scope.ui.data.ScheduleStatus.Options.Data.ActiveThreadCount = data.data.Data.Data.ActiveThreadCount;
+                $scope.ui.data.ScheduleStatus.Options.Data.FreeThreadCount = data.data.Data.Data.FreeThreadCount;
+                $scope.ui.data.ScheduleStatus.Options.Data.ServerTime = data.data.Data.Data.ServerTime;
             }
         });
         ScheduleStatus = setTimeout($scope.GetScheduleStatus, 5000);
     };
 
     $scope.EditTask = function (scheduleid) {
-        common.webApi.get('Scheduler/GetScheduleItem', 'scheduleId=' + scheduleid).success(function (data) {
-            if (data.Data.Status === 'Success') {
-                $scope.ui.data.RunOnEvent.Value = data.Data.Data.AttachToEvent === "" ? "0" : data.Data.Data.AttachToEvent;
-                if (data.Data.Data.Enabled === true) {
-                    $scope.ui.data.EnabledScheduling.Value = data.Data.Data.Enabled;
+        common.webApi.get('Scheduler/GetScheduleItem', 'scheduleId=' + scheduleid).then(function (data) {
+            if (data.data.Data.Status === 'Success') {
+                $scope.ui.data.RunOnEvent.Value = data.data.Data.Data.AttachToEvent === "" ? "0" : data.data.Data.Data.AttachToEvent;
+                if (data.data.Data.Data.Enabled === true) {
+                    $scope.ui.data.EnabledScheduling.Value = data.data.Data.Data.Enabled;
                     $scope.EnabledScheduling = true;
                 }
-                $scope.ui.data.ScheduleStartDate.Value = data.Data.Data.ScheduleStartDate; //change
-                $scope.ui.data.Frequency.Value = data.Data.Data.TimeLapse.toString();
-                $scope.ui.data.FrequencyPeriod.Value = data.Data.Data.TimeLapseMeasurement === "" ? "s" : data.Data.Data.TimeLapseMeasurement;
-                $scope.ui.data.RetainScheduleHistory.Value = data.Data.Data.RetainHistoryNum.toString() === "" ? "0" : data.Data.Data.RetainHistoryNum.toString();
-                $scope.ui.data.RetryTimeLapse.Value = data.Data.Data.RetryTimeLapse.toString() === "-1" ? "" : data.Data.Data.RetryTimeLapse.toString();
-                $scope.ui.data.RunTimeLapsePeriod.Value = data.Data.Data.RetryTimeLapseMeasurement === "" ? "s" : data.Data.Data.RetryTimeLapseMeasurement;
-                $scope.ui.data.Server.Value = data.Data.Data.Servers;
-                $scope.ui.data.ObjectDependencies.Value = data.Data.Data.ObjectDependencies;
-                $scope.ui.data.ClassNameAssembly.Value = data.Data.Data.TypeFullName;
-                $scope.ui.data.CatchUpTasks.Value = data.Data.Data.CatchUpEnabled.toString();
-                $scope.ui.data.FriendlyName.Value = data.Data.Data.FriendlyName;
-                $scope.ScheduleID = data.Data.Data.ScheduleID;
+                $scope.ui.data.ScheduleStartDate.Value = data.data.Data.Data.ScheduleStartDate; //change
+                $scope.ui.data.Frequency.Value = data.data.Data.Data.TimeLapse.toString();
+                $scope.ui.data.FrequencyPeriod.Value = data.data.Data.Data.TimeLapseMeasurement === "" ? "s" : data.data.Data.Data.TimeLapseMeasurement;
+                $scope.ui.data.RetainScheduleHistory.Value = data.data.Data.Data.RetainHistoryNum.toString() === "" ? "0" : data.data.Data.Data.RetainHistoryNum.toString();
+                $scope.ui.data.RetryTimeLapse.Value = data.data.Data.Data.RetryTimeLapse.toString() === "-1" ? "" : data.data.Data.Data.RetryTimeLapse.toString();
+                $scope.ui.data.RunTimeLapsePeriod.Value = data.data.Data.Data.RetryTimeLapseMeasurement === "" ? "s" : data.data.Data.Data.RetryTimeLapseMeasurement;
+                $scope.ui.data.Server.Value = data.data.Data.Data.Servers;
+                $scope.ui.data.ObjectDependencies.Value = data.data.Data.Data.ObjectDependencies;
+                $scope.ui.data.ClassNameAssembly.Value = data.data.Data.Data.TypeFullName;
+                $scope.ui.data.CatchUpTasks.Value = data.data.Data.Data.CatchUpEnabled.toString();
+                $scope.ui.data.FriendlyName.Value = data.data.Data.Data.FriendlyName;
+                $scope.ScheduleID = data.data.Data.Data.ScheduleID;
             }
         })
         $scope.AddTaskSchedule = true;
@@ -219,32 +219,32 @@
                 scheduleDto.CatchUpEnabled = $scope.ui.data.CatchUpTasks.Value
             }
             if ($scope.ScheduleID === "0") {
-                common.webApi.post('scheduler/CreateScheduleItem', '', scheduleDto).success(function (data) {
+                common.webApi.post('scheduler/CreateScheduleItem', '', scheduleDto).then(function (data) {
                     if (data.IsSuccess) {
                         $scope.pagginationData.pagination.numberOfPages = data.Data.ScheduleItems.numberOfPages;
                         $scope.ScheduleItems = data.Data.ScheduleItems.ScheduledItems;
                         $scope.Click_Cancel();
                         $scope.ShowAddTask = true;
                         //$scope.AddTaskSchedule = false;
-                        window.parent.ShowNotification('', data.Message, 'success');
+                        window.parent.ShowNotification('', data.data.Message, 'success');
                     }
                     else
-                        window.parent.ShowNotification('', data.Message, 'error');
+                        window.parent.ShowNotification('', data.data.Message, 'error');
                 })
             }
             else {
                 scheduleDto.ScheduleID = $scope.ScheduleID;
-                common.webApi.post('scheduler/UpdateScheduleItem', '', scheduleDto).success(function (data) {
-                    if (data.IsSuccess) {
-                        $scope.pagginationData.pagination.numberOfPages = data.Data.ScheduleItems.numberOfPages;
-                        $scope.ScheduleItems = data.Data.ScheduleItems.ScheduledItems;
+                common.webApi.post('scheduler/UpdateScheduleItem', '', scheduleDto).then(function (data) {
+                    if (data.data.IsSuccess) {
+                        $scope.pagginationData.pagination.numberOfPages = data.data.Data.ScheduleItems.numberOfPages;
+                        $scope.ScheduleItems = data.data.Data.ScheduleItems.ScheduledItems;
                         $scope.Click_Cancel();
                         $scope.ShowAddTask = true;
                         //$scope.AddTaskSchedule = false;
-                        window.parent.ShowNotification('', data.Message, 'success');
+                        window.parent.ShowNotification('', data.data.Message, 'success');
                     }
                     else
-                        window.parent.ShowNotification('', data.Message, 'error');
+                        window.parent.ShowNotification('', data.data.Message, 'error');
                 })
             }
         }
@@ -267,12 +267,12 @@
                         $('.mode').addClass('disable');
                     }
                     else {
-                        common.webApi.delete('TaskQueue/StopSchedule').success(function (data) {
-                            if (data.IsSuccess) {
+                        common.webApi.delete('TaskQueue/StopSchedule').then(function (data) {
+                            if (data.data.IsSuccess) {
                                 $scope.ui.data.ScheduleStatus.Options.Data.Status = $scope.GetScheduleStatus();
                             }
                             else {
-                                window.parent.ShowNotification('', data.Message, 'error');
+                                window.parent.ShowNotification('', data.data.Message, 'error');
                             }
                         });
                     }
@@ -286,12 +286,12 @@
             $('.mode').addClass('disable');
         }
         else {
-            common.webApi.post('TaskQueue/StartSchedule').success(function (data) {
-                if (data.IsSuccess) {
+            common.webApi.post('TaskQueue/StartSchedule').then(function (data) {
+                if (data.data.IsSuccess) {
                     $scope.ui.data.ScheduleStatus.Options.Data.Status = $scope.GetScheduleStatus();
                 }
                 else {
-                    window.parent.ShowNotification('', data.Message, 'error');
+                    window.parent.ShowNotification('', data.data.Message, 'error');
                 }
             });
         }
@@ -313,13 +313,13 @@
     $scope.Pipe_ScheduleHistoryItemPagging = function (tableState) {
         $scope.HistoryItemTableState = tableState;
         if ($scope.ScheduleID !== "0") {
-            common.webApi.get('history/GetScheduleItemHistory', 'scheduleId=' + $scope.ScheduleID + '&pageSize=' + tableState.pagination.number + '&pageIndex=' + (tableState.pagination.start / tableState.pagination.number)).success(function (data) {
-                if (data.Data.Status === "Success") {
-                    $scope.ScheduleHistoryItem = data.Data.Item;
-                    $scope.HistoryItemTableState.pagination.numberOfPages = data.Data.NumberOfPages;
+            common.webApi.get('history/GetScheduleItemHistory', 'scheduleId=' + $scope.ScheduleID + '&pageSize=' + tableState.pagination.number + '&pageIndex=' + (tableState.pagination.start / tableState.pagination.number)).then(function (data) {
+                if (data.data.Data.Status === "Success") {
+                    $scope.ScheduleHistoryItem = data.data.Data.Item;
+                    $scope.HistoryItemTableState.pagination.numberOfPages = data.data.Data.NumberOfPages;
                 }
                 else {
-                    window.parent.ShowNotification('', data.Data.Status, 'error');
+                    window.parent.ShowNotification('', data.data.Data.Status, 'error');
                 }
             });
         }
@@ -333,10 +333,10 @@
         }
 
 
-        common.webApi.post('Scheduler/GetSchedulerItembyPageing', '', formData).success(function (data) {
+        common.webApi.post('Scheduler/GetSchedulerItembyPageing', '', formData).then(function (data) {
             if (data != null) {
-                tableState.pagination.numberOfPages = data.Data.ScheduleItems.numberOfPages;
-                $scope.ScheduleItems = data.Data.ScheduleItems.ScheduledItems;
+                tableState.pagination.numberOfPages = data.data.Data.ScheduleItems.numberOfPages;
+                $scope.ScheduleItems = data.data.Data.ScheduleItems.ScheduledItems;
             }
 
         });
