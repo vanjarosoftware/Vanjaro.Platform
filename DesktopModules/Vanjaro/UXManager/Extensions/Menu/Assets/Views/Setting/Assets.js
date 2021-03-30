@@ -656,8 +656,8 @@
                     'TabId': parseInt(sf.getTabId()),
                     'RequestVerificationToken': sf.getAntiForgeryValue()
                 },
-            }).success(function (data, status, headers) {
-                headers = headers();
+            }).then(function (data) {
+                headers = data.headers();
                 var filename = headers['x-filename'];
                 var contentType = headers['content-type'];
                 var linkElement = document.createElement('a');
@@ -675,8 +675,8 @@
                 } catch (ex) {
                     alert(ex);
                 }
-            }).error(function (data) {
-                alert(data);
+            }, function (data) {
+                alert(data.data);
             });
         }
     };

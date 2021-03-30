@@ -161,8 +161,8 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                             'TabId': parseInt($.ServicesFramework(-1).getTabId()),
                             'RequestVerificationToken': $.ServicesFramework(-1).getAntiForgeryValue()
                         }
-                    }).success(function (data, status, headers) {
-                        headers = headers();
+                    }).then(function (data, status, headers) {
+                        headers = data.headers();
                         var filename = headers['x-filename'];
                         var contentType = headers['content-type'];
                         var linkElement = document.createElement('a');
@@ -180,8 +180,8 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         } catch (ex) {
                             alert(ex);
                         }
-                    }).error(function (data) {
-                        alert(data);
+                    },function (data) {
+                        alert(data.data);
                     });
                 }
             });

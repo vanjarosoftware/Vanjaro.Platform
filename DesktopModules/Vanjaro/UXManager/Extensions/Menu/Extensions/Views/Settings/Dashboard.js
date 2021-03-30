@@ -79,8 +79,8 @@
                     'TabId': parseInt($.ServicesFramework(parseInt($scope.$parent.moduleid)).getTabId()),
                     'RequestVerificationToken': $.ServicesFramework(parseInt($scope.$parent.moduleid)).getAntiForgeryValue()
                 },
-            }).success(function (data, status, headers) {
-                headers = headers();
+            }).then(function (data) {
+                headers = data.headers();
                 var filename = headers['x-filename'];
                 var contentType = headers['content-type'];
                 var linkElement = document.createElement('a');
@@ -100,7 +100,7 @@
                 } catch (ex) {
                     alert(ex);
                 }
-            }).error(function (data) {
+            },function (data) {
                 alert(data);
             });
         }
@@ -114,8 +114,8 @@
                     'TabId': parseInt($.ServicesFramework(parseInt($scope.$parent.moduleid)).getTabId()),
                     'RequestVerificationToken': $.ServicesFramework(parseInt($scope.$parent.moduleid)).getAntiForgeryValue()
                 },
-            }).success(function (data, status, headers) {
-                headers = headers();
+            }).then(function (data) {
+                headers = data.headers();
                 var filename = headers['x-filename'];
                 var contentType = headers['content-type'];
                 var linkElement = document.createElement('a');
@@ -135,8 +135,8 @@
                 } catch (ex) {
                     alert(ex);
                 }
-            }).error(function (data) {
-                alert(data);
+            },function (data) {
+                alert(data.data);
             });
         }
     };
