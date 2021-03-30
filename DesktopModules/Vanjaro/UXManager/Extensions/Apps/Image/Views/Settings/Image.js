@@ -123,8 +123,8 @@
                         target.set('src', url);
                         if ($scope.targetParent == undefined)
                             $scope.targetParent = target.parent();
-                        if (data.Urls.length)
-                            parent.ChangeToWebp($scope.targetParent, data.Urls);
+                        if (data.data.Urls.length)
+                            parent.ChangeToWebp($scope.targetParent, data.data.Urls);
                         else {
                             target.removeStyle('max-width');
                             $($scope.targetParent.components().models).each(function (index, component) {
