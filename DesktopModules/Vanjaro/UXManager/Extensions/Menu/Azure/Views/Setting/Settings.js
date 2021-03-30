@@ -5,8 +5,8 @@
     };
 
     $scope.GetAllConnector = function () {
-        common.webApi.get('Settings/GetAllConnector').success(function (Response) {
-            $scope.ui.data.Connectors.Options = Response.Data;
+        common.webApi.get('Settings/GetAllConnector').then(function (Response) {
+            $scope.ui.data.Connectors.Options = Response.data.Data;
         });
     };
 

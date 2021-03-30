@@ -79,10 +79,10 @@
         if (!isNaN(option.PropertyValue) && option.PropertyValue != null) {
             var Id = parseInt(option.PropertyValue);
             if (Id != null) {
-                common.webApi.get('updateprofile/Regions', 'country=' + Id).success(function (data) {
-                    $scope.Regions = data;
+                common.webApi.get('updateprofile/Regions', 'country=' + Id).then(function (data) {
+                    $scope.Regions = data.data;
                     $.each($scope.ui.data.ProfileProperties.Options, function (key, value) {
-                        if (regionChange || data.length == 1) {
+                        if (regionChange || data.data.length == 1) {
                             if (value.ControlType == "Region") {
                                 value.ProfilePropertyDefinition.PropertyValue = "-1";
                             }
@@ -135,7 +135,7 @@
     };
 
     $scope.CountryremoteAPI = function (userInputString, timeoutPromise) {
-        return common.webApi.get('updateprofile/countries', 'keyword=' + userInputString).success(function (response) { });
+        return common.webApi.get('updateprofile/countries', 'keyword=' + userInputString).then(function (response) { });
     };
 
     $scope.Parse = function (option) {

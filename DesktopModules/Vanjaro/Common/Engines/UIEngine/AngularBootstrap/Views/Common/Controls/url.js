@@ -59,8 +59,8 @@
             var urltype = 0;
             if ($scope.ui.data.Types.Value == false)
                 urltype = 1;
-            common.webApi.get('upload/getlink', 'fileurl=' + fileurl + '&urltype=' + urltype).success(function (data) {
-                Opnr.CKEDITOR.tools.callFunction(FuncNum, data, '');
+            common.webApi.get('upload/getlink', 'fileurl=' + fileurl + '&urltype=' + urltype).then(function (data) {
+                Opnr.CKEDITOR.tools.callFunction(FuncNum, data.data, '');
                 self.close();
             });
         }
@@ -73,8 +73,8 @@
             var urltype = 0;
             if ($scope.ui.data.Types.Value == false)
                 urltype = 1;
-            common.webApi.get('upload/getlink', 'fileurl=' + fileurl + '&urltype=' + urltype).success(function (data) {
-                Opnr.CKEDITOR.tools.callFunction(FuncNum, data, '');
+            common.webApi.get('upload/getlink', 'fileurl=' + fileurl + '&urltype=' + urltype).then(function (data) {
+                Opnr.CKEDITOR.tools.callFunction(FuncNum, data.data, '');
                 self.close();
             });
         }
@@ -95,8 +95,8 @@
                 var urltype = 0;
                 if ($scope.ui.data.TypesPages.Value == false)
                     urltype = 1;
-                common.webApi.get('upload/getlink', 'fileurl=pages' + $scope.SelectedPage + '&urltype=' + urltype + '&language=' + $scope.ui.data.Languages.Value + '&anchorlist=' + $scope.ui.data.PageAnchors.Value).success(function (data) {
-                    Opnr.CKEDITOR.tools.callFunction(FuncNum, data, '');
+                common.webApi.get('upload/getlink', 'fileurl=pages' + $scope.SelectedPage + '&urltype=' + urltype + '&language=' + $scope.ui.data.Languages.Value + '&anchorlist=' + $scope.ui.data.PageAnchors.Value).then(function (data) {
+                    Opnr.CKEDITOR.tools.callFunction(FuncNum, data.data, '');
                     self.close();
                 });
             }
@@ -138,9 +138,9 @@
                 if ($(value).attr('id') == ("pages" + $scope.SelectedPage))
                     $(value).css('font-weight', 'bold');
             });
-            common.webApi.get('~PageLink/GetPageAnchors', 'pageid=' + $scope.SelectedPage).success(function (data) {
+            common.webApi.get('~PageLink/GetPageAnchors', 'pageid=' + $scope.SelectedPage).then(function (data) {
                 if (data) {
-                    $scope.ui.data.PageAnchors.Options = data;
+                    $scope.ui.data.PageAnchors.Options = data.data;
                     $scope.ui.data.PageAnchors.Value = "0";
                 }
             });

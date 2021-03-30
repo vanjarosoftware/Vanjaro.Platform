@@ -37,14 +37,14 @@
     };
 
     $scope.Click_GetAllContainers = function () {
-        common.webApi.get('add/GetAllContainers', 'id=' + parseInt($scope.ui.data.Connector.Options.Id)).success(function (Response) {
-            if (Response.IsSuccess) {
+        common.webApi.get('add/GetAllContainers', 'id=' + parseInt($scope.ui.data.Connector.Options.Id)).then(function (Response) {
+            if (Response.data.IsSuccess) {
                 $scope.loadcontainer = true;
-                $scope.ui.data.Containers.Options = Response.Data;
+                $scope.ui.data.Containers.Options = Response.data.Data;
                 $scope.ui.data.Containers.Value = $scope.ui.data.Connector.Options.Configurations.Container;
             }
-            else if (Response.HasErrors)
-                window.parent.swal(Response.Message);
+            else if (Response.data.HasErrors)
+                window.parent.swal(Response.data.Message);
         });
     };
 
