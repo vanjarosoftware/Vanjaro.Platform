@@ -681,7 +681,7 @@ namespace Vanjaro.Core
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
 
                     Pages Page = Managers.PageManager.GetPages(TermsTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
-                    UpdateValue(pinfo.PortalId, TermsTab.TabID, "setting_detail", "ReplaceTokens", "true");
+                    UpdateValue(pinfo.PortalID, TermsTab.TabID, "setting_detail", "ReplaceTokens", "true");
 
                     if (Page != null && uInfo != null)
                     {
@@ -719,7 +719,7 @@ namespace Vanjaro.Core
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
 
                     Pages Page = Managers.PageManager.GetPages(PrivacyTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
-                    UpdateValue(pinfo.PortalId, PrivacyTab.TabID, "setting_detail", "ReplaceTokens", "true");
+                    UpdateValue(pinfo.PortalID, PrivacyTab.TabID, "setting_detail", "ReplaceTokens", "true");
 
                     if (Page != null && uInfo != null)
                     {

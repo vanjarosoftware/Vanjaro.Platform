@@ -94,8 +94,6 @@ copy ..\..\..\..\bin\Vanjaro.URL.dll bin\ >NUL
 
 copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\HtmlAgilityPack.dll bin\ >NUL
 
-copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\AdvancedStringBuilder.dll bin\ >NUL
-copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\System.Buffers.dll bin\ >NUL
 copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\ImageProcessor.dll bin\ >NUL
 copy ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Vanjaro\bin\ImageProcessor.Plugins.WebP.dll bin\ >NUL
 

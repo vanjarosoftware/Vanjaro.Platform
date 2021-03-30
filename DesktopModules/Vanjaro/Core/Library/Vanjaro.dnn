@@ -370,16 +370,6 @@
 						</assembly>
 						<assembly>
 							<path>bin</path>
-							<name>AdvancedStringBuilder.dll</name>
-							<version>0.1.0.0</version>
-						</assembly>
-						<assembly>
-							<path>bin</path>
-							<name>System.Buffers.dll</name>
-							<version>4.6.26515.6</version>
-						</assembly>
-						<assembly>
-							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Users.dll</name>
 							<version>01.00.00</version>
 						</assembly>
