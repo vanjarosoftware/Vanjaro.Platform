@@ -167,7 +167,7 @@
 
     $scope.ApplyChanges = function (menu) {
         if ($scope.ui.data.Global.Value) {
-            common.webApi.post('menu/update', '', menu.attributes.attributes).success(function () {
+            common.webApi.post('menu/update', '', menu.attributes.attributes).then(function () {
                 window.parent.RenderBlock(menu);
             });
         }

@@ -23,7 +23,7 @@
 
     $scope.ApplyChanges = function (language) {
         if ($scope.ui.data.Global.Value) {
-            common.webApi.post('language/update', '', language.attributes.attributes).success(function () {
+            common.webApi.post('language/update', '', language.attributes.attributes).then(function () {
                 window.parent.RenderBlock(language);
             });
         }

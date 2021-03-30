@@ -9,8 +9,8 @@
 
 	$scope.onInit = function () {
 		window.parent.window.VJIsSaveCall = false;
-		$('.uiengine-wrapper a[data-target="#admin"]').removeClass("active");
-		$('.uiengine-wrapper a[data-target="#imageonline"]').addClass("active");
+		$('.uiengine-wrapper a[data-target="#!/admin"]').removeClass("active");
+		$('.uiengine-wrapper a[data-target="#!/imageonline"]').addClass("active");
 		$scope.ChangeImageProviders();
 		$(window.parent.document.body).find('[data-bs-dismiss="modal"]').on("click", function (e, popup) {
 			if (typeof popup === 'undefined') {
@@ -46,8 +46,8 @@
 		if ($scope.ui.data.keyword != undefined && $scope.ui.data.keyword.Value.length >= 3) {
 			$scope.Images = [];
 			$scope.SearchKeyword = $scope.ui.data.keyword.Value;
-			common.webApi.get('Image/Search', 'source=' + $scope.ui.data.ImageProviders.Value + '&keyword=' + $scope.ui.data.keyword.Value + '&PageNo=' + Math.round(($scope.ImageTableState.pagination.start / $scope.ImageTableState.pagination.number) + 1)).success(function (data) {
-				var imgjson = JSON.parse(data);
+			common.webApi.get('Image/Search', 'source=' + $scope.ui.data.ImageProviders.Value + '&keyword=' + $scope.ui.data.keyword.Value + '&PageNo=' + Math.round(($scope.ImageTableState.pagination.start / $scope.ImageTableState.pagination.number) + 1)).then(function (data) {
+				var imgjson = JSON.parse(data.data);
 				$.each(imgjson.hits, function (key, value) {
 					$scope.Images.push(value);
 				});
@@ -74,10 +74,10 @@
 			if (!$(window.parent.document.body).find('.uxmanager-modal .modal-dialog').find('.modal-backdrop').length)
 				$(window.parent.document.body).find('.uxmanager-modal .modal-dialog').append('<div class="modal-backdrop fade show"></div>');
 
-			common.webApi.post('Image/Save', 'path=' + window.parent.document.vj_image_target.attributes["src"] + '&id=' + $scope.PictureId).success(function (data) {
-				if (data != "failed") {
+			common.webApi.post('Image/Save', 'path=' + window.parent.document.vj_image_target.attributes["src"] + '&id=' + $scope.PictureId).then(function (data) {
+				if (data.data != "failed") {
 					window.parent.window.VJIsSaveCall = true;
-					$scope.SelectImage(data, true);
+					$scope.SelectImage(data.data, true);
 					$(window.parent.document.body).find('[data-bs-dismiss="modal"]').trigger('click', 'close');
 				}
 			});

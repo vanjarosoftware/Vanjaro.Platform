@@ -7,8 +7,8 @@
 
     $scope.onInit = function () {
         window.parent.window.VJIsSaveCall = false;
-        $('.uiengine-wrapper a[data-target="#admin"]').addClass("active");
-        $('.uiengine-wrapper a[data-target="#videoonline"]').removeClass("active");
+        $('.uiengine-wrapper a[data-target="#!/admin"]').addClass("active");
+        $('.uiengine-wrapper a[data-target="#!/videoonline"]').removeClass("active");
         setTimeout(function () {
             $scope.FileAttachmentsClick_FileUpoad('browse');
             $('[identifier="settings_video"]').find('.col-sm-12.esc').remove();

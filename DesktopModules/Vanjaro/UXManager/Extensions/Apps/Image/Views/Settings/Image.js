@@ -9,8 +9,8 @@
 
     $scope.onInit = function () {
         window.parent.window.VJIsSaveCall = false;
-        $('.uiengine-wrapper a[data-target="#admin"]').addClass("active");
-        $('.uiengine-wrapper a[data-target="#imageonline"]').removeClass("active");
+        $('.uiengine-wrapper a[data-target="#!/admin"]').addClass("active");
+        $('.uiengine-wrapper a[data-target="#!/imageonline"]').removeClass("active");
         setTimeout(function () {
             $scope.FileAttachmentsClick_FileUpoad('browse');
             $('[identifier="settings_image"]').find('.col-sm-12.esc').remove();
@@ -107,9 +107,9 @@
 
     $scope.GetURL = function (fileid) {
         window.parent.window.VJIsSaveCall = false;
-        common.webApi.post('Upload/GetUrl', 'fileid=' + fileid).success(function (data) {
-            if (data.Status == 'Success') {
-                var Link = data.Url;
+        common.webApi.post('Upload/GetUrl', 'fileid=' + fileid).then(function (data) {
+            if (data.data.Status == 'Success') {
+                var Link = data.data.Url;
 
                 var target = window.parent.document.vj_image_target;
 
@@ -140,7 +140,7 @@
                 }
             }
             else {
-                window.parent.ShowNotification('Error', data.Status, 'error');
+                window.parent.ShowNotification('Error', data.data.Status, 'error');
             }
             if ($scope.dblclickFired)
                 $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();

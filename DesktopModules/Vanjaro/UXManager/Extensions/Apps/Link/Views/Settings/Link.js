@@ -7,8 +7,8 @@
 
     $scope.onInit = function () {
         window.parent.VjEditor.StorageManager.setAutosave(false);
-        $('.uiengine-wrapper a[data-target="#admin"]').addClass("active");
-        $('.uiengine-wrapper a[data-target="#imageonline"]').removeClass("active");
+        $('.uiengine-wrapper a[data-target="#!/admin"]').addClass("active");
+        $('.uiengine-wrapper a[data-target="#!/imageonline"]').removeClass("active");
         setTimeout(function () {
             $scope.FileAttachmentsClick_FileUpoad('browse');
             $('[identifier="settings_link"]').find('.col-sm-12.esc').remove();
@@ -110,9 +110,9 @@
     };
 
     $scope.GetURL = function (fileid) {
-        common.webApi.post('Upload/GetUrl', 'fileid=' + fileid).success(function (data) {
-            if (data.Status == 'Success') {
-                var Link = data.Url;
+        common.webApi.post('Upload/GetUrl', 'fileid=' + fileid).then(function (data) {
+            if (data.data.Status == 'Success') {
+                var Link = data.data.Url;
                 Link = Link.split('?')[0];
 
                 var sourcetarget = $(window.parent.document).find('#vj_link_target');
