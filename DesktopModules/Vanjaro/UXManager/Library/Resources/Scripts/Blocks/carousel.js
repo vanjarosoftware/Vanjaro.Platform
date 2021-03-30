@@ -294,7 +294,7 @@
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				name: 'Carousel Inner',
 				draggable: false,
-				droppable: true,
+                droppable: '[data-gjs-type=carousel-item]',
 				selectable: false,
 				hoverable: false,
 				highlightable: false,
