@@ -2569,6 +2569,21 @@ $(document).ready(function () {
                                         $('#LibraryBlock').css('opacity', '0.01');
                                 }
                             });
+                            VjEditor.on('component:drag:end', function (model) {
+                                if (model.target.attributes.type == "carousel-item") {   
+                                 
+                                    $(model.parent.find('.carousel-item')).each(function (index, item) {
+                                        item.removeClass('active');
+                                    });                                  
+                                    model.parent.find('.carousel-item')[0].addClass('active');
+                                    
+                                    $(model.parent.parent().getEl()).find('.active.carousel-indicator').removeClass('active');  
+                                    $(model.parent.parent().getEl()).find('.carousel-indicator').first().addClass('active');
+
+                                }
+                            });
+
+
 
                             VjEditor.on('change:changesCount', e => {
 

@@ -332,7 +332,7 @@ div#MenuSettings .parent-menu-hide {
     left: -300px;
     top: 0;
     bottom: 0;
-    z-index: 99;
+    z-index: 1000;
 }
 
     .sidebar.sidebar-open #mode-switcher {
