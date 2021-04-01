@@ -1622,6 +1622,19 @@ $(document).ready(function () {
 
                                 if (typeof model != "undefined") {
 
+                                    $.each(getAllComponents(model), function (i, n) {
+                                        var classes = n.attributes.classes;
+                                        if (classes.length) {
+                                            classes.map(selector => {
+                                                if (selector.active) {
+                                                    selector.set({
+                                                        active: false
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+
                                     if (typeof model.attributes != "undefined") {
 
                                         var Block = model.attributes.type;
@@ -2272,6 +2285,8 @@ $(document).ready(function () {
                                     $(model.components().models[0].getEl()).removeClass('gjs-dashed');
                             });
 
+                            VjEditor.on('selector:add', selector => selector.set({ active: false }));
+
                             VjEditor.on('component:styleUpdate', (model, property) => {
 
                                 if (property == "color" && typeof event != "undefined" && $(event.target).parents(".gjs-sm-property.gjs-sm-color").length) {
@@ -2569,6 +2584,7 @@ $(document).ready(function () {
                                         $('#LibraryBlock').css('opacity', '0.01');
                                 }
                             });
+
                             VjEditor.on('component:drag:end', function (model) {
                                 if (model.target.attributes.type == "carousel-item") {   
                                  

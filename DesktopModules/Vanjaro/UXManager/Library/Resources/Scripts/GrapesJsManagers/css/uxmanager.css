@@ -436,7 +436,7 @@ div#MenuSettings .parent-menu-hide {
 }
 
 .traitsmanager.scrollbar > div {
-    padding: 15px 0;
+    padding: 0 0 15px 0;
 }
 
 .sidebar #ContentBlocks:hover,
@@ -624,8 +624,8 @@ div#MenuSettings .parent-menu-hide {
 }
 
 .gjs-clm-tags #gjs-clm-add-tag svg {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
 }
 
 .sidebar .block-manager .gjs-block[title="Custom Code"] svg {
@@ -1201,11 +1201,6 @@ div#MenuSettings .parent-menu-hide {
     display: none;
 }
 
-.gjs-clm-tags #gjs-clm-tags-field {
-    padding-top: 7px;
-    display: none;
-}
-
 .gjs-clm-tags .gjs-clm-tag {
     background: #fafafa;
     color: #495157;
@@ -1251,6 +1246,16 @@ div#MenuSettings .parent-menu-hide {
 
 #gjs-clm-sel-help {
     border-bottom: 1px solid #ccc;
+}
+
+#gjs-clm-add-tag, .gjs-clm-tags-btn {
+    padding: 1px;
+    top: 3px;
+    position: relative;
+}
+
+.opac50 {
+    opacity: 1;
 }
 
 .jsPanel-controlbar .jsPanel-btn.jsPanel-btn-md svg:not(.svg-inline--fa) {
