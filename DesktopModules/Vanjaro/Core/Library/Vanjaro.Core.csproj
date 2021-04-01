@@ -249,7 +249,6 @@
     <Content Include="Packager\Licenses\Resources.txt" />
     <Content Include="Packager\Releases\placeholder.txt" />
     <Content Include="Packager\Vanjaro\bin\x64\dart.exe" />
-    <Content Include="Packager\Vanjaro\bin\x86\dart.exe" />
     <Content Include="Packager\Vanjaro\Images\icon_authentication.png" />
     <Content Include="Packager\Vanjaro\Images\Branding\Vanjaro_Icon.png" />
     <Content Include="Packager\Vanjaro\Images\icon_extensions_32px.png" />
@@ -444,7 +443,6 @@
     <Content Include="Install\Core.01.00.03.SqlDataProvider" />
     <Content Include="Install\Core.01.00.04.SqlDataProvider" />
     <Content Include="Packager\Vanjaro\bin\x64\sass.snapshot" />
-    <Content Include="Packager\Vanjaro\bin\x86\sass.snapshot" />
     <Content Include="Themes\Basic\templates\website\Privacy.json" />
     <Content Include="Themes\Basic\templates\website\Terms.json" />
     <None Include="web.Debug.config">
