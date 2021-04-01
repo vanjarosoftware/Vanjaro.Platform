@@ -436,7 +436,7 @@ div#MenuSettings .parent-menu-hide {
 }
 
 .traitsmanager.scrollbar > div {
-    padding: 15px 0;
+    padding: 0 0 15px 0;
 }
 
 .sidebar #ContentBlocks:hover,
