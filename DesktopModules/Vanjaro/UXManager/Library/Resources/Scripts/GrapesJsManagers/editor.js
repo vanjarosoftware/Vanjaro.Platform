@@ -1489,6 +1489,13 @@ $(document).ready(function () {
                                     }
                                 });
 
+                                $.each(getAllComponents(), function (ci, cd) {
+                                    if (cd.attributes.forcesave != undefined && cd.attributes.forcesave == 'true') {
+                                        delete cd.attributes.forcesave;
+                                        VjEditor.runCommand("save");
+                                    }
+                                });
+
                                 LoadCustomBlocks();
                                 VjEditor.UndoManager.start();
 
@@ -1656,6 +1663,8 @@ $(document).ready(function () {
                                 if (typeof VjEditor.BlockManager.get('LibraryBlock') != 'undefined') {
                                     if (bmodel != undefined && bmodel.attributes != undefined && bmodel.attributes.attributes != undefined && bmodel.attributes.attributes.id == 'LibraryBlock') {
                                         IsVJCBRendered = true;
+                                        if (!$('.optimizing-overlay').length)
+                                            $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Please wait</h1></div>');
                                     }
                                     VjEditor.BlockManager.remove('LibraryBlock');
                                 }
@@ -2586,14 +2595,14 @@ $(document).ready(function () {
                             });
 
                             VjEditor.on('component:drag:end', function (model) {
-                                if (model.target.attributes.type == "carousel-item") {   
-                                 
+                                if (model.target.attributes.type == "carousel-item") {
+
                                     $(model.parent.find('.carousel-item')).each(function (index, item) {
                                         item.removeClass('active');
-                                    });                                  
+                                    });
                                     model.parent.find('.carousel-item')[0].addClass('active');
-                                    
-                                    $(model.parent.parent().getEl()).find('.active.carousel-indicator').removeClass('active');  
+
+                                    $(model.parent.parent().getEl()).find('.active.carousel-indicator').removeClass('active');
                                     $(model.parent.parent().getEl()).find('.carousel-indicator').first().addClass('active');
 
                                 }
@@ -2996,7 +3005,7 @@ $(document).ready(function () {
                 $iframe.removeClass("fixed-height mobile-landscape-height");
                 $iframe.contents().find("html").addClass('responsive');
                 $iframe.contents().find("#wrapper").addClass("scrollbar");
-                $iframe.contents().find("html").removeClass('mobile-responsive');                
+                $iframe.contents().find("html").removeClass('mobile-responsive');
                 VjEditor.runCommand('set-device-tablet');
             }
             else
@@ -3019,7 +3028,7 @@ $(document).ready(function () {
 
         //MobileLandscape
         else if ($this.attr("id") == "MobileLandscape") {
-           
+
             if (vjEditorSettings.EditPage) {
                 $iframe.removeClass("fixed-height");
                 $iframe.addClass("mobile-landscape-height");
@@ -3031,7 +3040,7 @@ $(document).ready(function () {
             else {
                 $body.removeClass('tablet mobile-portrait').addClass('resp-mode mobile-landscape');
             }
-               
+
         }
 
         var selected = VjEditor.getSelected();
