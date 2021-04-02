@@ -115,7 +115,8 @@ ClosePopUp = function (closeall) {
 };
 
 RedirectPopup = function (iframe) {
-    if (iframe.contentWindow.location.href.indexOf('ctl') == -1)
+    var iframehref = iframe.contentWindow.location.href;
+    if (iframehref.indexOf('ctl') == -1 && iframehref.indexOf('icp') == -1)
         ClosePopUp();
 };
 
