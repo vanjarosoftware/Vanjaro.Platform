@@ -218,8 +218,12 @@ export default (editor, config = {}) => {
 		view: defaultView
 	});
 
+    const textType = domc.getType('text');
+    const textModel = textType.model;
+    const textView = textType.view;
+
 	domc.addType('list-item', {
-		model: defaultModel.extend({
+        model: textModel.extend({
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -263,7 +267,7 @@ export default (editor, config = {}) => {
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: Object.assign({}, textModel.prototype.defaults, {
 				'custom-name': 'List Item',
 				draggable: '.list',
 				droppable: true,
@@ -279,32 +283,6 @@ export default (editor, config = {}) => {
 				}
 			}
 		}),
-		view: defaultView
-	});
-
-	const textType = domc.getType('text');
-	const textModel = textType.model;
-	const textView = textType.view;
-
-	domc.addType('list-text', {
-		model: textModel.extend({
-			defaults: Object.assign({}, textModel.prototype.defaults, {
-				'custom-name': 'List Text',
-				draggable: '.list',
-				droppable: false,
-				layerable: false,
-				selectable: false,
-				hoverable: false,
-				traits: [],
-			}),
-		},
-			{
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('list-text')) {
-						return { type: 'list-text' };
-					}
-				}
-			}),
 		view: textView
 	});
 }
