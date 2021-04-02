@@ -26,7 +26,7 @@ export default (editor, config = {}) => {
 	cmd.add('add-list-item', ed => {
 		var Selected = VjEditor.getSelected();
 
-		if (Selected.attributes.type == 'List') {
+		if (Selected.attributes.type == 'list') {
 			var List = `<li class="list-item"><span class="list-text">List Item</span></li>`;
 			Selected.components().add(List);
 		}
