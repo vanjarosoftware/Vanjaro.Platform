@@ -1869,11 +1869,22 @@ $(document).ready(function () {
                                     if (typeof width == "undefined") {
 
                                         $(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val('auto');
-                                        $(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('width')));
 
-                                        if (target.getAttributes()['data-block-type'] == "Logo")
-                                            $(sm.getProperty(Size, 'width').view.$el.find('input')).val($(target.getEl()).find('img').width());
+                                        if (target.getAttributes()['data-block-type'] == "Logo") {
 
+                                            var logoimg = $(target.getEl()).find('img');
+
+                                            if (logoimg.get(0).style.width == '')
+                                                width = logoimg.width();
+                                            else {
+                                                width = parseInt(logoimg.get(0).style.width);
+                                                $(sm.getProperty(Size, 'width').view.$el.find('input')).val(width);
+                                            }
+
+                                            $(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(width);
+                                        }
+                                        else
+                                            $(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('width')));
                                     }
                                     else
                                         $(sm.getProperty(Size, 'width').view.$el.find('input')).val(parseInt($(target.getEl()).css('width')));
@@ -1887,11 +1898,24 @@ $(document).ready(function () {
                                     var height = target.getStyle()['height'];
 
                                     if (typeof height == "undefined") {
-                                        $(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val('auto');
-                                        $(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('height')));
 
-                                        if (target.getAttributes()['data-block-type'] == "Logo")
-                                            $(sm.getProperty(Size, 'height').view.$el.find('input')).val($(target.getEl()).find('img').height());
+                                        $(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val('auto');
+
+                                        if (target.getAttributes()['data-block-type'] == "Logo") {
+
+                                            var logoimg = $(target.getEl()).find('img');
+
+                                            if (logoimg.get(0).style.height == '')
+                                                height = logoimg.height();
+                                            else {
+                                                height = parseInt(logoimg.get(0).style.height);
+                                                $(sm.getProperty(Size, 'height').view.$el.find('input')).val(height);
+                                            }
+
+                                            $(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(height);
+                                        }
+                                        else
+                                            $(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('height')));
                                     }
                                     else
                                         $(sm.getProperty(Size, 'height').view.$el.find('input')).val(parseInt($(target.getEl()).css('height')));
@@ -2367,24 +2391,23 @@ $(document).ready(function () {
                                     model.removeStyle(property);
 
                                 }
-                                else if (model.getAttributes()['data-block-type'] == "Logo") {
+                                else if (model.getAttributes()['data-block-type'] == "Logo" && (property == "width" || property == "height")) {
 
                                     var style = model.getStyle()[property];
                                     var img = $(model.getEl()).find('img');
+                                    img.css(property, style);
 
-                                    if (property == "width")
-                                        img.css('width', style);
-
-                                    else if (property == "height")
-                                        img.css('height', style);
-
-                                    var width = img.width();
-                                    var height = img.height();
-
+                                    var width = img.get(0).style.width;
+                                    var height = img.get(0).style.height;
                                     var attr = model.getAttributes();
-                                    attr['data-style'] = 'width:' + width + 'px; height:' + height + 'px;';
-                                    model.setAttributes(attr);
 
+                                    if (width != '')
+                                        attr['data-style'] = 'width:' + width + ';';
+
+                                    if (height != '')
+                                        attr['data-style'] += 'height:' + height + ';';
+
+                                    model.setAttributes(attr);
                                     model.removeStyle(property);
                                 }
 
