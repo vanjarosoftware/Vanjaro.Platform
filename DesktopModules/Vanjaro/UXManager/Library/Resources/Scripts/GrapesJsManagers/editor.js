@@ -27,16 +27,9 @@ $(document).ready(function () {
     var Responsive = VjLocalized.Responsive.replace(/ /g, '_').toLowerCase();
     var Filters = VjLocalized.Filters.replace(/ /g, '_').toLowerCase();
     var Transform = VjLocalized.Transform.replace(/ /g, '_').toLowerCase();
-    var Transitions = VjLocalized.Transitions.replace(/ /g, '_').toLowerCase();
     var Size = VjLocalized.Size.replace(/ /g, '_').toLowerCase();
-    var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();
-    var BorderRadius = VjLocalized.BorderRadius.replace(/ /g, '_').toLowerCase();
-    var Text = VjLocalized.Text.replace(/ /g, '').toLowerCase();
-    var BackgroundShadow = VjLocalized.BackgroundShadow.replace(/ /g, '_').toLowerCase();
-    var Position = VjLocalized.Position.replace(/ /g, '_').toLowerCase();
-    var Margin = VjLocalized.Margin.replace(/ /g, '_').toLowerCase();
-    var Padding = VjLocalized.Padding.replace(/ /g, '_').toLowerCase();
-    var Extra = VjLocalized.Extra.replace(/ /g, '_').toLowerCase();
+    var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();   
+    var Text = VjLocalized.Text.replace(/ /g, '').toLowerCase();    
 
     if (window.parent.CurrentTabUrl.indexOf('?') > 0)
         CurrentExtTabUrl = window.parent.CurrentTabUrl + '&mid=0&icp=true';
@@ -1305,7 +1298,146 @@ $(document).ready(function () {
                                                 }],
                                             }
                                         ]
-                                    }]
+                                        }, {
+                                            name: VjLocalized.Flex,
+                                            open: false,
+                                            properties: [{
+                                                name: 'Direction',
+                                                property: 'flex-direction',
+                                                type: 'customradio',
+                                                cssproperty: 'flex-direction',
+                                                list: [{
+                                                    value: 'row',
+                                                    name: 'Row',
+                                                    img: 'flex-dir-row.png',
+                                                }, {
+                                                    value: 'row-reverse',
+                                                    name: 'Row Reverse',
+                                                    img: 'flex-dir-row-rev.png',
+                                                }, {
+                                                    value: 'column',
+                                                    name: 'Column',
+                                                    img: 'flex-dir-col.png',
+                                                }, {
+                                                    value: 'column-reverse',
+                                                    name: 'Column Reverse',
+                                                    img: 'flex-dir-col-rev.png',
+                                                }],
+                                            }, {
+                                                name: 'Justify',
+                                                property: 'justify-content',
+                                                type: 'customradio',
+                                                list: [{
+                                                    value: 'flex-start',
+                                                    name: 'Start',
+                                                    img: 'align-left.png'
+                                                }, {
+                                                    value: 'space-between',
+                                                    name: 'Space Between',
+                                                    img: 'align-between.png',
+                                                }, {
+                                                    value: 'space-around',
+                                                    name: 'Space Around',
+                                                    img: 'align-around.png',
+                                                }, {
+                                                    value: 'center',
+                                                    name: 'Center',
+                                                    img: 'align-center.png',
+                                                }, {
+                                                    value: 'flex-end',
+                                                    name: 'End',
+                                                    img: 'align-right.png',
+                                                }],
+                                            }, {
+                                                name: 'Align',
+                                                property: 'align-items',
+                                                type: 'customradio',
+                                                list: [{
+                                                    value: 'flex-start',
+                                                    name: 'Start',
+                                                    img: 'align-left.png',
+                                                }, {
+                                                    value: 'stretch',
+                                                    name: 'Stretch',
+                                                    img: 'align-justify.png',
+                                                }, {
+                                                    value: 'center',
+                                                    name: 'Center',
+                                                    img: 'align-center.png',
+                                                }, {
+                                                    value: 'flex-end',
+                                                    name: 'End',
+                                                    img: 'align-right.png',
+                                                }],
+                                            }, {
+                                                name: 'Order',
+                                                property: 'order',
+                                                type: 'customrange',
+                                                defaults: 0,
+                                                step: 1,
+                                                min: 0,
+                                                max: 100,
+                                                cssproperty: 'order',
+                                            }, {
+                                                name: 'Flex',
+                                                property: 'flex',
+                                                type: 'composite',
+                                                properties: [{
+                                                    name: 'Grow',
+                                                    property: 'flex-grow',
+                                                    type: 'customrange',
+                                                    defaults: 0,
+                                                    step: 1,
+                                                    min: 0,
+                                                    max: 100,
+                                                }, {
+                                                    name: 'Shrink',
+                                                    property: 'flex-shrink',
+                                                    type: 'customrange',
+                                                    defaults: 0,
+                                                    step: 1,
+                                                    min: 0,
+                                                    max: 100,
+                                                    cssproperty: 'flex-shrink',
+                                                }, {
+                                                    name: 'Basis',
+                                                    property: 'flex-basis',
+                                                    type: 'customrange',
+                                                        units: [{ name: 'px', min: 1, max: 100, step: 1 },
+                                                            { name: '%', min: 1, max: 100, step: 1 }
+                                                        ],
+                                                    unit: 'px',
+                                                    defaults: 'auto',
+                                                    cssproperty: 'flex-basis',
+                                                }],
+                                            }, {
+                                                name: 'Align',
+                                                property: 'align-self',
+                                                type: 'customradio',
+                                                defaults: 'auto',
+                                                list: [{
+                                                    value: 'auto',
+                                                    name: 'Auto',
+                                                }, {
+                                                    value: 'flex-start',
+                                                    name: 'Start',
+                                                    img: 'align-left.png',
+                                                }, {
+                                                    value: 'center',
+                                                    name: 'Center',
+                                                    img: 'align-center.png',
+                                                },{
+                                                    value: 'stretch',
+                                                    name: 'Stretch',
+                                                    img: 'align-justify.png'
+                                                }, {
+                                                    value: 'flex-end',
+                                                    name: 'End',
+                                                    img: 'align-right.png'
+                                                }],
+                                            }]
+                                        }
+                                    ]
                                 },
                                 layerManager: {
                                     appendTo: '#layer-manager .jsPanel-content'
@@ -1629,11 +1761,22 @@ $(document).ready(function () {
 
                                 if (typeof model != "undefined") {
 
+                                    var modelClasses = model.attributes.classes;
+                                    if (modelClasses.length) {
+                                        modelClasses.map(selector => {
+                                            if (selector.attributes.active) {
+                                                selector.set({
+                                                    active: false
+                                                });
+                                            }
+                                        });
+                                    }
+
                                     $.each(getAllComponents(model), function (i, n) {
                                         var classes = n.attributes.classes;
                                         if (classes.length) {
                                             classes.map(selector => {
-                                                if (selector.active) {
+                                                if (selector.attributes.active) {
                                                     selector.set({
                                                         active: false
                                                     });
