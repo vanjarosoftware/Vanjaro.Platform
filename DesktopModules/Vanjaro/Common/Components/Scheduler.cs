@@ -61,8 +61,69 @@ namespace Vanjaro.Common.Components
 
         private void ProcessMailQueue()
         {
-
             NotificationFactory.SMTPPurgeLogs();
+            foreach (PortalInfo portalInfo in PortalController.Instance.GetPortals())
+            {
+                SmtpClient client = null;
+                string NotificationEnabled = PortalController.GetPortalSetting("SMTPmode", portalInfo.PortalID, "");
+                if (!string.IsNullOrEmpty(NotificationEnabled))
+                {
+                    bool IsGlobal = NotificationEnabled == "h";
+                    SmtpServer SmtpServer = NotificationFactory.GetSMTP(IsGlobal, portalInfo.PortalID);
+                    try
+                    {
+                        if (SmtpServer != null && !string.IsNullOrEmpty(SmtpServer.Server) && SmtpServer.Port > 0)
+                        {
+                            List<MailQueue> MailQueue = NotificationFactory.GetMailQueue(portalInfo.PortalID, 0);
+                            if (MailQueue.Count > 0)
+                            {
+                                client = NotificationFactory.Connect(SmtpServer.Server, SmtpServer.Port, SmtpServer.Authentication, SmtpServer.Username, SmtpServer.Password, SmtpServer.SSL);
+
+                                foreach (MailQueue mail in MailQueue)
+                                {
+                                    try
+                                    {
+                                        NotificationFactory.SendMail(client, mail);
+                                        mail.Delete();
+                                        NotificationFactory.Log(new MailQueue_Log { PortalID = mail.PortalID, Subject = mail.Subject, ToEmail = mail.ToEmail });
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        if (mail.RetryAttempt < 3)
+                                        {
+                                            mail.Status = "Retry";
+                                            mail.RetryDateTime = DateTime.Now.AddMinutes(2);
+                                            mail.RetryAttempt = mail.RetryAttempt + 1;
+                                            mail.Update();
+                                        }
+                                        else
+                                        {
+                                            mail.Status = "Error";
+                                            mail.Update();
+                                            mail.Delete();
+                                        }
+                                        Exceptions.LogException(ex);
+                                    }
+                                }
+                                SchedulerLog.Add("Mail queue operation run successfully");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Exceptions.LogException(ex);
+                        SchedulerLog.Add("Mail queue operation Failed. !See event log for details");
+                    }
+                    finally
+                    {
+                        if (client != null)
+                        {
+                            client.Dispose();
+                        }
+                    }
+                }
+            }
+
             foreach (int ModuleId in SettingFactory.GetDistinctModuleIds(AppFactory.Identifiers.admin_notifications_email.ToString()))
             {
                 SmtpClient client = null;
