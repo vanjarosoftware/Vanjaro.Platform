@@ -1,5 +1,6 @@
 ﻿using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
+using DotNetNuke.Entities.Portals;
 using System.Collections.Generic;
 using System.Linq;
 using Vanjaro.Common.Components;
@@ -224,6 +225,13 @@ namespace Vanjaro.Common.Factories
             if (Secure)
                 return hostController.GetEncryptedString(Name, Config.GetDecryptionkey());
             return hostController.GetString(Name, defaultValue);
+        }
+
+        public static string GetPortalSetting(string Name, int PortalId, bool Secure, string defaultValue = "")
+        {
+            if (Secure)
+                return PortalController.GetEncryptedString(Name, PortalId, Config.GetDecryptionkey());
+            return PortalController.GetPortalSetting(Name, PortalId, defaultValue);
         }
         #endregion
     }
