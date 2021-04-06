@@ -639,3 +639,14 @@ uploaddefault .ud_stfooter ul.pagination, .uploaddefault .images-container table
     padding-left: 0;
 }
 
+.input-group ol.treeview li.angular-ui-tree-node .angular-ui-tree-handle .btn_triangle {
+    background: transparent;
+    outline: none;
+    position: absolute;
+    text-shadow: 0 0 0;
+    left: 30px;
+    box-shadow: 0 0 0;
+    font-size: 12px;
+    top: 0px;
+    font-weight: normal;
+}
