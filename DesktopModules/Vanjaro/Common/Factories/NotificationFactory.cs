@@ -212,9 +212,99 @@ namespace Vanjaro.Common.Factories
             return smtp;
         }
 
+        internal static SmtpServer GetSMTP(bool IsGlobal, int PortalId)
+        {
+            SmtpServer smtp = new SmtpServer();
+            CacheFactory.ClearCache();
+            string Server = string.Empty, Port = string.Empty, Authentication = string.Empty, Username = string.Empty, Password = string.Empty, SSL = string.Empty;
+
+            if (IsGlobal)
+            {
+                Server = SettingFactory.GetHostSetting("SMTPServer", false);
+                if (!string.IsNullOrEmpty(Server))
+                {
+                    if (Server.Split(':').Length > 0 && !string.IsNullOrEmpty(Server.Split(':')[0]))
+                        smtp.Server = Server.Split(':')[0];
+
+                    if (Server.Split(':').Length > 1)
+                        Port = Server.Split(':')[1];
+                }
+
+                if (!string.IsNullOrEmpty(Port) && int.Parse(Port) > -1)
+                {
+                    smtp.Port = int.Parse(Port);
+                }
+
+                Authentication = SettingFactory.GetHostSetting("SMTPAuthentication", false);
+                if (!string.IsNullOrEmpty(Authentication))
+                {
+                    smtp.Authentication = Authentication;
+                }
+
+                Username = SettingFactory.GetHostSetting("SMTPUsername", false);
+                if (!string.IsNullOrEmpty(Username))
+                {
+                    smtp.Username = Username;
+                }
+
+                Password = SettingFactory.GetHostSetting("SMTPPassword", true);
+                if (!string.IsNullOrEmpty(Password))
+                {
+                    smtp.Password = Password;
+                }
+
+                SSL = SettingFactory.GetHostSetting("SMTPEnableSSL", false);
+                if (!string.IsNullOrEmpty(SSL))
+                {
+                    smtp.SSL = SSL.ToLower() == "y";
+                }
+            }
+            else
+            {
+                Server = SettingFactory.GetPortalSetting("SMTPServer", PortalId, false);
+                if (!string.IsNullOrEmpty(Server))
+                {
+                    if (Server.Split(':').Length > 0 && !string.IsNullOrEmpty(Server.Split(':')[0]))
+                        smtp.Server = Server.Split(':')[0];
+
+                    if (Server.Split(':').Length > 1)
+                        Port = Server.Split(':')[1];
+                }
+
+                if (!string.IsNullOrEmpty(Port) && int.Parse(Port) > -1)
+                {
+                    smtp.Port = int.Parse(Port);
+                }
+
+                Username = SettingFactory.GetPortalSetting("SMTPUsername", PortalId, false);
+                if (!string.IsNullOrEmpty(Username))
+                {
+                    smtp.Username = Username;
+                }
+
+                Password = SettingFactory.GetPortalSetting("SMTPPassword", PortalId, true);
+                if (!string.IsNullOrEmpty(Password))
+                {
+                    smtp.Password = Password;
+                }
+
+                SSL = SettingFactory.GetPortalSetting("SMTPEnableSSL", PortalId, false);
+                if (!string.IsNullOrEmpty(SSL))
+                {
+                    smtp.SSL = SSL.ToLower() == "y";
+                }
+            }
+            return smtp;
+        }
+
         internal static List<MailQueue> GetMailQueue(int moduleId)
         {
             return MailQueue.Query("Where ModuleID=@0", moduleId).Where(m => m.Status == "Queue" || (m.Status == "Retry" && m.RetryDateTime < DateTime.Now && m.RetryAttempt <= 3)).ToList();
+        }
+
+        internal static List<MailQueue> GetMailQueue(int PortalID, int ModuleID)
+        {
+            return MailQueue.Query("Where PortalID=@0", PortalID).Where(m => (m.Status == "Queue" && m.ModuleID <= ModuleID) || (m.Status == "Retry" && m.RetryDateTime < DateTime.Now && m.RetryAttempt <= 3 && m.ModuleID <= ModuleID)).ToList();
         }
 
         internal static SmtpServer GetDNNHostSettingsSmtpServer(int ModuleId)
@@ -458,10 +548,6 @@ namespace Vanjaro.Common.Factories
             string Days = SettingFactory.GetHostSetting("SMTPPurgeLogsAfter", false, "60");
             MailQueue_Log.Delete("WHERE DATEDIFF(DAY, CAST(CreatedOn as DATETIME), GETUTCDATE())>@0", Days);
         }
-
-
-
-
         #endregion
     }
 }

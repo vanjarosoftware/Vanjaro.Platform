@@ -11,7 +11,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.GoogleAnalytics.Controllers
             switch ((Factories.AppFactory.Identifier)Enum.Parse(typeof(Factories.AppFactory.Identifier), Identifier))
             {
                 case Factories.AppFactory.Identifier.setting_setting:
-                    return SettingController.GetData(PortalSettings.PortalId, UserInfo);
+                    return SettingController.GetData();
                 default:
                     break;
             }

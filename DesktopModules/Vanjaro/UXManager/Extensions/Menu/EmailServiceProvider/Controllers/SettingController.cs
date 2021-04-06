@@ -95,7 +95,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.Controllers
                     Localization.GetSystemMessage(PortalSettings, "EMAIL_SMTP_TEST_SUBJECT"),
                     MailFormat.Text,
                     Encoding.UTF8,
-                    "",
+                    Localization.GetSystemMessage(PortalSettings, "EMAIL_SMTP_TEST_SUBJECT"),
                     "",
                     Data.Server.ToString(),
                     "1",
