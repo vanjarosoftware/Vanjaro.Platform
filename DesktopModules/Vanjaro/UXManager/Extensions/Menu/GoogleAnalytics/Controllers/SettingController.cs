@@ -6,6 +6,7 @@ using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.UXManager.Library.Common;
+using static Vanjaro.Core.Managers;
 
 namespace Vanjaro.UXManager.Extensions.Menu.GoogleAnalytics.Controllers
 {
@@ -13,31 +14,19 @@ namespace Vanjaro.UXManager.Extensions.Menu.GoogleAnalytics.Controllers
     [AuthorizeAccessRoles(AccessRoles = "admin")]
     public class SettingController : UIEngineController
     {
-        internal static List<IUIData> GetData(int portalId, UserInfo userInfo)
+        internal static List<IUIData> GetData()
         {
-            Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>
-            {
-                { "Settings", new UIData { Name = "Settings", Options = Managers.ConnectorManager.GetConfig() } },
-                { "HasConfig", new UIData { Name = "HasConfig", Options = Managers.ConnectorManager.HasConfig() } }
-            };
+            Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
+            Settings.Add("MeasurementID", new UIData { Name = "MeasurementID", Value = SettingManager.GetPortalSetting("Vanjaro.Integration.GoogleAnalytics.MeasurementID", true) });
+
             return Settings.Values.ToList();
         }
 
         [HttpPost]
-        public ActionResult Save(Dictionary<string, dynamic> Data)
+        public bool Save(dynamic Data)
         {
-            return Managers.ConnectorManager.SaveConfig(Data);
-        }
-
-        [HttpGet]
-        public dynamic Delete()
-        {
-            if (Managers.ConnectorManager.HasConfig())
-            {
-                Managers.ConnectorManager.DeleteConfig();
-            }
-
-            return Managers.ConnectorManager.GetConfig();
+            SettingManager.UpdatePortalSetting("Vanjaro.Integration.GoogleAnalytics.MeasurementID", Data.MeasurementID.ToString(), true);
+            return true;
         }
 
         public override string AccessRoles()

@@ -1489,6 +1489,13 @@ $(document).ready(function () {
                                     }
                                 });
 
+                                $.each(getAllComponents(), function (ci, cd) {
+                                    if (cd.attributes.forcesave != undefined && cd.attributes.forcesave == 'true') {
+                                        delete cd.attributes.forcesave;
+                                        VjEditor.runCommand("save");
+                                    }
+                                });
+
                                 LoadCustomBlocks();
                                 VjEditor.UndoManager.start();
 
@@ -1622,6 +1629,19 @@ $(document).ready(function () {
 
                                 if (typeof model != "undefined") {
 
+                                    $.each(getAllComponents(model), function (i, n) {
+                                        var classes = n.attributes.classes;
+                                        if (classes.length) {
+                                            classes.map(selector => {
+                                                if (selector.active) {
+                                                    selector.set({
+                                                        active: false
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+
                                     if (typeof model.attributes != "undefined") {
 
                                         var Block = model.attributes.type;
@@ -1643,6 +1663,8 @@ $(document).ready(function () {
                                 if (typeof VjEditor.BlockManager.get('LibraryBlock') != 'undefined') {
                                     if (bmodel != undefined && bmodel.attributes != undefined && bmodel.attributes.attributes != undefined && bmodel.attributes.attributes.id == 'LibraryBlock') {
                                         IsVJCBRendered = true;
+                                        if (!$('.optimizing-overlay').length)
+                                            $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Please wait</h1></div>');
                                     }
                                     VjEditor.BlockManager.remove('LibraryBlock');
                                 }
@@ -1847,11 +1869,22 @@ $(document).ready(function () {
                                     if (typeof width == "undefined") {
 
                                         $(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val('auto');
-                                        $(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('width')));
 
-                                        if (target.getAttributes()['data-block-type'] == "Logo")
-                                            $(sm.getProperty(Size, 'width').view.$el.find('input')).val($(target.getEl()).find('img').width());
+                                        if (target.getAttributes()['data-block-type'] == "Logo") {
 
+                                            var logoimg = $(target.getEl()).find('img');
+
+                                            if (logoimg.get(0).style.width == '')
+                                                width = logoimg.width();
+                                            else {
+                                                width = parseInt(logoimg.get(0).style.width);
+                                                $(sm.getProperty(Size, 'width').view.$el.find('input')).val(width);
+                                            }
+
+                                            $(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(width);
+                                        }
+                                        else
+                                            $(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('width')));
                                     }
                                     else
                                         $(sm.getProperty(Size, 'width').view.$el.find('input')).val(parseInt($(target.getEl()).css('width')));
@@ -1865,11 +1898,24 @@ $(document).ready(function () {
                                     var height = target.getStyle()['height'];
 
                                     if (typeof height == "undefined") {
-                                        $(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val('auto');
-                                        $(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('height')));
 
-                                        if (target.getAttributes()['data-block-type'] == "Logo")
-                                            $(sm.getProperty(Size, 'height').view.$el.find('input')).val($(target.getEl()).find('img').height());
+                                        $(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val('auto');
+
+                                        if (target.getAttributes()['data-block-type'] == "Logo") {
+
+                                            var logoimg = $(target.getEl()).find('img');
+
+                                            if (logoimg.get(0).style.height == '')
+                                                height = logoimg.height();
+                                            else {
+                                                height = parseInt(logoimg.get(0).style.height);
+                                                $(sm.getProperty(Size, 'height').view.$el.find('input')).val(height);
+                                            }
+
+                                            $(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(height);
+                                        }
+                                        else
+                                            $(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('height')));
                                     }
                                     else
                                         $(sm.getProperty(Size, 'height').view.$el.find('input')).val(parseInt($(target.getEl()).css('height')));
@@ -2272,6 +2318,8 @@ $(document).ready(function () {
                                     $(model.components().models[0].getEl()).removeClass('gjs-dashed');
                             });
 
+                            VjEditor.on('selector:add', selector => selector.set({ active: false }));
+
                             VjEditor.on('component:styleUpdate', (model, property) => {
 
                                 if (property == "color" && typeof event != "undefined" && $(event.target).parents(".gjs-sm-property.gjs-sm-color").length) {
@@ -2343,24 +2391,23 @@ $(document).ready(function () {
                                     model.removeStyle(property);
 
                                 }
-                                else if (model.getAttributes()['data-block-type'] == "Logo") {
+                                else if (model.getAttributes()['data-block-type'] == "Logo" && (property == "width" || property == "height")) {
 
                                     var style = model.getStyle()[property];
                                     var img = $(model.getEl()).find('img');
+                                    img.css(property, style);
 
-                                    if (property == "width")
-                                        img.css('width', style);
-
-                                    else if (property == "height")
-                                        img.css('height', style);
-
-                                    var width = img.width();
-                                    var height = img.height();
-
+                                    var width = img.get(0).style.width;
+                                    var height = img.get(0).style.height;
                                     var attr = model.getAttributes();
-                                    attr['data-style'] = 'width:' + width + 'px; height:' + height + 'px;';
-                                    model.setAttributes(attr);
 
+                                    if (width != '')
+                                        attr['data-style'] = 'width:' + width + ';';
+
+                                    if (height != '')
+                                        attr['data-style'] += 'height:' + height + ';';
+
+                                    model.setAttributes(attr);
                                     model.removeStyle(property);
                                 }
 
@@ -2569,6 +2616,22 @@ $(document).ready(function () {
                                         $('#LibraryBlock').css('opacity', '0.01');
                                 }
                             });
+
+                            VjEditor.on('component:drag:end', function (model) {
+                                if (model.target.attributes.type == "carousel-item") {
+
+                                    $(model.parent.find('.carousel-item')).each(function (index, item) {
+                                        item.removeClass('active');
+                                    });
+                                    model.parent.find('.carousel-item')[0].addClass('active');
+
+                                    $(model.parent.parent().getEl()).find('.active.carousel-indicator').removeClass('active');
+                                    $(model.parent.parent().getEl()).find('.carousel-indicator').first().addClass('active');
+
+                                }
+                            });
+
+
 
                             VjEditor.on('change:changesCount', e => {
 
@@ -2965,7 +3028,7 @@ $(document).ready(function () {
                 $iframe.removeClass("fixed-height mobile-landscape-height");
                 $iframe.contents().find("html").addClass('responsive');
                 $iframe.contents().find("#wrapper").addClass("scrollbar");
-                $iframe.contents().find("html").removeClass('mobile-responsive');                
+                $iframe.contents().find("html").removeClass('mobile-responsive');
                 VjEditor.runCommand('set-device-tablet');
             }
             else
@@ -2988,7 +3051,7 @@ $(document).ready(function () {
 
         //MobileLandscape
         else if ($this.attr("id") == "MobileLandscape") {
-           
+
             if (vjEditorSettings.EditPage) {
                 $iframe.removeClass("fixed-height");
                 $iframe.addClass("mobile-landscape-height");
@@ -3000,7 +3063,7 @@ $(document).ready(function () {
             else {
                 $body.removeClass('tablet mobile-portrait').addClass('resp-mode mobile-landscape');
             }
-               
+
         }
 
         var selected = VjEditor.getSelected();

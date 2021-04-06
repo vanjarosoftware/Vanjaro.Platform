@@ -8,9 +8,6 @@ export default (editor, config = {}) => {
 	const clsRow = `${stylePrefix}row`;
 	const clsCell = `${stylePrefix}col-lg-6`;
 
-	editor.on('selector:add',
-		selector => selector.set({ private: true }))
-
 	const colAttr = {
 		class: clsCell + ' col-sm-6 col-12',
 		'data-gjs-custom-name': labelCell,

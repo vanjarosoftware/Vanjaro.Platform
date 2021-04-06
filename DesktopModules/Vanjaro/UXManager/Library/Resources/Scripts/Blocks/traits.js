@@ -1540,64 +1540,68 @@ export default (editor, config = {}) => {
 		},
 		onUpdate({ elInput, component, trait }) {
 
-			if (typeof event != 'undefined' && !event.target.classList.contains('input-control')) {
-				var inputvalue = '', unit = '', property = '', value = '';
+            var inputvalue = '', unit = '', property = '', value = '';
 
-				if (typeof trait.attributes.cssproperties != 'undefined')
-					property = trait.attributes.cssproperties[0].name;
+            if (typeof trait.attributes.cssproperties != 'undefined')
+                property = trait.attributes.cssproperties[0].name;
 
-				if (typeof component.getStyle()[property] != 'undefined')
-					value = component.getStyle()[property].replace('!important', '');
-				else
-					value = trait.getInitValue();
+            if (typeof event != 'undefined' && !event.target.classList.contains('input-control')) {
+              
+                if (typeof component.getStyle()[property] != 'undefined')
+                    value = component.getStyle()[property].replace('!important', '');
+                else
+                    value = trait.getInitValue();
 
-				if (typeof value == "string" && value != "") {
+                if (typeof value == "string" && value != "") {
 
-					inputvalue = value.replace(/[^-\d\.]/g, '');
+                    inputvalue = value.replace(/[^-\d\.]/g, '');
 
-					if (typeof trait.attributes.units != 'undefined') {
-						$(trait.attributes.units).each(function (index, option) {
+                    if (typeof trait.attributes.units != 'undefined') {
+                        $(trait.attributes.units).each(function (index, option) {
 
-							if (value.indexOf(option.name) >= 0) {
-								unit = option.name
-								return false;
-							}
-						});
-					}
-				}
-				else {
-					inputvalue = trait.attributes.value;
-				}
+                            if (value.indexOf(option.name) >= 0) {
+                                unit = option.name
+                                return false;
+                            }
+                        });
+                    }
+                }
+                else {
+                    inputvalue = trait.attributes.value;
+                }
 
-				if (unit == '' && typeof trait.attributes.unit != 'undefined')
-					unit = trait.attributes.unit;
+                if (unit == '' && typeof trait.attributes.unit != 'undefined')
+                    unit = trait.attributes.unit;
 
-				if (typeof trait.attributes.units != 'undefined') {
+                if (typeof trait.attributes.units != 'undefined') {
 
-					var inputControl = trait.view.el.querySelectorAll('.input-control');
+                    var inputControl = trait.view.el.querySelectorAll('.input-control');
 
-					$(trait.attributes.units).each(function (index, option) {
+                    $(trait.attributes.units).each(function (index, option) {
 
-						if (option.name == unit) {
+                        if (option.name == unit) {
 
-							$(inputControl).attr({
-								'value': option.value,
-								'min': option.min,
-								'max': option.max,
-								'step': option.step
-							});
+                            $(inputControl).attr({
+                                'value': option.value,
+                                'min': option.min,
+                                'max': option.max,
+                                'step': option.step
+                            });
 
-							if (inputvalue == '')
-								inputvalue = option.value;
+                            if (inputvalue == '')
+                                inputvalue = option.value;
 
-							return false;
-						}
-					});
-				}
+                            return false;
+                        }
+                    });
+                }
 
-				trait.view.$el.find('input.input-control').val(inputvalue);
-				trait.view.$el.find('input[value="' + unit + '"]').prop('checked', true);
-			}
+                trait.view.$el.find('input[value="' + unit + '"]').prop('checked', true);
+            }
+            else
+                inputvalue = trait.getInitValue().replace(/[^-\d\.]/g, '');            
+
+            trait.view.$el.find('input.input-control').val(inputvalue);
 
 			if (component.attributes.type == 'icon') {
 				if ((elInput.firstElementChild.name == "framewidth" || elInput.firstElementChild.name == "framegap") && component.getTrait('frame').getInitValue() == "none")

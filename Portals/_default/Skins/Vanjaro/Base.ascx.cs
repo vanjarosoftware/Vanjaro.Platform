@@ -183,27 +183,40 @@ namespace Vanjaro.Skin
             {
                 if (!string.IsNullOrEmpty(Site_Head))
                 {
-                    HeadScript.InnerText = Site_Head;
+                    HeadScript.InnerHtml = Site_Head;
                     Page.FindControl("Head").Controls.AddAt(0, HeadScript);
                 }
                 if (!string.IsNullOrEmpty(Site_Body))
                 {
-                    BodyScript.InnerText = Site_Body;
+                    BodyScript.InnerHtml = Site_Body;
                     Page.FindControl("Body").Controls.AddAt(0, BodyScript);
                 }
             }
-            else
+            else if(!string.IsNullOrEmpty(Host_Head) || !string.IsNullOrEmpty(Host_Body))
             {
                 if (!string.IsNullOrEmpty(Host_Head))
                 {
-                    HeadScript.InnerText = Host_Head;
+                    HeadScript.InnerHtml = Host_Head;
                     Page.FindControl("Head").Controls.AddAt(0, HeadScript);
                 }
                 if (!string.IsNullOrEmpty(Host_Body))
                 {
-                    BodyScript.InnerText = Host_Body;
+                    BodyScript.InnerHtml = Host_Body;
                     Page.FindControl("Body").Controls.AddAt(0, BodyScript);
                 }
+            }
+            else
+                RenderGoogleAnalyticsScript();
+            
+        }
+        private void RenderGoogleAnalyticsScript()
+        {
+            string MeasurementID = SettingManager.GetPortalSetting("Vanjaro.Integration.GoogleAnalytics.MeasurementID", true);
+            if (!string.IsNullOrEmpty(MeasurementID))
+            {
+                Literal GoogleAnalyticsScript = new Literal();
+                GoogleAnalyticsScript.Text = "<script async src=\"https://www.googletagmanager.com/gtag/js?id=" + MeasurementID + "\"></script><script>window.dataLayer = window.dataLayer || [];  function gtag() { dataLayer.push(arguments); } gtag('js', new Date());gtag('config', '" + MeasurementID + "');</script>";
+                Page.Header.Controls.AddAt(0, GoogleAnalyticsScript);
             }
         }
 

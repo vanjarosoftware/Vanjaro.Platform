@@ -62,7 +62,7 @@ export default (editor, config = {}) => {
 						type: "custom_range",
 						cssproperties: [{ name: "font-size" }],
 						units: [
-							{ name: 'px', min: 10, max: 100, step: 1, value: 32 },
+							{ name: 'px', min: 10, max: 100, step: 1, value: 40 },
 							{ name: 'vw', min: 0.5, max: 10, step: 0.1, value: 2 },
 						],
 						unit: "px",
@@ -115,6 +115,9 @@ export default (editor, config = {}) => {
 				if (typeof this.attributes.importance != 'undefined' && this.attributes.importance != "") {
 					this.attributes.tagName = this.attributes.importance;
                     this.view.reset();
+                    this.removeStyle("font-size");
+                    this.getTrait('fontsize').setTargetValue($(this.getEl()).css('font-size').replace(/[^-\d\.]/g, ''));
+                    this.getTrait('fontsize').view.render();
                     VjEditor.runCommand("save");
 				}
 			},

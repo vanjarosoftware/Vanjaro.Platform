@@ -114,6 +114,12 @@ ClosePopUp = function (closeall) {
         $('.uxmanager-modal').last().find('[data-bs-dismiss="modal"]').click();
 };
 
+RedirectPopup = function (iframe) {
+    var iframehref = iframe.contentWindow.location.href;
+    if (iframehref.indexOf('ctl') == -1 && iframehref.indexOf('icp') == -1)
+        ClosePopUp();
+};
+
 OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, removemodals, ModuleId, scrollbars, titleposition) {
 
     var id = 'vjModal' + (new Date()).getTime();
@@ -173,7 +179,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
                 </div>
                 <div class="modal-body" id="UXRender">
 <img class="loader" alt="Loading" src="` + VjDefaultPath + `loading.svg" />
-                    <iframe id="UXpagerender" scrolling="` + scrolling + `"></iframe>
+                    <iframe id="UXpagerender" scrolling="` + scrolling + `" onload="RedirectPopup(this);"></iframe>
                 </div>
             </div>
         </div>

@@ -2616,7 +2616,7 @@
           "Type": "Dropdown"
         }
       ],
-      "Sass": ".cookieconsent {\n    position: fixed;\n    padding: 18px;\n    z-index: 1;\n    bottom: 0px;\n    background: red;\n    width: 100%;\n    align-items: center;\n    z-index: 9;\n}\n.cookiemessage{\nflex-grow: 1;\njustify-content: flex-start;\n}\n\n.cookiestatus a{\n  width: -webkit-fill-available;\n}\n\n"
+      "Sass": ".cookieconsent {\n    position: fixed;\n    padding: 18px;\n    z-index: 999;\n    bottom: 0px;\n    background: red;\n    width: 100%;\n    align-items: center;\n }\n.cookiemessage{\nflex-grow: 1;\njustify-content: flex-start;\n}\n\n.cookiestatus a{\n  width: -webkit-fill-available;\n}\n\n"
     },
     {
       "Guid": "7e976e57-b092-4678-99c7-692d9ca53774",
