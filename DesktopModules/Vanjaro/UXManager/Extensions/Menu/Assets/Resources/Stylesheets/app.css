@@ -261,3 +261,9 @@ td.dropdownimgicon {
 #CreateFolder .btn-close {
     font-size: 10px;
 }
+
+table.Imagetable tbody {
+    display: flex;
+    flex-wrap: wrap;
+}
+
