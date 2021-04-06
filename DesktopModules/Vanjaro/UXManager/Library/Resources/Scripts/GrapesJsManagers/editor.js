@@ -412,11 +412,11 @@ $(document).ready(function () {
                                     }
                                 },
                                 selectorManager: {
-                                    appendTo: '.stylemanager',
+                                    appendTo: '.selectorManager',
                                 },
                                 styleManager: {
                                     clearProperties: true,
-                                    appendTo: '.stylemanager',
+                                    appendTo: '.styleManager',
                                     sectors: [{
                                         name: VjLocalized.Margin,
                                         open: false,
@@ -1978,6 +1978,16 @@ $(document).ready(function () {
                                     $('.gjs-frame').contents().find('#' + slider.getId()).carousel('dispose').carousel({ interval: false }).carousel(index);
                                     return;
                                 }
+                                else if (model.attributes.type == 'column') {
+                                    $(model.parent().getEl()).addClass('gjs-dashed');
+                                    var dataPane = model.getTrait('data-pane');
+                                    var migrate = GetParameterByName('migrate', parent.window.location.href);
+                                    if ((migrate == null || (migrate != null && migrate.indexOf('true') == -1)) && typeof dataPane != 'undefined') {
+                                        setTimeout(function () {
+                                            $(dataPane.view.$el).hide(0);
+                                        });
+                                    }
+                                }
 
                                 if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
 
@@ -2235,17 +2245,6 @@ $(document).ready(function () {
 
                                 model.set('border-position', 'sm-border');
                                 FilterBorderOptions(model, 'sm-border');
-
-                                if (model.attributes.type == 'column') {
-
-                                    $(model.parent().getEl()).addClass('gjs-dashed');
-
-                                    var dataPane = model.getTrait('data-pane');
-                                    var migrate = GetParameterByName('migrate', parent.window.location.href);
-
-                                    if ((migrate == null || (migrate != null && migrate.indexOf('true') == -1)) && typeof dataPane != 'undefined')
-                                        dataPane.destroy();
-                                }
 
                                 var flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
 
