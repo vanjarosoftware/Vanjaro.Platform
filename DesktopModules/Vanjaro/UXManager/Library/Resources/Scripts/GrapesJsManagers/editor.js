@@ -30,6 +30,8 @@ $(document).ready(function () {
     var Size = VjLocalized.Size.replace(/ /g, '_').toLowerCase();
     var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();   
     var Text = VjLocalized.Text.replace(/ /g, '').toLowerCase();    
+    var Extra = VjLocalized.Extra.replace(/ /g, '').toLowerCase();
+    var Flex = VjLocalized.Flex.replace(/ /g, '').toLowerCase();
 
     if (window.parent.CurrentTabUrl.indexOf('?') > 0)
         CurrentExtTabUrl = window.parent.CurrentTabUrl + '&mid=0&icp=true';
@@ -1306,6 +1308,7 @@ $(document).ready(function () {
                                                 property: 'flex-direction',
                                                 type: 'customradio',
                                                 cssproperty: 'flex-direction',
+                                                UpdateStyles: true,
                                                 list: [{
                                                     value: 'row',
                                                     name: 'Row',
@@ -1327,6 +1330,7 @@ $(document).ready(function () {
                                                 name: 'Justify',
                                                 property: 'justify-content',
                                                 type: 'customradio',
+                                                UpdateStyles: true,
                                                 list: [{
                                                     value: 'flex-start',
                                                     name: 'Start',
@@ -1352,6 +1356,7 @@ $(document).ready(function () {
                                                 name: 'Align',
                                                 property: 'align-items',
                                                 type: 'customradio',
+                                                UpdateStyles: true,
                                                 list: [{
                                                     value: 'flex-start',
                                                     name: 'Start',
@@ -1414,7 +1419,7 @@ $(document).ready(function () {
                                                 name: 'Align',
                                                 property: 'align-self',
                                                 type: 'customradio',
-                                                defaults: 'auto',
+                                                UpdateStyles: true,
                                                 list: [{
                                                     value: 'auto',
                                                     name: 'Auto',
@@ -2006,6 +2011,11 @@ $(document).ready(function () {
                                     if (model.attributes.type == "icon")
                                         target = model.components().models[0];
 
+                                    if (sm.getProperty(Extra, 'display').attributes.value == 'flex')
+                                        $('#gjs-sm-' + Flex).show();
+                                    else
+                                        $('#gjs-sm-' + Flex).hide();
+
                                     //Width
                                     var width = target.getStyle()['width'];
 
@@ -2558,7 +2568,16 @@ $(document).ready(function () {
                                     model.removeStyle(property);
                             });
 
+                            VjEditor.on('component:styleUpdate:display', (model, argument) => {
+
+                                if (event.target.value == 'flex')
+                                    $('#gjs-sm-' + Flex).show();
+                                else
+                                    $('#gjs-sm-' + Flex).hide();
+                            });
+
                             VjEditor.on('component:styleUpdate:border-position', (model, argument) => {
+
                                 FilterBorderOptions(model, event.target.value);
                                 model.removeStyle('border-position');
                             });
