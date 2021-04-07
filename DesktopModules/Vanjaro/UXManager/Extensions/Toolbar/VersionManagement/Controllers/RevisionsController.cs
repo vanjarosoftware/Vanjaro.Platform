@@ -95,11 +95,15 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
         [HttpGet]
         public void GetBlockVersion(int Version, string BlockGuid)
         {
-            GlobalBlock Block = Core.Managers.BlockManager.GetAllGlobalBlocks(this.PortalSettings.PortalId, BlockGuid).Where(a => a.Version == Version).FirstOrDefault();
-            GlobalBlock CurrentBlock = Core.Managers.BlockManager.GetAllGlobalBlocks(PortalSettings.Current).Where(c => c.Guid.ToLower() == Block.Guid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
+            string Locale = PageManager.GetCultureCode(PortalSettings.Current);
+            GlobalBlock Block = BlockManager.GetAllGlobalBlocks(PortalSettings.Current.PortalId, BlockGuid, Locale).Where(a => a.Version == Version).FirstOrDefault();
+            if (Block == null)
+                Block = BlockManager.GetAllGlobalBlocks(PortalSettings.Current.PortalId, BlockGuid, null).Where(a => a.Version == Version).FirstOrDefault();
+            GlobalBlock CurrentBlock = BlockManager.GetGlobalByGuid(PortalSettings.Current.PortalId, BlockGuid, Locale, true);
             if (CurrentBlock.IsPublished)
             {
                 Block.ID = 0;
+                Block.Locale = Locale;
                 BlockManager.UpdateGlobalBlock(Block);
             }
             else
@@ -108,8 +112,8 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Controllers
                 CurrentBlock.Css = Block.Css;
                 CurrentBlock.ContentJSON = Block.ContentJSON;
                 CurrentBlock.StyleJSON = Block.StyleJSON;
+                CurrentBlock.Locale = Locale;
                 BlockManager.UpdateGlobalBlock(CurrentBlock);
-
             }
             Core.Factories.CacheFactory.Clear(Core.Factories.CacheFactory.Keys.Page);
         }

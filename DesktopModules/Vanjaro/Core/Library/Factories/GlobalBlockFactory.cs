@@ -69,24 +69,33 @@ namespace Vanjaro.Core
                 }
                 return Global_Block;
             }
-            internal static List<GlobalBlock> GetAll(int PortalID, bool IsPublished = false)
+            internal static List<GlobalBlock> GetAll(int PortalID, string Locale, bool IsPublished = false)
             {
-                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.GlobalBlock + "ALL", PortalID, IsPublished);
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.GlobalBlock + "ALL", PortalID, Locale, IsPublished);
                 List<GlobalBlock> Global_Blocks = CacheFactory.Get(CacheKey);
                 if (Global_Blocks == null)
                 {
-                    if (IsPublished)
-                        Global_Blocks = GlobalBlock.Query("where PortalID=@0 and IsPublished=@1", PortalID, IsPublished).GroupBy(a => a.Guid).Select(a => a.OrderByDescending(n => n.Version).FirstOrDefault()).ToList();
+                    if (string.IsNullOrEmpty(Locale))
+                    {
+                        if (IsPublished)
+                            Global_Blocks = GlobalBlock.Query("where PortalID=@0 and IsPublished=@1 and Locale is null", PortalID, IsPublished).GroupBy(a => a.Guid).Select(a => a.OrderByDescending(n => n.Version).FirstOrDefault()).ToList();
+                        else
+                            Global_Blocks = GlobalBlock.Query("where PortalID=@0 and Locale is null", PortalID).GroupBy(a => a.Guid).Select(a => a.OrderByDescending(n => n.Version).FirstOrDefault()).ToList();
+                    }
                     else
-                        Global_Blocks = GlobalBlock.Query("where PortalID=@0", PortalID).GroupBy(a => a.Guid).Select(a => a.OrderByDescending(n => n.Version).FirstOrDefault()).ToList();
+                    {
+                        if (IsPublished)
+                            Global_Blocks = GlobalBlock.Query("where PortalID=@0 and IsPublished=@1 and Locale=@2", PortalID, IsPublished, Locale).GroupBy(a => a.Guid).Select(a => a.OrderByDescending(n => n.Version).FirstOrDefault()).ToList();
+                        else
+                            Global_Blocks = GlobalBlock.Query("where PortalID=@0 and Locale=@1", PortalID, Locale).GroupBy(a => a.Guid).Select(a => a.OrderByDescending(n => n.Version).FirstOrDefault()).ToList();
+                    }
                     CacheFactory.Set(CacheKey, Global_Blocks);
                 }
                 return Global_Blocks;
             }
             internal static void Delete(int PortalID, string Guid)
             {
-                foreach (GlobalBlock item in GetAllByGUID(PortalID, Guid))
-                    GlobalBlock.Delete("where ID=@0", item.ID);
+                GlobalBlock.Delete("where PortalID=@0 and Guid=@1", PortalID, Guid.ToLower());
                 CacheFactory.Clear(CacheFactory.Keys.GlobalBlock);
             }
             private static void RemoveRevisions(int PortalID, string Guid)

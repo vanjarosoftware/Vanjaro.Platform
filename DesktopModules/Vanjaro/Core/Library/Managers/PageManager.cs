@@ -511,9 +511,15 @@ namespace Vanjaro.Core
 
             private static void UpdateGlobalBlocks(PortalSettings portalSettings, Dictionary<string, dynamic> globalKeyValuePairs, Dictionary<string, dynamic> globalStyleKeyValuePairs, dynamic blocksJSON, IEnumerable<string> aliases, bool IsPublished)
             {
+                string Locale = GetCultureCode(portalSettings);
                 foreach (var item in globalKeyValuePairs)
                 {
-                    GlobalBlock block = BlockManager.GetGlobalByGuid(portalSettings.PortalId, item.Key);
+                    GlobalBlock block = BlockManager.GetGlobalByGuid(portalSettings.PortalId, item.Key, Locale, false);
+                    if (block == null)
+                    {
+                        block = BlockManager.GetGlobalByGuid(portalSettings.PortalId, item.Key, null, false);
+                        block.ID = 0;
+                    }
                     if (block != null)
                     {
                         block.ContentJSON = PageManager.DeTokenizeLinks(JsonConvert.SerializeObject(item.Value), portalSettings.PortalId);
@@ -559,7 +565,25 @@ namespace Vanjaro.Core
 
                         block.UpdatedOn = DateTime.UtcNow;
                         block.UpdatedBy = PortalSettings.Current.UserInfo.UserID;
+                        block.Locale = Locale;
                         BlockManager.UpdateGlobalBlock(block);
+                        if (IsPublished)
+                        {
+                            foreach (string culture in GetCultureListItems())
+                            {
+                                string _Locale = portalSettings.DefaultLanguage == culture ? null : culture;
+                                GlobalBlock _block = BlockManager.GetGlobalByGuid(portalSettings.PortalId, item.Key, _Locale, false);
+                                if (_block != null)
+                                {
+                                    _block.PublishedBy = PortalSettings.Current.UserInfo.UserID;
+                                    _block.IsPublished = IsPublished;
+                                    _block.PublishedOn = DateTime.UtcNow;
+                                    _block.UpdatedOn = DateTime.UtcNow;
+                                    _block.UpdatedBy = PortalSettings.Current.UserInfo.UserID;
+                                    BlockManager.UpdateGlobalBlock(_block);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1044,7 +1068,8 @@ namespace Vanjaro.Core
                 string blockguid = item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value;
                 if (!string.IsNullOrEmpty(blockguid))
                 {
-                    GlobalBlock customBlock = BlockManager.GetGlobalByLocale(PortalId, blockguid, GetCultureCode(PortalController.Instance.GetCurrentSettings() as PortalSettings));
+                    PortalSettings portalSettings = PortalController.Instance.GetCurrentSettings() as PortalSettings;
+                    GlobalBlock customBlock = BlockManager.GetGlobalByLocale(PortalId, blockguid, GetCultureCode(portalSettings));
                     if (customBlock == null)
                     {
                         customBlock = new GlobalBlock
@@ -1068,7 +1093,7 @@ namespace Vanjaro.Core
                         {
                             customBlock.Html = str[0];
                         }
-
+                        customBlock.Locale = GetCultureCode(portalSettings);
                         GlobalBlockFactory.AddUpdate(customBlock);
                     }
                     item.InnerHtml = item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value;
@@ -1477,7 +1502,8 @@ namespace Vanjaro.Core
             {
                 if (page != null)
                 {
-                    string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Page + "ApplyGlobalBlockJSON", page.ID);
+                    string Locale = GetCultureCode(PortalSettings.Current);
+                    string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Page + "ApplyGlobalBlockJSON", page.ID, Locale);
                     string IsCached = CacheFactory.Get(CacheKey);
                     if (string.IsNullOrEmpty(IsCached) && page.ContentJSON != null)
                     {
@@ -1489,7 +1515,7 @@ namespace Vanjaro.Core
                                 if (string.IsNullOrEmpty(page.StyleJSON))
                                     page.StyleJSON = "";
                                 var styleJSON = JsonConvert.DeserializeObject(page.StyleJSON);
-                                UpdateGlobalBlockJSON(contentJSON, styleJSON);
+                                UpdateGlobalBlockJSON(contentJSON, styleJSON, Locale);
                                 page.ContentJSON = JsonConvert.SerializeObject(contentJSON);
                                 if (styleJSON != null)
                                     page.StyleJSON = JsonConvert.SerializeObject(styleJSON);
@@ -1501,13 +1527,13 @@ namespace Vanjaro.Core
                 }
             }
 
-            private static void UpdateGlobalBlockJSON(dynamic contentJSON, dynamic styleJSON)
+            private static void UpdateGlobalBlockJSON(dynamic contentJSON, dynamic styleJSON, string locale)
             {
                 foreach (dynamic con in contentJSON)
                 {
                     if (con.type != null && con.type.Value == "globalblockwrapper" && con.attributes != null && con.attributes["data-guid"] != null)
                     {
-                        GlobalBlock block = BlockManager.GetGlobalByGuid(PortalSettings.Current.PortalId, con.attributes["data-guid"].Value);
+                        GlobalBlock block = BlockManager.GetGlobalByGuid(PortalSettings.Current.PortalId, con.attributes["data-guid"].Value, locale, true);
 
                         if (block != null && !string.IsNullOrEmpty(block.ContentJSON))
                         {
@@ -1540,7 +1566,7 @@ namespace Vanjaro.Core
                     }
                     else if (con.components != null)
                     {
-                        UpdateGlobalBlockJSON(con.components, styleJSON);
+                        UpdateGlobalBlockJSON(con.components, styleJSON, locale);
                     }
                 }
             }
