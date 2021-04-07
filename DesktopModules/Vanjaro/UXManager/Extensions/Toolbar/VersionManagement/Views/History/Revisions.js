@@ -55,7 +55,7 @@
 
     $scope.Click_ViewLogs = function (Data) {
         if (Data.IsLogsExist)
-            window.parent.OpenPopUp(null, 600, 'right', 'Logs', window.parent.CurrentExtTabUrl + '&guid=33d8efed-0f1d-471e-80a4-6a7f10e87a42#moderator?version=' + Data.Version + '&entity=Page&entityid=' + Data.TabID);
+            window.parent.OpenPopUp(null, 600, 'right', 'Logs', window.parent.CurrentExtTabUrl + '&guid=33d8efed-0f1d-471e-80a4-6a7f10e87a42#!/moderator?version=' + Data.Version + '&entity=Page&entityid=' + Data.TabID);
     };
 
     $scope.BuildLogo = function (components, id, existinghtml, blockdom) {

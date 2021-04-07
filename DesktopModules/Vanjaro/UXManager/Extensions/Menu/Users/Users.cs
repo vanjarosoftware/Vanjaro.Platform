@@ -96,7 +96,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users
         {
             Text = Localization.Get("Shortcut_Text", "Text", Constants.LocalResourcesFile, Extension.ShowMissingKeysStatic, Localization.SharedMissingPrefix),
             ViewOrder = 40,
-            URL = ExtensionInfo.GUID + "#adduser",
+            URL = ExtensionInfo.GUID + "#!/adduser",
             Title = Localization.Get("Shortcut_Title", "Text", Constants.LocalResourcesFile, Extension.ShowMissingKeysStatic, Localization.SharedMissingPrefix),
             Breakline = false,
             Width = Width,

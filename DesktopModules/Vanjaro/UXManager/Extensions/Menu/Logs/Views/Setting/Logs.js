@@ -97,7 +97,7 @@
         if ($scope.SelectedLogItems.length > 0) {
             swal({
                 title: '',
-                text: "<iframe class='border-0' style='width: 100%; height: 450px;' src='" + window.location.href + "#email'></iframe>",
+                text: "<iframe class='border-0' style='width: 100%; height: 450px;' src='" + window.location.href + "#!/email'></iframe>",
                 html: true,
                 showConfirmButton: false
             });

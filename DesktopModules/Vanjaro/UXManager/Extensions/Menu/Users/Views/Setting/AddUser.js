@@ -23,7 +23,7 @@
                             window.parent.ShowNotification(data.data.Data.displayName, '[L:UserCreatedSuccess]', 'success');
 
                         $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
-                        //parent.OpenPopUp(null, 800, 'right', '', $scope.ui.data.RedirectUrl.Value + '#/setting?uid=' + data.Data.userId);
+                        //parent.OpenPopUp(null, 800, 'right', '', $scope.ui.data.RedirectUrl.Value + '#!/setting?uid=' + data.Data.userId);
                     }
                     else {
                         parent.ShowNotification('[LS:Shortcut_Title]', data.data.Message, 'error');
