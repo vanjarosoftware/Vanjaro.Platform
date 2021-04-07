@@ -61,7 +61,6 @@ namespace Vanjaro.Skin
 
         protected override void OnPreRender(EventArgs e)
         {
-            HandleAppSettings();
             RemoveDNNDependencies();
         }
 
@@ -1016,20 +1015,7 @@ namespace Vanjaro.Skin
                 Page.Header.Controls.Add(Link);
             }
         }
-
-        private void HandleAppSettings()
-        {
-            if (!string.IsNullOrEmpty(Request.QueryString["ctl"]))
-            {
-                string script = @"$(document).ready(function () {                               
-                               $('.dnnActions').click(function () {
-                                   $(window.parent.document.body).find('.uxmanager-modal [data-bs-dismiss=" + @"modal" + @"]').click();
-                               });
-                               setTimeout(function () {$('[href=""#msSpecificSettings""]').click();},100);
-                          });";
-                WebForms.RegisterStartupScript(Page, "ModuleSettingScript", script, true);
-            }
-        }
+                
         private void RenderLocalizedMetaData()
         {
             DotNetNuke.Framework.CDefault basePage = (DotNetNuke.Framework.CDefault)Page;
