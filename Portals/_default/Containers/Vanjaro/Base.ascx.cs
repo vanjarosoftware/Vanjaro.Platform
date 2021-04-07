@@ -35,7 +35,7 @@ namespace Vanjaro.Container
                             else
                                 url += "?skinsrc=" + "[g]skins/vanjaro/base";
                             if (splitarray.Length > 1)
-                                url += "#" + splitarray[1];
+                                url += "#!/" + splitarray[1];
                         }
                         JsonAction += "{\"Title\":\"" + action.Title + "\", \"Icon\":\"" + action.Icon + "\",\"Url\":\"" + url + "\",\"NewWindow\":\"" + action.NewWindow + "\",\"ModuleId\":\"" + ModuleConfiguration.ModuleID + "\"},";
                     }

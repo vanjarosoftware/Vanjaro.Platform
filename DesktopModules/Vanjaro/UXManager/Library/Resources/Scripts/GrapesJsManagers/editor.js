@@ -2649,7 +2649,7 @@ $(document).ready(function () {
                                     var event = window;
                                     var guid = $(event.event.currentTarget).attr('guid');
                                     var width = $(event.event.currentTarget).attr('width');
-                                    var url = CurrentExtTabUrl + "&guid=" + guid + "#permissions/" + editor.getSelected().attributes.attributes.mid;
+                                    var url = CurrentExtTabUrl + "&guid=" + guid + "#!/permissions/" + editor.getSelected().attributes.attributes.mid;
                                     OpenPopUp(null, width, 'right', VjLocalized.Setting, url);
                                 }
                             });
@@ -3410,7 +3410,7 @@ global.UnlockGlobalBlock = function ($this) {
 
 global.ViewBlockRevisions = function (Guid) {
     if (Guid != undefined && Guid != '') {
-        var revisionsrc = CurrentExtTabUrl + "&guid=e2f6ebcb-5d68-4d85-b180-058fb2d26178#revisions/" + Guid;
+        var revisionsrc = CurrentExtTabUrl + "&guid=e2f6ebcb-5d68-4d85-b180-058fb2d26178#!/revisions/" + Guid;
 
         $('#iframeHolder').find('iframe').attr('src', 'about:blank');
         setTimeout(function () {

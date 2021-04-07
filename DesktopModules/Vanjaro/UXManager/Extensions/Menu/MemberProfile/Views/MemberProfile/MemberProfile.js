@@ -8,13 +8,13 @@
     };
 
     $scope.Add_MemberProfile = function () {
-        parent.OpenPopUp(event, 900, 'right', '[L:AddMemberProfileTitle]', $scope.ui.data.MemberProfileUrl.Value + '#memberprofilesettings');
+        parent.OpenPopUp(event, 900, 'right', '[L:AddMemberProfileTitle]', $scope.ui.data.MemberProfileUrl.Value + '#!/memberprofilesettings');
     };
     $scope.Click_Settings = function (row) {
-        parent.OpenPopUp(event, 900, 'right', '[L:UpdateMemberProfile]', $scope.ui.data.MemberProfileUrl.Value + '#memberprofilesettings?mpid=' + row.PropertyDefinitionId);
+        parent.OpenPopUp(event, 900, 'right', '[L:UpdateMemberProfile]', $scope.ui.data.MemberProfileUrl.Value + '#!/memberprofilesettings?mpid=' + row.PropertyDefinitionId);
     };
     $scope.Click_MemberProfileSettings = function () {
-        parent.OpenPopUp(event, 700, 'right', '[L:UserProfileSettings]', $scope.ui.data.MemberProfileUrl.Value + '#settings');
+        parent.OpenPopUp(event, 700, 'right', '[L:UserProfileSettings]', $scope.ui.data.MemberProfileUrl.Value + '#!/settings');
     };
     $scope.Click_Delete = function (row) {
         window.parent.swal({
