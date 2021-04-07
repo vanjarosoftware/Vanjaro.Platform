@@ -31,28 +31,28 @@
 	cmd.add('add-image', ed => {
 		var Selected = VjEditor.getSelected();
 
-		if (Selected.attributes.type == 'image-gallery') {
-			var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
-			var Img = `
+        if (Selected.attributes.type == 'image-gallery') {
+            var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
+            var Img = `
 				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
 					<img onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" style="width:` + Selected.components().models[0].getStyle().width + `; height:` + Selected.components().models[0].getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
 				</picture>
 			`;
-			Selected.components().add(Img);
+            Selected.components().add(Img);
 
-			VjEditor.select(Selected.components().last());
-		}
-		else {
-			var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
-			var Img = `
+            VjEditor.select(Selected.components().last().find('img'));
+        }
+        else {
+            var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
+            var Img = `
 				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
 				<img onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" style="width:` + Selected.getStyle().width + `; height:` + Selected.getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
 				</picture>
 			`;
-			Selected.parent().parent().components().add(Img);
+            Selected.parent().parent().components().add(Img);
 
-			VjEditor.select(Selected.parent().parent().components().last());
-		}
+            VjEditor.select(Selected.parent().parent().components().last().find('img'));
+        }
 
 		var target = VjEditor.getSelected();
 		window.document.vj_image_target = target;
@@ -324,13 +324,13 @@
 				VjEditor.select(Selected);
 				var target = Selected;
 				window.document.vj_image_target = target;
-				var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
+				var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
 				OpenPopUp(null, 900, 'right', 'Image', url, '', true);
 			},
 			ShowModal() {
 				var target = VjEditor.getSelected() || this.model;
 				window.document.vj_image_target = target;
-				var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
+				var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
 				OpenPopUp(null, 900, 'right', 'Image', url, '', true);
 			},
 		}),

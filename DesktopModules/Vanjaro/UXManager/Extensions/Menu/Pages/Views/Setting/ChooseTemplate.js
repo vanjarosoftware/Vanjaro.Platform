@@ -10,10 +10,10 @@
             PageLayout: Layout
         };
         var TabID = $scope.ui.data.PagesTemplate.Options.tabId;
-        common.webApi.post('pages/choosetemplate', '', formdata).success(function (Response) {
-            if (Response.IsSuccess) {
+        common.webApi.post('pages/choosetemplate', '', formdata).then(function (Response) {
+            if (Response.data.IsSuccess) {
                 window.parent.ShowNotification(Layout.Name, '[L:PageUpdatedSuccess]', 'success');                               
-                if (Response.IsRedirect) {
+                if (Response.data.IsRedirect) {
                     window.parent.location.href = window.parent.location.href;
                 }
                 else

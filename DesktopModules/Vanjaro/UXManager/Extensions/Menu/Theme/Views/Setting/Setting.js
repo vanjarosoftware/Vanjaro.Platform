@@ -16,7 +16,7 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('setting/update', 'theme=' + Theme).success(function (data) {
+                    common.webApi.post('setting/update', 'theme=' + Theme).then(function (data) {
                         window.parent.location.reload();
                     });
                 }

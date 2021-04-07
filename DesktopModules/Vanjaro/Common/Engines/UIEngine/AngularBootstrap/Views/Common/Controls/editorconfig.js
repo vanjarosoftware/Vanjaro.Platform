@@ -70,7 +70,7 @@
 
 
     $scope.SaveEditorProfile = function (apply) {
-        common.webApi.post('~EditorConfig/SaveEditorProfile', 'uid=' + $scope.ui.data.UID.Value + '&profileid=' + $scope.ui.data.Profiles.Value + '&applyto=' + apply, $scope.ui.data.Settings.Options).success(function (success) {
+        common.webApi.post('~EditorConfig/SaveEditorProfile', 'uid=' + $scope.ui.data.UID.Value + '&profileid=' + $scope.ui.data.Profiles.Value + '&applyto=' + apply, $scope.ui.data.Settings.Options).then(function (success) {
             if (success) {
                 window.parent.ClosePopUp();
                 window.close();
@@ -112,7 +112,7 @@
         }
         else {
             $scope.ProfileName = $('#txtEditorConfigNewProfile').val();
-            common.webApi.post('~EditorConfig/SaveProfile', 'profileid=' + $scope.ui.data.Profiles.Value + '&profileName=' + $scope.ProfileName + '&uid=' + $scope.ui.data.UID.Value, $scope.ui.data.EditorOptions.Options).success(function (success) {
+            common.webApi.post('~EditorConfig/SaveProfile', 'profileid=' + $scope.ui.data.Profiles.Value + '&profileName=' + $scope.ProfileName + '&uid=' + $scope.ui.data.UID.Value, $scope.ui.data.EditorOptions.Options).then(function (success) {
                 if (success) {
                     if (success.Data != undefined && success.Data != null) {
                         $scope.ui.data.UID = success.Data[0];
@@ -162,10 +162,10 @@
 
     $scope.CreateNewProfile = function () {
         $scope.NewProfile = true;
-        common.webApi.get('~EditorConfig/GetNewProfile').success(function (success) {
+        common.webApi.get('~EditorConfig/GetNewProfile').then(function (success) {
             if (success != undefined && success != null) {
-                $scope.ui.data.EditorOptions.Options = success.EditorOptions;
-                $.each(success.FullPlugins, function (key, value) {
+                $scope.ui.data.EditorOptions.Options = success.data.EditorOptions;
+                $.each(success.data.FullPlugins, function (key, value) {
                     if ($scope.ui.data.EditorOptions.Options.Plugins[key] == undefined) {
                         Object.defineProperty($scope.ui.data.EditorOptions.Options.Plugins, key, {
                             value: value,
@@ -175,9 +175,9 @@
                         });
                     }
                 });
-                $('#Height').val(success.EditorOptions.Height);
-                $('#UiColor').val(success.EditorOptions.UiColor);
-                $('#Width').val(success.EditorOptions.Width);
+                $('#Height').val(success.data.EditorOptions.Height);
+                $('#UiColor').val(success.data.EditorOptions.UiColor);
+                $('#Width').val(success.data.EditorOptions.Width);
                 $scope.ProfileName = "";
                 $('#txtEditorConfigNewProfile').val("");
                 $scope.ui.data.Profiles.Value = 0;
@@ -227,7 +227,7 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.delete('~EditorConfig/DeleteProfile', 'profileid=' + $scope.ui.data.Profiles.Value).success(function (success) {
+                    common.webApi.delete('~EditorConfig/DeleteProfile', 'profileid=' + $scope.ui.data.Profiles.Value).then(function (success) {
                         if (success != null && success != undefined) {
                             if (success == "deleted")
                                 window.location.reload();

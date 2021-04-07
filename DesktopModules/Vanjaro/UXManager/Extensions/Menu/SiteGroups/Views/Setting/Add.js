@@ -35,7 +35,7 @@
                 AssignedPortals = { PortalID: value.id, PortalName: value.value }
                 $scope.ui.data.PortalGroupInfo.Options[0].Portals.push(AssignedPortals);
             });
-            common.webApi.post('add/update', '', $scope.ui.data.PortalGroupInfo.Options[0]).success(function (Response) {
+            common.webApi.post('add/update', '', $scope.ui.data.PortalGroupInfo.Options[0]).then(function (Response) {
                 var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
                 Parentscope.RefreshGrid();
                 $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();

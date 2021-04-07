@@ -143,6 +143,10 @@
     <Content Include="Resources\Images\extensions\editor.jpg" />
     <Content Include="Resources\Images\extensions\seo.jpg" />
     <Content Include="Resources\Images\extensions\stay.jpg" />
+    <Content Include="Resources\Images\flex-dir-col-rev.png" />
+    <Content Include="Resources\Images\flex-dir-col.png" />
+    <Content Include="Resources\Images\flex-dir-row-rev.png" />
+    <Content Include="Resources\Images\flex-dir-row.png" />
     <Content Include="Resources\Images\Flower.mp4" />
     <Content Include="Resources\Images\image.png" />
     <Content Include="Resources\Images\librarytemplates\blogpost.jpg" />

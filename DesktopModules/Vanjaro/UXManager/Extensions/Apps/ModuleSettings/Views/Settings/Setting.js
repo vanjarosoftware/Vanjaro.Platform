@@ -83,8 +83,8 @@
                 chkAllTabs: $scope.ui.data.chkAllTabs.Options,
                 chkNewTabs: $scope.ui.data.chkAllTabs.Options === false ? false : $scope.chkNewTabs
             };
-            common.webApi.post('setting/save', 'moduleid=' + $scope.ui.data.ModuleID.Options, data).success(function (Response) {
-                if (Response.IsSuccess) {
+            common.webApi.post('setting/save', 'moduleid=' + $scope.ui.data.ModuleID.Options, data).then(function (Response) {
+                if (Response.data.IsSuccess) {
                     $scope.chkNewTabs = false;
                     $scope.Click_Cancel('update');
                 }

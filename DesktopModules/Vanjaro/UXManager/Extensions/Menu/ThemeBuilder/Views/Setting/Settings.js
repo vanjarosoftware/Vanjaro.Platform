@@ -140,13 +140,13 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('settings/save', 'guid=' + $scope.ui.data.Guid.Value, formdata).success(function (response) {
-                        if (response.Message == undefined) {
+                    common.webApi.post('settings/save', 'guid=' + $scope.ui.data.Guid.Value, formdata).then(function (response) {
+                        if (response.data.Message == undefined) {
                             window.parent.ShowNotification('[L:Theme]', '[L:SaveSuccess]', 'success');
                             window.parent.location.reload();
                         }
                         else {
-                            window.parent.ShowNotification('[L:Theme]', response.Message, 'error');
+                            window.parent.ShowNotification('[L:Theme]', response.data.Message, 'error');
                             $scope.ResetMarkUp(ResetMarkUp, formdata);
                         }
                     });
@@ -245,7 +245,7 @@
     $scope.OpenPopUp = function () {
         event.preventDefault();
         var url = window.location.href.split('#')[0];
-        url = url + "#/manage/" + $scope.ui.data.Guid.Value;
+        url = url + "#!/manage/" + $scope.ui.data.Guid.Value;
         parent.OpenPopUp(event, 900, 'right', '[LS:ThemeBuilder]', url);
         window.location.reload();
     };

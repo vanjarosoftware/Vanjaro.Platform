@@ -20,7 +20,7 @@
                     Site_Body: $scope.ui.data.Site_Body.Value,
                 }
             }
-            common.webApi.post('Setting/save', '', Data).success(function (Response) {
+            common.webApi.post('Setting/save', '', Data).then(function (Response) {
                 if (Response)
                     $scope.Click_Cancel();
                 else {

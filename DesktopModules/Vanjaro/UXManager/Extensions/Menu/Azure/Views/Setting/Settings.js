@@ -5,8 +5,8 @@
     };
 
     $scope.GetAllConnector = function () {
-        common.webApi.get('Settings/GetAllConnector').success(function (Response) {
-            $scope.ui.data.Connectors.Options = Response.Data;
+        common.webApi.get('Settings/GetAllConnector').then(function (Response) {
+            $scope.ui.data.Connectors.Options = Response.data.Data;
         });
     };
 
@@ -23,21 +23,21 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('Settings/DeleteConnection', 'id=' + row.Id).success(function (Response) {
-                        if (Response.IsSuccess)
-                            $scope.ui.data.Connectors.Options = Response.Data;
-                        else if (Response.HasErrors)
-                            CommonSvc.SweetAlert.swal(Response.Message);
+                    common.webApi.get('Settings/DeleteConnection', 'id=' + row.Id).then(function (Response) {
+                        if (Response.data.IsSuccess)
+                            $scope.ui.data.Connectors.Options = Response.data.Data;
+                        else if (Response.data.HasErrors)
+                            CommonSvc.SweetAlert.swal(Response.data.Message);
                     });
                 }
             });
     };
 
     $scope.Click_New = function () {
-        parent.OpenPopUp(null, 700, 'right', 'Azure', "#/add");
+        parent.OpenPopUp(null, 700, 'right', 'Azure', "#!/add");
     };
 
     $scope.Click_Edit = function (row) {
-        parent.OpenPopUp(null, 700, 'right', 'Azure', "#/add/" + row.Id);
+        parent.OpenPopUp(null, 700, 'right', 'Azure', "#!/add/" + row.Id);
     };
 });

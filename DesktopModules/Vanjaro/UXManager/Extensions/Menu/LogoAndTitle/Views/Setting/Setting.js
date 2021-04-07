@@ -275,15 +275,15 @@ app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http,
                 $scope.ui.data.SiteSettings.Options.FavIcon.fileName = $scope.ui.data.FavIcon.Options.fileName;
             }
             $scope.ui.data.SiteSettings.Options.IconSet = $scope.ui.data.IconFolders.Value;
-            common.webApi.post('setting/updatePortalSettings', 'FileId=' + $scope.ui.data.SocialSharingLogo.Options.fileId.toString() + '&HomeIcon=' + $scope.ui.data.HomeScreenIcon.Options.fileId.toString(), $scope.ui.data.SiteSettings.Options).success(function (data) {
-                if (data.Message != null && data.Message.length > 0) {
+            common.webApi.post('setting/updatePortalSettings', 'FileId=' + $scope.ui.data.SocialSharingLogo.Options.fileId.toString() + '&HomeIcon=' + $scope.ui.data.HomeScreenIcon.Options.fileId.toString(), $scope.ui.data.SiteSettings.Options).then(function (data) {
+                if (data.data.Message != null && data.data.Message.length > 0) {
                     window.parent.swal(data.Message);
                 }
                 else {
                     window.parent.document.callbacktype = type;
                     if (parent.VjEditor != null && parent.VjEditor.getComponents() != null && parent.VjEditor.getComponents().models != null && typeof parent.VjEditor.getComponents().models != 'undefined') {
                         $.each(parent.VjEditor.getComponents().models, function (key, value) {
-                            $scope.BindLogo(value, data.Data);
+                            $scope.BindLogo(value, data.data.Data);
                         });
                     }
                     $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
@@ -315,8 +315,8 @@ app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http,
                     FileIds.push(parseInt(value.file.name.split('fileid')[1]));
             });
             if (FileIds.length > 0) {
-                common.webApi.get('Upload/GetMultipleFileDetails', 'fileids=' + FileIds.join()).success(function (response) {
-                    $.each(response, function (key, value) {
+                common.webApi.get('Upload/GetMultipleFileDetails', 'fileids=' + FileIds.join()).then(function (response) {
+                    $.each(response.data, function (key, value) {
                         if (value.Name != null) {
                             var Title = (value.Name.split('/').pop()).split('.')[0];
                         }
@@ -344,13 +344,13 @@ app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http,
             $.each(newValue, function (key, value) {
                 var FileId = parseInt(value.fileid);
                 if (FileId > 0) {
-                    common.webApi.get('Upload/GetFile', 'fileid=' + FileId).success(function (response) {
-                        if (response.Name != null) {
-                            var Title = (response.Name.split('/').pop()).split('.')[0];
+                    common.webApi.get('Upload/GetFile', 'fileid=' + FileId).then(function (response) {
+                        if (response.data.Name != null) {
+                            var Title = (response.data.Name.split('/').pop()).split('.')[0];
                         }
-                        $scope.ui.data.LogoFile.Value = response.FileUrl;
+                        $scope.ui.data.LogoFile.Value = response.data.FileUrl;
                         var data = {
-                            "fileName": response.Name,
+                            "fileName": response.data.Name,
                             "fileId": FileId,
                             "Title": Title,
                             "KBSize": 0,
@@ -376,8 +376,8 @@ app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http,
                     FileIds.push(parseInt(value.file.name.split('fileid')[1]));
             });
             if (FileIds.length > 0) {
-                common.webApi.get('Upload/GetMultipleFileDetails', 'fileids=' + FileIds.join()).success(function (response) {
-                    $.each(response, function (key, value) {
+                common.webApi.get('Upload/GetMultipleFileDetails', 'fileids=' + FileIds.join()).then(function (response) {
+                    $.each(response.data, function (key, value) {
                         if (value.Name != null) {
                             var Title = (value.Name.split('/').pop()).split('.')[0];
                         }
@@ -405,13 +405,13 @@ app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http,
             $.each(newValue, function (key, value) {
                 var FileId = parseInt(value.fileid);
                 if (FileId > 0) {
-                    common.webApi.get('Upload/GetFile', 'fileid=' + FileId).success(function (response) {
-                        if (response.Name != null) {
-                            var Title = (response.Name.split('/').pop()).split('.')[0];
+                    common.webApi.get('Upload/GetFile', 'fileid=' + FileId).then(function (response) {
+                        if (response.data.Name != null) {
+                            var Title = (response.data.Name.split('/').pop()).split('.')[0];
                         }
-                        $scope.ui.data.FavIcon.Value = response.FileUrl;
+                        $scope.ui.data.FavIcon.Value = response.data.FileUrl;
                         var data = {
-                            "fileName": response.Name,
+                            "fileName": response.data.Name,
                             "fileId": FileId,
                             "Title": Title,
                             "KBSize": 0,
@@ -437,8 +437,8 @@ app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http,
                     FileIds.push(parseInt(value.file.name.split('fileid')[1]));
             });
             if (FileIds.length > 0) {
-                common.webApi.get('Upload/GetMultipleFileDetails', 'fileids=' + FileIds.join()).success(function (response) {
-                    $.each(response, function (key, value) {
+                common.webApi.get('Upload/GetMultipleFileDetails', 'fileids=' + FileIds.join()).then(function (response) {
+                    $.each(response.data, function (key, value) {
                         if (value.Name != null) {
                             var Title = (value.Name.split('/').pop()).split('.')[0];
                         }
@@ -466,13 +466,13 @@ app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http,
             $.each(newValue, function (key, value) {
                 var FileId = parseInt(value.fileid);
                 if (FileId > 0) {
-                    common.webApi.get('Upload/GetFile', 'fileid=' + FileId).success(function (response) {
-                        if (response.Name != null) {
-                            var Title = (response.Name.split('/').pop()).split('.')[0];
+                    common.webApi.get('Upload/GetFile', 'fileid=' + FileId).then(function (response) {
+                        if (response.data.Name != null) {
+                            var Title = (response.data.Name.split('/').pop()).split('.')[0];
                         }
-                        $scope.ui.data.SocialSharingLogo.Value = response.FileUrl;
+                        $scope.ui.data.SocialSharingLogo.Value = response.data.FileUrl;
                         var data = {
-                            "fileName": response.Name,
+                            "fileName": response.data.Name,
                             "fileId": FileId,
                             "Title": Title,
                             "KBSize": 0,
@@ -499,8 +499,8 @@ app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http,
                     FileIds.push(parseInt(value.file.name.split('fileid')[1]));
             });
             if (FileIds.length > 0) {
-                common.webApi.get('Upload/GetMultipleFileDetails', 'fileids=' + FileIds.join()).success(function (response) {
-                    $.each(response, function (key, value) {
+                common.webApi.get('Upload/GetMultipleFileDetails', 'fileids=' + FileIds.join()).then(function (response) {
+                    $.each(response.data, function (key, value) {
                         if (value.Name != null) {
                             var Title = (value.Name.split('/').pop()).split('.')[0];
                         }
@@ -529,13 +529,13 @@ app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http,
             $.each(newValue, function (key, value) {
                 var FileId = parseInt(value.fileid);
                 if (FileId > 0) {
-                    common.webApi.get('Upload/GetFile', 'fileid=' + FileId).success(function (response) {
-                        if (response.Name != null) {
-                            var Title = (response.Name.split('/').pop()).split('.')[0];
+                    common.webApi.get('Upload/GetFile', 'fileid=' + FileId).then(function (response) {
+                        if (response.data.Name != null) {
+                            var Title = (response.data.Name.split('/').pop()).split('.')[0];
                         }
-                        $scope.ui.data.HomeScreenIcon.Value = response.FileUrl;
+                        $scope.ui.data.HomeScreenIcon.Value = response.data.FileUrl;
                         var data = {
-                            "fileName": response.Name,
+                            "fileName": response.data.Name,
                             "fileId": FileId,
                             "Title": Title,
                             "KBSize": 0,

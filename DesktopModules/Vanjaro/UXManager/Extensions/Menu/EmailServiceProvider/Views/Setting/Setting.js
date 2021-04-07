@@ -21,12 +21,12 @@
                 EnableSSL: $scope.ui.data.Portal_EnableSSL.Options
             }
         }
-        common.webApi.post('Setting/SendTestEmail', '', Data).success(function (data) {
-            if (data.IsSuccess) {
-                window.parent.ShowNotification('[LS:EmailServiceProvider]', data.Data, 'success');
+        common.webApi.post('Setting/SendTestEmail', '', Data).then(function (data) {
+            if (data.data.IsSuccess) {
+                window.parent.ShowNotification('[LS:EmailServiceProvider]', data.data.Data, 'success');
             }
-            else if (data.HasErrors) {
-                window.parent.swal(data.Message);
+            else if (data.data.HasErrors) {
+                window.parent.swal(data.data.Message);
             }
         });
     };
@@ -55,12 +55,12 @@
                 Portal_EnableSSL: $scope.ui.data.Portal_EnableSSL.Options
             }
         }
-        common.webApi.post('Setting/update', '', Data).success(function (data) {
-            if (data.IsSuccess) {
+        common.webApi.post('Setting/update', '', Data).then(function (data) {
+            if (data.data.IsSuccess) {
                 $scope.Click_Cancel();
             }
-            else if (data.HasErrors) {
-                window.parent.swal(data.Message);
+            else if (data.data.HasErrors) {
+                window.parent.swal(data.data.Message);
             }
         });
     }

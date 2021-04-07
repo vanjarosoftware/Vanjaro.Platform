@@ -6,7 +6,7 @@
         $scope.avlinstall = false;
     };
     $scope.Click_CreateModule = function () {
-        location.href = "#/createmodule";
+        location.href = "#!/createmodule";
     };
     $scope.Click_IsInstall = function (IsInstall) {
         if (IsInstall) {
@@ -14,9 +14,9 @@
         } else {
             $scope.avlinstall = true;
         }
-        common.webApi.get('dashboard/Extensions', 'isinstall=' + IsInstall).success(function (Response) {
-            if (Response.IsSuccess) {
-                $scope.Extensions = Response.Data;
+        common.webApi.get('dashboard/Extensions', 'isinstall=' + IsInstall).then(function (Response) {
+            if (Response.data.IsSuccess) {
+                $scope.Extensions = Response.data.Data;
                 $scope.Search_Extensions = $scope.Extensions;
             }
             else {
@@ -26,16 +26,16 @@
         });
     };
     $scope.Click_CreateExtension = function () {
-        location.href = "#/createextension";
+        location.href = "#!/createextension";
     };
     $scope.Click_InstallExtension = function () {
-        parent.OpenPopUp(null, 600, 'center', 'Install Extension', "#/install", 700);
+        parent.OpenPopUp(null, 600, 'center', 'Install Extension', "#!/install", 700);
     };
     $scope.Click_Edit = function (row) {
-        parent.OpenPopUp(null, 750, 'right', 'Manage Extension', "#/edit/pid/" + row.PackageId);
+        parent.OpenPopUp(null, 750, 'right', 'Manage Extension', "#!/edit/pid/" + row.PackageId);
     };
     $scope.Click_Delete = function (row) {
-        parent.OpenPopUp(null, 600, 'center', 'Delete Extension', "#/delete/pid/" + row.PackageId, 300);
+        parent.OpenPopUp(null, 600, 'center', 'Delete Extension', "#!/delete/pid/" + row.PackageId, 300);
     };
     $scope.ShowInUse = function (val) {
         if (!val) {
@@ -44,18 +44,18 @@
         return true;
     };
     $scope.Click_IsInUse = function (row) {
-        parent.OpenPopUp(null, 600, 'right', 'In Use', "#/usage/pid/" + row.PackageId);
+        parent.OpenPopUp(null, 600, 'right', 'In Use', "#!/usage/pid/" + row.PackageId);
     };
     $scope.Click_Install = function (row) {
         if (row.FileName) {
-            parent.OpenPopUp(null, 600, 'center', 'Install Extension', "#/install/type/" + row.Type + "/name/" + row.FileName, 700);
+            parent.OpenPopUp(null, 600, 'center', 'Install Extension', "#!/install/type/" + row.Type + "/name/" + row.FileName, 700);
         }
         else if (row.Type === 'CoreLanguagePack') {
-            common.webApi.get('dashboard/ParseLanguagePackage', 'cultureCode=' + row.Description).success(function (Response) {
-                if (Response.IsSuccess && Response.Data.success) {
-                    common.webApi.get('dashboard/GetAvailablePackages').success(function (Response) {
-                        if (Response.IsSuccess) {
-                            parent.OpenPopUp(null, 600, 'center', 'Install Extension', "#/install/type/" + row.Type + "/name/installlanguage.resources", 700);
+            common.webApi.get('dashboard/ParseLanguagePackage', 'cultureCode=' + row.Description).then(function (Response) {
+                if (Response.data.IsSuccess && Response.data.Data.success) {
+                    common.webApi.get('dashboard/GetAvailablePackages').then(function (Response) {
+                        if (Response.data.IsSuccess) {
+                            parent.OpenPopUp(null, 600, 'center', 'Install Extension', "#!/install/type/" + row.Type + "/name/installlanguage.resources", 700);
                         }
                     });
                 }
@@ -79,8 +79,8 @@
                     'TabId': parseInt($.ServicesFramework(parseInt($scope.$parent.moduleid)).getTabId()),
                     'RequestVerificationToken': $.ServicesFramework(parseInt($scope.$parent.moduleid)).getAntiForgeryValue()
                 },
-            }).success(function (data, status, headers) {
-                headers = headers();
+            }).then(function (data) {
+                headers = data.headers();
                 var filename = headers['x-filename'];
                 var contentType = headers['content-type'];
                 var linkElement = document.createElement('a');
@@ -100,7 +100,7 @@
                 } catch (ex) {
                     alert(ex);
                 }
-            }).error(function (data) {
+            },function (data) {
                 alert(data);
             });
         }
@@ -114,8 +114,8 @@
                     'TabId': parseInt($.ServicesFramework(parseInt($scope.$parent.moduleid)).getTabId()),
                     'RequestVerificationToken': $.ServicesFramework(parseInt($scope.$parent.moduleid)).getAntiForgeryValue()
                 },
-            }).success(function (data, status, headers) {
-                headers = headers();
+            }).then(function (data) {
+                headers = data.headers();
                 var filename = headers['x-filename'];
                 var contentType = headers['content-type'];
                 var linkElement = document.createElement('a');
@@ -135,8 +135,8 @@
                 } catch (ex) {
                     alert(ex);
                 }
-            }).error(function (data) {
-                alert(data);
+            },function (data) {
+                alert(data.data);
             });
         }
     };

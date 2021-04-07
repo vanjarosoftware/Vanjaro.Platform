@@ -161,8 +161,8 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                             'TabId': parseInt($.ServicesFramework(-1).getTabId()),
                             'RequestVerificationToken': $.ServicesFramework(-1).getAntiForgeryValue()
                         }
-                    }).success(function (data, status, headers) {
-                        headers = headers();
+                    }).then(function (data, status, headers) {
+                        headers = data.headers();
                         var filename = headers['x-filename'];
                         var contentType = headers['content-type'];
                         var linkElement = document.createElement('a');
@@ -180,8 +180,8 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         } catch (ex) {
                             alert(ex);
                         }
-                    }).error(function (data) {
-                        alert(data);
+                    },function (data) {
+                        alert(data.data);
                     });
                 }
             });
@@ -355,32 +355,32 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                     MakePublic: $scope.ui.data.MakePublic.Value
                 }
                 var TabID = $scope.ui.data.PagesTemplate.Options.tabId;
-                common.webApi.post('pages/savepagedetails', 'DefaultWorkflow=' + $scope.ui.data.ddlWorkFlows.Value + '&MaxRevisions=' + $scope.ui.data.MaxRevisions.Value + '&Copy=' + IsCopy, formdata).success(function (data) {
-                    if (data.HasErrors) {
-                        window.parent.ShowNotification('[LS:Pages]', data.Message, 'error');
+                common.webApi.post('pages/savepagedetails', 'DefaultWorkflow=' + $scope.ui.data.ddlWorkFlows.Value + '&MaxRevisions=' + $scope.ui.data.MaxRevisions.Value + '&Copy=' + IsCopy, formdata).then(function (data) {
+                    if (data.data.HasErrors) {
+                        window.parent.ShowNotification('[LS:Pages]', data.data.Message, 'error');
                     }
-                    if (data.IsSuccess) {
+                    if (data.data.IsSuccess) {
                         if ($scope.pid > 0 && $scope.TabName != $scope.ui.data.PagesTemplate.Options.name) {
-                            parent.location.href = data.Data.url;
+                            parent.location.href = data.data.Data.url;
                         }
 
                         if ($scope.ui.data.PagesTemplate.Options.tabId == parseInt($.ServicesFramework(-1).getTabId())) {
-                            window.parent.VJIsContentApproval = data.Data.IsContentApproval ? "True" : "False";
-                            window.parent.VJNextStateName = data.Data.NextStateName;
-                            window.parent.VJIsPageDraft = data.Data.IsPageDraft;
-                            window.parent.VJIsLocked = data.Data.IsLocked ? "True" : "False";
-                            window.parent.VJIsModeratorEditPermission = data.Data.IsModeratorEditPermission;
+                            window.parent.VJIsContentApproval = data.data.Data.IsContentApproval ? "True" : "False";
+                            window.parent.VJNextStateName = data.data.Data.NextStateName;
+                            window.parent.VJIsPageDraft = data.data.Data.IsPageDraft;
+                            window.parent.VJIsLocked = data.data.Data.IsLocked ? "True" : "False";
+                            window.parent.VJIsModeratorEditPermission = data.data.Data.IsModeratorEditPermission;
 
-                            if (data.Data.IsPageDraft)
+                            if (data.data.Data.IsPageDraft)
                                 $(window.parent.document.body).find('#VJBtnPublish').removeClass('disabled');
 
                             else
                                 $(window.parent.document.body).find('#VJBtnPublish').addClass('disabled');
 
-                            if (!data.Data.IsPageDraft || data.Data.IsLocked)
+                            if (!data.data.Data.IsPageDraft || data.data.Data.IsLocked)
                                 $(window.parent.document.body).find('#VJBtnPublish').addClass('disabled');
 
-                            if (data.Data.IsContentApproval && data.Data.IsLocked)
+                            if (data.data.Data.IsContentApproval && data.data.Data.IsLocked)
                                 $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('lockcanvas');
                             else
                                 $(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('lockcanvas');
@@ -394,14 +394,14 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                                     Menuextension.scope().FetchPages();
                                 }
                                 else if (!IsCopy && $scope.pid > 0)
-                                    Menuextension.scope().Findnode(data.Data.PagesTree, Menuextension.scope().ui.data.PagesTree.Options, $scope.pid);
+                                    Menuextension.scope().Findnode(data.data.Data.PagesTree, Menuextension.scope().ui.data.PagesTree.Options, $scope.pid);
                                 else {
                                     //if copy or adding new page has parent
                                     if (parseInt($scope.ui.data.ParentPage.Value) > 0) {
-                                        $scope.Findnode(data.Data.PagesTree, Menuextension.scope().ui.data.PagesTree.Options, parseInt($scope.ui.data.ParentPage.Value))
+                                        $scope.Findnode(data.data.Data.PagesTree, Menuextension.scope().ui.data.PagesTree.Options, parseInt($scope.ui.data.ParentPage.Value))
                                     }
                                     else {
-                                        $.each(data.Data.PagesTree, function (key, value) {
+                                        $.each(data.data.Data.PagesTree, function (key, value) {
                                             if (Menuextension.scope().ui.data.PagesTree.Options[key] == undefined) {
                                                 Menuextension.scope().ui.data.PagesTree.Options.push(value);
                                                 return false;
@@ -415,15 +415,15 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         }
                         $scope.RenderMarkup();
                         if (parent.GetParameterByName('m2vsetup', parent.window.location) != null && typeof parent.GetParameterByName('m2vsetup', parent.window.location) != undefined && data.Data.url != null) {
-                            parent.window.location.href = data.Data.url + "?migrate=true";
+                            parent.window.location.href = data.data.Data.url + "?migrate=true";
                         }
                         else {
                             if (TabID == 0 || IsCopy) {
                                 if (IsCopy) {
-                                    window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageCreatedSuccess]', 'success', data.Data.url);
+                                    window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageCreatedSuccess]', 'success', data.data.Data.url);
                                 }
                                 else {
-                                    window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageCreatedSuccess]', 'success', data.Data.url);
+                                    window.parent.ShowNotification($scope.ui.data.PagesTemplate.Options.name, '[L:PageCreatedSuccess]', 'success', data.data.Data.url);
                                 }
                             }
                             else {
@@ -472,8 +472,8 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('pages/deletelayout', 'name=' + option.Name, '').success(function (response) {
-                        if (response.IsSuccess) {
+                    common.webApi.post('pages/deletelayout', 'name=' + option.Name, '').then(function (response) {
+                        if (response.data.IsSuccess) {
                             $.each($scope.ui.data.PageLayouts.Options, function (k, v) {
                                 if (!v.IsSystem && option.Name == v.Name) {
                                     $scope.ui.data.PageLayouts.Options.splice(k, 1);
@@ -524,14 +524,14 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
     };
 
     $scope.Click_UrlAddUpdate = function (type) {
-        common.webApi.post('pages/urladdupdate', '', $scope.ui.data.WorkingPageUrls.Options).success(function (response) {
-            if (response.HasErrors) {
-                window.parent.ShowNotification('[LS:Pages]', response.Message, 'error');
-                $scope.ui.data.WorkingPageUrls.Options.saveUrl.Path = response.Data.SuggestedUrlPath;
+        common.webApi.post('pages/urladdupdate', '', $scope.ui.data.WorkingPageUrls.Options).then(function (response) {
+            if (response.data.HasErrors) {
+                window.parent.ShowNotification('[LS:Pages]', response.data.Message, 'error');
+                $scope.ui.data.WorkingPageUrls.Options.saveUrl.Path = response.data.Data.SuggestedUrlPath;
             }
-            if (response.IsSuccess) {
+            if (response.data.IsSuccess) {
                 $scope.ui.data.PageUrls.Options = [];
-                $scope.ui.data.PageUrls.Options = response.Data;
+                $scope.ui.data.PageUrls.Options = response.data.Data;
                 $('#PagesUrldefaultModal').find('[data-bs-dismiss="modal"]').click();
             }
         });
@@ -555,13 +555,13 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         Id: row.id,
                         TabId: $scope.pid
                     };
-                    common.webApi.post('pages/deletecustomurl', '', UrlIdDto).success(function (response) {
-                        if (response.HasErrors) {
-                            window.parent.ShowNotification('[LS:Error]', response.Message, 'error');
+                    common.webApi.post('pages/deletecustomurl', '', UrlIdDto).then(function (response) {
+                        if (response.data.HasErrors) {
+                            window.parent.ShowNotification('[LS:Error]', response.data.Message, 'error');
                         }
-                        if (response.IsSuccess) {
+                        if (response.data.IsSuccess) {
                             $scope.ui.data.PageUrls.Options = [];
-                            $scope.ui.data.PageUrls.Options = response.Data;
+                            $scope.ui.data.PageUrls.Options = response.data.Data;
                             $('#PagesUrldefaultModal').find('[data-bs-dismiss="modal"]').click();
                         }
                     });
@@ -578,8 +578,8 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                     FileIds.push(parseInt(value.file.name.split('fileid')[1]));
             });
             if (FileIds.length > 0) {
-                common.webApi.get('Upload/GetMultipleFileDetails', 'fileids=' + FileIds.join()).success(function (response) {
-                    $.each(response, function (key, value) {
+                common.webApi.get('Upload/GetMultipleFileDetails', 'fileids=' + FileIds.join()).then(function (response) {
+                    $.each(response.data, function (key, value) {
                         if (value.Name != null) {
                             var Title = (value.Name.split('/').pop()).split('.')[0];
                         }
@@ -606,13 +606,13 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
             $.each(newValue, function (key, value) {
                 var FileId = parseInt(value.fileid);
                 if (FileId > 0) {
-                    common.webApi.get('Upload/GetFile', 'fileid=' + FileId).success(function (response) {
-                        if (response.Name != null) {
-                            var Title = (response.Name.split('/').pop()).split('.')[0];
+                    common.webApi.get('Upload/GetFile', 'fileid=' + FileId).then(function (response) {
+                        if (response.data.Name != null) {
+                            var Title = (response.data.Name.split('/').pop()).split('.')[0];
                         }
                         var data = {
-                            "Name": response.Name,
-                            "ImageUrl": response.FileUrl,
+                            "Name": response.data.Name,
+                            "ImageUrl": response.data.FileUrl,
                             "FileId": FileId,
                             "Title": Title,
                             "KBSize": 0,
@@ -661,7 +661,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('pages/restoremodule', 'PageId=' + $scope.pid + '&ModuleID=' + row.TabModuleId).success(function (Response) {
+                    common.webApi.get('pages/restoremodule', 'PageId=' + $scope.pid + '&ModuleID=' + row.TabModuleId).then(function (Response) {
                         window.parent.location.reload();
                     });
                 }
@@ -682,14 +682,14 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('pages/removeallmodule', 'PageId=' + $scope.pid, '').success(function (Response) {
-                        if (Response.IsSuccess) {
+                    common.webApi.post('pages/removeallmodule', 'PageId=' + $scope.pid, '').then(function (Response) {
+                        if (Response.data.IsSuccess) {
                             $scope.ui.data.DeletedModules.Options = [];
                             if ($scope.ui.data.DeletedModules.Options.length <= 0)
                                 $scope.Click_ShowTab('Page_details');
                         }
-                        if (Response.HasErrors) {
-                            window.parent.ShowNotification('[L:DeleteAllAppsError]', Response.Message, 'error');
+                        if (Response.data.HasErrors) {
+                            window.parent.ShowNotification('[L:DeleteAllAppsError]', Response.data.Message, 'error');
                         }
                     });
 
@@ -718,11 +718,11 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                             if ($scope.ui.data.ddlWorkFlows.Value == w.Value) {
                                 $scope.ui.data.WorkflowStateInfo.Value = w.Content;
 
-                                common.webApi.post('pages/updateworkflow', 'WorkflowID=' + $scope.ui.data.ddlWorkFlows.Value + '&PageID=' + $scope.pid).success(function (Response) {
-                                    if (Response.IsSuccess && Response.Data != undefined && Response.Data.Revisions != undefined) {
-                                        $scope.ui.data.MaxRevisions.Value = Response.Data.Revisions;
-                                        $scope.PermissionsRoles = Response.Data.Permissions.RolePermissions
-                                        $scope.PermissionsUsers = Response.Data.Permissions.UserPermissions;
+                                common.webApi.post('pages/updateworkflow', 'WorkflowID=' + $scope.ui.data.ddlWorkFlows.Value + '&PageID=' + $scope.pid).then(function (Response) {
+                                    if (Response.data.IsSuccess && Response.Data != undefined && Response.data.Data.Revisions != undefined) {
+                                        $scope.ui.data.MaxRevisions.Value = Response.data.Data.Revisions;
+                                        $scope.PermissionsRoles = Response.data.Data.Permissions.RolePermissions
+                                        $scope.PermissionsUsers = Response.data.Data.Permissions.UserPermissions;
 
                                     }
                                 });

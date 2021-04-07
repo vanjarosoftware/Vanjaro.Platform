@@ -512,13 +512,13 @@
 				VjEditor.select(Selected);
 				var target = Selected;
 				window.document.vj_image_target = target;
-				var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
+				var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
 				OpenPopUp(null, 900, 'right', 'Image', url, '', true);
 			},
 			ShowModal() {
 				var target = VjEditor.getSelected() || this.model;
 				window.document.vj_image_target = target;
-				var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
+				var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
 				OpenPopUp(null, 900, 'right', 'Image', url, '', true);
 			},
 		}),
@@ -719,7 +719,7 @@
 	cmd.add('add-slide', {
 		run(editor, sender) {
 
-			var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#/setting";
+			var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
 			var Selected = VjEditor.getSelected();
 			var slideInner = Selected.components().models.find(m => m.attributes.type == 'carousel-inner');
 

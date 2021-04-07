@@ -121,15 +121,15 @@
                     DefaultEndUserExtensionWhitelist: $scope.ui.data.IsSuperUser.Value ? $scope.ui.data.DefaultEndUserExtensionWhitelist.Value : null
                 };
                 $scope.ui.data.UpdateSslSettingsRequest.Options.SSLEnforced = $scope.ui.data.UpdateSslSettingsRequest.Options.SSLEnabled;
-                common.webApi.post('security/UpdateSettings', '', settingData).success(function (Response) {
-                    if (Response.IsSuccess) {
-                        if (Response.IsRedirect) {
-                            window.parent.location.href = Response.RedirectURL;
+                common.webApi.post('security/UpdateSettings', '', settingData).then(function (Response) {
+                    if (Response.data.IsSuccess) {
+                        if (Response.data.IsRedirect) {
+                            window.parent.location.href = Response.data.RedirectURL;
                         }
                         $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     }
                     else {
-                        window.parent.ShowNotification('[LS:SecuritySettings]', Response.Message, 'error');
+                        window.parent.ShowNotification('[LS:SecuritySettings]', Response.data.Message, 'error');
                     }
                 });
             }
