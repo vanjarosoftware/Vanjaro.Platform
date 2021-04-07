@@ -79,11 +79,6 @@
 				}
 			}),
 		view: linkView.extend({
-			events: {
-				dblclick: function () {
-					return false;
-				}
-			},
 			onRender() {
 				var hasClass = this.model.getClasses().find(v => v == 'link')
 				if (typeof hasClass == 'undefined' && this.model.parent().attributes.type != 'blockwrapper')
