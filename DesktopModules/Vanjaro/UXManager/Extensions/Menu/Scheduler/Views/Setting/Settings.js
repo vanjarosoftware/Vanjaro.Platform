@@ -34,8 +34,8 @@
                 "SchedulerMode": $scope.ScheduleMode ? 1 : 0,
                 "SchedulerdelayAtAppStart": $scope.ui.data.ScheduleStatus.Options.Data.DelayAtAppStart
             };
-            common.webApi.post('TaskQueue/UpdateSchedulerSettings', '', data).success(function (data) {
-                if (data.IsSuccess) {
+            common.webApi.post('TaskQueue/UpdateSchedulerSettings', '', data).then(function (data) {
+                if (data.data.IsSuccess) {
                     if ($scope.ScheduleMode)
                         $scope.ui.data.ScheduleStatus.Options.Data.ScheduleMode = 1;
                     else
@@ -45,23 +45,23 @@
                     if (!$scope.ScheduleMode) {
                         $('.mode').addClass('disable');
                     }
-                    window.parent.ShowNotification('[LS:Scheduler]', data.Message, 'success');
+                    window.parent.ShowNotification('[LS:Scheduler]', data.data.Message, 'success');
                 }
                 else {
-                    window.parent.ShowNotification('[LS:Scheduler]', data.Message, 'error');
+                    window.parent.ShowNotification('[LS:Scheduler]', data.data.Message, 'error');
                 }
             });
         }, 800)
     };
 
     $scope.GetScheduleStatus = function () {
-        common.webApi.get('Scheduler/GetScheduleStatus', '').success(function (data) {
+        common.webApi.get('Scheduler/GetScheduleStatus', '').then(function (data) {
             if (data) {
-                $scope.ui.data.ScheduleStatus.Options.Data.Status = data.Data.Data.Status;
-                $scope.ui.data.ScheduleStatus.Options.Data.MaxThreadCount = data.Data.Data.MaxThreadCount;
-                $scope.ui.data.ScheduleStatus.Options.Data.ActiveThreadCount = data.Data.Data.ActiveThreadCount;
-                $scope.ui.data.ScheduleStatus.Options.Data.FreeThreadCount = data.Data.Data.FreeThreadCount;
-                $scope.ui.data.ScheduleStatus.Options.Data.ServerTime = data.Data.Data.ServerTime;
+                $scope.ui.data.ScheduleStatus.Options.Data.Status = data.data.Data.Data.Status;
+                $scope.ui.data.ScheduleStatus.Options.Data.MaxThreadCount = data.data.Data.Data.MaxThreadCount;
+                $scope.ui.data.ScheduleStatus.Options.Data.ActiveThreadCount = data.data.Data.Data.ActiveThreadCount;
+                $scope.ui.data.ScheduleStatus.Options.Data.FreeThreadCount = data.data.Data.Data.FreeThreadCount;
+                $scope.ui.data.ScheduleStatus.Options.Data.ServerTime = data.data.Data.Data.ServerTime;
             }
         });
         ScheduleStatus = setTimeout($scope.GetScheduleStatus, 5000);
@@ -84,12 +84,12 @@
                         $('.mode').addClass('disable');
                     }
                     else {
-                        common.webApi.delete('TaskQueue/StopSchedule').success(function (data) {
-                            if (data.IsSuccess) {
+                        common.webApi.delete('TaskQueue/StopSchedule').then(function (data) {
+                            if (data.data.IsSuccess) {
                                 $scope.ui.data.ScheduleStatus.Options.Data.Status = $scope.GetScheduleStatus();
                             }
                             else {
-                                window.parent.ShowNotification('', data.Message, 'error');
+                                window.parent.ShowNotification('', data.data.Message, 'error');
                             }
                         });
                     }
@@ -103,12 +103,12 @@
             $('.mode').addClass('disable');
         }
         else {
-            common.webApi.post('TaskQueue/StartSchedule').success(function (data) {
-                if (data.IsSuccess) {
+            common.webApi.post('TaskQueue/StartSchedule').then(function (data) {
+                if (data.data.IsSuccess) {
                     $scope.ui.data.ScheduleStatus.Options.Data.Status = $scope.GetScheduleStatus();
                 }
                 else {
-                    window.parent.ShowNotification('', data.Message, 'error');
+                    window.parent.ShowNotification('', data.data.Message, 'error');
                 }
             });
         }

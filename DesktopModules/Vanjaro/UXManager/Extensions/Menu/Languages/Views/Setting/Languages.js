@@ -5,13 +5,13 @@
     }
 
     $scope.Click_New = function () {
-        parent.OpenPopUp(null, 500, 'right', '[L:NewLanguages]', "#/add");
+        parent.OpenPopUp(null, 500, 'right', '[L:NewLanguages]', "#!/add");
     }
     $scope.Click_Translator = function (row) {
-        parent.OpenPopUp(null, 800, 'right', '[L:Translators]', "#/translator/lid/" + row.LanguageId);
+        parent.OpenPopUp(null, 800, 'right', '[L:Translators]', "#!/translator/lid/" + row.LanguageId);
     }
     $scope.Click_Resources = function (row) {
-        parent.OpenPopUp(null, 900, 'right', '[L:TranslateResourceFile]', "#/resources/lid/" + row.LanguageId);
+        parent.OpenPopUp(null, 900, 'right', '[L:TranslateResourceFile]', "#!/resources/lid/" + row.LanguageId);
     }
     $scope.Click_Enabled = function (row) {
 
@@ -32,12 +32,12 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('languages/Enabled', 'lid=' + row.LanguageId).success(function (Response) {
-                        if (Response.IsSuccess) {
-                            if (Response.RedirectURL != null && Response.RedirectURL.length > 0)
-                                window.parent.location.href = Response.RedirectURL;
+                    common.webApi.get('languages/Enabled', 'lid=' + row.LanguageId).then(function (Response) {
+                        if (Response.data.IsSuccess) {
+                            if (Response.data.RedirectURL != null && Response.data.RedirectURL.length > 0)
+                                window.parent.location.href = Response.data.RedirectURL;
                                 $scope.RenderMarkup();
-                            $scope.ui.data.Languages.Options = Response.Data;
+                            $scope.ui.data.Languages.Options = Response.data.Data;
                         }
                     });
                 }
@@ -53,9 +53,9 @@
     }
 
     $scope.GetLanguages = function () {
-        common.webApi.get('languages/getlanguages').success(function (Response) {
-            if (Response.IsSuccess) {
-                $scope.ui.data.Languages.Options = Response.Data;
+        common.webApi.get('languages/getlanguages').then(function (Response) {
+            if (Response.data.IsSuccess) {
+                $scope.ui.data.Languages.Options = Response.data.Data;
             }
         })
     };

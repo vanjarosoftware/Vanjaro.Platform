@@ -20,11 +20,11 @@
         if (SearchKeys.skip == parseInt($('#Notification .Messagetab a>span', window.document).html()))
             SearchKeys.skip = SearchKeys.skip - SearchKeys.pagesize;
 
-        common.webApi.get('Notification/GetNotificationList', 'Page=' + SearchKeys.skip + '&PageSize=' + SearchKeys.pagesize).success(function (data) {
-            if (data) {
+        common.webApi.get('Notification/GetNotificationList', 'Page=' + SearchKeys.skip + '&PageSize=' + SearchKeys.pagesize).then(function (data) {
+            if (data.data) {
                 tableState.pagination.numberOfPages = Math.ceil(parseInt($('#Notification .Messagetab a>span', window.document).html()) / SearchKeys.pagesize)
                 $scope.NotificationsPagestableState = tableState;
-                $scope.Notifications = data.Notifications;
+                $scope.Notifications = data.data.Notifications;
             }
         });
     };
@@ -33,8 +33,8 @@
         var postData = {
             NotificationId: row.NotificationId
         };
-        common.webApi.post('Notification/Dismiss', '', postData).success(function (data) {
-            if (data.IsSuccess) {
+        common.webApi.post('Notification/Dismiss', '', postData).then(function (data) {
+            if (data.data.IsSuccess) {
                 $("#VJnotifycount", parent.document).text(parseInt($("#VJnotifycount", parent.document).text()) - 1);
                 $('#Notification .Messagetab a>span', window.document).html(parseInt($('#Notification .Messagetab a>span', window.document).html()) - 1);
                 $('.registerlink-notification > sup > strong', parent.document).text(parseInt($('#Notification .Messagetab a>span', window.document).html()) - 1);
@@ -56,11 +56,11 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('Notification/DismissAll', '',).success(function (data) {
-                        if (data.IsSuccess) {
-                            $("#VJnotifycount", parent.document).text(parseInt($("#VJnotifycount", parent.document).text()) - data.TotalNotifications);
-                            $('#Notification .Messagetab a>span', window.document).html(parseInt($('#Notification .Messagetab a>span', window.document).html()) - data.TotalNotifications);
-                            $('.registerlink-notification > sup > strong', parent.document).text(parseInt($('#Notification .Messagetab a>span', window.document).html()) - data.TotalNotifications);
+                    common.webApi.post('Notification/DismissAll', '',).then(function (data) {
+                        if (data.data.IsSuccess) {
+                            $("#VJnotifycount", parent.document).text(parseInt($("#VJnotifycount", parent.document).text()) - data.data.TotalNotifications);
+                            $('#Notification .Messagetab a>span', window.document).html(parseInt($('#Notification .Messagetab a>span', window.document).html()) - data.data.TotalNotifications);
+                            $('.registerlink-notification > sup > strong', parent.document).text(parseInt($('#Notification .Messagetab a>span', window.document).html()) - data.data.TotalNotifications);
                             $scope.Pipe_NotificationsPages($scope.NotificationsPagestableState);
                         }
                     });

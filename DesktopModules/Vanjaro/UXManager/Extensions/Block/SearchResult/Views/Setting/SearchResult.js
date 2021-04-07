@@ -22,7 +22,7 @@
 
     $scope.ApplyChanges = function (searchresult) {
         if ($scope.ui.data.Global.Value) {
-            common.webApi.post('searchresult/update', '', searchresult.attributes.attributes).success(function () {
+            common.webApi.post('searchresult/update', '', searchresult.attributes.attributes).then(function () {
                 window.parent.RenderBlock(searchresult);
             });
         }

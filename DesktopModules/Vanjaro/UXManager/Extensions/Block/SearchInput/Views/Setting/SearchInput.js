@@ -23,7 +23,7 @@
 
     $scope.ApplyChanges = function (searchinput) {
         if ($scope.ui.data.Global.Value) {
-            common.webApi.post('search/update', '', searchinput.attributes.attributes).success(function () {
+            common.webApi.post('search/update', '', searchinput.attributes.attributes).then(function () {
                 window.parent.RenderBlock(searchinput);
             });
         }

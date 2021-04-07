@@ -84,7 +84,7 @@ mnSvc.factory('CommonSvc', function ($rootScope, SweetAlert) {
     var initData = function ($rootScope, $scope, $attrs, $http) {
         //bind the module id (key) to the scope
         $scope.moduleid = $attrs.moduleid;
-        $scope.appName = $attrs.appName;
+        $scope.appName = $attrs.appName.trim();
         $rootScope.roles = $attrs.roles;
         $rootScope.showMissingKeys = $attrs.showMissingKeys;
         appName = $attrs.appName;
@@ -222,12 +222,12 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
         // calculate the total number of .net ticks for your date
         var yourTicks = epochTicks + (yourDate.getTime() * ticksPerMillisecond);
 
-        common.webApi.post('ui/render', 'identifier=' + $attrs.identifier + "&v=" + yourTicks, formdata).success(function (data) {
+        common.webApi.post('ui/render', 'identifier=' + $attrs.identifier + "&v=" + yourTicks, formdata).then(function (data) {
             $scope.ui = {
                 data: {},
                 origData: {}
             };
-            $scope.ui.data = JSON.parse(data.data);
+            $scope.ui.data = JSON.parse(data.data.data);
 
             if ($attrs.autosave) {
                 $scope.ui.origData = angular.copy($scope.ui.data);
@@ -239,9 +239,9 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
 
 
             $scope.Cancel = function () {
-                common.webApi.get('ui/cancelurl').success(function (data) {
+                common.webApi.get('ui/cancelurl').then(function (data) {
                     window.location.href = data;
-                }).error(function (data) {
+                }, function (data) {
                     swal('error');
                 });
             };
@@ -256,26 +256,26 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
 
                 if (IsValid) {
                     formdata.uidata = $scope.ui.data;
-                    common.webApi.post('ui/updatedata', 'identifier=' + $attrs.identifier, formdata).success(function (data) {
+                    common.webApi.post('ui/updatedata', 'identifier=' + $attrs.identifier, formdata).then(function (data) {
                         //$scope.Cancel();
-                    }).error(function (data) {
+                    }, function (data) {
                         swal({
                             title: "Error!",
-                            text: data.ExceptionMessage,
+                            text: data.data.ExceptionMessage,
                             html: true
                         });
                     });
                 }
             };
 
-            $element.html(data.markup);
+            $element.html(data.data.markup);
 
             //fix for ckeditor
-            eval(data.prescript);
+            eval(data.data.prescript);
 
             $compile($element.contents())($scope);
 
-            setTimeout(function () { if ($scope.onInit) $scope.onInit(); eval(data.script); }, 2);
+            setTimeout(function () { if ($scope.onInit) $scope.onInit(); eval(data.data.script); }, 2);
 
             if ($.isFunction($element.find('[datepicker]').datepicker)) {
                 $element.find('[datepicker]').datepicker({
@@ -430,8 +430,8 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
                     $scope.ImportParameter = '';
                     if ($scope.ui.data.CsvParameter != undefined)
                         $scope.ImportParameter = $scope.ui.data.CsvParameter.Value;
-                    common.webApi.post('' + $scope.ui.data.Controller.Value + '/bulkadd', $scope.ImportParameter, dImport).success(function (data) {
-                        if (data != null && data.IsSuccess) {
+                    common.webApi.post('' + $scope.ui.data.Controller.Value + '/bulkadd', $scope.ImportParameter, dImport).then(function (data) {
+                        if (data != null && data.data.IsSuccess) {
                             location.reload();
                         }
 
@@ -491,15 +491,15 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
 
         $scope.ManageSlug = function (eid, ename) {
             if (eid != undefined && ename != undefined) {
-                common.webApi.get('ui/getlink', 'identifier=' + $attrs.identifier + '&entity=' + ename + '&entityid=' + eid).success(function (data) {
-                    if (data.length > 0) {
-                        if (data.indexOf('?') > -1) {
-                            data += '&';
+                common.webApi.get('ui/getlink', 'identifier=' + $attrs.identifier + '&entity=' + ename + '&entityid=' + eid).then(function (data) {
+                    if (data.data.length > 0) {
+                        if (data.data.indexOf('?') > -1) {
+                            data.data += '&';
                         } else {
-                            data += '?';
+                            data.data += '?';
                         }
-                        data += 'popUp=true&v=' + new Date().getTime();
-                        parent.OpenPopUp(null, "1200", "center", "View History", data + "#/url/manage/" + ename + "/" + eid, "600", "", true, "");
+                        data.data += 'popUp=true&v=' + new Date().getTime();
+                        parent.OpenPopUp(null, "1200", "center", "View History", data + "#!/url/manage/" + ename + "/" + eid, "600", "", true, "");
                     }
                 })
             }

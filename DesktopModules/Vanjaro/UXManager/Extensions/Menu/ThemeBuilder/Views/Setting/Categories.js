@@ -5,7 +5,7 @@
     $scope.OpenSettings = function (option) {
         event.preventDefault();
         var url = window.location.href.split('#')[0];
-        window.location.href = url + "#/settings/" + $scope.ui.data.Theme.Value + "/" + option.Name + "/" + option.Guid;
+        window.location.href = url + "#!/settings/" + $scope.ui.data.Theme.Value + "/" + option.Name + "/" + option.Guid;
     };
 
     $scope.BackTo_Theme = function () {

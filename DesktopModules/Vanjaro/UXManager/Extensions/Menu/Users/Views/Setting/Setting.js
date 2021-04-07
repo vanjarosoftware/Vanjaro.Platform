@@ -100,16 +100,16 @@
                     SearchKeys.pagesize = $scope.pagginationData.pagination.number;
             }
 
-            common.webApi.get('user/getuserroles', 'keyword=' + SearchKeys.Search_Key + '&userId=' + $scope.uid + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize).success(function (data) {
-                if (data != null && data.Data != null && data.IsSuccess && !data.HasErrors) {
+            common.webApi.get('user/getuserroles', 'keyword=' + SearchKeys.Search_Key + '&userId=' + $scope.uid + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize).then(function (data) {
+                if (data.data != null && data.data.Data != null && data.data.IsSuccess && !data.data.HasErrors) {
                     if (tableState != null && tableState != 'undefiend' && tableState != '') {
-                        tableState.pagination.numberOfPages = Math.ceil(data.Data.totalRecords / SearchKeys.pagesize);
+                        tableState.pagination.numberOfPages = Math.ceil(data.data.Data.totalRecords / SearchKeys.pagesize);
                     }
                     else {
-                        $scope.pagginationData.pagination.numberOfPages = Math.ceil(data.Data.totalRecords / SearchKeys.pagesize);
+                        $scope.pagginationData.pagination.numberOfPages = Math.ceil(data.data.Data.totalRecords / SearchKeys.pagesize);
                         $scope.pagginationData.pagination.start = 0;
                     }
-                    $scope.ui.data.UserRoles.Options = data.Data.UserRoles;
+                    $scope.ui.data.UserRoles.Options = data.data.Data.UserRoles;
                 }
             });
 
@@ -172,10 +172,10 @@
         if (!isNaN(option.PropertyValue) && option.PropertyValue != null) {
             var Id = parseInt(option.PropertyValue);
             if (Id != null) {
-                common.webApi.get('user/Regions', 'country=' + Id).success(function (data) {
-                    $scope.Regions = data;
+                common.webApi.get('user/Regions', 'country=' + Id).then(function (data) {
+                    $scope.Regions = data.data;
                     $.each($scope.ui.data.ProfileProperties.Options, function (key, value) {
-                        if (regionChange || data.length == 1) {
+                        if (regionChange || data.data.length == 1) {
                             if (value.ControlType == "Region") {
                                 value.ProfilePropertyDefinition.PropertyValue = "-1";
                             }
@@ -198,15 +198,15 @@
             if (typeof fileID == 'undefined' && fileID == null)
                 fileID = -1;
 
-            common.webApi.post('user/updateuserbasicinfo', 'fileid=' + fileID, Data).success(function (data) {
-                if (data.IsSuccess) {
+            common.webApi.post('user/updateuserbasicinfo', 'fileid=' + fileID, Data).then(function (data) {
+                if (data.data.IsSuccess) {
                     $(window.parent.document.body).find(".Gravitar").remove();
                     $scope.Click_CancelSetting(Sender);
                     window.parent.ShowNotification(userdata.displayName, '[L:UserUpdatedSuccess]', 'success');
                 }
-                if (data.HasErrors) {
+                if (data.data.HasErrors) {
                     var errorMessages = "<div class='alert alert-danger summary'>";
-                    $.each(data.Errors, function (k, v) {
+                    $.each(data.data.Errors, function (k, v) {
                         if (v.Message != null && v.Message != "") {
                             errorMessages = errorMessages + v.Message + "<br/>";
                         }
@@ -231,14 +231,14 @@
             closeOnCancel: true
         }, function (isConfirm) {
             if (isConfirm) {
-                common.webApi.post('user/removeuserrole', '', row).success(function (response) {
-                    if (response.IsSuccess) {
+                common.webApi.post('user/removeuserrole', '', row).then(function (response) {
+                    if (response.data.IsSuccess) {
                         var tablestate = $scope.pagginationData;
                         $scope.Pipe_UserRolePagging(tablestate);
-                        parent.ShowNotification(row.displayName, response.Message, 'success');
+                        parent.ShowNotification(row.displayName, response.data.Message, 'success');
                     }
-                    if (response.HasErrors) {
-                        parent.ShowNotification(row.displayName, response.Message, 'error');
+                    if (response.data.HasErrors) {
+                        parent.ShowNotification(row.displayName, response.data.Message, 'error');
                     }
                 });
             }
@@ -247,10 +247,10 @@
     };
 
     $scope.CountryremoteAPI = function (userInputString, timeoutPromise) {
-        return common.webApi.get('user/countries', 'keyword=' + userInputString).success(function (response) { });
+        return common.webApi.get('user/countries', 'keyword=' + userInputString).then(function (response) { });
     };
     $scope.RoleremoteAPI = function (userInputString, timeoutPromise) {
-        return common.webApi.get('user/getsuggestionroles', 'keyword=' + userInputString).success(function (response) { });
+        return common.webApi.get('user/getsuggestionroles', 'keyword=' + userInputString).then(function (response) { });
     };
 
     $scope.Click_UserRoleAdd = function (selectedRole) {
@@ -258,14 +258,14 @@
             var Role = $.extend(true, {}, $scope.ui.data.RoleName.Options);
             Role.roleId = selectedRole.originalObject.Value;
             Role.roleName = selectedRole.originalObject.Label;
-            common.webApi.post('user/saveuserrole', 'notifyuser=' + $scope.notifyUser + '&isowner=' + false + '&userid=' + $scope.ui.data.UserDetails.Options.userId + '&action=add', Role).success(function (data) {
-                if (data.IsSuccess) {
+            common.webApi.post('user/saveuserrole', 'notifyuser=' + $scope.notifyUser + '&isowner=' + false + '&userid=' + $scope.ui.data.UserDetails.Options.userId + '&action=add', Role).then(function (data) {
+                if (data.data.IsSuccess) {
                     var tablestate = $scope.pagginationData;
                     $scope.Pipe_UserRolePagging(tablestate);
-                    parent.ShowNotification(data.Data.displayName, data.Message, 'success');
+                    parent.ShowNotification(data.data.Data.displayName, data.data.Message, 'success');
                 }
-                if (data.HasErrors) {
-                    parent.ShowNotification($scope.ui.data.UserDetails.Options.displayName, data.Message, 'error');
+                if (data.data.HasErrors) {
+                    parent.ShowNotification($scope.ui.data.UserDetails.Options.displayName, data.data.Message, 'error');
                 }
             });
             selectedRole.originalObject.Value == undefined;
@@ -310,13 +310,13 @@
             }
         }
         if (valid) {
-            common.webApi.post('user/saveuserrole', 'notifyuser=' + false + '&isowner=' + true + '&userid=' + $scope.ui.data.UserDetails.Options.userId + '&action=update', row).success(function (data) {
-                if (data != null && data.Data != null && data.IsSuccess && !data.HasErrors) {
+            common.webApi.post('user/saveuserrole', 'notifyuser=' + false + '&isowner=' + true + '&userid=' + $scope.ui.data.UserDetails.Options.userId + '&action=update', row).then(function (data) {
+                if (data != null && data.data.Data != null && data.data.IsSuccess && !data.data.HasErrors) {
                     var tablestate = $scope.pagginationData;
                     $scope.Pipe_UserRolePagging(tablestate);
                 }
-                if (data.HasErrors) {
-                    parent.ShowNotification('[L:UsersError]', data.Message, 'error');
+                if (data.data.HasErrors) {
+                    parent.ShowNotification('[L:UsersError]', data.data.Message, 'error');
                 }
             });
         }
@@ -334,8 +334,8 @@
                     FileIds.push(parseInt(value.file.name.split('fileid')[1]));
             });
             if (FileIds.length > 0) {
-                common.webApi.get('Upload/GetMultipleFileDetails', 'fileids=' + FileIds.join()).success(function (response) {
-                    $.each(response, function (key, value) {
+                common.webApi.get('Upload/GetMultipleFileDetails', 'fileids=' + FileIds.join()).then(function (response) {
+                    $.each(response.data, function (key, value) {
                         if (value.Name != null) {
                             var Title = (value.Name.split('/').pop()).split('.')[0];
                         }
@@ -364,13 +364,13 @@
             $.each(newValue, function (key, value) {
                 var FileId = parseInt(value.fileid);
                 if (FileId > 0) {
-                    common.webApi.get('Upload/GetFile', 'fileid=' + FileId).success(function (response) {
-                        if (response.Name != null) {
-                            var Title = (response.Name.split('/').pop()).split('.')[0];
+                    common.webApi.get('Upload/GetFile', 'fileid=' + FileId).then(function (response) {
+                        if (response.data.Name != null) {
+                            var Title = (response.data.Name.split('/').pop()).split('.')[0];
                         }
                         var data = {
-                            "Name": response.Name,
-                            "FileUrl": response.FileUrl,
+                            "Name": response.data.Name,
+                            "FileUrl": response.data.FileUrl,
                             "FileId": FileId,
                             "Title": Title,
                             "KBSize": 0,
@@ -380,7 +380,7 @@
                         $scope.ui.data.PhotoURL.Options = [];
                         $scope.ui.data.PhotoURL.Value = null;
                         $scope.ui.data.PhotoURL.Options.push(data);
-                        $("#uploaded_image").attr("src", response.FileUrl);
+                        $("#uploaded_image").attr("src", response.data.FileUrl);
                         $scope.ui.data.PhotoURL.Value = data.FileUrl;
 
                     });

@@ -30,13 +30,13 @@
 
             $scope.ui.data.Working_RoleGroupDto.Options.Description = inputValue;
             $scope.ui.data.Working_RoleGroupDto.Options.Name = inputValue;
-            common.webApi.post('rolegroup/SaveRoleGroup', '', $scope.ui.data.Working_RoleGroupDto.Options).success(function (Response) {
-                if (Response.IsSuccess) {
-                    $scope.ui.data.RoleGroup.Options = Response.Data.AllRoleGroup;
-                    $scope.ui.data.Working_RoleDto.Options.groupId = Response.Data.FromRoleGroupInfo.id;
+            common.webApi.post('rolegroup/SaveRoleGroup', '', $scope.ui.data.Working_RoleGroupDto.Options).then(function (Response) {
+                if (Response.data.IsSuccess) {
+                    $scope.ui.data.RoleGroup.Options = Response.data.Data.AllRoleGroup;
+                    $scope.ui.data.Working_RoleDto.Options.groupId = Response.data.Data.FromRoleGroupInfo.id;
                     var ParentScope = parent.document.getElementById("iframe").contentWindow.angular;
                     if (ParentScope != undefined && ParentScope.element(".menuextension").scope() != undefined && ParentScope.element(".menuextension").scope().ui.data.RoleGroup != undefined) {
-                        ParentScope.element(".menuextension").scope().ui.data.RoleGroup.Options = Response.Data.AllRoleGroup;
+                        ParentScope.element(".menuextension").scope().ui.data.RoleGroup.Options = Response.data.Data.AllRoleGroup;
                         ParentScope.element(".menuextension").scope().$apply();
                     }
                     swal.close()
@@ -53,24 +53,24 @@
     $scope.Click_SaveRole = function (type) {
         if (mnValidationService.DoValidationAndSubmit('', 'setting_add')) {
             $scope.isDisabled = true;
-            common.webApi.post('role/saverole', '', $scope.ui.data.Working_RoleDto.Options).success(function (data) {
-                if (data.IsSuccess) {
+            common.webApi.post('role/saverole', '', $scope.ui.data.Working_RoleDto.Options).then(function (data) {
+                if (data.data.IsSuccess) {
                     var ParentScope = parent.document.getElementById("iframe").contentWindow.angular;
                     if (ParentScope != undefined && ParentScope.element(".menuextension") != undefined && ParentScope.element(".menuextension").scope() != undefined && has(ParentScope.element(".menuextension").scope(), 'ui.data.RoleGroup')) {
                         $scope.ParentScope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
-                        var option = { GroupId: data.Data.Roles[0].GroupId, Name: data.Data.Roles[0].GroupName };
+                        var option = { GroupId: data.data.Data.Roles[0].GroupId, Name: data.data.Data.Roles[0].GroupName };
                         if ($scope.ParentScope.FilterGroupOption != null)
                             $scope.ParentScope.filterGroup($scope.ParentScope.FilterGroupOption);
                         else
                             $scope.ParentScope.filterGroup(option);
-                        $scope.ParentScope.ui.data.RoleGroup.Options = data.Data.RoleGroups;
+                        $scope.ParentScope.ui.data.RoleGroup.Options = data.data.Data.RoleGroups;
                         $scope.ParentScope.$apply();
                     }
                     $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                     window.parent.ShowNotification($scope.ui.data.Working_RoleDto.Options.name, $scope.rid > 0 ? '[LS:RoleUpdatedSuccess]' : '[LS:RoleCreatedSuccess]', 'success');
                 }
                 else {
-                    window.parent.ShowNotification('[LS:Roles]', data.Message, 'error');
+                    window.parent.ShowNotification('[LS:Roles]', data.data.Message, 'error');
                 }
                 $scope.isDisabled = false;
             });

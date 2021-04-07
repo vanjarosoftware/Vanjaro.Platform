@@ -19,7 +19,7 @@ namespace Vanjaro.Common
         /// </summary>
         private static readonly Dictionary<string, string> FrameworksVersions = new Dictionary<string, string>
         {
-            {"AngularJS","1.3.9"},
+            {"AngularJS","1.8.2"},
             {"Bootstrap","5.0.0"},
             {"FontAwesome","5.10.1"},
             {"WebAPI","1.0.0"},

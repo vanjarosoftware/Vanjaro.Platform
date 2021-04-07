@@ -13,17 +13,17 @@
             PermissionsInherit: $scope.PermissionsInherit,
             FolderIds: $scope.GetFolderIds($scope.CopyPermissionSubfolder)
         };
-        common.webApi.post('permission/save', 'folderid=' + $scope.ui.data.FolderID.Value + '&Copyfolder=' + $scope.CopyPermissionSubfolder, data).success(function (Response) {
-            if (Response.IsSuccess && Response.Data !== null) {
+        common.webApi.post('permission/save', 'folderid=' + $scope.ui.data.FolderID.Value + '&Copyfolder=' + $scope.CopyPermissionSubfolder, data).then(function (Response) {
+            if (Response.data.IsSuccess && Response.data.Data !== null) {
 
                 var allFolders = $($(window.parent.$('.uxmanager-modal').find('iframe')[0].contentDocument).find('.Iconsfoldersdiv')).find('.folders');
-                var objectkeys = Object.keys(Response.Data);
+                var objectkeys = Object.keys(Response.data.Data);
 
                 $.each(allFolders, function (k, v) {
                     var foid = $(v).attr('id').split("folders")[1];
                     if (objectkeys.includes(foid)) {
                         var dom = $(v).parent();
-                        if (Response.Data[foid]) {
+                        if (Response.data.Data[foid]) {
                             if ($(dom).find('.arrowicon .fa-lock').length <= 0)
                                 $(dom).append('<span class="action-icon float-end arrowicon"><em class="fas fa-lock"></em></span>');
                         }
@@ -37,8 +37,8 @@
                     $(window.parent.document.body).find('.uxmanager-modal [data-bs-dismiss="modal"]').click();
                 }, 100);
             }
-            else if (Response.HasErrors)
-                window.parent.ShowNotification('', Response.Message, 'error');
+            else if (Response.data.HasErrors)
+                window.parent.ShowNotification('', Response.data.Message, 'error');
         });
     };
 

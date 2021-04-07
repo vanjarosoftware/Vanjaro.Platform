@@ -37,16 +37,16 @@
             SearchKeys.pagesize = $scope.pagginationData.pagination.number;
         }
 
-        common.webApi.get('role/getroleusers', 'keyword=' + SearchKeys.Search_Key + '&roleid=' + $scope.rid + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize).success(function (data) {
-            if (data != null && data.Data != null && data.IsSuccess && !data.HasErrors) {
+        common.webApi.get('role/getroleusers', 'keyword=' + SearchKeys.Search_Key + '&roleid=' + $scope.rid + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize).then(function (data) {
+            if (data != null && data.data.Data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 if (tableState != null && tableState != 'undefiend' && tableState != '') {
-                    tableState.pagination.numberOfPages = Math.ceil(data.Data.totalRecords / SearchKeys.pagesize);
+                    tableState.pagination.numberOfPages = Math.ceil(data.data.Data.totalRecords / SearchKeys.pagesize);
                 }
                 else {
-                    $scope.pagginationData.pagination.numberOfPages = Math.ceil(data.Data.totalRecords / SearchKeys.pagesize);
+                    $scope.pagginationData.pagination.numberOfPages = Math.ceil(data.data.Data.totalRecords / SearchKeys.pagesize);
                     $scope.pagginationData.pagination.start = 0;
                 }
-                $scope.ui.data.UserRole.Options = data.Data.users;
+                $scope.ui.data.UserRole.Options = data.data.Data.users;
             }
         });
         setTimeout(function () {
@@ -92,13 +92,13 @@
             User.Email = selectedUser.originalObject.Email;
             User.AvatarUrl = selectedUser.originalObject.AvatarUrl;
             User.RoleId = $scope.ui.data.Working_RoleDto.Options.id;
-            common.webApi.post('role/addusertorole', '', User).success(function (data) {
-                if (data.IsSuccess) {
+            common.webApi.post('role/addusertorole', '', User).then(function (data) {
+                if (data.data.IsSuccess) {
                     var tablestate = $scope.pagginationData;
                     $scope.Pipe_UserRolePagging(tablestate);
                 }
                 if (data.HasErrors) {
-                    window.parent.ShowNotification(User.DisplayName, data.Message, 'error');
+                    window.parent.ShowNotification(User.DisplayName, data.data.Message, 'error');
                 }
             });
             selectedUser.originalObject.Value == undefined;
@@ -108,7 +108,7 @@
     };
 
     $scope.UserremoteAPI = function (userInputString, timeoutPromise) {
-        return common.webApi.get('role/getsuggestionusers', 'keyword=' + userInputString + '&count=' + 10).success(function (response) { });
+        return common.webApi.get('role/getsuggestionusers', 'keyword=' + userInputString + '&count=' + 10).then(function (response) { });
     };
 
     $scope.Click_UpdateUserRole = function (row) {
@@ -127,13 +127,13 @@
             }
         }
         if (valid) {
-            common.webApi.post('role/saveuserrole', 'notifyuser=' + false + '&isowner=' + true + '&userid=' + row.UserId, row).success(function (data) {
-                if (data.IsSuccess) {
+            common.webApi.post('role/saveuserrole', 'notifyuser=' + false + '&isowner=' + true + '&userid=' + row.UserId, row).then(function (data) {
+                if (data.data.IsSuccess) {
                     var tablestate = $scope.pagginationData;
                     $scope.Pipe_UserRolePagging(tablestate);
                 }
                 if (data.HasErrors) {
-                    window.parent.ShowNotification('[LS:RolesError]', data.Message, 'error');
+                    window.parent.ShowNotification('[LS:RolesError]', data.data.Message, 'error');
                 }
             });
         }
@@ -155,13 +155,13 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('role/removeUserFromRole', '', row).success(function (response) {
-                        if (response.IsSuccess) {
+                    common.webApi.post('role/removeUserFromRole', '', row).then(function (response) {
+                        if (response.data.IsSuccess) {
                             var tablestate = $scope.pagginationData;
                             $scope.Pipe_UserRolePagging(tablestate);
                         }
-                        if (response.HasErrors) {
-                            window.parent.ShowNotification('[LS:RolesError]', response.Message, 'error');
+                        if (response.data.HasErrors) {
+                            window.parent.ShowNotification('[LS:RolesError]', response.data.Message, 'error');
                         }
                     });
                 }

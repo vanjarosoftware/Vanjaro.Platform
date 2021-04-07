@@ -27,16 +27,16 @@
             },
                 function (isConfirm) {
                     if (isConfirm) {
-                        common.webApi.post('pages/restorepage', '', $scope.ui.data.List_PageItem.Options).success(function (Response) {
-                            if (Response.IsSuccess) {
+                        common.webApi.post('pages/restorepage', '', $scope.ui.data.List_PageItem.Options).then(function (Response) {
+                            if (Response.data.IsSuccess) {
                                 $scope.ui.data.PagesTree.Options = [];
-                                $scope.ui.data.PagesTree.Options = Response.Data.PagesTree;
+                                $scope.ui.data.PagesTree.Options = Response.data.Data.PagesTree;
 
                                 $scope.ui.data.DeletedPages.Options = [];
-                                $scope.ui.data.DeletedPages.Options = Response.Data.DeletedPages;
+                                $scope.ui.data.DeletedPages.Options = Response.data.Data.DeletedPages;
                             }
-                            if (Response.HasErrors && Response.Message != null) {
-                                window.parent.ShowNotification('[LS:Pages]', Response.Message, 'error');                                  
+                            if (Response.data.HasErrors && Response.data.Message != null) {
+                                window.parent.ShowNotification('[LS:Pages]', Response.data.Message, 'error');                                  
                             }
                         });
                     }
@@ -69,13 +69,13 @@
                 function (isConfirm) {
                     if (isConfirm) {
                         if ($scope.ui.data.List_PageItem.Options.length > 0) {
-                            common.webApi.post('pages/removepage', '', $scope.ui.data.List_PageItem.Options).success(function (Response) {
-                                if (Response.IsSuccess) {
+                            common.webApi.post('pages/removepage', '', $scope.ui.data.List_PageItem.Options).then(function (Response) {
+                                if (Response.data.IsSuccess) {
                                     $scope.ui.data.DeletedPages.Options = [];
-                                    $scope.ui.data.DeletedPages.Options = Response.Data.DeletedPages;
+                                    $scope.ui.data.DeletedPages.Options = Response.data.Data.DeletedPages;
                                 }
-                                if (Response.HasErrors && Response.Message != null) {
-                                    window.parent.ShowNotification('[LS:Pages]', Response.Message, 'error');                                   
+                                if (Response.data.HasErrors && Response.data.Message != null) {
+                                    window.parent.ShowNotification('[LS:Pages]', Response.data.Message, 'error');                                   
                                 }
                             });
                         }

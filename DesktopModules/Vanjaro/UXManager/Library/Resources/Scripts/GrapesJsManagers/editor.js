@@ -2729,7 +2729,7 @@ $(document).ready(function () {
                                     var perm = target.attributes.attributes.perm;
                                     if (perm == undefined)
                                         perm = 0;
-                                    var url = CurrentExtTabUrl + "&guid=b1b28eac-b520-4a20-8c36-f0283e8ca263#/permissions/" + perm + "/" + target.attributes.type;
+                                    var url = CurrentExtTabUrl + "&guid=b1b28eac-b520-4a20-8c36-f0283e8ca263#!/permissions/" + perm + "/" + target.attributes.type;
                                     OpenPopUp(null, 800, 'right', VjLocalized.Setting, url);
                                 }
                             });

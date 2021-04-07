@@ -31,7 +31,7 @@
 
     $scope.ApplyChanges = function (login) {
         if ($scope.ui.data.Global.Value) {
-            common.webApi.post('login/update', '', login.attributes.attributes).success(function () {
+            common.webApi.post('login/update', '', login.attributes.attributes).then(function () {
                 window.parent.RenderBlock(login);
             });
         }

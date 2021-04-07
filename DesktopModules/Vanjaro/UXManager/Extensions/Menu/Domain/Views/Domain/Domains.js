@@ -11,7 +11,7 @@
     };
 
     $scope.Click_AddDomain = function () {
-        parent.OpenPopUp(null, 800, 'right', '[L:DomainTitle]', '#/setting');
+        parent.OpenPopUp(null, 800, 'right', '[L:DomainTitle]', '#!/setting');
     };
 
     $scope.Register_Tooltip = function () {
@@ -21,16 +21,16 @@
     $scope.Click_UpdateSetting = function (row) {
         if (row != null && row != undefined) {
             row.IsPrimary = !row.IsPrimary;
-            common.webApi.post('domain/updatesitealias', '', row).success(function (Response) {
-                if (Response.IsSuccess) {
-                    $scope.PortalAliases = Response.Data.SiteAliases.PortalAliases;
+            common.webApi.post('domain/updatesitealias', '', row).then(function (Response) {
+                if (Response.data.IsSuccess) {
+                    $scope.PortalAliases = Response.data.Data.SiteAliases.PortalAliases;
                     $scope.Search_PortalAliases = $scope.PortalAliases;
                     window.parent.ShowNotification(row.HTTPAlias, row.IsPrimary ? '[L:SetAsDomainStatus]' : '[L:RemoveFromDomainStatus]', 'success');
                 }
                 else {
                     $scope.PortalAliases = [];
                     $scope.Search_PortalAliases = $scope.PortalAliases;
-                    window.parent.ShowNotification(row.HTTPAlias, Response.Message, 'error');
+                    window.parent.ShowNotification(row.HTTPAlias, Response.data.Message, 'error');
                 }
             });
         }
@@ -50,16 +50,16 @@
             },
                 function (isConfirm) {
                     if (isConfirm) {
-                        common.webApi.post('domain/deletesitealias', 'portalAliasId=' + row.PortalAliasID, '').success(function (Response) {
-                            if (Response.IsSuccess) {
-                                $scope.PortalAliases = Response.Data.SiteAliases.PortalAliases;
+                        common.webApi.post('domain/deletesitealias', 'portalAliasId=' + row.PortalAliasID, '').then(function (Response) {
+                            if (Response.data.IsSuccess) {
+                                $scope.PortalAliases = Response.data.Data.SiteAliases.PortalAliases;
                                 $scope.Search_PortalAliases = $scope.PortalAliases;
                                 window.parent.ShowNotification(row.HTTPAlias, '[L:DomainDelete]', 'success');
                             }
                             else {
                                 $scope.PortalAliases = [];
                                 $scope.Search_PortalAliases = $scope.PortalAliases;
-                                window.parent.ShowNotification(row.HTTPAlias, Response.Message, 'error');
+                                window.parent.ShowNotification(row.HTTPAlias, Response.data.Message, 'error');
                             }
                         });
                     }
@@ -68,7 +68,7 @@
     };
 
     $scope.Click_Edit = function (row) {
-        parent.OpenPopUp(null, 800, 'right', '[LS:EditDomain]', '#/setting?sid=' + row.PortalAliasID);
+        parent.OpenPopUp(null, 800, 'right', '[LS:EditDomain]', '#!/setting?sid=' + row.PortalAliasID);
     };
 
     $scope.Click_Back = function () {

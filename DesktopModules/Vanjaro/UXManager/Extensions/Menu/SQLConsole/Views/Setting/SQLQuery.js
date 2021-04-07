@@ -16,11 +16,11 @@
 
     $scope.Click_Run = function () {
         if ($scope.Script.getValue() != "") {
-            common.webApi.post('sqlquery/run', 'sqlconnection=' + $scope.ui.data.Connections.Value, $scope.Script.getValue()).success(function (Response) {
-                if (Response.IsSuccess) {
+            common.webApi.post('sqlquery/run', 'sqlconnection=' + $scope.ui.data.Connections.Value, $scope.Script.getValue()).then(function (Response) {
+                if (Response.data.IsSuccess) {
                     $scope.Heading = [];
 
-                    $scope.Results = Response.Data[0];
+                    $scope.Results = Response.data.Data[0];
                     $scope.stResult = $scope.Results;
                     if ($scope.Results.length == 0) {
                         $scope.ShowTableResult = false;
@@ -36,10 +36,10 @@
                         $scope.columncount = $scope.Heading.length;
                     }
                 }
-                else if (Response.HasErrors) {
+                else if (Response.data.HasErrors) {
                     window.parent.swal({
                         title: 'Error',
-                        text: "<div class='sweetheight'>" + Response.Message + "</div>",
+                        text: "<div class='sweetheight'>" + Response.data.Message + "</div>",
                         html: true,
                     });
                 }
