@@ -100,7 +100,7 @@ export default (editor, config = {}) => {
 			}),
 		view: textView.extend({
 			init() {
-				if (this.model.parent().attributes.type == 'text' || this.model.parent().attributes.type == 'heading')
+				if (this.model.parent().attributes.type == 'text' || this.model.parent().attributes.type == 'heading' || this.model.parent().attributes.type == 'list-text')
 					this.model.removeClass(this.getClasses());
 			},
 			onRender() {

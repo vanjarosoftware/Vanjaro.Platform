@@ -13,8 +13,8 @@
     };
 
     $scope.Click_Update = function () {
-        common.webApi.post('stylesheet/save', '', $scope.StylesheetEditor.getValue()).success(function (Response) {
-            if (Response.IsSuccess) {
+        common.webApi.post('stylesheet/save', '', $scope.StylesheetEditor.getValue()).then(function (Response) {
+            if (Response.data.IsSuccess) {
                 $scope.Click_Cancel();
                 //window.parent.ShowNotification('[L:CustomCSS]', '[L:StyleSheetUpdated]', 'success');
             }

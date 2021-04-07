@@ -8,8 +8,8 @@
             PermissionsUsers: $scope.PermissionsUsers,
             PermissionsInherit: $scope.PermissionsInherit
         };
-        common.webApi.post('permission/update', 'entityid=' + $scope.ui.data.EntityID.Value + '&entity=' + $scope.ui.data.Entity.Value, data).success(function (Response) {
-            if (Response.IsSuccess) {
+        common.webApi.post('permission/update', 'entityid=' + $scope.ui.data.EntityID.Value + '&entity=' + $scope.ui.data.Entity.Value, data).then(function (Response) {
+            if (Response.data.IsSuccess) {
                 var attrAdded = false;
                 var target = window.parent.document.vj_personalization_target;
                 if (target != undefined) {
@@ -18,15 +18,15 @@
                         delete attr.perm;
                         target.setAttributes(attr);
                     }
-                    else if (Response.Data > 0 && target.attributes.attributes.perm == undefined) {
-                        target.addAttributes({ perm: Response.Data });
+                    else if (Response.data.Data > 0 && target.attributes.attributes.perm == undefined) {
+                        target.addAttributes({ perm: Response.data.Data });
                         attrAdded = true;
                     }
                 }
                 $scope.Click_Cancel('update', attrAdded);
             }
             else {
-                window.parent.ShowNotification('', Response.Message, 'error');
+                window.parent.ShowNotification('', Response.data.Message, 'error');
             }
         });
     };

@@ -89,24 +89,24 @@
         if (typeof Keyword == 'undefined' || Keyword == null || Keyword == "")
             Keyword = "";
 
-        common.webApi.post('icon/Search', 'Keyword=' + Keyword + '&index=' + $scope.Paging.Skip + '&size=' + $scope.Paging.PageSize + '&iconfolder=' + $scope.ui.data.IconFolders.Value, '').success(function (Response) {
-            if (Response.IsSuccess) {
+        common.webApi.post('icon/Search', 'Keyword=' + Keyword + '&index=' + $scope.Paging.Skip + '&size=' + $scope.Paging.PageSize + '&iconfolder=' + $scope.ui.data.IconFolders.Value, '').then(function (Response) {
+            if (Response.data.IsSuccess) {
                 var scrolliconspage = $('.vj-icon-wrapper');
                 if ($scope.Paging.Skip == 0) {
-                    $scope.ui.data.All_Icons.Options = Response.Data.All_Icons;
+                    $scope.ui.data.All_Icons.Options = Response.data.Data.All_Icons;
                 }
                 else {
-                    $.each(Response.Data.All_Icons, function (key, value) {
+                    $.each(Response.data.Data.All_Icons, function (key, value) {
                         $scope.ui.data.All_Icons.Options.push(value);
                     });
                     scrolliconspage.animate({ scrollTop: scrolliconspage.prop("scrollHeight") });
                 }
-                $scope.Paging.Total_Icon = Response.Data.Total_Icon;
+                $scope.Paging.Total_Icon = Response.data.Data.Total_Icon;
                 $scope.Paging.Skip = $scope.ui.data.All_Icons.Options.length >= $scope.Paging.PageSize ? $scope.ui.data.All_Icons.Options.length : 0;
                 $scope.NoIconFound = $scope.ui.data.All_Icons.Options.length > 0 ? true : false;
             }
             if (Response.HasErrors) {
-                window.parent.ShowNotification('[L:IconError]', Response.Message, 'error');
+                window.parent.ShowNotification('[L:IconError]', Response.data.Message, 'error');
             }
         });
     };

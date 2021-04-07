@@ -21,15 +21,15 @@
             }
         });
         if (val) {
-            common.webApi.get('InstallPackage/install').success(function (Response) {
-                if (Response.Data.length === 0) {
+            common.webApi.get('InstallPackage/install').then(function (Response) {
+                if (Response.data.Data.length === 0) {
                     window.parent.ShowNotification('[L:Products]','[L:InstalledSuccessfully]', 'success');
                     var Parentscope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
                     Parentscope.Click_IsInstall(true);
                     $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 }
                 else {
-                    $scope.ui.data.PackageErrorList.Options = Response.Data;
+                    $scope.ui.data.PackageErrorList.Options = Response.data.Data;
                     $scope.PackageError();
                 }
             });

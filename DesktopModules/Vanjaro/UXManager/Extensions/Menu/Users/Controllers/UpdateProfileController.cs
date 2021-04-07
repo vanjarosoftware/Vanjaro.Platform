@@ -183,7 +183,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                     actionResult.Message = Managers.LoginManager.UserAuthenticated(eventArgs).Message;
                 }
                 else
-                    actionResult.RedirectURL = ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=fa7ca744-1677-40ef-86b2-ca409c5c6ed3#/unauthorize");
+                    actionResult.RedirectURL = ServiceProvider.NavigationManager.NavigateURL("", "mid=0", "icp=true", "guid=fa7ca744-1677-40ef-86b2-ca409c5c6ed3#!/unauthorize");
             }
             catch (Exception ex)
             {

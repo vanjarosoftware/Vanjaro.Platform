@@ -62,11 +62,11 @@
     }
 
     $scope.Edit_PagesTreeNode = function (node) {
-        parent.OpenPopUp(null, 800, 'right', node.label, '#/detail?pid=' + node.Value);
+        parent.OpenPopUp(null, 800, 'right', node.label, '#!/detail?pid=' + node.Value);
     };
 
     $scope.SaveTemplateAs = function (node, event) {
-        parent.OpenPopUp(null, 550, 'center', '[L:SaveTemplateAs]', '#/savetemplateas/' + node.Value, 350);
+        parent.OpenPopUp(null, 550, 'center', '[L:SaveTemplateAs]', '#!/savetemplateas/' + node.Value, 350);
     };
 
     $scope.View_Page = function (node, event) {
@@ -78,7 +78,7 @@
     };
 
     $scope.Copy_Page = function (node, event) {
-        parent.OpenPopUp(null, 800, 'right', '[L:CopyPages]' + node.label, '#/detail?pid=' + node.Value + '&copy=true');
+        parent.OpenPopUp(null, 800, 'right', '[L:CopyPages]' + node.label, '#!/detail?pid=' + node.Value + '&copy=true');
     };
 
     $scope.gettreeicon = function (node) {
@@ -155,21 +155,21 @@
                     $scope.ui.data.PageItem.Options.Name = node.label.trim();;
                     $scope.ui.data.PageItem.Options.ChildrenCount = node.children.length;
 
-                    common.webApi.post('pages/deletepage', '', $scope.ui.data.PageItem.Options).success(function (Response) {
-                        if (Response.IsSuccess) {
-                            if (Response.IsRedirect) {
-                                window.parent.location.href = Response.RedirectURL;
+                    common.webApi.post('pages/deletepage', '', $scope.ui.data.PageItem.Options).then(function (Response) {
+                        if (Response.data.IsSuccess) {
+                            if (Response.data.IsRedirect) {
+                                window.parent.location.href = Response.data.RedirectURL;
                             }
                             $scope.RemovenodeFind($scope.ui.data.PagesTree.Options, node.Value);
 
                             $scope.ui.data.DeletedPages.Options = [];
-                            $scope.ui.data.DeletedPages.Options = Response.Data.DeletedPages;
-                            $scope.ui.data.DeletedPagesCount.Options = Response.Data.DeletedPages.length;
+                            $scope.ui.data.DeletedPages.Options = Response.data.Data.DeletedPages;
+                            $scope.ui.data.DeletedPagesCount.Options = Response.data.Data.DeletedPages.length;
                             $scope.init();
                             $scope.RenderMarkup();
                         }
                         if (Response.HasErrors) {
-                            window.parent.ShowNotification('[LS:Pages]', Response.Message, 'error');
+                            window.parent.ShowNotification('[LS:Pages]', Response.data.Message, 'error');
                         }
                     });
                 }
@@ -319,13 +319,13 @@
                 $scope.ui.data.DefaultPagesSettingsRequest.Options.HomeTabId = node.Value;
                 break;
         }
-        common.webApi.post('pages/updatedefaultpagessettings', 'key=' + type, $scope.ui.data.DefaultPagesSettingsRequest.Options).success(function (Response) {
-            if (Response.IsSuccess) {
-                $scope.ui.data.PageSetting.Options = Response.Data;
-                window.parent.ShowNotification(node.label, Response.Message, 'success');
+        common.webApi.post('pages/updatedefaultpagessettings', 'key=' + type, $scope.ui.data.DefaultPagesSettingsRequest.Options).then(function (Response) {
+            if (Response.data.IsSuccess) {
+                $scope.ui.data.PageSetting.Options = Response.data.Data;
+                window.parent.ShowNotification(node.label, Response.data.Message, 'success');
             }
             if (Response.HasErrors) {
-                window.parent.ShowNotification(node.label, Response.Message, 'error');
+                window.parent.ShowNotification(node.label, Response.data.Message, 'error');
             }
         });
         return false;
@@ -371,13 +371,13 @@
                 Pagemove: JSON.stringify($scope.ui.data.PageMoveRequest.Options),
             };
             if (children != undefined && children.length > 0 && dynamicdata.Pagemove.length > 0) {
-                common.webApi.post('pages/updatehireracy', 'ParentId=' + ParentId, dynamicdata).success(function (response) {
-                    if (response.HasErrors) {
+                common.webApi.post('pages/updatehireracy', 'ParentId=' + ParentId, dynamicdata).then(function (response) {
+                    if (response.data.HasErrors) {
                         $scope.ui.data.PagesTree.Options = [];
-                        $scope.ui.data.PagesTree.Options = response.Data.PagesTree;
+                        $scope.ui.data.PagesTree.Options = response.data.Data.PagesTree;
                         $scope.SearchKey = '';
                         $scope.init();
-                        window.parent.ShowNotification('[L:UpdateHireracyError]', response.Message, 'error');
+                        window.parent.ShowNotification('[L:UpdateHireracyError]', response.data.Message, 'error');
                     }
                     else {
                         $scope.RenderMarkup();
@@ -411,22 +411,22 @@
             },
                 function (isConfirm) {
                     if (isConfirm) {
-                        common.webApi.post('pages/restorepage', '', $scope.ui.data.List_PageItem.Options).success(function (Response) {
-                            if (Response.IsSuccess) {
+                        common.webApi.post('pages/restorepage', '', $scope.ui.data.List_PageItem.Options).then(function (Response) {
+                            if (Response.data.IsSuccess) {
                                 $scope.ui.data.PagesTree.Options = [];
-                                $scope.ui.data.PagesTree.Options = Response.Data.PagesTree;
+                                $scope.ui.data.PagesTree.Options = Response.data.Data.PagesTree;
 
                                 $scope.ui.data.DeletedPages.Options = [];
-                                $scope.ui.data.DeletedPages.Options = Response.Data.DeletedPages;
-                                $scope.ui.data.DeletedPagesCount.Options = Response.Data.DeletedPages.length;
+                                $scope.ui.data.DeletedPages.Options = Response.data.Data.DeletedPages;
+                                $scope.ui.data.DeletedPagesCount.Options = Response.data.Data.DeletedPages.length;
                                 $scope.Show_RecycleBin = false;
                                 $scope.HeaderText = "[L:Pages]";
                                 $scope.SearchKey = '';
                                 $scope.init();
                                 $scope.RenderMarkup();
                             }
-                            if (Response.HasErrors && Response.Message != null) {
-                                window.parent.ShowNotification('[LS:Pages]', Response.Message, 'error');
+                            if (Response.data.HasErrors && Response.data.Message != null) {
+                                window.parent.ShowNotification('[LS:Pages]', Response.data.Message, 'error');
                             }
                         });
                     }
@@ -460,18 +460,18 @@
                 function (isConfirm) {
                     if (isConfirm) {
                         if ($scope.ui.data.List_PageItem.Options.length > 0) {
-                            common.webApi.post('pages/removepage', '', $scope.ui.data.List_PageItem.Options).success(function (Response) {
-                                if (Response.IsSuccess) {
+                            common.webApi.post('pages/removepage', '', $scope.ui.data.List_PageItem.Options).then(function (Response) {
+                                if (Response.data.IsSuccess) {
                                     $scope.ui.data.DeletedPages.Options = [];
-                                    $scope.ui.data.DeletedPages.Options = Response.Data.DeletedPages
-                                    $scope.ui.data.DeletedPagesCount.Options = Response.Data.DeletedPages.length;
-                                    if (Response.Data.DeletedPages.length <= 0) {
+                                    $scope.ui.data.DeletedPages.Options = Response.data.Data.DeletedPages
+                                    $scope.ui.data.DeletedPagesCount.Options = Response.data.Data.DeletedPages.length;
+                                    if (Response.data.Data.DeletedPages.length <= 0) {
                                         $scope.Show_RecycleBin = false;
                                         $scope.HeaderText = "[L:Pages]";
                                     }
                                 }
-                                if (Response.HasErrors) {
-                                    window.parent.ShowNotification('[LS:Pages]', Response.Message, 'error');
+                                if (Response.data.HasErrors) {
+                                    window.parent.ShowNotification('[LS:Pages]', Response.data.Message, 'error');
                                 }
                             });
                         }
@@ -494,15 +494,15 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('pages/removeallpages', '', '').success(function (Response) {
-                        if (Response.IsSuccess) {
+                    common.webApi.post('pages/removeallpages', '', '').then(function (Response) {
+                        if (Response.data.IsSuccess) {
                             $scope.ui.data.DeletedPages.Options = [];
                             $scope.ui.data.DeletedPagesCount.Options = [];
                             $scope.Show_RecycleBin = false;
                             $scope.HeaderText = "[L:Pages]";
                         }
-                        if (Response.HasErrors) {
-                            window.parent.ShowNotification('[L:DeleteAllPagesError]', Response.Message, 'error');
+                        if (Response.data.HasErrors) {
+                            window.parent.ShowNotification('[L:DeleteAllPagesError]', Response.data.Message, 'error');
                         }
                     });
 
@@ -541,14 +541,14 @@
             Key: type,
             Value: value
         };
-        common.webApi.post('pages/updatesettings', 'key=' + type, request).success(function (Response) {
-            if (Response.IsSuccess) {
+        common.webApi.post('pages/updatesettings', 'key=' + type, request).then(function (Response) {
+            if (Response.data.IsSuccess) {
                 $scope.Findnode(Response.Data.PagesTree, $scope.ui.data.PagesTree.Options, node.Value);
                 $scope.init();
-                window.parent.ShowNotification(node.label, Response.Message, 'success');
+                window.parent.ShowNotification(node.label, Response.data.Message, 'success');
             }
-            if (Response.HasErrors) {
-                window.parent.ShowNotification(node.label, Response.Message, 'error');
+            if (Response.data.HasErrors) {
+                window.parent.ShowNotification(node.label, Response.data.Message, 'error');
             }
             $scope.RenderMarkup();
         });
@@ -616,10 +616,10 @@
     }, 500);
 
     $scope.FetchPages = function () {
-        common.webApi.post('pages/SearchPages', 'searchKey=' + $scope.SearchKey, '').success(function (Response) {
-            if (Response.IsSuccess) {
+        common.webApi.post('pages/SearchPages', 'searchKey=' + $scope.SearchKey, '').then(function (Response) {
+            if (Response.data.IsSuccess) {
                 $scope.ui.data.PagesTree.Options = [];
-                $scope.ui.data.PagesTree.Options = Response.Data.PagesTree;
+                $scope.ui.data.PagesTree.Options = Response.data.Data.PagesTree;
             }
         });
     };

@@ -1073,3 +1073,8 @@ uploadinput-button {
     color: #7c9eb2;
     margin-left: 4px;
 }
+.permission_grid button.actionbtn {
+    background: transparent;
+    border: none;
+    outline: none !important;
+}

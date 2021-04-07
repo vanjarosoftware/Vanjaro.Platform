@@ -48,12 +48,12 @@ app.controller('setting_taskqueue', function ($scope, $attrs, $http, CommonSvc, 
                         $('.mode').addClass('disable');
                     }
                     else {
-                        common.webApi.delete('TaskQueue/StopSchedule').success(function (data) {
-                            if (data.IsSuccess) {
+                        common.webApi.delete('TaskQueue/StopSchedule').then(function (data) {
+                            if (data.data.IsSuccess) {
                                 $scope.ui.data.ScheduleStatus.Options.Data.Status = $scope.GetScheduleStatus();
                             }
                             else {
-                                window.parent.ShowNotification('', data.Message, 'error');
+                                window.parent.ShowNotification('', data.data.Message, 'error');
                             }
                         });
                     }
@@ -67,27 +67,27 @@ app.controller('setting_taskqueue', function ($scope, $attrs, $http, CommonSvc, 
             $('.mode').addClass('disable');
         }
         else {
-            common.webApi.post('TaskQueue/StartSchedule').success(function (data) {
-                if (data.IsSuccess) {
+            common.webApi.post('TaskQueue/StartSchedule').then(function (data) {
+                if (data.data.IsSuccess) {
                     $scope.ui.data.ScheduleStatus.Options.Data.Status = $scope.GetScheduleStatus();
                 }
                 else {
-                    window.parent.ShowNotification('', data.Message, 'error');
+                    window.parent.ShowNotification('', data.data.Message, 'error');
                 }
             });
         }
     };
 
     $scope.GetScheduleStatus = function () {
-        common.webApi.get('Scheduler/GetScheduleStatus', '').success(function (data) {
+        common.webApi.get('Scheduler/GetScheduleStatus', '').then(function (data) {
             if (data) {
-                $scope.ui.data.ScheduleStatus.Options.Data.ScheduleQueue = data.Data.Data.ScheduleQueue;
-                $scope.ui.data.ScheduleStatus.Options.Data.Status = data.Data.Data.Status;
-                $scope.ui.data.ScheduleStatus.Options.Data.MaxThreadCount = data.Data.Data.MaxThreadCount;
-                $scope.ui.data.ScheduleStatus.Options.Data.ActiveThreadCount = data.Data.Data.ActiveThreadCount;
-                $scope.ui.data.ScheduleStatus.Options.Data.FreeThreadCount = data.Data.Data.FreeThreadCount;
-                $scope.ui.data.ScheduleStatus.Options.Data.ServerTime = data.Data.Data.ServerTime;
-                $scope.ui.data.ScheduleStatus.Options.Data.ScheduleProcessing = data.Data.Data.ScheduleProcessing;
+                $scope.ui.data.ScheduleStatus.Options.Data.ScheduleQueue = data.data.Data.Data.ScheduleQueue;
+                $scope.ui.data.ScheduleStatus.Options.Data.Status = data.data.Data.Data.Status;
+                $scope.ui.data.ScheduleStatus.Options.Data.MaxThreadCount = data.data.Data.Data.MaxThreadCount;
+                $scope.ui.data.ScheduleStatus.Options.Data.ActiveThreadCount = data.data.Data.Data.ActiveThreadCount;
+                $scope.ui.data.ScheduleStatus.Options.Data.FreeThreadCount = data.data.Data.Data.FreeThreadCount;
+                $scope.ui.data.ScheduleStatus.Options.Data.ServerTime = data.data.Data.Data.ServerTime;
+                $scope.ui.data.ScheduleStatus.Options.Data.ScheduleProcessing = data.data.Data.Data.ScheduleProcessing;
             }
         });
         ScheduleStatus = setTimeout($scope.GetScheduleStatus, 5000);

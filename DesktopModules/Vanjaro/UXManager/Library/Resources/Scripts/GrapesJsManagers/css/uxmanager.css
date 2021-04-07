@@ -3478,7 +3478,7 @@ body.resp-mode.mobile-landscape .vj-wrapper {
 
 .ssmanager .component-name-box {
     background: #fff;
-    padding: 10px 10px 10px 10px !important;
+    padding: 10px 10px 0 10px !important;
 }
 
 .ssmanager .component-name {

@@ -18,16 +18,16 @@
     $scope.Click_Update = function () {
         $scope.ui.data.UpdateTransaltionsRequest.Options.ResourceFile = $scope.ResourceFile;
         $scope.ui.data.UpdateTransaltionsRequest.Options.Mode = $scope.ResourceMode;
-        common.webApi.post('Resources/SaveResxEntries', 'lid=' + $scope.ui.data.LanguageID.Options, $scope.ui.data.UpdateTransaltionsRequest.Options).success(function (Response) {
+        common.webApi.post('Resources/SaveResxEntries', 'lid=' + $scope.ui.data.LanguageID.Options, $scope.ui.data.UpdateTransaltionsRequest.Options).then(function (Response) {
             window.parent.ShowNotification('', '[L:SavedSuccessfully]', 'success');
         });
     };
     $scope.Click_GetFoldersFils = function (event, folder) {
         var $this = $(event.currentTarget);
         if ($this.hasClass("fas fa-caret-right") && $this.parent().parent().find('> .rootfolder li').length <= 0) {
-            common.webApi.get('Resources/GetSubRootResources', 'currentFolder=' + folder.Value, '').success(function (Response) {
-                if (Response.IsSuccess) {
-                    folder.children = Response.Data;
+            common.webApi.get('Resources/GetSubRootResources', 'currentFolder=' + folder.Value, '').then(function (Response) {
+                if (Response.data.IsSuccess) {
+                    folder.children = Response.data.Data;
                     setTimeout(function () {
                         $this.toggleClass('fas fa-caret-right fas fa-caret-down');
                         if ($this.hasClass('fas fa-caret-down'))
@@ -36,8 +36,8 @@
                             $this.parent().parent().find('> .rootfolder').hide();
                     }, 2)
                 }
-                else if (Response.HasErrors)
-                    CommonSvc.SweetAlert.swal(Response.Message);
+                else if (Response.data.HasErrors)
+                    CommonSvc.SweetAlert.swal(Response.data.Message);
             });
         }
         else {
@@ -64,9 +64,9 @@
             $(targetfile).addClass("active");
         }
 
-        common.webApi.post('Resources/GetResxEntries', 'mode=' + $scope.ResourceMode + '&lid=' + $scope.ui.data.LanguageID.Options, Data).success(function (Response) {
-            if (Response.IsSuccess) {
-                $scope.ui.data.UpdateTransaltionsRequest.Options.Entries = Response.Data;
+        common.webApi.post('Resources/GetResxEntries', 'mode=' + $scope.ResourceMode + '&lid=' + $scope.ui.data.LanguageID.Options, Data).then(function (Response) {
+            if (Response.data.IsSuccess) {
+                $scope.ui.data.UpdateTransaltionsRequest.Options.Entries = Response.data.Data;
             }
             else if (Response.HasErrors)
                 CommonSvc.SweetAlert.swal(Response.Message);

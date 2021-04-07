@@ -399,6 +399,9 @@
   <data name="Extra.Text" xml:space="preserve">
     <value>Extra</value>
   </data>
+  <data name="Flex.Text" xml:space="preserve">
+    <value>Flex</value>
+  </data>
   <data name="AddSlide.Text" xml:space="preserve">
     <value>Add Slide</value>
   </data>

@@ -54,8 +54,8 @@
             $('#General a.nav-link').removeClass("active");
             $('#Fonts a.nav-link').addClass("active");
             $scope.ShowGeneralTab = false;
-            common.webApi.get('settings/getfonts', 'Guid=' + $scope.ui.data.Guid.Value).success(function (response) {
-                $scope.ui.data.Fonts.Options = response;
+            common.webApi.get('settings/getfonts','Guid=' + $scope.ui.data.Guid.Value).then(function (response) {
+                $scope.ui.data.Fonts.Options = response.data;
             });
         }
     };
@@ -97,9 +97,9 @@
                     Family: $scope.ui.data.Font.Options.Family,
                     Css: $scope.ui.data.Font.Options.Css
                 };
-                common.webApi.post('settings/updatefont', 'Guid=' + $scope.ui.data.Guid.Value, formdata).success(function (response) {
-                    if (response != undefined && response.IsSuccess) {
-                        $scope.ui.data.Fonts.Options = response.Data.Fonts;
+                common.webApi.post('settings/updatefont', 'Guid=' + $scope.ui.data.Guid.Value, formdata).then(function (response) {
+                    if (response.data != undefined && response.data.IsSuccess) {
+                        $scope.ui.data.Fonts.Options = response.data.Data.Fonts;
                         $scope.AddNewFonts = false;
                     }
                 });
@@ -120,9 +120,9 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('settings/deletefont', 'Guid=' + $scope.ui.data.Guid.Value, data).success(function (response) {
-                        if (response != undefined && response.IsSuccess) {
-                            $scope.ui.data.Fonts.Options = response.Data.Fonts;
+                    common.webApi.post('settings/deletefont', 'Guid=' + $scope.ui.data.Guid.Value, data).then(function (response) {
+                        if (response.data != undefined && response.data.IsSuccess) {
+                            $scope.ui.data.Fonts.Options = response.data.Data.Fonts;
                         }
                     });
                 }
@@ -164,10 +164,10 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('settings/delete', 'Category=' + Category + '&Guid=' + $scope.ui.data.Guid.Value).success(function (response) {
-                        if (response != undefined && response.IsSuccess) {
+                    common.webApi.post('settings/delete', 'Category=' + Category + '&Guid=' + $scope.ui.data.Guid.Value).then(function (response) {
+                        if (response.data != undefined && response.data.IsSuccess) {
                             $(window.parent.document.body).find('#iframe')[0].contentWindow.location.reload();
-                            $scope.ui.data.MarkUp.Value = response.ManageMarkup;
+                            $scope.ui.data.MarkUp.Value = response.data.ManageMarkup;
                             setTimeout(function () { $compile($('#dvMarkUp'))($scope); $scope.rightThemeBuilderToggle(); }, 500);
                         }
                     });
@@ -190,10 +190,10 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('settings/delete', 'Category=' + Category + '&SubCategory=' + SubCategory + '&Guid=' + $scope.ui.data.Guid.Value).success(function (response) {
-                        if (response != undefined && response.IsSuccess) {
+                    common.webApi.post('settings/delete', 'Category=' + Category + '&SubCategory=' + SubCategory + '&Guid=' + $scope.ui.data.Guid.Value).then(function (response) {
+                        if (response.data != undefined && response.data.IsSuccess) {
                             $(window.parent.document.body).find('#iframe')[0].contentWindow.location.reload();
-                            $scope.ui.data.MarkUp.Value = response.ManageMarkup;
+                            $scope.ui.data.MarkUp.Value = response.data.ManageMarkup;
                             setTimeout(function () { $compile($('#dvMarkUp'))($scope); $scope.rightThemeBuilderToggle(); }, 500);
                         }
                     });

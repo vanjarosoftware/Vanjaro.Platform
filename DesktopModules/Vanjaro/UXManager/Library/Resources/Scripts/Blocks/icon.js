@@ -282,7 +282,7 @@
 			ShowIcons() {
 				var target = VjEditor.getSelected() || this.model;
 				window.document.vj_icon_target = target;
-				var url = CurrentExtTabUrl + "&guid=85682CD1-D5FD-4611-B252-3BC1972545A0#/setting";
+				var url = CurrentExtTabUrl + "&guid=85682CD1-D5FD-4611-B252-3BC1972545A0#!/setting";
 				OpenPopUp(null, 700, 'right', 'Select Icon', url, '', true);
 			},
 		}),

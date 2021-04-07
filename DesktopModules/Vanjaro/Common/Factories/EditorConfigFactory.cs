@@ -468,12 +468,12 @@ namespace Vanjaro.Common.Factories
 
                     if (editorOptions.FilebrowserBrowseUrl && PortalSettings.Current.UserInfo.UserID > 0)
                     {
-                        sb.Append("filebrowserBrowseUrl: $scope.ui.data.BrowseUrl.Value + '&type=filebrowserBrowseUrl#/common/controls/url/" + uid.Replace(moduleid.ToString(), "") + "',");
+                        sb.Append("filebrowserBrowseUrl: $scope.ui.data.BrowseUrl.Value + '&type=filebrowserBrowseUrl#!/common/controls/url/" + uid.Replace(moduleid.ToString(), "") + "',");
                     }
 
                     if (editorOptions.FilebrowserImageBrowseUrl && PortalSettings.Current.UserInfo.UserID > 0)
                     {
-                        sb.Append("filebrowserImageBrowseUrl: $scope.ui.data.BrowseUrl.Value + '&type=filebrowserImageBrowseUrl#/common/controls/url/" + uid.Replace(moduleid.ToString(), "") + "',");
+                        sb.Append("filebrowserImageBrowseUrl: $scope.ui.data.BrowseUrl.Value + '&type=filebrowserImageBrowseUrl#!/common/controls/url/" + uid.Replace(moduleid.ToString(), "") + "',");
                     }
 
                     if (HTMLEditorProfile.ProfileID == -3)
@@ -607,12 +607,12 @@ namespace Vanjaro.Common.Factories
 
                     if (editorOptions.FilebrowserBrowseUrl && PortalSettings.Current.UserInfo.UserID > 0)
                     {
-                        sb.Append("\"filebrowserBrowseUrl\": \"" + BrowseUrl + "&type=filebrowserBrowseUrl#/common/controls/url/" + uid.Replace(moduleid.ToString(), "") + "\",");
+                        sb.Append("\"filebrowserBrowseUrl\": \"" + BrowseUrl + "&type=filebrowserBrowseUrl#!/common/controls/url/" + uid.Replace(moduleid.ToString(), "") + "\",");
                     }
 
                     if (editorOptions.FilebrowserImageBrowseUrl && PortalSettings.Current.UserInfo.UserID > 0)
                     {
-                        sb.Append("\"filebrowserImageBrowseUrl\": \"" + BrowseUrl + "&type=filebrowserImageBrowseUrl#/common/controls/url/" + uid.Replace(moduleid.ToString(), "") + "\",");
+                        sb.Append("\"filebrowserImageBrowseUrl\": \"" + BrowseUrl + "&type=filebrowserImageBrowseUrl#!/common/controls/url/" + uid.Replace(moduleid.ToString(), "") + "\",");
                     }
 
                     if (HTMLEditorProfile.ProfileID == -3)

@@ -25,7 +25,7 @@
 
     $scope.ApplyChanges = function (registered) {
         if ($scope.ui.data.Global.Value) {
-            common.webApi.post('registerlink/update', '', registered.attributes.attributes).success(function () {
+            common.webApi.post('registerlink/update', '', registered.attributes.attributes).then(function () {
                 window.parent.RenderBlock(registered);
             });
         }

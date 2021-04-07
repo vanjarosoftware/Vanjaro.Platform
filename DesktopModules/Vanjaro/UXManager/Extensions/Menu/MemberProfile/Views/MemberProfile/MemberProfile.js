@@ -29,12 +29,12 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.post('memberprofile/DeleteProfileProperty', 'propertyId=' + row.PropertyDefinitionId, '').success(function (Response) {
-                        if (Response.IsSuccess) {
-                            $scope.ui.data.MemberProfile.Options = Response.Data.MemberProfile;
+                    common.webApi.post('memberprofile/DeleteProfileProperty', 'propertyId=' + row.PropertyDefinitionId, '').then(function (Response) {
+                        if (Response.data.IsSuccess) {
+                            $scope.ui.data.MemberProfile.Options = Response.data.Data.MemberProfile;
                         }
                         if (Response.HasErrors) {
-                            window.parent.ShowNotification(row.PropertyName, Response.Message, 'error');
+                            window.parent.ShowNotification(row.PropertyName, Response.data.Message, 'error');
                         }
                     });
                 }
@@ -44,7 +44,7 @@
 
     $scope.onGridSorted = function () {
         $scope.ui.data.TemplateProfilePropertyOrders.Options.Properties = $scope.ui.data.MemberProfile.Options;
-        common.webApi.post('memberprofile/UpdateProfilePropertyOrders', '', $scope.ui.data.TemplateProfilePropertyOrders.Options).success(function (Response) {
+        common.webApi.post('memberprofile/UpdateProfilePropertyOrders', '', $scope.ui.data.TemplateProfilePropertyOrders.Options).then(function (Response) {
         });
     };
 

@@ -147,7 +147,7 @@
             function (isConfirm) {
                 if (isConfirm) {
                     $('[type="search"]').focus();
-                    common.webApi.post('Upload/ExtractFiles', 'fileids=' + $scope.ExtractFiles.join(',')).success(function (response) {
+                    common.webApi.post('Upload/ExtractFiles', 'fileids=' + $scope.ExtractFiles.join(',')).then(function (response) {
                         $scope.ExtractFiles = [];
                         $scope.Pipe_IconsPagging($scope.IconsTableState);
                     });
@@ -161,8 +161,8 @@
     };
 
     $scope.GetFolderAndFiles = function (AssetValue) {
-        common.webApi.get('Assets/GetFolderAndFiles', 'IsGlobal=' + !AssetValue).success(function (data) {
-            $scope.IconsFolders = data;
+        common.webApi.get('Assets/GetFolderAndFiles', 'IsGlobal=' + !AssetValue).then(function (data) {
+            $scope.IconsFolders = data.data;
             $scope.BindFolderEvents();
             $scope.ChangeFolderType(AssetValue); //false means global
             setTimeout(function () {
@@ -183,7 +183,7 @@
         //$("uiengine #permDiv").on("hidden.bs.modal", function (e) {
         //    $('uiengine .PermissionFrame').attr('src', 'about:blank');
         //});
-        window.parent.OpenPopUp(null, 700, 'centre', 'Permissions', window.location.href + '#/permission/' + folder.Value, 850, '');
+        window.parent.OpenPopUp(null, 700, 'centre', 'Permissions', window.location.href + '#!/permission/' + folder.Value, 850, '');
     };
 
     $scope.RenameFolder = function (folderid, foldername) {
@@ -209,15 +209,15 @@
                     return true;
                 }
                 var folderName = inputValue;
-                common.webApi.get('Upload/RenameFolder', 'folderid=' + FolderID + '&newFolderName=' + encodeURIComponent(folderName)).success(function (data) {
-                    if (data === 'Success') {
+                common.webApi.get('Upload/RenameFolder', 'folderid=' + FolderID + '&newFolderName=' + encodeURIComponent(folderName)).then(function (data) {
+                    if (data.data === 'Success') {
                         $.each($scope.IconsFolders, function (key, value) {
                             RenameTree(folderName, value, FolderID);
                         });
                         swal.close();
                     }
                     else {
-                        swal.showInputError(data);
+                        swal.showInputError(data.data);
                         return false;
                     }
                 });
@@ -245,13 +245,13 @@
                     return true;
                 }
                 var ChangeFileName = inputValue;
-                common.webApi.get('Upload/RenameFile', 'fileID=' + fileid + '&newFileName=' + encodeURIComponent(ChangeFileName)).success(function (data) {
-                    if (data === 'Success') {
+                common.webApi.get('Upload/RenameFile', 'fileID=' + fileid + '&newFileName=' + encodeURIComponent(ChangeFileName)).then(function (data) {
+                    if (data.data === 'Success') {
                         $scope.Syncfolder(false, parseInt($('[identifier="setting_assets"]').find('.folders[style="font-weight: bold;"]').attr('id').replace(/[^0-9]/gi, '')));
                         swal.close();
                     }
                     else {
-                        swal.showInputError(data);
+                        swal.showInputError(data.data);
                         return false;
                     }
                 });
@@ -273,14 +273,14 @@
             $('.ShowErrorMessage').show();
         }
         if (!$scope.ShowErrorMessage) {
-            common.webApi.post('Upload/CreateNewFolder', 'folderparentID=' + folderid + '&folderName=' + encodeURIComponent(FolderName) + '&FolderType=' + FolderType).success(function (data) {
-                if (data === 'Success') {
+            common.webApi.post('Upload/CreateNewFolder', 'folderparentID=' + folderid + '&folderName=' + encodeURIComponent(FolderName) + '&FolderType=' + FolderType).then(function (data) {
+                if (data.data === 'Success') {
                     $scope.Syncfolder(true, folderid);
                     $('[data-bs-dismiss="modal"]').click();
                 }
                 else {
                     $scope.ShowErrorMessage = true;
-                    $scope.ErrorMessage = data;
+                    $scope.ErrorMessage = data.data;
                     $('.ShowErrorMessage').show();
                 }
             });
@@ -391,14 +391,14 @@
                 method = "Upload/MoveFile?fileid=" + fileid + '&overwrite=' + false;
             else if ($scope.CopyFileValue)
                 method = "Upload/CopyFile?fileid=" + fileid + '&overwrite=' + false;
-            common.webApi.get(method + '&destinationFolderId=' + $scope.SelectedFolder).success(function (Data) {
+            common.webApi.get(method + '&destinationFolderId=' + $scope.SelectedFolder).then(function (Data) {
                 $(window.document.body).find('[data-bs-dismiss="modal"]').click();
                 $scope.ClosePopUp();
-                if (Data === "Success") {
+                if (Data.data === "Success") {
                     $scope.Syncfolder(true, $scope.IconsFolders[0].Value);
                     $scope.ResetFolders();
                 }
-                else if (Data === "Exist") {
+                else if (Data.data === "Exist") {
                     swal({
                         title: "[L:DuplicateExist]",
                         text: "[L:SureReplace]",
@@ -412,13 +412,13 @@
                         function (isConfirm) {
                             if (isConfirm) {
                                 method = method.replace(false, true);
-                                common.webApi.get(method + '&destinationFolderId=' + $scope.SelectedFolder).success(function (Data) {
-                                    if (Data === "Success") {
+                                common.webApi.get(method + '&destinationFolderId=' + $scope.SelectedFolder).then(function (Data) {
+                                    if (Data.data === "Success") {
                                         $scope.Syncfolder(true, $scope.IconsFolders[0].Value);
                                         $scope.ResetFolders();
                                     }
                                     else {
-                                        window.parent.ShowNotification('', Data, 'error');
+                                        window.parent.ShowNotification('', Data.data, 'error');
                                     }
                                 });
                             }
@@ -440,19 +440,19 @@
                 method = "Upload/CopyFiles?fileids=" + fileids.join(',') + '&overwrite=' + false;
                 Type = 'Copy';
             }
-            common.webApi.get(method + '&destinationFolderId=' + $scope.SelectedFolder).success(function (Data) {
+            common.webApi.get(method + '&destinationFolderId=' + $scope.SelectedFolder).then(function (Data) {
                 $(window.document.body).find('[data-bs-dismiss="modal"]').click();
                 $scope.ClosePopUp();
-                if (Data === "Success") {
+                if (Data.data === "Success") {
                     $scope.Syncfolder(true, $scope.IconsFolders[0].Value);
                     $scope.ResetFolders();
                 }
-                else if (Data != undefined && Data.Error != undefined && Data.Error == "Exist") {
-                    if (Data.ExistingFiles.length > 0)
-                        $scope.ProcessExistingFile(Data.ExistingFiles[0], Data.ExistingFiles, Type);
+                else if (Data.data != undefined && Data.data.Error != undefined && Data.data.Error == "Exist") {
+                    if (Data.data.ExistingFiles.length > 0)
+                        $scope.ProcessExistingFile(Data.data.ExistingFiles[0], Data.data.ExistingFiles, Type);
                 }
                 else {
-                    window.parent.ShowNotification('', Data, 'error');
+                    window.parent.ShowNotification('', Data.data, 'error');
                 }
             });
         }
@@ -485,13 +485,13 @@
                             method = "Upload/MoveFiles?fileids=" + $scope.ExistingFileIds.join(',') + '&overwrite=' + true;
                         else if (type == 'Copy')
                             method = "Upload/CopyFiles?fileids=" + $scope.ExistingFileIds.join(',') + '&overwrite=' + true;
-                        common.webApi.get(method + '&destinationFolderId=' + $scope.SelectedFolder).success(function (Data) {
-                            if (Data == "Success") {
+                        common.webApi.get(method + '&destinationFolderId=' + $scope.SelectedFolder).then(function (Data) {
+                            if (Data.data == "Success") {
                                 $scope.Syncfolder(true, $scope.IconsFolders[0].Value);
                                 $scope.ResetFolders();
                             }
                             else {
-                                window.parent.ShowNotification('', Data, 'error');
+                                window.parent.ShowNotification('', Data.data, 'error');
                             }
                         });
                     }
@@ -502,9 +502,9 @@
     $scope.BaseFolderClick_GetSubFolders = function (event, folder) {
         var $this = $(event.currentTarget);
         if ($this.hasClass("fas fa-caret-right") && $this.parent().find('> .rootfolder li').length <= 0) {
-            common.webApi.get('Upload/GetSubFolders', 'identifier=setting_assets&folderid=' + folder.Value).success(function (data) {
+            common.webApi.get('Upload/GetSubFolders', 'identifier=setting_assets&folderid=' + folder.Value).then(function (data) {
                 if (data !== undefined && data !== null) {
-                    folder.children = data;
+                    folder.children = data.data;
                     setTimeout(function () {
                         $this.toggleClass('fas fa-caret-right fas fa-caret-down');
                         if ($this.hasClass('fas fa-caret-down'))
@@ -538,13 +538,13 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('Upload/DeleteItems', 'folderid=' + folderid).success(function (Data) {
-                        if (Data === "Success") {
+                    common.webApi.get('Upload/DeleteItems', 'folderid=' + folderid).then(function (Data) {
+                        if (Data.data === "Success") {
                             $scope.Syncfolder(true, $scope.IconsFolders[0].Value);
                             $scope.ResetFolders();
                         }
                         else {
-                            swal.showInputError(Data);
+                            swal.showInputError(Data.data);
                             return false;
                         }
                     });
@@ -563,17 +563,17 @@
             folderID = id;
         else
             folderID = $('[identifier="setting_assets"]').find('.folders[style="font-weight: bold;"]').attr('id').replace(/[^0-9]/gi, '');
-        common.webApi.get('Upload/SynchronizeFolder', 'folderid=' + folderID + '&recursive=' + value).success(function (data) {
-            if (data.IsSuccess) {
-                common.webApi.get('Upload/GetSubFolders', 'folderid=' + folderID).success(function (Data) {
+        common.webApi.get('Upload/SynchronizeFolder', 'folderid=' + folderID + '&recursive=' + value).then(function (data) {
+            if (data.data.IsSuccess) {
+                common.webApi.get('Upload/GetSubFolders', 'folderid=' + folderID).then(function (Data) {
                     if (Data !== undefined) {
-                        AddTree(Data, $scope.IconsFolders[0], folderID);
+                        AddTree(Data.data, $scope.IconsFolders[0], folderID);
                         $scope.BindFolderEvents();
                     }
                 });
-                common.webApi.get('Upload/GetFiles', 'folderId=' + folderID + '&uid=' + null + '&skip=' + 0 + '&pagesize=' + 20 + '&keyword=').success(function (data) {
+                common.webApi.get('Upload/GetFiles', 'folderId=' + folderID + '&uid=' + null + '&skip=' + 0 + '&pagesize=' + 20 + '&keyword=').then(function (data) {
                     if (data !== undefined) {
-                        $scope.IconsFiles = data.Files;
+                        $scope.IconsFiles = data.data.Files;
                     }
                 });
                 if (sync)
@@ -609,12 +609,12 @@
                             fileids.push(parseInt($(v).attr('cbfid')));
                         });
                     }
-                    common.webApi.delete('Upload/DeleteFiles', 'fileIDs=' + fileids.join(',')).success(function (Data) {
-                        if (Data === "Success") {
+                    common.webApi.delete('Upload/DeleteFiles', 'fileIDs=' + fileids.join(',')).then(function (Data) {
+                        if (Data.data === "Success") {
                             $scope.Pipe_IconsPagging($scope.IconsTableState);
                         }
                         else {
-                            swal.showInputError(Data);
+                            swal.showInputError(Data.data);
                             return false;
                         }
                     });
@@ -623,13 +623,13 @@
     };
 
     $scope.GetURL = function (fileid) {
-        common.webApi.post('Upload/GetUrl', 'fileid=' + fileid).success(function (data) {
-            if (data.Status === 'Success') {
+        common.webApi.post('Upload/GetUrl', 'fileid=' + fileid).then(function (data) {
+            if (data.data.Status === 'Success') {
                 var Link = "";
-                if (data.Url.startsWith('http') || data.Url.startsWith('//') || data.Url.startsWith('www'))
-                    Link = data.Url;
+                if (data.data.Url.startsWith('http') || data.data.Url.startsWith('//') || data.data.Url.startsWith('www'))
+                    Link = data.data.Url;
                 else
-                    Link = window.location.origin + data.Url;
+                    Link = window.location.origin + data.data.Url;
                 var $temp = $("<input>");
                 $("body").append($temp);
                 $temp.val(Link).select();
@@ -638,7 +638,7 @@
                 window.parent.ShowNotification('', '[L:LinkCopied]', 'success');
             }
             else {
-                swal.showInputError(data);
+                swal.showInputError(data.data);
                 return false;
             }
         });
@@ -656,8 +656,8 @@
                     'TabId': parseInt(sf.getTabId()),
                     'RequestVerificationToken': sf.getAntiForgeryValue()
                 },
-            }).success(function (data, status, headers) {
-                headers = headers();
+            }).then(function (data) {
+                headers = data.headers();
                 var filename = headers['x-filename'];
                 var contentType = headers['content-type'];
                 var linkElement = document.createElement('a');
@@ -675,8 +675,8 @@
                 } catch (ex) {
                     alert(ex);
                 }
-            }).error(function (data) {
-                alert(data);
+            }, function (data) {
+                alert(data.data);
             });
         }
     };

@@ -10,8 +10,8 @@
 
 	$scope.onInit = function () {
         window.parent.window.VJIsSaveCall = false;
-		$('.uiengine-wrapper a[data-target="#admin"]').removeClass("active");
-		$('.uiengine-wrapper a[data-target="#videoonline"]').addClass("active");
+		$('.uiengine-wrapper a[data-target="#!/admin"]').removeClass("active");
+		$('.uiengine-wrapper a[data-target="#!/videoonline"]').addClass("active");
 		$scope.ChangeVideoProviders();
 		$(window.parent.document.body).find('[data-bs-dismiss="modal"]').on("click", function (e) {
 			$scope.SaveVideo();
@@ -57,8 +57,8 @@
 			$scope.SearchKeyword = $scope.ui.data.keyword.Value;
 			if (!loadmorecall)
 				$scope.AdditionalData = "";
-			common.webApi.post('Video/Search', 'source=' + $scope.ui.data.VideoProviders.Value + '&keyword=' + $scope.ui.data.keyword.Value + '&PageNo=' + $scope.PageNo, $scope.AdditionalData).success(function (data) {
-				$.each(JSON.parse(data), function (key, value) {
+			common.webApi.post('Video/Search', 'source=' + $scope.ui.data.VideoProviders.Value + '&keyword=' + $scope.ui.data.keyword.Value + '&PageNo=' + $scope.PageNo, $scope.AdditionalData).then(function (data) {
+				$.each(JSON.parse(data.data), function (key, value) {
 					if (value.AdditionalData != null) {
 						$scope.AdditionalData = value.AdditionalData;
 					}
