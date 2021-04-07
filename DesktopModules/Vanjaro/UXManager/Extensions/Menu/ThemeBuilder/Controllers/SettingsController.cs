@@ -57,6 +57,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.Controllers
                 Settings.Add("DeveloperMode", new UIData { Name = "DeveloperMode", Value = DeveloperMode.ToString().ToLower() });
                 Settings.Add("Fonts", new UIData { Name = "Fonts", Options = Core.Managers.ThemeManager.GetFonts(PortalSettings.Current.PortalId, Guid) });
                 Settings.Add("Font", new UIData { Name = "Font", Options = new ThemeFont() });
+                Settings.Add("FontOptions", new UIData { Name = "FontOptions", Value = "true" });
             }
             return Settings.Values.ToList();
         }

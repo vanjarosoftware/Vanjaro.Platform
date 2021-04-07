@@ -139,22 +139,31 @@
     <value>Are you sure?</value>
   </data>
   <data name="FontCss.Text" xml:space="preserve">
-    <value>Font CSS</value>
+    <value>CSS</value>
   </data>
   <data name="FontFamily.Text" xml:space="preserve">
-    <value>Font Family</value>
+    <value>Family</value>
   </data>
   <data name="FontName.Text" xml:space="preserve">
-    <value>Font Name</value>
+    <value>Name</value>
   </data>
   <data name="Fonts_Columns_Action.Text" xml:space="preserve">
     <value> </value>
   </data>
   <data name="Fonts_Columns_FontFamily.Text" xml:space="preserve">
-    <value>Font Family</value>
+    <value>Family</value>
   </data>
   <data name="Fonts_Columns_FontName.Text" xml:space="preserve">
-    <value>Font Name</value>
+    <value>Name</value>
+  </data>
+  <data name="FontOptions.ON" xml:space="preserve">
+    <value>Google Font</value>
+  </data>
+  <data name="FontOptions.OFF" xml:space="preserve">
+    <value>Custom Font</value>
+  </data>
+  <data name="FontOptions.Text" xml:space="preserve">
+    <value>Add New</value>
   </data>
   <data name="Info.Text" xml:space="preserve">
     <value>&lt;strong&gt;&lt;em class="fa fa-info-circle"&gt;&lt;/em&gt; Info&lt;/strong&gt;: Changes to fonts are not reflected until theme is saved.</value>
