@@ -28,14 +28,13 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Managers
 
         internal static List<PageVersion> GetAllVersionByTabID(int PortalID, int TabID, string Locale, string BlockGuid = null)
         {
-
             List<PageVersion> versioncontent = new List<PageVersion>();
             string ResourceFilePath = AppFactory.SharedResourcePath();
             string _Pulished = Localization.GetString("Published", ResourceFilePath);
             string _Draft = Localization.GetString("Draft", ResourceFilePath);
             if (!string.IsNullOrEmpty(BlockGuid))
             {
-                List<Core.Data.Entities.GlobalBlock> Blocks = BlockManager.GetAllGlobalBlocks(PortalID, BlockGuid).OrderByDescending(a => a.Version).ToList();
+                List<Core.Data.Entities.GlobalBlock> Blocks = BlockManager.GetAllGlobalBlocks(PortalID, BlockGuid, Locale).OrderByDescending(a => a.Version).ToList();
                 int DefaultWorkflow = WorkflowManager.GetDefaultWorkflow();
                 Core.Data.Entities.WorkflowState FirstState = WorkflowManager.GetFirstStateID(DefaultWorkflow);
                 Core.Data.Entities.WorkflowState LastState = WorkflowManager.GetLastStateID(DefaultWorkflow);
@@ -92,7 +91,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Managers
             int MaxVersion = 0;
             if (!string.IsNullOrEmpty(BlockGuid))
             {
-                List<Core.Data.Entities.GlobalBlock> CustomBlock = BlockManager.GetAllGlobalBlocks(PortalID, BlockGuid).OrderByDescending(a => a.Version).ToList();
+                List<Core.Data.Entities.GlobalBlock> CustomBlock = BlockManager.GetAllGlobalBlocks(PortalID, BlockGuid, Locale).OrderByDescending(a => a.Version).ToList();
                 if (CustomBlock.Count > 0)
                     MaxVersion = CustomBlock.FirstOrDefault().Version;
 
@@ -119,7 +118,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.Managers
             int result = 0;
             if (!string.IsNullOrEmpty(BlockGuid))
             {
-                Core.Data.Entities.GlobalBlock CustomBlock = Core.Managers.BlockManager.GetAllGlobalBlocks(PortalID, BlockGuid).Where(v => v.IsPublished == true).OrderByDescending(a => a.Version).FirstOrDefault();
+                Core.Data.Entities.GlobalBlock CustomBlock = Core.Managers.BlockManager.GetAllGlobalBlocks(PortalID, BlockGuid, Locale).Where(v => v.IsPublished == true).OrderByDescending(a => a.Version).FirstOrDefault();
                 if (CustomBlock != null)
                 {
                     result = CustomBlock.Version;

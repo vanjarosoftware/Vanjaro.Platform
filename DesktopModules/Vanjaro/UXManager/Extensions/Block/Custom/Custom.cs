@@ -43,12 +43,13 @@ namespace Vanjaro.UXManager.Extensions.Block.Custom
             {
                 if (Attributes["data-block-type"] != null && Attributes["data-block-type"] == "global")
                 {
+                    string Locale = Core.Managers.PageManager.GetCultureCode(PortalSettings.Current);
                     string blockguid = Attributes["data-guid"];
                     Core.Data.Entities.GlobalBlock block;
                     if (HttpContext.Current.Request.Cookies["vj_IsPageEdit"] != null && HttpContext.Current.Request.Cookies["vj_IsPageEdit"].Value == "true")
-                        block = Core.Managers.BlockManager.GetAllGlobalBlocks(PortalSettings.Current).Where(c => c.Guid.ToLower() == blockguid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
+                        block = Core.Managers.BlockManager.GetGlobalByGuid(PortalSettings.Current.PortalId, blockguid, Locale, true);
                     else
-                        block = Core.Managers.BlockManager.GetAllGlobalBlocks(PortalSettings.Current, true).Where(c => c.Guid.ToLower() == blockguid.ToLower()).OrderByDescending(a => a.Version).FirstOrDefault();
+                        block = Core.Managers.BlockManager.GetGlobalByGuid(PortalSettings.Current.PortalId, blockguid, Locale, true, true);
                     if (block != null)
                     {
                         response.Markup = block.Html;
