@@ -120,7 +120,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.Controllers
             dynamic result = new ExpandoObject();
             try
             {
-                Core.Managers.ThemeManager.UpdateFonts(Guid, Data);
+                Core.Managers.ThemeManager.UpdateFonts(PortalSettings.Current.PortalId, Guid, Data);
                 result.Fonts = Core.Managers.ThemeManager.GetFonts(PortalSettings.Current.PortalId, Guid);
             }
             catch (Exception)

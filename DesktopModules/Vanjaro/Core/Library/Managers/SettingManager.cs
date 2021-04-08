@@ -24,6 +24,7 @@ using Vanjaro.Core.Components;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Data.Scripts;
 using Vanjaro.Core.Entities;
+using Vanjaro.Core.Entities.Theme;
 using Vanjaro.Core.Services;
 using static Vanjaro.Core.Factories;
 
@@ -109,6 +110,8 @@ namespace Vanjaro.Core
                         {
                             DoIUpgradeable(pinfo, ApplyTemplates);
                         }
+
+                        AddThemeFont(pinfo.PortalID);
                     }
                     catch (Exception ex)
                     {
@@ -911,6 +914,27 @@ namespace Vanjaro.Core
                 var providerSettings = section.Providers[defaultProvider];
                 providerSettings.Parameters.Set(Key, Value.ToLower());
                 config.Save();
+            }
+
+            private static void AddThemeFont(int PortalID)
+            {
+                List<ThemeFont> themeFont = new List<ThemeFont>();
+                themeFont.Add(new ThemeFont() { Name = "Arial Black", Family = "Arial Black, Gadget, sans-serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                themeFont.Add(new ThemeFont() { Name = "Arial", Family = "Arial, Helvetica, sans - serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                themeFont.Add(new ThemeFont() { Name = "Brush Script MT", Family = "Brush Script MT, sans-serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                themeFont.Add(new ThemeFont() { Name = "Comic Sans MS", Family = "Comic Sans MS, cursive, sans-serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                themeFont.Add(new ThemeFont() { Name = "Courier New", Family = "Courier New, Courier, monospace", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                themeFont.Add(new ThemeFont() { Name = "Georgia", Family = "Georgia, serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                themeFont.Add(new ThemeFont() { Name = "Helvetica", Family = "Helvetica, serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                themeFont.Add(new ThemeFont() { Name = "Impact", Family = "Impact, Charcoal, sans - serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                themeFont.Add(new ThemeFont() { Name = "Lucida Sans Unicode", Family = "Lucida Sans Unicode, Lucida Grande, sans - serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                themeFont.Add(new ThemeFont() { Name = "Tahoma", Family = "Tahoma, Geneva, sans - serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                themeFont.Add(new ThemeFont() { Name = "Times New Roman", Family = "Times New Roman, Times, serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                themeFont.Add(new ThemeFont() { Name = "Trebuchet MS", Family = "Trebuchet MS, Helvetica, sans-serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                themeFont.Add(new ThemeFont() { Name = "Verdana", Family = "Verdana, Geneva, sans - serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                
+                foreach (ThemeFont t in themeFont)
+                    ThemeManager.UpdateFonts(PortalID, "be134fd2-3a3d-4460-8ee9-2953722a5ab2", t, false);
             }
 
         }

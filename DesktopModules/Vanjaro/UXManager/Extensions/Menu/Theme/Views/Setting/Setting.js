@@ -29,9 +29,9 @@
 
         var url = $scope.ui.data.ThemeBuilderUrl.Value;
         if (url.indexOf("?") == -1)
-            url = url + "?v=" + (new Date()).getTime() + '#categories/' + $scope.ui.data.Theme.Options[0].Value;
+            url = url + "?v=" + (new Date()).getTime() + '#!/categories/' + $scope.ui.data.Theme.Options[0].Value;
         else
-            url = url + "&v=" + (new Date()).getTime() + '#categories/' + $scope.ui.data.Theme.Options[0].Value;
+            url = url + "&v=" + (new Date()).getTime() + '#!/categories/' + $scope.ui.data.Theme.Options[0].Value;
         window.location.href = url;
     };
 });

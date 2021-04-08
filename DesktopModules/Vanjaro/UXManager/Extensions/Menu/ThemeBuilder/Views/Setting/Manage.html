@@ -73,7 +73,7 @@
             </uitemplate>
         </uilayout>
         <uilayout name="Fonts">
-            <uielement name="FontOptions" control="checkboxtoggle" container-attr-ng-show="AddNewFonts && !GoogleFontOption" attr-class="font"></uielement>
+            <uielement name="FontOptions" control="checkboxtoggle" container-attr-ng-show="AddNewFonts && !GoogleFontOption" container-attr-style="text-align:center;" attr-class="font"></uielement>
             <uielement name="FontName" control="textbox" attr-ng-model="ui.data.Font.Options.Name" attr-required="true" container-attr-ng-show="AddNewFonts && !ui.data.FontOptions.Value" attr-placeholder="Spartan"></uielement>
             <uielement name="FontFamily" control="textbox" attr-ng-model="ui.data.Font.Options.Family" attr-required="true" container-attr-ng-show="AddNewFonts && !ui.data.FontOptions.Value" attr-placeholder="'Spartan', sans-serif"></uielement>
             <uielement name="FontCss" control="textarea" attr-ng-model="ui.data.Font.Options.Css" container-attr-ng-show="AddNewFonts && !ui.data.FontOptions.Value" attr-rows="6"></uielement>
@@ -90,8 +90,8 @@
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item box-icon" ng-click="Click_EditFont(row)"><em class="fas fa-cog"></em><span>[LS:Setting]</span></a>
-                                <hr style="margin-top: 5px;margin-bottom: 5px;" mn-ng-if="ui.data.DeveloperMode.Value" />
+                                <a class="dropdown-item box-icon" ng-click="Click_EditFont(row)" ng-if="!IsGoogleFont(row.Name)"><em class="fas fa-cog"></em><span>[LS:Setting]</span></a>
+                                <hr style="margin-top: 5px;margin-bottom: 5px;" mn-ng-if="ui.data.DeveloperMode.Value && !IsGoogleFont(row.Name)" />
                                 <a class="dropdown-item box-icon" ng-click="Click_DeleteFont(row)" mn-ng-if="ui.data.DeveloperMode.Value"><em class="fas fa-trash mr-xs"></em><span>[LS:Delete]</span></a>
                             </div>
                         </div>

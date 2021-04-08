@@ -136,16 +136,13 @@
         $scope.ui.data.Font.Options.Family = data.Family;
         $scope.ui.data.Font.Options.Css = data.Css;
         $scope.ui.data.FontOptions.Value = false;
-        $scope.GoogleFontOption = false;        
-        $("#GoogleFonts option").each(function (index, elem) {
-            if ($(elem).html() == $scope.ui.data.Font.Options.Name) {               
-                $(elem).attr('selected', 'selected');
-                $scope.ui.data.FontOptions.Value = true;
-                $scope.GoogleFontOption = true;
-                return;
-            }
-        });         
-
+        $scope.GoogleFontOption = false;
+        if ($scope.IsGoogleFont($scope.ui.data.Font.Options.Name))
+        {
+            $(elem).attr('selected', 'selected');
+            $scope.ui.data.FontOptions.Value = true;
+            $scope.GoogleFontOption = true;
+        }
         $("#GoogleFonts option:selected").length > 0        
         $scope.AddNewFonts = true;
 
@@ -207,7 +204,6 @@
         window.location.hash = hash;
     };
 
-
     $scope.Change_GoogleFont = function () {
         var FontCategory = $('#GoogleFonts').val();
         var FontName = $("#GoogleFonts option:selected").html();
@@ -219,9 +215,9 @@
                     Family: "'" + FontName + "'," + FontCategory + "",
                     Css: data
                 };
-                common.webApi.post('settings/updatefont', 'Guid=' + $scope.ui.data.Guid.Value, formdata).success(function (response) {
-                    if (response != undefined && response.IsSuccess) {
-                        $scope.ui.data.Fonts.Options = response.Data.Fonts;
+                common.webApi.post('settings/updatefont', 'Guid=' + $scope.ui.data.Guid.Value, formdata).then(function (response) {
+                    if (response.data != undefined && response.data.IsSuccess) {
+                        $scope.ui.data.Fonts.Options = response.data.Data.Fonts;
                         $scope.AddNewFonts = false;
                     }
                 });
@@ -236,5 +232,16 @@
         event.preventDefault();
         window.location.hash = hash + '/' + $scope.ui.data.Guid.Value;
     };
+
+    $scope.IsGoogleFont = function (FontName)
+    {
+        var flag = false;
+        $("#GoogleFonts option").each(function (index, elem) {
+            if ($(elem).html() == FontName) {               
+                flag = true; 
+            }
+        });
+        return flag;
+    }
 
 });
