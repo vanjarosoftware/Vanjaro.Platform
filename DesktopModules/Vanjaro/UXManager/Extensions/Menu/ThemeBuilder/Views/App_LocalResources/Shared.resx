@@ -124,13 +124,25 @@
     <value>Design</value>
   </data>
   <data name="Fonts.Text" xml:space="preserve">
-    <value>Fonts</value>
+    <value>Font</value>
   </data>
   <data name="General.Text" xml:space="preserve">
     <value>General</value>
   </data>
+  <data name="GoogleFonts.Text" xml:space="preserve">
+    <value>Google Fonts</value>
+  </data>
+  <data name="InvalidGoogleFont.Text" xml:space="preserve">
+    <value>Invalid google font</value>
+  </data>
+  <data name="NoneSpecified.Text" xml:space="preserve">
+    <value>None Specified</value>
+  </data>
   <data name="SearchKeywords.Text" xml:space="preserve">
     <value>theme,themes,design,layout,skin,skins,template,templates,layouts</value>
+  </data>
+  <data name="SelectFont.Text" xml:space="preserve">
+    <value>Select Font</value>
   </data>
   <data name="Setting.Text" xml:space="preserve">
     <value>Settings</value>

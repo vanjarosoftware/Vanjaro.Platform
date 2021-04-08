@@ -315,15 +315,15 @@ namespace Vanjaro.Core
                             ThemeEditorWrapper.ThemeEditors = ThemeEditorWrapper.ThemeEditors.Where(t => t.Category.ToLower() != Category.ToLower()).ToList();
                         }
 
-                        UpdateThemeEditorJson(CategoryGuid, ThemeEditorWrapper);
+                        UpdateThemeEditorJson(PortalSettings.Current.PortalId, CategoryGuid, ThemeEditorWrapper);
                     }
                     return true;
                 }
                 catch (Exception ex) { ExceptionManager.LogException(ex); return false; }
             }
-            private static void UpdateThemeEditorJson(string CategoryGuid, ThemeEditorWrapper ThemeEditorWrapper)
+            private static void UpdateThemeEditorJson(int PortalID, string CategoryGuid, ThemeEditorWrapper ThemeEditorWrapper, bool CheckVisibilityPermission = true)
             {
-                string ThemeEditorJsonPath = GetThemeEditorJsonPath(PortalSettings.Current.PortalId, CategoryGuid);
+                string ThemeEditorJsonPath = GetThemeEditorJsonPath(PortalID, CategoryGuid, CheckVisibilityPermission);
                 if (ThemeEditorJsonPath.EndsWith("theme.editor.custom.json"))
                 {
                     ThemeEditorWrapper.DeveloperMode = true;
@@ -376,7 +376,7 @@ namespace Vanjaro.Core
                             themeEditor
                         };
                     }
-                    UpdateThemeEditorJson(categoryGuid, ThemeEditorWrapper);
+                    UpdateThemeEditorJson(PortalSettings.Current.PortalId,categoryGuid, ThemeEditorWrapper);
                     return true;
                 }
                 catch (Exception ex) { ExceptionManager.LogException(ex); return false; }
@@ -515,9 +515,9 @@ namespace Vanjaro.Core
                 FontList.AddRange(GetFonts(PortalSettings.Current.PortalId, CategoryGuid).Select(x => new StringTextNV { Name = x.Name, Value = x.Family }));
                 return FontList;
             }
-            public static void UpdateFonts(string CategoryGuid, dynamic data)
+            public static void UpdateFonts(int PortalID, string CategoryGuid, dynamic data, bool CheckVisibilityPermission = true)
             {
-                ThemeEditorWrapper ThemeEditorWrapper = GetThemeEditors(PortalSettings.Current.PortalId, CategoryGuid);
+                ThemeEditorWrapper ThemeEditorWrapper = GetThemeEditors(PortalID, CategoryGuid, CheckVisibilityPermission);
 
                 if (ThemeEditorWrapper == null)
                 {
@@ -546,7 +546,7 @@ namespace Vanjaro.Core
                     ThemeEditorWrapper.Fonts.Add(new ThemeFont { Guid = GUID, Name = data.Name.ToString(), Family = data.Family.ToString(), Css = data.Css.ToString().Replace("\"", "'") });
                 }
 
-                UpdateThemeEditorJson(CategoryGuid, ThemeEditorWrapper);
+                UpdateThemeEditorJson(PortalID, CategoryGuid, ThemeEditorWrapper, CheckVisibilityPermission);
 
             }
             public static void DeleteFonts(string CategoryGuid, ThemeFont data)
@@ -569,7 +569,7 @@ namespace Vanjaro.Core
                 {
                     ThemeFont ThemeFont = ThemeEditorWrapper.Fonts.Where(a => a.Guid.ToLower() == GUID.ToLower()).FirstOrDefault();
                     ThemeEditorWrapper.Fonts.Remove(ThemeFont);
-                    UpdateThemeEditorJson(CategoryGuid, ThemeEditorWrapper);
+                    UpdateThemeEditorJson(PortalSettings.Current.PortalId,CategoryGuid, ThemeEditorWrapper);
                 }
             }
             internal static List<ThemeEditorValue> GetThemeEditorValues(int PortalId, string CategoryGuid)
