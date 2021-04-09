@@ -21,11 +21,9 @@
             $scope.InputMaxUploadSize = parseInt($scope.ui.data.MaxUploadSize.Value);
         }
         if (!$scope.ui.data.IsSuperUser.Value) {
-            $scope.Click_ShowTab('SecurityLogin');
-        }
-        if ($scope.ui.data.UserRegistration.Options.Settings.UserRegistration != null)
-            $scope.ui.data.UserRegistration.Options.Settings.UserRegistration = $scope.ui.data.UserRegistration.Options.Settings.UserRegistration.toString();
-       
+            $scope.Click_ShowTab('Media');
+        }       
+
         $scope.ShowGeneralTab = true;
         $scope.Show_Tab = false;
     };
@@ -42,31 +40,7 @@
             $scope.Registeration = false;
             $scope.ShowMediaTab = false;
             $scope.ShowSSLModule = false;
-        }
-        else if (type == 'SecurityLogin') {
-            $('#General a.nav-link').removeClass("active");
-            $('#SecurityLogin a.nav-link').addClass("active");
-            $('#Registeration a.nav-link').removeClass("active");
-            $('#Media a.nav-link').removeClass("active");
-            $('#SSL a.nav-link').removeClass("active");
-            $scope.ShowGeneralTab = false;
-            $scope.ShowLoginTab = true;
-            $scope.Registeration = false;
-            $scope.ShowMediaTab = false;
-            $scope.ShowSSLModule = false;
-        }
-        else if (type == 'Registeration') {
-            $('#General a.nav-link').removeClass("active");
-            $('#SecurityLogin a.nav-link').removeClass("active");
-            $('#Registeration a.nav-link').addClass("active");
-            $('#Media a.nav-link').removeClass("active");
-            $('#SSL a.nav-link').removeClass("active");
-            $scope.ShowGeneralTab = false;
-            $scope.ShowLoginTab = false;
-            $scope.Registeration = true;
-            $scope.ShowMediaTab = false;
-            $scope.ShowSSLModule = false;
-        }
+        }        
         else if (type == 'Media') {
             $('#General a.nav-link').removeClass("active");
             $('#SecurityLogin a.nav-link').removeClass("active");
@@ -106,8 +80,6 @@
             else {
                 var settingData = {
                     UpdateSslSettingsRequest: $scope.ui.data.UpdateSslSettingsRequest.Options,
-                    UpdateRegistrationSettingsRequest: $scope.ui.data.UserRegistration.Options.Settings,
-                    UpdateBasicLoginSettingsRequest: $scope.ui.data.UpdateBasicLoginSettingsRequest.Options,
                     Picture_DefaultFolder: $scope.ui.data.Picture_DefaultFolder.Value,
                     Picture_MaxUploadSize: $scope.ui.data.Picture_MaxUploadSize.Value,
                     Picture_AllowableFileExtensions: $scope.ui.data.Picture_AllowableFileExtensions.Value,

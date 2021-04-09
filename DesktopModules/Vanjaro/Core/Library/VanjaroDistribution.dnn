@@ -456,6 +456,11 @@
 							<name>Vanjaro.UXManager.Extensions.Menu.MemberProfile.dll</name>
 							<version>01.00.04</version>
 						</assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Vanjaro.UXManager.Extensions.Menu.Memberships.dll</name>
+              <version>01.00.00</version>
+            </assembly>
 					</assemblies>
 				</component>
 				<component type="ResourceFile">
@@ -1002,6 +1007,14 @@
 						</resourceFile>
 					</resourceFiles>
 				</component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules\Vanjaro\UXManager\Extensions\Menu\Memberships</basePath>
+            <resourceFile>
+              <name>menu-memberships-resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
 				<component type="ResourceFile">
 					<resourceFiles>
 						<basePath>Portals\_default\vThemes</basePath>

@@ -1,0 +1,82 @@
+﻿<div ng-controller="memberships_settings" class="vj-ux-manager memberships-settings">
+    <uiengine provider="AngularBootstrap" identifier="memberships_settings" layout="admin">
+        <uilayout name="Default">
+            <uitemplate>
+                <uilayout name="default">
+                    <uitemplate>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <ul class="nav nav-pills nav-stacked tab-line">
+                                    <li id="Memberships" class="nav-item"><a class="nav-link active" mn-ng-click="Click_ShowTab('Memberships')">[L:Memberships]</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-9 left_border">
+                                <uilayout name="TabsContentMemberships">
+                                    <uitemplate>
+                                        <div id="accordion" mn-ng-if="ShowMembershipsTab">
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseone">
+                                                        [L:Memberships]
+                                                        <em class="fas fa-caret-down float-end"></em>
+                                                    </a>
+                                                </div>
+                                                <div id="collapseone" class="accordion-collapse collapse show" data-bs-parent="#accordion">
+                                                    <div class="accordion-body">
+                                                        [uilayout:Memberships]
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <div class="accordion-header">
+                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapstwo">
+                                                        [L:Advance]
+                                                        <em class="fas fa-caret-right float-end"></em>
+                                                    </a>
+                                                </div>
+                                                <div id="collapstwo" class="accordion-collapse  collapse" data-bs-parent="#accordion">
+                                                    <div class="accordion-body">
+                                                        [uilayout:Advance]
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </uitemplate>
+                                </uilayout>
+                            </div>
+                        </div>
+                    </uitemplate>
+                </uilayout>
+            </uitemplate>
+            <uitemplate>
+                <div class="text-end fixed-footer">
+                    <button type="button" class="btn btn-sm btn-primary float-end" id="Update" mn-ng-click="Click_Save('update')">
+                        [L:Update]
+                    </button>
+                </div>
+            </uitemplate>
+        </uilayout>
+
+        <uilayout name="Memberships">
+            <uitemplate>
+                <div class="form-group">
+                    <label class="" for="setting_registeration1textbox0" data-bs-toggle="tooltip" title="[L:UserRegistration.Tooltip]">[L:UserRegistration]</label>
+                    <div class="UserRegistration">
+                        <div class="input-group-append">
+                            <select class="form-control" mn-ng-model="ui.data.UserRegistration.Options.Settings.UserRegistration">
+                                <option value="{{row.Value}}" mn-ng-repeat="row in ui.data.UserRegistration.Options.UserRegistrationOptions">{{row.Key}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
+            <uielement name="EnableRegisterNotification" ngmodel="ui.data.UserRegistration.Options.Settings.EnableRegisterNotification" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uielement name="UseEmailAsUsername" ngmodel="ui.data.UserRegistration.Options.Settings.UseEmailAsUsername" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uielement name="UseRandomPassword" ngmodel="ui.data.UserRegistration.Options.Settings.UseRandomPassword" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uielement name="RequireValidProfileAtLogin" ngmodel="ui.data.UpdateBasicLoginSettingsRequest.Options.RequireValidProfileAtLogin" control="checkboxtoggle" attr-class="toggle_right" container-attr-access-roles="host"></uielement>
+        </uilayout>
+        <uilayout name="Advance" attr-class="tab-pane active">
+            <uielement name="EmailAddressValidation" attr-ng-model="ui.data.UserRegistration.Options.Settings.EmailAddressValidation" control="textbox"></uielement>
+        </uilayout>
+    </uiengine>
+</div>
