@@ -197,6 +197,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                         Settings.Add("UserBasicTemplate", new UIData { Name = "UserBasicTemplate", Options = new UserBasicDto() });
                         Settings.Add("AllRoles", new UIData { Name = "AllRoles", Options = RoleController.Instance.GetRoles((PortalController.Instance.GetCurrentSettings() as PortalSettings).PortalId), Value = "" });
                         Settings.Add("RoleName", new UIData { Name = "RoleName", Value = "", Options = new UserRoleDto() });
+                        Settings.Add("UseEmailAsUserName", new UIData { Name = "UseEmailAsUserName", Options = ps.Registration.UseEmailAsUserName });
                         return Settings.Values.ToList();
                     }
                 case "setting_changepassword":
@@ -618,7 +619,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                     {
                         if (string.IsNullOrEmpty(userBasicDto.Displayname))
                             userBasicDto.Displayname = user.DisplayName;
-                        if (string.IsNullOrEmpty(userBasicDto.Email))
+                        if (string.IsNullOrEmpty(userBasicDto.Email) || PortalSettings.Registration.UseEmailAsUserName)
                             userBasicDto.Email = user.Email;
                         if (string.IsNullOrEmpty(userBasicDto.Username))
                             userBasicDto.Username = user.Username;
