@@ -61,7 +61,7 @@
         <uilayout name="BasicSetting" attr-ng-show="ShowUser_accountTab">
             <uielement name="UserName" control="textbox" container-attr-ng-if="Show_UserName" attr-required="true" attr-ng-model="ui.data.UserDetails.Options.userName"></uielement>
             <uielement name="DisplayName" control="textbox" attr-required="true" attr-ng-model="ui.data.UserDetails.Options.displayName"></uielement>
-            <uielement name="Email" control="email" attr-required="true" attr-ng-model="ui.data.UserDetails.Options.email"></uielement>
+            <uielement name="Email" control="email" attr-ng-disabled="ui.data.UseEmailAsUserName.Options" attr-required="true" attr-ng-model="ui.data.UserDetails.Options.email"></uielement>
         </uilayout>
         <!--Profile-->
         <uilayout name="TabsContentProfile" attr-ng-show="ShowUser_profileTab">

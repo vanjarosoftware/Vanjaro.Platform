@@ -55,6 +55,7 @@ licenses-resources.zip
 ..\..\UXManager\Extensions\Menu\Workflow\menu-workflow-resources.zip
 ..\..\UXManager\Extensions\Menu\Privacy\menu-privacy-resources.zip
 ..\..\UXManager\Extensions\Menu\MemberProfile\menu-memberprofile-resources.zip
+..\..\UXManager\Extensions\Menu\Memberships\menu-memberships-resources.zip
 
 ..\..\UXManager\Extensions\Toolbar\DeviceMode\toolbar-devicemode-resources.zip
 ..\..\UXManager\Extensions\Toolbar\Fullscreen\toolbar-fullscreen-resources.zip

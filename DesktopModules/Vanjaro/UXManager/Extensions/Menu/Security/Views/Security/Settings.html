@@ -7,9 +7,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <ul class="nav nav-pills nav-stacked tab-line">
-                                    <li id="General" class="nav-item" access-roles="host"><a class="nav-link active" mn-ng-click="Click_ShowTab('General')">[L:General]</a></li>
-                                    <li id="SecurityLogin" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('SecurityLogin')">[L:Login]</a></li>
-                                    <li id="Registeration" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('Registeration')">[L:Registeration]</a></li>
+                                    <li id="General" class="nav-item" access-roles="host"><a class="nav-link active" mn-ng-click="Click_ShowTab('General')">[L:General]</a></li>                                    
                                     <li id="Media" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('Media')">[L:Media]</a></li>
                                     <li id="SSL" class="nav-item"><a class="nav-link" mn-ng-click="Click_ShowTab('SSL')">[L:SSL]</a></li>
                                 </ul>
@@ -33,58 +31,7 @@
                                             </div>
                                         </div>
                                     </uitemplate>
-                                </uilayout>
-                                <uilayout name="TabsContentLogin" attr-ng-show="TabsContentLogin" access-roles="admin">
-                                    <uitemplate>
-                                        <div id="accordion3" mn-ng-show="ShowLoginTab">
-                                            <div class="accordion-item">
-                                                <div class="accordion-header">
-                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapsetwo">
-                                                        [L:Login]
-                                                        <em class="fas fa-caret-down float-end"></em>
-                                                    </a>
-                                                </div>
-                                                <div id="collapsetwo" class="accordion-collapse  collapse show" data-bs-parent="#accordion3">
-                                                    <div class="accordion-body">
-                                                        [uilayout:Login]
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </uitemplate>
-                                </uilayout>
-                                <uilayout name="TabsContentRegistration" access-roles="admin">
-                                    <uitemplate>
-                                        <div id="accordion4" mn-ng-show="Registeration">
-                                            <div class="accordion-item">
-                                                <div class="accordion-header">
-                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapsethree">
-                                                        [L:Registeration]
-                                                        <em class="fas fa-caret-down float-end"></em>
-                                                    </a>
-                                                </div>
-                                                <div id="collapsethree" class="accordion-collapse  collapse show" data-bs-parent="#accordion4">
-                                                    <div class="accordion-body">
-                                                        [uilayout:Registeration]
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <div class="accordion-header">
-                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseven">
-                                                        [L:Advance]
-                                                        <em class="fas fa-caret-right float-end"></em>
-                                                    </a>
-                                                </div>
-                                                <div id="collapseven" class="accordion-collapse  collapse" data-bs-parent="#accordion4">
-                                                    <div class="accordion-body">
-                                                        [uilayout:Advance]
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </uitemplate>
-                                </uilayout>
+                                </uilayout>                                
                                 <uilayout name="TabsContentMedia">
                                     <uitemplate>
                                         <div id="accordion" mn-ng-show="ShowMediaTab">
@@ -158,43 +105,9 @@
             <uielement name="FileExtensions" tooltip="false" control="textarea" attr-rows="6" container-attr-access-roles="host"></uielement>
             <uielement name="DefaultEndUserExtensionWhitelist" tooltip="false" control="textarea" attr-rows="6" container-attr-access-roles="host"></uielement>
         </uilayout>
-
-        <uilayout name="Login">
-            <!--<uielement name="DefaultAuthProvider" attr-ng-model="ui.data.UpdateBasicLoginSettingsRequest.Options.DefaultAuthProvider" control="dropdownlist" container-attr-access-roles="host"></uielement>-->
-            <uielement name="RequireValidProfileAtLogin" ngmodel="ui.data.UpdateBasicLoginSettingsRequest.Options.RequireValidProfileAtLogin" control="checkboxtoggle" attr-class="toggle_right" container-attr-access-roles="host"></uielement>
-            <!--<uielement name="HideLoginControl" ngmodel="ui.data.UpdateBasicLoginSettingsRequest.Options.HideLoginControl" control="checkboxtoggle" attr-class="toggle_right" container-attr-access-roles="host"></uielement>-->
-        </uilayout>
-        <uilayout name="Registeration" attr-class="tab-pane active">
-            <uitemplate>
-                <div class="form-group">
-                    <label class="" for="setting_registeration1textbox0" data-bs-toggle="tooltip" title="[L:UserRegistration.Tooltip]">[L:UserRegistration]</label>
-                    <div class="UserRegistration">
-                        <!--<span class="radio-inline" mn-ng-repeat="row in ui.data.UserRegistration.Options.UserRegistrationOptions">
-                            <input name="UserRegistration" mn-ng-model="ui.data.UserRegistration.Options.Settings.UserRegistration" type="radio" value="{{row.Value}}"><span>{{row.Key}}</span>
-                        </span>-->
-                        <div class="input-group-append">
-                            <select class="form-control" ng-model="ui.data.UserRegistration.Options.Settings.UserRegistration">
-                                <option value="{{row.Value}}" mn-ng-repeat="row in ui.data.UserRegistration.Options.UserRegistrationOptions">{{row.Key}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </uitemplate>
-            <uielement name="EnableRegisterNotification" ngmodel="ui.data.UserRegistration.Options.Settings.EnableRegisterNotification" attr-class="toggle_right" control="checkboxtoggle"></uielement>
-            <uielement name="UseEmailAsUsername" ngmodel="ui.data.UserRegistration.Options.Settings.UseEmailAsUsername" attr-class="toggle_right" control="checkboxtoggle"></uielement>
-            <uielement name="UseRandomPassword" ngmodel="ui.data.UserRegistration.Options.Settings.UseRandomPassword" attr-class="toggle_right" control="checkboxtoggle"></uielement>
-        </uilayout>
-        <uilayout name="Advance" attr-class="tab-pane active">
-            <uielement name="EmailAddressValidation" attr-ng-model="ui.data.UserRegistration.Options.Settings.EmailAddressValidation" control="textbox"></uielement>
-        </uilayout>
+        
         <uilayout name="SSL" attr-class="tab-pane active" attr-ng-show="ShowSSLModule">
-            <uielement name="SSLEnabled" attr-class="toggle_right" ngmodel="ui.data.UpdateSslSettingsRequest.Options.SSLEnabled" container-attr-access-roles="admin,host" control="toggle"></uielement>
-            <!--<uielement name="line" control="line" label="false" container-attr-access-roles="admin,host"></uielement>-->
-            <!--<uielement name="SSLEnforced" attr-class="toggle_right" ngmodel="ui.data.UpdateSslSettingsRequest.Options.SSLEnforced" container-attr-access-roles="admin,host" control="checkboxtoggle"></uielement>-->
-            <!--<uielement name="line" control="line" label="false" container-attr-access-roles="admin,host"></uielement>
-            <uielement name="SSLURL" control="textbox" ngmodel="ui.data.UpdateSslSettingsRequest.Options.SSLURL" container-attr-access-roles="admin,host"></uielement>
-            <uielement name="StandardURL" control="textbox" ngmodel="ui.data.UpdateSslSettingsRequest.Options.STDURL" container-attr-access-roles="admin,host"></uielement>
-            <uielement name="SSLOffloadHeaderValue" ngmodel="ui.data.UpdateSslSettingsRequest.Options.SSLOffloadHeader" control="textbox" container-attr-access-roles="host"></uielement>-->
+            <uielement name="SSLEnabled" attr-class="toggle_right" ngmodel="ui.data.UpdateSslSettingsRequest.Options.SSLEnabled" container-attr-access-roles="admin,host" control="toggle"></uielement>            
         </uilayout>
 
         <uilayout name="Pictures" attr-class="tab-pane active">

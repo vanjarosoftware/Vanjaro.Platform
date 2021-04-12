@@ -68,6 +68,7 @@ copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.Users.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.Workflow.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.Privacy.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.MemberProfile.dll bin\ >NUL
+copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Menu.Memberships.dll bin\ >NUL
 
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Toolbar.DeviceMode.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Toolbar.Fullscreen.dll bin\ >NUL
@@ -296,6 +297,10 @@ del menu-privacy-resources.zip >NUL 2>&1
 cd ..\MemberProfile >NUL
 del menu-memberprofile-resources.zip >NUL 2>&1
 "C:\Program Files\7-Zip\7z.exe" a menu-memberprofile-resources.zip @Resources.txt -xr!?svn\ >NUL
+
+cd ..\Memberships >NUL
+del menu-memberships-resources.zip >NUL 2>&1
+"C:\Program Files\7-Zip\7z.exe" a menu-memberships-resources.zip @Resources.txt -xr!?svn\ >NUL
 
 cd ..\..\Toolbar\DeviceMode >NUL
 del toolbar-devicemode-resources.zip >NUL 2>&1
