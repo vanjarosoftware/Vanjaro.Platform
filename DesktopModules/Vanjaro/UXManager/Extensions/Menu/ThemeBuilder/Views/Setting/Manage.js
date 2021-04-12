@@ -201,7 +201,7 @@
     };
 
     $scope.OpenPopUp = function (hash) {
-        window.location.hash = hash;
+        window.location.hash = "#!/" + hash;
     };
 
     $scope.Change_GoogleFont = function () {
@@ -230,7 +230,7 @@
 
     $scope.AddEditSetting = function (hash) {
         event.preventDefault();
-        window.location.hash = hash + '/' + $scope.ui.data.Guid.Value;
+        window.location.hash = "#!/"+hash + '/' + $scope.ui.data.Guid.Value;
     };
 
     $scope.IsGoogleFont = function (FontName)

@@ -232,14 +232,14 @@
             },
                 function (isConfirm) {
                     if (isConfirm) {
-                        window.location.hash = 'categories/' + $scope.ui.data.ThemeName.Value;
+                        window.location.hash = '#!/categories/' + $scope.ui.data.ThemeName.Value;
                     }
                     else
                         $scope.ResetMarkUp(ResetMarkUp, formdata);
                 });
         }
         else
-            window.location.hash = 'categories/' + $scope.ui.data.ThemeName.Value;
+            window.location.hash = '#!/categories/' + $scope.ui.data.ThemeName.Value;
     };
 
     $scope.OpenPopUp = function () {
