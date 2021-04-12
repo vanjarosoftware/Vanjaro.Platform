@@ -168,7 +168,7 @@
                     var parentScope = parent.document.getElementById("iframe").contentWindow.angular.element("#dvMarkUp").scope();
                     parentScope.ui.data.MarkUp.Value = response.data;
                     window.parent.document.getElementById("iframe").contentWindow.location.reload();
-                    window.location.hash = 'manage/' + $scope.ui.data.CatGuid.Value;
+                    window.location.hash = '#!/manage/' + $scope.ui.data.CatGuid.Value;
                 }
                 else
                     swal(response.data);
@@ -177,7 +177,7 @@
     };
 
     $scope.Click_CancelEdit = function () {
-        window.location.hash = 'manage/' + $scope.ui.data.CatGuid.Value;
+        window.location.hash = '#!/manage/' + $scope.ui.data.CatGuid.Value;
     };
 
     $scope.AddUpdateControl = function (type, control) {
