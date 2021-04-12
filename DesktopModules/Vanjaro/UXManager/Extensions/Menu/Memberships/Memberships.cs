@@ -25,13 +25,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Memberships
                     Text = Localization.Get(ExtensionInfo.Name, "Text", Constants.LocalResourcesFile, Extension.ShowMissingKeysStatic, Localization.SharedMissingPrefix),
 
                     ItemGuid = Guid.Parse(ExtensionInfo.GUID),
-                    Icon = "fas fa-lock",
-                    ViewOrder = 700,
+                    Icon = "fa fa-users",
+                    ViewOrder = 620,
                     BelowBreakLine = false,
                     Hierarchy = new MenuItem
                     {
                         Text = Localization.Get("Settings", "Text", Components.Constants.LocalResourcesFile, Extension.ShowMissingKeysStatic, Localization.SharedMissingPrefix),
-                        Icon = "fa fa-file",
+                        Icon = "fas fa-cog",
                     }
                 });
                 return ListItems;
