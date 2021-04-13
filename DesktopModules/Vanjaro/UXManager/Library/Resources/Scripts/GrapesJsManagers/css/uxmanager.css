@@ -1249,9 +1249,20 @@ div#MenuSettings .parent-menu-hide {
 }
 
 #gjs-clm-add-tag, .gjs-clm-tags-btn {
-    padding: 1px;
-    top: 3px;
-    position: relative;
+    position: absolute;
+    top: -37px;
+    right: 0px;
+    width: 29px;
+    height: 29px;
+    margin-right: 0;
+}
+
+.gjs-clm-header-status {
+    margin-left: 0;
+}
+
+.gjs-clm-tags #gjs-clm-tags-field {
+    padding-bottom: 2px;
 }
 
 .opac50 {
@@ -3478,13 +3489,25 @@ body.resp-mode.mobile-landscape .vj-wrapper {
 
 .ssmanager .component-name-box {
     background: #fff;
-    padding: 10px 10px 0 10px !important;
+    padding: 0 10px !important;
 }
 
 .ssmanager .component-name {
-    font-size: 14px;
+    font-size: 10px;
     color: #495157;
-    font-weight: bold;
+}
+
+.ssmanager .component-id {
+    font-size: 10px;
+    color: #c9c9c9;
+    text-transform: none;
+    display: block;
+    top: -5px;
+    position: relative;
+}
+
+.gjs-clm-tags #gjs-clm-checkbox {
+    display: none;
 }
 
 .gjs-clm-sels-info {

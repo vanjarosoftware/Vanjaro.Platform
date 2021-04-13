@@ -1945,8 +1945,9 @@ $(document).ready(function () {
                             }
 
                             VjEditor.on('component:selected', (model, argument) => {
-                                var Componenttype = model.getName();
-                                $('.ssmanager .component-name').text(Componenttype);
+                                
+                                $('.ssmanager .component-name').text(model.getName());
+                                $('.ssmanager .component-id').text('#' + model.getId());
 
                                 if (typeof model.attributes.type == 'undefined')
                                     return false;
