@@ -1626,6 +1626,8 @@ $(document).ready(function () {
                                     }
                                 });
 
+                                $('#gjs-clm-add-tag').attr('title', 'Add Class').tooltip();
+
                                 $.each(getAllComponents(), function (ci, cd) {
                                     if (cd.attributes.forcesave != undefined && cd.attributes.forcesave == 'true') {
                                         delete cd.attributes.forcesave;

@@ -1262,7 +1262,8 @@ div#MenuSettings .parent-menu-hide {
 }
 
 .gjs-clm-tags #gjs-clm-tags-field {
-    padding-bottom: 2px;
+    padding: 0;
+    border: 0;
 }
 
 .opac50 {
