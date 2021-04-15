@@ -21,17 +21,17 @@ namespace Vanjaro.Core
 
                 return Locales;
             }
-            public static void AddProperty(Localization localization)
+            public static void AddProperty(int PortalID, Localization localization)
             {
                 List<Localization> Localization = new List<Localization>
                 {
                     localization
                 };
-                AddProperty(Localization);
+                AddProperty(PortalID, Localization);
             }
-            public static void AddProperty(List<Localization> localizations)
+            public static void AddProperty(int PortalID, List<Localization> localizations)
             {
-                Factories.LocalizationFactory.AddUpdateProperty(localizations);
+                Factories.LocalizationFactory.AddUpdateProperty(PortalID, localizations);
             }
             public static void RemoveProperty(string EntityName, int EntityID)
             {
