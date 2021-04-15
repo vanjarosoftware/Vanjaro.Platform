@@ -389,14 +389,13 @@ export default (editor, config = {}) => {
 
 			if (event.target.value == "none") {
 				style["border-width"] = "0";
-				style["padding"] = "10px";
 				style["border-radius"] = "0";
 			}
-			else if (event.target.value == "circle") {
+            else if (event.target.value == "circle") {
 				style["border-width"] = mainComponent.getTrait('framewidth').getInitValue() + "px";
 				style["border-radius"] = "50%";
 			}
-			else if (event.target.value == "square") {
+            else if (event.target.value == "square") {
 				style["border-width"] = mainComponent.getTrait('framewidth').getInitValue() + "px";
 				style["border-radius"] = "0";
 			}

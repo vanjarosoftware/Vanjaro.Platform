@@ -209,7 +209,7 @@
 						],
 						min: "0",
 						max: "200",
-						default: "10",
+						default: "0",
 						changeProp: 1,
 					}, {
 						label: "Style",

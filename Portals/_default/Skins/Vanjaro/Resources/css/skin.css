@@ -114,7 +114,6 @@
     vertical-align: middle;
     color: inherit;
     fill: currentColor;
-    padding: 10px;
     border-width: 0;
     border-style: solid;
 }
@@ -212,12 +211,6 @@ video {
 
 a, a:hover, a:focus, a:active {
     text-decoration: none;
-}
-
-
-.button-box,
-.icon-box {
-    margin: 5px;
 }
 
     .button-box .button-text {
