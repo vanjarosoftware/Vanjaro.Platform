@@ -33,7 +33,7 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('sites/delete', 'PortalID=' + row.PortalId).then(function (Response) {
+                    common.webApi.get('sites/delete', 'PortalID=' + row.PortalID).then(function (Response) {
                         if (Response.data.IsSuccess) {
                             $scope.RefreshGrid();
                             window.parent.ShowNotification('[LS:Sites]', '[L:Success_DeleteMessage]', 'success');
