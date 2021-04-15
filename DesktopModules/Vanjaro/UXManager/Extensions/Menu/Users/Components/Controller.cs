@@ -19,10 +19,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Components
 
                     UserInfo iUserInfo = UserController.GetUserById(pS.PortalId, iUserId);
 
-                    if (iUserInfo.IsInRole("Administrators") && !pS.UserInfo.IsSuperUser)
-                    {
-                        return "Cannot impersonate an Administrator!";
-                    }
+                    //if (iUserInfo.IsInRole("Administrators") && !pS.UserInfo.IsSuperUser)
+                    //{
+                    //    return "Cannot impersonate an Administrator!";
+                    //}
 
                     if (iUserInfo != null)
                     {

@@ -14,7 +14,7 @@ using Vanjaro.UXManager.Library.Common;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
 {
-    [AuthorizeAccessRoles(AccessRoles = "host")]
+    [AuthorizeAccessRoles(AccessRoles = "admin")]
     public class ImpersonationController : UIEngineController
     {
 
