@@ -1,4 +1,5 @@
-﻿using Dnn.PersonaBar.Sites.Components;
+﻿using Dnn.PersonaBar.Recyclebin.Components;
+using Dnn.PersonaBar.Sites.Components;
 using Dnn.PersonaBar.Sites.Services.Dto;
 using DotNetNuke.Abstractions.Portals;
 using DotNetNuke.Common;
@@ -8,6 +9,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
+using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
@@ -360,24 +362,25 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 return actionResult;
             }
         }
-        public static ActionResult DeletePortal(int portalId, PortalSettings portalSettings)
+        public static ActionResult DeletePortal(int portalIdToDelete, PortalSettings currentPortalSettings)
         {
             ActionResult actionResult = new ActionResult();
-
             string LocalResourceFile = Components.Constants.LocalResourcesFile;
-
             try
             {
-                PortalInfo portal = PortalController.Instance.GetPortal(portalId);
+                PortalInfo portal = PortalController.Instance.GetPortal(portalIdToDelete);
                 if (portal != null)
                 {
-                    if (portal.PortalID != portalSettings.PortalId && !PortalController.IsMemberOfPortalGroup(portal.PortalID))
+                    if (portal.PortalId != currentPortalSettings.PortalId && !PortalController.IsMemberOfPortalGroup(portal.PortalId))
                     {
-                        string strMessage = PortalController.DeletePortal(portal, portalSettings.HomeDirectoryMapPath);// need to check this line
+                        PortalSettings ps = new PortalSettings(portal.PortalId);
+                        List<UserInfo> portalUsers = SoftDeleteUsers(portal.PortalId);
+                        DataCache.ClearHostCache(true);
+                        RecyclebinController.Instance.DeleteUsers(portalUsers);
+                        string strMessage = PortalController.DeletePortal(portal, GetAbsoluteServerPath());
                         if (string.IsNullOrEmpty(strMessage))
                         {
-                            DeleteVanjaroPortal(portalId);
-                            EventLogController.Instance.AddLog("PortalName", portal.PortalName, portalSettings as IPortalSettings, portalSettings.UserInfo.UserID, EventLogController.EventLogType.PORTAL_DELETED);
+                            DeleteVanjaroPortal(portal);
                             actionResult.IsSuccess = true;
                             return actionResult;
                         }
@@ -386,8 +389,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                     }
                     actionResult.AddError("PortalDeletionDenied", Localization.GetString("PortalDeletionDenied", LocalResourceFile));
                     return actionResult;
-
-
                 }
                 actionResult.AddError("PortalNotFound", Localization.GetString("PortalNotFound", Components.Constants.LocalResourcesFile));
                 return actionResult;
@@ -409,7 +410,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             portalInfo.RegisterTabId = SignUpTab != null && !SignUpTab.IsDeleted ? SignUpTab.TabID : Null.NullInteger;
             PortalController.Instance.UpdatePortalInfo(portalInfo);
         }
-        public static string GetAbsoluteServerPath()
+        private static string GetAbsoluteServerPath()
         {
             string strServerPath = string.Empty;
             if (HttpContext.Current != null)
@@ -423,13 +424,30 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             }
             return strServerPath;
         }
-        private static void DeleteVanjaroPortal(int PortalID)
+        private static List<UserInfo> SoftDeleteUsers(int portalID)
         {
-            Core.Factories.PortalFactory.DeletePages(PortalID);
-            Core.Factories.PortalFactory.DeleteCustomBlocks(PortalID);
-            Core.Factories.PortalFactory.DeleteSetting(PortalID);
-            Core.Factories.PortalFactory.DeleteWorkflows(PortalID);
-
+            List<UserInfo> result = new List<UserInfo>();
+            using (Core.Data.Entities.VanjaroRepo rp = new Core.Data.Entities.VanjaroRepo())
+            {
+                List<int> userids = rp.Query<int>("select u.UserId from " + Core.Data.Scripts.CommonScript.DnnTablePrefix + "UserPortals u join " + Core.Data.Scripts.CommonScript.DnnTablePrefix + "UserPortals u1 on u1.UserId=u.UserId where u.PortalId=@0 group by u.UserId having count(u1.UserId)=1", portalID).ToList();
+                if (userids != null && userids.Count > 0)
+                {
+                    rp.Execute("update " + Core.Data.Scripts.CommonScript.DnnTablePrefix + "UserPortals set IsDeleted=1 where portalid=@0 and userid in(@1)", portalID, userids);
+                    foreach (int userid in userids)
+                    {
+                        result.Add(new UserInfo() { UserID = userid, PortalID = portalID, IsDeleted = true });
+                    }
+                }
+            }
+            return result;
+        }
+        private static void DeleteVanjaroPortal(PortalInfo portal)
+        {
+            using (Core.Data.Entities.VanjaroRepo rp = new Core.Data.Entities.VanjaroRepo())
+            {
+                rp.Execute("delete from " + Core.Data.Scripts.CommonScript.TablePrefix + "VJ_Common_HTMLEditor_Profile where PortalID=@0", portal.PortalId);
+            }
+            PortalFactory.DeleteWorkflows(portal.PortalId);
         }
     }
 }

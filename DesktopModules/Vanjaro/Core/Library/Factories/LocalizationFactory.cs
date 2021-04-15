@@ -10,7 +10,7 @@ namespace Vanjaro.Core
     {
         internal static class LocalizationFactory
         {
-            internal static void AddUpdateProperty(List<Localization> Localizations)
+            internal static void AddUpdateProperty(int PortalID, List<Localization> Localizations)
             {
                 VanjaroRepo db = VanjaroRepo.GetInstance();
                 using (Transaction scope = db.GetTransaction())
@@ -25,6 +25,7 @@ namespace Vanjaro.Core
                             }
                             else
                             {
+                                localization.PortalID = PortalID;
                                 localization.Insert();
                             }
                         }

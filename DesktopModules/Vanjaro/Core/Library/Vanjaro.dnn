@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="Vanjaro" type="Library" version="01.00.04">
+    <package name="Vanjaro" type="Library" version="01.00.05">
       <friendlyName>Vanjaro</friendlyName>
       <description>Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN.</description>
       <dependencies>
@@ -44,6 +44,11 @@
               <path>Install</path>
               <name>Core.01.00.04.SqlDataProvider</name>
               <version>01.00.04</version>
+            </script>
+            <script type="Install">
+              <path>Install</path>
+              <name>Core.01.00.05.SqlDataProvider</name>
+              <version>01.00.05</version>
             </script>
             <script type="UnInstall">
               <path>Install</path>
@@ -116,12 +121,12 @@
             <assembly>
               <path>bin</path>
               <name>Vanjaro.Core.Providers.Mail.VanjaroMailProvider.dll</name>
-              <version>01.00.04</version>
+              <version>01.00.05</version>
             </assembly>
             <assembly>
               <path>bin</path>
               <name>Vanjaro.Core.dll</name>
-              <version>01.00.04</version>
+              <version>01.00.05</version>
             </assembly>
             <assembly>
               <path>bin</path>

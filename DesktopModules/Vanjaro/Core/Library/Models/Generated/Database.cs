@@ -173,6 +173,7 @@ namespace Vanjaro.Core.Data.Entities
     public partial class Localization : VanjaroRepo.Record<Localization>
     {
         [Column] public int LocalizationID { get; set; }
+        [Column] public int PortalID { get; set; }
         [Column] public string Language { get; set; }
         [Column] public string EntityName { get; set; }
         [Column] public int EntityID { get; set; }
