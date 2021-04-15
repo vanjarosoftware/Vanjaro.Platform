@@ -176,7 +176,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
 
                             if (LocaleController.Instance.GetDefaultLocale(PortalSettings.Current.PortalId).Code != PortalSettings.Current.CultureCode)
                             {
-                                LocalizationManager.AddProperty(PageSettingLayout.LocaleProperties);
+                                LocalizationManager.AddProperty(portalSettings.PortalId, PageSettingLayout.LocaleProperties);
                             }
                         }
                         List<TabInfo> tabs = TabController.GetPortalTabs(portalSettings.PortalId, Null.NullInteger, false, true, false, true);

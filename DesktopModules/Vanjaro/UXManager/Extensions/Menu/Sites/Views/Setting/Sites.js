@@ -33,7 +33,10 @@
         },
             function (isConfirm) {
                 if (isConfirm) {
-                    common.webApi.get('sites/delete', 'PortalID=' + row.PortalId).then(function (Response) {
+                    var pid = row.PortalId;
+                    if (pid == undefined)
+                        pid = row.PortalID;
+                    common.webApi.get('sites/delete', 'PortalID=' + pid).then(function (Response) {
                         if (Response.data.IsSuccess) {
                             $scope.RefreshGrid();
                             window.parent.ShowNotification('[LS:Sites]', '[L:Success_DeleteMessage]', 'success');
@@ -64,9 +67,12 @@
         },
             function (IsConfirm) {
                 if (IsConfirm) {
+                    var pid = row.PortalId;
+                    if (pid == undefined)
+                        pid = row.PortalID;
                     $http({
                         method: 'GET',
-                        url: window.location.origin + jQuery.ServicesFramework(-1).getServiceRoot('Sites') + "Sites/Export?PortalID=" + row.PortalId + "&Name=" + row.PortalName,
+                        url: window.location.origin + jQuery.ServicesFramework(-1).getServiceRoot('Sites') + "Sites/Export?PortalID=" + pid + "&Name=" + row.PortalName,
                         responseType: 'arraybuffer',
                         headers: {
                             'ModuleId': -1,
@@ -92,7 +98,7 @@
                         } catch (ex) {
                             alert(ex);
                         }
-                    },function (data) {
+                    }, function (data) {
                         alert(data.data);
                     });
                 }
