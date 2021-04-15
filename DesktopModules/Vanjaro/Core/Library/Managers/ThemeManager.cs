@@ -731,7 +731,7 @@ namespace Vanjaro.Core
                 sb.Append("<div class=\"dropdown float-end dropbtn\">");
                 sb.Append("<a id=\"dropdownMenuLink\" class=\"dropdownmenu\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><em class=\"fas fa-ellipsis-v\"></em></a>");
                 sb.Append("<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuLink\">");
-                sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + item.Guid + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
+                sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('#!/edit/" + Guid + "/" + item.Guid + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
                 if (developerMode)
                 {
                     sb.Append("<hr class=\"small\" />");
@@ -755,21 +755,21 @@ namespace Vanjaro.Core
                         string type = themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count == 0).FirstOrDefault().Guid;
                         if (string.IsNullOrEmpty(type))
                             type = "new";
-                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/" + type + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
+                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('#!/edit/" + Guid + "/" + themeEditorGroup.Key + "/" + type + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
                     }
                     else if (themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count > 0).FirstOrDefault() != null)
                     {
-                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count > 0).FirstOrDefault().Guid + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
+                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('#!/edit/" + Guid + "/" + themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count > 0).FirstOrDefault().Guid + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
                     }
                     else
                     {
                         string type = "new";
                         if (themeEditorGroup != null && themeEditorGroup.FirstOrDefault() != null)
                             type = themeEditorGroup.FirstOrDefault().Guid;
-                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/" + type + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
+                        sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('#!/edit/" + Guid + "/" + themeEditorGroup.Key + "/" + type + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
                     }
 
-                    sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Key + "/newsub')\"><em class=\"fas fa-plus mr-xs\"></em><span>Add Subcategory</span></a>");
+                    sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('#!/edit/" + Guid + "/" + themeEditorGroup.Key + "/newsub')\"><em class=\"fas fa-plus mr-xs\"></em><span>Add Subcategory</span></a>");
                     sb.Append("<hr class=\"small\" />");
                     sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"Delete('" + themeEditorGroup.Key + "')\"><em class=\"fas fa-trash mr-xs\"></em><span>Delete</span></a>");
                     sb.Append("</div>");
@@ -780,7 +780,7 @@ namespace Vanjaro.Core
                     sb.Append("<div class=\"dropdown float-end dropbtn\">");
                     sb.Append("<a id=\"dropdownMenuLink\" class=\"dropdownmenu\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><em class=\"fas fa-ellipsis-v\"></em></a>");
                     sb.Append("<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuLink\">");
-                    sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('edit/" + Guid + "/" + themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count > 0).FirstOrDefault().Guid + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
+                    sb.Append("<a class=\"dropdown-item box-icon\" ng-click=\"OpenPopUp('#!/edit/" + Guid + "/" + themeEditorGroup.Where(g => string.IsNullOrEmpty(g.Title) == true && g.Controls.Count > 0).FirstOrDefault().Guid + "')\"><em class=\"fas fa-cog mr-xs\"></em><span>Settings</span></a>");
                     sb.Append("</div>");
                     sb.Append("</div>");
                 }

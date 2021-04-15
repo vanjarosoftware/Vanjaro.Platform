@@ -179,12 +179,12 @@
     };
 
     $scope.OpenPopUp = function (hash) {
-        window.location.hash = "#!/" + hash;
+        window.location.hash = hash;
     };
 
     $scope.AddEditSetting = function (hash) {
         event.preventDefault();
-        window.location.hash = "#!/"+hash + '/' + $scope.ui.data.Guid.Value;
+        window.location.hash = hash + '/' + $scope.ui.data.Guid.Value;
     };
 
 });
