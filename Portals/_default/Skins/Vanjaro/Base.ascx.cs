@@ -191,7 +191,7 @@ namespace Vanjaro.Skin
                     Page.FindControl("Body").Controls.AddAt(0, BodyScript);
                 }
             }
-            else if(!string.IsNullOrEmpty(Host_Head) || !string.IsNullOrEmpty(Host_Body))
+            else if (!string.IsNullOrEmpty(Host_Head) || !string.IsNullOrEmpty(Host_Body))
             {
                 if (!string.IsNullOrEmpty(Host_Head))
                 {
@@ -206,7 +206,7 @@ namespace Vanjaro.Skin
             }
             else
                 RenderGoogleAnalyticsScript();
-            
+
         }
         private void RenderGoogleAnalyticsScript()
         {
@@ -416,7 +416,8 @@ namespace Vanjaro.Skin
                     RemoveDataBlocks(html);
 
                 string FinalMarkup = InjectModules(html.DocumentNode.OuterHtml);
-                if (page.ReplaceTokens)
+                
+                if (page != null && page.ReplaceTokens)
                     FinalMarkup = new TokenReplace().ReplaceEnvironmentTokens(FinalMarkup);
 
                 string ClassName = "vj-wrapper";
@@ -1015,7 +1016,7 @@ namespace Vanjaro.Skin
                 Page.Header.Controls.Add(Link);
             }
         }
-                
+
         private void RenderLocalizedMetaData()
         {
             DotNetNuke.Framework.CDefault basePage = (DotNetNuke.Framework.CDefault)Page;
