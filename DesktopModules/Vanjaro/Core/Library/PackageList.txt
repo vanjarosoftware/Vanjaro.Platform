@@ -15,7 +15,6 @@ licenses-resources.zip
 ..\..\UXManager\Extensions\Block\BreadCrumb\block-breadcrumb-resources.zip
 ..\..\UXManager\Extensions\Block\Custom\block-custom-resources.zip
 ..\..\UXManager\Extensions\Block\Login\block-login-resources.zip
-..\..\UXManager\Extensions\Block\LoginLink\block-loginlink-resources.zip
 ..\..\UXManager\Extensions\Block\Logo\block-logo-resources.zip
 ..\..\UXManager\Extensions\Block\Menu\block-menu-resources.zip
 ..\..\UXManager\Extensions\Block\Profile\block-profile-resources.zip

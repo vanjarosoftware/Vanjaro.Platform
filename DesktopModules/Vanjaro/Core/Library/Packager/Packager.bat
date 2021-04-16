@@ -30,7 +30,6 @@ copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Block.BlockLanguage.dll bin\  
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Block.BreadCrumb.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Block.Custom.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Block.Login.dll bin\ >NUL
-copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Block.LoginLink.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Block.Logo.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Block.Menu.dll bin\ >NUL
 copy ..\..\..\..\bin\Vanjaro.UXManager.Extensions.Block.Profile.dll bin\ >NUL
@@ -144,10 +143,6 @@ del block-custom-resources.zip >NUL 2>&1
 cd ..\Login >NUL
 del block-login-resources.zip >NUL
 "C:\Program Files\7-Zip\7z.exe" a block-login-resources.zip @Resources.txt -xr!?svn\ >NUL
-
-cd ..\LoginLink >NUL
-del block-loginlink-resources.zip >NUL 2>&1
-"C:\Program Files\7-Zip\7z.exe" a block-loginlink-resources.zip @Resources.txt -xr!?svn\ >NUL
 
 cd ..\Logo >NUL
 del block-logo-resources.zip >NUL 2>&1

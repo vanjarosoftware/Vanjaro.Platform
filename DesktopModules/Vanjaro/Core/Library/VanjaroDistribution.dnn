@@ -186,12 +186,7 @@
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.Login.dll</name>
 							<version>01.00.05</version>
-						</assembly>
-						<assembly>
-							<path>bin</path>
-							<name>Vanjaro.UXManager.Extensions.Block.LoginLink.dll</name>
-							<version>01.00.05</version>
-						</assembly>
+						</assembly>						
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.Logo.dll</name>
@@ -587,15 +582,7 @@
 							<name>block-login-resources.zip</name>
 						</resourceFile>
 					</resourceFiles>
-				</component>
-				<component type="ResourceFile">
-					<resourceFiles>
-						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Block\LoginLink</basePath>
-						<resourceFile>
-							<name>block-loginlink-resources.zip</name>
-						</resourceFile>
-					</resourceFiles>
-				</component>
+				</component>				
 				<component type="ResourceFile">
 					<resourceFiles>
 						<basePath>DesktopModules\Vanjaro\UXManager\Extensions\Block\Logo</basePath>
