@@ -371,10 +371,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 PortalInfo portal = PortalController.Instance.GetPortal(portalIdToDelete);
                 if (portal != null)
                 {
-                    if (portal.PortalId != currentPortalSettings.PortalId && !PortalController.IsMemberOfPortalGroup(portal.PortalId))
+                    if (portal.PortalID != currentPortalSettings.PortalId && !PortalController.IsMemberOfPortalGroup(portal.PortalID))
                     {
-                        PortalSettings ps = new PortalSettings(portal.PortalId);
-                        List<UserInfo> portalUsers = SoftDeleteUsers(portal.PortalId);
+                        PortalSettings ps = new PortalSettings(portal.PortalID);
+                        List<UserInfo> portalUsers = SoftDeleteUsers(portal.PortalID);
                         DataCache.ClearHostCache(true);
                         RecyclebinController.Instance.DeleteUsers(portalUsers);
                         string strMessage = PortalController.DeletePortal(portal, GetAbsoluteServerPath());
@@ -410,7 +410,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             portalInfo.RegisterTabId = SignUpTab != null && !SignUpTab.IsDeleted ? SignUpTab.TabID : Null.NullInteger;
             PortalController.Instance.UpdatePortalInfo(portalInfo);
         }
-        private static string GetAbsoluteServerPath()
+        public static string GetAbsoluteServerPath()
         {
             string strServerPath = string.Empty;
             if (HttpContext.Current != null)
@@ -445,9 +445,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
         {
             using (Core.Data.Entities.VanjaroRepo rp = new Core.Data.Entities.VanjaroRepo())
             {
-                rp.Execute("delete from " + Core.Data.Scripts.CommonScript.TablePrefix + "VJ_Common_HTMLEditor_Profile where PortalID=@0", portal.PortalId);
+                rp.Execute("delete from " + Core.Data.Scripts.CommonScript.TablePrefix + "VJ_Common_HTMLEditor_Profile where PortalID=@0", portal.PortalID);
             }
-            PortalFactory.DeleteWorkflows(portal.PortalId);
+            PortalFactory.DeleteWorkflows(portal.PortalID);
         }
     }
 }
