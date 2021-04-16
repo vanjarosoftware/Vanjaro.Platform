@@ -13,7 +13,6 @@ Resources.zip
 ..\Extensions\Block\BreadCrumb\block-breadcrumb-resources.zip
 ..\Extensions\Block\Custom\block-custom-resources.zip
 ..\Extensions\Block\Login\block-login-resources.zip
-..\Extensions\Block\LoginLink\block-loginlink-resources.zip
 ..\Extensions\Block\Logo\block-logo-resources.zip
 ..\Extensions\Block\Menu\block-menu-resources.zip
 ..\Extensions\Block\Profile\block-profile-resources.zip

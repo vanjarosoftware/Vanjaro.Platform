@@ -147,10 +147,10 @@
   <data name="Data.Block.Login.EmailAddressOrUsername.Text" xml:space="preserve">
     <value>Email Address or Username</value>
   </data>
-  <data name="Data.Block.LoginLink.LoginText.Text" xml:space="preserve">
+  <data name="Data.Block.RegisterLink.LoginText.Text" xml:space="preserve">
     <value>My Account</value>
   </data>
-  <data name="Data.Block.LoginLink.LogoutText.Text" xml:space="preserve">
+  <data name="Data.Block.RegisterLink.LogoutText.Text" xml:space="preserve">
     <value>Sign out</value>
   </data>
   <data name="Data.Block.RegisterLink.RegisterText.Text" xml:space="preserve">

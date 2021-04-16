@@ -275,7 +275,6 @@
     <Content Include="Resources\Images\youtube.png" />
     <Content Include="Themes\Basic\Blocks\Breadcrumb\breadcrumb.html" />
     <Content Include="Themes\Basic\Blocks\Language\language.html" />
-    <Content Include="Themes\Basic\Blocks\Login Link\login link.html" />
     <Content Include="Themes\Basic\Blocks\Login\login.html" />
     <Content Include="Themes\Basic\Blocks\Logo\logo.html" />
     <Content Include="Themes\Basic\Blocks\Menu\menu.html" />
@@ -383,7 +382,6 @@
   <ItemGroup>
     <Content Include="Themes\Basic\Blocks\Breadcrumb\Templates\Default.cshtml" />
     <Content Include="Themes\Basic\Blocks\Language\Templates\Default.cshtml" />
-    <Content Include="Themes\Basic\Blocks\Login Link\Templates\Default.cshtml" />
     <Content Include="Themes\Basic\Blocks\Login\Templates\Default.cshtml" />
     <Content Include="Themes\Basic\Blocks\Logo\Templates\Default.cshtml" />
     <Content Include="Themes\Basic\Blocks\Menu\Templates\Default.cshtml" />
@@ -415,7 +413,9 @@
     <Content Include="Themes\Basic\theme.editor.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Themes\Basic\App_LocalResources\Shared.resx" />
+    <Content Include="Themes\Basic\App_LocalResources\Shared.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Themes\Basic\templates\design\Cookie Consent\Default.cshtml" />
