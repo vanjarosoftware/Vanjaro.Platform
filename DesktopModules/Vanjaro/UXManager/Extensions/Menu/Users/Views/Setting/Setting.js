@@ -250,7 +250,7 @@
         return common.webApi.get('user/countries', 'keyword=' + userInputString).then(function (response) { });
     };
     $scope.RoleremoteAPI = function (userInputString, timeoutPromise) {
-        return common.webApi.get('user/getsuggestionroles', 'keyword=' + userInputString).then(function (response) { });
+        return common.webApi.get('user/getsuggestionroles', 'keyword=' + userInputString);
     };
 
     $scope.Click_UserRoleAdd = function (selectedRole) {
