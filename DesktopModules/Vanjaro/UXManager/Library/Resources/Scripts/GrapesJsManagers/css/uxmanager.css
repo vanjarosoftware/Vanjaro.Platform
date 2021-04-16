@@ -1639,13 +1639,6 @@ html.mobile-responsive {
             height: 3px;
         }
 
-    .traitsmanager [class*="-custom_range"] input[type="number"] {
-        width: 25%;
-        margin-left: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
 .traitsmanager .gjs-field-select select {
     width: 276px;
 }
@@ -3368,7 +3361,8 @@ body.resp-mode.mobile-landscape .vj-wrapper {
         z-index: 1;
     }
 
-        .stylemanager .sm-range-wrapper input[type="text"] {
+        .stylemanager .sm-range-wrapper input[type="text"],
+        .traitsmanager .range-wrapper input[type="number"] { 
             width: 30%;
             padding-right: 25px;
             margin-left: 10px;
@@ -3434,14 +3428,16 @@ body.resp-mode.mobile-landscape .vj-wrapper {
                 height: 3px;
             }
 
-.stylemanager .sm-unit-wrapper {
+.stylemanager .sm-unit-wrapper,
+.traitsmanager .tm-unit-wrapper {
     position: absolute;
     top: 0;
     right: 2px;
     padding: 6px;
 }
 
-    .stylemanager .sm-unit-wrapper select {
+    .stylemanager .sm-unit-wrapper select,
+    .traitsmanager .tm-unit-wrapper select {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
