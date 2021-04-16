@@ -224,7 +224,7 @@ export default (editor, config = {}) => {
 		var trait = mainComponent.getTrait(event.target.name);
 		var componentType = component.attributes.type;
 
-		if (componentType != 'image-gallery-item' && !event.target.classList.contains('choose-unit')) {
+        if (componentType != 'image-gallery-item' && !event.target.classList.contains('unit-list')) {
 			if (componentType == 'carousel' && event.target.type == 'radio')
 				trait.setTargetValue(event.target.id);
 			else
@@ -247,28 +247,26 @@ export default (editor, config = {}) => {
 				inputRange.value = inputNumber.value;
 
 			if (typeof trait.attributes.units != "undefined") {
-				unit = $(".unit-wrapper input.unit:checked").val();
+                unit = $(".tm-unit-wrapper select.unit-list option:selected").val();
 				component.set({ 'unit': unit });
 			}
 
-			if (event.target.classList.contains('unit')) {
+			if (event.target.classList.contains('unit-list')) {
 
-				$(event.target).prop('checked', true)
-
-				unit = event.target.value;
-				var inputControl = elInput.querySelectorAll('.input-control');
-
+                var inputControl = elInput.querySelectorAll('.input-control');
+                unit = $(event.target).find('option:selected').val();
+                
 				$(trait.attributes.units).each(function (index, option) {
-					if (option.name == unit) {
-						$(inputControl).attr({
-							'value': option.value,
-							'min': option.min,
-							'max': option.max,
-							'step': option.step
-						});
+                    if (option.name == unit) {
+                        $(inputControl).attr({
+                            'value': option.value,
+                            'min': option.min,
+                            'max': option.max,
+                            'step': option.step
+                        });
 
-						$(inputControl).val(option.value);
-						
+                        $(inputControl).val(option.value);
+
 						$(property).each(function (index, item) {
 							style[item.name] = option.value + unit;
 						})
@@ -1510,29 +1508,22 @@ export default (editor, config = {}) => {
 				<input type="range" value="`+ traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="input-control range" /> 
 				<input type="number" value="`+ traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="input-control number" />
 			`;
-			if (typeof trait.attributes.units != "undefined" && trait.attributes.units.length) {
+            if (typeof trait.attributes.units != "undefined" && trait.attributes.units.length) {
+                var wrapper = document.createElement('span')
+                wrapper.setAttribute("class", "tm-unit-wrapper");
 
-				var div = document.createElement("div");
-				div.setAttribute("class", "unit-wrapper");
+                var select = document.createElement("select");
+                select.setAttribute("class", "unit-list");
+                select.setAttribute("name", trait.attributes.name);
 
-				$(trait.attributes.units).each(function (index, option) {
-					var input = document.createElement('input');
-					var label = document.createElement("label");
-
-					input.setAttribute("class", "unit");
-					input.setAttribute("type", "radio");
-					input.setAttribute("name", trait.attributes.name);
-					input.setAttribute("id", trait.attributes.name + option.name);
-					input.setAttribute("value", option.name);
-
-					label.setAttribute("for", trait.attributes.name + option.name);
-					label.innerHTML = option.name;
-
-					div.appendChild(input);
-					div.appendChild(label);
+				$(trait.attributes.units).each(function (index, opt) {
+					var option = document.createElement('option');
+                    option.setAttribute("value", opt.name);
+                    option.innerHTML = opt.name;
+                    select.appendChild(option);
 				});
-
-				el.appendChild(div);
+                wrapper.appendChild(select);
+                el.appendChild(wrapper);
 			}
 
 			return el;
@@ -1557,8 +1548,7 @@ export default (editor, config = {}) => {
 
                     if (typeof trait.attributes.units != 'undefined') {
                         $(trait.attributes.units).each(function (index, option) {
-
-                            if (value.indexOf(option.name) >= 0) {
+                            if (value.replace('.', '').replace(/\d+/g, '').trim() == option.name) {
                                 unit = option.name
                                 return false;
                             }
@@ -1595,7 +1585,7 @@ export default (editor, config = {}) => {
                     });
                 }
 
-                trait.view.$el.find('input[value="' + unit + '"]').prop('checked', true);
+                trait.view.$el.find('select').val(unit);
             }
             else
                 inputvalue = trait.getInitValue().replace(/[^-\d\.]/g, '');            

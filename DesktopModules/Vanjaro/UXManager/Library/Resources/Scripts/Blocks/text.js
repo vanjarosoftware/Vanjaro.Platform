@@ -45,8 +45,12 @@ export default (editor, config = {}) => {
 						type: "custom_range",
 						cssproperties: [{ name: "font-size" }],
 						units: [
-							{ name: 'px', min: 10, max: 100, step: 1, value: 16 },
-							{ name: 'vw', min: 0.5, max: 10, step: 0.1, value: 1 },
+                            { name: 'px', min: 10, max: 100, step: 1, value: 16 },
+                            { name: '%', min: 10, max: 100, step: 1, value: 100 },
+                            { name: 'em', min: 0.5, max: 10, step: 0.1, value: 1 },
+                            { name: 'rem', min: 0.5, max: 10, step: 0.1, value: 1 },
+                            { name: 'vw', min: 0.5, max: 10, step: 0.1, value: 1 },
+                            { name: 'vh', min: 0.5, max: 10, step: 0.1, value: 1.5 },
 						],
 						unit: "px",
 						changeProp: 1
@@ -137,15 +141,16 @@ export default (editor, config = {}) => {
 						name: "fontsize",
 						type: "custom_range",
 						cssproperties: [{ name: "font-size" }],
-						units: [
-							{ name: 'px' },
-							{ name: '%' },
-							{ name: 'em' }
-						],
+                        units: [
+                            { name: 'px', min: 10, max: 100, step: 1, value: 16 },
+                            { name: '%', min: 10, max: 100, step: 1, value: 100 },
+                            { name: 'em', min: 0.5, max: 10, step: 0.1, value: 1 },
+                            { name: 'rem', min: 0.5, max: 10, step: 0.1, value: 1 },
+                            { name: 'vw', min: 0.5, max: 10, step: 0.1, value: 1 },
+                            { name: 'vh', min: 0.5, max: 10, step: 0.1, value: 1 },
+                        ],
 						unit: "px",
-						min: "1",
-						max: "100",
-						default: "16",
+                        changeProp: 1,
 					}, {
 						label: "Color",
 						name: "color",

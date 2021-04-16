@@ -61,10 +61,14 @@ export default (editor, config = {}) => {
 						name: "fontsize",
 						type: "custom_range",
 						cssproperties: [{ name: "font-size" }],
-						units: [
-							{ name: 'px', min: 10, max: 100, step: 1, value: 40 },
-							{ name: 'vw', min: 0.5, max: 10, step: 0.1, value: 2 },
-						],
+                        units: [
+                            { name: 'px', min: 10, max: 100, step: 1, value: 40 },
+                            { name: '%', min: 10, max: 100, step: 1, value: 100 },
+                            { name: 'em', min: 0.5, max: 10, step: 0.1, value: 2 },
+                            { name: 'rem', min: 0.5, max: 10, step: 0.1, value: 2 },
+                            { name: 'vw', min: 0.5, max: 10, step: 0.1, value: 2 },
+                            { name: 'vh', min: 0.5, max: 10, step: 0.1, value: 3 },
+                        ],
 						unit: "px",
 						changeProp: 1,
 					}, {
