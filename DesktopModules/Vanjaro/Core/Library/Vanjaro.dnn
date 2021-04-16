@@ -4,7 +4,7 @@
       <friendlyName>Vanjaro</friendlyName>
       <description>Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN.</description>
       <dependencies>
-        <dependency type="CoreVersion">09.08.01</dependency>
+        <dependency type="CoreVersion">09.09.01</dependency>
         <dependency type="ManagedPackage" version="01.00.00">Dnn.PersonaBar.UI</dependency>
       </dependencies>
       <owner>
