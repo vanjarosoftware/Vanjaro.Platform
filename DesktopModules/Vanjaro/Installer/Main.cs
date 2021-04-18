@@ -386,13 +386,16 @@ namespace Vanjaro.Installer
                     return false;
             }
 
-            if (Properties.Settings.Default.Use32Bit)
-            {
-                DialogResult dR = MessageBox.Show("Are you sure you want to install the 32 Bit (x86) Package? Click No to install 64 bit (x64) package", "Install 32 bit", MessageBoxButtons.YesNo);
+            //Dropped support for 32 Bit Packages. Force 64 Bit
+            Properties.Settings.Default.Use32Bit = false;
 
-                if (dR == DialogResult.No)
-                    Properties.Settings.Default.Use32Bit = false;
-            }
+            //if (Properties.Settings.Default.Use32Bit)
+            //{
+            //    DialogResult dR = MessageBox.Show("Are you sure you want to install the 32 Bit (x86) Package? Click No to install 64 bit (x64) package", "Install 32 bit", MessageBoxButtons.YesNo);
+
+            //    if (dR == DialogResult.No)
+            //        Properties.Settings.Default.Use32Bit = false;
+            //}
 
             if (string.IsNullOrEmpty(tbSiteURL.Text) || string.IsNullOrEmpty(tbSiteTLD.Text) || string.IsNullOrEmpty(tbDatabaseServer.Text) || string.IsNullOrEmpty(tbPhysicalPath.Text))
             {
@@ -872,7 +875,6 @@ namespace Vanjaro.Installer
                     bUpgradeSite.Enabled = true;
                     bUpgradeSite.Text = "Upgrade";
 
-                    //MessageBox.Show("Continue upgrading all sites using the site wizard...", "Site Upgraded", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     BindUpgradeList();
                 }
@@ -883,6 +885,13 @@ namespace Vanjaro.Installer
         {
 
             var Architecture = vanjaroSite.Enable32Bit ? "x86" : "x64";
+
+            //Dropped support for 32 Bit Packages. Force 64 Bit
+            if (Architecture == "x86")
+            {
+                MessageBox.Show("32 Bit App Pools are no longer supported", "Please update App Pool settings and try again.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             bUpgradeSite.Text = "Upgrading " + vanjaroSite.Name;
             bUpgradeSite.Refresh();
