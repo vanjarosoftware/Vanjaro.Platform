@@ -139,7 +139,7 @@
             this.groupBox1.Controls.Add(this.rbWindowsAuth);
             this.groupBox1.Controls.Add(this.metroLabel1);
             this.groupBox1.Controls.Add(this.tbSQLPassword);
-            this.groupBox1.Location = new System.Drawing.Point(23, 181);
+            this.groupBox1.Location = new System.Drawing.Point(23, 63);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(245, 191);
             this.groupBox1.TabIndex = 10;
@@ -150,12 +150,13 @@
             // 
             this.groupBox2.Controls.Add(this.rb32Bit);
             this.groupBox2.Controls.Add(this.rb64Bit);
-            this.groupBox2.Location = new System.Drawing.Point(23, 75);
+            this.groupBox2.Location = new System.Drawing.Point(274, 211);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(245, 100);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Application Pool";
+            this.groupBox2.Visible = false;
             // 
             // groupBox3
             // 
@@ -166,7 +167,7 @@
             this.groupBox3.Controls.Add(this.metroLabel3);
             this.groupBox3.Controls.Add(this.tbUpgradePackage);
             this.groupBox3.Controls.Add(this.metroLabel4);
-            this.groupBox3.Location = new System.Drawing.Point(23, 378);
+            this.groupBox3.Location = new System.Drawing.Point(23, 260);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(245, 163);
             this.groupBox3.TabIndex = 12;
@@ -245,7 +246,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 564);
+            this.ClientSize = new System.Drawing.Size(294, 450);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
