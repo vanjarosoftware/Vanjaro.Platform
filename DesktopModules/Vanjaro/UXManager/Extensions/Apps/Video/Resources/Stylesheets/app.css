@@ -145,3 +145,9 @@
 a.assetIsList {
     margin: 0 5px;
 }
+
+@media (max-width: 576px) {
+    .col-sm-4.scrollbar {
+        height: 100% !important;
+    }
+}

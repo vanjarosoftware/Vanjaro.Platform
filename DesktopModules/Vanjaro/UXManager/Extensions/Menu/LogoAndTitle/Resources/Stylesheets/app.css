@@ -281,3 +281,9 @@ span.label {
 .empty_msg {
     margin-top: 0px;
 }
+
+@media (max-width: 576px) {
+    .col-sm-4.scrollbar {
+        height: 100% !important;
+    }
+}
