@@ -28,15 +28,29 @@ namespace Vanjaro.Container
                         string url = string.Empty;
                         if (!string.IsNullOrEmpty(action.Url) && action.Url.Length > 0)
                         {
-                            var splitarray = action.Url.Split('#');
-                            url = splitarray[0];
-                            if (url.Contains("?"))
-                                url += "&skinsrc=" + "[g]skins/vanjaro/base";
+                            if (action.Url.IndexOf("javascript:") < 0)
+                            {
+                                var splitarray = action.Url.Split('#');
+                                url = splitarray[0];
+                                if (url.Contains("?"))
+                                    url += "&skinsrc=" + "[g]skins/vanjaro/base";
+                                else
+                                    url += "?skinsrc=" + "[g]skins/vanjaro/base";
+                                if (splitarray.Length > 1)
+                                    url += "#!/" + splitarray[1];
+                            }
                             else
-                                url += "?skinsrc=" + "[g]skins/vanjaro/base";
-                            if (splitarray.Length > 1)
-                                url += "#!/" + splitarray[1];
+                            {
+                                try
+                                {
+                                    url = action.Url.Replace("javascript:dnnModal.show('", "").Split(',')[0].Trim('\'');
+                                }
+                                catch (Exception)
+                                {
+                                }
+                            }
                         }
+
                         JsonAction += "{\"Title\":\"" + action.Title + "\", \"Icon\":\"" + action.Icon + "\",\"Url\":\"" + url + "\",\"NewWindow\":\"" + action.NewWindow + "\",\"ModuleId\":\"" + ModuleConfiguration.ModuleID + "\"},";
                     }
                 }
