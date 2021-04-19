@@ -650,3 +650,9 @@ uploaddefault .ud_stfooter ul.pagination, .uploaddefault .images-container table
     top: 0px;
     font-weight: normal;
 }
+
+@media (max-width: 576px) {
+    table tbody tr.imagesrow {
+        width: 50%;
+    }
+}

@@ -1078,3 +1078,13 @@ uploadinput-button {
     border: none;
     outline: none !important;
 }
+
+@media (max-width: 576px) {
+    .vj-ux-manager .nav-stacked {
+        margin-bottom: 20px;
+    }
+
+        .vj-ux-manager .nav-stacked .nav-item {
+            width: auto;
+        }
+}
