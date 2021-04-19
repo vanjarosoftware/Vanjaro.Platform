@@ -13,7 +13,7 @@
                 var attrAdded = false;
                 var target = window.parent.document.vj_personalization_target;
                 if (target != undefined) {
-                    if (Response.Data <= 0) {
+                    if (Response.data.Data <= 0) {
                         const attr = target.getAttributes();
                         delete attr.perm;
                         target.setAttributes(attr);

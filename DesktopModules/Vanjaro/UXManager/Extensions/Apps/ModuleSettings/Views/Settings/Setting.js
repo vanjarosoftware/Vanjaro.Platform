@@ -89,7 +89,7 @@
                     $scope.Click_Cancel('update');
                 }
                 else {
-                    window.parent.ShowNotification('', Response.Message, 'error');
+                    window.parent.ShowNotification('', Response.data.Message, 'error');
                 }
             });
         }

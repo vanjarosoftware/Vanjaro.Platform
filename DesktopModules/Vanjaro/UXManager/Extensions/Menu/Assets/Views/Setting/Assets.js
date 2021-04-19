@@ -425,7 +425,7 @@
                         });
                 }
                 else {
-                    window.parent.ShowNotification('', Data, 'error');
+                    window.parent.ShowNotification('', Data.data, 'error');
                 }
             });
         }
@@ -503,7 +503,7 @@
         var $this = $(event.currentTarget);
         if ($this.hasClass("fas fa-caret-right") && $this.parent().find('> .rootfolder li').length <= 0) {
             common.webApi.get('Upload/GetSubFolders', 'identifier=setting_assets&folderid=' + folder.Value).then(function (data) {
-                if (data !== undefined && data !== null) {
+                if (data.data !== undefined && data.data !== null) {
                     folder.children = data.data;
                     setTimeout(function () {
                         $this.toggleClass('fas fa-caret-right fas fa-caret-down');
@@ -566,21 +566,21 @@
         common.webApi.get('Upload/SynchronizeFolder', 'folderid=' + folderID + '&recursive=' + value).then(function (data) {
             if (data.data.IsSuccess) {
                 common.webApi.get('Upload/GetSubFolders', 'folderid=' + folderID).then(function (Data) {
-                    if (Data !== undefined) {
+                    if (Data.data !== undefined) {
                         AddTree(Data.data, $scope.IconsFolders[0], folderID);
                         $scope.BindFolderEvents();
                     }
                 });
                 common.webApi.get('Upload/GetFiles', 'folderId=' + folderID + '&uid=' + null + '&skip=' + 0 + '&pagesize=' + 20 + '&keyword=').then(function (data) {
-                    if (data !== undefined) {
+                    if (data.data !== undefined) {
                         $scope.IconsFiles = data.data.Files;
                     }
                 });
                 if (sync)
-                    window.parent.ShowNotification(data.FolderName, '[LS:SyncSuccessMessage]', 'success');
+                    window.parent.ShowNotification(data.data.FolderName, '[LS:SyncSuccessMessage]', 'success');
             }
             else
-                window.parent.ShowNotification(data.FolderName, data.Message, 'error');
+                window.parent.ShowNotification(data.data.FolderName, data.data.Message, 'error');
         });
     };
 

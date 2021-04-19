@@ -122,7 +122,7 @@
                 }
             }
             else {
-                window.parent.ShowNotification('Error', data.Status, 'error');
+                window.parent.ShowNotification('Error', data.data.Status, 'error');
             }
         });
     };

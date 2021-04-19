@@ -240,7 +240,7 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
 
             $scope.Cancel = function () {
                 common.webApi.get('ui/cancelurl').then(function (data) {
-                    window.location.href = data;
+                    window.location.href = data.data;
                 }, function (data) {
                     swal('error');
                 });
@@ -431,7 +431,7 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
                     if ($scope.ui.data.CsvParameter != undefined)
                         $scope.ImportParameter = $scope.ui.data.CsvParameter.Value;
                     common.webApi.post('' + $scope.ui.data.Controller.Value + '/bulkadd', $scope.ImportParameter, dImport).then(function (data) {
-                        if (data != null && data.data.IsSuccess) {
+                        if (data.data != null && data.data.IsSuccess) {
                             location.reload();
                         }
 

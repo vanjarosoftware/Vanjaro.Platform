@@ -168,7 +168,7 @@
                             $scope.init();
                             $scope.RenderMarkup();
                         }
-                        if (Response.HasErrors) {
+                        if (Response.data.HasErrors) {
                             window.parent.ShowNotification('[LS:Pages]', Response.data.Message, 'error');
                         }
                     });

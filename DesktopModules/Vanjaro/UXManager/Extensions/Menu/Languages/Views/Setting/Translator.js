@@ -10,7 +10,7 @@
             if (Response.data.IsSuccess) {
                 $scope.Click_Cancel();
             }
-            else if (Response.HasErrors)
+            else if (Response.data.HasErrors)
                 CommonSvc.SweetAlert.swal(Response.data.Message);
         });
     };
@@ -34,7 +34,7 @@
             if (Response.data.IsSuccess) {
                 $scope.ui.data.Roles.Options = Response.data.Data;
             }
-            else if (Response.HasErrors)
+            else if (Response.data.HasErrors)
                 CommonSvc.SweetAlert.swal(Response.data.Message);
         });
     };

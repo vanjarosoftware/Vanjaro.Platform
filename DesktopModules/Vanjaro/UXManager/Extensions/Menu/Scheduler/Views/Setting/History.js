@@ -31,7 +31,7 @@
 
     $scope.GetScheduleStatus = function () {
         common.webApi.get('Scheduler/GetScheduleStatus', '').then(function (data) {
-            if (data) {
+            if (data.data) {
                 $scope.ui.data.ScheduleStatus.Options.Data.Status = data.data.Data.Data.Status;
                 $scope.ui.data.ScheduleStatus.Options.Data.MaxThreadCount = data.data.Data.Data.MaxThreadCount;
                 $scope.ui.data.ScheduleStatus.Options.Data.ActiveThreadCount = data.data.Data.Data.ActiveThreadCount;

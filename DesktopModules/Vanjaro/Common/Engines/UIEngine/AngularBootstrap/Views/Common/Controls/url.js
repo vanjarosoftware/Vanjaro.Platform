@@ -139,7 +139,7 @@
                     $(value).css('font-weight', 'bold');
             });
             common.webApi.get('~PageLink/GetPageAnchors', 'pageid=' + $scope.SelectedPage).then(function (data) {
-                if (data) {
+                if (data.data) {
                     $scope.ui.data.PageAnchors.Options = data.data;
                     $scope.ui.data.PageAnchors.Value = "0";
                 }
