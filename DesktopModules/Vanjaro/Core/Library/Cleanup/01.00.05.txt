@@ -1,0 +1,10 @@
+bin\AdvancedStringBuilder.dll
+bin\Vanjaro.UXManager.Extensions.Block.LoginLink.dll
+DesktopModules\Vanjaro\UXManager\Extensions\Block\LoginLink\Views\App_LocalResources\Shared.resx
+DesktopModules\Vanjaro\UXManager\Extensions\Block\LoginLink\Views\Setting\App_LocalResources\Login.resx
+DesktopModules\Vanjaro\UXManager\Extensions\Block\LoginLink\Views\Setting\LoginLink.html
+DesktopModules\Vanjaro\UXManager\Extensions\Block\LoginLink\Views\Setting\LoginLink.js
+DesktopModules\Vanjaro\UXManager\Extensions\Block\LoginLink\
+Portals\_default\vThemes\Basic\blocks\Login Link\Templates\Default.cshtml
+Portals\_default\vThemes\Basic\blocks\Login Link\login link.html
+Portals\_default\vThemes\Basic\blocks\Login Link\
