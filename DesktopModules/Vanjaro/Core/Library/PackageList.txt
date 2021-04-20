@@ -83,3 +83,4 @@ Release.txt
 License.txt
 Cleanup\00.05.03.txt
 Cleanup\01.00.04.txt
+Cleanup\01.00.05.txt
