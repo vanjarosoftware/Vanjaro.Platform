@@ -1,0 +1,6 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_URL_URLEntity]') AND type in (N'U'))
+BEGIN
+delete from {databaseOwner}[VJ_URL_URLEntity] where ModuleID not in(select ModuleID from {databaseOwner}[{objectQualifier}Modules])
+ALTER TABLE {databaseOwner}[VJ_URL_URLEntity] ADD CONSTRAINT FK_URLEntityModuleDelete FOREIGN KEY (ModuleID) REFERENCES {databaseOwner}[{objectQualifier}Modules](ModuleID) ON DELETE CASCADE
+END
+GO

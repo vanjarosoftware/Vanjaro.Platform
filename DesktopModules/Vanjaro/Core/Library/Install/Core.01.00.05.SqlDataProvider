@@ -1,31 +1,3 @@
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_HTMLEditor]') AND type in (N'U'))
-BEGIN
-delete from {databaseOwner}[VJ_Common_HTMLEditor] where PortalID not in(select portalid from {databaseOwner}[{objectQualifier}Portals])
-ALTER TABLE {databaseOwner}[VJ_Common_HTMLEditor] ADD CONSTRAINT FK_CommonHTMLEditorPortalDelete FOREIGN KEY (PortalID) REFERENCES {databaseOwner}[{objectQualifier}Portals](PortalID) ON DELETE CASCADE
-END
-GO
-
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_MailQueue]') AND type in (N'U'))
-BEGIN
-delete from {databaseOwner}[VJ_Common_MailQueue] where PortalID not in(select portalid from {databaseOwner}[{objectQualifier}Portals])
-ALTER TABLE {databaseOwner}[VJ_Common_MailQueue] ADD CONSTRAINT FK_CommonMailQueuePortalDelete FOREIGN KEY (PortalID) REFERENCES {databaseOwner}[{objectQualifier}Portals](PortalID) ON DELETE CASCADE
-END
-GO
-
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_MailQueue_Log]') AND type in (N'U'))
-BEGIN
-delete from {databaseOwner}[VJ_Common_MailQueue_Log] where PortalID not in(select portalid from {databaseOwner}[{objectQualifier}Portals])
-ALTER TABLE {databaseOwner}[VJ_Common_MailQueue_Log] ADD CONSTRAINT FK_CommonMailQueueLogPortalDelete FOREIGN KEY (PortalID) REFERENCES {databaseOwner}[{objectQualifier}Portals](PortalID) ON DELETE CASCADE
-END
-GO
-
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_Setting]') AND type in (N'U'))
-BEGIN
-delete from {databaseOwner}[VJ_Common_Setting] where ModuleID not in(select ModuleID from {databaseOwner}[{objectQualifier}Modules])
-ALTER TABLE {databaseOwner}[VJ_Common_Setting] ADD CONSTRAINT FK_CommonSettingModuleDelete FOREIGN KEY (ModuleID) REFERENCES {databaseOwner}[{objectQualifier}Modules](ModuleID) ON DELETE CASCADE
-END
-GO
-
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_BlockSection]') AND type in (N'U'))
 BEGIN
 delete from {databaseOwner}[VJ_Core_BlockSection] where TabID not in(select TabID from {databaseOwner}[{objectQualifier}Tabs])
@@ -76,9 +48,3 @@ ALTER TABLE {databaseOwner}[VJ_Core_Setting] ADD CONSTRAINT FK_CoreSettingPortal
 END
 GO
 
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_URL_URLEntity]') AND type in (N'U'))
-BEGIN
-delete from {databaseOwner}[VJ_URL_URLEntity] where ModuleID not in(select ModuleID from {databaseOwner}[{objectQualifier}Modules])
-ALTER TABLE {databaseOwner}[VJ_URL_URLEntity] ADD CONSTRAINT FK_URLEntityModuleDelete FOREIGN KEY (ModuleID) REFERENCES {databaseOwner}[{objectQualifier}Modules](ModuleID) ON DELETE CASCADE
-END
-GO

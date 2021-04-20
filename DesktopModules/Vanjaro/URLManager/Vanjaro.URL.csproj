@@ -85,6 +85,7 @@
     </Content>
     <Content Include="Install\Uninstall.URL.SqlDataProvider" />
     <Content Include="App.config" />
+    <Content Include="Install\URL.01.00.05.SqlDataProvider" />
     <None Include="Install\URL.01.00.00.SqlDataProvider" />
     <Content Include="Models\Generated\PetaPoco.Core.ttinclude" />
     <Content Include="Models\Generated\PetaPoco.Generator.ttinclude" />
