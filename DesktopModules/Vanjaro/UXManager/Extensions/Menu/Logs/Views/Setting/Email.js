@@ -22,7 +22,7 @@
                     Message: Message
                 };
                 common.webApi.post('Email/EmailLogItems', '', EmailLog).then(function (data) {
-                    if (data !== undefined) {
+                    if (data.data !== undefined) {
                         if (data.data.Success) {
                             window.parent.parent.ShowNotification('[L:LogEmail]', data.data.ErrorMessage, 'success');
                             parentscope.SelectedLogItems = [];

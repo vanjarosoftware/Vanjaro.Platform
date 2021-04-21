@@ -311,7 +311,7 @@
         }
         if (valid) {
             common.webApi.post('user/saveuserrole', 'notifyuser=' + false + '&isowner=' + true + '&userid=' + $scope.ui.data.UserDetails.Options.userId + '&action=update', row).then(function (data) {
-                if (data != null && data.data.Data != null && data.data.IsSuccess && !data.data.HasErrors) {
+                if (data.data != null && data.data.Data != null && data.data.IsSuccess && !data.data.HasErrors) {
                     var tablestate = $scope.pagginationData;
                     $scope.Pipe_UserRolePagging(tablestate);
                 }

@@ -33,7 +33,7 @@
                         if (Response.data.IsSuccess) {
                             $scope.ui.data.MemberProfile.Options = Response.data.Data.MemberProfile;
                         }
-                        if (Response.HasErrors) {
+                        if (Response.data.HasErrors) {
                             window.parent.ShowNotification(row.PropertyName, Response.data.Message, 'error');
                         }
                     });

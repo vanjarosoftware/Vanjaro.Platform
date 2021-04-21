@@ -16,7 +16,7 @@
             function (isConfirm) {
                 if (isConfirm) {
                     common.webApi.get('LogSetting/DeleteLogSetting', 'LogTypeConfigId=' + row.ID).then(function (data) {
-                        if (data != undefined && data.data.Status == 'Success')
+                        if (data.data != undefined && data.data.Status == 'Success')
                             $scope.RefreshGrid();
                         else
                             window.parent.ShowNotification('[LS:Error]', data.data.Status, 'error');
@@ -45,7 +45,7 @@
                 MailToAddress: row.MailToAddress,
             };
             common.webApi.post('LogSetting/UpdateLogSetting', '', LogType).then(function (data) {
-                if (data != undefined && data.data.Status == 'Success')
+                if (data.data != undefined && data.data.Status == 'Success')
                     $scope.RefreshGrid();
                 else
                     window.parent.ShowNotification('[LS:Error]', data.data.Status, 'error');
@@ -74,8 +74,8 @@
         if (tableState != undefined && tableState.search != undefined && tableState.search.predicateObject != undefined && tableState.search.predicateObject.$ != undefined)
             str = tableState.search.predicateObject.$;
         common.webApi.get('LogSetting/GetLogSettings', 'pageSize=' + tableState.pagination.number + '&pageIndex=' + (tableState.pagination.start / tableState.pagination.number) + '&search=' + str).then(function (data) {
-            if (data != undefined && data.data.Status == 'Success') {
-                $scope.LogSetting = data.Types;
+            if (data.data != undefined && data.data.Status == 'Success') {
+                $scope.LogSetting = data.data.Types;
                 $scope.LogSettingTableState.pagination.numberOfPages = data.data.NumberOfPages;
             }
             else

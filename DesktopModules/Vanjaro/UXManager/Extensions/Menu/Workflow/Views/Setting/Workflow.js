@@ -76,7 +76,7 @@
                 MaxRevisions: $scope.ui.data.MaxRevisions.Value
             }
             common.webApi.post('workflow/UpdateAdvance', '', data).then(function (data) {
-                if (data != null) {
+                if (data.data != null) {
                     $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 }
             });
@@ -88,7 +88,7 @@
             WorkflowID: $scope.ui.data.ddlWorkFlows.Value,
         }
         common.webApi.post('workflow/UpdateDefault', '', data).then(function (data) {
-            if (data != null) {
+            if (data.data != null) {
                 $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
             }
         })
