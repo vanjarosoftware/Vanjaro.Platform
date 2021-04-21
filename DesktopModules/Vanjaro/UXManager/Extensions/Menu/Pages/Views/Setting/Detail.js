@@ -719,7 +719,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                                 $scope.ui.data.WorkflowStateInfo.Value = w.Content;
 
                                 common.webApi.post('pages/updateworkflow', 'WorkflowID=' + $scope.ui.data.ddlWorkFlows.Value + '&PageID=' + $scope.pid).then(function (Response) {
-                                    if (Response.data.IsSuccess && Response.Data != undefined && Response.data.Data.Revisions != undefined) {
+                                    if (Response.data.IsSuccess && Response.data.Data != undefined && Response.data.Data.Revisions != undefined) {
                                         $scope.ui.data.MaxRevisions.Value = Response.data.Data.Revisions;
                                         $scope.PermissionsRoles = Response.data.Data.Permissions.RolePermissions
                                         $scope.PermissionsUsers = Response.data.Data.Permissions.UserPermissions;
