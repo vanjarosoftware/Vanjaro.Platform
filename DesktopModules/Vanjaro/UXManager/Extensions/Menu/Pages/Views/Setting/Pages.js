@@ -324,7 +324,7 @@
                 $scope.ui.data.PageSetting.Options = Response.data.Data;
                 window.parent.ShowNotification(node.label, Response.data.Message, 'success');
             }
-            if (Response.HasErrors) {
+            if (Response.data.HasErrors) {
                 window.parent.ShowNotification(node.label, Response.data.Message, 'error');
             }
         });

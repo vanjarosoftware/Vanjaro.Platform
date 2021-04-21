@@ -49,7 +49,7 @@
             if (data.data) {
                 tableState.pagination.numberOfPages = data.data.NumberOfPages;
                 $scope.ReviewPages = [];
-                $scope.ReviewPages = data.Data;
+                $scope.ReviewPages = data.data.Data;
             }
         });
     };

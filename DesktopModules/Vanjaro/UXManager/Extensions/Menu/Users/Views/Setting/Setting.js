@@ -213,7 +213,7 @@
                     });
                     errorMessages = errorMessages + "</div>";
                     $('.vj-ux-manager.user-info .col-md-9.left_border.uiengine-wrapper.scrollbar').prepend(errorMessages);
-                    parent.ShowNotification('[L:UsersError]', data.Message, 'error');
+                    parent.ShowNotification('[L:UsersError]', data.data.Message, 'error');
                 }
             });
         }
