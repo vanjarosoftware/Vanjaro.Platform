@@ -1,11 +1,22 @@
 ﻿app.controller('setting_manage', function ($scope, $attrs, $routeParams, $http, CommonSvc, $compile) {
 
     var common = CommonSvc.getData($scope);
+    $scope.LoadingPath = window.parent.VjDefaultPath + 'loading.svg';
+
+    $scope.CompileMarkup = function (toggle) {
+        setTimeout(function () {
+            $('.RightSideMenu').show();
+            $('.RightSideMenuLoader').hide();
+            $compile($('#dvMarkUp'))($scope);
+            if (toggle)
+                $scope.rightThemeBuilderToggle();
+        }, 1000);
+    };
 
     $scope.onInit = function () {
         $scope.GoogleFontOption = false;
         $scope.ShowGeneralTab = true;
-        setTimeout(function () { $compile($('#dvMarkUp'))($scope); $scope.rightThemeBuilderToggle(); }, 500);
+        $scope.CompileMarkup(true);
         if ($scope.ui.data.Fonts.Options.length == 0)
             $scope.AddNewFonts = true;
 
@@ -48,13 +59,13 @@
             $('#General a.nav-link').addClass("active");
             $('#Fonts a.nav-link').removeClass("active");
             $scope.ShowGeneralTab = true;
-            setTimeout(function () { $compile($('#dvMarkUp'))($scope); }, 500);
+            $scope.CompileMarkup(false);
         }
         else {
             $('#General a.nav-link').removeClass("active");
             $('#Fonts a.nav-link').addClass("active");
             $scope.ShowGeneralTab = false;
-            common.webApi.get('settings/getfonts','Guid=' + $scope.ui.data.Guid.Value).then(function (response) {
+            common.webApi.get('settings/getfonts', 'Guid=' + $scope.ui.data.Guid.Value).then(function (response) {
                 $scope.ui.data.Fonts.Options = response.data;
             });
         }
@@ -64,8 +75,7 @@
     $scope.Change_AddNew = function () {
         if ($scope.AddNewFonts == true)
             $scope.AddNewFonts = false;
-        else
-        {            
+        else {
             $scope.AddNewFonts = true;
             $scope.GoogleFontOption = false;
         }
@@ -137,13 +147,12 @@
         $scope.ui.data.Font.Options.Css = data.Css;
         $scope.ui.data.FontOptions.Value = false;
         $scope.GoogleFontOption = false;
-        if ($scope.IsGoogleFont($scope.ui.data.Font.Options.Name))
-        {
+        if ($scope.IsGoogleFont($scope.ui.data.Font.Options.Name)) {
             $(elem).attr('selected', 'selected');
             $scope.ui.data.FontOptions.Value = true;
             $scope.GoogleFontOption = true;
         }
-        $("#GoogleFonts option:selected").length > 0        
+        $("#GoogleFonts option:selected").length > 0
         $scope.AddNewFonts = true;
 
     }
@@ -165,12 +174,12 @@
                         if (response.data != undefined && response.data.IsSuccess) {
                             $(window.parent.document.body).find('#iframe')[0].contentWindow.location.reload();
                             $scope.ui.data.MarkUp.Value = response.data.ManageMarkup;
-                            setTimeout(function () { $compile($('#dvMarkUp'))($scope); $scope.rightThemeBuilderToggle(); }, 500);
+                            $scope.CompileMarkup(true);
                         }
                     });
                 }
                 else
-                    setTimeout(function () { $compile($('#dvMarkUp'))($scope); $scope.rightThemeBuilderToggle(); }, 500);
+                    $scope.CompileMarkup(true);
             });
     };
 
@@ -191,12 +200,12 @@
                         if (response.data != undefined && response.data.IsSuccess) {
                             $(window.parent.document.body).find('#iframe')[0].contentWindow.location.reload();
                             $scope.ui.data.MarkUp.Value = response.data.ManageMarkup;
-                            setTimeout(function () { $compile($('#dvMarkUp'))($scope); $scope.rightThemeBuilderToggle(); }, 500);
+                            $scope.CompileMarkup(true);
                         }
                     });
                 }
                 else
-                    setTimeout(function () { $compile($('#dvMarkUp'))($scope); $scope.rightThemeBuilderToggle(); }, 500);
+                    $scope.CompileMarkup(true);
             });
     };
 
@@ -233,12 +242,11 @@
         window.location.hash = hash + '/' + $scope.ui.data.Guid.Value;
     };
 
-    $scope.IsGoogleFont = function (FontName)
-    {
+    $scope.IsGoogleFont = function (FontName) {
         var flag = false;
         $("#GoogleFonts option").each(function (index, elem) {
-            if ($(elem).html() == FontName) {               
-                flag = true; 
+            if ($(elem).html() == FontName) {
+                flag = true;
             }
         });
         return flag;
