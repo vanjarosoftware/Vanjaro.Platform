@@ -503,3 +503,9 @@
     display: block;
     text-decoration: none !important;
 }
+.centerloader {
+    height: 40px !important;
+    width: 40px !important;
+    margin: 0 auto;
+    display: table;
+}

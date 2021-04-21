@@ -11,7 +11,7 @@
                                     <li id="Fonts" class="nav-item"><a class="nav-link" mn-ng-if="ui.data.Guid.Value!='921af5fa-3030-4bae-aaec-0e353b9489ff'" mn-ng-click="Click_ShowTab('Fonts')">[LS:Fonts]</a></li>
                                 </ul>
                             </div>
-                            <div class="col-md-9 left_border RightSideMenu">
+                            <div class="col-md-9 left_border RightSideMenu" style="display:none;">
                                 <uilayout name="TabsContentGeneral" mn-ng-if="ShowGeneralTab">
                                     <uitemplate>
                                         <div id="accordion1" class="theme-builder-accordion">
@@ -66,6 +66,9 @@
                                     </uitemplate>
                                 </uilayout>
 
+                            </div>
+                            <div class="col-md-9 RightSideMenuLoader">
+                                <img class="centerloader" ng-src="{{LoadingPath}}" />
                             </div>
                         </div>
                     </uitemplate>
