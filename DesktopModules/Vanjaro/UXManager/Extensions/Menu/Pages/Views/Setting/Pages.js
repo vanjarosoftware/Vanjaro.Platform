@@ -543,7 +543,7 @@
         };
         common.webApi.post('pages/updatesettings', 'key=' + type, request).then(function (Response) {
             if (Response.data.IsSuccess) {
-                $scope.Findnode(Response.Data.PagesTree, $scope.ui.data.PagesTree.Options, node.Value);
+                $scope.Findnode(Response.data.Data.PagesTree, $scope.ui.data.PagesTree.Options, node.Value);
                 $scope.init();
                 window.parent.ShowNotification(node.label, Response.data.Message, 'success');
             }
