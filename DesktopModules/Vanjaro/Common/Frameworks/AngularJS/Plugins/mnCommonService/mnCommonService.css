@@ -56,7 +56,7 @@ uiengine {
 
 @media (max-width: 768px) {
 
-    .ms-input-group {
+    .input-group {
         width: 100%;
     }
 }
@@ -82,7 +82,7 @@ uiengine {
     display: flex !important;
     filter: alpha(opacity=0);
     padding: 6px 12px;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    -filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 }
 
     #ImportCsv .cta::before {
@@ -144,38 +144,38 @@ uiengine {
 }
 
 
-a.ms-btn.ms-btn-default.button-left {
+a.btn.btn-default.button-left {
     text-decoration: none;
     background: #eee;
     color: #23527c;
     border-color: #ccc;
 }
 
-    a.ms-btn.ms-btn-default.button-left:hover {
+    a.btn.btn-default.button-left:hover {
         background: #e6e6e6;
         border-color: #adadad;
     }
 
-a.ms-btn.ms-btn-primary.button-left {
+a.btn.btn-primary.button-left {
     text-decoration: none;
     background-color: #337ab7;
     color: #fff;
 }
 
-    a.ms-btn.ms-btn-primary.button-left:hover {
+    a.btn.btn-primary.button-left:hover {
         background-color: #286090;
         border-color: #204d74;
     }
 
-.ms-form-group .angular-ui-tree-node .ms-chevron {
+.form-group .angular-ui-tree-node .chevron {
     background: transparent;
 }
 
-    .ms-form-group .angular-ui-tree-node .ms-chevron:focus {
+    .form-group .angular-ui-tree-node .chevron:focus {
         outline: none;
     }
 
-    .ms-form-group .angular-ui-tree-node .ms-chevron:active {
+    .form-group .angular-ui-tree-node .chevron:active {
         box-shadow: none;
     }
 
@@ -186,83 +186,225 @@ a.ms-btn.ms-btn-primary.button-left {
     column-count: 4;
 }
 
-.ms-uploaddefault.uploadinput-button .upld {
+.uploaddefault.uploadinput-button .upld {
     min-height: 140px;
     /*width: 60%;
     margin: 0 auto;*/
 }
 
-    .ms-uploaddefault.uploadinput-button .upld span {
+    .uploaddefault.uploadinput-button .upld span {
         position: relative;
         font-size: large;
     }
 
-.ms-uploaddefault input[type=file].inpt_sty {
+.uploaddefault input[type=file].inpt_sty {
     display: none;
     cursor: pointer;
     opacity: 0;
     background-color: transparent;
 }
 
-.ms-uploaddefault.uploadinput-button .upld text {
+.uploaddefault.uploadinput-button .upld text {
     margin-top: 10px;
     display: inline-block;
     color: #ccc;
 }
 
-.ms-uploaddefault.uploadinput-button .upld .ms-glyphicon {
+.uploaddefault.uploadinput-button .upld .glyphicon {
     padding: 10px 20px;
     font-size: 24px;
     cursor: pointer;
 }
 
-.ms-uploaddefault.uploadinput-button span:hover span.ng-binding {
+.uploaddefault.uploadinput-button span:hover span.ng-binding {
     color: #fff;
 }
 
-.ms-uploaddefault .btnmargin {
+.uploaddefault .btnmargin {
     margin: 2px 0 10px 0;
 }
 
-.ms-uploaddefault td.r_file {
+.uploaddefault td.r_file {
     list-style: none;
     border-bottom: 1px solid #ddd;
     padding: 5px 0;
     line-height: 23px;
 }
 
-    .ms-uploaddefault td.r_file:hover {
+    .uploaddefault td.r_file:hover {
         color: #000;
     }
 
-.ms-uploaddefault .r_file span.ng-binding {
+.uploaddefault .r_file span.ng-binding {
     margin-left: 5px;
     cursor: pointer;
 }
 
-.ms-uploaddefault .l_folder,
-.ms-uploaddefault .l_folder ul li {
+.uploaddefault .l_folder,
+.uploaddefault .l_folder ul li {
     list-style: none;
     margin: 10px 0;
 }
 
-    .ms-uploaddefault .l_folder span {
+    .uploaddefault .l_folder span {
         margin-left: 5px;
         cursor: pointer;
     }
 
-    .ms-uploaddefault .l_folder ul {
-        margin-left: 10px;
+        .uploaddefault .l_folder span.arrowicon {
+            margin-right: 5px;
+            width: 5px;
+        }
+
+    .uploaddefault .l_folder .pagedir span.arrowicon {
+        position: relative;
+        right: 10px;
     }
 
-.ms-uploaddefault .ovrflow .ms-col-sm-4,
-.ms-uploaddefault .ovrflow .ms-col-sm-8 {
-    max-height: 350px;
-    overflow-y: auto;
+.uploaddefault span.fas.fa-folder {
+    font-size: 10px;
+    color: #777 !important;
+    display: inline-block;
+    top: -1px;
+}
+
+.uploaddefault span.action-icon {
+    font-size: 10px;
+    margin-right: 5px;
+}
+
+.pagedir .folders {
+    font-size: 14px;
+    display: inline-block;
+    width: 180px;
+    overflow: hidden;
+    white-space: pre;
+    text-overflow: ellipsis;
+}
+
+.Basefoldersdiv {
+    padding: 0 10px;
+}
+
+.basedir {
+    display: inline-block;
+    width: 95%;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.uploaddefault .friendlynametooltip {
+    display: none;
+    text-decoration: none;
+    padding: 0 4px;
+    z-index: 999;
+    cursor: default;
+}
+
+table.Imagetable tbody {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+table tbody tr.imagesrow {
+    width: 25%;
+    overflow: hidden;
+    position: static;
+}
+
+.vj-ux-manager .dropdownimgicon .dropdown-menu {
+    top: -100px;
+    position: absolute;
+    min-width: 160px;
+    right: -5px;
+}
+
+.imagesrow:hover .dropdownimgicon .dropdownmenu {
+    background: #ccc;
+}
+
+table tbody tr.imagesrow td {
+    padding: 7px 10px !important;
+    width: 150px;
+    position: relative;
+}
+
+    table tbody tr.imagesrow td img {
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        object-fit: scale-down;
+        border-radius: 5px;
+    }
+
+
+.uploaddefault .friendlyname:hover .friendlynametooltip {
+    display: block;
+    position: absolute;
+    background-color: #151515;
+    margin-top: -45px;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+span.fileiconname {
+    color: #fff;
+    position: relative;
+    word-break: break-word;
+    text-transform: capitalize;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    background: rgba(36,27,28,.9);
+    bottom: 15%;
+    left: 10px;
+    padding: 9px 5px;
+    position: absolute;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+    text-transform: uppercase;
+    z-index: 2;
+    width: 129px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.uploaddefault .imagesrow .friendlyname:hover .friendlynametooltip {
+    border-radius: 0px;
+    width: 133px;
+    word-wrap: break-word;
+    position: absolute;
+    bottom: 19px;
+    white-space: normal;
+    bottom: 60px;
 }
 
 
-.ms-uploaddefault .third_link input {
+.uploaddefault .l_folder span.glyphicon {
+    font-size: 10px;
+    color: #777 !important;
+    display: inline-block;
+    top: -1px;
+}
+
+.uploaddefault .l_folder span.glyphicon-triangle-bottom {
+    font-size: 10px;
+    color: #777 !important;
+}
+
+.uploaddefault .l_folder ul {
+    margin-left: 10px;
+    padding-left: 0;
+}
+
+/*.uploaddefault .ovrflow .col-sm-4,
+.uploaddefault .ovrflow .col-sm-8 {
+    max-height: 350px;
+    overflow-y: auto;
+}*/
+
+.uploaddefault .third_link input {
     width: 100%;
     border: none;
     outline: none;
@@ -274,172 +416,42 @@ a.ms-btn.ms-btn-primary.button-left {
     color: #777 !important;
 }
 
-.ms-uploaddefault .third_link .esc {
+.uploaddefault .third_link .esc {
     display: inline-block;
     width: 100%;
     margin: 15px 0 5px 0;
     color: #337ab7;
 }
 
-    .ms-uploaddefault .third_link .esc > span {
+    .uploaddefault .third_link .esc > span {
         margin-right: 15px;
     }
 
-.ms-uploaddefault .l_folder .rootfolder:not(.show) {
+.uploaddefault .l_folder .rootfolder:not(.show) {
     display: none;
     transition-duration: 5s;
 }
 
-.ms-uploaddefault .entr_url {
+.uploaddefault .entr_url {
     margin: 0px auto 5px;
     /*width: 60%;*/
 }
 
-.ms-uploaddefault .ms-well.ovrflow {
+.uploaddefault .card.ovrflow {
     border: none;
     padding: 19px 0;
 }
 
-.ms-uploaddefault .upld .buttons {
+.ImageBox .uploaddefault .well.ovrflow {
+    padding-top: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin-top: 0;
+}
+
+.uploaddefault .upld .buttons {
     display: inline-block;
 }
-
-.ms-uploaddefault .upld:hover {
-    background-color: rgba(30,136,195,0.6);
-    transition: background-color 0.2s ease;
-    color: #fff;
-}
-
-.ms-uploaddefault.uploadinput-button .upld:hover text {
-    color: #fff;
-}
-
-.ms-uploaddefault .upld:hover .buttons:hover .ms-glyphicon {
-    color: #c8c8c8;
-}
-
-    .ms-uploaddefault .upld:hover .buttons,
-    .ms-uploaddefault .upld:hover .buttons:hover,
-    .ms-uploaddefault .upld:hover .buttons:hover .ms-glyphicon:hover,
-    .ms-uploaddefault .upld:hover .f_clr {
-        color: #fff;
-        transition: color 0.2s ease;
-    }
-
-.permission .ui-inlineblock {
-    display: inline-block;
-}
-
-.permission .ui-element-width {
-    width: 150px;
-}
-
-
-.permission .ui-inlineblock.addroleUI a {
-    background: #f3f3f3;
-    border: 1px solid #bfbfbf;
-    border-radius: 0px;
-    -webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
-    color: #666;
-    text-decoration: none;
-    border-left: none;
-}
-
-    .permission .ui-inlineblock.addroleUI a:hover {
-        background: #dedede;
-    }
-
-.permission .ms-form-group.addroleUI a {
-    background: #f3f3f3;
-    border: 1px solid #bfbfbf;
-    border-radius: 0px;
-    -webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
-    color: #666;
-    text-decoration: none;
-    border-left: none;
-}
-
-    .permission .ms-form-group.addroleUI a:hover {
-        background: #dedede;
-    }
-
-span.choosefile.ms-glyphicon.ms-glyphicon-plus:before, span.choosefile.ms-glyphicon.ms-glyphicon-cog:before {
-    margin-right: 3px;
-    vertical-align: text-bottom;
-}
-
-.ms-btn-success.manageslug:hover {
-    color: #fff;
-    background-color: #398439;
-    text-decoration: none;
-}
-
-.manageslug {
-    float: right;
-    margin-top: 0px !important;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    width: 15%;
-}
-
-.editorconfig-delete-hidden {
-    visibility: hidden;
-}
-
-.ms-table .selectqueueimg {
-    max-height: 40px;
-    vertical-align: text-top;
-    max-width: 40px;
-    margin-right: 10px;
-}
-
-.ud_stfooter {
-    cursor: pointer;
-}
-
-    .ud_stfooter .active a {
-        color: #fff;
-        background-color: #999;
-        border-color: #999;
-    }
-
-.Url_link {
-    cursor: pointer;
-}
-
-.commonurltype > .ms-btn-group {
-    float: right;
-    margin-top: -20px;
-    margin-bottom: 20px;
-}
-
-.tag-list li {
-    list-style-type: none;
-}
-
-.uploaddefault input[type=file].inpt_sty {
-    display: none;
-    cursor: pointer;
-    opacity: 0;
-    background-color: transparent;
-}
-
-.uploaddefault.uploadinput-button .upld {
-    min-height: 140px;
-}
-
-    .uploaddefault.uploadinput-button .upld span {
-        position: relative;
-        font-size: large;
-    }
-
-    .uploaddefault.uploadinput-button .upld text {
-        margin-top: 10px;
-        display: inline-block;
-        color: #ccc;
-    }
 
 .uploaddefault .upld:hover {
     background-color: rgba(30,136,195,0.6);
@@ -451,47 +463,344 @@ span.choosefile.ms-glyphicon.ms-glyphicon-plus:before, span.choosefile.ms-glyphi
     color: #fff;
 }
 
-/*Scrollbar*/
-
-::-webkit-scrollbar {
-    margin-top: 10px;
-    height: 10px;
-    width: 8px;
+.uploaddefault .upld:hover .buttons:hover .glyphicon {
+    color: #c8c8c8;
 }
 
-::-webkit-scrollbar-track {
-    /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
-    border-radius: 10px;
-    opacity: 0.8;
-}
-
-::-webkit-scrollbar-track-piece {
-    background: rgba(255, 255, 255, 0);
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: rgba(170, 170, 170, 0.3);
-    outline: none;
-    -webkit-transition: background-color .2s linear,width .2s ease-in-out;
-    -o-transition: background-color .2s linear,width .2s ease-in-out;
-    transition: background-color .2s linear,width .2s ease-in-out;
-}
-
-table.Imagetable tbody {
-    display: flex;
-    flex-wrap: wrap;
-}
-table tbody tr.imagesrow {
-    width: 25%;
-    overflow: hidden;
-    position: static;
-}
-    table tbody tr.imagesrow td {
-        padding: 7px 10px !important;
-        width: 150px;
-        position: relative;
+    .uploaddefault .upld:hover .buttons,
+    .uploaddefault .upld:hover .buttons:hover,
+    .uploaddefault .upld:hover .buttons:hover .glyphicon:hover,
+    .uploaddefault .upld:hover .f_clr {
+        color: #fff;
+        transition: color 0.2s ease;
     }
+
+/*.permission_grid {
+    margin-top: 25px;
+}*/
+
+.permission_grid .ui-inlineblock {
+    display: inline-block;
+}
+
+.permission_grid .addroleinput {
+    margin-bottom: 10px;
+}
+
+.permission_grid .roleDropdown {
+    width: calc(100% - 137px);
+}
+
+    .permission_grid .roleDropdown input {
+        border-radius: 4px 0 0 4px;
+    }
+
+.permission_grid .permission-icon {
+    cursor: pointer;
+    margin-bottom: 10px;
+    color: inherit;
+}
+
+.permission_grid select {
+    border-radius: 0 4px 4px 0;
+    width: auto;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.permission_grid .ui-element-width {
+    width: 150px;
+}
+
+
+.permission_grid .ui-inlineblock.addroleUI a {
+    background: #f3f3f3;
+    border: 1px solid #bfbfbf;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    color: #666;
+    text-decoration: none;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+}
+
+    .permission_grid .ui-inlineblock.addroleUI a:hover {
+        background: #dedede;
+    }
+
+.permission_grid .form-group.addroleUI a {
+    background: #f3f3f3;
+    border: 1px solid #bfbfbf;
+    border-radius: 0 4px 4px 0;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    color: #666;
+    text-decoration: none;
+    border-left: none;
+}
+
+.permission_grid button.actionbtn {
+    background: transparent;
+    border: none;
+    outline: none !important;
+}
+
+    .permission_grid button.actionbtn:disabled {
+        color: #ccc;
+    }
+
+.permission_grid .displayname {
+    width: 200px;
+}
+
+.permission_grid .permissionaction {
+    width: 100px;
+}
+
+.permission_grid .form-group.addroleUI a:hover {
+    background: #dedede;
+}
+
+span.choosefile.glyphicon.glyphicon-plus:before, span.choosefile.glyphicon.glyphicon-cog:before {
+    margin-right: 3px;
+    vertical-align: text-bottom;
+}
+
+.btn-success.manageslug:hover {
+    color: #fff;
+    background-color: #398439;
+    text-decoration: none;
+}
+
+.manageslug {
+    float: right;
+    margin-top: 0px !important;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 20%;
+}
+
+.editorconfig-delete-hidden {
+    visibility: hidden;
+}
+
+.table .selectqueueimg {
+    max-height: 40px;
+    vertical-align: text-top;
+    max-width: 40px;
+    margin-right: 10px;
+}
+
+.ud_stfooter {
+    cursor: pointer;
+}
+
+    .ud_stfooter .active a {
+        color: #fff !important;
+        background-color: #999;
+        border-color: #999;
+    }
+
+.Url_link {
+    cursor: pointer;
+}
+
+.commonurltype > .btn-group {
+    float: right;
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+
+.uploadinput-button span.btn.btn-primary {
+    background: transparent !important;
+    color: #444 !important;
+    border: none;
+    box-shadow: none;
+    top: -20px;
+}
+
+    .uploadinput-button span.btn.btn-primary .choosefile {
+        position: relative;
+        z-index: 9;
+        cursor: pointer;
+    }
+
+.uploaddefault .card.ovrflow {
+    background: transparent;
+    height: 100%;
+    margin-top: 15px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgb(249, 249, 249) !important;
+}
+
+.uploaddefault td.r_file {
+    padding: 10px 0;
+    line-height: 21px;
+    font-size: 14px;
+    border: none;
+}
+
+.uploaddefault td {
+    border: none !important;
+}
+
+.uploaddefault .ovrflow .col-sm-4 > ul {
+    border: 1px solid #eee;
+}
+
+/*.uploaddefault .ovrflow .col-sm-4, .uploaddefault .ovrflow .col-sm-8 {
+    max-height: calc(100% - 120px);
+    overflow-y: hidden !important;
+    height: inherit;
+}*/
+
+
+/*.uploaddefault .ovrflow .col-sm-4.scrollbar {
+        height: 100% !important;
+    }*/
+
+/*.uploaddefault .ovrflow .col-sm-4 > ul {
+        height: calc(100% - 30px) !important;
+    }*/
+
+
+/*.ImageBox .uploaddefault .ovrflow .col-sm-4,
+.ImageBox .uploaddefault .ovrflow .col-sm-8 {
+    margin-bottom: 20px;
+}*/
+
+/*.ImageBox .uploaddefault .ovrflow .col-sm-4 strong,
+    .ImageBox .uploaddefault .ovrflow .col-sm-8 strong {
+        display: none;
+    }*/
+
+/*.uploaddefault .ovrflow .col-sm-4:hover, .uploaddefault .ovrflow .col-sm-8:hover {
+    overflow-y: overlay !important;
+}*/
+
+/*.uploaddefault .ovrflow .col-sm-4 {
+    padding-left: 0;
+}*/
+
+.uploaddefault .table thead th {
+    vertical-align: bottom;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.dropdown.dropbtn .dropdownmenu {
+    right: 0px;
+}
+
+.filenametext {
+    width: 180px !important;
+    overflow: hidden !important;
+    height: 20px;
+    display: block !important;
+    text-overflow: ellipsis;
+    white-space: pre;
+}
+
+    .filenametext em {
+        display: inline-block;
+    }
+
+.l_folder .fa-caret-down,
+.l_folder .fa-caret-right {
+    color: #ccc;
+}
+
+.pagedir {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 9px;
+    display: inline-block;
+    width: calc(100% - 19px);
+    text-align: left;
+    height: 32px;
+}
+
+    .pagedir .glyphicon {
+        font-size: 10px;
+        color: #777 !important;
+    }
+
+.ImageBox .l_folder span.glyphicon {
+    top: -5px !important;
+}
+
+.displayname img {
+    width: 47px !important;
+    height: 47px !important;
+}
+
+.arrowicon {
+    color: #ccc !important;
+    font-size: 14px;
+    margin-left: 4px;
+}
+
+    .arrowicon em {
+        color: #777 !important;
+        margin-top: 6px;
+    }
+
+
+.Imagebox .fileicon {
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.fileiconname {
+    font-size: 12px;
+    color: #777;
+}
+
+.user_info {
+    font-size: 12px;
+    font-size: 12px;
+    padding: 8px;
+}
+
+    .user_info .user_email {
+        font-size: 10px;
+        color: #999;
+    }
+
+.displayname .users {
+    display: inline-flex;
+}
+
+.empty_msg {
+    height: 120px !important;
+    text-align: center;
+    margin-top: 50px;
+    padding: 50px 15px;
+    border: 1px solid #ccc;
+    color: #aaa;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.permission_grid .displayinfo {
+    padding: 0 !important;
+}
+
+
+.rolestable,
+.userstable {
+    border-collapse: separate !important;
+    border-spacing: 0 5px !important;
+}
+
+.permission_grid td {
+    border-top: none !important;
+}
+
 .thumb-info-wrapper {
     display: block;
     border: 1px solid #eee;
@@ -500,13 +809,85 @@ table tbody tr.imagesrow {
     position: relative;
     border-radius: 5px;
 }
-table tbody tr.imagesrow td img {
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    object-fit: scale-down;
-    border-radius: 5px;
+
+.thumb-info-wrapper-selected {
+    border: 3px solid red !important;
+    border-radius: 8px;
+    border-bottom-right-radius: 0;
 }
+
+    .thumb-info-wrapper-selected:after {
+        content: "\f00c";
+        font-family: "Font Awesome 5 Free";
+        font-weight: bold;
+        font-size: 12px;
+        padding: 4px;
+        color: #fff;
+        position: relative;
+        top: -21px;
+        left: 99px;
+        right: 0;
+        background: red;
+        line-height: 1px;
+        z-index: 99;
+    }
+
+input.chkfidall {
+    position: absolute;
+    right: 46px;
+    top: -16px;
+    z-index: 999;
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.checkmark:after {
+    content: "\f0c8";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 400;
+    font-size: 16px;
+    padding: 4px;
+    position: absolute;
+    right: 45px;
+    top: -10px;
+    line-height: 1px;
+    z-index: 99;
+}
+
+input:checked ~ .checkmark:after {
+    content: "\f14a";
+}
+
+
+.thumb-info-wrapper .fas {
+    padding: 5px;
+}
+
+span.thumb-info-title:hover {
+    white-space: unset;
+}
+
+.thumb-info .thumb-info-wrapper:before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: rgba(36,27,28,.5);
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    bottom: 0;
+    color: #fff;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    z-index: 1;
+}
+
 .imagesrow:hover .thumb-info-wrapper:before {
     filter: alpha(opacity=100);
     opacity: 1;
@@ -533,126 +914,139 @@ table tbody tr.imagesrow td img {
     z-index: 1;
     border-radius: 5px;
 }
-.thumb-info .thumb-info-wrapper:before {
-    content: "";
-    height: 100%;
-    width: 100%;
-    background: rgba(36,27,28,.5);
-    -webkit-transition: all .3s;
-    -moz-transition: all .3s;
-    transition: all .3s;
-    bottom: 0;
-    color: #fff;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    display: block;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    z-index: 1;
+
+.dropdownimgicon {
+    position: absolute !important;
 }
- /*pagination*/
-.vj-ux-manager .ud_stfooter ul.pagination {
-    margin-bottom: 0;
-    justify-content: center;
-    padding: 12px;
-    border-radius: 0;
-    background: #fff;
+
+    .dropdownimgicon .dropdownmenu {
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        transition: all .3s;
+        border-radius: 0 0 0 10px;
+        display: inline-block;
+        height: 40px;
+        line-height: 50px;
+        position: absolute;
+        text-align: center;
+        width: 40px;
+        z-index: 2;
+        right: -10px !important;
+        top: -158px !important;
+        border-left: 0 !important;
+        opacity: 0;
+        background: #fff !important;
+    }
+
+.imagesrow:hover .dropdown.dropbtn .dropdownmenu {
+    right: 7px !important;
+    top: -144px !important;
+    opacity: 1;
+    line-height: normal;
+    border-top-right-radius: 4px;
 }
-uploaddefault .ud_stfooter ul.pagination, .uploaddefault .images-container table {
-    margin: 0;
-}
-.pagination {
-    display: flex;
-    padding-left: 0;
-    list-style: none;
-}
-.pagination .page-item.active .page-link, .pagination > li > .page-item:focus, .pagination > li > .page-item:hover {
-    color:#000;
-    background: #eee !important;
-    border: 1px solid #eee !important;
-}
-.page-item.active .page-link {
+
+a.page-link.active {
     background: #eee;
 }
 
-
-.uploadinput-button span.btn.btn-primary {
-    background: transparent !important;
-    color: #444 !important;
-    border: none;
-    box-shadow: none;
-    top: -20px;
+.pagination a.page-link.active,
+.pagination > li > a.page-link:focus,
+.pagination > li > a.page-link:hover {
+    background: #eee !important;
+    border: 1px solid #eee !important;
 }
 
-.uploaddefault .ovrflow .col-sm-4 > ul {
-    border: 1px solid #eee;
+.rolesdiv, .usersdiv {
+    max-height: 240px;
+    overflow: auto;
 }
 
-.uploaddefault .l_folder, .uploaddefault .l_folder ul li {
-    list-style: none;
-    margin: 10px 0 0 0;
+.addroles, .addusers {
+    display: flow-root;
 }
 
-.l_folder .fa-caret-down, .l_folder .fa-caret-right {
-    color: #ccc;
+@media (min-width: 576px) {
+    .modal-dialog {
+        /*max-width: initial !important;*/
+    }
 }
 
-.uploaddefault .l_folder span.arrowicon {
-    margin-right: 5px;
-    width: 5px;
+.uploaddefault .ud_stfooter ul.pagination,
+.uploaddefault .images-container table {
+    margin: 0;
 }
 
-.uploaddefault .l_folder span {
-    margin-left: 5px;
-    cursor: pointer;
+.uploaddefault .images-container {
+    height: calc(100vh - 225px) !important;
+    overflow-y: auto;
 }
 
-.pagedir {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 9px;
-    display: inline-block;
-    width: calc(100% - 19px);
-    text-align: left;
-    height: 32px;
+.uploaddefault .ud_stfooter {
+    position: fixed;
+    padding: 15px;
+    right: 210px;
+    bottom: 25px;
 }
 
-    .pagedir .folders {
-        font-size: 14px;
-        display: inline-block;
-        width: 180px;
-        overflow: hidden;
-        white-space: pre;
-        text-overflow: ellipsis;
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc !important;
+}
+
+
+#loading-bar .bar {
+    background-image: linear-gradient(to left, #333 0%, #444 100%) !important;
+}
+
+#loading-bar-spinner {
+    top: 50% !important;
+    margin-top: -12px;
+    margin-left: -20px;
+}
+
+    #loading-bar-spinner .spinner-icon {
+        background-image: url('/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.svg') !important;
+        position: fixed;
+        background-size: 40px !important;
+        width: 40px !important;
+        height: 40px !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        border: none !important;
+        border-radius: 0 !important;
+        animation: none !important;
     }
 
-.uploaddefault span.fas.fa-folder {
-    font-size: 10px;
-    color: #777 !important;
-    display: inline-block;
-    top: -1px;
+ul.nav.nav-tabs {
+    margin-bottom: 10px;
 }
 
-.uploaddefault .l_folder ul {
-    margin-left: 10px;
-    padding-left: 0;
+
+/*Scrollbar*/
+
+::-webkit-scrollbar {
+    margin-top: 10px;
+    height: 10px;
+    width: 8px;
 }
 
-.input-group ol.treeview li.angular-ui-tree-node .angular-ui-tree-handle .btn_triangle {
-    background: transparent;
+::-webkit-scrollbar-track {
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+    border-radius: 10px;
+    opacity: 0.8;
+}
+
+::-webkit-scrollbar-track-piece {
+    background: rgba(255, 255, 255, 0);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(170, 170, 170, 0.3);
     outline: none;
-    position: absolute;
-    text-shadow: 0 0 0;
-    left: 30px;
-    box-shadow: 0 0 0;
-    font-size: 12px;
-    top: 0px;
-    font-weight: normal;
-}
-
-@media (max-width: 576px) {
-    table tbody tr.imagesrow {
-        width: 50%;
-    }
+    -webkit-transition: background-color .2s linear,width .2s ease-in-out;
+    -o-transition: background-color .2s linear,width .2s ease-in-out;
+    transition: background-color .2s linear,width .2s ease-in-out;
 }
