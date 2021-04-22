@@ -67,7 +67,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
                     {
                         int pid = 0;
                         bool copy = false;
-                        string ParentPageValue = "-1", SitemapPriorityValue = "-1";
+                        string ParentPageValue = "-1", SitemapPriorityValue = "0.5";
                         if (parameters.Count > 0)
                         {
                             pid = int.Parse(parameters["pid"]);
