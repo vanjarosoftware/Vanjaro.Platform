@@ -23,7 +23,7 @@ export default grapesjs.plugins.add('modulewrapper', (editor, opts = {}) => {
                         if (AppMenusScript.length > 0) {
 
                             tb.push({
-                                attributes: { class: 'fa fa-bars', title: VjLocalized.Menu},
+                                attributes: { class: 'fa fa-bars', title: VjLocalized.Menu },
                                 command: function (t) {
                                     return t.runCommand("tlb-app-actions", {
                                         BlockMenus: jQuery.parseJSON(AppMenusScript.html())
@@ -124,6 +124,18 @@ export default grapesjs.plugins.add('modulewrapper', (editor, opts = {}) => {
                 var parentelement = parent.getEl();
                 if ($(parentelement).attr('data-appname') != undefined)
                     parent.set('name', VjLocalized.PrefixAppName + $(parentelement).attr('data-appname'));
+                try {
+                    if (this.model.view.$el[0].innerHTML == '') {
+                        var response = parent.attributes.attributes.mid;
+                        var framesrc = CurrentTabUrl;
+                        if (framesrc.indexOf("?") == -1)
+                            framesrc = framesrc + "?mid=" + response + "&icp=true";
+                        else
+                            framesrc = framesrc + "&mid=" + response + "&icp=true";
+                        this.model.view.$el[0].innerHTML = '<div id="dnn_vj_' + response + '"><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" /><iframe scrolling="no" onload="window.parent.RenderApp(this);" src="' + framesrc + '" style="width:100%;height:auto;"></iframe></div>';
+                    }
+                }
+                catch (err) {  }
                 return this;
             }
         })
