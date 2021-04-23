@@ -53,7 +53,7 @@
     Transform: "[LS:Transform]",
     Filters: "[LS:Filters]",
     Extra: "[LS:Extra]",
-    Flex: "[LS:Flex]",
+    Display: "[LS:Display]",
     Transitions: "[LS:Transitions]",
     ShowHiddenIcons: "[LS:ShowHiddenIcons]",
     CustomBlock: "[LS:CustomBlock]",

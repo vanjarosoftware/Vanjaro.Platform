@@ -31,7 +31,7 @@ $(document).ready(function () {
     var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();   
     var Text = VjLocalized.Text.replace(/ /g, '').toLowerCase();    
     var Extra = VjLocalized.Extra.replace(/ /g, '').toLowerCase();
-    var Flex = VjLocalized.Flex.replace(/ /g, '').toLowerCase();
+    var Display = VjLocalized.Display.replace(/ /g, '').toLowerCase();
 
     if (window.parent.CurrentTabUrl.indexOf('?') > 0)
         CurrentExtTabUrl = window.parent.CurrentTabUrl + '&mid=0&icp=true';
@@ -1232,30 +1232,9 @@ $(document).ready(function () {
                                     }, {
                                         name: VjLocalized.Extra,
                                         open: false,
-                                        buildProps: ['display', 'cursor', 'float', 'clear', 'overflow-x', 'overflow-y'],
+                                        buildProps: ['cursor', 'float', 'clear', 'overflow-x', 'overflow-y'],
                                         properties: [
-                                            {
-                                                type: 'radio',
-                                                name: 'Display',
-                                                property: 'display',
-                                                defaults: 'none',
-                                                list: [{
-                                                    value: 'none',
-                                                    name: 'none',
-                                                }, {
-                                                    value: 'block',
-                                                    name: 'block',
-                                                }, {
-                                                    value: 'inline',
-                                                    name: 'inline',
-                                                }, {
-                                                    value: 'inline-block',
-                                                    name: 'inline-block',
-                                                }, {
-                                                    value: 'flex',
-                                                    name: 'flex',
-                                                }],
-                                            }, {
+                                             {
                                                 type: 'radio',
                                                 name: 'Clear',
                                                 property: 'clear',
@@ -1306,9 +1285,30 @@ $(document).ready(function () {
                                             }
                                         ]
                                         }, {
-                                            name: VjLocalized.Flex,
+                                            name: VjLocalized.Display,
                                             open: false,
                                             properties: [{
+                                                type: 'radio',
+                                                name: 'Display',
+                                                property: 'display',
+                                                defaults: 'none',
+                                                list: [{
+                                                    value: 'none',
+                                                    name: 'none',
+                                                }, {
+                                                    value: 'block',
+                                                    name: 'block',
+                                                }, {
+                                                    value: 'inline',
+                                                    name: 'inline',
+                                                }, {
+                                                    value: 'inline-block',
+                                                    name: 'inline-block',
+                                                }, {
+                                                    value: 'flex',
+                                                    name: 'flex',
+                                                }],
+                                            },{
                                                 name: 'Direction',
                                                 property: 'flex-direction',
                                                 type: 'customradio',
@@ -2029,10 +2029,22 @@ $(document).ready(function () {
                                     if (model.attributes.type == "icon")
                                         target = model.components().models[0];
 
-                                    if (sm.getProperty(Extra, 'display').attributes.value == 'flex')
-                                        $('#gjs-sm-' + Flex).show();
-                                    else
-                                        $('#gjs-sm-' + Flex).hide();
+                                    if (sm.getProperty(Display, 'display').attributes.value == 'flex') {
+                                        $(sm.getProperty(Display, 'flex-direction').view.el).show();
+                                        $(sm.getProperty(Display, 'justify-content').view.el).show();
+                                        $(sm.getProperty(Display, 'align-items').view.el).show();
+                                        $(sm.getProperty(Display, 'order').view.el).show();
+                                        $(sm.getProperty(Display, 'flex').view.el).show();
+                                        $(sm.getProperty(Display, 'align-self').view.el).show();
+                                    }
+                                    else {
+                                        $(sm.getProperty(Display, 'flex-direction').view.el).hide();
+                                        $(sm.getProperty(Display, 'justify-content').view.el).hide();
+                                        $(sm.getProperty(Display, 'align-items').view.el).hide();
+                                        $(sm.getProperty(Display, 'order').view.el).hide();
+                                        $(sm.getProperty(Display, 'flex').view.el).hide();
+                                        $(sm.getProperty(Display, 'align-self').view.el).hide();
+                                    }
 
                                     //Width
                                     var width = target.getStyle()['width'];
@@ -2577,10 +2589,24 @@ $(document).ready(function () {
 
                             VjEditor.on('component:styleUpdate:display', (model, argument) => {
 
-                                if (event.target.value == 'flex')
-                                    $('#gjs-sm-' + Flex).show();
-                                else
-                                    $('#gjs-sm-' + Flex).hide();
+                                var sm = VjEditor.StyleManager;
+
+                                if (event.target.value == 'flex') {
+                                    $(sm.getProperty(Display, 'flex-direction').view.el).show();
+                                    $(sm.getProperty(Display, 'justify-content').view.el).show();
+                                    $(sm.getProperty(Display, 'align-items').view.el).show();
+                                    $(sm.getProperty(Display, 'order').view.el).show();
+                                    $(sm.getProperty(Display, 'flex').view.el).show();
+                                    $(sm.getProperty(Display, 'align-self').view.el).show();
+                                }
+                                else {
+                                    $(sm.getProperty(Display, 'flex-direction').view.el).hide();
+                                    $(sm.getProperty(Display, 'justify-content').view.el).hide();
+                                    $(sm.getProperty(Display, 'align-items').view.el).hide();
+                                    $(sm.getProperty(Display, 'order').view.el).hide();
+                                    $(sm.getProperty(Display, 'flex').view.el).hide();
+                                    $(sm.getProperty(Display, 'align-self').view.el).hide();
+                                }
                             });
 
                             VjEditor.on('component:styleUpdate:border-position', (model, argument) => {
