@@ -80,6 +80,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Theme.Controllers
             {
                 string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Theme + "/editor");
                 string PortalThemeFolder = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + Theme + "/").Replace("_default", PortalSettings.PortalId.ToString());
+                Core.Managers.SettingManager.UpdateValue(PortalSettings.PortalId, -1, "setting_theme", "Theme", Theme);
                 if (!File.Exists(PortalThemeFolder + "Theme.css"))
                 {
                     Core.Managers.SettingManager.Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", PortalSettings.PortalId.ToString()));
@@ -89,7 +90,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Theme.Controllers
                     }
                     catch (System.Exception ex) { ExceptionManager.LogException(ex); }
                 }
-                Core.Managers.SettingManager.UpdateValue(PortalSettings.PortalId, -1, "setting_theme", "Theme", Theme);
             }
         }
 
