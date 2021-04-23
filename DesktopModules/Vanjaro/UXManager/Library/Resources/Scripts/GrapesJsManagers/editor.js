@@ -2287,7 +2287,7 @@ $(document).ready(function () {
                                     VjEditor.StyleManager.addSector(Text, {
                                         name: VjLocalized.Text,
                                         open: false,
-                                        buildProps: ['color', 'font-family', 'line-height', 'letter-spacing', 'word-spacing', 'font-weight', 'font-style', 'text-transform', 'text-decoration', 'text-shadow'],
+                                        buildProps: ['color', 'font-family', 'font-size', 'line-height', 'letter-spacing', 'word-spacing', 'font-weight', 'font-style', 'text-transform', 'text-decoration', 'text-shadow'],
                                         properties: [{
                                             type: 'radio',
                                             name: 'Text decoration',
@@ -2323,6 +2323,20 @@ $(document).ready(function () {
                                             name: 'Font Family',
                                             property: 'font-family',
                                             list: fontfamilylist
+                                        }, {
+                                            type: 'customrange',
+                                            name: 'Font size',
+                                            property: 'font-size',
+                                            units: [
+                                                { name: 'px', min: 1, max: 100, step: 1 },
+                                                { name: '%', min: 1, max: 100, step: 1 },
+                                                { name: 'em', min: 1, max: 100, step: 1 },
+                                                { name: 'rem', min: 1, max: 100, step: 1 },
+                                                { name: 'vw', min: 1, max: 100, step: 1 },
+                                                { name: 'vh', min: 1, max: 100, step: 1 },
+                                            ],
+                                            unit: 'px',
+                                            defaults: 16
                                         }, {
                                             type: 'customrange',
                                             name: 'Line height',
