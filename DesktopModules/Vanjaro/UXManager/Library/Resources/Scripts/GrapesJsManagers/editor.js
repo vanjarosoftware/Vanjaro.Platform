@@ -379,8 +379,13 @@ $(document).ready(function () {
                             BuildAppComponentFromHtml(vjcomps, VJLandingPage.html);
                             BuildBlockComponent(vjcomps);
                             vjcomps = FilterComponents(vjcomps);
+
                             if (typeof LoadThemeBlocks != 'undefined')
                                 LoadThemeBlocks(grapesjs);
+
+                            if (typeof LoadCustomCode != 'undefined')
+                                LoadCustomCode(grapesjs);
+
                             VjEditor = grapesjs.init({
                                 protectedCss: '',
                                 allowScripts: 1,
@@ -401,7 +406,7 @@ $(document).ready(function () {
                                 container: vjEditorSettings.ContainerID,
                                 height: '100%',
                                 fromElement: vjcomps != undefined ? false : true,
-                                plugins: ['modulewrapper', 'blockwrapper', 'vjpreset', 'ThemeBlocks'],
+                                plugins: ['modulewrapper', 'blockwrapper', 'vjpreset', 'ThemeBlocks', 'customcode'],
                                 pluginsOpts: {
                                     'vj-preset': {
                                         colorPicker: 'default',
