@@ -37,7 +37,17 @@ namespace Vanjaro.Core.Providers.Authentication.Controllers
             dynamic actionResult = new ExpandoObject();
             try
             {
-                PasswordReset.ResetToken = HttpContext.Current.Request.UrlReferrer.AbsoluteUri.Split('/')[HttpContext.Current.Request.UrlReferrer.AbsoluteUri.Split('/').Length - 1];
+                PasswordReset.ResetToken = null;
+                string[] FindToken = HttpContext.Current.Request.UrlReferrer.AbsoluteUri.Split('/');
+                for (int i = 0; i < FindToken.Length - 1; i++)
+                {
+                    if (FindToken[i] == "resettoken" && FindToken.Length > i + 1)
+                    {
+                        PasswordReset.ResetToken = FindToken[i + 1];
+                        break;
+                    }
+                }
+
                 UserInfo UserInfo = UserController.GetUserByPasswordResetToken(PortalSettings.Current.PortalId, PasswordReset.ResetToken);
                 _ipAddress = UserRequestIPAddressController.Instance.GetUserRequestIPAddress(new HttpRequestWrapper(HttpContext.Current.Request));
                 string username = PasswordReset.Username;
