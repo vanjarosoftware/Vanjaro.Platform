@@ -145,6 +145,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
                             Settings.Add("LocalizedPage", new UIData { Name = "LocalizedPage", Options = Managers.PagesManager.AddDefaultLocalization(pid, pageSettings) });
                             Settings.Add("Languages", new UIData { Name = "Languages", Value = PortalSettings.Current.CultureCode, Options = LocalizationManager.GetActiveLocale(PortalSettings.Current.PortalId).Where(a => a.Value.ToLower() == PortalSettings.Current.CultureCode.ToLower()), OptionsText = "Text", OptionsValue = "Value" });
                             Settings.Add("MakePublic", new UIData { Name = "MakePublic", Value = bool.FalseString });
+                            Settings.Add("EnableScheduling", new UIData { Name = "EnableScheduling", Value = bool.FalseString });
                         }
 
                         return Settings.Values.ToList();

@@ -117,7 +117,7 @@
                                 <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseOne" class="accordion-collapse collapse show"  data-bs-parent="#accordion">
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordion">
                             <div class="accordion-body">
                                 [uilayout:NavMenu]
                             </div>
@@ -125,12 +125,12 @@
                     </div>
                     <div class="accordion-item" mn-ng-if="ui.data.IsDefaultLocale.Options" mn-ng-show="ui.data.PagesTemplate.Options.pageType=='Standard'">
                         <div class="accordion-header">
-                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse"  data-bs-parent="#accordion" data-bs-target="#collapseTwo">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordion" data-bs-target="#collapseTwo">
                                 [L:LiveEditing]
                                 <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseTwo" class="accordion-collapse collapse"  data-bs-parent="#accordion">
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion">
                             <div class="accordion-body">
                                 [uilayout:LiveEditing]
                             </div>
@@ -138,12 +138,12 @@
                     </div>
                     <div class="accordion-item" mn-ng-if="ui.data.IsDefaultLocale.Options" mn-ng-show="ui.data.PagesTemplate.Options.pageType=='Standard'">
                         <div class="accordion-header">
-                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse"  data-bs-parent="#accordion" data-bs-target="#collapseThree">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordion" data-bs-target="#collapseThree">
                                 [L:Personalization]
                                 <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="collapseThree" class="accordion-collapse collapse"  data-bs-parent="#accordion">
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordion">
                             <div class="accordion-body">
                                 [uilayout:Personalization]
                             </div>
@@ -195,7 +195,7 @@
                                 <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="PermissionSetting" class="accordion-collapse collapse show"  data-bs-parent="#accordion3">
+                        <div id="PermissionSetting" class="accordion-collapse collapse show" data-bs-parent="#accordion3">
                             <div class="accordion-body">
                                 [uilayout:PermissionSetting]
                             </div>
@@ -219,7 +219,7 @@
                                 <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="SearchResult" class="accordion-collapse collapse show"  data-bs-parent="#accordionseo">
+                        <div id="SearchResult" class="accordion-collapse collapse show" data-bs-parent="#accordionseo">
                             <div class="accordion-body">
                                 [uilayout:SearchResult]
                             </div>
@@ -227,12 +227,12 @@
                     </div>
                     <div class="accordion-item" mn-ng-show="pid>0">
                         <div class="accordion-header">
-                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse"  data-bs-parent="#accordionseo" data-bs-target="#URLs">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionseo" data-bs-target="#URLs">
                                 [L:URLs]
                                 <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="URLs" class="accordion-collapse collapse"  data-bs-parent="#accordionseo">
+                        <div id="URLs" class="accordion-collapse collapse" data-bs-parent="#accordionseo">
                             <div class="accordion-body">
                                 [uilayout:URLs]
                             </div>
@@ -240,12 +240,12 @@
                     </div>
                     <div class="accordion-item" mn-ng-if="ui.data.IsDefaultLocale.Options">
                         <div class="accordion-header">
-                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse"  data-bs-parent="#accordionseo" data-bs-target="#Advance">
+                            <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-parent="#accordionseo" data-bs-target="#Advance">
                                 [L:Advance]
                                 <em class="fas fa-caret-right float-end"></em>
                             </a>
                         </div>
-                        <div id="Advance" class="accordion-collapse collapse"  data-bs-parent="#accordionseo">
+                        <div id="Advance" class="accordion-collapse collapse" data-bs-parent="#accordionseo">
                             <div class="accordion-body">
                                 [uilayout:Advance]
                             </div>
@@ -337,7 +337,7 @@
                                 <em class="fas fa-caret-down float-end"></em>
                             </a>
                         </div>
-                        <div id="SchedulingSetting" class="accordion-collapse collapse show"  data-bs-parent="#accordion2">
+                        <div id="SchedulingSetting" class="accordion-collapse collapse show" data-bs-parent="#accordion2">
                             <div class="accordion-body">
                                 [uilayout:SchedulingSetting]
                             </div>
@@ -348,9 +348,9 @@
             </uitemplate>
         </uilayout>
         <uilayout name="SchedulingSetting" attr-ng-show="Scheduled && Show_Tab">
-            <uielement name="EnableScheduling" ngmodel="EnableScheduling" control="toggle" attr-class="toggle_right">></uielement>
-            <uielement name="StartDate" container-attr-ng-show="EnableScheduling" attr-ng-model="ui.data.PagesTemplate.Options.startDate" control="bootstrapdatepicker" attr-class="input-group date_picker font-datetime"></uielement>
-            <uielement name="EndDate" container-attr-ng-show="EnableScheduling" attr-ng-model="ui.data.PagesTemplate.Options.endDate" control="bootstrapdatepicker" attr-class="input-group date_picker font-datetime"></uielement>
+            <uielement name="EnableScheduling" control="toggle" attr-class="toggle_right">></uielement>
+            <uielement name="StartDate" container-attr-ng-show="ui.data.EnableScheduling.Value" attr-ng-model="ui.data.PagesTemplate.Options.startDate" control="bootstrapdatepicker" attr-class="input-group date_picker font-datetime"></uielement>
+            <uielement name="EndDate" container-attr-ng-show="ui.data.EnableScheduling.Value" attr-ng-model="ui.data.PagesTemplate.Options.endDate" control="bootstrapdatepicker" attr-class="input-group date_picker font-datetime"></uielement>
         </uilayout>
 
         <!--Start deleted modules-->

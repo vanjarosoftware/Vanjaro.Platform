@@ -80,7 +80,6 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
     $scope.Layout = null;
     $scope.ShowPage_detailsTab = false;
     $scope.ShowPermissionsTab = false;
-    $scope.EnableScheduling = false;
     $scope.ShowSEOTab = false;
     $scope.ShowUrlEdit = false;
     $scope.ParentPageValue = -1;
@@ -105,16 +104,15 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                     $scope.ui.data.PagesTemplate.Options.endDate = ((enddate.getMonth() + 1) < 10 ? '0' + (enddate.getMonth() + 1) : (enddate.getMonth() + 1)) + "/" + (enddate.getDate() < 10 ? '0' + enddate.getDate() : enddate.getDate()) + "/" + enddate.getFullYear();
                 }
                 $scope.Click_ShowPageType($scope.PageTypes);
-                $scope.EnableScheduling = ($scope.ui.data.PagesTemplate.Options.startDate != null || $scope.ui.data.PagesTemplate.Options.endDate != null);
+                $scope.ui.data.EnableScheduling.Value = ($scope.ui.data.PagesTemplate.Options.startDate != null || $scope.ui.data.PagesTemplate.Options.endDate != null);
                 $scope.ParentPageValue = parseInt($scope.ui.data.ParentPage.Value);
             }
 
-            if (!$scope.EnableScheduling) {
+            if (!$scope.ui.data.EnableScheduling.Value) {
                 $scope.ui.data.PagesTemplate.Options.startDate = null;
                 $scope.ui.data.PagesTemplate.Options.endDate = null;
             }
-            if ($scope.ui.data.ParentPage.Value != null)
-                $scope.ui.data.ParentPage.Value = parseInt($scope.ui.data.ParentPage.Value);
+
             if ($scope.ui.data.URLType.Value != null)
                 $scope.ui.data.URLType.Value = parseInt($scope.ui.data.URLType.Value);
             if ($scope.ui.data.SiteAlias != undefined && $scope.ui.data.SiteAlias.Value != null)
@@ -337,13 +335,13 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
 
             $scope.ui.data.PagesTemplate.Options.permissions.rolePermissions = rolePermissions;
             $scope.ui.data.PagesTemplate.Options.permissions.userPermissions = userPermissions;
-            if (!$scope.EnableScheduling) {
+            if (!$scope.ui.data.EnableScheduling.Value) {
                 $scope.ui.data.PagesTemplate.Options.startDate = null;
                 $scope.ui.data.PagesTemplate.Options.endDate = null;
             }
             var valid = true;
-            if ($scope.EnableScheduling && $scope.ui.data.PagesTemplate.Options.startDate != null && $scope.ui.data.PagesTemplate.Options.endDate != null) {
-                valid = new Date($scope.ui.data.PagesTemplate.Options.startDate) < new Date($scope.ui.data.PagesTemplate.Options.endDate);
+            if ($scope.ui.data.EnableScheduling.Value && $scope.ui.data.PagesTemplate.Options.startDate != '' && $scope.ui.data.PagesTemplate.Options.startDate != null && $scope.ui.data.PagesTemplate.Options.endDate != '' && $scope.ui.data.PagesTemplate.Options.endDate != null) {
+                valid = new Date($scope.ui.data.PagesTemplate.Options.startDate) <= new Date($scope.ui.data.PagesTemplate.Options.endDate);
             }
             if (valid) {
                 var IsCopy = false;
