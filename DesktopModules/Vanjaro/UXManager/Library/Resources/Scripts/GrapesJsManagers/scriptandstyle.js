@@ -9,7 +9,7 @@ global.BindLinksAndScripts = function () {
     global.VjScript = '';
     global.VjStyle = '';
     $('link').each(function () {
-        if (VjLinks.indexOf(this.href) == -1) {
+        if (typeof this.attributes.vj == 'undefined' && VjLinks.indexOf(this.href) == -1) {
             VjLinks.push(this.href);
         }
     });
