@@ -88,6 +88,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
     $scope.PageFile = new FileUploader();
     $scope.PageFileDetails = [];
     $scope.Show_Tab = false;
+    $scope.SelectedWorkflow = 0;
     var common = CommonSvc.getData($scope);
     //Init Scope
     $scope.onInit = function () {
@@ -120,6 +121,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                 $scope.ui.data.SiteAlias.Value = parseInt($scope.ui.data.SiteAlias.Value);
             LocalizationServices.BindLocalization($scope, $scope.ui.data.LocalizedPage.Options, $scope.ui.data.Languages.Options);
             BindSitemapPriorityList();
+            $scope.SelectedWorkflow = $scope.ui.data.ddlWorkFlows.Value;
         }
         else {
             window.parent.swal('[LS:DonotHaveEditPermission_Message]');
@@ -180,7 +182,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         } catch (ex) {
                             alert(ex);
                         }
-                    },function (data) {
+                    }, function (data) {
                         alert(data.data);
                     });
                 }
@@ -717,7 +719,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         $.each($scope.ui.data.ddlWorkFlows.Options, function (key, w) {
                             if ($scope.ui.data.ddlWorkFlows.Value == w.Value) {
                                 $scope.ui.data.WorkflowStateInfo.Value = w.Content;
-
+                                $scope.SelectedWorkflow = $scope.ui.data.ddlWorkFlows.Value;
                                 common.webApi.post('pages/updateworkflow', 'WorkflowID=' + $scope.ui.data.ddlWorkFlows.Value + '&PageID=' + $scope.pid).then(function (Response) {
                                     if (Response.data.IsSuccess && Response.data.Data != undefined && Response.data.Data.Revisions != undefined) {
                                         $scope.ui.data.MaxRevisions.Value = Response.data.Data.Revisions;
@@ -729,6 +731,9 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                                 return;
                             }
                         });
+                    }
+                    else {
+                        $scope.ui.data.ddlWorkFlows.Value = $scope.SelectedWorkflow;
                     }
                 });
         }
