@@ -180,7 +180,6 @@
 						name: "frame",
 						type: "toggle_radio",
 						UpdateStyles: true,
-						cssproperties: [{ name: "border-radius" }],
 						options: [
 							{ id: 'none', name: 'none', icon: "fas fa-ban" },
 							{ id: 'square', name: 'square', icon: "far fa-square" },
