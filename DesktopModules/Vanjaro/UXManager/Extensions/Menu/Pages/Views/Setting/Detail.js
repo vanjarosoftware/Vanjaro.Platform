@@ -414,7 +414,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                             }
                         }
                         $scope.RenderMarkup();
-                        if (parent.GetParameterByName('m2vsetup', parent.window.location) != null && typeof parent.GetParameterByName('m2vsetup', parent.window.location) != undefined && data.Data.url != null) {
+                        if (parent.GetParameterByName('m2vsetup', parent.window.location) != null && typeof parent.GetParameterByName('m2vsetup', parent.window.location) != undefined && data.data.Data.url != null) {
                             parent.window.location.href = data.data.Data.url + "?migrate=true";
                         }
                         else {

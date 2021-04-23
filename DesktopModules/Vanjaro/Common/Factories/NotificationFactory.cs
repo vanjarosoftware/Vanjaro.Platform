@@ -276,6 +276,12 @@ namespace Vanjaro.Common.Factories
                     smtp.Port = int.Parse(Port);
                 }
 
+                Authentication = SettingFactory.GetPortalSetting("SMTPAuthentication", PortalId, false);
+                if (!string.IsNullOrEmpty(Authentication))
+                {
+                    smtp.Authentication = Authentication;
+                }
+
                 Username = SettingFactory.GetPortalSetting("SMTPUsername", PortalId, false);
                 if (!string.IsNullOrEmpty(Username))
                 {
