@@ -111,7 +111,7 @@
 
             common.webApi.post('updateprofile/updateuserbasicinfo', 'fileid=' + fileID, Data).then(function (data) {
                 if (data.data.IsSuccess) {
-                    if (data.IsRedirect) {
+                    if (data.data.IsRedirect) {
                         window.parent.location.href = data.data.RedirectURL;
                     }
                     else {

@@ -1154,6 +1154,7 @@
 				</component>
 				<component type="Cleanup" version="00.05.03" fileName="Cleanup\00.05.03.txt" />
         <component type="Cleanup" version="01.00.04" fileName="Cleanup\01.00.04.txt" />
+        <component type="Cleanup" version="01.00.05" fileName="Cleanup\01.00.05.txt" />
 			</components>
 			<eventMessage>
 				<processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>

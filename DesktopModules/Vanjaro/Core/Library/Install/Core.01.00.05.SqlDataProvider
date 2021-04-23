@@ -48,3 +48,4 @@ ALTER TABLE {databaseOwner}[VJ_Core_Setting] ADD CONSTRAINT FK_CoreSettingPortal
 END
 GO
 
+UPDATE {databaseOwner}{objectQualifier}Tabs SET SiteMapPriority=0.5 WHERE SiteMapPriority=-1

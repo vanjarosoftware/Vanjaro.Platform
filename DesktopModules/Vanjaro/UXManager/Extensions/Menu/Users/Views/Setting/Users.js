@@ -117,7 +117,7 @@
         }
         SearchKeys.pagesize = parseInt($('#setting_users2grid0').attr('pagesize'));
         common.webApi.get('user/getdeleteduserlist', 'searchtext=' + SearchKeys.Search_Key + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize).then(function (data) {
-            if (data != null && data.data.Data != null && data.data.IsSuccess && !data.data.HasErrors) {
+            if (data.data != null && data.data.Data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 if (tableState != null && tableState != 'undefiend' && tableState != '') {
                     tableState.pagination.numberOfPages = Math.ceil(data.data.Data.TotalResults / SearchKeys.pagesize);
                 }
@@ -167,7 +167,7 @@
             function (isConfirm) {
                 if (isConfirm) {
                     common.webApi.post('user/softdeleteuser', 'userid=' + row.userId, '').then(function (data) {
-                        if (data != null && data.data.IsSuccess && !data.data.HasErrors) {
+                        if (data.data != null && data.data.IsSuccess && !data.data.HasErrors) {
                             row.isDeleted = true;
                             var index = $scope.ui.data.AllUsers.Options.indexOf(row);
                             $scope.ui.data.AllUsers.Options.splice(index, 1);
@@ -297,7 +297,7 @@
 
     $scope.Click_Restore = function (row) {
         common.webApi.post('user/restoredeleteduser', 'userid=' + row.userId, '').then(function (data) {
-            if (data != null && data.data.IsSuccess && !data.data.HasErrors) {
+            if (data.data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 row.isDeleted = false;
                 if ($scope.ui.data.UserFilters.Value == 2) {
                     var index = $scope.ui.data.AllUsers.Options.indexOf(row);
@@ -348,7 +348,7 @@
         if (!row.authorized)
             setAuthorized = true;
         common.webApi.post('user/updateauthorizestatus', 'userid=' + row.userId + '&authorized=' + setAuthorized, '').then(function (data) {
-            if (data != null && data.data.IsSuccess && !data.data.HasErrors) {
+            if (data.data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 row.authorized = setAuthorized;
                 if (row.authorized) {
                     if ($scope.ui.data.UserFilters.Value == 1) {

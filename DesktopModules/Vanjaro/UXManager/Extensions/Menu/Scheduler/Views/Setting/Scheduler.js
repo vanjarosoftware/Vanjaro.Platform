@@ -220,9 +220,9 @@
             }
             if ($scope.ScheduleID === "0") {
                 common.webApi.post('scheduler/CreateScheduleItem', '', scheduleDto).then(function (data) {
-                    if (data.IsSuccess) {
-                        $scope.pagginationData.pagination.numberOfPages = data.Data.ScheduleItems.numberOfPages;
-                        $scope.ScheduleItems = data.Data.ScheduleItems.ScheduledItems;
+                    if (data.data.IsSuccess) {
+                        $scope.pagginationData.pagination.numberOfPages = data.data.Data.ScheduleItems.numberOfPages;
+                        $scope.ScheduleItems = data.data.Data.ScheduleItems.ScheduledItems;
                         $scope.Click_Cancel();
                         $scope.ShowAddTask = true;
                         //$scope.AddTaskSchedule = false;
@@ -334,7 +334,7 @@
 
 
         common.webApi.post('Scheduler/GetSchedulerItembyPageing', '', formData).then(function (data) {
-            if (data != null) {
+            if (data.data != null) {
                 tableState.pagination.numberOfPages = data.data.Data.ScheduleItems.numberOfPages;
                 $scope.ScheduleItems = data.data.Data.ScheduleItems.ScheduledItems;
             }

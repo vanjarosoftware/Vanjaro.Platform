@@ -68,8 +68,8 @@
             if (Response.data.IsSuccess) {
                 $scope.ui.data.UpdateTransaltionsRequest.Options.Entries = Response.data.Data;
             }
-            else if (Response.HasErrors)
-                CommonSvc.SweetAlert.swal(Response.Message);
+            else if (Response.data.HasErrors)
+                CommonSvc.SweetAlert.swal(Response.data.Message);
         });
     };
     $scope.Click_Cancel = function () {

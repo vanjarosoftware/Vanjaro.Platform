@@ -46,7 +46,7 @@
         }
         if ($scope.ui.data.GroupName.Value !== '' || typeof $scope.ui.data.GroupName.Value === "number") {
             common.webApi.post('rolegroup/getGroupRoles', 'keyword=' + GroupRoles.keyword + '&startIndex=' + GroupRoles.startIndex + '&pageSize=' + GroupRoles.pageSize, GroupRoles).then(function (data) {
-                if (data !== null && data.data.Roles !== null) {
+                if (data.data !== null && data.data.Roles !== null) {
                     if (tableState !== null && tableState !== 'undefiend' && tableState !== '') {
                         tableState.pagination.numberOfPages = Math.ceil(data.data.total / GroupRoles.pageSize);
                     }
@@ -89,7 +89,7 @@
                 if (isConfirm) {
                     common.webApi.post('role/deleterole', '', $scope.ui.data.Working_RoleDto.Options).then(function (data) {
                         if (data.data.Message !== null && data.data.Message.length > 0) {
-                            window.parent.ShowNotification('Error!', data.Message, 'error');
+                            window.parent.ShowNotification('Error!', data.data.Message, 'error');
                         }
                         if (data.data.IsSuccess) {
                             $scope.Pipe_RolesPaging($scope.pagginationData);
@@ -118,7 +118,7 @@
                         if (data.data.Message !== null && data.data.Message.length > 0) {
                             window.parent.ShowNotification('Error!', data.data.Message, 'error');
                         }
-                        if (data.IsSuccess) {
+                        if (data.data.IsSuccess) {
                             $scope.ui.data.RoleGroup.Options = data.data.Data.AllRoleGroup;
                         }
                     });

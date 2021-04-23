@@ -17,7 +17,7 @@
             $scope.ui.data.ChangePasswordTemplate.Options.userId = $scope.uid;
             if ($scope.ui.data.ChangePasswordTemplate.Options.password == ConfirmPassword) {
                 common.webApi.post('user/changepassword', '', $scope.ui.data.ChangePasswordTemplate.Options).then(function (data) {
-                    if (data != null && data.data.IsSuccess && !data.data.HasErrors) {
+                    if (data.data != null && data.data.IsSuccess && !data.data.HasErrors) {
                         $scope.Click_Cancel(change);
                         window.parent.ShowNotification($scope.uname, '[L:Success_ChangePasswordMessage]', 'success');
                     }

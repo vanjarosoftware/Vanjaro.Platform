@@ -21,7 +21,7 @@
                 }
             }
             common.webApi.post('Setting/save', '', Data).then(function (Response) {
-                if (Response)
+                if (Response.data)
                     $scope.Click_Cancel();
                 else {
                     CommonSvc.SweetAlert.swal("[L:Invalid]");

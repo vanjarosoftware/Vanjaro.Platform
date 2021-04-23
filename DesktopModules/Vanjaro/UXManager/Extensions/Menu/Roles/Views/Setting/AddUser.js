@@ -38,7 +38,7 @@
         }
 
         common.webApi.get('role/getroleusers', 'keyword=' + SearchKeys.Search_Key + '&roleid=' + $scope.rid + '&pageindex=' + SearchKeys.skip / SearchKeys.pagesize + '&pagesize=' + SearchKeys.pagesize).then(function (data) {
-            if (data != null && data.data.Data != null && data.data.IsSuccess && !data.data.HasErrors) {
+            if (data.data != null && data.data.Data != null && data.data.IsSuccess && !data.data.HasErrors) {
                 if (tableState != null && tableState != 'undefiend' && tableState != '') {
                     tableState.pagination.numberOfPages = Math.ceil(data.data.Data.totalRecords / SearchKeys.pagesize);
                 }
@@ -97,7 +97,7 @@
                     var tablestate = $scope.pagginationData;
                     $scope.Pipe_UserRolePagging(tablestate);
                 }
-                if (data.HasErrors) {
+                if (data.data.HasErrors) {
                     window.parent.ShowNotification(User.DisplayName, data.data.Message, 'error');
                 }
             });
@@ -132,7 +132,7 @@
                     var tablestate = $scope.pagginationData;
                     $scope.Pipe_UserRolePagging(tablestate);
                 }
-                if (data.HasErrors) {
+                if (data.data.HasErrors) {
                     window.parent.ShowNotification('[LS:RolesError]', data.data.Message, 'error');
                 }
             });
