@@ -429,3 +429,18 @@
 .addpage-notification {
     cursor: pointer;
 }
+
+.Menu-Pages .DelPagesNotifycount {
+    font-weight: 800;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    margin-left: 2px;
+}
+
+.Menu-Pages .btndelpages {
+    position: relative;
+    margin-right: 4px;
+}
+
+

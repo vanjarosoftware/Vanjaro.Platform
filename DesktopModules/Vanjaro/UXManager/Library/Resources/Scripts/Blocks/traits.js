@@ -387,15 +387,24 @@ export default (editor, config = {}) => {
 
 			if (event.target.value == "none") {
 				style["border-width"] = "0";
-				style["border-radius"] = "0";
+				style["border-top-left-radius"] = "0";
+				style["border-top-right-radius"] = "0";
+				style["border-bottom-left-radius"] = "0";
+				style["border-bottom-right-radius"] = "0";
 			}
             else if (event.target.value == "circle") {
 				style["border-width"] = mainComponent.getTrait('framewidth').getInitValue() + "px";
-				style["border-radius"] = "50%";
+				style["border-top-left-radius"] = "50%";
+				style["border-top-right-radius"] = "50%";
+				style["border-bottom-left-radius"] = "50%";
+				style["border-bottom-right-radius"] = "50%";
 			}
             else if (event.target.value == "square") {
 				style["border-width"] = mainComponent.getTrait('framewidth').getInitValue() + "px";
-				style["border-radius"] = "0";
+				style["border-top-left-radius"] = "0";
+				style["border-top-right-radius"] = "0";
+				style["border-bottom-left-radius"] = "0";
+				style["border-bottom-right-radius"] = "0";
 			}
 		}
 

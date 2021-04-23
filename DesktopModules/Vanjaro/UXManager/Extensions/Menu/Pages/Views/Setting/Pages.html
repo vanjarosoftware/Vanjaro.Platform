@@ -15,6 +15,10 @@
                         <a href="#" onclick="parent.OpenPopUp(event, 800,'right', '[LS:Shortcut_Title]', '#!/detail')" mn-access-roles="admin" class="ux-btn ux-btn-hover float-end" mn-ng-hide="Show_RecycleBin" title="[L:AddPages]">
                             <em class="fas fa-plus"></em>
                         </a>
+                        <a class='ux-btn ux-btn-hover float-end btndelpages' mn-ng-hide="Show_RecycleBin||!Show_RecycleBin&&ui.data.DeletedPagesCount.Options<=0" ng-click="Show_RecycleBin =!(Show_RecycleBin);HeaderText='[LS:RecycleBin]'" title="[L:Deleted]">
+                            <em class='fas fa-trash' data-bs-toggle="tooltip" data-bs-placement="bottom" title="[L:Deleted]"></em>
+                            <sup class='DelPagesNotifycount' id="DeletedPagesCount">{{ui.data.DeletedPagesCount.Options}}</sup>
+                        </a>
                         <a class="ux-btn ux-btn-hover float-end" title="[LS:DeleteAllPages]" ng-click="Remove_All_Pages()" mn-ng-show="Show_RecycleBin && ui.data.DeletedPagesCount.Options >0">
                             <em class="fas fa-eraser"></em>
                         </a>
@@ -50,15 +54,7 @@
             </uitemplate>
         </uilayout>
 
-        <uilayout name="default" attr-ng-hide="Show_RecycleBin">
-            <uitemplate>
-                <div class="col-md-12 text-center">
-                    <a href="#" mn-ng-hide="Show_RecycleBin||!Show_RecycleBin&&ui.data.DeletedPagesCount.Options<=0" ng-click="Show_RecycleBin =!(Show_RecycleBin);HeaderText='[LS:RecycleBin]'" class="badge badge-button position-relative" title="[L:Deleted]">
-                        <span class="title">[L:Deleted]</span>
-                        <span class="badge badge-button-inverse float-end">{{ui.data.DeletedPagesCount.Options}}</span>
-                    </a>
-                </div>
-            </uitemplate>
+        <uilayout name="default" attr-ng-hide="Show_RecycleBin">            
             <uitemplate>
                 <div class='page-search'>
                     <em class='fa fa-search'></em><input id='page-search' mn-ng-model="SearchKey" type='text' placeholder="[L:Search]" class='form-control' /><em class="fas fa-times close-pagebtn"></em>

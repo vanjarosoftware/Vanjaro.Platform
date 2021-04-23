@@ -243,7 +243,7 @@ a.btn.btn-primary.button-left {
 .uploaddefault .l_folder,
 .uploaddefault .l_folder ul li {
     list-style: none;
-    margin: 10px 0;
+    margin: 10px 0 -1px 0;
 }
 
     .uploaddefault .l_folder span {

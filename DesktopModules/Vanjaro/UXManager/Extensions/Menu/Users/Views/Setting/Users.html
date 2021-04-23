@@ -71,20 +71,20 @@
                             </a>
                             <div ng-if="!row.isDeleted" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item box-icon" mn-ng-click="Click_UserSettings(row)"><em class="fas fa-cog"></em><span>[L:UserSettings]</span></a>
-                                <a mn-ng-show="ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_LoginAs(row.userId)" class="dropdown-item box-icon"><em class="fas fa-sign-in-alt"></em><span>[L:LogInAs]</span></a>
+                                <a mn-ng-if="ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_LoginAs(row.userId)" class="dropdown-item box-icon"><em class="fas fa-sign-in-alt"></em><span>[L:LogInAs]</span></a>
                                 <hr class="m-none" access-roles="admin">
                                 <a mn-ng-click="Click_ManagePassword(row)" access-roles="admin" class="dropdown-item box-icon"><em class="fas fa-lock"></em><span>[L:ChangePassword]</span></a>
                                 <a mn-ng-click="Click_ForceChangePassword(row)" access-roles="admin" class="dropdown-item box-icon"><em class="fas fa-wrench"></em><span>[L:ForcePasswordChange]</span></a>
                                 <a mn-ng-click="Click_SendPasswordResetLink(row)" access-roles="admin" class="dropdown-item box-icon"><em class="fas fa-paper-plane"></em><span>[L:SendPasswordResetLink]</span></a>
-                                <hr class="m-none" mn-ng-show="!row.isSuperUser" access-roles="admin">
-                                <a mn-ng-show="row.authorized && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_UpdateAuthorizeStatus(row)" class="dropdown-item box-icon"><em class="fas fa-user"></em><span>[L:UnAuthorizeUser]</span></a>
-                                <a mn-ng-show="!row.authorized && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_UpdateAuthorizeStatus(row)" class="dropdown-item box-icon"><em class="fas fa-user"></em><span>[L:AuthorizeUser]</span></a>
-                                <a mn-ng-show="!row.isDeleted && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_SoftDelete(row)" class="dropdown-item box-icon"><em class="fas fa-trash"></em><span>[L:Delete]</span></a>
-                                <a mn-ng-show="row.isDeleted && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_HardDelete(row)" class="dropdown-item box-icon"><em class="fas fa-times"></em><span>[L:Remove]</span></a>
-                                <a mn-ng-show="row.isDeleted && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_Restore(row)" class="dropdown-item box-icon"><em class="fas fa-redo"></em><span>[L:RestoreUser]</span></a>
-                                <hr class="m-none" mn-ng-show="!row.isSuperUser" access-roles="admin">
-                                <a mn-ng-show="!row.isSuperUser && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_UpdateSuperUserStatus(row)" class="dropdown-item box-icon"><em class="far fa-star"></em><span>[L:MakeSuperUser]</span></a>
-                                <a mn-ng-show="row.isSuperUser && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_UpdateSuperUserStatus(row)" class="dropdown-item box-icon"><em class="fas fa-star"></em><span>[L:MakeRegularUser]</span></a>
+                                <hr class="m-none" mn-ng-if="ui.data.CurrentUserId.Value != row.userId" access-roles="admin">
+                                <a mn-ng-if="row.authorized && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_UpdateAuthorizeStatus(row)" class="dropdown-item box-icon"><em class="fas fa-user"></em><span>[L:UnAuthorizeUser]</span></a>
+                                <a mn-ng-if="!row.authorized && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_UpdateAuthorizeStatus(row)" class="dropdown-item box-icon"><em class="fas fa-user"></em><span>[L:AuthorizeUser]</span></a>
+                                <a mn-ng-if="!row.isDeleted && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_SoftDelete(row)" class="dropdown-item box-icon"><em class="fas fa-trash"></em><span>[L:Delete]</span></a>
+                                <a mn-ng-if="row.isDeleted && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_HardDelete(row)" class="dropdown-item box-icon"><em class="fas fa-times"></em><span>[L:Remove]</span></a>
+                                <a mn-ng-if="row.isDeleted && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_Restore(row)" class="dropdown-item box-icon"><em class="fas fa-redo"></em><span>[L:RestoreUser]</span></a>
+                                <hr class="m-none" mn-ng-if="ui.data.CurrentUserId.Value != row.userId" access-roles="host">
+                                <a mn-ng-if="!row.isSuperUser && ui.data.CurrentUserId.Value != row.userId" access-roles="host" mn-ng-click="Click_UpdateSuperUserStatus(row)" class="dropdown-item box-icon"><em class="far fa-star"></em><span>[L:MakeSuperUser]</span></a>
+                                <a mn-ng-if="row.isSuperUser && ui.data.CurrentUserId.Value != row.userId" access-roles="host" mn-ng-click="Click_UpdateSuperUserStatus(row)" class="dropdown-item box-icon"><em class="fas fa-star"></em><span>[L:MakeRegularUser]</span></a>
                             </div>
 
                             <div ng-if="row.isDeleted" class="dropdown-menu" aria-labelledby="dropdownMenuLink">

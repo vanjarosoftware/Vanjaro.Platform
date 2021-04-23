@@ -703,6 +703,9 @@ div#MenuSettings .parent-menu-hide {
 .blockItem.registerlink-notification {
     cursor: pointer;
 }
+[data-gjs-type="blockwrapper"] .desktop_registerbox .dropdown {
+    pointer-events: none;
+}
 /*Panel Footer*/
 
 .sidebar .panelfooter {
@@ -1789,6 +1792,7 @@ html.mobile-responsive {
         color: #0088cc;
         border-color: #0088cc;
     }
+
 
 .traitsmanager .gjs-field-href .link-wrapper .link-block input,
 .traitsmanager .gjs-field-href .link-wrapper .link-block select {
@@ -3510,3 +3514,8 @@ body.resp-mode.mobile-landscape .vj-wrapper {
 .gjs-clm-sels-info {
     display: none;
 }
+
+[data-gjs-type='blockwrapper'] #navbar-menu {
+    pointer-events: none;  
+}
+

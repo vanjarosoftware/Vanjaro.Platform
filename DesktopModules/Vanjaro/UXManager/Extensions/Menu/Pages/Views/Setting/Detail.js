@@ -80,7 +80,6 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
     $scope.Layout = null;
     $scope.ShowPage_detailsTab = false;
     $scope.ShowPermissionsTab = false;
-    $scope.EnableScheduling = false;
     $scope.ShowSEOTab = false;
     $scope.ShowUrlEdit = false;
     $scope.ParentPageValue = -1;
@@ -88,6 +87,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
     $scope.PageFile = new FileUploader();
     $scope.PageFileDetails = [];
     $scope.Show_Tab = false;
+    $scope.SelectedWorkflow = 0;
     var common = CommonSvc.getData($scope);
     //Init Scope
     $scope.onInit = function () {
@@ -104,22 +104,22 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                     $scope.ui.data.PagesTemplate.Options.endDate = ((enddate.getMonth() + 1) < 10 ? '0' + (enddate.getMonth() + 1) : (enddate.getMonth() + 1)) + "/" + (enddate.getDate() < 10 ? '0' + enddate.getDate() : enddate.getDate()) + "/" + enddate.getFullYear();
                 }
                 $scope.Click_ShowPageType($scope.PageTypes);
-                $scope.EnableScheduling = ($scope.ui.data.PagesTemplate.Options.startDate != null || $scope.ui.data.PagesTemplate.Options.endDate != null);
+                $scope.ui.data.EnableScheduling.Value = ($scope.ui.data.PagesTemplate.Options.startDate != null || $scope.ui.data.PagesTemplate.Options.endDate != null);
                 $scope.ParentPageValue = parseInt($scope.ui.data.ParentPage.Value);
             }
 
-            if (!$scope.EnableScheduling) {
+            if (!$scope.ui.data.EnableScheduling.Value) {
                 $scope.ui.data.PagesTemplate.Options.startDate = null;
                 $scope.ui.data.PagesTemplate.Options.endDate = null;
             }
-            if ($scope.ui.data.ParentPage.Value != null)
-                $scope.ui.data.ParentPage.Value = parseInt($scope.ui.data.ParentPage.Value);
+
             if ($scope.ui.data.URLType.Value != null)
                 $scope.ui.data.URLType.Value = parseInt($scope.ui.data.URLType.Value);
             if ($scope.ui.data.SiteAlias != undefined && $scope.ui.data.SiteAlias.Value != null)
                 $scope.ui.data.SiteAlias.Value = parseInt($scope.ui.data.SiteAlias.Value);
             LocalizationServices.BindLocalization($scope, $scope.ui.data.LocalizedPage.Options, $scope.ui.data.Languages.Options);
             BindSitemapPriorityList();
+            $scope.SelectedWorkflow = $scope.ui.data.ddlWorkFlows.Value;
         }
         else {
             window.parent.swal('[LS:DonotHaveEditPermission_Message]');
@@ -180,7 +180,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         } catch (ex) {
                             alert(ex);
                         }
-                    },function (data) {
+                    }, function (data) {
                         alert(data.data);
                     });
                 }
@@ -335,13 +335,13 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
 
             $scope.ui.data.PagesTemplate.Options.permissions.rolePermissions = rolePermissions;
             $scope.ui.data.PagesTemplate.Options.permissions.userPermissions = userPermissions;
-            if (!$scope.EnableScheduling) {
+            if (!$scope.ui.data.EnableScheduling.Value) {
                 $scope.ui.data.PagesTemplate.Options.startDate = null;
                 $scope.ui.data.PagesTemplate.Options.endDate = null;
             }
             var valid = true;
-            if ($scope.EnableScheduling && $scope.ui.data.PagesTemplate.Options.startDate != null && $scope.ui.data.PagesTemplate.Options.endDate != null) {
-                valid = new Date($scope.ui.data.PagesTemplate.Options.startDate) < new Date($scope.ui.data.PagesTemplate.Options.endDate);
+            if ($scope.ui.data.EnableScheduling.Value && $scope.ui.data.PagesTemplate.Options.startDate != '' && $scope.ui.data.PagesTemplate.Options.startDate != null && $scope.ui.data.PagesTemplate.Options.endDate != '' && $scope.ui.data.PagesTemplate.Options.endDate != null) {
+                valid = new Date($scope.ui.data.PagesTemplate.Options.startDate) <= new Date($scope.ui.data.PagesTemplate.Options.endDate);
             }
             if (valid) {
                 var IsCopy = false;
@@ -414,7 +414,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                             }
                         }
                         $scope.RenderMarkup();
-                        if (parent.GetParameterByName('m2vsetup', parent.window.location) != null && typeof parent.GetParameterByName('m2vsetup', parent.window.location) != undefined && data.Data.url != null) {
+                        if (parent.GetParameterByName('m2vsetup', parent.window.location) != null && typeof parent.GetParameterByName('m2vsetup', parent.window.location) != undefined && data.data.Data.url != null) {
                             parent.window.location.href = data.data.Data.url + "?migrate=true";
                         }
                         else {
@@ -717,7 +717,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         $.each($scope.ui.data.ddlWorkFlows.Options, function (key, w) {
                             if ($scope.ui.data.ddlWorkFlows.Value == w.Value) {
                                 $scope.ui.data.WorkflowStateInfo.Value = w.Content;
-
+                                $scope.SelectedWorkflow = $scope.ui.data.ddlWorkFlows.Value;
                                 common.webApi.post('pages/updateworkflow', 'WorkflowID=' + $scope.ui.data.ddlWorkFlows.Value + '&PageID=' + $scope.pid).then(function (Response) {
                                     if (Response.data.IsSuccess && Response.data.Data != undefined && Response.data.Data.Revisions != undefined) {
                                         $scope.ui.data.MaxRevisions.Value = Response.data.Data.Revisions;
@@ -729,6 +729,9 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                                 return;
                             }
                         });
+                    }
+                    else {
+                        $scope.ui.data.ddlWorkFlows.Value = $scope.SelectedWorkflow;
                     }
                 });
         }

@@ -389,7 +389,7 @@ OpenImagePopup = function (img) {
     }
 };
 
-$(document).ready(function () {
+menuFlyOut = function() {
 
     $("#navbar-menu li.dropdown").hover(function () {
         if ($(window).width() < 767)
@@ -422,6 +422,12 @@ $(document).ready(function () {
         else
             subMenu.css("margin-left", 0);
     });
+} 
+
+
+
+$(document).ready(function () {
+        menuFlyOut();    
 
     if ($("body").find(".vj-image-gallery").length) {
 
