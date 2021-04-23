@@ -5,8 +5,8 @@
     $scope.Click_GeAll = function () {
         $scope.IsNativeName = !$scope.IsNativeName;
         common.webApi.get('add/getall', 'IsNativeName=' + $scope.IsNativeName).then(function (Response) {
-            if (Response.IsSuccess) {
-                $scope.ui.data.Languages.Options = Response.Data;
+            if (Response.data.IsSuccess) {
+                $scope.ui.data.Languages.Options = Response.data.Data;
             }
         });
     };

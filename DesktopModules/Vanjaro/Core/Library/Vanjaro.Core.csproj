@@ -159,6 +159,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Cleanup\01.00.05.txt" />
     <Content Include="Cleanup\01.00.04.txt" />
     <Content Include="Cleanup\00.05.03.txt" />
     <Content Include="DistributionAddList.txt" />

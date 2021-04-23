@@ -277,7 +277,7 @@ app.controller('setting_setting', function ($scope, $attrs, $routeParams, $http,
             $scope.ui.data.SiteSettings.Options.IconSet = $scope.ui.data.IconFolders.Value;
             common.webApi.post('setting/updatePortalSettings', 'FileId=' + $scope.ui.data.SocialSharingLogo.Options.fileId.toString() + '&HomeIcon=' + $scope.ui.data.HomeScreenIcon.Options.fileId.toString(), $scope.ui.data.SiteSettings.Options).then(function (data) {
                 if (data.data.Message != null && data.data.Message.length > 0) {
-                    window.parent.swal(data.Message);
+                    window.parent.swal(data.data.Message);
                 }
                 else {
                     window.parent.document.callbacktype = type;

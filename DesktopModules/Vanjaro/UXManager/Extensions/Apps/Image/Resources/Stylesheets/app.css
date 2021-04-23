@@ -193,7 +193,12 @@ a.assetIsList {
     position: absolute !important;
 }
 
-
 .vj-ux-manager .page-item .page-link {
     line-height: normal;
+}
+
+@media (max-width: 576px) {
+    .col-sm-4.scrollbar {
+       height: 100% !important;
+    }
 }

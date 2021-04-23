@@ -71,7 +71,7 @@
 
     $scope.SaveEditorProfile = function (apply) {
         common.webApi.post('~EditorConfig/SaveEditorProfile', 'uid=' + $scope.ui.data.UID.Value + '&profileid=' + $scope.ui.data.Profiles.Value + '&applyto=' + apply, $scope.ui.data.Settings.Options).then(function (success) {
-            if (success) {
+            if (success.data) {
                 window.parent.ClosePopUp();
                 window.close();
             }
@@ -113,11 +113,11 @@
         else {
             $scope.ProfileName = $('#txtEditorConfigNewProfile').val();
             common.webApi.post('~EditorConfig/SaveProfile', 'profileid=' + $scope.ui.data.Profiles.Value + '&profileName=' + $scope.ProfileName + '&uid=' + $scope.ui.data.UID.Value, $scope.ui.data.EditorOptions.Options).then(function (success) {
-                if (success) {
-                    if (success.Data != undefined && success.Data != null) {
-                        $scope.ui.data.UID = success.Data[0];
-                        $scope.ui.data.Profiles = success.Data[2];
-                        $scope.ui.data.EditorOptions = success.Data[3];
+                if (success.data) {
+                    if (success.Data != undefined && success.data.Data != null) {
+                        $scope.ui.data.UID = success.data.Data[0];
+                        $scope.ui.data.Profiles = success.data.Data[2];
+                        $scope.ui.data.EditorOptions = success.data.Data[3];
                         if ($scope.ui.data.Profiles != undefined && $scope.ui.data.Profiles != null) {
                             $scope.ui.data.Profiles.Value = parseInt($scope.ui.data.Profiles.Value);
                             $.each($scope.ui.data.Profiles.Options, function (k, v) {
@@ -129,14 +129,14 @@
                             });
                         }
                         if (Apply) {
-                            if (success.Profile != undefined && success.Profile != null) {
-                                $scope.ui.data.Profiles.Value = success.Profile.ProfileID;
+                            if (success.data.Profile != undefined && success.data.Profile != null) {
+                                $scope.ui.data.Profiles.Value = success.data.Profile.ProfileID;
                                 $scope.CurrentProfileValue = $scope.ui.data.Profiles.Value;
                             }
                             $scope.SaveEditorProfile('CurrentModule');
                         }
                     }
-                    else if (success.Message != undefined && success.Message != null && success.Message == "Profile Name Exists") {
+                    else if (success.data.Message != undefined && success.data.Message != null && success.data.Message == "Profile Name Exists") {
                         $scope.ProfileName = '';
                         SweetAlert.swal("Profile name already exists.");
                     }
@@ -163,7 +163,7 @@
     $scope.CreateNewProfile = function () {
         $scope.NewProfile = true;
         common.webApi.get('~EditorConfig/GetNewProfile').then(function (success) {
-            if (success != undefined && success != null) {
+            if (success.data != undefined && success.data != null) {
                 $scope.ui.data.EditorOptions.Options = success.data.EditorOptions;
                 $.each(success.data.FullPlugins, function (key, value) {
                     if ($scope.ui.data.EditorOptions.Options.Plugins[key] == undefined) {
@@ -228,10 +228,10 @@
             function (isConfirm) {
                 if (isConfirm) {
                     common.webApi.delete('~EditorConfig/DeleteProfile', 'profileid=' + $scope.ui.data.Profiles.Value).then(function (success) {
-                        if (success != null && success != undefined) {
-                            if (success == "deleted")
+                        if (success.data != null && success.data != undefined) {
+                            if (success.data == "deleted")
                                 window.location.reload();
-                            else if (success == "inuse")
+                            else if (success.data == "inuse")
                                 setTimeout(function () { CommonSvc.SweetAlert.swal("[L:NotDeleted]") }, 100);
                         }
                     });

@@ -1,0 +1,27 @@
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_CommonHTMLEditorPortalDelete]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_HTMLEditor]'))
+BEGIN
+delete from {databaseOwner}[VJ_Common_HTMLEditor] where PortalID not in(select portalid from {databaseOwner}[{objectQualifier}Portals])
+ALTER TABLE {databaseOwner}[VJ_Common_HTMLEditor] ADD CONSTRAINT FK_CommonHTMLEditorPortalDelete FOREIGN KEY (PortalID) REFERENCES {databaseOwner}[{objectQualifier}Portals](PortalID) ON DELETE CASCADE
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_CommonMailQueuePortalDelete]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_MailQueue]'))
+BEGIN
+delete from {databaseOwner}[VJ_Common_MailQueue] where PortalID not in(select portalid from {databaseOwner}[{objectQualifier}Portals])
+ALTER TABLE {databaseOwner}[VJ_Common_MailQueue] ADD CONSTRAINT FK_CommonMailQueuePortalDelete FOREIGN KEY (PortalID) REFERENCES {databaseOwner}[{objectQualifier}Portals](PortalID) ON DELETE CASCADE
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_CommonMailQueueLogPortalDelete]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_MailQueue_Log]'))
+BEGIN
+delete from {databaseOwner}[VJ_Common_MailQueue_Log] where PortalID not in(select portalid from {databaseOwner}[{objectQualifier}Portals])
+ALTER TABLE {databaseOwner}[VJ_Common_MailQueue_Log] ADD CONSTRAINT FK_CommonMailQueueLogPortalDelete FOREIGN KEY (PortalID) REFERENCES {databaseOwner}[{objectQualifier}Portals](PortalID) ON DELETE CASCADE
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}[FK_CommonSettingModuleDelete]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[VJ_Common_Setting]'))
+BEGIN
+delete from {databaseOwner}[VJ_Common_Setting] where ModuleID not in(select ModuleID from {databaseOwner}[{objectQualifier}Modules])
+ALTER TABLE {databaseOwner}[VJ_Common_Setting] ADD CONSTRAINT FK_CommonSettingModuleDelete FOREIGN KEY (ModuleID) REFERENCES {databaseOwner}[{objectQualifier}Modules](ModuleID) ON DELETE CASCADE
+END
+GO

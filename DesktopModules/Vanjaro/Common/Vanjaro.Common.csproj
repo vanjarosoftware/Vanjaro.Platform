@@ -4832,6 +4832,7 @@
     <Content Include="Frameworks\AngularJS\1.8.2\angular.min.js.map" />
     <Content Include="Frameworks\AngularJS\1.8.2\errors.json" />
     <Content Include="Frameworks\AngularJS\1.8.2\version.json" />
+    <Content Include="Install\Common.01.00.05.SqlDataProvider" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

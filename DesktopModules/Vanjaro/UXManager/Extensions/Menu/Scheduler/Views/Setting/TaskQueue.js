@@ -80,7 +80,7 @@ app.controller('setting_taskqueue', function ($scope, $attrs, $http, CommonSvc, 
 
     $scope.GetScheduleStatus = function () {
         common.webApi.get('Scheduler/GetScheduleStatus', '').then(function (data) {
-            if (data) {
+            if (data.data) {
                 $scope.ui.data.ScheduleStatus.Options.Data.ScheduleQueue = data.data.Data.Data.ScheduleQueue;
                 $scope.ui.data.ScheduleStatus.Options.Data.Status = data.data.Data.Data.Status;
                 $scope.ui.data.ScheduleStatus.Options.Data.MaxThreadCount = data.data.Data.Data.MaxThreadCount;

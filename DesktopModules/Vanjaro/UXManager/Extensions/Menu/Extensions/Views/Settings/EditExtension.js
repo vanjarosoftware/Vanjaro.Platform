@@ -307,7 +307,7 @@
                     window.parent.LoadApps();
                     $scope.Click_Cancel();
                 }
-                else if (Response.HasErrors)
+                else if (Response.data.HasErrors)
                     CommonSvc.SweetAlert.swal(Response.data.Message);
             });
         }

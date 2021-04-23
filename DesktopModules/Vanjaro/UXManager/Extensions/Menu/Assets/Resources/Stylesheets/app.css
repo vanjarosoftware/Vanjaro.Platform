@@ -267,3 +267,8 @@ table.Imagetable tbody {
     flex-wrap: wrap;
 }
 
+@media (max-width: 576px) {
+    .col-sm-4.scrollbar {
+        height: 100% !important;
+    }
+}

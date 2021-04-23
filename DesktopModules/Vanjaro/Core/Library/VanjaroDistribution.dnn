@@ -70,6 +70,11 @@
 							<name>Common.01.00.01.SqlDataProvider</name>
 							<version>01.00.01</version>
 						</script>
+            <script type="Install">
+              <path>Install</path>
+              <name>Common.01.00.05.SqlDataProvider</name>
+              <version>01.00.05</version>
+            </script>
 						<script type="UnInstall">
 							<path>Install</path>
 							<name>Uninstall.Common.SqlDataProvider</name>
@@ -85,6 +90,11 @@
 							<name>URL.01.00.00.SqlDataProvider</name>
 							<version>01.00.00</version>
 						</script>
+            <script type="Install">
+              <path>Install</path>
+              <name>URL.01.00.05.SqlDataProvider</name>
+              <version>01.00.05</version>
+            </script>
 						<script type="UnInstall">
 							<path>Install</path>
 							<name>Uninstall.URL.SqlDataProvider</name>
@@ -1144,6 +1154,7 @@
 				</component>
 				<component type="Cleanup" version="00.05.03" fileName="Cleanup\00.05.03.txt" />
         <component type="Cleanup" version="01.00.04" fileName="Cleanup\01.00.04.txt" />
+        <component type="Cleanup" version="01.00.05" fileName="Cleanup\01.00.05.txt" />
 			</components>
 			<eventMessage>
 				<processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
