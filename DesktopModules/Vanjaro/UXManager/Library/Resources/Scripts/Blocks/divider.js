@@ -34,18 +34,6 @@ export default (editor, config = {}) => {
 						default: "10",
 						changeProp: 1,
 					}, {
-						label: "Gap",
-						name: "gap",
-						type: "custom_range",
-						cssproperties: [
-							{ name: "margin-top" },
-							{ name: "margin-bottom" }
-						],
-						min: "0",
-						max: "50",
-						default: "15",
-						changeProp: 1,
-					}, {
 						label: "Width",
 						name: "width",
 						type: "custom_range",
