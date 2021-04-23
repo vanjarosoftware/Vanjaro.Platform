@@ -547,7 +547,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                             objUser = UserController.GetUserById(objUser.PortalID, objUser.UserID);
                         }
                         string redirTo = string.Format("{0}/default.aspx?ctl=PasswordReset&resetToken={1}&forced=true", portalAlias, objUser.PasswordResetToken);
-                        //Response.Redirect(redirTo);
+                        actionResult.RedirectURL = redirTo;
                         break;
                     case UserValidStatus.UPDATEPROFILE:
                         //Save UserID in ViewState so that can update profile later
