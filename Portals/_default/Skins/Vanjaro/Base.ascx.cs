@@ -309,8 +309,9 @@ namespace Vanjaro.Skin
             {
                 string SharedResourceFile = ScriptsPath.Replace("/js", "").Replace(@"\js", "") + "App_LocalResources/Shared.resx";
                 ThemeScripts = new DNNLocalizationEngine(null, SharedResourceFile, ShowMissingKeys).Parse(ThemeScripts);
-                WebForms.RegisterStartupScript(Page, "ThemeBlocks", "LoadThemeBlocks = function (grapesjs) { grapesjs.plugins.add('ThemeBlocks', (editor, opts = {}) => { " + ThemeScripts + "}); };", true);
             }
+
+            WebForms.RegisterStartupScript(Page, "ThemeBlocks", "LoadThemeBlocks = function (grapesjs) { grapesjs.plugins.add('ThemeBlocks', (editor, opts = {}) => { " + ThemeScripts + "}); };", true);
         }
 
         private void InjectViewport()
@@ -1013,6 +1014,7 @@ namespace Vanjaro.Skin
                 Link.ID = "HomeScreenIcon";
                 Link.Attributes["rel"] = "apple-touch-icon";
                 Link.Attributes["href"] = HomeScreenIcon;
+                Link.Attributes["vj"] = "true";
                 Page.Header.Controls.Add(Link);
             }
         }
