@@ -4,9 +4,10 @@
 
     $scope.UploadFile = new FileUploader();
     $scope.FileAttachments = new FileUploader();
+    $scope.dblclickFired = false;
 
     $scope.onInit = function () {
-        window.parent.VjEditor.StorageManager.setAutosave(false);
+        window.parent.window.VJIsSaveCall = false;
         $('.uiengine-wrapper a[data-target="#!/admin"]').addClass("active");
         $('.uiengine-wrapper a[data-target="#!/imageonline"]').removeClass("active");
         setTimeout(function () {
@@ -16,14 +17,9 @@
             $('[identifier="settings_link"]').find('.url-add .choosefile').html('<span style="font-family:Arial, Helvetica, sans-serif;">[L:Upload]</span>');
             $('[identifier="settings_link"]').find('.url-add .choosefile').addClass('fas fa-plus');
         }, 10);
+
         $(window.parent.document.body).find('[data-bs-dismiss="modal"]').on("click", function (e) {
-            var target = window.parent.VjEditor.getSelected();
-            if (target != undefined) {
-                var url = $(window.parent.document).find('#vj_link_target').val();
-                target.set({ href: url, data_href: url, data_subject: '', data_href_type: 'url' });
-                target.addAttributes({ href: url });
-            }
-            window.parent.VjEditor.StorageManager.setAutosave(true);
+            window.parent.window.VJIsSaveCall = true;
             window.parent.VjEditor.runCommand("save");
         });
         $scope.BindFolderEvents();
@@ -84,7 +80,8 @@
         if (newValue != undefined && newValue != null && newValue.length > 0) {
             setTimeout(function () {
                 $('[fid]').on("dblclick", function (e) {
-                    $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
+                    $scope.dblclickFired = true;
+                    //$(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
                 });
             }, 100);
         }
@@ -110,20 +107,29 @@
     };
 
     $scope.GetURL = function (fileid) {
+        window.parent.window.VJIsSaveCall = false;
         common.webApi.post('Upload/GetUrl', 'fileid=' + fileid).then(function (data) {
             if (data.data.Status == 'Success') {
                 var Link = data.data.Url;
                 Link = Link.split('?')[0];
-
                 var sourcetarget = $(window.parent.document).find('#vj_link_target');
                 if (sourcetarget != undefined) {
                     var url = Link;
                     $(sourcetarget).val(url);
                 }
+
+                var target = window.parent.VjEditor.getSelected();
+                if (target != undefined) {
+                    var url = $(window.parent.document).find('#vj_link_target').val();
+                    target.set({ href: url, data_href: url, data_subject: '', data_href_type: 'url' });
+                    target.addAttributes({ href: url });
+                }
             }
             else {
                 window.parent.ShowNotification('Error', data.data.Status, 'error');
             }
+            if ($scope.dblclickFired)
+                $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
         });
     };
 });
