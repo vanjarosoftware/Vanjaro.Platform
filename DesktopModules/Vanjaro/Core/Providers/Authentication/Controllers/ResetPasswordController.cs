@@ -14,7 +14,6 @@ using System.Web;
 using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
-using System.Collections.Generic;
 
 namespace Vanjaro.Core.Providers.Authentication.Controllers
 {
