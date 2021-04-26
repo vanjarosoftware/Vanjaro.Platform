@@ -133,7 +133,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.MemberProfile
                             Success = true,
                             ProfileProperty = MapProfileProperty(profileProperty),
                             UserVisibilityOptions = GetVisibilityOptions(),
-                            DataTypeOptions = listController.GetListEntryInfoItems("DataType").Where(x => !ExcludeControls.Contains(x.Value)).Select(t => new
+                            DataTypeOptions = listController.GetListEntryInfoItems("DataType").Where(x => !(ExcludeControls.Contains(x.Value) && x.Value != "TimeZone")).Select(t => new
                             {
                                 t.EntryID,
                                 Value = DNNLocalization.Localization.GetString(Components.Constants.Prefix + Regex.Replace(t.Value.ToString(), "[ ().-]+", ""), Components.Constants.LocalResourcesFile),
@@ -472,7 +472,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.MemberProfile
             {
                 bool IsExistsDataType = false;
                 ListController listController = new ListController();
-                foreach (var d in listController.GetListEntryInfoItems("DataType").Where(x => !ExcludeControls.Contains(x.Value)).ToList())
+                foreach (var d in listController.GetListEntryInfoItems("DataType").Where(x => !(ExcludeControls.Contains(x.Value) && x.Value != "TimeZone")).ToList())
                 {
                     if (d.EntryID == dataType)
                     {
