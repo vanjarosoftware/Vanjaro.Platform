@@ -375,48 +375,9 @@ namespace Vanjaro.Core
                             NewSigninTab.ContainerSrc = "[g]containers/vanjaro/base.ascx";
                             tab.UpdateTab(NewSigninTab);
                         }
-
-                        List<Layout> pageLayouts = GetLayouts(pinfo);
                         TabInfo SigninTab = TabController.Instance.GetTabByName("Signin", pinfo.PortalID);
-                        Layout Signinlayout = pageLayouts.Where(a => a.Name == "Signin").FirstOrDefault();
-                        PortalSettings portalSettings = new PortalSettings(pinfo);
-                        Layout homelayout = pageLayouts.Where(a => a.Name == "Home").FirstOrDefault();
-                        if (SigninTab != null && Signinlayout != null && portalSettings != null)
-                        {
-                            ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
-
-                            if (portalSettings.ActiveTab == null)
-                            {
-                                portalSettings.ActiveTab = new TabInfo();
-                            }
-
-                            portalSettings.ActiveTab.TabID = SigninTab.TabID;
-                            Dictionary<string, object> LayoutData = new Dictionary<string, object>
-                            {
-                                ["IsPublished"] = false,
-                                ["Comment"] = string.Empty,
-                                ["gjs-assets"] = string.Empty,
-                                ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.Style.ToString(), pinfo.PortalID),
-                                ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.Content.ToString(), pinfo.PortalID),
-                                ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.ContentJSON.ToString(), pinfo.PortalID),
-                                ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.StyleJSON.ToString(), pinfo.PortalID)
-                            };
-                            Core.Managers.PageManager.Update(portalSettings, LayoutData);
-
-
-                            Pages Page = Managers.PageManager.GetPages(SigninTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
-
-                            if (Page != null && uInfo != null)
-                            {
-                                WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
-                                Page.Version = 1;
-                                Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
-                                Page.IsPublished = true;
-                                Page.PublishedBy = uInfo.UserID;
-                                Page.PublishedOn = DateTime.UtcNow;
-                                PageFactory.Update(Page, uInfo.UserID);
-                            }
-                        }
+                        List<Layout> pageLayouts = GetLayouts(pinfo);
+                        UpdateSignInTab(pinfo, uInfo, pageLayouts);
                         if (SigninTab != null)
                         {
                             Core.Managers.LoginManager.AddUpdateLoginModule(SigninTab.TabID, pinfo.PortalID);
@@ -495,6 +456,51 @@ namespace Vanjaro.Core
                 PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.MinifyCssKey, "True");
                 PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.MinifyJsKey, "True");
             }
+
+            public static void UpdateSignInTab(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts)
+            {
+                TabInfo SigninTab = TabController.Instance.GetTabByName("Signin", pinfo.PortalID);
+                Layout Signinlayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "signin").FirstOrDefault();
+                PortalSettings portalSettings = new PortalSettings(pinfo);
+                Layout homelayout = pageLayouts.Where(a => a.Name == "Home").FirstOrDefault();
+                if (SigninTab != null && Signinlayout != null && portalSettings != null)
+                {
+                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+
+                    if (portalSettings.ActiveTab == null)
+                    {
+                        portalSettings.ActiveTab = new TabInfo();
+                    }
+
+                    portalSettings.ActiveTab.TabID = SigninTab.TabID;
+                    Dictionary<string, object> LayoutData = new Dictionary<string, object>
+                    {
+                        ["IsPublished"] = false,
+                        ["Comment"] = string.Empty,
+                        ["gjs-assets"] = string.Empty,
+                        ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.Style.ToString(), pinfo.PortalID),
+                        ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.Content.ToString(), pinfo.PortalID),
+                        ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.ContentJSON.ToString(), pinfo.PortalID),
+                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.StyleJSON.ToString(), pinfo.PortalID)
+                    };
+                    Core.Managers.PageManager.Update(portalSettings, LayoutData);
+
+
+                    Pages Page = Managers.PageManager.GetPages(SigninTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
+
+                    if (Page != null && uInfo != null)
+                    {
+                        WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
+                        Page.Version = 1;
+                        Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
+                        Page.IsPublished = true;
+                        Page.PublishedBy = uInfo.UserID;
+                        Page.PublishedOn = DateTime.UtcNow;
+                        PageFactory.Update(Page, uInfo.UserID);
+                    }
+                }
+            }
+
             public static void ApplyDefaultLayouts(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts)
             {
                 #region Applying Layouts
@@ -502,7 +508,7 @@ namespace Vanjaro.Core
                 PortalSettings portalSettings = new PortalSettings(pinfo);
 
                 TabInfo SignUpTab = TabController.Instance.GetTabByName("Signup", pinfo.PortalID);
-                Layout Signuplayout = pageLayouts.Where(a => a.Name == "Signup").FirstOrDefault();
+                Layout Signuplayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "signup").FirstOrDefault();
                 if (SignUpTab != null && Signuplayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, Signuplayout.Blocks);
@@ -541,7 +547,9 @@ namespace Vanjaro.Core
                 }
 
                 TabInfo NotFoundTab = TabController.Instance.GetTabByName("404 Error Page", pinfo.PortalID);
-                Layout NotFoundPagelayout = pageLayouts.Where(a => a.Name == "NotFoundPage").FirstOrDefault();
+                Layout NotFoundPagelayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "notfoundpage").FirstOrDefault();
+                if (NotFoundPagelayout == null)
+                    NotFoundPagelayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "404errorpage").FirstOrDefault();
                 if (NotFoundTab != null && NotFoundPagelayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, NotFoundPagelayout.Blocks);
@@ -582,7 +590,7 @@ namespace Vanjaro.Core
                 }
 
                 TabInfo ProfileTab = TabController.Instance.GetTabByName("Profile", pinfo.PortalID);
-                Layout Profilelayout = pageLayouts.Where(a => a.Name == "Profile").FirstOrDefault();
+                Layout Profilelayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "profile").FirstOrDefault();
                 if (ProfileTab != null && Profilelayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, Profilelayout.Blocks);
@@ -622,7 +630,7 @@ namespace Vanjaro.Core
                 }
 
                 TabInfo SearchResultTab = TabController.Instance.GetTabByName("Search Results", pinfo.PortalID);
-                Layout SearchResultlayout = pageLayouts.Where(a => a.Name == "SearchResults").FirstOrDefault();
+                Layout SearchResultlayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "searchresults").FirstOrDefault();
                 if (SearchResultTab != null && SearchResultlayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, SearchResultlayout.Blocks);
@@ -661,7 +669,7 @@ namespace Vanjaro.Core
                 }
 
                 TabInfo TermsTab = TabController.Instance.GetTabByName("Terms", pinfo.PortalID);
-                Layout Termslayout = pageLayouts.Where(a => a.Name == "Terms").FirstOrDefault();
+                Layout Termslayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "terms").FirstOrDefault();
                 if (TermsTab != null && Termslayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, Termslayout.Blocks);
@@ -699,7 +707,7 @@ namespace Vanjaro.Core
                 }
 
                 TabInfo PrivacyTab = TabController.Instance.GetTabByName("Privacy", pinfo.PortalID);
-                Layout Privacylayout = pageLayouts.Where(a => a.Name == "Privacy").FirstOrDefault();
+                Layout Privacylayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "privacy").FirstOrDefault();
                 if (PrivacyTab != null && Privacylayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, Privacylayout.Blocks);
@@ -737,7 +745,7 @@ namespace Vanjaro.Core
                 }
 
                 TabInfo HomeTab = TabController.Instance.GetTabByName("Home", pinfo.PortalID);
-                Layout homelayout = pageLayouts.Where(a => a.Name == "Home").FirstOrDefault();
+                Layout homelayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "home").FirstOrDefault();
                 if (HomeTab != null && homelayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
@@ -932,7 +940,7 @@ namespace Vanjaro.Core
                 themeFont.Add(new ThemeFont() { Name = "Times New Roman", Family = "Times New Roman, Times, serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
                 themeFont.Add(new ThemeFont() { Name = "Trebuchet MS", Family = "Trebuchet MS, Helvetica, sans-serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
                 themeFont.Add(new ThemeFont() { Name = "Verdana", Family = "Verdana, Geneva, sans - serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
-                
+
                 foreach (ThemeFont t in themeFont)
                     ThemeManager.UpdateFonts(PortalID, "be134fd2-3a3d-4460-8ee9-2953722a5ab2", t, false);
             }
