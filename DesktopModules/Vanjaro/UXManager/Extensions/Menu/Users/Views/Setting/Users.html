@@ -19,16 +19,16 @@
                             <em class="fas fa-eraser"></em>
                         </a>
                         <div class="user-group dropdown float-end" mn-ng-show="!Show_RecycleBin">
-                            <div class="dropdown-menu">
+                            <a href="#" role="button" id="filterMenuLink" data-bs-toggle="dropdown" class="ux-btn ux-btn-hover float-end dropdown-toggle" aria-expanded="false">
+                                <em class="fas fa-filter"></em>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="filterMenuLink">
                                 <div class="dropdown-item" mn-ng-click="Change_UserFilter(option)" mn-ng-repeat="option in ui.data.UserFilters.Options" ng-class="{'active':(ui.data.Select_UserFilters.Options.Value==option.Value)}">
                                     <hr class="m-none" mn-ng-if="option.Value == 3" />
                                     <span mn-ng-if="option.Value==1">[L:DeAuthorized]</span>
                                     <span mn-ng-if="option.Value!=1">{{option.Key}}</span>
                                 </div>
                             </div>
-                            <a href="#" class="ux-btn ux-btn-hover float-end dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <em class="fas fa-filter"></em>
-                            </a>
                         </div>
                         <a class="ux-btn ux-btn-hover float-end" mn-ng-click="Open_MemberProfile()" title="[L:MemberProfileSettings]" mn-ng-show="!Show_RecycleBin">
                             <em class="fas fa-user-tag"></em>
