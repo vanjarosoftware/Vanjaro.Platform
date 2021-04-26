@@ -296,7 +296,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             if (tab.IsDeleted)
                 return false;
             string Name = pageSettings.Name.ToLower().Replace(" ", "");
-            if (Name == "home" || Name == "signup" || Name == "notfoundpage" || Name == "profile" || Name == "searchresults" || Name == "404errorpage" || Name == "signin" || Name == "site")
+            if (Name == "home" || Name == "signup" || Name == "notfoundpage" || Name == "profile" || Name == "searchresults" || Name == "404errorpage" || Name == "signin" || Name == "site" || Name == "terms")
                 return true;
             if (tab.IsVisible && tab.TabPermissions.Where(t => t != null && t.RoleName == "All Users").FirstOrDefault() != null && tab.TabPermissions.Where(t => t != null && t.RoleName == "All Users").FirstOrDefault().AllowAccess)
                 return true;
