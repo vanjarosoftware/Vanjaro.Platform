@@ -83,8 +83,8 @@
                             <label>[L:DataType]</label>
                             <div class="input-group">
                                 <select class="form-control datatype" mn-ng-model="ui.data.ProfileProperty.Options.ProfileProperty.DataType" attr-datatype-required="true">
-                                    <option value="0" ng-selected="option.EntryID==ui.data.ProfileProperty.Options.ProfileProperty.DataType">[L:SelectOption]</option>
-                                    <option value="{{option.EntryID}}" ng-selected="option.EntryID==ui.data.ProfileProperty.Options.ProfileProperty.DataType" mn-ng-repeat="option in ui.data.ProfileProperty.Options.DataTypeOptions">{{option.Value}}</option>
+                                    <option value="0" mn-ng-selected="option.EntryID==ui.data.ProfileProperty.Options.ProfileProperty.DataType">[L:SelectOption]</option>
+                                    <option value="{{option.EntryID}}" mn-ng-selected="option.EntryID==ui.data.ProfileProperty.Options.ProfileProperty.DataType" mn-ng-repeat="option in ui.data.ProfileProperty.Options.DataTypeOptions">{{option.Value}}</option>
                                 </select>
                             </div>
                         </div>

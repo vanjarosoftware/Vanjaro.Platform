@@ -12,6 +12,7 @@
     $scope.onInit = function () {
         if (!$scope.IsUpdate)
             $scope.ui.data.ProfileProperty.Options.ProfileProperty.Length = '';
+        $scope.ui.data.ProfileProperty.Options.ProfileProperty.DataType = $scope.ui.data.ProfileProperty.Options.ProfileProperty.DataType.toString();
         $scope.Loaded = true;
     };
 
