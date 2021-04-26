@@ -184,8 +184,11 @@ namespace Vanjaro.Core
             {
                 try
                 {
-                    ModuleController.Instance.DeleteTabModule(TabID, ModuleID, false);
-                    DataCache.ClearCache();
+                    if (!GlobalBlockFactory.ModuleExists(ModuleID))
+                    {
+                        ModuleController.Instance.DeleteTabModule(TabID, ModuleID, false);
+                        DataCache.ClearCache();
+                    }
                 }
                 catch (Exception ex)
                 {
