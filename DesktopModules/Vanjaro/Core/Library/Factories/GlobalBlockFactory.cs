@@ -98,6 +98,13 @@ namespace Vanjaro.Core
                 GlobalBlock.Delete("where PortalID=@0 and Guid=@1", PortalID, Guid.ToLower());
                 CacheFactory.Clear(CacheFactory.Keys.GlobalBlock);
             }
+            internal static bool ModuleExists(int ModuleID)
+            {
+                if (GlobalBlock.Query("Where Html like @0", "%mid=\"" + ModuleID + "\"%").Count() > 0)
+                    return true;
+                else
+                    return false;
+            }
             private static void RemoveRevisions(int PortalID, string Guid)
             {
                 int Version = 5;
