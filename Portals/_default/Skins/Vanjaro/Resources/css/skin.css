@@ -748,3 +748,6 @@ ul.vj_authenticationtab {
     display: inline-block;
 }
 
+#dnn_ContentPane_SyncPanel {
+    height: 100%;
+}

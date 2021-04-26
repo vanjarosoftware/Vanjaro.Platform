@@ -191,7 +191,15 @@ export default (editor, config = {}) => {
 						changeProp: 1,
 					}
 				]
-			}),
+            }),
+            init() {
+                this.listenTo(this, 'change:size', this.handleSizeChange);
+            },
+            handleSizeChange() {
+                this.removeStyle("font-size");
+                this.getTrait('fontsize').setTargetValue($(this.getEl()).css('font-size').replace(/[^-\d\.]/g, ''));
+                this.getTrait('fontsize').view.render();
+            },
 		}, {
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('btn')) {

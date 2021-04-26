@@ -685,3 +685,8 @@ $(document).on("ajaxSend", function (event, xhr, settings) {
 
 $.fn.dnnModuleActions = function (options) {
 };
+
+// Added to fix ContentEditorManager undefined error when using Vanjaro for DNN package 
+dnn.ContentEditorManager = {};
+dnn.ContentEditorManager.init = function () {
+};
