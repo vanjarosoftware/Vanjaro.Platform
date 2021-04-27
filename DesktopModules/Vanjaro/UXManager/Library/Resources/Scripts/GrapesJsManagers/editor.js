@@ -10,7 +10,6 @@ global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
 global.IsVJEditorSaveCall = true;
 global.IsVJCBRendered = false;
-global.VanjaroServiceRoot = '';
 
 $(window).load(function () {
 	if ($(window).width() < 1000) {
@@ -327,8 +326,6 @@ $(document).ready(function () {
 				catch (sferr) { sf = window.parent.$.ServicesFramework(-1); }
 				if (parseInt(sf.getTabId()) <= 0)
 					sf = window.parent.$.ServicesFramework(-1);
-				if (VanjaroServiceRoot.length <= 0)
-					VanjaroServiceRoot = sf.getServiceRoot('Vanjaro');
 				$.ajax({
 					type: "GET",
 					url: eval(vjEditorSettings.GetContentUrl),
@@ -1610,7 +1607,7 @@ $(document).ready(function () {
 							window.editor = VjEditor;
 
 							VjEditor.on('load', function () {
-								try { $.ServicesFramework(-1); VanjaroServiceRoot = $.ServicesFramework(-1).getServiceRoot('Vanjaro'); }
+								try { $.ServicesFramework(-1); }
 								catch (err) { window.parent.location.reload(); }
 								$('#BlockManager').find('.block-search').val('');
 
