@@ -428,6 +428,7 @@ div#MenuSettings .parent-menu-hide {
     height: calc(100vh - 118px);
     overflow-x: hidden;
     overflow-y: hidden;
+    background: #fff;
 }
 
 
@@ -436,7 +437,7 @@ div#MenuSettings .parent-menu-hide {
 }
 
 .traitsmanager.scrollbar > div {
-    padding: 0 0 15px 0;
+    padding: 15px 0;
 }
 
 .sidebar #ContentBlocks:hover,
@@ -3489,7 +3490,6 @@ body.resp-mode.mobile-landscape .vj-wrapper {
         }
 
 .ssmanager .component-name-box {
-    background: #fff;
     padding: 0 10px !important;
 }
 
