@@ -3519,3 +3519,6 @@ body.resp-mode.mobile-landscape .vj-wrapper {
     pointer-events: none;  
 }
 
+.gjs-selected {
+    outline-offset: unset !important;
+}
