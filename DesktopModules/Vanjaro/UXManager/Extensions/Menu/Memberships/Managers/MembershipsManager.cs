@@ -19,8 +19,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Memberships
     public static partial class Managers
     {
         public class MembershipsManager
-        {
-            public const string LocalResourcesFile = "~/DesktopModules/admin/Dnn.PersonaBar/Modules/Dnn.Security/App_LocalResources/Security.resx";
+        {                       
             #region Get Login Settings
             public static dynamic GetBasicLoginSettings(PortalSettings portalSettings)
             {
@@ -152,10 +151,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Memberships
             {
                 List<KeyValuePair<string, int>> userRegistrationOptions = new List<KeyValuePair<string, int>>
                 {
-                    new KeyValuePair<string, int>(Localization.GetString("None", LocalResourcesFile), 0),
-                    new KeyValuePair<string, int>(Localization.GetString("Private", LocalResourcesFile), 1),
-                    new KeyValuePair<string, int>(Localization.GetString("Public", LocalResourcesFile), 2),
-                    new KeyValuePair<string, int>(Localization.GetString("Verified", LocalResourcesFile), 3)
+                    new KeyValuePair<string, int>(Localization.GetString("None", Components.Constants.LocalResourcesFile), 0),
+                    new KeyValuePair<string, int>(Localization.GetString("Private", Components.Constants.LocalResourcesFile), 1),
+                    new KeyValuePair<string, int>(Localization.GetString("Public", Components.Constants.LocalResourcesFile), 2),
+                    new KeyValuePair<string, int>(Localization.GetString("Verified", Components.Constants.LocalResourcesFile), 3)
                 };
                 return userRegistrationOptions;
             }
@@ -163,8 +162,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Memberships
             {
                 List<KeyValuePair<string, int>> registrationFormTypeOptions = new List<KeyValuePair<string, int>>
                 {
-                    new KeyValuePair<string, int>(Localization.GetString("Standard", LocalResourcesFile), 0),
-                    new KeyValuePair<string, int>(Localization.GetString("Custom", LocalResourcesFile), 1)
+                    new KeyValuePair<string, int>(Localization.GetString("Standard", Constants.LocalResourcesFile), 0),
+                    new KeyValuePair<string, int>(Localization.GetString("Custom", Constants.LocalResourcesFile), 1)
                 };
                 return registrationFormTypeOptions;
             }
