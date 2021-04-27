@@ -3376,7 +3376,7 @@ global.ChangeBlockType = function (query) {
 				return globalBlocks;
 		}
 
-		if (!isGlobal && !isCustom && isLocal)
+        if (!isGlobal && !isCustom && isLocal && localBlocks.length)
 			$('#ContentBlocks').empty().append(VjEditor.BlockManager.render(localBlocks));
 		else if (!isLocal && !isGlobal && isCustom) {
 			if (customblocks.length <= 0)
