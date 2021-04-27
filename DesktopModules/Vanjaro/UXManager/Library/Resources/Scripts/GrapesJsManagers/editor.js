@@ -1461,7 +1461,7 @@ $(document).ready(function () {
 									preferredFormat: "hex",
 								},
 								traitManager: {
-									appendTo: '.traitsmanager'
+									appendTo: '.traitsManager'
 								},
 								deviceManager: {
 									devices: [{
@@ -1657,7 +1657,7 @@ $(document).ready(function () {
 									VjEditor.runCommand("save");
 									VjEditor.destroy();
 									// Remove All Managers
-									$('#ContentBlocks, .stylemanager, .traitsmanager').empty();
+                                    $('#ContentBlocks, .styleManager, .traitsManager').empty();
 									VjLayerpanel.close();
 									VjInit();
 								} else if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
@@ -3040,7 +3040,7 @@ $(document).ready(function () {
 			});
 		}
 		// Remove All Managers
-		$('#ContentBlocks, .stylemanager, .traitsmanager').empty();
+		$('#ContentBlocks, .styleManager, .traitsManager').empty();
 	};
 
 	var VjInit = function () {
