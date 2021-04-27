@@ -450,6 +450,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 rp.Execute("delete from " + Core.Data.Scripts.CommonScript.TablePrefix + "VJ_Common_HTMLEditor_Profile where PortalID=@0", portal.PortalID);
             }
             PortalFactory.DeleteWorkflows(portal.PortalID);
+            string portalSystemPath = GetAbsoluteServerPath() + "Portals\\" + portal.PortalID + "-System";
+            if (Directory.Exists(portalSystemPath))
+                Directory.Delete(portalSystemPath, true);
         }
     }
 }

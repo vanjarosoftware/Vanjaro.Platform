@@ -5,6 +5,7 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Services.Installer.Packages;
 using DotNetNuke.Web.Api;
 using System;
 using System.Collections.Generic;
@@ -118,6 +119,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
             HttpPostedFile file = files[0];
             InstallResultDto InstallResultDto = InstallController.Instance.InstallPackage(PortalSettings, UserInfo, legacySkin, file.FileName, file.InputStream, isPortalPackage);
             actionResult.Data = InstallResultDto;
+            if (InstallResultDto != null)
+            {
+                PackageInfo packageInfo = PackageController.Instance.GetExtensionPackage(Null.NullInteger, (p) => p.PackageID == InstallResultDto.NewPackageId);
+                if (packageInfo != null && packageInfo.PackageType.ToLower() == "module")
+                    Core.Managers.ThemeManager.ProcessScss(PortalSettings.PortalId, true);
+            }
             DataCache.ClearCache();
             actionResult.IsSuccess = true;
             return actionResult;
