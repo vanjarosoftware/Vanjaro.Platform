@@ -10,6 +10,7 @@ global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
 global.IsVJEditorSaveCall = true;
 global.IsVJCBRendered = false;
+global.VanjaroServiceRoot = '';
 
 $(window).load(function () {
 	if ($(window).width() < 1000) {
@@ -318,10 +319,16 @@ $(document).ready(function () {
 				$('#dnn_ContentPane').addClass("sidebar-open");
 
 			$(window.parent.document.body).find('.vj-wrapper').removeClass("m2vDisplayNone");
-			if ($.isFunction($.ServicesFramework)) {
-				var sf = $.ServicesFramework(-1);
+			if ($.isFunction($.ServicesFramework) || $.isFunction(window.parent.$.ServicesFramework)) {
+				var sf;
+				try {
+					sf = $.ServicesFramework(-1);
+				}
+				catch (sferr) { sf = window.parent.$.ServicesFramework(-1); }
 				if (parseInt(sf.getTabId()) <= 0)
-					sf = parent.$.ServicesFramework(-1);
+					sf = window.parent.$.ServicesFramework(-1);
+				if (VanjaroServiceRoot.length <= 0)
+					VanjaroServiceRoot = sf.getServiceRoot('Vanjaro');
 				$.ajax({
 					type: "GET",
 					url: eval(vjEditorSettings.GetContentUrl),
@@ -1603,7 +1610,7 @@ $(document).ready(function () {
 							window.editor = VjEditor;
 
 							VjEditor.on('load', function () {
-								try { $.ServicesFramework(-1); }
+								try { $.ServicesFramework(-1); VanjaroServiceRoot = $.ServicesFramework(-1).getServiceRoot('Vanjaro'); }
 								catch (err) { window.parent.location.reload(); }
 								$('#BlockManager').find('.block-search').val('');
 

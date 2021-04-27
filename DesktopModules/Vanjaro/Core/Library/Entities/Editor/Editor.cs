@@ -42,8 +42,8 @@ namespace Vanjaro.Core.Entities
         {
             EditorOptions options = new EditorOptions()
             {
-                UpdateContentUrl = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/save'",
-                GetContentUrl = "parent.window.location.origin + $.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/get'",
+                UpdateContentUrl = "parent.window.location.origin + VanjaroServiceRoot + 'page/save'",
+                GetContentUrl = "parent.window.location.origin + VanjaroServiceRoot + 'page/get'",
                 ContainerID = "#vjEditor",
                 EditPage = true,
                 ModuleId = -1,
