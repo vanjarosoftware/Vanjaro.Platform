@@ -417,7 +417,7 @@ namespace Vanjaro.Skin
                     RemoveDataBlocks(html);
 
                 string FinalMarkup = InjectModules(html.DocumentNode.OuterHtml);
-                
+
                 if (page != null && page.ReplaceTokens)
                     FinalMarkup = new TokenReplace().ReplaceEnvironmentTokens(FinalMarkup);
 
@@ -987,7 +987,7 @@ namespace Vanjaro.Skin
                 string ThemeName = Core.Managers.ThemeManager.GetCurrent(PortalSettings.Current.PortalId).Name;
                 string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/editor");
                 string ThemeCss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/Theme.css");
-                if (!File.Exists(ThemeCss) && !Directory.Exists(BaseEditorFolder))
+                if (!File.Exists(ThemeCss))
                     ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);
             }
             catch (Exception ex) { ExceptionManager.LogException(ex); }
