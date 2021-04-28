@@ -606,14 +606,16 @@ $(window).resize(function () {
 			var containerPosition = container.offset();
 			var containerWidth = container.width();
 
-			root.css({
-				position: "absolute",
-				marginLeft: 0,
-				marginTop: 0,
-				top: containerPosition.top + 10,
-				left: containerPosition.left + containerWidth - 170,
-				visibility: "hidden"
-			});
+            if (root.length) {
+                root.css({
+                    position: "absolute",
+                    marginLeft: 0,
+                    marginTop: 0,
+                    top: containerPosition.top + 10,
+                    left: containerPosition.left + containerWidth - 170,
+                    visibility: "hidden"
+                });
+            }
 		}
 
 		var $form = $("form#Form");

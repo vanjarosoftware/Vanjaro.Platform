@@ -120,10 +120,22 @@
   <data name="Memberships.Text" xml:space="preserve">
     <value>Memberships</value>
   </data>
+  <data name="None.Text" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Private.Text" xml:space="preserve">
+    <value>Only admins can register new users</value>
+  </data>
+  <data name="Public.Text" xml:space="preserve">
+    <value>Anyone can self register</value>
+  </data>
   <data name="SearchKeywords.Text" xml:space="preserve">
     <value>memberships,redirect after login,redirect after logout,require profile,valid profile,login,registeration,redirect after registeration,new user notification,user notification,registeration notification,email</value>
   </data>
   <data name="Settings.Text" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Verified.Text" xml:space="preserve">
+    <value>Anyone can self register but must verify email</value>
   </data>
 </root>

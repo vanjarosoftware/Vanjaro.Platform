@@ -27,6 +27,7 @@ namespace Vanjaro.Core
                 {
                     Factories.WorkflowFactory.DeleteWorkflow(workflow);
                 }
+                WorkflowLog.Delete("Where PortalID=@0", PortalID);
             }
         }
     }

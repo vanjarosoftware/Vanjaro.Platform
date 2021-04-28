@@ -318,10 +318,14 @@ $(document).ready(function () {
 				$('#dnn_ContentPane').addClass("sidebar-open");
 
 			$(window.parent.document.body).find('.vj-wrapper').removeClass("m2vDisplayNone");
-			if ($.isFunction($.ServicesFramework)) {
-				var sf = $.ServicesFramework(-1);
+			if ($.isFunction($.ServicesFramework) || $.isFunction(window.parent.$.ServicesFramework)) {
+				var sf;
+				try {
+					sf = $.ServicesFramework(-1);
+				}
+				catch (sferr) { sf = window.parent.$.ServicesFramework(-1); }
 				if (parseInt(sf.getTabId()) <= 0)
-					sf = parent.$.ServicesFramework(-1);
+					sf = window.parent.$.ServicesFramework(-1);
 				$.ajax({
 					type: "GET",
 					url: eval(vjEditorSettings.GetContentUrl),
@@ -1461,7 +1465,7 @@ $(document).ready(function () {
 									preferredFormat: "hex",
 								},
 								traitManager: {
-									appendTo: '.traitsmanager'
+									appendTo: '.traitsManager'
 								},
 								deviceManager: {
 									devices: [{
@@ -1657,7 +1661,7 @@ $(document).ready(function () {
 									VjEditor.runCommand("save");
 									VjEditor.destroy();
 									// Remove All Managers
-									$('#ContentBlocks, .stylemanager, .traitsmanager').empty();
+                                    $('#ContentBlocks, .styleManager, .traitsManager').empty();
 									VjLayerpanel.close();
 									VjInit();
 								} else if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
@@ -3040,7 +3044,7 @@ $(document).ready(function () {
 			});
 		}
 		// Remove All Managers
-		$('#ContentBlocks, .stylemanager, .traitsmanager').empty();
+		$('#ContentBlocks, .styleManager, .traitsManager').empty();
 	};
 
 	var VjInit = function () {
@@ -3376,7 +3380,7 @@ global.ChangeBlockType = function (query) {
 				return globalBlocks;
 		}
 
-		if (!isGlobal && !isCustom && isLocal)
+        if (!isGlobal && !isCustom && isLocal && localBlocks.length)
 			$('#ContentBlocks').empty().append(VjEditor.BlockManager.render(localBlocks));
 		else if (!isLocal && !isGlobal && isCustom) {
 			if (customblocks.length <= 0)
