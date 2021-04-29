@@ -3023,25 +3023,26 @@ $(document).ready(function () {
 	var GrapesjsDestroy = function () {
 		if (VjEditor) {
 			VjEditor.destroy();
-			$.get(CurrentTabUrl + (CurrentTabUrl.indexOf("?") != -1 ? "&uxmode=true" : "?uxmode=true"), function (data) {
-				var html = $.parseHTML(data);
-				var dom = $(data);
-				var newhtml = $(html).find('#dnn_ContentPane');
-				$('#dnn_ContentPane').html('');
-				$('#dnn_ContentPane').html($(newhtml).html());
-				$('#dnn_ContentPane').removeClass("sidebar-open");
-				var Scripts_Links = $(data).find('script');
-				$.each(dom, function (i, v) {
-					Scripts_Links.push(v);
-				});
-				$.each($(data).find('style'), function (i, v) {
-					Scripts_Links.push(v);
-				});
-				$(window.parent.document).find('style[vjdataguid]').remove();
-				InjectLinksAndScripts(Scripts_Links, window.document);
-				InitAppActionMenu();
-				$(window.parent.document.body).find('.pageloader').remove();
-			});
+			window.parent.location.reload();
+			//$.get(CurrentTabUrl + (CurrentTabUrl.indexOf("?") != -1 ? "&uxmode=true" : "?uxmode=true"), function (data) {
+			//	var html = $.parseHTML(data);
+			//	var dom = $(data);
+			//	var newhtml = $(html).find('#dnn_ContentPane');
+			//	$('#dnn_ContentPane').html('');
+			//	$('#dnn_ContentPane').html($(newhtml).html());
+			//	$('#dnn_ContentPane').removeClass("sidebar-open");
+			//	var Scripts_Links = $(data).find('script');
+			//	$.each(dom, function (i, v) {
+			//		Scripts_Links.push(v);
+			//	});
+			//	$.each($(data).find('style'), function (i, v) {
+			//		Scripts_Links.push(v);
+			//	});
+			//	$(window.parent.document).find('style[vjdataguid]').remove();
+			//	InjectLinksAndScripts(Scripts_Links, window.document);
+			//	InitAppActionMenu();
+			//	$(window.parent.document.body).find('.pageloader').remove();
+			//});
 		}
 		// Remove All Managers
 		$('#ContentBlocks, .styleManager, .traitsManager').empty();
