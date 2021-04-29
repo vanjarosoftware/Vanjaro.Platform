@@ -520,12 +520,7 @@ Theme.css end
 .vj-section {
     position: relative;
     padding-top: 50px;
-    padding-bottom: 50px;
-    background-position: center center;
-    background-attachment: scroll;
-    background-repeat: no-repeat;
-    background-size: auto;
-    /*z-index: 1;*/
+    padding-bottom: 50px;  
 }
 
 .link,
