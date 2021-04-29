@@ -952,9 +952,9 @@ export default (editor, config = {}) => {
 			}
 
 			if (component.attributes.type == 'section') {
-				if (event.target.name == "background") {
 
-					component.addStyle({ 'overflow': 'visible' });
+                if (event.target.name == "background") {
+                    
 					component.set({ 'src': '', 'thumbnail': '' });
 
 					if (event.target.value == "image") {
