@@ -461,8 +461,12 @@ namespace Vanjaro.Core
                         {
                             foreach (dynamic cons in con.selectors)
                             {
-                                if (cons.name != null)
-                                    selectorIds.Add(cons.name.Value);
+                                try
+                                {
+                                    if (cons.name != null)
+                                        selectorIds.Add(cons.name.Value);
+                                }
+                                catch (Exception ex) { ExceptionManager.LogException(ex); }
                             }
                         }
                         bool delete = true;
