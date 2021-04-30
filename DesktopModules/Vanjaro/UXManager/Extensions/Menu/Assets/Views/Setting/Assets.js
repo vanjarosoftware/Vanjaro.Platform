@@ -662,7 +662,7 @@
                 var contentType = headers['content-type'];
                 var linkElement = document.createElement('a');
                 try {
-                    var blob = new Blob([data], { type: contentType });
+                    var blob = new Blob([data.data], { type: contentType });
                     var url = window.URL.createObjectURL(blob);
                     linkElement.setAttribute('href', url);
                     linkElement.setAttribute("download", filename);
