@@ -232,7 +232,7 @@
     <value>Image</value>
   </data>
   <data name="Information.Text" xml:space="preserve">
-    <value>Select from an available profile or create a custom one using the new profile option. Admin may allow uploads via link and image plugin with file type restrictions and max file size. &lt;br /&gt;&lt;br /&gt;
+    <value>Select from an available profile. Admin may allow uploads via link and image plugin with file type restrictions and max file size. &lt;br /&gt;&lt;br /&gt;
 Note: You must refresh the original page with the editor to see any new changes.</value>
   </data>
   <data name="InsertFlash.Text" xml:space="preserve">

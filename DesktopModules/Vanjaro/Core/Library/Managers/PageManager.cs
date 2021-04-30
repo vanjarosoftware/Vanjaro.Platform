@@ -461,8 +461,12 @@ namespace Vanjaro.Core
                         {
                             foreach (dynamic cons in con.selectors)
                             {
-                                if (cons.name != null)
-                                    selectorIds.Add(cons.name.Value);
+                                try
+                                {
+                                    if (cons.name != null)
+                                        selectorIds.Add(cons.name.Value);
+                                }
+                                catch { }
                             }
                         }
                         bool delete = true;
@@ -1347,7 +1351,7 @@ namespace Vanjaro.Core
                     string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
                     string tempNewUrl = newurl;
                     int count = 1;
-                    Find:
+                Find:
                     if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
                     {
                         tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;

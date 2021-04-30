@@ -12,10 +12,10 @@
                 <div>
                     <label>[L:SelectEditorProfile]</label>
                     <div class="form-group">
-                        <a class="btn btn-default manageslug" mn-ng-if="ui.data.IsSuperUser.Value==true" ng-click="ManageProfile()" role="button"><span style='font-family:Arial, Helvetica, sans-serif;'>[L:Manage]</span></a>
+                        <!--<a class="btn btn-default manageslug" mn-ng-if="ui.data.IsSuperUser.Value==true" ng-click="ManageProfile()" role="button"><span style='font-family:Arial, Helvetica, sans-serif;'>[L:Manage]</span></a>
                         <a class="btn btn-default manageslug" mn-ng-if="ui.data.IsSuperUser.Value==false" mn-ng-show="ui.data.Profiles.Options.length>4" ng-click="ManageProfile()" role="button"><span style='font-family:Arial, Helvetica, sans-serif;'>[L:Manage]</span></a>
-                        <a class="btn btn-default manageslug" mn-ng-if="ui.data.IsSuperUser.Value==false" mn-ng-hide="ui.data.Profiles.Options.length>4" ng-click="ManageProfile()" role="button"><span style='font-family:Arial, Helvetica, sans-serif;'>[L:New]</span></a>
-                        <select class="form-control control-background" ng-change="changeProfile()" ng-model="ui.data.Profiles.Value" ng-options="option.ProfileID as option.Name for option in ui.data.Profiles.Options" style="width:80%;"></select>
+                        <a class="btn btn-default manageslug" mn-ng-if="ui.data.IsSuperUser.Value==false" mn-ng-hide="ui.data.Profiles.Options.length>4" ng-click="ManageProfile()" role="button"><span style='font-family:Arial, Helvetica, sans-serif;'>[L:New]</span></a>-->
+                        <select class="form-control control-background" ng-change="changeProfile()" ng-model="ui.data.Profiles.Value" ng-options="option.ProfileID as option.Name for option in ui.data.Profiles.Options"></select>
                     </div>
                 </div>
             </uitemplate>
@@ -48,14 +48,14 @@
                     </a>-->
                     <div class="dropdown btn-group" style="display: inline; margin-right:5px;">
                         <button type="button" class="btn btn-primary " mn-ng-click="SaveEditorProfile('CurrentModule')">[L:Apply]</button>
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" mn-ng-if="ui.data.ModuleID.Value>0">
+                        <!--<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" mn-ng-if="ui.data.ModuleID.Value>0">
                             <span class="caret"></span>
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" style="right: 0;left: auto;top: 20px;" mn-ng-if="ui.data.ModuleID.Value>0">
                             <li class="ng-scope"><a mn-ng-click="SaveEditorProfileConfirm('PageModule')" class="ng-binding" style="cursor:pointer;">[L:PageModule]</a></li>
                             <li class="ng-scope"><a mn-ng-click="SaveEditorProfileConfirm('PortalModule')" class="ng-binding" style="cursor:pointer;">[L:PortalModule]</a></li>
-                        </ul>
+                        </ul>-->
                     </div>
                     <a class="btn btn-default btn-link " role="button" mn-ng-click="CloseWindow()">
                         <span class="glyphicon glyphicon-" style="float: left;margin-right: 5px;"></span>[L:Cancel]
@@ -63,7 +63,7 @@
                 </div>
             </uitemplate>
         </uilayout>
-        <uilayout name="default" attr-ng-hide="SelectEditorProfile">
+        <!--<uilayout name="default" attr-ng-hide="SelectEditorProfile">
             <uitemplate>
                 <div class="form-group">
                     <label mn-ng-hide="ui.data.Profiles.Options.length==0 || ProfileName==''">[L:Profile]</label>
@@ -87,15 +87,15 @@
                         <label style="padding: 5px 0px 0px 0px; color:white;">NA</label>
                         <input type="button" mn-ng-disabled="ui.data.Profiles.Value < 1?true:null" ng-click="DeleteProfile()" value="[L:DeleteProfile]" class="form-control btn btn-default" style="margin: 0px; color:#337ab7;" />
                     </div>
-                </div>
-                <!--<hr />
-                <label>[L:Toolbar]</label>
-                <div class="form-group editor-config-Fields">
-                    <div mn-ng-repeat="(key, value) in ui.data.EditorOptions.Options">
-                        <input mn-ng-disabled="ProfileName=='Default'?true:false" mn-ng-if="key !='Plugins' && key !='ToolbarDependencies' && key !='UiColor' && key !='Height' && key !='Width'" mn-ng-model="value" type="checkbox" name="key" value="value" style="margin: 0px;" mn-ng-click="EditorOptions_ngClick(false,key,value)"> <span mn-ng-if="key !='Plugins' && key !='ToolbarDependencies' && key !='UiColor' && key !='Height' && key !='Width'" style="padding: 5px;">{{getLocalizedValue(key)}}</span>
-                    </div>
                 </div>-->
-                <hr mn-ng-if="PluginsCount>0" />
+        <!--<hr />
+        <label>[L:Toolbar]</label>
+        <div class="form-group editor-config-Fields">
+            <div mn-ng-repeat="(key, value) in ui.data.EditorOptions.Options">
+                <input mn-ng-disabled="ProfileName=='Default'?true:false" mn-ng-if="key !='Plugins' && key !='ToolbarDependencies' && key !='UiColor' && key !='Height' && key !='Width'" mn-ng-model="value" type="checkbox" name="key" value="value" style="margin: 0px;" mn-ng-click="EditorOptions_ngClick(false,key,value)"> <span mn-ng-if="key !='Plugins' && key !='ToolbarDependencies' && key !='UiColor' && key !='Height' && key !='Width'" style="padding: 5px;">{{getLocalizedValue(key)}}</span>
+            </div>
+        </div>-->
+        <!--<hr mn-ng-if="PluginsCount>0" />
                 <input type="checkbox" mn-ng-if="PluginsCount>0" mn-ng-disabled="ui.data.Profiles.Value < 0 && ui.data.IsSuperUser.Value !=true?true:null" style="margin: 0px;" mn-ng-click="EditorOptions_ngAllClick()" id="EditorOptionsAllPlugins" /><label mn-ng-if="PluginsCount>0">[L:Plugins]</label>
                 <div class="form-group editor-config-Fields" mn-ng-if="PluginsCount>0">
                     <div mn-ng-repeat="(key, value) in ui.data.EditorOptions.Options.Plugins">
@@ -118,6 +118,6 @@
                     </a>
                 </div>
             </uitemplate>
-        </uilayout>
+        </uilayout>-->
     </uiengine>
 </div>
