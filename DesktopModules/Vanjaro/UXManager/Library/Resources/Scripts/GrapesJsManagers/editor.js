@@ -1615,7 +1615,7 @@ $(document).ready(function () {
 								if (vjEditorSettings.EditPage) {
 									LoadApps();
 									LoadDesignBlocks();
-								}
+                                }
 
 								if ($(window).width() < 1000) {
 									$(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
@@ -1693,7 +1693,15 @@ $(document).ready(function () {
 									$("#iframeHolder").fadeIn();
 
 									eraseCookie("vj_UXLoad");
-								}
+                                }
+
+                                VjEditor.SelectorManager.getAll().filter(selector => {
+                                    if (selector.attributes.type == 1) {
+                                        selector.set({
+                                            active: false
+                                        })
+                                    }
+                                });
 							});
 
 							var parentClone = "";
@@ -1781,7 +1789,7 @@ $(document).ready(function () {
 
 									var modelClasses = model.attributes.classes;
 									if (modelClasses.length) {
-										modelClasses.map(selector => {
+                                        modelClasses.map(selector => {
 											if (selector.attributes.active) {
 												selector.set({
 													active: false
@@ -2512,9 +2520,15 @@ $(document).ready(function () {
 
 								if (model.attributes.type == 'grid' && model.components().length)
 									$(model.components().models[0].getEl()).removeClass('gjs-dashed');
-							});
+							});                            
 
-							VjEditor.on('selector:add', selector => selector.set({ active: false }));
+                            VjEditor.on('selector:add', selector => {
+                                if (selector.attributes.type == 1) {
+                                    selector.set({
+                                        active: false
+                                    });
+                                }
+                            });
 
 							VjEditor.on('component:styleUpdate', (model, property) => {
 
