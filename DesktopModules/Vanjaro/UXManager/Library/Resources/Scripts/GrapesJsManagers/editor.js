@@ -317,59 +317,60 @@ $(document).ready(function () {
             if ($('#dnn_ContentPane').length > 0)
                 $('#dnn_ContentPane').addClass("sidebar-open");
 
-            $(window.parent.document.body).find('.vj-wrapper').removeClass("m2vDisplayNone");
-            if ($.isFunction($.ServicesFramework) || $.isFunction(window.parent.$.ServicesFramework)) {
-                var sf;
-                try {
-                    sf = $.ServicesFramework(-1);
-                }
-                catch (sferr) { sf = window.parent.$.ServicesFramework(-1); }
-                if (parseInt(sf.getTabId()) <= 0)
-                    sf = window.parent.$.ServicesFramework(-1);
-                $.ajax({
-                    type: "GET",
-                    url: eval(vjEditorSettings.GetContentUrl),
-                    headers: {
-                        'ModuleId': parseInt(vjEditorSettings.ModuleId),
-                        'TabId': parseInt(sf.getTabId()),
-                        'RequestVerificationToken': sf.getAntiForgeryValue()
-                    },
-                    success: function (response) {
-                        if (response != undefined) {
-                            VJLandingPage.components = response.ContentJSON;
-                            VJLandingPage.html = response.Content;
-                            VJLandingPage.style = response.StyleJSON;
-                            VJLandingPage.css = response.Style;
-                        }
-                        if (VJLandingPage != undefined) {
-                            $("#mode-switcher").find("em").addClass("fa-chevron-left").removeClass("fa-chevron-right");
-                            $('.sidebar, #dnn_ContentPane').addClass("sidebar-open").removeClass("sidebar-close");
-                            BindLinksAndScripts();
-                            VjLayerpanel = jsPanel.create({
-                                id: 'layer-manager',
-                                theme: 'dark',
-                                headerTitle: VjLocalized.Navigator,
-                                position: 'right-top -320 20',
-                                resizeit: false,
-                                contentSize: {
-                                    width: '300',
-                                },
-                                headerControls: {
-                                    minimize: 'remove',
-                                    normalize: 'remove',
-                                    maximize: 'remove',
-                                    smallify: 'remove',
-                                    reset: 'remove',
-                                    add: {
-                                        html: '<span class="panelclosebtn"><em class="fas fa-times"></em></span>',
-                                        name: 'Closebtn',
-                                        handler: function (panel, control) {
-                                            $(".jsPanel-btn-Closebtn").click(function () {
-                                                $('#layer-manager').hide();
-                                            });
-                                        },
-                                    }
-                                },
+			$(window.parent.document.body).find('.vj-wrapper').removeClass("m2vDisplayNone");
+			if ($.isFunction($.ServicesFramework) || $.isFunction(window.parent.$.ServicesFramework)) {
+				var sf;
+				try {
+					sf = $.ServicesFramework(-1);
+				}
+				catch (sferr) { sf = window.parent.$.ServicesFramework(-1); }
+				if (parseInt(sf.getTabId()) <= 0)
+					sf = window.parent.$.ServicesFramework(-1);
+				$.ajax({
+					type: "GET",
+					url: eval(vjEditorSettings.GetContentUrl),
+					cache: false,
+					headers: {
+						'ModuleId': parseInt(vjEditorSettings.ModuleId),
+						'TabId': parseInt(sf.getTabId()),
+						'RequestVerificationToken': sf.getAntiForgeryValue()
+					},
+					success: function (response) {
+						if (response != undefined) {
+							VJLandingPage.components = response.ContentJSON;
+							VJLandingPage.html = response.Content;
+							VJLandingPage.style = response.StyleJSON;
+							VJLandingPage.css = response.Style;
+						}
+						if (VJLandingPage != undefined) {
+							$("#mode-switcher").find("em").addClass("fa-chevron-left").removeClass("fa-chevron-right");
+							$('.sidebar, #dnn_ContentPane').addClass("sidebar-open").removeClass("sidebar-close");
+							BindLinksAndScripts();
+							VjLayerpanel = jsPanel.create({
+								id: 'layer-manager',
+								theme: 'dark',
+								headerTitle: VjLocalized.Navigator,
+								position: 'right-top -320 20',
+								resizeit: false,
+								contentSize: {
+									width: '300',
+								},
+								headerControls: {
+									minimize: 'remove',
+									normalize: 'remove',
+									maximize: 'remove',
+									smallify: 'remove',
+									reset: 'remove',
+									add: {
+										html: '<span class="panelclosebtn"><em class="fas fa-times"></em></span>',
+										name: 'Closebtn',
+										handler: function (panel, control) {
+											$(".jsPanel-btn-Closebtn").click(function () {
+												$('#layer-manager').hide();
+											});
+										},
+									}
+								},
 
                                 onclosed: function () {
                                     VjLayerpanel = null;
@@ -1611,9 +1612,9 @@ $(document).ready(function () {
                                 catch (err) { window.parent.location.reload(); }
                                 $('#BlockManager').find('.block-search').val('');
 
-                                if (vjEditorSettings.EditPage) {
-                                    LoadApps();
-                                    LoadDesignBlocks();
+								if (vjEditorSettings.EditPage) {
+									LoadApps();
+									LoadDesignBlocks();
                                 }
 
                                 if ($(window).width() < 1000) {
@@ -1691,9 +1692,17 @@ $(document).ready(function () {
                                     $('#iframeHolder').find('iframe').attr('src', getCookie('vj_UXLoad'));
                                     $("#iframeHolder").fadeIn();
 
-                                    eraseCookie("vj_UXLoad");
+									eraseCookie("vj_UXLoad");
                                 }
-                            });
+
+                                VjEditor.SelectorManager.getAll().filter(selector => {
+                                    if (selector.attributes.type == 1) {
+                                        selector.set({
+                                            active: false
+                                        })
+                                    }
+                                });
+							});
 
                             var parentClone = "";
                             var parentRemove = "";
@@ -1778,16 +1787,16 @@ $(document).ready(function () {
 
                                 if (typeof model != "undefined") {
 
-                                    var modelClasses = model.attributes.classes;
-                                    if (modelClasses.length) {
+									var modelClasses = model.attributes.classes;
+									if (modelClasses.length) {
                                         modelClasses.map(selector => {
-                                            if (selector.attributes.active) {
-                                                selector.set({
-                                                    active: false
-                                                });
-                                            }
-                                        });
-                                    }
+											if (selector.attributes.active) {
+												selector.set({
+													active: false
+												});
+											}
+										});
+									}
 
                                     $.each(getAllComponents(model), function (i, n) {
                                         var classes = n.attributes.classes;
@@ -2509,11 +2518,17 @@ $(document).ready(function () {
                                 if (model.attributes.type == 'column')
                                     $(model.parent().getEl()).removeClass('gjs-dashed');
 
-                                if (model.attributes.type == 'grid' && model.components().length)
-                                    $(model.components().models[0].getEl()).removeClass('gjs-dashed');
-                            });
+								if (model.attributes.type == 'grid' && model.components().length)
+									$(model.components().models[0].getEl()).removeClass('gjs-dashed');
+							});                            
 
-                            VjEditor.on('selector:add', selector => selector.set({ active: false }));
+                            VjEditor.on('selector:add', selector => {
+                                if (selector.attributes.type == 1) {
+                                    selector.set({
+                                        active: false
+                                    });
+                                }
+                            });
 
                             VjEditor.on('component:styleUpdate', (model, property) => {
 
