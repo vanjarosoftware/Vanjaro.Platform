@@ -612,13 +612,22 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                                 block.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.ContentJSON, portalID), true, Assets);
                             if (!string.IsNullOrEmpty(block.StyleJSON))
                                 block.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.StyleJSON, portalID), true, Assets);
+
+                            if (!string.IsNullOrEmpty(block.Html))
+                            {
+                                HtmlDocument bhtml = new HtmlDocument();
+                                bhtml.LoadHtml(block.Html);
+                                block.ContentJSON = BlockManager.RemovePermissions(bhtml, block.ContentJSON);
+                                block.Html = bhtml.DocumentNode.OuterHtml;
+                            }
                         }
                         Core.Factories.CacheFactory.Clear(Core.Factories.CacheFactory.GetCacheKey(Core.Factories.CacheFactory.Keys.CustomBlock + "ALL", portalID));
                     }
                     layout.Name = name;
-                    layout.Content = html.DocumentNode.OuterHtml;
                     layout.SVG = "";
                     layout.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.ContentJSON, portalID), true, Assets);
+                    layout.ContentJSON = BlockManager.RemovePermissions(html, layout.ContentJSON);
+                    layout.Content = html.DocumentNode.OuterHtml;
                     layout.Style = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.Style.ToString(), portalID), false, Assets);
                     layout.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.StyleJSON.ToString(), portalID), true, Assets);
                     layout.Type = baseLayout.Type;
