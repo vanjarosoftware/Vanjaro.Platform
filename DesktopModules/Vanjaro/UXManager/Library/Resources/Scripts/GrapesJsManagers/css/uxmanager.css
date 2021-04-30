@@ -1754,6 +1754,12 @@ html.mobile-responsive {
 	}
 	}*/
 
+.traitsmanager select {
+    -webkit-appearance: auto;
+    -moz-appearance: none;
+    appearance: auto;
+}
+
 
 .traitsmanager .gjs-field-wrp--href {
     width: 100%;
