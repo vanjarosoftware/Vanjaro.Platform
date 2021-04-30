@@ -465,4 +465,7 @@
   <data name="MobileLandscape.Text" xml:space="preserve">
     <value>Mobile Landscape</value>
   </data>
+  <data name="AddImage.Text" xml:space="preserve">
+    <value>Add Image</value>
+  </data>
 </root>
