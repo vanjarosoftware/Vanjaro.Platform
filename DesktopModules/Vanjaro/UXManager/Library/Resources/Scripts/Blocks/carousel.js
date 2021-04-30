@@ -324,7 +324,8 @@
 				resizable: false,
 				selectable: true,
 				editable: false,
-				hoverable: false,
+                hoverable: false,
+                traits: [],
 			}),
 		}, {
 			isComponent(el) {
@@ -353,7 +354,7 @@
 				resizable: false,
 				selectable: false,
 				editable: false,
-				hoverable: false,
+                hoverable: false
 			}),
 		},
 			{
@@ -419,8 +420,8 @@
 					type: 'text',
 					name: 'slidetitle',
 					label: 'Title',
-					changeProp: 1,
-					UpdateStyles: true,
+                    changeProp: 1,
+                    UpdateStyles: true,
 				}, {
 					type: 'textarea',
 					name: 'caption',
@@ -445,7 +446,6 @@
 
 				var slide = this.closest('[data-gjs-type="carousel-item"]');
 				var carouselCaption = slide.components().models.find(m => m.attributes.type == 'carousel-caption');
-
 				if (typeof carouselCaption == 'undefined') {
 					slide.append('<div class="carousel-caption d-none d-md-block"></div>');
 					carouselCaption = slide.components().models.find(m => m.attributes.type == 'carousel-caption');
@@ -453,13 +453,13 @@
 
 				if (carouselCaption.components().length <= 0 || (carouselCaption.components().length > 0 && typeof carouselCaption.components().models.find(t => t.attributes.type == 'carousel-heading') == 'undefined')) {
 
-					carouselCaption.append('<h5 class="carousel-heading">' + this.attributes.slidetitle + '</h5>');
+                    carouselCaption.append('<h5 class="carousel-heading">' + this.attributes.slidetitle + '</h5>');
 
 					if (typeof carouselCaption.components().models.find(t => t.attributes.type == 'carousel-caption') == 'undefined')
 						carouselCaption.append('<p class="carousel-text"></p>');
 				}
 				else
-					carouselCaption.components().models.find(t => t.attributes.type == 'carousel-heading').set('content', this.attributes.slidetitle);
+                    carouselCaption.components().models.find(t => t.attributes.type == 'carousel-heading').set('content', this.attributes.slidetitle);
 			},
 			ChangeCaption() {
 
@@ -622,14 +622,14 @@
 				editable: false,
 				hoverable: false,
 				propagate: ['removable', 'draggable', 'droppable', 'badgable', 'stylable', 'highlightable', 'copyable', 'resizable', 'editable', 'layerable', 'selectable', 'hoverable'],
-			}),
+            }),         
 		}, {
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('carousel-control-next')) return { type: 'next' };
 			},
 		}),
 
-		view: defaultType.view
+        view: defaultType.view
 	});
 
 	dc.addType('prev', {

@@ -70,6 +70,7 @@
     EditImage: "[LS:EditImage]",
     AddColumn: "[LS:AddColumn]",
     AddListItem: "[LS:AddListItem]",
+    AddImage: "[LS:AddImage]",
     SaveBlock: "[LS:SaveBlock]",
     Settings: "[LS:Settings]",
     Menu: "[LS:Menu]",
