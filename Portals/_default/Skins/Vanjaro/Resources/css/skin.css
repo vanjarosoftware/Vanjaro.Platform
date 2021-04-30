@@ -485,7 +485,7 @@ a.dnnSecondaryAction {
 /*
 Theme.css start
 */
-body {
+body#Body {
     font-family: Arial,sans-serif;
 }
 
