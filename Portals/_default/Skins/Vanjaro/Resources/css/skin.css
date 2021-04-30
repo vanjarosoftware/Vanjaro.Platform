@@ -485,12 +485,9 @@ a.dnnSecondaryAction {
 /*
 Theme.css start
 */
-body,
-#dnn_ContentPane {
+body {
     font-family: Arial,sans-serif;
 }
-
-
 
 /*.ResetPassword-container #btnChangePassword .form-ResetPassword .Login-link {
 	color: #fff !important;
