@@ -128,6 +128,8 @@ $(document).ready(function () {
 	$(".pubish-btn").click(function (e) {
 		e.preventDefault();
 
+		VjEditor.select();
+
 		var VjPublishChanges = function () {
 			if (VJIsContentApproval == 'True') {
 				swal(
@@ -291,8 +293,6 @@ $(document).ready(function () {
 	};
 
 	global.GrapesjsInit = function () {
-
-
 
 		if (isEditPage()) {
 

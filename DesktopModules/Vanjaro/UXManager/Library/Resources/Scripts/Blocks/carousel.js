@@ -294,7 +294,7 @@
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				name: 'Carousel Inner',
 				draggable: false,
-                droppable: '[data-gjs-type=carousel-item]',
+				droppable: '[data-gjs-type=carousel-item]',
 				selectable: false,
 				hoverable: false,
 				highlightable: false,
@@ -315,7 +315,7 @@
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				name: 'Carousel Item',
 				removable: false,
-                draggable: ".carousel-inner",
+				draggable: ".carousel-inner",
 				droppable: false,
 				badgable: false,
 				stylable: false,
@@ -325,6 +325,7 @@
 				selectable: true,
 				editable: false,
 				hoverable: false,
+				traits: []
 			}),
 		}, {
 			isComponent(el) {
@@ -420,25 +421,22 @@
 					name: 'slidetitle',
 					label: 'Title',
 					changeProp: 1,
-					UpdateStyles: true,
 				}, {
 					type: 'textarea',
 					name: 'caption',
 					label: 'Caption',
 					changeProp: 1,
-				}
-					, {
+				}, {
 					label: " ",
 					name: "href",
 					type: "href",
 					href: "",
 					"data_href_type": "url",
-				}],
+				}]
 			}),
 			init() {
 				this.listenTo(this, 'change:slidetitle', this.ChangeTitle);
 				this.listenTo(this, 'change:caption', this.ChangeCaption);
-				//this.listenTo(this, 'change:attributes:href', this.ChangeLink);
 				this.listenTo(this, 'change:attributes:target', this.ChangeTarget);
 			},
 			ChangeTitle() {
@@ -451,15 +449,11 @@
 					carouselCaption = slide.components().models.find(m => m.attributes.type == 'carousel-caption');
 				}
 
-				if (carouselCaption.components().length <= 0 || (carouselCaption.components().length > 0 && typeof carouselCaption.components().models.find(t => t.attributes.type == 'carousel-heading') == 'undefined')) {
+				if (carouselCaption.components().length && typeof carouselCaption.components().models.find(t => t.attributes.type == 'carousel-heading') != 'undefined')
+					carouselCaption.components().models.find(t => t.attributes.type == 'carousel-heading').remove();
 
-					carouselCaption.append('<h5 class="carousel-heading">' + this.attributes.slidetitle + '</h5>');
+				carouselCaption.append('<h5 class="carousel-heading">' + this.attributes.slidetitle + '</h5>', { at: 0 });
 
-					if (typeof carouselCaption.components().models.find(t => t.attributes.type == 'carousel-caption') == 'undefined')
-						carouselCaption.append('<p class="carousel-text"></p>');
-				}
-				else
-					carouselCaption.components().models.find(t => t.attributes.type == 'carousel-heading').set('content', this.attributes.slidetitle);
 			},
 			ChangeCaption() {
 
@@ -471,19 +465,12 @@
 					carouselCaption = slide.components().models.find(m => m.attributes.type == 'carousel-caption');
 				}
 
-				if (carouselCaption.components().length <= 0 || (carouselCaption.components().length > 0 && typeof carouselCaption.components().models.find(t => t.attributes.type == 'carousel-text') == 'undefined')) {
+				if (carouselCaption.components().length && typeof carouselCaption.components().models.find(t => t.attributes.type == 'carousel-text') != 'undefined')
+					carouselCaption.components().models.find(t => t.attributes.type == 'carousel-text').remove();
+	
+				carouselCaption.append('<p class="carousel-text">' + this.attributes.caption + '</p>');
 
-					if (typeof carouselCaption.components().models.find(t => t.attributes.type == 'carousel-heading') == 'undefined')
-						carouselCaption.append('<h5 class="carousel-heading"></h5>');
-
-					carouselCaption.append('<p class="carousel-text">' + this.attributes.caption + '</p>');
-				}
-				else
-					carouselCaption.components().models.find(t => t.attributes.type == 'carousel-text').set('content', this.attributes.caption);
 			},
-			//ChangeLink() {
-			//	this.parent().parent().addAttributes({ href: this.attributes.href });
-			//},
 			ChangeTarget() {
 				if (this.getAttributes().target == '_blank')
 					this.parent().parent().addAttributes({ target: this.getAttributes().target });
