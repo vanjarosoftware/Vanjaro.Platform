@@ -211,9 +211,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 if (!CanExport(pageSettings, tab))
                     continue;
                 var version = PageManager.GetLatestVersion(page.Value, PageManager.GetCultureCode(ps));
+                if (version == null)
+                    version = new Core.Data.Entities.Pages();
                 Layout layout = new Layout
                 {
-                    Content = PageManager.TokenizeTemplateLinks(version.Content, false, Assets)
+                    Content = PageManager.TokenizeTemplateLinks(version.Content != null ? version.Content : string.Empty, false, Assets)
                 };
 
                 HtmlDocument html = new HtmlDocument();
@@ -253,9 +255,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 layout.Name = pageSettings.Name;
                 layout.Content = html.DocumentNode.OuterHtml;
                 layout.SVG = "";
-                layout.ContentJSON = PageManager.TokenizeTemplateLinks(version.ContentJSON, true, Assets);
-                layout.Style = PageManager.TokenizeTemplateLinks(version.Style, false, Assets);
-                layout.StyleJSON = PageManager.TokenizeTemplateLinks(version.StyleJSON, true, Assets);
+                layout.ContentJSON = PageManager.TokenizeTemplateLinks(version.ContentJSON != null ? version.ContentJSON : string.Empty, true, Assets);
+                layout.Style = PageManager.TokenizeTemplateLinks(version.Style != null ? version.Style : string.Empty, false, Assets);
+                layout.StyleJSON = PageManager.TokenizeTemplateLinks(version.StyleJSON != null ? version.StyleJSON : string.Empty, true, Assets);
                 layout.Type = pageSettings.PageType = pageSettings.PageType.ToLower() == "url" ? "URL" : (pageSettings.DisableLink && pageSettings.IncludeInMenu) ? "Folder" : "Standard";
                 layout.Children = ConvertToLayouts(PortalID, Assets, ExportedModulesContent, ps, page.children);
                 layout.SortOrder = ctr;
@@ -294,7 +296,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             if (tab.IsDeleted)
                 return false;
             string Name = pageSettings.Name.ToLower().Replace(" ", "");
-            if (Name == "home" || Name == "signup" || Name == "notfoundpage" || Name == "profile" || Name == "searchresults" || Name == "404errorpage" || Name == "signin")
+            if (Name == "home" || Name == "signup" || Name == "notfoundpage" || Name == "profile" || Name == "searchresults" || Name == "404errorpage" || Name == "signin" || Name == "site" || Name == "terms" || Name == "user" || Name == "privacy")
                 return true;
             if (tab.IsVisible && tab.TabPermissions.Where(t => t != null && t.RoleName == "All Users").FirstOrDefault() != null && tab.TabPermissions.Where(t => t != null && t.RoleName == "All Users").FirstOrDefault().AllowAccess)
                 return true;
@@ -448,6 +450,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 rp.Execute("delete from " + Core.Data.Scripts.CommonScript.TablePrefix + "VJ_Common_HTMLEditor_Profile where PortalID=@0", portal.PortalID);
             }
             PortalFactory.DeleteWorkflows(portal.PortalID);
+            string portalSystemPath = GetAbsoluteServerPath() + "Portals\\" + portal.PortalID + "-System";
+            if (Directory.Exists(portalSystemPath))
+                Directory.Delete(portalSystemPath, true);
         }
     }
 }

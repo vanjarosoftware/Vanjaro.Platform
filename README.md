@@ -20,7 +20,7 @@ Use **Vanjaro Installer** to create your next Vanjaro Site. Refer to [**Vanjaro 
 
 Vanjaro is also available as an extension for DNN. Use this option if you're installing on an existing DNN 9.9.1+ Site.
 
-You may install Vanjaro as any other DNN Extension. Refer to [Getting Started Video](https://www.youtube.com/watch?v=mezy_YV0acs) for step by step instructions. Be sure to install either [x86 or x64](https://github.com/vanjarosoftware/Vanjaro.Platform/wiki/x86-or-x64-Build) depending on your environment. You may also upgrade Vanjaro as any other [DNN Extension](https://github.com/vanjarosoftware/Vanjaro.Platform/wiki/DNN-Extension).
+You may install Vanjaro as any other DNN Extension. Refer to [Getting Started Video](https://www.youtube.com/watch?v=mezy_YV0acs) for step by step instructions. You may also upgrade Vanjaro as any other [DNN Extension](https://github.com/vanjarosoftware/Vanjaro.Platform/wiki/DNN-Extension).
 
 ##### Vanjaro Improvement Program
 Vanjaro uses Google Analytics (GA) to collect usage statistics and exceptions. The sole purpose is to identify how widely the product is used, which features are most important in course of future updates, and to quickly resolve most widespread errors. Vanjaro does not collect any personal data. location.hostname is automatically collected by Google Anlaytics (GA) and its sole purpose is to measure statistics on the usage. 

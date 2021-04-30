@@ -9,7 +9,7 @@ global.BindLinksAndScripts = function () {
     global.VjScript = '';
     global.VjStyle = '';
     $('link').each(function () {
-        if (typeof this.attributes.vj == 'undefined' && VjLinks.indexOf(this.href) == -1) {
+        if (typeof this.attributes.vj == 'undefined' && VjLinks.indexOf(this.href) == -1 && (typeof this.attributes.rel != 'undefined' && this.attributes.rel.value != 'SHORTCUT ICON')) {
             VjLinks.push(this.href);
         }
     });

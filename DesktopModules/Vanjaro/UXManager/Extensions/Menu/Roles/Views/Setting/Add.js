@@ -58,11 +58,13 @@
                     var ParentScope = parent.document.getElementById("iframe").contentWindow.angular;
                     if (ParentScope != undefined && ParentScope.element(".menuextension") != undefined && ParentScope.element(".menuextension").scope() != undefined && has(ParentScope.element(".menuextension").scope(), 'ui.data.RoleGroup')) {
                         $scope.ParentScope = parent.document.getElementById("iframe").contentWindow.angular.element(".menuextension").scope();
-                        var option = { GroupId: data.data.Data.Roles[0].GroupId, Name: data.data.Data.Roles[0].GroupName };
-                        if ($scope.ParentScope.FilterGroupOption != null)
-                            $scope.ParentScope.filterGroup($scope.ParentScope.FilterGroupOption);
-                        else
-                            $scope.ParentScope.filterGroup(option);
+                        if (data.data.Data.Roles != null && data.data.Data.Roles.length > 0 && data.data.Data.Roles[0].GroupId != null) {
+                            var option = { GroupId: data.data.Data.Roles[0].GroupId, Name: data.data.Data.Roles[0].GroupName };
+                            if ($scope.ParentScope.FilterGroupOption != null)
+                                $scope.ParentScope.filterGroup($scope.ParentScope.FilterGroupOption);
+                            else
+                                $scope.ParentScope.filterGroup(option);
+                        }
                         $scope.ParentScope.ui.data.RoleGroup.Options = data.data.Data.RoleGroups;
                         $scope.ParentScope.$apply();
                     }

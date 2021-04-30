@@ -387,15 +387,24 @@ export default (editor, config = {}) => {
 
 			if (event.target.value == "none") {
 				style["border-width"] = "0";
-				style["border-radius"] = "0";
+				style["border-top-left-radius"] = "0";
+				style["border-top-right-radius"] = "0";
+				style["border-bottom-left-radius"] = "0";
+				style["border-bottom-right-radius"] = "0";
 			}
             else if (event.target.value == "circle") {
 				style["border-width"] = mainComponent.getTrait('framewidth').getInitValue() + "px";
-				style["border-radius"] = "50%";
+				style["border-top-left-radius"] = "50%";
+				style["border-top-right-radius"] = "50%";
+				style["border-bottom-left-radius"] = "50%";
+				style["border-bottom-right-radius"] = "50%";
 			}
             else if (event.target.value == "square") {
 				style["border-width"] = mainComponent.getTrait('framewidth').getInitValue() + "px";
-				style["border-radius"] = "0";
+				style["border-top-left-radius"] = "0";
+				style["border-top-right-radius"] = "0";
+				style["border-bottom-left-radius"] = "0";
+				style["border-bottom-right-radius"] = "0";
 			}
 		}
 
@@ -474,7 +483,7 @@ export default (editor, config = {}) => {
 			el.innerHTML = `
 				<hr />
 				<div class="option-block">
-					<input type="radio" id="URL" name="LinkType" data-type="url">
+					<input type="radio" id="URL" name="LinkType" checked data-type="url">
 					<label for="URL"><em class="fas fa-link"></em></label>
 					<input type="radio" id="Page" name="LinkType" data-type="page">
 					<label for="Page"><em class="far fa-file"></em></label>			
@@ -485,7 +494,7 @@ export default (editor, config = {}) => {
 				</div>
 				<div class="link-block">
 					<div id="url" class="link-type">
-						<input type="url" id="vj_link_target" class="url" placeholder="Insert URL"  autofocus/>
+						<input type="url" id="vj_link_target" class="url" placeholder="Insert URL" autofocus/>
                         <em class="fas fa-link urlbtn" onclick="window.parent.OpenPopUp(null, 900, 'right', 'Link', window.parent.CurrentExtTabUrl + '&guid=a0a86356-6c9f-49c4-a431-24917641cb32');"></em>
 					</div>
 					<div id="page" class="link-type">
@@ -726,7 +735,7 @@ export default (editor, config = {}) => {
 				}
 			}
 			else {
-				$(".link-wrapper").find("input").off('keyup').on('keyup', UXManager_Search);
+                UXManager_Search();
 			}
 		}
 	});
@@ -943,9 +952,9 @@ export default (editor, config = {}) => {
 			}
 
 			if (component.attributes.type == 'section') {
-				if (event.target.name == "background") {
 
-					component.addStyle({ 'overflow': 'visible' });
+                if (event.target.name == "background") {
+                    
 					component.set({ 'src': '', 'thumbnail': '' });
 
 					if (event.target.value == "image") {

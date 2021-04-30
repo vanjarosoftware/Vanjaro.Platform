@@ -111,6 +111,7 @@ namespace Vanjaro.Core
                 {
                     result = new Dictionary<string, string>();
                     string FolderPath = Globals.ApplicationMapPath + @"\portals\_default\" + GetTheme(PortalSettings.PortalId) + BlockDirectory + "\\" + Block + "\\";
+                    string PortalFolderPath = FolderPath.Replace("_default", PortalSettings.PortalId.ToString());
                     if (Directory.Exists(FolderPath))
                     {
                         string markup = string.Empty;
@@ -119,9 +120,12 @@ namespace Vanjaro.Core
                             markup += File.ReadAllText(FolderPath + Block + ".html");
                         }
 
-                        if (IsGlobal && File.Exists(FolderPath + Block + ".config.html"))
+                        if (IsGlobal)
                         {
-                            markup += File.ReadAllText(FolderPath + Block + ".config.html");
+                            if (Directory.Exists(PortalFolderPath) && File.Exists(PortalFolderPath + Block + ".config.html"))
+                                markup += File.ReadAllText(PortalFolderPath + Block + ".config.html");
+                            else if (File.Exists(FolderPath + Block + ".config.html"))
+                                markup += File.ReadAllText(FolderPath + Block + ".config.html");
                         }
 
                         if (!string.IsNullOrEmpty(markup))
@@ -183,6 +187,9 @@ namespace Vanjaro.Core
                     }
                     sb.Append("></div>");
                     string FolderPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeManager.CurrentTheme.Name + "/Blocks/" + Attributes["data-block-type"] + "/");
+                    FolderPath = FolderPath.Replace("_default", PortalSettings.PortalId.ToString());
+                    if (!Directory.Exists(FolderPath))
+                        Directory.CreateDirectory(FolderPath);
                     if (Directory.Exists(FolderPath))
                     {
                         if (!File.Exists(FolderPath + Attributes["data-block-type"] + ".config.html"))

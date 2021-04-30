@@ -508,6 +508,9 @@
             model.view.$el.find('input').val(value);
             model.view.$el.find('select').val(unit);
 
+            if (property == 'font-size')
+                selected.getTrait('fontsize').setTargetValue(value);
+
 			if (property == "border-width" || property == "border-top-width" || property == "border-right-width" || property == "border-bottom-width" || property == "border-left-width") {
 
 				var borderStyle;

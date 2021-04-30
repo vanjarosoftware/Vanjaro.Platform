@@ -32,7 +32,7 @@
     <profiledefinition>
       <propertycategory>Location</propertycategory>
       <propertyname>PreferredTimeZone</propertyname>
-      <datatype>TimeZoneInfo</datatype>
+      <datatype>TimeZone</datatype>
       <length>0</length>
       <defaultvisibility>2</defaultvisibility>
     </profiledefinition>

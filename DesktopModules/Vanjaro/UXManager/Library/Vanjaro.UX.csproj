@@ -172,7 +172,6 @@
     <Content Include="Resources\placeholder.html" />
     <Content Include="Resources\node_modules\.bin\webpack.config.js" />
     <Content Include="Resources\Scripts\Blocks\carousel.js" />
-    <Content Include="Resources\Scripts\Blocks\config.js" />
     <Content Include="Resources\Scripts\Blocks\map.js" />
     <Content Include="Resources\Scripts\Blocks\heading.js" />
     <Content Include="Resources\Scripts\Blocks\icon.js" />

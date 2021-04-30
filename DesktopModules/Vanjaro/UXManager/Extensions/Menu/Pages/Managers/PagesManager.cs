@@ -1,4 +1,5 @@
 ﻿using Dnn.PersonaBar.Pages.Components;
+using Dnn.PersonaBar.Pages.Components.Dto;
 using Dnn.PersonaBar.Pages.Components.Exceptions;
 using Dnn.PersonaBar.Pages.Components.Security;
 using Dnn.PersonaBar.Pages.Services.Dto;
@@ -177,6 +178,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                             if (LocaleController.Instance.GetDefaultLocale(PortalSettings.Current.PortalId).Code != PortalSettings.Current.CultureCode)
                             {
                                 LocalizationManager.AddProperty(portalSettings.PortalId, PageSettingLayout.LocaleProperties);
+                                string LocalizeTabname = PageSettingLayout.LocaleProperties.Where(x => x.EntityName == "Page" && x.Name == "Name").FirstOrDefault().Value;
+                                var res = AutoGenrateUrlForLocale(portalSettings.PortalId, tab.TabID, LocalizeTabname);
                             }
                         }
                         List<TabInfo> tabs = TabController.GetPortalTabs(portalSettings.PortalId, Null.NullInteger, false, true, false, true);
@@ -1114,6 +1117,35 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                 TabInfo tab = TabController.Instance.GetTab(tabId, portalId);
                 return tab != null && !tab.IsDeleted ? tab.TabID : Null.NullInteger;
             }
+
+            private static PageUrlResult AutoGenrateUrlForLocale(int PortalId, int TabId, string TabName)
+            {
+                PageUrlsServices pageUrlsController = new PageUrlsServices();
+                var TabURL = TabController.Instance.GetTabUrls(TabId, PortalId);
+                if (!(TabURL.Where(x => x.CultureCode == PortalSettings.Current.CultureCode).Count() > 0))
+                {
+
+                    SeoUrl dto = new SeoUrl()
+                    {
+                        TabId = TabId,
+                        SaveUrl = new DotNetNuke.Entities.Urls.SaveUrlDto()
+                        {
+                            Id = -1,
+                            IsSystem = false,
+                            LocaleKey = 1,
+                            Path = TabName.Replace(" ", ""),
+                            QueryString = "",
+                            SiteAliasKey = PortalSettings.Current.PortalAlias.PortalAliasID,
+                            SiteAliasUsage = 0,
+                            StatusCodeKey = 200
+                        }
+                    };
+                    return pageUrlsController.CreateCustomUrl(dto);
+                }
+
+                return null;
+            }
+
             #endregion
 
             #region Default Page Setting

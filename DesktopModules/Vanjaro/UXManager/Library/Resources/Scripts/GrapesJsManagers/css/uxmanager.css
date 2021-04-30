@@ -428,6 +428,7 @@ div#MenuSettings .parent-menu-hide {
     height: calc(100vh - 118px);
     overflow-x: hidden;
     overflow-y: hidden;
+    background: #fff;
 }
 
 
@@ -436,7 +437,7 @@ div#MenuSettings .parent-menu-hide {
 }
 
 .traitsmanager.scrollbar > div {
-    padding: 0 0 15px 0;
+    padding: 15px 0;
 }
 
 .sidebar #ContentBlocks:hover,
@@ -702,6 +703,9 @@ div#MenuSettings .parent-menu-hide {
 
 .blockItem.registerlink-notification {
     cursor: pointer;
+}
+[data-gjs-type="blockwrapper"] .desktop_registerbox .dropdown {
+    pointer-events: none;
 }
 /*Panel Footer*/
 
@@ -1789,6 +1793,7 @@ html.mobile-responsive {
         color: #0088cc;
         border-color: #0088cc;
     }
+
 
 .traitsmanager .gjs-field-href .link-wrapper .link-block input,
 .traitsmanager .gjs-field-href .link-wrapper .link-block select {
@@ -3485,7 +3490,6 @@ body.resp-mode.mobile-landscape .vj-wrapper {
         }
 
 .ssmanager .component-name-box {
-    background: #fff;
     padding: 0 10px !important;
 }
 
@@ -3509,4 +3513,12 @@ body.resp-mode.mobile-landscape .vj-wrapper {
 
 .gjs-clm-sels-info {
     display: none;
+}
+
+[data-gjs-type='blockwrapper'] #navbar-menu {
+    pointer-events: none;  
+}
+
+.gjs-selected {
+    outline-offset: unset !important;
 }

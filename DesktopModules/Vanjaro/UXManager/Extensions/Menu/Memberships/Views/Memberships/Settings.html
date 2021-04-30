@@ -29,7 +29,7 @@
                                             </div>
                                             <div class="accordion-item">
                                                 <div class="accordion-header">
-                                                    <a class="accordion-button" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapstwo">
+                                                    <a class="accordion-button collapsed" href="javascript:;" data-bs-toggle="collapse" data-bs-target="#collapstwo">
                                                         [L:Advance]
                                                         <em class="fas fa-caret-right float-end"></em>
                                                     </a>
@@ -70,10 +70,10 @@
                     </div>
                 </div>
             </uitemplate>
-            <uielement name="EnableRegisterNotification" ngmodel="ui.data.UserRegistration.Options.Settings.EnableRegisterNotification" attr-class="toggle_right" control="checkboxtoggle"></uielement>
-            <uielement name="UseEmailAsUsername" ngmodel="ui.data.UserRegistration.Options.Settings.UseEmailAsUsername" attr-class="toggle_right" control="checkboxtoggle"></uielement>
-            <uielement name="UseRandomPassword" ngmodel="ui.data.UserRegistration.Options.Settings.UseRandomPassword" attr-class="toggle_right" control="checkboxtoggle"></uielement>
-            <uielement name="RequireValidProfileAtLogin" ngmodel="ui.data.UpdateBasicLoginSettingsRequest.Options.RequireValidProfileAtLogin" control="checkboxtoggle" attr-class="toggle_right"></uielement>
+            <uielement name="EnableRegisterNotification" container-attr-ng-hide="ui.data.UserRegistration.Options.Settings.UserRegistration=='0'"  ngmodel="ui.data.UserRegistration.Options.Settings.EnableRegisterNotification" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uielement name="UseEmailAsUsername" container-attr-ng-hide="ui.data.UserRegistration.Options.Settings.UserRegistration=='0'" ngmodel="ui.data.UserRegistration.Options.Settings.UseEmailAsUsername" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uielement name="UseRandomPassword" container-attr-ng-hide="ui.data.UserRegistration.Options.Settings.UserRegistration=='0'" ngmodel="ui.data.UserRegistration.Options.Settings.UseRandomPassword" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uielement name="RequireValidProfileAtLogin" container-attr-ng-hide="ui.data.UserRegistration.Options.Settings.UserRegistration=='0'" ngmodel="ui.data.UpdateBasicLoginSettingsRequest.Options.RequireValidProfileAtLogin" control="checkboxtoggle" attr-class="toggle_right"></uielement>
         </uilayout>
         <uilayout name="Advance" attr-class="tab-pane active">
             <uielement name="EmailAddressValidation" attr-ng-model="ui.data.UserRegistration.Options.Settings.EmailAddressValidation" control="textbox"></uielement>
