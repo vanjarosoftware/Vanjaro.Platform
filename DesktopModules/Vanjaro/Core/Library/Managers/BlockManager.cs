@@ -322,6 +322,51 @@ namespace Vanjaro.Core
                 }
                 return Result;
             }
+
+            public static string RemovePermissions(HtmlDocument html, string contentJson)
+            {
+                if (html != null)
+                {
+                    IEnumerable<HtmlNode> query = html.DocumentNode.SelectNodes("//*[@perm]");
+                    if (query != null)
+                    {
+                        foreach (HtmlNode item in query.ToList())
+                        {
+                            item.Attributes["perm"].Remove();
+                        }
+                    }
+                }
+                if (!string.IsNullOrEmpty(contentJson))
+                {
+                    dynamic DeserializedContentJSON = JsonConvert.DeserializeObject(contentJson);
+                    RemoveContentPermissions(DeserializedContentJSON);
+                    if (DeserializedContentJSON != null)
+                        contentJson = JsonConvert.SerializeObject(DeserializedContentJSON);
+                }
+                return contentJson;
+            }
+
+            private static void RemoveContentPermissions(dynamic DeserializedContentJSON)
+            {
+                if (DeserializedContentJSON != null)
+                {
+                    foreach (dynamic con in DeserializedContentJSON)
+                    {
+                        if (con.type != null && con.type.Value == "section")
+                        {
+                            if (con.attributes != null && con.attributes["perm"] != null)
+                            {
+                                (con.attributes as JObject).Remove("perm");
+                            }
+                        }
+                        if (con.components != null)
+                        {
+                            RemoveContentPermissions(con.components);
+                        }
+                    }
+                }
+            }
+
             public static void UpdateGlobalBlock(GlobalBlock GlobalBlock)
             {
                 GlobalBlockFactory.AddUpdate(GlobalBlock);
@@ -555,7 +600,10 @@ namespace Vanjaro.Core
                         foreach (GlobalBlock block in layout.Blocks)
                         {
                             if (!string.IsNullOrEmpty(block.ContentJSON))
+                            {
                                 block.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.ContentJSON, PortalID), true, Assets);
+                                block.ContentJSON = RemovePermissions(null, block.ContentJSON);
+                            }
                             if (!string.IsNullOrEmpty(block.StyleJSON))
                                 block.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.StyleJSON, PortalID), true, Assets);
                         }

@@ -249,13 +249,22 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                             block.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.ContentJSON, PortalID), true, Assets);
                         if (!string.IsNullOrEmpty(block.StyleJSON))
                             block.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.StyleJSON, PortalID), true, Assets);
+
+                        if (!string.IsNullOrEmpty(block.Html))
+                        {
+                            HtmlDocument bhtml = new HtmlDocument();
+                            bhtml.LoadHtml(block.Html);
+                            block.ContentJSON = BlockManager.RemovePermissions(bhtml, block.ContentJSON);
+                            block.Html = bhtml.DocumentNode.OuterHtml;
+                        }
                     }
                     CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", PortalID));
                 }
                 layout.Name = pageSettings.Name;
-                layout.Content = html.DocumentNode.OuterHtml;
                 layout.SVG = "";
                 layout.ContentJSON = PageManager.TokenizeTemplateLinks(version.ContentJSON != null ? version.ContentJSON : string.Empty, true, Assets);
+                layout.ContentJSON = BlockManager.RemovePermissions(html, layout.ContentJSON);
+                layout.Content = html.DocumentNode.OuterHtml;
                 layout.Style = PageManager.TokenizeTemplateLinks(version.Style != null ? version.Style : string.Empty, false, Assets);
                 layout.StyleJSON = PageManager.TokenizeTemplateLinks(version.StyleJSON != null ? version.StyleJSON : string.Empty, true, Assets);
                 layout.Type = pageSettings.PageType = pageSettings.PageType.ToLower() == "url" ? "URL" : (pageSettings.DisableLink && pageSettings.IncludeInMenu) ? "Folder" : "Standard";
