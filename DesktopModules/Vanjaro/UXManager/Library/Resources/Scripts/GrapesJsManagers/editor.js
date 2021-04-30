@@ -329,6 +329,7 @@ $(document).ready(function () {
 				$.ajax({
 					type: "GET",
 					url: eval(vjEditorSettings.GetContentUrl),
+					cache: false,
 					headers: {
 						'ModuleId': parseInt(vjEditorSettings.ModuleId),
 						'TabId': parseInt(sf.getTabId()),
