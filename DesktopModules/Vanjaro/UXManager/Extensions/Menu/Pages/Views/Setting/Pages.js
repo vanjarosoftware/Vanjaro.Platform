@@ -96,6 +96,16 @@
             return { 'fas fa-exclamation': true };
         else if (node.Value == $scope.ui.data.PageSetting.Options.Custom500TabId)
             return { 'fas fa-exclamation-triangle': true };
+        else if (node.Value == $scope.ui.data.PageSetting.Options.TermsTabId)
+            return { 'fas fa-user-shield': true };
+        else if (node.Value == $scope.ui.data.PageSetting.Options.PrivacyTabId)
+            return { 'fas fa-file-contract': true };
+        else if (node.Value == $scope.ui.data.PageSetting.Options.RedirectAfterRegistrationTabId)
+            return { 'fas fa-external-link-square-alt': true };
+        else if (node.Value == $scope.ui.data.PageSetting.Options.RedirectAfterLoginTabId)
+            return { 'fas fa-external-link-square-alt': true };
+        else if (node.Value == $scope.ui.data.PageSetting.Options.RedirectAfterLogoutTabId)
+            return { 'fas fa-external-link-square-alt': true };
         else if (node.FolderPage)
             return { 'far fa-folder': true };
         else if (node.IsRedirectPage)
@@ -119,6 +129,16 @@
             return '[L:404ErrorPage]';
         else if (node.Value == $scope.ui.data.PageSetting.Options.Custom500TabId)
             return '[L:500ErrorPage]';
+        else if (node.Value == $scope.ui.data.PageSetting.Options.TermsTabId)
+            return '[L:Terms]'
+        else if (node.Value == $scope.ui.data.PageSetting.Options.PrivacyTabId)
+            return '[L:Privacy]'
+        else if (node.Value == $scope.ui.data.PageSetting.Options.RedirectAfterRegistrationTabId)
+            return '[L:RedirectAfterRegistration]'
+        else if (node.Value == $scope.ui.data.PageSetting.Options.RedirectAfterLoginTabId)
+            return '[L:RedirectAfterLogin]'
+        else if (node.Value == $scope.ui.data.PageSetting.Options.RedirectAfterLogoutTabId)
+            return '[L:RedirectAfterLogout]'
         else if (node.FolderPage)
             return '[L:FolderPage]';
         else if (node.IsRedirectPage)

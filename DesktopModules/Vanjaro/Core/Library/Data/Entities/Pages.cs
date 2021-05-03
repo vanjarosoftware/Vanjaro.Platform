@@ -25,6 +25,15 @@ namespace Vanjaro.Core.Data.Entities
             }
         }
 
+        public string Name
+        {
+            get
+            {
+                List<Localization> Localization = LocalizationManager.GetLocaleProperties(PortalSettings.Current.CultureCode, "Page", PortalSettings.Current.ActiveTab.TabID, null);
+                return Localization.Where(x => x.Name == "Name").FirstOrDefault() != null && !string.IsNullOrEmpty(Localization.Where(x => x.Name == "Name").FirstOrDefault().Value) ? Localization.Where(x => x.Name == "Name").FirstOrDefault().Value : null;
+            }
+        }
+
         public string Description
         {
             get
