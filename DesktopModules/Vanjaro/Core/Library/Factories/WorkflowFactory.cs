@@ -161,7 +161,7 @@ namespace Vanjaro.Core
                 else
                 {
                     wflow = GetWorkflowbyID(workflow.ID);
-                    if (wflow != null)
+                    if (wflow != null && wflow.PortalID.HasValue)
                     {
                         wflow.Description = workflow.Description;
                         wflow.IsDeleted = workflow.IsDeleted;
@@ -171,7 +171,7 @@ namespace Vanjaro.Core
                         wflow.DeletedBy = workflow.DeletedBy;
                         wflow.DeletedOn = workflow.DeletedOn;
                         wflow.Revisions = workflow.Revisions;
-                        wflow.PortalID = wflow.ID == 1 ? null : workflow.PortalID;
+                        wflow.PortalID = workflow.PortalID;
                         wflow.Update();
                     }
                 }
