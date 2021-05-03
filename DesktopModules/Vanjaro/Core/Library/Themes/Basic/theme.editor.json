@@ -2515,7 +2515,7 @@
         {
           "Guid": "fe5745d2-d4db-48bb-8f0c-3a7c37a3d0a3",
           "Title": "Primary",
-          "DefaultValue": "#0088CC",
+          "DefaultValue": "#242623",
           "Suffix": "",
           "CustomCSS": ".bg-frameprimary,\n.bg-colorprimary {\n\tbackground-color: $primarycolor !important;\n}\n\n$blue: $primarycolor",
           "PreviewCSS": "",
