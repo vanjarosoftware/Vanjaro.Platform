@@ -568,6 +568,7 @@ namespace Vanjaro.Core
                     ThemeEditorWrapper.Fonts.Add(new ThemeFont { Guid = GUID, Name = data.Name.ToString(), Family = data.Family.ToString(), Css = data.Css.ToString().Replace("\"", "'") });
                 }
 
+                ThemeEditorWrapper.Fonts = ThemeEditorWrapper.Fonts.OrderBy(o => o.Name).ToList();
                 UpdateThemeEditorJson(PortalID, CategoryGuid, ThemeEditorWrapper, CheckVisibilityPermission);
 
             }
