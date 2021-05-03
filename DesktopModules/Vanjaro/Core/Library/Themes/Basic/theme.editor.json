@@ -974,7 +974,7 @@
         {
           "Guid": "03163755-b910-45e5-9ef7-c97972b6bc95",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after{\n  color: $userprofileaccountClr;\n}\n\n",
           "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after{\n  color: $userprofileaccountClr;\n}\n\n",
