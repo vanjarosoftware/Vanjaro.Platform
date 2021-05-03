@@ -1754,6 +1754,12 @@ html.mobile-responsive {
 	}
 	}*/
 
+.traitsmanager select {
+    -webkit-appearance: auto;
+    -moz-appearance: none;
+    appearance: auto;
+}
+
 
 .traitsmanager .gjs-field-wrp--href {
     width: 100%;
@@ -3515,8 +3521,8 @@ body.resp-mode.mobile-landscape .vj-wrapper {
     display: none;
 }
 
-[data-gjs-type='blockwrapper'] #navbar-menu {
-    pointer-events: none;  
+[data-gjs-type='blockwrapper'] .navbar-nav {
+    pointer-events: none;
 }
 
 .gjs-selected {

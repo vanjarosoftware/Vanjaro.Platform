@@ -85,7 +85,7 @@
                 var contentType = headers['content-type'];
                 var linkElement = document.createElement('a');
                 try {
-                    var blob = new Blob([data], {
+                    var blob = new Blob([data.data], {
                         type: contentType
                     });
                     var url = window.URL.createObjectURL(blob);
@@ -120,7 +120,7 @@
                 var contentType = headers['content-type'];
                 var linkElement = document.createElement('a');
                 try {
-                    var blob = new Blob([data], {
+                    var blob = new Blob([data.data], {
                         type: contentType
                     });
                     var url = window.URL.createObjectURL(blob);

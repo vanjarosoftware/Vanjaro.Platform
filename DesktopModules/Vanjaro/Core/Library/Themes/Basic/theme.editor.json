@@ -9,12 +9,12 @@
         {
           "Guid": "b6ccb469-81e8-433e-84c0-81f65a6ab605",
           "Title": "Color",
-          "DefaultValue": "#444",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": ".DefaultMenu li a.nav-link {\n  color: $color!important;\n}",
           "PreviewCSS": ".DefaultMenu li a.nav-link {\n  color: $color!important;\n}",
           "LessVariable": "$color",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -487,12 +487,12 @@
         {
           "Guid": "54c022c6-2d50-4362-b03d-e271352bed4e",
           "Title": "Color",
-          "DefaultValue": "#999",
+          "DefaultValue": "#999999",
           "Suffix": "",
           "CustomCSS": "@media (min-width: 992px) {\n.DefaultMenu .dropdown ul li a.menu-item {\n\tcolor: $submenucolor !important;\n}\n\n.DefaultMenu .dropdown ul li a.menu-item:after {\n\tborder-left-color: $submenucolor !important;\n}\n}\n  ",
           "PreviewCSS": "@media (min-width: 992px) {\n.DefaultMenu .dropdown ul li a.menu-item {\n\tcolor: $submenucolor !important;\n}\n\n.DefaultMenu .dropdown ul li a.menu-item:after {\n\tborder-left-color: $submenucolor !important;\n}\n}",
           "LessVariable": "$submenucolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -720,10 +720,10 @@
         {
           "Guid": "bded6b29-283f-4620-b090-0e05be41abfb",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .dropdown-menu li span ,\n.mobile_registerbox .modal .modal-body a,\n .registerlink-notification sup strong,\n.desktop_registerbox .registerlink-notification,\n.loginuser span {\n    color: $registercolor ;\n}\n\n .registerlink-notification svg path{\n  fill: $registercolor;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .dropdown-menu li span ,\n.mobile_registerbox .modal .modal-body a,\n.registerlink-notification sup strong,\n.desktop_registerbox .registerlink-notification,\n.loginuser span {\n    color: $registercolor ;\n}\n\n.registerlink-notification svg path{\n  fill: $registercolor;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu li span ,\n.mobile_registerbox .modal .modal-body a,\n .registerlink-notification sup strong,\n.desktop_registerbox .registerlink-notification,\n.loginuser span,\n.mobile_registerbox sup strong{\n    color: $registercolor ;\n}\n\n .registerlink-notification svg path,\n .registerlink-notification-icon svg path{\n  fill: $registercolor;\n}\n.desktop_registerbox .registerlink-notification span.badge,\n.mobile_registerbox .registerlink-notification span.badge{\n background-color: $registercolor;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu li span ,\n.mobile_registerbox .modal .modal-body a,\n .registerlink-notification sup strong,\n.desktop_registerbox .registerlink-notification,\n.loginuser span,\n.mobile_registerbox sup strong{\n    color: $registercolor ;\n}\n\n .registerlink-notification svg path,\n .registerlink-notification-icon svg path{\n  fill: $registercolor;\n}\n.desktop_registerbox .registerlink-notification span.badge,\n.mobile_registerbox .registerlink-notification span.badge{\n background-color: $registercolor;\n}",
           "LessVariable": "$registercolor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -736,8 +736,8 @@
           "Title": "Font Size",
           "DefaultValue": "14",
           "Suffix": "px",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body .myaccount-items a,\n.loginuser span{\n  font-size: $registerfontsizepx !important;\n}\n",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body .myaccount-items a,\n.loginuser span{\n  font-size: $registerfontsizepx !important;\n}\n",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body .myaccount-items a,\n.loginuser span{\n  font-size: $registerfontsizepx !important;\n}\n",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body .myaccount-items a,\n.loginuser span{\n  font-size: $registerfontsizepx !important;\n}\n",
           "LessVariable": "$registerfontsize",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -747,8 +747,8 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n    font-family: $signupfontfamily !important;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n    font-family: $signupfontfamily !important;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n    font-family: $signupfontfamily !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n    font-family: $signupfontfamily !important;\n}",
           "LessVariable": "$signupfontfamily",
           "JavascriptVariable": "",
           "Type": "Fonts"
@@ -766,8 +766,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n    font-style: $registerfontstyle !important;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n    font-style: $registerfontstyle !important;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n    font-style: $registerfontstyle !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p,\n.loginuser span{\n    font-style: $registerfontstyle !important;\n}",
           "LessVariable": "$registerfontstyle",
           "JavascriptVariable": "",
           "Type": "Dropdown"
@@ -788,8 +788,8 @@
           "Title": "Border Color",
           "DefaultValue": "#00000026",
           "Suffix": "",
-          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n  \n}\n\n.desktop_registerbox .dropdown-menu li + li,\n .mobile_registerbox .myaccount-items + .myaccount-items{\n    border-top-color: $profilebrColor;\n}\n.myaccount-items:last-child {\n  border-bottom-color: $profilebrColor;\n}\n\n.mobile_registerbox .modal-body hr{\n background-color :  $profilebrColor;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n\n}\n.desktop_registerbox .dropdown-menu li + li,\n .mobile_registerbox .myaccount-items + .myaccount-items{\n    border-top-color: $profilebrColor;\n}\n.myaccount-items:last-child {\n  border-bottom: $profilebrColor;\n}\n\n.mobile_registerbox .modal-body hr{\n background-color :  $profilebrColor;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n  \n}\n\n.desktop_registerbox .dropdown-menu li + li,\n .mobile_registerbox .myaccount-items + .myaccount-items{\n    border-top-color: $profilebrColor;\n}\n.myaccount-items:last-child,\n .mobile_registerbox .modal-header{\n  border-bottom-color: $profilebrColor;\n}\n\n.mobile_registerbox .modal-body hr{\n background-color :  $profilebrColor;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n\n}\n.desktop_registerbox .dropdown-menu li + li,\n .mobile_registerbox .myaccount-items + .myaccount-items{\n    border-top-color: $profilebrColor;\n}\n.myaccount-items:last-child,\n .mobile_registerbox .modal-header{\n  border-bottom-color: $profilebrColor;\n}\n\n\n.mobile_registerbox .modal-body hr{\n background-color :  $profilebrColor;\n}",
           "LessVariable": "$profilebrColor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -802,8 +802,8 @@
           "Title": "Border Width",
           "DefaultValue": "1",
           "Suffix": "px",
-          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-width: $profiledDropdownbrWidthpx ;\n}\n\n.desktop_registerbox .dropdown-menu li + li,\n .mobile_registerbox .myaccount-items + .myaccount-items{\n  border-top-width: $profiledDropdownbrWidthpx ;\n}\n.mobile_registerbox .myaccount-items:last-child {\n  border-bottom-width: $profiledDropdownbrWidthpx;\n}\n",
-          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-width: $profiledDropdownbrWidthpx ;\n}\n\n.desktop_registerbox .dropdown-menu li + li,\n .mobile_registerbox .myaccount-items + .myaccount-items{\n  border-top-width: $profiledDropdownbrWidthpx ;\n}\n.mobile_registerbox .myaccount-items:last-child {\n  border-bottom-width: $profiledDropdownbrWidthpx;\n}\n",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-width: $profiledDropdownbrWidthpx ;\n}\n\n.desktop_registerbox .dropdown-menu li + li,\n .mobile_registerbox .myaccount-items + .myaccount-items{\n  border-top-width: $profiledDropdownbrWidthpx ;\n}\n.mobile_registerbox .myaccount-items:last-child,\n .mobile_registerbox .modal-header {\n  border-bottom-width: $profiledDropdownbrWidthpx;\n}\n",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-width: $profiledDropdownbrWidthpx ;\n}\n\n.desktop_registerbox .dropdown-menu li + li,\n .mobile_registerbox .myaccount-items + .myaccount-items{\n  border-top-width: $profiledDropdownbrWidthpx ;\n}\n.mobile_registerbox .myaccount-items:last-child,\n .mobile_registerbox .modal-header {\n  border-bottom-width: $profiledDropdownbrWidthpx;\n}\n",
           "LessVariable": "$profiledDropdownbrWidth",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -820,7 +820,7 @@
           "Type": "Color Picker"
         }
       ],
-      "Sass": ".registerlinkbox {\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}\n\n.registeruser:hover {\n\tcolor: #444;\n}\n.desktop_registerbox .dropdown-menu li {\n position:relative;\n}\n\n.desktop_registerbox .registerlink-notification {\n    right: 5px;\n    top: 10px;\n    display: flex !important;\n    justify-content: space-between;\n  \tcursor: pointer; \n}\n\n.desktop_registerbox .dropdown-menu li svg,\n.mobile_registerbox .modal .modal-body svg {\n    margin-right: 5px;\n}\n\n.mobile_registerbox .registerlink-notification {\n\tpadding: 5px !important;\n}\n\n\n    .registerlinkbox .vj-text{\n\tdisplay: inline-block;\n    text-align: unset;\n    color: unset !important;\n    margin-left:5px;\n}\n\n\n.desktop_registerbox .dropdown-toggle {\n    display: block;\n}\n\n.desktop_registerbox span {\n    margin: 0;\n}\n.desktop_registerbox .dropdown-menu {\n    min-width: 235px;\n    padding: 0;\n    top: 0 !important;\n    right: 0 !important;\n    left: auto !important;\n}\n    .desktop_registerbox .dropdown-menu a {\n        display: block;\n        padding: 10px;\n        margin: 0;       \n        transition: all .15s ease-in-out;\n    }\n\n\n.desktop_registerbox .dropdown-menu li + li{\n  border-style:solid;\n  border-bottom:0px;\n  border-left:0px;\n  border-right:0px \n}\n\n.mobile_registerbox .myaccount-items + .myaccount-items {\n    border-top-style:solid;  \n}\n.mobile_registerbox .myaccount-items:last-child{\n  border-bottom-style:solid;\n}\n\n.mobile_registerbox .myaccount-items {\n  padding: 10px;\n}\n.mobile_registerbox .modal-body {\n  padding: 1rem 0rem;\n}\n\n.mobile_registerbox .modal-dialog {\n    margin: 0;\n    max-width: 100% !important;\n    height: 100%  !important;\n}\n\n@media(min-width: 992px) {\n    .mobile_registerbox {\n        display: none;\n    }\n}\n@media(max-width: 991px) {\n    .desktop_registerbox {\n        display: none;\n    }\n    .mobile_registerbox img {\n        border-radius: 50%;\n    }\n}"
+      "Sass": ".registerlinkbox {\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}\n\n.registeruser:hover {\n\tcolor: #444;\n}\n.desktop_registerbox .dropdown-menu li {\n position:relative;\n}\n\n.desktop_registerbox .registerlink-notification,\n.mobile_registerbox .registerlink-notification{\n    display: flex !important;\n    cursor: pointer;\n    justify-content: space-between;\n    align-items: center;\n}\n\n.desktop_registerbox .dropdown-menu li svg,\n.mobile_registerbox .modal .modal-body svg {\n    margin-right: 5px;\n}\n.desktop_registerbox sup,\n.mobile_registerbox sup{\n      left: -3px;\n}\n\n.desktop_registerbox .registerlink-notification span.badge,\n.mobile_registerbox .registerlink-notification span.badge{\n    color: #ffff;\n    font-size: 12px !important;\n  \tfont-weight: bold;\n    margin: 0;\n    padding: 4px 8px;\n\n}\n\n.desktop_registerbox .registerlink-notification-profile .registerlink-notification-icon {\n    margin-right: 10px;\n}\n .desktop_registerbox sup, .mobile_registerbox sup{\n  top:-1.1em;\n}\n\n.mobile_registerbox .registerlink-notification span.badge{\n    color: #ffff;\n    font-size: 12px !important;\n  \tfont-weight: bold;\n    margin: 0;\n  \tpadding: 4px 8px;\n}\n\n    .registerlinkbox .vj-text{\n\tdisplay: inline-block;\n    text-align: unset;\n    color: unset !important;\n    margin-left:5px;\n}\n\n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .registerlink-notification-profile{\n    display: inline-block;\n  \tcursor: pointer;\n}\n\n.desktop_registerbox span {\n    margin: 0px;\n}\n\n.desktop_registerbox .dropdown-menu {\n    min-width: 235px;\n    padding: 0;\n    top: 0 !important;\n    right: 0 !important;\n    left: auto !important;\n}\n    .desktop_registerbox .dropdown-menu a {\n        display: block;\n        padding: 10px;\n        margin: 0;       \n        transition: all .15s ease-in-out;\n    }\n\n\n.desktop_registerbox .dropdown-menu li + li{\n  border-style:solid;\n  border-bottom:0px;\n  border-left:0px;\n  border-right:0px \n}\n\n.mobile_registerbox .myaccount-items {\n   display:block;\n}\n\n.mobile_registerbox .myaccount-items + .myaccount-items {\n    border-top-style:solid;  \n}\n.mobile_registerbox .myaccount-items:last-child{\n  border-bottom-style:solid;\n}\n\n.mobile_registerbox .myaccount-items {\n  padding: 10px;\n}\n.mobile_registerbox .modal-body {\n  padding: 1rem 0rem;\n}\n\n.mobile_registerbox .modal-dialog {\n    margin: 0;\n    max-width: 100% !important;\n    height: 100%  !important;\n}\n\n@media(min-width: 992px) {\n    .mobile_registerbox {\n        display: none;\n    }\n}\n@media(max-width: 991px) {\n    .desktop_registerbox {\n        display: none;\n    }\n    .mobile_registerbox img {\n        border-radius: 50%;\n    }\n}"
     },
     {
       "Guid": "02beb436-0e62-41d4-805f-537d0d391294",
@@ -927,7 +927,7 @@
         {
           "Guid": "c6a8f780-886d-4029-8bd4-d919bfc6f393",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": ".desktop_registerbox .dropdown-menu li svg path,\n.mobile_registerbox .modal .modal-body svg path {\n  fill: $myProfileDmenuIconClr;\n}",
           "PreviewCSS": ".desktop_registerbox .dropdown-menu li svg path,\n.mobile_registerbox .modal .modal-body svg path {\n  fill: $myProfileDmenuIconClr;\n}",
@@ -967,6 +967,91 @@
       "Sass": ""
     },
     {
+      "Guid": "62eef89b-083b-424c-bb63-d50f5d584434",
+      "Category": "Sign In & My Account",
+      "Title": "Username",
+      "Controls": [
+        {
+          "Guid": "03163755-b910-45e5-9ef7-c97972b6bc95",
+          "Title": "Color",
+          "DefaultValue": "$secondarycolor",
+          "Suffix": "",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after{\n  color: $userprofileaccountClr;\n}\n\n",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after{\n  color: $userprofileaccountClr;\n}\n\n",
+          "LessVariable": "$userprofileaccountClr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "7beef59d-2d5c-449e-ba53-63b778c6230b",
+          "Title": "Font Size",
+          "DefaultValue": "14",
+          "Suffix": "px",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle{\n  font-size: $userprofileFsizepx;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle{\n  font-size: $userprofileFsizepx;\n}",
+          "LessVariable": "$userprofileFsize",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "abe0ee96-1a7f-4d05-8441-43bffbd053dc",
+          "Title": "Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle{\n    font-style: $userprofileFstyle !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle{\n    font-style: $userprofileFstyle !important;\n}",
+          "LessVariable": "$userprofileFstyle",
+          "JavascriptVariable": "",
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "143f5a7c-239a-450f-b420-15203f300296",
+          "Title": "Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle{\n    font-family: $userProfileFf !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle{\n    font-family: $userProfileFf !important;\n}",
+          "LessVariable": "$userProfileFf",
+          "JavascriptVariable": "",
+          "Type": "Fonts"
+        },
+        {
+          "Guid": "38dc73e4-6caf-444c-a5a4-aec01478f27b",
+          "Title": "Bell Icon Color",
+          "DefaultValue": "#c5c5c5",
+          "Suffix": "",
+          "CustomCSS": ".desktop_registerbox .registerlink-notification-profile svg path{\n fill :  $usernamebellIconClr;\n}",
+          "PreviewCSS": ".desktop_registerbox .registerlink-notification-profile svg path{\n fill :  $usernamebellIconClr;\n}",
+          "LessVariable": "$usernamebellIconClr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "9cbe4d4f-9382-4db1-a19f-4b47bf52e707",
+          "Title": "Notification Count Color",
+          "DefaultValue": "#444444",
+          "Suffix": "",
+          "CustomCSS": ".desktop_registerbox .registerlink-notification-profile sup strong{\n  color: $notificationCountclr;\n}",
+          "PreviewCSS": ".desktop_registerbox .registerlink-notification-profile sup strong{\n  color: $notificationCountclr;\n}",
+          "LessVariable": "$notificationCountclr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        }
+      ],
+      "Sass": ""
+    },
+    {
       "Guid": "dc5f49a8-3bdd-4e6e-a372-d90cf17ae7c9",
       "Category": "Breadcrumb",
       "Title": null,
@@ -974,18 +1059,18 @@
         {
           "Guid": "cc53eab5-a018-4abd-aa82-1b702be984d6",
           "Title": "Color",
-          "DefaultValue": "#ffffff",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": ".vj-breadcrumb .breadcrumb-item,\n.vj-breadcrumb .breadcrumb-item a span,\n.vj-breadcrumb .breadcrumb-item::before {\n    color: $breadcolor !important;\n}",
           "PreviewCSS": ".vj-breadcrumb .breadcrumb-item,\n.vj-breadcrumb .breadcrumb-item a span,\n.vj-breadcrumb .breadcrumb-item::before {\n    color: $breadcolor !important;\n}",
           "LessVariable": "$breadcolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
           "Guid": "6c4a3d19-0ca1-43b7-b279-09b88c2c4293",
           "Title": "Active Color",
-          "DefaultValue": "#ffffff",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".vj-breadcrumb .breadcrumb .active{\n    color: $breadactivecolor  !important;\n}",
           "PreviewCSS": ".vj-breadcrumb .breadcrumb .active{\n    color: $breadactivecolor  !important;\n}",
@@ -996,7 +1081,7 @@
         {
           "Guid": "ba78a2d9-424b-48d8-9475-8561e5ba6113",
           "Title": "Hover color",
-          "DefaultValue": "#000000",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".vj-breadcrumb .breadcrumb .breadcrumb-item a:hover span{\n  color:$bchcolor !important;\n}",
           "PreviewCSS": ".vj-breadcrumb .breadcrumb .breadcrumb-item a:hover span{\n  color:$bchcolor !important;\n}",
@@ -1129,12 +1214,12 @@
         {
           "Guid": "77b12aaf-6cff-4079-b8d4-8d45f222f60c",
           "Title": "Color",
-          "DefaultValue": "#495057",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": "input.search_box,\ninput.search_box:focus {\n color:$searchcolor;\n}\n\n.searchicon svg {\n    fill:$searchcolor !important;\n}\ninput.search_box::placeholder {\n color:$searchcolor;\n}",
           "PreviewCSS": "input.search_box,\ninput.search_box:focus {\n color:$searchcolor ;\n}\n\n.searchicon svg {\n    fill:$searchcolor !important;\n}\ninput.search_box::placeholder {\n color:$searchcolor;\n}",
           "LessVariable": "$searchcolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1174,7 +1259,7 @@
           "Type": "Fonts"
         }
       ],
-      "Sass": "input.search_box {\nborder: 1px solid #ccc;\npadding: 10px;\nwidth: 100%;\nmargin-bottom: 10px;\n}\n\ninput.search_box {\nfont-size: 12px;\nmargin: 0;\nline-height: 20px;\nborder-radius: 5px;\npadding: 6px 8px;\n}\n\n.vanjarosearchinput {\nposition: relative;\n}\n\n.vanjarosearchinput .searchicon {\nposition: absolute;\nright: 0px;\ntop: 0;\npadding: 8px 6px;\nz-index: 9;\nheight: 100%;\n}\n\n.vanjarosearchinput span.input-group-text {\nbackground: #fff;\n}\n\n.vanjarosearchinput .searchicon svg {\nfill: #a4afb7;\nvertical-align: top;\n}\n\n.vanjarosearchinput {\ndisplay: inline-block;\n}"
+      "Sass": "input.search_box {\nborder: 1px solid #ccc;\npadding: 10px;\nwidth: 100%;\nmargin-bottom: 10px;\n}\n\ninput.search_box {\nfont-size: 12px;\nmargin: 0;\nline-height: 20px;\nborder-radius: 5px;\npadding: 6px 8px;\n}\n\n.vanjarosearchinput {\nposition: relative;\n}\n\n.vanjarosearchinput .searchicon {\nposition: absolute;\nright: 0px;\ntop: 0;\npadding: 8px 6px;\nz-index: 9;\nheight: 100%;\n}\n\n.vanjarosearchinput span.input-group-text {\nbackground: #fff;\n}\n\n.vanjarosearchinput .searchicon svg {\nfill: #a4afb7;\nvertical-align: top;\n}\n\n.vanjarosearchinput {\ndisplay: inline-block;\n}\n"
     },
     {
       "Guid": "8661cbae-2047-433e-8646-95579bde85df",
@@ -1184,7 +1269,7 @@
         {
           "Guid": "ee7335a8-d1fe-4399-8b1a-5ede19e050ed",
           "Title": "color",
-          "DefaultValue": "$primarycolor",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Login .loginhead{\n    color:$headcolor !important;\n}",
           "PreviewCSS": ".Vj-Login .loginhead{\n    color:$headcolor !important;\n}",
@@ -1323,10 +1408,10 @@
         {
           "Guid": "4d6816fd-951a-4d4c-9d91-7cea1e65e11f",
           "Title": "Color",
-          "DefaultValue": "$primarycolor",
+          "DefaultValue": "$darkcolor",
           "Suffix": "",
-          "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\ncolor:$labelcolor !important;\n}\n",
-          "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\ncolor:$labelcolor !important;\n}\n",
+          "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink,\n .Vj-Login .loginlabel{\ncolor:$labelcolor !important;\n}\n",
+          "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink,\n .Vj-Login .loginlabel{\ncolor:$labelcolor !important;\n}\n",
           "LessVariable": "$labelcolor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -1339,8 +1424,8 @@
           "Title": "Font Size",
           "DefaultValue": "16",
           "Suffix": "px",
-          "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\nfont-size:$labelfontsizepx;\n}",
-          "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\nfont-size:$labelfontsizepx;\n}",
+          "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink,\n .Vj-Login .loginlabel{\nfont-size:$labelfontsizepx;\n}",
+          "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink,\n .Vj-Login .loginlabel{\nfont-size:$labelfontsizepx;\n}",
           "LessVariable": "$labelfontsize",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -1350,8 +1435,8 @@
           "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\nfont-family:$signinformfontfamily;\n}",
-          "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\nfont-family:$signinformfontfamily;\n}",
+          "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink,\n .Vj-Login .loginlabel{\nfont-family:$signinformfontfamily;\n}",
+          "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink,\n .Vj-Login .loginlabel{\nfont-family:$signinformfontfamily;\n}",
           "LessVariable": "$signinformfontfamily",
           "JavascriptVariable": "",
           "Type": "Fonts"
@@ -1369,8 +1454,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\nfont-style:$SignFormlabelfs !important;\n}\n",
-          "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\nfont-style:$SignFormlabelfs !important;\n}",
+          "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink,\n .Vj-Login .loginlabel{\nfont-style:$SignFormlabelfs !important;\n}\n",
+          "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink,\n .Vj-Login .loginlabel{\nfont-style:$SignFormlabelfs !important;\n}",
           "LessVariable": "$SignFormlabelfs",
           "JavascriptVariable": "",
           "Type": "Dropdown"
@@ -1383,8 +1468,8 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\nletter-spacing:$labelspacingpx !important;\n}",
-          "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\nletter-spacing:$labelspacingpx !important;\n}",
+          "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink,\n .Vj-Login .loginlabel{\nletter-spacing:$labelspacingpx !important;\n}",
+          "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink,\n .Vj-Login .loginlabel{\nletter-spacing:$labelspacingpx !important;\n}",
           "LessVariable": "$labelspacing",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -1414,8 +1499,8 @@
           "Title": "Font Weight",
           "DefaultValue": "500",
           "Suffix": "",
-          "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\nfont-weight:$SigninFormlabelFontweight ;\n}\n",
-          "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink{\nfont-weight:$SigninFormlabelFontweight ;\n}\n",
+          "CustomCSS": ".Vj-Login span,\n.Vj-Login .loginlink,\n .Vj-Login .loginlabel{\nfont-weight:$SigninFormlabelFontweight ;\n}\n",
+          "PreviewCSS": ".Vj-Login span,\n.Vj-Login .loginlink,\n .Vj-Login .loginlabel{\nfont-weight:$SigninFormlabelFontweight ;\n}\n",
           "LessVariable": "$SigninFormlabelFontweight",
           "JavascriptVariable": "",
           "Type": "Dropdown"
@@ -1464,10 +1549,10 @@
         {
           "Guid": "e180ca66-2b72-4cdf-a41d-9d7286dc81f0",
           "Title": "Background Hover Color",
-          "DefaultValue": "#555555",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
-          "CustomCSS": ".Vj-Login #loginbtn:hover {\nbackground:$signinbtnbgHoverColor;\n  border-color: $signinbtnbgHoverColor;\n}",
-          "PreviewCSS": ".Vj-Login #loginbtn:hover {\nbackground:$signinbtnbgHoverColor;\n  border-color: $signinbtnbgHoverColor;\n}",
+          "CustomCSS": ".Vj-Login #loginbtn:hover {\nbackground:lighten( $signinbtnbgHoverColor, 10% );\n  border-color: lighten( $signinbtnbgHoverColor, 10% );\n}",
+          "PreviewCSS": ".Vj-Login #loginbtn:hover {\nbackground:lighten( $signinbtnbgHoverColor, 10% );\n  border-color: lighten( $signinbtnbgHoverColor, 10% );\n}",
           "LessVariable": "$signinbtnbgHoverColor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -1522,11 +1607,12 @@
         {
           "Guid": "21d0714b-e04a-4326-98c4-07408c2606f0",
           "Title": "Background ",
-          "DefaultValue": "#ffffff",
+          "DefaultValue": "$lightcolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Login, .ResetPassword {\n     background: $formbackground;\n}",
           "PreviewCSS": ".Vj-Login, .ResetPassword {\n     background: $formbackground;\n}",
           "LessVariable": "$formbackground",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         }
       ],
@@ -1540,7 +1626,7 @@
         {
           "Guid": "143d928f-c677-4a92-a84b-0de6a14e126e",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": ".select_language{\ncolor:$langcolor;\n}",
           "PreviewCSS": ".select_language{\ncolor:$langcolor;\n}",
@@ -1585,7 +1671,7 @@
           "Type": "Slider"
         }
       ],
-      "Sass": ".select_language {\n\tpadding: 6px 8px;\n\tfont-size: 12px;\n\tborder: 1px solid #ccc;\n\toutline: none;\n}\n\n\t.select_language option {\n\t\tpadding: 10px;\n\t}\n\n.select_language option {\n\tdisplay: block;\n\ttext-align: left;\n\tfont-size: 12px;\n\tfont-family: Poppins;\n\tfont-weight: 400;\n  \tcolor:#444444 !important;\n}\n\n"
+      "Sass": ".select_language {\n\tpadding: 6px 8px;\n\tfont-size: 12px;\n\tborder: 1px solid #ccc;\n\toutline: none;\n}\n\n\t.select_language option {\n\t\tpadding: 10px;\n\t}\n\n.select_language option {\n\tdisplay: block;\n\ttext-align: left;\n\tfont-size: 12px;\n\tfont-family: Poppins;\n\tfont-weight: 400;\n  \tcolor:#444444 !important;\n}\n\n.select_language:focus {\n    border-color: $primarycolor;\n    outline: 0;\n    box-shadow: 0 0 0 0.25rem rgba($primarycolor, .25);\n}\n"
     },
     {
       "Guid": "672e8a22-0c8c-413d-aef5-480979d39589",
@@ -1595,7 +1681,7 @@
         {
           "Guid": "7f51d24d-5b7e-4e89-ad3b-5f594cec48a9",
           "Title": "Color",
-          "DefaultValue": "$primarycolor",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Register .Registerhead{\n  color:$signUpHeadingColor !important;\n}",
           "PreviewCSS": ".Vj-Register .Registerhead{\n  color:$signUpHeadingColor !important;\n}",
@@ -1734,7 +1820,7 @@
         {
           "Guid": "e6f1478a-ae79-4eae-84c2-d5366af44742",
           "Title": "Color",
-          "DefaultValue": "$primarycolor",
+          "DefaultValue": "$darkcolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Register span,\n.Vj-Register label,\n.Vj-Register .registerterms .vj-text a{\n color:$signUpLablecolor !important;\n}\n.registerterms a:hover{\n color:$signUpLablecolor !important;\n}",
           "PreviewCSS": ".Vj-Register span,\n.Vj-Register label,\n.Vj-Register .registerterms .vj-text a{\n color:$signUpLablecolor !important;\n}\n.registerterms a:hover{\n color:$signUpLablecolor !important;\n}",
@@ -1866,8 +1952,8 @@
           "Title": "Background",
           "DefaultValue": "$primarycolor",
           "Suffix": "",
-          "CustomCSS": ".registered a {\n  background-color:$Signupbuttonbackground ;\n}",
-          "PreviewCSS": ".registered a {\n  background-color:$Signupbuttonbackground ;\n}",
+          "CustomCSS": ".registered a {\n  background-color:$Signupbuttonbackground ;\n}\n.registered #registerbtn {\n\tborder-color: $Signupbuttonbackground;\n}",
+          "PreviewCSS": ".registered a {\n  background-color:$Signupbuttonbackground ;\n}\n.registered #registerbtn {\n\tborder-color: $Signupbuttonbackground;\n}",
           "LessVariable": "$Signupbuttonbackground",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -1875,12 +1961,12 @@
         {
           "Guid": "f7d157a3-97ef-4092-943b-96121acc7b4d",
           "Title": "Background Hover Color",
-          "DefaultValue": "#555555",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
-          "CustomCSS": ".registered a:hover {\n    background-color: $signUpbtnHovercolor;\n}",
-          "PreviewCSS": ".registered a:hover {\n    background-color: $signUpbtnHovercolor;\n}",
+          "CustomCSS": ".registered a:hover {\n    background-color:lighten( $signUpbtnHovercolor, 10% );\n}\n.registered #registerbtn:hover {\n\tborder-color:lighten( $signUpbtnHovercolor, 10% );\n}\n\n",
+          "PreviewCSS": ".registered a:hover {\n    background-color:lighten( $signUpbtnHovercolor, 10% );\n}\n.registered #registerbtn:hover {\n\tborder-color:lighten( $signUpbtnHovercolor, 10% );\n}\n",
           "LessVariable": "$signUpbtnHovercolor",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -1923,7 +2009,7 @@
           "Type": "Slider"
         }
       ],
-      "Sass": ".registered #registerbtn {\n\tborder-color: #444;\n}\n\n.registered .spinner-grow-sm {\n  color: #fff; }\n\n"
+      "Sass": "\n\n.registered .spinner-grow-sm {\n  color: #fff; }\n\n"
     },
     {
       "Guid": "327764d7-2a7a-4491-bca0-d6598d67b193",
@@ -1933,11 +2019,12 @@
         {
           "Guid": "af06378a-346e-4a79-90f5-168eb0089df0",
           "Title": "Background",
-          "DefaultValue": "#ffffff",
+          "DefaultValue": "$lightcolor",
           "Suffix": "",
           "CustomCSS": ".Vj-Register {\n  background-color:$signUpFormbgcolor !important;\n}",
           "PreviewCSS": ".Vj-Register {\n  background-color:$signUpFormbgcolor !important;\n}",
           "LessVariable": "$signUpFormbgcolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         }
       ],
@@ -1951,7 +2038,7 @@
         {
           "Guid": "106959a3-87b9-45a1-beb9-ccd3b27e8931",
           "Title": "Color",
-          "DefaultValue": "$primarycolor",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": ".searchhead{\ncolor:$searchheadcolor;\n}",
           "PreviewCSS": ".searchhead{\ncolor:$searchheadcolor;\n}",
@@ -2023,17 +2110,18 @@
         {
           "Guid": "7f77e2dc-bafa-43e3-a838-82e67d5fd8d3",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".searchpagetitle{\ncolor: $searchtitlecolor;\n}",
           "PreviewCSS": ".searchpagetitle{\ncolor: $searchtitlecolor;\n}",
           "LessVariable": "$searchtitlecolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "26b6d9f0-4cdb-4ad5-bb1b-2aed48d9f898",
           "Title": "Font Size",
           "DefaultValue": "16",
@@ -2041,12 +2129,13 @@
           "CustomCSS": ".searchpagetitle{\n  font-size:$searchtitlefontsizepx;\n}",
           "PreviewCSS": ".searchpagetitle{\n  font-size:$searchtitlefontsizepx;\n}",
           "LessVariable": "$searchtitlefontsize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": -5,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": -5.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "34501dea-61d7-48ae-b7bd-14cb2ff4c3a8",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -2054,6 +2143,7 @@
           "CustomCSS": ".searchpagetitle{\n  letter-spacing:$searchtitlespacingpx;\n}",
           "PreviewCSS": ".searchpagetitle{\n  letter-spacing:$searchtitlespacingpx;\n}",
           "LessVariable": "$searchtitlespacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         }
       ],
@@ -2067,17 +2157,18 @@
         {
           "Guid": "18c44134-d6b7-4f49-9e52-d353d52ca150",
           "Title": "Color",
-          "DefaultValue": "#777777",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": ".searchdesription{\ncolor:$searchdescriptioncolor;\n}",
           "PreviewCSS": ".searchdesription{\ncolor:$searchdescriptioncolor;\n}",
           "LessVariable": "$searchdescriptioncolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "37e8cd00-a592-43e8-9f10-963dc89efe4e",
           "Title": "Font Size",
           "DefaultValue": "13",
@@ -2085,12 +2176,13 @@
           "CustomCSS": ".searchdesription{\nfont-size:$searchdescriptionfontsizepx;\n}",
           "PreviewCSS": ".searchdesription{\nfont-size:$searchdescriptionfontsizepx;\n}",
           "LessVariable": "$searchdescriptionfontsize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
-          "RangeMin": -5,
-          "RangeMax": 25,
-          "Increment": 1,
+          "RangeMin": -5.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
           "Guid": "ffad277e-4ac4-41aa-8403-bcc16fc25b5f",
           "Title": "Letter Spacing",
           "DefaultValue": "0",
@@ -2098,6 +2190,7 @@
           "CustomCSS": ".searchdesription{\nletter-spacing:$searchdescriptionspacingpx;\n}",
           "PreviewCSS": ".searchdesription{\nletter-spacing:$searchdescriptionspacingpx;\n}",
           "LessVariable": "$searchdescriptionspacing",
+          "JavascriptVariable": null,
           "Type": "Slider"
         }
       ],
@@ -2111,17 +2204,18 @@
         {
           "Guid": "b760b81b-b2a2-4e58-925c-9e69fc3abb75",
           "Title": "Color",
-          "DefaultValue": "#777777",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": ".searchinfo p{\n  color:$searchinfocolor !important;\n}",
           "PreviewCSS": ".searchinfo p{\n  color:$searchinfocolor !important;\n}",
           "LessVariable": "$searchinfocolor",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
-          "RangeMin": 0,
-          "RangeMax": 100,
-          "Increment": 1,
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
           "Guid": "eecbb663-4b9e-42dc-a94b-d74d5d024d7e",
           "Title": "Font Size",
           "DefaultValue": "11",
@@ -2129,6 +2223,7 @@
           "CustomCSS": ".searchinfo p{\n  font-size:$searchinfofontsizepx;\n}",
           "PreviewCSS": ".searchinfo p{\n  font-size:$searchinfofontsizepx;\n}",
           "LessVariable": "$searchinfofontsize",
+          "JavascriptVariable": null,
           "Type": "Slider"
         },
         {
@@ -2147,6 +2242,7 @@
           "CustomCSS": ".searchinfo p{\n  font-style:$searchinfofontstyle;\n}",
           "PreviewCSS": ".searchinfo p{\n  font-style:$searchinfofontstyle;\n}",
           "LessVariable": "$searchinfofontstyle",
+          "JavascriptVariable": null,
           "Type": "Dropdown"
         }
       ],
@@ -2198,7 +2294,7 @@
         {
           "Guid": "79c205f6-2e57-4cde-b5b4-571e771d9b68",
           "Title": "Color",
-          "DefaultValue": "$primarycolor",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": ".editprofile h4{\ncolor:$profileHeadingColor !important;\n}",
           "PreviewCSS": ".editprofile h4{\ncolor:$profileHeadingColor !important;\n}",
@@ -2389,11 +2485,12 @@
         {
           "Guid": "228aba5b-040f-474d-afcd-d64437c61c43",
           "Title": "Background",
-          "DefaultValue": "#ffffff",
+          "DefaultValue": "$lightcolor",
           "Suffix": "",
           "CustomCSS": ".profileinfo{\nbackground:$profilebackground !important;\n}",
           "PreviewCSS": ".profileinfo{\nbackground:$profilebackground !important;\n}",
           "LessVariable": "$profilebackground",
+          "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
@@ -2404,6 +2501,7 @@
           "CustomCSS": ".profileinfo *{\nfont-family:$profilefontfamily;\n}",
           "PreviewCSS": ".profileinfo *{\nfont-family:$profilefontfamily;\n}",
           "LessVariable": "$profilefontfamily",
+          "JavascriptVariable": null,
           "Type": "Fonts"
         }
       ],
@@ -2417,7 +2515,7 @@
         {
           "Guid": "fe5745d2-d4db-48bb-8f0c-3a7c37a3d0a3",
           "Title": "Primary",
-          "DefaultValue": "#000000",
+          "DefaultValue": "#242623",
           "Suffix": "",
           "CustomCSS": ".bg-frameprimary,\n.bg-colorprimary {\n\tbackground-color: $primarycolor !important;\n}\n\n$blue: $primarycolor",
           "PreviewCSS": "",
@@ -2428,7 +2526,7 @@
         {
           "Guid": "6bd3311b-64cb-4600-94b2-3fbe4282b2c0",
           "Title": "Secondary",
-          "DefaultValue": "#fa255e",
+          "DefaultValue": "#4A5057",
           "Suffix": "",
           "CustomCSS": ".bg-framesecondary,\n.bg-colorsecondary {\n\tbackground-color: $secondarycolor !important;\n}\n\n$gray-600: $secondarycolor",
           "PreviewCSS": "",
@@ -2681,7 +2779,7 @@
         {
           "Guid": "816c9e87-165c-421b-8c96-4b8b64be3f68",
           "Title": "Color",
-          "DefaultValue": "$primarycolor",
+          "DefaultValue": "$darkcolor",
           "Suffix": "",
           "CustomCSS": ".Register-container .already-registerd span,\n.Register-container .already-registerd a{\n\tcolor : $lable1color;\n}",
           "PreviewCSS": ".Register-container .already-registerd span,\n.Register-container .already-registerd a{\n\tcolor : $lable1color;\n}",
@@ -2783,10 +2881,10 @@
         {
           "Guid": "4e228571-158e-4214-8829-fb65289da672",
           "Title": "Color",
-          "DefaultValue": "$primarycolor",
+          "DefaultValue": "$darkcolor",
           "Suffix": "",
-          "CustomCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  color : $loginNotRegColor;\n}",
-          "PreviewCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  color : $loginNotRegColor;\n}",
+          "CustomCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  color : $loginNotRegColor !important;\n}",
+          "PreviewCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  color : $loginNotRegColor !important;\n}",
           "LessVariable": "$loginNotRegColor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -2802,7 +2900,7 @@
           "CustomCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  font-size : $loginNotRegFontSizepx;\n}",
           "PreviewCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  font-size : $loginNotRegFontSizepx;\n}",
           "LessVariable": "$loginNotRegFontSize",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
@@ -2829,8 +2927,8 @@
           "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  font-style : $loginNotRegfontStyle;\n}\n",
-          "PreviewCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  font-style : $loginNotRegfontStyle;\n}",
+          "CustomCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  font-style : $loginNotRegfontStyle !important;\n}\n",
+          "PreviewCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  font-style : $loginNotRegfontStyle !important;\n}",
           "LessVariable": "$loginNotRegfontStyle",
           "JavascriptVariable": "",
           "Type": "Dropdown"
@@ -2843,10 +2941,10 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  letter-spacing : $loginNotRegSpacingpx;\n}\n",
-          "PreviewCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  letter-spacing : $loginNotRegSpacingpx;\n}\n",
+          "CustomCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  letter-spacing : $loginNotRegSpacingpx  !important;\n}\n",
+          "PreviewCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  letter-spacing : $loginNotRegSpacingpx !important;\n}\n",
           "LessVariable": "$loginNotRegSpacing",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
@@ -2868,7 +2966,7 @@
           "Title": "Text Transform",
           "DefaultValue": "none",
           "Suffix": "",
-          "CustomCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  text-transform : $loginNotRegTt;\n}",
+          "CustomCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  text-transform : $loginNotRegTt ;\n}",
           "PreviewCSS": ".login-container .not-registerd span,\n.login-container .not-registerd a{\n  text-transform : $loginNotRegTt;\n}",
           "LessVariable": "$loginNotRegTt",
           "JavascriptVariable": "",
