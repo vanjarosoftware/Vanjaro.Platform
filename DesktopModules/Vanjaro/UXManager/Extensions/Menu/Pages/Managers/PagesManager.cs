@@ -178,8 +178,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                             if (LocaleController.Instance.GetDefaultLocale(PortalSettings.Current.PortalId).Code != PortalSettings.Current.CultureCode)
                             {
                                 LocalizationManager.AddProperty(portalSettings.PortalId, PageSettingLayout.LocaleProperties);
-                                string LocalizeTabname = PageSettingLayout.LocaleProperties.Where(x => x.EntityName == "Page" && x.Name == "Name").FirstOrDefault().Value;
-                                var res = AutoGenrateUrlForLocale(portalSettings.PortalId, tab.TabID, LocalizeTabname);
+                                Core.Data.Entities.Localization localization = PageSettingLayout.LocaleProperties.Where(x => x.EntityName == "Page" && x.Name == "Name").FirstOrDefault();
+                                if (localization != null && !string.IsNullOrEmpty(localization.Value))
+                                {
+                                    var res = AutoGenrateUrlForLocale(portalSettings.PortalId, tab.TabID, localization.Value);
+                                }
                             }
                         }
                         List<TabInfo> tabs = TabController.GetPortalTabs(portalSettings.PortalId, Null.NullInteger, false, true, false, true);
