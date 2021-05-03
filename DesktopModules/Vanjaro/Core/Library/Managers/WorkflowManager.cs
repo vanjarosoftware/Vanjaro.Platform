@@ -487,71 +487,73 @@ namespace Vanjaro.Core
             public static List<WorkflowState> UpdateState(int WorkflowID, dynamic Data)
             {
                 Workflow Workflow = GetWorkflow(WorkflowID);
-                int StateID = int.Parse(Data.StateID.ToString());
-                WorkflowState wState = GetStateByID(StateID);
-                List<WorkflowState> wStates = WorkflowFactory.GetAllStatesbyWorkflowID(WorkflowID).OrderBy(o => o.Order).ToList();
-                bool IsNew = false;
-                if (wState == null)
+                if (Workflow.PortalID.HasValue)
                 {
-                    wState = new WorkflowState
+                    int StateID = int.Parse(Data.StateID.ToString());
+                    WorkflowState wState = GetStateByID(StateID);
+                    List<WorkflowState> wStates = WorkflowFactory.GetAllStatesbyWorkflowID(WorkflowID).OrderBy(o => o.Order).ToList();
+                    bool IsNew = false;
+                    if (wState == null)
                     {
-                        WorkflowID = WorkflowID
-                    };
-                    IsNew = true;
-                }
-
-                wState.Name = Data.Name.ToString();
-                wState.Notify = bool.Parse(Data.Notify.ToString());
-                wState.IsActive = bool.Parse(Data.IsActive.ToString());
-
-                if (IsNew)
-                {
-                    wState.Order = WorkflowFactory.UpdateSatesOrder(wStates, Workflow, true, null);
-                }
-
-                WorkflowFactory.UpdateWorkflowState(wState);
-
-                if ((IsNew && wStates.Count > 2) || (wStates.Count > 2 && !IsFirstState(WorkflowID, wState.StateID) && !IsLastState(WorkflowID, wState.StateID)))
-                {
-                    WorkflowFactory.ClearAllWorkflowStatePermissionsByStateID(StateID);
-
-                    List<GenericPermissionInfo> Permissions = new List<GenericPermissionInfo>();
-                    foreach (dynamic item in Data.RolePermissions)
-                    {
-                        string PermissionID = "";
-                        foreach (dynamic p in item.Permissions)
+                        wState = new WorkflowState
                         {
-                            if (p.PermissionName.ToString() == PageWorkflowPermission.PERMISSION_REVIEWCONTENT && bool.Parse(p.AllowAccess.ToString()))
+                            WorkflowID = WorkflowID
+                        };
+                        IsNew = true;
+                    }
+
+                    wState.Name = Data.Name.ToString();
+                    wState.Notify = bool.Parse(Data.Notify.ToString());
+                    wState.IsActive = bool.Parse(Data.IsActive.ToString());
+
+                    if (IsNew)
+                    {
+                        wState.Order = WorkflowFactory.UpdateSatesOrder(wStates, Workflow, true, null);
+                    }
+
+                    WorkflowFactory.UpdateWorkflowState(wState);
+
+                    if ((IsNew && wStates.Count > 2) || (wStates.Count > 2 && !IsFirstState(WorkflowID, wState.StateID) && !IsLastState(WorkflowID, wState.StateID)))
+                    {
+                        WorkflowFactory.ClearAllWorkflowStatePermissionsByStateID(StateID);
+
+                        List<GenericPermissionInfo> Permissions = new List<GenericPermissionInfo>();
+                        foreach (dynamic item in Data.RolePermissions)
+                        {
+                            string PermissionID = "";
+                            foreach (dynamic p in item.Permissions)
                             {
-                                PermissionID = p.PermissionId.ToString();
-                                break;
+                                if (p.PermissionName.ToString() == PageWorkflowPermission.PERMISSION_REVIEWCONTENT && bool.Parse(p.AllowAccess.ToString()))
+                                {
+                                    PermissionID = p.PermissionId.ToString();
+                                    break;
+                                }
+                            }
+                            if (!string.IsNullOrEmpty(PermissionID))
+                            {
+                                Permissions.Add(new GenericPermissionInfo { AllowAccess = true, RoleID = int.Parse(item.RoleId.ToString()), PermissionID = int.Parse(PermissionID) });
                             }
                         }
-                        if (!string.IsNullOrEmpty(PermissionID))
+                        foreach (dynamic item in Data.UserPermissions)
                         {
-                            Permissions.Add(new GenericPermissionInfo { AllowAccess = true, RoleID = int.Parse(item.RoleId.ToString()), PermissionID = int.Parse(PermissionID) });
-                        }
-                    }
-                    foreach (dynamic item in Data.UserPermissions)
-                    {
-                        string PermissionID = "";
-                        foreach (dynamic p in item.Permissions)
-                        {
-                            if (p.PermissionName.ToString() == PageWorkflowPermission.PERMISSION_REVIEWCONTENT && bool.Parse(p.AllowAccess.ToString()))
+                            string PermissionID = "";
+                            foreach (dynamic p in item.Permissions)
                             {
-                                PermissionID = p.PermissionId.ToString();
-                                break;
+                                if (p.PermissionName.ToString() == PageWorkflowPermission.PERMISSION_REVIEWCONTENT && bool.Parse(p.AllowAccess.ToString()))
+                                {
+                                    PermissionID = p.PermissionId.ToString();
+                                    break;
+                                }
+                            }
+                            if (!string.IsNullOrEmpty(PermissionID))
+                            {
+                                Permissions.Add(new GenericPermissionInfo { AllowAccess = true, UserID = int.Parse(item.UserId.ToString()), PermissionID = int.Parse(PermissionID) });
                             }
                         }
-                        if (!string.IsNullOrEmpty(PermissionID))
-                        {
-                            Permissions.Add(new GenericPermissionInfo { AllowAccess = true, UserID = int.Parse(item.UserId.ToString()), PermissionID = int.Parse(PermissionID) });
-                        }
+                        WorkflowFactory.UpdateWorkflowStatePermissions(GetStatePermissions(wState.StateID, Permissions));
                     }
-                    WorkflowFactory.UpdateWorkflowStatePermissions(GetStatePermissions(wState.StateID, Permissions));
+
                 }
-
-
                 return GetWorkflowStates(WorkflowID);
             }
 
@@ -638,7 +640,7 @@ namespace Vanjaro.Core
                     {
                         AllowAccess = false,
                         PermissionID = pinfo.PermissionId,
-                        RoleID = 1,
+                        RoleID = RoleController.Instance.GetRoleByName(UserInfo.PortalID, "Registered Users").RoleID,
                         RoleName = "Registered Users"
                     };
                     Vanjaro.Common.Manager.PermissionManager.AddRolePermission(Permissions, allreginfo);

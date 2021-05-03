@@ -974,7 +974,7 @@
         {
           "Guid": "03163755-b910-45e5-9ef7-c97972b6bc95",
           "Title": "Color",
-          "DefaultValue": "#444444",
+          "DefaultValue": "$secondarycolor",
           "Suffix": "",
           "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after{\n  color: $userprofileaccountClr;\n}\n\n",
           "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after{\n  color: $userprofileaccountClr;\n}\n\n",
@@ -2515,7 +2515,7 @@
         {
           "Guid": "fe5745d2-d4db-48bb-8f0c-3a7c37a3d0a3",
           "Title": "Primary",
-          "DefaultValue": "#0088CC",
+          "DefaultValue": "#242623",
           "Suffix": "",
           "CustomCSS": ".bg-frameprimary,\n.bg-colorprimary {\n\tbackground-color: $primarycolor !important;\n}\n\n$blue: $primarycolor",
           "PreviewCSS": "",

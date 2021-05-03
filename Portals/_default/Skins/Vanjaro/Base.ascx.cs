@@ -1024,7 +1024,7 @@ namespace Vanjaro.Skin
             DotNetNuke.Framework.CDefault basePage = (DotNetNuke.Framework.CDefault)Page;
             if (page != null)
             {
-                basePage.Title = !string.IsNullOrEmpty(page.Title) ? page.Title : basePage.Title;
+                basePage.Title = !string.IsNullOrEmpty(page.Title) ? page.Title : (!string.IsNullOrEmpty(page.Name) ? PortalSettings.Current.PortalName +" > "+ page.Name : basePage.Title);
                 basePage.Description = !string.IsNullOrEmpty(page.Description) ? page.Description : basePage.Description;
             }
 
