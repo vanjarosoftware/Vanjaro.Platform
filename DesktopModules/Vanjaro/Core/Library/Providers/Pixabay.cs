@@ -96,6 +96,9 @@ namespace Vanjaro.Core.Providers
             {
                 if (!string.IsNullOrEmpty(ApiKey) && !string.IsNullOrEmpty(Keyword) && !string.IsNullOrEmpty(Type) && PageNo > 0 && PageSize > 0)
                 {
+
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
                     Uri Link;
                     WebClient client = new WebClient();
                     string result = string.Empty;
