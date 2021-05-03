@@ -221,7 +221,7 @@
                 var formdata = {
                     Guid: $scope.ui.data.Font.Options.Guid != undefined && $scope.ui.data.Font.Options.Guid != '' ? $scope.ui.data.Font.Options.Guid : '',
                     Name: FontName,
-                    Family: "'" + FontName + "'," + FontCategory + "",
+                    Family: FontName + ", " + FontCategory,
                     Css: data
                 };
                 common.webApi.post('settings/updatefont', 'Guid=' + $scope.ui.data.Guid.Value, formdata).then(function (response) {
