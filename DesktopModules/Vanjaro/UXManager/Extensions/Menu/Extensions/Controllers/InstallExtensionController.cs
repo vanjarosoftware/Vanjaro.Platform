@@ -124,24 +124,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
             {
                 PackageInfo packageInfo = PackageController.Instance.GetExtensionPackage(Null.NullInteger, (p) => p.PackageID == InstallResultDto.NewPackageId);
                 if (packageInfo != null && packageInfo.PackageType.ToLower() == "module")
-                {
-                    List<int> pids = new List<int>();
-                    foreach (PortalInfo pi in PortalController.Instance.GetPortals())
-                        pids.Add(pi.PortalID);
-
-                    string ThemeCssFolder = HttpContext.Current.Server.MapPath("~/Portals");
-                    Parallel.ForEach(pids,
-                    new ParallelOptions { MaxDegreeOfParallelism = Convert.ToInt32(Math.Ceiling((Environment.ProcessorCount * 0.50) * 1.0)) },
-                    pid =>
-                    {
-                        string ThemeCss = ThemeCssFolder + "/" + pid + "/vThemes/" + ThemeManager.GetCurrent(pid).Name + "/Theme.css";
-                        if (File.Exists(ThemeCss))
-                        {
-                            File.Copy(ThemeCss, ThemeCss.Replace("Theme.css", "Theme.backup.css"), true);
-                            File.Delete(ThemeCss.Replace("Theme.backup.css", "Theme.css"));
-                        }
-                    });
-                }
+                    ThemeManager.DeletePortalThemeCss();
             }
             DataCache.ClearCache();
             actionResult.IsSuccess = true;
