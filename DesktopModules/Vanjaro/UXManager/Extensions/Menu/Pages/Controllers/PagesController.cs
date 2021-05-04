@@ -249,7 +249,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
         {
             ActionResult actionresult = new ActionResult
             {
-                Data = Managers.PagesManager.UpdatePageWorkflow(WorkflowID, PageID)
+                Data = Managers.PagesManager.UpdatePageWorkflow(PortalSettings, WorkflowID, PageID)
             };
             return actionresult;
         }

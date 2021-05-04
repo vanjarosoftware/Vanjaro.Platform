@@ -557,7 +557,7 @@ namespace Vanjaro.Core
                 return GetWorkflowStates(WorkflowID);
             }
 
-            public static List<GenericPermissionInfo> GetGenericPermissions(List<WorkflowPermission> Permissions)
+            public static List<GenericPermissionInfo> GetGenericPermissions(int PortalID, List<WorkflowPermission> Permissions)
             {
                 List<GenericPermissionInfo> GenericPermissions = new List<GenericPermissionInfo>();
                 foreach (WorkflowPermission wp in Permissions)
@@ -571,7 +571,7 @@ namespace Vanjaro.Core
                     };
                     if (gp.UserID > -1)
                     {
-                        UserInfo UserInfo = UserController.GetUserById(PortalSettings.Current.PortalId, gp.UserID);
+                        UserInfo UserInfo = UserController.GetUserById(PortalID, gp.UserID);
                         if (UserInfo != null)
                         {
                             gp.DisplayName = UserInfo.DisplayName;
@@ -584,14 +584,13 @@ namespace Vanjaro.Core
                 return GenericPermissions;
             }
 
-            public static Permissions GetWorkflowPermission(int WorkflowID)
+            public static Permissions GetWorkflowPermission(PortalInfo PortalInfo, int WorkflowID)
             {
                 List<WorkflowPermission> permissions = WorkflowFactory.GetWorkflowPermissionsByID(WorkflowID);
-                return GetWorkflowPermission(WorkflowID, permissions);
+                return GetWorkflowPermission(PortalInfo, WorkflowID, permissions);
             }
-            private static Permissions GetWorkflowPermission(int WorkflowID, List<WorkflowPermission> permissions)
+            private static Permissions GetWorkflowPermission(PortalInfo PortalInfo, int WorkflowID, List<WorkflowPermission> permissions)
             {
-                UserInfo UserInfo = UserController.Instance.GetCurrentUserInfo();
                 Permissions Permissions = new Permissions();
                 List<Permission> PermissionDefinitions = new List<Permission>();
                 foreach (DNNModulePermissionInfo p in Vanjaro.Common.Manager.PermissionManager.GetPermissionInfo("SYSTEM_TAB"))
@@ -599,7 +598,7 @@ namespace Vanjaro.Core
                     PermissionDefinitions.Add(AddPermissionDefinitions(p.PermissionName, p.PermissionID));
                 }
 
-                foreach (GenericPermissionInfo perm in GetGenericPermissions(permissions))
+                foreach (GenericPermissionInfo perm in GetGenericPermissions(PortalInfo.PortalID, permissions))
                 {
 
                     if (perm.UserID == -1 && perm.RoleID != -4)
@@ -610,7 +609,9 @@ namespace Vanjaro.Core
                         }
                         else if (perm.RoleID != -1)
                         {
-                            perm.RoleName = RoleController.Instance.GetRoleById(UserInfo.PortalID, perm.RoleID).RoleName;
+                            RoleInfo _RoleInfo = RoleController.Instance.GetRoleById(PortalInfo.PortalID, perm.RoleID);
+                            if (_RoleInfo != null)
+                                perm.RoleName = _RoleInfo.RoleName;
                         }
                         else if (perm.RoleID == -1)
                         {
@@ -640,7 +641,7 @@ namespace Vanjaro.Core
                     {
                         AllowAccess = false,
                         PermissionID = pinfo.PermissionId,
-                        RoleID = RoleController.Instance.GetRoleByName(UserInfo.PortalID, "Registered Users").RoleID,
+                        RoleID = RoleController.Instance.GetRoleByName(PortalInfo.PortalID, "Registered Users").RoleID,
                         RoleName = "Registered Users"
                     };
                     Vanjaro.Common.Manager.PermissionManager.AddRolePermission(Permissions, allreginfo);
@@ -657,8 +658,9 @@ namespace Vanjaro.Core
                 List<WorkflowPermission> permissions = WorkflowFactory.GetWorkflowPermissionsByID(WorkflowID);
                 if (WorkflowID > 0 && permissions.Count > 0)
                 {
-
-                    permData.Add("Permissions", GetWorkflowPermission(WorkflowID, permissions));
+                    PortalInfo portalInfo = PortalController.Instance.GetPortal(PortalID);
+                    if (portalInfo != null)
+                        permData.Add("Permissions", GetWorkflowPermission(portalInfo, WorkflowID, permissions));
                 }
                 else
                 {
