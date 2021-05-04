@@ -2651,7 +2651,19 @@ $(document).ready(function () {
 
 								FilterBorderOptions(model, event.target.value);
 								model.removeStyle('border-position');
-							});
+                            });
+
+                            VjEditor.on('component:styleUpdate:d-desktop-none', (model) => {
+                                model.removeStyle('d-desktop-none');
+                            });
+
+                            VjEditor.on('component:styleUpdate:d-tablet-none', (model) => {
+                                model.removeStyle('d-tablet-none');
+                            });
+
+                            VjEditor.on('component:styleUpdate:d-mobile-none', (model) => {
+                                model.removeStyle('d-mobile-none');
+                            });
 
 							VjEditor.on('component:styleUpdate:flex-direction', (model) => {
 
