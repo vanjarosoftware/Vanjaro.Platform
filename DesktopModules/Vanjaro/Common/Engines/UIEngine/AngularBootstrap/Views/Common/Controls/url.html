@@ -8,13 +8,13 @@
                 </ul>
             </uitemplate>
         </uilayout>
-        <uilayout name="default" attr-ng-show="ShowLink==true">
+        <uilayout name="default" attr-ng-show="ShowLink==true" attr-class="browseurl">
             <uielement name="UploadFile" control="upload" mode="file" attr-class="url-add" autoupload="true" label="false" container-attr-ng-show="(ui.data.FilebrowserBrowseUrl.Value && ui.data.Settings.Options.UploadFiles)||(!ui.data.FilebrowserBrowseUrl.Value && ui.data.Settings.Options.UploadImages)" maxsize="$scope.ui.data.FilebrowserBrowseUrl.Value?$scope.ui.data.Settings.Options.UploadFilesMaxFileSize* 1000000:$scope.ui.data.Settings.Options.UploadImagesMaxFileSize* 1000000" filetypes="$scope.ui.data.FilebrowserBrowseUrl.Value?$scope.ui.data.Settings.Options.UploadFilesAllowedAttachmentFileExtensions:$scope.ui.data.Settings.Options.UploadImagesAllowedAttachmentFileExtensions"></uielement>
             <uielement name="Attachment" control="upload" mode="advance" autoupload="true" label="false" attr-controlmodes="browse" folders="$scope.ui.data.Folders.Options" files="$scope.ui.data.Files.Options"></uielement>
             <uielement name="Types" control="checkboxtoggle" attr-class="commonurltype"></uielement>
             <uielement name="line" control="line"></uielement>
-            <uielement name="Cancel" control="button" label="false" attr-ng-click="CancelBrowser()" attr-class="btn-link pull-right" container="false"></uielement>
-            <uielement name="Update" attr-id="Update" control="button" attr-class="pull-right" attr-ng-click="UpdateBrowser('Update')" label="false"></uielement>
+            <uielement name="Cancel" control="button" label="false" attr-ng-click="CancelBrowser()" attr-class="btn btn-link float-end" container="false"></uielement>
+            <uielement name="Update" attr-id="Update" control="button" attr-class="float-end" attr-ng-click="UpdateBrowser('Update')" label="false"></uielement>
         </uilayout>
         <uilayout name="default" attr-ng-show="ShowLink==false">
             <uitemplate>
@@ -46,8 +46,8 @@
             <uielement name="Languages" control="dropdownlist"></uielement>
             <uielement name="TypesPages" control="checkboxtoggle" attr-class="commonurltype"></uielement>
             <uielement name="line" control="line"></uielement>
-            <uielement name="Cancel" control="button" label="false" attr-ng-click="CancelBrowser()" attr-class="btn-link pull-right" container="false"></uielement>
-            <uielement name="Update" attr-id="UpdatePageLink" control="button" attr-class="pull-right" attr-ng-click="UpdatePageLink('UpdatePageLink')" label="false"></uielement>
+            <uielement name="Cancel" control="button" label="false" attr-ng-click="CancelBrowser()" attr-class="btn btn-link float-end" container="false"></uielement>
+            <uielement name="Update" attr-id="UpdatePageLink" control="button" attr-class="float-end" attr-ng-click="UpdatePageLink('UpdatePageLink')" label="false"></uielement>
         </uilayout>
     </uiengine>
 </div>
