@@ -584,14 +584,13 @@ namespace Vanjaro.Core
                 return GenericPermissions;
             }
 
-            public static Permissions GetWorkflowPermission(int WorkflowID)
+            public static Permissions GetWorkflowPermission(PortalInfo PortalInfo, int WorkflowID)
             {
                 List<WorkflowPermission> permissions = WorkflowFactory.GetWorkflowPermissionsByID(WorkflowID);
-                return GetWorkflowPermission(WorkflowID, permissions);
+                return GetWorkflowPermission(PortalInfo, WorkflowID, permissions);
             }
-            private static Permissions GetWorkflowPermission(int WorkflowID, List<WorkflowPermission> permissions)
+            private static Permissions GetWorkflowPermission(PortalInfo PortalInfo, int WorkflowID, List<WorkflowPermission> permissions)
             {
-                UserInfo UserInfo = UserController.Instance.GetCurrentUserInfo();
                 Permissions Permissions = new Permissions();
                 List<Permission> PermissionDefinitions = new List<Permission>();
                 foreach (DNNModulePermissionInfo p in Vanjaro.Common.Manager.PermissionManager.GetPermissionInfo("SYSTEM_TAB"))
@@ -610,7 +609,7 @@ namespace Vanjaro.Core
                         }
                         else if (perm.RoleID != -1)
                         {
-                            perm.RoleName = RoleController.Instance.GetRoleById(UserInfo.PortalID, perm.RoleID).RoleName;
+                            perm.RoleName = RoleController.Instance.GetRoleById(PortalInfo.PortalID, perm.RoleID).RoleName;
                         }
                         else if (perm.RoleID == -1)
                         {
@@ -640,7 +639,7 @@ namespace Vanjaro.Core
                     {
                         AllowAccess = false,
                         PermissionID = pinfo.PermissionId,
-                        RoleID = RoleController.Instance.GetRoleByName(UserInfo.PortalID, "Registered Users").RoleID,
+                        RoleID = RoleController.Instance.GetRoleByName(PortalInfo.PortalID, "Registered Users").RoleID,
                         RoleName = "Registered Users"
                     };
                     Vanjaro.Common.Manager.PermissionManager.AddRolePermission(Permissions, allreginfo);
@@ -657,8 +656,9 @@ namespace Vanjaro.Core
                 List<WorkflowPermission> permissions = WorkflowFactory.GetWorkflowPermissionsByID(WorkflowID);
                 if (WorkflowID > 0 && permissions.Count > 0)
                 {
-
-                    permData.Add("Permissions", GetWorkflowPermission(WorkflowID, permissions));
+                    PortalInfo portalInfo = PortalController.Instance.GetPortal(PortalID);
+                    if (portalInfo != null)
+                        permData.Add("Permissions", GetWorkflowPermission(portalInfo, WorkflowID, permissions));
                 }
                 else
                 {
