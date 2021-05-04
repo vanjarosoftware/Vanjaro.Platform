@@ -21,7 +21,7 @@ namespace Vanjaro.Core.Components
             if (Version == "01.00.00")
             {
                 PlatformCleanup();
-                MoveFilesInRoot();                
+                MoveFilesInRoot();
                 Managers.SettingManager.ApplyingSettings(true);
                 Services.Search.SearchEngineScheduler.Install();
                 PageWorkflowPermission.InitTabPermissions();
@@ -30,6 +30,7 @@ namespace Vanjaro.Core.Components
             else
             {
                 Managers.SettingManager.ApplyingSettings(Version);
+                ThemeManager.DeletePortalThemeCss();
             }
 
             return "Success";

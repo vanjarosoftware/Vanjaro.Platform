@@ -495,8 +495,15 @@ namespace Vanjaro.Core
                             List<string> selectors = new List<string>();
                             foreach (dynamic cons in con.selectors)
                             {
-                                if (cons.name != null)
-                                    selectors.Add(cons.name.Value);
+                                try
+                                {
+                                    if (cons.name != null)
+                                        selectors.Add(cons.name.Value);
+                                }
+                                catch
+                                {
+                                    try { selectors.Add(cons.Value.ToString().Replace("#", "").Replace(".", "")); } catch { }
+                                }
                             }
                             bool hasMatch = styleIds.Any(x => selectors.Any(y => y == x));
                             if (!hasMatch)
