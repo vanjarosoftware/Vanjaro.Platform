@@ -638,7 +638,6 @@ $(document).ready(function () {
 												list: [{
 													name: 'Yes',
 													value: 'd-tablet-none'
-
 												},
 												{
 													name: 'No',
@@ -2651,7 +2650,7 @@ $(document).ready(function () {
 
 								FilterBorderOptions(model, event.target.value);
 								model.removeStyle('border-position');
-							});
+                            });                            
 
 							VjEditor.on('component:styleUpdate:flex-direction', (model) => {
 
