@@ -190,7 +190,7 @@ namespace Vanjaro.Core
                 }
 
                 List<string> Css = new List<string>();
-                foreach (IThemeEditor category in GetCategories(CheckVisibilityPermission))
+                foreach (IThemeEditor category in GetCategories(CheckVisibilityPermission).OrderBy(o => o.ViewOrder).ToList())
                 {
                     List<ThemeEditorValue> themeEditorValues = GetThemeEditorValues(PortalID, category.Guid);
                     ThemeEditorWrapper editors = GetThemeEditors(PortalID, category.Guid, CheckVisibilityPermission);
