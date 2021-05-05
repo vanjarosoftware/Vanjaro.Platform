@@ -26,7 +26,8 @@
 		model: defaultModel.extend({
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				'custom-name': 'Image Box',
-				droppable: false,
+                droppable: false,
+                selectable: false,
 				traits: []
 			}),
 		},

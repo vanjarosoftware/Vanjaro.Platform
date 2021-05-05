@@ -47,6 +47,7 @@ export default (editor, config = {}) => {
             defaults: Object.assign({}, defaultModel.prototype.defaults, {
                 'custom-name': 'List Box',
                 droppable: false,
+                selectable: false,
                 traits: []
             }),
         },

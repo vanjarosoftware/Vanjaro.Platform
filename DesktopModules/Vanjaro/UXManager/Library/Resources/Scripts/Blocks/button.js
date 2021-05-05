@@ -24,8 +24,9 @@ export default (editor, config = {}) => {
 	domc.addType('button-box', {
 		model: defaultModel.extend({
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
-				'custom-name': 'Button Box',
-				droppable: false,
+				'custom-name': 'Button Box',                           
+                droppable: false,               
+                selectable: false,          
 				traits: []
 			}),
 		},
