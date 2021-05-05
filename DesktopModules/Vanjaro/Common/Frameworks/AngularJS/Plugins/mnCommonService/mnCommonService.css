@@ -255,7 +255,18 @@ a.btn.btn-primary.button-left {
             margin-right: 5px;
             width: 5px;
         }
+.browseurl .uploaddefault .l_folder span.arrowicon {
+    margin-right: 0px;
+}
 
+.browseurl .uploaddefault .l_folder span {
+    margin-bottom: -5px;
+}
+
+.browseurl a.btn-link {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
     .uploaddefault .l_folder .pagedir span.arrowicon {
         position: relative;
         right: 10px;
