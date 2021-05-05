@@ -72,7 +72,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Workflow.Controllers
 
             data.Add("Workflow", workflow);
             data.Add("WorkflowStates", Managers.WorkflowManager.GetWorkflowStates(WorkflowID));
-            data.Add("workflowPermission", Managers.WorkflowManager.GetWorkflowPermission(WorkflowID, PortalSettings.PortalId));
+            data.Add("workflowPermission", Managers.WorkflowManager.GetWorkflowPermission(workflow.PortalID.HasValue ? WorkflowID : 0, PortalSettings.PortalId));
             ActionResult.Data = data;
             return ActionResult;
         }

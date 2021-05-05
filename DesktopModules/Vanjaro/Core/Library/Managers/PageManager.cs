@@ -1599,11 +1599,27 @@ namespace Vanjaro.Core
                                     {
                                         foreach (dynamic st in style.selectors)
                                         {
-                                            if (st.name != null)
+                                            try
                                             {
-                                                string val = st.name;
-                                                if (!Ids.Contains(val))
-                                                    st.name.Value = prefix + "-" + val.Split('-').Last();
+                                                if (st.name != null)
+                                                {
+                                                    string val = st.name;
+                                                    if (!Ids.Contains(val))
+                                                        st.name.Value = prefix + "-" + val.Split('-').Last();
+                                                }
+                                            }
+                                            catch
+                                            {
+                                                try
+                                                {
+                                                    if (st != null)
+                                                    {
+                                                        string val = st.Value.ToString().Replace("#", "").Replace(".", "");
+                                                        if (!Ids.Contains(val))
+                                                            st.Value = prefix + "-" + val.Split('-').Last();
+                                                    }
+                                                }
+                                                catch { }
                                             }
                                         }
                                     }
