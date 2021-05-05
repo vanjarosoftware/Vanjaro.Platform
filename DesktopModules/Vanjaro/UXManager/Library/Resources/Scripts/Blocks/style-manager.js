@@ -50,7 +50,8 @@
 			if (model.attributes.UpdateStyles) {
 				var style = selected.getStyle();
 				style[property] = event.target.value;
-				selected.setStyle(style);
+                selected.setStyle(style);                
+                model.setValue(val);
 			}
 			else {
 				var classes = model.attributes.list.map(opt => opt.value);
@@ -60,11 +61,8 @@
 				});
 
 				selected.addClass(val);
-			}
-
-			selected.set(property, val);
-
-			model.setValue(val);
+            }
+            selected.set(property, val);
 		},
 		setValue(value) {
 			var model = this.model;
