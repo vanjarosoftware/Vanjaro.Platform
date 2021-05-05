@@ -1,17 +1,17 @@
 ﻿<div ng-controller="common_controls_editorconfig">
     <uiengine provider="AngularBootstrap" identifier="common_controls_editorconfig" layout="default">
-        <uilayout name="default">
+        <uilayout name="default" attr-style="padding: 20px 20px 0px 20px;">
             <uitemplate>
                 <div class="alert alert-info" role="alert">
                     [L:Information]
                 </div>
             </uitemplate>
         </uilayout>
-        <uilayout name="default" attr-ng-show="SelectEditorProfile">
+        <uilayout name="default" attr-ng-show="SelectEditorProfile" attr-style="padding: 0px 20px 0px 20px;">
             <uitemplate>
                 <div>
                     <label>[L:SelectEditorProfile]</label>
-                    <div class="form-group">                       
+                    <div class="form-group">
                         <select class="form-control control-background" ng-change="changeProfile()" ng-model="ui.data.Profiles.Value" ng-options="option.ProfileID as option.Name for option in ui.data.Profiles.Options"></select>
                     </div>
                 </div>
@@ -28,26 +28,26 @@
             <uielement name="Line" control="line" container-attr-ng-show="!ShowSetting && ShowLink && ui.data.Profiles.Value!=-3"></uielement>
             <uielement name="UploadFilesAllowedAttachmentFileExtensions" ngmodel="ui.data.Settings.Options.UploadFilesAllowedAttachmentFileExtensions" attr-required="true" control="textarea" container-attr-ng-show="!ShowSetting && ShowLink && ui.data.Profiles.Value!=-3"></uielement>
             <uielement name="Line" control="line" container-attr-ng-show="!ShowSetting && ShowLink && ui.data.Profiles.Value!=-3"></uielement>
-            <uielement name="UploadFiles" ngmodel="ui.data.Settings.Options.UploadFiles" container-attr-style="margin-bottom: 35px;" attr-style="display:block;float:right;" control="toggle" container-attr-ng-show="!ShowSetting && ShowLink && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="UploadFiles" ngmodel="ui.data.Settings.Options.UploadFiles" container-attr-style="margin-bottom: 35px;" attr-style="float:right;" control="toggle" container-attr-ng-show="!ShowSetting && ShowLink && ui.data.Profiles.Value!=-3"></uielement>
             <uielement name="UploadFilesMaxFileSize" ngmodel="ui.data.Settings.Options.UploadFilesMaxFileSize" control="textbox" attr-required="true" attr-numeric="true" suffix="true" help="true" container-attr-ng-show="!ShowSetting && ShowLink && ui.data.Settings.Options.UploadFiles && ui.data.Profiles.Value!=-3"></uielement>
             <uielement name="UploadImagesRootFolder" ngmodel="ui.data.Settings.Options.UploadImagesRootFolder" ngoptions="ui.data.Folders.Options" attr-required="true" control="dropdownlist" container-attr-ng-show="!ShowSetting && !ShowLink && ui.data.Profiles.Value!=-3"></uielement>
             <uielement name="Line" control="line" container-attr-ng-show="!ShowSetting && !ShowLink && ui.data.Profiles.Value!=-3"></uielement>
             <uielement name="UploadImagesAllowedAttachmentFileExtensions" ngmodel="ui.data.Settings.Options.UploadImagesAllowedAttachmentFileExtensions" attr-required="true" control="textarea" container-attr-ng-show="!ShowSetting && !ShowLink && ui.data.Profiles.Value!=-3"></uielement>
             <uielement name="Line" control="line" container-attr-ng-show="!ShowSetting && !ShowLink && ui.data.Profiles.Value!=-3"></uielement>
-            <uielement name="UploadImages" ngmodel="ui.data.Settings.Options.UploadImages" container-attr-style="margin-bottom: 35px;" attr-style="display:block;float:right;" control="toggle" container-attr-ng-show="!ShowSetting && !ShowLink && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="UploadImages" ngmodel="ui.data.Settings.Options.UploadImages" container-attr-style="margin-bottom: 35px;" attr-style="float:right;" control="toggle" container-attr-ng-show="!ShowSetting && !ShowLink && ui.data.Profiles.Value!=-3"></uielement>
             <uielement name="UploadImagesMaxFileSize" ngmodel="ui.data.Settings.Options.UploadImagesMaxFileSize" control="textbox" attr-required="true" attr-numeric="true" suffix="true" help="true" container-attr-ng-show="!ShowSetting && !ShowLink && ui.data.Settings.Options.UploadImages && ui.data.Profiles.Value!=-3"></uielement>
-            <uielement name="FullPageMode" ngmodel="ui.data.Settings.Options.FullPageMode" container-attr-style="margin-bottom: 0px;" attr-style="display:block;float:right;" control="toggle" container-attr-ng-show="ShowSetting && ui.data.Profiles.Value!=-3"></uielement>
+            <uielement name="FullPageMode" ngmodel="ui.data.Settings.Options.FullPageMode" container-attr-style="margin-bottom: 0px;" attr-style="float:right;" control="toggle" container-attr-ng-show="ShowSetting && ui.data.Profiles.Value!=-3"></uielement>
             <uielement name="Line" control="line"></uielement>
             <uitemplate>
-                <div style="display:table; margin: 0 auto;">                    
+                <div style="display:table; margin: 0 auto;">
                     <div class="dropdown btn-group" style="display: inline; margin-right:5px;">
-                        <button type="button" class="btn btn-primary " mn-ng-click="SaveEditorProfile('CurrentModule')">[L:Apply]</button>                        
+                        <button type="button" class="btn btn-primary " mn-ng-click="SaveEditorProfile('CurrentModule')">[L:Apply]</button>
                     </div>
                     <a class="btn btn-default btn-link " role="button" mn-ng-click="CloseWindow()">
                         <span class="glyphicon glyphicon-" style="float: left;margin-right: 5px;"></span>[L:Cancel]
                     </a>
                 </div>
             </uitemplate>
-        </uilayout>        
+        </uilayout>
     </uiengine>
 </div>
