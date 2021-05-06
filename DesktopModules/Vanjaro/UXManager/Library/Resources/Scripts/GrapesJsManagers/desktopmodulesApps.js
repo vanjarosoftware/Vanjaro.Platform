@@ -343,8 +343,15 @@ global.UpdateGlobalBlock = function (model) {
         try {
             if (model.attributes != undefined)
                 model.attributes.content = '';
-            var content = VjEditor.runCommand("export-component", {
-                component: model.attributes.components.models[0]
+            var content = { html: '', css: '' };
+            $.each(model.attributes.components.models, function (mi, mv) {
+                var mvcontent = VjEditor.runCommand("export-component", {
+                    component: mv
+                });
+                if (mvcontent != undefined && mvcontent.html != undefined && mvcontent.html != "") {
+                    content.html += mvcontent.html;
+                    content.css += mvcontent.css;
+                }
             });
             if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
                 var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));
