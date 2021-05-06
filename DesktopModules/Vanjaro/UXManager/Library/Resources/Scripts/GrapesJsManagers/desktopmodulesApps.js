@@ -25,7 +25,7 @@ global.LoadApps = function () {
 
             $.each(data, function (key, value) {
                 VjEditor.BlockManager.add(value.ModuleName, {
-                    category: { label: VjLocalized.Apps, order: 3 },
+                    category: VjLocalized.Apps,
                     attributes: { type: 'apps' },
                     label: '<div><img style="width:32px;height:32px;" src="' + value.ModuleImage + '"/><div class="my-label-block">' + value.ModuleName + '</div></div>',
                     content: '<div dmid="' + value.ModuleID + '" mid="" uid="' + value.UniqueID + '" fname="' + value.ModuleName + '"><div vjmod="true">[Module]</div></div>'
@@ -142,7 +142,7 @@ global.LoadDesignBlocks = function () {
         success: function (data) {
             $.each(data, function (key, value) {
                 VjEditor.BlockManager.add(value.Name, {
-                    category: { label: value.Attributes["data-block-category"] != undefined ? value.Attributes["data-block-category"] : value.Category, order: 4 },
+                    category: value.Attributes["data-block-category"] != undefined ? value.Attributes["data-block-category"] : value.Category,
                     attributes: { type: 'blockext' },
                     label: '<div class="' + value.Icon + '"><div class="my-label-block">' + value.DisplayName + '</div></div>',
                     content: GetBlockContent(value)
