@@ -3011,8 +3011,9 @@ input.rangeinput {
     }
 
         .global-tools .toolbar.draft {
-            top: 40px;
-            background: #ffffff;
+            top: 10px;
+            right: 130px;
+            background: #f8f9fa;
             opacity: 1;
             color: #a1a1a3;
         }
