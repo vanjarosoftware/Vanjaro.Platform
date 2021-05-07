@@ -393,4 +393,10 @@
   <data name="MemberProfileSettings.Text" xml:space="preserve">
     <value>Member Profile Settings</value>
   </data>
+  <data name="UnlockUser.Text" xml:space="preserve">
+    <value>Unlock User</value>
+  </data>
+  <data name="UnlockUserText.Text" xml:space="preserve">
+    <value>Do you want to unlock this user?</value>
+  </data>
 </root>
