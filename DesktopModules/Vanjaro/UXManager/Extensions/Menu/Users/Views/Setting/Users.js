@@ -400,6 +400,34 @@
         }
     };
 
+    $scope.Click_UnlockUser = function (row) {
+        if (row.isLocked) {
+            window.parent.swal({
+                title: "[L:Confirm]",
+                text: "[L:UnlockUserText]",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55", confirmButtonText: "[L:ConfirmYes]",
+                cancelButtonText: "[L:ConfirmNo]",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        common.webApi.post('user/unlockuser', 'userid=' + row.userId, '').then(function (data) {
+                            if (data.data != null && data.data.IsSuccess) {
+                                if (row.isLocked) {
+                                    row.isLocked = false;
+                                    var index = $scope.ui.data.AllUsers.Options.indexOf(row);
+                                    $scope.ui.data.AllUsers.Options[index] = row;
+                                }
+                            }
+                        });
+                    }
+                });
+        }
+    };
+
     var UpdateGrantedStatus = function (row) {
         var setSuperUser = null;
         if (row.isSuperUser)
