@@ -1602,6 +1602,7 @@ namespace Vanjaro.Core
 
                         if (block != null && !string.IsNullOrEmpty(block.ContentJSON))
                         {
+                            con.attributes["published"] = block.IsPublished;
                             con.components = JsonConvert.DeserializeObject(block.ContentJSON);
                             string prefix = con.attributes["id"] != null ? con.attributes["id"].Value : string.Empty;
                             List<string> Ids = new List<string>();
