@@ -392,7 +392,7 @@ $(document).ready(function () {
 								LoadCustomCode(grapesjs);
 
 							if (!$('.optimizing-overlay').length)
-								$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Loading your content</h1></div>');
+								$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Please wait</h1></div>');
 
 							VjEditor = grapesjs.init({
 								protectedCss: '',
