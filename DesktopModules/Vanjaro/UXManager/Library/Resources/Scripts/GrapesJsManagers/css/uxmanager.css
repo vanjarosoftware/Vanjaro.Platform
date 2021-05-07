@@ -704,6 +704,7 @@ div#MenuSettings .parent-menu-hide {
 .blockItem.registerlink-notification {
     cursor: pointer;
 }
+
 [data-gjs-type="blockwrapper"] .desktop_registerbox .dropdown {
     pointer-events: none;
 }
@@ -3009,6 +3010,13 @@ input.rangeinput {
         background-color: #fff;
     }
 
+        .global-tools .toolbar.draft {
+            top: 40px;
+            background: #ffffff;
+            opacity: 1;
+            color: #a1a1a3;
+        }
+
     .global-tools .fa-globe {
         position: absolute;
         left: 10px;
@@ -3373,7 +3381,7 @@ body.resp-mode.mobile-landscape .vj-wrapper {
     }
 
         .stylemanager .sm-range-wrapper input[type="text"],
-        .traitsmanager .range-wrapper input[type="number"] { 
+        .traitsmanager .range-wrapper input[type="number"] {
             width: 30%;
             padding-right: 25px;
             margin-left: 10px;
