@@ -924,7 +924,7 @@ namespace Vanjaro.Core
                 config.Save();
             }
 
-            private static void AddThemeFont(int PortalID)
+            public static List<ThemeFont> GetDefaultFont()
             {
                 List<ThemeFont> themeFont = new List<ThemeFont>();
                 themeFont.Add(new ThemeFont() { Name = "Arial Black", Family = "Arial Black, Gadget, sans-serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
@@ -940,8 +940,12 @@ namespace Vanjaro.Core
                 themeFont.Add(new ThemeFont() { Name = "Times New Roman", Family = "Times New Roman, Times, serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
                 themeFont.Add(new ThemeFont() { Name = "Trebuchet MS", Family = "Trebuchet MS, Helvetica, sans-serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
                 themeFont.Add(new ThemeFont() { Name = "Verdana", Family = "Verdana, Geneva, sans - serif", Css = string.Empty, Guid = Guid.NewGuid().ToString() });
+                return themeFont;
+            }
 
-                foreach (ThemeFont t in themeFont)
+            public static void AddThemeFont(int PortalID)
+            {
+                foreach (ThemeFont t in GetDefaultFont())
                     ThemeManager.UpdateFonts(PortalID, "be134fd2-3a3d-4460-8ee9-2953722a5ab2", t, false);
             }
 

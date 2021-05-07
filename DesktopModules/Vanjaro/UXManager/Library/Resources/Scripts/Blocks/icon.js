@@ -28,7 +28,8 @@
 		model: defaultModel.extend({
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				'custom-name': 'Icon Box',
-				droppable: false,
+                droppable: false,
+                selectable: false,
 				traits: []
 			}),
 		},

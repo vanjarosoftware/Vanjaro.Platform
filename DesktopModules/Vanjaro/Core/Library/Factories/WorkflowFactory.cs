@@ -161,19 +161,17 @@ namespace Vanjaro.Core
                 else
                 {
                     wflow = GetWorkflowbyID(workflow.ID);
-                    if (wflow != null)
-                    {
-                        wflow.Description = workflow.Description;
-                        wflow.IsDeleted = workflow.IsDeleted;
-                        wflow.Name = workflow.Name;
-                        wflow.CreatedBy = wflow.CreatedBy;
-                        wflow.CreatedOn = wflow.CreatedOn;
-                        wflow.DeletedBy = workflow.DeletedBy;
-                        wflow.DeletedOn = workflow.DeletedOn;
-                        wflow.Revisions = workflow.Revisions;
-                        wflow.PortalID = wflow.ID == 1 ? null : workflow.PortalID;
-                        wflow.Update();
-                    }
+                    wflow.Description = workflow.Description;
+                    wflow.IsDeleted = workflow.IsDeleted;
+                    wflow.Name = workflow.Name;
+                    wflow.CreatedBy = wflow.CreatedBy;
+                    wflow.CreatedOn = wflow.CreatedOn;
+                    wflow.DeletedBy = workflow.DeletedBy;
+                    wflow.DeletedOn = workflow.DeletedOn;
+                    wflow.Revisions = workflow.Revisions;
+                    wflow.PortalID = wflow.PortalID;
+                    wflow.Update();
+
                 }
                 CacheFactory.Clear(CacheFactory.Keys.Workflow);
                 return wflow;

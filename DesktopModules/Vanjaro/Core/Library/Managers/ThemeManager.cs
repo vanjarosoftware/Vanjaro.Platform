@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using Vanjaro.Common.ASPNET;
@@ -145,6 +146,27 @@ namespace Vanjaro.Core
                 index = -1;
                 return null;
             }
+
+            public static void DeletePortalThemeCss()
+            {
+                List<int> pids = new List<int>();
+                foreach (PortalInfo pi in PortalController.Instance.GetPortals())
+                    pids.Add(pi.PortalID);
+
+                string ThemeCssFolder = HttpContext.Current.Server.MapPath("~/Portals");
+                Parallel.ForEach(pids,
+                new ParallelOptions { MaxDegreeOfParallelism = Convert.ToInt32(Math.Ceiling((Environment.ProcessorCount * 0.50) * 1.0)) },
+                pid =>
+                {
+                    string ThemeCss = ThemeCssFolder + "/" + pid + "/vThemes/" + GetCurrent(pid).Name + "/Theme.css";
+                    if (File.Exists(ThemeCss))
+                    {
+                        File.Copy(ThemeCss, ThemeCss.Replace("Theme.css", "Theme.backup.css"), true);
+                        File.Delete(ThemeCss.Replace("Theme.backup.css", "Theme.css"));
+                    }
+                });
+            }
+
             public static void ProcessScss(int PortalID, bool CheckVisibilityPermission)
             {
                 StringBuilder sb = new StringBuilder();
@@ -168,7 +190,7 @@ namespace Vanjaro.Core
                 }
 
                 List<string> Css = new List<string>();
-                foreach (IThemeEditor category in GetCategories(CheckVisibilityPermission))
+                foreach (IThemeEditor category in GetCategories(CheckVisibilityPermission).OrderBy(o => o.ViewOrder).ToList())
                 {
                     List<ThemeEditorValue> themeEditorValues = GetThemeEditorValues(PortalID, category.Guid);
                     ThemeEditorWrapper editors = GetThemeEditors(PortalID, category.Guid, CheckVisibilityPermission);
@@ -376,7 +398,7 @@ namespace Vanjaro.Core
                             themeEditor
                         };
                     }
-                    UpdateThemeEditorJson(PortalSettings.Current.PortalId,categoryGuid, ThemeEditorWrapper);
+                    UpdateThemeEditorJson(PortalSettings.Current.PortalId, categoryGuid, ThemeEditorWrapper);
                     return true;
                 }
                 catch (Exception ex) { ExceptionManager.LogException(ex); return false; }
@@ -546,6 +568,7 @@ namespace Vanjaro.Core
                     ThemeEditorWrapper.Fonts.Add(new ThemeFont { Guid = GUID, Name = data.Name.ToString(), Family = data.Family.ToString(), Css = data.Css.ToString().Replace("\"", "'") });
                 }
 
+                ThemeEditorWrapper.Fonts = ThemeEditorWrapper.Fonts.OrderBy(o => o.Name).ToList();
                 UpdateThemeEditorJson(PortalID, CategoryGuid, ThemeEditorWrapper, CheckVisibilityPermission);
 
             }
@@ -569,7 +592,7 @@ namespace Vanjaro.Core
                 {
                     ThemeFont ThemeFont = ThemeEditorWrapper.Fonts.Where(a => a.Guid.ToLower() == GUID.ToLower()).FirstOrDefault();
                     ThemeEditorWrapper.Fonts.Remove(ThemeFont);
-                    UpdateThemeEditorJson(PortalSettings.Current.PortalId,CategoryGuid, ThemeEditorWrapper);
+                    UpdateThemeEditorJson(PortalSettings.Current.PortalId, CategoryGuid, ThemeEditorWrapper);
                 }
             }
             internal static List<ThemeEditorValue> GetThemeEditorValues(int PortalId, string CategoryGuid)
@@ -683,9 +706,12 @@ namespace Vanjaro.Core
                                 {
                                     sb.Append("<div class=\"dropdownselect optioncontrol\" id=" + item.Guid + "><div class=\"dropdownlabel\" ><label>" + fonts.Title + ":</label></div>");
                                     sb.Append("<div class=\"dropdownOption\"><select  guid=" + fonts.Guid + ">");
-                                    foreach (StringTextNV opt in GetDDLFonts("all"))
+                                    List<StringTextNV> _DDLFonts = GetDDLFonts("all");
+                                    foreach (StringTextNV opt in _DDLFonts)
                                     {
                                         string value = GetGuidValue(themeEditorValues, fonts);
+                                        if (string.IsNullOrEmpty(value) || _DDLFonts.Where(f => f.Value == value).FirstOrDefault() == null)
+                                            value = _DDLFonts.FirstOrDefault().Value;
                                         if (opt.Value == value)
                                         {
                                             sb.Append("<option selected=\"selected\" value=\"" + opt.Value + "\">" + opt.Name + "</option>");

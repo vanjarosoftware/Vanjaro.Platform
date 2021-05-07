@@ -156,7 +156,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                     redirectUrl = UrlUtils.ValidReturnUrl(redirectUrl);
                 }
 
-                if (string.IsNullOrEmpty(redirectUrl) && checkSettings && redirectAfterLogin > 0) //redirect to after login page
+                if (string.IsNullOrEmpty(redirectUrl.TrimEnd('/')) && checkSettings && redirectAfterLogin > 0) //redirect to after login page
                 {
                     redirectUrl = ServiceProvider.NavigationManager.NavigateURL(redirectAfterLogin);
                 }

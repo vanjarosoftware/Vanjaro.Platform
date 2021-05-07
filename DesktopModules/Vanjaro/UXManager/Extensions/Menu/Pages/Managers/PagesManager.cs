@@ -164,7 +164,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                             Core.Managers.PageManager.ChangePageWorkflow(portalSettings, tab.TabID, DefaultWorkflow);
                             if (PageSettingLayout.EntityID == 0)
                             {
-                                Managers.PagesManager.UpdatePageWorkflow(DefaultWorkflow, tab.TabID);
+                                Managers.PagesManager.UpdatePageWorkflow(portalSettings, DefaultWorkflow, tab.TabID);
                                 if (PageSettingLayout.MakePublic)
                                     UpdatePagePermission(tab.TabID);
                             }
@@ -178,8 +178,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                             if (LocaleController.Instance.GetDefaultLocale(PortalSettings.Current.PortalId).Code != PortalSettings.Current.CultureCode)
                             {
                                 LocalizationManager.AddProperty(portalSettings.PortalId, PageSettingLayout.LocaleProperties);
-                                string LocalizeTabname = PageSettingLayout.LocaleProperties.Where(x => x.EntityName == "Page" && x.Name == "Name").FirstOrDefault().Value;
-                                var res = AutoGenrateUrlForLocale(portalSettings.PortalId, tab.TabID, LocalizeTabname);
+                                Core.Data.Entities.Localization localization = PageSettingLayout.LocaleProperties.Where(x => x.EntityName == "Page" && x.Name == "Name").FirstOrDefault();
+                                if (localization != null && !string.IsNullOrEmpty(localization.Value))
+                                {
+                                    var res = AutoGenrateUrlForLocale(portalSettings.PortalId, tab.TabID, localization.Value);
+                                }
                             }
                         }
                         List<TabInfo> tabs = TabController.GetPortalTabs(portalSettings.PortalId, Null.NullInteger, false, true, false, true);
@@ -375,7 +378,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                 return actionResult;
             }
 
-            internal static dynamic UpdatePageWorkflow(int workflowID, int TabID)
+            internal static dynamic UpdatePageWorkflow(PortalSettings portalSettings, int workflowID, int TabID)
             {
 
                 dynamic data = new ExpandoObject();
@@ -389,7 +392,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                 {
                     PageSettings PageSettings = PagesController.Instance.GetPageSettings(TabID);
 
-                    Permissions Permissions = WorkflowManager.GetWorkflowPermission(workflowID);
+                    Permissions Permissions = WorkflowManager.GetWorkflowPermission(PortalController.Instance.GetPortal(portalSettings.PortalId), workflowID);
                     PageSettings.Permissions.RolePermissions.Clear();
                     foreach (RolePermission RolePerm in Permissions.RolePermissions)
                     {

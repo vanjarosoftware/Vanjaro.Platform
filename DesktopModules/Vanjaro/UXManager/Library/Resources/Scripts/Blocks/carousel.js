@@ -12,7 +12,7 @@
 		category: VjLocalized.Basic,
 		content: {
 			classes: ['carousel', 'vj-carousel', 'slide'],
-			attributes: { 'data-bs-ride': 'carousel', 'data-bs-interval': 'false' },
+            attributes: { 'data-bs-ride': 'carousel', 'data-bs-interval': '5000' },
 			type: 'carousel'
 		}
 	});
@@ -200,11 +200,11 @@
 			AddControl() {
 				var modelId = this.getId();
 				this.components().add(`<a class="carousel-control carousel-control-prev" href="#` + modelId + `" role="button" data-bs-slide="prev">
-    <span class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
+    <span data-gjs-selectable="false" class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="carousel-control visually-hidden">Previous</span>
   </a>
   <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-bs-slide="next">
-    <span class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
+    <span data-gjs-selectable="false" class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
     <span class="carousel-control visually-hidden">Next</span>
   </a>`);
 			},
@@ -218,10 +218,14 @@
 
 				$.each(slides, function (k, v) {
 
-					markup += '<li class="carousel-indicator" data-bs-target="#' + modelId + '" data-bs-slide-to="' + k + '"';
+                    markup += '<li data-bs-target="#' + modelId + '" data-bs-slide-to="' + k + '" class="carousel-indicator';
 
-					if (k = 0)
-						markup += ' class="carousel-indicator active"';
+                    var index = $(this.closest('[data-gjs-type="carousel-inner"]').getEl()).find('.carousel-item.active').index();
+
+                    if (k == index)
+                        markup += ' active"';
+                    else
+                        markup += '"';
 
 					markup += '></li>';
 				});

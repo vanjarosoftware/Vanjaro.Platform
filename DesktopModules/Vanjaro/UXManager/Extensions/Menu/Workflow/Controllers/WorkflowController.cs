@@ -72,7 +72,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Workflow.Controllers
 
             data.Add("Workflow", workflow);
             data.Add("WorkflowStates", Managers.WorkflowManager.GetWorkflowStates(WorkflowID));
-            data.Add("workflowPermission", Managers.WorkflowManager.GetWorkflowPermission(WorkflowID, PortalSettings.PortalId));
+            data.Add("workflowPermission", Managers.WorkflowManager.GetWorkflowPermission(workflow.PortalID.HasValue ? WorkflowID : 0, PortalSettings.PortalId));
             ActionResult.Data = data;
             return ActionResult;
         }
@@ -92,12 +92,15 @@ namespace Vanjaro.UXManager.Extensions.Menu.Workflow.Controllers
             ActionResult ActionResult = new ActionResult();
             Dictionary<string, dynamic> data = new Dictionary<string, dynamic>();
             Workflow = Managers.WorkflowManager.Update(Workflow.ID, Workflow.Name, Workflow.Description, Workflow.Revisions, Workflow.IsDeleted, UserInfo.UserID, PortalSettings.PortalId);
-            Managers.WorkflowManager.UpdateWorkflowPermissions(Data);
-            data.Add("WorkflowID", Workflow.ID);
-            data.Add("Workflows", Managers.WorkflowManager.GetAll(PortalSettings.PortalId, true));
-            data.Add("WorkflowStates", Managers.WorkflowManager.GetWorkflowStates(Workflow.ID));
-            data.Add("Workflow", Managers.WorkflowManager.GetWorkflow(Workflow.ID));
-            data.Add("ddlWorkFlows", Managers.WorkflowManager.GetDDLWorkflow(PortalSettings.PortalId, false));
+            if (Workflow.PortalID.HasValue)
+            {
+                Managers.WorkflowManager.UpdateWorkflowPermissions(Data);
+                data.Add("WorkflowID", Workflow.ID);
+                data.Add("Workflows", Managers.WorkflowManager.GetAll(PortalSettings.PortalId, true));
+                data.Add("WorkflowStates", Managers.WorkflowManager.GetWorkflowStates(Workflow.ID));
+                data.Add("Workflow", Managers.WorkflowManager.GetWorkflow(Workflow.ID));
+                data.Add("ddlWorkFlows", Managers.WorkflowManager.GetDDLWorkflow(PortalSettings.PortalId, false));
+            }
             ActionResult.Data = data;
             return ActionResult;
         }

@@ -638,7 +638,6 @@ $(document).ready(function () {
 												list: [{
 													name: 'Yes',
 													value: 'd-tablet-none'
-
 												},
 												{
 													name: 'No',
@@ -2651,7 +2650,7 @@ $(document).ready(function () {
 
 								FilterBorderOptions(model, event.target.value);
 								model.removeStyle('border-position');
-							});
+                            });                            
 
 							VjEditor.on('component:styleUpdate:flex-direction', (model) => {
 
@@ -2876,8 +2875,15 @@ $(document).ready(function () {
 											try {
 												if (v.attributes != undefined)
 													v.attributes.content = '';
-												var content = VjEditor.runCommand("export-component", {
-													component: v.attributes.components.models[0]
+												var content = { html: '', css: '' };
+												$.each(v.attributes.components.models, function (mi, mv) {
+													var mvcontent = VjEditor.runCommand("export-component", {
+														component: mv
+													});
+													if (mvcontent != undefined && mvcontent.html != undefined && mvcontent.html != "") {
+														content.html += mvcontent.html;
+														content.css += mvcontent.css;
+													}
 												});
 												if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
 													var item = {

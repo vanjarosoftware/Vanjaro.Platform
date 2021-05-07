@@ -296,7 +296,7 @@
 					else if (this.model.attributes.background == "video") {
 
 						this.model.components().forEach(item => item.getAttributes()["data-bg-video"] == "true" ? item.remove() : null);
-						this.model.append("<video src=" + this.model.attributes.src + " data-gjs-layerable='false' data-gjs-clickable='false' data-gjs-selectable='false' data-gjs-hoverable='false' data-gjs-draggable='false' data-gjs-droppable='false' data-bg-video='true' class='bg-video' autoplay loop muted></video>");
+						this.model.append("<video src=" + this.model.attributes.src + " data-gjs-layerable='false' data-gjs-clickable='false' data-gjs-selectable='false' data-gjs-hoverable='false' data-gjs-draggable='false' data-gjs-droppable='false' data-bg-video='true' class='bg-video' autoplay loop muted></video>", { at: 0 });
 
 						this.model.components().forEach(item => {
 							item.getAttributes()["data-bg-video"] == "true" ? item.set({ 'controls': 0 }) : null

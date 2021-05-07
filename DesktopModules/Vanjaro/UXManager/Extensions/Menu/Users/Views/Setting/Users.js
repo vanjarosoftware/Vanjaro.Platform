@@ -261,7 +261,8 @@
                 $scope.Pipe_DeletedUserPagging($scope.pagginationData);
                 $scope.Pipe_AllUserPagging($scope.allUserPagginationData);
                 window.parent.ShowNotification(row.DisplayName, '[L:Success_RemoveUserMessage]', 'success');
-                $scope.Click_Back();
+                if ($scope.Show_RecycleBin)
+                    $scope.Click_Back();
             }
             else {
                 window.parent.ShowNotification(row.DisplayName, data.data.Message, 'error');

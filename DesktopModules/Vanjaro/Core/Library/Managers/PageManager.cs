@@ -148,11 +148,27 @@ namespace Vanjaro.Core
                                             {
                                                 foreach (dynamic st in style.selectors)
                                                 {
-                                                    if (st.name != null)
+                                                    try
                                                     {
-                                                        string val = st.name;
-                                                        if (!Ids.Contains(val))
-                                                            st.name.Value = prefix + "-" + val.Split('-').Last();
+                                                        if (st.name != null)
+                                                        {
+                                                            string val = st.name;
+                                                            if (!Ids.Contains(val))
+                                                                st.name.Value = prefix + "-" + val.Split('-').Last();
+                                                        }
+                                                    }
+                                                    catch
+                                                    {
+                                                        try
+                                                        {
+                                                            if (st != null)
+                                                            {
+                                                                string val = st.Value.ToString().Replace("#", "").Replace(".", "");
+                                                                if (!Ids.Contains(val))
+                                                                    st.Value = "#" + prefix + "-" + val.Split('-').Last();
+                                                            }
+                                                        }
+                                                        catch { }
                                                     }
                                                 }
                                             }
@@ -189,10 +205,25 @@ namespace Vanjaro.Core
                                     break;
                                 foreach (dynamic st in style.selectors)
                                 {
-                                    if (st.name != null && cons.name != null && cons.name.Value == st.name.Value)
+                                    try
                                     {
-                                        result = true;
-                                        break;
+                                        if (st.name != null && cons.name != null && cons.name.Value == st.name.Value)
+                                        {
+                                            result = true;
+                                            break;
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        try
+                                        {
+                                            if (st != null && cons != null && cons.Value.ToString().Replace("#", "").Replace(".", "") == st.Value.ToString().Replace("#", "").Replace(".", ""))
+                                            {
+                                                result = true;
+                                                break;
+                                            }
+                                        }
+                                        catch { }
                                     }
                                 }
                             }
@@ -272,22 +303,49 @@ namespace Vanjaro.Core
                                 bool breaked = false;
                                 foreach (var style in StyleIds)
                                 {
-                                    if (cons.name != null && style.Value.Contains(cons.name.Value))
+                                    try
                                     {
-                                        if (itemsToRemove.ContainsKey(style.Key))
+                                        if (cons.name != null && style.Value.Contains(cons.name.Value))
                                         {
-                                            List<dynamic> existing = itemsToRemove[style.Key];
-                                            existing.Add(con);
-                                            itemsToRemove[style.Key] = existing;
+                                            if (itemsToRemove.ContainsKey(style.Key))
+                                            {
+                                                List<dynamic> existing = itemsToRemove[style.Key];
+                                                existing.Add(con);
+                                                itemsToRemove[style.Key] = existing;
+                                            }
+                                            else
+                                            {
+                                                List<dynamic> obj = new List<dynamic>();
+                                                obj.Add(con);
+                                                itemsToRemove.Add(style.Key, obj);
+                                            }
+                                            breaked = true;
+                                            break;
                                         }
-                                        else
+                                    }
+                                    catch
+                                    {
+                                        try
                                         {
-                                            List<dynamic> obj = new List<dynamic>();
-                                            obj.Add(con);
-                                            itemsToRemove.Add(style.Key, obj);
+                                            if (cons != null && style.Value.Contains(cons.Value.ToString().Replace("#", "").Replace(".", "")))
+                                            {
+                                                if (itemsToRemove.ContainsKey(style.Key))
+                                                {
+                                                    List<dynamic> existing = itemsToRemove[style.Key];
+                                                    existing.Add(con);
+                                                    itemsToRemove[style.Key] = existing;
+                                                }
+                                                else
+                                                {
+                                                    List<dynamic> obj = new List<dynamic>();
+                                                    obj.Add(con);
+                                                    itemsToRemove.Add(style.Key, obj);
+                                                }
+                                                breaked = true;
+                                                break;
+                                            }
                                         }
-                                        breaked = true;
-                                        break;
+                                        catch { }
                                     }
                                 }
                                 if (breaked)
@@ -466,7 +524,10 @@ namespace Vanjaro.Core
                                     if (cons.name != null)
                                         selectorIds.Add(cons.name.Value);
                                 }
-                                catch { }
+                                catch
+                                {
+                                    try { selectorIds.Add(cons.Value.ToString().Replace("#", "").Replace(".", "")); } catch { }
+                                }
                             }
                         }
                         bool delete = true;
@@ -1351,7 +1412,7 @@ namespace Vanjaro.Core
                     string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
                     string tempNewUrl = newurl;
                     int count = 1;
-                Find:
+                    Find:
                     if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
                     {
                         tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;
@@ -1554,11 +1615,27 @@ namespace Vanjaro.Core
                                     {
                                         foreach (dynamic st in style.selectors)
                                         {
-                                            if (st.name != null)
+                                            try
                                             {
-                                                string val = st.name;
-                                                if (!Ids.Contains(val))
-                                                    st.name.Value = prefix + "-" + val.Split('-').Last();
+                                                if (st.name != null)
+                                                {
+                                                    string val = st.name;
+                                                    if (!Ids.Contains(val))
+                                                        st.name.Value = prefix + "-" + val.Split('-').Last();
+                                                }
+                                            }
+                                            catch
+                                            {
+                                                try
+                                                {
+                                                    if (st != null)
+                                                    {
+                                                        string val = st.Value.ToString().Replace("#", "").Replace(".", "");
+                                                        if (!Ids.Contains(val))
+                                                            st.Value = "#" + prefix + "-" + val.Split('-').Last();
+                                                    }
+                                                }
+                                                catch { }
                                             }
                                         }
                                     }
