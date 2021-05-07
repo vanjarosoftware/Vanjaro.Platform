@@ -6,11 +6,11 @@ updates:
       interval: "daily"
 
   - package-ecosystem: "npm"
-    directory: "/"
+    directory: "/DesktopModules/Vanjaro/UXManager/Library/Resources/"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
 
   - package-ecosystem: "nuget"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
