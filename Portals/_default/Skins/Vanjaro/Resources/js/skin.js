@@ -685,6 +685,9 @@ $.fn.dnnModuleActions = function (options) {
 };
 
 // Added to fix ContentEditorManager undefined error when using Vanjaro for DNN package 
-dnn.ContentEditorManager = {};
-dnn.ContentEditorManager.init = function () {
-};
+
+if (typeof dnn != 'undefined') {
+    dnn.ContentEditorManager = {};
+    dnn.ContentEditorManager.init = function () {
+    };
+}

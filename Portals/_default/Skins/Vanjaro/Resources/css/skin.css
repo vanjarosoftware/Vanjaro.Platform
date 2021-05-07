@@ -485,21 +485,14 @@ a.dnnSecondaryAction {
 /*
 Theme.css start
 */
-body#Body {
+body#Body.dnnEditState {
     font-family: Arial,sans-serif;
 }
-
-/*.ResetPassword-container #btnChangePassword .form-ResetPassword .Login-link {
-	color: #fff !important;
-	background: #444;
-	border-color: #444;
-}*/
 
 .spinner-grow-sm {
     vertical-align: middle;
     margin-top: -2px;
 }
-
 
 /*
 Theme.css end
