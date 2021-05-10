@@ -250,10 +250,6 @@ a, a:hover, a:focus, a:active {
     display: none;
 }
 
-.dnnModuleSettings .dnnAdminTabNav {
-    display: none;
-}
-
 div.actionMenu ul {
     z-index: 1000 !important;
 }

@@ -2356,6 +2356,10 @@ span.notificationname {
     z-index: 999;
 }
 
+.initrevisionloaderimg {
+    z-index: 9999;
+}
+
 /*Action Bar*/
 .gjs-rte-action {
     border-right: 1px solid #eee;
@@ -2846,6 +2850,16 @@ input.rangeinput {
 /*[data-gjs-type="wrapper"] .vanjarosearchinput .searchicon {
     top: 5px;
 }*/
+
+.initoptimizing-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #808080;
+    z-index: 9999;
+}
 
 .optimizing-overlay {
     position: fixed;
