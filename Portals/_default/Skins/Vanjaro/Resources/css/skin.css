@@ -597,7 +597,7 @@ Theme.css end
     }
 }
 
-@media(max-width: 576px) {
+@media(max-width: 767px) {
     .d-desktop-none {
         display: block !important;
     }
@@ -606,7 +606,25 @@ Theme.css end
         display: block !important;
     }
 
-    .d-mobile-none {
+    .d-mobile-landscape-none {
+        display: none !important;
+    }
+}
+
+@media(max-width: 575px) {
+    .d-desktop-none {
+        display: block !important;
+    }
+
+    .d-tablet-none {
+        display: block !important;
+    }
+
+    .d-mobile-landscape-none {
+        display: block !important;
+    }
+
+    .d-mobile-portrait-none {
         display: none !important;
     }
 }
