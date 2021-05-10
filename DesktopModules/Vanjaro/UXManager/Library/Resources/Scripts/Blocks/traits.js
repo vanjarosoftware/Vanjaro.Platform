@@ -799,10 +799,14 @@ export default (editor, config = {}) => {
 
 			if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
 
-				if (typeof component.getStyle()[property] != 'undefined')
-					value = component.getStyle()[property].replace('!important', '');
+				if (property != '') {
+					if (typeof component.getStyle()[property] != 'undefined')
+						value = component.getStyle()[property].replace('!important', '');
+					else
+						value = $(component.view.el).css(property);
+				}
 				else
-					value = $(component.view.el).css(property);
+					value = trait.getInitValue();
 
 				trait.view.$el.find("input:checked").prop('checked', false);
 				trait.view.$el.find('input#' + value).prop('checked', true);
@@ -1564,10 +1568,15 @@ export default (editor, config = {}) => {
 
 			if (typeof event != 'undefined' && !event.target.classList.contains('input-control')) {
 
-				if (typeof component.getStyle()[property] != 'undefined')
-					value = component.getStyle()[property].replace('!important', '');
+				if (property != '') {
+
+					if (typeof component.getStyle()[property] != 'undefined')
+						value = component.getStyle()[property].replace('!important', '');
+					else
+						value = $(component.view.el).css(property);
+				}
 				else
-					value = $(component.view.el).css(property);
+					value = trait.getInitValue()
 
 				if (typeof value == "string" && value != "") {
 
