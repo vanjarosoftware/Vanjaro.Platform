@@ -391,8 +391,10 @@ $(document).ready(function () {
 							if (typeof LoadCustomCode != 'undefined')
 								LoadCustomCode(grapesjs);
 
-							if (!$('.optimizing-overlay').length)
-								$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Please wait</h1></div>');
+							if ($('.initpageloader').length <= 0) {
+								$('.vj-wrapper').prepend('<div class="initoptimizing-overlay"></div>');
+								$('body').append('<div class="initpageloader"><div class="modal-backdrop fade show"></div><img class="revisionloader initrevisionloaderimg" src="' + window.parent.VjDefaultPath + 'loading.svg" /></div>');
+							}
 
 							VjEditor = grapesjs.init({
 								protectedCss: '',
@@ -1625,7 +1627,7 @@ $(document).ready(function () {
 							VjEditor.on('load', function () {
 								try { $.ServicesFramework(-1); }
 								catch (err) { window.parent.location.reload(); }
-								setTimeout(function () { $(window.parent.document.body).find('.vj-wrapper').find('.optimizing-overlay').remove(); }, 500);
+								setTimeout(function () { $(window.parent.document.body).find('.vj-wrapper').find('.initoptimizing-overlay').remove(); $(window.parent.document.body).find('.initpageloader').remove(); }, 500);
 								$('#BlockManager').find('.block-search').val('');
 
 								if (vjEditorSettings.EditPage) {
