@@ -3309,12 +3309,14 @@ $(document).ready(function () {
 			else {
 				$body.removeClass('tablet mobile-portrait').addClass('resp-mode mobile-landscape');
 			}
-
 		}
 
-		var selected = VjEditor.getSelected();
-		VjEditor.select();
-		VjEditor.select(selected);
+		$('.gjs-frame-wrapper').on('transitionend webkitTransitionEnd oTransitionEnd', function () {
+			var selected = VjEditor.getSelected();
+			VjEditor.select();
+			VjEditor.select(selected);
+		});
+		
 	});
 
 	var Stylemanager = function () {
