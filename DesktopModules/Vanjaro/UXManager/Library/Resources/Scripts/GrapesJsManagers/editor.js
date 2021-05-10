@@ -3016,11 +3016,11 @@ $(document).ready(function () {
 									$(model.parent().getEl()).attr("data-empty", "true");
 
 								if (model.parent() != undefined && model.parent().attributes.type == "row" && model.parent().components().length == 0) {
-
 									if (model.parent().parent() != undefined && model.parent().parent().attributes.type == "grid")
 										model.parent().parent().remove();
-								}
+                                }
 
+                                VjEditor.select();
 							});
 
 							//Tooltip
