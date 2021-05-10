@@ -23,7 +23,7 @@
                 $(this).siblings("input[type='number']").val(this.value);            
                 $scope.ApplyChanges(this);
             });
-        }, 500);
+        }, 1000);
 
 
         $('.subtMenu').on("click", function (e) {

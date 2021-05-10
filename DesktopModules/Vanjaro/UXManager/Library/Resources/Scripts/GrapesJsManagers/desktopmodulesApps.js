@@ -334,8 +334,12 @@ global.GetGlobalBlockName = function (guid) {
 
 global.StyleGlobal = function (model) {
     var modelEl = $(model.getEl());
-    if (!modelEl.find('global-tools').length)
+    if (!modelEl.find('global-tools').length) {
         modelEl.append('<div class="global-tools"><div class="backdrop"></div><em title="Global" class="fa fa-globe"></em><div class="toolbar"><em title="Unlock" class="fa fa-unlock" onclick="window.parent.UnlockGlobalBlock($(this))"></em><em title="revisions" class="fa fa-history" onclick="window.parent.ViewBlockRevisions(\'' + model.attributes.attributes["data-guid"] + '\')"></em><em title="Unlink from Global" class="fa fa-unlink" onclick="window.parent.VjEditor.runCommand(\'custom-block-globaltolocal\')"></em><em title="Move" class="fa fa-arrows" onclick="window.parent.VjEditor.runCommand(\'tlb-move\')"></em><em title="Delete" class="fa fa-trash-o" onclick="window.parent.VjEditor.runCommand(\'global-delete\')"></em>');
+        if (model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes.published != undefined && !model.attributes.attributes.published) {
+            $(modelEl).find('.global-tools').append('<span class="toolbar draft badge font-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Draft">Draft</span>');
+        }
+    }
 }
 
 global.UpdateGlobalBlock = function (model) {
@@ -343,8 +347,15 @@ global.UpdateGlobalBlock = function (model) {
         try {
             if (model.attributes != undefined)
                 model.attributes.content = '';
-            var content = VjEditor.runCommand("export-component", {
-                component: model.attributes.components.models[0]
+            var content = { html: '', css: '' };
+            $.each(model.attributes.components.models, function (mi, mv) {
+                var mvcontent = VjEditor.runCommand("export-component", {
+                    component: mv
+                });
+                if (mvcontent != undefined && mvcontent.html != undefined && mvcontent.html != "") {
+                    content.html += mvcontent.html;
+                    content.css += mvcontent.css;
+                }
             });
             if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
                 var Block = VjEditor.BlockManager.get(GetGlobalBlockName(model.attributes.attributes['data-guid']));

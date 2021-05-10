@@ -109,11 +109,7 @@
 }
 
 .vj-icon {
-    display: inline-block;
-    text-decoration: none;
-    vertical-align: middle;
-    color: inherit;
-    fill: currentColor;
+    display: inline-block;  
     border-width: 0;
     border-style: solid;
 }
@@ -121,6 +117,7 @@
     .vj-icon svg {
         width: 50px;
         height: 50px;
+        fill: currentColor;
     }
 
 /*Blocks CSS*/
@@ -485,21 +482,14 @@ a.dnnSecondaryAction {
 /*
 Theme.css start
 */
-body#Body {
+body#Body.dnnEditState {
     font-family: Arial,sans-serif;
 }
-
-/*.ResetPassword-container #btnChangePassword .form-ResetPassword .Login-link {
-	color: #fff !important;
-	background: #444;
-	border-color: #444;
-}*/
 
 .spinner-grow-sm {
     vertical-align: middle;
     margin-top: -2px;
 }
-
 
 /*
 Theme.css end

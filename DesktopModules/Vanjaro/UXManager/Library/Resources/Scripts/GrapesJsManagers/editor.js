@@ -391,6 +391,9 @@ $(document).ready(function () {
 							if (typeof LoadCustomCode != 'undefined')
 								LoadCustomCode(grapesjs);
 
+							if (!$('.optimizing-overlay').length)
+								$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Please wait</h1></div>');
+
 							VjEditor = grapesjs.init({
 								protectedCss: '',
 								allowScripts: 1,
@@ -1622,6 +1625,7 @@ $(document).ready(function () {
 							VjEditor.on('load', function () {
 								try { $.ServicesFramework(-1); }
 								catch (err) { window.parent.location.reload(); }
+								setTimeout(function () { $(window.parent.document.body).find('.vj-wrapper').find('.optimizing-overlay').remove(); }, 500);
 								$('#BlockManager').find('.block-search').val('');
 
 								if (vjEditorSettings.EditPage) {
@@ -2888,8 +2892,15 @@ $(document).ready(function () {
 											try {
 												if (v.attributes != undefined)
 													v.attributes.content = '';
-												var content = VjEditor.runCommand("export-component", {
-													component: v.attributes.components.models[0]
+												var content = { html: '', css: '' };
+												$.each(v.attributes.components.models, function (mi, mv) {
+													var mvcontent = VjEditor.runCommand("export-component", {
+														component: mv
+													});
+													if (mvcontent != undefined && mvcontent.html != undefined && mvcontent.html != "") {
+														content.html += mvcontent.html;
+														content.css += mvcontent.css;
+													}
 												});
 												if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
 													var item = {
@@ -2899,6 +2910,9 @@ $(document).ready(function () {
 														css: content.css,
 													};
 													globalblocks.push(item);
+													if (v.attributes != undefined && v.attributes.attributes != undefined && v.attributes.attributes.published != undefined) {
+														v.attributes.attributes.published = true;
+													}
 												}
 											}
 											catch (err) { console.log(err); }

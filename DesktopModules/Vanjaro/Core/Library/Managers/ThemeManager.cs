@@ -190,7 +190,7 @@ namespace Vanjaro.Core
                 }
 
                 List<string> Css = new List<string>();
-                foreach (IThemeEditor category in GetCategories(CheckVisibilityPermission))
+                foreach (IThemeEditor category in GetCategories(CheckVisibilityPermission).OrderBy(o => o.ViewOrder).ToList())
                 {
                     List<ThemeEditorValue> themeEditorValues = GetThemeEditorValues(PortalID, category.Guid);
                     ThemeEditorWrapper editors = GetThemeEditors(PortalID, category.Guid, CheckVisibilityPermission);
@@ -706,9 +706,12 @@ namespace Vanjaro.Core
                                 {
                                     sb.Append("<div class=\"dropdownselect optioncontrol\" id=" + item.Guid + "><div class=\"dropdownlabel\" ><label>" + fonts.Title + ":</label></div>");
                                     sb.Append("<div class=\"dropdownOption\"><select  guid=" + fonts.Guid + ">");
-                                    foreach (StringTextNV opt in GetDDLFonts("all"))
+                                    List<StringTextNV> _DDLFonts = GetDDLFonts("all");
+                                    foreach (StringTextNV opt in _DDLFonts)
                                     {
                                         string value = GetGuidValue(themeEditorValues, fonts);
+                                        if (string.IsNullOrEmpty(value) || _DDLFonts.Where(f => f.Value == value).FirstOrDefault() == null)
+                                            value = _DDLFonts.FirstOrDefault().Value;
                                         if (opt.Value == value)
                                         {
                                             sb.Append("<option selected=\"selected\" value=\"" + opt.Value + "\">" + opt.Name + "</option>");
