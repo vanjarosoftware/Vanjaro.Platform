@@ -82,7 +82,8 @@ export default (editor, config = {}) => {
 			},
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				droppable: false,
-				classes: ['btn', 'btn-primary', 'button-style-1'],
+                classes: ['btn', 'btn-primary', 'button-style-1'],
+                text: true,
 				resizable: {
 					tl: 0, // Top left
 					tc: 0, // Top center

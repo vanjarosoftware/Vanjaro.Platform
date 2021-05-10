@@ -2334,7 +2334,7 @@ $(document).ready(function () {
 										VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
 								}
 
-								if (model.attributes.type == 'heading' || model.attributes.type == 'text' || model.attributes.type == 'button' || model.attributes.type == 'list' || model.attributes.type == 'link') {
+                                if (typeof model.attributes.text != 'undefined' && model.attributes.text) {
 
 									VjEditor.StyleManager.addSector(Text, {
 										name: VjLocalized.Text,

@@ -26,7 +26,8 @@
 		model: linkModel.extend({
 			defaults: Object.assign({}, linkModel.prototype.defaults, {
 				droppable: true,
-				tagName: 'a',
+                tagName: 'a',
+                text: true,
 				traits: [
 					{
 						label: "Alignment",
