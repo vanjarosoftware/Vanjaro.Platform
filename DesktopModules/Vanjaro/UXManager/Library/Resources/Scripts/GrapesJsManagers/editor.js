@@ -622,16 +622,29 @@ $(document).ready(function () {
 										properties: [
 											{
 												type: 'customradio',
-												name: 'Hide in Mobile',
-												property: 'd-mobile-none',
-												defaults: 'd-mobile-show',
+												name: 'Hide in Mobile Portrait',
+												property: 'd-mobile-portrait-none',
+												defaults: 'd-mobile-portrait-show',
 												list: [{
 													name: 'Yes',
-													value: 'd-mobile-none'
+													value: 'd-mobile-portrait-none'
 												},
 												{
 													name: 'No',
-													value: 'd-mobile-show'
+													value: 'd-mobile-portrait-show'
+												}],
+											}, {
+												type: 'customradio',
+												name: 'Hide in Mobile Landscape',
+												property: 'd-mobile-landscape-none',
+												defaults: 'd-mobile-landscape-show',
+												list: [{
+													name: 'Yes',
+													value: 'd-mobile-landscape-none'
+												},
+												{
+													name: 'No',
+													value: 'd-mobile-landscape-show'
 												}],
 											}, {
 												type: 'customradio',
@@ -1024,169 +1037,169 @@ $(document).ready(function () {
 												defaults: 'auto',
 											}
 										]
-                                        }, {
-                                            name: VjLocalized.Display,
-                                            open: false,
-                                            properties: [{
-                                                type: 'radio',
-                                                name: 'Display',
-                                                property: 'display',
-                                                defaults: 'none',
-                                                list: [{
-                                                    value: 'none',
-                                                    name: 'none',
-                                                }, {
-                                                    value: 'block',
-                                                    name: 'block',
-                                                }, {
-                                                    value: 'inline',
-                                                    name: 'inline',
-                                                }, {
-                                                    value: 'inline-block',
-                                                    name: 'inline-block',
-                                                }, {
-                                                    value: 'flex',
-                                                    name: 'flex',
-                                                }],
-                                            }, {
-                                                name: 'Direction',
-                                                property: 'flex-direction',
-                                                type: 'customradio',
-                                                cssproperty: 'flex-direction',
-                                                UpdateStyles: true,
-                                                list: [{
-                                                    value: 'row',
-                                                    name: 'Row',
-                                                    img: 'flex-dir-row.png',
-                                                }, {
-                                                    value: 'row-reverse',
-                                                    name: 'Row Reverse',
-                                                    img: 'flex-dir-row-rev.png',
-                                                }, {
-                                                    value: 'column',
-                                                    name: 'Column',
-                                                    img: 'flex-dir-col.png',
-                                                }, {
-                                                    value: 'column-reverse',
-                                                    name: 'Column Reverse',
-                                                    img: 'flex-dir-col-rev.png',
-                                                }],
-                                            }, {
-                                                name: 'Justify',
-                                                property: 'justify-content',
-                                                type: 'customradio',
-                                                UpdateStyles: true,
-                                                list: [{
-                                                    value: 'flex-start',
-                                                    name: 'Start',
-                                                    img: 'align-left.png'
-                                                }, {
-                                                    value: 'space-between',
-                                                    name: 'Space Between',
-                                                    img: 'align-between.png',
-                                                }, {
-                                                    value: 'space-around',
-                                                    name: 'Space Around',
-                                                    img: 'align-around.png',
-                                                }, {
-                                                    value: 'center',
-                                                    name: 'Center',
-                                                    img: 'align-center.png',
-                                                }, {
-                                                    value: 'flex-end',
-                                                    name: 'End',
-                                                    img: 'align-right.png',
-                                                }],
-                                            }, {
-                                                name: 'Align',
-                                                property: 'align-items',
-                                                type: 'customradio',
-                                                UpdateStyles: true,
-                                                list: [{
-                                                    value: 'flex-start',
-                                                    name: 'Start',
-                                                    img: 'align-left.png',
-                                                }, {
-                                                    value: 'stretch',
-                                                    name: 'Stretch',
-                                                    img: 'align-justify.png',
-                                                }, {
-                                                    value: 'center',
-                                                    name: 'Center',
-                                                    img: 'align-center.png',
-                                                }, {
-                                                    value: 'flex-end',
-                                                    name: 'End',
-                                                    img: 'align-right.png',
-                                                }],
-                                            }, {
-                                                name: 'Order',
-                                                property: 'order',
-                                                type: 'customrange',
-                                                defaults: 0,
-                                                step: 1,
-                                                min: 0,
-                                                max: 100,
-                                                cssproperty: 'order',
-                                            }, {
-                                                name: 'Flex',
-                                                property: 'flex',
-                                                type: 'composite',
-                                                properties: [{
-                                                    name: 'Grow',
-                                                    property: 'flex-grow',
-                                                    type: 'customrange',
-                                                    defaults: 0,
-                                                    step: 1,
-                                                    min: 0,
-                                                    max: 100,
-                                                }, {
-                                                    name: 'Shrink',
-                                                    property: 'flex-shrink',
-                                                    type: 'customrange',
-                                                    defaults: 0,
-                                                    step: 1,
-                                                    min: 0,
-                                                    max: 100,
-                                                    cssproperty: 'flex-shrink',
-                                                }, {
-                                                    name: 'Basis',
-                                                    property: 'flex-basis',
-                                                    type: 'customrange',
-                                                    units: [{ name: 'px', min: 1, max: 100, step: 1 },
-                                                    { name: '%', min: 1, max: 100, step: 1 }
-                                                    ],
-                                                    unit: 'px',
-                                                    defaults: 'auto',
-                                                    cssproperty: 'flex-basis',
-                                                }],
-                                            }, {
-                                                name: 'Align',
-                                                property: 'align-self',
-                                                type: 'customradio',
-                                                UpdateStyles: true,
-                                                list: [{
-                                                    value: 'auto',
-                                                    name: 'Auto',
-                                                }, {
-                                                    value: 'flex-start',
-                                                    name: 'Start',
-                                                    img: 'align-left.png',
-                                                }, {
-                                                    value: 'center',
-                                                    name: 'Center',
-                                                    img: 'align-center.png',
-                                                }, {
-                                                    value: 'stretch',
-                                                    name: 'Stretch',
-                                                    img: 'align-justify.png'
-                                                }, {
-                                                    value: 'flex-end',
-                                                    name: 'End',
-                                                    img: 'align-right.png'
-                                                }],
-                                            }]
-                                        }, {
+									}, {
+										name: VjLocalized.Display,
+										open: false,
+										properties: [{
+											type: 'radio',
+											name: 'Display',
+											property: 'display',
+											defaults: 'none',
+											list: [{
+												value: 'none',
+												name: 'none',
+											}, {
+												value: 'block',
+												name: 'block',
+											}, {
+												value: 'inline',
+												name: 'inline',
+											}, {
+												value: 'inline-block',
+												name: 'inline-block',
+											}, {
+												value: 'flex',
+												name: 'flex',
+											}],
+										}, {
+											name: 'Direction',
+											property: 'flex-direction',
+											type: 'customradio',
+											cssproperty: 'flex-direction',
+											UpdateStyles: true,
+											list: [{
+												value: 'row',
+												name: 'Row',
+												img: 'flex-dir-row.png',
+											}, {
+												value: 'row-reverse',
+												name: 'Row Reverse',
+												img: 'flex-dir-row-rev.png',
+											}, {
+												value: 'column',
+												name: 'Column',
+												img: 'flex-dir-col.png',
+											}, {
+												value: 'column-reverse',
+												name: 'Column Reverse',
+												img: 'flex-dir-col-rev.png',
+											}],
+										}, {
+											name: 'Justify',
+											property: 'justify-content',
+											type: 'customradio',
+											UpdateStyles: true,
+											list: [{
+												value: 'flex-start',
+												name: 'Start',
+												img: 'align-left.png'
+											}, {
+												value: 'space-between',
+												name: 'Space Between',
+												img: 'align-between.png',
+											}, {
+												value: 'space-around',
+												name: 'Space Around',
+												img: 'align-around.png',
+											}, {
+												value: 'center',
+												name: 'Center',
+												img: 'align-center.png',
+											}, {
+												value: 'flex-end',
+												name: 'End',
+												img: 'align-right.png',
+											}],
+										}, {
+											name: 'Align',
+											property: 'align-items',
+											type: 'customradio',
+											UpdateStyles: true,
+											list: [{
+												value: 'flex-start',
+												name: 'Start',
+												img: 'align-left.png',
+											}, {
+												value: 'stretch',
+												name: 'Stretch',
+												img: 'align-justify.png',
+											}, {
+												value: 'center',
+												name: 'Center',
+												img: 'align-center.png',
+											}, {
+												value: 'flex-end',
+												name: 'End',
+												img: 'align-right.png',
+											}],
+										}, {
+											name: 'Order',
+											property: 'order',
+											type: 'customrange',
+											defaults: 0,
+											step: 1,
+											min: 0,
+											max: 100,
+											cssproperty: 'order',
+										}, {
+											name: 'Flex',
+											property: 'flex',
+											type: 'composite',
+											properties: [{
+												name: 'Grow',
+												property: 'flex-grow',
+												type: 'customrange',
+												defaults: 0,
+												step: 1,
+												min: 0,
+												max: 100,
+											}, {
+												name: 'Shrink',
+												property: 'flex-shrink',
+												type: 'customrange',
+												defaults: 0,
+												step: 1,
+												min: 0,
+												max: 100,
+												cssproperty: 'flex-shrink',
+											}, {
+												name: 'Basis',
+												property: 'flex-basis',
+												type: 'customrange',
+												units: [{ name: 'px', min: 1, max: 100, step: 1 },
+												{ name: '%', min: 1, max: 100, step: 1 }
+												],
+												unit: 'px',
+												defaults: 'auto',
+												cssproperty: 'flex-basis',
+											}],
+										}, {
+											name: 'Align',
+											property: 'align-self',
+											type: 'customradio',
+											UpdateStyles: true,
+											list: [{
+												value: 'auto',
+												name: 'Auto',
+											}, {
+												value: 'flex-start',
+												name: 'Start',
+												img: 'align-left.png',
+											}, {
+												value: 'center',
+												name: 'Center',
+												img: 'align-center.png',
+											}, {
+												value: 'stretch',
+												name: 'Stretch',
+												img: 'align-justify.png'
+											}, {
+												value: 'flex-end',
+												name: 'End',
+												img: 'align-right.png'
+											}],
+										}]
+									}, {
 										name: VjLocalized.Transform,
 										open: false,
 										properties: [
@@ -1618,7 +1631,7 @@ $(document).ready(function () {
 								if (vjEditorSettings.EditPage) {
 									LoadApps();
 									LoadDesignBlocks();
-                                }
+								}
 
 								if ($(window).width() < 1000) {
 									$(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
@@ -1665,7 +1678,7 @@ $(document).ready(function () {
 									VjEditor.runCommand("save");
 									VjEditor.destroy();
 									// Remove All Managers
-                                    $('#ContentBlocks, .styleManager, .traitsManager').empty();
+									$('#ContentBlocks, .styleManager, .traitsManager').empty();
 									VjLayerpanel.close();
 									VjInit();
 								} else if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
@@ -1696,15 +1709,15 @@ $(document).ready(function () {
 									$("#iframeHolder").fadeIn();
 
 									eraseCookie("vj_UXLoad");
-                                }
+								}
 
-                                VjEditor.SelectorManager.getAll().filter(selector => {
-                                    if (selector.attributes.type == 1) {
-                                        selector.set({
-                                            active: false
-                                        })
-                                    }
-                                });
+								VjEditor.SelectorManager.getAll().filter(selector => {
+									if (selector.attributes.type == 1) {
+										selector.set({
+											active: false
+										})
+									}
+								});
 							});
 
 							var parentClone = "";
@@ -1792,7 +1805,7 @@ $(document).ready(function () {
 
 									var modelClasses = model.attributes.classes;
 									if (modelClasses.length) {
-                                        modelClasses.map(selector => {
+										modelClasses.map(selector => {
 											if (selector.attributes.active) {
 												selector.set({
 													active: false
@@ -2523,15 +2536,15 @@ $(document).ready(function () {
 
 								if (model.attributes.type == 'grid' && model.components().length)
 									$(model.components().models[0].getEl()).removeClass('gjs-dashed');
-							});                            
+							});
 
-                            VjEditor.on('selector:add', selector => {
-                                if (selector.attributes.type == 1) {
-                                    selector.set({
-                                        active: false
-                                    });
-                                }
-                            });
+							VjEditor.on('selector:add', selector => {
+								if (selector.attributes.type == 1) {
+									selector.set({
+										active: false
+									});
+								}
+							});
 
 							VjEditor.on('component:styleUpdate', (model, property) => {
 
@@ -2654,7 +2667,7 @@ $(document).ready(function () {
 
 								FilterBorderOptions(model, event.target.value);
 								model.removeStyle('border-position');
-                            });                            
+							});
 
 							VjEditor.on('component:styleUpdate:flex-direction', (model) => {
 
@@ -3409,7 +3422,7 @@ global.ChangeBlockType = function (query) {
 				return globalBlocks;
 		}
 
-        if (!isGlobal && !isCustom && isLocal && localBlocks.length)
+		if (!isGlobal && !isCustom && isLocal && localBlocks.length)
 			$('#ContentBlocks').empty().append(VjEditor.BlockManager.render(localBlocks));
 		else if (!isLocal && !isGlobal && isCustom) {
 			if (customblocks.length <= 0)
