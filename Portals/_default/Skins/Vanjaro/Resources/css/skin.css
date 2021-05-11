@@ -125,7 +125,6 @@
 
 
 .vj-image-gallery .vj-image-gallery-item {
-    margin: 5px;
     object-fit: cover;
     cursor: pointer;
 }
