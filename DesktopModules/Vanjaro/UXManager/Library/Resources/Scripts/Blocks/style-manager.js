@@ -48,10 +48,12 @@
 			var property = model.attributes.property;
 
 			if (model.attributes.UpdateStyles) {
+
 				var style = selected.getStyle();
+
 				style[property] = event.target.value;
-                selected.setStyle(style);                
-                model.setValue(val);
+				selected.setStyle(style);
+				model.setValue(val);
 			}
 			else {
 				var classes = model.attributes.list.map(opt => opt.value);
@@ -61,8 +63,11 @@
 				});
 
 				selected.addClass(val);
-            }
-            selected.set(property, val);
+			}
+			selected.set(property, val);
+
+			if (property == "border-position")
+				FilterBorderOptions(selected, val);
 		},
 		setValue(value) {
 			var model = this.model;
@@ -448,7 +453,7 @@
 
 				if (typeof model.attributes.units != 'undefined')
 					LoadAttr(model, unit);
-            }			
+			}
 
 			var selected = VjEditor.getSelected();
 
@@ -496,18 +501,18 @@
 				}
 			}
 
-            selected.removeStyle(property);
+			selected.removeStyle(property);
 
-            var computedValue = $(selected.getEl()).css(property).replace(unit, '');
+			var computedValue = $(selected.getEl()).css(property).replace(unit, '');
 
-            if (computedValue != value)
-                value = computedValue;
+			if (computedValue != value)
+				value = computedValue;
 
-            model.view.$el.find('input').val(value);
-            model.view.$el.find('select').val(unit);
+			model.view.$el.find('input').val(value);
+			model.view.$el.find('select').val(unit);
 
-            if (property == 'font-size')
-                selected.getTrait('fontsize').setTargetValue(value);
+			if (property == 'font-size')
+				selected.getTrait('fontsize').setTargetValue(value);
 
 			if (property == "border-width" || property == "border-top-width" || property == "border-right-width" || property == "border-bottom-width" || property == "border-left-width") {
 
