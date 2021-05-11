@@ -108,6 +108,7 @@ export default (editor, config = {}) => {
             },
             defaults: Object.assign({}, defaultModel.prototype.defaults, {
                 droppable: '.list-item, .list-text',
+                text: true,
                 traits: [{
                     label: 'List Type',
                     name: 'list_type',

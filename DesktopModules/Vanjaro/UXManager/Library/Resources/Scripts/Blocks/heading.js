@@ -26,7 +26,8 @@ export default (editor, config = {}) => {
 				'custom-name': 'Heading',
 				droppable: false,
 				tagName: 'h1',
-				classes: ['vj-heading', 'text-primary', 'head-style-1'],
+                classes: ['vj-heading', 'text-primary', 'head-style-1'],
+                text: true,
 				traits: [
 					{
 						label: 'Importance',
