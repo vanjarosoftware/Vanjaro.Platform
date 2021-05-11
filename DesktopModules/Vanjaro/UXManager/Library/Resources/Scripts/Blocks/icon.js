@@ -192,24 +192,11 @@
 						label: "Width",
 						name: "framewidth",
 						type: "custom_range",
-						cssproperties: [{ name: "border-width" }],
-						min: "0",
-						max: "100",
-						default: "10",
-						changeProp: 1,
-					}, {
-						label: "Gap",
-						name: "framegap",
-						type: "custom_range",
-						cssproperties: [
-							{ name: "padding-top" },
-							{ name: "padding-bottom" },
-							{ name: "padding-left" },
-							{ name: "padding-right" }
-						],
-						min: "0",
-						max: "200",
-						default: "0",
+                        cssproperties: [{ name: "border-width" }],
+                        units: [
+                            { name: 'px', min: 0, max: 100, step: 1, value: 10 },
+                        ],
+                        unit: "px",
 						changeProp: 1,
 					}, {
 						label: "Style",

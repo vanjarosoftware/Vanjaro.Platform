@@ -947,14 +947,12 @@ export default (editor, config = {}) => {
 				if (event.target.name == "frame") {
 					if (event.target.value != "none") {
 						$(component.getTrait("framewidth").el).parents(".gjs-trt-trait__wrp").show();
-						$(component.getTrait("framegap").el).parents(".gjs-trt-trait__wrp").show();
 						$(component.getTrait("framestyle").el).parents(".gjs-trt-trait__wrp").show();
 						$(component.getTrait("framecolor").el).parents(".gjs-trt-trait__wrp").show();
 						$(component.getTrait("framecolor").el).find("input#frame" + component.getTrait("framecolor").attributes.value).prop('checked', true).next().addClass('active');
 					}
 					else {
 						$(component.getTrait("framewidth").el).parents(".gjs-trt-trait__wrp").hide();
-						$(component.getTrait("framegap").el).parents(".gjs-trt-trait__wrp").hide();
 						$(component.getTrait("framestyle").el).parents(".gjs-trt-trait__wrp").hide();
 						$(component.getTrait("framecolor").el).parents(".gjs-trt-trait__wrp").hide();
 					}
@@ -1613,7 +1611,7 @@ export default (editor, config = {}) => {
 								'step': option.step
 							});
 
-							if (inputvalue == '')
+                            if (typeof option.value != 'undefined')
 								inputvalue = option.value;
 
 							return false;
