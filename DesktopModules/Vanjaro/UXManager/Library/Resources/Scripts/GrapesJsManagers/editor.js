@@ -2349,7 +2349,7 @@ $(document).ready(function () {
 										VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
 								}
 
-								if (model.attributes.type == 'heading' || model.attributes.type == 'text' || model.attributes.type == 'button' || model.attributes.type == 'list' || model.attributes.type == 'link') {
+                                if (typeof model.attributes.text != 'undefined' && model.attributes.text) {
 
 									VjEditor.StyleManager.addSector(Text, {
 										name: VjLocalized.Text,
@@ -3016,11 +3016,11 @@ $(document).ready(function () {
 									$(model.parent().getEl()).attr("data-empty", "true");
 
 								if (model.parent() != undefined && model.parent().attributes.type == "row" && model.parent().components().length == 0) {
-
 									if (model.parent().parent() != undefined && model.parent().parent().attributes.type == "grid")
 										model.parent().parent().remove();
-								}
+                                }
 
+                                VjEditor.select();
 							});
 
 							//Tooltip
@@ -3309,12 +3309,14 @@ $(document).ready(function () {
 			else {
 				$body.removeClass('tablet mobile-portrait').addClass('resp-mode mobile-landscape');
 			}
-
 		}
 
-		var selected = VjEditor.getSelected();
-		VjEditor.select();
-		VjEditor.select(selected);
+		$('.gjs-frame-wrapper').on('transitionend webkitTransitionEnd oTransitionEnd', function () {
+			var selected = VjEditor.getSelected();
+			VjEditor.select();
+			VjEditor.select(selected);
+		});
+		
 	});
 
 	var Stylemanager = function () {

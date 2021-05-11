@@ -23,7 +23,8 @@ export default (editor, config = {}) => {
 		model: textModel.extend({
 			defaults: Object.assign({}, textModel.prototype.defaults, {
 				droppable: false,
-				classes: ['vj-text', 'text-dark', 'paragraph-style-1'],
+                classes: ['vj-text', 'text-dark', 'paragraph-style-1'],
+                text: true,
 				traits: [
 					{
 						label: 'Alignment',

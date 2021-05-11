@@ -16,7 +16,7 @@
     height: 100%;
     width: 100%;
     border: none;
-    position:absolute;
+    position: absolute;
 }
 
     .modal .modal-dialog iframe body {
@@ -109,7 +109,8 @@
 }
 
 .vj-icon {
-    display: inline-block;  
+    display: inline-block;
+    padding: 5px;
     border-width: 0;
     border-style: solid;
 }
@@ -122,10 +123,7 @@
 
 /*Blocks CSS*/
 
-
-
 .vj-image-gallery .vj-image-gallery-item {
-    margin: 5px;
     object-fit: cover;
     cursor: pointer;
 }
@@ -210,9 +208,9 @@ a, a:hover, a:focus, a:active {
     text-decoration: none;
 }
 
-    .button-box .button-text {
-        word-break: break-word;
-    }
+.button-box .button-text {
+    word-break: break-word;
+}
 
 .modal.fullwidth {
     padding-left: 1.75rem;
@@ -233,7 +231,7 @@ a, a:hover, a:focus, a:active {
 
 #UXRender {
     padding: 0;
-    position:relative;
+    position: relative;
 }
 
 .uxmanager-modal .modal-dialog {
@@ -503,7 +501,7 @@ Theme.css end
 .vj-section {
     position: relative;
     padding-top: 50px;
-    padding-bottom: 50px;  
+    padding-bottom: 50px;
 }
 
 .link,
@@ -524,7 +522,7 @@ Theme.css end
 
 .vj-heading {
     display: block;
-    text-align: left;    
+    text-align: left;
 }
 
 .vj-text {
