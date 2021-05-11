@@ -5576,9 +5576,9 @@
           "Title": "Font Style",
           "DefaultValue": "italic",
           "Suffix": "",
-          "CustomCSS": ".paragraph-style-3 {\n    font-style: $psoneFontStyle;\n}",
-          "PreviewCSS": ".paragraph-style-3 {\n    font-style: $psoneFontStyle;\n}",
-          "LessVariable": "$psoneFontStyle",
+          "CustomCSS": ".paragraph-style-3 {\n    font-style: $psThreeFontStyle;\n}",
+          "PreviewCSS": ".paragraph-style-3 {\n    font-style: $psThreeFontStyle;\n}",
+          "LessVariable": "$psThreeFontStyle",
           "Type": "Dropdown"
         },
         {
@@ -6397,9 +6397,9 @@
           "Title": "Letter Spacing",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": ".paragraph-style-7 {\n    letter-spacing: $psoneLetterSpacingpx;\n}",
-          "PreviewCSS": ".paragraph-style-7 {\n    letter-spacing: $psoneLetterSpacingpx;\n}",
-          "LessVariable": "$psoneLetterSpacing",
+          "CustomCSS": ".paragraph-style-7 {\n    letter-spacing: $psSevLetterSpacingpx;\n}",
+          "PreviewCSS": ".paragraph-style-7 {\n    letter-spacing: $psSevLetterSpacingpx;\n}",
+          "LessVariable": "$psSevLetterSpacing",
           "JavascriptVariable": "",
           "Type": "Slider"
         },
