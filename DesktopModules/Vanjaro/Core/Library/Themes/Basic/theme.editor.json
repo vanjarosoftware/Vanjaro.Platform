@@ -97,7 +97,7 @@
         },
         {
           "Guid": "d8810137-ba34-4c50-a771-769130e5eaa8",
-          "Title": "Border bottom color ",
+          "Title": "Border color ",
           "DefaultValue": "transparent",
           "Suffix": "",
           "CustomCSS": ".DefaultMenu li a.nav-link {\n  border-color:$bordercolor !important;\n}",
@@ -108,7 +108,7 @@
         },
         {
           "Guid": "1c55d5b4-a527-4654-adf7-9c0ff04c1ca8",
-          "Title": "Active border bottom color",
+          "Title": "Active border color",
           "DefaultValue": "$primarycolor",
           "Suffix": "",
           "CustomCSS": ".DefaultMenu > ul > li.selected > a,\n.DefaultMenu > ul > li:hover > a {\n  Border-color:$navbordercolor !important;\n}",
