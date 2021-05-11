@@ -59,9 +59,10 @@
 						name: "height",
 						type: "custom_range",
 						cssproperties: [{ name: "height" }],
-						min: "10",
-						max: "600",
-						default: "50",
+						units: [
+							{ name: 'px', min: 10, max: 600, step: 1, value: 50 },
+						],
+						unit: "px",
 						changeProp: 1,
 					}
 				]

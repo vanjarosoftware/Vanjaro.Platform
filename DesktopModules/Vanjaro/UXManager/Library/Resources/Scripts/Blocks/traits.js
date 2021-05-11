@@ -330,7 +330,6 @@ export default (editor, config = {}) => {
 					}
 				}
 				else if (componentType == 'divider') {
-					style["display"] = "table";
 
 					if (event.target.value == "left") {
 						style["margin-left"] = "0";
@@ -393,14 +392,14 @@ export default (editor, config = {}) => {
 				style["border-bottom-right-radius"] = "0";
 			}
 			else if (event.target.value == "circle") {
-				style["border-width"] = mainComponent.getTrait('framewidth').getInitValue() + "px";
+				style["border-width"] =  "10px";
 				style["border-top-left-radius"] = "50%";
 				style["border-top-right-radius"] = "50%";
 				style["border-bottom-left-radius"] = "50%";
 				style["border-bottom-right-radius"] = "50%";
 			}
 			else if (event.target.value == "square") {
-				style["border-width"] = mainComponent.getTrait('framewidth').getInitValue() + "px";
+				style["border-width"] = "10px";
 				style["border-top-left-radius"] = "0";
 				style["border-top-right-radius"] = "0";
 				style["border-bottom-left-radius"] = "0";
@@ -792,7 +791,7 @@ export default (editor, config = {}) => {
 		},
 		onUpdate({ elInput, component, trait }) {
 
-			var property = '', value = '';
+			var property = '', value = trait.getInitValue();
 
 			if (typeof trait.attributes.cssproperties != 'undefined')
 				property = trait.attributes.cssproperties[0].name;
@@ -805,11 +804,11 @@ export default (editor, config = {}) => {
 					else
 						value = $(component.view.el).css(property);
 				}
-				else
-					value = trait.getInitValue();
 
-				trait.view.$el.find("input:checked").prop('checked', false);
-				trait.view.$el.find('input#' + value).prop('checked', true);
+				if (value != "") {
+					trait.view.$el.find("input:checked").prop("checked", false);
+					trait.view.$el.find("input#" + value).prop("checked", true);
+				}
 			}
 		},
 		eventCapture: ['input'],
@@ -1559,72 +1558,57 @@ export default (editor, config = {}) => {
 		},
 		onUpdate({ elInput, component, trait }) {
 
-			var inputvalue = '', unit = '', property = '', value = '';
+			var value = trait.getInitValue(),
+				unit = trait.attributes.unit,
+				property = '';
+
+			if (typeof component.attributes.unit != 'undefined')
+				unit = component.attributes.unit
 
 			if (typeof trait.attributes.cssproperties != 'undefined')
 				property = trait.attributes.cssproperties[0].name;
 
-			if (typeof event != 'undefined' && !event.target.classList.contains('input-control')) {
+			if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
 
-				if (property != '') {
-
-					if (typeof component.getStyle()[property] != 'undefined')
-						value = component.getStyle()[property].replace('!important', '');
-					else
-						value = $(component.view.el).css(property);
-				}
+				if (typeof component.getStyle()[property] != 'undefined')
+					value = component.getStyle()[property].replace('!important', '');
 				else
-					value = trait.getInitValue()
+					if (typeof trait.attributes.units != 'undefined')
+						value = '';
 
-				if (typeof value == "string" && value != "") {
-
-					inputvalue = value.replace(/[^-\d\.]/g, '');
-
-					if (typeof trait.attributes.units != 'undefined') {
-						$(trait.attributes.units).each(function (index, option) {
-							if (value.replace('.', '').replace(/\d+/g, '').trim() == option.name) {
-								unit = option.name
-								return false;
-							}
-						});
-					}
-				}
-				else {
-					inputvalue = trait.attributes.value;
-				}
-
-				if (unit == '' && typeof trait.attributes.unit != 'undefined')
-					unit = trait.attributes.unit;
+				if (typeof value == "string" && value != "") 
+					value = parseInt(value);
 
 				if (typeof trait.attributes.units != 'undefined') {
 
-					var inputControl = trait.view.el.querySelectorAll('.input-control');
+					var input = trait.view.el.querySelectorAll('input');
 
 					$(trait.attributes.units).each(function (index, option) {
 
 						if (option.name == unit) {
 
-							$(inputControl).attr({
+							$(input).attr({
 								'value': option.value,
 								'min': option.min,
 								'max': option.max,
 								'step': option.step
 							});
 
-                            if (typeof option.value != 'undefined')
-								inputvalue = option.value;
+							if (value == '')
+								value = option.value;
 
 							return false;
 						}
 					});
 				}
 
+				if (property != '' && unit == 'px')
+					value = parseInt($(component.view.el).css(property));
+
 				trait.view.$el.find('select').val(unit);
 			}
-			else
-				inputvalue = trait.getInitValue().replace(/[^-\d\.]/g, '');
 
-			trait.view.$el.find('input.input-control').val(inputvalue);
+			trait.view.$el.find('input').val(value);
 
 			if (component.attributes.type == 'icon') {
 				if ((elInput.firstElementChild.name == "framewidth" || elInput.firstElementChild.name == "framegap") && component.getTrait('frame').getInitValue() == "none")
