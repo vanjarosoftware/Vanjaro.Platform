@@ -3024,13 +3024,11 @@ input.rangeinput {
         background-color: #fff;
     }
 
-        .global-tools .toolbar.draft {
-            top: 10px;
-            right: 130px;
-            background: #f8f9fa;
-            opacity: 1;
-            color: #a1a1a3;
-        }
+    .global-tools .toolbar-draft {
+        color: white !important;
+        opacity: 100 !important;
+        background: #0d6efd !important;
+    }
 
     .global-tools .fa-globe {
         position: absolute;

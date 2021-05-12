@@ -326,6 +326,10 @@ $(document).ready(function () {
 				catch (sferr) { sf = window.parent.$.ServicesFramework(-1); }
 				if (parseInt(sf.getTabId()) <= 0)
 					sf = window.parent.$.ServicesFramework(-1);
+				if ($('.initpageloader').length <= 0) {
+					$('.vj-wrapper').prepend('<div class="initoptimizing-overlay"></div>');
+					$('body').append('<div class="initpageloader"><div class="modal-backdrop fade show"></div><img class="revisionloader initrevisionloaderimg" src="' + window.parent.VjDefaultPath + 'loading.svg" /></div>');
+				}
 				$.ajax({
 					type: "GET",
 					url: eval(vjEditorSettings.GetContentUrl),
@@ -390,11 +394,6 @@ $(document).ready(function () {
 
 							if (typeof LoadCustomCode != 'undefined')
 								LoadCustomCode(grapesjs);
-
-							if ($('.initpageloader').length <= 0) {
-								$('.vj-wrapper').prepend('<div class="initoptimizing-overlay"></div>');
-								$('body').append('<div class="initpageloader"><div class="modal-backdrop fade show"></div><img class="revisionloader initrevisionloaderimg" src="' + window.parent.VjDefaultPath + 'loading.svg" /></div>');
-							}
 
 							VjEditor = grapesjs.init({
 								protectedCss: '',
