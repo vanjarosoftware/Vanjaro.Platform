@@ -326,6 +326,10 @@ $(document).ready(function () {
 				catch (sferr) { sf = window.parent.$.ServicesFramework(-1); }
 				if (parseInt(sf.getTabId()) <= 0)
 					sf = window.parent.$.ServicesFramework(-1);
+				if ($('.initpageloader').length <= 0) {
+					$('.vj-wrapper').prepend('<div class="initoptimizing-overlay"></div>');
+					$('body').append('<div class="initpageloader"><div class="modal-backdrop fade show"></div><img class="revisionloader initrevisionloaderimg" src="' + window.parent.VjDefaultPath + 'loading.svg" /></div>');
+				}
 				$.ajax({
 					type: "GET",
 					url: eval(vjEditorSettings.GetContentUrl),
@@ -390,11 +394,6 @@ $(document).ready(function () {
 
 							if (typeof LoadCustomCode != 'undefined')
 								LoadCustomCode(grapesjs);
-
-							if ($('.initpageloader').length <= 0) {
-								$('.vj-wrapper').prepend('<div class="initoptimizing-overlay"></div>');
-								$('body').append('<div class="initpageloader"><div class="modal-backdrop fade show"></div><img class="revisionloader initrevisionloaderimg" src="' + window.parent.VjDefaultPath + 'loading.svg" /></div>');
-							}
 
 							VjEditor = grapesjs.init({
 								protectedCss: '',
@@ -1919,51 +1918,6 @@ $(document).ready(function () {
 								}
 							});
 
-							var FilterBorderOptions = function (target, position) {
-
-								setTimeout(function () {
-
-									var val;
-
-									switch (position) {
-										case "sm-border-top":
-											val = "border-top"
-											break;
-										case "sm-border-right":
-											val = "border-right"
-											break;
-										case "sm-border-bottom":
-											val = "border-bottom"
-											break;
-										case "sm-border-left":
-											val = "border-left"
-											break;
-										default:
-											val = "border"
-									}
-
-									var sm = VjEditor.StyleManager;
-
-									$(sm.getProperties(Border).models).each(function () {
-										if (this.attributes.name != 'Border Postion')
-											this.view.$el.hide();
-									});
-
-									$(sm.getProperty(Border, val + '-style').view.el).show();
-									$(sm.getProperty(Border, val + '-color').view.el).show();
-									$(sm.getProperty(Border, val + '-width').view.el).show();
-
-									var style = val + '-style';
-
-									if (typeof target.getStyle()[style] == "undefined")
-										sm.getProperty(Border, val + '-style').view.$el.find('input').prop('checked', false);
-
-									if (typeof target.getStyle()['border-width'] == "undefined")
-										sm.getProperty(Border, 'border-width').setValue(0);
-
-								});
-							}
-
 							var ReverseColums = function (model) {
 
 								var flexDirection = model.getStyle()['flex-direction'];
@@ -2656,12 +2610,6 @@ $(document).ready(function () {
 								}
 							});
 
-							VjEditor.on('component:styleUpdate:border-position', (model, argument) => {
-
-								FilterBorderOptions(model, event.target.value);
-								model.removeStyle('border-position');
-							});
-
 							VjEditor.on('component:styleUpdate:flex-direction', (model) => {
 
 								if (model.attributes.type == "grid")
@@ -3307,7 +3255,7 @@ $(document).ready(function () {
 			VjEditor.select();
 			VjEditor.select(selected);
 		});
-		
+
 	});
 
 	var Stylemanager = function () {
@@ -3320,7 +3268,6 @@ $(document).ready(function () {
 		Stylemanager();
 	});
 });
-
 
 if (document.addEventListener) {
 	document.addEventListener('webkitfullscreenchange', exitHandler, false);
@@ -3531,7 +3478,6 @@ global.getUrlVars = function () {
 	return output;
 }
 
-
 // start review toast 
 global.ConfirmReviewChange = function (FirstStateName) {
 	swal({
@@ -3638,4 +3584,50 @@ global.ChangeToWebp = function (target, URLs) {
 
 		});
 	}
+}
+
+global.FilterBorderOptions = function (target, position) {
+
+	setTimeout(function () {
+
+		var val;
+
+		switch (position) {
+			case "sm-border-top":
+				val = "border-top"
+				break;
+			case "sm-border-right":
+				val = "border-right"
+				break;
+			case "sm-border-bottom":
+				val = "border-bottom"
+				break;
+			case "sm-border-left":
+				val = "border-left"
+				break;
+			default:
+				val = "border"
+		}
+
+		var sm = VjEditor.StyleManager;
+		var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();
+
+		$(sm.getProperties(Border).models).each(function () {
+			if (this.attributes.name != 'Border Postion')
+				this.view.$el.hide();
+		});
+
+		$(sm.getProperty(Border, val + '-style').view.el).show();
+		$(sm.getProperty(Border, val + '-color').view.el).show();
+		$(sm.getProperty(Border, val + '-width').view.el).show();
+
+		var style = val + '-style';
+
+		if (typeof target.getStyle()[style] == "undefined")
+			sm.getProperty(Border, val + '-style').view.$el.find('input').prop('checked', false);
+
+		if (typeof target.getStyle()['border-width'] == "undefined")
+			sm.getProperty(Border, 'border-width').setValue(0);
+
+	});
 }

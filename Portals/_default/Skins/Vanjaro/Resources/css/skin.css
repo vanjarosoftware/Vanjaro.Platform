@@ -124,7 +124,6 @@
 /*Blocks CSS*/
 
 .vj-image-gallery .vj-image-gallery-item {
-    margin: 5px;
     object-fit: cover;
     cursor: pointer;
 }
@@ -524,6 +523,30 @@ Theme.css end
 .vj-heading {
     display: block;
     text-align: left;
+}
+
+h1.vj-heading {
+    font-size: 40px;
+}
+
+h2.vj-heading {
+    font-size: 32px;
+}
+
+h3.vj-heading {
+    font-size: 28px;
+}
+
+h4.vj-heading {
+    font-size: 24px;
+}
+
+h5.vj-heading {
+    font-size: 20px;
+}
+
+h6.vj-heading {
+    font-size: 16px;
 }
 
 .vj-text {
