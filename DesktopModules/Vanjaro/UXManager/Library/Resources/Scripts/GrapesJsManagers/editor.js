@@ -2548,25 +2548,16 @@ $(document).ready(function () {
 									var style = model.getStyle()[property];
 									var svg = model.components().models[0];
 
-									if (property == "width") {
-										svg.addStyle({ 'width': style });
-										svg.addStyle({ 'height': style });
+                                    if (property == "width" || property == "height") {
+                                        svg.addStyle({ 'width': style, 'height': style });
+                                        model.addStyle({ 'line-height': style });
 									}
-
 									else if (property == "min-width")
 										svg.addStyle({ 'min-width': style });
-
 									else if (property == "max-width")
 										svg.addStyle({ 'max-width': style });
-
-									else if (property == "height") {
-										svg.addStyle({ 'width': style });
-										svg.addStyle({ 'height': style });
-									}
-
 									else if (property == "min-height")
 										svg.addStyle({ 'min-height': style });
-
 									else if (property == "max-height")
 										svg.addStyle({ 'max-height': style });
 
