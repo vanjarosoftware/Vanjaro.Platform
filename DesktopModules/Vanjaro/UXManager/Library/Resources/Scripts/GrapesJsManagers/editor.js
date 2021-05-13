@@ -694,17 +694,17 @@ $(document).ready(function () {
 													img: 'border-top.svg',
 													value: 'sm-border-top',
 												}, {
-													name: 'Border Right',
-													img: 'border-right.svg',
-													value: 'sm-border-right',
+													name: 'Border Left',
+													img: 'border-left.svg',
+													value: 'sm-border-left',
 												}, {
 													name: 'Border Bottom',
 													img: 'border-bottom.svg',
 													value: 'sm-border-bottom',
 												}, {
-													name: 'Border Left',
-													img: 'border-left.svg',
-													value: 'sm-border-left',
+													name: 'Border Right',
+													img: 'border-right.svg',
+													value: 'sm-border-right',
 												}],
 											},
 											{
@@ -2272,7 +2272,7 @@ $(document).ready(function () {
 									}, 300);
 								}
 
-								model.set('border-position', 'sm-border');
+								VjEditor.StyleManager.getProperty(Border, 'border-position').setValue('sm-border')
 								FilterBorderOptions(model, 'sm-border');
 
 								var flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
@@ -2308,7 +2308,7 @@ $(document).ready(function () {
 										VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
 								}
 
-                                if (typeof model.attributes.text != 'undefined' && model.attributes.text) {
+								if (typeof model.attributes.text != 'undefined' && model.attributes.text) {
 
 									VjEditor.StyleManager.addSector(Text, {
 										name: VjLocalized.Text,
@@ -2553,9 +2553,9 @@ $(document).ready(function () {
 									var style = model.getStyle()[property];
 									var svg = model.components().models[0];
 
-                                    if (property == "width" || property == "height") {
-                                        svg.addStyle({ 'width': style, 'height': style });
-                                        model.addStyle({ 'line-height': style });
+									if (property == "width" || property == "height") {
+										svg.addStyle({ 'width': style, 'height': style });
+										model.addStyle({ 'line-height': style });
 									}
 									else if (property == "min-width")
 										svg.addStyle({ 'min-width': style });
@@ -3627,10 +3627,17 @@ global.FilterBorderOptions = function (target, position) {
 		var style = val + '-style';
 
 		if (typeof target.getStyle()[style] == "undefined")
-			sm.getProperty(Border, val + '-style').view.$el.find('input').prop('checked', false);
+			sm.getProperty(Border, style).view.$el.find('input').prop('checked', false);
 
-		if (typeof target.getStyle()['border-width'] == "undefined")
-			sm.getProperty(Border, 'border-width').setValue(0);
+		var width = val + '-width';
+
+		if (typeof target.getStyle()[width] == "undefined")
+			sm.getProperty(Border, width).view.$el.find('input').val(0);
+
+		var color = val + '-color';
+
+		if (typeof target.getStyle()[color] == "undefined")
+			sm.getProperty(Border, color).view.$el.find('input').val('#000000');
 
 	});
 }
