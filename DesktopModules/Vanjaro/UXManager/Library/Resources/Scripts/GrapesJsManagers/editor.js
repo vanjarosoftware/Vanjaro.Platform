@@ -2958,8 +2958,6 @@ $(document).ready(function () {
 									if (model.parent().parent() != undefined && model.parent().parent().attributes.type == "grid")
 										model.parent().parent().remove();
                                 }
-
-                                VjEditor.select();
 							});
 
 							//Tooltip
