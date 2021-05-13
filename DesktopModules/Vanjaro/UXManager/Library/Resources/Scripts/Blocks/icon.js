@@ -96,7 +96,8 @@
 					onMove: function (e) {
 						var SelectedCol = VjEditor.getSelected();
 						var width = SelectedCol.getStyle().width;
-						var height = SelectedCol.getStyle().height;
+                        var height = SelectedCol.getStyle().height;
+                        SelectedCol.addStyle({ 'line-height': width });
 						SelectedCol.components().models[0].addStyle({ 'width': width, 'height': height });
 						SelectedCol.removeStyle('width');
 						SelectedCol.removeStyle('height');

@@ -388,6 +388,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                         List<UserInfo> portalUsers = SoftDeleteUsers(portal.PortalID);
                         DataCache.ClearHostCache(true);
                         RecyclebinController.Instance.DeleteUsers(portalUsers);
+                        foreach (var au in portalUsers.Where(p => p.IsAdmin))
+                            UserController.RemoveUser(UserController.Instance.GetUser(portal.PortalID, au.UserID));
                         string strMessage = PortalController.DeletePortal(portal, GetAbsoluteServerPath());
                         if (string.IsNullOrEmpty(strMessage))
                         {
