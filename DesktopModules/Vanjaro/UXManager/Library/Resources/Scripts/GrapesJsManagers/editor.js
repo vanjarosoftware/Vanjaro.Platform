@@ -191,7 +191,7 @@ $(document).ready(function () {
 
 					var size = sizes.shift();
 
-					$('.gjs-frame').width(size).css('transition', 'none');
+				$('.gjs-frame').width(size).css('transition', 'none');
 
 					waitForEl('.gjs-frame', size, function () {
 
@@ -199,7 +199,8 @@ $(document).ready(function () {
 						var imgEl = image.getEl();
 
 						if (imgEl) {
-							var imgWidth = $(imgEl).width();
+
+                            var imgWidth = $(imgEl).parents('.image-box').width();
 
 							if (imgWidth && imgWidth > 0) {
 								var calcWidth = Math.round((imgWidth / size) * 100);
@@ -2961,9 +2962,7 @@ $(document).ready(function () {
 								if (model.parent() != undefined && model.parent().attributes.type == "row" && model.parent().components().length == 0) {
 									if (model.parent().parent() != undefined && model.parent().parent().attributes.type == "grid")
 										model.parent().parent().remove();
-								}
-
-								VjEditor.select();
+                                }
 							});
 
 							//Tooltip
