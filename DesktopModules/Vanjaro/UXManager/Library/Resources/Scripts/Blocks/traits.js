@@ -247,7 +247,7 @@ export default (editor, config = {}) => {
 				inputRange.value = inputNumber.value;
 
 			if (typeof trait.attributes.units != "undefined") {
-				unit = $(".tm-unit-wrapper select.unit-list option:selected").val();
+				unit = $(elInput).find("select.unit-list option:selected").val();
 				component.set({ 'unit': unit });
 			}
 
