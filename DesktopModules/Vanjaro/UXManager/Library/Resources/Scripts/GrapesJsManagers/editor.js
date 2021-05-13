@@ -624,15 +624,15 @@ $(document).ready(function () {
 											{
 												type: 'customradio',
 												name: 'Hide in Mobile Portrait',
-												property: 'd-mobile-portrait-none',
-												defaults: 'd-mobile-portrait-show',
+												property: 'd-mobile-none',
+												defaults: 'd-mobile-show',
 												list: [{
 													name: 'Yes',
-													value: 'd-mobile-portrait-none'
+													value: 'd-mobile-none'
 												},
 												{
 													name: 'No',
-													value: 'd-mobile-portrait-show'
+													value: 'd-mobile-show'
 												}],
 											}, {
 												type: 'customradio',
@@ -2169,7 +2169,8 @@ $(document).ready(function () {
 
 								var desktop = 'd-desktop-none';
 								var tablet = 'd-tablet-none';
-								var mobile = 'd-mobile-none';
+								var mobileLandscape = 'd-mobile-landscape-none';
+								var mobilePortrait = 'd-mobile-none';
 
 								if (typeof model.get(desktop) != 'undefined')
 									VjEditor.StyleManager.getProperty(Responsive, desktop).setValue(model.get(desktop));
@@ -2177,8 +2178,11 @@ $(document).ready(function () {
 								if (typeof model.get(tablet) != 'undefined')
 									VjEditor.StyleManager.getProperty(Responsive, tablet).setValue(model.get(tablet));
 
-								if (typeof model.get(mobile) != 'undefined')
-									VjEditor.StyleManager.getProperty(Responsive, mobile).setValue(model.get(mobile));
+								if (typeof model.get(mobileLandscape) != 'undefined')
+									VjEditor.StyleManager.getProperty(Responsive, mobileLandscape).setValue(model.get(mobileLandscape));
+
+								if (typeof model.get(mobilePortrait) != 'undefined')
+									VjEditor.StyleManager.getProperty(Responsive, mobilePortrait).setValue(model.get(mobilePortrait));
 
 								if (typeof model.getStyle()['filter'] != "undefined") {
 
