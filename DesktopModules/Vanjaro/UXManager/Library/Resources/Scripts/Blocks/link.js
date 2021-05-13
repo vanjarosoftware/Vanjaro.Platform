@@ -25,7 +25,7 @@
 	domc.addType('link', {
 		model: linkModel.extend({
 			defaults: Object.assign({}, linkModel.prototype.defaults, {
-				droppable: true,
+                droppable: '[data-gjs-type=section], [data-gjs-type=grid], [data-gjs-type=heading], [data-gjs-type=text], [data-gjs-type=list], [data-gjs-type=spacer], [data-gjs-type=image], [data-gjs-type=divider]',
                 tagName: 'a',
                 text: true,
 				traits: [

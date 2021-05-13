@@ -483,7 +483,8 @@ Theme.css end
 */
 
 
-.img-fluid {
+.img-fluid,
+.image-box {
     width: 100%;
 }
 
