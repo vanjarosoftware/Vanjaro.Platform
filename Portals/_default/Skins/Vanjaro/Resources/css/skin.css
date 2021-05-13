@@ -483,8 +483,7 @@ Theme.css end
 */
 
 
-.img-fluid,
-.image-box {
+.img-fluid {
     width: 100%;
 }
 
@@ -512,6 +511,7 @@ Theme.css end
 .image-box,
 .button-box {
     display: inline-block;
+    width: 100%;
 }
 
 .vj-divider {
