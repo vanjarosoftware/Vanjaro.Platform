@@ -9799,6 +9799,62 @@
           "LessVariable": "$navitemBleftWidth",
           "JavascriptVariable": "",
           "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "ac673cea-8f1f-45d8-8288-cd63ee8ec079",
+          "Title": "Margin Top",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".DefaultMenu .navbar-nav .nav-item {\n  margin-top:$NavigationItemMtoppx;\n}",
+          "PreviewCSS": ".DefaultMenu .navbar-nav .nav-item {\n  margin-top:$NavigationItemMtoppx;\n}",
+          "LessVariable": "$NavigationItemMtop",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "bbc011da-1c3f-458b-978b-82e55a325e3e",
+          "Title": "Margin Right",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".DefaultMenu .navbar-nav .nav-item {\n  margin-right:$NavigationItemMRightpx;\n}",
+          "PreviewCSS": ".DefaultMenu .navbar-nav .nav-item {\n  margin-right:$NavigationItemMRightpx;\n}",
+          "LessVariable": "$NavigationItemMRight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "412267a4-53ea-4315-88fc-045ba3b3716d",
+          "Title": "Margin Bottom",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".DefaultMenu .navbar-nav .nav-item {\n  margin-bottom:$NavigationItemMBottompx;\n}",
+          "PreviewCSS": ".DefaultMenu .navbar-nav .nav-item {\n  margin-bottom:$NavigationItemMBottompx;\n}",
+          "LessVariable": "$NavigationItemMBottom",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "1d752c4b-67bd-4855-abe1-3738d3a272d3",
+          "Title": "Margin Left",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".DefaultMenu .navbar-nav .nav-item {\n  margin-left:$NavigationItemMLeftpx;\n}",
+          "PreviewCSS": ".DefaultMenu .navbar-nav .nav-item {\n  margin-left:$NavigationItemMLeftpx;\n}",
+          "LessVariable": "$NavigationItemMLeft",
+          "JavascriptVariable": "",
+          "Type": "Slider"
         }
       ],
       "Sass": ".DefaultMenu .navbar-nav .nav-item{\n border-style: solid;\n}"
