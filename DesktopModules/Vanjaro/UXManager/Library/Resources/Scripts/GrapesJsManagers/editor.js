@@ -2643,7 +2643,34 @@ $(document).ready(function () {
 									style['float'] = model.getStyle()['float'];
 									model.parent().parent().setStyle(style);
 								}
-							});
+                            });
+
+                            VjEditor.Commands.add('core:copy', {
+                                run(editor, sender) {
+                                    const selected = editor.getSelectedAll();
+                                    var filteredSelected = selected.filter(item => item.attributes.copyable == true);
+
+                                    if (filteredSelected.length) {
+
+                                        filteredSelected = filteredSelected.map(function (element) {
+
+                                            const selectedType = element.attributes.type;
+
+                                            if (element.parent() && element.parent().attributes.type != 'wrapper' && (selectedType == 'button' || selectedType == 'icon' || selectedType == 'list' || selectedType == 'image')) {
+
+                                                if (selectedType == 'image')
+                                                    return element.parent().parent();
+                                                else
+                                                    return element.parent();
+                                            }
+                                            else
+                                                return element;
+                                        }); 
+                                                                               
+                                        VjEditor.getModel().set('clipboard', filteredSelected);
+                                    }
+                                }
+                            });
 
 							VjEditor.Commands.add('global-delete', {
 								run(editor, sender) {
