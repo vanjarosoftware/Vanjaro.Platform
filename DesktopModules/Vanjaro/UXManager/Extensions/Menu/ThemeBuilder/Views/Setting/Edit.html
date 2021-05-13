@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </uitemplate>
-            <uielement name="Controls" control="grid" pagesize="20" paged="true" displayedpages="5" container-attr-ng-show="ui.data.ThemeEditor.Options.Controls.length>0" sortable="true" sortablekey="SortOrder" sortablehandle="drag" ngoptions="ui.data.ThemeEditor.Options.Controls" attr-class="ux-gridcolumnhide table-grid addmodulebtn">
+            <uielement name="Controls" control="grid" pagesize="100" paged="true" displayedpages="5" container-attr-ng-show="ui.data.ThemeEditor.Options.Controls.length>0" sortable="true" sortablekey="SortOrder" sortablehandle="drag" ngoptions="ui.data.ThemeEditor.Options.Controls" attr-class="ux-gridcolumnhide table-grid addmodulebtn">
                 <column name="Image" width="90">
                     <uitemplate>
                         <span class="sortguid" guid="{{row.Guid}}">{{row.Title}}</span>
