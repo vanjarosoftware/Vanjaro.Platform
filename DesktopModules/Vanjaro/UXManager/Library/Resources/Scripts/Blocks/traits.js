@@ -295,38 +295,39 @@ export default (editor, config = {}) => {
 
 				component.set({ 'alignment': val });
 
-				if (componentType == 'icon' || componentType == 'list') {
-					component.parent().setStyle('text-align:' + val + '; display: block;');
-				}
-				else if (componentType == 'image') {
-					component.parent().parent().setStyle('text-align:' + val + '; display: block;');
-				}
-				else if (componentType == 'button') {
-					component.parent().setStyle('text-align:' + val + '; display: block;');
+				style["display"] = "block";
 
-					if (style.width != "100%")
-						component.set({ 'width': component.getStyle()["width"] });
+				if (mainComponent.attributes.type == 'button') {
 
 					if (event.target.value == "justify") {
-						style["width"] = "100%";
-						style["display"] = "block";
-						component.set({ 'resizable': false });
+						var buttonStyle = mainComponent.getStyle();
+						buttonStyle["width"] = "100%";
+						mainComponent.setStyle(buttonStyle);
+						mainComponent.set({ 'resizable': false });
 					}
 					else {
-						style["width"] = component.attributes["width"];
-						style["display"] = "inline-block";
-						component.set({
-							'resizable': {
-								tl: 0, // Top left
-								tc: 0, // Top center
-								tr: 0, // Top right
-								cl: 1, // Center left
-								cr: 1, // Center right
-								bl: 0, // Bottom left
-								bc: 0, // Bottom center
-								br: 0, // Bottom right
-							}
-						});
+
+						if (typeof mainComponent.getStyle()["width"] != 'undefined' && mainComponent.getStyle()["width"] != '100%') {
+
+							var buttonStyle = mainComponent.getStyle();
+							buttonStyle['width'] = mainComponent.getStyle()["width"];
+							mainComponent.setStyle(buttonStyle);
+						}
+						else {
+							mainComponent.removeStyle('width');
+							mainComponent.set({
+								'resizable': {
+									tl: 0, // Top left
+									tc: 0, // Top center
+									tr: 0, // Top right
+									cl: 1, // Center left
+									cr: 1, // Center right
+									bl: 0, // Bottom left
+									bc: 0, // Bottom center
+									br: 0, // Bottom right
+								}
+							});
+						}
 					}
 				}
 				else if (componentType == 'divider') {
@@ -343,10 +344,6 @@ export default (editor, config = {}) => {
 						style["margin-left"] = "auto";
 						style["margin-right"] = "0";
 					}
-				}
-				else {
-					style["text-align"] = val;
-					style["display"] = "block";
 				}
 			}
 			else {
@@ -392,13 +389,15 @@ export default (editor, config = {}) => {
 				style["border-bottom-right-radius"] = "0";
 			}
 			else if (event.target.value == "circle") {
-				style["border-width"] =  "10px";
+				component.getTrait('framewidth').setTargetValue('10');
+				style["border-width"] = "10px";
 				style["border-top-left-radius"] = "50%";
 				style["border-top-right-radius"] = "50%";
 				style["border-bottom-left-radius"] = "50%";
 				style["border-bottom-right-radius"] = "50%";
 			}
 			else if (event.target.value == "square") {
+				component.getTrait('framewidth').setTargetValue('10');
 				style["border-width"] = "10px";
 				style["border-top-left-radius"] = "0";
 				style["border-top-right-radius"] = "0";
@@ -798,11 +797,25 @@ export default (editor, config = {}) => {
 
 			if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
 
-				if (property != '') {
-					if (typeof component.getStyle()[property] != 'undefined')
-						value = component.getStyle()[property].replace('!important', '');
+				var model = component;
+
+				if (typeof trait.attributes.selector != 'undefined') {
+
+					var selector = trait.attributes.selector;
+
+					if (trait.attributes.closest)
+						model = component.closestType(selector);
 					else
-						value = $(component.view.el).css(property);
+						model = component.findType(selector)[0];
+				}
+
+				if (property != '') {
+					if (typeof model.getStyle()[property] != 'undefined')
+						value = model.getStyle()[property].replace('!important', '');
+					else {
+						if (trait.attributes.name != 'alignment' && value != 'none')
+							value = $(model.view.el).css(property);
+					}
 				}
 
 				if (value != "") {
@@ -819,8 +832,15 @@ export default (editor, config = {}) => {
 			var model = component;
 			var trait = component.getTrait(event.target.name);
 
-			if (typeof trait.attributes.selector != 'undefined')
-				model = component.findType(trait.attributes.selector);
+			if (typeof trait.attributes.selector != 'undefined') {
+
+				var selector = trait.attributes.selector;
+
+				if (trait.attributes.closest)
+					model = component.closestType(selector)
+				else
+					model = component.findType(selector);
+			}
 
 			$(model).each(function (index, item) {
 
@@ -889,7 +909,41 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
+
+			var property = '', value = trait.getInitValue();
+
+			if (typeof trait.attributes.cssproperties != 'undefined')
+				property = trait.attributes.cssproperties[0].name;
+
+			if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
+
+				var model = component;
+
+				if (typeof trait.attributes.selector != 'undefined') {
+
+					var selector = trait.attributes.selector;
+
+					if (trait.attributes.closest)
+						model = component.closestType(selector);
+					else
+						model = component.findType(selector)[0];
+				}
+
+				if (property != '') {
+					if (typeof model.getStyle()[property] != 'undefined')
+						value = model.getStyle()[property].replace('!important', '');
+					else {
+						if (trait.attributes.name != 'alignment' && value != 'none')
+							value = $(model.view.el).css(property);
+					}
+				}
+
+				if (value != "") {
+					trait.view.$el.find("input:checked").prop("checked", false);
+					trait.view.$el.find("input#" + value).prop("checked", true);
+				}
+			}
 
 			if (component.attributes.type == 'list') {
 				if (elInput.firstElementChild.name == "ul_list_style" && component.getTrait('list_type').getInitValue() == "ol")
@@ -1329,8 +1383,15 @@ export default (editor, config = {}) => {
 			var model = component;
 			var trait = component.getTrait(event.target.name);
 
-			if (typeof trait.attributes.selector != 'undefined')
-				model = component.findType(trait.attributes.selector);
+			if (typeof trait.attributes.selector != 'undefined') {
+
+				var selector = trait.attributes.selector;
+
+				if (trait.attributes.closest)
+					model = component.closestType(selector)
+				else
+					model = component.findType(selector);
+			}
 
 			$(model).each(function (index, item) {
 
@@ -1506,8 +1567,15 @@ export default (editor, config = {}) => {
 			var model = component;
 			var trait = component.getTrait(event.target.name);
 
-			if (typeof trait != 'undefined' && typeof trait.attributes.selector != 'undefined')
-				model = component.findType(trait.attributes.selector);
+			if (typeof trait != 'undefined' && typeof trait.attributes.selector != 'undefined') {
+
+				var selector = trait.attributes.selector;
+
+				if (trait.attributes.closest)
+					model = component.closestType(selector)
+				else
+					model = component.findType(selector);
+			}
 
 			$(model).each(function (index, item) {
 
@@ -1576,7 +1644,7 @@ export default (editor, config = {}) => {
 					if (typeof trait.attributes.units != 'undefined')
 						value = '';
 
-				if (typeof value == "string" && value != "") 
+				if (typeof value == "string" && value != "")
 					value = parseInt(value);
 
 				if (typeof trait.attributes.units != 'undefined') {
@@ -1627,10 +1695,16 @@ export default (editor, config = {}) => {
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);
-			var size = component.getStyle()['font-size'];
 
-			if (typeof trait.attributes.selector != 'undefined')
-				model = component.findType(trait.attributes.selector);
+			if (typeof trait.attributes.selector != 'undefined') {
+
+				var selector = trait.attributes.selector;
+
+				if (trait.attributes.closest)
+					model = component.closestType(selector)
+				else
+					model = component.findType(selector);
+			}
 
 			$(model).each(function (index, item) {
 
@@ -1654,7 +1728,6 @@ export default (editor, config = {}) => {
 					}
 				}
 
-				size = item.getStyle()['font-size'];
 			});
 		}
 	});

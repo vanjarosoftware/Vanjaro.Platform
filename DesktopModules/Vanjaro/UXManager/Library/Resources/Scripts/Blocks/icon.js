@@ -29,7 +29,9 @@
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				'custom-name': 'Icon Box',
                 droppable: false,
-                selectable: false,
+				selectable: false,
+				highlightable: false,
+				hoverable: false,
 				traits: []
 			}),
 		},
@@ -96,8 +98,8 @@
 					onMove: function (e) {
 						var SelectedCol = VjEditor.getSelected();
 						var width = SelectedCol.getStyle().width;
-                        var height = SelectedCol.getStyle().height;
-                        SelectedCol.addStyle({ 'line-height': width });
+						var height = SelectedCol.getStyle().height;
+						SelectedCol.addStyle({ 'line-height': width });
 						SelectedCol.components().models[0].addStyle({ 'width': width, 'height': height });
 						SelectedCol.removeStyle('width');
 						SelectedCol.removeStyle('height');
@@ -115,19 +117,20 @@
 						type: "text",
 					},
 					{
-
 						label: "Alignment",
 						type: "toggle_checkbox",
 						name: "alignment",
 						UpdateStyles: true,
+						selector: 'icon-box',
+						closest: true,
+						cssproperties: [{ name: "text-align" }],
 						options: [
 							{ id: 'left', name: 'left', image: 'align-left' },
 							{ id: 'center', name: 'center', image: 'align-center' },
 							{ id: 'right', name: 'right', image: 'align-right' },
 						],
-						default: "none",
+						default: 'none',
 						changeProp: 1,
-
 					}, {
 						label: "Color",
 						name: "color",
