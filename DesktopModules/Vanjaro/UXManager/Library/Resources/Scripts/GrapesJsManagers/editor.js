@@ -200,7 +200,17 @@ $(document).ready(function () {
 
 						if (imgEl) {
 
+                            if ($(imgEl).parents('.link').length)
+                                $(imgEl).parents('.link').css('width', '100%');
+
+                            $(imgEl).parents('.image-box').css('width', '100%');
+
                             var imgWidth = $(imgEl).parents('.image-box').width();
+
+                            if ($(imgEl).parents('.link').length)
+                                $(imgEl).parents('.link, image-box').css('width', '100%');
+
+                            $(imgEl).parents('.image-box').css('width', '');
 
 							if (imgWidth && imgWidth > 0) {
 								var calcWidth = Math.round((imgWidth / size) * 100);
