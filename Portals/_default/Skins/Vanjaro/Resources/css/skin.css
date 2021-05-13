@@ -121,13 +121,6 @@
         fill: currentColor;
     }
 
-/*Blocks CSS*/
-
-.vj-image-gallery .vj-image-gallery-item {
-    object-fit: cover;
-    cursor: pointer;
-}
-
 /*modaltoggle*/
 
 .modal-toggle {
@@ -505,6 +498,14 @@ Theme.css end
     padding-bottom: 50px;
 }
 
+.row {
+    justify-content: flex-start;
+}
+
+.row [class^="col-"] {
+    text-align: left;
+}
+
 .link,
 .icon-box,
 .list-box,
@@ -559,6 +560,8 @@ h6.vj-heading {
 .vj-image-gallery-item {
     width: 128px;
     height: 128px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .vj-map {
@@ -633,7 +636,7 @@ h6.vj-heading {
         display: block !important;
     }
 
-    .d-mobile-portrait-none {
+    .d-mobile-none {
         display: none !important;
     }
 }
