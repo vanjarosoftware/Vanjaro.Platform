@@ -200,7 +200,17 @@ $(document).ready(function () {
 
 						if (imgEl) {
 
-							var imgWidth = $(imgEl).parents('.image-box').width();
+                            if ($(imgEl).parents('.link').length)
+                                $(imgEl).parents('.link').css('width', '100%');
+
+                            $(imgEl).parents('.image-box').css('width', '100%');
+
+                            var imgWidth = $(imgEl).parents('.image-box').width();
+
+                            if ($(imgEl).parents('.link').length)
+                                $(imgEl).parents('.link, image-box').css('width', '100%');
+
+                            $(imgEl).parents('.image-box').css('width', '');
 
 							if (imgWidth && imgWidth > 0) {
 								var calcWidth = Math.round((imgWidth / size) * 100);
@@ -333,7 +343,7 @@ $(document).ready(function () {
 				}
 				$.ajax({
 					type: "GET",
-					url: eval(vjEditorSettings.GetContentUrl),
+					url: vjEditorSettings.GetContentUrl,
 					cache: false,
 					headers: {
 						'ModuleId': parseInt(vjEditorSettings.ModuleId),
@@ -1508,7 +1518,7 @@ $(document).ready(function () {
 									autosave: false,
 									autoload: false,
 									stepsBeforeSave: 1,
-									urlStore: eval(vjEditorSettings.UpdateContentUrl),
+									urlStore: vjEditorSettings.UpdateContentUrl,
 									onComplete(jqXHR, status) {
 										if (jqXHR.IsSuccess) {
 											if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
@@ -2674,6 +2684,44 @@ $(document).ready(function () {
 								model.removeStyle('border-width');
 
 							});
+
+                            VjEditor.Commands.add('core:copy', {
+                                run(editor, sender) {
+
+                                    var filteredSelected = editor.getSelectedAll().filter(item => item.attributes.copyable == true);
+                                    var copiedSelected = [];
+
+                                    filteredSelected.forEach(item => {
+                                        copiedSelected.push(item.clone());
+                                    });
+
+                                    if (copiedSelected.length) {
+
+                                        copiedSelected = copiedSelected.map(function (comp) {
+
+                                            const type = comp.attributes.type;
+
+                                            if (comp.findType('modulewrapper').length) {
+                                                comp.findType('modulewrapper').forEach(item => {
+                                                    item.remove();
+                                                });
+                                            }
+
+                                            if (comp.parent() && comp.parent().attributes.type != 'wrapper' && (type == 'button' || type == 'icon' || type == 'list' || type == 'image')) {
+
+                                                if (type == 'image')
+                                                    return comp.parent().parent();
+                                                else
+                                                    return comp.parent();
+                                            }
+                                            else                                               
+                                                return comp;                                            
+                                        }); 
+                                                                               
+                                        VjEditor.getModel().set('clipboard', copiedSelected);
+                                    }
+                                }
+                            });
 
 							VjEditor.Commands.add('global-delete', {
 								run(editor, sender) {
