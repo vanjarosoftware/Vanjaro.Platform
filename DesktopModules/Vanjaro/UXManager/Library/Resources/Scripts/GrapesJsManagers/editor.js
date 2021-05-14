@@ -343,7 +343,7 @@ $(document).ready(function () {
 				}
 				$.ajax({
 					type: "GET",
-					url: eval(vjEditorSettings.GetContentUrl),
+					url: vjEditorSettings.GetContentUrl,
 					cache: false,
 					headers: {
 						'ModuleId': parseInt(vjEditorSettings.ModuleId),
@@ -1518,7 +1518,7 @@ $(document).ready(function () {
 									autosave: false,
 									autoload: false,
 									stepsBeforeSave: 1,
-									urlStore: eval(vjEditorSettings.UpdateContentUrl),
+									urlStore: vjEditorSettings.UpdateContentUrl,
 									onComplete(jqXHR, status) {
 										if (jqXHR.IsSuccess) {
 											if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
