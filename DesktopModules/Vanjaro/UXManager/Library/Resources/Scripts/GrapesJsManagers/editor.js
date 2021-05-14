@@ -2643,7 +2643,45 @@ $(document).ready(function () {
 									style['float'] = model.getStyle()['float'];
 									model.parent().parent().setStyle(style);
 								}
-							});
+                            });
+
+                            VjEditor.Commands.add('core:copy', {
+                                run(editor, sender) {
+
+                                    var filteredSelected = editor.getSelectedAll().filter(item => item.attributes.copyable == true);
+                                    var copiedSelected = [];
+
+                                    filteredSelected.forEach(item => {
+                                        copiedSelected.push(item.clone());
+                                    });
+
+                                    if (copiedSelected.length) {
+
+                                        copiedSelected = copiedSelected.map(function (comp) {
+
+                                            const type = comp.attributes.type;
+
+                                            if (comp.findType('modulewrapper').length) {
+                                                comp.findType('modulewrapper').forEach(item => {
+                                                    item.remove();
+                                                });
+                                            }
+
+                                            if (comp.parent() && comp.parent().attributes.type != 'wrapper' && (type == 'button' || type == 'icon' || type == 'list' || type == 'image')) {
+
+                                                if (type == 'image')
+                                                    return comp.parent().parent();
+                                                else
+                                                    return comp.parent();
+                                            }
+                                            else                                               
+                                                return comp;                                            
+                                        }); 
+                                                                               
+                                        VjEditor.getModel().set('clipboard', copiedSelected);
+                                    }
+                                }
+                            });
 
 							VjEditor.Commands.add('global-delete', {
 								run(editor, sender) {
