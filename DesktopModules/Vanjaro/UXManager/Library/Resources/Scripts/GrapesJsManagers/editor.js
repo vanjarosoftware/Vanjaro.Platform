@@ -2647,27 +2647,38 @@ $(document).ready(function () {
 
                             VjEditor.Commands.add('core:copy', {
                                 run(editor, sender) {
-                                    const selected = editor.getSelectedAll();
-                                    var filteredSelected = selected.filter(item => item.attributes.copyable == true);
 
-                                    if (filteredSelected.length) {
+                                    var filteredSelected = editor.getSelectedAll().filter(item => item.attributes.copyable == true);
+                                    var copiedSelected = [];
 
-                                        filteredSelected = filteredSelected.map(function (element) {
+                                    filteredSelected.forEach(item => {
+                                        copiedSelected.push(item.clone());
+                                    });
 
-                                            const selectedType = element.attributes.type;
+                                    if (copiedSelected.length) {
 
-                                            if (element.parent() && element.parent().attributes.type != 'wrapper' && (selectedType == 'button' || selectedType == 'icon' || selectedType == 'list' || selectedType == 'image')) {
+                                        copiedSelected = copiedSelected.map(function (comp) {
 
-                                                if (selectedType == 'image')
-                                                    return element.parent().parent();
-                                                else
-                                                    return element.parent();
+                                            const type = comp.attributes.type;
+
+                                            if (comp.findType('modulewrapper').length) {
+                                                comp.findType('modulewrapper').forEach(item => {
+                                                    item.remove();
+                                                });
                                             }
-                                            else
-                                                return element;
+
+                                            if (comp.parent() && comp.parent().attributes.type != 'wrapper' && (type == 'button' || type == 'icon' || type == 'list' || type == 'image')) {
+
+                                                if (type == 'image')
+                                                    return comp.parent().parent();
+                                                else
+                                                    return comp.parent();
+                                            }
+                                            else                                               
+                                                return comp;                                            
                                         }); 
                                                                                
-                                        VjEditor.getModel().set('clipboard', filteredSelected);
+                                        VjEditor.getModel().set('clipboard', copiedSelected);
                                     }
                                 }
                             });
