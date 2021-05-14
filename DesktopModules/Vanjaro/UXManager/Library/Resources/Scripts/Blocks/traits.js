@@ -1628,10 +1628,8 @@ export default (editor, config = {}) => {
 
 			var value = trait.getInitValue(),
 				unit = trait.attributes.unit,
+				inputValue = '',
 				property = '';
-
-			if (typeof component.attributes.unit != 'undefined')
-				unit = component.attributes.unit
 
 			if (typeof trait.attributes.cssproperties != 'undefined')
 				property = trait.attributes.cssproperties[0].name;
@@ -1644,8 +1642,21 @@ export default (editor, config = {}) => {
 					if (typeof trait.attributes.units != 'undefined')
 						value = '';
 
-				if (typeof value == "string" && value != "")
-					value = parseInt(value);
+				if (typeof value == "string" && value != "") {
+
+					inputValue = parseInt(value);
+
+					if (typeof trait.attributes.units != 'undefined') {
+						$(trait.attributes.units).each(function (index, option) {
+							if (value.replace('.', '').replace(/\d+/g, '').trim() == option.name) {
+								unit = option.name
+								return false;
+							}
+						});
+					}
+				}
+				else 
+					inputValue = value;
 
 				if (typeof trait.attributes.units != 'undefined') {
 
@@ -1662,8 +1673,8 @@ export default (editor, config = {}) => {
 								'step': option.step
 							});
 
-							if (value == '')
-								value = option.value;
+							if (inputValue == '')
+								inputValue = option.value;
 
 							return false;
 						}
@@ -1671,12 +1682,12 @@ export default (editor, config = {}) => {
 				}
 
 				if (property != '' && unit == 'px')
-					value = parseInt($(component.view.el).css(property));
+					inputValue = parseInt($(component.view.el).css(property));
 
 				trait.view.$el.find('select').val(unit);
 			}
 
-			trait.view.$el.find('input').val(value);
+			trait.view.$el.find('input').val(inputValue);
 
 			if (component.attributes.type == 'icon') {
 				if ((elInput.firstElementChild.name == "framewidth" || elInput.firstElementChild.name == "framegap") && component.getTrait('frame').getInitValue() == "none")
