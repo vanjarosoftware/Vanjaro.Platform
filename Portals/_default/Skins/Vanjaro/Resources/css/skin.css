@@ -501,7 +501,7 @@ Theme.css end
     justify-content: flex-start;
 }
 
-.row [class^="col-"] {
+#wrapper .row [class^="col-"] {
     text-align: left;
 }
 
