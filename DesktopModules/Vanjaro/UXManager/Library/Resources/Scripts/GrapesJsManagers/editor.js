@@ -1782,11 +1782,15 @@ $(document).ready(function () {
 									else if (typeof model.modelToDrop.parent != 'undefined' && model.modelToDrop.parent() && model.modelToDrop.parent().attributes.type == "column")
 										$(model.modelToDrop.parent().getEl()).removeAttr("data-empty");
 
-									if (parentRemove != '' && parentClone != '') {
-										model.modelToDrop.replaceWith(parentClone);
-										parentRemove.remove();
-										parentRemove = '';
-										parentClone = '';
+                                    if (parentRemove != '' && parentClone != '') {
+                                        var selectModel = parentClone.components().models[0];
+                                        model.modelToDrop.replaceWith(parentClone);
+                                        setTimeout(function () {
+                                            VjEditor.select(selectModel);
+                                            parentRemove.remove();
+                                            parentRemove = '';
+                                            parentClone = '';
+                                        });
 									}
 								}
 
@@ -2651,11 +2655,26 @@ $(document).ready(function () {
                                     var filteredSelected = editor.getSelectedAll().filter(item => item.attributes.copyable == true);
                                     var copiedSelected = [];
 
-                                    filteredSelected.forEach(item => {
-                                        copiedSelected.push(item.clone());
-                                    });
+                                    if (filteredSelected.length) {
 
-                                    if (copiedSelected.length) {
+                                        filteredSelected = filteredSelected.map(function (comp) {
+
+                                            const type = comp.attributes.type;
+
+                                            if (comp.parent() && comp.parent().attributes.type != 'wrapper' && (type == 'button' || type == 'icon' || type == 'list' || type == 'image')) {
+
+                                                if (type == 'image')
+                                                    return comp.parent().parent();
+                                                else
+                                                    return comp.parent();
+                                            }
+                                            else
+                                                return comp;
+                                        });
+
+                                        filteredSelected.forEach(item => {
+                                            copiedSelected.push(item.clone());
+                                        });
 
                                         copiedSelected = copiedSelected.map(function (comp) {
 
@@ -2667,15 +2686,7 @@ $(document).ready(function () {
                                                 });
                                             }
 
-                                            if (comp.parent() && comp.parent().attributes.type != 'wrapper' && (type == 'button' || type == 'icon' || type == 'list' || type == 'image')) {
-
-                                                if (type == 'image')
-                                                    return comp.parent().parent();
-                                                else
-                                                    return comp.parent();
-                                            }
-                                            else                                               
-                                                return comp;                                            
+                                            return comp;
                                         }); 
                                                                                
                                         VjEditor.getModel().set('clipboard', copiedSelected);
