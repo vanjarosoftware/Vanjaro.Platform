@@ -191,7 +191,7 @@ $(document).ready(function () {
 
 					var size = sizes.shift();
 
-				$('.gjs-frame').width(size).css('transition', 'none');
+					$('.gjs-frame').width(size).css('transition', 'none');
 
 					waitForEl('.gjs-frame', size, function () {
 
@@ -343,7 +343,7 @@ $(document).ready(function () {
 				}
 				$.ajax({
 					type: "GET",
-					url: eval(vjEditorSettings.GetContentUrl),
+					url: vjEditorSettings.GetContentUrl,
 					cache: false,
 					headers: {
 						'ModuleId': parseInt(vjEditorSettings.ModuleId),
@@ -1518,7 +1518,7 @@ $(document).ready(function () {
 									autosave: false,
 									autoload: false,
 									stepsBeforeSave: 1,
-									urlStore: eval(vjEditorSettings.UpdateContentUrl),
+									urlStore: vjEditorSettings.UpdateContentUrl,
 									onComplete(jqXHR, status) {
 										if (jqXHR.IsSuccess) {
 											if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
@@ -2286,8 +2286,9 @@ $(document).ready(function () {
 									}, 300);
 								}
 
-								VjEditor.StyleManager.getProperty(Border, 'border-position').setValue('sm-border')
+								model.set('border-position', 'sm-border');
 								FilterBorderOptions(model, 'sm-border');
+								$(VjEditor.StyleManager.getProperty(Border, 'border-position').view.$el.find('input')[0]).prop('checked', true);
 
 								var flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
 
@@ -2647,7 +2648,46 @@ $(document).ready(function () {
 									style['float'] = model.getStyle()['float'];
 									model.parent().parent().setStyle(style);
 								}
-                            });
+							});
+
+							VjEditor.on('component:styleUpdate:border-style', (model, argument) => {
+
+								var style = model.getStyle()['border-style'];
+
+								model.addStyle({ 'border-top-style': style });
+								model.addStyle({ 'border-bottom-style': style });
+								model.addStyle({ 'border-left-style': style });
+								model.addStyle({ 'border-right-style': style });
+
+								model.removeStyle('border-style');
+
+							});
+
+							VjEditor.on('component:styleUpdate:border-color', (model, argument) => {
+
+								var color = model.getStyle()['border-color'];
+
+								model.addStyle({ 'border-top-color': color });
+								model.addStyle({ 'border-bottom-color': color });
+								model.addStyle({ 'border-left-color': color });
+								model.addStyle({ 'border-right-color': color });
+
+								model.removeStyle('border-color');
+
+							});
+
+							VjEditor.on('component:styleUpdate:border-width', (model, argument) => {
+
+								var width = model.getStyle()['border-width'];
+
+								model.addStyle({ 'border-top-width': width });
+								model.addStyle({ 'border-bottom-width': width });
+								model.addStyle({ 'border-left-width': width });
+								model.addStyle({ 'border-right-width': width });
+
+								model.removeStyle('border-width');
+
+							});
 
                             VjEditor.Commands.add('core:copy', {
                                 run(editor, sender) {
@@ -3021,7 +3061,7 @@ $(document).ready(function () {
 								if (model.parent() != undefined && model.parent().attributes.type == "row" && model.parent().components().length == 0) {
 									if (model.parent().parent() != undefined && model.parent().parent().attributes.type == "grid")
 										model.parent().parent().remove();
-                                }
+								}
 							});
 
 							//Tooltip
@@ -3691,12 +3731,34 @@ global.FilterBorderOptions = function (target, position) {
 		var width = val + '-width';
 
 		if (typeof target.getStyle()[width] == "undefined")
-			sm.getProperty(Border, width).view.$el.find('input').val(0);
+			sm.getProperty(Border, width).view.$el.find('input').val(parseInt('0'));
 
 		var color = val + '-color';
 
-		if (typeof target.getStyle()[color] == "undefined")
+		if (typeof target.getStyle()[color] == "undefined") {
 			sm.getProperty(Border, color).view.$el.find('input').val('#000000');
+			sm.getProperty(Border, color).view.$el.find('.gjs-field-color-picker').css('background-color', '#000000');
+		}
 
+		setTimeout(function () {
+
+			var borderStyle = target.getStyle()['border-top-style'];
+			var borderColor = target.getStyle()['border-top-color'];
+			var borderWidth = target.getStyle()['border-top-width'];
+
+			if (typeof borderStyle != 'undefined' && borderStyle == target.getStyle()['border-bottom-style'] && borderStyle == target.getStyle()['border-left-style'] && borderStyle == target.getStyle()['border-right-style'])
+				$(sm.getProperty(Border, 'border-style').view.$el).find('input[value= ' + borderStyle + ']').prop('checked', true);
+
+
+			if (typeof borderColor != 'undefined' && borderColor == target.getStyle()['border-bottom-color'] && borderColor == target.getStyle()['border-left-color'] && borderColor == target.getStyle()['border-right-color']) {
+				$(sm.getProperty(Border, 'border-color').view.$el).find('input').val(borderColor);
+				sm.getProperty(Border, color).view.$el.find('.gjs-field-color-picker').css('background-color', borderColor);
+			}
+
+
+			if (typeof borderWidth != 'undefined' && borderWidth == target.getStyle()['border-bottom-width'] && borderWidth == target.getStyle()['border-left-width'] && borderWidth == target.getStyle()['border-right-width'])
+				$(sm.getProperty(Border, 'border-width').view.$el).find('input').val(borderWidth);
+
+		});
 	});
 }

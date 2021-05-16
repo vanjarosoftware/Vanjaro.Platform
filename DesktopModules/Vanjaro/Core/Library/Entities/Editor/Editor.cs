@@ -40,10 +40,14 @@ namespace Vanjaro.Core.Entities
 
         private static EditorOptions DefaultSettings()
         {
+            string url = "/api/vanjaro/";
+            if (HttpContext.Current != null)
+                url = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, url);
+
             EditorOptions options = new EditorOptions()
             {
-                UpdateContentUrl = "parent.window.location.origin + window.parent.$.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/save'",
-                GetContentUrl = "parent.window.location.origin + window.parent.$.ServicesFramework(-1).getServiceRoot('Vanjaro') + 'page/get'",
+                UpdateContentUrl = url + "page/save",
+                GetContentUrl = url + "page/get",
                 ContainerID = "#vjEditor",
                 EditPage = true,
                 ModuleId = -1,
