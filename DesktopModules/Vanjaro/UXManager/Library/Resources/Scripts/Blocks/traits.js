@@ -1685,9 +1685,9 @@ export default (editor, config = {}) => {
 					inputValue = parseInt($(component.view.el).css(property));
 
 				trait.view.$el.find('select').val(unit);
-			}
 
-			trait.view.$el.find('input').val(inputValue);
+				trait.view.$el.find('input').val(inputValue);
+			}
 
 			if (component.attributes.type == 'icon') {
 				if ((elInput.firstElementChild.name == "framewidth" || elInput.firstElementChild.name == "framegap") && component.getTrait('frame').getInitValue() == "none")
