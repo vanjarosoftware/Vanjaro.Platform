@@ -2734,6 +2734,19 @@ $(document).ready(function () {
                                 }
                             });
 
+                            VjEditor.on('component:paste', (model, argument) => {
+                                
+                                var type = model.attributes.type;
+
+                                if (type == 'button-box' || type == 'icon-box' || type == 'list-box' || type == 'image-box') {
+
+                                    if (type == 'image-box')
+                                        model.move(model.parent().parent().parent());
+                                    else
+                                        model.move(model.parent().parent());
+                                }
+                            });
+
 							VjEditor.Commands.add('global-delete', {
 								run(editor, sender) {
 									setTimeout(function () {
