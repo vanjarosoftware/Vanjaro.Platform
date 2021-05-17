@@ -803,10 +803,12 @@ export default (editor, config = {}) => {
 
 					var selector = trait.attributes.selector;
 
-					if (trait.attributes.closest)
-						model = component.closestType(selector);
-					else
-						model = component.findType(selector)[0];
+                    if (trait.attributes.closest) {
+                        if (typeof component.closestType(selector) != 'undefined')
+                            model = component.closestType(selector);
+                    }
+                    else
+                        model = component.findType(selector)[0];
 				}
 
 				if (property != '') {
@@ -836,8 +838,10 @@ export default (editor, config = {}) => {
 
 				var selector = trait.attributes.selector;
 
-				if (trait.attributes.closest)
-					model = component.closestType(selector)
+                if (trait.attributes.closest) {
+                    if (typeof component.closestType(selector) != 'undefined')
+                        model = component.closestType(selector);
+                }
 				else
 					model = component.findType(selector);
 			}
@@ -924,10 +928,12 @@ export default (editor, config = {}) => {
 
 					var selector = trait.attributes.selector;
 
-					if (trait.attributes.closest)
-						model = component.closestType(selector);
-					else
-						model = component.findType(selector)[0];
+                    if (trait.attributes.closest) {
+                        if (typeof component.closestType(selector) != 'undefined')
+                            model = component.closestType(selector);
+                    }
+                    else
+                        model = component.findType(selector)[0];
 				}
 
 				if (property != '') {
@@ -1387,8 +1393,10 @@ export default (editor, config = {}) => {
 
 				var selector = trait.attributes.selector;
 
-				if (trait.attributes.closest)
-					model = component.closestType(selector)
+                if (trait.attributes.closest) {
+                    if (typeof component.closestType(selector) != 'undefined')
+                        model = component.closestType(selector);
+                }
 				else
 					model = component.findType(selector);
 			}
@@ -1571,8 +1579,10 @@ export default (editor, config = {}) => {
 
 				var selector = trait.attributes.selector;
 
-				if (trait.attributes.closest)
-					model = component.closestType(selector)
+                if (trait.attributes.closest) {
+                    if (typeof component.closestType(selector) != 'undefined')
+                        model = component.closestType(selector);
+                }
 				else
 					model = component.findType(selector);
 			}
@@ -1644,7 +1654,7 @@ export default (editor, config = {}) => {
 
 				if (typeof value == "string" && value != "") {
 
-					inputValue = parseInt(value);
+					inputValue = parseFloat(value);
 
 					if (typeof trait.attributes.units != 'undefined') {
 						$(trait.attributes.units).each(function (index, option) {
@@ -1682,7 +1692,7 @@ export default (editor, config = {}) => {
 				}
 
 				if (property != '' && unit == 'px')
-					inputValue = parseInt($(component.view.el).css(property));
+					inputValue = parseFloat($(component.view.el).css(property));
 
 				trait.view.$el.find('select').val(unit);
 
@@ -1711,8 +1721,10 @@ export default (editor, config = {}) => {
 
 				var selector = trait.attributes.selector;
 
-				if (trait.attributes.closest)
-					model = component.closestType(selector)
+                if (trait.attributes.closest) {
+                    if (typeof component.closestType(selector) != 'undefined')
+                        model = component.closestType(selector);
+                }
 				else
 					model = component.findType(selector);
 			}
