@@ -1654,7 +1654,7 @@ export default (editor, config = {}) => {
 
 				if (typeof value == "string" && value != "") {
 
-					inputValue = parseInt(value);
+					inputValue = parseFloat(value);
 
 					if (typeof trait.attributes.units != 'undefined') {
 						$(trait.attributes.units).each(function (index, option) {
@@ -1692,12 +1692,12 @@ export default (editor, config = {}) => {
 				}
 
 				if (property != '' && unit == 'px')
-					inputValue = parseInt($(component.view.el).css(property));
+					inputValue = parseFloat($(component.view.el).css(property));
 
 				trait.view.$el.find('select').val(unit);
-			}
 
-			trait.view.$el.find('input').val(inputValue);
+				trait.view.$el.find('input').val(inputValue);
+			}
 
 			if (component.attributes.type == 'icon') {
 				if ((elInput.firstElementChild.name == "framewidth" || elInput.firstElementChild.name == "framegap") && component.getTrait('frame').getInitValue() == "none")

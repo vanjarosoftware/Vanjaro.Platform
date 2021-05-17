@@ -3731,13 +3731,16 @@ global.FilterBorderOptions = function (target, position) {
 		var width = val + '-width';
 
 		if (typeof target.getStyle()[width] == "undefined")
-			sm.getProperty(Border, width).view.$el.find('input').val(parseInt('0'));
+			sm.getProperty(Border, width).view.$el.find('input').val(0);
 
 		var color = val + '-color';
 
 		if (typeof target.getStyle()[color] == "undefined") {
-			sm.getProperty(Border, color).view.$el.find('input').val('#000000');
-			sm.getProperty(Border, color).view.$el.find('.gjs-field-color-picker').css('background-color', '#000000');
+
+			var brdcolor = $(target.getEl()).css('border-color');
+
+			sm.getProperty(Border, color).view.$el.find('input').val(brdcolor);
+			sm.getProperty(Border, color).view.$el.find('.gjs-field-color-picker').css('background-color', brdcolor);
 		}
 
 		setTimeout(function () {
@@ -3757,7 +3760,7 @@ global.FilterBorderOptions = function (target, position) {
 
 
 			if (typeof borderWidth != 'undefined' && borderWidth == target.getStyle()['border-bottom-width'] && borderWidth == target.getStyle()['border-left-width'] && borderWidth == target.getStyle()['border-right-width'])
-				$(sm.getProperty(Border, 'border-width').view.$el).find('input').val(borderWidth);
+				$(sm.getProperty(Border, 'border-width').view.$el).find('input').val(parseInt(borderWidth));
 
 		});
 	});

@@ -2242,6 +2242,7 @@ span.notificationname {
     flex: 0 0 20%;
     max-width: 20%;
     padding: 0 8px;
+    text-align: center !important
 }
 
 .select-layout a {
