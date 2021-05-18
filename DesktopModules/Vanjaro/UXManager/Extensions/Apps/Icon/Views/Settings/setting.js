@@ -34,6 +34,9 @@
     $scope.selectIcon = function (option) {
         var compSelected = window.parent.VjEditor.getSelected();
 
+        if (typeof window.parent.document.vj_icon_target != 'undefined')
+            compSelected = window.parent.document.vj_icon_target;
+      
         if (location.href.indexOf('ignoregj') > 0)
             $(window.parent.document.body).find('.uxmanager-modal #UXpagerender').contents().find('svg').replaceWith(option.SVG);
         else {
