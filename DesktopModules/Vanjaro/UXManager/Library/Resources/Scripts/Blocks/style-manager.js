@@ -346,6 +346,16 @@
 						unit = '';
 				}
 
+				if (val == "auto") {
+
+					if (property == "min-width" || property == "max-width")
+						val = $(selected.view.el).css('width');
+					else if (property == "min-height" || property == "max-height")
+						val = $(selected.view.el).css('height');
+					else 
+						val = $(selected.view.el).css(property);
+				}
+
 				if (event.keyCode === 38)
 					val = parseInt(val) + 1;
 				else if (event.keyCode === 40)
@@ -353,10 +363,10 @@
 
 			}
 			else if (event.target.classList.contains('unit-list')) {
+
 				val = inputText.value;
 				unit = event.target.value;
 				LoadAttr(model, unit);
-
 			}
 
 			inputRange.value = inputText.value = val;
