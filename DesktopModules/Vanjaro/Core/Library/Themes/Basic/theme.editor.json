@@ -2808,6 +2808,24 @@
       "Sass": ""
     },
     {
+      "Guid": "859f7532-4b90-4e1a-82ad-82e03d75371a",
+      "Category": "Site",
+      "Controls": [
+        {
+          "Guid": "fc8aa0f1-d9db-4d34-8901-050d2bf4987e",
+          "Title": "Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": "#wrapper,\n#dnn_ContentPane{\n  font-family:$siteFontFamily;\n}",
+          "PreviewCSS": "#wrapper,\n#dnn_ContentPane{\n  font-family:$siteFontFamily;\n}",
+          "LessVariable": "$siteFontFamily",
+          "JavascriptVariable": "",
+          "Type": "Fonts"
+        }
+      ],
+      "Sass": ""
+    },
+    {
       "Guid": "54ce03bd-f16d-405b-b4a5-264feb926458",
       "Category": "Cookie Consent",
       "Title": null,
