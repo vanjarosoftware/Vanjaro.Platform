@@ -262,11 +262,11 @@ export default (editor, config = {}) => {
 						UpdateStyles: true,
 						cssproperties: [{ name: "align-self" }],
 						options: [
-							{ id: 'flex-start', name: 'flex-start', image: 'align-top' },
-							{ id: 'center', name: 'center', image: 'align-middle' },
-							{ id: 'flex-end', name: 'flex-end', image: 'align-bottom' }
+							{ id: 'vertical-start', name: 'flex-start', image: 'align-top' },
+							{ id: 'vertical-center', name: 'center', image: 'align-middle' },
+							{ id: 'vertical-end', name: 'flex-end', image: 'align-bottom' }
 						],
-						default: 'flex-start',
+						default: 'vertical-start',
 						changeProp: 1,
 					},
 					{

@@ -822,7 +822,7 @@ export default (editor, config = {}) => {
 
 				if (value != "") {
 					trait.view.$el.find("input:checked").prop("checked", false);
-					trait.view.$el.find("input#" + value).prop("checked", true);
+					trait.view.$el.find('input[value=' + value + ']').prop("checked", true);
 				}
 			}
 		},
@@ -947,7 +947,7 @@ export default (editor, config = {}) => {
 
 				if (value != "") {
 					trait.view.$el.find("input:checked").prop("checked", false);
-					trait.view.$el.find("input#" + value).prop("checked", true);
+					trait.view.$el.find('input[value=' + value + ']').prop("checked", true);
 				}
 			}
 
