@@ -1387,7 +1387,11 @@ namespace Vanjaro.Core
                     foreach (var item in url.Split(','))
                     {
                         var obj = item.Split(' ');
-                        result.Add(ExtractAndProcessLink(item, Assets) + (obj.Length > 1 ? (" " + item.Split(' ')[1]) : ""));
+                        string ProcessedLink = ExtractAndProcessLink(item, Assets);
+                        if (item == ProcessedLink)
+                            result.Add(ProcessedLink);
+                        else
+                            result.Add(ProcessedLink + (obj.Length > 1 ? (" " + item.Split(' ')[1]) : ""));
                     }
                     return string.Join(",", result);
                 }
