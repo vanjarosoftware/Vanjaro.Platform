@@ -2586,11 +2586,28 @@ span.notificationname {
     padding: 6px 0;
     border-top: 1px solid transparent;
     border-bottom: 1px solid #eee;
+    display: inline-flex;
 }
 
-    .traitsmanager .preset-wrapper div.styles.active {
-        border-color: #ccc;
+    .traitsmanager .preset-wrapper div.styles em {
+        align-self: center;
+        visibility: hidden;
+        font-size: 16px;
     }
+
+
+    .traitsmanager .preset-wrapper div.styles.active em {
+        align-self: center;
+        visibility: visible;
+    }
+
+.traitsmanager .preset-wrapper.button div.styles.active {
+    justify-content: space-between;
+}
+
+.traitsmanager .preset-wrapper div.styles.active {
+    border-color: #ccc;
+}
 
 .traitsmanager .preset-wrapper label {
     display: block;
