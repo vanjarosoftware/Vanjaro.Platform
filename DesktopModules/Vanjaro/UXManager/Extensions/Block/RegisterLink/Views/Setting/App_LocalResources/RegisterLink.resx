@@ -129,6 +129,15 @@
   <data name="ShowAvatar.Text" xml:space="preserve">
     <value>Show Avatar</value>
   </data>
+  <data name="ShowProfileLink.Text" xml:space="preserve">
+    <value>Show Profile Link</value>
+  </data>
+  <data name="ShowProfileLink.OFF" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ShowProfileLink.ON" xml:space="preserve">
+    <value>Yes</value>
+  </data>
   <data name="ShowNotification.OFF" xml:space="preserve">
     <value>No</value>
   </data>
