@@ -2648,6 +2648,24 @@ span.notificationname {
     white-space: normal;
 }
 
+.traitsmanager .preset-wrapper.blockwrapper label div {
+    pointer-events: none;
+}
+
+.traitsmanager .preset-wrapper.blockwrapper label .vj_language_wrapper .select_language {
+    width: auto;
+    font-size: 12px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+}
+
+.traitsmanager .preset-wrapper.blockwrapper label .vanjarosearchinput input {
+    display: block;
+    font-size: 12px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+}
+
 .gjs-rte-active .fa-link:before {
     content: "\f127" !important;
 }
