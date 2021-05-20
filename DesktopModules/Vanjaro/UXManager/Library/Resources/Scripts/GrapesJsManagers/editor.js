@@ -1097,7 +1097,7 @@ $(document).ready(function () {
 												img: 'flex-dir-col-rev.png',
 											}],
 										}, {
-											name: 'Justify',
+											name: 'Justify Content',
 											property: 'justify-content',
 											type: 'customradio',
 											UpdateStyles: true,
@@ -1123,7 +1123,7 @@ $(document).ready(function () {
 												img: 'align-right.png',
 											}],
 										}, {
-											name: 'Align',
+											name: 'Align Items',
 											property: 'align-items',
 											type: 'customradio',
 											UpdateStyles: true,
@@ -1186,7 +1186,7 @@ $(document).ready(function () {
 												cssproperty: 'flex-basis',
 											}],
 										}, {
-											name: 'Align',
+											name: 'Align Self',
 											property: 'align-self',
 											type: 'customradio',
 											UpdateStyles: true,
