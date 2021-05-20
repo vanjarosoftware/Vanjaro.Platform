@@ -125,15 +125,13 @@ namespace Vanjaro.Core
                                     {
                                         (con as JObject).Add("type", "div");
                                         (con as JObject).Add("components", blockContentJSON);
-                                        if (isLibrary)
-                                            (con as JObject).Add("forcesave", "true");
+                                        (con as JObject).Add("forcesave", "true");
                                     }
                                     else
                                     {
                                         foreach (JProperty prop in blockContentJSON[0].Properties())
                                             (con as JObject).Add(prop.Name, prop.Value);
-                                        if (isLibrary)
-                                            (con as JObject).Add("forcesave", "true");
+                                        (con as JObject).Add("forcesave", "true");
                                     }
                                     UpdateIds(con, prefix, Ids);
                                 }

@@ -2021,8 +2021,11 @@ export default (editor, config = {}) => {
 				label.setAttribute("class", value.class);
 				label.innerHTML = trait.target.getEl().textContent;
 
+				icon.setAttribute("class", "fas fa-check-circle");
+
 				div.appendChild(input);
 				div.appendChild(label);
+				div.appendChild(icon);
 				el.appendChild(div);
 			});
 
