@@ -1910,7 +1910,7 @@ $(document).ready(function () {
 									});
 								}
 								else if (bmodel != undefined && bmodel.attributes != undefined && bmodel.attributes.attributes != undefined && bmodel.attributes.attributes.type == 'VjCustomBlock')
-									RenderCustomBlock(model, bmodel);
+                                    RenderCustomBlock(model, bmodel);
 								else if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes["data-block-type"] != undefined)
 									RenderBlock(model, bmodel);
 							});
@@ -2014,7 +2014,9 @@ $(document).ready(function () {
 											$(dataPane.view.$el).hide(0);
 										});
 									}
-								}
+                                }
+
+                                VjEditor.SelectorManager.setState();
 
 								if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
 
