@@ -174,6 +174,73 @@
           "Type": "Slider"
         },
         {
+          "Guid": "07fe3bc1-4eae-46df-b546-982e4cc3a08f",
+          "Title": "Hover Border Color",
+          "DefaultValue": "$primarycolor",
+          "Suffix": "",
+          "CustomCSS": ".DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n border-color:$navlinkhoverBorderColor !important;\n}",
+          "PreviewCSS": ".DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n border-color:$navlinkhoverBorderColor !important;\n}",
+          "LessVariable": "$navlinkhoverBorderColor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "b586de84-252b-4f16-be73-1d7ade58bae3",
+          "Title": "Hover Border top width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-top-width:$hoverBordernavigationBTwidthpx !important;\n}",
+          "PreviewCSS": ".DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-top-width:$hoverBordernavigationBTwidthpx !important;\n}",
+          "LessVariable": "$hoverBordernavigationBTwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "d0d04a3e-d8c2-4ff5-8448-6d937f26bfc0",
+          "Title": "Hover Border right width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-right-width:$hoverBordernavigationBRwidthpx !important;\n}",
+          "PreviewCSS": ".DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-right-width:$hoverBordernavigationBRwidthpx !important;\n}",
+          "LessVariable": "$hoverBordernavigationBRwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "ebf05726-50cf-4961-9146-6b394fd8ea2e",
+          "Title": "Hover  Border bottom width",
+          "DefaultValue": "2",
+          "Suffix": "px",
+          "CustomCSS": ".DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-bottom-width:$hoverBordernavigationBBwidthpx !important;\n}",
+          "PreviewCSS": ".DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-bottom-width:$hoverBordernavigationBBwidthpx !important;\n}",
+          "LessVariable": "$hoverBordernavigationBBwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "dd67814e-696f-48de-ba53-723c07c2f0fb",
+          "Title": "Hover Border left width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-left-width:$hoverBordernavigationBLwidthpx !important;\n}",
+          "PreviewCSS": ".DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-left-width:$hoverBordernavigationBLwidthpx !important;\n}",
+          "LessVariable": "$hoverBordernavigationBLwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
           "RangeMin": 1.0,
           "RangeMax": 100.0,
           "Increment": 1.0,
@@ -9877,6 +9944,1832 @@
         }
       ],
       "Sass": ".DefaultMenu .navbar-nav .nav-item{\n border-style: solid;\n}"
+    },
+    {
+      "Guid": "3569008a-873e-4f5a-b3d6-ea0d2fc4a74a",
+      "Category": "Styles: Menu",
+      "Title": null,
+      "Controls": [
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "56a4df90-5139-40d8-bd29-944ed893691c",
+      "Category": "Styles: Menu",
+      "Title": "Style A",
+      "Controls": [
+        {
+          "Guid": "3924b461-0f20-458f-a705-37cf345c2b94",
+          "Title": "Hamburger Color",
+          "DefaultValue": "#ffffff",
+          "Suffix": "",
+          "CustomCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler svg {\n    fill: $msOHamurgermenucolor;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler svg {\n    fill: $msOHamurgermenucolor;\n}\n}",
+          "LessVariable": "$msOHamurgermenucolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "38538a6b-e6bd-4e3c-98eb-feac44ba7957",
+          "Title": "Hamburger Background Color",
+          "DefaultValue": "#444444",
+          "Suffix": "",
+          "CustomCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  background: $msOHamurgermenubgColor;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  background: $msOHamurgermenubgColor;\n}\n}",
+          "LessVariable": "$msOHamurgermenubgColor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "1902cc64-9078-48f7-b1cb-5265f5b0300a",
+          "Title": "Hamburger Height",
+          "DefaultValue": "15",
+          "Suffix": "px",
+          "CustomCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler svg {\n  height: $msOHamurgermenuHeightpx;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler svg {\n  height: $msOHamurgermenuHeightpx;\n}\n}",
+          "LessVariable": "$msOHamurgermenuHeight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "5b525cba-a3d8-418f-90ba-ad572d540b45",
+          "Title": "Hamburger Width",
+          "DefaultValue": "13",
+          "Suffix": "px",
+          "CustomCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler svg {\n  width: $msOHamurgermenuWidthpx;\n}\n}\n",
+          "PreviewCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler svg{\n  width: $msOHamurgermenuWidthpx;\n}\n}",
+          "LessVariable": "$msOHamurgermenuWidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "3ec9768e-79a7-44df-8d2e-9c5ce04e5167",
+          "Title": "Hamburger Border Width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  border-width: $msOHamurgermenuBwidthpx;\n}\n}\n",
+          "PreviewCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  border-width: $msOHamurgermenuBwidthpx;\n}\n}",
+          "LessVariable": "$msOHamurgermenuBwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "b0fa200a-fcf4-4990-b013-4aa737264193",
+          "Title": "Hamburger Border Color",
+          "DefaultValue": "#444444",
+          "Suffix": "",
+          "CustomCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  border-color: $msOHamurgermenuBcolor;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  border-color: $msOHamurgermenuBcolor;\n}\n}",
+          "LessVariable": "$msOHamurgermenuBcolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "ce34933b-7c54-49be-99a7-d30bf082cbbc",
+          "Title": "Hamburger Border Radius",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  border-radius: $msOHamurgermenuBradiuspx;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  border-radius: $msOHamurgermenuBradiuspx;\n}\n}",
+          "LessVariable": "$msOHamurgermenuBradius",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "d13253ad-a1de-4bb3-8715-85e279972f26",
+          "Title": "Hamburger Padding Top",
+          "DefaultValue": "5",
+          "Suffix": "px",
+          "CustomCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  padding-top: $msOhamburgermenuPtoppx;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  padding-top: $msOhamburgermenuPtoppx;\n}\n}",
+          "LessVariable": "$msOhamburgermenuPtop",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "4f72ae27-c545-4163-a41a-a57de72fa2bd",
+          "Title": "Hamburger Padding Left",
+          "DefaultValue": "8",
+          "Suffix": "px",
+          "CustomCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  padding-left: $msOhamburgermenuPleftpx;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  padding-left: $msOhamburgermenuPleftpx;\n}\n}",
+          "LessVariable": "$msOhamburgermenuPleft",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "d36a1330-125a-4b7e-ba1c-80d078dcf4d8",
+          "Title": "Hamburger Padding Bottom",
+          "DefaultValue": "5",
+          "Suffix": "px",
+          "CustomCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  padding-bottom: $msOhamburgermenuPbottompx;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  padding-bottom: $msOhamburgermenuPbottompx;\n}\n}",
+          "LessVariable": "$msOhamburgermenuPbottom",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "4e836c4c-af10-4387-81a1-9784fac1f950",
+          "Title": "Hamburger Padding Right",
+          "DefaultValue": "8",
+          "Suffix": "px",
+          "CustomCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  padding-right: $msOhamburgermenuPrightpx;\n}\n}",
+          "PreviewCSS": "@media (max-width: 991px){\n.menu-style-1 .navbar-expand-lg .navbar-toggler {\n  padding-right: $msOhamburgermenuPrightpx;\n}\n}",
+          "LessVariable": "$msOhamburgermenuPright",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "17563e35-c387-4c1a-b3b9-a2627b1eaa0f",
+          "Title": "Navigation Item Border Color",
+          "DefaultValue": "$secondarycolor",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item{\n border-color: $msOnavitemBColor;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item{\n border-color: $msOnavitemBColor;\n}",
+          "LessVariable": "$msOnavitemBColor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "a91d7612-92e3-42c2-90d8-b5b63ad2c6a2",
+          "Title": "Navigation Item Border top width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item{\n border-top-width: $msOnavitemborderTopWidthpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item{\n border-top-width: $msOnavitemborderTopWidthpx;\n}",
+          "LessVariable": "$msOnavitemborderTopWidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "3c66b846-35a2-426c-bd1f-51cbe6dab3d8",
+          "Title": "Navigation Item Border right width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item{\n border-right-width: $msOnavitemBRightWidthpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item{\n border-right-width: $msOnavitemBRightWidthpx;\n}",
+          "LessVariable": "$msOnavitemBRightWidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "024cf487-c184-4b4c-913a-6fc85936a8d3",
+          "Title": "Navigation Item Border Bottom Width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item{\n border-bottom-width: $msOnavitemBbottomWidthpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item{\n border-bottom-width: $msOnavitemBbottomWidthpx;\n}",
+          "LessVariable": "$msOnavitemBbottomWidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "74b7fdf4-72c2-467d-8fc6-c4d924ff8f55",
+          "Title": "Navigation Item Border Left Width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item{\n border-left-width: $msOnavitemBleftWidthpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item{\n border-left-width: $msOnavitemBleftWidthpx;\n}",
+          "LessVariable": "$msOnavitemBleftWidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "2712a4e6-1e17-4661-9e14-c3c7a5266156",
+          "Title": "Navigation Item Margin Top",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item {\n  margin-top:$msONavigationItemMtoppx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item {\n  margin-top:$msONavigationItemMtoppx;\n}",
+          "LessVariable": "$msONavigationItemMtop",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "e6ef614a-603d-45cd-a9a3-fbb915678935",
+          "Title": "Navigation Item Margin Right",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item {\n  margin-right:$msONavigationItemMRightpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item {\n  margin-right:$msONavigationItemMRightpx;\n}",
+          "LessVariable": "$msONavigationItemMRight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "57ea7898-6327-4e8e-b931-997b49ae79e4",
+          "Title": "Navigation Item Margin Bottom",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item {\n  margin-bottom:$msONavigationItemMBottompx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item {\n  margin-bottom:$msONavigationItemMBottompx;\n}",
+          "LessVariable": "$msONavigationItemMBottom",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "36099309-3573-491f-9903-021f505a369d",
+          "Title": "Navigation Item Margin Left",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item {\n  margin-left:$msONavigationItemMLeftpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item {\n  margin-left:$msONavigationItemMLeftpx;\n}",
+          "LessVariable": "$msONavigationItemMLeft",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "fc8eb0d7-c9e4-422a-8d76-663a5434935b",
+          "Title": "Navigation links Color",
+          "DefaultValue": "$secondarycolor",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\n  color: $msOcolor!important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\n  color: $msOcolor!important;\n}",
+          "LessVariable": "$msOcolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "4ddacd7d-60a9-4668-9fdc-0f304954cd7e",
+          "Title": "Navigation links Hover Color",
+          "DefaultValue": "$primarycolor",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu > ul > li:hover > a {\n  color:$msOnavhovercolor !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu > ul > li:hover > a {\n  color:$msOnavhovercolor !important;\n}",
+          "LessVariable": "$msOnavhovercolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "7252a167-8339-45b3-bc76-5c068f11f664",
+          "Title": "Navigation links Active Color",
+          "DefaultValue": "$primarycolor",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.selected a{\n  color:$msOnavactivecolor !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.selected a{\n  color:$msOnavactivecolor !important;\n}",
+          "LessVariable": "$msOnavactivecolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "e3122a67-9018-41c0-930f-307134747c27",
+          "Title": "Navigation links Active border color",
+          "DefaultValue": "$primarycolor",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu > ul > li.selected > a,\n.menu-style-1 .DefaultMenu > ul > li:hover > a {\n  Border-color:$msOnavbordercolor !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu > ul > li.selected > a,\n.menu-style-1 .DefaultMenu > ul > li:hover > a {\n  Border-color:$msOnavbordercolor !important;\n}",
+          "LessVariable": "$msOnavbordercolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "2a4366ff-1857-4a87-b045-3c8aaea901b2",
+          "Title": "Navigation links Active Border top width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.selected a {\n  border-top-width:$msOnavigationBTwidthpx !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.selected a {\n  border-top-width:$msOnavigationBTwidthpx !important;\n}",
+          "LessVariable": "$msOnavigationBTwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "b7674c5b-5cae-45d1-b4b5-0816072837da",
+          "Title": "Navigation links Active Border right width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.selected a {\n  border-right-width:$msOnavigationBRwidthpx !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.selected a {\n  border-right-width:$msOnavigationBRwidthpx !important;\n}",
+          "LessVariable": "$msOnavigationBRwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "23356b5a-7995-4ec1-b3ee-1534ba739a1e",
+          "Title": "Navigation links Active Border bottom width",
+          "DefaultValue": "2",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.selected a {\n  border-bottom-width:$msOnavigationBBwidthpx !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.selected a {\n  border-bottom-width:$msOnavigationBBwidthpx !important;\n}",
+          "LessVariable": "$msOnavigationBBwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "6343505d-0e9b-45af-b93f-d5e3dcd6146d",
+          "Title": "Navigation links Active Border left width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.selected a {\n  border-left-width:$msOnavigationBLwidthpx !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.selected a {\n  border-left-width:$msOnavigationBLwidthpx !important;\n}",
+          "LessVariable": "$msOnavigationBLwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "c994172c-aa97-4e75-8f40-0bfb44ed2db1",
+          "Title": "Navigation links Border color ",
+          "DefaultValue": "$secondarycolor",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\n  border-color:$msObordercolor !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\n  border-color:$msObordercolor !important;\n}",
+          "LessVariable": "$msObordercolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "c8c9353e-e6d8-4601-b6fa-fcf6881adeff",
+          "Title": "Navigation links Border Top width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item a{\n border-top-width: $msOnavlinksbordertoppx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item a{\n border-top-width: $msOnavlinksbordertoppx;\n}",
+          "LessVariable": "$msOnavlinksbordertop",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "f837c0e3-ed72-4a0b-abe0-01d7cf1fd3ea",
+          "Title": "Navigation links Border Right width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item a{\n border-right-width: $msOnavlinksborderRightpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item a{\n border-right-width: $msOnavlinksborderRightpx;\n}",
+          "LessVariable": "$msOnavlinksborderRight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "b1919255-aba2-4f10-8ac1-a8e417cf68d5",
+          "Title": "Navigation links Border Bottom width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item a{\n border-bottom-width: $msOnavlinksborderBottompx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item a{\n border-bottom-width: $msOnavlinksborderBottompx;\n}",
+          "LessVariable": "$msOnavlinksborderBottom",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "bb2d2a54-bcc1-4ea8-9e43-1b546794699a",
+          "Title": "Navigation links Border Left width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item a{\n border-left-width: $msOnavlinksborderLeftpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item a{\n border-left-width: $msOnavlinksborderLeftpx;\n}",
+          "LessVariable": "$msOnavlinksborderLeft",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "2f4d2f59-0908-48ad-b3ae-b6680dc08f6b",
+          "Title": "Navigation links Hover Border Color",
+          "DefaultValue": "$primarycolor",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n border-color:$msOnavlinkhoverBorderColor !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n border-color:$msOnavlinkhoverBorderColor !important;\n}",
+          "LessVariable": "$msOnavlinkhoverBorderColor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "251e798a-1ea1-40c0-91c3-55b2cbc6876a",
+          "Title": "Navigation links Hover Border top width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-top-width:$msOhoverBordernavigationBTwidthpx !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-top-width:$msOhoverBordernavigationBTwidthpx !important;\n}",
+          "LessVariable": "$msOhoverBordernavigationBTwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "31e3af82-87b0-440f-b61f-e2d5135c2ee1",
+          "Title": "Navigation links Hover Border right width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-right-width:$msOhoverBordernavigationBRwidthpx !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-right-width:$msOhoverBordernavigationBRwidthpx !important;\n}",
+          "LessVariable": "$msOhoverBordernavigationBRwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "ba481206-5ec5-4fb7-b356-1b512eb60dc1",
+          "Title": "Navigation links Hover  Border bottom width",
+          "DefaultValue": "2",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-bottom-width:$msOhoverBordernavigationBBwidthpx !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-bottom-width:$msOhoverBordernavigationBBwidthpx !important;\n}",
+          "LessVariable": "$msOhoverBordernavigationBBwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "2454306c-2f0c-4499-9626-dc07707c6979",
+          "Title": "Navigation links Hover Border left width",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-left-width:$msOhoverBordernavigationBLwidthpx !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-left-width:$msOhoverBordernavigationBLwidthpx !important;\n}",
+          "LessVariable": "$msOhoverBordernavigationBLwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 1.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "e386b0c2-d7c8-4b6b-a3d0-a3431d4ae8b1",
+          "Title": "Navigation links Font Size",
+          "DefaultValue": "14",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\n  font-size: $msOfontsizepx!important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li a.nav-link  {\n  font-size: $msOfontsizepx!important;\n}",
+          "LessVariable": "$msOfontsize",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "b80d3fc8-5583-4643-a57f-13c0c804ecd6",
+          "Title": "Navigation links Font Weight",
+          "DefaultValue": "400",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\nfont-weight:$msOfontweight !important;\n}\n",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\nfont-weight:$msOfontweight !important;\n}",
+          "LessVariable": "$msOfontweight",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "a0538df1-2682-459b-9b20-2c279d9d3ff5",
+          "Title": "Navigation links Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\n  font-family: $msOmenufontfamily!important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\n  font-family: $msOmenufontfamily!important;\n}",
+          "LessVariable": "$msOmenufontfamily",
+          "JavascriptVariable": null,
+          "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "a5b2d603-0d0c-4c15-a645-2747ae274172",
+          "Title": "Navigation links Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\nfont-style:$msOfontstyle !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\nfont-style:$msOfontstyle !important;\n}",
+          "LessVariable": "$msOfontstyle",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "RangeMin": -5.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "0233bbaf-842b-4b3b-847f-9bb48fff10f2",
+          "Title": "Navigation links Letter Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\nletter-spacing:$msOletterspacingpx !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\nletter-spacing:$msOletterspacingpx !important;\n}",
+          "LessVariable": "$msOletterspacing",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "2da4a759-8b9f-4843-8960-49f9c9fe43f8",
+          "Title": "Navigation links Text Transform",
+          "DefaultValue": "None",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\n  text-transform:$msOtexttransform !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li a.nav-link {\n  text-transform:$msOtexttransform !important;\n}",
+          "LessVariable": "$msOtexttransform",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "7485a378-c8cb-4bf0-9384-7bded440d690",
+          "Title": "Navigation links Padding Top",
+          "DefaultValue": "8",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  padding-top:$msONavigationPtpx;\n}",
+          "PreviewCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  padding-top:$msONavigationPtpx;\n}",
+          "LessVariable": "$msONavigationPt",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "d4a3ff47-89cb-4cee-8fb9-a0caf08f642d",
+          "Title": "Navigation links Padding Right",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  padding-right:$msONavigationPRightpx !important;\n}",
+          "PreviewCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  padding-right:$msONavigationPRightpx !important;\n}",
+          "LessVariable": "$msONavigationPRight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "48148e53-68fc-4eb3-adf5-4e3bb13d9b9c",
+          "Title": "Navigation links Padding Bottom",
+          "DefaultValue": "8",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  padding-bottom:$msONavigationPbpx;\n}",
+          "PreviewCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  padding-bottom:$msONavigationPbpx;\n}",
+          "LessVariable": "$msONavigationPb",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "40c1a757-6bac-435f-aad4-5dc422aa6434",
+          "Title": "Navigation links Padding Left",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  padding-left:$msONavigationPlpx !important;\n}",
+          "PreviewCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  padding-left:$msONavigationPlpx !important;\n}",
+          "LessVariable": "$msONavigationPl",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "863c5088-7e30-485b-9a41-c05a68a1a297",
+          "Title": "Navigation links Margin Top",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  margin-top:$msONavigationMtoppx;\n}",
+          "PreviewCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  margin-top:$msONavigationMtoppx;\n}",
+          "LessVariable": "$msONavigationMtop",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "faf4916c-4410-4585-a049-b60bb0c6d1a7",
+          "Title": "Navigation links Margin Right",
+          "DefaultValue": "12",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  margin-right:$msONavigationMRightpx;\n}",
+          "PreviewCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  margin-right:$msONavigationMRightpx;\n}",
+          "LessVariable": "$msONavigationMRight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "04cc0ee4-c8e4-4f75-b50a-3fa62cfa2a80",
+          "Title": "Navigation links Margin Bottom",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  margin-bottom:$msONavigationMBottompx;\n}",
+          "PreviewCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  margin-bottom:$msONavigationMBottompx;\n}",
+          "LessVariable": "$msONavigationMBottom",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "ae027d09-ef06-4727-bc53-60d8842555da",
+          "Title": "Navigation links Margin Left",
+          "DefaultValue": "12",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  margin-left:$msONavigationMLeftpx;\n}",
+          "PreviewCSS": ".menu-style-1 .navbar-expand-lg .navbar-nav .nav-link {\n  margin-left:$msONavigationMLeftpx;\n}",
+          "LessVariable": "$msONavigationMLeft",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "49c99443-ceb3-4c0f-9a50-111249d0f7c7",
+          "Title": "Submenu Background",
+          "DefaultValue": "#ffffff",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n background-color:$msOsubmenubackground;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n background-color:$msOsubmenubackground;\n}",
+          "LessVariable": "$msOsubmenubackground",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "a7d40a57-f0bb-475e-b1ef-31ca8ab0c4f6",
+          "Title": "Submenu Padding",
+          "DefaultValue": "5",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n  padding:$msOsubmenupaddingpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n  padding:$msOsubmenupaddingpx;\n}",
+          "LessVariable": "$msOsubmenupadding",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "e1a5d61b-0cfc-463d-b9d4-5c76b5dc1b2a",
+          "Title": "Submenu Border Width Top",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n  border-top-width:$msOsubmenuBwToppx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n  border-top-width:$msOsubmenuBwToppx;\n}",
+          "LessVariable": "$msOsubmenuBwTop",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "bb3337bd-2297-4d0b-93f6-710a678df768",
+          "Title": "Submenu Border Width Bottom",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n  border-bottom-width:$msOsubmenuBwBottompx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n  border-bottom-width:$msOsubmenuBwBottompx;\n}",
+          "LessVariable": "$msOsubmenuBwBottom",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "1ed48357-e833-4c8c-9aea-dde95c625fa7",
+          "Title": "Submenu Border Width Left",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n  border-left-width:$msOsubmenuBwLeftpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n  border-left-width:$msOsubmenuBwLeftpx;\n}",
+          "LessVariable": "$msOsubmenuBwLeft",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "906f1c0a-9609-4fe6-8609-082677b0d091",
+          "Title": "Submenu Border Width Right",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n  border-right-width:$msOsubmenuBwRightpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n  border-right-width:$msOsubmenuBwRightpx;\n}",
+          "LessVariable": "$msOsubmenuBwRight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "ce94464a-8d0f-400f-b35f-0522b961a70c",
+          "Title": "Submenu Border Color Top",
+          "DefaultValue": "#777777",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-top-color:$msOsubmenuBTclr;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-top-color:$msOsubmenuBTclr;\n}",
+          "LessVariable": "$msOsubmenuBTclr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "eb5f6bf9-c948-420c-be2c-2d0d5c16c2d1",
+          "Title": "Submenu Border Color Bottom",
+          "DefaultValue": "#777777",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-bottom-color:$msOsubmenuBbclr;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-bottom-color:$msOsubmenuBbclr;\n}",
+          "LessVariable": "$msOsubmenuBbclr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "d44fd54f-ae20-4be6-9acb-e700686944f1",
+          "Title": "Submenu Border Color Left",
+          "DefaultValue": "#777777",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-left-color:$msOsubmenuBlclr;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-left-color:$msOsubmenuBlclr;\n}",
+          "LessVariable": "$msOsubmenuBlclr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "d5fba2b0-bc1b-4531-a119-24e790a5ff2e",
+          "Title": "Submenu Border Color Right",
+          "DefaultValue": "#777777",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-right-color:$msOsubmenuBRclr;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-right-color:$msOsubmenuBRclr;\n}",
+          "LessVariable": "$msOsubmenuBRclr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "80edd8bf-0d61-4c18-a715-50fcaa4a583c",
+          "Title": "Submenu Border Top Left Radius",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-top-left-radius : $msOsubmenuradiustopleftpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-top-left-radius : $msOsubmenuradiustopleftpx;\n}",
+          "LessVariable": "$msOsubmenuradiustopleft",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "0335fd0e-ccf1-4031-810d-332cc07d2c69",
+          "Title": "Submenu Border Top Right Radius",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-top-right-radius : $msOsubmenuradiustoprightpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-top-right-radius : $msOsubmenuradiustoprightpx;\n}",
+          "LessVariable": "$msOsubmenuradiustopright",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "3f8a355f-eaad-4142-bf6e-dc2ddbe3d644",
+          "Title": "Submenu Border Bottom Left Radius",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-bottom-left-radius : $msOsubmenuradiusbottomleftpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n border-bottom-left-radius : $msOsubmenuradiusbottomleftpx;\n}",
+          "LessVariable": "$msOsubmenuradiusbottomleft",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "780070c1-a986-4f85-a896-660b35eccc75",
+          "Title": "Submenu Border Bottom Right Radius",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n  border-bottom-right-radius : $msOsubmenuradiusBottomRightpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist {\n  border-bottom-right-radius : $msOsubmenuradiusBottomRightpx;\n}",
+          "LessVariable": "$msOsubmenuradiusBottomRight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 500.0,
+          "Increment": 1.0,
+          "Guid": "71b93cfd-8145-42f4-99b6-9490ca28924d",
+          "Title": "Submenu Min Width",
+          "DefaultValue": "160",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist{\n  min-width: $msOsubmenuMinWidthhpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu li.dropdown .dropdown-menu.menulist{\n  min-width: $msOsubmenuMinWidthhpx;\n}",
+          "LessVariable": "$msOsubmenuMinWidthh",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "26caac5f-57a3-4fb3-92d4-9183cbbab443",
+          "Title": "Submenu Links Color",
+          "DefaultValue": "#999999",
+          "Suffix": "",
+          "CustomCSS": "@media (min-width: 992px) {\n.menu-style-1 .DefaultMenu .dropdown ul li a.menu-item {\n\tcolor: $msOsubmenucolor !important;\n}\n\n.menu-style-1 .DefaultMenu .dropdown ul li a.menu-item:after {\n\tborder-left-color: $msOsubmenucolor !important;\n}\n}\n  ",
+          "PreviewCSS": "@media (min-width: 992px) {\n.menu-style-1 .DefaultMenu .dropdown ul li a.menu-item {\n\tcolor: $msOsubmenucolor !important;\n}\n\n.menu-style-1 .DefaultMenu .dropdown ul li a.menu-item:after {\n\tborder-left-color: $msOsubmenucolor !important;\n}\n}",
+          "LessVariable": "$msOsubmenucolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "6e4a75e7-00a3-4f56-8473-fdad065b4d0a",
+          "Title": "Submenu Links Hover Color",
+          "DefaultValue": "#fff",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .dropdown ul li a.menu-item:hover {\n\tcolor:$msOcolorhover !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .dropdown ul li a.menu-item:hover {\n\tcolor:$msOcolorhover !important;\n}",
+          "LessVariable": "$msOcolorhover",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "091e3577-9307-4cf2-9196-d122173f0962",
+          "Title": "Submenu Links Background",
+          "DefaultValue": "#fff",
+          "Suffix": "",
+          "CustomCSS": "@media (min-width: 992px) {\n.menu-style-1 .DefaultMenu .dropdown ul li a.menu-item {\n\tbackground: $msOsubmenubackground !important;\n}\n}",
+          "PreviewCSS": "@media (min-width: 992px) {\n.menu-style-1 .DefaultMenu .dropdown ul li a.menu-item {\n\tbackground: $msOsubmenubackground !important;\n}\n}",
+          "LessVariable": "$msOsubmenubackground",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "4983080e-e980-43ae-bf6d-43727133f91a",
+          "Title": "Submenu Links Background Hover ",
+          "DefaultValue": "$primarycolor",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .dropdown ul li a.menu-item:hover {\n\tbackground:$msObackgroundhover !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .dropdown ul li a.menu-item:hover {\n\tbackground:$msObackgroundhover !important;\n}",
+          "LessVariable": "$msObackgroundhover",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "b731f5fd-daba-4f57-bbbc-1d971b77ee3a",
+          "Title": "Submenu Links Font Size",
+          "DefaultValue": "14",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .dropdown-menu a.menu-item,\n    .menu-style-1 .dropdown-submenu a.menu-item {\n        font-size: $msOsubfontsizepx !important;\n    }",
+          "PreviewCSS": ".menu-style-1 .dropdown-menu a.menu-item,\n    .menu-style-1 .dropdown-submenu a.menu-item {\n        font-size: $msOsubfontsizepx !important;\n    }",
+          "LessVariable": "$msOsubfontsize",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "0b8aa16e-54de-4a00-8ff5-1ae248619016",
+          "Title": "Submenu Links Font Weight",
+          "DefaultValue": "400",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .dropdown-menu a.menu-item,\n    .menu-style-1 .dropdown-submenu a.menu-item {\n        font-weight:$msOsubfontweight !important;\n    }",
+          "PreviewCSS": ".menu-style-1 .dropdown-menu a.menu-item,\n    .menu-style-1 .dropdown-submenu a.menu-item {\n        font-weight:$msOsubfontweight !important;\n    }",
+          "LessVariable": "$msOsubfontweight",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "e6c3fe11-ca4a-4587-8661-822e13f484ba",
+          "Title": "Submenu Links Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .dropdown ul li a.menu-item {\n\tfont-family:$msOsubmenufontfamily !important;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .dropdown ul li a.menu-item {\n\tfont-family:$msOsubmenufontfamily !important;\n}",
+          "LessVariable": "$msOsubmenufontfamily",
+          "JavascriptVariable": null,
+          "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "f881407b-dd78-49d2-926c-e265feb97d7b",
+          "Title": "Submenu Links Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .dropdown-menu a.menu-item,\n    .menu-style-1 .dropdown-submenu a.menu-item {\n        font-style:$msOsubfontstyle !important;\n    }",
+          "PreviewCSS": ".menu-style-1 .dropdown-menu a.menu-item,\n    .menu-style-1 .dropdown-submenu a.menu-item {\n        font-style:$msOsubfontstyle !important;\n    }",
+          "LessVariable": "$msOsubfontstyle",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "5cbb2769-7824-4cb4-a3f2-5958fc9f8a0c",
+          "Title": "Submenu Links Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .dropdown-menu a.menu-item,\n    .menu-style-1 .dropdown-submenu a.menu-item {\n               text-transform: $msOsubtexttransform !important;\n    }",
+          "PreviewCSS": ".menu-style-1 .dropdown-menu a.menu-item,\n    .menu-style-1 .dropdown-submenu a.menu-item {\n               text-transform: $msOsubtexttransform !important;\n    }",
+          "LessVariable": "$msOsubtexttransform",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "e02ac4ab-9a9f-4426-b755-ec89568a8b81",
+          "Title": "Submenu Links Padding Top",
+          "DefaultValue": "10",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .dropdown-item a,\n.menu-style-1 .DefaultMenu .dropdown-submenu a{\n    padding-top: $msOsubmenulinkPtpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .dropdown-item a,\n.menu-style-1 .DefaultMenu .dropdown-submenu a{\n    padding-top: $msOsubmenulinkPtpx;\n}",
+          "LessVariable": "$msOsubmenulinkPt",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "c5253c2e-a06a-4461-a832-b8dcd54b7e3d",
+          "Title": "Submenu Links Padding Bottom",
+          "DefaultValue": "10",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .dropdown-item a,\n.menu-style-1 .DefaultMenu .dropdown-submenu a{\n    padding-bottom: $msOsubmenulinkPbpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .dropdown-item a,\n.menu-style-1 .DefaultMenu .dropdown-submenu a{\n    padding-bottom: $msOsubmenulinkPbpx;\n}",
+          "LessVariable": "$msOsubmenulinkPb",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "9c8bb744-1026-4641-ae94-585d864c6031",
+          "Title": "Submenu Links Padding Left",
+          "DefaultValue": "25",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .dropdown-item a,\n.menu-style-1 .DefaultMenu .dropdown-submenu a{\n    padding-left: $msOsubmenulinkPlpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .dropdown-item a,\n.menu-style-1 .DefaultMenu .dropdown-submenu a{\n    padding-left: $msOsubmenulinkPlpx;\n}",
+          "LessVariable": "$msOsubmenulinkPl",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "3fd36a34-c303-4eaa-8dbb-9950d350f7a9",
+          "Title": "Submenu Links Padding Right",
+          "DefaultValue": "25",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .dropdown-item a,\n.menu-style-1 .DefaultMenu .dropdown-submenu a{\n    padding-right: $msOsubmenulinkPrpx;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .dropdown-item a,\n.menu-style-1 .DefaultMenu .dropdown-submenu a{\n    padding-right: $msOsubmenulinkPrpx;\n}",
+          "LessVariable": "$msOsubmenulinkPr",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "76545d61-f8b1-430f-b2cc-e30d8c2ff61f",
+          "Title": "Submenu Links Border Bottom Width",
+          "DefaultValue": "1",
+          "Suffix": "px",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .dropdown-menu a.menu-item{\n  border-bottom-width : $msOsubmenuBbwidthpx\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .dropdown-menu a.menu-item{\n  border-bottom-width : $msOsubmenuBbwidthpx\n}",
+          "LessVariable": "$msOsubmenuBbwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "1e69691f-2344-4083-ae5f-c1b7fdea4cb0",
+          "Title": "Submenu Links Border Bottom Color",
+          "DefaultValue": "#f4f4f4",
+          "Suffix": "",
+          "CustomCSS": ".menu-style-1 .DefaultMenu .dropdown-menu a.menu-item{\n  border-bottom-color : $msOsubmenuBbcolor;\n}",
+          "PreviewCSS": ".menu-style-1 .DefaultMenu .dropdown-menu a.menu-item{\n  border-bottom-color : $msOsubmenuBbcolor;\n}",
+          "LessVariable": "$msOsubmenuBbcolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        }
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "316d6784-a0d2-4ede-90c3-d9e9117f6c3e",
+      "Category": "Styles: Breadcrumb",
+      "Title": null,
+      "Controls": [
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "ac5552c4-371e-4575-9653-71b7b9bcd37a",
+      "Category": "Styles: Breadcrumb",
+      "Title": "Style: A",
+      "Controls": [
+        {
+          "Guid": "c0c77c09-38be-44e6-a083-948968c0d6c7",
+          "Title": "Color",
+          "DefaultValue": "$secondarycolor",
+          "Suffix": "",
+          "CustomCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item a span,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item::before {\n    color: $brOnebreadcolor !important;\n}",
+          "PreviewCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item a span,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item::before {\n    color: $brOnebreadcolor !important;\n}",
+          "LessVariable": "$brOnebreadcolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "3a82bbd1-8265-4ae9-b209-e94d1ef3e8aa",
+          "Title": "Active Color",
+          "DefaultValue": "$primarycolor",
+          "Suffix": "",
+          "CustomCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb .active{\n    color: $brOnebreadactivecolor  !important;\n}",
+          "PreviewCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb .active{\n    color: $brOnebreadactivecolor  !important;\n}",
+          "LessVariable": "$brOnebreadactivecolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "2e1d864a-331a-42d1-87d3-b412a12431ac",
+          "Title": "Hover color",
+          "DefaultValue": "$primarycolor",
+          "Suffix": "",
+          "CustomCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb .breadcrumb-item a:hover span{\n  color:$brOnebchcolor !important;\n}",
+          "PreviewCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb .breadcrumb-item a:hover span{\n  color:$brOnebchcolor !important;\n}",
+          "LessVariable": "$brOnebchcolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "e53326ef-83b1-473f-9ea3-874c46ed1f09",
+          "Title": "Font Size",
+          "DefaultValue": "12",
+          "Suffix": "px",
+          "CustomCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item a span{\n    font-size: $brOnebreadfontsizepx ;\n}\n",
+          "PreviewCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item a span{\n    font-size: $brOnebreadfontsizepx ;\n}\n",
+          "LessVariable": "$brOnebreadfontsize",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "e239b3d2-4ecd-44f8-899f-d357c7b799ca",
+          "Title": "Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".breadcrumb-style-1 .vj-breadcrumb *{\n    font-family: $brOnebreadfontfamily;\n}",
+          "PreviewCSS": ".breadcrumb-style-1 .vj-breadcrumb *{\n    font-family: $brOnebreadfontfamily ;\n}",
+          "LessVariable": "$brOnebreadfontfamily",
+          "JavascriptVariable": null,
+          "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "1e9436d9-4e55-437f-ac85-309e1221bccc",
+          "Title": "Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item a span{\n    font-style: $brOnebreadfontstyle;\n}\n",
+          "PreviewCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item a span{\n    font-style: $brOnebreadfontstyle;\n}\n",
+          "LessVariable": "$brOnebreadfontstyle",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "43c64413-57e6-49f1-adea-e49f127b2da3",
+          "Title": "Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": " .breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item,\n .breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item a span{\n      text-transform: $brOnebreadtransform ;\n  }\t",
+          "PreviewCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item a span{\n    text-transform: $brOnebreadtransform;\n}",
+          "LessVariable": "$brOnebreadtransform",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "cc51f4f0-c981-4839-8672-e555564903d3",
+          "Title": "Font Weight",
+          "DefaultValue": "300",
+          "Suffix": "",
+          "CustomCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item a span{\n    font-weight: $brOnebreadweight  !important;\n}",
+          "PreviewCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item a span{\n    font-weight: $brOnebreadweight !important;\n}",
+          "LessVariable": "$brOnebreadweight",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "RangeMin": -5.0,
+          "RangeMax": 25.0,
+          "Increment": 0.0,
+          "Guid": "50e3495f-953e-4eb1-9cae-5603a18a47ee",
+          "Title": "Letter Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item a span{\n    letter-spacing: $brOnebreadletterspacingpx;\n}\t",
+          "PreviewCSS": ".breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item,\n.breadcrumb-style-1 .vj-breadcrumb .breadcrumb-item a span{\n    letter-spacing: $brOnebreadletterspacingpx;\n}",
+          "LessVariable": "$brOnebreadletterspacing",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        }
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "906b349f-0604-4605-bdc2-53150b6b0e58",
+      "Category": "Styles: Language",
+      "Title": null,
+      "Controls": [
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "5cdfc0d1-bc66-4fc5-9f4d-3b8bbfe412c8",
+      "Category": "Styles: Language",
+      "Title": "Style A",
+      "Controls": [
+        {
+          "Guid": "1a438933-7f72-4503-a234-3719d95940a4",
+          "Title": "Color",
+          "DefaultValue": "$secondarycolor",
+          "Suffix": "",
+          "CustomCSS": ".language-style-1 .select_language{\ncolor:$lanOnelangcolor;\n}",
+          "PreviewCSS": ".language-style-1 .select_language{\ncolor:$lanOnelangcolor;\n}",
+          "LessVariable": "$lanOnelangcolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "0ef3ed21-b6d6-4128-9a2b-52f87ccc59b1",
+          "Title": "Background",
+          "DefaultValue": "#ffffff",
+          "Suffix": "",
+          "CustomCSS": ".language-style-1 .select_language{\nbackground:$lanOnelangbackground;\n}",
+          "PreviewCSS": ".language-style-1 .select_language{\nbackground:$lanOnelangbackground;\n}",
+          "LessVariable": "$lanOnelangbackground",
+          "JavascriptVariable": null,
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "9c0d2e82-a4c3-4510-ba2b-64a20a85cc0e",
+          "Title": "Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".language-style-1 .select_language,.language-style-1  .select_language option{\nfont-family:$lanOnelangfontfamily;\n}",
+          "PreviewCSS": ".language-style-1 .select_language,.language-style-1  .select_language option{\nfont-family:$lanOnelangfontfamily;\n}",
+          "LessVariable": "$lanOnelangfontfamily",
+          "JavascriptVariable": null,
+          "Type": "Fonts"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "836cefcb-40c9-4231-b525-674f6dbbc582",
+          "Title": "Border Radius",
+          "DefaultValue": "5",
+          "Suffix": "px",
+          "CustomCSS": ".language-style-1 .select_language{\nborder-radius:$lanOnelangradiuspx;\n}",
+          "PreviewCSS": ".language-style-1 .select_language{\nborder-radius:$lanOnelangradiuspx;\n}",
+          "LessVariable": "$lanOnelangradius",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        }
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "481b4d88-50aa-4f18-9bcd-008ce5543eaf",
+      "Category": "Styles: Search Input",
+      "Title": null,
+      "Controls": [
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "cdf1036a-9456-4410-8f44-115539ad8933",
+      "Category": "Styles: Search Input",
+      "Title": "Style A",
+      "Controls": [
+        {
+          "Guid": "a61fd171-d5c1-472b-a0c2-7d838dc3c00f",
+          "Title": "Color",
+          "DefaultValue": "$secondarycolor",
+          "Suffix": "",
+          "CustomCSS": ".search-input-style-1 input.search_box,\n.search-input-style-1 input.search_box:focus {\n color:$siOsearchcolor;\n}\n\n.search-input-style-1 .searchicon svg {\n    fill:$siOsearchcolor !important;\n}\n.search-input-style-1 input.search_box::placeholder {\n color:$siOsearchcolor;\n}",
+          "PreviewCSS": ".search-input-style-1 input.search_box,\n.search-input-style-1 input.search_box:focus {\n color:$siOsearchcolor ;\n}\n\n.search-input-style-1 .searchicon svg {\n    fill:$siOsearchcolor !important;\n}\n.search-input-style-1 input.search_box::placeholder {\n color:$siOsearchcolor;\n}",
+          "LessVariable": "$siOsearchcolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "148d7752-4399-4acc-8f1c-bd622c2ae712",
+          "Title": "Background",
+          "DefaultValue": "#ffffff",
+          "Suffix": "",
+          "CustomCSS": ".search-input-style-1 input.search_box,\n.search-input-style-1 input.search_box:focus{ \n background:$siOsearchbackground;\n}\n\n",
+          "PreviewCSS": ".search-input-style-1 input.search_box,\n.search-input-style-1 input.search_box:focus{ \n background:$siOsearchbackground;\n}\n",
+          "LessVariable": "$siOsearchbackground",
+          "JavascriptVariable": null,
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "76f2561c-99e0-4bb8-86d7-ce63b6ee5f5b",
+          "Title": "Border Radius",
+          "DefaultValue": "5",
+          "Suffix": "px",
+          "CustomCSS": ".search-input-style-1 input.search_box{\n border-radius:$siOsearchradiuspx;\n}\n",
+          "PreviewCSS": ".search-input-style-1 input.search_box{\n border-radius:$siOsearchradiuspx;\n}\n",
+          "LessVariable": "$siOsearchradius",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "Guid": "06fd1e76-cc56-4329-a5ca-381a8af0e172",
+          "Title": "Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".search-input-style-1 input.search_box,\n.search-input-style-1 input.search_box:focus,\n.search-input-style-1 input.search_box::placeholder{\n font-family:$siOsearchfontfamily;\n}\n",
+          "PreviewCSS": ".search-input-style-1 input.search_box,\n.search-input-style-1 input.search_box:focus,\n.search-input-style-1 input.search_box::placeholder{\n font-family:$siOsearchfontfamily;\n}\n",
+          "LessVariable": "$siOsearchfontfamily",
+          "JavascriptVariable": null,
+          "Type": "Fonts"
+        }
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "27e70e88-228e-4c5c-bdb1-c107f604a1ad",
+      "Category": "Styles: My Account",
+      "Title": null,
+      "Controls": [
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "7526c8c7-12b8-4fa6-8672-eef25dae7905",
+      "Category": "Styles: My Account",
+      "Title": "Styles A",
+      "Controls": [
+        {
+          "Guid": "ed9390a7-a509-46d1-9bca-c717cafff290",
+          "Title": "My Account Color",
+          "DefaultValue": "$secondarycolor",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li span ,\n.register-link-style-1 .mobile_registerbox .modal .modal-body a,\n.register-link-style-1  .registerlink-notification sup strong,\n.register-link-style-1 .desktop_registerbox .registerlink-notification,\n.register-link-style-1 .mobile_registerbox sup strong{\n    color: $mAoneregistercolor ;\n}\n\n.register-link-style-1  .registerlink-notification svg path,\n.register-link-style-1  .registerlink-notification-icon svg path{\n  fill: $mAoneregistercolor;\n}\n.register-link-style-1 .desktop_registerbox .registerlink-notification span.badge,\n.register-link-style-1 .mobile_registerbox .registerlink-notification span.badge{\n background-color: $mAoneregistercolor;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li span ,\n.register-link-style-1 .mobile_registerbox .modal .modal-body a,\n.register-link-style-1  .registerlink-notification sup strong,\n.register-link-style-1 .desktop_registerbox .registerlink-notification,\n.register-link-style-1 .mobile_registerbox sup strong{\n    color: $mAoneregistercolor ;\n}\n\n.register-link-style-1  .registerlink-notification svg path,\n.register-link-style-1 .registerlink-notification-icon svg path{\n  fill: $mAoneregistercolor;\n}\n.register-link-style-1 .desktop_registerbox .registerlink-notification span.badge,\n.register-link-style-1 .mobile_registerbox .registerlink-notification span.badge{\n background-color: $mAoneregistercolor;\n}",
+          "LessVariable": "$mAoneregistercolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "2689a519-ede1-4bab-abec-97be47e598e0",
+          "Title": "My Account Font Size",
+          "DefaultValue": "14",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-1 .mobile_registerbox .modal .modal-body .myaccount-items a{\n  font-size: $mAoneregisterfontsizepx !important;\n}\n",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-1 .mobile_registerbox .modal .modal-body .myaccount-items a{\n  font-size: $mAoneregisterfontsizepx !important;\n}\n",
+          "LessVariable": "$mAoneregisterfontsize",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "d0a03f80-18bb-4fb4-bc89-cbf14a276e69",
+          "Title": "My Account Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-1 .mobile_registerbox .modal .modal-body p{\n    font-family: $mAonesignupfontfamily !important;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-1 .mobile_registerbox .modal .modal-body p{\n    font-family: $mAonesignupfontfamily !important;\n}",
+          "LessVariable": "$mAonesignupfontfamily",
+          "JavascriptVariable": "",
+          "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "3ade914d-d01d-48e0-9cb4-42c72fdea6bf",
+          "Title": "My Account Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-1 .mobile_registerbox .modal .modal-body p{\n    font-style: $mAoneregisterfontstyle !important;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-1 .mobile_registerbox .modal .modal-body p{\n    font-style: $mAoneregisterfontstyle !important;\n}",
+          "LessVariable": "$mAoneregisterfontstyle",
+          "JavascriptVariable": "",
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "8cc59d85-276f-48d9-a78d-e93bb7bc94b7",
+          "Title": "My Account Background Color",
+          "DefaultValue": "#ffffff",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu,\n.register-link-style-1 .mobile_registerbox .modal .modal-content{\n  background-color: $mAoneprofilebgColor;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu,\n.register-link-style-1 .mobile_registerbox .modal .modal-content{\n  background-color: $mAoneprofilebgColor;\n}",
+          "LessVariable": "$mAoneprofilebgColor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "a98b181e-9537-438c-8d71-ff27d6b86aa1",
+          "Title": "My Account Border Color",
+          "DefaultValue": "#00000026",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu{\n  border-color: $mAoneprofilebrColor;\n  \n}\n\n.register-link-style-1 .desktop_registerbox .dropdown-menu li + li,\n.register-link-style-1   .mobile_registerbox .myaccount-items + .myaccount-items{\n    border-top-color: $mAoneprofilebrColor;\n}\n.register-link-style-1  .myaccount-items:last-child,\n.register-link-style-1   .mobile_registerbox .modal-header{\n  border-bottom-color: $mAoneprofilebrColor;\n}\n\n.register-link-style-1  .mobile_registerbox .modal-body hr{\n background-color :  $mAoneprofilebrColor;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu{\n  border-color: $mAoneprofilebrColor;\n\n}\n.register-link-style-1 .desktop_registerbox .dropdown-menu li + li,\n.register-link-style-1   .mobile_registerbox .myaccount-items + .myaccount-items{\n    border-top-color: $mAoneprofilebrColor;\n}\n.register-link-style-1  .myaccount-items:last-child,\n.register-link-style-1   .mobile_registerbox .modal-header{\n  border-bottom-color: $mAoneprofilebrColor;\n}\n\n\n.register-link-style-1  .mobile_registerbox .modal-body hr{\n background-color :  $mAoneprofilebrColor;\n}",
+          "LessVariable": "$mAoneprofilebrColor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "cc344e97-b152-4c6e-bd01-e462fd0f945c",
+          "Title": "My Account Border Width",
+          "DefaultValue": "1",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu{\n  border-width: $mAoneprofiledDropdownbrWidthpx ;\n}\n\n.register-link-style-1 .desktop_registerbox .dropdown-menu li + li,\n.register-link-style-1  .mobile_registerbox .myaccount-items + .myaccount-items{\n  border-top-width: $mAoneprofiledDropdownbrWidthpx ;\n}\n.register-link-style-1 .mobile_registerbox .myaccount-items:last-child,\n.register-link-style-1  .mobile_registerbox .modal-header {\n  border-bottom-width: $mAoneprofiledDropdownbrWidthpx;\n}\n",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu{\n  border-width: $mAoneprofiledDropdownbrWidthpx ;\n}\n\n.register-link-style-1 .desktop_registerbox .dropdown-menu li + li,\n .register-link-style-1 .mobile_registerbox .myaccount-items + .myaccount-items{\n  border-top-width: $mAoneprofiledDropdownbrWidthpx ;\n}\n.register-link-style-1 .mobile_registerbox .myaccount-items:last-child,\n.register-link-style-1  .mobile_registerbox .modal-header {\n  border-bottom-width: $mAoneprofiledDropdownbrWidthpx;\n}\n",
+          "LessVariable": "$mAoneprofiledDropdownbrWidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "0ca74561-cada-4d14-a7aa-24cc7f304c3c",
+          "Title": "My Account Padding Top",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox, .mobile_registerbox {\n  padding-top:$mAoneProfilesignPtpx;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox, .mobile_registerbox {\n  padding-top:$mAoneProfilesignPtpx;\n}",
+          "LessVariable": "$mAoneProfilesignPt",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "8021f739-8272-469c-a6bc-6fdfd711008e",
+          "Title": "My Account Padding Bottom",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox, .mobile_registerbox {\n  padding-bottom:$mAoneProfilesignPbpx;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox, .mobile_registerbox {\n  padding-bottom:$mAoneProfilesignPbpx;\n}",
+          "LessVariable": "$mAoneProfilesignPb",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "72e41327-f6b1-4f40-8720-b23d9144e66e",
+          "Title": "My Account Padding Left",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox, .mobile_registerbox {\n  padding-left:$mAoneProfilesignPlpx;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox, .mobile_registerbox {\n  padding-left:$mAoneProfilesignPlpx;\n}",
+          "LessVariable": "$mAoneProfilesignPl",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "e3502466-0578-4a24-a42f-af14414b6da4",
+          "Title": "My Account Padding Right",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox, .mobile_registerbox {\n  padding-right:$mAoneProfilesignPrpx;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox, .mobile_registerbox {\n  padding-right:$mAoneProfilesignPrpx;\n}",
+          "LessVariable": "$mAoneProfilesignPr",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "c9d1f487-da47-49f2-be9c-3fddafd565fc",
+          "Title": "My Account Background Hover Color",
+          "DefaultValue": "#EFEFEF",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu a:hover,\n.register-link-style-1 .mobile_registerbox .myaccount-items:hover{\n  background-color:$mAoneprofilebgHoveVolor;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu a:hover,\n.register-link-style-1 .mobile_registerbox .myaccount-items:hover{\n  background-color:$mAoneprofilebgHoveVolor;\n}",
+          "LessVariable": "$mAoneprofilebgHoveVolor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "ad823ce3-e84a-4161-9805-da60e091439d",
+          "Title": "Avatar Width",
+          "DefaultValue": "25",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox img{\nwidth:$mAoneavatarwidthpx!important;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox img{\nwidth:$mAoneavatarwidthpx!important;\n}",
+          "LessVariable": "$mAoneavatarwidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 0.0,
+          "Guid": "5db2e71c-598c-4787-8bdd-c296fb8432e5",
+          "Title": "Avatar Height",
+          "DefaultValue": "25",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox img{\nheight:$mAoneavatarheightpx!important;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox img{\nheight:$mAoneavatarheightpx!important;\n}",
+          "LessVariable": "$mAoneavatarheight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "ed5fefb9-2e76-404d-a140-b4a9ad2b87e2",
+          "Title": "Avatar Border radius",
+          "DefaultValue": "50",
+          "Suffix": "%",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox img{\nborder-radius:$mAoneavatarradius%!important;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox img{\nborder-radius:$mAoneavatarradius%!important;\n}",
+          "LessVariable": "$mAoneavatarradius",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "eaf9e884-2442-4984-bed7-33ede313f7b0",
+          "Title": "Menu Icon Color",
+          "DefaultValue": "$secondarycolor",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li svg path,\n.register-link-style-1 .mobile_registerbox .modal .modal-body svg path {\n  fill: $mAonemyProfileDmenuIconClr;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li svg path,\n.register-link-style-1 .mobile_registerbox .modal .modal-body svg path {\n  fill: $mAonemyProfileDmenuIconClr;\n}",
+          "LessVariable": "$mAonemyProfileDmenuIconClr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "20a2b81a-4301-400c-887f-517591dfabdd",
+          "Title": "Menu Icon Height",
+          "DefaultValue": "14",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li svg,\n.register-link-style-1 .mobile_registerbox .modal .modal-body svg{\n  height: $mAonemyProfileDmenuIconHeightpx;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li svg,\n.register-link-style-1 .mobile_registerbox .modal .modal-body svg {\n  height: $mAonemyProfileDmenuIconHeightpx;\n}",
+          "LessVariable": "$mAonemyProfileDmenuIconHeight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "41a6ada8-9e5e-40ff-b4ee-5f38629aa9d6",
+          "Title": "Menu Icon Width ",
+          "DefaultValue": "14",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li svg,\n.register-link-style-1 .mobile_registerbox .modal .modal-body svg{\n  width: $mAonemyProfileDmenuIconWidthpx;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-menu li svg,\n.register-link-style-1 .mobile_registerbox .modal .modal-body svg {\n  width: $mAonemyProfileDmenuIconWidthpx;\n}",
+          "LessVariable": "$mAonemyProfileDmenuIconWidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "712601ec-c557-4210-83b8-889722ebd7bb",
+          "Title": "User Icon Color",
+          "DefaultValue": "#444444",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-1 .mobile_registerbox .mobile-registerbox-btn svg path,\n.register-link-style-1 .loginuser svg path{\n  fill: $mAoneprofileMobileIconClr;\n}",
+          "PreviewCSS": ".register-link-style-1 .mobile_registerbox .mobile-registerbox-btn svg path,\n.register-link-style-1 .loginuser svg path{\n  fill: $mAoneprofileMobileIconClr;\n}",
+          "LessVariable": "$mAoneprofileMobileIconClr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "40266181-27f3-4555-9e9d-42ac332c7c2a",
+          "Title": "User Icon Height",
+          "DefaultValue": "23",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .mobile_registerbox .mobile-registerbox-btn svg,\n.register-link-style-1 .loginuser svg{\n    height: $mAoneuserIconHeightpx;\n}",
+          "PreviewCSS": ".register-link-style-1 .mobile_registerbox .mobile-registerbox-btn svg,\n.register-link-style-1 .loginuser svg {\n    height: $mAoneuserIconHeightpx;\n}",
+          "LessVariable": "$mAoneuserIconHeight",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "6182e2d3-60e0-4d57-a39f-2d886bcc8823",
+          "Title": "User Icon Width",
+          "DefaultValue": "23",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .mobile_registerbox .mobile-registerbox-btn svg,\n.register-link-style-1 .loginuser svg {\n    width: $mAoneuserIconWidthpx;\n}",
+          "PreviewCSS": ".register-link-style-1 .mobile_registerbox .mobile-registerbox-btn svg,\n.register-link-style-1 .loginuser svg {\n    width: $mAoneuserIconWidthpx;\n}",
+          "LessVariable": "$mAoneuserIconWidth",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Guid": "c916b411-fea0-41e2-9d06-2390c74e4b58",
+          "Title": "Username Color",
+          "DefaultValue": "$secondarycolor",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-toggle,\n.register-link-style-1 .desktop_registerbox .dropdown-toggle::after,\n.register-link-style-1 .desktop_registerbox .loginuser{\n  color: $mAoneuserprofileaccountClr;\n}\n\n",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-toggle,\n.register-link-style-1 .desktop_registerbox .dropdown-toggle::after,\n.register-link-style-1 .desktop_registerbox .loginuser{\n  color: $mAoneuserprofileaccountClr;\n}\n\n",
+          "LessVariable": "$mAoneuserprofileaccountClr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "c921fc5c-d00b-4af1-ab43-eaa768fc1cfd",
+          "Title": "Username Font Size",
+          "DefaultValue": "14",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-toggle,\n.register-link-style-1 .desktop_registerbox .loginuser{\n  font-size: $mAoneuserprofileFsizepx;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-toggle,\n.register-link-style-1 .desktop_registerbox .loginuser{\n  font-size: $mAoneuserprofileFsizepx;\n}",
+          "LessVariable": "$mAoneuserprofileFsize",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "31a822b4-a375-4c07-85a3-b9fccf837c99",
+          "Title": "Username Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .dropdown-toggle,\n.register-link-style-1 .desktop_registerbox .loginuser{\n    font-style: $mAoneuserprofileFstyle !important;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .dropdown-toggle,\n.register-link-style-1 .desktop_registerbox .loginuser{\n    font-style: $mAoneuserprofileFstyle !important;\n}",
+          "LessVariable": "$mAoneuserprofileFstyle",
+          "JavascriptVariable": "",
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "ac2c8252-6e66-45d0-b9de-6957c4330620",
+          "Title": "Username Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    font-family: $mAoneuserProfileFf !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    font-family: $mAoneuserProfileFf !important;\n}",
+          "LessVariable": "$mAoneuserProfileFf",
+          "JavascriptVariable": "",
+          "Type": "Fonts"
+        },
+        {
+          "Guid": "f469de14-b8b9-4aac-a848-c6478a607d58",
+          "Title": "Username Bell Icon Color",
+          "DefaultValue": "#c5c5c5",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .registerlink-notification-profile svg path{\n fill :  $mAoneusernamebellIconClr;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .registerlink-notification-profile svg path{\n fill :  $mAoneusernamebellIconClr;\n}",
+          "LessVariable": "$mAoneusernamebellIconClr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
+          "Guid": "d67e4ccf-3d80-49b3-ad31-634fd916ed24",
+          "Title": "Username Notification Count Color",
+          "DefaultValue": "#444444",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-1 .desktop_registerbox .registerlink-notification-profile sup strong{\n  color: $mAonenotificationCountclr;\n}",
+          "PreviewCSS": ".register-link-style-1 .desktop_registerbox .registerlink-notification-profile sup strong{\n  color: $mAonenotificationCountclr;\n}",
+          "LessVariable": "$mAonenotificationCountclr",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        }
+
+
+      ],
+      "Sass": ""
     }
   ],
   "Fonts": [

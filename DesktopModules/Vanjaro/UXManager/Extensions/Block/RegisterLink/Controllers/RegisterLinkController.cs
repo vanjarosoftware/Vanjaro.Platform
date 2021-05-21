@@ -24,6 +24,7 @@ namespace Vanjaro.UXManager.Extensions.Block.RegisterLink.Controllers
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>
             {
                 { "ShowSignInLink", new UIData { Name = "ShowSignInLink", Value = "false" } },
+                { "ShowProfileLink", new UIData { Name = "ShowProfileLink", Value = "false" } },
                 { "ShowAvatar", new UIData { Name = "ShowAvatar", Value = "false" } },
                 { "ShowNotification", new UIData { Name = "ShowNotification", Value = "false" } },
                 { "GlobalConfigs", new UIData { Name = "GlobalConfigs", Options = Core.Managers.BlockManager.GetGlobalConfigs(portalSettings, "register link") } },

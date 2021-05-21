@@ -471,6 +471,7 @@ Theme.css start
 */
 body#Body.dnnEditState {
     font-family: Arial,sans-serif;
+    background: transparent;
 }
 
 .spinner-grow-sm {
