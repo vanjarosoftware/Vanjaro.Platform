@@ -118,6 +118,9 @@ RedirectPopup = function (iframe) {
 	var iframehref = iframe.contentWindow.location.href;
 	if (iframehref.indexOf('ctl') == -1 && iframehref.indexOf('icp') == -1)
 		ClosePopUp();
+	else if (iframehref.indexOf('ctl/module/moduleid') > 0) {
+		$(iframe).contents().find('.dnnAdminTabNav li:last>a').click();
+	}
 };
 
 OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, removemodals, ModuleId, scrollbars, titleposition) {
@@ -685,6 +688,9 @@ $.fn.dnnModuleActions = function (options) {
 };
 
 // Added to fix ContentEditorManager undefined error when using Vanjaro for DNN package 
-dnn.ContentEditorManager = {};
-dnn.ContentEditorManager.init = function () {
-};
+
+if (typeof dnn != 'undefined') {
+    dnn.ContentEditorManager = {};
+    dnn.ContentEditorManager.init = function () {
+    };
+}

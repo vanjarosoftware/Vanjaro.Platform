@@ -16,7 +16,7 @@
     height: 100%;
     width: 100%;
     border: none;
-    position:absolute;
+    position: absolute;
 }
 
     .modal .modal-dialog iframe body {
@@ -110,10 +110,7 @@
 
 .vj-icon {
     display: inline-block;
-    text-decoration: none;
-    vertical-align: middle;
-    color: inherit;
-    fill: currentColor;
+    padding: 5px;
     border-width: 0;
     border-style: solid;
 }
@@ -121,17 +118,8 @@
     .vj-icon svg {
         width: 50px;
         height: 50px;
+        fill: currentColor;
     }
-
-/*Blocks CSS*/
-
-
-
-.vj-image-gallery .vj-image-gallery-item {
-    margin: 5px;
-    object-fit: cover;
-    cursor: pointer;
-}
 
 /*modaltoggle*/
 
@@ -213,9 +201,9 @@ a, a:hover, a:focus, a:active {
     text-decoration: none;
 }
 
-    .button-box .button-text {
-        word-break: break-word;
-    }
+.button-box .button-text {
+    word-break: break-word;
+}
 
 .modal.fullwidth {
     padding-left: 1.75rem;
@@ -236,7 +224,7 @@ a, a:hover, a:focus, a:active {
 
 #UXRender {
     padding: 0;
-    position:relative;
+    position: relative;
 }
 
 .uxmanager-modal .modal-dialog {
@@ -250,10 +238,6 @@ a, a:hover, a:focus, a:active {
 }
 
 .dnnModuleSettings .dnnActions li:nth-child(2) {
-    display: none;
-}
-
-.dnnModuleSettings .dnnAdminTabNav {
     display: none;
 }
 
@@ -485,21 +469,15 @@ a.dnnSecondaryAction {
 /*
 Theme.css start
 */
-body#Body {
+body#Body.dnnEditState {
     font-family: Arial,sans-serif;
+    background: transparent;
 }
-
-/*.ResetPassword-container #btnChangePassword .form-ResetPassword .Login-link {
-	color: #fff !important;
-	background: #444;
-	border-color: #444;
-}*/
 
 .spinner-grow-sm {
     vertical-align: middle;
     margin-top: -2px;
 }
-
 
 /*
 Theme.css end
@@ -517,7 +495,15 @@ Theme.css end
 .vj-section {
     position: relative;
     padding-top: 50px;
-    padding-bottom: 50px;  
+    padding-bottom: 50px;
+}
+
+.row {
+    justify-content: flex-start;
+}
+
+.row [class^="col-"] {
+    text-align: left;
 }
 
 .link,
@@ -538,7 +524,31 @@ Theme.css end
 
 .vj-heading {
     display: block;
-    text-align: left;    
+    text-align: left;
+}
+
+h1.vj-heading {
+    font-size: 40px;
+}
+
+h2.vj-heading {
+    font-size: 32px;
+}
+
+h3.vj-heading {
+    font-size: 28px;
+}
+
+h4.vj-heading {
+    font-size: 24px;
+}
+
+h5.vj-heading {
+    font-size: 20px;
+}
+
+h6.vj-heading {
+    font-size: 16px;
 }
 
 .vj-text {
@@ -550,6 +560,8 @@ Theme.css end
 .vj-image-gallery-item {
     width: 128px;
     height: 128px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .vj-map {
@@ -597,12 +609,30 @@ Theme.css end
     }
 }
 
-@media(max-width: 576px) {
+@media(max-width: 767px) {
     .d-desktop-none {
         display: block !important;
     }
 
     .d-tablet-none {
+        display: block !important;
+    }
+
+    .d-mobile-landscape-none {
+        display: none !important;
+    }
+}
+
+@media(max-width: 575px) {
+    .d-desktop-none {
+        display: block !important;
+    }
+
+    .d-tablet-none {
+        display: block !important;
+    }
+
+    .d-mobile-landscape-none {
         display: block !important;
     }
 

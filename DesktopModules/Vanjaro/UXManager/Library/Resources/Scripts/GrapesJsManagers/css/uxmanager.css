@@ -704,6 +704,7 @@ div#MenuSettings .parent-menu-hide {
 .blockItem.registerlink-notification {
     cursor: pointer;
 }
+
 [data-gjs-type="blockwrapper"] .desktop_registerbox .dropdown {
     pointer-events: none;
 }
@@ -2241,6 +2242,7 @@ span.notificationname {
     flex: 0 0 20%;
     max-width: 20%;
     padding: 0 8px;
+    text-align: center !important
 }
 
 .select-layout a {
@@ -2353,6 +2355,10 @@ span.notificationname {
 
 .revisionloaderimg {
     z-index: 999;
+}
+
+.initrevisionloaderimg {
+    z-index: 9999;
 }
 
 /*Action Bar*/
@@ -2580,11 +2586,28 @@ span.notificationname {
     padding: 6px 0;
     border-top: 1px solid transparent;
     border-bottom: 1px solid #eee;
+    display: inline-flex;
 }
 
-    .traitsmanager .preset-wrapper div.styles.active {
-        border-color: #ccc;
+    .traitsmanager .preset-wrapper div.styles em {
+        align-self: center;
+        visibility: hidden;
+        font-size: 16px;
     }
+
+
+    .traitsmanager .preset-wrapper div.styles.active em {
+        align-self: center;
+        visibility: visible;
+    }
+
+.traitsmanager .preset-wrapper.button div.styles.active {
+    justify-content: space-between;
+}
+
+.traitsmanager .preset-wrapper div.styles.active {
+    border-color: #ccc;
+}
 
 .traitsmanager .preset-wrapper label {
     display: block;
@@ -2623,6 +2646,24 @@ span.notificationname {
     color: #fff;
     font-size: 16px;
     white-space: normal;
+}
+
+.traitsmanager .preset-wrapper.blockwrapper label div {
+    pointer-events: none;
+}
+
+.traitsmanager .preset-wrapper.blockwrapper label .vj_language_wrapper .select_language {
+    width: auto;
+    font-size: 12px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+}
+
+.traitsmanager .preset-wrapper.blockwrapper label .vanjarosearchinput input {
+    display: block;
+    font-size: 12px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
 }
 
 .gjs-rte-active .fa-link:before {
@@ -2846,6 +2887,16 @@ input.rangeinput {
     top: 5px;
 }*/
 
+.initoptimizing-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #808080;
+    z-index: 9999;
+}
+
 .optimizing-overlay {
     position: fixed;
     top: 0;
@@ -3007,6 +3058,12 @@ input.rangeinput {
         border-radius: 4px;
         opacity: 0.7;
         background-color: #fff;
+    }
+
+    .global-tools .toolbar-draft {
+        color: white !important;
+        opacity: 100 !important;
+        background: #0d6efd !important;
     }
 
     .global-tools .fa-globe {
@@ -3373,7 +3430,7 @@ body.resp-mode.mobile-landscape .vj-wrapper {
     }
 
         .stylemanager .sm-range-wrapper input[type="text"],
-        .traitsmanager .range-wrapper input[type="number"] { 
+        .traitsmanager .range-wrapper input[type="number"] {
             width: 30%;
             padding-right: 25px;
             margin-left: 10px;

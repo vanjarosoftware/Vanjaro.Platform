@@ -26,16 +26,18 @@ export default (editor, config = {}) => {
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				'custom-name': 'Button Box',
 				droppable: false,
+				selectable: false,
+				highlightable: false,
+				hoverable: false,
 				traits: []
 			}),
-		},
-			{
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('button-box')) {
-						return { type: 'button-box' };
-					}
+		}, {
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('button-box')) {
+					return { type: 'button-box' };
 				}
-			}),
+			}
+		}),
 		view: defaultView
 	});
 
@@ -82,6 +84,7 @@ export default (editor, config = {}) => {
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				droppable: false,
 				classes: ['btn', 'btn-primary', 'button-style-1'],
+				text: true,
 				resizable: {
 					tl: 0, // Top left
 					tc: 0, // Top center
@@ -121,26 +124,30 @@ export default (editor, config = {}) => {
 						name: 'alignment',
 						type: 'toggle_checkbox',
 						UpdateStyles: true,
+						selector: 'button-box',
+						closest: true,
+						cssproperties: [{ name: "text-align" }],
 						options: [
 							{ id: 'left', name: 'left', image: 'align-left' },
 							{ id: 'center', name: 'center', image: 'align-center' },
 							{ id: 'right', name: 'right', image: 'align-right' },
 							{ id: 'justify', name: 'justify', image: 'align-justify' },
 						],
+						default: 'none',
 						changeProp: 1,
 					}, {
 						label: "Font Size",
 						name: "fontsize",
 						type: "custom_range",
 						cssproperties: [{ name: "font-size" }],
-                        units: [
-                            { name: 'px', min: 10, max: 100, step: 1, value: 16 },
-                                { name: '%', min: 10, max: 100, step: 1, value: 100 },
-                            { name: 'em', min: 0.5, max: 10, step: 0.1, value: 1 },
-                            { name: 'rem', min: 0.5, max: 10, step: 0.1, value: 1 },
-                            { name: 'vw', min: 0.5, max: 10, step: 0.1, value: 1 },
-                            { name: 'vh', min: 0.5, max: 10, step: 0.1, value: 1.5 },
-                        ],
+						units: [
+							{ name: 'px', min: 10, max: 100, step: 1, value: 16 },
+							{ name: '%', min: 10, max: 100, step: 1, value: 100 },
+							{ name: 'em', min: 0.5, max: 10, step: 0.1, value: 1 },
+							{ name: 'rem', min: 0.5, max: 10, step: 0.1, value: 1 },
+							{ name: 'vw', min: 0.5, max: 10, step: 0.1, value: 1 },
+							{ name: 'vh', min: 0.5, max: 10, step: 0.1, value: 1.5 },
+						],
 						unit: "px",
 						changeProp: 1,
 					}, {
@@ -191,15 +198,15 @@ export default (editor, config = {}) => {
 						changeProp: 1,
 					}
 				]
-            }),
-            init() {
-                this.listenTo(this, 'change:size', this.handleSizeChange);
-            },
-            handleSizeChange() {
-                this.removeStyle("font-size");
-                this.getTrait('fontsize').setTargetValue($(this.getEl()).css('font-size').replace(/[^-\d\.]/g, ''));
-                this.getTrait('fontsize').view.render();
-            },
+			}),
+			init() {
+				this.listenTo(this, 'change:size', this.handleSizeChange);
+			},
+			handleSizeChange() {
+				this.removeStyle("font-size");
+				this.getTrait('fontsize').setTargetValue($(this.getEl()).css('font-size').replace(/[^-\d\.]/g, ''));
+				this.getTrait('fontsize').view.render();
+			},
 		}, {
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('btn')) {

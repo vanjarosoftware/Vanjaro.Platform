@@ -312,6 +312,7 @@
     <Content Include="Themes\Basic\scss\Bootstrap\mixins\_buttons.scss" />
     <Content Include="Themes\Basic\scss\Bootstrap\mixins\_caret.scss" />
     <Content Include="Themes\Basic\scss\Bootstrap\mixins\_clearfix.scss" />
+    <Content Include="Themes\Basic\scss\Bootstrap\mixins\_color-scheme.scss" />
     <Content Include="Themes\Basic\scss\Bootstrap\mixins\_container.scss" />
     <Content Include="Themes\Basic\scss\Bootstrap\mixins\_deprecate.scss" />
     <Content Include="Themes\Basic\scss\Bootstrap\mixins\_forms.scss" />

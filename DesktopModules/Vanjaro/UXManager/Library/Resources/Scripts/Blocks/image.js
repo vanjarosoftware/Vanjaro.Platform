@@ -27,6 +27,9 @@
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				'custom-name': 'Image Box',
 				droppable: false,
+				selectable: false,
+				highlightable: false,
+				hoverable: false,
 				traits: []
 			}),
 		},
@@ -57,12 +60,12 @@
 				hoverable: false,
 			}),
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('picture-box')) {
-						return { type: 'picture-box' };
-					}
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('picture-box')) {
+					return { type: 'picture-box' };
 				}
-			}),
+			}
+		}),
 		view: defaultView
 	});
 
@@ -79,12 +82,12 @@
 				hoverable: false,
 			}),
 		}, {
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('source')) {
-						return { type: 'source' };
-					}
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('source')) {
+					return { type: 'source' };
 				}
-			}),
+			}
+		}),
 		view: defaultView
 	});
 
@@ -100,7 +103,7 @@
 					var tb = [];
 
 					tb.push({
-                        attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
+						attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
 						command: 'custom-tui-image-editor',
 					});
 
@@ -168,11 +171,15 @@
 						type: 'toggle_checkbox',
 						name: 'alignment',
 						UpdateStyles: true,
+						selector: 'image-box',
+						closest: true,
+						cssproperties: [{ name: "text-align" }],
 						options: [
 							{ id: 'left', name: 'left', image: 'align-left' },
 							{ id: 'center', name: 'center', image: 'align-center' },
 							{ id: 'right', name: 'right', image: 'align-right' },
 						],
+						default: 'none',
 						changeProp: 1,
 					}, {
 						type: 'text',
@@ -181,16 +188,14 @@
 					}
 				]
 			}),
-		},
-			{
-				isComponent(el) {
-					if (el && el.tagName && el.tagName.toLowerCase() == 'img') {
-						return { type: 'image' };
-					}
+		}, {
+			isComponent(el) {
+				if (el && el.tagName && el.tagName.toLowerCase() == 'img') {
+					return { type: 'image' };
 				}
-			}),
+			}
+		}),
 		view: imageView.extend({
-
 			events: {
 				dblclick: function () {
 					this.ShowModal()
@@ -205,7 +210,7 @@
 			},
 
 			onRender() {
-
+				
 				var model = this.model;
 				if (event && (event.type == 'load' || event.type == 'drop')) {
 					if (typeof model.parent() != 'undefined' && model.parent().attributes.type != "picture-box" && model.parent().parent().attributes.type != 'blockwrapper') {
@@ -218,7 +223,6 @@
 				var hasClass = this.model.getClasses().find(v => v == 'img-fluid')
 				if (typeof hasClass == 'undefined')
 					this.model.addClass('img-fluid');
-
 			},
 			ShowModal() {
 				var target = VjEditor.getSelected() || this.model;

@@ -127,6 +127,7 @@ h2.dnnForm.dnnInstall.dnnClear {
 
 .dnnTooltip .dnnFormHelpContent, .dnnHelperTip .dnnFormHelpContent {
     width: fit-content;
+    width: -moz-fit-content;
     padding-left: 10px;
     color: #fff;
 }

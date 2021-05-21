@@ -28,7 +28,10 @@
 		model: defaultModel.extend({
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				'custom-name': 'Icon Box',
-				droppable: false,
+                droppable: false,
+				selectable: false,
+				highlightable: false,
+				hoverable: false,
 				traits: []
 			}),
 		},
@@ -96,6 +99,7 @@
 						var SelectedCol = VjEditor.getSelected();
 						var width = SelectedCol.getStyle().width;
 						var height = SelectedCol.getStyle().height;
+						SelectedCol.addStyle({ 'line-height': width });
 						SelectedCol.components().models[0].addStyle({ 'width': width, 'height': height });
 						SelectedCol.removeStyle('width');
 						SelectedCol.removeStyle('height');
@@ -113,19 +117,20 @@
 						type: "text",
 					},
 					{
-
 						label: "Alignment",
 						type: "toggle_checkbox",
 						name: "alignment",
 						UpdateStyles: true,
+						selector: 'icon-box',
+						closest: true,
+						cssproperties: [{ name: "text-align" }],
 						options: [
 							{ id: 'left', name: 'left', image: 'align-left' },
 							{ id: 'center', name: 'center', image: 'align-center' },
 							{ id: 'right', name: 'right', image: 'align-right' },
 						],
-						default: "none",
+						default: 'none',
 						changeProp: 1,
-
 					}, {
 						label: "Color",
 						name: "color",
@@ -191,24 +196,11 @@
 						label: "Width",
 						name: "framewidth",
 						type: "custom_range",
-						cssproperties: [{ name: "border-width" }],
-						min: "0",
-						max: "100",
-						default: "10",
-						changeProp: 1,
-					}, {
-						label: "Gap",
-						name: "framegap",
-						type: "custom_range",
-						cssproperties: [
-							{ name: "padding-top" },
-							{ name: "padding-bottom" },
-							{ name: "padding-left" },
-							{ name: "padding-right" }
-						],
-						min: "0",
-						max: "200",
-						default: "0",
+                        cssproperties: [{ name: "border-width" }],
+                        units: [
+                            { name: 'px', min: 0, max: 100, step: 1, value: 10 },
+                        ],
+                        unit: "px",
 						changeProp: 1,
 					}, {
 						label: "Style",

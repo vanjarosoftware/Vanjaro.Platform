@@ -125,15 +125,13 @@ namespace Vanjaro.Core
                                     {
                                         (con as JObject).Add("type", "div");
                                         (con as JObject).Add("components", blockContentJSON);
-                                        if (isLibrary)
-                                            (con as JObject).Add("forcesave", "true");
+                                        (con as JObject).Add("forcesave", "true");
                                     }
                                     else
                                     {
                                         foreach (JProperty prop in blockContentJSON[0].Properties())
                                             (con as JObject).Add(prop.Name, prop.Value);
-                                        if (isLibrary)
-                                            (con as JObject).Add("forcesave", "true");
+                                        (con as JObject).Add("forcesave", "true");
                                     }
                                     UpdateIds(con, prefix, Ids);
                                 }
@@ -148,11 +146,27 @@ namespace Vanjaro.Core
                                             {
                                                 foreach (dynamic st in style.selectors)
                                                 {
-                                                    if (st.name != null)
+                                                    try
                                                     {
-                                                        string val = st.name;
-                                                        if (!Ids.Contains(val))
-                                                            st.name.Value = prefix + "-" + val.Split('-').Last();
+                                                        if (st.name != null)
+                                                        {
+                                                            string val = st.name;
+                                                            if (!Ids.Contains(val))
+                                                                st.name.Value = prefix + "-" + val.Split('-').Last();
+                                                        }
+                                                    }
+                                                    catch
+                                                    {
+                                                        try
+                                                        {
+                                                            if (st != null)
+                                                            {
+                                                                string val = st.Value.ToString().Replace("#", "").Replace(".", "");
+                                                                if (!Ids.Contains(val))
+                                                                    st.Value = "#" + prefix + "-" + val.Split('-').Last();
+                                                            }
+                                                        }
+                                                        catch { }
                                                     }
                                                 }
                                             }
@@ -1371,7 +1385,11 @@ namespace Vanjaro.Core
                     foreach (var item in url.Split(','))
                     {
                         var obj = item.Split(' ');
-                        result.Add(ExtractAndProcessLink(item, Assets) + (obj.Length > 1 ? (" " + item.Split(' ')[1]) : ""));
+                        string ProcessedLink = ExtractAndProcessLink(item, Assets);
+                        if (item == ProcessedLink)
+                            result.Add(ProcessedLink);
+                        else
+                            result.Add(ProcessedLink + (obj.Length > 1 ? (" " + item.Split(' ')[1]) : ""));
                     }
                     return string.Join(",", result);
                 }
@@ -1586,6 +1604,7 @@ namespace Vanjaro.Core
 
                         if (block != null && !string.IsNullOrEmpty(block.ContentJSON))
                         {
+                            con.attributes["published"] = block.IsPublished;
                             con.components = JsonConvert.DeserializeObject(block.ContentJSON);
                             string prefix = con.attributes["id"] != null ? con.attributes["id"].Value : string.Empty;
                             List<string> Ids = new List<string>();
@@ -1616,7 +1635,7 @@ namespace Vanjaro.Core
                                                     {
                                                         string val = st.Value.ToString().Replace("#", "").Replace(".", "");
                                                         if (!Ids.Contains(val))
-                                                            st.Value = prefix + "-" + val.Split('-').Last();
+                                                            st.Value = "#" + prefix + "-" + val.Split('-').Last();
                                                     }
                                                 }
                                                 catch { }

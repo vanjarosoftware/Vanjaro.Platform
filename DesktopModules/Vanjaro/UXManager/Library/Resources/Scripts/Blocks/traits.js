@@ -19,8 +19,9 @@ export default (editor, config = {}) => {
 			var parent = selected.parent().parent().clone();
 			var mainparent = selected.parent().parent().parent();
 			mainparent.append(parent);
-		}
-
+        }
+        VjEditor.select();
+        VjEditor.select(selected);
 	});
 
 	cmd.add('vj-delete', {
@@ -224,7 +225,7 @@ export default (editor, config = {}) => {
 		var trait = mainComponent.getTrait(event.target.name);
 		var componentType = component.attributes.type;
 
-        if (componentType != 'image-gallery-item' && !event.target.classList.contains('unit-list')) {
+		if (componentType != 'image-gallery-item' && !event.target.classList.contains('unit-list')) {
 			if (componentType == 'carousel' && event.target.type == 'radio')
 				trait.setTargetValue(event.target.id);
 			else
@@ -247,25 +248,25 @@ export default (editor, config = {}) => {
 				inputRange.value = inputNumber.value;
 
 			if (typeof trait.attributes.units != "undefined") {
-                unit = $(".tm-unit-wrapper select.unit-list option:selected").val();
+				unit = $(elInput).find("select.unit-list option:selected").val();
 				component.set({ 'unit': unit });
 			}
 
 			if (event.target.classList.contains('unit-list')) {
 
-                var inputControl = elInput.querySelectorAll('.input-control');
-                unit = $(event.target).find('option:selected').val();
-                
-				$(trait.attributes.units).each(function (index, option) {
-                    if (option.name == unit) {
-                        $(inputControl).attr({
-                            'value': option.value,
-                            'min': option.min,
-                            'max': option.max,
-                            'step': option.step
-                        });
+				var inputControl = elInput.querySelectorAll('.input-control');
+				unit = $(event.target).find('option:selected').val();
 
-                        $(inputControl).val(option.value);
+				$(trait.attributes.units).each(function (index, option) {
+					if (option.name == unit) {
+						$(inputControl).attr({
+							'value': option.value,
+							'min': option.min,
+							'max': option.max,
+							'step': option.step
+						});
+
+						$(inputControl).val(option.value);
 
 						$(property).each(function (index, item) {
 							style[item.name] = option.value + unit;
@@ -295,42 +296,42 @@ export default (editor, config = {}) => {
 
 				component.set({ 'alignment': val });
 
-				if (componentType == 'icon' || componentType == 'list') {
-					component.parent().setStyle('text-align:' + val + '; display: block;');
-				}
-				else if (componentType == 'image') {
-					component.parent().parent().setStyle('text-align:' + val + '; display: block;');
-				}
-				else if (componentType == 'button') {
-					component.parent().setStyle('text-align:' + val + '; display: block;');
+				style["display"] = "block";
 
-					if (style.width != "100%")
-						component.set({ 'width': component.getStyle()["width"] });
+				if (mainComponent.attributes.type == 'button') {
 
 					if (event.target.value == "justify") {
-						style["width"] = "100%";
-						style["display"] = "block";
-						component.set({ 'resizable': false });
+						var buttonStyle = mainComponent.getStyle();
+						buttonStyle["width"] = "100%";
+						mainComponent.setStyle(buttonStyle);
+						mainComponent.set({ 'resizable': false });
 					}
 					else {
-						style["width"] = component.attributes["width"];
-						style["display"] = "inline-block";
-						component.set({
-							'resizable': {
-								tl: 0, // Top left
-								tc: 0, // Top center
-								tr: 0, // Top right
-								cl: 1, // Center left
-								cr: 1, // Center right
-								bl: 0, // Bottom left
-								bc: 0, // Bottom center
-								br: 0, // Bottom right
-							}
-						});
+
+						if (typeof mainComponent.getStyle()["width"] != 'undefined' && mainComponent.getStyle()["width"] != '100%') {
+
+							var buttonStyle = mainComponent.getStyle();
+							buttonStyle['width'] = mainComponent.getStyle()["width"];
+							mainComponent.setStyle(buttonStyle);
+						}
+						else {
+							mainComponent.removeStyle('width');
+							mainComponent.set({
+								'resizable': {
+									tl: 0, // Top left
+									tc: 0, // Top center
+									tr: 0, // Top right
+									cl: 1, // Center left
+									cr: 1, // Center right
+									bl: 0, // Bottom left
+									bc: 0, // Bottom center
+									br: 0, // Bottom right
+								}
+							});
+						}
 					}
 				}
 				else if (componentType == 'divider') {
-					style["display"] = "table";
 
 					if (event.target.value == "left") {
 						style["margin-left"] = "0";
@@ -344,10 +345,6 @@ export default (editor, config = {}) => {
 						style["margin-left"] = "auto";
 						style["margin-right"] = "0";
 					}
-				}
-				else {
-					style["text-align"] = val;
-					style["display"] = "block";
 				}
 			}
 			else {
@@ -392,15 +389,17 @@ export default (editor, config = {}) => {
 				style["border-bottom-left-radius"] = "0";
 				style["border-bottom-right-radius"] = "0";
 			}
-            else if (event.target.value == "circle") {
-				style["border-width"] = mainComponent.getTrait('framewidth').getInitValue() + "px";
+			else if (event.target.value == "circle") {
+				component.getTrait('framewidth').setTargetValue('10');
+				style["border-width"] = "10px";
 				style["border-top-left-radius"] = "50%";
 				style["border-top-right-radius"] = "50%";
 				style["border-bottom-left-radius"] = "50%";
 				style["border-bottom-right-radius"] = "50%";
 			}
-            else if (event.target.value == "square") {
-				style["border-width"] = mainComponent.getTrait('framewidth').getInitValue() + "px";
+			else if (event.target.value == "square") {
+				component.getTrait('framewidth').setTargetValue('10');
+				style["border-width"] = "10px";
 				style["border-top-left-radius"] = "0";
 				style["border-top-right-radius"] = "0";
 				style["border-bottom-left-radius"] = "0";
@@ -575,9 +574,9 @@ export default (editor, config = {}) => {
 				$(options).find("#Page").prop('checked', true);
 				$(wrapper).find("#page").show();
 				this.loadPages('page', pid);
-            }
-            else
-                $(wrapper).find("#url").show();
+			}
+			else
+				$(wrapper).find("#url").show();
 
 			if (typeof trait.target.getAttributes().target == 'undefined')
 				$(target).find("input#no").prop('checked', true);
@@ -735,7 +734,7 @@ export default (editor, config = {}) => {
 				}
 			}
 			else {
-                UXManager_Search();
+				UXManager_Search();
 			}
 		}
 	});
@@ -790,6 +789,44 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
+		onUpdate({ elInput, component, trait }) {
+
+			var property = '', value = trait.getInitValue();
+
+			if (typeof trait.attributes.cssproperties != 'undefined')
+				property = trait.attributes.cssproperties[0].name;
+
+			if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
+
+				var model = component;
+
+				if (typeof trait.attributes.selector != 'undefined') {
+
+					var selector = trait.attributes.selector;
+
+					if (trait.attributes.closest) {
+						if (typeof component.closestType(selector) != 'undefined')
+							model = component.closestType(selector);
+					}
+					else
+						model = component.findType(selector)[0];
+				}
+
+				if (property != '') {
+					if (typeof model.getStyle()[property] != 'undefined')
+						value = model.getStyle()[property].replace('!important', '');
+					else {
+						if (trait.attributes.name != 'alignment' && value != 'none')
+							value = $(model.view.el).css(property);
+					}
+				}
+
+				if (value != "") {
+					trait.view.$el.find("input:checked").prop("checked", false);
+					trait.view.$el.find('input[value=' + value + ']').prop("checked", true);
+				}
+			}
+		},
 		eventCapture: ['input'],
 		onEvent({ elInput, component, event }) {
 
@@ -798,8 +835,17 @@ export default (editor, config = {}) => {
 			var model = component;
 			var trait = component.getTrait(event.target.name);
 
-			if (typeof trait.attributes.selector != 'undefined')
-				model = component.findType(trait.attributes.selector);
+			if (typeof trait.attributes.selector != 'undefined') {
+
+				var selector = trait.attributes.selector;
+
+				if (trait.attributes.closest) {
+					if (typeof component.closestType(selector) != 'undefined')
+						model = component.closestType(selector);
+				}
+				else
+					model = component.findType(selector);
+			}
 
 			$(model).each(function (index, item) {
 
@@ -868,7 +914,43 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
+
+			var property = '', value = trait.getInitValue();
+
+			if (typeof trait.attributes.cssproperties != 'undefined')
+				property = trait.attributes.cssproperties[0].name;
+
+			if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
+
+				var model = component;
+
+				if (typeof trait.attributes.selector != 'undefined') {
+
+					var selector = trait.attributes.selector;
+
+					if (trait.attributes.closest) {
+						if (typeof component.closestType(selector) != 'undefined')
+							model = component.closestType(selector);
+					}
+					else
+						model = component.findType(selector)[0];
+				}
+
+				if (property != '') {
+					if (typeof model.getStyle()[property] != 'undefined')
+						value = model.getStyle()[property].replace('!important', '');
+					else {
+						if (trait.attributes.name != 'alignment' && value != 'none')
+							value = $(model.view.el).css(property);
+					}
+				}
+
+				if (value != "") {
+					trait.view.$el.find("input:checked").prop("checked", false);
+					trait.view.$el.find('input[value=' + value + ']').prop("checked", true);
+				}
+			}
 
 			if (component.attributes.type == 'list') {
 				if (elInput.firstElementChild.name == "ul_list_style" && component.getTrait('list_type').getInitValue() == "ol")
@@ -925,14 +1007,12 @@ export default (editor, config = {}) => {
 				if (event.target.name == "frame") {
 					if (event.target.value != "none") {
 						$(component.getTrait("framewidth").el).parents(".gjs-trt-trait__wrp").show();
-						$(component.getTrait("framegap").el).parents(".gjs-trt-trait__wrp").show();
 						$(component.getTrait("framestyle").el).parents(".gjs-trt-trait__wrp").show();
 						$(component.getTrait("framecolor").el).parents(".gjs-trt-trait__wrp").show();
 						$(component.getTrait("framecolor").el).find("input#frame" + component.getTrait("framecolor").attributes.value).prop('checked', true).next().addClass('active');
 					}
 					else {
 						$(component.getTrait("framewidth").el).parents(".gjs-trt-trait__wrp").hide();
-						$(component.getTrait("framegap").el).parents(".gjs-trt-trait__wrp").hide();
 						$(component.getTrait("framestyle").el).parents(".gjs-trt-trait__wrp").hide();
 						$(component.getTrait("framecolor").el).parents(".gjs-trt-trait__wrp").hide();
 					}
@@ -953,8 +1033,8 @@ export default (editor, config = {}) => {
 
 			if (component.attributes.type == 'section') {
 
-                if (event.target.name == "background") {
-                    
+				if (event.target.name == "background") {
+
 					component.set({ 'src': '', 'thumbnail': '' });
 
 					if (event.target.value == "image") {
@@ -1310,8 +1390,17 @@ export default (editor, config = {}) => {
 			var model = component;
 			var trait = component.getTrait(event.target.name);
 
-			if (typeof trait.attributes.selector != 'undefined')
-				model = component.findType(trait.attributes.selector);
+			if (typeof trait.attributes.selector != 'undefined') {
+
+				var selector = trait.attributes.selector;
+
+				if (trait.attributes.closest) {
+					if (typeof component.closestType(selector) != 'undefined')
+						model = component.closestType(selector);
+				}
+				else
+					model = component.findType(selector);
+			}
 
 			$(model).each(function (index, item) {
 
@@ -1382,7 +1471,7 @@ export default (editor, config = {}) => {
 				$(traitsmanager).click(function (event) {
 					event.stopPropagation();
 				});
-				
+
 			});
 
 			$(editor.TraitManager.getType('color').prototype.getInputEl.apply(that, arguments)).on('move.spectrum change.spectrum', function (e, color) {
@@ -1487,8 +1576,17 @@ export default (editor, config = {}) => {
 			var model = component;
 			var trait = component.getTrait(event.target.name);
 
-			if (typeof trait != 'undefined' && typeof trait.attributes.selector != 'undefined')
-				model = component.findType(trait.attributes.selector);
+			if (typeof trait != 'undefined' && typeof trait.attributes.selector != 'undefined') {
+
+				var selector = trait.attributes.selector;
+
+				if (trait.attributes.closest) {
+					if (typeof component.closestType(selector) != 'undefined')
+						model = component.closestType(selector);
+				}
+				else
+					model = component.findType(selector);
+			}
 
 			$(model).each(function (index, item) {
 
@@ -1517,89 +1615,90 @@ export default (editor, config = {}) => {
 				<input type="range" value="`+ traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="input-control range" /> 
 				<input type="number" value="`+ traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="input-control number" />
 			`;
-            if (typeof trait.attributes.units != "undefined" && trait.attributes.units.length) {
-                var wrapper = document.createElement('span')
-                wrapper.setAttribute("class", "tm-unit-wrapper");
+			if (typeof trait.attributes.units != "undefined" && trait.attributes.units.length) {
+				var wrapper = document.createElement('span')
+				wrapper.setAttribute("class", "tm-unit-wrapper");
 
-                var select = document.createElement("select");
-                select.setAttribute("class", "unit-list");
-                select.setAttribute("name", trait.attributes.name);
+				var select = document.createElement("select");
+				select.setAttribute("class", "unit-list");
+				select.setAttribute("name", trait.attributes.name);
 
 				$(trait.attributes.units).each(function (index, opt) {
 					var option = document.createElement('option');
-                    option.setAttribute("value", opt.name);
-                    option.innerHTML = opt.name;
-                    select.appendChild(option);
+					option.setAttribute("value", opt.name);
+					option.innerHTML = opt.name;
+					select.appendChild(option);
 				});
-                wrapper.appendChild(select);
-                el.appendChild(wrapper);
+				wrapper.appendChild(select);
+				el.appendChild(wrapper);
 			}
 
 			return el;
 		},
 		onUpdate({ elInput, component, trait }) {
 
-            var inputvalue = '', unit = '', property = '', value = '';
+			var value = trait.getInitValue(),
+				unit = trait.attributes.unit,
+				inputValue = '',
+				property = '';
 
-            if (typeof trait.attributes.cssproperties != 'undefined')
-                property = trait.attributes.cssproperties[0].name;
+			if (typeof trait.attributes.cssproperties != 'undefined')
+				property = trait.attributes.cssproperties[0].name;
 
-            if (typeof event != 'undefined' && !event.target.classList.contains('input-control')) {
-              
-                if (typeof component.getStyle()[property] != 'undefined')
-                    value = component.getStyle()[property].replace('!important', '');
-                else
-                    value = trait.getInitValue();
+			if (typeof event != 'undefined' && !event.target.classList.contains('input-control')) {
 
-                if (typeof value == "string" && value != "") {
+				if (typeof component.getStyle()[property] != 'undefined')
+					value = component.getStyle()[property].replace('!important', '');
+				else
+					if (typeof trait.attributes.units != 'undefined')
+						value = '';
 
-                    inputvalue = value.replace(/[^-\d\.]/g, '');
+				if (typeof value == "string" && value != "") {
 
-                    if (typeof trait.attributes.units != 'undefined') {
-                        $(trait.attributes.units).each(function (index, option) {
-                            if (value.replace('.', '').replace(/\d+/g, '').trim() == option.name) {
-                                unit = option.name
-                                return false;
-                            }
-                        });
-                    }
-                }
-                else {
-                    inputvalue = trait.attributes.value;
-                }
+					inputValue = parseFloat(value);
 
-                if (unit == '' && typeof trait.attributes.unit != 'undefined')
-                    unit = trait.attributes.unit;
+					if (typeof trait.attributes.units != 'undefined') {
+						$(trait.attributes.units).each(function (index, option) {
+							if (value.replace('.', '').replace(/\d+/g, '').trim() == option.name) {
+								unit = option.name
+								return false;
+							}
+						});
+					}
+				}
+				else
+					inputValue = value;
 
-                if (typeof trait.attributes.units != 'undefined') {
+				if (typeof trait.attributes.units != 'undefined') {
 
-                    var inputControl = trait.view.el.querySelectorAll('.input-control');
+					var input = trait.view.el.querySelectorAll('input');
 
-                    $(trait.attributes.units).each(function (index, option) {
+					$(trait.attributes.units).each(function (index, option) {
 
-                        if (option.name == unit) {
+						if (option.name == unit) {
 
-                            $(inputControl).attr({
-                                'value': option.value,
-                                'min': option.min,
-                                'max': option.max,
-                                'step': option.step
-                            });
+							$(input).attr({
+								'value': option.value,
+								'min': option.min,
+								'max': option.max,
+								'step': option.step
+							});
 
-                            if (inputvalue == '')
-                                inputvalue = option.value;
+							if (inputValue == '')
+								inputValue = option.value;
 
-                            return false;
-                        }
-                    });
-                }
+							return false;
+						}
+					});
+				}
 
-                trait.view.$el.find('select').val(unit);
-            }
-            else
-                inputvalue = trait.getInitValue().replace(/[^-\d\.]/g, '');            
+				if (property != '' && unit == 'px')
+					inputValue = parseFloat($(component.view.el).css(property));
 
-            trait.view.$el.find('input.input-control').val(inputvalue);
+				trait.view.$el.find('select').val(unit);
+
+				trait.view.$el.find('input').val(inputValue);
+			}
 
 			if (component.attributes.type == 'icon') {
 				if ((elInput.firstElementChild.name == "framewidth" || elInput.firstElementChild.name == "framegap") && component.getTrait('frame').getInitValue() == "none")
@@ -1618,10 +1717,18 @@ export default (editor, config = {}) => {
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);
-			var size = component.getStyle()['font-size'];
 
-			if (typeof trait.attributes.selector != 'undefined')
-				model = component.findType(trait.attributes.selector);
+			if (typeof trait.attributes.selector != 'undefined') {
+
+				var selector = trait.attributes.selector;
+
+				if (trait.attributes.closest) {
+					if (typeof component.closestType(selector) != 'undefined')
+						model = component.closestType(selector);
+				}
+				else
+					model = component.findType(selector);
+			}
 
 			$(model).each(function (index, item) {
 
@@ -1645,7 +1752,6 @@ export default (editor, config = {}) => {
 					}
 				}
 
-				size = item.getStyle()['font-size'];
 			});
 		}
 	});
@@ -1662,7 +1768,7 @@ export default (editor, config = {}) => {
 			el.innerHTML = `<input type="number" value="` + traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="number" />`;
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
 			if (component.attributes.type == 'list' && elInput.firstElementChild.name == "start" && component.getTrait('list_type').getInitValue() == "ul") {
 				$(elInput).parents(".gjs-trt-trait__wrp").hide();
 			}
@@ -1738,7 +1844,7 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
 			if (component.attributes.type == 'section') {
 				if (elInput.firstElementChild.name == "backgroundimage" && (component.getTrait('background').getInitValue() == "none" || component.getTrait('background').getInitValue() == "gradient" || component.getTrait('background').getInitValue() == "video"))
 					$(elInput).parents(".gjs-trt-trait__wrp").hide();
@@ -1794,7 +1900,7 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
 			if (component.attributes.type == 'section') {
 				if ((elInput.id == "imageposition" || elInput.id == "imageattachment" || elInput.id == "imagerepeat" || elInput.id == "imagesize") && (component.getTrait('background').getInitValue() == "none" || component.getTrait('background').getInitValue() == "gradient" || component.getTrait('background').getInitValue() == "video"))
 					$(elInput).parents(".gjs-trt-trait__wrp").hide();
@@ -1876,7 +1982,7 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
 			if (component.attributes.type == 'section' && component.getTrait('background').getInitValue() != "gradient")
 				$(elInput).parents(".gjs-trt-trait__wrp").hide();
 
@@ -1916,8 +2022,11 @@ export default (editor, config = {}) => {
 				label.setAttribute("class", value.class);
 				label.innerHTML = trait.target.getEl().textContent;
 
+				icon.setAttribute("class", "fas fa-check-circle");
+
 				div.appendChild(input);
 				div.appendChild(label);
+				div.appendChild(icon);
 				el.appendChild(div);
 			});
 
@@ -1932,10 +2041,9 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
 
 			var model = component;
-			var trait = component.getTrait('styles');
 
 			if (typeof trait.attributes.selector != 'undefined')
 				model = component.findType(trait.attributes.selector)[0];
@@ -1944,6 +2052,46 @@ export default (editor, config = {}) => {
 			text = text.split(/\s+/).slice(0, 20).join(" ");
 			$(elInput).find('label').text(text);
 
+			if (typeof model.getAttributes()["data-block-type"] != 'undefined') {
+
+				var blockName = model.getAttributes()['data-block-type'].toLowerCase();
+
+				$(elInput).find('label').each(function (index, item) {
+
+					if (blockName == 'menu') {
+
+						$(item).html(`
+							<nav class="navbar navbar-expand-lg">
+								<div class="collapse navbar-collapse DefaultMenu scrollbar" id="DefaultMenu_132659749735737316">
+									<ul class="navbar-nav" id="navbar-menu">
+										<li class="first selected nav-item">
+											<a class="nav-link" href="#">${$(model.getEl()).find('.nav-link:eq(0)')[0].innerHTML}</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#">${$(model.getEl()).find('.nav-link:eq(1)')[0].innerHTML}</a>
+										</li>
+									</ul>
+								</div>
+							</nav>
+						`);
+					}
+					else if (blockName == 'breadcrumb' || blockName == 'language' || blockName == 'search input') {
+						$(item).html(model.getEl().innerHTML);
+					}
+					else if (blockName == 'register link') {
+
+						var content = $(model.getEl()).find('.desktop_registerbox .dropdown-toggle')[0].outerHTML;
+
+						$(item).html(`
+							<div class="desktop_registerbox">
+								<div class="dropdown">
+									${content}						
+								</div>
+							</div>
+						`);
+					}
+				});
+			}
 		},
 		onEvent({ elInput, component }) {
 
@@ -1962,10 +2110,6 @@ export default (editor, config = {}) => {
 
 			$(model).each(function (index, item) {
 
-				var className = event.target.className;
-				var classes = item.getClasses();
-				var $el = $(item.getEl());
-
 				item.removeStyle('font-family');
 				item.removeStyle('font-style');
 				item.removeStyle('line-height');
@@ -1976,25 +2120,13 @@ export default (editor, config = {}) => {
 				item.removeStyle('text-decoration');
 				item.removeStyle('text-shadow');
 
-				if ($el.is('[class*="head-style-"]')) {
-					classes = jQuery.grep(classes, function (className, index) {
-						return (className.match(/\bhead-style-\S+/g) || []).join(' ');
-					});
-				}
-				else if ($el.is('[class*="paragraph-style-"]')) {
-					classes = jQuery.grep(classes, function (className, index) {
-						return (className.match(/\bparagraph-style-\S+/g) || []).join(' ');
-					});
-				}
-				else if ($el.is('[class*="button-style-"]')) {
-					classes = jQuery.grep(classes, function (className, index) {
-						return (className.match(/\bbutton-style-\S+/g) || []).join(' ');
-					});
-				}
-				else
-					classes = "";
+				var classes = trait.attributes.options.map(opt => opt.class);
 
-				item.removeClass(classes);
+				$(classes).each(function (index, className) {
+					item.removeClass(className);
+				});
+
+				var className = event.target.className;
 
 				if (className != 'none')
 					item.addClass(className);

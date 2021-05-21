@@ -48,9 +48,12 @@
 			var property = model.attributes.property;
 
 			if (model.attributes.UpdateStyles) {
+
 				var style = selected.getStyle();
+
 				style[property] = event.target.value;
 				selected.setStyle(style);
+				model.setValue(val);
 			}
 			else {
 				var classes = model.attributes.list.map(opt => opt.value);
@@ -61,10 +64,10 @@
 
 				selected.addClass(val);
 			}
-
 			selected.set(property, val);
 
-			model.setValue(val);
+			if (property == "border-position")
+				FilterBorderOptions(selected, val);
 		},
 		setValue(value) {
 			var model = this.model;
@@ -101,24 +104,7 @@
 			if (selected.attributes.type == "grid")
 				selected.attributes.components.models[0].removeStyle(property);
 
-			if (property == "border-position") {
-
-				var BorderWidth = ['border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width'];
-				var BorderColor = ['border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color'];
-				var BorderStyle = ['border-top-style', 'border-right-style', 'border-bottom-style', 'border-left-style'];
-
-				$.each([BorderWidth, BorderColor, BorderStyle], function () {
-
-					$.each(this, function (i) {
-
-						var DefaultValue = VjEditor.StyleManager.getProperty(Border, this).getDefaultValue();
-
-						VjEditor.StyleManager.getProperty(Border, this).setValue(DefaultValue);
-					});
-
-				});
-			}
-			else if (property == "border-style" || property == "border-top-style" || property == "border-right-style" || property == "border-bottom-style" || property == "border-left-style") {
+			if (property == "border-style" || property == "border-top-style" || property == "border-right-style" || property == "border-bottom-style" || property == "border-left-style") {
 
 				var borderWidth;
 
@@ -360,6 +346,16 @@
 						unit = '';
 				}
 
+				if (val == "auto") {
+
+					if (property == "min-width" || property == "max-width")
+						val = $(selected.view.el).css('width');
+					else if (property == "min-height" || property == "max-height")
+						val = $(selected.view.el).css('height');
+					else 
+						val = $(selected.view.el).css(property);
+				}
+
 				if (event.keyCode === 38)
 					val = parseInt(val) + 1;
 				else if (event.keyCode === 40)
@@ -367,10 +363,10 @@
 
 			}
 			else if (event.target.classList.contains('unit-list')) {
+
 				val = inputText.value;
 				unit = event.target.value;
 				LoadAttr(model, unit);
-
 			}
 
 			inputRange.value = inputText.value = val;
@@ -450,7 +446,7 @@
 
 				if (typeof model.attributes.units != 'undefined')
 					LoadAttr(model, unit);
-            }			
+			}
 
 			var selected = VjEditor.getSelected();
 
@@ -498,18 +494,18 @@
 				}
 			}
 
-            selected.removeStyle(property);
+			selected.removeStyle(property);
 
-            var computedValue = $(selected.getEl()).css(property).replace(unit, '');
+			var computedValue = $(selected.getEl()).css(property).replace(unit, '');
 
-            if (computedValue != value)
-                value = computedValue;
+			if (computedValue != value)
+				value = computedValue;
 
-            model.view.$el.find('input').val(value);
-            model.view.$el.find('select').val(unit);
+			model.view.$el.find('input').val(value);
+			model.view.$el.find('select').val(unit);
 
-            if (property == 'font-size')
-                selected.getTrait('fontsize').setTargetValue(value);
+			if (property == 'font-size')
+				selected.getTrait('fontsize').setTargetValue(value);
 
 			if (property == "border-width" || property == "border-top-width" || property == "border-right-width" || property == "border-bottom-width" || property == "border-left-width") {
 

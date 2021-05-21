@@ -25,24 +25,25 @@ export default (editor, config = {}) => {
 				classes: ['vj-divider', 'border-primary'],
 				traits: [
 					{
-						label: "Weight",
-						name: "weight",
-						type: "custom_range",
-						cssproperties: [{ name: "border-top-width" }],
-						min: "1",
-						max: "100",
-						default: "10",
-						changeProp: 1,
-					}, {
 						label: "Width",
 						name: "width",
 						type: "custom_range",
 						cssproperties: [{ name: "width" }],
 						units: [
-							{ name: 'px', min: 10, max: 1920, step: 1, value: 100 },
+							{ name: 'px', min: 1, max: 1920, step: 1, value: 100 },
 							{ name: '%', min: 1, max: 100, step: 1, value: 100 },
 						],
 						unit: "%",
+						changeProp: 1,
+					}, {
+						label: "Height",
+						name: "height",
+						type: "custom_range",
+						cssproperties: [{ name: "border-top-width" }],
+						units: [
+							{ name: 'px', min: 1, max: 1000, step: 1, value: 10 },
+						],
+						unit: "px",
 						changeProp: 1,
 					}, {
 						label: "Design",

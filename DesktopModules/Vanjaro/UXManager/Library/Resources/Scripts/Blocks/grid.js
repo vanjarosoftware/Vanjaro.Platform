@@ -93,9 +93,9 @@ export default (editor, config = {}) => {
 		var Device = VjEditor.getDevice();
 		var browserwidth = window.innerWidth - 325;
 
-        if (Device == 'Mobile Portrait' || browserwidth <= '360')
+		if (Device == 'Mobile Portrait' || browserwidth <= '360')
 			colClass = 'col-';
-        else if (Device == 'Tablet' || browserwidth <= '991' || Device == 'Mobile Landscape')
+		else if (Device == 'Tablet' || browserwidth <= '991' || Device == 'Mobile Landscape')
 			colClass = 'col-sm-';
 
 		var re = new RegExp('(' + colClass + '(\\d+))', 'i');
@@ -153,7 +153,7 @@ export default (editor, config = {}) => {
 					var tb = [];
 
 					tb.push({
-                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddColumn},
+						attributes: { class: 'fa fa-plus', title: VjLocalized.AddColumn },
 						command: 'add-column',
 					});
 
@@ -243,14 +243,14 @@ export default (editor, config = {}) => {
 				traits: [
 					{
 						label: "Horizontal",
-						type: "toggle_radio",
 						name: "horizontalalignment",
+						type: "toggle_radio",
 						UpdateStyles: true,
 						cssproperties: [{ name: "text-align" }],
 						options: [
 							{ id: 'left', name: 'left', image: 'align-left' },
 							{ id: 'center', name: 'center', image: 'align-center' },
-							{ id: 'right', name: 'right', image: 'align-right' },
+							{ id: 'right', name: 'right', image: 'align-right' }
 						],
 						default: "left",
 						changeProp: 1,
@@ -258,14 +258,15 @@ export default (editor, config = {}) => {
 					{
 						label: "Vertical",
 						name: "verticalalignment",
-						type: 'toggle_radio',
-						SwitchClass: true,
+						type: 'toggle_checkbox',
+						UpdateStyles: true,
+						cssproperties: [{ name: "align-self" }],
 						options: [
-							{ id: 'top', class: 'align-items-start', name: 'Top', image: 'align-top' },
-							{ id: 'middle', class: 'align-self-center', name: 'Middle', image: 'align-middle' },
-							{ id: 'bottom', class: 'align-self-end', name: 'Bottom', image: 'align-bottom' },
+							{ id: 'vertical-start', name: 'flex-start', image: 'align-top' },
+							{ id: 'vertical-center', name: 'center', image: 'align-middle' },
+							{ id: 'vertical-end', name: 'flex-end', image: 'align-bottom' }
 						],
-						default: 'top',
+						default: 'vertical-start',
 						changeProp: 1,
 					},
 					{
@@ -316,7 +317,7 @@ export default (editor, config = {}) => {
 					var GetBlockMenus = function () {
 						var Result = [];
 						if (IsAdmin)
-                            Result.push({ 'Title': VjLocalized.SaveBlock, 'Command': 'custom-block' });
+							Result.push({ 'Title': VjLocalized.SaveBlock, 'Command': 'custom-block' });
 						return Result;
 					};
 
@@ -324,7 +325,7 @@ export default (editor, config = {}) => {
 
 					if (GetBlockMenus().length > 0) {
 						tb.push({
-                            attributes: { class: 'fa fa-bars', title: VjLocalized.Menu },
+							attributes: { class: 'fa fa-bars', title: VjLocalized.Menu },
 							command: function (t) {
 								return t.runCommand("tlb-app-actions", {
 									BlockMenus: GetBlockMenus()
@@ -391,15 +392,17 @@ export default (editor, config = {}) => {
 					label: 'Alignment',
 					name: 'horizontalalignment',
 					type: 'toggle_radio',
-					SwitchClass: true,
+					UpdateStyles: true,
+					selector: 'row',
+					cssproperties: [{ name: "justify-content" }],
 					options: [
-						{ id: 'left', class: 'justify-content-start', name: 'Left', image: 'align-left' },
-						{ id: 'center', class: 'justify-content-center', name: 'Center', image: 'align-center' },
-						{ id: 'right', class: 'justify-content-end', name: 'Right', image: 'align-right' },
-						{ id: 'around', class: 'justify-content-around', name: 'Around', image: 'align-around' },
-						{ id: 'between', class: 'justify-content-between', name: 'Between', image: 'align-between' },
+						{ id: 'flex-start', name: 'flex-start', image: 'align-left' },
+						{ id: 'center', name: 'center', image: 'align-center' },
+						{ id: 'flex-end', name: 'flex-end', image: 'align-right' },
+						{ id: 'space-around', name: 'space-around', image: 'align-around' },
+						{ id: 'space-between', name: 'space-between', image: 'align-between' }
 					],
-					default: 'left',
+					default: 'flex-start',
 					changeProp: 1,
 				},
 				]

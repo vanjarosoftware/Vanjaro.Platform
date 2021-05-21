@@ -199,7 +199,18 @@ $(document).ready(function () {
 						var imgEl = image.getEl();
 
 						if (imgEl) {
-							var imgWidth = $(imgEl).width();
+
+                            if ($(imgEl).parents('.link').length)
+                                $(imgEl).parents('.link').css('width', '100%');
+
+                            $(imgEl).parents('.image-box').css('width', '100%');
+
+                            var imgWidth = $(imgEl).parents('.image-box').width();
+
+                            if ($(imgEl).parents('.link').length)
+                                $(imgEl).parents('.link, image-box').css('width', '100%');
+
+                            $(imgEl).parents('.image-box').css('width', '');
 
 							if (imgWidth && imgWidth > 0) {
 								var calcWidth = Math.round((imgWidth / size) * 100);
@@ -326,9 +337,13 @@ $(document).ready(function () {
 				catch (sferr) { sf = window.parent.$.ServicesFramework(-1); }
 				if (parseInt(sf.getTabId()) <= 0)
 					sf = window.parent.$.ServicesFramework(-1);
+				if ($('.initpageloader').length <= 0) {
+					$('.vj-wrapper').prepend('<div class="initoptimizing-overlay"></div>');
+					$('body').append('<div class="initpageloader"><div class="modal-backdrop fade show"></div><img class="revisionloader initrevisionloaderimg" src="' + window.parent.VjDefaultPath + 'loading.svg" /></div>');
+				}
 				$.ajax({
 					type: "GET",
-					url: eval(vjEditorSettings.GetContentUrl),
+					url: vjEditorSettings.GetContentUrl,
 					cache: false,
 					headers: {
 						'ModuleId': parseInt(vjEditorSettings.ModuleId),
@@ -619,7 +634,7 @@ $(document).ready(function () {
 										properties: [
 											{
 												type: 'customradio',
-												name: 'Hide in Mobile',
+												name: 'Hide in Mobile Portrait',
 												property: 'd-mobile-none',
 												defaults: 'd-mobile-show',
 												list: [{
@@ -632,13 +647,25 @@ $(document).ready(function () {
 												}],
 											}, {
 												type: 'customradio',
+												name: 'Hide in Mobile Landscape',
+												property: 'd-mobile-landscape-none',
+												defaults: 'd-mobile-landscape-show',
+												list: [{
+													name: 'Yes',
+													value: 'd-mobile-landscape-none'
+												},
+												{
+													name: 'No',
+													value: 'd-mobile-landscape-show'
+												}],
+											}, {
+												type: 'customradio',
 												name: 'Hide in Tablet',
 												property: 'd-tablet-none',
 												defaults: 'd-tablet-show',
 												list: [{
 													name: 'Yes',
 													value: 'd-tablet-none'
-
 												},
 												{
 													name: 'No',
@@ -677,17 +704,17 @@ $(document).ready(function () {
 													img: 'border-top.svg',
 													value: 'sm-border-top',
 												}, {
-													name: 'Border Right',
-													img: 'border-right.svg',
-													value: 'sm-border-right',
+													name: 'Border Left',
+													img: 'border-left.svg',
+													value: 'sm-border-left',
 												}, {
 													name: 'Border Bottom',
 													img: 'border-bottom.svg',
 													value: 'sm-border-bottom',
 												}, {
-													name: 'Border Left',
-													img: 'border-left.svg',
-													value: 'sm-border-left',
+													name: 'Border Right',
+													img: 'border-right.svg',
+													value: 'sm-border-right',
 												}],
 											},
 											{
@@ -1022,169 +1049,169 @@ $(document).ready(function () {
 												defaults: 'auto',
 											}
 										]
-                                        }, {
-                                            name: VjLocalized.Display,
-                                            open: false,
-                                            properties: [{
-                                                type: 'radio',
-                                                name: 'Display',
-                                                property: 'display',
-                                                defaults: 'none',
-                                                list: [{
-                                                    value: 'none',
-                                                    name: 'none',
-                                                }, {
-                                                    value: 'block',
-                                                    name: 'block',
-                                                }, {
-                                                    value: 'inline',
-                                                    name: 'inline',
-                                                }, {
-                                                    value: 'inline-block',
-                                                    name: 'inline-block',
-                                                }, {
-                                                    value: 'flex',
-                                                    name: 'flex',
-                                                }],
-                                            }, {
-                                                name: 'Direction',
-                                                property: 'flex-direction',
-                                                type: 'customradio',
-                                                cssproperty: 'flex-direction',
-                                                UpdateStyles: true,
-                                                list: [{
-                                                    value: 'row',
-                                                    name: 'Row',
-                                                    img: 'flex-dir-row.png',
-                                                }, {
-                                                    value: 'row-reverse',
-                                                    name: 'Row Reverse',
-                                                    img: 'flex-dir-row-rev.png',
-                                                }, {
-                                                    value: 'column',
-                                                    name: 'Column',
-                                                    img: 'flex-dir-col.png',
-                                                }, {
-                                                    value: 'column-reverse',
-                                                    name: 'Column Reverse',
-                                                    img: 'flex-dir-col-rev.png',
-                                                }],
-                                            }, {
-                                                name: 'Justify',
-                                                property: 'justify-content',
-                                                type: 'customradio',
-                                                UpdateStyles: true,
-                                                list: [{
-                                                    value: 'flex-start',
-                                                    name: 'Start',
-                                                    img: 'align-left.png'
-                                                }, {
-                                                    value: 'space-between',
-                                                    name: 'Space Between',
-                                                    img: 'align-between.png',
-                                                }, {
-                                                    value: 'space-around',
-                                                    name: 'Space Around',
-                                                    img: 'align-around.png',
-                                                }, {
-                                                    value: 'center',
-                                                    name: 'Center',
-                                                    img: 'align-center.png',
-                                                }, {
-                                                    value: 'flex-end',
-                                                    name: 'End',
-                                                    img: 'align-right.png',
-                                                }],
-                                            }, {
-                                                name: 'Align',
-                                                property: 'align-items',
-                                                type: 'customradio',
-                                                UpdateStyles: true,
-                                                list: [{
-                                                    value: 'flex-start',
-                                                    name: 'Start',
-                                                    img: 'align-left.png',
-                                                }, {
-                                                    value: 'stretch',
-                                                    name: 'Stretch',
-                                                    img: 'align-justify.png',
-                                                }, {
-                                                    value: 'center',
-                                                    name: 'Center',
-                                                    img: 'align-center.png',
-                                                }, {
-                                                    value: 'flex-end',
-                                                    name: 'End',
-                                                    img: 'align-right.png',
-                                                }],
-                                            }, {
-                                                name: 'Order',
-                                                property: 'order',
-                                                type: 'customrange',
-                                                defaults: 0,
-                                                step: 1,
-                                                min: 0,
-                                                max: 100,
-                                                cssproperty: 'order',
-                                            }, {
-                                                name: 'Flex',
-                                                property: 'flex',
-                                                type: 'composite',
-                                                properties: [{
-                                                    name: 'Grow',
-                                                    property: 'flex-grow',
-                                                    type: 'customrange',
-                                                    defaults: 0,
-                                                    step: 1,
-                                                    min: 0,
-                                                    max: 100,
-                                                }, {
-                                                    name: 'Shrink',
-                                                    property: 'flex-shrink',
-                                                    type: 'customrange',
-                                                    defaults: 0,
-                                                    step: 1,
-                                                    min: 0,
-                                                    max: 100,
-                                                    cssproperty: 'flex-shrink',
-                                                }, {
-                                                    name: 'Basis',
-                                                    property: 'flex-basis',
-                                                    type: 'customrange',
-                                                    units: [{ name: 'px', min: 1, max: 100, step: 1 },
-                                                    { name: '%', min: 1, max: 100, step: 1 }
-                                                    ],
-                                                    unit: 'px',
-                                                    defaults: 'auto',
-                                                    cssproperty: 'flex-basis',
-                                                }],
-                                            }, {
-                                                name: 'Align',
-                                                property: 'align-self',
-                                                type: 'customradio',
-                                                UpdateStyles: true,
-                                                list: [{
-                                                    value: 'auto',
-                                                    name: 'Auto',
-                                                }, {
-                                                    value: 'flex-start',
-                                                    name: 'Start',
-                                                    img: 'align-left.png',
-                                                }, {
-                                                    value: 'center',
-                                                    name: 'Center',
-                                                    img: 'align-center.png',
-                                                }, {
-                                                    value: 'stretch',
-                                                    name: 'Stretch',
-                                                    img: 'align-justify.png'
-                                                }, {
-                                                    value: 'flex-end',
-                                                    name: 'End',
-                                                    img: 'align-right.png'
-                                                }],
-                                            }]
-                                        }, {
+									}, {
+										name: VjLocalized.Display,
+										open: false,
+										properties: [{
+											type: 'radio',
+											name: 'Display',
+											property: 'display',
+											defaults: 'none',
+											list: [{
+												value: 'none',
+												name: 'none',
+											}, {
+												value: 'block',
+												name: 'block',
+											}, {
+												value: 'inline',
+												name: 'inline',
+											}, {
+												value: 'inline-block',
+												name: 'inline-block',
+											}, {
+												value: 'flex',
+												name: 'flex',
+											}],
+										}, {
+											name: 'Direction',
+											property: 'flex-direction',
+											type: 'customradio',
+											cssproperty: 'flex-direction',
+											UpdateStyles: true,
+											list: [{
+												value: 'row',
+												name: 'Row',
+												img: 'flex-dir-row.png',
+											}, {
+												value: 'row-reverse',
+												name: 'Row Reverse',
+												img: 'flex-dir-row-rev.png',
+											}, {
+												value: 'column',
+												name: 'Column',
+												img: 'flex-dir-col.png',
+											}, {
+												value: 'column-reverse',
+												name: 'Column Reverse',
+												img: 'flex-dir-col-rev.png',
+											}],
+										}, {
+											name: 'Justify Content',
+											property: 'justify-content',
+											type: 'customradio',
+											UpdateStyles: true,
+											list: [{
+												value: 'flex-start',
+												name: 'Start',
+												img: 'align-left.png'
+											}, {
+												value: 'space-between',
+												name: 'Space Between',
+												img: 'align-between.png',
+											}, {
+												value: 'space-around',
+												name: 'Space Around',
+												img: 'align-around.png',
+											}, {
+												value: 'center',
+												name: 'Center',
+												img: 'align-center.png',
+											}, {
+												value: 'flex-end',
+												name: 'End',
+												img: 'align-right.png',
+											}],
+										}, {
+											name: 'Align Items',
+											property: 'align-items',
+											type: 'customradio',
+											UpdateStyles: true,
+											list: [{
+												value: 'flex-start',
+												name: 'Start',
+												img: 'align-left.png',
+											}, {
+												value: 'stretch',
+												name: 'Stretch',
+												img: 'align-justify.png',
+											}, {
+												value: 'center',
+												name: 'Center',
+												img: 'align-center.png',
+											}, {
+												value: 'flex-end',
+												name: 'End',
+												img: 'align-right.png',
+											}],
+										}, {
+											name: 'Order',
+											property: 'order',
+											type: 'customrange',
+											defaults: 0,
+											step: 1,
+											min: 0,
+											max: 100,
+											cssproperty: 'order',
+										}, {
+											name: 'Flex',
+											property: 'flex',
+											type: 'composite',
+											properties: [{
+												name: 'Grow',
+												property: 'flex-grow',
+												type: 'customrange',
+												defaults: 0,
+												step: 1,
+												min: 0,
+												max: 100,
+											}, {
+												name: 'Shrink',
+												property: 'flex-shrink',
+												type: 'customrange',
+												defaults: 0,
+												step: 1,
+												min: 0,
+												max: 100,
+												cssproperty: 'flex-shrink',
+											}, {
+												name: 'Basis',
+												property: 'flex-basis',
+												type: 'customrange',
+												units: [{ name: 'px', min: 1, max: 100, step: 1 },
+												{ name: '%', min: 1, max: 100, step: 1 }
+												],
+												unit: 'px',
+												defaults: 'auto',
+												cssproperty: 'flex-basis',
+											}],
+										}, {
+											name: 'Align Self',
+											property: 'align-self',
+											type: 'customradio',
+											UpdateStyles: true,
+											list: [{
+												value: 'auto',
+												name: 'Auto',
+											}, {
+												value: 'flex-start',
+												name: 'Start',
+												img: 'align-left.png',
+											}, {
+												value: 'center',
+												name: 'Center',
+												img: 'align-center.png',
+											}, {
+												value: 'stretch',
+												name: 'Stretch',
+												img: 'align-justify.png'
+											}, {
+												value: 'flex-end',
+												name: 'End',
+												img: 'align-right.png'
+											}],
+										}]
+									}, {
 										name: VjLocalized.Transform,
 										open: false,
 										properties: [
@@ -1491,7 +1518,7 @@ $(document).ready(function () {
 									autosave: false,
 									autoload: false,
 									stepsBeforeSave: 1,
-									urlStore: eval(vjEditorSettings.UpdateContentUrl),
+									urlStore: vjEditorSettings.UpdateContentUrl,
 									onComplete(jqXHR, status) {
 										if (jqXHR.IsSuccess) {
 											if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
@@ -1610,12 +1637,13 @@ $(document).ready(function () {
 							VjEditor.on('load', function () {
 								try { $.ServicesFramework(-1); }
 								catch (err) { window.parent.location.reload(); }
+								setTimeout(function () { $(window.parent.document.body).find('.vj-wrapper').find('.initoptimizing-overlay').remove(); $(window.parent.document.body).find('.initpageloader').remove(); }, 500);
 								$('#BlockManager').find('.block-search').val('');
 
 								if (vjEditorSettings.EditPage) {
 									LoadApps();
 									LoadDesignBlocks();
-                                }
+								}
 
 								if ($(window).width() < 1000) {
 									$(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
@@ -1627,7 +1655,7 @@ $(document).ready(function () {
 										$(".ToolbarItem li:not(.PageSettings),.toolmanager,.more_icons, .blockItem.blocksmenu ").hide();
 										$("a.blockItem.settings").trigger("click");
 									}
-									else {
+                                    else if ($(window.parent.document.body).find('.gjs-cv-canvas__frames').hasClass('deviceframe')) {
 										$(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('deviceframe');
 										$(".ToolbarItem li,.toolmanager,.more_icons,.blockItem.blocksmenu ").show();
 										$('.ToolbarItem > li:gt(4)').hide();
@@ -1662,7 +1690,7 @@ $(document).ready(function () {
 									VjEditor.runCommand("save");
 									VjEditor.destroy();
 									// Remove All Managers
-                                    $('#ContentBlocks, .styleManager, .traitsManager').empty();
+									$('#ContentBlocks, .styleManager, .traitsManager').empty();
 									VjLayerpanel.close();
 									VjInit();
 								} else if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
@@ -1693,15 +1721,15 @@ $(document).ready(function () {
 									$("#iframeHolder").fadeIn();
 
 									eraseCookie("vj_UXLoad");
-                                }
+								}
 
-                                VjEditor.SelectorManager.getAll().filter(selector => {
-                                    if (selector.attributes.type == 1) {
-                                        selector.set({
-                                            active: false
-                                        })
-                                    }
-                                });
+								VjEditor.SelectorManager.getAll().filter(selector => {
+									if (selector.attributes.type == 1) {
+										selector.set({
+											active: false
+										})
+									}
+								});
 							});
 
 							var parentClone = "";
@@ -1754,11 +1782,15 @@ $(document).ready(function () {
 									else if (typeof model.modelToDrop.parent != 'undefined' && model.modelToDrop.parent() && model.modelToDrop.parent().attributes.type == "column")
 										$(model.modelToDrop.parent().getEl()).removeAttr("data-empty");
 
-									if (parentRemove != '' && parentClone != '') {
-										model.modelToDrop.replaceWith(parentClone);
-										parentRemove.remove();
-										parentRemove = '';
-										parentClone = '';
+                                    if (parentRemove != '' && parentClone != '') {
+                                        var selectModel = parentClone.components().models[0];
+                                        model.modelToDrop.replaceWith(parentClone);
+                                        setTimeout(function () {
+                                            VjEditor.select(selectModel);
+                                            parentRemove.remove();
+                                            parentRemove = '';
+                                            parentClone = '';
+                                        });
 									}
 								}
 
@@ -1789,7 +1821,7 @@ $(document).ready(function () {
 
 									var modelClasses = model.attributes.classes;
 									if (modelClasses.length) {
-                                        modelClasses.map(selector => {
+										modelClasses.map(selector => {
 											if (selector.attributes.active) {
 												selector.set({
 													active: false
@@ -1878,7 +1910,7 @@ $(document).ready(function () {
 									});
 								}
 								else if (bmodel != undefined && bmodel.attributes != undefined && bmodel.attributes.attributes != undefined && bmodel.attributes.attributes.type == 'VjCustomBlock')
-									RenderCustomBlock(model, bmodel);
+                                    RenderCustomBlock(model, bmodel);
 								else if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes["data-block-type"] != undefined)
 									RenderBlock(model, bmodel);
 							});
@@ -1900,51 +1932,6 @@ $(document).ready(function () {
 
 								}
 							});
-
-							var FilterBorderOptions = function (target, position) {
-
-								setTimeout(function () {
-
-									var val;
-
-									switch (position) {
-										case "sm-border-top":
-											val = "border-top"
-											break;
-										case "sm-border-right":
-											val = "border-right"
-											break;
-										case "sm-border-bottom":
-											val = "border-bottom"
-											break;
-										case "sm-border-left":
-											val = "border-left"
-											break;
-										default:
-											val = "border"
-									}
-
-									var sm = VjEditor.StyleManager;
-
-									$(sm.getProperties(Border).models).each(function () {
-										if (this.attributes.name != 'Border Postion')
-											this.view.$el.hide();
-									});
-
-									$(sm.getProperty(Border, val + '-style').view.el).show();
-									$(sm.getProperty(Border, val + '-color').view.el).show();
-									$(sm.getProperty(Border, val + '-width').view.el).show();
-
-									var style = val + '-style';
-
-									if (typeof target.getStyle()[style] == "undefined")
-										sm.getProperty(Border, val + '-style').view.$el.find('input').prop('checked', false);
-
-									if (typeof target.getStyle()['border-width'] == "undefined")
-										sm.getProperty(Border, 'border-width').setValue(0);
-
-								});
-							}
 
 							var ReverseColums = function (model) {
 
@@ -2000,13 +1987,13 @@ $(document).ready(function () {
 									return;
 								}
 								else if (model.attributes.type == 'prev') {
-									var slider = model.closest('[data-gjs-type="carousel"]');
+									var slider = model.closest('[data-gjs-type="carousel"]').find(".carousel-item-prev img");
 									VjEditor.select(slider);
 									VjEditor.runCommand("slider-prev", { slider });
 									return;
 								}
 								else if (model.attributes.type == 'next') {
-									var slider = model.closest('[data-gjs-type="carousel"]');
+									var slider = model.closest('[data-gjs-type="carousel"]').find(".carousel-item-next img");
 									VjEditor.select(slider);
 									VjEditor.runCommand("slider-next", { slider });
 									return;
@@ -2027,7 +2014,9 @@ $(document).ready(function () {
 											$(dataPane.view.$el).hide(0);
 										});
 									}
-								}
+                                }
+
+                                VjEditor.SelectorManager.setState();
 
 								if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
 
@@ -2197,7 +2186,8 @@ $(document).ready(function () {
 
 								var desktop = 'd-desktop-none';
 								var tablet = 'd-tablet-none';
-								var mobile = 'd-mobile-none';
+								var mobileLandscape = 'd-mobile-landscape-none';
+								var mobilePortrait = 'd-mobile-none';
 
 								if (typeof model.get(desktop) != 'undefined')
 									VjEditor.StyleManager.getProperty(Responsive, desktop).setValue(model.get(desktop));
@@ -2205,8 +2195,11 @@ $(document).ready(function () {
 								if (typeof model.get(tablet) != 'undefined')
 									VjEditor.StyleManager.getProperty(Responsive, tablet).setValue(model.get(tablet));
 
-								if (typeof model.get(mobile) != 'undefined')
-									VjEditor.StyleManager.getProperty(Responsive, mobile).setValue(model.get(mobile));
+								if (typeof model.get(mobileLandscape) != 'undefined')
+									VjEditor.StyleManager.getProperty(Responsive, mobileLandscape).setValue(model.get(mobileLandscape));
+
+								if (typeof model.get(mobilePortrait) != 'undefined')
+									VjEditor.StyleManager.getProperty(Responsive, mobilePortrait).setValue(model.get(mobilePortrait));
 
 								if (typeof model.getStyle()['filter'] != "undefined") {
 
@@ -2297,6 +2290,7 @@ $(document).ready(function () {
 
 								model.set('border-position', 'sm-border');
 								FilterBorderOptions(model, 'sm-border');
+								$(VjEditor.StyleManager.getProperty(Border, 'border-position').view.$el.find('input')[0]).prop('checked', true);
 
 								var flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
 
@@ -2331,7 +2325,7 @@ $(document).ready(function () {
 										VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
 								}
 
-								if (model.attributes.type == 'heading' || model.attributes.type == 'text' || model.attributes.type == 'button' || model.attributes.type == 'list' || model.attributes.type == 'link') {
+								if (typeof model.attributes.text != 'undefined' && model.attributes.text) {
 
 									VjEditor.StyleManager.addSector(Text, {
 										name: VjLocalized.Text,
@@ -2520,15 +2514,15 @@ $(document).ready(function () {
 
 								if (model.attributes.type == 'grid' && model.components().length)
 									$(model.components().models[0].getEl()).removeClass('gjs-dashed');
-							});                            
+							});
 
-                            VjEditor.on('selector:add', selector => {
-                                if (selector.attributes.type == 1) {
-                                    selector.set({
-                                        active: false
-                                    });
-                                }
-                            });
+							VjEditor.on('selector:add', selector => {
+								if (selector.attributes.type == 1) {
+									selector.set({
+										active: false
+									});
+								}
+							});
 
 							VjEditor.on('component:styleUpdate', (model, property) => {
 
@@ -2576,25 +2570,16 @@ $(document).ready(function () {
 									var style = model.getStyle()[property];
 									var svg = model.components().models[0];
 
-									if (property == "width") {
-										svg.addStyle({ 'width': style });
-										svg.addStyle({ 'height': style });
+									if (property == "width" || property == "height") {
+										svg.addStyle({ 'width': style, 'height': style });
+										model.addStyle({ 'line-height': style });
 									}
-
 									else if (property == "min-width")
 										svg.addStyle({ 'min-width': style });
-
 									else if (property == "max-width")
 										svg.addStyle({ 'max-width': style });
-
-									else if (property == "height") {
-										svg.addStyle({ 'width': style });
-										svg.addStyle({ 'height': style });
-									}
-
 									else if (property == "min-height")
 										svg.addStyle({ 'min-height': style });
-
 									else if (property == "max-height")
 										svg.addStyle({ 'max-height': style });
 
@@ -2647,12 +2632,6 @@ $(document).ready(function () {
 								}
 							});
 
-							VjEditor.on('component:styleUpdate:border-position', (model, argument) => {
-
-								FilterBorderOptions(model, event.target.value);
-								model.removeStyle('border-position');
-							});
-
 							VjEditor.on('component:styleUpdate:flex-direction', (model) => {
 
 								if (model.attributes.type == "grid")
@@ -2672,6 +2651,103 @@ $(document).ready(function () {
 									model.parent().parent().setStyle(style);
 								}
 							});
+
+							VjEditor.on('component:styleUpdate:border-style', (model, argument) => {
+
+								var style = model.getStyle()['border-style'];
+
+								model.addStyle({ 'border-top-style': style });
+								model.addStyle({ 'border-bottom-style': style });
+								model.addStyle({ 'border-left-style': style });
+								model.addStyle({ 'border-right-style': style });
+
+								model.removeStyle('border-style');
+
+							});
+
+							VjEditor.on('component:styleUpdate:border-color', (model, argument) => {
+
+								var color = model.getStyle()['border-color'];
+
+								model.addStyle({ 'border-top-color': color });
+								model.addStyle({ 'border-bottom-color': color });
+								model.addStyle({ 'border-left-color': color });
+								model.addStyle({ 'border-right-color': color });
+
+								model.removeStyle('border-color');
+
+							});
+
+							VjEditor.on('component:styleUpdate:border-width', (model, argument) => {
+
+								var width = model.getStyle()['border-width'];
+
+								model.addStyle({ 'border-top-width': width });
+								model.addStyle({ 'border-bottom-width': width });
+								model.addStyle({ 'border-left-width': width });
+								model.addStyle({ 'border-right-width': width });
+
+								model.removeStyle('border-width');
+
+							});
+
+                            VjEditor.Commands.add('core:copy', {
+                                run(editor, sender) {
+
+                                    var filteredSelected = editor.getSelectedAll().filter(item => item.attributes.copyable == true);
+                                    var copiedSelected = [];
+
+                                    if (filteredSelected.length) {
+
+                                        filteredSelected = filteredSelected.map(function (comp) {
+
+                                            const type = comp.attributes.type;
+
+                                            if (comp.parent() && comp.parent().attributes.type != 'wrapper' && (type == 'button' || type == 'icon' || type == 'list' || type == 'image')) {
+
+                                                if (type == 'image')
+                                                    return comp.parent().parent();
+                                                else
+                                                    return comp.parent();
+                                            }
+                                            else
+                                                return comp;
+                                        });
+
+                                        filteredSelected.forEach(item => {
+                                            copiedSelected.push(item.clone());
+                                        });
+
+                                        copiedSelected = copiedSelected.map(function (comp) {
+
+                                            const type = comp.attributes.type;
+
+                                            if (comp.findType('modulewrapper').length) {
+                                                comp.findType('modulewrapper').forEach(item => {
+                                                    item.remove();
+                                                });
+                                            }
+
+                                            return comp;
+                                        }); 
+                                                                               
+                                        VjEditor.getModel().set('clipboard', copiedSelected);
+                                    }
+                                }
+                            });
+
+                            VjEditor.on('component:paste', (model, argument) => {
+                                
+                                var type = model.attributes.type;
+
+                                if (type == 'button-box' || type == 'icon-box' || type == 'list-box' || type == 'image-box') {
+
+                                    if (type == 'image-box')
+                                        model.move(model.parent().parent().parent());
+                                    else
+                                        model.move(model.parent().parent());
+                                }
+                            });
 
 							VjEditor.Commands.add('global-delete', {
 								run(editor, sender) {
@@ -2876,8 +2952,15 @@ $(document).ready(function () {
 											try {
 												if (v.attributes != undefined)
 													v.attributes.content = '';
-												var content = VjEditor.runCommand("export-component", {
-													component: v.attributes.components.models[0]
+												var content = { html: '', css: '' };
+												$.each(v.attributes.components.models, function (mi, mv) {
+													var mvcontent = VjEditor.runCommand("export-component", {
+														component: mv
+													});
+													if (mvcontent != undefined && mvcontent.html != undefined && mvcontent.html != "") {
+														content.html += mvcontent.html;
+														content.css += mvcontent.css;
+													}
 												});
 												if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
 													var item = {
@@ -2887,6 +2970,9 @@ $(document).ready(function () {
 														css: content.css,
 													};
 													globalblocks.push(item);
+													if (v.attributes != undefined && v.attributes.attributes != undefined && v.attributes.attributes.published != undefined) {
+														v.attributes.attributes.published = true;
+													}
 												}
 											}
 											catch (err) { console.log(err); }
@@ -2988,11 +3074,9 @@ $(document).ready(function () {
 									$(model.parent().getEl()).attr("data-empty", "true");
 
 								if (model.parent() != undefined && model.parent().attributes.type == "row" && model.parent().components().length == 0) {
-
 									if (model.parent().parent() != undefined && model.parent().parent().attributes.type == "grid")
 										model.parent().parent().remove();
 								}
-
 							});
 
 							//Tooltip
@@ -3281,12 +3365,14 @@ $(document).ready(function () {
 			else {
 				$body.removeClass('tablet mobile-portrait').addClass('resp-mode mobile-landscape');
 			}
-
 		}
 
-		var selected = VjEditor.getSelected();
-		VjEditor.select();
-		VjEditor.select(selected);
+		$('.gjs-frame-wrapper').on('transitionend webkitTransitionEnd oTransitionEnd', function () {
+			var selected = VjEditor.getSelected();
+			VjEditor.select();
+			VjEditor.select(selected);
+		});
+
 	});
 
 	var Stylemanager = function () {
@@ -3299,7 +3385,6 @@ $(document).ready(function () {
 		Stylemanager();
 	});
 });
-
 
 if (document.addEventListener) {
 	document.addEventListener('webkitfullscreenchange', exitHandler, false);
@@ -3396,7 +3481,7 @@ global.ChangeBlockType = function (query) {
 				return globalBlocks;
 		}
 
-        if (!isGlobal && !isCustom && isLocal && localBlocks.length)
+		if (!isGlobal && !isCustom && isLocal && localBlocks.length)
 			$('#ContentBlocks').empty().append(VjEditor.BlockManager.render(localBlocks));
 		else if (!isLocal && !isGlobal && isCustom) {
 			if (customblocks.length <= 0)
@@ -3510,7 +3595,6 @@ global.getUrlVars = function () {
 	return output;
 }
 
-
 // start review toast 
 global.ConfirmReviewChange = function (FirstStateName) {
 	swal({
@@ -3617,4 +3701,82 @@ global.ChangeToWebp = function (target, URLs) {
 
 		});
 	}
+}
+
+global.FilterBorderOptions = function (target, position) {
+
+	setTimeout(function () {
+
+		var val;
+
+		switch (position) {
+			case "sm-border-top":
+				val = "border-top"
+				break;
+			case "sm-border-right":
+				val = "border-right"
+				break;
+			case "sm-border-bottom":
+				val = "border-bottom"
+				break;
+			case "sm-border-left":
+				val = "border-left"
+				break;
+			default:
+				val = "border"
+		}
+
+		var sm = VjEditor.StyleManager;
+		var Border = VjLocalized.Border.replace(/ /g, '_').toLowerCase();
+
+		$(sm.getProperties(Border).models).each(function () {
+			if (this.attributes.name != 'Border Postion')
+				this.view.$el.hide();
+		});
+
+		$(sm.getProperty(Border, val + '-style').view.el).show();
+		$(sm.getProperty(Border, val + '-color').view.el).show();
+		$(sm.getProperty(Border, val + '-width').view.el).show();
+
+		var style = val + '-style';
+
+		if (typeof target.getStyle()[style] == "undefined")
+			sm.getProperty(Border, style).view.$el.find('input').prop('checked', false);
+
+		var width = val + '-width';
+
+		if (typeof target.getStyle()[width] == "undefined")
+			sm.getProperty(Border, width).view.$el.find('input').val(0);
+
+		var color = val + '-color';
+
+		if (typeof target.getStyle()[color] == "undefined") {
+
+			var brdcolor = $(target.getEl()).css('border-color');
+
+			sm.getProperty(Border, color).view.$el.find('input').val(brdcolor);
+			sm.getProperty(Border, color).view.$el.find('.gjs-field-color-picker').css('background-color', brdcolor);
+		}
+
+		setTimeout(function () {
+
+			var borderStyle = target.getStyle()['border-top-style'];
+			var borderColor = target.getStyle()['border-top-color'];
+			var borderWidth = target.getStyle()['border-top-width'];
+
+			if (typeof borderStyle != 'undefined' && borderStyle == target.getStyle()['border-bottom-style'] && borderStyle == target.getStyle()['border-left-style'] && borderStyle == target.getStyle()['border-right-style'])
+				$(sm.getProperty(Border, 'border-style').view.$el).find('input[value= ' + borderStyle + ']').prop('checked', true);
+
+
+			if (typeof borderColor != 'undefined' && borderColor == target.getStyle()['border-bottom-color'] && borderColor == target.getStyle()['border-left-color'] && borderColor == target.getStyle()['border-right-color']) {
+				$(sm.getProperty(Border, 'border-color').view.$el).find('input').val(borderColor);
+				sm.getProperty(Border, color).view.$el.find('.gjs-field-color-picker').css('background-color', borderColor);
+			}
+
+
+			if (typeof borderWidth != 'undefined' && borderWidth == target.getStyle()['border-bottom-width'] && borderWidth == target.getStyle()['border-left-width'] && borderWidth == target.getStyle()['border-right-width'])
+				$(sm.getProperty(Border, 'border-width').view.$el).find('input').val(parseInt(borderWidth));
+
+		});
+	});
 }

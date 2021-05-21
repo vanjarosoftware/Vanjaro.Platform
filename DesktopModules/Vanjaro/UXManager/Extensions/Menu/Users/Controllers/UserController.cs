@@ -273,7 +273,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                     isDeleted = d.IsDeleted,
                     authorized = DotNetNuke.Entities.Users.UserController.GetUserById((PortalController.Instance.GetCurrentSettings() as PortalSettings).PortalId, d.UserId).Membership.Approved,
                     isSuperUser = d.IsSuperUser,
-                    isAdmin = d.IsAdmin
+                    isAdmin = d.IsAdmin,
+                    isLocked = DotNetNuke.Entities.Users.UserController.GetUserById(PortalSettings.PortalId, d.UserId).Membership.LockedOut,
                 });
 
                 var response = new
@@ -955,6 +956,36 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                 actionResult.AddError("Service_RestoreTabModuleError", RecyclebinController.Instance.LocalizeString("Service_RestoreTabModuleError") + resultmessage);
                 actionResult.Data = new { Status = 1 };
             }
+            return actionResult;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UnLockUser(int userId)
+        {
+            ActionResult actionResult = new ActionResult();
+            try
+            {
+                KeyValuePair<HttpStatusCode, string> response;
+                var user = UsersController.GetUser(userId, this.PortalSettings, this.UserInfo, out response);
+                if (user == null)
+                    actionResult.AddError(response.Key.ToString(), response.Value);
+
+                if (userId == this.UserInfo.UserID)
+                    actionResult.AddError(HttpStatusCode.Unauthorized.ToString(), Localization.GetString("InSufficientPermissions", Dnn.PersonaBar.Users.Components.Constants.LocalResourcesFile));
+
+                if (actionResult.IsSuccess)
+                {
+                    var unlocked = user.Membership.LockedOut && DotNetNuke.Entities.Users.UserController.UnLockUser(user);
+                    if (!unlocked)
+                        actionResult.AddError(HttpStatusCode.InternalServerError.ToString(), Localization.GetString("UserUnlockError", Dnn.PersonaBar.Users.Components.Constants.LocalResourcesFile));
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionManager.LogException(ex);
+            }
+
             return actionResult;
         }
 

@@ -19,7 +19,13 @@ namespace Vanjaro.Common.ASPNET
         {
             LinkCSS(Page, ID, URL, true);
         }
+
         public static void LinkCSS(Page Page, string ID, string URL, bool Composite)
+        {
+            LinkCSS(Page, ID, URL, true, "DnnPageHeaderProvider");
+        }
+
+        public static void LinkCSS(Page Page, string ID, string URL, bool Composite, string Provider)
         {
             if (Composite)
             {
@@ -36,7 +42,7 @@ namespace Vanjaro.Common.ASPNET
 
                 if (Uri.IsWellFormedUriString(relativeURL, UriKind.Relative) && !relativeURL.Contains('?'))
                 {
-                    ClientResourceManager.RegisterStyleSheet(Page, relativeURL, cssPriority, "DnnPageHeaderProvider");
+                    ClientResourceManager.RegisterStyleSheet(Page, relativeURL, cssPriority, Provider);
                     cssPriority++;
 
                     return;
@@ -66,7 +72,13 @@ namespace Vanjaro.Common.ASPNET
         {
             RegisterClientScriptInclude(Page, ID, URL, true);
         }
+
         public static void RegisterClientScriptInclude(Page Page, string ID, string URL, bool Composite)
+        {
+            RegisterClientScriptInclude(Page, ID, URL, Composite, "DnnPageHeaderProvider");
+        }
+
+        public static void RegisterClientScriptInclude(Page Page, string ID, string URL, bool Composite, string Provider)
         {
             if (Composite)
             {
@@ -84,7 +96,7 @@ namespace Vanjaro.Common.ASPNET
 
                 if (Uri.IsWellFormedUriString(relativeURL, UriKind.Relative) && !relativeURL.Contains('?'))
                 {
-                    ClientResourceManager.RegisterScript(Page, relativeURL, jsPriority, "DnnPageHeaderProvider");
+                    ClientResourceManager.RegisterScript(Page, relativeURL, jsPriority, Provider);
                     jsPriority++;
 
                     return;
