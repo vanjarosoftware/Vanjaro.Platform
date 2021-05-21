@@ -803,12 +803,12 @@ export default (editor, config = {}) => {
 
 					var selector = trait.attributes.selector;
 
-                    if (trait.attributes.closest) {
-                        if (typeof component.closestType(selector) != 'undefined')
-                            model = component.closestType(selector);
-                    }
-                    else
-                        model = component.findType(selector)[0];
+					if (trait.attributes.closest) {
+						if (typeof component.closestType(selector) != 'undefined')
+							model = component.closestType(selector);
+					}
+					else
+						model = component.findType(selector)[0];
 				}
 
 				if (property != '') {
@@ -838,10 +838,10 @@ export default (editor, config = {}) => {
 
 				var selector = trait.attributes.selector;
 
-                if (trait.attributes.closest) {
-                    if (typeof component.closestType(selector) != 'undefined')
-                        model = component.closestType(selector);
-                }
+				if (trait.attributes.closest) {
+					if (typeof component.closestType(selector) != 'undefined')
+						model = component.closestType(selector);
+				}
 				else
 					model = component.findType(selector);
 			}
@@ -928,12 +928,12 @@ export default (editor, config = {}) => {
 
 					var selector = trait.attributes.selector;
 
-                    if (trait.attributes.closest) {
-                        if (typeof component.closestType(selector) != 'undefined')
-                            model = component.closestType(selector);
-                    }
-                    else
-                        model = component.findType(selector)[0];
+					if (trait.attributes.closest) {
+						if (typeof component.closestType(selector) != 'undefined')
+							model = component.closestType(selector);
+					}
+					else
+						model = component.findType(selector)[0];
 				}
 
 				if (property != '') {
@@ -1393,10 +1393,10 @@ export default (editor, config = {}) => {
 
 				var selector = trait.attributes.selector;
 
-                if (trait.attributes.closest) {
-                    if (typeof component.closestType(selector) != 'undefined')
-                        model = component.closestType(selector);
-                }
+				if (trait.attributes.closest) {
+					if (typeof component.closestType(selector) != 'undefined')
+						model = component.closestType(selector);
+				}
 				else
 					model = component.findType(selector);
 			}
@@ -1579,10 +1579,10 @@ export default (editor, config = {}) => {
 
 				var selector = trait.attributes.selector;
 
-                if (trait.attributes.closest) {
-                    if (typeof component.closestType(selector) != 'undefined')
-                        model = component.closestType(selector);
-                }
+				if (trait.attributes.closest) {
+					if (typeof component.closestType(selector) != 'undefined')
+						model = component.closestType(selector);
+				}
 				else
 					model = component.findType(selector);
 			}
@@ -1644,7 +1644,7 @@ export default (editor, config = {}) => {
 			if (typeof trait.attributes.cssproperties != 'undefined')
 				property = trait.attributes.cssproperties[0].name;
 
-			if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
+			if (typeof event != 'undefined' && !event.target.classList.contains('input-control')) {
 
 				if (typeof component.getStyle()[property] != 'undefined')
 					value = component.getStyle()[property].replace('!important', '');
@@ -1665,7 +1665,7 @@ export default (editor, config = {}) => {
 						});
 					}
 				}
-				else 
+				else
 					inputValue = value;
 
 				if (typeof trait.attributes.units != 'undefined') {
@@ -1721,10 +1721,10 @@ export default (editor, config = {}) => {
 
 				var selector = trait.attributes.selector;
 
-                if (trait.attributes.closest) {
-                    if (typeof component.closestType(selector) != 'undefined')
-                        model = component.closestType(selector);
-                }
+				if (trait.attributes.closest) {
+					if (typeof component.closestType(selector) != 'undefined')
+						model = component.closestType(selector);
+				}
 				else
 					model = component.findType(selector);
 			}
@@ -1767,7 +1767,7 @@ export default (editor, config = {}) => {
 			el.innerHTML = `<input type="number" value="` + traitValue + `" name="` + trait.attributes.name + `" min="` + trait.attributes.min + `" max="` + trait.attributes.max + `" class="number" />`;
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
 			if (component.attributes.type == 'list' && elInput.firstElementChild.name == "start" && component.getTrait('list_type').getInitValue() == "ul") {
 				$(elInput).parents(".gjs-trt-trait__wrp").hide();
 			}
@@ -1843,7 +1843,7 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
 			if (component.attributes.type == 'section') {
 				if (elInput.firstElementChild.name == "backgroundimage" && (component.getTrait('background').getInitValue() == "none" || component.getTrait('background').getInitValue() == "gradient" || component.getTrait('background').getInitValue() == "video"))
 					$(elInput).parents(".gjs-trt-trait__wrp").hide();
@@ -1899,7 +1899,7 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
 			if (component.attributes.type == 'section') {
 				if ((elInput.id == "imageposition" || elInput.id == "imageattachment" || elInput.id == "imagerepeat" || elInput.id == "imagesize") && (component.getTrait('background').getInitValue() == "none" || component.getTrait('background').getInitValue() == "gradient" || component.getTrait('background').getInitValue() == "video"))
 					$(elInput).parents(".gjs-trt-trait__wrp").hide();
@@ -1981,7 +1981,7 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
 			if (component.attributes.type == 'section' && component.getTrait('background').getInitValue() != "gradient")
 				$(elInput).parents(".gjs-trt-trait__wrp").hide();
 
@@ -2021,8 +2021,11 @@ export default (editor, config = {}) => {
 				label.setAttribute("class", value.class);
 				label.innerHTML = trait.target.getEl().textContent;
 
+				icon.setAttribute("class", "fas fa-check-circle");
+
 				div.appendChild(input);
 				div.appendChild(label);
+				div.appendChild(icon);
 				el.appendChild(div);
 			});
 
@@ -2037,10 +2040,9 @@ export default (editor, config = {}) => {
 
 			return el;
 		},
-		onUpdate({ elInput, component }) {
+		onUpdate({ elInput, component, trait }) {
 
 			var model = component;
-			var trait = component.getTrait('styles');
 
 			if (typeof trait.attributes.selector != 'undefined')
 				model = component.findType(trait.attributes.selector)[0];
@@ -2049,6 +2051,46 @@ export default (editor, config = {}) => {
 			text = text.split(/\s+/).slice(0, 20).join(" ");
 			$(elInput).find('label').text(text);
 
+			if (typeof model.getAttributes()["data-block-type"] != 'undefined') {
+
+				var blockName = model.getAttributes()['data-block-type'].toLowerCase();
+
+				$(elInput).find('label').each(function (index, item) {
+
+					if (blockName == 'menu') {
+
+						$(item).html(`
+							<nav class="navbar navbar-expand-lg">
+								<div class="collapse navbar-collapse DefaultMenu scrollbar" id="DefaultMenu_132659749735737316">
+									<ul class="navbar-nav" id="navbar-menu">
+										<li class="first selected nav-item">
+											<a class="nav-link" href="#">${$(model.getEl()).find('.nav-link:eq(0)')[0].innerHTML}</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#">${$(model.getEl()).find('.nav-link:eq(1)')[0].innerHTML}</a>
+										</li>
+									</ul>
+								</div>
+							</nav>
+						`);
+					}
+					else if (blockName == 'breadcrumb' || blockName == 'language' || blockName == 'search input') {
+						$(item).html(model.getEl().innerHTML);
+					}
+					else if (blockName == 'register link') {
+
+						var content = $(model.getEl()).find('.desktop_registerbox .dropdown-toggle')[0].outerHTML;
+
+						$(item).html(`
+							<div class="desktop_registerbox">
+								<div class="dropdown">
+									${content}						
+								</div>
+							</div>
+						`);
+					}
+				});
+			}
 		},
 		onEvent({ elInput, component }) {
 
@@ -2067,10 +2109,6 @@ export default (editor, config = {}) => {
 
 			$(model).each(function (index, item) {
 
-				var className = event.target.className;
-				var classes = item.getClasses();
-				var $el = $(item.getEl());
-
 				item.removeStyle('font-family');
 				item.removeStyle('font-style');
 				item.removeStyle('line-height');
@@ -2081,25 +2119,13 @@ export default (editor, config = {}) => {
 				item.removeStyle('text-decoration');
 				item.removeStyle('text-shadow');
 
-				if ($el.is('[class*="head-style-"]')) {
-					classes = jQuery.grep(classes, function (className, index) {
-						return (className.match(/\bhead-style-\S+/g) || []).join(' ');
-					});
-				}
-				else if ($el.is('[class*="paragraph-style-"]')) {
-					classes = jQuery.grep(classes, function (className, index) {
-						return (className.match(/\bparagraph-style-\S+/g) || []).join(' ');
-					});
-				}
-				else if ($el.is('[class*="button-style-"]')) {
-					classes = jQuery.grep(classes, function (className, index) {
-						return (className.match(/\bbutton-style-\S+/g) || []).join(' ');
-					});
-				}
-				else
-					classes = "";
+				var classes = trait.attributes.options.map(opt => opt.class);
 
-				item.removeClass(classes);
+				$(classes).each(function (index, className) {
+					item.removeClass(className);
+				});
+
+				var className = event.target.className;
 
 				if (className != 'none')
 					item.addClass(className);
