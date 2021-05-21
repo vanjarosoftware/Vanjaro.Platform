@@ -178,6 +178,7 @@ html, body, form {
     left: auto !important;
     transform: none !important;
     height: fit-content;
+    height: -moz-fit-content;
 }
 
 .vj-ux-manager .dropdown.dropbtn .dropdownmenu {
