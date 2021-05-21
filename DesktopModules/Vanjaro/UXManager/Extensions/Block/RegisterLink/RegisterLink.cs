@@ -126,6 +126,7 @@ namespace Vanjaro.UXManager.Extensions.Block.RegisterLink
                     Url = Globals.RegisterURL(HttpUtility.UrlEncode(ServiceProvider.NavigationManager.NavigateURL()), Null.NullString),
                     IsAuthenticated = HttpContext.Current.Request.IsAuthenticated,
                     ShowSignInLink = Convert.ToBoolean(Attributes["data-block-showsigninlink"]),
+                    ShowProfileLink = Convert.ToBoolean(Attributes["data-block-showprofilelink"]),
                     ShowNotification = Convert.ToBoolean(Attributes["data-block-shownotification"]),
                     ShowAvatar = Convert.ToBoolean(Attributes["data-block-showavatar"])
                 };

@@ -12,7 +12,7 @@ namespace Vanjaro.UXManager.Extensions.Block.RegisterLink.Entities
         public bool IsAuthenticated { get; set; }        
 
         public bool ShowSignInLink { get; set; }
-        
+        public bool ShowProfileLink { get; set; }        
         public bool ShowAvatar { get; set; }
         public bool ShowNotification { get; set; }
 
