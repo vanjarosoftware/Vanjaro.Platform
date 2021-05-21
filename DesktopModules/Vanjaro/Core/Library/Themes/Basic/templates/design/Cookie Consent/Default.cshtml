@@ -21,7 +21,11 @@
     <script>
         function createCookie(cookieName, cookieValue) {
             $('#dnn_CookieConsentPane').remove();
-            document.cookie = cookieName + "=" + cookieValue + ";path=/; expires = 0;"
+            var now = new Date();
+            var time = now.getTime();
+            var expireTime = time + 1000 * 36000;
+            now.setTime(expireTime);            
+            document.cookie = cookieName + "=" + cookieValue + ";path=/; expires = " + now.toUTCString()+";"
             if (isEditPage())
                 $('body, form').css('height', '100vh');
         }
