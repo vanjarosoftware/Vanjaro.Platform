@@ -1650,18 +1650,18 @@ $(document).ready(function () {
 								}
 
 								$(window).resize(function () {
-                                    if ($(window).width() < 1000) {
-                                        $(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
-                                        $(".ToolbarItem li:not(.PageSettings),.toolmanager,.more_icons, .blockItem.blocksmenu ").hide();
-                                        $("a.blockItem.settings").trigger("click");
-                                    }
+									if ($(window).width() < 1000) {
+										$(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
+										$(".ToolbarItem li:not(.PageSettings),.toolmanager,.more_icons, .blockItem.blocksmenu ").hide();
+										$("a.blockItem.settings").trigger("click");
+									}
                                     else if ($(window.parent.document.body).find('.gjs-cv-canvas__frames').hasClass('deviceframe')) {
-                                        $(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('deviceframe');
-                                        $(".ToolbarItem li,.toolmanager,.more_icons,.blockItem.blocksmenu ").show();
-                                        $('.ToolbarItem > li:gt(4)').hide();
-                                        $('.ntoolbox > li:lt(5)').hide();
-                                        $("a.blockItem.blocksmenu").trigger("click");
-                                    }
+										$(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('deviceframe');
+										$(".ToolbarItem li,.toolmanager,.more_icons,.blockItem.blocksmenu ").show();
+										$('.ToolbarItem > li:gt(4)').hide();
+										$('.ntoolbox > li:lt(5)').hide();
+										$("a.blockItem.blocksmenu").trigger("click");
+									}
 								});
 
 								$('#gjs-clm-add-tag').attr('title', 'Add Class').tooltip();
