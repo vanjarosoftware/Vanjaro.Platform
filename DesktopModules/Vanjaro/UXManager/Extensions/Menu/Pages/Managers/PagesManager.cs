@@ -624,7 +624,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                                 block.Html = bhtml.DocumentNode.OuterHtml;
                             }
                         }
-                        Core.Factories.CacheFactory.Clear(Core.Factories.CacheFactory.GetCacheKey(Core.Factories.CacheFactory.Keys.CustomBlock + "ALL", portalID));
+                        Core.Factories.CacheFactory.Clear(Core.Factories.CacheFactory.GetCacheKey(Core.Factories.CacheFactory.Keys.GlobalBlock + "ALL", portalID));
                     }
                     layout.Name = name;
                     layout.SVG = "";

@@ -16,5 +16,6 @@ namespace Vanjaro.Core.Entities
         public bool IsSystem { get; set; }
         public List<Layout> Children { get; set; }
         public int SortOrder { get; set; }
+        public Dictionary<string, dynamic> Settings { get; set; }
     }
 }
