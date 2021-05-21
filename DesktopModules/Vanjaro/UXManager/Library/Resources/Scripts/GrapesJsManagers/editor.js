@@ -1655,7 +1655,7 @@ $(document).ready(function () {
 										$(".ToolbarItem li:not(.PageSettings),.toolmanager,.more_icons, .blockItem.blocksmenu ").hide();
 										$("a.blockItem.settings").trigger("click");
 									}
-									else {
+                                    else if ($(window.parent.document.body).find('.gjs-cv-canvas__frames').hasClass('deviceframe')) {
 										$(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('deviceframe');
 										$(".ToolbarItem li,.toolmanager,.more_icons,.blockItem.blocksmenu ").show();
 										$('.ToolbarItem > li:gt(4)').hide();

@@ -19,8 +19,9 @@ export default (editor, config = {}) => {
 			var parent = selected.parent().parent().clone();
 			var mainparent = selected.parent().parent().parent();
 			mainparent.append(parent);
-		}
-
+        }
+        VjEditor.select();
+        VjEditor.select(selected);
 	});
 
 	cmd.add('vj-delete', {
