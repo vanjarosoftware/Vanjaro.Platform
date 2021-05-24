@@ -200,17 +200,17 @@ $(document).ready(function () {
 
 						if (imgEl) {
 
-                            if ($(imgEl).parents('.link').length)
-                                $(imgEl).parents('.link').css('width', '100%');
+							if ($(imgEl).parents('.link').length)
+								$(imgEl).parents('.link').css('width', '100%');
 
-                            $(imgEl).parents('.image-box').css('width', '100%');
+							$(imgEl).parents('.image-box').css('width', '100%');
 
-                            var imgWidth = $(imgEl).parents('.image-box').width();
+							var imgWidth = $(imgEl).parents('.image-box').width();
 
-                            if ($(imgEl).parents('.link').length)
-                                $(imgEl).parents('.link, image-box').css('width', '100%');
+							if ($(imgEl).parents('.link').length)
+								$(imgEl).parents('.link, image-box').css('width', '100%');
 
-                            $(imgEl).parents('.image-box').css('width', '');
+							$(imgEl).parents('.image-box').css('width', '');
 
 							if (imgWidth && imgWidth > 0) {
 								var calcWidth = Math.round((imgWidth / size) * 100);
@@ -1049,169 +1049,176 @@ $(document).ready(function () {
 												defaults: 'auto',
 											}
 										]
-									}, {
-										name: VjLocalized.Display,
-										open: false,
-										properties: [{
-											type: 'radio',
-											name: 'Display',
-											property: 'display',
-											defaults: 'none',
-											list: [{
-												value: 'none',
-												name: 'none',
-											}, {
-												value: 'block',
-												name: 'block',
-											}, {
-												value: 'inline',
-												name: 'inline',
-											}, {
-												value: 'inline-block',
-												name: 'inline-block',
-											}, {
-												value: 'flex',
-												name: 'flex',
-											}],
 										}, {
-											name: 'Direction',
-											property: 'flex-direction',
-											type: 'customradio',
-											cssproperty: 'flex-direction',
-											UpdateStyles: true,
-											list: [{
-												value: 'row',
-												name: 'Row',
-												img: 'flex-dir-row.png',
-											}, {
-												value: 'row-reverse',
-												name: 'Row Reverse',
-												img: 'flex-dir-row-rev.png',
-											}, {
-												value: 'column',
-												name: 'Column',
-												img: 'flex-dir-col.png',
-											}, {
-												value: 'column-reverse',
-												name: 'Column Reverse',
-												img: 'flex-dir-col-rev.png',
-											}],
-										}, {
-											name: 'Justify Content',
-											property: 'justify-content',
-											type: 'customradio',
-											UpdateStyles: true,
-											list: [{
-												value: 'flex-start',
-												name: 'Start',
-												img: 'align-left.png'
-											}, {
-												value: 'space-between',
-												name: 'Space Between',
-												img: 'align-between.png',
-											}, {
-												value: 'space-around',
-												name: 'Space Around',
-												img: 'align-around.png',
-											}, {
-												value: 'center',
-												name: 'Center',
-												img: 'align-center.png',
-											}, {
-												value: 'flex-end',
-												name: 'End',
-												img: 'align-right.png',
-											}],
-										}, {
-											name: 'Align Items',
-											property: 'align-items',
-											type: 'customradio',
-											UpdateStyles: true,
-											list: [{
-												value: 'flex-start',
-												name: 'Start',
-												img: 'align-left.png',
-											}, {
-												value: 'stretch',
-												name: 'Stretch',
-												img: 'align-justify.png',
-											}, {
-												value: 'center',
-												name: 'Center',
-												img: 'align-center.png',
-											}, {
-												value: 'flex-end',
-												name: 'End',
-												img: 'align-right.png',
-											}],
-										}, {
-											name: 'Order',
-											property: 'order',
-											type: 'customrange',
-											defaults: 0,
-											step: 1,
-											min: 0,
-											max: 100,
-											cssproperty: 'order',
-										}, {
-											name: 'Flex',
-											property: 'flex',
-											type: 'composite',
+											name: VjLocalized.Display,
+											open: false,
 											properties: [{
-												name: 'Grow',
-												property: 'flex-grow',
-												type: 'customrange',
-												defaults: 0,
-												step: 1,
-												min: 0,
-												max: 100,
+												type: 'radio',
+												name: 'Display',
+												property: 'display',
+												defaults: 'none',
+												list: [{
+													value: 'none',
+													name: 'none',
+												}, {
+													value: 'block',
+													name: 'block',
+												}, {
+													value: 'inline',
+													name: 'inline',
+												}, {
+													value: 'inline-block',
+													name: 'inline-block',
+												}, {
+													value: 'flex',
+													name: 'flex',
+												}],
 											}, {
-												name: 'Shrink',
-												property: 'flex-shrink',
-												type: 'customrange',
-												defaults: 0,
-												step: 1,
-												min: 0,
-												max: 100,
-												cssproperty: 'flex-shrink',
-											}, {
-												name: 'Basis',
-												property: 'flex-basis',
-												type: 'customrange',
-												units: [{ name: 'px', min: 1, max: 100, step: 1 },
-												{ name: '%', min: 1, max: 100, step: 1 }
-												],
-												unit: 'px',
-												defaults: 'auto',
-												cssproperty: 'flex-basis',
-											}],
+												name: 'Container',
+												property: 'container',
+												type: 'composite',
+												properties: [{
+													name: 'Direction',
+													property: 'flex-direction',
+													type: 'customradio',
+													cssproperty: 'flex-direction',
+													UpdateStyles: true,
+													list: [{
+														value: 'row',
+														name: 'Row',
+														img: 'flex-dir-row.png',
+													}, {
+														value: 'row-reverse',
+														name: 'Row Reverse',
+														img: 'flex-dir-row-rev.png',
+													}, {
+														value: 'column',
+														name: 'Column',
+														img: 'flex-dir-col.png',
+													}, {
+														value: 'column-reverse',
+														name: 'Column Reverse',
+														img: 'flex-dir-col-rev.png',
+													}],
+												}, {
+													name: 'Justify',
+													property: 'justify-content',
+													type: 'customradio',
+													UpdateStyles: true,
+													list: [{
+														value: 'flex-start',
+														name: 'Start',
+														img: 'align-left.png'
+													}, {
+														value: 'space-between',
+														name: 'Space Between',
+														img: 'align-between.png',
+													}, {
+														value: 'space-around',
+														name: 'Space Around',
+														img: 'align-around.png',
+													}, {
+														value: 'center',
+														name: 'Center',
+														img: 'align-center.png',
+													}, {
+														value: 'flex-end',
+														name: 'End',
+														img: 'align-right.png',
+													}],
+												}, {
+													name: 'Align',
+													property: 'align-items',
+													type: 'customradio',
+													UpdateStyles: true,
+													list: [{
+														value: 'flex-start',
+														name: 'Start',
+														img: 'align-left.png',
+													}, {
+														value: 'stretch',
+														name: 'Stretch',
+														img: 'align-justify.png',
+													}, {
+														value: 'center',
+														name: 'Center',
+														img: 'align-center.png',
+													}, {
+														value: 'flex-end',
+														name: 'End',
+														img: 'align-right.png',
+													}],
+												}, {
+													name: 'Order',
+													property: 'order',
+													type: 'customrange',
+													defaults: 0,
+													step: 1,
+													min: 0,
+													max: 100,
+													cssproperty: 'order',
+												}],
+											},
+											{
+												name: 'Items',
+												property: 'flex',
+												type: 'composite',
+												properties: [{
+													name: 'Grow',
+													property: 'flex-grow',
+													type: 'customrange',
+													defaults: 0,
+													step: 1,
+													min: 0,
+													max: 100,
+												}, {
+													name: 'Shrink',
+													property: 'flex-shrink',
+													type: 'customrange',
+													defaults: 0,
+													step: 1,
+													min: 0,
+													max: 100,
+													cssproperty: 'flex-shrink',
+												}, {
+													name: 'Basis',
+													property: 'flex-basis',
+													type: 'customrange',
+													units: [{ name: 'px', min: 1, max: 100, step: 1 },
+													{ name: '%', min: 1, max: 100, step: 1 }
+													],
+													unit: 'px',
+													defaults: 'auto',
+													cssproperty: 'flex-basis',
+												},
+												{
+													name: 'Align',
+													property: 'align-self',
+													type: 'customradio',
+													UpdateStyles: true,
+													list: [{
+														value: 'auto',
+														name: 'Auto',
+													}, {
+														value: 'flex-start',
+														name: 'Start',
+														img: 'align-left.png',
+													}, {
+														value: 'center',
+														name: 'Center',
+														img: 'align-center.png',
+													}, {
+														value: 'stretch',
+														name: 'Stretch',
+														img: 'align-justify.png'
+													}, {
+														value: 'flex-end',
+														name: 'End',
+														img: 'align-right.png'
+													}],
+												}],
+											}]
 										}, {
-											name: 'Align Self',
-											property: 'align-self',
-											type: 'customradio',
-											UpdateStyles: true,
-											list: [{
-												value: 'auto',
-												name: 'Auto',
-											}, {
-												value: 'flex-start',
-												name: 'Start',
-												img: 'align-left.png',
-											}, {
-												value: 'center',
-												name: 'Center',
-												img: 'align-center.png',
-											}, {
-												value: 'stretch',
-												name: 'Stretch',
-												img: 'align-justify.png'
-											}, {
-												value: 'flex-end',
-												name: 'End',
-												img: 'align-right.png'
-											}],
-										}]
-									}, {
 										name: VjLocalized.Transform,
 										open: false,
 										properties: [
@@ -1655,7 +1662,7 @@ $(document).ready(function () {
 										$(".ToolbarItem li:not(.PageSettings),.toolmanager,.more_icons, .blockItem.blocksmenu ").hide();
 										$("a.blockItem.settings").trigger("click");
 									}
-                                    else if ($(window.parent.document.body).find('.gjs-cv-canvas__frames').hasClass('deviceframe')) {
+									else if ($(window.parent.document.body).find('.gjs-cv-canvas__frames').hasClass('deviceframe')) {
 										$(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('deviceframe');
 										$(".ToolbarItem li,.toolmanager,.more_icons,.blockItem.blocksmenu ").show();
 										$('.ToolbarItem > li:gt(4)').hide();
@@ -1782,15 +1789,15 @@ $(document).ready(function () {
 									else if (typeof model.modelToDrop.parent != 'undefined' && model.modelToDrop.parent() && model.modelToDrop.parent().attributes.type == "column")
 										$(model.modelToDrop.parent().getEl()).removeAttr("data-empty");
 
-                                    if (parentRemove != '' && parentClone != '') {
-                                        var selectModel = parentClone.components().models[0];
-                                        model.modelToDrop.replaceWith(parentClone);
-                                        setTimeout(function () {
-                                            VjEditor.select(selectModel);
-                                            parentRemove.remove();
-                                            parentRemove = '';
-                                            parentClone = '';
-                                        });
+									if (parentRemove != '' && parentClone != '') {
+										var selectModel = parentClone.components().models[0];
+										model.modelToDrop.replaceWith(parentClone);
+										setTimeout(function () {
+											VjEditor.select(selectModel);
+											parentRemove.remove();
+											parentRemove = '';
+											parentClone = '';
+										});
 									}
 								}
 
@@ -1910,7 +1917,7 @@ $(document).ready(function () {
 									});
 								}
 								else if (bmodel != undefined && bmodel.attributes != undefined && bmodel.attributes.attributes != undefined && bmodel.attributes.attributes.type == 'VjCustomBlock')
-                                    RenderCustomBlock(model, bmodel);
+									RenderCustomBlock(model, bmodel);
 								else if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes["data-block-type"] != undefined)
 									RenderBlock(model, bmodel);
 							});
@@ -2014,9 +2021,9 @@ $(document).ready(function () {
 											$(dataPane.view.$el).hide(0);
 										});
 									}
-                                }
+								}
 
-                                VjEditor.SelectorManager.setState();
+								VjEditor.SelectorManager.setState();
 
 								if (typeof model.attributes.toolbar[0] != 'undefined' && typeof model.attributes.toolbar[0].attributes != 'undefined' && typeof model.attributes.toolbar[0].attributes['title'] == 'undefined') {
 
@@ -2051,20 +2058,12 @@ $(document).ready(function () {
 										target = model.components().models[0];
 
 									if (sm.getProperty(Display, 'display').attributes.value == 'flex') {
-										$(sm.getProperty(Display, 'flex-direction').view.el).show();
-										$(sm.getProperty(Display, 'justify-content').view.el).show();
-										$(sm.getProperty(Display, 'align-items').view.el).show();
-										$(sm.getProperty(Display, 'order').view.el).show();
+										$(sm.getProperty(Display, 'container').view.el).show();
 										$(sm.getProperty(Display, 'flex').view.el).show();
-										$(sm.getProperty(Display, 'align-self').view.el).show();
 									}
 									else {
-										$(sm.getProperty(Display, 'flex-direction').view.el).hide();
-										$(sm.getProperty(Display, 'justify-content').view.el).hide();
-										$(sm.getProperty(Display, 'align-items').view.el).hide();
-										$(sm.getProperty(Display, 'order').view.el).hide();
+										$(sm.getProperty(Display, 'container').view.el).hide();
 										$(sm.getProperty(Display, 'flex').view.el).hide();
-										$(sm.getProperty(Display, 'align-self').view.el).hide();
 									}
 
 									//Width
@@ -2615,20 +2614,12 @@ $(document).ready(function () {
 								var sm = VjEditor.StyleManager;
 
 								if (event.target.value == 'flex') {
-									$(sm.getProperty(Display, 'flex-direction').view.el).show();
-									$(sm.getProperty(Display, 'justify-content').view.el).show();
-									$(sm.getProperty(Display, 'align-items').view.el).show();
-									$(sm.getProperty(Display, 'order').view.el).show();
+									$(sm.getProperty(Display, 'container').view.el).show();
 									$(sm.getProperty(Display, 'flex').view.el).show();
-									$(sm.getProperty(Display, 'align-self').view.el).show();
 								}
 								else {
-									$(sm.getProperty(Display, 'flex-direction').view.el).hide();
-									$(sm.getProperty(Display, 'justify-content').view.el).hide();
-									$(sm.getProperty(Display, 'align-items').view.el).hide();
-									$(sm.getProperty(Display, 'order').view.el).hide();
+									$(sm.getProperty(Display, 'container').view.el).hide();
 									$(sm.getProperty(Display, 'flex').view.el).hide();
-									$(sm.getProperty(Display, 'align-self').view.el).hide();
 								}
 							});
 
@@ -2691,63 +2682,63 @@ $(document).ready(function () {
 
 							});
 
-                            VjEditor.Commands.add('core:copy', {
-                                run(editor, sender) {
+							VjEditor.Commands.add('core:copy', {
+								run(editor, sender) {
 
-                                    var filteredSelected = editor.getSelectedAll().filter(item => item.attributes.copyable == true);
-                                    var copiedSelected = [];
+									var filteredSelected = editor.getSelectedAll().filter(item => item.attributes.copyable == true);
+									var copiedSelected = [];
 
-                                    if (filteredSelected.length) {
+									if (filteredSelected.length) {
 
-                                        filteredSelected = filteredSelected.map(function (comp) {
+										filteredSelected = filteredSelected.map(function (comp) {
 
-                                            const type = comp.attributes.type;
+											const type = comp.attributes.type;
 
-                                            if (comp.parent() && comp.parent().attributes.type != 'wrapper' && (type == 'button' || type == 'icon' || type == 'list' || type == 'image')) {
+											if (comp.parent() && comp.parent().attributes.type != 'wrapper' && (type == 'button' || type == 'icon' || type == 'list' || type == 'image')) {
 
-                                                if (type == 'image')
-                                                    return comp.parent().parent();
-                                                else
-                                                    return comp.parent();
-                                            }
-                                            else
-                                                return comp;
-                                        });
+												if (type == 'image')
+													return comp.parent().parent();
+												else
+													return comp.parent();
+											}
+											else
+												return comp;
+										});
 
-                                        filteredSelected.forEach(item => {
-                                            copiedSelected.push(item.clone());
-                                        });
+										filteredSelected.forEach(item => {
+											copiedSelected.push(item.clone());
+										});
 
-                                        copiedSelected = copiedSelected.map(function (comp) {
+										copiedSelected = copiedSelected.map(function (comp) {
 
-                                            const type = comp.attributes.type;
+											const type = comp.attributes.type;
 
-                                            if (comp.findType('modulewrapper').length) {
-                                                comp.findType('modulewrapper').forEach(item => {
-                                                    item.remove();
-                                                });
-                                            }
+											if (comp.findType('modulewrapper').length) {
+												comp.findType('modulewrapper').forEach(item => {
+													item.remove();
+												});
+											}
 
-                                            return comp;
-                                        }); 
-                                                                               
-                                        VjEditor.getModel().set('clipboard', copiedSelected);
-                                    }
-                                }
-                            });
+											return comp;
+										});
 
-                            VjEditor.on('component:paste', (model, argument) => {
-                                
-                                var type = model.attributes.type;
+										VjEditor.getModel().set('clipboard', copiedSelected);
+									}
+								}
+							});
 
-                                if (type == 'button-box' || type == 'icon-box' || type == 'list-box' || type == 'image-box') {
+							VjEditor.on('component:paste', (model, argument) => {
 
-                                    if (type == 'image-box')
-                                        model.move(model.parent().parent().parent());
-                                    else
-                                        model.move(model.parent().parent());
-                                }
-                            });
+								var type = model.attributes.type;
+
+								if (type == 'button-box' || type == 'icon-box' || type == 'list-box' || type == 'image-box') {
+
+									if (type == 'image-box')
+										model.move(model.parent().parent().parent());
+									else
+										model.move(model.parent().parent());
+								}
+							});
 
 							VjEditor.Commands.add('global-delete', {
 								run(editor, sender) {
