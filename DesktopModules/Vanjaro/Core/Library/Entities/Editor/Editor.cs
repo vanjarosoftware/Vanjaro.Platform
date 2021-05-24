@@ -42,7 +42,13 @@ namespace Vanjaro.Core.Entities
         {
             string url = "/api/vanjaro/";
             if (HttpContext.Current != null)
-                url = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, url);
+            {
+                var alias = PortalAliasController.Instance.GetPortalAliasesByPortalId(PortalSettings.Current.PortalId).OrderByDescending(a => a.IsPrimary).FirstOrDefault();
+                var httpAlias = DotNetNuke.Common.Globals.AddHTTP(alias.HTTPAlias);
+                var originalUrl = HttpContext.Current.Items["UrlRewrite:OriginalUrl"];
+                httpAlias = DotNetNuke.Common.Globals.AddPort(httpAlias, originalUrl?.ToString().ToLowerInvariant() ?? httpAlias);
+                url = httpAlias.TrimEnd('/') + url;
+            }
 
             EditorOptions options = new EditorOptions()
             {

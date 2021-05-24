@@ -391,6 +391,22 @@ namespace Vanjaro.Core
                 }
             }
 
+            public static Dictionary<string, dynamic> GetLayoutSettings(TabInfo tab)
+            {
+                Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
+                if (tab != null)
+                {
+                    result.Add("TabID", tab.TabID);
+                    result.Add("TabName", tab.TabName);
+                    result.Add("TabVisible", tab.IsVisible);
+                    result.Add("TabDisableLink", tab.DisableLink);
+                    result.Add("TabUrl", tab.Url);
+                    result.Add("TabPermanentRedirect", tab.PermanentRedirect);
+                    result.Add("TabSettings", tab.TabSettings);
+                }
+                return result;
+            }
+
             public static dynamic Update(PortalSettings PortalSettings, dynamic Data)
             {
                 dynamic result = new ExpandoObject();

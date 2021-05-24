@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Vanjaro.Core.Data.Entities;
 
 namespace Vanjaro.Core.Entities
 {
@@ -15,6 +16,8 @@ namespace Vanjaro.Core.Entities
         public string FavIcon { get; set; }
         public string SocialSharingLogo { get; set; }
         public string HomeScreenIcon { get; set; }
+        public List<CustomBlock> CustomBlocks { get; set; }
+        public Dictionary<string, dynamic> Settings { get; set; }
     }
     public enum TemplateType
     {
