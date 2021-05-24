@@ -106,6 +106,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                 $scope.Click_ShowPageType($scope.PageTypes);
                 $scope.ui.data.EnableScheduling.Value = ($scope.ui.data.PagesTemplate.Options.startDate != null || $scope.ui.data.PagesTemplate.Options.endDate != null);
                 $scope.ParentPageValue = parseInt($scope.ui.data.ParentPage.Value);
+                $scope.IsAnchor = Boolean.parse($scope.ui.data.IsAnchor.Value);
             }
 
             if (!$scope.ui.data.EnableScheduling.Value) {
@@ -255,6 +256,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
         if (Layout != undefined)
             $scope.Layout = Layout;
         $scope.Click_ShowTab('Page_details');
+        $scope.IsAnchor = false;
         $scope.Show_Tab = true;
         if (type == 'Standard') {
             $('#Standard').addClass("active");
@@ -291,6 +293,17 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                 $(".uxmanager-modal .modal-title", parent.document).html('[L:AddFolder]');
             $scope.ui.data.PagesTemplate.Options.includeInMenu = true;
         }
+        else if (type == 'Anchor') {
+            $scope.IsAnchor = true;
+            $scope.ui.data.PagesTemplate.Options.pageType = 'Folder';
+            $scope.ui.data.ParentPage.Value = $scope.ui.data.PagesTemplate.Value;
+            if ($scope.pid > 0)
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:EditAnchor]');
+            else
+                $(".uxmanager-modal .modal-title", parent.document).html('[L:AddAnchor]');
+            $scope.ui.data.PagesTemplate.Options.includeInMenu = true;
+        }
+
         setTimeout(function () {
             $('input.pagename ').focus();
         }, 200);
@@ -352,7 +365,8 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                     PageLayout: $scope.Layout,
                     LocaleProperties: $scope.Localization.Properties,
                     ReplaceTokens: $scope.ui.data.ReplaceTokens.Value,
-                    MakePublic: $scope.ui.data.MakePublic.Value
+                    MakePublic: $scope.ui.data.MakePublic.Value,
+                    IsAnchor: $scope.IsAnchor,
                 }
                 var TabID = $scope.ui.data.PagesTemplate.Options.tabId;
                 common.webApi.post('pages/savepagedetails', 'DefaultWorkflow=' + $scope.ui.data.ddlWorkFlows.Value + '&MaxRevisions=' + $scope.ui.data.MaxRevisions.Value + '&Copy=' + IsCopy, formdata).then(function (data) {
@@ -360,7 +374,7 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                         window.parent.ShowNotification('[LS:Pages]', data.data.Message, 'error');
                     }
                     if (data.data.IsSuccess) {
-                        if ($scope.pid > 0 && $scope.TabName != $scope.ui.data.PagesTemplate.Options.name) {
+                        if ($scope.pid == parseInt($scope.ui.data.PagesTemplate.Value) && $scope.TabName != $scope.ui.data.PagesTemplate.Options.name) {
                             parent.location.href = data.data.Data.url;
                         }
 

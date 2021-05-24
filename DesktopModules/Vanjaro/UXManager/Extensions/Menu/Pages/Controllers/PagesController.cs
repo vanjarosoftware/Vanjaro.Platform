@@ -121,7 +121,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
 
                             string SiteUrl = PortalSettings.Current.PortalAlias != null ? PortalSettings.Current.PortalAlias.HTTPAlias : ServiceProvider.NavigationManager.NavigateURL();
                             List<Layout> pageLayouts = Managers.PagesManager.GetLayouts();
-                            Settings.Add("PagesTemplate", new UIData { Name = "PagesTemplate", Options = pageSettings });
+                            Settings.Add("PagesTemplate", new UIData { Name = "PagesTemplate", Options = pageSettings, Value = PortalSettings.Current.ActiveTab.TabID.ToString() });
                             Settings.Add("PageLayouts", new UIData { Name = "PageLayouts", Options = pageLayouts });
                             Settings.Add("Permissions", new UIData { Name = "Permissions", Options = Managers.PagesManager.GetPagePermission(pageSettings, PortalSettings.Current.PortalId) });
                             Settings.Add("ParentPage", new UIData { Name = "ParentPage", Options = Library.Managers.PageManager.GetParentPages(PortalSettings.Current, true).Select(a => new { a.TabID, a.TabName }), OptionsText = "TabName", OptionsValue = "TabID", Value = ParentPageValue });
@@ -146,6 +146,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
                             Settings.Add("Languages", new UIData { Name = "Languages", Value = PortalSettings.Current.CultureCode, Options = LocalizationManager.GetActiveLocale(PortalSettings.Current.PortalId).Where(a => a.Value.ToLower() == PortalSettings.Current.CultureCode.ToLower()), OptionsText = "Text", OptionsValue = "Value" });
                             Settings.Add("MakePublic", new UIData { Name = "MakePublic", Value = bool.FalseString });
                             Settings.Add("EnableScheduling", new UIData { Name = "EnableScheduling", Value = bool.FalseString });
+                            Settings.Add("IsAnchor", new UIData { Name = "IsAnchor", Value = TabController.Instance.GetTabSettings(pid).ContainsKey("Anchor").ToString() });
                         }
 
                         return Settings.Values.ToList();
