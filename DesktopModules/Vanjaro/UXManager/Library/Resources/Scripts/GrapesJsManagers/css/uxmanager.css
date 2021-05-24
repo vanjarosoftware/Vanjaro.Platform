@@ -2587,6 +2587,7 @@ span.notificationname {
     border-top: 1px solid transparent;
     border-bottom: 1px solid #eee;
     display: inline-flex;
+    border-radius: 0 !important;
 }
 
     .traitsmanager .preset-wrapper div.styles em {
@@ -2601,13 +2602,11 @@ span.notificationname {
         visibility: visible;
     }
 
-.traitsmanager .preset-wrapper.button div.styles.active {
-    justify-content: space-between;
-}
 
-.traitsmanager .preset-wrapper div.styles.active {
-    border-color: #ccc;
-}
+    .traitsmanager .preset-wrapper div.styles.active {
+        justify-content: space-between;
+        border-color: #ccc;
+    }
 
 .traitsmanager .preset-wrapper label {
     display: block;

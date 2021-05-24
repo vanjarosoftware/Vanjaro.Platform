@@ -2009,7 +2009,7 @@ export default (editor, config = {}) => {
 				var label = document.createElement("label");
 				var icon = document.createElement("em");
 
-				div.setAttribute("class", trait.attributes.name);
+				div.setAttribute("class", trait.attributes.name + " " + value.class);
 
 				input.setAttribute("type", "radio");
 				input.setAttribute("name", trait.attributes.name);

@@ -94,7 +94,6 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 						options: [
 							{ id: '' + blockName + '-style-1', name: 'Style 1', class: '' + blockName + '-style-1' },
 							{ id: '' + blockName + '-style-2', name: 'Style 2', class: '' + blockName + '-style-2' },
-							{ id: '' + blockName + '-style-3', name: 'Style 3', class: '' + blockName + '-style-3' }
 						],
 						default: 'Style 1'
 					});
