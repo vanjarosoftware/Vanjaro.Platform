@@ -48,5 +48,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Entities
         }
         public bool ReplaceTokens { get; set; }
         public bool MakePublic { get; set; }
+        public bool IsAnchor { get; set; }        
     }
 }

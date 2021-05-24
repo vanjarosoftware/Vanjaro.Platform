@@ -9,6 +9,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Entities
         public bool selected { get; set; }
         public string PageUrl { get; set; }
         public bool IsRedirectPage { get; set; }
+        public bool IsAnchorPage { get; set; }
         public bool FolderPage { get; set; }
         public bool LinkNewWindow { get; set; }
         public bool HasBeenPublished { get; set; }

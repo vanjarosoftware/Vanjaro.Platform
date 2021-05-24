@@ -147,6 +147,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         tab.SkinSrc = "[g]skins/vanjaro/base.ascx";
                         tab.ContainerSrc = "[g]containers/vanjaro/base.ascx";
 
+                        if (PageSettingLayout.IsAnchor)
+                            tab.TabSettings["Anchor"] = tab.TabName;
+
                         TabController.Instance.UpdateTab(tab);
 
 
@@ -909,13 +912,15 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         //RoleID=-1(All Users)
                         bool HasBeenPublished = (c.TabPermissions.Where(t => t != null && t.RoleID == -1 && t.AllowAccess == true).FirstOrDefault() != null) ? true : false;
 
+                        bool IsAnchorPage = c.TabSettings.ContainsKey("Anchor") && c.DisableLink;
+
                         //Display in Menu Yes and DisbaledLink Yes then page is folder page
-                        bool IsFolder = c.DisableLink;
+                        bool IsFolder = !c.TabSettings.ContainsKey("Anchor") && c.DisableLink;
                         bool HasEditPermission = TabPermissionController.HasTabPermission(c.TabPermissions, "EDIT");
 
                         if (c.TabID > Null.NullInteger)
                         {
-                            result.Add(new PagesTreeView { HasContent = Core.Managers.PageManager.GetAllTabIdByPortalID(PortalSettings.Current.PortalId).Where(x => x == c.TabID).FirstOrDefault() > 0 ? true : false, label = c.TabName.TrimStart('.'), Value = c.TabID, selected = false, children = tabInfo == null ? GetPageTreeChildrens(c.TabID, portalSettings) : new List<PagesTreeView>(), usedbyCount = 0, PageUrl = c.FullUrl, FolderPage = IsFolder, LinkNewWindow = LinkNewWindow, HasBeenPublished = HasBeenPublished, IsVisible = c.IsVisible, IsRedirectPage = IsRedirectPage, HasEditPermission = HasEditPermission });
+                            result.Add(new PagesTreeView { HasContent = Core.Managers.PageManager.GetAllTabIdByPortalID(PortalSettings.Current.PortalId).Where(x => x == c.TabID).FirstOrDefault() > 0 ? true : false, label = c.TabName.TrimStart('.'), Value = c.TabID, selected = false, children = tabInfo == null ? GetPageTreeChildrens(c.TabID, portalSettings) : new List<PagesTreeView>(), usedbyCount = 0, PageUrl = c.FullUrl, FolderPage = IsFolder, LinkNewWindow = LinkNewWindow, HasBeenPublished = HasBeenPublished, IsVisible = c.IsVisible, IsRedirectPage = IsRedirectPage, HasEditPermission = HasEditPermission, IsAnchorPage = IsAnchorPage });
                         }
                     }
                 }
@@ -1089,11 +1094,17 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     bool LinkNewWindow = c.TabSettings.ContainsKey("LinkNewWindow") ? Convert.ToBoolean(c.TabSettings["LinkNewWindow"]) : false;
                     //RoleID=-1(All Users)
                     bool HasBeenPublished = (c.TabPermissions.Where(t => t != null && t.RoleID == -1 && t.AllowAccess == true).FirstOrDefault() != null) ? true : false;
-                    bool HasEditPermission = TabPermissionController.HasTabPermission(c.TabPermissions, "EDIT");
+
+                    bool IsAnchorPage = c.TabSettings.ContainsKey("Anchor") && c.DisableLink;
+
+                    //Display in Menu Yes and DisbaledLink Yes then page is folder page
+                    bool IsFolder = !c.TabSettings.ContainsKey("Anchor") && c.DisableLink;
+
+                    bool HasEditPermission = TabPermissionController.HasTabPermission(c.TabPermissions, "EDIT");                   
 
                     if (PageTreeChildrens != null && PageTreeChildrens.Count > 0)
                     {
-                        result.Add(new PagesTreeView { HasContent = Core.Managers.PageManager.GetAllTabIdByPortalID(PortalSettings.Current.PortalId).Where(x => x == c.TabID).FirstOrDefault() > 0 ? true : false, label = c.TabName.TrimStart('.'), Value = c.TabID, selected = false, children = GetPageTreeChildrens(c.TabID, portalSettings), usedbyCount = 0, PageUrl = c.FullUrl, FolderPage = c.DisableLink, LinkNewWindow = LinkNewWindow, HasBeenPublished = HasBeenPublished, IsVisible = c.IsVisible, IsRedirectPage = IsRedirectPage, HasEditPermission = HasEditPermission });
+                        result.Add(new PagesTreeView { HasContent = Core.Managers.PageManager.GetAllTabIdByPortalID(PortalSettings.Current.PortalId).Where(x => x == c.TabID).FirstOrDefault() > 0 ? true : false, label = c.TabName.TrimStart('.'), Value = c.TabID, selected = false, children = GetPageTreeChildrens(c.TabID, portalSettings), usedbyCount = 0, PageUrl = c.FullUrl, FolderPage = IsFolder, LinkNewWindow = LinkNewWindow, HasBeenPublished = HasBeenPublished, IsVisible = c.IsVisible, IsRedirectPage = IsRedirectPage, HasEditPermission = HasEditPermission, IsAnchorPage = IsAnchorPage });
                     }
                 }
                 return result;

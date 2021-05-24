@@ -1,4 +1,5 @@
-﻿using DotNetNuke.UI.WebControls;
+﻿using DotNetNuke.Entities.Tabs;
+using DotNetNuke.UI.WebControls;
 using System;
 using System.Collections.Generic;
 using System.Web;
@@ -37,6 +38,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Menu.Entities
         public bool Last => (Parent == null) || (Parent.Children[Parent.Children.Count - 1] == this);
         public string Target { get; set; }
         public bool IsRedirect { get; set; }
+        public bool IsAnchor { get; set; }
 
         public int Depth
         {
@@ -96,6 +98,12 @@ namespace Vanjaro.UXManager.Extensions.Block.Menu.Entities
             CommandName = dnnNode.get_CustomAttribute("CommandName");
             CommandArgument = dnnNode.get_CustomAttribute("CommandArgument");
             IsRedirect = dnnNode.NavigateURL.StartsWith(string.Format("{0}://{1}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority)) ? false : true;
+            IsAnchor = TabController.Instance.GetTabSettings(TabId).ContainsKey("Anchor");
+            if (IsAnchor)
+            {
+                Enabled = IsAnchor;
+                Url = Parent.Selected ? "#" + Text : Parent.Url + "#" + Text;
+            }
 
             DNNNodeToMenuNode(dnnNode, this);
 

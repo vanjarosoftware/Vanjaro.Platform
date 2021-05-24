@@ -31,7 +31,7 @@
                     <em class="fas fa-ellipsis-v"></em>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li ng-if="!node.FolderPage">
+                    <li ng-if="!node.FolderPage && !node.IsAnchorPage">
                         <a class="dropdown-item box-icon" data-nodrag="" ng-click="View_Page(node,$event)" ng-if="[enableselect]==false" ng-disabled="{{node.usedbyCount==0?'false':'true'}}" onclick="return false;">
                             <em class="fas fa-eye"></em><span>[L:View]</span>
                         </a>
@@ -59,16 +59,16 @@
                             <em ng-class="node.HasBeenPublished? 'fas fa-lock':'fas fa-lock-open'"></em><span>{{node.HasBeenPublished?'[L:MakePrivatePage]':'[L:PublishPage]'}}</span>
                         </a>
                     </li>
-                    <li ng-if="!node.FolderPage&&!node.IsRedirectPage" class="setaspage">
+                    <li ng-if="!node.FolderPage&&!node.IsRedirectPage&&!node.IsAnchorPage" class="setaspage">
                         <hr class="m-none" />
                     </li>
-                    <li ng-if="!node.FolderPage&&!node.IsRedirectPage&&node.HasContent">
+                    <li ng-if="!node.FolderPage&&!node.IsRedirectPage&&!node.IsAnchorPage&&node.HasContent">
                         <a class="dropdown-item box-icon" data-nodrag="" ng-click="SaveTemplateAs(node,$event)" access-roles="admin" ng-if="[enableselect]==false">
                             <em class="fas fa-save"></em><span>[L:SaveTemplateAs]</span>
                         </a>
                     </li>
                     <!--Set As Start-->
-                    <li ng-if="!node.FolderPage&&!node.IsRedirectPage" class="setaspage">
+                    <li ng-if="!node.FolderPage&&!node.IsRedirectPage&&!node.IsAnchorPage" class="setaspage">
                         <a class="dropdown-item box-icon" data-nodrag="">
                             <em class="fas fa-bars"></em><span>[L:SetAsPage]</span>
                             <em class="fas fa-chevron-right float-end toggle-arrow"></em>

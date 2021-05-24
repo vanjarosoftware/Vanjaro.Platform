@@ -110,6 +110,8 @@
             return { 'far fa-folder': true };
         else if (node.IsRedirectPage)
             return { 'fas fa-link': true };
+        else if (node.IsAnchorPage)
+            return { 'fas fa-hashtag': true };
         else
             return { 'fas fa-file': true };
     };
@@ -143,6 +145,8 @@
             return '[L:FolderPage]';
         else if (node.IsRedirectPage)
             return '[L:RedirectPage]';
+        else if (node.IsAnchorPage)
+            return '[L:AnchorPage]';
         else
             return '[L:Page]';
     };

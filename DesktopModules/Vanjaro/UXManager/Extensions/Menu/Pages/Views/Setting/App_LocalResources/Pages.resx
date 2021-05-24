@@ -300,4 +300,7 @@
   <data name="Search.Text" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="AnchorPage.Text" xml:space="preserve">
+    <value>Anchor</value>
+  </data>
 </root>
