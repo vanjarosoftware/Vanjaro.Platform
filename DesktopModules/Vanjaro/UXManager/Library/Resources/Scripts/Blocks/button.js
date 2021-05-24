@@ -12,7 +12,7 @@ export default (editor, config = {}) => {
 				<div class="gjs-block-label">`+ VjLocalized.Button + `</div>
 			`,
 			category: VjLocalized.Basic,
-			content: '<div class="button-box"><a role="button" href="" class="btn btn-primary button-style-1"><span class="button-text">Button</span></a></div>',
+			content: '<div class="button-box"><a role="button" href="#" class="btn btn-primary button-style-1"><span class="button-text">Button</span></a></div>',
 		});
 	}
 
@@ -176,7 +176,7 @@ export default (editor, config = {}) => {
 						label: " ",
 						name: "href",
 						type: "href",
-						href: "",
+						href: "#",
 						"data_href_type": "url",
 					}, {
 						label: 'Styles',
