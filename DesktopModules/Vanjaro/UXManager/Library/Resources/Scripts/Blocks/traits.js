@@ -19,9 +19,9 @@ export default (editor, config = {}) => {
 			var parent = selected.parent().parent().clone();
 			var mainparent = selected.parent().parent().parent();
 			mainparent.append(parent);
-        }
-        VjEditor.select();
-        VjEditor.select(selected);
+		}
+		VjEditor.select();
+		VjEditor.select(selected);
 	});
 
 	cmd.add('vj-delete', {
@@ -791,39 +791,42 @@ export default (editor, config = {}) => {
 		},
 		onUpdate({ elInput, component, trait }) {
 
-			var property = '', value = trait.getInitValue();
+			if (trait.attributes.UpdateStyles) {
 
-			if (typeof trait.attributes.cssproperties != 'undefined')
-				property = trait.attributes.cssproperties[0].name;
+				var property = '', value = trait.getInitValue();
 
-			if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
+				if (typeof trait.attributes.cssproperties != 'undefined')
+					property = trait.attributes.cssproperties[0].name;
 
-				var model = component;
+				if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
 
-				if (typeof trait.attributes.selector != 'undefined') {
+					var model = component;
 
-					var selector = trait.attributes.selector;
+					if (typeof trait.attributes.selector != 'undefined') {
 
-					if (trait.attributes.closest) {
-						if (typeof component.closestType(selector) != 'undefined')
-							model = component.closestType(selector);
+						var selector = trait.attributes.selector;
+
+						if (trait.attributes.closest) {
+							if (typeof component.closestType(selector) != 'undefined')
+								model = component.closestType(selector);
+						}
+						else
+							model = component.findType(selector)[0];
 					}
-					else
-						model = component.findType(selector)[0];
-				}
 
-				if (property != '') {
-					if (typeof model.getStyle()[property] != 'undefined')
-						value = model.getStyle()[property].replace('!important', '');
-					else {
-						if (trait.attributes.name != 'alignment' && value != 'none')
-							value = $(model.view.el).css(property);
+					if (property != '') {
+						if (typeof model.getStyle()[property] != 'undefined')
+							value = model.getStyle()[property].replace('!important', '');
+						else {
+							if (trait.attributes.name != 'alignment' && value != 'none')
+								value = $(model.view.el).css(property);
+						}
 					}
-				}
 
-				if (value != "") {
-					trait.view.$el.find("input:checked").prop("checked", false);
-					trait.view.$el.find('input[value=' + value + ']').prop("checked", true);
+					if (value != "") {
+						trait.view.$el.find("input:checked").prop("checked", false);
+						trait.view.$el.find('input[value=' + value + ']').prop("checked", true);
+					}
 				}
 			}
 		},
@@ -916,39 +919,42 @@ export default (editor, config = {}) => {
 		},
 		onUpdate({ elInput, component, trait }) {
 
-			var property = '', value = trait.getInitValue();
+			if (trait.attributes.UpdateStyles) {
 
-			if (typeof trait.attributes.cssproperties != 'undefined')
-				property = trait.attributes.cssproperties[0].name;
+				var property = '', value = trait.getInitValue();
 
-			if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
+				if (typeof trait.attributes.cssproperties != 'undefined')
+					property = trait.attributes.cssproperties[0].name;
 
-				var model = component;
+				if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
 
-				if (typeof trait.attributes.selector != 'undefined') {
+					var model = component;
 
-					var selector = trait.attributes.selector;
+					if (typeof trait.attributes.selector != 'undefined') {
 
-					if (trait.attributes.closest) {
-						if (typeof component.closestType(selector) != 'undefined')
-							model = component.closestType(selector);
+						var selector = trait.attributes.selector;
+
+						if (trait.attributes.closest) {
+							if (typeof component.closestType(selector) != 'undefined')
+								model = component.closestType(selector);
+						}
+						else
+							model = component.findType(selector)[0];
 					}
-					else
-						model = component.findType(selector)[0];
-				}
 
-				if (property != '') {
-					if (typeof model.getStyle()[property] != 'undefined')
-						value = model.getStyle()[property].replace('!important', '');
-					else {
-						if (trait.attributes.name != 'alignment' && value != 'none')
-							value = $(model.view.el).css(property);
+					if (property != '') {
+						if (typeof model.getStyle()[property] != 'undefined')
+							value = model.getStyle()[property].replace('!important', '');
+						else {
+							if (trait.attributes.name != 'alignment' && value != 'none')
+								value = $(model.view.el).css(property);
+						}
 					}
-				}
 
-				if (value != "") {
-					trait.view.$el.find("input:checked").prop("checked", false);
-					trait.view.$el.find('input[value=' + value + ']').prop("checked", true);
+					if (value != "") {
+						trait.view.$el.find("input:checked").prop("checked", false);
+						trait.view.$el.find('input[value=' + value + ']').prop("checked", true);
+					}
 				}
 			}
 

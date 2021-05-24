@@ -42,10 +42,10 @@
 		},
 		emit({ props, updateStyle }, { event, complete }) {
 
-			var model = this.model;
-			var selected = VjEditor.getSelected();
-			var val = event.target.value;
-			var property = model.attributes.property;
+			var selected = editor.getSelected(),
+				model = this.model,
+				val = event.target.value,
+				property = model.attributes.property;
 
 			if (model.attributes.UpdateStyles) {
 
@@ -53,7 +53,7 @@
 
 				style[property] = event.target.value;
 				selected.setStyle(style);
-				model.setValue(val);
+
 			}
 			else {
 				var classes = model.attributes.list.map(opt => opt.value);
@@ -64,14 +64,24 @@
 
 				selected.addClass(val);
 			}
+
+			model.setValue(val);
 			selected.set(property, val);
 
 			if (property == "border-position")
 				FilterBorderOptions(selected, val);
 		},
 		setValue(value) {
+
 			var model = this.model;
 			model.view.$el.find('input[value="' + value + '"]').prop('checked', true);
+
+			setTimeout(function () {
+
+				if (typeof editor.getSelected() != 'undefined' && typeof model.attributes.UpdateStyles == 'undefined')
+					editor.getSelected().removeStyle(model.attributes.property);
+
+			});
 
 			if (value == model.getDefaultValue())
 				$(this.$el).find('.gjs-sm-clear').hide();
@@ -352,7 +362,7 @@
 						val = $(selected.view.el).css('width');
 					else if (property == "min-height" || property == "max-height")
 						val = $(selected.view.el).css('height');
-					else 
+					else
 						val = $(selected.view.el).css(property);
 				}
 
@@ -536,6 +546,97 @@
 				$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('width')));
 			else if (property == "height" && value == "auto")
 				$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('height')));
+		}
+	});
+
+	sm.addType('customselect', {
+		create({ props, change }) {
+
+			const el = document.createElement('div');
+			el.classList.add("sm-select-wrapper");
+
+			var select = document.createElement('select');
+
+			$(props.list).each(function (index, item) {
+				var option = document.createElement("option");
+				option.setAttribute("name", item.name);
+				option.setAttribute("value", item.value);
+				option.text = item.name;
+				select.append(option);
+			});
+
+			el.appendChild(select);
+
+			select.addEventListener('change', event => change({ event }));
+
+			return el;
+		},
+		emit({ props, updateStyle }, { event, complete }) {
+
+			var selected = editor.getSelected(),
+				model = this.model,
+				val = event.target.value,
+				property = model.attributes.property;
+
+			var classes = model.attributes.list.map(opt => opt.value);
+
+			$(classes).each(function (index, className) {
+				selected.removeClass(className);
+			});
+
+			if (typeof props.dataAttribute != 'undefined') {
+
+				const attr = selected.getAttributes();
+				attr[props.dataAttribute] = val;
+				selected.setAttributes(attr);
+
+				$(selected.getEl()).addClass(props.className + ' ' + val);
+			}
+			else
+				selected.addClass(val);
+
+			selected.set(property, val);
+
+			if (val == model.getDefaultValue())
+				this.$el.find('.gjs-sm-clear').hide();
+			else
+				this.$el.find('.gjs-sm-clear').css('display', 'inline-block');
+		},
+		setValue(value) {
+
+			var model = this.model;
+			model.view.$el.find('select').val(value);
+
+			if (value == model.getDefaultValue())
+				this.$el.find('.gjs-sm-clear').hide();
+			else
+				this.$el.find('.gjs-sm-clear').show();
+		},
+		clear() {
+
+			var selected = editor.getSelected(),
+				model = this.model,
+				property = model.attributes.property,
+				defaultValue = model.getDefaultValue();
+
+			var classes = model.attributes.list.map(opt => opt.value);
+
+			$(classes).each(function (index, className) {
+				selected.removeClass(className);
+			});
+
+			if (typeof model.attributes.dataAttribute != 'undefined') {
+
+				const attr = selected.getAttributes();
+				delete attr[model.attributes.dataAttribute];
+				selected.setAttributes(attr);
+			}
+
+			selected.set(property, defaultValue);
+
+			this.$el.find('.gjs-sm-clear').hide();
+			model.view.$el.find('select').val(defaultValue);
+
 		}
 	});
 };
