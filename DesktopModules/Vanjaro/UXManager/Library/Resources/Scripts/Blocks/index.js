@@ -204,7 +204,8 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 						}
 						$('.vj-wrapper').find('.optimizing-overlay').remove();
 					}
-				});
+                });
+                event.preventDefault();
 			}
 		},
 

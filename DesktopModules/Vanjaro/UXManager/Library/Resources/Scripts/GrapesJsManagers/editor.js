@@ -1655,7 +1655,7 @@ $(document).ready(function () {
 										$(".ToolbarItem li:not(.PageSettings),.toolmanager,.more_icons, .blockItem.blocksmenu ").hide();
 										$("a.blockItem.settings").trigger("click");
 									}
-									else {
+                                    else if ($(window.parent.document.body).find('.gjs-cv-canvas__frames').hasClass('deviceframe')) {
 										$(window.parent.document.body).find('.gjs-cv-canvas__frames').removeClass('deviceframe');
 										$(".ToolbarItem li,.toolmanager,.more_icons,.blockItem.blocksmenu ").show();
 										$('.ToolbarItem > li:gt(4)').hide();
@@ -1987,13 +1987,13 @@ $(document).ready(function () {
 									return;
 								}
 								else if (model.attributes.type == 'prev') {
-									var slider = model.closest('[data-gjs-type="carousel"]');
+									var slider = model.closest('[data-gjs-type="carousel"]').find(".carousel-item-prev img");
 									VjEditor.select(slider);
 									VjEditor.runCommand("slider-prev", { slider });
 									return;
 								}
 								else if (model.attributes.type == 'next') {
-									var slider = model.closest('[data-gjs-type="carousel"]');
+									var slider = model.closest('[data-gjs-type="carousel"]').find(".carousel-item-next img");
 									VjEditor.select(slider);
 									VjEditor.runCommand("slider-next", { slider });
 									return;
