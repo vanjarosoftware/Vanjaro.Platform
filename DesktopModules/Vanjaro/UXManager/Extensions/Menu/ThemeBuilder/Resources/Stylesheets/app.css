@@ -42,7 +42,7 @@
     border: 0px;
     background: none;
     vertical-align: middle;
-        padding-right: 14px;
+    padding-right: 0px;
 }
 
 
@@ -82,9 +82,9 @@
 }
 
 .mainblocks {
-    border-bottom: 1px solid #b2b2b2;
+    border-bottom: 1px solid #eee;
     padding: 9px 10px 9px 20px;
-    border-top: 1px solid #b2b2b2;
+    border-top: 1px solid #eee;
     margin-top: -1px;
 }
 
@@ -170,16 +170,17 @@
 .dropdownselect .dropdownOption {
     position: relative;
     width: 100%;
-    padding-right: 33px;
+    padding-right: 18px;
 }
-    .dropdownselect .dropdownOption .units{
-        right:16px;
+
+    .dropdownselect .dropdownOption .units {
+        right: 16px;
     }
 
-    .dropdownselect {
-        width: 100%;
-        display: flex;
-    }
+.dropdownselect {
+    width: 100%;
+    display: flex;
+}
 
 .dropdownlabel {
     flex: none;
@@ -205,7 +206,7 @@
 }
 
 .csslider .input-wrapper {
-    margin-top: -8%;
+    margin-top: -12%;
 }
 
 
@@ -281,7 +282,7 @@
 .grptitle .fa-chevron-down:before {
     position: absolute;
     top: 2px;
-    right: 35px;
+    right: 20px;
     color: #999;
     font-size: 10px;
 }
@@ -310,12 +311,21 @@
 }
 
 .optioncontrol label {
-    display: inline;
     font-size: 12px;
     font-weight: normal;
     margin-left: 20px;
     color: #999;
     text-transform: capitalize;
+}
+
+.optioncontrol label {
+    display: inline-block;
+    max-width: 170px;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .subtMenu .optioncontrol label {
@@ -460,16 +470,16 @@
 }
 
 .subtMenu .PvNotAvailable {
-    right: 10px;
+    right: -2px;
 }
 
 .subtMenu .input-wrapper {
-    right: 14px;
-    padding-left: 35px;
+    right: 5px;
+    padding-left: 20px;
 }
 
 .subtMenu .dropdownselect .dropdownOption {
-    padding-right: 29px;
+    padding-right: 6px;
 }
 
 .vj-ux-manager ul.role-group {
@@ -489,10 +499,10 @@
 
 
 .contentdefault {
-    background-color: #e6e9ec!important;
-    margin: 0!important;
-    padding-right: 15px!important;
-    padding-left: 15px!important;
+    background-color: #e6e9ec !important;
+    margin: 0 !important;
+    padding-right: 15px !important;
+    padding-left: 15px !important;
 }
 
 .vj-ux-manager ul.role-group li a {
@@ -503,6 +513,7 @@
     display: block;
     text-decoration: none !important;
 }
+
 .centerloader {
     height: 40px !important;
     width: 40px !important;
