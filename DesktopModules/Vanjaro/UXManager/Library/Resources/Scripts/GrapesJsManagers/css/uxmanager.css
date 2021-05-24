@@ -1151,7 +1151,7 @@ div#MenuSettings .parent-menu-hide {
 }
 
 .gjs-sm-sector .gjs-sm-field.gjs-sm-composite, .gjs-clm-tags .gjs-sm-field.gjs-sm-composite, .gjs-sm-sector .gjs-sm-composite.gjs-clm-field, .gjs-clm-tags .gjs-sm-composite.gjs-clm-field {
-    background: #fafafa;
+    background: #fff;
 }
 
 
@@ -2584,8 +2584,8 @@ span.notificationname {
 .traitsmanager .preset-wrapper div.styles {
     width: 278px;
     padding: 6px 0;
-    border-top: 1px solid transparent;
-    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid transparent;
     display: inline-flex;
     border-radius: 0 !important;
 }
@@ -2598,14 +2598,16 @@ span.notificationname {
 
 
     .traitsmanager .preset-wrapper div.styles.active em {
-        align-self: center;
+        align-self: flex-start;
         visibility: visible;
+        color: #ccc;
+        text-shadow: none;
+        text-decoration: none;
     }
 
 
     .traitsmanager .preset-wrapper div.styles.active {
         justify-content: space-between;
-        border-color: #ccc;
     }
 
 .traitsmanager .preset-wrapper label {
