@@ -2,30 +2,6 @@
     height: 100vh;
 }
 
-/*#Body,
-#Body > form,
-#toast-container {
-    margin: 0;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-}*/
-
-/*.btn.btn-primary {
-    background-color: #0088cc;
-    border-color: #0088cc;
-    color: #fff;
-}
-
-    .btn.btn-primary:hover {
-        border-color: #0099e6 #0099e6 #0077b3;
-        background-color: #0099e6;
-    }
-
-    .btn.btn-primary:active,
-    .btn.btn-primary:focus {
-        border-color: #0077b3 #0077b3 #0077b3;
-        background-color: #0077b3;
-    }*/
-
 #StyleToolManager {
     display: none;
     font-family: sans-serif;
@@ -2587,7 +2563,6 @@ span.notificationname {
     border-top: 1px solid #eee;
     border-bottom: 1px solid transparent;
     display: inline-flex;
-    border-radius: 0 !important;
 }
 
     .traitsmanager .preset-wrapper div.styles em {
@@ -2605,10 +2580,13 @@ span.notificationname {
         text-decoration: none;
     }
 
+.traitsmanager .preset-wrapper.button div.styles.active {
+    justify-content: space-between;
+}
 
-    .traitsmanager .preset-wrapper div.styles.active {
-        justify-content: space-between;
-    }
+.traitsmanager .preset-wrapper div.styles.active {
+    border-color: #ccc;
+}
 
 .traitsmanager .preset-wrapper label {
     display: block;
@@ -3585,4 +3563,47 @@ body.resp-mode.mobile-landscape .vj-wrapper {
 
 .gjs-selected {
     outline-offset: unset !important;
+}
+
+.gjs-sm-customselect .sm-select-wrapper {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.gjs-sm-customselect .gjs-fields {
+    position: relative;
+}
+
+.gjs-sm-customselect .sm-select-wrapper select:focus {
+    outline: 0px;
+}
+
+.gjs-sm-customselect .sm-select-wrapper select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    color: inherit;
+    border: none;
+    background-color: transparent;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    padding: 5px;
+    z-index: 1;
+}
+
+.gjs-sm-customselect .sm-select-wrapper:before {
+    content: "\f0d7";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 6px;
+    top: 6px;
+}
+
+.gjs-sm-customselect option[disabled] {
+    color: #000;
+    text-transform: uppercase;
+    font-weight: bold;
 }
