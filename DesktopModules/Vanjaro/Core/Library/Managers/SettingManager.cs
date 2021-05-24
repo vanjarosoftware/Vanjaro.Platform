@@ -466,6 +466,7 @@ namespace Vanjaro.Core
                 if (SigninTab != null && Signinlayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+                    UpdateLayoutSettings(SigninTab, Signinlayout.Settings);
 
                     if (portalSettings.ActiveTab == null)
                     {
@@ -512,6 +513,7 @@ namespace Vanjaro.Core
                 if (SignUpTab != null && Signuplayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, Signuplayout.Blocks);
+                    UpdateLayoutSettings(SignUpTab, Signuplayout.Settings);
 
                     if (portalSettings.ActiveTab == null)
                     {
@@ -553,6 +555,7 @@ namespace Vanjaro.Core
                 if (NotFoundTab != null && NotFoundPagelayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, NotFoundPagelayout.Blocks);
+                    UpdateLayoutSettings(NotFoundTab, NotFoundPagelayout.Settings);
 
                     if (portalSettings.ActiveTab == null)
                     {
@@ -594,6 +597,7 @@ namespace Vanjaro.Core
                 if (ProfileTab != null && Profilelayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, Profilelayout.Blocks);
+                    UpdateLayoutSettings(ProfileTab, Profilelayout.Settings);
                     pinfo.UserTabId = ProfileTab.TabID;
                     if (portalSettings.ActiveTab == null)
                     {
@@ -634,6 +638,7 @@ namespace Vanjaro.Core
                 if (SearchResultTab != null && SearchResultlayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, SearchResultlayout.Blocks);
+                    UpdateLayoutSettings(SearchResultTab, SearchResultlayout.Settings);
                     if (portalSettings.ActiveTab == null)
                     {
                         portalSettings.ActiveTab = new TabInfo();
@@ -673,6 +678,7 @@ namespace Vanjaro.Core
                 if (TermsTab != null && Termslayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, Termslayout.Blocks);
+                    UpdateLayoutSettings(TermsTab, Termslayout.Settings);
                     if (portalSettings.ActiveTab == null)
                     {
                         portalSettings.ActiveTab = new TabInfo();
@@ -711,6 +717,7 @@ namespace Vanjaro.Core
                 if (PrivacyTab != null && Privacylayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, Privacylayout.Blocks);
+                    UpdateLayoutSettings(PrivacyTab, Privacylayout.Settings);
                     if (portalSettings.ActiveTab == null)
                     {
                         portalSettings.ActiveTab = new TabInfo();
@@ -749,6 +756,7 @@ namespace Vanjaro.Core
                 if (HomeTab != null && homelayout != null && portalSettings != null)
                 {
                     ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+                    UpdateLayoutSettings(HomeTab, homelayout.Settings);
 
                     if (portalSettings.ActiveTab == null)
                     {
@@ -793,7 +801,29 @@ namespace Vanjaro.Core
                 pinfo.PrivacyTabId = PrivacyTab != null && !PrivacyTab.IsDeleted ? PrivacyTab.TabID : Null.NullInteger;
                 #endregion
             }
-
+            public static void UpdateLayoutSettings(TabInfo tab, Dictionary<string, dynamic> settings)
+            {
+                if (tab != null && settings != null && settings.Count > 0)
+                {
+                    settings.Add("NewTabID", tab.TabID);
+                    if (settings.ContainsKey("TabVisible"))
+                        tab.IsVisible = settings["TabVisible"];
+                    if (settings.ContainsKey("TabDisableLink"))
+                        tab.DisableLink = settings["TabDisableLink"];
+                    if (settings.ContainsKey("TabUrl"))
+                        tab.Url = settings["TabUrl"];
+                    if (settings.ContainsKey("TabPermanentRedirect"))
+                        tab.PermanentRedirect = settings["TabPermanentRedirect"];
+                    TabController.Instance.UpdateTab(tab);
+                    if (settings.ContainsKey("TabSettings"))
+                    {
+                        foreach (var setting in settings["TabSettings"])
+                        {
+                            TabController.Instance.UpdateTabSetting(tab.TabID, setting.Name.ToString(), setting.Value.ToString());
+                        }
+                    }
+                }
+            }
             private static void UpdatePortalSettings(List<StringValue> SettingNameValue, int PortalID, int UserID)
             {
                 string query = string.Empty;
