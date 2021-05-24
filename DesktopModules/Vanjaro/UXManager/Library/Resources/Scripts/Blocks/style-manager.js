@@ -53,7 +53,7 @@
 
 				style[property] = event.target.value;
 				selected.setStyle(style);
-
+				model.setValue(val);
 			}
 			else {
 				var classes = model.attributes.list.map(opt => opt.value);
@@ -65,7 +65,6 @@
 				selected.addClass(val);
 			}
 
-			model.setValue(val);
 			selected.set(property, val);
 
 			if (property == "border-position")
@@ -75,13 +74,6 @@
 
 			var model = this.model;
 			model.view.$el.find('input[value="' + value + '"]').prop('checked', true);
-
-			setTimeout(function () {
-
-				if (typeof editor.getSelected() != 'undefined' && typeof model.attributes.UpdateStyles == 'undefined')
-					editor.getSelected().removeStyle(model.attributes.property);
-
-			});
 
 			if (value == model.getDefaultValue())
 				$(this.$el).find('.gjs-sm-clear').hide();
