@@ -171,7 +171,7 @@
 						type: 'toggle_checkbox',
 						name: 'alignment',
 						UpdateStyles: true,
-						selector: 'image-box',
+						selector: '[data-gjs-type="image-box"]',
 						closest: true,
 						cssproperties: [{ name: "text-align" }],
 						options: [
@@ -210,7 +210,7 @@
 			},
 
 			onRender() {
-				
+
 				var model = this.model;
 				if (event && (event.type == 'load' || event.type == 'drop')) {
 					if (typeof model.parent() != 'undefined' && model.parent().attributes.type != "picture-box" && model.parent().parent().attributes.type != 'blockwrapper') {
