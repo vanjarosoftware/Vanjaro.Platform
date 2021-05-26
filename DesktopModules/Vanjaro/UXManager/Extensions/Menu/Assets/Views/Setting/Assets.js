@@ -313,7 +313,7 @@
             $('.cpymv').text('[LS:Move]');
         else
             $('.cpymv').text('[LS:Copy]');
-        $('uiengine #movefolder').modal({ keyboard: false });
+        $('uiengine #movefolder').modal('show', { keyboard: false });
         $("uiengine #movefolder").on("shown.bs.modal", function (e) {
             var DestinationFolderID = -1;
             if ($scope.IconsFolders !== undefined && $scope.IconsFolders[0] !== undefined)

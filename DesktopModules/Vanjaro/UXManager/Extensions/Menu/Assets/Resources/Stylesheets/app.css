@@ -262,6 +262,12 @@ td.dropdownimgicon {
     font-size: 10px;
 }
 
+button.close {
+    border: none;
+    font-size: 18px;
+    background: #fff;
+}
+
 table.Imagetable tbody {
     display: flex;
     flex-wrap: wrap;
