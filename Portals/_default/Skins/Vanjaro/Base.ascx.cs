@@ -751,9 +751,9 @@ namespace Vanjaro.Skin
                         if (!string.IsNullOrEmpty(response.Style))
                         {
                             if (item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault() != null && !string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value))
-                                WebForms.RegisterClientScriptBlock(Page, "BlocksStyle" + item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value, "<style type=\"text/css\" vj=\"true\" vjdataguid=\"" + item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value + "\">" + response.Style + "</style>", false);
+                                WebForms.RegisterClientStyleBlock(Page, "BlocksStyle" + item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value, "<style type=\"text/css\" vj=\"true\" vjdataguid=\"" + item.Attributes.Where(a => a.Name == "data-guid").FirstOrDefault().Value + "\">" + response.Style + "</style>", false);
                             else
-                                WebForms.RegisterClientScriptBlock(Page, "BlocksStyle" + item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value, "<style type=\"text/css\">" + response.Style + "</style>", false);
+                                WebForms.RegisterClientStyleBlock(Page, "BlocksStyle" + item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value, "<style type=\"text/css\">" + response.Style + "</style>", false);
                         }
                     }
 
