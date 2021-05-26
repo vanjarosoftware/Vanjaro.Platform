@@ -585,7 +585,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     Dictionary<string, string> Assets = new Dictionary<string, string>();
                     Layout layout = new Layout
                     {
-                        Content = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.Content, portalID), false, Assets)
+                        Content = PageManager.TokenizeTemplateLinks(portalID, PageManager.DeTokenizeLinks(baseLayout.Content, portalID), false, Assets)
                     };
                     HtmlDocument html = new HtmlDocument();
                     html.LoadHtml(layout.Content);
@@ -611,13 +611,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         foreach (GlobalBlock block in layout.Blocks)
                         {
                             if (!string.IsNullOrEmpty(block.Html))
-                                block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, portalID), false, Assets);
+                                block.Html = PageManager.TokenizeTemplateLinks(portalID, PageManager.DeTokenizeLinks(block.Html, portalID), false, Assets);
                             if (!string.IsNullOrEmpty(block.Css))
-                                block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, portalID), false, Assets);
+                                block.Css = PageManager.TokenizeTemplateLinks(portalID, PageManager.DeTokenizeLinks(block.Css, portalID), false, Assets);
                             if (!string.IsNullOrEmpty(block.ContentJSON))
-                                block.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.ContentJSON, portalID), true, Assets);
+                                block.ContentJSON = PageManager.TokenizeTemplateLinks(portalID, PageManager.DeTokenizeLinks(block.ContentJSON, portalID), true, Assets);
                             if (!string.IsNullOrEmpty(block.StyleJSON))
-                                block.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.StyleJSON, portalID), true, Assets);
+                                block.StyleJSON = PageManager.TokenizeTemplateLinks(portalID, PageManager.DeTokenizeLinks(block.StyleJSON, portalID), true, Assets);
 
                             if (!string.IsNullOrEmpty(block.Html))
                             {
@@ -631,11 +631,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     }
                     layout.Name = name;
                     layout.SVG = "";
-                    layout.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.ContentJSON, portalID), true, Assets);
+                    layout.ContentJSON = PageManager.TokenizeTemplateLinks(portalID, PageManager.DeTokenizeLinks(baseLayout.ContentJSON, portalID), true, Assets);
                     layout.ContentJSON = BlockManager.RemovePermissions(html, layout.ContentJSON);
                     layout.Content = html.DocumentNode.OuterHtml;
-                    layout.Style = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.Style.ToString(), portalID), false, Assets);
-                    layout.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(baseLayout.StyleJSON.ToString(), portalID), true, Assets);
+                    layout.Style = PageManager.TokenizeTemplateLinks(portalID, PageManager.DeTokenizeLinks(baseLayout.Style.ToString(), portalID), false, Assets);
+                    layout.StyleJSON = PageManager.TokenizeTemplateLinks(portalID, PageManager.DeTokenizeLinks(baseLayout.StyleJSON.ToString(), portalID), true, Assets);
                     layout.Type = baseLayout.Type;
                     exportTemplate.Templates.Add(layout);
                     PageManager.ProcessPortableModules(portalID, layout.Content, ExportedModulesContent);
@@ -1100,7 +1100,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     //Display in Menu Yes and DisbaledLink Yes then page is folder page
                     bool IsFolder = !c.TabSettings.ContainsKey("Anchor") && c.DisableLink;
 
-                    bool HasEditPermission = TabPermissionController.HasTabPermission(c.TabPermissions, "EDIT");                   
+                    bool HasEditPermission = TabPermissionController.HasTabPermission(c.TabPermissions, "EDIT");
 
                     if (PageTreeChildrens != null && PageTreeChildrens.Count > 0)
                     {
