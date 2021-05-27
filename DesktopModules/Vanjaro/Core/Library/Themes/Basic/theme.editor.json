@@ -1695,15 +1695,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "7d41b467-de7c-41b6-a9d1-a0bee80a8f00",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.head-style-1{\ndisplay:$HSoneVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.head-style-1 {\ndisplay:$HSoneVisiblity !important;\n}",
@@ -1917,15 +1917,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "cfffe540-d41f-4c9e-9610-d2958103f086",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.head-style-2{\ndisplay:$hstwoVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.head-style-2 {\ndisplay:$hstwoVisiblity !important;\n}",
@@ -2139,15 +2139,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "40f4caa7-95b0-4df4-8bfb-2fd8e66bfcce",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.head-style-3{\ndisplay:$HSThreeVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.head-style-3 {\ndisplay:$HSThreeVisiblity !important;\n}",
@@ -2361,15 +2361,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "600af067-3853-49ad-86b9-553f22f2f3c1",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.head-style-4{\ndisplay:$HSFourVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.head-style-4 {\ndisplay:$HSFourVisiblity !important;\n}",
@@ -2583,15 +2583,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "009166ca-7972-430d-8ffa-e91817e23782",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.head-style-5{\ndisplay:$HSFiveVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.head-style-5 {\ndisplay:$HSFiveVisiblity !important;\n}",
@@ -2805,15 +2805,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "16e18014-2a68-43ec-add0-30d0529629ee",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.head-style-6{\ndisplay:$HSSixVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.head-style-6 {\ndisplay:$HSSixVisiblity !important;\n}",
@@ -3027,15 +3027,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "d4b407f6-06ff-4acf-a4b4-04d60a09bc21",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.head-style-7{\ndisplay:$HSSevVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.head-style-7 {\ndisplay:$HSSevVisiblity !important;\n}",
@@ -3249,15 +3249,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "8d01ba4b-b474-48db-83a2-8d80d1deedf7",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.head-style-8{\ndisplay:$HSEthVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.head-style-8 {\ndisplay:$HSEthVisiblity !important;\n}",
@@ -3471,15 +3471,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "3d2aa517-e5b1-4bcf-bc89-dbe52d2da596",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.head-style-9{\ndisplay:$HSNineVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.head-style-9 {\ndisplay:$HSNineVisiblity !important;\n}",
@@ -3693,15 +3693,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "caca34c7-0116-4ef0-aaf6-2a00cd7072fc",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.head-style-10{\ndisplay:$HSTenVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.head-style-10 {\ndisplay:$HSTenVisiblity !important;\n}",
@@ -3923,15 +3923,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "103d6546-287e-4288-9970-553a8ceb0fff",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.paragraph-style-1{\ndisplay:$psoneVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.paragraph-style-1 {\ndisplay:$psoneVisiblity !important;\n}",
@@ -4138,15 +4138,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "0d9f0b68-5d66-4f8d-a190-bea51cb0e65d",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.paragraph-style-2{\ndisplay:$psTwoVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.paragraph-style-2 {\ndisplay:$psTwoVisiblity !important;\n}",
@@ -4360,15 +4360,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "62d2ceb8-2319-476e-946b-84b133712a53",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.paragraph-style-3{\ndisplay:$psThreeVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.paragraph-style-3 {\ndisplay:$psThreeVisiblity !important;\n}",
@@ -4575,15 +4575,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "ad32f66d-c4f1-4012-a4e7-af5af999d06f",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.paragraph-style-4{\ndisplay:$psFourVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.paragraph-style-4 {\ndisplay:$psFourVisiblity !important;\n}",
@@ -4797,15 +4797,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "c101be58-82e2-4dc4-a4b1-27fe721d2311",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.paragraph-style-5{\ndisplay:$psFiveVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.paragraph-style-5 {\ndisplay:$psFiveVisiblity !important;\n}",
@@ -5019,15 +5019,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "475414e7-1bd2-449b-affa-0c19f6f206b4",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.paragraph-style-6{\ndisplay:$psSixVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.paragraph-style-6 {\ndisplay:$psSixVisiblity !important;\n}",
@@ -5241,15 +5241,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "a75d2892-afc5-49ca-8ed5-7c210402374c",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.paragraph-style-7{\ndisplay:$psSevVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.paragraph-style-7 {\ndisplay:$psSevVisiblity !important;\n}",
@@ -5463,15 +5463,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "988f5265-28f2-4d49-a023-3847d1b1d761",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.paragraph-style-8{\ndisplay:$psEthVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.paragraph-style-8 {\ndisplay:$psEthVisiblity !important;\n}",
@@ -5685,15 +5685,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "35e5dad3-b12f-481e-b1c6-9112bddf377a",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.paragraph-style-9{\ndisplay:$psNineVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.paragraph-style-9 {\ndisplay:$psNineVisiblity !important;\n}",
@@ -5923,15 +5923,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "294f5038-b179-4b4b-9b9f-371da88ffb84",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.button-style-1{\ndisplay:$bsoneVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.button-style-1 {\ndisplay:$bsoneVisiblity !important;\n}",
@@ -6159,15 +6159,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "a1959810-8622-42b9-aed7-a98642294b6e",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.button-style-2{\ndisplay:$bsTwoVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.button-style-2 {\ndisplay:$bsTwoVisiblity !important;\n}",
@@ -6395,15 +6395,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "87ca3919-1592-40f4-b7f5-07a2ce7b7afe",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.button-style-3{\ndisplay:$bsThreeVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.button-style-3 {\ndisplay:$bsThreeVisiblity !important;\n}",
@@ -6631,15 +6631,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "70fbe905-c9f6-4808-89f7-73852b6805b9",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.button-style-4{\ndisplay:$bsFourVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.button-style-4 {\ndisplay:$bsFourVisiblity !important;\n}",
@@ -6867,15 +6867,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "d354766d-c953-4d41-b683-118734f4ccbd",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.button-style-5{\ndisplay:$bsFiveVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.button-style-5 {\ndisplay:$bsFiveVisiblity !important;\n}",
@@ -7103,15 +7103,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "7e8428d5-f1c1-4111-aefe-900950ad0438",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.button-style-6{\ndisplay:$bsSixVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.button-style-6 {\ndisplay:$bsSixVisiblity !important;\n}",
@@ -7339,15 +7339,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "1860d5c7-89a8-4020-8925-e04984cc3583",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.button-style-7{\ndisplay:$bsSevVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.button-style-7 {\ndisplay:$bsSevVisiblity !important;\n}",
@@ -7575,15 +7575,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "1cc0fabb-3a48-4e60-a479-6343f1d40d30",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.button-style-8{\ndisplay:$bsEthVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.button-style-8 {\ndisplay:$bsEthVisiblity !important;\n}",
@@ -7811,15 +7811,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "2e79b584-70ae-4ac1-9b1f-43600c6792f0",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.button-style-9{\ndisplay:$bsNineVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.button-style-9 {\ndisplay:$bsNineVisiblity !important;\n}",
@@ -8047,15 +8047,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "e21662a0-c412-4889-9210-13795ae31254",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.button-style-10{\ndisplay:$bsTenVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.button-style-10 {\ndisplay:$bsTenVisiblity !important;\n}",
@@ -8283,15 +8283,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "9d058957-dc5b-43d6-bd2b-eb48824acff1",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.paragraph-style-10{\ndisplay:$psTenVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.paragraph-style-10 {\ndisplay:$psTenVisiblity !important;\n}",
@@ -8683,15 +8683,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "0800b481-d801-45c1-af63-96ae71182798",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.menu-style-1{\ndisplay:$msOVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.menu-style-1 {\ndisplay:$msOVisiblity !important;\n}",
@@ -9139,8 +9139,8 @@
           "Title": "Nav link Hover Border Color",
           "DefaultValue": "$primarycolor",
           "Suffix": "",
-          "CustomCSS": " .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n border-color:$navlinkhoverBorderColor !important;\n}",
-          "PreviewCSS": " .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n border-color:$navlinkhoverBorderColor !important;\n}",
+          "CustomCSS": " .DefaultMenu .navbar-nav .nav-item:hover .nav-link{\n border-color:$navlinkhoverBorderColor !important;\n}",
+          "PreviewCSS": " .DefaultMenu .navbar-nav .nav-item:hover .nav-link{\n border-color:$navlinkhoverBorderColor !important;\n}",
           "LessVariable": "$navlinkhoverBorderColor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -9153,8 +9153,8 @@
           "Title": "Nav link Hover Border top",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": " .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-top-width:$hoverBordernavigationBTwidthpx !important;\n}",
-          "PreviewCSS": " .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-top-width:$hoverBordernavigationBTwidthpx !important;\n}",
+          "CustomCSS": " .DefaultMenu .navbar-nav .nav-item:hover .nav-link{\n  border-top-width:$hoverBordernavigationBTwidthpx !important;\n}",
+          "PreviewCSS": " .DefaultMenu .navbar-nav .nav-item:hover .nav-link{\n  border-top-width:$hoverBordernavigationBTwidthpx !important;\n}",
           "LessVariable": "$hoverBordernavigationBTwidth",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -9167,8 +9167,8 @@
           "Title": "Nav link Hover Border right",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": " .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-right-width:$hoverBordernavigationBRwidthpx !important;\n}",
-          "PreviewCSS": " .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-right-width:$hoverBordernavigationBRwidthpx !important;\n}",
+          "CustomCSS": " .DefaultMenu .navbar-nav .nav-item:hover .nav-link{\n  border-right-width:$hoverBordernavigationBRwidthpx !important;\n}",
+          "PreviewCSS": " .DefaultMenu .navbar-nav .nav-item:hover .nav-link{\n  border-right-width:$hoverBordernavigationBRwidthpx !important;\n}",
           "LessVariable": "$hoverBordernavigationBRwidth",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -9179,10 +9179,10 @@
           "Increment": 1.0,
           "Guid": "ebf05726-50cf-4961-9146-6b394fd8ea2e",
           "Title": "Nav link Hover  Border bottom",
-          "DefaultValue": "2",
+          "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": " .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-bottom-width:$hoverBordernavigationBBwidthpx !important;\n}",
-          "PreviewCSS": " .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-bottom-width:$hoverBordernavigationBBwidthpx !important;\n}",
+          "CustomCSS": " .DefaultMenu .navbar-nav .nav-item:hover .nav-link{\n  border-bottom-width:$hoverBordernavigationBBwidthpx !important;\n}",
+          "PreviewCSS": " .DefaultMenu .navbar-nav .nav-item:hover .nav-link{\n  border-bottom-width:$hoverBordernavigationBBwidthpx !important;\n}",
           "LessVariable": "$hoverBordernavigationBBwidth",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -9195,8 +9195,8 @@
           "Title": "Nav link Hover Border left",
           "DefaultValue": "0",
           "Suffix": "px",
-          "CustomCSS": " .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-left-width:$hoverBordernavigationBLwidthpx !important;\n}",
-          "PreviewCSS": " .DefaultMenu .navbar-nav .nav-item .nav-link:hover{\n  border-left-width:$hoverBordernavigationBLwidthpx !important;\n}",
+          "CustomCSS": " .DefaultMenu .navbar-nav .nav-item:hover .nav-link{\n  border-left-width:$hoverBordernavigationBLwidthpx !important;\n}",
+          "PreviewCSS": " .DefaultMenu .navbar-nav .nav-item:hover .nav-link{\n  border-left-width:$hoverBordernavigationBLwidthpx !important;\n}",
           "LessVariable": "$hoverBordernavigationBLwidth",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -9307,7 +9307,7 @@
           ],
           "Guid": "5b561e36-0a0e-44bf-86d6-7d16d556e3ad",
           "Title": "Nav link Text Transform",
-          "DefaultValue": "None",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": " .DefaultMenu li a.nav-link {\n  text-transform:$texttransform !important;\n}",
           "PreviewCSS": " .DefaultMenu li a.nav-link {\n  text-transform:$texttransform !important;\n}",
@@ -9858,15 +9858,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "5842e325-ae51-44ac-bee5-4859e992ce7f",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": "div.styles.menu-style-2{\ndisplay:$msbVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.menu-style-2 {\ndisplay:$msbVisiblity !important;\n}",
@@ -10482,7 +10482,7 @@
           ],
           "Guid": "1709b0ff-34fe-4ac8-bd33-6ecc8a38ef68",
           "Title": "Nav link Text Transform",
-          "DefaultValue": "None",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": ".menu-style-2 .DefaultMenu li a.nav-link {\n  text-transform:$msbtexttransform !important;\n}",
           "PreviewCSS": ".menu-style-2 .DefaultMenu li a.nav-link {\n  text-transform:$msbtexttransform !important;\n}",
@@ -11041,15 +11041,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "a2e0afd5-96c3-4fe5-a35d-7a21c1287e5d",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.breadcrumb-style-1{\ndisplay:$brOneVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.breadcrumb-style-1 {\ndisplay:$brOneVisiblity !important;\n}",
@@ -11215,15 +11215,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "050efb2c-0f28-4d6e-9cba-c6422668be7d",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": "div.styles.breadcrumb-style-2{\ndisplay:$brTwoVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.breadcrumb-style-2 {\ndisplay:$brTwoVisiblity !important;\n}",
@@ -11397,19 +11397,19 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "fd8bc98a-ddfe-4448-8f7f-e8326b27bc94",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
-          "CustomCSS": "div.styles.language-style-1{\ndisplay:$lanOneVisiblity !important;\n}\n",
-          "PreviewCSS": "div.styles.language-style-1 {\ndisplay:$lanOneVisiblity !important;\n}",
-          "LessVariable": "$lanOneVisiblity",
+          "CustomCSS": "div.styles.language-style-1{\ndisplay:$lanoneVisiblity !important;\n}\n",
+          "PreviewCSS": "div.styles.language-style-1 {\ndisplay:$lanoneVisiblity !important;\n}",
+          "LessVariable": "$lanoneVisiblity",
           "JavascriptVariable": null,
           "Type": "Dropdown"
         },
@@ -11471,15 +11471,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "39e4b731-9ea6-43dc-88da-d7bb38129337",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": "div.styles.language-style-2{\ndisplay:$lanTwoVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.language-style-2 {\ndisplay:$lanTwoVisiblity !important;\n}",
@@ -11553,15 +11553,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "732f78b5-e772-42b2-b04f-8f3ba7c12c50",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.search-input-style-1{\ndisplay:$siOVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.search-input-style-1 {\ndisplay:$siOVisiblity !important;\n}",
@@ -11627,15 +11627,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "50127aef-7e9c-4dec-b576-cb4ccab9bd1b",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": "div.styles.search-input-style-2{\ndisplay:$siTVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.search-input-style-2 {\ndisplay:$siTVisiblity !important;\n}",
@@ -11709,15 +11709,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "cd332793-e16f-42ef-b0c1-d792fb8073dc",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "inline-flex",
           "Suffix": "",
           "CustomCSS": "div.styles.register-link-style-1{\ndisplay:$mAoneVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.register-link-style-1 {\ndisplay:$mAoneVisiblity !important;\n}",
@@ -12093,15 +12093,15 @@
         {
           "Options": [
             {
-              "Inline-flex": "Visible"
+              "inline-flex": "Visible"
             },
             {
-              "None": "Hidden"
+              "none": "Hidden"
             }
           ],
           "Guid": "1409aff8-5f8d-47f6-ba7d-42b22bb72eb5",
-          "Title": "Visible",
-          "DefaultValue": "Visible",
+          "Title": "Style",
+          "DefaultValue": "none",
           "Suffix": "",
           "CustomCSS": "div.styles.register-link-style-2{\ndisplay:$mAtwoVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.register-link-style-2 {\ndisplay:$mAtwoVisiblity !important;\n}",
