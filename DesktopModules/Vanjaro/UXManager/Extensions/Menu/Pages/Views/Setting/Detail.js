@@ -296,7 +296,6 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
         else if (type == 'Anchor') {
             $scope.IsAnchor = true;
             $scope.ui.data.PagesTemplate.Options.pageType = 'Folder';
-            $scope.ui.data.ParentPage.Value = $scope.ui.data.PagesTemplate.Value;
             if ($scope.pid > 0)
                 $(".uxmanager-modal .modal-title", parent.document).html('[L:EditAnchor]');
             else
@@ -367,6 +366,8 @@ app.controller('setting_detail', function ($scope, $routeParams, CommonSvc, Swee
                     ReplaceTokens: $scope.ui.data.ReplaceTokens.Value,
                     MakePublic: $scope.ui.data.MakePublic.Value,
                     IsAnchor: $scope.IsAnchor,
+                    AnchorPageID: $scope.ui.data.AnchorPage.Value,
+                    AnchorID: $scope.ui.data.AnchorID.Value,
                 }
                 var TabID = $scope.ui.data.PagesTemplate.Options.tabId;
                 common.webApi.post('pages/savepagedetails', 'DefaultWorkflow=' + $scope.ui.data.ddlWorkFlows.Value + '&MaxRevisions=' + $scope.ui.data.MaxRevisions.Value + '&Copy=' + IsCopy, formdata).then(function (data) {

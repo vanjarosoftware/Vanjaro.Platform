@@ -170,21 +170,32 @@
                     <label>{{IsAnchor ? '[L:AnchorParentPage]' : '[L:ParentPage]'}}</label>
                     <div class="input-group">
                         <select class="form-control" mn-ng-model="ui.data.ParentPage.Value">
-                            <option value="-1" mn-ng-if="!IsAnchor">[L:SelectOption]</option>
+                            <option value="-1">[L:SelectOption]</option>
                             <option value="{{option.TabID}}" mn-ng-repeat="option in ui.data.ParentPage.Options">{{option.TabName}}</option>
                         </select>
                     </div>
                 </div>
             </uitemplate>
+            <uielement name="Name" container-attr-ng-if="ui.data.IsDefaultLocale.Options && ShowPage_detailsTab && Show_Tab" attr-ng-model="ui.data.PagesTemplate.Options.name" control="textbox" attr-required="true" attr-class="pagename"></uielement>
+            <uielement name="Name" container-attr-ng-if="!ui.data.IsDefaultLocale.Options && ShowPage_detailsTab && Show_Tab" attr-localized="Name" attr-ng-model="Page_Name[ui.data.Languages.Value].Value" control="textbox" attr-required="true" attr-class="pagename"></uielement>
+            <uielement name="RedirectLink" container-attr-ng-if="ui.data.IsDefaultLocale.Options && ShowPage_detailsTab && Show_Tab && ui.data.PagesTemplate.Options.pageType=='URL'" attr-placeholder="[L:RedirectLinkPlaceholder]" attr-ng-model="ui.data.PagesTemplate.Options.externalRedirection" control="textbox" attr-required="true"></uielement>
+            <uielement name="PermanentRedirect" container-attr-ng-if="ui.data.IsDefaultLocale.Options && ShowPage_detailsTab && Show_Tab && ui.data.PagesTemplate.Options.pageType=='URL'" ngmodel="ui.data.PagesTemplate.Options.permanentRedirect" attr-class="toggle_right" control="checkboxtoggle"></uielement>
+            <uielement name="OpenLinkInNewWindow" container-attr-ng-if="ui.data.IsDefaultLocale.Options && ShowPage_detailsTab && Show_Tab && ui.data.PagesTemplate.Options.pageType=='URL'" ngmodel="ui.data.PagesTemplate.Options.linkNewWindow" attr-class="toggle_right" control="checkboxtoggle"></uielement>
             <!-- Anchor Page -->
-            <uielement name="AnchorName" container-attr-ng-if="ui.data.IsDefaultLocale.Options && IsAnchor && ShowPage_detailsTab && Show_Tab" attr-ng-model="ui.data.PagesTemplate.Options.name" control="textbox" attr-required="true" attr-class="pagename"></uielement>
-            <uielement name="AnchorName" container-attr-ng-if="!ui.data.IsDefaultLocale.Options && IsAnchor && ShowPage_detailsTab && Show_Tab" attr-ng-model="Page_Name[ui.data.Languages.Value].Value" control="textbox" attr-required="true" attr-class="pagename" attr-localized="Name"></uielement>
+            <uitemplate>
+                <div class="form-group" mn-ng-if="ui.data.IsDefaultLocale.Options && ShowPage_detailsTab && Show_Tab && IsAnchor">
+                    <label>[L:AnchorPage]</label>
+                    <div class="input-group">
+                        <select class="form-control" mn-ng-model="ui.data.AnchorPage.Value">
+                            <option value="{{option.TabID}}" mn-ng-repeat="option in ui.data.AnchorPage.Options">{{option.TabName}}</option>
+                        </select>
+                        <div class="input-group-append">
+                            <input type="text" id="AnchorID" placeholder="[L:AnchorID]" mn-ng-model="ui.data.AnchorID.Value" class="form-control float-end" required />
+                        </div>
+                    </div>
+                </div>
+            </uitemplate>
             <!-- Anchor Page -->
-            <uielement name="Name" container-attr-ng-if="ui.data.IsDefaultLocale.Options && !IsAnchor" container-attr-ng-show="ShowPage_detailsTab&&Show_Tab" attr-ng-model="ui.data.PagesTemplate.Options.name" control="textbox" attr-required="true" attr-class="pagename"></uielement>
-            <uielement name="Name" container-attr-ng-if="!ui.data.IsDefaultLocale.Options && !IsAnchor" container-attr-ng-show="ShowPage_detailsTab&&Show_Tab" attr-localized="Name" attr-ng-model="Page_Name[ui.data.Languages.Value].Value" control="textbox" attr-required="true" attr-class="pagename"></uielement>
-            <uielement name="RedirectLink" container-attr-ng-if="ui.data.IsDefaultLocale.Options" attr-placeholder="[L:RedirectLinkPlaceholder]" container-attr-ng-show="ShowPage_detailsTab&&Show_Tab &&ui.data.PagesTemplate.Options.pageType=='URL'" attr-ng-model="ui.data.PagesTemplate.Options.externalRedirection" control="textbox" attr-required="true"></uielement>
-            <uielement name="PermanentRedirect" container-attr-ng-if="ui.data.IsDefaultLocale.Options" container-attr-ng-show="ShowPage_detailsTab&&Show_Tab&&ui.data.PagesTemplate.Options.pageType=='URL'" ngmodel="ui.data.PagesTemplate.Options.permanentRedirect" attr-class="toggle_right" control="checkboxtoggle"></uielement>
-            <uielement name="OpenLinkInNewWindow" container-attr-ng-if="ui.data.IsDefaultLocale.Options" container-attr-ng-show="ShowPage_detailsTab&&Show_Tab&&ui.data.PagesTemplate.Options.pageType=='URL'" ngmodel="ui.data.PagesTemplate.Options.linkNewWindow" attr-class="toggle_right" control="checkboxtoggle"></uielement>
         </uilayout>
         <uilayout name="LiveEditing" attr-ng-show="ShowPage_detailsTab&&Show_Tab && (ui.data.PagesTemplate.Options.pageType=='URL'||ui.data.PagesTemplate.Options.pageType=='Folder'||ui.data.PagesTemplate.Options.pageType=='Standard')">
             <uielement name="ddlWorkFlows" control="dropdownlist" tooltip="false" attr-class="ddlworkflow" attr-ng-change="Change_WorkflowStateInfo()"></uielement>

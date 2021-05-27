@@ -300,4 +300,7 @@
   <data name="SetAs_TermsTabId.Text" xml:space="preserve">
     <value>Set as Terms Page</value>
   </data>
+  <data name="EmptyAnchorID.Text" xml:space="preserve">
+    <value>Anchor ID is Empty</value>
+  </data>
 </root>

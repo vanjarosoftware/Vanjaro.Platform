@@ -1,10 +1,13 @@
 ﻿@inherits System.Web.WebPages.WebPage
 
-<div class="resetpasslogo">
-    <a href="@Model.ResetPassword.NavigateURL">
-        <img class="img-fluid" alt="@Model.ResetPassword.SiteName" title="@Model.ResetPassword.SiteName" src="@Model.ResetPassword.Path">
-    </a>
-</div>
+@if (!string.IsNullOrEmpty(Model.ResetPassword.Path))
+{
+    <div class="resetpasslogo">
+        <a href="@Model.ResetPassword.NavigateURL">
+            <img class="img-fluid" alt="@Model.ResetPassword.SiteName" title="@Model.ResetPassword.SiteName" src="@Model.ResetPassword.Path">
+        </a>
+    </div>
+}
 <div class="ResetPassword-container validationGroup">
     <div class="ResetPassword" id="ResetPassword">
         <h4 class="Resethead">[LS:Data.Block.Login.ChangePasswordText]</h4>
