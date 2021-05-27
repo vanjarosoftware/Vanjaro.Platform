@@ -393,7 +393,7 @@ export default (editor, config = {}) => {
 					name: 'horizontalalignment',
 					type: 'toggle_radio',
 					UpdateStyles: true,
-					selector: 'row',
+					selector: '[data-gjs-type="row"]',
 					cssproperties: [{ name: "justify-content" }],
 					options: [
 						{ id: 'flex-start', name: 'flex-start', image: 'align-left' },

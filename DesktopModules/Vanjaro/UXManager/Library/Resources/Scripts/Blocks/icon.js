@@ -121,7 +121,7 @@
 						type: "toggle_checkbox",
 						name: "alignment",
 						UpdateStyles: true,
-						selector: 'icon-box',
+						selector: '[data-gjs-type="icon-box"]',
 						closest: true,
 						cssproperties: [{ name: "text-align" }],
 						options: [

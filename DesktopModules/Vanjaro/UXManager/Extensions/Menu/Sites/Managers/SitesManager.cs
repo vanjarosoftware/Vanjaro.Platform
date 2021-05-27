@@ -226,11 +226,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 {
                     if (!string.IsNullOrEmpty(block.ContentJSON))
                     {
-                        block.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.ContentJSON, portalSettings.PortalId), true, Assets);
+                        block.ContentJSON = PageManager.TokenizeTemplateLinks(portalSettings.PortalId, PageManager.DeTokenizeLinks(block.ContentJSON, portalSettings.PortalId), true, Assets);
                         block.ContentJSON = BlockManager.RemovePermissions(null, block.ContentJSON);
                     }
                     if (!string.IsNullOrEmpty(block.StyleJSON))
-                        block.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.StyleJSON, portalSettings.PortalId), true, Assets);
+                        block.StyleJSON = PageManager.TokenizeTemplateLinks(portalSettings.PortalId, PageManager.DeTokenizeLinks(block.StyleJSON, portalSettings.PortalId), true, Assets);
                 }
                 CacheFactory.Clear(CacheFactory.GetCacheKey(CacheFactory.Keys.CustomBlock + "ALL", portalSettings.PortalId));
             }
@@ -252,7 +252,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                     version = new Core.Data.Entities.Pages();
                 Layout layout = new Layout
                 {
-                    Content = PageManager.TokenizeTemplateLinks(version.Content != null ? version.Content : string.Empty, false, Assets)
+                    Content = PageManager.TokenizeTemplateLinks(PortalID, version.Content != null ? version.Content : string.Empty, false, Assets)
                 };
 
                 HtmlDocument html = new HtmlDocument();
@@ -279,13 +279,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                     foreach (Core.Data.Entities.GlobalBlock block in layout.Blocks)
                     {
                         if (!string.IsNullOrEmpty(block.Html))
-                            block.Html = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
+                            block.Html = PageManager.TokenizeTemplateLinks(PortalID, PageManager.DeTokenizeLinks(block.Html, PortalID), false, Assets);
                         if (!string.IsNullOrEmpty(block.Css))
-                            block.Css = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.Css, PortalID), false, Assets);
+                            block.Css = PageManager.TokenizeTemplateLinks(PortalID, PageManager.DeTokenizeLinks(block.Css, PortalID), false, Assets);
                         if (!string.IsNullOrEmpty(block.ContentJSON))
-                            block.ContentJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.ContentJSON, PortalID), true, Assets);
+                            block.ContentJSON = PageManager.TokenizeTemplateLinks(PortalID, PageManager.DeTokenizeLinks(block.ContentJSON, PortalID), true, Assets);
                         if (!string.IsNullOrEmpty(block.StyleJSON))
-                            block.StyleJSON = PageManager.TokenizeTemplateLinks(PageManager.DeTokenizeLinks(block.StyleJSON, PortalID), true, Assets);
+                            block.StyleJSON = PageManager.TokenizeTemplateLinks(PortalID, PageManager.DeTokenizeLinks(block.StyleJSON, PortalID), true, Assets);
 
                         if (!string.IsNullOrEmpty(block.Html))
                         {
@@ -300,11 +300,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 layout.Settings = PageManager.GetLayoutSettings(tab);
                 layout.Name = pageSettings.Name;
                 layout.SVG = "";
-                layout.ContentJSON = PageManager.TokenizeTemplateLinks(version.ContentJSON != null ? version.ContentJSON : string.Empty, true, Assets);
+                layout.ContentJSON = PageManager.TokenizeTemplateLinks(PortalID, version.ContentJSON != null ? version.ContentJSON : string.Empty, true, Assets);
                 layout.ContentJSON = BlockManager.RemovePermissions(html, layout.ContentJSON);
                 layout.Content = html.DocumentNode.OuterHtml;
-                layout.Style = PageManager.TokenizeTemplateLinks(version.Style != null ? version.Style : string.Empty, false, Assets);
-                layout.StyleJSON = PageManager.TokenizeTemplateLinks(version.StyleJSON != null ? version.StyleJSON : string.Empty, true, Assets);
+                layout.Style = PageManager.TokenizeTemplateLinks(PortalID, version.Style != null ? version.Style : string.Empty, false, Assets);
+                layout.StyleJSON = PageManager.TokenizeTemplateLinks(PortalID, version.StyleJSON != null ? version.StyleJSON : string.Empty, true, Assets);
                 layout.Type = pageSettings.PageType = pageSettings.PageType.ToLower() == "url" ? "URL" : (pageSettings.DisableLink && pageSettings.IncludeInMenu) ? "Folder" : "Standard";
                 layout.Children = ConvertToLayouts(PortalID, Assets, ExportedModulesContent, ps, page.children);
                 layout.SortOrder = ctr;

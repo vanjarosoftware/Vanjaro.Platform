@@ -124,7 +124,7 @@ export default (editor, config = {}) => {
 						name: 'alignment',
 						type: 'toggle_checkbox',
 						UpdateStyles: true,
-						selector: 'button-box',
+						selector: '[data-gjs-type="button-box"]',
 						closest: true,
 						cssproperties: [{ name: "text-align" }],
 						options: [

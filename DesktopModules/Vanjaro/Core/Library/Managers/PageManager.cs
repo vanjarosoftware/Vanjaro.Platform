@@ -21,6 +21,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.UI;
 using Vanjaro.Common.ASPNET;
 using Vanjaro.Common.Factories;
@@ -1330,7 +1331,7 @@ namespace Vanjaro.Core
             {
                 return PageFactory.GetAllTabIdByPortalID(Portalid, OnlyPublished);
             }
-            public static string TokenizeTemplateLinks(string content, bool IsJson, Dictionary<string, string> Assets)
+            public static string TokenizeTemplateLinks(int portalid, string content, bool IsJson, Dictionary<string, string> Assets)
             {
                 if (IsJson)
                 {
@@ -1339,7 +1340,7 @@ namespace Vanjaro.Core
                     {
                         foreach (dynamic arr in deserializeObject)
                         {
-                            ProcessJsonObject(arr, Assets);
+                            ProcessJsonObject(portalid, arr, Assets);
                         }
                         content = JsonConvert.SerializeObject(deserializeObject);
                     }
@@ -1353,7 +1354,7 @@ namespace Vanjaro.Core
                     {
                         foreach (HtmlNode node in NodeCollectionSrc)
                         {
-                            node.Attributes["src"].Value = GetNewLink(node.Attributes["src"].Value, Assets);
+                            node.Attributes["src"].Value = GetNewLink(portalid, node.Attributes["src"].Value, Assets);
                         }
                     }
                     HtmlNodeCollection NodeCollectionSrcSet = html.DocumentNode.SelectNodes("//*[@srcset]");
@@ -1361,7 +1362,7 @@ namespace Vanjaro.Core
                     {
                         foreach (HtmlNode node in NodeCollectionSrcSet)
                         {
-                            node.Attributes["srcset"].Value = GetNewLink(node.Attributes["srcset"].Value, Assets);
+                            node.Attributes["srcset"].Value = GetNewLink(portalid, node.Attributes["srcset"].Value, Assets);
                         }
                     }
                     HtmlNodeCollection NodeCollectionThumb = html.DocumentNode.SelectNodes("//*[@thumbnail]");
@@ -1369,7 +1370,7 @@ namespace Vanjaro.Core
                     {
                         foreach (HtmlNode node in NodeCollectionThumb)
                         {
-                            node.Attributes["thumbnail"].Value = GetNewLink(node.Attributes["thumbnail"].Value, Assets);
+                            node.Attributes["thumbnail"].Value = GetNewLink(portalid, node.Attributes["thumbnail"].Value, Assets);
                         }
                     }
                     content = html.DocumentNode.OuterHtml;
@@ -1379,7 +1380,7 @@ namespace Vanjaro.Core
                     try
                     {
                         string matchurl = match.Value.Replace("url(\"", "").Replace("\")", "").Replace("url(\\\"", "").Replace("\\\")", "");
-                        string newlink = GetNewLink(matchurl, Assets);
+                        string newlink = GetNewLink(portalid, matchurl, Assets);
                         if (matchurl != newlink)
                         {
                             if (matchurl.EndsWith("\\") || matchurl.EndsWith(@"\"))
@@ -1393,7 +1394,7 @@ namespace Vanjaro.Core
                 return content;
             }
 
-            private static string GetNewLink(string url, Dictionary<string, string> Assets)
+            private static string GetNewLink(int portalid, string url, Dictionary<string, string> Assets)
             {
                 if (url.Contains(','))
                 {
@@ -1401,7 +1402,7 @@ namespace Vanjaro.Core
                     foreach (var item in url.Split(','))
                     {
                         var obj = item.Split(' ');
-                        string ProcessedLink = ExtractAndProcessLink(item, Assets);
+                        string ProcessedLink = ExtractAndProcessLink(portalid, item, Assets);
                         if (item == ProcessedLink)
                             result.Add(ProcessedLink);
                         else
@@ -1411,13 +1412,13 @@ namespace Vanjaro.Core
                 }
                 else
                 {
-                    return ExtractAndProcessLink(url, Assets);
+                    return ExtractAndProcessLink(portalid, url, Assets);
                 }
             }
 
-            private static string ExtractAndProcessLink(string url, Dictionary<string, string> Assets)
+            private static string ExtractAndProcessLink(int portalid, string url, Dictionary<string, string> Assets)
             {
-                if (url.StartsWith("http"))
+                if (url.StartsWith("http") && !IsThisSite(portalid, url))
                     return url;
                 url = url.Split('?')[0];
                 string newurl = ExportTemplateRootToken + (url.ToLower().Contains(".versions") ? ".versions/" : "") + System.IO.Path.GetFileName(url);
@@ -1449,13 +1450,27 @@ namespace Vanjaro.Core
                 return newurl;
             }
 
-            private static void ProcessJsonObject(dynamic arr, Dictionary<string, string> Assets)
+            private static bool IsThisSite(int portalid, string url)
+            {
+                try
+                {
+                    string rootpath = BrowseUploadFactory.GetRootFolder(portalid).MappedPath;
+                    string matchurl = HttpContext.Current != null ? HttpContext.Current.Request.Url.Authority : string.Empty;
+                    if (url.Contains(matchurl))
+                        return true;
+                    else
+                        return false;
+                }
+                catch { return false; }
+            }
+
+            private static void ProcessJsonObject(int portalid, dynamic arr, Dictionary<string, string> Assets)
             {
                 foreach (JProperty prop in arr.Properties())
                 {
                     if ((prop.Name == "src" || prop.Name == "srcset" || prop.Name == "thumbnail") && !string.IsNullOrEmpty(prop.Value.ToString()))
                     {
-                        prop.Value = GetNewLink(prop.Value.ToString(), Assets);
+                        prop.Value = GetNewLink(portalid, prop.Value.ToString(), Assets);
                     }
                 }
                 if (arr.attributes != null)
@@ -1464,7 +1479,7 @@ namespace Vanjaro.Core
                     {
                         if ((prop.Name == "src" || prop.Name == "srcset" || prop.Name == "thumbnail") && !string.IsNullOrEmpty(prop.Value.ToString()))
                         {
-                            prop.Value = GetNewLink(prop.Value.ToString(), Assets);
+                            prop.Value = GetNewLink(portalid, prop.Value.ToString(), Assets);
                         }
                     }
                 }
@@ -1472,7 +1487,7 @@ namespace Vanjaro.Core
                 {
                     foreach (dynamic obj in arr.components)
                     {
-                        ProcessJsonObject(obj, Assets);
+                        ProcessJsonObject(portalid, obj, Assets);
                     }
                 }
             }

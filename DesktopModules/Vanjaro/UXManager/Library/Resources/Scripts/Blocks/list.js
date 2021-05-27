@@ -163,7 +163,7 @@ export default (editor, config = {}) => {
 					type: "toggle_checkbox",
 					name: "alignment",
 					UpdateStyles: true,
-					selector: 'list-box',
+					selector: '[data-gjs-type="list-box"]',
 					closest: true,
 					cssproperties: [{ name: "text-align" }],
 					options: [

@@ -68,6 +68,31 @@ namespace Vanjaro.Common.ASPNET
             }
         }
 
+        public static void RegisterClientStyleBlock(Page Page, string ID, string Style, bool AddStyleTags)
+        {
+            if (Page.Header.FindControl(ID) == null)
+            {
+                LiteralControl lit = new LiteralControl
+                {
+                    ID = ID
+                };
+
+                if (AddStyleTags)
+                {
+                    lit.Text = "<style type=\"text/css\">" + Style + "</style>";
+                }
+                else
+                {
+                    lit.Text = Style;
+                }
+
+                if (!string.IsNullOrEmpty(lit.Text))
+                {
+                    Page.Header.Controls.Add(lit);
+                }
+            }
+        }
+
         public static void RegisterClientScriptInclude(Page Page, string ID, string URL)
         {
             RegisterClientScriptInclude(Page, ID, URL, true);

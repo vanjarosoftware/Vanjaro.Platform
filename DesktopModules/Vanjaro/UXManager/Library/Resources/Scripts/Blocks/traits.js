@@ -173,8 +173,10 @@ export default (editor, config = {}) => {
 		var classes = [];
 		var model = comp;
 
-		if (typeof trait.attributes.selector != 'undefined')
-			model = comp.findType(trait.attributes.selector);
+		var selector = trait.attributes.selector;
+
+		if (typeof selector != 'undefined')
+			model = comp.find(selector);
 
 		$(model).each(function (index, item) {
 			var style = item.getStyle();
@@ -801,17 +803,16 @@ export default (editor, config = {}) => {
 				if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
 
 					var model = component;
+					var selector = trait.attributes.selector;
 
-					if (typeof trait.attributes.selector != 'undefined') {
-
-						var selector = trait.attributes.selector;
+					if (typeof selector != 'undefined') {
 
 						if (trait.attributes.closest) {
-							if (typeof component.closestType(selector) != 'undefined')
-								model = component.closestType(selector);
+							if (typeof component.closest(selector) != 'undefined')
+								model = component.closest(selector);
 						}
 						else
-							model = component.findType(selector)[0];
+							model = component.find(selector)[0];
 					}
 
 					if (property != '') {
@@ -837,17 +838,16 @@ export default (editor, config = {}) => {
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);
+			var selector = trait.attributes.selector;
 
-			if (typeof trait.attributes.selector != 'undefined') {
-
-				var selector = trait.attributes.selector;
+			if (typeof selector != 'undefined') {
 
 				if (trait.attributes.closest) {
-					if (typeof component.closestType(selector) != 'undefined')
-						model = component.closestType(selector);
+					if (typeof component.closest(selector) != 'undefined')
+						model = component.closest(selector);
 				}
 				else
-					model = component.findType(selector);
+					model = component.find(selector);
 			}
 
 			$(model).each(function (index, item) {
@@ -929,17 +929,16 @@ export default (editor, config = {}) => {
 				if (typeof event != 'undefined' && event.target.tagName.toLowerCase() != "input") {
 
 					var model = component;
+					var selector = trait.attributes.selector;
 
-					if (typeof trait.attributes.selector != 'undefined') {
-
-						var selector = trait.attributes.selector;
+					if (typeof selector != 'undefined') {
 
 						if (trait.attributes.closest) {
-							if (typeof component.closestType(selector) != 'undefined')
-								model = component.closestType(selector);
+							if (typeof component.closest(selector) != 'undefined')
+								model = component.closest(selector);
 						}
 						else
-							model = component.findType(selector)[0];
+							model = component.find(selector)[0];
 					}
 
 					if (property != '') {
@@ -1395,17 +1394,16 @@ export default (editor, config = {}) => {
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);
+			var selector = trait.attributes.selector;
 
-			if (typeof trait.attributes.selector != 'undefined') {
-
-				var selector = trait.attributes.selector;
+			if (typeof selector != 'undefined') {
 
 				if (trait.attributes.closest) {
-					if (typeof component.closestType(selector) != 'undefined')
-						model = component.closestType(selector);
+					if (typeof component.closest(selector) != 'undefined')
+						model = component.closest(selector);
 				}
 				else
-					model = component.findType(selector);
+					model = component.find(selector);
 			}
 
 			$(model).each(function (index, item) {
@@ -1489,9 +1487,10 @@ export default (editor, config = {}) => {
 
 				var classes = [];
 				var model = trait.target;
+				var selector = trait.attributes.selector;
 
-				if (typeof trait.attributes.selector != 'undefined')
-					model = trait.target.findType(trait.attributes.selector);
+				if (typeof selector != 'undefined')
+					model = trait.target.find(selector);
 
 				$(model).each(function (index, item) {
 
@@ -1549,6 +1548,24 @@ export default (editor, config = {}) => {
 
 			var property = trait.attributes.cssproperties[0].name;
 
+			var value = trait.getInitValue();
+
+			if (value != "" && value.indexOf('#') == -1) {
+
+				trait.view.$el.find("input:checked").prop("checked", false);
+				trait.view.$el.find(".active").removeClass("active");
+
+				trait.view.$el.find('input#' + value).prop("checked", true);
+				trait.view.$el.find('input#' + value).next().addClass("active");
+			}
+			else {
+
+				trait.view.$el.find("input:checked").prop("checked", false);
+				trait.view.$el.find(".active").removeClass("active");
+
+				trait.view.$el.find(".colorPicker").addClass('active');
+			}
+
 			if (typeof component.getStyle()[property] != "undefined") {
 
 				var customColor = component.getStyle()[property].replace("!important", "");
@@ -1587,11 +1604,11 @@ export default (editor, config = {}) => {
 				var selector = trait.attributes.selector;
 
 				if (trait.attributes.closest) {
-					if (typeof component.closestType(selector) != 'undefined')
-						model = component.closestType(selector);
+					if (typeof component.closest(selector) != 'undefined')
+						model = component.closest(selector);
 				}
 				else
-					model = component.findType(selector);
+					model = component.find(selector);
 			}
 
 			$(model).each(function (index, item) {
@@ -1723,17 +1740,16 @@ export default (editor, config = {}) => {
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);
+			var selector = trait.attributes.selector;
 
-			if (typeof trait.attributes.selector != 'undefined') {
-
-				var selector = trait.attributes.selector;
+			if (typeof selector != 'undefined') {
 
 				if (trait.attributes.closest) {
-					if (typeof component.closestType(selector) != 'undefined')
-						model = component.closestType(selector);
+					if (typeof component.closest(selector) != 'undefined')
+						model = component.closest(selector);
 				}
 				else
-					model = component.findType(selector);
+					model = component.find(selector);
 			}
 
 			$(model).each(function (index, item) {
@@ -1790,9 +1806,10 @@ export default (editor, config = {}) => {
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);
+			var selector = trait.attributes.selector;
 
-			if (typeof trait.attributes.selector != 'undefined')
-				model = component.findType(trait.attributes.selector);
+			if (typeof selector != 'undefined')
+				model = component.find(selector);
 
 			$(model).each(function (index, item) {
 				UpdateStyles(elInput, item, event, component);
@@ -1923,9 +1940,10 @@ export default (editor, config = {}) => {
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);
+			var selector = trait.attributes.selector;
 
-			if (typeof trait.attributes.selector != 'undefined')
-				model = component.findType(trait.attributes.selector);
+			if (typeof selector != 'undefined')
+				model = component.find(selector);
 
 			$(model).each(function (index, item) {
 				if (item.attributes.type == 'videobox')
@@ -2050,9 +2068,10 @@ export default (editor, config = {}) => {
 		onUpdate({ elInput, component, trait }) {
 
 			var model = component;
+			var selector = trait.attributes.selector;
 
-			if (typeof trait.attributes.selector != 'undefined')
-				model = component.findType(trait.attributes.selector)[0];
+			if (typeof selector != 'undefined')
+				model = component.find(selector)[0];
 
 			var text = model.getEl().textContent;
 			text = text.split(/\s+/).slice(0, 20).join(" ");
@@ -2110,9 +2129,10 @@ export default (editor, config = {}) => {
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);
+			var selector = trait.attributes.selector;
 
-			if (typeof trait.attributes.selector != 'undefined')
-				model = component.findType(trait.attributes.selector);
+			if (typeof selector != 'undefined')
+				model = component.find(selector);
 
 			$(model).each(function (index, item) {
 
