@@ -13,6 +13,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Help.Controllers
             {
                 case AppFactory.Identifier.setting_help:
                     return HelpController.GetData(UserInfo, Identifier, Parameters);
+                case AppFactory.Identifier.setting_videos:
+                    return HelpController.GetData(UserInfo, Identifier, Parameters);
                 default:
                     break;
             }

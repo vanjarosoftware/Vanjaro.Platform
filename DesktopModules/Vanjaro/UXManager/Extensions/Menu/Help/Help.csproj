@@ -40,7 +40,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\..\..\..\..\bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -59,9 +59,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources.txt" />
+    <Content Include="Resources\Help\Videos.html" />
     <Content Include="Resources\Images\Logo.png" />
+    <Content Include="Resources\Scripts\app.js" />
     <Content Include="Resources\Stylesheets\app.css" />
     <Content Include="Resources\UIEngine\AngularBootstrap\Layouts\Help.htm" />
+    <Content Include="Views\Setting\Videos.html" />
+    <Content Include="Views\Setting\Videos.js" />
     <Content Include="Views\Setting\Help.html" />
     <Content Include="Views\Setting\Help.js" />
   </ItemGroup>
@@ -69,8 +73,7 @@
     <Content Include="Views\App_LocalResources\Shared.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Setting\App_LocalResources\Add.resx" />
-    <Content Include="Views\Setting\App_LocalResources\Roles.resx" />
+    <Content Include="Views\Setting\App_LocalResources\Videos.resx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="DotNetNuke, Version=9.3.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -106,9 +109,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Setting\App_LocalResources\AddGroup.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -116,6 +116,9 @@
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Setting\App_LocalResources\Help.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
