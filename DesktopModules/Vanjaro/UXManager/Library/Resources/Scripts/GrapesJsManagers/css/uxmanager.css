@@ -2645,9 +2645,25 @@ span.notificationname {
     border: 1px solid #ccc;
 }
 
-.gjs-rte-active .fa-link:before {
-    content: "\f127" !important;
+.traitsmanager .preset-wrapper.blockwrapper label nav {
+    width: max-content;
 }
+
+    .traitsmanager .preset-wrapper.blockwrapper label nav li.selected a,
+    .traitsmanager .preset-wrapper.blockwrapper label nav li,
+    .traitsmanager .preset-wrapper.blockwrapper label nav li a,
+    .traitsmanager .preset-wrapper.blockwrapper label nav li .dropdown-toggle::after {
+        border: 0px !important;
+    }
+
+        .traitsmanager .preset-wrapper.blockwrapper label nav li a {
+            color: #333 !important;
+        }
+
+
+        .gjs-rte-active .fa-link:before {
+            content: "\f127" !important;
+        }
 /*custom slider*/
 
 .custom-range-sliderInput {
