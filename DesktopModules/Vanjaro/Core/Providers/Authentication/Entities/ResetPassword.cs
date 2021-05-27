@@ -14,7 +14,17 @@ namespace Vanjaro.Core.Providers.Authentication.Entities
         public string LoginURL => Managers.ResetPasswordManager.LoginURL("", false);
 
         private readonly IFileInfo logoFile = string.IsNullOrEmpty(PortalController.Instance.GetPortal(PortalSettings.Current.PortalId, PortalSettings.Current.CultureCode).LogoFile) ? null : FileManager.Instance.GetFile(PortalSettings.Current.PortalId, PortalController.Instance.GetPortal(PortalSettings.Current.PortalId, PortalSettings.Current.CultureCode).LogoFile);
-        public string Path => FileManager.Instance.GetUrl(FileManager.Instance.GetFile(logoFile.FileId));
+        public string Path
+        {
+            get
+            {
+                string logoPath = null;
+                if (logoFile != null && logoFile.FileId > 0)
+                    logoPath = FileManager.Instance.GetUrl(FileManager.Instance.GetFile(logoFile.FileId));
+                return logoPath;
+            }
+
+        }
 
         public string NavigateURL => ServiceProvider.NavigationManager.NavigateURL(PortalSettings.Current.HomeTabId);
         public string SiteName => PortalSettings.Current.PortalName;
