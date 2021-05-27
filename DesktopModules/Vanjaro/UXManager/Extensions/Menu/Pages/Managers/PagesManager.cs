@@ -137,6 +137,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         //HttpStatusCode.Forbidden  message is hardcoded in DotNetnuke so we localized our side.
                         actionResult.AddError("HttpStatusCode.Forbidden", DotNetNuke.Services.Localization.Localization.GetString("UserAuthorizationForbidden", Components.Constants.LocalResourcesFile));
                     }
+
+                    if (actionResult.IsSuccess && PageSettingLayout.IsAnchor && string.IsNullOrEmpty(PageSettingLayout.AnchorID))
+                        actionResult.AddError("EmptyAnchorID", DotNetNuke.Services.Localization.Localization.GetString("EmptyAnchorID", Components.Constants.LocalResourcesFile));
+
                     if (actionResult.IsSuccess)
                     {
                         pageSettings.Clean();
@@ -148,7 +152,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         tab.ContainerSrc = "[g]containers/vanjaro/base.ascx";
 
                         if (PageSettingLayout.IsAnchor)
-                            tab.TabSettings["Anchor"] = tab.TabName;
+                        {
+                            tab.TabSettings["AnchorID"] = PageSettingLayout.AnchorID;
+                            tab.TabSettings["AnchorPageID"] = PageSettingLayout.AnchorPageID;
+                        }
 
                         TabController.Instance.UpdateTab(tab);
 
@@ -912,10 +919,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         //RoleID=-1(All Users)
                         bool HasBeenPublished = (c.TabPermissions.Where(t => t != null && t.RoleID == -1 && t.AllowAccess == true).FirstOrDefault() != null) ? true : false;
 
-                        bool IsAnchorPage = c.TabSettings.ContainsKey("Anchor") && c.DisableLink;
+                        bool IsAnchorPage = c.TabSettings.ContainsKey("AnchorID") && c.DisableLink;
 
                         //Display in Menu Yes and DisbaledLink Yes then page is folder page
-                        bool IsFolder = !c.TabSettings.ContainsKey("Anchor") && c.DisableLink;
+                        bool IsFolder = !c.TabSettings.ContainsKey("AnchorID") && c.DisableLink;
                         bool HasEditPermission = TabPermissionController.HasTabPermission(c.TabPermissions, "EDIT");
 
                         if (c.TabID > Null.NullInteger)
@@ -1095,10 +1102,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     //RoleID=-1(All Users)
                     bool HasBeenPublished = (c.TabPermissions.Where(t => t != null && t.RoleID == -1 && t.AllowAccess == true).FirstOrDefault() != null) ? true : false;
 
-                    bool IsAnchorPage = c.TabSettings.ContainsKey("Anchor") && c.DisableLink;
+                    bool IsAnchorPage = c.TabSettings.ContainsKey("AnchorID") && c.DisableLink;
 
                     //Display in Menu Yes and DisbaledLink Yes then page is folder page
-                    bool IsFolder = !c.TabSettings.ContainsKey("Anchor") && c.DisableLink;
+                    bool IsFolder = !c.TabSettings.ContainsKey("AnchorID") && c.DisableLink;
 
                     bool HasEditPermission = TabPermissionController.HasTabPermission(c.TabPermissions, "EDIT");
 

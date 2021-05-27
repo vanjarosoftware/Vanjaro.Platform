@@ -213,6 +213,7 @@ namespace Vanjaro.UXManager.Library
                     tab.DisableLink = (page.TabPermissions.Where(t => t != null && t.RoleID == -1 && t.AllowAccess == true).FirstOrDefault() != null) ? false : true;
                     tab.TabName = page.TabName;
                     tab.TabID = page.TabID;
+                    tab.TabType = GetTabType(page);
                     RootCategory.Add(tab);
                     RootCategory.AddRange(GetPagesChildPages(page.TabID, "-", portalSettings, DisableLink));
                 }
@@ -241,6 +242,7 @@ namespace Vanjaro.UXManager.Library
                     childTab.DisableLink = (item.TabPermissions.Where(t => t != null && t.RoleID == -1 && t.AllowAccess == true).FirstOrDefault() != null) ? false : true;
                     childTab.TabName = NamePrefix + " " + item.TabName.TrimStart('-');
                     childTab.TabID = item.TabID;
+                    childTab.TabType = GetTabType(item);
                     ChildPages.Add(childTab);
                     ChildPages.AddRange(GetPagesChildPages(item.TabID, NamePrefix + "-", portalSettings, DisableLink));
                 }
@@ -345,7 +347,16 @@ namespace Vanjaro.UXManager.Library
                 return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
             }
 
+            private static string GetTabType(TabInfo tab)
+            {
+                string TabType = tab.TabType.ToString().ToLower();
+                if (!tab.TabSettings.ContainsKey("AnchorID") && tab.DisableLink)
+                    TabType = "folder";
+                else if (tab.TabSettings.ContainsKey("AnchorID") && tab.DisableLink)
+                    TabType = "anchor";
 
+                return TabType;
+            }
         }
     }
 }

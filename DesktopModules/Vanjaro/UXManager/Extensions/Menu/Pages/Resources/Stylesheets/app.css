@@ -379,7 +379,7 @@
 }
 
     #PagesUrldefaultModal .modal-dialog .modal-header .btn-close {
-        font-size:10px;
+        font-size: 10px;
     }
 
 .vj-ux-manager .select-template-icon svg {
@@ -444,3 +444,6 @@
 }
 
 
+.vj-ux-manager .input-group-append {
+    margin-left: 2px !important;
+}

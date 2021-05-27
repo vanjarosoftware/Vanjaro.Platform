@@ -1,5 +1,4 @@
-﻿using Dnn.PersonaBar.Pages.Components;
-using Dnn.PersonaBar.Pages.Components.Dto;
+﻿using Dnn.PersonaBar.Pages.Components.Dto;
 using Dnn.PersonaBar.Pages.Components.Security;
 using Dnn.PersonaBar.Pages.Services.Dto;
 using Dnn.PersonaBar.SiteSettings.Services.Dto;
@@ -11,6 +10,7 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Web.Api;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -87,12 +87,14 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
                         {
                             PageSettings pageSettings = new PageSettings();
                             pageSettings = pid > 0 ? Managers.PagesManager.GetPageDetails(pid).Data : Managers.PagesManager.GetDefaultSettings();
+                            Hashtable tabSettings = pid > 0 ? TabController.Instance.GetTabSettings(pid) : null;
                             if (copy)
                             {
                                 pageSettings.Name += "_Copy";
                                 pageSettings.AbsoluteUrl = null;
                             }
                             ParentPageValue = pid > 0 && pageSettings.ParentId.HasValue ? pageSettings.ParentId.ToString() : ParentPageValue;
+                            string BindAnchorPage = tabSettings != null && tabSettings.ContainsKey("AnchorPageID") ? tabSettings["AnchorPageID"].ToString() : PortalSettings.Current.ActiveTab.TabID.ToString();
                             SitemapPriorityValue = pid > 0 && pageSettings.SiteMapPriority != Null.NullInteger ? pageSettings.SiteMapPriority.ToString() : SitemapPriorityValue;
                             if (pageSettings.TabId > 0)
                             {
@@ -146,7 +148,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
                             Settings.Add("Languages", new UIData { Name = "Languages", Value = PortalSettings.Current.CultureCode, Options = LocalizationManager.GetActiveLocale(PortalSettings.Current.PortalId).Where(a => a.Value.ToLower() == PortalSettings.Current.CultureCode.ToLower()), OptionsText = "Text", OptionsValue = "Value" });
                             Settings.Add("MakePublic", new UIData { Name = "MakePublic", Value = bool.FalseString });
                             Settings.Add("EnableScheduling", new UIData { Name = "EnableScheduling", Value = bool.FalseString });
-                            Settings.Add("IsAnchor", new UIData { Name = "IsAnchor", Value = TabController.Instance.GetTabSettings(pid).ContainsKey("Anchor").ToString() });
+                            Settings.Add("IsAnchor", new UIData { Name = "IsAnchor", Value = (tabSettings != null && tabSettings.ContainsKey("AnchorID")).ToString() });
+                            Settings.Add("AnchorPage", new UIData { Name = "AnchorPage", Options = Library.Managers.PageManager.GetParentPages(PortalSettings.Current).Where(x => x.TabType != "url" && x.TabType != "folder" && x.TabType != "anchor").Select(a => new { a.TabID, a.TabName }), OptionsText = "TabName", OptionsValue = "TabID", Value = BindAnchorPage });
+                            Settings.Add("AnchorID", new UIData { Name = "AnchorID", Value = (tabSettings != null && tabSettings.ContainsKey("AnchorID")) ? tabSettings["AnchorID"].ToString() : string.Empty });
                         }
 
                         return Settings.Values.ToList();
