@@ -53,7 +53,7 @@
                                 <em class="fas fa-ellipsis-v"></em>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item box-icon" ng-click="Click_EditRole(row)"><em class="fas fa-cog"></em><span>[L:Edit]</span></a>
+                                <a mn-ng-if="!row.IsSystem" class="dropdown-item box-icon" ng-click="Click_EditRole(row)"><em class="fas fa-cog"></em><span>[L:Edit]</span></a>
                                 <a class="dropdown-item box-icon" ng-click="Click_AddUser(row)"><em class="fas fa-users mr-xs"></em><span>[L:AddUser]</span></a>
                                 <hr class="m-none" mn-ng-hide="row.IsSystem" />
                                 <a mn-ng-hide="row.IsSystem" class="dropdown-item box-icon" ng-click="Click_DeleteRole(row,'update')"><em class="fas fa-trash mr-xs"></em><span>[L:Delete]</span></a>
