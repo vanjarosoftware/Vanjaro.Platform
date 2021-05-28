@@ -1145,6 +1145,11 @@ div#MenuSettings .parent-menu-hide {
     border-radius: 0 4px 4px 0;
 }
 
+.gjs-field-toggle_radio .toggle-wrapper label em,
+.gjs-field-toggle_checkbox .toggle-wrapper label em,
+.gjs-field-toggle_checkbox .toggle-wrapper label img {
+    margin:0px 4px;
+}
 
 .gjs-select option, .gjs-clm-select option, .gjs-sm-select option, .gjs-fields option, .gjs-sm-unit option {
     color: #495157;
@@ -3623,3 +3628,34 @@ body.resp-mode.mobile-landscape .vj-wrapper {
     text-transform: uppercase;
     font-weight: bold;
 }
+
+.gjs-field-toggle .toggle-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #aaa;
+    text-transform: capitalize;
+    width: 100%;
+}
+
+.gjs-field-toggle.gjs-field {
+    cursor: pointer;
+    border:0px;
+}
+
+.gjs-field-toggle .toggle-box input{
+    display: none;
+}
+
+.toggle-box {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
