@@ -759,17 +759,27 @@ export default (editor, config = {}) => {
                 input.setAttribute("name", trait.attributes.name);
                 input.setAttribute("id", value.id);
                 input.setAttribute("value", value.name);
+                input.setAttribute("title", value.title);
 
                 label.setAttribute("for", value.id);
+ 
 
                 if (typeof value.icon != 'undefined') {
+                    if (typeof value.title != 'undefined')
+                        label.innerHTML = value.title;
+
                     icon.setAttribute("class", value.icon);
                     label.appendChild(icon);
                 }
+
                 else if (typeof value.image != 'undefined') {
+                    if (typeof value.title != 'undefined')
+                        label.innerHTML = value.title;
+
                     img.setAttribute("src", VjDefaultPath + value.image + ".png");
                     label.appendChild(img);
                 }
+
                 else {
                     if (trait.target.attributes.type == "list")
                         label.innerHTML = value.name
@@ -879,6 +889,7 @@ export default (editor, config = {}) => {
                 input.setAttribute("name", trait.attributes.name);
                 input.setAttribute("id", value.id);
                 input.setAttribute("value", value.name);
+                input.setAttribute("title", value.title);
 
                 if (trait.target.attributes.type == 'list' && trait.attributes.name == "ol_list_style")
                     input.setAttribute("value", value.id);
@@ -888,11 +899,19 @@ export default (editor, config = {}) => {
 
                 label.setAttribute("for", value.id);
 
-                if (typeof value.icon != 'undefined') {
-                    icon.setAttribute("class", value.icon);
+
+                 if (typeof value.icon != 'undefined') {
+                    if (typeof value.title != 'undefined')
+                        label.innerHTML = value.title;
+
+                    icon.setAttribute("class", value.icon);                    
                     label.appendChild(icon);
                 }
+
                 else if (typeof value.image != 'undefined') {
+                    if (typeof value.title != 'undefined')
+                        label.innerHTML = value.title;
+
                     img.setAttribute("src", VjDefaultPath + value.image + ".png");
                     label.appendChild(img);
                 }
@@ -2146,4 +2165,35 @@ export default (editor, config = {}) => {
             });
         }
     });
+
+
+    //toggle
+    tm.addType('toggle', {
+        createInput({ trait }) {
+            const el = document.createElement('div');
+            el.classList.add("toggle-box");
+            el.id = trait.attributes.name;
+
+            el.innerHTML = `
+                <input type="checkbox" class="btn-check" name="${ trait.attributes.name}" id="toggle-box" >
+                <label for="toggle-box" class="toggle-option">  ${trait.attributes.name}
+                    <em class="fas fa-chevron-down float-end"></em>
+                </label> `
+            return el;
+        },
+        onEvent({ elInput, component, event }) {
+
+            var trait = component.getTrait(event.target.name);
+
+            trait.setTargetValue(event.target.id);
+
+        }
+    });
+
+
 }
+
+
+
+
+
