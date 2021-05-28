@@ -2584,10 +2584,6 @@ span.notificationname {
     justify-content: space-between;
 }
 
-.traitsmanager .preset-wrapper div.styles.active {
-    border-color: #ccc;
-}
-
 .traitsmanager .preset-wrapper label {
     display: block;
     width: 278px;
