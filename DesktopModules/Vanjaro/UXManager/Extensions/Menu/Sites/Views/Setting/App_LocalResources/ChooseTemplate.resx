@@ -117,37 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddNewSite.Text" xml:space="preserve">
-    <value>Add New Site</value>
-  </data>
-  <data name="ChooseTemplate.Text" xml:space="preserve">
-    <value>Choose Template</value>
-  </data>
-  <data name="Delete.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="DeleteConfirm.Text" xml:space="preserve">
-    <value>You want to delete </value>
-  </data>
-  <data name="Export.Text" xml:space="preserve">
-    <value>Export as Zip</value>
-  </data>
-  <data name="ExportMessage.Text" xml:space="preserve">
-    <value>You want to export all page templates of </value>
-  </data>
-  <data name="Portals_Columns_PortalName.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="Portals_Columns_Setting.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="SiteGroup.Text" xml:space="preserve">
-    <value>Site Group</value>
-  </data>
-  <data name="Success_DeleteMessage.Text" xml:space="preserve">
-    <value>Site deleted successfully.</value>
-  </data>
-  <data name="View.Text" xml:space="preserve">
-    <value>View</value>
+  <data name="ContinueDefault.Text" xml:space="preserve">
+    <value>Continue with default</value>
   </data>
 </root>

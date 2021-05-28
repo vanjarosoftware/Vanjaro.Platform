@@ -6,7 +6,7 @@
 
     };
     $scope.Click_New = function () {
-        parent.OpenPopUp(null, 800, 'right', 'Add New Site', "#!/add");
+        parent.OpenPopUp(null, '100%', 'center', '[L:AddNewSite]', "#!/choosetemplate", '100%', true, false, null, false);
     };
     $scope.Click_SiteGroup = function () {
         event.preventDefault();

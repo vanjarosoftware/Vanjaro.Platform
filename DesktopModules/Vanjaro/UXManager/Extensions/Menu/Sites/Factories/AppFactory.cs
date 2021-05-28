@@ -38,6 +38,19 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Factories
             };
             Views.Add(addSite);
 
+
+            AngularView choosetemplate = new AngularView
+            {
+                AccessRoles = "host",
+                UrlPaths = new List<string> {
+                  "choosetemplate"
+                },
+                TemplatePath = "setting/choosetemplate.html",
+                Identifier = Identifier.setting_choosetemplate.ToString(),
+                Defaults = new Dictionary<string, string> { }
+            };
+            Views.Add(choosetemplate);
+
             return Views;
         }
 
@@ -107,7 +120,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Factories
 
         internal enum Identifier
         {
-            setting_sites, setting_add
+            setting_sites, setting_add, setting_choosetemplate
         }
     }
 }

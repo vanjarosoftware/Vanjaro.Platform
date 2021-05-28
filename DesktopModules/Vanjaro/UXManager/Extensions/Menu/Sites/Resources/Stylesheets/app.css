@@ -4,3 +4,54 @@
     overflow: hidden;
     white-space: pre;
 }
+
+#FrameUrl {
+    height: calc(100vh - 10px);
+}
+
+.fixed-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100% !important;
+    z-index: 9;
+}
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 40px;
+    width: 40px;
+    margin: -20px 0 0 -20px;
+}
+
+.create-site-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.centerloader {
+    display: block;
+    height: 40px !important;
+    width: 40px !important;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.create-site-overlay h1 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+}

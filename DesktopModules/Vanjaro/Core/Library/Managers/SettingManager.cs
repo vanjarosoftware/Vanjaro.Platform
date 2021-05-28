@@ -314,7 +314,7 @@ namespace Vanjaro.Core
                     if (ApplyTemplates)
                     {
                         List<Layout> pageLayouts = GetLayouts(pinfo);
-                        ApplyDefaultLayouts(pinfo, uInfo, pageLayouts);
+                        ApplyDefaultLayouts(pinfo, uInfo, pageLayouts, string.Empty);
                         pinfo.LogoFile = fi.FolderPath + "Logo.svg";
                     }
 
@@ -377,7 +377,7 @@ namespace Vanjaro.Core
                         }
                         TabInfo SigninTab = TabController.Instance.GetTabByName("Signin", pinfo.PortalID);
                         List<Layout> pageLayouts = GetLayouts(pinfo);
-                        UpdateSignInTab(pinfo, uInfo, pageLayouts);
+                        UpdateSignInTab(pinfo, uInfo, pageLayouts, ApplyTemplates, string.Empty);
                         if (SigninTab != null)
                         {
                             Core.Managers.LoginManager.AddUpdateLoginModule(SigninTab.TabID, pinfo.PortalID);
@@ -457,7 +457,7 @@ namespace Vanjaro.Core
                 PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.MinifyJsKey, "True");
             }
 
-            public static void UpdateSignInTab(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts)
+            public static void UpdateSignInTab(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts, bool ApplyTemplates, string portableModulesPath)
             {
                 TabInfo SigninTab = TabController.Instance.GetTabByName("Signin", pinfo.PortalID);
                 Layout Signinlayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "signin").FirstOrDefault();
@@ -465,7 +465,8 @@ namespace Vanjaro.Core
                 Layout homelayout = pageLayouts.Where(a => a.Name == "Home").FirstOrDefault();
                 if (SigninTab != null && Signinlayout != null && portalSettings != null)
                 {
-                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
+                    if (ApplyTemplates)
+                        ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
                     UpdateLayoutSettings(SigninTab, Signinlayout.Settings);
 
                     if (portalSettings.ActiveTab == null)
@@ -484,6 +485,7 @@ namespace Vanjaro.Core
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.ContentJSON.ToString(), pinfo.PortalID),
                         ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
+                    PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
 
 
@@ -502,7 +504,7 @@ namespace Vanjaro.Core
                 }
             }
 
-            public static void ApplyDefaultLayouts(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts)
+            public static void ApplyDefaultLayouts(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts, string portableModulesPath)
             {
                 #region Applying Layouts
 
@@ -531,6 +533,7 @@ namespace Vanjaro.Core
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.ContentJSON.ToString(), pinfo.PortalID),
                         ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
+                    PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
 
                     Pages Page = Managers.PageManager.GetPages(SignUpTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
@@ -573,6 +576,7 @@ namespace Vanjaro.Core
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.ContentJSON.ToString(), pinfo.PortalID),
                         ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
+                    PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
 
                     Pages Page = Managers.PageManager.GetPages(NotFoundTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
@@ -615,6 +619,7 @@ namespace Vanjaro.Core
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.ContentJSON.ToString(), pinfo.PortalID),
                         ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
+                    PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
 
                     Pages Page = Managers.PageManager.GetPages(ProfileTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
@@ -655,6 +660,7 @@ namespace Vanjaro.Core
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.ContentJSON.ToString(), pinfo.PortalID),
                         ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
+                    PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
 
                     Pages Page = Managers.PageManager.GetPages(SearchResultTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
@@ -695,6 +701,7 @@ namespace Vanjaro.Core
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Termslayout.ContentJSON.ToString(), pinfo.PortalID),
                         ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Termslayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
+                    PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
 
                     Pages Page = Managers.PageManager.GetPages(TermsTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
@@ -734,6 +741,7 @@ namespace Vanjaro.Core
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.ContentJSON.ToString(), pinfo.PortalID),
                         ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
+                    PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
 
                     Pages Page = Managers.PageManager.GetPages(PrivacyTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
@@ -775,6 +783,7 @@ namespace Vanjaro.Core
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(homelayout.ContentJSON.ToString(), pinfo.PortalID),
                         ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(homelayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
+                    PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
 
                     Pages Page = Managers.PageManager.GetPages(HomeTab.TabID).OrderByDescending(o => o.Version).FirstOrDefault();
