@@ -139,7 +139,7 @@
     <value>Title</value>
   </data>
   <data name="Update.Text" xml:space="preserve">
-    <value>Update</value>
+    <value>Create Site</value>
   </data>
   <data name="UseCurrentUserAsAdmin.OFF" xml:space="preserve">
     <value>No</value>

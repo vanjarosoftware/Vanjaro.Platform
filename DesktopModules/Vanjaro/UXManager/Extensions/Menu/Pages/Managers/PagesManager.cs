@@ -106,7 +106,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                 return actionResult;
             }
 
-            public static ActionResult SavePageDetails(int DefaultWorkflow, int MaxRevisions, PageSettingLayout PageSettingLayout)
+            public static ActionResult SavePageDetails(PortalSettings portalSettings, int DefaultWorkflow, int MaxRevisions, PageSettingLayout PageSettingLayout, bool checkPermission = true)
             {
                 PageSettings pageSettings = PageSettingLayout.PageSettings;
                 if (pageSettings.PageType.ToLower() == "url")
@@ -125,14 +125,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     pageSettings.PageType = "normal";
                 }
 
-                PortalSettings portalSettings = PortalController.Instance.GetCurrentSettings() as PortalSettings;
-
                 dynamic Data = new ExpandoObject();
                 Data.NewTabId = 0;
                 ActionResult actionResult = new ActionResult();
                 try
                 {
-                    if (!SecurityService.Instance.CanSavePageDetails(pageSettings))
+                    if (checkPermission && !SecurityService.Instance.CanSavePageDetails(pageSettings))
                     {
                         //HttpStatusCode.Forbidden  message is hardcoded in DotNetnuke so we localized our side.
                         actionResult.AddError("HttpStatusCode.Forbidden", DotNetNuke.Services.Localization.Localization.GetString("UserAuthorizationForbidden", Components.Constants.LocalResourcesFile));
@@ -274,6 +272,100 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     CacheFactory.Clear(CacheFactory.Keys.PageLayout);
                 }
             }
+
+            public static void ImportTemplates(PortalInfo portalInfo, UserInfo uInfo, List<Layout> pageLayouts, string portableModulesPath)
+            {
+                int defaultWorkflow = WorkflowManager.GetDefaultWorkflow(0);
+                int maxRevisions = WorkflowManager.GetMaxRevisions(0);
+                PortalSettings portalSettings = new PortalSettings(portalInfo);
+                if (portalSettings.PortalAlias == null)
+                {
+                    foreach (var alias in PortalAliasController.Instance.GetPortalAliasesByPortalId(portalInfo.PortalID).Where(alias => alias.IsPrimary))
+                        portalSettings.PortalAlias = alias;
+                }
+                foreach (Layout layout in pageLayouts)
+                {
+                    ImportTemplate(portalInfo, uInfo, portableModulesPath, defaultWorkflow, maxRevisions, portalSettings, layout, -1);
+                }
+            }
+
+            public static void ImportTemplate(PortalInfo portalInfo, UserInfo uInfo, string portableModulesPath, int defaultWorkflow, int maxRevisions, PortalSettings portalSettings, Layout layout, int parentID)
+            {
+                if (layout != null && portalSettings != null)
+                {
+                    PageSettingLayout pageSettingLayout = new PageSettingLayout(0);
+                    pageSettingLayout.PageSettings = GetDefaultSettings();
+                    pageSettingLayout.PageSettings.AllowIndex = true;
+                    pageSettingLayout.PageSettings.PageType = layout.Type;
+                    pageSettingLayout.PageSettings.Name = layout.Name;
+                    if (layout.Type.ToLower() == "url" && string.IsNullOrEmpty(pageSettingLayout.PageSettings.ExternalRedirection))
+                        pageSettingLayout.PageSettings.ExternalRedirection = layout.Name;
+                    if (parentID > 0)
+                        pageSettingLayout.PageSettings.ParentId = parentID;
+                    ActionResult ActionResult = SavePageDetails(portalSettings, defaultWorkflow, maxRevisions, pageSettingLayout, uInfo.IsAdmin ? false : true);
+                    if (ActionResult.IsSuccess)
+                    {
+                        try
+                        {
+                            ProcessBlocks(portalInfo.PortalID, layout.Blocks);
+                            if (portalSettings.ActiveTab == null)
+                                portalSettings.ActiveTab = new TabInfo();
+                            portalSettings.ActiveTab.TabID = ActionResult.Data.NewTabId;
+                            TabInfo tab = TabController.Instance.GetTab(portalSettings.ActiveTab.TabID, portalSettings.ActiveTab.PortalID);
+                            tab.IsVisible = true;
+                            TabController.Instance.UpdateTab(tab);
+                            DotNetNuke.Security.Roles.RoleInfo adminrole = DotNetNuke.Security.Roles.RoleController.Instance.GetRoleByName(portalSettings.ActiveTab.PortalID, "Administrators");
+                            if (adminrole != null)
+                            {
+                                foreach (TabPermissionInfo p in tab.TabPermissions.Where(t => t != null && t.RoleName == "Administrators"))
+                                    p.RoleID = adminrole.RoleID;
+                            }
+                            if (tab.TabPermissions.Where(t => t != null && t.RoleName == "All Users").FirstOrDefault() != null)
+                            {
+                                foreach (TabPermissionInfo p in tab.TabPermissions.Where(t => t != null && t.RoleName == "All Users"))
+                                    p.AllowAccess = true;
+                            }
+                            else
+                                tab.TabPermissions.Add(new TabPermissionInfo { PermissionID = 3, TabID = tab.TabID, AllowAccess = true, RoleID = -1, RoleName = "All Users" });
+                            TabPermissionController.SaveTabPermissions(tab);
+                            SettingManager.UpdateLayoutSettings(tab, layout.Settings);
+                            Dictionary<string, object> LayoutData = new Dictionary<string, object>
+                            {
+                                ["IsPublished"] = false,
+                                ["Comment"] = string.Empty,
+                                ["gjs-assets"] = string.Empty,
+                                ["gjs-css"] = PageManager.DeTokenizeLinks(layout.Style.ToString(), portalInfo.PortalID),
+                                ["gjs-html"] = PageManager.DeTokenizeLinks(layout.Content.ToString(), portalInfo.PortalID),
+                                ["gjs-components"] = PageManager.DeTokenizeLinks(layout.ContentJSON.ToString(), portalInfo.PortalID),
+                                ["gjs-styles"] = PageManager.DeTokenizeLinks(layout.StyleJSON.ToString(), portalInfo.PortalID)
+                            };
+                            PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
+                            PageManager.Update(portalSettings, LayoutData);
+                            List<Core.Data.Entities.Pages> pages = PageManager.GetPages(ActionResult.Data.NewTabId);
+                            Core.Data.Entities.Pages Page = pages.OrderByDescending(o => o.Version).FirstOrDefault();
+                            if (Page != null && uInfo != null)
+                            {
+                                WorkflowState state = WorkflowManager.GetStateByID(Page.StateID.Value);
+                                Page.Version = 1;
+                                Page.StateID = state != null ? WorkflowManager.GetLastStateID(state.WorkflowID).StateID : 2;
+                                Page.IsPublished = true;
+                                Page.PublishedBy = uInfo.UserID;
+                                Page.PublishedOn = DateTime.UtcNow;
+                                Core.Factories.PageFactory.Update(Page, uInfo.UserID);
+                            }
+                            foreach (Layout childLayout in layout.Children)
+                            {
+                                ImportTemplate(portalInfo, uInfo, portableModulesPath, defaultWorkflow, maxRevisions, portalSettings, childLayout, tab.TabID);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                        }
+                    }
+                }
+            }
+
 
             public static ActionResult SaveLayoutAs(int pid, string name, dynamic Data, PortalSettings PortalSettings)
             {
@@ -733,7 +825,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                 PageSettingLayout.PageSettings.TabId = 0;
                 PageSettingLayout.PageSettings.Url = string.Empty;
                 PortalSettings portalSettings = PortalController.Instance.GetCurrentSettings() as PortalSettings;
-                ActionResult Response = PagesManager.SavePageDetails(DefaultWorkflow, MaxRevisions, PageSettingLayout);
+                ActionResult Response = PagesManager.SavePageDetails(portalSettings, DefaultWorkflow, MaxRevisions, PageSettingLayout);
                 if (Response.IsSuccess)
                 {
                     foreach (string Locale in Core.Managers.PageManager.GetCultureListItems())

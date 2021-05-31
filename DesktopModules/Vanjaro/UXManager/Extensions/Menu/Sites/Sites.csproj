@@ -72,6 +72,7 @@
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -108,6 +109,7 @@
     <Compile Include="Controllers\AddController.cs" />
     <Compile Include="Controllers\ServiceRouteMapper.cs" />
     <Compile Include="Controllers\SitesController.cs" />
+    <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Controllers\UIController.cs" />
     <Compile Include="ExtensionInfo.cs" />
     <Compile Include="Factories\AppFactory.cs" />
@@ -118,6 +120,7 @@
   <ItemGroup>
     <Content Include="Resources.txt" />
     <Content Include="Resources\Stylesheets\app.css" />
+    <Content Include="Resources\UIEngine\AngularBootstrap\Layouts\Site.htm" />
     <Content Include="Resources\UIEngine\AngularBootstrap\Layouts\Sites.htm" />
     <Content Include="Views\Setting\Add.html" />
     <Content Include="Views\Setting\Add.js" />
@@ -126,6 +129,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Setting\ChooseTemplate.html" />
+    <Content Include="Views\Setting\ChooseTemplate.js" />
     <Content Include="Views\Setting\Sites.html" />
     <Content Include="Views\Setting\Sites.js" />
   </ItemGroup>
@@ -161,6 +166,9 @@
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Setting\App_LocalResources\ChooseTemplate.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

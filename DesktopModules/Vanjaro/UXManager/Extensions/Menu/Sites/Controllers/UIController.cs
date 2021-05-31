@@ -15,6 +15,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Controllers
                     return SitesController.GetData(PortalSettings.PortalId);
                 case AppFactory.Identifier.setting_add:
                     return AddController.GetData();
+                case AppFactory.Identifier.setting_choosetemplate:
+                    return TemplateController.GetData();
                 default:
                     break;
             }

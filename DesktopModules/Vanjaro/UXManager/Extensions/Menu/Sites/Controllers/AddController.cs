@@ -28,26 +28,26 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CreatePortalRequest Data)
+        public ActionResult Create(dynamic Data)
         {
             CreatePortalRequest request = new CreatePortalRequest
             {
-                SiteName = Data.SiteName,
-                SiteAlias = Data.SiteAlias,
+                SiteName = Data.PortalRequest.SiteName.Value,
+                SiteAlias = Data.PortalRequest.SiteAlias.Value,
                 IsChildSite = false,
                 HomeDirectory = "Portals/[PortalID]",
-                UseCurrentUserAsAdmin = Data.UseCurrentUserAsAdmin
+                UseCurrentUserAsAdmin = Data.PortalRequest.UseCurrentUserAsAdmin.Value
             };
             if (!request.UseCurrentUserAsAdmin)
             {
-                request.Username = Data.Email;
-                request.Email = Data.Email;
-                request.Firstname = Data.Firstname;
-                request.Lastname = Data.Lastname;
-                request.Password = Data.Password;
-                request.PasswordConfirm = Data.PasswordConfirm;
+                request.Username = Data.PortalRequest.Email.Value;
+                request.Email = Data.PortalRequest.Email.Value;
+                request.Firstname = Data.PortalRequest.Firstname.Value;
+                request.Lastname = Data.PortalRequest.Lastname.Value;
+                request.Password = Data.PortalRequest.Password.Value;
+                request.PasswordConfirm = Data.PortalRequest.PasswordConfirm.Value;
             }
-            return SitesManager.CreatePortal(request);
+            return SitesManager.CreatePortal(request, Data.SiteTemplate);
         }
 
         public override string AccessRoles()

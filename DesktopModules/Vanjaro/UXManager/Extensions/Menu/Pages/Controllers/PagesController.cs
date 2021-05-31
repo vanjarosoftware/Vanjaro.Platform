@@ -205,7 +205,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
             }
             else
             {
-                ActionResult = Managers.PagesManager.SavePageDetails(DefaultWorkflow, MaxRevisions, PageSettingLayout);
+                PortalSettings portalSettings = PortalController.Instance.GetCurrentSettings() as PortalSettings;
+                ActionResult = Managers.PagesManager.SavePageDetails(portalSettings, DefaultWorkflow, MaxRevisions, PageSettingLayout);
                 if (ActionResult.IsSuccess && PageSettingLayout.PageLayout != null)
                 {
                     try
