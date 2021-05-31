@@ -3653,5 +3653,7 @@ body.resp-mode.mobile-landscape .vj-wrapper {
     align-items: center;
 }
 
-
+.gjs-trt-trait--toggle .gjs-label {
+    display:none;
+}
 

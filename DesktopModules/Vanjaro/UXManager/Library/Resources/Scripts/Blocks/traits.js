@@ -2175,8 +2175,8 @@ export default (editor, config = {}) => {
             el.id = trait.attributes.name;
 
             el.innerHTML = `
-                <input type="checkbox" class="btn-check" name="${ trait.attributes.name}" id="toggle-box" >
-                <label for="toggle-box" class="toggle-option">  ${trait.attributes.name}
+                <input type="checkbox" class="btn-check" name="${ trait.attributes.label}" id="toggle-box" >
+                <label for="toggle-box" class="toggle-option">  ${trait.attributes.label}
                     <em class="fas fa-chevron-down float-end"></em>
                 </label> `
             return el;
