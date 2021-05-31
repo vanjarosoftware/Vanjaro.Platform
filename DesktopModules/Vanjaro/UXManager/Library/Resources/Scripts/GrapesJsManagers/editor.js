@@ -312,14 +312,7 @@ $(document).ready(function () {
                 if (vjEditorSettings.AppName && vjEditorSettings.AppTitle) {
                     var markup = '<div class="app-header"><div class="app-title"><strong>Editing</strong>: ' + vjEditorSettings.AppTitle + '</div><div class="app-name">' + vjEditorSettings.AppName + '</div></div>';
                     $('.vj-wrapper').prepend(markup);
-                }
-
-                $(document).on("click", function (e) {
-                    if ($(e.target).parents('.sidebar').length <= 0) {
-                        VjEditor.select();
-                        ShowBlockUI();
-                    }
-                });
+                }                
             }
 
             $('#vjEditor').scroll(function () {
@@ -1785,7 +1778,7 @@ $(document).ready(function () {
 
 							VjEditor.on('sorter:drag:end', function (model, bmodel) {
 
-								if (typeof model != 'undefined' && typeof model.modelToDrop != 'undefined') {
+								if (typeof model != 'undefined' && typeof model.modelToDrop != 'undefined') {                                   
 
 									if (typeof model.modelToDrop.attributes != 'undefined' && model.modelToDrop.attributes.type == "videobox") {
 										model.modelToDrop.components().models.find(t => t.attributes.type == 'video').set({ 'src': model.modelToDrop.attributes.src });
@@ -1830,6 +1823,11 @@ $(document).ready(function () {
 							VjEditor.on('block:drag:stop', function (model, bmodel) {
 
 								if (typeof model != "undefined") {
+
+                                    if ($(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]').length && model.attributes.type == 'globalblockwrapper') {
+                                        model.remove();
+                                        return false;
+                                    }
 
 									var modelClasses = model.attributes.classes;
 									if (modelClasses.length) {
