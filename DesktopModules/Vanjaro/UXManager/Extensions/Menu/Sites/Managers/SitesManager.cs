@@ -416,7 +416,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             }
         }
 
-        private static void ImportTemplate(PortalInfo pinfo, string SiteTemplatePath, string SiteTemplateHash)
+        public static void ImportTemplate(PortalInfo pinfo, string SiteTemplatePath, string SiteTemplateHash)
         {
             try
             {

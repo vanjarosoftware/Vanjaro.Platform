@@ -120,6 +120,7 @@
   <ItemGroup>
     <Content Include="Resources.txt" />
     <Content Include="Resources\Stylesheets\app.css" />
+    <Content Include="Resources\UIEngine\AngularBootstrap\Layouts\Site.htm" />
     <Content Include="Resources\UIEngine\AngularBootstrap\Layouts\Sites.htm" />
     <Content Include="Views\Setting\Add.html" />
     <Content Include="Views\Setting\Add.js" />

@@ -5,6 +5,7 @@
     $scope.SiteTemplate;
 
     $scope.onInit = function () {
+        $(window.parent.document.body).find('.modal-dialog:last').find('.defaultdesign-hidden').remove();
         $scope.SiteTemplate = $scope.GetSbTemplate("vj_sbtemplate");
         if ($scope.SiteTemplate != undefined && $scope.SiteTemplate.length > 0) {
             $scope.SiteTemplate = JSON.parse($scope.SiteTemplate);

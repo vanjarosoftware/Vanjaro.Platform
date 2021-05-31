@@ -21,7 +21,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Controllers
         {
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
             Settings.Add("LibraryUrl", new UIData { Name = "LibraryUrl", Value = LibraryUrl });
-            Settings.Add("LibraryMidUrl", new UIData { Name = "LibraryMidUrl", Value = (LibraryUrl + "/templates/type/site/tid/ccc5ec98-0cbf-471a-bd8a-6a9f6bea53fc") });
+            Settings.Add("LibraryMidUrl", new UIData { Name = "LibraryMidUrl", Value = (LibraryUrl + "/templates/type/site/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower()) });
             return Settings.Values.ToList();
         }
 

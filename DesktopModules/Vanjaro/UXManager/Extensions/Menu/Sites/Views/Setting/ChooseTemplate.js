@@ -11,6 +11,9 @@
     $scope.VjDefaultPath = window.parent.parent.VjDefaultPath + 'loading.svg';
 
     $scope.onInit = function () {
+        $(window.parent.document.body).find('.modal-dialog:last').parent().removeAttr('data-edit');
+        $('.defaultdesign').show();
+        $(window.parent.document.body).find('.modal-dialog:last').find('.btn-close').before($('.defaultdesign-hidden'));
         var $FrameUrl = $('uiengine #FrameUrl');
         $FrameUrl.attr('src', $scope.ui.data.LibraryMidUrl.Value).load(function () { $(this).prev('.loader').hide(); });
     };
@@ -23,8 +26,7 @@
 
     $scope.HideModal = function () {
         $(window.parent.document.body).find('.modal-dialog:last').parent().removeAttr('data-edit');
-        $(window.parent.document.body).find('.modal-dialog:last').addClass('modal-right');
-        $(window.parent.document.body).find('.modal-dialog:last').attr('style', 'width:800px;');
+        $(window.parent.document.body).find('.modal-dialog:last>[ng-controller="Controller"]').removeClass('container-fluid').addClass('container');
     };
 
     $scope.CreateSite = function () {

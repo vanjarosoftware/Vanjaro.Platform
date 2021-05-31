@@ -267,12 +267,13 @@ namespace Vanjaro.Core
                 #region Copy Vthemes in portal folder
                 try
                 {
-                    ThemeManager.ProcessScss(pinfo.PortalID, false);
+                    if (ApplyTemplates)
+                        ThemeManager.ProcessScss(pinfo.PortalID, false);
                 }
                 catch (Exception ex) { ExceptionManager.LogException(ex); }
 
                 string UXManagervDefaultPath = HttpContext.Current.Request.PhysicalApplicationPath + "DesktopModules\\Vanjaro\\Core\\Library\\Images";
-                if (Directory.Exists(UXManagervDefaultPath) && fi != null)
+                if (ApplyTemplates && Directory.Exists(UXManagervDefaultPath) && fi != null)
                 {
                     DirectoryInfo source = new DirectoryInfo(UXManagervDefaultPath);
                     foreach (System.IO.FileInfo _file in source.GetFiles())
@@ -333,7 +334,7 @@ namespace Vanjaro.Core
                     UpdatePortalSettings(SeoSettings, pinfo.PortalID, uInfo.UserID);
                     #endregion                    
                 }
-                if (!IsVanjaroInstalled && ApplyTemplates)
+                if (!IsVanjaroInstalled)
                 {
                     #region Signin Tab
                     if (pinfo.LoginTabId == -1)
@@ -385,39 +386,46 @@ namespace Vanjaro.Core
 
                         pinfo.LoginTabId = SigninTab != null && !SigninTab.IsDeleted ? SigninTab.TabID : Null.NullInteger;
                     }
-                    #endregion
-
-                    #region Update Portal Settings
-                    IFileInfo file;
-                    if (fi != null)
-                    {
-                        if (FileManager.Instance.FileExists(fi, "vanjaro_social.png") && !PortalController.Instance.GetPortalSettings(pinfo.PortalID).ContainsKey("SocialSharingLogo"))
-                        {
-                            file = FileManager.Instance.GetFile(fi, "vanjaro_social.png");
-                            PortalController.UpdatePortalSetting(pinfo.PortalID, "SocialSharingLogo", "FileID=" + file.FileId, true, pinfo.CultureCode);
-                        }
-
-                        if (FileManager.Instance.FileExists(fi, "vanjaro_home.png") && !PortalController.Instance.GetPortalSettings(pinfo.PortalID).ContainsKey("HomeScreenIcon"))
-                        {
-                            file = FileManager.Instance.GetFile(fi, "vanjaro_home.png");
-                            PortalController.UpdatePortalSetting(pinfo.PortalID, "HomeScreenIcon", "FileID=" + file.FileId, true, pinfo.CultureCode);
-                        }
-                    }
                     PortalController.Instance.UpdatePortalInfo(pinfo);
-                    List<StringValue> SettingNameValue = new List<StringValue>
-                {
-                    new StringValue { Text = "DNN_Enabled", Value = "False" },
-                    new StringValue { Text = "Registration_UseEmailAsUserName", Value = "True" },
-                    new StringValue { Text = "ClientResourcesManagementMode", Value = "p" },
-                    new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.EnableCompositeFilesKey, Value = "True" },
-                    new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.MinifyCssKey, Value = "True" },
-                    new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.MinifyJsKey, Value = "True" },
-                    new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.OverrideDefaultSettingsKey, Value = "True" },
-                };
-                    int CrmVersion = Host.CrmVersion + 1;
-                    SettingNameValue.Add(new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.VersionKey, Value = CrmVersion.ToString() });
-                    UpdatePortalSettings(SettingNameValue, pinfo.PortalID, uInfo.UserID);
                     #endregion
+
+                    if (!IsVanjaroInstalled && ApplyTemplates)
+                    {
+                        #region Update Portal Settings
+                        IFileInfo file;
+                        if (fi != null)
+                        {
+                            if (FileManager.Instance.FileExists(fi, "vanjaro_social.png") && !PortalController.Instance.GetPortalSettings(pinfo.PortalID).ContainsKey("SocialSharingLogo"))
+                            {
+                                file = FileManager.Instance.GetFile(fi, "vanjaro_social.png");
+                                PortalController.UpdatePortalSetting(pinfo.PortalID, "SocialSharingLogo", "FileID=" + file.FileId, true, pinfo.CultureCode);
+                            }
+
+                            if (FileManager.Instance.FileExists(fi, "vanjaro_home.png") && !PortalController.Instance.GetPortalSettings(pinfo.PortalID).ContainsKey("HomeScreenIcon"))
+                            {
+                                file = FileManager.Instance.GetFile(fi, "vanjaro_home.png");
+                                PortalController.UpdatePortalSetting(pinfo.PortalID, "HomeScreenIcon", "FileID=" + file.FileId, true, pinfo.CultureCode);
+                            }
+                        }
+                        #endregion
+                    }
+
+                    if (!IsVanjaroInstalled)
+                    {
+                        List<StringValue> SettingNameValue = new List<StringValue>
+                        {
+                            new StringValue { Text = "DNN_Enabled", Value = "False" },
+                            new StringValue { Text = "Registration_UseEmailAsUserName", Value = "True" },
+                            new StringValue { Text = "ClientResourcesManagementMode", Value = "p" },
+                            new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.EnableCompositeFilesKey, Value = "True" },
+                            new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.MinifyCssKey, Value = "True" },
+                            new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.MinifyJsKey, Value = "True" },
+                            new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.OverrideDefaultSettingsKey, Value = "True" },
+                        };
+                        int CrmVersion = Host.CrmVersion + 1;
+                        SettingNameValue.Add(new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.VersionKey, Value = CrmVersion.ToString() });
+                        UpdatePortalSettings(SettingNameValue, pinfo.PortalID, uInfo.UserID);
+                    }
                 }
 
                 #region Delete Unnecessary Files
