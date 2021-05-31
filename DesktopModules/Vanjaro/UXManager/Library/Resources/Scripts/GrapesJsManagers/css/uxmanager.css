@@ -3680,4 +3680,7 @@ body .gjs-selected {
 }
 
 
+.gjs-trt-trait--toggle .gjs-label {
+    display:none;
+}
 
