@@ -2166,16 +2166,16 @@ export default (editor, config = {}) => {
         }
     });
 
-
-    //toggle
+    //Toggle
     tm.addType('toggle', {
         createInput({ trait }) {
+
             const el = document.createElement('div');
             el.classList.add("toggle-box");
             el.id = trait.attributes.name;
 
             el.innerHTML = `
-                <input type="checkbox" class="btn-check" name="${ trait.attributes.label}" id="toggle-box" >
+                <input type="checkbox" class="btn-check" name="${ trait.attributes.name}" id="toggle-box" >
                 <label for="toggle-box" class="toggle-option">  ${trait.attributes.label}
                     <em class="fas fa-chevron-down float-end"></em>
                 </label> `
@@ -2185,15 +2185,10 @@ export default (editor, config = {}) => {
 
             var trait = component.getTrait(event.target.name);
 
-            trait.setTargetValue(event.target.id);
-
+            if ($(event.target).prop("checked"))
+                trait.setTargetValue('show');
+            else
+                trait.setTargetValue('hide');
         }
     });
-
-
 }
-
-
-
-
-
