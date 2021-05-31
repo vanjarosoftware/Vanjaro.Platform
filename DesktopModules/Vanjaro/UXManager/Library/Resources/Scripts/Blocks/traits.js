@@ -638,7 +638,7 @@ export default (editor, config = {}) => {
                     break;
                 case 'page':
                     var pid = $(elInput.querySelector('.page')).children("option:selected").attr('pid');
-                    if (pid != 0 && typeof pid != 'undefined' ) {
+                    if (typeof pid != 'undefined' && pid != 0 ) {
                         var sf = $.ServicesFramework(-1);
                         $.ajax({
                             type: "GET",
