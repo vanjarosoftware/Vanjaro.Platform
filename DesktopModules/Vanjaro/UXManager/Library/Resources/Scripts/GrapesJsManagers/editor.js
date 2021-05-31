@@ -12,7 +12,7 @@ global.IsVJEditorSaveCall = true;
 global.IsVJCBRendered = false;
 
 $(window).load(function () {
-	if ($(window).width() < 1000) {
+	if ($(window).width() < 1260) {
 		$(".ToolbarItem li:not(.PageSettings),.toolmanager,.more_icons,.blockItem.blocksmenu ").hide(0);
 		$(".block-manager > div").not("#MenuSettings,.Menupanel-top").hide(0);
 		$(".Searchresult ul").empty();
@@ -307,19 +307,17 @@ $(document).ready(function () {
 
 		if (isEditPage()) {
 
-			if (!vjEditorSettings.EditPage) {
+            if (!vjEditorSettings.EditPage) {
 
-				$(document).on("click", function (e) {
-					if ($(e.target).parents('.sidebar').length <= 0) {
-						VjEditor.select();
-						ShowBlockUI();
-					}
-				});
+                if (vjEditorSettings.AppName && vjEditorSettings.AppTitle) {
+                    var markup = '<div class="app-header"><div class="app-title"><strong>Editing</strong>: ' + vjEditorSettings.AppTitle + '</div><div class="app-name">' + vjEditorSettings.AppName + '</div></div>';
+                    $('.vj-wrapper').prepend(markup);
+                }                
+            }
 
-				$('#vjEditor,' + vjEditorSettings.ContainerID).scroll(function () {
-					debounce(VjEditor.refresh(), 100);
-				});
-			}
+            $('#vjEditor').scroll(function () {
+                debounce(VjEditor.refresh(), 100);
+            });
 
 			if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
 				$(window.parent.document.body).find('#dnn_ContentPane').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Please Wait</h1></div>');
@@ -423,7 +421,7 @@ $(document).ready(function () {
 								showOffsets: 1,
 								avoidInlineStyle: 1,
 								noticeOnUnload: 0,
-								container: vjEditorSettings.ContainerID,
+                                container: '#vjEditor',
 								height: '100%',
 								fromElement: vjcomps != undefined ? false : true,
 								plugins: ['modulewrapper', 'blockwrapper', 'vjpreset', 'ThemeBlocks', 'customcode'],
@@ -1652,12 +1650,12 @@ $(document).ready(function () {
 									LoadDesignBlocks();
 								}
 
-								if ($(window).width() < 1000) {
+								if ($(window).width() < 1260) {
 									$(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
 								}
 
 								$(window).resize(function () {
-									if ($(window).width() < 1000) {
+									if ($(window).width() < 1260) {
 										$(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
 										$(".ToolbarItem li:not(.PageSettings),.toolmanager,.more_icons, .blockItem.blocksmenu ").hide();
 										$("a.blockItem.settings").trigger("click");
@@ -1780,7 +1778,7 @@ $(document).ready(function () {
 
 							VjEditor.on('sorter:drag:end', function (model, bmodel) {
 
-								if (typeof model != 'undefined' && typeof model.modelToDrop != 'undefined') {
+								if (typeof model != 'undefined' && typeof model.modelToDrop != 'undefined') {                                   
 
 									if (typeof model.modelToDrop.attributes != 'undefined' && model.modelToDrop.attributes.type == "videobox") {
 										model.modelToDrop.components().models.find(t => t.attributes.type == 'video').set({ 'src': model.modelToDrop.attributes.src });
@@ -1825,6 +1823,11 @@ $(document).ready(function () {
 							VjEditor.on('block:drag:stop', function (model, bmodel) {
 
 								if (typeof model != "undefined") {
+
+                                    if ($(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]').length && model.attributes.type == 'globalblockwrapper') {
+                                        model.remove();
+                                        return false;
+                                    }
 
 									var modelClasses = model.attributes.classes;
 									if (modelClasses.length) {
@@ -3156,7 +3159,7 @@ $(document).ready(function () {
 			if (window.location.href.indexOf('#') > 0 && window.location.href.split("#")[0] != CurrentTabUrl) {
 				window.location.href = CurrentTabUrl.split('/uxmode')[0];
 			}
-			if ($(window).width() < 1000) {
+			if ($(window).width() < 1260) {
 				setTimeout(function () {
 					$(window.parent.document.body).find('.gjs-cv-canvas__frames').addClass('deviceframe');
 				}, 300);

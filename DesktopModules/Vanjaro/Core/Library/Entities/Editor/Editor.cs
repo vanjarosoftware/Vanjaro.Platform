@@ -54,7 +54,6 @@ namespace Vanjaro.Core.Entities
             {
                 UpdateContentUrl = url + "page/save",
                 GetContentUrl = url + "page/get",
-                ContainerID = "#vjEditor",
                 EditPage = true,
                 ModuleId = -1,
                 RevisionGUID = "e2f6ebcb-5d68-4d85-b180-058fb2d26178",
