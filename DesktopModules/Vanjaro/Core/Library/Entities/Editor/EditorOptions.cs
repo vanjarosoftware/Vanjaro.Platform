@@ -10,7 +10,8 @@ namespace Vanjaro.Core.Entities
         public string GetContentUrl { get; set; }
         public string UpdateContentUrl { get; set; }
         public string SettingsUrl { get; set; }
-        public string ContainerID { get; set; }
+        public string AppName { get; set; }
+        public string AppTitle { get; set; }
         public bool EditPage { get; set; }
         public int ModuleId { get; set; }
         public int EntityID { get; set; }

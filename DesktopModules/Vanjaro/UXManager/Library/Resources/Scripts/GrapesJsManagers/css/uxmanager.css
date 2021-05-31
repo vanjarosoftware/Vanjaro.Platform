@@ -53,6 +53,7 @@ li.openbtn {
     position: absolute;
     top: 0;
     bottom: 0;
+    left: 0;
     right: 0;
     width: 100% !important;
     height: 100% !important;
@@ -3578,8 +3579,9 @@ body.resp-mode.mobile-landscape .vj-wrapper {
     pointer-events: none;
 }
 
-.gjs-selected {
-    outline-offset: unset !important;
+body .gjs-selected {
+    outline-offset: -1px !important;
+    outline-width: 1px !important;
 }
 
 .gjs-sm-customselect .sm-select-wrapper {
@@ -3652,6 +3654,31 @@ body.resp-mode.mobile-landscape .vj-wrapper {
     justify-content: center;
     align-items: center;
 }
+
+.app-header {
+    background-color: #495157;
+    color: #a4afb7;
+    padding: 10px;
+    font-size: 13px;
+    height: 40px;
+}
+
+.app-title {
+    float: left;
+}
+
+.app-name {
+    float: right;
+}
+
+.app-header + #vjEditor {
+    padding-top: 50px;
+    max-width: 1320px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 
 .gjs-trt-trait--toggle .gjs-label {
     display:none;
