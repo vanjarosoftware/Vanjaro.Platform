@@ -2465,7 +2465,7 @@ $(document).ready(function () {
 												name: 'Capitalize',
 											}],
 										}],
-									}, { at: 3 })
+									}, { at: 0 })
 								}
 								else if (typeof VjEditor.StyleManager.getSector(Text) != 'undefined')
 									VjEditor.StyleManager.removeSector(Text);
