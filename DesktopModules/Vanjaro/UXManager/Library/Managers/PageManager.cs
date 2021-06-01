@@ -128,7 +128,7 @@ namespace Vanjaro.UXManager.Library
                 if (tab != null)
                 {
                     string flaggedUrl = Globals.FriendlyUrl(tab, Globals.ApplicationURL(TabID), PortalSettings as IPortalSettings);
-                    return Globals.ResolveUrl(Regex.Replace(flaggedUrl, string.Format("{0}://{1}", HttpContext.Current.Request.Url.Scheme, Globals.GetDomainName(HttpContext.Current.Request, true)), "~", RegexOptions.IgnoreCase));
+                    return Globals.ResolveUrl(Regex.Replace(flaggedUrl, string.Format("{0}://{1}/", HttpContext.Current.Request.Url.Scheme, Globals.GetDomainName(HttpContext.Current.Request, true)), "~", RegexOptions.IgnoreCase));
                 }
                 return string.Empty;
             }
