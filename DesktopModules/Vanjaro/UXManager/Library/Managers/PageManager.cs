@@ -136,12 +136,6 @@ namespace Vanjaro.UXManager.Library
 
             private static bool IgnorePackage(string PackageName)
             {
-
-
-
-
-
-
                 //Add specific name of ignore package name
                 List<string> Packages = new List<string>
                 {
