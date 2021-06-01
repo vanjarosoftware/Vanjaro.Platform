@@ -20,6 +20,7 @@ export default (editor, config = {}) => {
 			var mainparent = selected.parent().parent().parent();
 			mainparent.append(parent);
 		}
+
 		VjEditor.select();
 		VjEditor.select(selected);
 	});
