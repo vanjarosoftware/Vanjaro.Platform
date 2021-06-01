@@ -1069,6 +1069,7 @@ div#MenuSettings .parent-menu-hide {
 #layer-manager {
     display: none;
     height: calc(60vh - 40px) !important;
+    z-index: 9999 !important;
 }
 
 .jsPanel-content {
