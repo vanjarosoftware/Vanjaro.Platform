@@ -1,0 +1,24 @@
+﻿<div ng-controller="setting_videos" class="vj-ux-manager">
+    <uiengine provider="AngularBootstrap" identifier="setting_videos" layout="Help">
+        <uilayout name="Heading">
+            <uitemplate>
+                <div class="row">
+                    <div class="col-12 pr-none extback">
+                        <a ng-click="Click_Back()" title="[L:Back]" class="ux-backbtn">
+                            <span class="extbackicon">
+                                <em class="fas fa-chevron-left"></em>
+                            </span>
+                            <span class="extname">{{HeaderText}}</span>
+                        </a>
+                    </div>
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>                
+                <iframe id="videosFrame" src="" frameborder="0" style="height:100vh;" allowfullscreen></iframe>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>
+
