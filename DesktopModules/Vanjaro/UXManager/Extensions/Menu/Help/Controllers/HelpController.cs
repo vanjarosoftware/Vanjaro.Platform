@@ -1,6 +1,7 @@
 ﻿using DotNetNuke.Entities.Users;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 
@@ -12,11 +13,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Help.Controllers
     {
 
 #if RELEASE        
-        private const string VanjaroAzureURL = "https://vanjaroplatform.blob.core.windows.net/platform/support/videos.html";
-        private const string OriginURL = "https://vanjaroplatform.blob";
+        private static string VanjaroAzureURL = "https://vanjaroplatform.blob.core.windows.net/platform/support/videos.html";
+        private static string OriginURL = "https://vanjaroplatform.blob";
 #else        
-        private const string VanjaroAzureURL = "http://dev.vanjaro.local/desktopmodules/vanjaro/uxmanager/extensions/menu/help/resources/help/videos.html";
-        private const string OriginURL = "http://dev.vanjaro.local";
+        private static string VanjaroAzureURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/desktopmodules/vanjaro/uxmanager/extensions/menu/help/resources/help/videos.html";
+        private static string OriginURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority;
 #endif
 
         internal static List<IUIData> GetData(UserInfo userInfo, string identifier, Dictionary<string, string> parameters)
