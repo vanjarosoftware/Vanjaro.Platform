@@ -1,45 +1,664 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <title></title>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
     <style>
-        .vj-ux-manager ul.help-videos {
-            padding: 0;
+        .help-videos-body {
+            padding: 0px;
+            margin: 0px;
+                font-family: Arial,sans-serif;
         }
 
-            .vj-ux-manager ul.help-videos li {
-                background-color: #f9f9f9;
-                list-style: none;
-                border: none;
-                border-radius: 0;
-                margin-bottom: 5px;
-                padding: .75rem 1.25rem;
+        .vj-ux-manager {
+            height: calc(100vh - 100px);
+            overflow: auto;
+            padding: 12px;
+        }
+
+
+
+            .vj-ux-manager ul.help-videos {
+                padding: 0;
             }
 
-                .vj-ux-manager ul.help-videos li a {
-                    font-size: 15px;
-                    line-height: 20px;
-                    font-weight: 500;
-                    color: #313131;
-                    display: block;
-                    text-decoration: none !important;
+                .vj-ux-manager ul.help-videos li {
+                    background-color: #f9f9f9;
+                    list-style: none;
+                    border: none;
+                    border-radius: 0;
+                    margin-bottom: 5px;
+                    padding: .75rem .7rem;                   
                 }
+
+                    .vj-ux-manager ul.help-videos li:not(.video-heading) {
+                        cursor: pointer;
+                    }
+
+                    .vj-ux-manager ul.help-videos li a {
+                        font-size: 12px;
+                        line-height: 20px;
+                        color: #313131;
+                        text-decoration: none !important;
+                    }
+
+        .video-heading {
+            background: transparent !important;
+            font-weight: 900;
+            font-size: 11px;
+            color: #6d7882;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .help-videos .video-preview-time {
+            margin-left: 6px;
+            font-size: 12px;
+        }
+
+        .help-videos {
+            display: none;
+        }
+
+ .help-videos-box .help-videos li a {
+            display: flex;
+            align-items: center;
+        }
+
+            .help-videos-box .help-videos li a svg {
+                margin-right: 4px
+            }
+
+        .show-video {
+            display: block;
+        }
+
+        .help-videos-box .video-heading {
+            background: transparent;
+            border: 0;
+            padding: 10px 0px 10px 12px;
+            margin-bottom: 5px;
+            font-weight: 900;
+            color: #6d7882;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .help-videos-box {
+            position: relative;
+        }
+
+
+            .help-videos-box:after {
+                content: "";
+                position: absolute;
+                left: 8px;
+                right: 8px;
+                bottom: 0;
+                height: 5px;
+                background: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,.03)),to(transparent));
+                background: -webkit-linear-gradient(rgba(0,0,0,.03),transparent);
+                background: -o-linear-gradient(rgba(0,0,0,.03),transparent);
+                background: linear-gradient(rgba(0,0,0,.05),transparent);
+                -webkit-transform: translateY(100%);
+                -ms-transform: translateY(100%);
+                transform: translateY(100%);
+            }
+
+            .help-videos-box .rotate-icon svg {
+                transform: rotate( 90deg );
+            }
+
+            .help-video-wrapper{
+                width: 275px;
+            }
+
+                    /*Scrollbar*/
+
+
+::-webkit-scrollbar {
+    margin-top: 10px;
+    height: 10px;
+    width: 8px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track {
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+    border-radius: 10px;
+    opacity: 0.8;
+}
+
+::-webkit-scrollbar-track-piece,
+::-webkit-scrollbar-track-piece,
+::-webkit-scrollbar-track-piece {
+    background: rgba(255, 255, 255, 0);
+}
+
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(170, 170, 170, 0.3);
+    outline: none;
+    -webkit-transition: background-color .2s linear,width .2s ease-in-out;
+    -o-transition: background-color .2s linear,width .2s ease-in-out;
+    transition: background-color .2s linear,width .2s ease-in-out;
+}
+
+            
     </style>
     <script type="text/javascript">
         function openVideoPopup(element) {
-            var postdata = { action: 'Help.Videos', width: '100%', position: 'center', title: $(element).html(), url: $(element).attr('videoUrl') };
+            var postdata = { action: 'Help.Videos', width: '100%', position: 'center', title: $(element).attr('dataName'), url: $(element).attr('videoUrl') };
             window.parent.postMessage(postdata, '*');
         }
     </script>
 </head>
-<body>
+<body class="help-videos-body">
+
+
     <div class="vj-ux-manager">
-        <ul class="help-videos">
-            <li><a videoUrl="https://www.youtube.com/embed/tc1wGPWpxPc" onclick="openVideoPopup(this)">Vanjaro Preview: Why Vanjaro?</a></li>
-            <li><a videoUrl="https://www.youtube.com/embed/tc1wGPWpxPc" onclick="openVideoPopup(this)">Vanjaro Preview: Basics</a></li>
-        </ul>
+
+ 
+
+    <div class=" help-video-wrapper">
+
+        <div class="help-videos-box">
+            <div class="video-heading">
+                Page Builder
+                <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+
+            </div>
+            <ul class="help-videos">
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/tc1wGPWpxPc" dataName="Basics" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Basics
+                        <span class="video-preview-time">( 10:24 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/HS7_uNnNJkk" dataName="Navigator & Device View" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Navigator & Device View
+                        <span class="video-preview-time">( 5:22 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/kqQlUUa2AiE" dataName="Revisions" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Revisions
+                        <span class="video-preview-time">( 5:35 )</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="help-videos-box">
+            <div class="video-heading">
+                Content Blocks <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+            </div>
+            <ul class="help-videos">
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/5fPQZUfaY3Q" dataName="Button" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Button
+                        <span class="video-preview-time">( 4:04 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/2Evl3XcEujo" dataName="Custom Code" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Custom Code
+                        <span class="video-preview-time">( 4:32 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/2kDDmUUlJjc" dataName="Divider & Spacer" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Divider & Spacer
+                        <span class="video-preview-time">( 3:10 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/emMFlLOtDTQ" dataName="Grid" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Grid
+                        <span class="video-preview-time">( 6:13 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/nComZm4UxvA" dataName="Heading, Text, & Link" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Heading, Text, & Link
+                        <span class="video-preview-time">( 6:12 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/ght1fB8XMrU" dataName="Icon" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Icon
+                        <span class="video-preview-time">( 7:26 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/TUY1owfMZh0" dataName="Image" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Image
+                        <span class="video-preview-time">( 5:38 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/KY3NXUbkchA" dataName="List" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>List
+                        <span class="video-preview-time">( 4:43 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/AU5RtytVugY" dataName="Map & Image Gallery" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Map & Image Gallery
+                        <span class="video-preview-time">( 4:41 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/xQe1fWFTxb4" dataName="Section" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Section
+                        <span class="video-preview-time">( 9:43 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/ZOvNG3Lz25A" dataName="Video" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Video
+                        <span class="video-preview-time">( 4:17 )</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="help-videos-box">
+            <div class="video-heading">
+                Design Blocks <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+            </div>
+            <ul class="help-videos">
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/YOH1LngJPi4" dataName="Login" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Login
+                        <span class="video-preview-time">( 7:11 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/bX2ZZYcRPWI" dataName="Logo & Breadcrumb" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Logo & Breadcrumb
+                        <span class="video-preview-time">( 3:25 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/-ANBnkExIQU" dataName="Menu" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Menu
+                        <span class="video-preview-time">( 5:53 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/id9SFjGpTiQ" dataName="Register" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Register
+                        <span class="video-preview-time">( 2:44 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/NYczsPpgH9I" dataName="Search Input & Results" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Search Input & Results
+                        <span class="video-preview-time">( 2:36 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/Q-q5JlkPLpE" dataName="Signup & My Account Links" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Signup & My Account Links
+                        <span class="video-preview-time">( 3:28 )</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="help-videos-box">
+            <div class="video-heading">
+                Content Management <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+            </div>
+            <ul class="help-videos">
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/sin3mXYKK2Q" dataName="Custom Workflow" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Custom Workflow
+                        <span class="video-preview-time">( 6:55 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/8PUcBu1J_CA" dataName="Image Editor" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Image Editor
+                        <span class="video-preview-time">( 7:56 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/1Qac-cJrnW4" dataName="Multi Language Content" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Multi Language Content
+                        <span class="video-preview-time">( 4:19 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/O15bVxaFmPU" dataName="Personalization" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Personalization
+                        <span class="video-preview-time">( 1:57 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/zFLotAK0XCw" dataName="Review & Approve Content" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Review & Approve Content
+                        <span class="video-preview-time">( 9:40 )</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="help-videos-box">
+            <div class="video-heading">
+                Content Reuse <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+            </div>
+            <ul class="help-videos">
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/-lteMQRzl8g" dataName="Global Blocks" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Global Blocks
+                        <span class="video-preview-time">( 9:12 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/JQOhByQi268" dataName="Save as Custom Blocks & Layouts" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Save as Custom Blocks & Layouts
+                        <span class="video-preview-time">( 5:26 )</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="help-videos-box">
+            <div class="video-heading">
+                Design & Customization <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+            </div>
+            <ul class="help-videos">
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/lIySOo8-Z3k" dataName="Custom Fonts" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Custom Fonts
+                        <span class="video-preview-time">( 4:39 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/RgqktJUbRd0" dataName="Customize Theme Editor" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Customize Theme Editor
+                        <span class="video-preview-time">( 5:43 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/Z2q0JqoxS40" dataName="Responsive Design" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Responsive Design
+                        <span class="video-preview-time">( 9:00 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/1dsQEdGU6g8" dataName="Styling Blocks" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Styling Blocks
+                        <span class="video-preview-time">( 11:06 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/TwvySHpffyM" dataName="Theme Editor" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Theme Editor
+                        <span class="video-preview-time">( 6:13 )</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="help-videos-box">
+            <div class="video-heading">
+                Site Administration <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+            </div>
+            <ul class="help-videos">
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/Ye9gLRZwbw8" dataName="About Menu" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>About Menu
+                        <span class="video-preview-time">( 3:14 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/-1G9BHxIEK0" dataName="Asset Management" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Asset Management
+                        <span class="video-preview-time">( 7:56 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/balXfjP4jiA" dataName="Extensions" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Extensions
+                        <span class="video-preview-time">( 4:43 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/NzDiq9OHvR0" dataName="Page Management" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Page Management
+                        <span class="video-preview-time">( 11:08 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/eUjAGfW-_Bk" dataName="Role Management" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Role Management
+                        <span class="video-preview-time">( 3:59 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/njaqWOAAEw8" dataName="Scheduler & SQL Console" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Scheduler & SQL Console
+                        <span class="video-preview-time">( 4:10 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/MwXdiyRoKNE" dataName="Site Logs" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Site Logs
+                        <span class="video-preview-time">( 4:00 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/xvYDQG-0-FA" dataName="User Management" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>User Management
+                        <span class="video-preview-time">( 7:12 )</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="help-videos-box">
+            <div class="video-heading">
+                Extensibility <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+            </div>
+            <ul class="help-videos">
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/pE9Hj_eDnis" dataName="Apps & Modules" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Apps & Modules
+                        <span class="video-preview-time">( 4:54 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/mVF6oh70DzY" dataName="Custom Blocks" onclick="openVideoPopup(this)">
+                        Custom Blocks
+                        <span class="video-preview-time">( 6:27 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/l1kXxHLu8Iw" dataName="Custom Code & Plugins" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Custom Code & Plugins
+                        <span class="video-preview-time">( 4:20 )</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="help-videos-box">
+            <div class="video-heading">
+                Performance <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+            </div>
+            <ul class="help-videos">
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/AxhElKRF3pc" dataName="Optimize Images" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Optimize Images
+                        <span class="video-preview-time">( 13:04 )</span>
+                    </a>
+                </li>
+                <li>
+                    <a videoUrl="https://www.youtube.com/embed/wtjQmyxbfew" dataName="Site Speed" onclick="openVideoPopup(this)">
+                        <svg data-gjs-type="svg" height="14" width="14"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="ijmkw3">
+                            <path data-gjs-type="svg-in" draggable="true" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" id="irel0k"></path>
+                        </svg>Site Speed
+                        <span class="video-preview-time">( 2:47 )</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+
+
+
+
+
+
+
     </div>
+        </div>
+
+    <script>
+
+
+        $('.video-heading').click(function () {
+            $(this).toggleClass('rotate-icon');
+            $(this).parent().find('.help-videos').toggleClass('show-video');
+        })
+
+
+    </script>
+
+
+
 </body>
 </html>
