@@ -22,11 +22,11 @@ namespace Vanjaro.UXManager.Extensions.Menu.Help.Factories
 
             return string.Empty;
         }
-       
+
         public static List<AngularView> GetViews()
         {
             List<AngularView> Views = new List<AngularView>();
-            AngularView roles = new AngularView
+            AngularView help = new AngularView
             {
                 AccessRoles = "user,anonymous",
                 UrlPaths = new List<string> {
@@ -37,7 +37,19 @@ namespace Vanjaro.UXManager.Extensions.Menu.Help.Factories
                 Identifier = Identifier.setting_help.ToString(),
                 Defaults = new Dictionary<string, string> { }
             };
-            Views.Add(roles);
+            Views.Add(help);
+            
+            AngularView videos = new AngularView
+            {
+                AccessRoles = "user,anonymous",
+                UrlPaths = new List<string> {
+                  "videos"
+                },                
+                TemplatePath = "setting/videos.html",
+                Identifier = Identifier.setting_videos.ToString(),
+                Defaults = new Dictionary<string, string> { }
+            };
+            Views.Add(videos);
             return Views;
         }
 
@@ -87,7 +99,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Help.Factories
         }
         public enum Identifier
         {
-            setting_help
+            setting_help, setting_videos
         }
 
         public static dynamic GetLocalizedEnumOption(Type EnumType)

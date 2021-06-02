@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <style>
+        .vj-ux-manager ul.help-videos {
+            padding: 0;
+        }
+
+            .vj-ux-manager ul.help-videos li {
+                background-color: #f9f9f9;
+                list-style: none;
+                border: none;
+                border-radius: 0;
+                margin-bottom: 5px;
+                padding: .75rem 1.25rem;
+            }
+
+                .vj-ux-manager ul.help-videos li a {
+                    font-size: 15px;
+                    line-height: 20px;
+                    font-weight: 500;
+                    color: #313131;
+                    display: block;
+                    text-decoration: none !important;
+                }
+    </style>
+    <script type="text/javascript">
+        function openVideoPopup(element) {
+            var postdata = { action: 'Help.Videos', width: '100%', position: 'center', title: $(element).html(), url: $(element).attr('videoUrl') };
+            window.parent.postMessage(postdata, '*');
+        }
+    </script>
+</head>
+<body>
+    <div class="vj-ux-manager">
+        <ul class="help-videos">
+            <li><a videoUrl="https://www.youtube.com/embed/tc1wGPWpxPc" onclick="openVideoPopup(this)">Vanjaro Preview: Why Vanjaro?</a></li>
+            <li><a videoUrl="https://www.youtube.com/embed/tc1wGPWpxPc" onclick="openVideoPopup(this)">Vanjaro Preview: Basics</a></li>
+        </ul>
+    </div>
+</body>
+</html>

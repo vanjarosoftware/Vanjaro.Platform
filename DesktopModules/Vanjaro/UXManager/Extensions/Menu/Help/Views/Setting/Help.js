@@ -1,13 +1,17 @@
-﻿app.controller('setting_help', function ($scope, $attrs, $routeParams, $http, CommonSvc, SweetAlert) {
-	$scope.rid = $routeParams["rid"];
-	var common = CommonSvc.getData($scope);
-	$scope.onInit = function () {
-		$scope.HeaderText = "[L:Help]";
-	};
+﻿app.controller('setting_help', function ($scope, $attrs, $http, CommonSvc, SweetAlert) {
+    var common = CommonSvc.getData($scope);
+    $scope.HeaderText = "[L:Help]";
 
-	$scope.Click_Back = function () {
-		parent.Click_Back();
-	};
+    $scope.onInit = function () {
+    };
+
+    $scope.Click_Back = function () {
+        parent.Click_Back();
+    };
+
+    $scope.Click_Videos = function () {
+        window.location.href = '#!/videos';
+    };
 });
 
 

@@ -38,7 +38,7 @@ namespace Vanjaro.Common
             {"JsonViewer",""},
             {"Barcode",""},
             {"Notify",""},
-            {"CodeMirror","5.48.4"},
+            {"CodeMirror","5.61.1"},
             {"Toastr","2.1.4"},
             {"ContextMenu","2.8.0"},
             {"BootstrapDatepicker","1.9.0"},
