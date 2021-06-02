@@ -124,21 +124,40 @@
 					url = URL;
 			}
 
-			target.set('src', url);
+            //checked background image has not changed
+            if (typeof target.attributes.type != 'undefined') {
 
-			if (save != undefined && save == true) {
-				if (URL.Urls.length)
-					parent.ChangeToWebp(target.parent(), URL.Urls);
-				else {
-					target.removeStyle('max-width');
-					$(target.parent().components().models).each(function (index, component) {
-						if (component.getName() == "Source")
-							component.remove();
-					});
-				}
+                target.set('src', url);
 
-				window.parent.VjEditor.runCommand("save");
-			}
+                if (save != undefined && save == true) {
+
+                    if (URL.Urls.length) {
+
+                        if (target.attributes.type == 'image')
+                            parent.ChangeToWebp(target.parent(), URL.Urls);
+                        else
+                            target.set('src', URL.Urls.find(v => v.Type == 'webp').Url);
+                    }
+                    else {
+                        target.removeStyle('max-width');
+                        $(target.parent().components().models).each(function (index, component) {
+                            if (component.getName() == "Source")
+                                component.remove();
+                        });
+                    }
+
+                    window.parent.VjEditor.runCommand("save");
+                }
+            }
+            else {
+
+                var background = window.parent.VjEditor.StyleManager.getProperty('background_&_shadow', 'background');
+
+                if (save != undefined && save && URL.Urls.length)
+                    url = URL.Urls.find(v => v.Type == 'webp').Url;
+
+                background.getCurrentLayer().attributes.properties.models.find(m => m.id == 'background-image').setValue(url);
+            }
 		}
 	};
 

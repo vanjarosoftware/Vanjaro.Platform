@@ -120,21 +120,37 @@
                     //checked background image has not changed
                     if (typeof target.attributes.type != 'undefined') {
 
-                        target.set('src', url);
-                        if ($scope.targetParent == undefined)
-                            $scope.targetParent = target.parent();
-                        if (data.data.Urls.length)
-                            parent.ChangeToWebp($scope.targetParent, data.data.Urls);
+                        if (target.attributes.type == 'image') {
+
+                            target.set('src', url);
+
+                            if ($scope.targetParent == undefined)
+                                $scope.targetParent = target.parent();
+
+                            if (data.data.Urls.length)
+                                parent.ChangeToWebp($scope.targetParent, data.data.Urls);
+                            else {
+                                target.removeStyle('max-width');
+                                $($scope.targetParent.components().models).each(function (index, component) {
+                                    if (component.getName() == "Source")
+                                        component.remove();
+                                });
+                            }
+                        }
                         else {
-                            target.removeStyle('max-width');
-                            $($scope.targetParent.components().models).each(function (index, component) {
-                                if (component.getName() == "Source")
-                                    component.remove();
-                            });
+
+                            if (data.data.Urls.length)
+                                url = URL.Urls.find(v => v.Type == 'webp').Url;                            
+
+                            target.set('src', url);
                         }
                     }
                     else {
                         var background = window.parent.VjEditor.StyleManager.getProperty('background_&_shadow', 'background');
+                        
+                        if (data.data.Urls.length)
+                            url = URL.Urls.find(v => v.Type == 'webp').Url;                        
+
                         background.getCurrentLayer().attributes.properties.models.find(m => m.id == 'background-image').setValue(url);
                     }
                 }
