@@ -445,7 +445,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                     if (File.Exists(path + "/Template.json"))
                     {
                         ExportTemplate exportTemplate = JsonConvert.DeserializeObject<ExportTemplate>(File.ReadAllText(path + "/Template.json", Encoding.Unicode));
-                        if (exportTemplate != null)
+                        if (exportTemplate != null && exportTemplate.ThemeGuid.ToLower() == ThemeManager.GetCurrent(pinfo.PortalID).GUID.ToLower())
                         {
                             fi = ProcessAssets(pinfo, fi, foldersizeinfo, path);
                             ProcessTemplatePages(pinfo, path);

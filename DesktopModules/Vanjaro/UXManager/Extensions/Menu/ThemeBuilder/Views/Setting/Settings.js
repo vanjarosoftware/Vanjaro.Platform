@@ -4,12 +4,13 @@
 
     $scope.HasChanges = false;
 
-    function sliderInputChange(){
+    function sliderInputChange() {
         $('#dvMarkUp').find('[guid]').on("change", function () {
             $(this).siblings("input[type='range']").val(this.value);
+            $('#dvMarkUp').find('[guid="' + $(this).attr('guid') + '"]').attr('value', this.value);
             $scope.ApplyChanges(this);
         });
-    }
+    };
 
     $scope.onInit = function () {
         sliderInputChange();
@@ -20,7 +21,8 @@
                 $scope.ApplyChanges(this);
             });
             $('#dvMarkUp').find('[guid]').on("input", function () {
-                $(this).siblings("input[type='number']").val(this.value);            
+                $(this).siblings("input[type='number']").val(this.value);
+                $('#dvMarkUp').find('[guid="' + $(this).attr('guid') + '"]').attr('value', this.value);
                 $scope.ApplyChanges(this);
             });
         }, 1000);
@@ -121,7 +123,8 @@
                 Guid: $(v).attr('guid'),
                 Value: $(v).val()
             };
-            data.push(obj);
+            if ($(v).attr('value') == undefined || !$(v).attr('value').startsWith('$'))
+                data.push(obj);
         });
         var formdata = {
             ThemeEditorValues: data,
@@ -251,7 +254,7 @@
     };
 
     $scope.ResetTheme = function () {
-        event.preventDefault();        
+        event.preventDefault();
         $scope.ResetMarkUp($scope.ui.data.MarkUp.Value, null);
         $(window.parent.document.body).find('.gjs-frame').contents().find('head').find('style[pvcss="true"]').remove();
         $(window.parent.document.head).find('style[pvcss="true"]').remove();

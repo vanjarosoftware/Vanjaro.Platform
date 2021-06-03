@@ -7,8 +7,8 @@
     vertical-align: top;
 }
 
-#wrapper.gjs-comp-selected,
-#wrapper .gjs-comp-selected {
+[data-gjs-type="wrapper"].gjs-comp-selected,
+[data-gjs-type="wrapper"] .gjs-comp-selected {
     outline: 1px solid #ccc !important;
     outline-offset: -1px !important;
 }
