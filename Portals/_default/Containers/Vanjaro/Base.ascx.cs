@@ -4,6 +4,7 @@ using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.UI.Modules;
 using System;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -36,8 +37,12 @@ namespace Vanjaro.Container
                                     url += "&skinsrc=" + "[g]skins/vanjaro/base";
                                 else
                                     url += "?skinsrc=" + "[g]skins/vanjaro/base";
-                                if (splitarray.Length > 1)
-                                    url += "#!/" + splitarray[1];
+
+                                string TempSplitArray = splitarray.Length > 1 ? splitarray[1] : string.Empty;
+                                if (splitarray.Length > 1 && TempSplitArray.StartsWith("/"))
+                                    url += "#" + TempSplitArray;
+                                else
+                                    url += "#/" + TempSplitArray;
                             }
                             else
                             {
