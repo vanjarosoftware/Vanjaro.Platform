@@ -63,34 +63,28 @@ namespace Vanjaro.Core.Components
             }
         }
 
-        public string ScriptsPath
+        public string DesignScript
         {
             get
             {
-                return "~/Portals/_default/vThemes/" + Name + "/js/";
-            }
-        }
-        public string ThemeJS
-        {
-            get
-            {
-                return "~/Portals/_default/vThemes/" + Name + "/theme.js";
+                return ThemeManager.GetDesignScript(Name);
             }
         }
 
-        public bool HasThemeJS()
+        public string ClientScript
         {
-            string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, "ThemeJS");
-            bool? hasScript = CacheFactory.Get(CacheKey);
-            if (hasScript == null)
+            get
             {
-                if (File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(ThemeJS)))
-                    hasScript = true;
-                else
-                    hasScript = false;
-                CacheFactory.Set(CacheKey, hasScript);
+                return ThemeManager.GetClientScript(Name);
             }
-            return hasScript.Value;
         }
+
+        public string Assembly
+        {
+            get
+            {
+                return ThemeManager.GetAssembly(Name);
+            }
+        }        
     }
 }
