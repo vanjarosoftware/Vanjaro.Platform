@@ -965,7 +965,6 @@ div#MenuSettings .parent-menu-hide {
     -webkit-transition: border-color .25s;
     transition: border-color .25s;
     opacity: 0.6;
-    text-transform: capitalize;
     appearance: auto;
 }
 
