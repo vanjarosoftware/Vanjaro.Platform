@@ -1580,12 +1580,12 @@ $(document).ready(function () {
 										var selected = VjEditor.getSelected();
 										selected.view.syncContent();
 										VjEditor.getSelected().view.disableEditing();
-										$.each(selected.components().models, function (k, v) {
-											if (v.attributes.content == rtetext) {
+                                        $.each(selected.components().models, function (k, v) {
+                                            if ($(v.getEl())[0].innerText == rtetext) {
 												VjEditor.select(v);
 												return;
 											}
-										});
+                                        });
 										$('.href_url').focus();
 									}
 								},
