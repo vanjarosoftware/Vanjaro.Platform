@@ -128,7 +128,7 @@ li.openbtn {
 /*Scrollbar*/
 
 
-.scrollbar::-webkit-scrollbar, .jsPanel-content::-webkit-scrollbar, #wrapper::-webkit-scrollbar {
+.scrollbar::-webkit-scrollbar, .jsPanel-content::-webkit-scrollbar, [data-gjs-type="wrapper"]::-webkit-scrollbar {
     margin-top: 10px;
     height: 10px;
     width: 8px;
@@ -136,7 +136,7 @@ li.openbtn {
 
 .scrollbar::-webkit-scrollbar-track,
 .jsPanel-content::-webkit-scrollbar-track,
-#wrapper::-webkit-scrollbar-track {
+[data-gjs-type="wrapper"]::-webkit-scrollbar-track {
     /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
     border-radius: 10px;
     opacity: 0.8;
@@ -144,13 +144,13 @@ li.openbtn {
 
 .scrollbar::-webkit-scrollbar-track-piece,
 .jsPanel-content::-webkit-scrollbar-track-piece,
-#wrapper::-webkit-scrollbar-track-piece {
+[data-gjs-type="wrapper"]::-webkit-scrollbar-track-piece {
     background: rgba(255, 255, 255, 0);
 }
 
 .scrollbar::-webkit-scrollbar-thumb,
 .jsPanel-content::-webkit-scrollbar-thumb,
-#wrapper::-webkit-scrollbar-thumb {
+[data-gjs-type="wrapper"]::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background: rgba(170, 170, 170, 0.3);
     outline: none;
@@ -846,7 +846,7 @@ div#MenuSettings .parent-menu-hide {
     transform: translateY(100%);
 }
 
-#wrapper.gjs-hovered, #wrapper .gjs-comp-selected {
+[data-gjs-type="wrapper"].gjs-hovered, [data-gjs-type="wrapper"] .gjs-comp-selected {
     outline: 1px solid #08c !important;
 }
 
@@ -1361,22 +1361,22 @@ div.uitab.notificationtab a {
     transform: rotate(-20deg);
 }
 
-#wrapper {
+[data-gjs-type="wrapper"] {
     height: 100%;
 }
 
-    #wrapper .container,
-    #wrapper .container-fluid,
-    #wrapper .row,
-    #wrapper .col,
-    #wrapper [class^="col-"],
-    #wrapper .tab-pane,
-    #wrapper .card-group {
+    [data-gjs-type="wrapper"] .container,
+    [data-gjs-type="wrapper"] .container-fluid,
+    [data-gjs-type="wrapper"] .row,
+    [data-gjs-type="wrapper"] .col,
+    [data-gjs-type="wrapper"] [class^="col-"],
+    [data-gjs-type="wrapper"] .tab-pane,
+    [data-gjs-type="wrapper"] .card-group {
         min-height: 1.5rem !important;
     }
 
-/*#wrapper .collapse,
-	#wrapper .dropdown-menu {
+/*[data-gjs-type="wrapper"] .collapse,
+	[data-gjs-type="wrapper"] .dropdown-menu {
 		display: block !important;
 		min-height: 1.5rem !important;
 	}*/
@@ -1477,7 +1477,7 @@ html.responsive {
         border-radius: 30px;
     }
 
-        html.responsive body #wrapper {
+        html.responsive body [data-gjs-type="wrapper"] {
             height: 100%;
         }
 
@@ -2258,7 +2258,7 @@ span.notificationname {
     font-weight: bold;
 }
 
-#wrapper [data-gjs-type="grid"] [data-empty="true"] {
+[data-gjs-type="wrapper"] [data-gjs-type="grid"] [data-empty="true"] {
     position: relative;
     padding: 0 !important;
     min-height: 50px !important;

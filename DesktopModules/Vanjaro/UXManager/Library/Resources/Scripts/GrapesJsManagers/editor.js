@@ -1702,7 +1702,7 @@ $(document).ready(function () {
 									setTimeout(function () { $($(window.parent.document.body).find('#dnn_ContentPane')[0]).find('.optimizing-overlay').remove(); }, 1000);
 								}
 
-								$('.gjs-frame').contents().find("#wrapper").scroll(function () {
+								$('.gjs-frame').contents().find("[data-gjs-type='wrapper']").scroll(function () {
 									var $tools = $('#gjs-cv-tools')
 									$tools.hide();
 									clearTimeout($.data(this, 'scrollTimer'));
@@ -3090,7 +3090,7 @@ $(document).ready(function () {
 								$('#iframeHolder').find('iframe').attr('src', messagesrc);
 							});
 
-							$(VjEditor.Canvas.getDocument()).on("dblclick", "#wrapper", function (e) {
+							$(VjEditor.Canvas.getDocument()).on("dblclick", "[data-gjs-type='wrapper']", function (e) {
 								Stylemanager();
 							});
 
@@ -3311,7 +3311,7 @@ $(document).ready(function () {
 				$iframe.contents().find("html").removeClass('responsive');
 				$iframe.contents().find("html").removeClass('mobile-responsive');
 				$iframe.removeClass('mobile-landscape-height');
-				$iframe.contents().find("#wrapper").removeClass("scrollbar");
+				$iframe.contents().find("[data-gjs-type='wrapper']").removeClass("scrollbar");
 				VjEditor.runCommand('set-device-desktop');
 			}
 			else
@@ -3323,7 +3323,7 @@ $(document).ready(function () {
 			if (vjEditorSettings.EditPage) {
 				$iframe.removeClass("fixed-height mobile-landscape-height");
 				$iframe.contents().find("html").addClass('responsive');
-				$iframe.contents().find("#wrapper").addClass("scrollbar");
+				$iframe.contents().find("[data-gjs-type='wrapper']").addClass("scrollbar");
 				$iframe.contents().find("html").removeClass('mobile-responsive');
 				VjEditor.runCommand('set-device-tablet');
 			}
@@ -3338,7 +3338,7 @@ $(document).ready(function () {
 				$iframe.contents().find("html").addClass('responsive');
 				$iframe.contents().find("html").removeClass('mobile-responsive');
 				$iframe.removeClass('mobile-landscape-height');
-				$iframe.contents().find("#wrapper").addClass("scrollbar");
+				$iframe.contents().find("[data-gjs-type='wrapper']").addClass("scrollbar");
 				VjEditor.runCommand('set-device-mobile-portrait');
 			}
 			else
@@ -3353,7 +3353,7 @@ $(document).ready(function () {
 				$iframe.addClass("mobile-landscape-height");
 				$iframe.contents().find("html").addClass('mobile-responsive');
 				$iframe.contents().find("html").removeClass('responsive');
-				$iframe.contents().find("#wrapper").addClass("scrollbar");
+				$iframe.contents().find("[data-gjs-type='wrapper']").addClass("scrollbar");
 				VjEditor.runCommand('set-device-mobile-landscape');
 			}
 			else {
