@@ -151,9 +151,7 @@ namespace Vanjaro.Skin
                 //VjDefaultPath used in Skin.js for loading icon.
                 WebForms.RegisterClientScriptBlock(Page, "DefaultPath", "var VjThemePath='" + Page.ResolveUrl("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name) + "'; var VjDefaultPath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/") + "'; var VjSitePath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/") + "';", true);
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/js/skin.js"), 2, "DnnFormBottomProvider");
-                WebForms.RegisterClientScriptInclude(Page, "VJ-Bootstrap-JS", FrameworkManager.Request("Bootstrap", "js/bootstrap.min.js"), true, "DnnBodyProvider");
-                if ((TabPermissionController.HasTabPermission("EDIT") || (page != null && page.StateID.HasValue && HasReviewPermission)))
-                    InjectThemeScripts();
+                WebForms.RegisterClientScriptInclude(Page, "VJ-Bootstrap-JS", FrameworkManager.Request("Bootstrap", "js/bootstrap.min.js"), true, "DnnBodyProvider");                
             }
             else
             {
@@ -243,8 +241,8 @@ namespace Vanjaro.Skin
                 if (File.Exists(HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/theme.editor.js")))
                     ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/Portals/" + PortalSettings.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/theme.editor.js"));
             }
-            if (ThemeManager.CurrentTheme.HasThemeJS())
-                ClientResourceManager.RegisterScript(Page, Page.ResolveUrl(ThemeManager.CurrentTheme.ThemeJS));
+            if (!string.IsNullOrEmpty(ThemeManager.CurrentTheme.Assembly) && !string.IsNullOrEmpty(ThemeManager.CurrentTheme.ClientScript))
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "ThemeClientScript", "<script type=\"text/javascript\" src=\"" + Page.ClientScript.GetWebResourceUrl(Type.GetType(ThemeManager.CurrentTheme.Assembly), ThemeManager.CurrentTheme.ClientScript) + "\"></script>", false);
         }
         private void HandleUXM()
         {
@@ -282,37 +280,7 @@ namespace Vanjaro.Skin
                     }
                 }
             }
-        }
-
-        private void InjectThemeScripts()
-        {
-            string ScriptsPath = System.Web.Hosting.HostingEnvironment.MapPath(Core.Managers.ThemeManager.CurrentTheme.ScriptsPath);
-
-            string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.ThemeManager, "ThemeScripts");
-            string ThemeScripts = CacheFactory.Get(CacheKey);
-
-            if (Directory.Exists(ScriptsPath) && string.IsNullOrEmpty(ThemeScripts))
-            {
-                foreach (string file in Directory.GetFiles(ScriptsPath))
-                {
-                    string FileName = Path.GetFileName(file);
-                    if (!string.IsNullOrEmpty(FileName))
-                    {
-                        if (FileName.EndsWith(".js"))
-                            ThemeScripts += File.ReadAllText(ScriptsPath + "/" + FileName);
-                    }
-                }
-                CacheFactory.Set(CacheKey, ThemeScripts);
-            }
-
-            if (!string.IsNullOrEmpty(ThemeScripts))
-            {
-                string SharedResourceFile = ScriptsPath.Replace("/js", "").Replace(@"\js", "") + "App_LocalResources/Shared.resx";
-                ThemeScripts = new DNNLocalizationEngine(null, SharedResourceFile, ShowMissingKeys).Parse(ThemeScripts);
-            }
-
-            WebForms.RegisterStartupScript(Page, "ThemeBlocks", "LoadThemeBlocks = function (grapesjs) { grapesjs.plugins.add('ThemeBlocks', (editor, opts = {}) => { " + ThemeScripts + "}); };", true);
-        }
+        }        
 
         private void InjectViewport()
         {
