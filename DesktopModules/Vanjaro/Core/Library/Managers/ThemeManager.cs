@@ -77,6 +77,33 @@ namespace Vanjaro.Core
                     return string.Empty;
             }
 
+            public static string GetDesignScript(string name)
+            {
+                ITheme theme = GetThemes().Where(s => s.Name.ToLower() == name.ToLower()).FirstOrDefault();
+                if (theme != null)
+                    return theme.DesignScript.ToString();
+                else
+                    return string.Empty;
+            }
+
+            public static string GetAssembly(string name)
+            {
+                ITheme theme = GetThemes().Where(s => s.Name.ToLower() == name.ToLower()).FirstOrDefault();
+                if (theme != null)
+                    return theme.Assembly.ToString();
+                else
+                    return string.Empty;
+            }
+
+            public static string GetClientScript(string name)
+            {
+                ITheme theme = GetThemes().Where(s => s.Name.ToLower() == name.ToLower()).FirstOrDefault();
+                if (theme != null)
+                    return theme.ClientScript.ToString();
+                else
+                    return string.Empty;
+            }
+
             public static List<ITheme> GetThemes()
             {
                 string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.Theme, "AllIThemes");

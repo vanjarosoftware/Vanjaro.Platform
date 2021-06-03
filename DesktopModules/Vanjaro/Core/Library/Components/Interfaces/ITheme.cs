@@ -9,5 +9,8 @@ namespace Vanjaro.Core.Components.Interfaces
     {
         Guid GUID { get; }
         string Name { get; }
+        string DesignScript { get; }
+        string ClientScript { get; }
+        string Assembly { get; }
     }
 }
