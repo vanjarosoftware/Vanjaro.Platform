@@ -7,7 +7,7 @@
     $scope.dblclickFired = false;
 
     $scope.onInit = function () {
-        window.parent.window.VJIsSaveCall = false;
+        window.parent.window.VJIsSaveCall = true;
         $('.uiengine-wrapper a[data-target="#!/admin"]').addClass("active");
         $('.uiengine-wrapper a[data-target="#!/imageonline"]').removeClass("active");
         setTimeout(function () {
@@ -19,7 +19,7 @@
         }, 10);
 
         $(window.parent.document.body).find('[data-bs-dismiss="modal"]').on("click", function (e) {
-            window.parent.window.VJIsSaveCall = true;
+            window.parent.window.VJIsSaveCall = false;
             window.parent.VjEditor.runCommand("save");
         });
         $scope.BindFolderEvents();
@@ -107,7 +107,7 @@
     };
 
     $scope.GetURL = function (fileid) {
-        window.parent.window.VJIsSaveCall = false;
+        window.parent.window.VJIsSaveCall = true;
         common.webApi.post('Upload/GetUrl', 'fileid=' + fileid).then(function (data) {
             if (data.data.Status == 'Success') {
                 var Link = data.data.Url;

@@ -9,7 +9,7 @@
 	$scope.AdditionalData = "";
 
 	$scope.onInit = function () {
-        window.parent.window.VJIsSaveCall = false;
+        window.parent.window.VJIsSaveCall = true;
 		$('.uiengine-wrapper a[data-target="#!/admin"]').removeClass("active");
 		$('.uiengine-wrapper a[data-target="#!/videoonline"]').addClass("active");
 		$scope.ChangeVideoProviders();
@@ -44,7 +44,7 @@
 	};
 
 	$scope.SaveVideo = function () {
-        window.parent.window.VJIsSaveCall = true;
+        window.parent.window.VJIsSaveCall = false;
         window.parent.VjEditor.runCommand("save");
 	};
 
@@ -98,7 +98,7 @@
 	};
 
     $scope.SelectVideo = function (URL, save) {
-        window.parent.window.VJIsSaveCall = false;
+        window.parent.window.VJIsSaveCall = true;
 		var target = window.parent.document.vj_video_target;
 		if (target != undefined) {
 			var url = "";
