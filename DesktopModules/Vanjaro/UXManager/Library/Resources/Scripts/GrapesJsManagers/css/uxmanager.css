@@ -965,7 +965,6 @@ div#MenuSettings .parent-menu-hide {
     -webkit-transition: border-color .25s;
     transition: border-color .25s;
     opacity: 0.6;
-    text-transform: capitalize;
     appearance: auto;
 }
 
@@ -1069,6 +1068,7 @@ div#MenuSettings .parent-menu-hide {
 #layer-manager {
     display: none;
     height: calc(60vh - 40px) !important;
+    z-index: 9999 !important;
 }
 
 .jsPanel-content {
