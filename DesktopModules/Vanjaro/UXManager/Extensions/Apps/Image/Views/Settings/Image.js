@@ -140,7 +140,7 @@
                         else {
 
                             if (data.data.Urls.length)
-                                url = URL.Urls.find(v => v.Type == 'webp').Url;                            
+                                url = data.data.Urls.find(v => v.Type == 'webp').Url;                            
 
                             target.set('src', url);
                         }
@@ -149,7 +149,7 @@
                         var background = window.parent.VjEditor.StyleManager.getProperty('background_&_shadow', 'background');
                         
                         if (data.data.Urls.length)
-                            url = URL.Urls.find(v => v.Type == 'webp').Url;                        
+                            url = data.data.Urls.find(v => v.Type == 'webp').Url;                        
 
                         background.getCurrentLayer().attributes.properties.models.find(m => m.id == 'background-image').setValue(url);
                     }
