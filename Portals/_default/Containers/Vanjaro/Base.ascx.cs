@@ -38,11 +38,8 @@ namespace Vanjaro.Container
                                 else
                                     url += "?skinsrc=" + "[g]skins/vanjaro/base";
 
-                                string TempSplitArray = splitarray.Length > 1 ? splitarray[1] : string.Empty;
-                                if (splitarray.Length > 1 && TempSplitArray.StartsWith("/"))
-                                    url += "#" + TempSplitArray;
-                                else
-                                    url += "#/" + TempSplitArray;
+                                if (splitarray.Length > 1)
+                                    url += "#" + splitarray[1];
                             }
                             else
                             {
