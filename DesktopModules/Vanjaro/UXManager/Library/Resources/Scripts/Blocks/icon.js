@@ -28,7 +28,7 @@
 		model: defaultModel.extend({
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				'custom-name': 'Icon Box',
-                droppable: false,
+				droppable: false,
 				selectable: false,
 				highlightable: false,
 				hoverable: false,
@@ -196,11 +196,11 @@
 						label: "Width",
 						name: "framewidth",
 						type: "custom_range",
-                        cssproperties: [{ name: "border-width" }],
-                        units: [
-                            { name: 'px', min: 0, max: 100, step: 1, value: 10 },
-                        ],
-                        unit: "px",
+						cssproperties: [{ name: "border-width" }],
+						units: [
+							{ name: 'px', min: 0, max: 100, step: 1, value: 10 },
+						],
+						unit: "px",
 						changeProp: 1,
 					}, {
 						label: "Style",
@@ -235,13 +235,7 @@
 						],
 						default: "primary",
 						changeProp: 1,
-					}, {
-						label: " ",
-						name: "href",
-						type: "href",
-						href: "",
-						"data_href_type": "url",
-					},
+					}
 				]
 			}),
 			init() {
@@ -259,7 +253,6 @@
 					return { type: 'icon' };
 				}
 			}
-
 		}),
 		view: defaultView.extend({
 			events: {
@@ -276,6 +269,16 @@
 				var url = CurrentExtTabUrl + "&guid=85682CD1-D5FD-4611-B252-3BC1972545A0#!/setting";
 				OpenPopUp(null, 700, 'right', 'Select Icon', url, '', true);
 			},
+			onRender() {
+
+				var model = this.model;
+
+				if (model.parent().attributes.type != "icon-box") {
+					setTimeout(function () {
+						model.replaceWith('<div class="icon-box">' + model.getEl().outerHTML + '</div>');
+					});
+				}
+			}
 		}),
 	});
 

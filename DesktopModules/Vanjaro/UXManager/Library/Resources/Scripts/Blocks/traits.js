@@ -677,26 +677,6 @@ export default (editor, config = {}) => {
 
                 if (component.attributes.type == 'carousel-image')
                     component.parent().parent().addAttributes({ href: href });
-                else if (component.attributes.type == 'icon') {
-
-                    if (href == "") {
-                        component.attributes.tagName = 'span';
-                        component.view.reset();
-
-                        const attr = component.getAttributes();
-                        delete attr.href;
-                        component.setAttributes(attr);
-                    }
-                    else {
-
-                        component.attributes.tagName = 'a';
-                        component.view.reset();
-                        component.addAttributes({ href: href });
-
-                        if (val != "page")
-                            component.set({ 'pid': null });
-                    }
-                }
                 else
                     component.addAttributes({ href: href });
             }
