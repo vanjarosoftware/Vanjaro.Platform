@@ -94,7 +94,7 @@ namespace Vanjaro.Core
                 return Markup;
             }
 
-            internal static void BuildCustomBlocks(int portalID, dynamic contentJSON, dynamic styleJSON)
+            public static void BuildCustomBlocks(int portalID, dynamic contentJSON, dynamic styleJSON)
             {
                 if (contentJSON != null)
                 {
