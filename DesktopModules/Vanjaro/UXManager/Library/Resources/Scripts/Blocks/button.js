@@ -82,7 +82,7 @@ export default (editor, config = {}) => {
 				}
 			},
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
-				droppable: false,
+				droppable: '[data-gjs-type=icon-box], [data-gjs-type=icon]',
 				classes: ['btn', 'btn-primary', 'button-style-1'],
 				text: true,
 				resizable: {
