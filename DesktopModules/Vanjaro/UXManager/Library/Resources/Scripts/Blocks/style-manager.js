@@ -348,7 +348,7 @@
 						unit = '';
 				}
 
-				if (val == "auto") {
+				if ((event.keyCode === 38 || event.keyCode === 40) && val == "auto") {
 
 					if (property == "min-width" || property == "max-width")
 						val = $(selected.view.el).css('width');
