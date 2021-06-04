@@ -116,6 +116,8 @@ namespace Vanjaro.UXManager.Library
                     WebForms.LinkCSS(Page, "GrapesJspluginCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJsManagers/css/uxmanager.css"));
                     WebForms.LinkCSS(Page, "FontawesomeV4Css", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/fontawesome/v4.css"));
 
+                    LocalizeThemeJS();
+
                     if (!string.IsNullOrEmpty(Core.Managers.ThemeManager.CurrentTheme.Assembly) && !string.IsNullOrEmpty(Core.Managers.ThemeManager.CurrentTheme.DesignScript))
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "ThemeDesignScript", "<script type=\"text/javascript\" src=\"" + Page.ClientScript.GetWebResourceUrl(Type.GetType(Core.Managers.ThemeManager.CurrentTheme.Assembly), Core.Managers.ThemeManager.CurrentTheme.DesignScript) + "\"></script>", false);
 
@@ -185,6 +187,18 @@ namespace Vanjaro.UXManager.Library
             item.EditPage = Core.Entities.Editor.Options.EditPage;
             item.ShowUXManager = string.IsNullOrEmpty(Core.Managers.CookieManager.GetValue("vj_InitUX")) ? false : Convert.ToBoolean(Core.Managers.CookieManager.GetValue("vj_InitUX"));
             return item;
+        }
+
+        private void LocalizeThemeJS()
+        {
+            string FilePath = Server.MapPath("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/Localization.js");
+            if (File.Exists(FilePath))
+            {
+                string FileText = File.ReadAllText(FilePath);
+                string SharedResourceFile = Server.MapPath("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/App_LocalResources/Shared.resx");
+                FileText = new DNNLocalizationEngine(null, SharedResourceFile, Extension.ShowMissingKeysStatic).Parse(FileText);
+                WebForms.RegisterStartupScript(Page, "LocalizeThemeJS", FileText, true);
+            }
         }
 
         private void LocalizeGrapeJS()
