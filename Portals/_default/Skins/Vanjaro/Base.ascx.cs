@@ -238,11 +238,10 @@ namespace Vanjaro.Skin
         {
             if (string.IsNullOrEmpty(Request.QueryString["mid"]) || (!string.IsNullOrEmpty(Request.QueryString["icp"]) && bool.Parse(Request.QueryString["icp"]) && (!string.IsNullOrEmpty(Request.QueryString["mid"]) && Request.QueryString["mid"] != "0")))
             {
-                if (File.Exists(HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/theme.editor.js")))
-                    ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/Portals/" + PortalSettings.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/theme.editor.js"));
+                if (!string.IsNullOrEmpty(ThemeManager.CurrentTheme.Assembly) && !string.IsNullOrEmpty(ThemeManager.CurrentTheme.ClientScript))
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "ThemeClientScript", "<script type=\"text/javascript\" src=\"" + Page.ClientScript.GetWebResourceUrl(Type.GetType(ThemeManager.CurrentTheme.Assembly), ThemeManager.CurrentTheme.ClientScript) + "\"></script>", false);
             }
-            if (!string.IsNullOrEmpty(ThemeManager.CurrentTheme.Assembly) && !string.IsNullOrEmpty(ThemeManager.CurrentTheme.ClientScript))
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "ThemeClientScript", "<script type=\"text/javascript\" src=\"" + Page.ClientScript.GetWebResourceUrl(Type.GetType(ThemeManager.CurrentTheme.Assembly), ThemeManager.CurrentTheme.ClientScript) + "\"></script>", false);
+            
         }
         private void HandleUXM()
         {
