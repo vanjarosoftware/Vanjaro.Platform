@@ -117,7 +117,7 @@ namespace Vanjaro.UXManager.Library
                     WebForms.LinkCSS(Page, "FontawesomeV4Css", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/fontawesome/v4.css"));
 
                     if (!string.IsNullOrEmpty(Core.Managers.ThemeManager.CurrentTheme.Assembly) && !string.IsNullOrEmpty(Core.Managers.ThemeManager.CurrentTheme.DesignScript))
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "ThemeDesignScript", "<script type=\"text/javascript\" src=\"" + Page.ClientScript.GetWebResourceUrl(Type.GetType(Core.Managers.ThemeManager.CurrentTheme.Assembly), Core.Managers.ThemeManager.CurrentTheme.ClientScript) + "\"></script>", false);
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "ThemeDesignScript", "<script type=\"text/javascript\" src=\"" + Page.ClientScript.GetWebResourceUrl(Type.GetType(Core.Managers.ThemeManager.CurrentTheme.Assembly), Core.Managers.ThemeManager.CurrentTheme.DesignScript) + "\"></script>", false);
 
                     LocalizeGrapeJS();
 

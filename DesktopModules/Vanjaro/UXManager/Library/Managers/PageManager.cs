@@ -104,7 +104,7 @@ namespace Vanjaro.UXManager.Library
                     result.Add(new PageItem() { Text = page.Text, Value = page.Value });
                     if (page.children != null && page.children.Count > 0)
                     {
-                        BindChildPages(result, page.children, "-");
+                        BindChildPages(result, page.children, "- ");
                     }
                 }
                 return result;
@@ -117,7 +117,7 @@ namespace Vanjaro.UXManager.Library
                     result.Add(new PageItem() { Text = prefix + " " + page.Text, Value = page.Value });
                     if (page.children != null && page.children.Count > 0)
                     {
-                        BindChildPages(result, page.children, prefix + ".");
+                        BindChildPages(result, page.children, prefix + "- ");
                     }
                 }
             }
@@ -215,7 +215,7 @@ namespace Vanjaro.UXManager.Library
                     tab.TabID = page.TabID;
                     tab.TabType = GetTabType(page);
                     RootCategory.Add(tab);
-                    RootCategory.AddRange(GetPagesChildPages(page.TabID, "-", portalSettings, DisableLink));
+                    RootCategory.AddRange(GetPagesChildPages(page.TabID, "- ", portalSettings, DisableLink));
                 }
                 return RootCategory;
             }
@@ -244,7 +244,7 @@ namespace Vanjaro.UXManager.Library
                     childTab.TabID = item.TabID;
                     childTab.TabType = GetTabType(item);
                     ChildPages.Add(childTab);
-                    ChildPages.AddRange(GetPagesChildPages(item.TabID, NamePrefix + "-", portalSettings, DisableLink));
+                    ChildPages.AddRange(GetPagesChildPages(item.TabID, NamePrefix + "- ", portalSettings, DisableLink));
                 }
                 return ChildPages;
             }
