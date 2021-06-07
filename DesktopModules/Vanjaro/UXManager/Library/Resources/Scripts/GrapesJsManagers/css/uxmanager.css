@@ -3634,6 +3634,7 @@ body .gjs-selected {
     color: #aaa;
     text-transform: capitalize;
     width: 100%;
+    cursor: pointer;
 }
 
 .gjs-field-toggle.gjs-field {
