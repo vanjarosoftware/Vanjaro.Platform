@@ -162,8 +162,8 @@ $(document).ready(function () {
 					if (component.attributes.attributes["data-block-type"] == "global" && $(component.getEl()).find('.global-tools').length == 0)
 						window.parent.StyleGlobal(component);
 				});
-			}
-
+            }
+            $(VjEditor.Canvas.getBody()).find('[data-gjs-type="globalblockwrapper"]').css('pointer-events', '');
 		};
 
 		var waitForEl = function (selector, size, callback) {
