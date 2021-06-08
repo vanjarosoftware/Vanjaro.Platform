@@ -937,11 +937,18 @@ namespace Vanjaro.Core
                                     {
                                         if (!objModule.IsDeleted && !string.IsNullOrEmpty(desktopModuleInfo.BusinessControllerClass) && desktopModuleInfo.IsPortable)
                                         {
-                                            var businessController = Reflection.CreateObject(
-                                                desktopModuleInfo.BusinessControllerClass,
-                                                desktopModuleInfo.BusinessControllerClass);
-                                            var controller = businessController as IPortable;
-                                            controller?.ImportModule(objModule.ModuleID, File.ReadAllText(portableModulesPath + "/" + oldMid + ".json", Encoding.Unicode), desktopModuleInfo.Version, userInfo.UserID);
+                                            try
+                                            {
+                                                var businessController = Reflection.CreateObject(
+                                                    desktopModuleInfo.BusinessControllerClass,
+                                                    desktopModuleInfo.BusinessControllerClass);
+                                                var controller = businessController as IPortable;
+                                                controller?.ImportModule(objModule.ModuleID, File.ReadAllText(portableModulesPath + "/" + oldMid + ".json", Encoding.Unicode), desktopModuleInfo.Version, userInfo.UserID);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                                            }
                                         }
                                     }
                                 }

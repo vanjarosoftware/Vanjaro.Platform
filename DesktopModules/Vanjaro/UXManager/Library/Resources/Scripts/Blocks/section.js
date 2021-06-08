@@ -119,7 +119,7 @@
 					}, {
 						label: 'Alignment',
 						name: 'alignment',
-						type: 'toggle_checkbox',
+						type: 'toggle_radio',
 						UpdateStyles: true,
 						cssproperties: [{ name: "text-align" }],
 						options: [

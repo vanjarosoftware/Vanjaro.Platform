@@ -392,7 +392,6 @@ export default (editor, config = {}) => {
                 style["border-bottom-right-radius"] = "0";
             }
             else if (event.target.value == "circle") {
-                component.getTrait('framewidth').setTargetValue('10');
                 style["border-width"] = "10px";
                 style["border-top-left-radius"] = "50%";
                 style["border-top-right-radius"] = "50%";
@@ -400,7 +399,6 @@ export default (editor, config = {}) => {
                 style["border-bottom-right-radius"] = "50%";
             }
             else if (event.target.value == "square") {
-                component.getTrait('framewidth').setTargetValue('10');
                 style["border-width"] = "10px";
                 style["border-top-left-radius"] = "0";
                 style["border-top-right-radius"] = "0";
@@ -428,6 +426,9 @@ export default (editor, config = {}) => {
         }
         else
             component.setStyle(style);
+
+        if (event.target.name == "frame" && (event.target.value == "circle" || event.target.value == "square"))
+            component.getTrait('framewidth').setTargetValue('10');
     };
 
     //Textarea
@@ -1674,8 +1675,22 @@ export default (editor, config = {}) => {
 
             if (typeof event != 'undefined' && !event.target.classList.contains('input-control')) {
 
-                if (typeof component.getStyle()[property] != 'undefined')
-                    value = component.getStyle()[property].replace('!important', '');
+                var model = component;
+                var selector = trait.attributes.selector;
+
+                if (typeof selector != 'undefined') {
+
+                    if (trait.attributes.closest) {
+                        if (typeof component.closest(selector) != 'undefined')
+                            model = component.closest(selector);
+                    }
+                    else
+                        model = component.find(selector)[0];
+                }
+
+
+                if (typeof model.getStyle()[property] != 'undefined')
+                    value = model.getStyle()[property].replace('!important', '');
                 else
                     if (typeof trait.attributes.units != 'undefined')
                         value = '';
@@ -1720,7 +1735,7 @@ export default (editor, config = {}) => {
                 }
 
                 if (property != '' && unit == 'px')
-                    inputValue = parseFloat($(component.view.el).css(property));
+                    inputValue = parseFloat($(model.view.el).css(property));
 
                 trait.view.$el.find('select').val(unit);
 

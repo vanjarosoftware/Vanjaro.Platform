@@ -962,6 +962,7 @@ div#MenuSettings .parent-menu-hide {
     padding: 5px 10px;
     color: #000;
     font-size: 14px;
+    text-transform: capitalize;
     -webkit-transition: border-color .25s;
     transition: border-color .25s;
     opacity: 0.6;
@@ -3634,6 +3635,7 @@ body .gjs-selected {
     color: #aaa;
     text-transform: capitalize;
     width: 100%;
+    cursor: pointer;
 }
 
 .gjs-field-toggle.gjs-field {

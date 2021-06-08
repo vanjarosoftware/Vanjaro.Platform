@@ -203,7 +203,8 @@ td.dropdownimgicon {
 }
 
 .imagesrow:hover .dropdown.dropbtn .dropdownmenu {
-    top: -1px !important;
+    top: -2px !important;
+    right: 6px !important;
 }
 
 .thumb-info .thumb-info-action-icon {
