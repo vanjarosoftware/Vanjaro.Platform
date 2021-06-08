@@ -1675,8 +1675,22 @@ export default (editor, config = {}) => {
 
             if (typeof event != 'undefined' && !event.target.classList.contains('input-control')) {
 
-                if (typeof component.getStyle()[property] != 'undefined')
-                    value = component.getStyle()[property].replace('!important', '');
+                var model = component;
+                var selector = trait.attributes.selector;
+
+                if (typeof selector != 'undefined') {
+
+                    if (trait.attributes.closest) {
+                        if (typeof component.closest(selector) != 'undefined')
+                            model = component.closest(selector);
+                    }
+                    else
+                        model = component.find(selector)[0];
+                }
+
+
+                if (typeof model.getStyle()[property] != 'undefined')
+                    value = model.getStyle()[property].replace('!important', '');
                 else
                     if (typeof trait.attributes.units != 'undefined')
                         value = '';
@@ -1721,7 +1735,7 @@ export default (editor, config = {}) => {
                 }
 
                 if (property != '' && unit == 'px')
-                    inputValue = parseFloat($(component.view.el).css(property));
+                    inputValue = parseFloat($(model.view.el).css(property));
 
                 trait.view.$el.find('select').val(unit);
 
