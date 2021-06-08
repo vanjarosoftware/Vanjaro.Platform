@@ -154,7 +154,7 @@
     </style>
     <script type="text/javascript">
         function openVideoPopup(element) {
-            var postdata = { action: 'Help.Videos', width: '100%', position: 'center', title: $(element).attr('dataName'), url: $(element).attr('videoUrl'), allow:'autoplay' };
+            var postdata = { action: 'Help.Videos', width: '100%', position: 'center', title: $(element).attr('dataName'), url: $(element).attr('videoUrl') };
             window.parent.postMessage(postdata, '*');
         }
     </script>
