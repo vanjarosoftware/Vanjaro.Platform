@@ -121,7 +121,7 @@
     <value>Apply</value>
   </data>
   <data name="ApplyThemeText.Text" xml:space="preserve">
-    <value>Please confirm you want to apply this theme.</value>
+    <value>Changing the theme can have unintended consequences. Be sure to review all pages after applying the new theme. \n\n Please confirm you want to apply this theme?</value>
   </data>
   <data name="ApplyThemeTitle.Text" xml:space="preserve">
     <value>Are you sure?</value>
