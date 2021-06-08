@@ -43,7 +43,7 @@
                 Template: $scope.CreatePortalRequest.SiteName,
                 TemplatePath: $scope.CreatePortalRequest.SiteTemplate,
                 TemplateHash: $scope.CreatePortalRequest.SiteTemplateHash,
-                Theme: $scope.ui.data.Theme.Value
+                Theme: $scope.ui.data.Themes.Value
             };
             var date = new Date();
             date.setTime(date.getTime() + (60 * 1000));
