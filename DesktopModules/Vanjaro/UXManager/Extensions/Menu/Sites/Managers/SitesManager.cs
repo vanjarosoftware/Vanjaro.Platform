@@ -401,6 +401,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                     else
                     {
                         PortalInfo pinfo = PortalController.Instance.GetPortal(portalId);
+                        Core.Managers.SettingManager.UpdateValue(portalId, -1, "setting_theme", "Theme", ThemeManager.GetThemes().Where(t => t.GUID.ToString().ToLower() == template.Theme.Value.ToString().ToLower()).FirstOrDefault().Name);
                         ImportTemplate(pinfo, template.TemplatePath.Value, template.TemplateHash.Value);
                     }
                 }

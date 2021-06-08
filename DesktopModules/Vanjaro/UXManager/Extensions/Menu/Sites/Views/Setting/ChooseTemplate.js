@@ -15,7 +15,15 @@
         $('.defaultdesign').show();
         $(window.parent.document.body).find('.modal-dialog:last').find('.btn-close').before($('.defaultdesign-hidden'));
         var $FrameUrl = $('uiengine #FrameUrl');
-        $FrameUrl.attr('src', $scope.ui.data.LibraryMidUrl.Value).load(function () { $(this).prev('.loader').hide(); });
+        $FrameUrl.attr('src', $scope.ui.data.LibraryMidUrl.Value + $scope.ui.data.Themes.Value).load(function () { $(this).prev('.loader').hide(); });
+        $.each($scope.ui.data.Themes.Options, function (i, v) {
+            v.Name = v.Name + ' Theme';
+        });
+    };
+
+    $scope.ChangeTheme = function () {
+        var $FrameUrl = $('uiengine #FrameUrl');
+        $FrameUrl.attr('src', $scope.ui.data.LibraryMidUrl.Value + $scope.ui.data.Themes.Value).load(function () { $(this).prev('.loader').hide(); });
     };
 
     $scope.Click_ContinueDefault = function () {
@@ -34,7 +42,8 @@
             var storagedata = {
                 Template: $scope.CreatePortalRequest.SiteName,
                 TemplatePath: $scope.CreatePortalRequest.SiteTemplate,
-                TemplateHash: $scope.CreatePortalRequest.SiteTemplateHash
+                TemplateHash: $scope.CreatePortalRequest.SiteTemplateHash,
+                Theme: $scope.ui.data.Theme.Value
             };
             var date = new Date();
             date.setTime(date.getTime() + (60 * 1000));
