@@ -5,10 +5,11 @@
     <title></title>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
     <style>
+
         .help-videos-body {
             padding: 0px;
             margin: 0px;
-                font-family: Arial,sans-serif;
+            font-family: Arial, sans-serif;
         }
 
         .vj-ux-manager {
@@ -17,31 +18,29 @@
             padding: 12px;
         }
 
+        .vj-ux-manager ul.help-videos {
+            padding: 0px 5px 0px 5px;
+        }
 
+        .vj-ux-manager ul.help-videos li {
+            background-color: #f9f9f9;
+            list-style: none;
+            border: none;
+            border-radius: 0;
+            margin-bottom: 5px;
+            padding: .75rem .7rem;
+        }
 
-            .vj-ux-manager ul.help-videos {
-               padding: 0px 5px 0px 5px;
-            }
+        .vj-ux-manager ul.help-videos li:not(.video-heading) {
+            cursor: pointer;
+        }
 
-                .vj-ux-manager ul.help-videos li {
-                    background-color: #f9f9f9;
-                    list-style: none;
-                    border: none;
-                    border-radius: 0;
-                    margin-bottom: 5px;
-                    padding: .75rem .7rem;                   
-                }
-
-                    .vj-ux-manager ul.help-videos li:not(.video-heading) {
-                        cursor: pointer;
-                    }
-
-                    .vj-ux-manager ul.help-videos li a {
-                        font-size: 12px;
-                        line-height: 20px;
-                        color: #313131;
-                        text-decoration: none !important;
-                    }
+        .vj-ux-manager ul.help-videos li a {
+            font-size: 12px;
+            line-height: 20px;
+            color: #313131;
+            text-decoration: none !important;
+        }
 
         .video-heading {
             background: transparent !important;
@@ -61,13 +60,13 @@
             display: none;
         }
 
- .help-videos-box .help-videos li a {
+        .help-videos-box .help-videos li a {
             display: flex;
             align-items: center;
         }
 
             .help-videos-box .help-videos li a svg {
-                margin-right: 4px
+                margin-right: 10px
             }
 
         .show-video {
@@ -91,147 +90,139 @@
             position: relative;
         }
 
+        .help-videos-box:after {
+            content: "";
+            position: absolute;
+            left: 0px;
+            right: 4px;
+            bottom: 0;
+            height: 5px;
+            background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .03)), to(transparent));
+            background: -webkit-linear-gradient(rgba(0, 0, 0, .03), transparent);
+            background: -o-linear-gradient(rgba(0, 0, 0, .03), transparent);
+            background: linear-gradient(rgba(0, 0, 0, .05), transparent);
+            -webkit-transform: translateY(100%);
+            -ms-transform: translateY(100%);
+            transform: translateY(100%);
+        }
 
-            .help-videos-box:after {
-                content: "";
-                position: absolute;
-                left: 0px;
-                right: 4px;
-                bottom: 0;
-                height: 5px;
-                background: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,.03)),to(transparent));
-                background: -webkit-linear-gradient(rgba(0,0,0,.03),transparent);
-                background: -o-linear-gradient(rgba(0,0,0,.03),transparent);
-                background: linear-gradient(rgba(0,0,0,.05),transparent);
-                -webkit-transform: translateY(100%);
-                -ms-transform: translateY(100%);
-                transform: translateY(100%);
-            }
+        .help-videos-box .rotate-icon svg {
+            transform: rotate( 90deg);
+        }
 
-            .help-videos-box .rotate-icon svg {
-                transform: rotate( 90deg );
-            }
+        .help-video-wrapper {
+            width: 275px;
+        }
+        /*Scrollbar*/
 
-            .help-video-wrapper{
-                width: 275px;
-            }
+        ::-webkit-scrollbar {
+            margin-top: 10px;
+            height: 10px;
+            width: 8px;
+        }
 
-                    /*Scrollbar*/
+        ::-webkit-scrollbar-track,
+        ::-webkit-scrollbar-track,
+        ::-webkit-scrollbar-track {
+            /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+            border-radius: 10px;
+            opacity: 0.8;
+        }
 
+        ::-webkit-scrollbar-track-piece,
+        ::-webkit-scrollbar-track-piece,
+        ::-webkit-scrollbar-track-piece {
+            background: rgba(255, 255, 255, 0);
+        }
 
-::-webkit-scrollbar {
-    margin-top: 10px;
-    height: 10px;
-    width: 8px;
-}
+        ::-webkit-scrollbar-thumb,
+        ::-webkit-scrollbar-thumb,
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: rgba(170, 170, 170, 0.3);
+            outline: none;
+            -webkit-transition: background-color .2s linear, width .2s ease-in-out;
+            -o-transition: background-color .2s linear, width .2s ease-in-out;
+            transition: background-color .2s linear, width .2s ease-in-out;
+        }
 
-::-webkit-scrollbar-track,
-::-webkit-scrollbar-track,
-::-webkit-scrollbar-track {
-    /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
-    border-radius: 10px;
-    opacity: 0.8;
-}
-
-::-webkit-scrollbar-track-piece,
-::-webkit-scrollbar-track-piece,
-::-webkit-scrollbar-track-piece {
-    background: rgba(255, 255, 255, 0);
-}
-
-::-webkit-scrollbar-thumb,
-::-webkit-scrollbar-thumb,
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: rgba(170, 170, 170, 0.3);
-    outline: none;
-    -webkit-transition: background-color .2s linear,width .2s ease-in-out;
-    -o-transition: background-color .2s linear,width .2s ease-in-out;
-    transition: background-color .2s linear,width .2s ease-in-out;
-}
-    
-.help-videos a svg path{
-    fill:#aaa;
-}
-   .help-videos-box .help-videos li a svg { margin-right: 10px; }         
+        .help-videos a svg path {
+            fill: #aaa;
+        }
     </style>
     <script type="text/javascript">
         function openVideoPopup(element) {
-            var postdata = { action: 'Help.Videos', width: '100%', position: 'center', title: $(element).attr('dataName'), url: $(element).attr('videoUrl') };
+            var postdata = {
+                action: 'Help.Videos',
+                width: '100%',
+                position: 'center',
+                title: $(element).attr('dataName'),
+                url: $(element).attr('videoUrl')
+            };
             window.parent.postMessage(postdata, '*');
         }
     </script>
 </head>
+
 <body class="help-videos-body">
-
-
     <div class="vj-ux-manager">
-
- 
-
-    <div class=" help-video-wrapper">
-
-        <div class="help-videos-box">
-            <div class="video-heading rotate-icon">
-                Page Builder
-                <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
-
+        <div class=" help-video-wrapper">
+            <div class="help-videos-box">
+                <div class="video-heading rotate-icon">
+                    Page Builder
+                    <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x">
+                        <path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path>
+                    </svg>
+                </div>
+                <ul class="help-videos show-video">
+                    <li>
+                        <a videoUrl="https://www.youtube.com/embed/tc1wGPWpxPc" dataName="Basics" onclick="openVideoPopup(this)">
+                            <svg data-gjs-type="svg" height="12" width="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path data-gjs-type="svg-in" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+                            </svg> Basics <span class="video-preview-time">(10:24)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a videoUrl="https://www.youtube.com/embed/HS7_uNnNJkk" dataName="Navigator & Device View" onclick="openVideoPopup(this)">
+                            <svg data-gjs-type="svg" height="12" width="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path data-gjs-type="svg-in" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+                            </svg> Navigator & Device View <span class="video-preview-time">(5:22)</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="help-videos show-video">
-                <li>
-                    <a videoUrl="https://www.youtube.com/embed/tc1wGPWpxPc" dataName="Basics" onclick="openVideoPopup(this)">
-                        <svg data-gjs-type="svg" height="12" width="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path data-gjs-type="svg-in" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg>
-                        Basics
-                        <span class="video-preview-time">(10:24)</span>
-                    </a>
-                </li>
-                <li>
-                    <a videoUrl="https://www.youtube.com/embed/HS7_uNnNJkk" dataName="Navigator & Device View" onclick="openVideoPopup(this)">
-                        <svg data-gjs-type="svg" height="12" width="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path data-gjs-type="svg-in" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg>
-                        Navigator & Device View
-                        <span class="video-preview-time">(5:22)</span>
-                    </a>
-                </li>
-               
-            </ul>
-        </div>
-        <div class="help-videos-box">
-            <div class="video-heading">
-                Content Blocks <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path></svg>
+            <div class="help-videos-box">
+                <div class="video-heading">
+                    Content Blocks
+                    <svg aria-hidden="true" height="20" width="20" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" class="svg-inline--fa fa-caret-right fa-w-6 fa-3x">
+                        <path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z" class=""></path>
+                    </svg>
+                </div>
+                <ul class="help-videos">
+                    <li>
+                        <a videoUrl="https://www.youtube.com/embed/5fPQZUfaY3Q" dataName="Button" onclick="openVideoPopup(this)">
+                            <svg data-gjs-type="svg" height="14" width="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path data-gjs-type="svg-in" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+                            </svg>Button <span class="video-preview-time">(4:04)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a videoUrl="https://www.youtube.com/embed/2Evl3XcEujo" dataName="Custom Code" onclick="openVideoPopup(this)">
+                            <svg data-gjs-type="svg" height="14" width="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path data-gjs-type="svg-in" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+                            </svg> Custom Code <span class="video-preview-time">(4:32)</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="help-videos">
-                <li>
-                    <a videoUrl="https://www.youtube.com/embed/5fPQZUfaY3Q" dataName="Button" onclick="openVideoPopup(this)">
-                        <svg data-gjs-type="svg" height="14" width="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path data-gjs-type="svg-in" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg>Button
-                        <span class="video-preview-time">(4:04)</span>
-                    </a>
-                </li>
-                <li>
-                    <a videoUrl="https://www.youtube.com/embed/2Evl3XcEujo" dataName="Custom Code" onclick="openVideoPopup(this)">
-                        <svg data-gjs-type="svg" height="14" width="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path data-gjs-type="svg-in" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg>
-                        Custom Code
-                        <span class="video-preview-time">(4:32)</span>
-                    </a>
-                </li>
-             
-            </ul>
         </div>
-      
     </div>
-        </div>
-
     <script>
-
-
         $('.video-heading').click(function () {
             $(this).toggleClass('rotate-icon');
             $(this).parent().find('.help-videos').toggleClass('show-video');
         })
-
-
     </script>
-
-
-
 </body>
+
 </html>
