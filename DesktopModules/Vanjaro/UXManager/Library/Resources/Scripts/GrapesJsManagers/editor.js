@@ -2289,7 +2289,6 @@ $(document).ready(function () {
                                     }, 300);
                                 }
 
-                                model.set('border-position', 'sm-border');
                                 FilterBorderOptions(model, 'sm-border');
                                 $(VjEditor.StyleManager.getProperty(Border, 'border-position').view.$el.find('input')[0]).prop('checked', true);
 
