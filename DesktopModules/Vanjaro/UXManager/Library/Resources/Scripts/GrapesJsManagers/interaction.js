@@ -156,7 +156,9 @@ $(document).ready(function () {
     }
 
     // Show-Hide ContentBlocks & MenuSettings
-    $(".block-manager #MenuSettings , .Menupanel-top , #About, #Shortcuts").hide();
+    if (typeof vjEditorSettings != 'undefined')
+        $(".block-manager #MenuSettings, .Menupanel-top , #About, #Shortcuts").hide();
+
     $(".block-manager #MenuSettings ul ul").css("left", "100%");
 
     $(".panelheader .blockItem").click(function (e) {
