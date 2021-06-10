@@ -798,7 +798,7 @@ export default (editor, config = {}) => {
 
                     if (typeof selector != 'undefined') {
 
-                        if (trait.attributes.closest) {
+                        if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
                             if (typeof component.closest(selector) != 'undefined')
                                 model = component.closest(selector);
                         }
@@ -833,7 +833,7 @@ export default (editor, config = {}) => {
 
             if (typeof selector != 'undefined') {
 
-                if (trait.attributes.closest) {
+                if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
                     if (typeof component.closest(selector) != 'undefined')
                         model = component.closest(selector);
                 }
@@ -933,7 +933,7 @@ export default (editor, config = {}) => {
 
                     if (typeof selector != 'undefined') {
 
-                        if (trait.attributes.closest) {
+                        if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
                             if (typeof component.closest(selector) != 'undefined')
                                 model = component.closest(selector);
                         }
@@ -1398,7 +1398,7 @@ export default (editor, config = {}) => {
 
             if (typeof selector != 'undefined') {
 
-                if (trait.attributes.closest) {
+                if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
                     if (typeof component.closest(selector) != 'undefined')
                         model = component.closest(selector);
                 }
@@ -1608,7 +1608,7 @@ export default (editor, config = {}) => {
 
                 var selector = trait.attributes.selector;
 
-                if (trait.attributes.closest) {
+                if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
                     if (typeof component.closest(selector) != 'undefined')
                         model = component.closest(selector);
                 }
@@ -1680,14 +1680,13 @@ export default (editor, config = {}) => {
 
                 if (typeof selector != 'undefined') {
 
-                    if (trait.attributes.closest) {
+                    if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
                         if (typeof component.closest(selector) != 'undefined')
                             model = component.closest(selector);
                     }
                     else
                         model = component.find(selector)[0];
                 }
-
 
                 if (typeof model.getStyle()[property] != 'undefined')
                     value = model.getStyle()[property].replace('!important', '');
@@ -1763,7 +1762,7 @@ export default (editor, config = {}) => {
 
             if (typeof selector != 'undefined') {
 
-                if (trait.attributes.closest) {
+                if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
                     if (typeof component.closest(selector) != 'undefined')
                         model = component.closest(selector);
                 }

@@ -36,7 +36,7 @@
 					br: 0, // Bottom right
 					minDim: 10,
 					maxDim: 600,
-					onMove: function (e) {
+					onEnd: function (e) {
 						var comp = VjEditor.getSelected();
 
 						//Updating Trait on resize
@@ -51,7 +51,7 @@
 								comp.getTrait('height').el.children[1].value = val
 							}
 						}
-					}
+                    }
 				},
 				traits: [
 					{
