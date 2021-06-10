@@ -38,7 +38,7 @@
             compSelected = window.parent.document.vj_icon_target;
       
         if (location.href.indexOf('ignoregj') > 0)
-            $(window.parent.document.body).find('.uxmanager-modal #UXpagerender').contents().find('svg').replaceWith(option.SVG);
+            $(window.parent.document.body).find('.uxmanager-modal #UXpagerender:first').contents().find('svg').replaceWith(option.SVG);
         else {
             var style = compSelected.components().models[0].getStyle();
             compSelected.components(option.SVG);
@@ -49,7 +49,7 @@
 
     $scope.doubleclick = function () {
         if (location.href.indexOf('ignoregj') > 0)
-            $(window.parent.document.body).find('.uxmanager-modal [data-bs-dismiss="modal"]').click();
+            $(window.parent.document.body).find('.uxmanager-modal [data-bs-dismiss="modal"]:last').click();
         else
             $(window.parent.document.body).find('[data-bs-dismiss="modal"]').click();
     };
