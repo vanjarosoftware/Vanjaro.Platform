@@ -10,7 +10,7 @@ namespace Vanjaro.Common.Data.Scripts
             Sql sb = Sql.Builder.Append("IF((select COUNT(*) from " + CommonScript.DnnTablePrefix + "files where folderid=" + FolderID + ") > 0)");
             sb.Append(" BEGIN");
             sb.Append(" SELECT CASE");
-            sb.Append(" WHEN (SELECT cast(COUNT(*) as float) FROM " + CommonScript.DnnTablePrefix + "files WHERE folderid=" + FolderID + " and ContentType like 'image%') / (SELECT cast(COUNT(*) as float) FROM " + CommonScript.DnnTablePrefix + "files WHERE folderid=" + FolderID + ") > 0.5 THEN 1");
+            sb.Append(" WHEN ((SELECT cast(COUNT(*) as float) FROM " + CommonScript.DnnTablePrefix + "files WHERE folderid=" + FolderID + " and ContentType like 'image%') / (SELECT cast(COUNT(*) as float) FROM " + CommonScript.DnnTablePrefix + "files WHERE folderid=" + FolderID + ") > 0.5) OR ((SELECT cast(COUNT(*) as float) FROM " + CommonScript.DnnTablePrefix + "files WHERE folderid=" + FolderID + " and LOWER(Extension) in('jpg','jpeg','gif','png','svg','webp')) / (SELECT cast(COUNT(*) as float) FROM " + CommonScript.DnnTablePrefix + "files WHERE folderid=" + FolderID + ") > 0.5) THEN 1");
             sb.Append(" ELSE 0");
             sb.Append(" END AS HasManyImages");
             sb.Append(" END");
