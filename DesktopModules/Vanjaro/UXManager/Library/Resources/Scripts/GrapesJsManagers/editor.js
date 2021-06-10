@@ -1770,7 +1770,7 @@ $(document).ready(function () {
                                 }
 
                                 if (model.target != undefined && model.target.attributes != undefined && model.target.attributes.attributes != undefined && model.target.attributes.attributes.dmid != undefined)
-                                    sortermarup = model.target.children[0].innerHTML;
+                                    sortermarup = model.target.getEl().children[0].innerHTML;
 
                                 VjEditor.runCommand('core:component-outline');
                             });
@@ -1798,8 +1798,8 @@ $(document).ready(function () {
                                     }
                                 }
 
-                                if (sortermarup != undefined && sortermarup != '' && model.target != undefined && model.target.dst != undefined && model.target.dst.children != undefined) {
-                                    $.each(model.target.dst.children, function (k, v) {
+                                if (sortermarup != undefined && sortermarup != '' && model.parent != undefined && model.parent.getEl().children != undefined) {
+                                    $.each(model.parent.getEl().children, function (k, v) {
                                         if ($(v).hasClass('gjs-comp-selected')) {
                                             $.each(v.children, function (key, val) {
                                                 if ($(val).attr('vjmod') != undefined)
