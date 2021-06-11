@@ -392,14 +392,21 @@ $(document).ready(function () {
                                     this.content.style.padding = '0';
                                 },
                             });
+
                             var vjcomps = eval(VJLandingPage.components);
+                            var plugins = [];
+
                             BuildAppComponent(vjcomps);
                             BuildAppComponentFromHtml(vjcomps, VJLandingPage.html);
                             BuildBlockComponent(vjcomps);
                             vjcomps = FilterComponents(vjcomps);
 
-                            if (typeof LoadThemeBlocks != 'undefined')
+                            if (typeof LoadThemeBlocks != 'undefined') {
                                 LoadThemeBlocks(grapesjs);
+                                plugins = ['modulewrapper', 'blockwrapper', 'vjpreset', 'ThemeBlocks', 'customcode'];
+                            }
+                            else
+                                plugins = ['modulewrapper', 'blockwrapper', 'vjpreset', 'customcode'];
 
                             if (typeof LoadCustomCode != 'undefined')
                                 LoadCustomCode(grapesjs);
@@ -424,7 +431,7 @@ $(document).ready(function () {
                                 container: '#vjEditor',
                                 height: '100%',
                                 fromElement: vjcomps != undefined ? false : true,
-                                plugins: ['modulewrapper', 'blockwrapper', 'vjpreset', 'ThemeBlocks', 'customcode'],
+                                plugins: plugins,
                                 pluginsOpts: {
                                     'vj-preset': {
                                         colorPicker: 'default',
