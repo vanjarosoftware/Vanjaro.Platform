@@ -5,8 +5,13 @@
     white-space: pre;
 }
 
+.vj-ux-manager .uiengine-wrapper {
+    height: 100vh !important;
+    overflow-y: hidden;
+}
+
 #FrameUrl {
-    height: calc(100vh - 10px);
+    height: calc(100vh - 30px);
 }
 
 .fixed-preview {
@@ -56,6 +61,6 @@
     margin: 0;
 }
 
-.defaultdesign-hidden{
-    display:none;
+.defaultdesign-hidden {
+    display: none;
 }
