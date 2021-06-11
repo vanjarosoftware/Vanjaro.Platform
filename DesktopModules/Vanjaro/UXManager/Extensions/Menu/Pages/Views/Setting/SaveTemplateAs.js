@@ -2,6 +2,12 @@
     var common = CommonSvc.getData($scope);
     //Init Scope
     $scope.onInit = function () {
+        $('.VjName').keypress(function (event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (keycode == '13') {
+                event.preventDefault();
+            }
+        });
     };
 
     $scope.openIconPopup = function () {
@@ -24,5 +30,5 @@
                 }
             });
         };
-    }
+    };
 });
