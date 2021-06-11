@@ -802,7 +802,7 @@ export default (editor, config = {}) => {
                             if (typeof component.closest(selector) != 'undefined')
                                 model = component.closest(selector);
                         }
-                        else
+                        else if (component.find(selector).length)
                             model = component.find(selector)[0];
                     }
 
@@ -837,7 +837,7 @@ export default (editor, config = {}) => {
                     if (typeof component.closest(selector) != 'undefined')
                         model = component.closest(selector);
                 }
-                else
+                else if (component.find(selector).length)
                     model = component.find(selector);
             }
 
@@ -937,7 +937,7 @@ export default (editor, config = {}) => {
                             if (typeof component.closest(selector) != 'undefined')
                                 model = component.closest(selector);
                         }
-                        else
+                        else if (component.find(selector).length)
                             model = component.find(selector)[0];
                     }
 
@@ -1402,7 +1402,7 @@ export default (editor, config = {}) => {
                     if (typeof component.closest(selector) != 'undefined')
                         model = component.closest(selector);
                 }
-                else
+                else if (component.find(selector).length)
                     model = component.find(selector);
             }
 
@@ -1684,7 +1684,7 @@ export default (editor, config = {}) => {
                         if (typeof component.closest(selector) != 'undefined')
                             model = component.closest(selector);
                     }
-                    else
+                    else if (component.find(selector).length)
                         model = component.find(selector)[0];
                 }
 
@@ -1766,7 +1766,7 @@ export default (editor, config = {}) => {
                     if (typeof component.closest(selector) != 'undefined')
                         model = component.closest(selector);
                 }
-                else
+                else if (component.find(selector).length)
                     model = component.find(selector);
             }
 
