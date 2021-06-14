@@ -235,6 +235,7 @@
                 if (isConfirm) {
                     common.webApi.post('user/removeusers', '').then(function (data) {
                         if (data.data != null && data.data.IsSuccess) {
+                            $scope.Pipe_AllUserPagging($scope.pagginationData);
                             $scope.pagginationData.pagination.start = 0;
                             $scope.Pipe_DeletedUserPagging($scope.pagginationData);
                         }

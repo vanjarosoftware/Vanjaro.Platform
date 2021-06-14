@@ -186,7 +186,7 @@
 
 .vj-ux-manager .permission-icon {
     margin-bottom: 10px;
-    color:inherit;
+    color: inherit;
 }
 
 .vj-ux-manager .ui-inlineblock {
@@ -243,6 +243,15 @@
     float: right;
 }
 
-/*.vj-ux-manager .rolename {
-    padding-top: 16px;
-}*/
+.vj-ux-manager .deletedUserCount {
+    font-weight: 800;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    margin-left: 2px;
+}
+
+.vj-ux-manager .btn-del-users {
+    position: relative;
+    margin-right: 4px;
+}

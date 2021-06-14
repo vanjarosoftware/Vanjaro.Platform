@@ -3,7 +3,7 @@
         <uilayout name="Heading">
             <uitemplate>
                 <div class="row">
-                    <div class="col-7 extback pr-none">
+                    <div class="col-6 extback pr-none">
                         <a ng-click="Click_Back()" title="[L:Back]" class="ux-backbtn">
                             <span class="extbackicon">
                                 <em class="fas fa-chevron-left"></em>
@@ -11,7 +11,7 @@
                             <span class="extname">{{HeaderText}}</span>
                         </a>
                     </div>
-                    <div class="col-5 pl-none" access-roles="admin">
+                    <div class="col-6 pl-none" access-roles="admin">
                         <a href="#" title="[L:AddUser]" onclick="parent.OpenPopUp(event, 450,'right', '[L:AddUser]', '#!/adduser')" class="ux-btn ux-btn-hover float-end adduser" mn-ng-hide="Show_RecycleBin">
                             <em class="fas fa-plus"></em>
                         </a>
@@ -33,21 +33,15 @@
                         <a class="ux-btn ux-btn-hover float-end" mn-ng-click="Open_MemberProfile()" title="[L:MemberProfileSettings]" mn-ng-show="!Show_RecycleBin">
                             <em class="fas fa-user-tag"></em>
                         </a>
-                    </div>
-                </div>
-            </uitemplate>
-        </uilayout>
-        <uilayout name="default" attr-ng-hide="Show_RecycleBin">
-            <uitemplate>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <a href="#" mn-ng-hide="Show_RecycleBin || !ui.data.DeletedUsers.Value" ng-click="Show_RecycleBin =!(Show_RecycleBin);HeaderText='[L:RecycleBin]'" class="badge badge-button position-relative" title="[L:RecycleBin]">
-                            <span class="title">[L:Deleted]</span>
-                            <span class="badge badge-button-inverse float-end">{{ui.data.DeletedUsers.Value}}</span>
+                        <a class='ux-btn ux-btn-hover float-end btn-del-users' mn-ng-hide="Show_RecycleBin || !ui.data.DeletedUsers.Value" ng-click="Show_RecycleBin =!(Show_RecycleBin);HeaderText='[L:RecycleBin]'" title="[L:Deleted]">
+                            <em class='fas fa-trash' data-bs-toggle="tooltip" data-bs-placement="bottom" title="[L:Deleted]"></em>
+                            <sup class='deletedUserCount' id="deletedUser">{{ui.data.DeletedUsers.Value}}</sup>
                         </a>
                     </div>
                 </div>
             </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-ng-hide="Show_RecycleBin">            
             <uielement name="AllUsers" control="grid" paged="true" search="true" label="false" pagesize="15" attr-pagesize="15" attr-class="table-responsive table-grid usertable" attr-st-pipe="Pipe_AllUserPagging">
                 <column name="UserName" width="18" attr-style="padding:0;">
                     <uitemplate>
