@@ -16,6 +16,9 @@
         $(window.parent.document.body).find('.modal-dialog:last').find('.btn-close').before($('.defaultdesign-hidden'));
         var $FrameUrl = $('uiengine #FrameUrl');
         $FrameUrl.attr('src', $scope.ui.data.LibraryMidUrl.Value + $scope.ui.data.Themes.Value).load(function () { $(this).prev('.loader').hide(); });
+        $.each($scope.ui.data.Themes.Options, function (i, v) {
+            v.Name = v.Name + ' Theme';
+        });
     };
 
     $scope.ChangeTheme = function () {
