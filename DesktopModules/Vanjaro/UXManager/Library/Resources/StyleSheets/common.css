@@ -1080,6 +1080,9 @@ uploadinput-button {
     height: 38px;
 }
 
+.vj-ux-manager .form-select {
+    background-image: unset !important;
+}
 
 .Dropablepage .dropbtn a{
     color: #7c9eb2;
