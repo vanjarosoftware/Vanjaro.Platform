@@ -1372,7 +1372,8 @@ div.uitab.notificationtab a {
     [data-gjs-type="wrapper"] .col,
     [data-gjs-type="wrapper"] [class^="col-"],
     [data-gjs-type="wrapper"] .tab-pane,
-    [data-gjs-type="wrapper"] .card-group {
+    [data-gjs-type="wrapper"] .card-group,
+    [data-gjs-type="custom-code"] {
         min-height: 1.5rem !important;
     }
 
