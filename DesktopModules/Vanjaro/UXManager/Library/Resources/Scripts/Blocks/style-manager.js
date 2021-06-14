@@ -455,24 +455,11 @@
 			if (selected.attributes.type == "icon" && (property == "width" || property == "min-width" || property == "max-width" || property == "height" || property == "min-height" || property == "max-height"))
 				selected = selected.components().models[0];
 
-			else if (selected.getAttributes()['data-block-type'] == "Logo") {
-
-				var img = $(selected.getEl()).find('img');
-
-				if (property == "width")
-					img.css('width', '100%');
-
-				else if (property == "height")
-					img.css('height', 'auto');
-
-				var width = img.width();
-				var height = img.height();
-
-				var attr = selected.getAttributes();
-				attr['data-style'] = 'width:' + width + 'px; height:' + height + 'px;';
-				selected.setAttributes(attr);
-
-			}
+            else if (selected.getAttributes()['data-block-type'] == "Logo") {
+                const attr = selected.getAttributes();
+                delete attr['data-style'];
+                selected.setAttributes(attr);
+            }
 
 			if (value == 'auto') {
 
