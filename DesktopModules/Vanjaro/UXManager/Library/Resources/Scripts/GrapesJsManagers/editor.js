@@ -2564,7 +2564,9 @@ $(document).ready(function () {
 
                                 }
                                 else if (model.getAttributes()['data-block-type'] == "Logo" && (property == "width" || property == "height")) {
-                                   model.removeAttribute('data-style');
+                                    const attr = model.getAttributes();
+                                    delete attr['data-style'];
+                                    model.setAttributes(attr);
                                 }
 
                                 if (typeof event != "undefined" && event.target.className == "gjs-sm-clear")
