@@ -4,3 +4,9 @@ delete from {databaseOwner}[VJ_URL_URLEntity] where ModuleID not in(select Modul
 ALTER TABLE {databaseOwner}[VJ_URL_URLEntity] ADD CONSTRAINT FK_URLEntityModuleDelete FOREIGN KEY (ModuleID) REFERENCES {databaseOwner}[{objectQualifier}Modules](ModuleID) ON DELETE CASCADE
 END
 GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME='VJ_Slug')
+BEGIN
+	ALTER TABLE {databaseOwner}[VJ_URL_URLEntity] DROP CONSTRAINT VJ_Slug
+END
+GO
