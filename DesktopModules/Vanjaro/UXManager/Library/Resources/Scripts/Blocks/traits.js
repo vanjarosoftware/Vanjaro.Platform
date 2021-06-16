@@ -799,7 +799,7 @@ export default (editor, config = {}) => {
                     if (typeof selector != 'undefined') {
 
                         if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
-                            if (typeof component.closest(selector) != 'undefined')
+                            if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
                                 model = component.closest(selector);
                         }
                         else if (component.find(selector).length)
@@ -825,30 +825,32 @@ export default (editor, config = {}) => {
         eventCapture: ['input'],
         onEvent({ elInput, component, event }) {
 
-            $(event.target.parentElement).find("input:checked").not(event.target).prop('checked', false);
+            if (typeof component != 'undefined') {
 
-            var model = component;
-            var trait = component.getTrait(event.target.name);
-            var selector = trait.attributes.selector;
+                $(event.target.parentElement).find("input:checked").not(event.target).prop('checked', false);
 
-            if (typeof selector != 'undefined') {
+                var model = component;
+                var trait = component.getTrait(event.target.name);
+                var selector = trait.attributes.selector;
 
-                if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
-                    if (typeof component.closest(selector) != 'undefined')
-                        model = component.closest(selector);
+                if (typeof selector != 'undefined') {
+
+                    if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
+                        if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
+                            model = component.closest(selector);
+                    }
+                    else if (component.find(selector).length)
+                        model = component.find(selector);
                 }
-                else if (component.find(selector).length)
-                    model = component.find(selector);
+
+                $(model).each(function (index, item) {
+
+                    if (trait.attributes.UpdateStyles)
+                        UpdateStyles(elInput, item, event, component);
+                    else if (trait.attributes.SwitchClass)
+                        SwitchClass(elInput, item, event, component);
+                });
             }
-
-            $(model).each(function (index, item) {
-
-                if (trait.attributes.UpdateStyles)
-                    UpdateStyles(elInput, item, event, component);
-                else if (trait.attributes.SwitchClass)
-                    SwitchClass(elInput, item, event, component);
-
-            });
         }
     });
 
@@ -934,7 +936,7 @@ export default (editor, config = {}) => {
                     if (typeof selector != 'undefined') {
 
                         if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
-                            if (typeof component.closest(selector) != 'undefined')
+                            if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
                                 model = component.closest(selector);
                         }
                         else if (component.find(selector).length)
@@ -1399,7 +1401,7 @@ export default (editor, config = {}) => {
             if (typeof selector != 'undefined') {
 
                 if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
-                    if (typeof component.closest(selector) != 'undefined')
+                    if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
                         model = component.closest(selector);
                 }
                 else if (component.find(selector).length)
@@ -1601,31 +1603,34 @@ export default (editor, config = {}) => {
         eventCapture: ['input'],
         onEvent({ elInput, component, event }) {
 
-            var model = component;
-            var trait = component.getTrait(event.target.name);
+            if (typeof component != 'undefined') {
 
-            if (typeof trait != 'undefined' && typeof trait.attributes.selector != 'undefined') {
+                var model = component;
+                var trait = component.getTrait(event.target.name);
 
-                var selector = trait.attributes.selector;
+                if (typeof trait != 'undefined' && typeof trait.attributes.selector != 'undefined') {
 
-                if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
-                    if (typeof component.closest(selector) != 'undefined')
-                        model = component.closest(selector);
+                    var selector = trait.attributes.selector;
+
+                    if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
+                        if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
+                            model = component.closest(selector);
+                    }
+                    else
+                        model = component.find(selector);
                 }
-                else
-                    model = component.find(selector);
+
+                $(model).each(function (index, item) {
+
+                    $(event.target).parents(".color-wrapper").find(".colorPicker").css("background-color", "transparent");
+                    $(event.target).parents(".color-wrapper").find(".active").removeClass("active");
+                    $(event.target.nextElementSibling).addClass("active");
+
+                    if (typeof trait != 'undefined')
+                        SwitchClass(elInput, item, event, component);
+
+                });
             }
-
-            $(model).each(function (index, item) {
-
-                $(event.target).parents(".color-wrapper").find(".colorPicker").css("background-color", "transparent");
-                $(event.target).parents(".color-wrapper").find(".active").removeClass("active");
-                $(event.target.nextElementSibling).addClass("active");
-
-                if (typeof trait != 'undefined')
-                    SwitchClass(elInput, item, event, component);
-
-            });
         }
     });
 
@@ -1681,7 +1686,7 @@ export default (editor, config = {}) => {
                 if (typeof selector != 'undefined') {
 
                     if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
-                        if (typeof component.closest(selector) != 'undefined')
+                        if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
                             model = component.closest(selector);
                     }
                     else if (component.find(selector).length)
@@ -1756,43 +1761,45 @@ export default (editor, config = {}) => {
         eventCapture: ['input'],
         onEvent({ elInput, component, event }) {
 
-            var model = component;
-            var trait = component.getTrait(event.target.name);
-            var selector = trait.attributes.selector;
+            if (typeof component != 'undefined') {
 
-            if (typeof selector != 'undefined') {
+                var model = component;
+                var trait = component.getTrait(event.target.name);
+                var selector = trait.attributes.selector;
 
-                if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
-                    if (typeof component.closest(selector) != 'undefined')
-                        model = component.closest(selector);
-                }
-                else if (component.find(selector).length)
-                    model = component.find(selector);
-            }
+                if (typeof selector != 'undefined') {
 
-            $(model).each(function (index, item) {
-
-                UpdateStyles(elInput, item, event, component);
-
-                if (item.attributes.type == 'section' && event.target.name == "angle") {
-
-                    var angle = event.target.value;
-
-                    if (angle == '180')
-                        angle = '0';
-
-                    if (typeof item.getTrait('gradient').view.gp != 'undefined') {
-
-                        const gp = item.getTrait('gradient').view.gp;
-                        gp.setDirection(angle + 'deg');
-
-                        var style = item.getStyle();
-                        style["background-image"] = gp.getSafeValue();
-                        item.setStyle(style);
+                    if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
+                        if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
+                            model = component.closest(selector);
                     }
+                    else if (component.find(selector).length)
+                        model = component.find(selector);
                 }
 
-            });
+                $(model).each(function (index, item) {
+
+                    UpdateStyles(elInput, item, event, component);
+
+                    if (item.attributes.type == 'section' && event.target.name == "angle") {
+
+                        var angle = event.target.value;
+
+                        if (angle == '180')
+                            angle = '0';
+
+                        if (typeof item.getTrait('gradient').view.gp != 'undefined') {
+
+                            const gp = item.getTrait('gradient').view.gp;
+                            gp.setDirection(angle + 'deg');
+
+                            var style = item.getStyle();
+                            style["background-image"] = gp.getSafeValue();
+                            item.setStyle(style);
+                        }
+                    }
+                });
+            }
         }
     });
 
