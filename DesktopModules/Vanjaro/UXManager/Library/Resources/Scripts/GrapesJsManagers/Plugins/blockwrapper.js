@@ -100,38 +100,33 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 				}
 
 				//Resizable
-				if (typeof this.getAttributes()["data-block-resizable"] != 'undefined' && this.getAttributes()["data-block-resizable"] == "true") {
+                if (typeof this.getAttributes()["data-block-resizable"] != 'undefined' && this.getAttributes()["data-block-resizable"] == "true") {
+                    IsVJEditorSaveCall = false;
 					this.set({
 						'resizable': {
 							ratioDefault: 1,
 							tc: 0,
 							cl: 0,
 							cr: 0,
-							bc: 0,
-							onMove: function (e) {
-								var SelectedCol = VjEditor.getSelected();
-								if (SelectedCol.getName() == 'Logo') {
-									var width = $(SelectedCol.getEl()).width();
-									var height = $(SelectedCol.getEl()).height();
-									var attr = SelectedCol.getAttributes();
-									attr['data-style'] = 'width:' + width + 'px; height:' + height + 'px;';
-									SelectedCol.setAttributes(attr);
-									$(SelectedCol.getEl()).find('img').css('width', width).css('height', height);
-									SelectedCol.removeStyle('width');
-									SelectedCol.removeStyle('height');
-								}
-							},
+                            bc: 0,
+                            onMove: function (e) {
+                                var SelectedCol = VjEditor.getSelected();
+                                if (SelectedCol.getName() == 'Logo')
+                                    $(SelectedCol.getEl()).find('img').removeAttr('style');
+                            },
 							onEnd: function (e) {
 								var SelectedCol = VjEditor.getSelected();
-								if (SelectedCol.getName() == 'Logo') {
-									SelectedCol.removeStyle('width');
-									SelectedCol.removeStyle('height');
-									var img = SelectedCol.getEl().innerHTML;
-									SelectedCol.set('content', img);
+                                if (SelectedCol.getName() == 'Logo') {
+                                    const attr = SelectedCol.getAttributes();
+                                    delete attr['data-style'];
+                                    SelectedCol.setAttributes(attr);
 								}
 							}
 						}
-					});
+                    });
+                    setTimeout(function () {
+                        IsVJEditorSaveCall = true;
+                    }, 1000);
 				}
 			},
 		},
@@ -314,12 +309,12 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 							v.set('content', CleanGjAttrs(compHtml));
 							v.view.render();
 
-							if (v.attributes.attributes["data-block-type"].toLowerCase() == "logo") {
-								var style = v.attributes.attributes["data-style"];
-								if (style != undefined) {
-									$(v.view.$el[0]).find('img').attr('style', style);
-								}
-							}
+                            if (v.attributes.attributes["data-block-type"].toLowerCase() == "logo") {
+                                var style = v.attributes.attributes["data-style"];
+                                if (style != undefined) {
+                                    $(v.view.$el[0]).find('img').attr('style', style);
+                                }
+                            }
 
 							$.each(getAllComponents(v), function (k, vv) {
 								if (vv.attributes.type != 'blockwrapper') {
@@ -343,14 +338,14 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 					});
 				}
 				else {
-					$.each(getAllComponents(this.model), function (k, v) {
-						if (v.attributes.type == 'blockwrapper' && v.attributes.attributes["data-block-type"].toLowerCase() == "logo") {
-							var style = v.attributes.attributes["data-style"];
-							if (style != undefined) {
-								$(v.view.$el[0]).find('img').attr('style', style);
-							}
-						}
-					})
+                    $.each(getAllComponents(this.model), function (k, v) {
+                        if (v.attributes.type == 'blockwrapper' && v.attributes.attributes["data-block-type"].toLowerCase() == "logo") {
+                            var style = v.attributes.attributes["data-style"];
+                            if (style != undefined) {
+                                $(v.view.$el[0]).find('img').attr('style', style);
+                            }
+                        }
+                    });
 				}
 				StyleGlobal(this.model);
 				return this;
