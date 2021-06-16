@@ -2567,6 +2567,7 @@ $(document).ready(function () {
                                     const attr = model.getAttributes();
                                     delete attr['data-style'];
                                     model.setAttributes(attr);
+                                    $(model.getEl()).find('img').removeAttr('style');
                                 }
 
                                 if (typeof event != "undefined" && event.target.className == "gjs-sm-clear")
