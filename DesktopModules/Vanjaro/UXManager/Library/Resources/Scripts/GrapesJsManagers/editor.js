@@ -2085,7 +2085,7 @@ $(document).ready(function () {
 										$(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('width')));
 									}
 									else
-										$(sm.getProperty(Size, 'width').view.$el.find('input')).val(parseInt($(target.getEl()).css('width')));
+										$(sm.getProperty(Size, 'width').view.$el.find('input')).val(parseInt(width));
 
 									if ($(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val() != "auto")
 										$(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear').show();
@@ -2101,7 +2101,7 @@ $(document).ready(function () {
 										$(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('height')));
 									}
 									else
-										$(sm.getProperty(Size, 'height').view.$el.find('input')).val(parseInt($(target.getEl()).css('height')));
+										$(sm.getProperty(Size, 'height').view.$el.find('input')).val(parseInt(height));
 
 
 									if ($(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val() != "auto")
@@ -3714,7 +3714,10 @@ global.FilterBorderOptions = function (target, position) {
 
 		if (typeof target.getStyle()[color] == "undefined") {
 
-			var brdcolor = $(target.getEl()).css('border-color');
+			var brdcolor = target.getStyle()[color];
+
+			if (typeof brdcolor == "undefined")
+				brdcolor = $(target.getEl()).css('color');
 
 			sm.getProperty(Border, color).view.$el.find('input').val(brdcolor);
 			sm.getProperty(Border, color).view.$el.find('.gjs-field-color-picker').css('background-color', brdcolor);
