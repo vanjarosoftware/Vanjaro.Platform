@@ -2164,15 +2164,10 @@ $(document).ready(function () {
 								});
 
 								//Responsive
-								var desktop = 'd-desktop-none';
-								var tablet = 'd-tablet-none';
-								var mobileLandscape = 'd-mobile-landscape-none';
-								var mobilePortrait = 'd-mobile-none';
-
-								sm.getProperty(Responsive, desktop).setValue(desktop);
-								sm.getProperty(Responsive, tablet).setValue(desktop);
-								sm.getProperty(Responsive, mobileLandscape).setValue(mobileLandscape);
-								sm.getProperty(Responsive, mobilePortrait).setValue(mobilePortrait);
+								sm.getProperty(Responsive, 'd-desktop-none').setValue("");
+								sm.getProperty(Responsive, 'd-tablet-none').setValue("");
+								sm.getProperty(Responsive, 'd-mobile-landscape-none').setValue("");
+								sm.getProperty(Responsive, 'd-mobile-none').setValue("");
 
 								//Filters
 
