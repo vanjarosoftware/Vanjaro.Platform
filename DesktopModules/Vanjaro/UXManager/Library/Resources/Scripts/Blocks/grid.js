@@ -9,7 +9,7 @@ export default (editor, config = {}) => {
 	const clsCell = `${stylePrefix}col-lg-6`;
 
 	const colAttr = {
-		class: clsCell + ' col-sm-6 col-12',
+		class: clsCell + ' col-md-6 col-sm-6 col-12',
 		'data-gjs-custom-name': labelCell,
 	};
 
@@ -49,7 +49,7 @@ export default (editor, config = {}) => {
 	cmd.add('add-column', ed => {
 		var Selected = VjEditor.getSelected();
 		var Row = '<div class="row"></div>';
-		var Column = '<div class="col-lg-1 col-sm-1 col-12"></div>';
+		var Column = '<div class="col-lg-1 col-md-1 col-sm-1 col-12"></div>';
 		if (Selected.attributes.type == 'grid') {
 			if (typeof Selected.components().models[0] != 'undefined')
 				Selected.components().models[0].components().add(Column);
@@ -94,9 +94,11 @@ export default (editor, config = {}) => {
 		var browserwidth = window.innerWidth - 325;
 
 		if (Device == 'Mobile Portrait' || browserwidth <= '360')
-			colClass = 'col-';
-		else if (Device == 'Tablet' || browserwidth <= '991' || Device == 'Mobile Landscape')
-			colClass = 'col-sm-';
+            colClass = 'col-';
+        else if (Device == 'Mobile Landscape' || browserwidth <= '767')
+            colClass = 'col-sm-';
+		else if (Device == 'Tablet' || browserwidth <= '991')
+			colClass = 'col-md-';
 
 		var re = new RegExp('(' + colClass + '(\\d+))', 'i');
 		var SelectedCol = VjEditor.getSelected();
@@ -504,7 +506,7 @@ global.ChangeGridColumns = function (cols) {
 	var content = `<div class="row">`;
 	var i;
 	for (i = 0; i < cols.length; i++) {
-		content += `<div class="col-lg-` + cols[i].size + ` col-sm-` + cols[i].size + ` col-12"></div>`;
+		content += `<div class="col-lg-` + cols[i].size + ` col-md-` + cols[i].size + ` col-sm-` + cols[i].size + ` col-12"></div>`;
 	}
 	content += `</div>`;
 	compSelected.components(content);

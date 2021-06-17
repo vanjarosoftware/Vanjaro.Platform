@@ -100,14 +100,20 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 				}
 
 				//Resizable
-				if (typeof this.getAttributes()["data-block-resizable"] != 'undefined' && this.getAttributes()["data-block-resizable"] == "true") {
+                if (typeof this.getAttributes()["data-block-resizable"] != 'undefined' && this.getAttributes()["data-block-resizable"] == "true") {
+                    IsVJEditorSaveCall = false;
 					this.set({
 						'resizable': {
 							ratioDefault: 1,
 							tc: 0,
 							cl: 0,
 							cr: 0,
-							bc: 0,
+                            bc: 0,
+                            onMove: function (e) {
+                                var SelectedCol = VjEditor.getSelected();
+                                if (SelectedCol.getName() == 'Logo')
+                                    $(SelectedCol.getEl()).find('img').removeAttr('style');
+                            },
 							onEnd: function (e) {
 								var SelectedCol = VjEditor.getSelected();
                                 if (SelectedCol.getName() == 'Logo') {
@@ -117,7 +123,10 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 								}
 							}
 						}
-					});
+                    });
+                    setTimeout(function () {
+                        IsVJEditorSaveCall = true;
+                    }, 1000);
 				}
 			},
 		},

@@ -3687,3 +3687,6 @@ body .gjs-selected {
     display:none;
 }
 
+[data-gjs-type=wrapper] .frame-box {
+    z-index: -1;
+}

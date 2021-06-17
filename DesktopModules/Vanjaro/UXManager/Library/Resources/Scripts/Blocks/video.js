@@ -9,7 +9,7 @@
 			attributes: { class: 'fa fa-youtube-play' },
 			content: `
 				<div class='video-box embed-container'>
-					<video controls class='vj-video' src='`+ VjDefaultPath + `Flower.mp4'></video>
+					<video controls src='`+ VjDefaultPath + `Flower.mp4'></video>
 				</div>	
 			`,
 			activate: 1
@@ -18,13 +18,13 @@
 
 	let domc = editor.DomComponents;
 
-	const videoType = domc.getType('video');
-	const videoModel = videoType.model;
-	const videoView = videoType.view;
+	const defaultType = domc.getType('default');
+	const defaultModel = defaultType.model;
+	const defaultView = defaultType.view;
 
-	domc.addType('video', {
-		model: videoModel.extend({
-			defaults: Object.assign({}, videoModel.prototype.defaults, {
+	domc.addType('iframe', {
+		model: defaultModel.extend({
+			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				droppable: false,
 				draggable: false,
 				hoverable: false,
@@ -33,12 +33,15 @@
 				layerable: false,
 				traits: [],
 			})
-		})
+		}, {
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('frame-box')) {
+					return { type: 'iframe' };
+				}
+			}
+		}),
+		view: defaultView
 	});
-
-	const defaultType = domc.getType('default');
-	const defaultModel = defaultType.model;
-	const defaultView = defaultType.view;
 
 	domc.addType('videobox', {
 		model: defaultModel.extend({
@@ -185,7 +188,7 @@
 			ChangeProvider() {
 
 				if (this.attributes.provider == "yt") {
-					this.components().models[0].replaceWith('<iframe src="https://www.youtube.com/embed/"></iframe>');
+					this.components().models[0].replaceWith('<iframe class="frame-box" src="https://www.youtube.com/embed/"></iframe>');
 					this.loadTraits(this.getYoutubeTraits());
 					this.components().models[0].set({ 'rel': 0, 'logo': 0 });
 					this.set({ 'src': 'https://www.youtube.com/embed/' });
@@ -256,17 +259,16 @@
 					this.set({ 'src': src });
 					this.components().models[0].set({ 'src': src, 'controls': 1 });
 					this.components().models[0].addAttributes({ 'allow': 'autoplay' });
-					$(this.components().models[0].getEl()).find('iframe').attr('src', src);
+					
 				}
 			}
-		},
-			{
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('video-box')) {
-						return { type: 'videobox' };
-					}
+		}, {
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('video-box')) {
+					return { type: 'videobox' };
 				}
-			}),
+			}
+		}),
 		view: defaultView.extend({
 			events: {
 				dblclick: function () {
