@@ -1632,6 +1632,74 @@ namespace Vanjaro.Core
                 }
             }
 
+            public static void ApplyBlockJSON(Pages page)
+            {
+                if (page != null && page.ContentJSON != null)
+                {
+                    dynamic contentJSON = JsonConvert.DeserializeObject(page.ContentJSON);
+                    if (contentJSON != null)
+                    {
+                        try
+                        {
+                            UpdateBlockJSON(contentJSON, page.Content);
+                            page.ContentJSON = JsonConvert.SerializeObject(contentJSON);
+                        }
+                        catch (Exception ex) { ExceptionManager.LogException(ex); }
+                    }
+                }
+            }
+
+            private static void UpdateBlockJSON(dynamic contentJSON, string content)
+            {
+                foreach (dynamic con in contentJSON)
+                {
+                    if (con.type != null && con.type.Value == "blockwrapper")
+                    {
+                        Dictionary<string, string> Attributes = new Dictionary<string, string>();
+                        StringBuilder sb = new StringBuilder();
+                        foreach (var attr in con.attributes)
+                        {
+                            Attributes.Add(attr.Name.ToString(), attr.Value.ToString());
+                            sb.Append(" ").Append(attr.Name.ToString()).Append("=\"" + attr.Value.ToString() + "\"");
+                        }
+                        if (content == null || !content.Contains(sb.ToString()))
+                        {
+                            Entities.Menu.ThemeTemplateResponse response = Core.Managers.BlockManager.Render(Attributes);
+                            if (response != null)
+                            {
+                                if (con.attributes["data-block-type"] == "Logo")
+                                {
+                                    HtmlDocument LogoHtml = new HtmlDocument();
+                                    LogoHtml.LoadHtml(response.Markup);
+                                    IEnumerable<HtmlNode> LogoImg = LogoHtml.DocumentNode.Descendants("img");
+                                    if ((con.attributes["data-style"] == null || LogoImg == null || LogoImg.FirstOrDefault<HtmlNode>() == null ? false : LogoImg.FirstOrDefault<HtmlNode>().Attributes != null))
+                                    {
+                                        if ((
+                                            from a in LogoImg.FirstOrDefault<HtmlNode>().Attributes
+                                            where a.Name == "style"
+                                            select a).FirstOrDefault<HtmlAttribute>() == null)
+                                        {
+                                            LogoImg.FirstOrDefault<HtmlNode>().Attributes.Add("style", con.attributes["data-style"].Value);
+                                        }
+                                        else
+                                        {
+                                            LogoImg.FirstOrDefault<HtmlNode>().Attributes["style"].Value = con.attributes["data-style"].Value;
+                                        }
+                                    }
+                                    con.content = LogoHtml.DocumentNode.OuterHtml;
+                                }
+                                else
+                                    con.content = response.Markup;
+                            }
+                        }
+                    }
+                    else if (con.components != null)
+                    {
+                        UpdateBlockJSON(con.components, content);
+                    }
+                }
+            }
+
             private static void UpdateGlobalBlockJSON(dynamic contentJSON, dynamic styleJSON, string locale)
             {
                 foreach (dynamic con in contentJSON)
