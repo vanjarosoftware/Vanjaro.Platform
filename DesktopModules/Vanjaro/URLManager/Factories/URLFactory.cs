@@ -32,7 +32,7 @@ namespace Vanjaro.URL.Factories
             Cache.Clear();
             //DataCache.RemoveCache(Cache.Keys.URLEntity + URL.ModuleID.ToString() + "-" + URL.EntityID.ToString() + "-" + URL.Entity.ToString());
         }
-        public static URLEntity GetURL(int ModuleID, string Slug)
+        public static URLEntity GetURL(int ModuleID, string Slug, int PortalID)
         {
             if (Slug == null)
                 throw new Exception("Slug cannot be empty or null");
@@ -49,7 +49,15 @@ namespace Vanjaro.URL.Factories
                     if (ModuleID > 0)
                         URL = URLEntity.Fetch("WHERE ModuleID=@0 AND Slug=@1", ModuleID, s).SingleOrDefault();
                     else
-                        URL = URLEntity.Fetch("WHERE Slug=@0", s).SingleOrDefault();
+                    {
+                        foreach (URLEntity url in URLEntity.Fetch("WHERE Slug=@0", s))
+                        {
+                            ModuleController mc = new ModuleController();
+                            ModuleInfo minfo = mc.GetModule(url.ModuleID);
+                            if (minfo.PortalID == PortalID)
+                                URL = url;
+                        }
+                    }
 
                     DataCache.SetCache(Cache.Keys.Slug + ModuleID.ToString() + "-" + s, URL, Cache.Keys.Cache_Time_Heavy);
                 }
@@ -65,11 +73,11 @@ namespace Vanjaro.URL.Factories
         /// </summary>
         /// <param name="Slugs"></param>
         /// <returns></returns>
-        public static URLEntity GetURL(int ModuleID, string[] Slugs)
+        public static URLEntity GetURL(int ModuleID, string[] Slugs, int PortalID)
         {
             foreach (string s in Slugs)
             {
-                URLEntity urlEntity = GetURL(ModuleID, s);
+                URLEntity urlEntity = GetURL(ModuleID, s, PortalID);
 
                 if (urlEntity != null)
                     return urlEntity;

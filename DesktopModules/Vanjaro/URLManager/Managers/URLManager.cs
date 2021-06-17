@@ -118,17 +118,17 @@ namespace Vanjaro.URL.Managers
         {
             return URLFactory.GetDefaultURL(ModuleID, EntityID, Entity, Language);
         }
-        public static URLEntity GetURL(string Slug)
+        public static URLEntity GetURL(string Slug, int PortalID)
         {
-            return URLFactory.GetURL(0, Slug);
+            return URLFactory.GetURL(0, Slug, PortalID);
         }
-        public static URLEntity GetURL(int ModuleID, string Slug)
+        public static URLEntity GetURL(int ModuleID, string Slug, int PortalID)
         {
-            return URLFactory.GetURL(ModuleID, Slug);
+            return URLFactory.GetURL(ModuleID, Slug, PortalID);
         }
-        public static URLEntity GetURL(int ModuleID, string[] Slugs)
+        public static URLEntity GetURL(int ModuleID, string[] Slugs, int PortalID)
         {
-            return URLFactory.GetURL(ModuleID, Slugs);
+            return URLFactory.GetURL(ModuleID, Slugs, PortalID);
         }
         public static int GetSlugTabID(string[] urlParms, ref string Slug, PortalInfo Pi)
         {
