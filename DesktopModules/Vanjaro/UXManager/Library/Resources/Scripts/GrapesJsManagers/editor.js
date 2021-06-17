@@ -2169,25 +2169,10 @@ $(document).ready(function () {
 								var mobileLandscape = 'd-mobile-landscape-none';
 								var mobilePortrait = 'd-mobile-none';
 
-								if (model.getEl().classList.contains(desktop))
-									VjEditor.StyleManager.getProperty(Responsive, desktop).setValue(desktop);
-								else
-									VjEditor.StyleManager.getProperty(Responsive, desktop).setValue('d-desktop-show');
-
-								if (model.getEl().classList.contains(tablet))
-									VjEditor.StyleManager.getProperty(Responsive, tablet).setValue(tablet);
-								else
-									VjEditor.StyleManager.getProperty(Responsive, tablet).setValue('d-tablet-show');
-
-								if (model.getEl().classList.contains(mobileLandscape))
-									VjEditor.StyleManager.getProperty(Responsive, mobileLandscape).setValue(mobileLandscape);
-								else
-									VjEditor.StyleManager.getProperty(Responsive, mobileLandscape).setValue('d-mobile-landscape-show');
-
-								if (model.getEl().classList.contains(mobilePortrait))
-									VjEditor.StyleManager.getProperty(Responsive, mobilePortrait).setValue(mobilePortrait);
-								else
-									VjEditor.StyleManager.getProperty(Responsive, mobilePortrait).setValue('d-mobile-show');
+								sm.getProperty(Responsive, desktop).setValue(desktop);
+								sm.getProperty(Responsive, tablet).setValue(desktop);
+								sm.getProperty(Responsive, mobileLandscape).setValue(mobileLandscape);
+								sm.getProperty(Responsive, mobilePortrait).setValue(mobilePortrait);
 
 								//Filters
 
