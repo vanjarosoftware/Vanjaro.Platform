@@ -26,6 +26,7 @@ namespace Vanjaro.UXManager.Library.Controllers
         {
             var page = Vanjaro.Core.Managers.PageManager.GetLatestVersion(PortalSettings.ActiveTab.TabID, PortalSettings.CultureCode, true);
             Core.Managers.PageManager.ApplyGlobalBlockJSON(page);
+            Core.Managers.PageManager.ApplyBlockJSON(page);
             return page;
         }
 
