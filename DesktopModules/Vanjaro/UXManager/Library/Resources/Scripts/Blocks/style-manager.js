@@ -73,6 +73,24 @@
 		setValue(value) {
 
 			var model = this.model;
+
+			var selected = editor.getSelected();
+
+			if (typeof selected != "undefined" && model.attributes.UpdateStyles == undefined) {
+
+				var classes = model.attributes.list.map(opt => opt.value);
+
+				$(classes).each(function (index, className) {
+
+					if (selected.getEl().classList.contains(className)) {
+						value = className;
+						return false;
+					}
+					else
+						value = model.getDefaultValue();
+				});
+			}
+
 			model.view.$el.find('input[value="' + value + '"]').prop('checked', true);
 
 			if (value == model.getDefaultValue())
@@ -232,6 +250,8 @@
 
 				if (value == "true")
 					this.$el.find('.gjs-sm-clear').css('display', 'inline-block');
+				else
+					this.$el.find('.gjs-sm-clear').css('display', 'none');
 
 			},
 			clear(ev) {
@@ -455,11 +475,11 @@
 			if (selected.attributes.type == "icon" && (property == "width" || property == "min-width" || property == "max-width" || property == "height" || property == "min-height" || property == "max-height"))
 				selected = selected.components().models[0];
 
-            else if (selected.getAttributes()['data-block-type'] == "Logo") {
-                const attr = selected.getAttributes();
-                delete attr['data-style'];
-                selected.setAttributes(attr);
-            }
+			else if (selected.getAttributes()['data-block-type'] == "Logo") {
+				const attr = selected.getAttributes();
+				delete attr['data-style'];
+				selected.setAttributes(attr);
+			}
 
 			if (value == 'auto') {
 
