@@ -11,7 +11,6 @@
     $scope.VjDefaultPath = window.parent.parent.VjDefaultPath + 'loading.svg';
 
     $scope.onInit = function () {
-        $(window.parent.document.body).find('.modal-dialog:last').parent().removeAttr('data-edit');
         $('.defaultdesign').show();
         $(window.parent.document.body).find('.modal-dialog:last').find('.btn-close').before($('.defaultdesign-hidden'));
         var $FrameUrl = $('uiengine #FrameUrl');
