@@ -382,6 +382,13 @@ export default (editor, config = {}) => {
             }
         }
 
+        if (trait.attributes.type == 'toggle_checkbox' && !$(event.target.parentElement).find("input:checked").length) {
+
+            $(property).each(function (index, value) {
+                delete style[value.name];
+            });
+        }
+
         if (event.target.name == "frame") {
 
             if (event.target.value == "none") {
