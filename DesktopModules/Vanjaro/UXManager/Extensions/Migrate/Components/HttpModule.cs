@@ -52,6 +52,9 @@ namespace Vanjaro.Migrate.Components
                             string TabSkinSrc = p.ActiveTab.SkinSrc != null ? p.ActiveTab.SkinSrc.ToLower() : string.Empty;
                             string QuerySkinSrc = context.Request.QueryString["SkinSrc"] != null ? context.Request.QueryString["SkinSrc"].ToLower() : null;
 
+                            if (!string.IsNullOrEmpty(TabSkinSrc) && TabSkinSrc != "[G]Skins/Vanjaro/Base.ascx".ToLower())
+                                ApplyPersonaBarContainer();
+
                             if (TabSkinSrc == "[G]Skins/Vanjaro/Base.ascx".ToLower() || QuerySkinSrc == "[G]Skins/Vanjaro/Base".ToLower())
                             {
                                 ToggleUserMode(p);
@@ -74,18 +77,14 @@ namespace Vanjaro.Migrate.Components
 
                                 _Page.PreRender += delegate (object ss, EventArgs ee)
                                 {
-                                    HostController.Instance.GetSettings()["ControlPanel"].Value = "DesktopModules/admin/Dnn.PersonaBar/UserControls/PersonaBarContainer.ascx";
-                                    if (HostController.Instance.GetBoolean("DisableEditBar"))
-                                        HostController.Instance.GetSettings()["DisableEditBar"].Value = "False";
+                                    ApplyPersonaBarContainer();
                                 };
                             }
                             else
                             {
                                 string NavigateURL = p.ActiveTab.FullUrl;
-
                                 string Script = "<script>var VanjaroMigrate_CurrentTabURL = '" + NavigateURL + "'; </script>";
                                 _Page.ClientScript.RegisterStartupScript(_Page.GetType(), "VJ-HttpMod-Div", Script);
-
                             }
                         }
                     }
@@ -98,6 +97,15 @@ namespace Vanjaro.Migrate.Components
         {
             return context.Request.QueryString["popUp"] != null;
         }
+
+        private void ApplyPersonaBarContainer()
+        {
+            HostController.Instance.GetSettings()["ControlPanel"].Value = "DesktopModules/admin/Dnn.PersonaBar/UserControls/PersonaBarContainer.ascx";
+            if (HostController.Instance.GetBoolean("DisableEditBar"))
+                HostController.Instance.GetSettings()["DisableEditBar"].Value = "False";
+
+        }
+
         public static void ToggleUserMode(PortalSettings portalSettings, string mode = "VIEW")
         {
             DotNetNuke.Services.Personalization.PersonalizationController personalizationController = new DotNetNuke.Services.Personalization.PersonalizationController();
