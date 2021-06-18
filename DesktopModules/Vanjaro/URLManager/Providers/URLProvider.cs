@@ -56,7 +56,7 @@ namespace Vanjaro.URL.Providers
 
             if (SlugTabID != -1) //Slug Found
             {
-                URLEntity CurrentURL = URLManager.GetURL(Slug);
+                URLEntity CurrentURL = URLManager.GetURL(Slug, portalId);
 
                 //Redirect if it's not the default URL 
                 if (CurrentURL != null && !CurrentURL.IsDefault)
@@ -73,7 +73,7 @@ namespace Vanjaro.URL.Providers
                 ClearUrlParams(ref urlParmsList, ref PageName, Slug, SlugTabID, pS);
 
                 //Tab not identified...need redirect
-                if (tabId == -1) 
+                if (tabId == -1)
                 {
                     InitPortalSettings(ref pS, tabId, portalAlias);
 
