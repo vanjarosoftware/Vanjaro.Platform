@@ -243,6 +243,7 @@ LoadCustomCode = function (grapesjs) {
                 target.set(keyCustomCode, code);
                 target.trigger(`change:${keyCustomCode}`);
                 editor.Modal.close();
+                return false;
             },
 
             /**
