@@ -3690,3 +3690,7 @@ body .gjs-selected {
 [data-gjs-type=wrapper] .frame-box {
     z-index: -1;
 }
+
+[data-gjs-type=wrapper] .btn {
+    -webkit-user-select: inherit;
+}
