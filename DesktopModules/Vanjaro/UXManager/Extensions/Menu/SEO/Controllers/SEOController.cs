@@ -43,6 +43,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.SEO.Controllers
             dynamic BasicSearchSettings = Managers.SearchManager.GetBasicSearchSettings(AvailableAnalyzers).Data;
             Settings.Add("SiteTitle", new UIData { Name = "SiteTitle", Value = portalSettings.PortalName });
             Settings.Add("HTMLPageHeader", new UIData { Name = "HTMLPageHeader", Value = portalSettings.PageHeadText });
+            Settings.Add("Description", new UIData { Name = "Description", Value = portalSettings.Description });
+            Settings.Add("Keywords", new UIData { Name = "Keywords", Value = portalSettings.KeyWords });
             bool DeletedPageHandling = UrlRedirectSettings.DeletedTabHandlingType == "Do301RedirectToPortalHome" ? true : false;
             Settings.Add("DeletedPageHandling", new UIData { Name = "DeletedPageHandling", Value = DeletedPageHandling.ToString() });
             Settings.Add("UrlRedirectSettings", new UIData { Name = "UrlRedirectSettings", Options = UrlRedirectSettings });
@@ -86,6 +88,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.SEO.Controllers
             {
                 PortalInfo portalInfo = PortalController.Instance.GetPortal(PortalSettings.PortalId);
                 portalInfo.PortalName = requestSettings.SiteTitle.Value;
+                portalInfo.Description = requestSettings.Description.Value;
+                portalInfo.KeyWords = requestSettings.Keywords.Value;
                 PortalController.UpdatePortalSetting(PortalSettings.PortalId, "PageHeadText", string.IsNullOrEmpty(requestSettings.HTMLPageHeader.Value) ? "false" : requestSettings.HTMLPageHeader.Value);
                 PortalController.Instance.UpdatePortalInfo(portalInfo);
                 UpdateGeneralSettingsRequest updateGeneralSettingsRequest = JsonConvert.DeserializeObject<UpdateGeneralSettingsRequest>(requestSettings.UpdateGeneralSettingsRequest.ToString());

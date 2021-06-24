@@ -102,7 +102,9 @@
                 SitemapSettingsRequest: $scope.ui.data.SitemapSettings.Options,
                 SiteTitle: $scope.ui.data.SiteTitle.Value,
                 HTMLPageHeader: $scope.ui.data.HTMLPageHeader.Value,
-                UpdateSearchData: UpdateSearchData
+                UpdateSearchData: UpdateSearchData,
+                Description: $scope.ui.data.Description.Value,
+                Keywords: $scope.ui.data.Keywords.Value,
             };
 
             common.webApi.post('seo/UpdateSettings', '', requestSettings).then(function (Response) {
