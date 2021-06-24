@@ -444,11 +444,11 @@ $(document).ready(function () {
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class ="modal-header">
-						<h4 class="modal-title"></h4>
+						<h4 class="modal-title"><span class="d-none">Heading</span></h4>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<img class="img-fluid" src=""/>
+						<img class="img-fluid" alt="Img"  src=""/>
 					</div>
 				</div>
 			</div>
