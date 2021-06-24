@@ -186,6 +186,9 @@
   <data name="DeletedPageHandling.Text" xml:space="preserve">
     <value>Redirect deleted, expired, disabled pages to Homepage</value>
   </data>
+  <data name="Description.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="DescriptionBoost.Text" xml:space="preserve">
     <value>Description Boost</value>
   </data>
@@ -239,6 +242,9 @@
   </data>
   <data name="IgnoreWord_Search.Text" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="Keywords.Text" xml:space="preserve">
+    <value>Keywords</value>
   </data>
   <data name="MaximumLength.Text" xml:space="preserve">
     <value>Maximum Word Length</value>
