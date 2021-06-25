@@ -10,6 +10,7 @@
             content: {
                 type: 'map',
                 classes: ['vj-map'],
+                attributes: { title: 'Map' },
                 zoom: 10,
             },
         });
