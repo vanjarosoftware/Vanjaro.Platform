@@ -307,7 +307,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     {
                         try
                         {
-                            ProcessBlocks(portalInfo.PortalID, layout.Blocks);
+                            SettingManager.ProcessBlocks(portalInfo.PortalID, layout.Blocks);
                             if (portalSettings.ActiveTab == null)
                                 portalSettings.ActiveTab = new TabInfo();
                             portalSettings.ActiveTab.TabID = ActionResult.Data.NewTabId;
@@ -598,7 +598,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
             {
                 if (layout != null)
                 {
-                    ProcessBlocks(PortalId, layout.Blocks);
+                    SettingManager.ProcessBlocks(PortalId, layout.Blocks);
                     Dictionary<string, object> LayoutData = new Dictionary<string, object>
                     {
                         ["IsPublished"] = false,
@@ -789,31 +789,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     using (Stream entryStream = zipItem.Open())
                     {
                         originalFileMemoryStream.CopyTo(entryStream);
-                    }
-                }
-            }
-            private static void ProcessBlocks(int PortalId, List<GlobalBlock> Blocks)
-            {
-                if (Blocks != null)
-                {
-                    foreach (GlobalBlock item in Blocks)
-                    {
-                        if (string.IsNullOrEmpty(item.Html) && string.IsNullOrEmpty(item.Css))
-                        {
-                            if (BlockManager.GetCustomByGuid(PortalId, item.Guid) == null)
-                            {
-                                item.ID = 0;
-                                BlockManager.Add(PortalController.Instance.GetCurrentSettings() as PortalSettings, item, 1);
-                            }
-                        }
-                        else
-                        {
-                            if (BlockManager.GetGlobalByLocale(PortalId, item.Guid, null) == null)
-                            {
-                                item.ID = 0;
-                                BlockManager.Add(PortalController.Instance.GetCurrentSettings() as PortalSettings, item, 1);
-                            }
-                        }
                     }
                 }
             }
