@@ -333,7 +333,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                             module.DesktopModule.BusinessControllerClass);
                         var controller = businessController as IPortable;
                         var content = controller?.ExportModule(module.ModuleID);
-                        if (!string.IsNullOrEmpty(content))
+                        if (!string.IsNullOrEmpty(content) && !ExportedModulesContent.ContainsKey(tabmodule.ModuleID))
                             ExportedModulesContent.Add(tabmodule.ModuleID, content);
                     }
                 }

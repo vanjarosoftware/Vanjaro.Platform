@@ -41,7 +41,7 @@
                                         <input type="text" class="form-control NewFolderName" ng-model="NewFolderName">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" mn-ng-show="FolderTypes.Options.length>1">>
                                     <label>[L:FolderType]</label>
                                     <div class="input-group">
                                         <select class="form-control FolderType" ng-model="FolderTypes.Value" ng-options="option.Value as option.Text for option in FolderTypes.Options"></select>
