@@ -67,7 +67,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
             ActionResult actionResult = new ActionResult();
             try
             {
-                Entities.UpdateSslSettingsRequest UpdateSslSettingsRequest = JsonConvert.DeserializeObject<Entities.UpdateSslSettingsRequest>(settingData.UpdateSslSettingsRequest.ToString());              
+                Entities.UpdateSslSettingsRequest UpdateSslSettingsRequest = JsonConvert.DeserializeObject<Entities.UpdateSslSettingsRequest>(settingData.UpdateSslSettingsRequest.ToString());
 
                 actionResult = UpdateMediaSettings(settingData);
                 if (actionResult.HasErrors)
@@ -85,7 +85,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
                     return actionResult;
                 }
 
-                actionResult = UpdateSslSettings(UpdateSslSettingsRequest);
+                actionResult = UpdateSslSettings(PortalSettings, UpdateSslSettingsRequest);
             }
             catch (Exception ex)
             {
@@ -94,7 +94,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
             }
             return actionResult;
         }
-        
+
         private ActionResult UpdateGeneralSettings(dynamic request)
         {
             ActionResult actionResult = new ActionResult();
@@ -138,13 +138,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
             }
             return actionResult;
         }
-        
-        private ActionResult UpdateSslSettings(Entities.UpdateSslSettingsRequest request)
+
+        public ActionResult UpdateSslSettings(PortalSettings PortalSettings, Entities.UpdateSslSettingsRequest request)
         {
             ActionResult ActionResult = new ActionResult();
             try
             {
-                PortalSettings PortalSettings = PortalController.Instance.GetCurrentSettings() as PortalSettings;
                 bool PreviousValue_SSLEnabled = PortalController.GetPortalSettingAsBoolean("SSLEnabled", PortalSettings.PortalId, false);
                 PortalController.UpdatePortalSetting(PortalSettings.PortalId, "SSLEnabled", request.SSLEnabled.ToString(), false);
                 PortalController.UpdatePortalSetting(PortalSettings.PortalId, "SSLEnforced", request.SSLEnforced.ToString(), false);
@@ -157,15 +156,15 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Controllers
 
                 if (PreviousValue_SSLEnabled != request.SSLEnabled)
                 {
-                    foreach (KeyValuePair<int, TabInfo> t in TabController.Instance.GetTabsByPortal(PortalSettings.Current.PortalId))
+                    foreach (KeyValuePair<int, TabInfo> t in TabController.Instance.GetTabsByPortal(PortalSettings.PortalId))
                     {
                         t.Value.IsSecure = request.SSLEnabled;
                         TabController.Instance.UpdateTab(t.Value);
                     }
 
-                    if (PortalSettings.Current != null && PortalSettings.Current.ActiveTab != null && !string.IsNullOrEmpty(PortalSettings.Current.ActiveTab.FullUrl))
+                    if (PortalSettings != null && PortalSettings.ActiveTab != null && !string.IsNullOrEmpty(PortalSettings.ActiveTab.FullUrl))
                     {
-                        ActionResult.RedirectURL = PortalSettings.Current.ActiveTab.FullUrl;
+                        ActionResult.RedirectURL = PortalSettings.ActiveTab.FullUrl;
                     }
                     else
                     {
