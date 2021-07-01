@@ -81,6 +81,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\bin\DotNetNuke.Web.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -115,7 +116,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Internal|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-	<OutputPath>..\..\..\..\..\..\bin\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\bin\</OutputPath>
     <DefineConstants>TRACE;INTERNAL</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>

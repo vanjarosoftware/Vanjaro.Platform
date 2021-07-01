@@ -2,6 +2,7 @@
 using DotNetNuke.Entities.Users;
 using System;
 using System.Collections.Generic;
+using System.Web;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Common.Entities.Apps;
 using Vanjaro.Common.Utilities;
@@ -52,10 +53,17 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.Preview
         {
             get
             {
+
+                string Slug = HttpContext.Current.Request.QueryString[null];
+                if (!string.IsNullOrEmpty(Slug))
+                    Slug = "&" + Slug;
+                else
+                    Slug = string.Empty;
+
                 Dictionary<MenuAction, dynamic> Event = new Dictionary<MenuAction, dynamic>
                 {
                     //Event.Add(MenuAction.OpenInNewWindow, "_blank");
-                    { MenuAction.onClick, "window.open(CurrentTabUrl + (CurrentTabUrl.indexOf(\"?\")!=-1?\"&pv=true&icp=true\":\"?pv=true&icp=true\"), \"_blank\");" }
+                    { MenuAction.onClick, "window.open(CurrentTabUrl.replace(\""+Slug.Replace("&","/")+"\", \"\").replace(\""+Slug+"\", \"\") + (CurrentTabUrl.indexOf(\"?\")!=-1?\"&icp=true&pv=true&"+Slug+"\":\"?icp=true&pv=yes"+Slug+"\"), \"_blank\");" }
                 };
                 return Event;
             }
