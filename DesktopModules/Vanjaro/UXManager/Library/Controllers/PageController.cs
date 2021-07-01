@@ -62,7 +62,10 @@ namespace Vanjaro.UXManager.Library.Controllers
         [DnnPageEditor]
         public string GetPageUrl(int TabID)
         {
-            return PageManager.GetPageUrl(PortalSettings, TabID);
+            string result = PageManager.GetPageUrl(PortalSettings, TabID);
+            if (string.IsNullOrEmpty(result))
+                result = "/";
+            return result;
         }
 
         [HttpGet]

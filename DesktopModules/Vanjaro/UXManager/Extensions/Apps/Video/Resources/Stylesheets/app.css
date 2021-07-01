@@ -51,7 +51,8 @@
 
 #more {
     position: fixed;
-    width: 96%;
+    width: 97%;
+    bottom: 10px;
 }
 
 .uploaddefault span.fas.fa-folder,

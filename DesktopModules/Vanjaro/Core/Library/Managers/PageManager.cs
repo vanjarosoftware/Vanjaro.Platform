@@ -204,25 +204,10 @@ namespace Vanjaro.Core
                                     break;
                                 foreach (dynamic st in style.selectors)
                                 {
-                                    try
+                                    if (style.ToString() == con.ToString())
                                     {
-                                        if (st.name != null && cons.name != null && cons.name.Value == st.name.Value)
-                                        {
-                                            result = true;
-                                            break;
-                                        }
-                                    }
-                                    catch
-                                    {
-                                        try
-                                        {
-                                            if (st != null && cons != null && cons.Value.ToString().Replace("#", "").Replace(".", "") == st.Value.ToString().Replace("#", "").Replace(".", ""))
-                                            {
-                                                result = true;
-                                                break;
-                                            }
-                                        }
-                                        catch { }
+                                        result = true;
+                                        break;
                                     }
                                 }
                             }

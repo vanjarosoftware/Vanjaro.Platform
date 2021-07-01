@@ -188,6 +188,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                                 }
                             }
                         }
+                        if (File.Exists(HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/portal.css")))
+                            AddZipItem("portal.css", File.ReadAllBytes(HttpContext.Current.Server.MapPath("~/Portals/" + PortalID + "/portal.css")), zip);
                     }
                     fileBytes = memoryStream.ToArray();
                 }
@@ -333,7 +335,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                             module.DesktopModule.BusinessControllerClass);
                         var controller = businessController as IPortable;
                         var content = controller?.ExportModule(module.ModuleID);
-                        if (!string.IsNullOrEmpty(content))
+                        if (!string.IsNullOrEmpty(content) && !ExportedModulesContent.ContainsKey(tabmodule.ModuleID))
                             ExportedModulesContent.Add(tabmodule.ModuleID, content);
                     }
                 }
@@ -458,6 +460,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                             ProcessPortalSettings(pinfo, fi, exportTemplate);
                             ProcessCustomBlocks(pinfo, exportTemplate);
                             ProcessTemplateSettings(pinfo, exportTemplate, tabKeyValuePairs);
+
+                            if (File.Exists(path + "/portal.css"))
+                                File.Copy(path + "/portal.css", HttpContext.Current.Server.MapPath("~/Portals/" + pinfo.PortalID + "/portal.css"));
                         }
                     }
                 }
