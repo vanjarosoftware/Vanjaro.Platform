@@ -154,6 +154,28 @@ namespace Vanjaro.Core
                             HostController.Instance.Update("DisableEditBar", "False");
                         }
                         break;
+                    case "01.01.00":
+                        UserInfo uInfo = UserController.Instance.GetCurrentUserInfo();
+                        foreach (PortalInfo pinfo in PortalController.Instance.GetPortals())
+                        {
+                            try
+                            {
+                                if (IsDistribution(pinfo.PortalID))
+                                {
+                                    List<StringValue> SettingNameValue = new List<StringValue>
+                                    {
+                                        new StringValue { Text = "ClientResourcesManagementMode", Value = "h" },
+                                        new StringValue { Text = ClientResourceSettings.OverrideDefaultSettingsKey, Value = "False" },
+                                    };
+                                    UpdatePortalSettings(SettingNameValue, pinfo.PortalID, uInfo.UserID);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                ExceptionManager.LogException(ex);
+                            }
+                        }
+                        break;
                 }
             }
 
@@ -418,7 +440,8 @@ namespace Vanjaro.Core
                             new StringValue { Text = "Registration_UseEmailAsUserName", Value = "True" },
                             new StringValue { Text = "ClientResourcesManagementMode", Value = "h" },
                             new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.OverrideDefaultSettingsKey, Value = "False" },
-                        };                        
+                        };
+                        HostController.Instance.IncrementCrmVersion(false);
                         UpdatePortalSettings(SettingNameValue, pinfo.PortalID, uInfo.UserID);
                     }
                 }

@@ -448,6 +448,7 @@
     <Content Include="Themes\Basic\templates\website\Privacy.json" />
     <Content Include="Themes\Basic\templates\website\Terms.json" />
     <Content Include="Install\Core.01.00.05.SqlDataProvider" />
+    <Content Include="Install\Core.01.01.00.SqlDataProvider" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
