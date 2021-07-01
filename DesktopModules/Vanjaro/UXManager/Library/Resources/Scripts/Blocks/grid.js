@@ -6,7 +6,7 @@ export default (editor, config = {}) => {
 	const stylePrefix = config.stylePrefix;
 	const labelCell = config.labelColumn;
 	const clsRow = `${stylePrefix}row`;
-	const clsCell = `${stylePrefix}col-lg-6`;
+	const clsCell = `${stylePrefix}col-xl-6`;
 
 	const colAttr = {
 		class: clsCell + ' col-md-6 col-sm-6 col-12',
@@ -49,7 +49,7 @@ export default (editor, config = {}) => {
 	cmd.add('add-column', ed => {
 		var Selected = VjEditor.getSelected();
 		var Row = '<div class="row"></div>';
-		var Column = '<div class="col-lg-1 col-md-1 col-sm-1 col-12"></div>';
+		var Column = '<div class="col-xl-1 col-md-1 col-sm-1 col-12"></div>';
 		if (Selected.attributes.type == 'grid') {
 			if (typeof Selected.components().models[0] != 'undefined')
 				Selected.components().models[0].components().add(Column);
@@ -89,7 +89,7 @@ export default (editor, config = {}) => {
 
 	global.setColSize = function (colSize) {
 
-		var colClass = 'col-lg-';
+		var colClass = 'col-xl-';
 		var Device = VjEditor.getDevice();
 		var browserwidth = window.innerWidth - 325;
 
@@ -506,7 +506,7 @@ global.ChangeGridColumns = function (cols) {
 	var content = `<div class="row">`;
 	var i;
 	for (i = 0; i < cols.length; i++) {
-		content += `<div class="col-lg-` + cols[i].size + ` col-md-` + cols[i].size + ` col-sm-` + cols[i].size + ` col-12"></div>`;
+		content += `<div class="col-xl-` + cols[i].size + ` col-md-` + cols[i].size + ` col-sm-` + cols[i].size + ` col-12"></div>`;
 	}
 	content += `</div>`;
 	compSelected.components(content);

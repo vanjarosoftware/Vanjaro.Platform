@@ -1514,7 +1514,7 @@ $(document).ready(function () {
                                     }, {
                                         name: 'Tablet',
                                         width: '768px', // this value will be used on canvas width
-                                        widthMedia: '991px', // this value will be used in CSS @media
+                                        widthMedia: '1199px', // this value will be used in CSS @media
                                     }, {
                                         name: 'Mobile Landscape',
                                         width: '700px', // this value will be used on canvas width
@@ -1954,13 +1954,15 @@ $(document).ready(function () {
                                 var flexDirection = model.getStyle()['flex-direction'];
                                 var row = model.components().models[0];
 
-                                var className = 'col-lg-12';
+                                var className = 'col-xl-12';
                                 var Device = VjEditor.getDevice();
 
                                 if (Device == 'Mobile Portrait')
                                     className = 'col-12';
-                                else if (Device == 'Tablet' || Device == 'Mobile Landscape')
+                                else if (Device == 'Mobile Landscape')
                                     className = 'col-sm-12';
+                                else if (Device == 'Tablet')
+                                    className = 'col-md-12';
 
                                 if (typeof flexDirection == 'undefined') {
 
