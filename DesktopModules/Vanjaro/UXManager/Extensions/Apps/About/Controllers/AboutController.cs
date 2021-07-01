@@ -1,6 +1,7 @@
 ﻿using DotNetNuke.Application;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Localization;
@@ -35,7 +36,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.About.Controllers
             Settings.Add("LogoutUrl", new UIData() { Name = "LogoutUrl", Value = Core.Managers.LoginManager.Logoff() });
             Settings.Add("RedirectAfterLogout", new UIData() { Name = "RedirectAfterLogout", Value = GetRedirectAfterLogout(portalSettings) });
             // Settings.Add("IncrementVersionCount", new UIData() { Name = "IncrementVersionCount", Value = GetPortalVersion(portalSettings.PortalId) });
-            Settings.Add("EnableMode", new UIData() { Name = "EnableMode", Options = bool.Parse(PortalController.GetPortalSetting(ClientResourceSettings.EnableCompositeFilesKey, portalSettings.PortalId, "false")) });
+            Settings.Add("EnableMode", new UIData() { Name = "EnableMode", Options = bool.Parse(HostController.Instance.GetString(ClientResourceSettings.EnableCompositeFilesKey, "false")) });
 
 
             //Get Vanjaro Version            
@@ -81,15 +82,15 @@ namespace Vanjaro.UXManager.Extensions.Apps.About.Controllers
         [HttpPost]
         public void IncrementCRMVersion()
         {
-            PortalController.IncrementCrmVersion(PortalSettings.PortalId);
+            HostController.Instance.IncrementCrmVersion(false);
         }
 
         [HttpGet]
         public bool EnableMode(bool IsEnabled)
         {
-            PortalController.UpdatePortalSetting(PortalSettings.PortalId, ClientResourceSettings.EnableCompositeFilesKey, IsEnabled.ToString());
-            PortalController.UpdatePortalSetting(PortalSettings.PortalId, ClientResourceSettings.MinifyCssKey, IsEnabled.ToString());
-            PortalController.UpdatePortalSetting(PortalSettings.PortalId, ClientResourceSettings.MinifyJsKey, IsEnabled.ToString());
+            HostController.Instance.Update(ClientResourceSettings.EnableCompositeFilesKey, IsEnabled.ToString());
+            HostController.Instance.Update(ClientResourceSettings.MinifyCssKey, IsEnabled.ToString());
+            HostController.Instance.Update(ClientResourceSettings.MinifyJsKey, IsEnabled.ToString());
             return IsEnabled;
         }
 
