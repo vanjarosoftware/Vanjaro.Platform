@@ -154,6 +154,25 @@ namespace Vanjaro.Core
                             HostController.Instance.Update("DisableEditBar", "False");
                         }
                         break;
+                    case "01.01.00":
+                        UserInfo uInfo = UserController.Instance.GetCurrentUserInfo();
+                        foreach (PortalInfo pinfo in PortalController.Instance.GetPortals())
+                        {
+                            try
+                            {
+                                List<StringValue> SettingNameValue = new List<StringValue>
+                                {
+                                   new StringValue { Text = "ClientResourcesManagementMode", Value = "h" },
+                                   new StringValue { Text = ClientResourceSettings.OverrideDefaultSettingsKey, Value = "False" },
+                                };
+                                UpdatePortalSettings(SettingNameValue, pinfo.PortalID, uInfo.UserID);
+                            }
+                            catch (Exception ex)
+                            {
+                                ExceptionManager.LogException(ex);
+                            }
+                        }
+                        break;
                 }
             }
 
@@ -416,14 +435,10 @@ namespace Vanjaro.Core
                         {
                             new StringValue { Text = "DNN_Enabled", Value = "False" },
                             new StringValue { Text = "Registration_UseEmailAsUserName", Value = "True" },
-                            new StringValue { Text = "ClientResourcesManagementMode", Value = "p" },
-                            new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.EnableCompositeFilesKey, Value = "True" },
-                            new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.MinifyCssKey, Value = "True" },
-                            new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.MinifyJsKey, Value = "True" },
-                            new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.OverrideDefaultSettingsKey, Value = "True" },
+                            new StringValue { Text = "ClientResourcesManagementMode", Value = "h" },
+                            new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.OverrideDefaultSettingsKey, Value = "False" },
                         };
-                        int CrmVersion = Host.CrmVersion + 1;
-                        SettingNameValue.Add(new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.VersionKey, Value = CrmVersion.ToString() });
+                        HostController.Instance.IncrementCrmVersion(false);
                         UpdatePortalSettings(SettingNameValue, pinfo.PortalID, uInfo.UserID);
                     }
                 }
@@ -460,9 +475,9 @@ namespace Vanjaro.Core
                 if (fi != null)
                     UpdateValue(pinfo.PortalID, 0, "security_settings", "Picture_DefaultFolder", fi.FolderID.ToString());
 
-                PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.EnableCompositeFilesKey, "True");
-                PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.MinifyCssKey, "True");
-                PortalController.UpdatePortalSetting(pinfo.PortalID, ClientResourceSettings.MinifyJsKey, "True");
+                HostController.Instance.Update(ClientResourceSettings.EnableCompositeFilesKey, "True");
+                HostController.Instance.Update(ClientResourceSettings.MinifyCssKey, "True");
+                HostController.Instance.Update(ClientResourceSettings.MinifyJsKey, "True");
             }
 
             public static void UpdateSignInTab(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts, bool ApplyTemplates, string portableModulesPath)
