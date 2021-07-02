@@ -172,6 +172,9 @@ namespace Vanjaro.Core
                                 ExceptionManager.LogException(ex);
                             }
                         }
+                        HostController.Instance.Update(ClientResourceSettings.EnableCompositeFilesKey, "True");
+                        HostController.Instance.Update(ClientResourceSettings.MinifyCssKey, "True");
+                        HostController.Instance.Update(ClientResourceSettings.MinifyJsKey, "True");
                         break;
                 }
             }
@@ -438,7 +441,6 @@ namespace Vanjaro.Core
                             new StringValue { Text = "ClientResourcesManagementMode", Value = "h" },
                             new StringValue { Text = DotNetNuke.Web.Client.ClientResourceSettings.OverrideDefaultSettingsKey, Value = "False" },
                         };
-                        HostController.Instance.IncrementCrmVersion(false);
                         UpdatePortalSettings(SettingNameValue, pinfo.PortalID, uInfo.UserID);
                     }
                 }
@@ -474,10 +476,6 @@ namespace Vanjaro.Core
 
                 if (fi != null)
                     UpdateValue(pinfo.PortalID, 0, "security_settings", "Picture_DefaultFolder", fi.FolderID.ToString());
-
-                HostController.Instance.Update(ClientResourceSettings.EnableCompositeFilesKey, "True");
-                HostController.Instance.Update(ClientResourceSettings.MinifyCssKey, "True");
-                HostController.Instance.Update(ClientResourceSettings.MinifyJsKey, "True");
             }
 
             public static void UpdateSignInTab(PortalInfo pinfo, UserInfo uInfo, List<Layout> pageLayouts, bool ApplyTemplates, string portableModulesPath)
