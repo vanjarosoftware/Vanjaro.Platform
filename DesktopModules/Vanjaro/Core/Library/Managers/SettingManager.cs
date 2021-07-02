@@ -160,15 +160,12 @@ namespace Vanjaro.Core
                         {
                             try
                             {
-                                if (IsDistribution(pinfo.PortalID))
+                                List<StringValue> SettingNameValue = new List<StringValue>
                                 {
-                                    List<StringValue> SettingNameValue = new List<StringValue>
-                                    {
-                                        new StringValue { Text = "ClientResourcesManagementMode", Value = "h" },
-                                        new StringValue { Text = ClientResourceSettings.OverrideDefaultSettingsKey, Value = "False" },
-                                    };
-                                    UpdatePortalSettings(SettingNameValue, pinfo.PortalID, uInfo.UserID);
-                                }
+                                   new StringValue { Text = "ClientResourcesManagementMode", Value = "h" },
+                                   new StringValue { Text = ClientResourceSettings.OverrideDefaultSettingsKey, Value = "False" },
+                                };
+                                UpdatePortalSettings(SettingNameValue, pinfo.PortalID, uInfo.UserID);
                             }
                             catch (Exception ex)
                             {
