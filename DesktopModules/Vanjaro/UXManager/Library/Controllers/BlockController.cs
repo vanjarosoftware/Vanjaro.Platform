@@ -178,7 +178,7 @@ namespace Vanjaro.UXManager.Library.Controllers
                                 }
                                 else
                                 {
-                                    SettingManager.ProcessBlocks(PortalSettings.ActiveTab.PortalID, pagelayout.Blocks);
+                                    SettingManager.ProcessBlocks(PortalSettings, DotNetNuke.Entities.Users.UserController.Instance.GetCurrentUserInfo(), pagelayout.Blocks, path + "/PortableModules");
 
                                     Dictionary<string, object> LayoutData = new Dictionary<string, object>();
                                     LayoutData.Add("gjs-html", pagelayout.Content);

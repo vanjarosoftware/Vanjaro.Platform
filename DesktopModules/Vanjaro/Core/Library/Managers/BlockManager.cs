@@ -649,7 +649,7 @@ namespace Vanjaro.Core
                                         {
                                             AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
                                         }
-                                        catch (Exception ex) { ExceptionManager.LogException(ex); }
+                                        catch (Exception ex) {}
                                     }
                                 }
                             }
@@ -740,7 +740,7 @@ namespace Vanjaro.Core
             //                            {
             //                                AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
             //                            }
-            //                            catch (Exception ex) { ExceptionManager.LogException(ex); }
+            //                            catch (Exception ex) {}
             //                        }
             //                    }
             //                }

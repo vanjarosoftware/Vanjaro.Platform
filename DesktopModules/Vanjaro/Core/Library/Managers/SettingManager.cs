@@ -486,16 +486,17 @@ namespace Vanjaro.Core
                 Layout homelayout = pageLayouts.Where(a => a.Name == "Home").FirstOrDefault();
                 if (SigninTab != null && Signinlayout != null && portalSettings != null)
                 {
-                    if (ApplyTemplates)
-                        ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
-                    UpdateLayoutSettings(SigninTab, Signinlayout.Settings);
-
                     if (portalSettings.ActiveTab == null)
                     {
                         portalSettings.ActiveTab = new TabInfo();
                     }
 
                     portalSettings.ActiveTab.TabID = SigninTab.TabID;
+
+                    if (ApplyTemplates)
+                        ProcessBlocks(portalSettings, uInfo, homelayout.Blocks, portableModulesPath);
+                    UpdateLayoutSettings(SigninTab, Signinlayout.Settings);
+
                     Dictionary<string, object> LayoutData = new Dictionary<string, object>
                     {
                         ["IsPublished"] = false,
@@ -535,15 +536,16 @@ namespace Vanjaro.Core
                 Layout Signuplayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "signup").FirstOrDefault();
                 if (SignUpTab != null && Signuplayout != null && portalSettings != null)
                 {
-                    ProcessBlocks(pinfo.PortalID, Signuplayout.Blocks);
-                    UpdateLayoutSettings(SignUpTab, Signuplayout.Settings);
-
                     if (portalSettings.ActiveTab == null)
                     {
                         portalSettings.ActiveTab = new TabInfo();
                     }
 
                     portalSettings.ActiveTab.TabID = SignUpTab.TabID;
+
+                    ProcessBlocks(portalSettings, uInfo, Signuplayout.Blocks, portableModulesPath);
+                    UpdateLayoutSettings(SignUpTab, Signuplayout.Settings);
+
                     Dictionary<string, object> LayoutData = new Dictionary<string, object>
                     {
                         ["IsPublished"] = false,
@@ -578,15 +580,16 @@ namespace Vanjaro.Core
                     NotFoundPagelayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "404errorpage").FirstOrDefault();
                 if (NotFoundTab != null && NotFoundPagelayout != null && portalSettings != null)
                 {
-                    ProcessBlocks(pinfo.PortalID, NotFoundPagelayout.Blocks);
-                    UpdateLayoutSettings(NotFoundTab, NotFoundPagelayout.Settings);
-
                     if (portalSettings.ActiveTab == null)
                     {
                         portalSettings.ActiveTab = new TabInfo();
                     }
 
                     portalSettings.ActiveTab.TabID = NotFoundTab.TabID;
+
+                    ProcessBlocks(portalSettings, uInfo, NotFoundPagelayout.Blocks, portableModulesPath);
+                    UpdateLayoutSettings(NotFoundTab, NotFoundPagelayout.Settings);
+
                     Dictionary<string, object> LayoutData = new Dictionary<string, object>
                     {
                         ["IsPublished"] = false,
@@ -621,15 +624,17 @@ namespace Vanjaro.Core
                 Layout Profilelayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "profile").FirstOrDefault();
                 if (ProfileTab != null && Profilelayout != null && portalSettings != null)
                 {
-                    ProcessBlocks(pinfo.PortalID, Profilelayout.Blocks);
-                    UpdateLayoutSettings(ProfileTab, Profilelayout.Settings);
-                    pinfo.UserTabId = ProfileTab.TabID;
                     if (portalSettings.ActiveTab == null)
                     {
                         portalSettings.ActiveTab = new TabInfo();
                     }
 
                     portalSettings.ActiveTab.TabID = ProfileTab.TabID;
+
+                    ProcessBlocks(portalSettings, uInfo, Profilelayout.Blocks, portableModulesPath);
+                    UpdateLayoutSettings(ProfileTab, Profilelayout.Settings);
+                    pinfo.UserTabId = ProfileTab.TabID;
+
                     Dictionary<string, object> LayoutData = new Dictionary<string, object>
                     {
                         ["IsPublished"] = false,
@@ -663,14 +668,16 @@ namespace Vanjaro.Core
                 Layout SearchResultlayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "searchresults").FirstOrDefault();
                 if (SearchResultTab != null && SearchResultlayout != null && portalSettings != null)
                 {
-                    ProcessBlocks(pinfo.PortalID, SearchResultlayout.Blocks);
-                    UpdateLayoutSettings(SearchResultTab, SearchResultlayout.Settings);
                     if (portalSettings.ActiveTab == null)
                     {
                         portalSettings.ActiveTab = new TabInfo();
                     }
 
                     portalSettings.ActiveTab.TabID = SearchResultTab.TabID;
+
+                    ProcessBlocks(portalSettings, uInfo, SearchResultlayout.Blocks, portableModulesPath);
+                    UpdateLayoutSettings(SearchResultTab, SearchResultlayout.Settings);
+
                     Dictionary<string, object> LayoutData = new Dictionary<string, object>
                     {
                         ["IsPublished"] = false,
@@ -704,14 +711,16 @@ namespace Vanjaro.Core
                 Layout Termslayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "terms").FirstOrDefault();
                 if (TermsTab != null && Termslayout != null && portalSettings != null)
                 {
-                    ProcessBlocks(pinfo.PortalID, Termslayout.Blocks);
-                    UpdateLayoutSettings(TermsTab, Termslayout.Settings);
                     if (portalSettings.ActiveTab == null)
                     {
                         portalSettings.ActiveTab = new TabInfo();
                     }
 
                     portalSettings.ActiveTab.TabID = TermsTab.TabID;
+
+                    ProcessBlocks(portalSettings, uInfo, Termslayout.Blocks, portableModulesPath);
+                    UpdateLayoutSettings(TermsTab, Termslayout.Settings);
+
                     Dictionary<string, object> LayoutData = new Dictionary<string, object>
                     {
                         ["IsPublished"] = false,
@@ -744,14 +753,16 @@ namespace Vanjaro.Core
                 Layout Privacylayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "privacy").FirstOrDefault();
                 if (PrivacyTab != null && Privacylayout != null && portalSettings != null)
                 {
-                    ProcessBlocks(pinfo.PortalID, Privacylayout.Blocks);
-                    UpdateLayoutSettings(PrivacyTab, Privacylayout.Settings);
                     if (portalSettings.ActiveTab == null)
                     {
                         portalSettings.ActiveTab = new TabInfo();
                     }
 
                     portalSettings.ActiveTab.TabID = PrivacyTab.TabID;
+
+                    ProcessBlocks(portalSettings, uInfo, Privacylayout.Blocks, portableModulesPath);
+                    UpdateLayoutSettings(PrivacyTab, Privacylayout.Settings);
+
                     Dictionary<string, object> LayoutData = new Dictionary<string, object>
                     {
                         ["IsPublished"] = false,
@@ -784,15 +795,14 @@ namespace Vanjaro.Core
                 Layout homelayout = pageLayouts.Where(a => a.Name.ToLower().Replace(" ", "") == "home").FirstOrDefault();
                 if (HomeTab != null && homelayout != null && portalSettings != null)
                 {
-                    ProcessBlocks(pinfo.PortalID, homelayout.Blocks);
-                    UpdateLayoutSettings(HomeTab, homelayout.Settings);
-
                     if (portalSettings.ActiveTab == null)
                     {
                         portalSettings.ActiveTab = new TabInfo();
                     }
 
                     portalSettings.ActiveTab.TabID = HomeTab.TabID;
+                    ProcessBlocks(portalSettings, uInfo, homelayout.Blocks, portableModulesPath);
+                    UpdateLayoutSettings(HomeTab, homelayout.Settings);
                     PortalController.UpdatePortalSetting(pinfo.PortalID, "Redirect_AfterLogin", HomeTab.TabID.ToString(), false, portalSettings.CultureCode, false);
                     Dictionary<string, object> LayoutData = new Dictionary<string, object>
                     {
@@ -867,7 +877,7 @@ namespace Vanjaro.Core
                     db.Execute(query);
                 }
             }
-            public static void ProcessBlocks(int PortalId, List<GlobalBlock> Blocks)
+            public static void ProcessBlocks(PortalSettings ps, UserInfo UInfo, List<GlobalBlock> Blocks, string portableModulesPath)
             {
                 if (Blocks != null)
                 {
@@ -875,25 +885,27 @@ namespace Vanjaro.Core
                     {
                         if (string.IsNullOrEmpty(item.Html) && string.IsNullOrEmpty(item.Css))
                         {
-                            if (BlockManager.GetCustomByGuid(PortalId, item.Guid) == null)
+                            if (BlockManager.GetCustomByGuid(ps.PortalId, item.Guid) == null)
                             {
                                 item.ID = 0;
-                                PortalSettings ps = new PortalSettings
-                                {
-                                    PortalId = PortalId
-                                };
                                 BlockManager.Add(ps, item, 1);
                             }
                         }
                         else
                         {
-                            if (BlockManager.GetGlobalByLocale(PortalId, item.Guid, null) == null)
+                            if (BlockManager.GetGlobalByLocale(ps.PortalId, item.Guid, null) == null)
                             {
                                 item.ID = 0;
-                                PortalSettings ps = new PortalSettings
+
+                                Dictionary<string, object> LayoutData = new Dictionary<string, object>
                                 {
-                                    PortalId = PortalId
+                                    ["gjs-html"] = item.Html.ToString(),
+                                    ["gjs-components"] = item.ContentJSON.ToString()
                                 };
+                                PageManager.AddModules(ps, LayoutData, UInfo, portableModulesPath, true);
+                                item.Html = LayoutData["gjs-html"].ToString();
+                                item.ContentJSON = LayoutData["gjs-components"].ToString();
+
                                 BlockManager.Add(ps, item, 1);
                             }
                         }

@@ -171,7 +171,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                                     {
                                         AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
                                     }
-                                    catch (Exception ex) { ExceptionManager.LogException(ex); }
+                                    catch (Exception ex) {}
                                 }
                                 FileNames.Add(FileName);
                             }
