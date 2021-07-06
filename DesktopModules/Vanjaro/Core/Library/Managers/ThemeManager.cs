@@ -1,4 +1,5 @@
 ﻿using Dnn.PersonaBar.Prompt.Components.Commands.Host;
+using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using Newtonsoft.Json;
@@ -336,7 +337,7 @@ namespace Vanjaro.Core
                 }
 
                 if (IncrementCrmVersion)
-                    PortalController.IncrementCrmVersion(PortalID);
+                    HostController.Instance.IncrementCrmVersion(false);
             }
 
             public static void Save(string CategoryGuid, List<ThemeEditorValue> ThemeEditorValues)

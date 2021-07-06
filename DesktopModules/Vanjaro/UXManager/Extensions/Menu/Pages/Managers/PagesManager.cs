@@ -307,10 +307,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     {
                         try
                         {
-                            SettingManager.ProcessBlocks(portalInfo.PortalID, layout.Blocks);
                             if (portalSettings.ActiveTab == null)
                                 portalSettings.ActiveTab = new TabInfo();
                             portalSettings.ActiveTab.TabID = ActionResult.Data.NewTabId;
+                            SettingManager.ProcessBlocks(portalSettings, uInfo, layout.Blocks, portableModulesPath);
                             TabInfo tab = TabController.Instance.GetTab(portalSettings.ActiveTab.TabID, portalSettings.ActiveTab.PortalID);
                             tab.IsVisible = true;
                             TabController.Instance.UpdateTab(tab);
@@ -598,7 +598,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
             {
                 if (layout != null)
                 {
-                    SettingManager.ProcessBlocks(PortalId, layout.Blocks);
                     Dictionary<string, object> LayoutData = new Dictionary<string, object>
                     {
                         ["IsPublished"] = false,
@@ -618,6 +617,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
 
                     LayoutData["gjs-styles"] = Core.Managers.PageManager.DeTokenizeLinks(layout.StyleJSON.ToString(), PortalId);
                     PortalSettings.Current.ActiveTab.TabID = ActionResult.Data.NewTabId;
+                    SettingManager.ProcessBlocks(PortalSettings.Current, null, layout.Blocks, null);
                     Core.Managers.PageManager.Update(PortalSettings.Current, LayoutData);
 
                     if (PortalSettings.Current.DefaultLanguage != PortalSettings.Current.CultureCode)
@@ -762,7 +762,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                                         {
                                             AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
                                         }
-                                        catch (Exception ex) { ExceptionManager.LogException(ex); }
+                                        catch (Exception ex) {}
                                     }
                                 }
                             }
