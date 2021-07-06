@@ -148,7 +148,19 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                         {
                             foreach (string layout in Directory.GetFiles(PortalPageTemplatePath, "*.json"))
                             {
-                                AddZipItem("Templates/Pages/" + layout.Replace(PortalPageTemplatePath, string.Empty), File.ReadAllBytes(layout), zip);
+                                string stringJson = File.ReadAllText(layout);
+                                if (!string.IsNullOrEmpty(stringJson))
+                                {
+                                    Layout lay = JsonConvert.DeserializeObject<Layout>(stringJson);
+                                    if (lay != null)
+                                    {
+                                        lay.Content = PageManager.TokenizeTemplateLinks(PortalID, PageManager.DeTokenizeLinks(lay.Content, PortalID), false, Assets);
+                                        lay.ContentJSON = PageManager.TokenizeTemplateLinks(PortalID, PageManager.DeTokenizeLinks(lay.ContentJSON, PortalID), true, Assets);
+                                        lay.Style = PageManager.TokenizeTemplateLinks(PortalID, PageManager.DeTokenizeLinks(lay.Style.ToString(), PortalID), false, Assets);
+                                        lay.StyleJSON = PageManager.TokenizeTemplateLinks(PortalID, PageManager.DeTokenizeLinks(lay.StyleJSON.ToString(), PortalID), true, Assets);
+                                        AddZipItem("Templates/Pages/" + layout.Replace(PortalPageTemplatePath, string.Empty), Encoding.Unicode.GetBytes(JsonConvert.SerializeObject(lay)), zip);
+                                    }
+                                }
                             }
                         }
 
@@ -171,7 +183,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                                     {
                                         AddZipItem("Assets/" + FileName, new WebClient().DownloadData(FileUrl), zip);
                                     }
-                                    catch (Exception ex) {}
+                                    catch (Exception ex) { }
                                 }
                                 FileNames.Add(FileName);
                             }
@@ -321,25 +333,29 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
 
         private static void ProcessPortableModules(int PortalID, TabInfo tab, Dictionary<int, string> ExportedModulesContent)
         {
-            foreach (var tabmodule in ModuleController.Instance.GetTabModules(tab.TabID).Values)
+            try
             {
-                var moduleDef = ModuleDefinitionController.GetModuleDefinitionByID(tabmodule.ModuleDefID);
-                var desktopModuleInfo = DesktopModuleController.GetDesktopModule(moduleDef.DesktopModuleID, PortalID);
-                if (!string.IsNullOrEmpty(desktopModuleInfo?.BusinessControllerClass))
+                foreach (var tabmodule in ModuleController.Instance.GetTabModules(tab.TabID).Values)
                 {
-                    var module = ModuleController.Instance.GetModule(tabmodule.ModuleID, tab.TabID, true);
-                    if (!module.IsDeleted && !string.IsNullOrEmpty(module.DesktopModule.BusinessControllerClass) && module.DesktopModule.IsPortable)
+                    var moduleDef = ModuleDefinitionController.GetModuleDefinitionByID(tabmodule.ModuleDefID);
+                    var desktopModuleInfo = DesktopModuleController.GetDesktopModule(moduleDef.DesktopModuleID, PortalID);
+                    if (!string.IsNullOrEmpty(desktopModuleInfo?.BusinessControllerClass))
                     {
-                        var businessController = Reflection.CreateObject(
-                            module.DesktopModule.BusinessControllerClass,
-                            module.DesktopModule.BusinessControllerClass);
-                        var controller = businessController as IPortable;
-                        var content = controller?.ExportModule(module.ModuleID);
-                        if (!string.IsNullOrEmpty(content) && !ExportedModulesContent.ContainsKey(tabmodule.ModuleID))
-                            ExportedModulesContent.Add(tabmodule.ModuleID, content);
+                        var module = ModuleController.Instance.GetModule(tabmodule.ModuleID, tab.TabID, true);
+                        if (!module.IsDeleted && !string.IsNullOrEmpty(module.DesktopModule.BusinessControllerClass) && module.DesktopModule.IsPortable)
+                        {
+                            var businessController = Reflection.CreateObject(
+                                module.DesktopModule.BusinessControllerClass,
+                                module.DesktopModule.BusinessControllerClass);
+                            var controller = businessController as IPortable;
+                            var content = controller?.ExportModule(module.ModuleID);
+                            if (!string.IsNullOrEmpty(content) && !ExportedModulesContent.ContainsKey(tabmodule.ModuleID))
+                                ExportedModulesContent.Add(tabmodule.ModuleID, content);
+                        }
                     }
                 }
             }
+            catch (Exception ex) { }
         }
 
         private static bool CanExport(Dnn.PersonaBar.Pages.Services.Dto.PageSettings pageSettings, TabInfo tab)
@@ -625,7 +641,19 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                         Directory.CreateDirectory(PortalPageTemplatePath);
                     foreach (string tp in TemplatePages)
                     {
-                        File.Copy(tp, PortalPageTemplatePath + Path.GetFileName(tp));
+                        string stringJson = File.ReadAllText(tp, Encoding.Unicode);
+                        if (!string.IsNullOrEmpty(stringJson))
+                        {
+                            Layout lay = JsonConvert.DeserializeObject<Layout>(stringJson);
+                            if (lay != null)
+                            {
+                                lay.Content = PageManager.DeTokenizeLinks(lay.Content.ToString(), pinfo.PortalID);
+                                lay.ContentJSON = PageManager.DeTokenizeLinks(lay.ContentJSON.ToString(), pinfo.PortalID);
+                                lay.Style = PageManager.DeTokenizeLinks(lay.Style.ToString(), pinfo.PortalID);
+                                lay.StyleJSON = PageManager.DeTokenizeLinks(lay.StyleJSON.ToString(), pinfo.PortalID);
+                                File.WriteAllText(PortalPageTemplatePath + Path.GetFileName(tp), JsonConvert.SerializeObject(lay));
+                            }
+                        }
                     }
                 }
             }
