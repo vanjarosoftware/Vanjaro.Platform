@@ -466,7 +466,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                         if (exportTemplate != null && exportTemplate.ThemeGuid.ToLower() == ThemeManager.GetCurrent(pinfo.PortalID).GUID.ToLower())
                         {
                             fi = ProcessAssets(pinfo, fi, foldersizeinfo, path);
-                            ProcessTemplatePages(pinfo, path);
 
                             Dictionary<int, int> tabKeyValuePairs = new Dictionary<int, int>();
                             ProcessTemplates(pinfo, portalAdmin, path, exportTemplate, tabKeyValuePairs);
@@ -725,6 +724,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             if (Directory.Exists(path + "/Theme"))
             {
                 SettingManager.Copy(path + "/Theme", HttpContext.Current.Server.MapPath("~/Portals/" + pinfo.PortalID + "/vThemes/" + ThemeManager.GetCurrent(pinfo.PortalID).Name + ""));
+                ProcessTemplatePages(pinfo, path);
                 try
                 {
                     ThemeManager.ProcessScss(pinfo.PortalID, false);
