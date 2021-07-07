@@ -1382,7 +1382,7 @@ namespace Vanjaro.Core
                 {
                     try
                     {
-                        string matchurl = match.Value.Replace("url(\"", "").Replace("\")", "").Replace("url(\\\"", "").Replace("\\\")", "");
+                        string matchurl = match.Value.Replace("url(\"", "").Replace("\")", "").Replace("url(\\\"", "").Replace("\\\")", "").TrimEnd('\\');
                         string newlink = GetNewLink(portalid, matchurl, Assets);
                         if (matchurl != newlink)
                         {
