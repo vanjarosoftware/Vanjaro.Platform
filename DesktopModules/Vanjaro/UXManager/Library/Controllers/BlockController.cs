@@ -222,14 +222,22 @@ namespace Vanjaro.UXManager.Library.Controllers
                                                 {
                                                     using (FileStream fs = File.OpenRead(asset))
                                                     {
-                                                        FileManager.Instance.AddFile(foldersizeinfo, fileName, fs);
+                                                        try
+                                                        {
+                                                            FileManager.Instance.AddFile(foldersizeinfo, fileName, fs);
+                                                        }
+                                                        catch (Exception ex) { ExceptionManager.LogException(ex); }
                                                     }
                                                 }
                                                 else
                                                 {
                                                     using (FileStream fs = File.OpenRead(asset))
                                                     {
-                                                        FileManager.Instance.AddFile(fi, fileName, fs);
+                                                        try
+                                                        {
+                                                            FileManager.Instance.AddFile(fi, fileName, fs);
+                                                        }
+                                                        catch (Exception ex) { ExceptionManager.LogException(ex); }
                                                     }
                                                 }
                                             }
