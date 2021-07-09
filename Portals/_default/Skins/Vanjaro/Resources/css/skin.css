@@ -469,9 +469,9 @@ a.dnnSecondaryAction {
 /*
 Theme.css start
 */
-body#Body.dnnEditState {
+body#Body.dnnEditState:not(.preview) {
     font-family: Arial,sans-serif;
-    background: transparent;
+    background: transparent !important;
 }
 
 .spinner-grow-sm {
