@@ -1744,6 +1744,7 @@ $(document).ready(function () {
                                         })
                                     }
                                 });
+                                CleanCssrules();
                             });
 
                             var parentClone = "";
