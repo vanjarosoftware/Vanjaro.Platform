@@ -69,6 +69,8 @@ $(document).ready(function () {
                                 }
                             }
                         }
+                        if (!$('.optimizing-overlay').length)
+                            $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Please wait</h1></div>');
                         var sf = $.ServicesFramework(-1);
                         $.ajax({
                             type: "Post",
@@ -79,7 +81,7 @@ $(document).ready(function () {
                                 'RequestVerificationToken': sf.getAntiForgeryValue()
                             },
                             success: function (data) {
-
+                                $('.vj-wrapper').find('.optimizing-overlay').remove();
                                 if (data.Html != undefined && data.Html.length > 0) {
                                     var LibraryBlock = VjEditor.BlockManager.add('LibraryBlock', {
                                         content: data.Html,

@@ -178,7 +178,7 @@ namespace Vanjaro.UXManager.Library.Controllers
                                 }
                                 else
                                 {
-                                    SettingManager.ProcessBlocks(PortalSettings.ActiveTab.PortalID, pagelayout.Blocks);
+                                    SettingManager.ProcessBlocks(PortalSettings, DotNetNuke.Entities.Users.UserController.Instance.GetCurrentUserInfo(), pagelayout.Blocks, path + "/PortableModules");
 
                                     Dictionary<string, object> LayoutData = new Dictionary<string, object>();
                                     LayoutData.Add("gjs-html", pagelayout.Content);
@@ -222,14 +222,22 @@ namespace Vanjaro.UXManager.Library.Controllers
                                                 {
                                                     using (FileStream fs = File.OpenRead(asset))
                                                     {
-                                                        FileManager.Instance.AddFile(foldersizeinfo, fileName, fs);
+                                                        try
+                                                        {
+                                                            FileManager.Instance.AddFile(foldersizeinfo, fileName, fs);
+                                                        }
+                                                        catch (Exception ex) { ExceptionManager.LogException(ex); }
                                                     }
                                                 }
                                                 else
                                                 {
                                                     using (FileStream fs = File.OpenRead(asset))
                                                     {
-                                                        FileManager.Instance.AddFile(fi, fileName, fs);
+                                                        try
+                                                        {
+                                                            FileManager.Instance.AddFile(fi, fileName, fs);
+                                                        }
+                                                        catch (Exception ex) { ExceptionManager.LogException(ex); }
                                                     }
                                                 }
                                             }

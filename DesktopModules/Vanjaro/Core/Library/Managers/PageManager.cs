@@ -850,103 +850,114 @@ namespace Vanjaro.Core
                 return GetPages(TabID).Where(a => a.IsPublished == true).OrderByDescending(a => a.Version).GroupBy(g => g.Version).FirstOrDefault()?.ToList() ?? new List<Pages>();
             }
 
-            public static void AddModules(PortalSettings PortalSettings, Dictionary<string, object> LayoutData, UserInfo userInfo, string portableModulesPath)
+            public static void AddModules(PortalSettings PortalSettings, Dictionary<string, object> LayoutData, UserInfo userInfo, string portableModulesPath, bool ShowOnAllTabs = false)
             {
-                string Markup = LayoutData["gjs-html"].ToString();
-                string MarkupJson = string.Empty;
-                if (LayoutData.ContainsKey("gjs-components"))
-                    MarkupJson = LayoutData["gjs-components"].ToString();
-                if (!string.IsNullOrEmpty(Markup))
+                if (PortalSettings != null && LayoutData != null && userInfo != null && !string.IsNullOrEmpty(portableModulesPath))
                 {
-                    HtmlDocument html = new HtmlDocument();
-                    html.LoadHtml(Markup);
-                    IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
-                    foreach (HtmlNode item in query.ToList())
+                    string Markup = LayoutData["gjs-html"].ToString();
+                    string MarkupJson = string.Empty;
+                    if (LayoutData.ContainsKey("gjs-components"))
+                        MarkupJson = LayoutData["gjs-components"].ToString();
+                    if (!string.IsNullOrEmpty(Markup))
                     {
-                        if (item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "mid").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "fname").FirstOrDefault() != null)
+                        HtmlDocument html = new HtmlDocument();
+                        html.LoadHtml(Markup);
+                        IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
+                        foreach (HtmlNode item in query.ToList())
                         {
-                            ModuleDefinitionInfo moduleDefinition = ModuleDefinitionController.GetModuleDefinitionByFriendlyName(item.Attributes.Where(a => a.Name == "fname").FirstOrDefault().Value);
-                            if (moduleDefinition != null)
+                            if (item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "mid").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "fname").FirstOrDefault() != null)
                             {
-                                ModuleInfo objModule = new ModuleInfo();
-                                objModule.Initialize(PortalSettings.ActiveTab.PortalID);
-                                objModule.PortalID = PortalSettings.ActiveTab.PortalID;
-                                objModule.TabID = PortalSettings.ActiveTab.TabID;
-                                objModule.ModuleOrder = -1;
-                                objModule.ModuleTitle = moduleDefinition.FriendlyName;
-                                objModule.PaneName = "ContentPane";
-                                objModule.ModuleDefID = moduleDefinition.ModuleDefID;
-                                objModule.ContainerSrc = "[g]containers/vanjaro/base.ascx";
-                                objModule.DisplayTitle = true;
+                                ModuleDefinitionInfo moduleDefinition = ModuleDefinitionController.GetModuleDefinitionByFriendlyName(item.Attributes.Where(a => a.Name == "fname").FirstOrDefault().Value);
+                                if (moduleDefinition != null)
+                                {
+                                    ModuleInfo objModule = new ModuleInfo();
+                                    objModule.Initialize(PortalSettings.ActiveTab.PortalID);
+                                    objModule.PortalID = PortalSettings.ActiveTab.PortalID;
+                                    objModule.TabID = PortalSettings.ActiveTab.TabID;
+                                    objModule.ModuleOrder = -1;
+                                    objModule.ModuleTitle = moduleDefinition.FriendlyName;
+                                    objModule.PaneName = "ContentPane";
+                                    objModule.ModuleDefID = moduleDefinition.ModuleDefID;
+                                    objModule.ContainerSrc = "[g]containers/vanjaro/base.ascx";
+                                    objModule.DisplayTitle = true;
 
-                                if (moduleDefinition.DefaultCacheTime > 0)
-                                {
-                                    objModule.CacheTime = moduleDefinition.DefaultCacheTime;
-                                    if (PortalSettings.DefaultModuleId > Null.NullInteger && PortalSettings.DefaultTabId > Null.NullInteger)
+                                    if (moduleDefinition.DefaultCacheTime > 0)
                                     {
-                                        ModuleInfo defaultModule = ModuleController.Instance.GetModule(PortalSettings.DefaultModuleId, PortalSettings.DefaultTabId, true);
-                                        if ((defaultModule != null))
-                                            objModule.CacheTime = defaultModule.CacheTime;
-                                    }
-                                }
-                                ModuleController.Instance.InitialModulePermission(objModule, objModule.TabID, 0);
-                                for (int i = 0; i < objModule.ModulePermissions.Count; i++)
-                                {
-                                    if (objModule.ModulePermissions[i].RoleID == 0)
-                                        objModule.ModulePermissions[i].RoleID = PortalSettings.AdministratorRoleId;
-
-                                }
-                                if (PortalSettings.ContentLocalizationEnabled)
-                                {
-                                    Locale defaultLocale = LocaleController.Instance.GetDefaultLocale(PortalSettings.PortalId);
-                                    //set the culture of the module to that of the tab
-                                    TabInfo tabInfo = TabController.Instance.GetTab(objModule.TabID, PortalSettings.PortalId, false);
-                                    objModule.CultureCode = tabInfo != null ? tabInfo.CultureCode : defaultLocale.Code;
-                                }
-                                else
-                                    objModule.CultureCode = Null.NullString;
-                                objModule.AllTabs = false;
-                                ModuleController.Instance.AddModule(objModule);
-                                int oldDmid = int.Parse(item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault().Value);
-                                int oldMid = int.Parse(item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value);
-                                int newDmid = moduleDefinition.DesktopModuleID;
-                                int newMid = objModule.ModuleID;
-                                item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault().Value = newDmid.ToString();
-                                item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value = newMid.ToString();
-                                item.InnerHtml = "<div vjmod=\"true\"><app id=\"" + newMid + "\"></app>";
-                                MarkupJson = MarkupJson.Replace("\"dmid\":\"" + oldDmid + "\",\"mid\":" + oldMid + "", "\"dmid\":\"" + newDmid + "\",\"mid\":" + newMid);
-                                if (Directory.Exists(portableModulesPath) && File.Exists(portableModulesPath + "/" + oldMid + ".json"))
-                                {
-                                    var desktopModuleInfo = DesktopModuleController.GetDesktopModule(newDmid, PortalSettings.PortalId);
-                                    if (!string.IsNullOrEmpty(desktopModuleInfo?.BusinessControllerClass))
-                                    {
-                                        if (!objModule.IsDeleted && !string.IsNullOrEmpty(desktopModuleInfo.BusinessControllerClass) && desktopModuleInfo.IsPortable)
+                                        objModule.CacheTime = moduleDefinition.DefaultCacheTime;
+                                        if (PortalSettings.DefaultModuleId > Null.NullInteger && PortalSettings.DefaultTabId > Null.NullInteger)
                                         {
-                                            try
+                                            ModuleInfo defaultModule = ModuleController.Instance.GetModule(PortalSettings.DefaultModuleId, PortalSettings.DefaultTabId, true);
+                                            if ((defaultModule != null))
+                                                objModule.CacheTime = defaultModule.CacheTime;
+                                        }
+                                    }
+                                    ModuleController.Instance.InitialModulePermission(objModule, objModule.TabID, 0);
+                                    for (int i = 0; i < objModule.ModulePermissions.Count; i++)
+                                    {
+                                        if (objModule.ModulePermissions[i].RoleID == 0)
+                                            objModule.ModulePermissions[i].RoleID = PortalSettings.AdministratorRoleId;
+
+                                    }
+                                    if (PortalSettings.ContentLocalizationEnabled)
+                                    {
+                                        Locale defaultLocale = LocaleController.Instance.GetDefaultLocale(PortalSettings.PortalId);
+                                        //set the culture of the module to that of the tab
+                                        TabInfo tabInfo = TabController.Instance.GetTab(objModule.TabID, PortalSettings.PortalId, false);
+                                        objModule.CultureCode = tabInfo != null ? tabInfo.CultureCode : defaultLocale.Code;
+                                    }
+                                    else
+                                        objModule.CultureCode = Null.NullString;
+                                    objModule.AllTabs = ShowOnAllTabs;
+                                    ModuleController.Instance.AddModule(objModule);
+                                    if (ShowOnAllTabs)
+                                    {
+                                        foreach (TabInfo destinationTab in TabController.GetPortalTabs(objModule.PortalID, Null.NullInteger, false, true))
+                                        {
+                                            if (!PortalSettings.ContentLocalizationEnabled || (objModule.CultureCode == destinationTab.CultureCode))
+                                                ModuleController.Instance.CopyModule(objModule, destinationTab, objModule.PaneName, true);
+                                        }
+                                    }
+                                    int oldDmid = int.Parse(item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault().Value);
+                                    int oldMid = int.Parse(item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value);
+                                    int newDmid = moduleDefinition.DesktopModuleID;
+                                    int newMid = objModule.ModuleID;
+                                    item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault().Value = newDmid.ToString();
+                                    item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value = newMid.ToString();
+                                    item.InnerHtml = "<div vjmod=\"true\"><app id=\"" + newMid + "\"></app>";
+                                    MarkupJson = MarkupJson.Replace("\"dmid\":\"" + oldDmid + "\",\"mid\":" + oldMid + "", "\"dmid\":\"" + newDmid + "\",\"mid\":" + newMid);
+                                    if (Directory.Exists(portableModulesPath) && File.Exists(portableModulesPath + "/" + oldMid + ".json"))
+                                    {
+                                        var desktopModuleInfo = DesktopModuleController.GetDesktopModule(newDmid, PortalSettings.PortalId);
+                                        if (!string.IsNullOrEmpty(desktopModuleInfo?.BusinessControllerClass))
+                                        {
+                                            if (!objModule.IsDeleted && !string.IsNullOrEmpty(desktopModuleInfo.BusinessControllerClass) && desktopModuleInfo.IsPortable)
                                             {
-                                                var businessController = Reflection.CreateObject(
-                                                    desktopModuleInfo.BusinessControllerClass,
-                                                    desktopModuleInfo.BusinessControllerClass);
-                                                var controller = businessController as IPortable;
-                                                controller?.ImportModule(objModule.ModuleID, File.ReadAllText(portableModulesPath + "/" + oldMid + ".json", Encoding.Unicode), desktopModuleInfo.Version, userInfo.UserID);
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                                                try
+                                                {
+                                                    var businessController = Reflection.CreateObject(
+                                                        desktopModuleInfo.BusinessControllerClass,
+                                                        desktopModuleInfo.BusinessControllerClass);
+                                                    var controller = businessController as IPortable;
+                                                    controller?.ImportModule(objModule.ModuleID, File.ReadAllText(portableModulesPath + "/" + oldMid + ".json", Encoding.Unicode), desktopModuleInfo.Version, userInfo.UserID);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    DotNetNuke.Services.Exceptions.Exceptions.LogException(ex);
+                                                }
                                             }
                                         }
                                     }
                                 }
+                                else
+                                    item.InnerHtml = "";
                             }
-                            else
-                                item.InnerHtml = "";
                         }
+                        Markup = html.DocumentNode.OuterHtml;
                     }
-                    Markup = html.DocumentNode.OuterHtml;
+                    LayoutData["gjs-html"] = Markup;
+                    if (LayoutData.ContainsKey("gjs-components"))
+                        LayoutData["gjs-components"] = MarkupJson;
                 }
-                LayoutData["gjs-html"] = Markup;
-                if (LayoutData.ContainsKey("gjs-components"))
-                    LayoutData["gjs-components"] = MarkupJson;
             }
 
             internal static List<Pages> GetAllByState(int State)
@@ -1371,7 +1382,7 @@ namespace Vanjaro.Core
                 {
                     try
                     {
-                        string matchurl = match.Value.Replace("url(\"", "").Replace("\")", "").Replace("url(\\\"", "").Replace("\\\")", "");
+                        string matchurl = match.Value.Replace("url(\"", "").Replace("\")", "").Replace("url(\\\"", "").Replace("\\\")", "").TrimEnd('\\');
                         string newlink = GetNewLink(portalid, matchurl, Assets);
                         if (matchurl != newlink)
                         {
