@@ -44,7 +44,7 @@ namespace Vanjaro.UXManager.Library
         {
 #if RELEASE
             TemplateLibraryURL = "https://library.vanjaro.cloud/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower() + "/type/block";
-            ExtensionStoreURL = "~" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/placeholder.html");
+            ExtensionStoreURL = "https://store.vanjaro.com";
 # else
             TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower()+"/type/block";
             ExtensionStoreURL = "http://store.vanjaro.local/store";
