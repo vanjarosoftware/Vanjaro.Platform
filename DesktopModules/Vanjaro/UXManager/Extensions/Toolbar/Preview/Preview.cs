@@ -63,7 +63,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.Preview
                 Dictionary<MenuAction, dynamic> Event = new Dictionary<MenuAction, dynamic>
                 {
                     //Event.Add(MenuAction.OpenInNewWindow, "_blank");
-                    { MenuAction.onClick, "window.open(CurrentTabUrl.replace(\""+Slug.Replace("&","/")+"\", \"\").replace(\""+Slug+"\", \"\") + (CurrentTabUrl.indexOf(\"?\")!=-1?\"&icp=true&pv=true&"+Slug+"\":\"?icp=true&pv=yes"+Slug+"\"), \"_blank\");" }
+                    { MenuAction.onClick, "window.open(CurrentTabUrl.replace(\""+Slug.Replace("&","/")+"\", \"\").replace(\""+Slug+"\", \"\") + (CurrentTabUrl.indexOf(\"?\")!=-1?\"&icp=true&pv=true&"+Slug+"\":\"?icp=true&pv=true"+Slug+"\"), \"_blank\");" }
                 };
                 return Event;
             }
