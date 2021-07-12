@@ -129,17 +129,11 @@ export default (editor, config = {}) => {
 		},
 			{
 				isComponent(el) {
-					if (el && ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(el.tagName)) {
+                    if (el && el.tagName && el.classList && el.classList.contains('vj-heading')) {
 						return { type: 'heading' };
 					}
 				}
 			}),
-		view: textView.extend({
-			onRender() {
-				var hasClass = this.model.getClasses().find(v => v == 'vj-heading' || v == 'text-primary')
-				if (typeof hasClass == 'undefined')
-					this.model.addClass('vj-heading  text-primary');
-			},
-		})
+		view: textView
 	});
 }

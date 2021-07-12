@@ -279,17 +279,12 @@
 		},
 			{
 				isComponent(el) {
-					if (el && el.tagName && (el.tagName.toLowerCase() == 'section' || el.tagName.toLowerCase() == 'header' || el.tagName.toLowerCase() == 'footer' || (el.tagName.toLowerCase() == 'nav' && el.classList && !el.classList.contains('nav-breadcrumb')) || el.tagName.toLowerCase() == 'article')) {
+                    if (el && el.tagName && el.tagName.toLowerCase() == 'div' && el.classList && el.classList.contains('vj-section')) {
 						return { type: 'section' };
 					}
 				}
 			}),
-		view: defaultView.extend({
-			onRender() {
-				var hasClass = this.model.getClasses().find(v => v == 'vj-section')
-				if (typeof hasClass == 'undefined')
-					this.model.addClass('vj-section');
-			},
+		view: defaultView.extend({			
 			init() {
 				this.listenTo(this.model, 'change:src', this.ChangeSrc);
 			},
