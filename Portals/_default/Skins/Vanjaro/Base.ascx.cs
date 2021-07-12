@@ -151,7 +151,7 @@ namespace Vanjaro.Skin
                 //VjDefaultPath used in Skin.js for loading icon.
                 WebForms.RegisterClientScriptBlock(Page, "DefaultPath", "var VjThemePath='" + Page.ResolveUrl("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name) + "'; var VjDefaultPath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/") + "'; var VjSitePath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/") + "';", true);
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/js/skin.js"), 2, "DnnFormBottomProvider");
-                WebForms.RegisterClientScriptInclude(Page, "VJ-Bootstrap-JS", FrameworkManager.Request("Bootstrap", "js/bootstrap.min.js"), true, "DnnBodyProvider");                
+                WebForms.RegisterClientScriptInclude(Page, "VJ-Bootstrap-JS", FrameworkManager.Request("Bootstrap", "js/bootstrap.min.js"), true, "DnnBodyProvider");
             }
             else
             {
@@ -280,7 +280,7 @@ namespace Vanjaro.Skin
                     }
                 }
             }
-        }        
+        }
 
         private void InjectViewport()
         {
@@ -898,6 +898,8 @@ namespace Vanjaro.Skin
             }
             else if (!string.IsNullOrEmpty(Request.QueryString["icp"]) && Convert.ToBoolean(Request.QueryString["icp"]) == true && !string.IsNullOrEmpty(Request.QueryString["pv"]) && Convert.ToBoolean(Request.QueryString["pv"]) == true)
             {
+                HtmlGenericControl body = (HtmlGenericControl)this.Page.FindControl("Body");
+                body.Attributes.Add("class", "preview");
                 return true;
             }
 
