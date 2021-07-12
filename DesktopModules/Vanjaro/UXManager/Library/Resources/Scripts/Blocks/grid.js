@@ -133,18 +133,7 @@ export default (editor, config = {}) => {
 				}
 			}
 		}),
-		view: defaultView.extend({
-			onRender() {
-
-				var model = this.model;
-
-				if (typeof model.parent() != 'undefined' && model.parent().attributes.type != "grid") {
-					setTimeout(function () {
-						model.replaceWith('<div class="container">' + model.getEl().outerHTML + '</div>');
-					});
-				}
-			},
-		})
+		view: defaultView
 	});
 
 	dc.addType('column', {
