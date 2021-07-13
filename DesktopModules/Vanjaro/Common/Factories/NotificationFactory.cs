@@ -106,7 +106,7 @@ namespace Vanjaro.Common.Factories
             }
 
             //msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(mail.Content, null, "text/html"));
-            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(ConvertToText(mail.Content), null, "text/plain"));
+            //msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(ConvertToText(mail.Content), null, "text/plain"));
 
             if (!string.IsNullOrEmpty(mail.Attachment))
             {
