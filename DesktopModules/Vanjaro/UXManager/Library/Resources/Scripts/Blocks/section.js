@@ -279,7 +279,7 @@
 		},
 			{
 				isComponent(el) {
-                    if (el && el.tagName && el.tagName.toLowerCase() == 'div' && el.classList && el.classList.contains('vj-section')) {
+                    if (el && el.classList && el.classList.contains('vj-section')) {
 						return { type: 'section' };
 					}
 				}
