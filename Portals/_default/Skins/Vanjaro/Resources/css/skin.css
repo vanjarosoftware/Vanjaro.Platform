@@ -514,6 +514,10 @@ Theme.css end
     display: inline-block;
 }
 
+.link, .link:hover {
+    text-decoration: underline;
+}
+
 .vj-divider {
     border-top-width: 10px;
     border-top-style: solid;
