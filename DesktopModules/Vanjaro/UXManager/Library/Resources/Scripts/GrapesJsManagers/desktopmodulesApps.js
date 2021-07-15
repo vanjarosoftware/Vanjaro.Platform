@@ -390,6 +390,8 @@ global.BuildAppComponent = function (vjcomps) {
                         v.components[0].content = "<div class='alert alert-info' role='alert'>" + v.attributes.fname + " will appear here when this page is previewed or published.</div>";
                     else
                         v.components[0].content = $('#dnn_vj_' + v.attributes.mid)[0].outerHTML;
+                    if (v.name == undefined)
+                        v.name = "App: " + v.attributes.fname;
                 }
                 else {
                     v.include = false;
