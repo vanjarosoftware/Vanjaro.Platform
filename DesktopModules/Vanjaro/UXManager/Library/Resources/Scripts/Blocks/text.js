@@ -103,7 +103,12 @@ export default (editor, config = {}) => {
 					}
 				}
 			}),
-		view: textView
+        view: textView.extend({
+            init() {
+                if (this.model.parent().attributes.type == 'text' || this.model.parent().attributes.type == 'heading' || this.model.parent().attributes.type == 'list-text')
+                    this.model.removeClass(this.getClasses());
+            },
+        })
 	});
 
 	domc.addType('text-inner', {
