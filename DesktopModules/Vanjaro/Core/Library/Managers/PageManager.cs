@@ -925,6 +925,7 @@ namespace Vanjaro.Core
                                     item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value = newMid.ToString();
                                     item.InnerHtml = "<div vjmod=\"true\"><app id=\"" + newMid + "\"></app>";
                                     MarkupJson = MarkupJson.Replace("\"dmid\":\"" + oldDmid + "\",\"mid\":" + oldMid + "", "\"dmid\":\"" + newDmid + "\",\"mid\":" + newMid);
+                                    MarkupJson = MarkupJson.Replace("\"dmid\":\"" + oldDmid + "\",\"mid\":\"" + oldMid + "\"", "\"dmid\":\"" + newDmid + "\",\"mid\":" + newMid);
                                     if (Directory.Exists(portableModulesPath) && File.Exists(portableModulesPath + "/" + oldMid + ".json"))
                                     {
                                         var desktopModuleInfo = DesktopModuleController.GetDesktopModule(newDmid, PortalSettings.PortalId);
