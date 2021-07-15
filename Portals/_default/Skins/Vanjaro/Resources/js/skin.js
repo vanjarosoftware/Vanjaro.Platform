@@ -474,6 +474,17 @@ $(document).ready(function () {
     });
 
     InitAppActionMenu();
+
+    //add aria label close
+    jQuery(window).on('load', function () {
+        var textareas = document.getElementsByClassName("g-recaptcha-response");
+        for (var i = 0; i < textareas.length; i++) {
+            textareas[i].setAttribute("aria-hidden", "true");
+            textareas[i].setAttribute("aria-label", "do not use");
+            textareas[i].setAttribute("aria-readonly", "true");
+        }
+    });
+
 });
 
 InitHamburgerMenu = function ($this) {
