@@ -18,6 +18,9 @@ namespace Vanjaro.UXManager.Library.Entities.Menu
         public bool BelowBreakLine { get; set; }
         [DefaultValue(null)]
         public string URL { get; set; }
+
+        public string ModuleDefinition { get; set; }
+        public string ModuleControl { get; set; }
     }
 
     [DefaultValue(Inline)]
