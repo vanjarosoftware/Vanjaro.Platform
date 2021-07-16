@@ -11,4 +11,5 @@ Resources\tui
 Resources\extension.html
 Resources\placeholder.html
 *.ascx
+*.aspx
 *.cshtml
