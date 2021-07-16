@@ -51,7 +51,10 @@ namespace Vanjaro.UXManager.Library
                         //Create Extension URL if GUID not null Or found
                         if (!string.IsNullOrEmpty(dr.GUID))
                         {
-                            url = ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/') + GetURL() + "mid=0&icp=true&guid=" + dr.GUID;
+                            if (string.IsNullOrEmpty(dr.URL) && !string.IsNullOrEmpty(dr.ModuleDefinition))
+                                url = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/DesktopModules/Vanjaro/UXManager/Library/ModuleControl.aspx?guid=" + dr.GUID + "&moduledefinition=" + dr.ModuleDefinition + "&modulecontrol=" + dr.ModuleControl;
+                            else
+                                url = ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/') + GetURL() + "mid=0&icp=true&guid=" + dr.GUID;
                         }
                         if (!string.IsNullOrEmpty(dr.URL))
                         {
@@ -75,7 +78,7 @@ namespace Vanjaro.UXManager.Library
 
                         if (!string.IsNullOrEmpty(dr.GUID) && !(dr.MenuAction == MenuAction.Inline))
                         {
-                            if (dr.MenuAction != MenuAction.RightOverlay && string.IsNullOrEmpty(dr.URL))
+                            if (dr.MenuAction != MenuAction.RightOverlay && string.IsNullOrEmpty(dr.URL) && string.IsNullOrEmpty(dr.ModuleDefinition))
                             {
                                 url = ServiceProvider.NavigationManager.NavigateURL().TrimEnd('/') + "?mid=0&icp=true&guid=" + dr.GUID;
                             }
@@ -165,7 +168,9 @@ namespace Vanjaro.UXManager.Library
                                         AboveBreakLine = !string.IsNullOrEmpty(SearchKeywords) ? false : Node.AboveBreakLine,
                                         BelowBreakLine = !string.IsNullOrEmpty(SearchKeywords) ? false : Node.BelowBreakLine,
                                         Width = categories.Width ?? 0,
-                                        MenuAction = categories.Event
+                                        MenuAction = categories.Event,
+                                        ModuleDefinition = category.ModuleDefinition,
+                                        ModuleControl = category.ModuleControl
                                     });
                                 }
 
@@ -196,7 +201,9 @@ namespace Vanjaro.UXManager.Library
                                 AboveBreakLine = !string.IsNullOrEmpty(SearchKeywords) ? false : category.AboveBreakLine,
                                 BelowBreakLine = !string.IsNullOrEmpty(SearchKeywords) ? false : category.BelowBreakLine,
                                 Width = categories.Width ?? 0,
-                                MenuAction = categories.Event
+                                MenuAction = categories.Event,
+                                ModuleDefinition = category.ModuleDefinition,
+                                ModuleControl = category.ModuleControl
                             });
                             CID++;
                         }
