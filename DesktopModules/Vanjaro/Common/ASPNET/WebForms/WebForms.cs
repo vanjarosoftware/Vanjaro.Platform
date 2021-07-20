@@ -130,9 +130,7 @@ namespace Vanjaro.Common.ASPNET
 
             if (Page.Header.FindControl(ID) == null)
             {
-                int PortalID = PortalSettings.Current.PortalId;
-                string CrmVersion = PortalController.GetPortalSetting("CrmVersion", PortalID, string.Empty);
-                string cdv = "cdv=" + CrmVersion;
+                string cdv = "cdv=" + Host.CrmVersion;
 
                 if (URL.Contains("?"))
                     cdv = "&" + cdv;
