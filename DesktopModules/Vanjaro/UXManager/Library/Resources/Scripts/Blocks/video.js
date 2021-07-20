@@ -9,7 +9,7 @@
 			attributes: { class: 'fa fa-youtube-play' },
 			content: `
 				<div class='video-box embed-container'>
-					<video controls src='`+ VjDefaultPath + `Flower.mp4' playsinline></video>
+					<video controls src='`+ VjDefaultPath + `Flower.mp4'></video>
 				</div>	
 			`,
 			activate: 1
@@ -194,7 +194,7 @@
 					this.set({ 'src': 'https://www.youtube.com/embed/' });
 				}
 				else {
-					this.components().models[0].replaceWith('<video src="' + VjDefaultPath + 'Flower.mp4" autoplay muted playsinline></video>');
+					this.components().models[0].replaceWith('<video src="' + VjDefaultPath + 'Flower.mp4"></video>');
 					this.loadTraits(this.getSourceTraits());
 					this.set({ 'src': '' + VjDefaultPath + 'Flower.mp4' });
 					this.getTrait('controls').setTargetValue('controlstrue');

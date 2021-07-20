@@ -1196,7 +1196,7 @@ export default (editor, config = {}) => {
 
                             component.set({ 'autoplay': 'autoplaytrue' });
                             video.set({ 'autoplay': 1 });
-                            video.addAttributes({ 'autoplay': true, 'muted': true });
+                            video.addAttributes({ 'autoplay': true, 'muted': true, 'playsinline': true });
                         }
                         else {
 
@@ -1206,6 +1206,7 @@ export default (editor, config = {}) => {
                             var attr = video.getAttributes();
                             delete attr.autoplay;
                             video.setAttributes(attr);
+                            video.addAttributes({ 'autoplay': false, 'muted': false, 'playsinline': false });
                         }
                     }
                     else if (event.target.name == "loop") {
