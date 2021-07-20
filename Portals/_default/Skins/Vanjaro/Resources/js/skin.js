@@ -376,7 +376,13 @@ OpenImagePopup = function (img) {
         });
 
         $Modal.find(".modal-title").text("").text(title);
-        $Modal.find("img").attr("src", image.attr("src"));
+
+        var src = image.attr("src");
+
+        if (typeof image.attr("data-src") != "undefined")
+            src = image.attr("data-src");
+
+        $Modal.find("img").attr("src", src);
 
         var ImgModal = new bootstrap.Modal(document.getElementById('ImgModal'));
         ImgModal.show();

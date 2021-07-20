@@ -322,6 +322,7 @@
 			},
 			init() {
 				this.listenTo(this.model.parent(), 'active', this.ActivateModal); // listen for active event
+				this.listenTo(this.model, 'change:src', this.ChangeSrc);
 			},
 			ActivateModal() {
 				var Selected = this.model.collection.first();
@@ -337,6 +338,10 @@
 				var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
 				OpenPopUp(null, 900, 'right', 'Image', url, '', true);
 			},
+			ChangeSrc() {
+				var src = this.model.attributes.src;
+				this.model.addAttributes({'data-src': src});
+			}
 		}),
 	});
 }
