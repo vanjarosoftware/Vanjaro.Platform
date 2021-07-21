@@ -149,7 +149,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
                             Settings.Add("MakePublic", new UIData { Name = "MakePublic", Value = bool.FalseString });
                             Settings.Add("EnableScheduling", new UIData { Name = "EnableScheduling", Value = bool.FalseString });
                             Settings.Add("IsAnchor", new UIData { Name = "IsAnchor", Value = (tabSettings != null && tabSettings.ContainsKey("AnchorID")).ToString() });
-                            Settings.Add("AnchorPage", new UIData { Name = "AnchorPage", Options = Library.Managers.PageManager.GetParentPages(PortalSettings.Current).Where(x => x.TabType != "url" && x.TabType != "folder" && x.TabType != "anchor").Select(a => new { a.TabID, a.TabName }), OptionsText = "TabName", OptionsValue = "TabID", Value = BindAnchorPage });
+                            Settings.Add("AnchorPage", new UIData { Name = "AnchorPage", Options = Library.Managers.PageManager.GetParentPages(PortalSettings.Current, true).Select(a => new { a.TabID, a.TabName, a.TabType }), OptionsText = "TabName", OptionsValue = "TabID", Value = BindAnchorPage });
                             Settings.Add("AnchorID", new UIData { Name = "AnchorID", Value = (tabSettings != null && tabSettings.ContainsKey("AnchorID")) ? tabSettings["AnchorID"].ToString() : string.Empty });
                         }
 
