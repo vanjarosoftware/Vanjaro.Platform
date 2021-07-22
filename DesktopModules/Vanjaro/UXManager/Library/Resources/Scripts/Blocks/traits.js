@@ -67,7 +67,7 @@ export default (editor, config = {}) => {
             });
         }
 
-        if (event.target.name == 'background' && mainComponent.getTrait("background").getInitValue() != 'gradient') {
+        if (event.target.name == 'background' && event.target.id != 'gradient') {
             var style = component.getStyle();
             style["background-image"] = "none";
             style["background-color"] = "transparent";
@@ -1195,13 +1195,11 @@ export default (editor, config = {}) => {
                         if (event.target.value == "yes") {
 
                             component.set({ 'autoplay': 'autoplaytrue' });
-                            video.set({ 'autoplay': 1 });
                             video.addAttributes({ 'autoplay': true, 'muted': true, 'playsinline': true });
                         }
                         else {
 
                             component.set({ 'autoplay': 'autoplayfalse' });
-                            video.set('autoplay', 0);
 
                             var attr = video.getAttributes();
                             delete attr.autoplay;
@@ -1214,13 +1212,11 @@ export default (editor, config = {}) => {
                         if (event.target.value == "yes") {
 
                             component.set({ 'loop': 'looptrue' });
-                            video.set({ 'loop': 1 });
                             video.addAttributes({ 'loop': true });
                         }
                         else {
 
                             component.set({ 'loop': 'loopfalse' });
-                            video.set('loop', 0);
 
                             var attr = video.getAttributes();
                             delete attr.loop;
