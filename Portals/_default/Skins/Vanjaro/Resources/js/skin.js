@@ -642,7 +642,7 @@ $(window).resize(function () {
                     marginTop: 0,
                     top: containerPosition.top + 10,
                     left: containerPosition.left + containerWidth - 170,
-                    visibility: "hidden"
+                    display: "none"
                 });
             }
         }
@@ -664,12 +664,12 @@ $(window).resize(function () {
 
         $("#moduleActions-" + moduleId + " .dnn_mact > li").on({
             mouseover: function () {
-                $("#moduleActions-" + moduleId + " ul").css('visibility', 'visible');
+                $("#moduleActions-" + moduleId + " ul").css('display', 'block');
                 showMenu($(this).find("ul").first());
             }
         }).on({
             mouseout: function () {
-                $("#moduleActions-" + moduleId + " ul").css('visibility', 'hidden');
+                $("#moduleActions-" + moduleId + " ul").css('display', 'none');
                 $(this).find("> a").css('border-radius', '100%');
                 closeMenu($(this).find("ul").first());
             }
@@ -678,10 +678,11 @@ $(window).resize(function () {
         $(".DnnModule-" + moduleId).on({
             mouseover: function () {
                 position(moduleId);
-                $("#moduleActions-" + moduleId + " ul").css('visibility', 'visible');
+                $("#moduleActions-" + moduleId + " ul").css('display', 'block');
+                $("#moduleActions-" + moduleId + " ul.dnn_mact li ul").css('display', 'none');
             },
             mouseout: function () {
-                $("#moduleActions-" + moduleId + " ul").css('visibility', 'hidden');
+                $("#moduleActions-" + moduleId + " ul").css('display', 'none');
             }
         });
 
