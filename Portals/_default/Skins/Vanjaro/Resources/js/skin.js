@@ -182,7 +182,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body" id="UXRender">
-                    <img class="loader" alt="Loading" src="` + VjDefaultPath + `loading.svg" />
+                    <img class="loader" alt="Loading" src="/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.svg" />
                     <iframe id="UXpagerender" scrolling="` + scrolling + `" onload="RedirectPopup(this);"></iframe>
                 </div>
             </div>
@@ -331,7 +331,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
                     framesrc = framesrc + "?mid=" + mid + "&icp=true";
                 else
                     framesrc = framesrc + "&mid=" + mid + "&icp=true";
-                $('.gjs-frame').contents().find('#dnn_vj_' + mid).html("<img class=\"centerloader moduleloader\" src='" + VjDefaultPath + "loading.svg'><iframe id=\"Appframe\" scrolling=\"no\" onload=\"window.parent.RenderApp(this);\" src='" + framesrc + "' style=\"width:100%;height:auto;\"></iframe>");
+                $('.gjs-frame').contents().find('#dnn_vj_' + mid).html("<img class=\"centerloader moduleloader\" src='/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.svg'><iframe id=\"Appframe\" scrolling=\"no\" onload=\"window.parent.RenderApp(this);\" src='" + framesrc + "' style=\"width:100%;height:auto;\"></iframe>");
             }
             else if (typeof reload == 'undefined' || reload)
                 window.parent.location.reload();
