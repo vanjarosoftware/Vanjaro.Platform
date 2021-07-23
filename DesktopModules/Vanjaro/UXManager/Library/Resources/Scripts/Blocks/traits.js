@@ -150,7 +150,7 @@ export default (editor, config = {}) => {
             }
         }
 
-        if (addClass && className != undefined && className != 'GJS_NO_CLASS') {
+        if (addClass && className != undefined && className != '' && className != 'GJS_NO_CLASS') {
             const value_a = className.split(' ');
             for (let i = 0; i < value_a.length; i++) {
                 if (comp == 'grid' && event.target.name == 'horizontalalignment')
