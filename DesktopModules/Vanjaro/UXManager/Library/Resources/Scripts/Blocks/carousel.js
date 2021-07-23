@@ -835,10 +835,15 @@
 		run(editor, sender, opts = {}) {
 			this.editor = editor;
 			this.options = opts;
-			this.target = opts.target || editor.getSelected();
+			this.target = opts.slider || editor.getSelected();
 			const target = this.target;
 
 			$('.gjs-frame').contents().find('#' + target.getId()).carousel('dispose').carousel({ interval: false }).carousel('prev');
+
+			setTimeout(function () {
+				var image = target.closest('[data-gjs-type="carousel"]').find('.carousel-item.active img');
+				editor.select(image);
+			}, 100);
 		}
 	});
 
@@ -846,10 +851,15 @@
 		run(editor, sender, opts = {}) {
 			this.editor = editor;
 			this.options = opts;
-			this.target = opts.target || editor.getSelected();
+			this.target = opts.slider || editor.getSelected();
 			const target = this.target;
 
 			$('.gjs-frame').contents().find('#' + target.getId()).carousel('dispose').carousel({ interval: false }).carousel('next');
+
+			setTimeout(function () {
+				var image = target.closest('[data-gjs-type="carousel"]').find('.carousel-item.active img');
+				editor.select(image);
+			}, 100);
 		}
 	});
 }
