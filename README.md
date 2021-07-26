@@ -1,5 +1,5 @@
 # Vanjaro
-Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN. 
+All-in-one integrated Website Builder, CMS, Online Store, Memberships, and Digital Marketing platform that grows with your business.
 
 ## Platform Installation
 
