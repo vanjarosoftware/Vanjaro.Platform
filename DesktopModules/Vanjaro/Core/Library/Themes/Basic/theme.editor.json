@@ -9216,8 +9216,6 @@
           "Type": "Slider"
         },
         {
-          ".DefaultMenu" "li.nav-item",
-          "a": null,
           "RangeMin": 1.0,
           "RangeMax": 100.0,
           "Increment": 1.0,
