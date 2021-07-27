@@ -466,43 +466,31 @@ namespace Vanjaro.URL.Factories
         }
         private static Dictionary<string, int> GetSlugIndex(int PortalID)
         {
-            Dictionary<string, int> Index = DataCache.GetCache<Dictionary<string, int>>(Cache.Keys.SlugIndex);
-
+            Dictionary<string, int> Index = DataCache.GetCache<Dictionary<string, int>>(Cache.Keys.SlugIndex + PortalID);
             if (Index == null)
             {
                 Index = new Dictionary<string, int>();
-                //Index = URLEntity.Fetch("").ToList().ToDictionary(u => u.Slug, u => u.ModuleID);
+                Dictionary<int, int> ModuleTabIndex = new Dictionary<int, int>();
+                ModuleController mc = new ModuleController();
                 foreach (URLEntity s in URLEntity.Fetch("").ToList())
                 {
-                    ModuleController mController = new ModuleController();
-                    ModuleInfo minfo = mController.GetModule(s.ModuleID);
-                    if (minfo.PortalID == PortalID)
+                    ModuleInfo minfo = mc.GetModule(s.ModuleID, Null.NullInteger, false);
+                    if (minfo != null && minfo.PortalID == PortalID)
                     {
                         if (Index != null && !Index.ContainsKey(s.Slug))
+                        {
                             Index.Add(s.Slug, s.ModuleID);
+                            //Generate TabID Index
+                            if (!ModuleTabIndex.ContainsKey(minfo.ModuleID))
+                                ModuleTabIndex.Add(minfo.ModuleID, minfo.TabID);
+                        }
                     }
                 }
-
-                ModuleController mc = new ModuleController();
-
-                //Generate TabID Index
-                Dictionary<int, int> ModuleTabIndex = new Dictionary<int, int>();
-                foreach (int i in Index.Values.Distinct())
-                {
-                    ModuleInfo m = mc.GetModule(i, Null.NullInteger, false);
-
-                    if (m != null)
-                        ModuleTabIndex.Add(m.ModuleID, m.TabID);
-                    else
-                        ModuleTabIndex.Add(i, -1);
-                }
-
                 foreach (int ModuleId in ModuleTabIndex.Keys) //Swap ModuleIDs for TabIDs
                     Index.Where(i => i.Value == ModuleId).ToList().ForEach(i => Index[i.Key] = ModuleTabIndex[ModuleId]);
 
-                DataCache.SetCache(Cache.Keys.SlugIndex, Index);
+                DataCache.SetCache(Cache.Keys.SlugIndex + PortalID, Index);
             }
-
             return Index;
         }
 
