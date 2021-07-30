@@ -1383,9 +1383,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                 List<AppItem> AppItems = new List<AppItem>();
                 if (page != null)
                 {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append(page.Content);
+                    MergeGlobalContent(JsonConvert.DeserializeObject(page.ContentJSON), CultureCode, sb);
                     foreach (ModuleInfo ModuleInfo in ModuleController.Instance.GetTabModules(PageId).Values)
                     {
-                        if (!page.Content.Contains("<app id=\"" + ModuleInfo.ModuleID + "\"></app>"))
+                        if (!sb.ToString().Contains("<app id=\"" + ModuleInfo.ModuleID + "\"></app>"))
                         {
                             AppItem AppItem = new AppItem
                             {
@@ -1397,6 +1400,24 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     }
                 }
                 return AppItems;
+            }
+
+            private static void MergeGlobalContent(dynamic contentJSON, string locale, StringBuilder sb)
+            {
+                if (contentJSON != null)
+                {
+                    foreach (dynamic con in contentJSON)
+                    {
+                        if (con.type != null && con.type.Value == "globalblockwrapper" && con.attributes != null && con.attributes["data-guid"] != null)
+                        {
+                            GlobalBlock block = BlockManager.GetGlobalByGuid(PortalSettings.Current.PortalId, con.attributes["data-guid"].Value, locale, true);
+                            if (block != null && !string.IsNullOrEmpty(block.Html))
+                                sb.Append(block.Html);
+                        }
+                        else if (con.components != null)
+                            MergeGlobalContent(con.components, locale, sb);
+                    }
+                }
             }
 
             private static AppItem ConvertToModuleItem(ModuleInfo mod)

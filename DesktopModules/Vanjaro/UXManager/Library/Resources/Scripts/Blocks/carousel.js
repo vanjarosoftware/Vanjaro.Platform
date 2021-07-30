@@ -94,24 +94,24 @@
 						label: 'Controls',
 						name: 'controls',
 						options: [
-							{ id: 'controlstrue', name: 'Yes' },
-							{ id: 'controlsfalse', name: 'No' },
+							{ id: 'controlstrue', name: 'Yes', class: '' },
+							{ id: 'controlsfalse', name: 'No', class: '' },
 						],
 						default: 'controlstrue',
 						changeProp: 1,
-						UpdateStyles: true,
+						SwitchClass: true,
 					},
 					{
 						type: 'toggle_radio',
 						label: 'Indicators',
 						name: 'indicators',
 						options: [
-							{ id: 'indicatorstrue', name: 'Yes' },
-							{ id: 'indicatorsfalse', name: 'No' },
+							{ id: 'indicatorstrue', name: 'Yes', class: '' },
+							{ id: 'indicatorsfalse', name: 'No', class: '' },
 						],
 						default: 'indicatorstrue',
 						changeProp: 1,
-						UpdateStyles: true,
+						SwitchClass: true,
 					},
 					{
 						type: 'toggle_radio',
@@ -129,10 +129,10 @@
 						type: 'toggle_radio',
 						label: 'Rotate Automatically',
 						name: 'automatically',
-						UpdateStyles: true,
+						SwitchClass: true,
 						options: [
-							{ id: 'automaticallytrue', name: 'Yes' },
-							{ id: 'automaticallyfalse', name: 'No' },
+							{ id: 'automaticallytrue', name: 'Yes', class: '' },
+							{ id: 'automaticallyfalse', name: 'No', class: '' },
 						],
 						default: 'automaticallytrue',
 						changeProp: 1,
@@ -835,10 +835,15 @@
 		run(editor, sender, opts = {}) {
 			this.editor = editor;
 			this.options = opts;
-			this.target = opts.target || editor.getSelected();
+			this.target = opts.slider || editor.getSelected();
 			const target = this.target;
 
 			$('.gjs-frame').contents().find('#' + target.getId()).carousel('dispose').carousel({ interval: false }).carousel('prev');
+
+			setTimeout(function () {
+				var image = target.closest('[data-gjs-type="carousel"]').find('.carousel-item.active img');
+				editor.select(image);
+			}, 100);
 		}
 	});
 
@@ -846,10 +851,15 @@
 		run(editor, sender, opts = {}) {
 			this.editor = editor;
 			this.options = opts;
-			this.target = opts.target || editor.getSelected();
+			this.target = opts.slider || editor.getSelected();
 			const target = this.target;
 
 			$('.gjs-frame').contents().find('#' + target.getId()).carousel('dispose').carousel({ interval: false }).carousel('next');
+
+			setTimeout(function () {
+				var image = target.closest('[data-gjs-type="carousel"]').find('.carousel-item.active img');
+				editor.select(image);
+			}, 100);
 		}
 	});
 }

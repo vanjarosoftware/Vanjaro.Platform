@@ -390,6 +390,8 @@ global.BuildAppComponent = function (vjcomps) {
                         v.components[0].content = "<div class='alert alert-info' role='alert'>" + v.attributes.fname + " will appear here when this page is previewed or published.</div>";
                     else
                         v.components[0].content = $('#dnn_vj_' + v.attributes.mid)[0].outerHTML;
+                    if (v.name == undefined)
+                        v.name = "App: " + v.attributes.fname;
                 }
                 else {
                     v.include = false;
@@ -687,4 +689,36 @@ global.CleanGjAttrs = function (html) {
         result = compHtml.outerHTML;
     }
     return result;
-}
+};
+
+global.CleanCssrules = function () {
+    try {
+        var ItemsToRemove = [];
+        var DistinctSelectors = [];
+        var AllCssRules = [];
+        $.each(VjEditor.CssComposer.getAll().models, function (i, v) {
+            AllCssRules.push(v);
+        });
+        $.each(AllCssRules.reverse(), function (ci, cv) {
+            if (cv != undefined && cv.attributes != undefined) {
+                var key = cv.attributes.mediaText + '|' + cv.attributes.state + '|';
+                if (cv.attributes.selectors != undefined && cv.attributes.selectors.models != undefined) {
+                    $.each(cv.attributes.selectors.models, function (i, v) {
+                        if (v != undefined && v.attributes != undefined && v.attributes.name != undefined)
+                            key += v.attributes.name;
+                    });
+                }
+                if (DistinctSelectors.indexOf(key) >= 0)
+                    ItemsToRemove.push(cv);
+                else
+                    DistinctSelectors.push(key);
+            }
+        });
+        if (ItemsToRemove.length > 0) {
+            $.each(ItemsToRemove, function (i, v) {
+                VjEditor.CssComposer.getAll().remove(v);
+            });
+        }
+    }
+    catch (e) { console.log(e); }
+};

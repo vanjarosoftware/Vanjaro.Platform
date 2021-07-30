@@ -76,6 +76,9 @@
 				}
 				this.set('traits', traits);
 
+				if (typeof prov == "undefined")
+					this.set('provider', 'so')
+
 				this.listenTo(this, 'change:provider', this.ChangeProvider);
 				this.listenTo(this, 'change:videoId', this.ChangeVideoId);
 				this.listenTo(this, 'change:src', this.ChangeSrc);

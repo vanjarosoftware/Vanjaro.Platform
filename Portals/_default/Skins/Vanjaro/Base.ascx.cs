@@ -149,9 +149,10 @@ namespace Vanjaro.Skin
 
                 //Skin js requried because using for openpopup update memeber Profile when user is registered user 
                 //VjDefaultPath used in Skin.js for loading icon.
-                WebForms.RegisterClientScriptBlock(Page, "DefaultPath", "var VjThemePath='" + Page.ResolveUrl("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name) + "'; var VjDefaultPath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/") + "'; var VjSitePath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/") + "';", true);
+                if (PageManager.InjectEditor(PortalSettings))
+                    WebForms.RegisterClientScriptBlock(Page, "DefaultPath", "var VjThemePath='" + Page.ResolveUrl("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name) + "'; var VjDefaultPath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/") + "'; var VjSitePath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/") + "';", true);
                 ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/js/skin.js"), 2, "DnnFormBottomProvider");
-                WebForms.RegisterClientScriptInclude(Page, "VJ-Bootstrap-JS", FrameworkManager.Request("Bootstrap", "js/bootstrap.min.js"), true, "DnnBodyProvider");                
+                WebForms.RegisterClientScriptInclude(Page, "VJ-Bootstrap-JS", FrameworkManager.Request("Bootstrap", "js/bootstrap.min.js"), true, "DnnBodyProvider");
             }
             else
             {
@@ -280,7 +281,7 @@ namespace Vanjaro.Skin
                     }
                 }
             }
-        }        
+        }
 
         private void InjectViewport()
         {
@@ -634,6 +635,21 @@ namespace Vanjaro.Skin
                 foreach (var Attribute in AttributesToRemove)
                     item.Attributes.Remove(Attribute);
             }
+
+            IEnumerable<HtmlNode> sectionquery = html.DocumentNode.Descendants("section");
+            foreach (HtmlNode item in sectionquery.ToList())
+            {
+                if (item.Attributes == null)
+                    continue;
+                List<dynamic> AttributesToRemove = new List<dynamic>();
+                foreach (var Attribute in item.Attributes)
+                {
+                    if (Attribute.Name == "perm")
+                        AttributesToRemove.Add(Attribute);
+                }
+                foreach (var Attribute in AttributesToRemove)
+                    item.Attributes.Remove(Attribute);
+            }
         }
         private void InjectBlocks(Pages page, HtmlDocument html)
         {
@@ -898,6 +914,8 @@ namespace Vanjaro.Skin
             }
             else if (!string.IsNullOrEmpty(Request.QueryString["icp"]) && Convert.ToBoolean(Request.QueryString["icp"]) == true && !string.IsNullOrEmpty(Request.QueryString["pv"]) && Convert.ToBoolean(Request.QueryString["pv"]) == true)
             {
+                HtmlGenericControl body = (HtmlGenericControl)this.Page.FindControl("Body");
+                body.Attributes.Add("class", "preview");
                 return true;
             }
 
@@ -992,7 +1010,7 @@ namespace Vanjaro.Skin
             DotNetNuke.Framework.CDefault basePage = (DotNetNuke.Framework.CDefault)Page;
             if (page != null)
             {
-                basePage.Title = !string.IsNullOrEmpty(page.Title) ? page.Title : (!string.IsNullOrEmpty(page.Name) ? PortalSettings.Current.PortalName +" > "+ page.Name : basePage.Title);
+                basePage.Title = !string.IsNullOrEmpty(page.Title) ? page.Title : (!string.IsNullOrEmpty(page.Name) ? PortalSettings.Current.PortalName + " > " + page.Name : basePage.Title);
                 basePage.Description = !string.IsNullOrEmpty(page.Description) ? page.Description : basePage.Description;
             }
 

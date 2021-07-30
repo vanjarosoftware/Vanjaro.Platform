@@ -83,7 +83,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Theme.Controllers
                 Core.Managers.SettingManager.UpdateValue(PortalSettings.PortalId, -1, "setting_theme", "Theme", Theme);
                 if (!File.Exists(PortalThemeFolder + "Theme.css"))
                 {
-                    Core.Managers.SettingManager.Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", PortalSettings.PortalId.ToString()));
+                    if (Directory.Exists(BaseEditorFolder))
+                        Core.Managers.SettingManager.Copy(BaseEditorFolder, BaseEditorFolder.Replace("_default", PortalSettings.PortalId.ToString()));
                     try
                     {
                         ThemeManager.ProcessScss(PortalSettings.PortalId, true);

@@ -98,22 +98,17 @@ export default (editor, config = {}) => {
 		},
 			{
 				isComponent(el) {
-					if (el && ((el.classList && el.classList.contains('vj-text')) || (el.tagName && el.tagName.toLowerCase() == 'p'))) {
+					if (el && (el.classList && el.classList.contains('vj-text'))) {
 						return { type: 'text' };
 					}
 				}
 			}),
-		view: textView.extend({
-			init() {
-				if (this.model.parent().attributes.type == 'text' || this.model.parent().attributes.type == 'heading' || this.model.parent().attributes.type == 'list-text')
-					this.model.removeClass(this.getClasses());
-			},
-			onRender() {
-				var hasClass = this.model.getClasses().find(v => v == 'vj-text' || v == 'text-dark')
-				if (typeof hasClass == 'undefined' && this.model.tagName == 'p')
-					this.model.addClass('vj-text text-dark');
-			}
-		})
+        view: textView.extend({
+            init() {
+                if (this.model.parent().attributes.type == 'text' || this.model.parent().attributes.type == 'heading' || this.model.parent().attributes.type == 'list-text')
+                    this.model.removeClass(this.getClasses());
+            },
+        })
 	});
 
 	domc.addType('text-inner', {

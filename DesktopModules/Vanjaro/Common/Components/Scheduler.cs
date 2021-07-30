@@ -65,10 +65,10 @@ namespace Vanjaro.Common.Components
             foreach (PortalInfo portalInfo in PortalController.Instance.GetPortals())
             {
                 SmtpClient client = null;
-                string NotificationEnabled = PortalController.GetPortalSetting("SMTPmode", portalInfo.PortalID, "");
+                string NotificationEnabled = PortalController.GetPortalSetting("SMTPmode", portalInfo.PortalID, "h");
                 if (!string.IsNullOrEmpty(NotificationEnabled))
                 {
-                    bool IsGlobal = NotificationEnabled == "h";
+                    bool IsGlobal = NotificationEnabled.Equals("h", StringComparison.OrdinalIgnoreCase);
                     SmtpServer SmtpServer = NotificationFactory.GetSMTP(IsGlobal, portalInfo.PortalID);
                     try
                     {

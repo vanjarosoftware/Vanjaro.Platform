@@ -67,7 +67,7 @@ export default (editor, config = {}) => {
             });
         }
 
-        if (event.target.name == 'background' && mainComponent.getTrait("background").getInitValue() != 'gradient') {
+        if (event.target.name == 'background' && event.target.id != 'gradient') {
             var style = component.getStyle();
             style["background-image"] = "none";
             style["background-color"] = "transparent";
@@ -150,7 +150,7 @@ export default (editor, config = {}) => {
             }
         }
 
-        if (addClass && className != undefined && className != 'GJS_NO_CLASS') {
+        if (addClass && className != undefined && className != '' && className != 'GJS_NO_CLASS') {
             const value_a = className.split(' ');
             for (let i = 0; i < value_a.length; i++) {
                 if (comp == 'grid' && event.target.name == 'horizontalalignment')
@@ -1195,17 +1195,16 @@ export default (editor, config = {}) => {
                         if (event.target.value == "yes") {
 
                             component.set({ 'autoplay': 'autoplaytrue' });
-                            video.set({ 'autoplay': 1 });
-                            video.addAttributes({ 'autoplay': true, 'muted': true });
+                            video.addAttributes({ 'autoplay': true, 'muted': true, 'playsinline': true });
                         }
                         else {
 
                             component.set({ 'autoplay': 'autoplayfalse' });
-                            video.set('autoplay', 0);
 
                             var attr = video.getAttributes();
                             delete attr.autoplay;
                             video.setAttributes(attr);
+                            video.addAttributes({ 'autoplay': false, 'muted': false, 'playsinline': false });
                         }
                     }
                     else if (event.target.name == "loop") {
@@ -1213,13 +1212,11 @@ export default (editor, config = {}) => {
                         if (event.target.value == "yes") {
 
                             component.set({ 'loop': 'looptrue' });
-                            video.set({ 'loop': 1 });
                             video.addAttributes({ 'loop': true });
                         }
                         else {
 
                             component.set({ 'loop': 'loopfalse' });
-                            video.set('loop', 0);
 
                             var attr = video.getAttributes();
                             delete attr.loop;

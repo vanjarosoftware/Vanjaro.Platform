@@ -182,7 +182,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body" id="UXRender">
-                    <img class="loader" alt="Loading" src="` + VjDefaultPath + `loading.svg" />
+                    <img class="loader" alt="Loading" src="/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.svg" />
                     <iframe id="UXpagerender" scrolling="` + scrolling + `" onload="RedirectPopup(this);"></iframe>
                 </div>
             </div>
@@ -331,7 +331,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
                     framesrc = framesrc + "?mid=" + mid + "&icp=true";
                 else
                     framesrc = framesrc + "&mid=" + mid + "&icp=true";
-                $('.gjs-frame').contents().find('#dnn_vj_' + mid).html("<img class=\"centerloader moduleloader\" src='" + VjDefaultPath + "loading.svg'><iframe id=\"Appframe\" scrolling=\"no\" onload=\"window.parent.RenderApp(this);\" src='" + framesrc + "' style=\"width:100%;height:auto;\"></iframe>");
+                $('.gjs-frame').contents().find('#dnn_vj_' + mid).html("<img class=\"centerloader moduleloader\" src='/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.svg'><iframe id=\"Appframe\" scrolling=\"no\" onload=\"window.parent.RenderApp(this);\" src='" + framesrc + "' style=\"width:100%;height:auto;\"></iframe>");
             }
             else if (typeof reload == 'undefined' || reload)
                 window.parent.location.reload();
@@ -376,7 +376,13 @@ OpenImagePopup = function (img) {
         });
 
         $Modal.find(".modal-title").text("").text(title);
-        $Modal.find("img").attr("src", image.attr("src"));
+
+        var src = image.attr("src");
+
+        if (typeof image.attr("data-src") != "undefined")
+            src = image.attr("data-src");
+
+        $Modal.find("img").attr("src", src);
 
         var ImgModal = new bootstrap.Modal(document.getElementById('ImgModal'));
         ImgModal.show();
@@ -474,6 +480,17 @@ $(document).ready(function () {
     });
 
     InitAppActionMenu();
+
+    //add aria label close
+    jQuery(window).on('load', function () {
+        var textareas = document.getElementsByClassName("g-recaptcha-response");
+        for (var i = 0; i < textareas.length; i++) {
+            textareas[i].setAttribute("aria-hidden", "true");
+            textareas[i].setAttribute("aria-label", "do not use");
+            textareas[i].setAttribute("aria-readonly", "true");
+        }
+    });
+
 });
 
 InitHamburgerMenu = function ($this) {
@@ -625,7 +642,7 @@ $(window).resize(function () {
                     marginTop: 0,
                     top: containerPosition.top + 10,
                     left: containerPosition.left + containerWidth - 170,
-                    visibility: "hidden"
+                    display: "none"
                 });
             }
         }
@@ -647,12 +664,12 @@ $(window).resize(function () {
 
         $("#moduleActions-" + moduleId + " .dnn_mact > li").on({
             mouseover: function () {
-                $("#moduleActions-" + moduleId + " ul").css('visibility', 'visible');
+                $("#moduleActions-" + moduleId + " ul").css('display', 'block');
                 showMenu($(this).find("ul").first());
             }
         }).on({
             mouseout: function () {
-                $("#moduleActions-" + moduleId + " ul").css('visibility', 'hidden');
+                $("#moduleActions-" + moduleId + " ul").css('display', 'none');
                 $(this).find("> a").css('border-radius', '100%');
                 closeMenu($(this).find("ul").first());
             }
@@ -661,10 +678,11 @@ $(window).resize(function () {
         $(".DnnModule-" + moduleId).on({
             mouseover: function () {
                 position(moduleId);
-                $("#moduleActions-" + moduleId + " ul").css('visibility', 'visible');
+                $("#moduleActions-" + moduleId + " ul").css('display', 'block');
+                $("#moduleActions-" + moduleId + " ul.dnn_mact li ul").css('display', 'none');
             },
             mouseout: function () {
-                $("#moduleActions-" + moduleId + " ul").css('visibility', 'hidden');
+                $("#moduleActions-" + moduleId + " ul").css('display', 'none');
             }
         });
 

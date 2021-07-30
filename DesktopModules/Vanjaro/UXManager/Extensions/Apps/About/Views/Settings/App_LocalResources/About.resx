@@ -157,7 +157,7 @@
     <value>Do you want to enable debug mode?</value>
   </data>
   <data name="ReleaseSuffix.Text" xml:space="preserve">
-    <value>(RC 2)</value>
+    <value> </value>
   </data>
   <data name="DNNPlatform.Text" xml:space="preserve">
     <value>DNN Platform</value>

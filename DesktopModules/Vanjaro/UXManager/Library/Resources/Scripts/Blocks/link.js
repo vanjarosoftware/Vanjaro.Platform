@@ -80,12 +80,6 @@
 					}
 				}
 			}),
-		view: linkView.extend({
-			onRender() {
-				var hasClass = this.model.getClasses().find(v => v == 'link')
-				if (typeof hasClass == 'undefined' && this.model.parent().attributes.type != 'blockwrapper')
-					this.model.addClass('link');
-			},
-		})
+		view: linkView
 	});
 }

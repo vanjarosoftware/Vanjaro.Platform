@@ -187,7 +187,7 @@
                     <label>[L:AnchorPage]</label>
                     <div class="input-group">
                         <select class="form-control" mn-ng-model="ui.data.AnchorPage.Value">
-                            <option value="{{option.TabID}}" mn-ng-repeat="option in ui.data.AnchorPage.Options">{{option.TabName}}</option>
+                            <option value="{{option.TabID}}" mn-ng-repeat="option in ui.data.AnchorPage.Options" mn-ng-disabled="(option.TabType == 'url' || option.TabType == 'folder' || option.TabType == 'anchor')">{{option.TabName}}</option>
                         </select>
                         <div class="input-group-append">
                             <input type="text" id="AnchorID" placeholder="[L:AnchorID]" mn-ng-model="ui.data.AnchorID.Value" class="form-control float-end" required />

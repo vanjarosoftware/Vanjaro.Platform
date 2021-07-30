@@ -925,6 +925,7 @@ namespace Vanjaro.Core
                                     item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value = newMid.ToString();
                                     item.InnerHtml = "<div vjmod=\"true\"><app id=\"" + newMid + "\"></app>";
                                     MarkupJson = MarkupJson.Replace("\"dmid\":\"" + oldDmid + "\",\"mid\":" + oldMid + "", "\"dmid\":\"" + newDmid + "\",\"mid\":" + newMid);
+                                    MarkupJson = MarkupJson.Replace("\"dmid\":\"" + oldDmid + "\",\"mid\":\"" + oldMid + "\"", "\"dmid\":\"" + newDmid + "\",\"mid\":" + newMid);
                                     if (Directory.Exists(portableModulesPath) && File.Exists(portableModulesPath + "/" + oldMid + ".json"))
                                     {
                                         var desktopModuleInfo = DesktopModuleController.GetDesktopModule(newDmid, PortalSettings.PortalId);
@@ -1357,7 +1358,7 @@ namespace Vanjaro.Core
                     {
                         foreach (HtmlNode node in NodeCollectionSrc)
                         {
-                            node.Attributes["src"].Value = GetNewLink(portalid, node.Attributes["src"].Value, Assets);
+                            node.Attributes["src"].Value = GetNewLink(portalid, node.Attributes["src"].Value, Assets, true);
                         }
                     }
                     HtmlNodeCollection NodeCollectionSrcSet = html.DocumentNode.SelectNodes("//*[@srcset]");
@@ -1365,7 +1366,7 @@ namespace Vanjaro.Core
                     {
                         foreach (HtmlNode node in NodeCollectionSrcSet)
                         {
-                            node.Attributes["srcset"].Value = GetNewLink(portalid, node.Attributes["srcset"].Value, Assets);
+                            node.Attributes["srcset"].Value = GetNewLink(portalid, node.Attributes["srcset"].Value, Assets, false);
                         }
                     }
                     HtmlNodeCollection NodeCollectionThumb = html.DocumentNode.SelectNodes("//*[@thumbnail]");
@@ -1373,7 +1374,7 @@ namespace Vanjaro.Core
                     {
                         foreach (HtmlNode node in NodeCollectionThumb)
                         {
-                            node.Attributes["thumbnail"].Value = GetNewLink(portalid, node.Attributes["thumbnail"].Value, Assets);
+                            node.Attributes["thumbnail"].Value = GetNewLink(portalid, node.Attributes["thumbnail"].Value, Assets, false);
                         }
                     }
                     content = html.DocumentNode.OuterHtml;
@@ -1383,7 +1384,7 @@ namespace Vanjaro.Core
                     try
                     {
                         string matchurl = match.Value.Replace("url(\"", "").Replace("\")", "").Replace("url(\\\"", "").Replace("\\\")", "").TrimEnd('\\');
-                        string newlink = GetNewLink(portalid, matchurl, Assets);
+                        string newlink = GetNewLink(portalid, matchurl, Assets, false);
                         if (matchurl != newlink)
                         {
                             if (matchurl.EndsWith("\\") || matchurl.EndsWith(@"\"))
@@ -1397,9 +1398,9 @@ namespace Vanjaro.Core
                 return content;
             }
 
-            private static string GetNewLink(int portalid, string url, Dictionary<string, string> Assets)
+            private static string GetNewLink(int portalid, string url, Dictionary<string, string> Assets, bool IgnoreComma)
             {
-                if (url.Contains(','))
+                if (!IgnoreComma && url.Contains(','))
                 {
                     List<string> result = new List<string>();
                     foreach (var item in url.Split(','))
@@ -1471,18 +1472,26 @@ namespace Vanjaro.Core
             {
                 foreach (JProperty prop in arr.Properties())
                 {
-                    if ((prop.Name == "src" || prop.Name == "srcset" || prop.Name == "thumbnail") && !string.IsNullOrEmpty(prop.Value.ToString()))
+                    if ((prop.Name == "src") && !string.IsNullOrEmpty(prop.Value.ToString()))
                     {
-                        prop.Value = GetNewLink(portalid, prop.Value.ToString(), Assets);
+                        prop.Value = GetNewLink(portalid, prop.Value.ToString(), Assets, true);
+                    }
+                    else if ((prop.Name == "srcset" || prop.Name == "thumbnail") && !string.IsNullOrEmpty(prop.Value.ToString()))
+                    {
+                        prop.Value = GetNewLink(portalid, prop.Value.ToString(), Assets, false);
                     }
                 }
                 if (arr.attributes != null)
                 {
                     foreach (dynamic prop in arr.attributes)
                     {
-                        if ((prop.Name == "src" || prop.Name == "srcset" || prop.Name == "thumbnail") && !string.IsNullOrEmpty(prop.Value.ToString()))
+                        if ((prop.Name == "src") && !string.IsNullOrEmpty(prop.Value.ToString()))
                         {
-                            prop.Value = GetNewLink(portalid, prop.Value.ToString(), Assets);
+                            prop.Value = GetNewLink(portalid, prop.Value.ToString(), Assets, true);
+                        }
+                        else if ((prop.Name == "srcset" || prop.Name == "thumbnail") && !string.IsNullOrEmpty(prop.Value.ToString()))
+                        {
+                            prop.Value = GetNewLink(portalid, prop.Value.ToString(), Assets, false);
                         }
                     }
                 }

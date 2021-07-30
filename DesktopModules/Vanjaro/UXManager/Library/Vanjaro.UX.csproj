@@ -98,6 +98,13 @@
     <Compile Include="Managers\PageManager.cs" />
     <Compile Include="Managers\ToolbarManager.cs" />
     <Compile Include="Managers\VideoManager.cs" />
+    <Compile Include="ModuleControl.aspx.cs">
+      <DependentUpon>ModuleControl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuleControl.aspx.designer.cs">
+      <DependentUpon>ModuleControl.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extension.ascx.cs">
       <DependentUpon>Extension.ascx</DependentUpon>
@@ -109,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Base.ascx" />
+    <Content Include="ModuleControl.aspx" />
     <Content Include="Resources\Images\align-around.png" />
     <Content Include="Resources\Images\align-between.png" />
     <Content Include="Resources\Images\align-bottom.png" />
@@ -371,7 +379,7 @@
     <PreBuildEvent>cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\ &amp;&amp; npm install &amp;&amp; cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\node_modules\.bin\ &amp;&amp; webpack</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if not $(ConfigurationName) == Debug start ..\DesktopModules\Vanjaro\Core\Library\Packager\Packager.bat"</PostBuildEvent>
+    <PostBuildEvent>if not $(ConfigurationName) == Debug start ..\DesktopModules\Vanjaro\Core\Library\Packager\Packager.bat Platform</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

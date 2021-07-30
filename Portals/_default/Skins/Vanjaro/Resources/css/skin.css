@@ -252,7 +252,7 @@ div.actionMenu ul {
     div.actionMenu ul.dnn_mact {
         margin-bottom: 0;
         margin-left: 0;
-        visibility: hidden;
+        display: none;
     }
 
         div.actionMenu ul.dnn_mact li {
@@ -469,9 +469,9 @@ a.dnnSecondaryAction {
 /*
 Theme.css start
 */
-body#Body.dnnEditState {
+body#Body.dnnEditState:not(.preview) {
     font-family: Arial,sans-serif;
-    background: transparent;
+    background: transparent !important;
 }
 
 .spinner-grow-sm {

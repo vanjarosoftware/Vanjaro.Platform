@@ -174,7 +174,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
                                         using (ImageFactory imageFactory = new ImageFactory(preserveExifData: false))
                                         {
                                             //Convert to png
-                                            ISupportedImageFormat format = new PngFormat { };
+                                            ISupportedImageFormat format = new PngFormat { Quality = 70 };
 
                                             // Load, resize, set the format and quality and save an image.
                                             imageFactory.Load(inStream)
