@@ -122,7 +122,7 @@
                     //checked background image has not changed
                     if (typeof target.attributes.type != 'undefined') {
 
-                        if (target.attributes.type == 'image' || target.attributes.type == 'image-gallery-item') {
+                        if (target.attributes.type == 'image' || target.attributes.type == 'image-gallery-item' || target.attributes.type == 'carousel-image') {
 
                             target.set('src', url);
 

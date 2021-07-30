@@ -683,8 +683,27 @@ export default (editor, config = {}) => {
 
                 component.set({ href: href });
 
-                if (component.attributes.type == 'carousel-image')
-                    component.parent().parent().addAttributes({ href: href });
+                if (component.attributes.type == 'carousel-image') {
+
+                    var carouselLink = component.parent().parent();
+
+                    if (href == "") {
+
+                        carouselLink.set({ tagName: 'span' });
+
+                        const attr = carouselLink.getAttributes();
+                        delete attr.href;
+                        carouselLink.setAttributes(attr);
+                    }
+                    else {
+
+                        carouselLink.set({ tagName: 'a' });
+                        carouselLink.addAttributes({ href: href });
+
+                        if (val != "page")
+                            carouselLink.set({ 'pid': null });
+                    }
+                }
                 else
                     component.addAttributes({ href: href });
             }

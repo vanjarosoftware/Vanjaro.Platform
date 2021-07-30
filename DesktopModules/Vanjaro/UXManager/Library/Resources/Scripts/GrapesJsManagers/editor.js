@@ -207,7 +207,7 @@ $(document).ready(function () {
 
                             var imgWidth;
 
-                            if (image.attributes.type == 'image-gallery-item')
+                            if (image.attributes.type == 'image-gallery-item' || image.attributes.type == 'carousel-image')
                                 imgWidth = $(imgEl).parents('.picture-box').width();
                             else {
 
@@ -249,7 +249,7 @@ $(document).ready(function () {
             }
         };
         var optImages = jQuery.grep(getAllComponents(), function (n, i) {
-            return (n.attributes.type == 'image' || n.attributes.type == 'image-gallery-item') && (n.parent().attributes.type == 'picture-box') && (typeof n.parent().components().models[0] != 'undefined') && (typeof n.parent().components().models[1] != 'undefined');
+            return (n.attributes.type == 'image' || n.attributes.type == 'image-gallery-item' || n.attributes.type == 'carousel-image') && (n.parent().attributes.type == 'picture-box') && (typeof n.parent().components().models[0] != 'undefined') && (typeof n.parent().components().models[1] != 'undefined');
         });
 
         if (optImages != undefined && optImages.length > 0) {
