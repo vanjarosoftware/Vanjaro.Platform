@@ -424,6 +424,7 @@
 					type: 'text',
 					name: 'alt',
 					label: 'Alt',
+					changeProp: 1,
 				}, {
 					type: 'text',
 					name: 'slidetitle',
@@ -449,6 +450,7 @@
 			},
 			ChangeTitle() {
 
+				var title = this.attributes.slidetitle;
 				var slide = this.closest('[data-gjs-type="carousel-item"]');
 				var carouselCaption = slide.components().models.find(m => m.attributes.type == 'carousel-caption');
 
@@ -460,11 +462,16 @@
 				if (carouselCaption.components().length && typeof carouselCaption.components().models.find(t => t.attributes.type == 'carousel-heading') != 'undefined')
 					carouselCaption.components().models.find(t => t.attributes.type == 'carousel-heading').remove();
 
-				carouselCaption.append('<h5 class="carousel-heading">' + this.attributes.slidetitle + '</h5>', { at: 0 });
+				if (title != "")
+					carouselCaption.append('<h5 class="carousel-heading">' + title + '</h5>', { at: 0 });
+
+				if (carouselCaption.components().length == 0)
+					carouselCaption.remove();
 
 			},
 			ChangeCaption() {
 
+				var caption = this.attributes.caption;
 				var slide = this.closest('[data-gjs-type="carousel-item"]');
 				var carouselCaption = slide.components().models.find(m => m.attributes.type == 'carousel-caption');
 
@@ -476,7 +483,11 @@
 				if (carouselCaption.components().length && typeof carouselCaption.components().models.find(t => t.attributes.type == 'carousel-text') != 'undefined')
 					carouselCaption.components().models.find(t => t.attributes.type == 'carousel-text').remove();
 
-				carouselCaption.append('<p class="carousel-text">' + this.attributes.caption + '</p>');
+				if (caption != "")
+					carouselCaption.append('<p class="carousel-text">' + caption + '</p>');
+
+				if (carouselCaption.components().length == 0)
+					carouselCaption.remove();
 
 			},
 			ChangeTarget() {
@@ -545,7 +556,6 @@
 
 		view: defaultType.view
 	});
-
 
 	dc.addType('carousel-heading', {
 		model: defaultModel.extend({
