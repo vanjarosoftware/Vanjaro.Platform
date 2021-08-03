@@ -507,6 +507,17 @@ namespace Vanjaro.Common.Factories
                 }
             }
 
+            #region Vanjaro Sites Only - Multi Tenancy  
+            if (Components.Product.SKU == "Vanjaro Sites")
+            {
+                if (string.IsNullOrEmpty(mailQueue.ReplyEmail))
+                    mailQueue.ReplyEmail = mailQueue.FromEmail;
+                if (!string.IsNullOrEmpty(mailQueue.FromName))
+                    mailQueue.FromName = mailQueue.FromName.Split('<')[0].Trim();
+                mailQueue.FromEmail = Host.HostEmail;
+            }
+            #endregion
+
             return mailQueue;
         }
 
