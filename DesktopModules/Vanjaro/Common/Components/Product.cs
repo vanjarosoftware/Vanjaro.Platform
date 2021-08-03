@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Vanjaro.Core.Components
+namespace Vanjaro.Common.Components
 {
     public class Product
     {

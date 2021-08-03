@@ -129,6 +129,7 @@
     <Compile Include="Components\HTMLEditorSetting.cs" />
     <Compile Include="Components\Interfaces\ICommonRazor.cs" />
     <Compile Include="Components\ListItem.cs" />
+    <Compile Include="Components\Product.cs" />
     <Compile Include="Components\SendAttachment.cs" />
     <Compile Include="Components\TreeView.cs" />
     <Compile Include="Components\UploadOptions.cs" />
