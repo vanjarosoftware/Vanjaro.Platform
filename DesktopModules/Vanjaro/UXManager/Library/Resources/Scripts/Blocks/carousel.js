@@ -12,7 +12,7 @@
 		category: VjLocalized.Basic,
 		content: {
 			classes: ['carousel', 'vj-carousel', 'slide'],
-            attributes: { 'data-bs-ride': 'carousel', 'data-bs-interval': '5000' },
+			attributes: { 'data-bs-ride': 'carousel', 'data-bs-interval': '5000' },
 			type: 'carousel'
 		}
 	});
@@ -198,15 +198,19 @@
 				}
 			},
 			AddControl() {
+
 				var modelId = this.getId();
-				this.components().add(`<a class="carousel-control carousel-control-prev" href="#` + modelId + `" role="button" data-bs-slide="prev">
-    <span data-gjs-selectable="false" class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="carousel-control visually-hidden">Previous</span>
-  </a>
-  <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-bs-slide="next">
-    <span data-gjs-selectable="false" class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="carousel-control visually-hidden">Next</span>
-  </a>`);
+
+				this.components().add(
+					`<button type="button" class="carousel-control carousel-control-prev" data-bs-target="#` + modelId + `" data-bs-slide="prev">
+						<span data-gjs-selectable="false" class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="carousel-control visually-hidden">Previous</span>
+					</button>
+					<button type="button" class="carousel-control carousel-control-next" data-bs-target="#`+ modelId + `" data-bs-slide="next">
+						<span data-gjs-selectable="false" class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="carousel-control visually-hidden">Next</span>
+					</button>`
+				);
 			},
 			AddIndicators() {
 
@@ -218,14 +222,14 @@
 
 				$.each(slides, function (k, v) {
 
-                    markup += '<li data-bs-target="#' + modelId + '" data-bs-slide-to="' + k + '" class="carousel-indicator';
+					markup += '<li data-bs-target="#' + modelId + '" data-bs-slide-to="' + k + '" class="carousel-indicator';
 
-                    var index = $(this.closest('[data-gjs-type="carousel-inner"]').getEl()).find('.carousel-item.active').index();
+					var index = $(this.closest('[data-gjs-type="carousel-inner"]').getEl()).find('.carousel-item.active').index();
 
-                    if (k == index)
-                        markup += ' active"';
-                    else
-                        markup += '"';
+					if (k == index)
+						markup += ' active"';
+					else
+						markup += '"';
 
 					markup += '></li>';
 				});
@@ -257,35 +261,35 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <a class="carousel-link">
+                                <span class="carousel-link">
                                     <picture class="picture-box">
-                                        <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png" />
+                                        <img loading="lazy" class="vj-slide-image img-fluid" src="`+ VjDefaultPath + `image.png" />
                                     </picture>
-                                </a>
+                                </span>
                             </div>
                             <div class="carousel-item">
-                                <a class="carousel-link">
+                                <span class="carousel-link">
                                     <picture class="picture-box">
-                                        <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png" />
+                                        <img loading="lazy" class="vj-slide-image img-fluid" src="`+ VjDefaultPath + `image.png" />
                                     </picture>
-                                </a>
+                                </span>
                             </div>
                             <div class="carousel-item">
-                                <a class="carousel-link">
+                                <span class="carousel-link">
                                     <picture class="picture-box">
-                                        <img class="vj-slide-image" src="`+ VjDefaultPath + `image.png" />
+                                        <img loading="lazy" class="vj-slide-image img-fluid" src="`+ VjDefaultPath + `image.png" />
                                     </picture>
-                                </a>
+                                </span>
                             </div>
                         </div>
-                        <a class="carousel-control carousel-control-prev" href="#`+ modelId + `" role="button" data-bs-slide="prev">
+                        <button type="button" class="carousel-control carousel-control-prev" data-bs-target="#`+ modelId + `" data-bs-slide="prev">
                             <span data-gjs-selectable="false" class="carousel-control carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="carousel-control visually-hidden">Previous</span>
-                        </a>
-                        <a class="carousel-control carousel-control-next" href="#`+ modelId + `" role="button" data-bs-slide="next">
+                        </button>
+                        <button type="button" class="carousel-control carousel-control-next" data-bs-target="#`+ modelId + `" data-bs-slide="next">
                             <span data-gjs-selectable="false" class="carousel-control carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="carousel-control visually-hidden">Next</span>
-                        </a>
+                        </button>
 					`);
 				}
 			},
@@ -340,13 +344,9 @@
 		view: defaultView
 	});
 
-	const linkType = dc.getType('link');
-	const linkModel = linkType.model;
-	const linkView = linkType.view;
-
 	dc.addType('carousel-link', {
-		model: linkModel.extend({
-			defaults: Object.assign({}, linkModel.prototype.defaults, {
+		model: defaultModel.extend({
+			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				name: 'Carousel Link',
 				removable: false,
 				draggable: false,
@@ -368,7 +368,7 @@
 					}
 				}
 			}),
-		view: linkView
+		view: defaultView
 	});
 
 	const imageType = dc.getType('image');
@@ -422,6 +422,11 @@
 				tagName: 'img',
 				traits: [{
 					type: 'text',
+					name: 'alt',
+					label: 'Alt',
+					changeProp: 1,
+				}, {
+					type: 'text',
 					name: 'slidetitle',
 					label: 'Title',
 					changeProp: 1,
@@ -445,6 +450,7 @@
 			},
 			ChangeTitle() {
 
+				var title = this.attributes.slidetitle;
 				var slide = this.closest('[data-gjs-type="carousel-item"]');
 				var carouselCaption = slide.components().models.find(m => m.attributes.type == 'carousel-caption');
 
@@ -456,11 +462,16 @@
 				if (carouselCaption.components().length && typeof carouselCaption.components().models.find(t => t.attributes.type == 'carousel-heading') != 'undefined')
 					carouselCaption.components().models.find(t => t.attributes.type == 'carousel-heading').remove();
 
-				carouselCaption.append('<h5 class="carousel-heading">' + this.attributes.slidetitle + '</h5>', { at: 0 });
+				if (title != "")
+					carouselCaption.append('<h5 class="carousel-heading">' + title + '</h5>', { at: 0 });
+
+				if (carouselCaption.components().length == 0)
+					carouselCaption.remove();
 
 			},
 			ChangeCaption() {
 
+				var caption = this.attributes.caption;
 				var slide = this.closest('[data-gjs-type="carousel-item"]');
 				var carouselCaption = slide.components().models.find(m => m.attributes.type == 'carousel-caption');
 
@@ -471,8 +482,12 @@
 
 				if (carouselCaption.components().length && typeof carouselCaption.components().models.find(t => t.attributes.type == 'carousel-text') != 'undefined')
 					carouselCaption.components().models.find(t => t.attributes.type == 'carousel-text').remove();
-	
-				carouselCaption.append('<p class="carousel-text">' + this.attributes.caption + '</p>');
+
+				if (caption != "")
+					carouselCaption.append('<p class="carousel-text">' + caption + '</p>');
+
+				if (carouselCaption.components().length == 0)
+					carouselCaption.remove();
 
 			},
 			ChangeTarget() {
@@ -541,7 +556,6 @@
 
 		view: defaultType.view
 	});
-
 
 	dc.addType('carousel-heading', {
 		model: defaultModel.extend({
@@ -716,11 +730,11 @@
 
 			slideInner.components().add(`
             <div class="carousel-item">
-                <a class="carousel-link">
+                <span class="carousel-link">
                     <picture class="picture-box">
-                        <img class="vj-slide-image" src = "`+ VjDefaultPath + `image.png" />
+                        <img loading="lazy" class="vj-slide-image img-fluid" src = "`+ VjDefaultPath + `image.png" />
 			        </picture>
-                </a>
+                </span>
             </div>`
 			);
 
@@ -822,10 +836,10 @@
 			var controlPrev = clone.components().models.find(m => m.attributes.type == 'prev');
 
 			if (typeof controlNext != 'undefined')
-				controlNext.addAttributes({ 'href': '#' + modelId });
+				controlNext.addAttributes({ 'data-bs-target': '#' + modelId });
 
 			if (typeof controlPrev != 'undefined')
-				controlPrev.addAttributes({ 'href': '#' + modelId });
+				controlPrev.addAttributes({ 'data-bs-target': '#' + modelId });
 
 			target.parent().append(clone);
 		}

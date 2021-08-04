@@ -641,8 +641,8 @@ h6.vj-heading {
     }
 }
 
-.vj-carousel img {
-    width: 100%;
+.vj-carousel {
+    max-width: 100%;
 }
 
 /*upload item*/

@@ -152,7 +152,7 @@
 
                     if (URL.Urls.length) {
 
-                        if (target.attributes.type == 'image' || target.attributes.type == 'image-gallery-item')
+                        if (target.attributes.type == 'image' || target.attributes.type == 'image-gallery-item' || target.attributes.type == 'carousel-image')
                             parent.ChangeToWebp(target.parent(), URL.Urls);
                         else
                             target.set('src', URL.Urls.find(v => v.Type == 'webp').Url);
