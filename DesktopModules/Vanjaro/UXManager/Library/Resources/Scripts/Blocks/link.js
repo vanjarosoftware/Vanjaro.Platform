@@ -80,6 +80,12 @@
 					}
 				}
 			}),
-		view: linkView
+		view: linkView.extend({
+			events: {
+				dblclick: function () {
+					return false;
+				}
+			}
+		}),
 	});
 }
