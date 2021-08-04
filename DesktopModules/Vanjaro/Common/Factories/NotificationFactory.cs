@@ -506,6 +506,7 @@ namespace Vanjaro.Common.Factories
                     mailQueue.FromEmail = FromEmailPrefix + mailQueue.FromEmail.Split('@')[1];
                 }
             }
+                       
 
             return mailQueue;
         }

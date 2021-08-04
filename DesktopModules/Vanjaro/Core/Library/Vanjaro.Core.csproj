@@ -50,7 +50,6 @@
     <Compile Include="Components\Interfaces\IReviewComment.cs" />
     <Compile Include="Components\Interfaces\ITheme.cs" />
     <Compile Include="Components\NotificationItem.cs" />
-    <Compile Include="Components\Product.cs" />
     <Compile Include="Components\ReviewContentInfo.cs" />
     <Compile Include="Components\ReviewSettings.cs" />
     <Compile Include="Components\StringText.cs" />
