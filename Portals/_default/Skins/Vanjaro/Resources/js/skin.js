@@ -401,7 +401,7 @@ OpenImagePopup = function (img) {
                 if (orignalheight > windowHeight - 200) {
 
                     var aspectRatio = orignalwidth / orignalheight;
-                    var fixedHeight = windowHeight - 115;
+                    var fixedHeight = windowHeight - 200;
                     var fixedWidth = aspectRatio * fixedHeight;
 
                     $Modal.find(".modal-dialog").css("max-width", fixedWidth).find(".modal-content").css("max-height", fixedHeight + 100).find(".modal-body").css("max-height", fixedHeight + 100).find("img").css("max-height", fixedHeight);
