@@ -385,26 +385,34 @@ OpenImagePopup = function (img) {
         $Modal.find("img").attr("src", src);
 
         var ImgModal = new bootstrap.Modal(document.getElementById('ImgModal'));
-        ImgModal.show();
 
         windowWidth = $(window).width();
         windowHeight = $(window).height();
 
         if (windowWidth > 992) {
 
-            var orignalwidth = image.prop("naturalWidth");
-            var orignalheight = image.prop("naturalHeight");
+            var img = new Image();
 
-            if (orignalheight > windowHeight - 200) {
+            img.addEventListener("load", function () {
 
-                var aspectRatio = orignalwidth / orignalheight;
-                var fixedHeight = windowHeight - 200;
-                var fixedWidth = aspectRatio * fixedHeight;
+                var orignalwidth = this.naturalWidth;
+                var orignalheight = this.naturalHeight;
 
-                $Modal.find(".modal-dialog").css("max-width", fixedWidth).find(".modal-content").css("max-height", fixedHeight + 100).find(".modal-body").css("max-height", fixedHeight + 100).find("img").css("max-height", fixedHeight);
-            }
-            else
-                $Modal.find(".modal-dialog").css("max-width", orignalwidth).find(".modal-content").css("max-height", orignalheight + 100).find(".modal-body").css("max-height", orignalheight + 100).find("img").css("max-height", orignalheight);
+                if (orignalheight > windowHeight - 200) {
+
+                    var aspectRatio = orignalwidth / orignalheight;
+                    var fixedHeight = windowHeight - 200;
+                    var fixedWidth = aspectRatio * fixedHeight;
+
+                    $Modal.find(".modal-dialog").css("max-width", fixedWidth).find(".modal-content").css("max-height", fixedHeight + 100).find(".modal-body").css("max-height", fixedHeight + 100).find("img").css("max-height", fixedHeight);
+                }
+                else
+                    $Modal.find(".modal-dialog").css("max-width", orignalwidth).find(".modal-content").css("max-height", orignalheight + 100).find(".modal-body").css("max-height", orignalheight + 100).find("img").css("max-height", orignalheight);
+
+                ImgModal.show();
+            });
+
+            img.src = src;
         }
     }
 };
