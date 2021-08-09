@@ -51,12 +51,13 @@ namespace Vanjaro.Common.Data.Scripts
                 sb.Append(" SELECT FolderID, StorageLocation,FolderPath,FolderMappingID FROM (");
                 sb.Append(" select f.FolderID, f.StorageLocation, FolderPath,f.FolderMappingID from " + CommonScript.DnnTablePrefix + "folders f join " + CommonScript.DnnTablePrefix + "folderpermission fp");
                 sb.Append(" on (f.FolderID = fp.FolderID)");
-                sb.Append(" where AllowAccess = 1");
-                sb.Append(" AND (RoleID = -1 OR RoleID IN (" + UserRoleIDs + ") OR UserID = " + UserInfo.UserID + ")");
+                sb.Append(" where ((AllowAccess = 1");
+                sb.Append(" AND (RoleID = -1 OR RoleID IN (" + UserRoleIDs + ") OR UserID = " + UserInfo.UserID + ")) OR (select issuperuser from users where userid=" + UserInfo.UserID + ")=1)");
                 sb.Append(" AND ParentID = " + ParentFolderID + "");
                 sb.Append(" AND FolderPath!='Templates/' AND FolderPath!='Users/' AND FolderPath!='vThemes/' AND FolderPath!='Containers/' AND FolderPath!='Skins/' AND FolderPath Not Like '%.versions/%'");
-                string guid = "Assets";
-                sb.Append(" AND FolderPath!='" + guid + "/Templates/' AND FolderPath!='" + guid + "/Users/' AND FolderPath!='" + guid + "/vThemes/' AND FolderPath!='" + guid + "/Containers/' AND FolderPath!='" + guid + "/Skins/'");
+                string guid = string.Empty;
+                if (!string.IsNullOrEmpty(guid))
+                    sb.Append(" AND FolderPath!='" + guid + "/Templates/' AND FolderPath!='" + guid + "/Users/' AND FolderPath!='" + guid + "/vThemes/' AND FolderPath!='" + guid + "/Containers/' AND FolderPath!='" + guid + "/Skins/'");
                 sb.Append(" AND PortalID = " + PortalID + ") RootFolders");
                 sb.Append(" GROUP BY FolderID, StorageLocation, FolderPath,FolderMappingID) A");
                 sb.Append(" left Join");
@@ -64,8 +65,8 @@ namespace Vanjaro.Common.Data.Scripts
                 sb.Append(" select ParentID,FolderID  FROM (");
                 sb.Append(" select f.FolderID,f.ParentID,f.FolderMappingID, FolderPath,fp.AllowAccess,fp.RoleID,fp.UserID from " + CommonScript.DnnTablePrefix + "folders f join " + CommonScript.DnnTablePrefix + "folderpermission fp");
                 sb.Append(" on (f.FolderID = fp.FolderID)");
-                sb.Append(" where AllowAccess = 1");
-                sb.Append(" AND (RoleID = -1 OR RoleID IN (" + UserRoleIDs + ") OR UserID = " + UserInfo.UserID + ")");
+                sb.Append(" where ((AllowAccess = 1");
+                sb.Append(" AND (RoleID = -1 OR RoleID IN (" + UserRoleIDs + ") OR UserID = " + UserInfo.UserID + ")) OR (select issuperuser from users where userid=" + UserInfo.UserID + ")=1)");
                 sb.Append(" AND FolderPath Not Like '%.versions/%' AND PortalID = " + PortalID + " ) ChildCountDer");
                 sb.Append(" GROUP By ParentID, FolderID) ChildCountTable");
                 sb.Append(" Group by ParentID) B");
