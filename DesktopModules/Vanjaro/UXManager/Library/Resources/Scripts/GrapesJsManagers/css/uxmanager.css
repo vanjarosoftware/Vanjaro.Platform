@@ -358,25 +358,22 @@ div#MenuSettings .parent-menu-hide {
     position: absolute;
     left: 300px;
     top: 50%;
-    width: 18px;
-    height: 50px;
+    width: 36px;
+    height: 100px;
     transform: translateY(-50%);
     background: #0088cc;
     color: #e6e9ec;
-    font-size: 10px;
+    font-size: 14px;
     box-shadow: 3px 1px 5px rgba(0, 0, 0, .1);
     text-align: center;
     padding: 20px 2px;
     cursor: pointer;
     z-index: 99;
+    border: 0;
 }
 
 .modal-open {
     right: 0;
-}
-
-.sidebar #mode-switcher em {
-    font-size: 10px;
 }
 
 .sidebar #ContentBlocks,
