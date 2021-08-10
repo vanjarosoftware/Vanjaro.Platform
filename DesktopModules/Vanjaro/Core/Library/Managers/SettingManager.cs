@@ -400,7 +400,8 @@ namespace Vanjaro.Core
                         }
                         TabInfo SigninTab = TabController.Instance.GetTabByName("Signin", pinfo.PortalID);
                         List<Layout> pageLayouts = GetLayouts(pinfo);
-                        UpdateSignInTab(pinfo, uInfo, pageLayouts, ApplyTemplates, string.Empty);
+                        if (ApplyTemplates)
+                            UpdateSignInTab(pinfo, uInfo, pageLayouts, ApplyTemplates, string.Empty);
                         if (SigninTab != null)
                         {
                             Core.Managers.LoginManager.AddUpdateLoginModule(SigninTab.TabID, pinfo.PortalID);
