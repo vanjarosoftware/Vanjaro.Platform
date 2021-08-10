@@ -15,9 +15,9 @@ export default (editor, config = {}) => {
 			var mainparent = selected.parent().parent();
 			mainparent.append(parent);
 		}
-		else if (selectedType == 'image' && selected.parent() && selected.parent().attributes.type != 'wrapper') {
-			var parent = selected.parent().parent().clone();
-			var mainparent = selected.parent().parent().parent();
+		else if (selectedType == 'image' && typeof selected.closestType('image-box') != 'undefined') {
+			var parent = selected.closestType('image-box').clone();
+			var mainparent = selected.closestType('image-box').parent();
 			mainparent.append(parent);
 		}
 
@@ -38,8 +38,8 @@ export default (editor, config = {}) => {
 			if ((selectedType == 'button' && selectedParentType == 'button-box') || (selectedType == 'icon' && selectedParentType == 'icon-box') || (selectedType == 'list' && selectedParentType == 'list-box') || (selectedType == "image-gallery-item" && selected.parent().attributes.tagName == "picture")) {
 				selected.parent().remove();
 			}
-			else if (selectedType == 'image' && typeof selected.parent().parent() != 'undefined' && selected.parent().parent().attributes.type == 'image-box') {
-				selected.parent().parent().remove();
+			else if (selectedType == 'image' && typeof selected.closestType('image-box') != 'undefined') {
+				selected.closestType('image-box').remove();
 			}
 			else if (selectedType == 'column' && selectedParentType == 'row' && selected.parent().parent().attributes.type == 'grid') {
 				if (!selected.parent().components().length)
@@ -682,25 +682,38 @@ export default (editor, config = {}) => {
 
 				component.set({ href: href });
 
-				if (component.attributes.type == 'carousel-image') {
+				if (component.attributes.type == 'carousel-image' || component.attributes.type == 'icon' || component.attributes.type == 'image') {
 
-					var carouselLink = component.parent().parent();
+					var comp = component;
+
+					if (component.attributes.type == 'carousel-image' || component.attributes.type == 'image')
+						comp = component.parent().parent();
 
 					if (href == "") {
 
-						carouselLink.set({ tagName: 'span' });
+						comp.set({ tagName: 'span' });
 
-						const attr = carouselLink.getAttributes();
+						const attr = comp.getAttributes();
 						delete attr.href;
-						carouselLink.setAttributes(attr);
+						comp.setAttributes(attr);
+
+						if (component.attributes.type == 'icon')
+							component.addClass('icon-link');
+						else if (component.attributes.type == 'image')
+							component.addClass('image-link');
 					}
 					else {
 
-						carouselLink.set({ tagName: 'a' });
-						carouselLink.addAttributes({ href: href });
+						comp.set({ tagName: 'a' });
+						comp.addAttributes({ href: href });
+
+						if (component.attributes.type == 'icon')
+							component.removeClass('icon-link');
+						else if (component.attributes.type == 'image')
+							component.removeClass('image-link');
 
 						if (val != "page")
-							carouselLink.set({ 'pid': null });
+							comp.set({ 'pid': null });
 					}
 				}
 				else

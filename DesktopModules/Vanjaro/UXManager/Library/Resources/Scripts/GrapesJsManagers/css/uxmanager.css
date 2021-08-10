@@ -2266,6 +2266,11 @@ span.notificationname {
     min-height: 50px !important;
 }
 
+.vj-link[data-empty="true"] {
+    display: inline-block;
+    min-width: 150px;
+}
+
 [data-empty="true"]:before {
     content: "Column";
     display: flex;
@@ -2280,6 +2285,10 @@ span.notificationname {
     right: 2px;
     background-color: rgba(238,238,238, 0.2);
     text-transform: uppercase;
+}
+
+.vj-link[data-empty="true"]:before {
+    content: "Link Group";
 }
 
 @media (min-width: 992px) {
