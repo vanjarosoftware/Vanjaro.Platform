@@ -7,13 +7,8 @@
 			label: VjLocalized.Link,
 			category: VjLocalized.Basic,
 			attributes: { class: 'fas fa-link' },
-			content: {
-				type: 'link',
-				components: [{
-					type: "text",
-					content: "Link"
-				}],
-			}
+			content: `
+            <a class="vj-link"></a>`
 		});
 	}
 
@@ -25,10 +20,10 @@
 	domc.addType('link', {
 		model: linkModel.extend({
 			defaults: Object.assign({}, linkModel.prototype.defaults, {
-				droppable: '[data-gjs-type=section], [data-gjs-type=grid], [data-gjs-type=heading], [data-gjs-type=text], [data-gjs-type=icon-box], [data-gjs-type=icon], [data-gjs-type=list-box], [data-gjs-type=list], [data-gjs-type=spacer], [data-gjs-type=image-box], [data-gjs-type=image], [data-gjs-type=divider]',
-                tagName: 'a',
-                attributes: { href: '#' },
-                text: true,
+				droppable: '[data-gjs-type=section], [data-gjs-type=grid], [data-gjs-type=heading], [data-gjs-type=text], [data-gjs-type=icon-box], [data-gjs-type=list-box], [data-gjs-type=list], [data-gjs-type=spacer], [data-gjs-type=image-box], [data-gjs-type=divider], .image-link, .icon-link',
+				tagName: 'a',
+				attributes: { href: '#' },
+				text: true,
 				traits: [
 					{
 						label: "Alignment",
@@ -72,15 +67,18 @@
 					}
 				]
 			}),
-		},
-			{
-				isComponent(el) {
-					if (el && el.tagName && el.tagName.toLowerCase() == 'a') {
-						return { type: 'link' };
-					}
+		}, {
+			isComponent(el) {
+				if (el && el.tagName && el.tagName.toLowerCase() == 'a') {
+					return { type: 'link' };
 				}
-			}),
+			}
+		}),
 		view: linkView.extend({
+			onRender() {
+				if (!this.model.components().length)
+					$(this.el).attr("data-empty", "true");
+			},
 			events: {
 				dblclick: function () {
 					return false;
