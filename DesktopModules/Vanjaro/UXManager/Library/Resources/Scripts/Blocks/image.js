@@ -9,9 +9,11 @@
 			attributes: { class: 'fas fa-image' },
 			content: `
 				<div class="image-box">
-					<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
-						<img loading="lazy" class="img-fluid" src="`+ VjDefaultPath + `image.png" />
-					</picture>
+					<span class="image-frame">
+						<picture class="picture-box">
+							<img loading="lazy" class="vj-image img-fluid image-link" src="`+ VjDefaultPath + `image.png" />
+						</picture>
+					</span>
 				</div>`,
 			activate: 1
 		});
@@ -40,6 +42,32 @@
 					}
 				}
 			}),
+		view: defaultView
+	});
+
+	domc.addType('image-frame', {
+		model: defaultModel.extend({
+			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+				'custom-name': 'Image Frame',
+				removable: false,
+				draggable: false,
+				droppable: false,
+				badgable: false,
+				stylable: false,
+				highlightable: false,
+				copyable: false,
+				resizable: false,
+				selectable: false,
+				editable: false,
+				hoverable: false,
+			}),
+		}, {
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('image-frame')) {
+					return { type: 'image-frame' };
+				}
+			}
+		}),
 		view: defaultView
 	});
 
@@ -185,6 +213,12 @@
 						type: 'text',
 						name: 'alt',
 						label: 'Alt',
+					}, {
+						label: " ",
+						name: "href",
+						type: "href",
+						href: "",
+						"data_href_type": "url",
 					}
 				]
 			}),

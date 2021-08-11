@@ -436,6 +436,11 @@ div[alignment="right"] nav.navbar.navbar-expand-xl {
         border: 0;
     }
 
+    .embed-container iframe{
+       z-index:0 !important;
+       pointer-events:none;
+    }
+
 a.dnnPrimaryAction {
     color: #fff !important;
     background: #337ab7 !important;

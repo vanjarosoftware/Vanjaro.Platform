@@ -202,8 +202,8 @@ $(document).ready(function () {
 
                         if (imgEl) {
 
-                            if ($(imgEl).parents('.link').length)
-                                $(imgEl).parents('.link').css('width', '100%');
+                            if ($(imgEl).parents('[data-gjs-type="link"]').length)
+                                $(imgEl).parents('[data-gjs-type="link"]').css('width', '100%');
 
                             var imgWidth;
 
@@ -1760,7 +1760,7 @@ $(document).ready(function () {
 
                                 if (typeof model != 'undefined' && typeof model.parent != 'undefined') {
 
-                                    if (model.parent.attributes.type == "column" && model.parent.components().length == 1)
+                                    if ((model.parent.attributes.type == "column" || model.parent.attributes.type == "link") && model.parent.components().length == 1)
                                         $(model.parent.getEl()).attr("data-empty", "true");
 
                                     var blockwrapper = model.target.closest('[data-gjs-type="blockwrapper"]');
@@ -1775,8 +1775,8 @@ $(document).ready(function () {
                                             parentClone = model.parent.clone();
                                         }
                                         else if (model.target.attributes.type == "image") {
-                                            parentRemove = model.parent.parent();
-                                            parentClone = model.parent.parent().clone();
+                                            parentRemove = model.target.closestType('image-box');
+                                            parentClone = model.target.closestType('image-box').clone();
                                         }
                                     }
                                 }
@@ -1795,7 +1795,7 @@ $(document).ready(function () {
                                         model.target.components().models.find(t => t.attributes.type == 'video').set({ 'src': model.target.attributes.src });
                                         $(model.target.getEl()).find('iframe').attr('src', model.target.attributes.src);
                                     }
-                                    else if (typeof model.parent != 'undefined' && model.parent && model.parent.attributes.type == "column")
+                                    else if (typeof model.parent != 'undefined' && model.parent && (model.parent.attributes.type == "column" || model.parent.attributes.type == "link"))
                                         $(model.parent.getEl()).removeAttr("data-empty");
 
                                     if (parentRemove != '' && parentClone != '') {
@@ -1807,6 +1807,21 @@ $(document).ready(function () {
                                             parentRemove = '';
                                             parentClone = '';
                                         });
+                                    }
+
+                                    if (typeof model.target.attributes != 'undefined' && model.target.attributes.type == "carousel-item") {
+
+                                        $(model.parent.getEl()).find('.active.carousel-item').removeClass('active')
+
+                                        $(model.parent.find('.carousel-item')).each(function (index, item) {
+                                            item.removeClass('active');
+                                        });
+
+                                        model.parent.find('.carousel-item')[0].addClass('active');
+
+                                        $(model.parent.parent().getEl()).find('.active.carousel-indicator').removeClass('active');
+                                        $(model.parent.parent().getEl()).find('.carousel-indicator').first().addClass('active');
+
                                     }
                                 }
 
@@ -1868,7 +1883,7 @@ $(document).ready(function () {
 
                                         var Block = model.attributes.type;
 
-                                        if (Block == 'grid' || Block == 'image-block' || Block == 'modulewrapper')
+                                        if (Block == 'grid' || Block == 'image-box' || Block == 'modulewrapper')
                                             VjEditor.select(model);
                                     }
 
@@ -1934,24 +1949,6 @@ $(document).ready(function () {
                                     RenderCustomBlock(model, bmodel);
                                 else if (model != undefined && model.attributes != undefined && model.attributes.attributes != undefined && model.attributes.attributes["data-block-type"] != undefined)
                                     RenderBlock(model, bmodel);
-                            });
-
-                            VjEditor.on('component:drag:end', function (model, bmodel) {
-
-                                if (model.target.attributes.type == "carousel-item") {
-
-                                    $(model.parent.getEl()).find('.active.carousel-item').removeClass('active')
-
-                                    $(model.parent.find('.carousel-item')).each(function (index, item) {
-                                        item.removeClass('active');
-                                    });
-
-                                    model.parent.find('.carousel-item')[0].addClass('active');
-
-                                    $(model.parent.parent().getEl()).find('.active.carousel-indicator').removeClass('active');
-                                    $(model.parent.parent().getEl()).find('.carousel-indicator').first().addClass('active');
-
-                                }
                             });
 
                             var ReverseColums = function (model) {
@@ -2038,6 +2035,18 @@ $(document).ready(function () {
                                         });
                                     }
                                 }
+                                else if (model.attributes.type == 'icon' || model.attributes.type == 'image') {
+
+                                    if (typeof model.closestType('link') != 'undefined')
+                                        setTimeout(function () {
+                                            $(model.getTrait("href").el).parents(".gjs-trt-trait__wrp").hide();
+                                        });
+                                    else 
+                                        setTimeout(function () {
+                                            $(model.getTrait("href").el).parents(".gjs-trt-trait__wrp").show();
+                                        });
+                                }
+                                
 
                                 VjEditor.SelectorManager.setState();
 
@@ -3026,7 +3035,7 @@ $(document).ready(function () {
                             });
 
                             VjEditor.on('component:add', function (model) {
-                                if (model.parent() != undefined && model.parent().attributes.type == "column")
+                                if (model.parent() != undefined && (model.parent().attributes.type == "column" || model.parent().attributes.type == "link"))
                                     $(model.parent().getEl()).removeAttr("data-empty");
                             });
 
@@ -3056,7 +3065,7 @@ $(document).ready(function () {
                                         ShowBlockUI();
                                 }
 
-                                if (model.parent() != undefined && model.parent().attributes.type == "column" && model.parent().components().length == 0)
+                                if (model.parent() != undefined && (model.parent().attributes.type == "column" || model.parent().attributes.type == "link") && model.parent().components().length == 0)
                                     $(model.parent().getEl()).attr("data-empty", "true");
 
                                 if (model.parent() != undefined && model.parent().attributes.type == "row" && model.parent().components().length == 0) {
