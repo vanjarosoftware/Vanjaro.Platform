@@ -9844,8 +9844,8 @@
           "Title": "Submenu Link Border Bottom",
           "DefaultValue": "1",
           "Suffix": "px",
-          "CustomCSS": " .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-width : $submenuBbwidthpx\n}",
-          "PreviewCSS": " .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-width : $submenuBbwidthpx\n}",
+          "CustomCSS": " .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-width : $submenuBbwidthpx !important\n}",
+          "PreviewCSS": " .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-width : $submenuBbwidthpx !important\n}",
           "LessVariable": "$submenuBbwidth",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -9855,8 +9855,8 @@
           "Title": "Submenu Link Border Bottom Color",
           "DefaultValue": "#f4f4f4",
           "Suffix": "",
-          "CustomCSS": " .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-color : $submenuBbcolor;\n}",
-          "PreviewCSS": " .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-color : $submenuBbcolor;\n}",
+          "CustomCSS": " .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-color : $submenuBbcolor !important;\n}",
+          "PreviewCSS": " .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-color : $submenuBbcolor !important;\n}",
           "LessVariable": "$submenuBbcolor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -11019,8 +11019,8 @@
           "Title": "Submenu Link Border Bottom",
           "DefaultValue": "1",
           "Suffix": "px",
-          "CustomCSS": ".menu-style-2 .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-width : $msbsubmenuBbwidthpx\n}",
-          "PreviewCSS": ".menu-style-2 .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-width : $msbsubmenuBbwidthpx\n}",
+          "CustomCSS": ".menu-style-2 .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-width : $msbsubmenuBbwidthpx  !important\n}",
+          "PreviewCSS": ".menu-style-2 .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-width : $msbsubmenuBbwidthpx  !important\n}",
           "LessVariable": "$msbsubmenuBbwidth",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11030,8 +11030,8 @@
           "Title": "Submenu Link Border Bottom Color",
           "DefaultValue": "#f4f4f4",
           "Suffix": "",
-          "CustomCSS": ".menu-style-2 .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-color : $msbsubmenuBbcolor;\n}",
-          "PreviewCSS": ".menu-style-2 .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-color : $msbsubmenuBbcolor;\n}",
+          "CustomCSS": ".menu-style-2 .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-color : $msbsubmenuBbcolor !important;\n}",
+          "PreviewCSS": ".menu-style-2 .DefaultMenu .dropdown-menu .menu-item{\n  border-bottom-color : $msbsubmenuBbcolor !important;\n}",
           "LessVariable": "$msbsubmenuBbcolor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
