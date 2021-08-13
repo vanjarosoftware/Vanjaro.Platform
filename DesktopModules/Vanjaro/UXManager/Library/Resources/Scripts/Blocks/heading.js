@@ -23,7 +23,7 @@ export default (editor, config = {}) => {
 	domc.addType('heading', {
 		model: textModel.extend({
 			defaults: Object.assign({}, textModel.prototype.defaults, {
-				'custom-name': 'Heading',
+				'custom-name': 'Heading - Style A',
 				droppable: false,
 				tagName: 'h1',
                 classes: ['vj-heading', 'text-primary', 'head-style-1'],
@@ -97,18 +97,18 @@ export default (editor, config = {}) => {
 						name: 'styles',
 						type: 'preset_radio',
 						options: [
-							{ id: 'head-style-1', name: 'Style 1', class: 'head-style-1' },
-							{ id: 'head-style-2', name: 'Style 2', class: 'head-style-2' },
-							{ id: 'head-style-3', name: 'Style 3', class: 'head-style-3' },
-							{ id: 'head-style-4', name: 'Style 4', class: 'head-style-4' },
-							{ id: 'head-style-5', name: 'Style 5', class: 'head-style-5' },
-							{ id: 'head-style-6', name: 'Style 6', class: 'head-style-6' },
-							{ id: 'head-style-7', name: 'Style 7', class: 'head-style-7' },
-							{ id: 'head-style-8', name: 'Style 8', class: 'head-style-8' },
-							{ id: 'head-style-9', name: 'Style 9', class: 'head-style-9' },
-							{ id: 'head-style-10', name: 'Style 10', class: 'head-style-10' },
+							{ id: 'head-style-1', name: 'Style A', class: 'head-style-1' },
+							{ id: 'head-style-2', name: 'Style B', class: 'head-style-2' },
+							{ id: 'head-style-3', name: 'Style C', class: 'head-style-3' },
+							{ id: 'head-style-4', name: 'Style D', class: 'head-style-4' },
+							{ id: 'head-style-5', name: 'Style E', class: 'head-style-5' },
+							{ id: 'head-style-6', name: 'Style F', class: 'head-style-6' },
+							{ id: 'head-style-7', name: 'Style G', class: 'head-style-7' },
+							{ id: 'head-style-8', name: 'Style H', class: 'head-style-8' },
+							{ id: 'head-style-9', name: 'Style I', class: 'head-style-9' },
+							{ id: 'head-style-10', name: 'Style J', class: 'head-style-10' },
 						],
-						default: 'Style 1',
+						default: 'Style A',
 						changeProp: 1,
 					}
 				]

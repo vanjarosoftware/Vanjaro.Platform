@@ -86,6 +86,7 @@ export default (editor, config = {}) => {
                 }
             },
             defaults: Object.assign({}, textModel.prototype.defaults, {
+                'custom-name': 'Button - Style A',
                 droppable: '[data-gjs-type=icon-box], [data-gjs-type=icon]',
                 classes: ['btn', 'btn-primary', 'button-style-1'],
                 text: true,
@@ -187,18 +188,18 @@ export default (editor, config = {}) => {
                         name: 'styles',
                         type: 'preset_radio',
                         options: [
-                            { id: 'button-style-1', name: 'Style 1', class: 'button-style-1' },
-                            { id: 'button-style-2', name: 'Style 2', class: 'button-style-2' },
-                            { id: 'button-style-3', name: 'Style 3', class: 'button-style-3' },
-                            { id: 'button-style-4', name: 'Style 4', class: 'button-style-4' },
-                            { id: 'button-style-5', name: 'Style 5', class: 'button-style-5' },
-                            { id: 'button-style-6', name: 'Style 6', class: 'button-style-6' },
-                            { id: 'button-style-7', name: 'Style 7', class: 'button-style-7' },
-                            { id: 'button-style-8', name: 'Style 8', class: 'button-style-8' },
-                            { id: 'button-style-9', name: 'Style 9', class: 'button-style-9' },
-                            { id: 'button-style-10', name: 'Style 10', class: 'button-style-10' },
+                            { id: 'button-style-1', name: 'Style A', class: 'button-style-1' },
+                            { id: 'button-style-2', name: 'Style B', class: 'button-style-2' },
+                            { id: 'button-style-3', name: 'Style C', class: 'button-style-3' },
+                            { id: 'button-style-4', name: 'Style D', class: 'button-style-4' },
+                            { id: 'button-style-5', name: 'Style E', class: 'button-style-5' },
+                            { id: 'button-style-6', name: 'Style F', class: 'button-style-6' },
+                            { id: 'button-style-7', name: 'Style G', class: 'button-style-7' },
+                            { id: 'button-style-8', name: 'Style H', class: 'button-style-8' },
+                            { id: 'button-style-9', name: 'Style I', class: 'button-style-9' },
+                            { id: 'button-style-10', name: 'Style J', class: 'button-style-10' },
                         ],
-                        default: 'Style 1',
+                        default: 'Style A',
                         changeProp: 1,
                     }
                 ]
