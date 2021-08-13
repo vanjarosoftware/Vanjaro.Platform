@@ -855,9 +855,6 @@ div#MenuSettings .parent-menu-hide {
     background: #08c !important;
     color: #fff;
 }
-.gjs-badge__name {
-    text-transform: capitalize;
-}
 
 .gjs-block-categories .gjs-block-category.gjs-open:after {
     content: none;
