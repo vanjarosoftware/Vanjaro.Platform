@@ -11905,8 +11905,8 @@
           "Title": "Dropdown Border Radius",
           "DefaultValue": "$siteBorderRadius",
           "Suffix": "px",
-          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-radius: unquote($profiledDropdownbrradius+'px');\n}\n\n.desktop_registerbox .dropdown-menu li:first-of-type a{\n  border-radius: unquote($profiledDropdownbrradius+'px');\n} .desktop_registerbox .dropdown-menu li:last-of-type a{\n  border-radius: unquote($profiledDropdownbrradius+'px');\n} \n ",
-          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-radius: $profiledDropdownbrradiuspx ;\n}\n\n.desktop_registerbox .dropdown-menu li:first-of-type a{\n  border-radius: $profiledDropdownbrradiuspx ;\n} \n .desktop_registerbox .dropdown-menu li:last-of-type a{\n  border-radius: $profiledDropdownbrradiuspx ;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-radius: unquote($profiledDropdownbrradius+'px');\n}\n",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-radius: $profiledDropdownbrradiuspx ;\n}\n",
           "LessVariable": "$profiledDropdownbrradius",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11919,8 +11919,8 @@
           "Title": "Dropdown Padding Top",
           "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".desktop_registerbox .dropdown .dropdown-menu li, .mobile_registerbox .myaccount-items {\n  padding-top:$ProfilesignPtpx;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown .dropdown-menu li, .mobile_registerbox .myaccount-items {\n  padding-top:$ProfilesignPtpx;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-top:$ProfilesignPtpx;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-top:$ProfilesignPtpx;\n}",
           "LessVariable": "$ProfilesignPt",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11933,8 +11933,8 @@
           "Title": "Dropdown Padding Bottom",
           "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".desktop_registerbox .dropdown .dropdown-menu li, .mobile_registerbox .myaccount-items {\n  padding-bottom:$ProfilesignPbpx;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown .dropdown-menu li, .mobile_registerbox .myaccount-items {\n  padding-bottom:$ProfilesignPbpx;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-bottom:$ProfilesignPbpx;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-bottom:$ProfilesignPbpx;\n}",
           "LessVariable": "$ProfilesignPb",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11947,8 +11947,8 @@
           "Title": "Dropdown Padding Left",
           "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".desktop_registerbox .dropdown .dropdown-menu li, .mobile_registerbox .myaccount-items {\n  padding-left:$ProfilesignPlpx;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown .dropdown-menu li, .mobile_registerbox .myaccount-items {\n  padding-left:$ProfilesignPlpx;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-left:$ProfilesignPlpx;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-left:$ProfilesignPlpx;\n}",
           "LessVariable": "$ProfilesignPl",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11961,8 +11961,8 @@
           "Title": "Dropdown Padding Right",
           "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".desktop_registerbox .dropdown .dropdown-menu li, .mobile_registerbox .myaccount-items {\n  padding-right:$ProfilesignPrpx;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown .dropdown-menu li, .mobile_registerbox .myaccount-items {\n  padding-right:$ProfilesignPrpx;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-right:$ProfilesignPrpx;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-right:$ProfilesignPrpx;\n}",
           "LessVariable": "$ProfilesignPr",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12121,7 +12121,7 @@
           "Type": "Color Picker"
         }
       ],
-      "Sass": "/*My Account*/\n.registerlinkbox {\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}\n\n.registeruser:hover {\n\tcolor: #444;\n}\n .desktop_registerbox .dropdown .dropdown-menu li:first-of-type a{ \nborder-bottom-left-radius:0 !important; \n border-bottom-right-radius:0 !important; \n } \n .desktop_registerbox .dropdown .dropdown-menu li:last-of-type a{ \nborder-top-left-radius:0 !important; \n border-top-right-radius:0 !important; \n } \n .desktop_registerbox .dropdown-menu li {\n position:relative;\n}\n\n.desktop_registerbox .registerlink-notification,\n.mobile_registerbox .registerlink-notification{\n    display: flex !important;\n    cursor: pointer;\n    justify-content: space-between;\n    align-items: center;\n}\n\n.desktop_registerbox .dropdown-menu li svg,\n.mobile_registerbox .modal .modal-body svg {\n    margin-right: 5px;\n}\n.desktop_registerbox sup,\n.mobile_registerbox sup{\n      left: -3px;\n}\n\n.desktop_registerbox .registerlink-notification span.badge,\n.mobile_registerbox .registerlink-notification span.badge{\n    color: #ffff;\n    font-size: 12px !important;\n  \tfont-weight: bold;\n    margin: 0;\n    padding: 4px 8px;\n\n}\n\n.desktop_registerbox .registerlink-notification-profile .registerlink-notification-icon {\n    margin-right: 10px;\n}\n .desktop_registerbox sup, .mobile_registerbox sup{\n  top:-1.1em;\n}\n\n.mobile_registerbox .registerlink-notification span.badge{\n    color: #ffff;\n    font-size: 12px !important;\n  \tfont-weight: bold;\n    margin: 0;\n  \tpadding: 4px 8px;\n}\n\n    .registerlinkbox .vj-text{\n\tdisplay: inline-block;\n    text-align: unset;\n    color: unset !important;\n    margin-left:5px;\n}\n\n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .registerlink-notification-profile{\n    display: inline-block;\n  \tcursor: pointer;\n}\n\n.desktop_registerbox span {\n    margin: 0px;\n}\n\n.desktop_registerbox .dropdown-menu {\n    min-width: 235px;\n    padding: 0;\n    top: 0 !important;\n    right: 0 !important;\n    left: auto !important;\n}\n    .desktop_registerbox .dropdown-menu a {\n        display: block;\n        margin: 0;       \n        transition: all .15s ease-in-out;\n    }\n\n\n.desktop_registerbox .dropdown-menu li + li{\n  border-style:solid;\n  border-bottom:0px;\n  border-left:0px;\n  border-right:0px \n}\n\n.mobile_registerbox .myaccount-items {\n   display:block;\n}\n\n.mobile_registerbox .myaccount-items + .myaccount-items {\n    border-top-style:solid;  \n}\n.mobile_registerbox .myaccount-items:last-child{\n  border-bottom-style:solid;\n}\n\n.mobile_registerbox .myaccount-items {\n  padding: 10px;\n}\n.mobile_registerbox .modal-body {\n  padding: 1rem 0rem;\n}\n\n.mobile_registerbox .modal-dialog {\n    margin: 0;\n    max-width: 100% !important;\n    height: 100%  !important;\n}\n\n@media(min-width: 1200px) {\n    .mobile_registerbox {\n        display: none;\n    }\n}\n@media(max-width: 1199px) {\n    .desktop_registerbox {\n        display: none;\n    }\n    .mobile_registerbox img {\n        border-radius: 50%;\n    }\n}"
+      "Sass": "/*My Account*/\n .desktop_registerbox .dropdown-menu {\noverflow:hidden;\n}\n\n\n.registerlinkbox {\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}\n\n.registeruser:hover {\n\tcolor: #444;\n}\n .desktop_registerbox .dropdown .dropdown-menu li:first-of-type a{ \nborder-bottom-left-radius:0 !important; \n border-bottom-right-radius:0 !important; \n } \n .desktop_registerbox .dropdown .dropdown-menu li:last-of-type a{ \nborder-top-left-radius:0 !important; \n border-top-right-radius:0 !important; \n } \n .desktop_registerbox .dropdown-menu li {\n position:relative;\n}\n\n.desktop_registerbox .registerlink-notification,\n.mobile_registerbox .registerlink-notification{\n    display: flex !important;\n    cursor: pointer;\n    justify-content: space-between;\n    align-items: center;\n}\n\n.desktop_registerbox .dropdown-menu li svg,\n.mobile_registerbox .modal .modal-body svg {\n    margin-right: 5px;\n}\n.desktop_registerbox sup,\n.mobile_registerbox sup{\n      left: -3px;\n}\n\n.desktop_registerbox .registerlink-notification span.badge,\n.mobile_registerbox .registerlink-notification span.badge{\n    color: #ffff;\n    font-size: 12px !important;\n  \tfont-weight: bold;\n    margin: 0;\n    padding: 4px 8px;\n\n}\n\n.desktop_registerbox .registerlink-notification-profile .registerlink-notification-icon {\n    margin-right: 10px;\n}\n .desktop_registerbox sup, .mobile_registerbox sup{\n  top:-1.1em;\n}\n\n.mobile_registerbox .registerlink-notification span.badge{\n    color: #ffff;\n    font-size: 12px !important;\n  \tfont-weight: bold;\n    margin: 0;\n  \tpadding: 4px 8px;\n}\n\n    .registerlinkbox .vj-text{\n\tdisplay: inline-block;\n    text-align: unset;\n    color: unset !important;\n    margin-left:5px;\n}\n\n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .registerlink-notification-profile{\n    display: inline-block;\n  \tcursor: pointer;\n}\n\n.desktop_registerbox span {\n    margin: 0px;\n}\n\n.desktop_registerbox .dropdown-menu {\n    min-width: 235px;\n    padding: 0;\n    top: 0 !important;\n    right: 0 !important;\n    left: auto !important;\n}\n    .desktop_registerbox .dropdown-menu a {\n        display: block;\n        margin: 0;       \n        transition: all .15s ease-in-out;\n    }\n\n\n.desktop_registerbox .dropdown-menu li + li{\n  border-style:solid;\n  border-bottom:0px;\n  border-left:0px;\n  border-right:0px \n}\n.mobile_registerbox .myaccount-items.display-name:first-child:hover{\n  background:none;\n}\n.mobile_registerbox .myaccount-items {\n   display:block;\n}\n\n.mobile_registerbox .myaccount-items + .myaccount-items {\n    border-top-style:solid;  \n}\n.mobile_registerbox .myaccount-items:last-child{\n  border-bottom-style:solid;\n}\n\n.mobile_registerbox .myaccount-items {\n  padding: 10px;\n}\n.mobile_registerbox .modal-body {\n  padding: 1rem 0rem;\n}\n\n.mobile_registerbox .modal-dialog {\n    margin: 0;\n    max-width: 100% !important;\n    height: 100%  !important;\n}\n\n@media(min-width: 1200px) {\n    .mobile_registerbox {\n        display: none;\n    }\n}\n@media(max-width: 1199px) {\n    .desktop_registerbox {\n        display: none;\n    }\n    .mobile_registerbox img {\n        border-radius: 50%;\n    }\n}"
     },
     {
       "Guid": "dd38080a-150f-4942-8cd6-db9c7200c315",
@@ -12309,12 +12309,12 @@
           "RangeMin": 0.0,
           "RangeMax": 100.0,
           "Increment": 1.0,
-          "Guid": "ce7abddc-82ba-43c0-9ee5-8bfe9bc47f61",
+          "Guid": "d2b20062-63ca-4f30-898c-fc45b07a69c2",
           "Title": "Dropdown Border Radius",
           "DefaultValue": "$siteBorderRadius",
           "Suffix": "px",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu{\n  border-radius: unquote($mAtwoprofiledDropdownbrradius+'px');\n}\n\n.register-link-style-2 .desktop_registerbox .dropdown-menu li:first-of-type a{\n  border-radius: unquote($mAtwoprofiledDropdownbrradius+'px');\n}\n .register-link-style-2  .desktop_registerbox .dropdown-menu li:last-of-type a{\n  border-radius: unquote($mAtwoprofiledDropdownbrradius+'px');\n} \n ",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu{\n  border-radius: $mAtwoprofiledDropdownbrradiuspx ;\n}\n\n.register-link-style-2 .desktop_registerbox .dropdown-menu li:first-of-type a{\n  border-radius: $mAtwoprofiledDropdownbrradiuspx ;\n} \n .register-link-style-2  .desktop_registerbox .dropdown-menu li:last-of-type a{\n  border-radius: $mAtwoprofiledDropdownbrradiuspx ;\n}",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu{\n  border-radius: unquote($mAtwoprofiledDropdownbrradius+'px');\n}\n\n ",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu{\n  border-radius: $mAtwoprofiledDropdownbrradiuspx ;\n}\n",
           "LessVariable": "$mAtwoprofiledDropdownbrradius",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12327,8 +12327,8 @@
           "Title": "Dropdown Padding Top",
           "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-top:$mAtwoProfilesignPtpx;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-top:$mAtwoProfilesignPtpx;\n}",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-top:$mAtwoProfilesignPtpx;\n}",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-top:$mAtwoProfilesignPtpx;\n}",
           "LessVariable": "$mAtwoProfilesignPt",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12341,8 +12341,8 @@
           "Title": "Dropdown Padding Bottom",
           "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-bottom:$mAtwoProfilesignPbpx;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-bottom:$mAtwoProfilesignPbpx;\n}",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-bottom:$mAtwoProfilesignPbpx;\n}",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-bottom:$mAtwoProfilesignPbpx;\n}",
           "LessVariable": "$mAtwoProfilesignPb",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12355,8 +12355,8 @@
           "Title": "Dropdown Padding Left",
           "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-left:$mAtwoProfilesignPlpx;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-left:$mAtwoProfilesignPlpx;\n}",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-left:$mAtwoProfilesignPlpx;\n}",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-left:$mAtwoProfilesignPlpx;\n}",
           "LessVariable": "$mAtwoProfilesignPl",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12369,8 +12369,8 @@
           "Title": "Dropdown Padding Right",
           "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-right:$mAtwoProfilesignPrpx;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-right:$mAtwoProfilesignPrpx;\n}",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-right:$mAtwoProfilesignPrpx;\n}",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-right:$mAtwoProfilesignPrpx;\n}",
           "LessVariable": "$mAtwoProfilesignPr",
           "JavascriptVariable": "",
           "Type": "Slider"
