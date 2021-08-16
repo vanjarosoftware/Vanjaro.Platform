@@ -32,12 +32,12 @@ export default (editor, config = {}) => {
                 traits: []
             }),
         }, {
-                isComponent(el) {
-                    if (el && el.classList && el.classList.contains('button-box')) {
-                        return { type: 'button-box' };
-                    }
+            isComponent(el) {
+                if (el && el.classList && el.classList.contains('button-box')) {
+                    return { type: 'button-box' };
                 }
-            }),
+            }
+        }),
         view: defaultView
     });
 
@@ -51,6 +51,13 @@ export default (editor, config = {}) => {
                 var model = this;
                 if (!model.get('toolbar')) {
                     var tb = [];
+
+                    if (model.getStyle()["background-image"] != undefined) {
+                        tb.push({
+                            attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
+                            command: 'custom-tui-image-editor',
+                        });
+                    }
 
                     tb.push({
                         attributes: { class: 'fa fa-arrow-up' },
@@ -71,14 +78,14 @@ export default (editor, config = {}) => {
                     if (model.get('copyable')) {
                         tb.push({
                             attributes: { class: 'fa fa-clone' },
-                            command: 'vj-copy',
+                            command: 'tlb-clone',
                         });
                     }
 
                     if (model.get('removable')) {
                         tb.push({
                             attributes: { class: 'fa fa-trash-o' },
-                            command: 'vj-delete',
+                            command: 'tlb-delete',
                         });
                     }
 
@@ -212,12 +219,12 @@ export default (editor, config = {}) => {
                 this.getTrait('fontsize').view.render();
             },
         }, {
-                isComponent(el) {
-                    if (el && el.classList && el.classList.contains('btn')) {
-                        return { type: 'button' };
-                    }
+            isComponent(el) {
+                if (el && el.classList && el.classList.contains('btn')) {
+                    return { type: 'button' };
                 }
-            }),
+            }
+        }),
         view: textView
     });
 }

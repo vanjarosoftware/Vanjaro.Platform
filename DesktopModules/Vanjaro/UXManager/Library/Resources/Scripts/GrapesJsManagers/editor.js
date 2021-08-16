@@ -2686,6 +2686,13 @@ $(document).ready(function () {
 
                             });
 
+                            VjEditor.on('component:styleUpdate:background-image', (model, argument) => {
+
+                                var backgroundimage = model.getStyle()['background-image'];
+                                model.attributes.src = backgroundimage.replace('url(', '').replace(')', '').replace(/\"/gi, "").replace(/'/g, '');
+
+                            });
+
                             VjEditor.Commands.add('core:copy', {
                                 run(editor, sender) {
 

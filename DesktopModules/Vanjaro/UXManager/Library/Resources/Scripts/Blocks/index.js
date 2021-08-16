@@ -23,689 +23,710 @@ import carousel from './carousel';
 
 export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
-	let config = opts;
+    let config = opts;
 
-	const opts_labels = opts.labels || {};
+    const opts_labels = opts.labels || {};
 
-	const default_labels = {
-		// LAYOUT
-		container: 'Container',
-		row: 'Row',
-		column: 'Column',
-		column_break: 'Column Break',
-		media_object: 'Media Object',
-		// COMPONENTS
-		alert: 'Alert',
-		tabs: 'Tabs',
-		tab: 'Tab',
-		tabPane: 'Tab Pane',
-		badge: 'Badge',
-		button: 'Button',
-		button_group: 'Button Group',
-		button_toolbar: 'Button Toolbar',
-		card: 'Card',
-		card_container: 'Card Container',
-		collapse: 'Collapse',
-		dropdown: 'Dropdown',
-		dropdown_menu: 'Dropdown Menu',
-		dropdown_item: 'Dropdown Item',
-		// TYPOGRAPHY
-		text: 'Text',
-		heading: 'Heading',
-		paragraph: 'Paragraph',
-		// BASIC
-		image: 'Image',
-		link: 'Link',
-		list: 'Simple List',
-		// FORMS
-		form: 'Form',
-		input: 'Input',
-		file_input: 'File',
-		input_group: 'Input group',
-		textarea: 'Textarea',
-		select: 'Select',
-		select_option: '- Select option -',
-		option: 'Option',
-		label: 'Label',
-		checkbox: 'Checkbox',
-		radio: 'Radio',
-		trait_method: 'Method',
-		trait_enctype: 'Encoding Type',
-		trait_multiple: 'Multiple',
-		trait_action: 'Action',
-		trait_state: 'State',
-		trait_id: 'ID',
-		trait_for: 'For',
-		trait_name: 'Name',
-		trait_placeholder: 'Placeholder',
-		trait_value: 'Value',
-		trait_required: 'Required',
-		trait_type: 'Type',
-		trait_options: 'Options',
-		trait_checked: 'Checked',
-		type_text: 'Text',
-		type_email: 'Email',
-		type_password: 'Password',
-		type_number: 'Number',
-		type_date: 'Date',
-		type_hidden: 'Hidden',
-		type_submit: 'Submit',
-		type_reset: 'Reset',
-		type_button: 'Button',
-	};
+    const default_labels = {
+        // LAYOUT
+        container: 'Container',
+        row: 'Row',
+        column: 'Column',
+        column_break: 'Column Break',
+        media_object: 'Media Object',
+        // COMPONENTS
+        alert: 'Alert',
+        tabs: 'Tabs',
+        tab: 'Tab',
+        tabPane: 'Tab Pane',
+        badge: 'Badge',
+        button: 'Button',
+        button_group: 'Button Group',
+        button_toolbar: 'Button Toolbar',
+        card: 'Card',
+        card_container: 'Card Container',
+        collapse: 'Collapse',
+        dropdown: 'Dropdown',
+        dropdown_menu: 'Dropdown Menu',
+        dropdown_item: 'Dropdown Item',
+        // TYPOGRAPHY
+        text: 'Text',
+        heading: 'Heading',
+        paragraph: 'Paragraph',
+        // BASIC
+        image: 'Image',
+        link: 'Link',
+        list: 'Simple List',
+        // FORMS
+        form: 'Form',
+        input: 'Input',
+        file_input: 'File',
+        input_group: 'Input group',
+        textarea: 'Textarea',
+        select: 'Select',
+        select_option: '- Select option -',
+        option: 'Option',
+        label: 'Label',
+        checkbox: 'Checkbox',
+        radio: 'Radio',
+        trait_method: 'Method',
+        trait_enctype: 'Encoding Type',
+        trait_multiple: 'Multiple',
+        trait_action: 'Action',
+        trait_state: 'State',
+        trait_id: 'ID',
+        trait_for: 'For',
+        trait_name: 'Name',
+        trait_placeholder: 'Placeholder',
+        trait_value: 'Value',
+        trait_required: 'Required',
+        trait_type: 'Type',
+        trait_options: 'Options',
+        trait_checked: 'Checked',
+        type_text: 'Text',
+        type_email: 'Email',
+        type_password: 'Password',
+        type_number: 'Number',
+        type_date: 'Date',
+        type_hidden: 'Hidden',
+        type_submit: 'Submit',
+        type_reset: 'Reset',
+        type_button: 'Button',
+    };
 
-	let defaults = {
+    let defaults = {
 
-		blocks: {
-			spacer: true,
-			divider: true,
-			button: true,
-			grid: true,
-			icon: true,
-			heading: true,
-			text: true,
-			list: true,
-			video: true,
-			section: true,
-			link: true,
-			image: true,
-			map: true,
-			imageGallery: true,
-			slider: true,
-		},
+        blocks: {
+            spacer: true,
+            divider: true,
+            button: true,
+            grid: true,
+            icon: true,
+            heading: true,
+            text: true,
+            list: true,
+            video: true,
+            section: true,
+            link: true,
+            image: true,
+            map: true,
+            imageGallery: true,
+            slider: true,
+        },
 
-		labels: Object.assign(default_labels, opts_labels),
+        labels: Object.assign(default_labels, opts_labels),
 
-		// Modal import title
-		modalImportTitle: 'Import',
+        // Modal import title
+        modalImportTitle: 'Import',
 
-		// Modal import button text
-		modalImportButton: 'Import',
+        // Modal import button text
+        modalImportButton: 'Import',
 
-		// Import description inside import modal
-		modalImportLabel: '',
+        // Import description inside import modal
+        modalImportLabel: '',
 
-		// Default content to setup on import model open.
-		// Could also be a function with a dynamic content return (must be a string)
-		// eg. modalImportContent: editor => editor.getHtml(),
-		modalImportContent: '',
+        // Default content to setup on import model open.
+        // Could also be a function with a dynamic content return (must be a string)
+        // eg. modalImportContent: editor => editor.getHtml(),
+        modalImportContent: '',
 
-		// Code viewer (eg. CodeMirror) options
-		importViewerOptions: {},
+        // Code viewer (eg. CodeMirror) options
+        importViewerOptions: {},
 
-		// Confirm text before cleaning the canvas
-		textCleanCanvas: 'Are you sure to clean the canvas?',
+        // Confirm text before cleaning the canvas
+        textCleanCanvas: 'Are you sure to clean the canvas?',
 
-		// Show the Style Manager on component change
-		showStylesOnChange: 1,
+        // Show the Style Manager on component change
+        showStylesOnChange: 1,
 
-		// `grapesjs-navbar` plugin options
-		// By setting this option to `false` will avoid loading the plugin
-		grapickOpts: {},
+        // `grapesjs-navbar` plugin options
+        // By setting this option to `false` will avoid loading the plugin
+        grapickOpts: {},
 
-		// Custom color picker, check Grapick's repo to get more about it
-		// If you leave it empty the native color picker will be used.
-		// You can use 'default' string to get the one used by Grapesjs (which
-		// is spectrum at the moment of writing)
-		colorPicker: '',
+        // Custom color picker, check Grapick's repo to get more about it
+        // If you leave it empty the native color picker will be used.
+        // You can use 'default' string to get the one used by Grapesjs (which
+        // is spectrum at the moment of writing)
+        colorPicker: '',
 
-		// Show gradient direction input under picker, you can pass an object
-		// as a model
-		inputDirection: 1,
+        // Show gradient direction input under picker, you can pass an object
+        // as a model
+        inputDirection: 1,
 
-		// Show gradient type input under picker, you can pass an object as
-		// a model
-		inputType: 1,
+        // Show gradient type input under picker, you can pass an object as
+        // a model
+        inputType: 1,
 
-		// `grapesjs-plugin-forms` plugin options
-		// By setting this option to `false` will avoid loading the plugin
-		stylefilterOpts: {},
+        // `grapesjs-plugin-forms` plugin options
+        // By setting this option to `false` will avoid loading the plugin
+        stylefilterOpts: {},
 
-		tuiimageeditorOpts: {
-			config: {
-				includeUI: {
-					menu: ['crop', 'flip', 'rotate', 'draw', 'text', 'mask', 'filter'],
-				},
-				cssMaxWidth: 560,
-				cssMaxHeight: 350,
-			},
-			icons: {
-				'menu.normalIcon.path': VjDefaultPath + '/svg/icon-d.svg',
-				'menu.activeIcon.path': VjDefaultPath + '/svg/icon-b.svg',
-				'menu.disabledIcon.path': VjDefaultPath + '/svg/icon-a.svg',
-				'menu.hoverIcon.path': VjDefaultPath + '/svg/icon-c.svg',
-				'submenu.normalIcon.path': VjDefaultPath + '/svg/icon-d.svg',
-				'submenu.activeIcon.path': VjDefaultPath + '/svg/icon-c.svg',
-			},
-			onApply: function (imageEditor, imageModel) {
-				if (!$('.optimizing-overlay').length)
-					$('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Optimizing Images</h1></div>');
-				var sf = $.ServicesFramework(-1);
-				var ImageData = {
-					PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
-					ImageByte: imageEditor.toDataURL()
-				};
-				$.ajax({
-					type: "POST",
-					url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Image") + "Image/Convert",
-					data: ImageData,
-					headers: {
-						'ModuleId': parseInt(sf.getModuleId()),
-						'TabId': parseInt(sf.getTabId()),
-						'RequestVerificationToken': sf.getAntiForgeryValue()
-					},
-					success: function (response) {
-						if (response != "failed") {
-							imageModel.set('src', response.Url);
-							var parentmodel = imageModel.parent();
-							ChangeToWebp(parentmodel, response.Urls);
-							$('.gjs-toolbar').hide();
-							VjEditor.Modal.close();
-						}
-						$('.vj-wrapper').find('.optimizing-overlay').remove();
-					}
+        tuiimageeditorOpts: {
+            config: {
+                includeUI: {
+                    menu: ['crop', 'flip', 'rotate', 'draw', 'text', 'mask', 'filter'],
+                },
+                cssMaxWidth: 560,
+                cssMaxHeight: 350,
+            },
+            icons: {
+                'menu.normalIcon.path': VjDefaultPath + '/svg/icon-d.svg',
+                'menu.activeIcon.path': VjDefaultPath + '/svg/icon-b.svg',
+                'menu.disabledIcon.path': VjDefaultPath + '/svg/icon-a.svg',
+                'menu.hoverIcon.path': VjDefaultPath + '/svg/icon-c.svg',
+                'submenu.normalIcon.path': VjDefaultPath + '/svg/icon-d.svg',
+                'submenu.activeIcon.path': VjDefaultPath + '/svg/icon-c.svg',
+            },
+
+            onApply: function (imageEditor, imageModel) {
+                if (!$('.optimizing-overlay').length)
+                    $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Optimizing Images</h1></div>');
+                var sf = $.ServicesFramework(-1);
+
+                if (imageModel.attributes.type == "section" || imageModel.attributes.type == "column" || imageModel.attributes.type == "divider" || imageModel.attributes.type == "heading" || imageModel.attributes.type == "text" || imageModel.attributes.type == "button" || imageModel.attributes.type == "list" || imageModel.attributes.type == "icon") {
+                    var imagefilename = imageModel.getStyle()["background-image"];
+                    var ImageData = {
+                        PreviousFileName: imagefilename.substring(imagefilename.lastIndexOf('/') + 1).split('?')[0],
+                        ImageByte: imageEditor.toDataURL()
+                    };
+                }
+                else {
+
+                    var ImageData = {
+                        PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
+                        ImageByte: imageEditor.toDataURL()
+                    };
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Image") + "Image/Convert",
+                    data: ImageData,
+                    headers: {
+                        'ModuleId': parseInt(sf.getModuleId()),
+                        'TabId': parseInt(sf.getTabId()),
+                        'RequestVerificationToken': sf.getAntiForgeryValue()
+                    },
+                    success: function (response) {
+                        if (response != "failed") {
+                            imageModel.set('src', response.Url);
+                            var parentmodel = imageModel.parent();
+                            if (imageModel.attributes.type == "column" || imageModel.attributes.type == "divider" || imageModel.attributes.type == "heading" || imageModel.attributes.type == "text" || imageModel.attributes.type == "button" || imageModel.attributes.type == "list" || imageModel.attributes.type == "icon") {
+                                var backgroundstyle = imageModel.getStyle();
+                                backgroundstyle["background-image"] = 'url("' + response.Url + '")';
+                                imageModel.setStyle(backgroundstyle);
+                                ChangeToWebp(imageModel, response.Urls);
+                            }
+                            else {
+                                ChangeToWebp(parentmodel, response.Urls);
+                            }
+                            $('.gjs-toolbar').hide();
+                            VjEditor.Modal.close();
+                        }
+                        $('.vj-wrapper').find('.optimizing-overlay').remove();
+                    }
                 });
                 event.preventDefault();
-			}
-		},
+            }
+        },
 
-		touchOpts: {},
+        touchOpts: {},
 
-		flexboxBlock: {},
+        flexboxBlock: {},
 
-		// Classes prefix
-		stylePrefix: '',
+        // Classes prefix
+        stylePrefix: '',
 
-		// Row label
-		labelRow: 'Row',
+        // Row label
+        labelRow: 'Row',
 
-		// Column label
-		labelColumn: 'Column'
-	};
-
-
-	// Load defaults
-	for (let name in defaults) {
-		if (!(name in config))
-			config[name] = defaults[name];
-	}
-
-	const {
-		stylegradientOpts,
-		stylefilterOpts,
-		tuiimageeditorOpts,
-		touchOpts,
-	} = config;
-
-	// Load plugins
-	//config && pluginstylegradient(editor, config);
-	stylefilterOpts && pluginstylefilter(editor, stylefilterOpts);
-
-	tuiimageeditorOpts && plugintuiimageeditor(editor, tuiimageeditorOpts);
-	touchOpts && plugintouch(editor, touchOpts);
-
-	// Custom Blocks
-	config && section(editor, config);
-	config && grid(editor, config);
-	config && heading(editor, config);
-	config && text(editor, config);
-	config && button(editor, config);
-	config && icon(editor, config);
-	config && link(editor, config);
-	config && list(editor, config);
-	config && image(editor, config);
-	config && imageGallery(editor, config);
-	config && carousel(editor, config);
-	config && video(editor, config);
-	config && map(editor, config);
-	config && spacer(editor, config);
-	config && divider(editor, config);
-
-	// Load Componenents
-	loadComponents(editor, config);
-
-	// Load Traits
-	loadTraits(editor, config);
-
-	loadStyles(editor, config);
+        // Column label
+        labelColumn: 'Column'
+    };
 
 
-	//Add Commands Switch Device 
-	editor.Commands.add('set-device-desktop', {
-		run: editor => editor.setDevice('Desktop')
-	});
-	editor.Commands.add('set-device-tablet', {
-		run: editor => editor.setDevice('Tablet')
-	});
-	editor.Commands.add('set-device-mobile-portrait', {
+    // Load defaults
+    for (let name in defaults) {
+        if (!(name in config))
+            config[name] = defaults[name];
+    }
+
+    const {
+        stylegradientOpts,
+        stylefilterOpts,
+        tuiimageeditorOpts,
+        touchOpts,
+    } = config;
+
+    // Load plugins
+    //config && pluginstylegradient(editor, config);
+    stylefilterOpts && pluginstylefilter(editor, stylefilterOpts);
+
+    tuiimageeditorOpts && plugintuiimageeditor(editor, tuiimageeditorOpts);
+    touchOpts && plugintouch(editor, touchOpts);
+
+    // Custom Blocks
+    config && section(editor, config);
+    config && grid(editor, config);
+    config && heading(editor, config);
+    config && text(editor, config);
+    config && button(editor, config);
+    config && icon(editor, config);
+    config && link(editor, config);
+    config && list(editor, config);
+    config && image(editor, config);
+    config && imageGallery(editor, config);
+    config && carousel(editor, config);
+    config && video(editor, config);
+    config && map(editor, config);
+    config && spacer(editor, config);
+    config && divider(editor, config);
+
+    // Load Componenents
+    loadComponents(editor, config);
+
+    // Load Traits
+    loadTraits(editor, config);
+
+    loadStyles(editor, config);
+
+
+    //Add Commands Switch Device 
+    editor.Commands.add('set-device-desktop', {
+        run: editor => editor.setDevice('Desktop')
+    });
+    editor.Commands.add('set-device-tablet', {
+        run: editor => editor.setDevice('Tablet')
+    });
+    editor.Commands.add('set-device-mobile-portrait', {
         run: editor => editor.setDevice('Mobile Portrait')
     });
     editor.Commands.add('set-device-mobile-landscape', {
         run: editor => editor.setDevice('Mobile Landscape')
     });
 
-	editor.Commands.add('save', ed => {
-		ed.store();
-	});
-
-	//Implement Search
-	var inputVal;
-
-	editor.Commands.add('search-filter', {
-		run(editor, sender) {
-			var r = inputVal
-				, i = editor.BlockManager
-				, a = ChangeBlockType('search').filter(function (t) {
-
-					if (r && r.length > 1) {
-
-						if (t.get("id") != undefined && t.get("id").toLowerCase().indexOf(r.toLowerCase()) >= 0)
-							return true;
-						else if (t.get('category').id != undefined && t.get('category').id.toLowerCase().indexOf(r.toLowerCase()) >= 0)
-							return true;
-						else
-							return false;
-					}
-					return !0
-				});
-			i.render(a)
-		}
-	});
-
-	$(".search-block input").keyup(function (e) {
-		inputVal = $(this).val();
-		editor.runCommand("search-filter");
-	});
-
-	$(".close-searchbtn").click(function () {
-		inputVal = $(this).val();
-		editor.runCommand("search-filter");
-	});
+    editor.Commands.add('save', ed => {
+        ed.store();
+    });
+
+    //Implement Search
+    var inputVal;
+
+    editor.Commands.add('search-filter', {
+        run(editor, sender) {
+            var r = inputVal
+                , i = editor.BlockManager
+                , a = ChangeBlockType('search').filter(function (t) {
+
+                    if (r && r.length > 1) {
+
+                        if (t.get("id") != undefined && t.get("id").toLowerCase().indexOf(r.toLowerCase()) >= 0)
+                            return true;
+                        else if (t.get('category').id != undefined && t.get('category').id.toLowerCase().indexOf(r.toLowerCase()) >= 0)
+                            return true;
+                        else
+                            return false;
+                    }
+                    return !0
+                });
+            i.render(a)
+        }
+    });
 
-	var modalContent = document.getElementById('ModalContent');
-	var saveButton = document.getElementById("btn-save");
+    $(".search-block input").keyup(function (e) {
+        inputVal = $(this).val();
+        editor.runCommand("search-filter");
+    });
 
-	var $BlockName = $("#ModalContent").find("#input-name");
-	var $BlockCategory = $("#ModalContent").find("#input-category");
-	var $CategoryDropdown = $("#ModalContent").find("#CategoryDropdown");
+    $(".close-searchbtn").click(function () {
+        inputVal = $(this).val();
+        editor.runCommand("search-filter");
+    });
 
-	$CategoryDropdown.on('change', function () {
-		$BlockCategory.val($(this).val());
-	});
+    var modalContent = document.getElementById('ModalContent');
+    var saveButton = document.getElementById("btn-save");
 
-	var AddCategory = function () {
+    var $BlockName = $("#ModalContent").find("#input-name");
+    var $BlockCategory = $("#ModalContent").find("#input-category");
+    var $CategoryDropdown = $("#ModalContent").find("#CategoryDropdown");
 
-		$("#ModalContent").find(".btn-add").click(function () {
+    $CategoryDropdown.on('change', function () {
+        $BlockCategory.val($(this).val());
+    });
 
-			var categories = editor.BlockManager.getCategories();
-			categories.remove(['Basic', 'Apps', 'Design']);
+    var AddCategory = function () {
 
-			swal(
-				{
-					title: VjLocalized.BlockCategory,
-					html: true,
-					text: '<input class="form-control" style="display:block;" type="text" id="Category" placeholder="' + VjLocalized.AddCategory + '"/>',
-					confirmButtonText: VjLocalized.Add,
-					cancelButtonText: VjLocalized.Cancel,
-					showCancelButton: true,
-					closeOnConfirm: false,
-				},
-				function (inputValue) {
+        $("#ModalContent").find(".btn-add").click(function () {
 
-					var category = $('#Category').val();
+            var categories = editor.BlockManager.getCategories();
+            categories.remove(['Basic', 'Apps', 'Design']);
 
-					if (category != '') {
+            swal(
+                {
+                    title: VjLocalized.BlockCategory,
+                    html: true,
+                    text: '<input class="form-control" style="display:block;" type="text" id="Category" placeholder="' + VjLocalized.AddCategory + '"/>',
+                    confirmButtonText: VjLocalized.Add,
+                    cancelButtonText: VjLocalized.Cancel,
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                },
+                function (inputValue) {
 
-						var count = 0;
+                    var category = $('#Category').val();
 
-						$(categories.models).each(function (index, item) {
+                    if (category != '') {
 
-							if (item.attributes.label == category.toLowerCase()) {
+                        var count = 0;
 
-								count = 1;
-								swal.showInputError(VjLocalized.CategoryExists);
+                        $(categories.models).each(function (index, item) {
 
-								return false;
-							}
-						});
+                            if (item.attributes.label == category.toLowerCase()) {
 
-						if (count == 0) {
+                                count = 1;
+                                swal.showInputError(VjLocalized.CategoryExists);
 
-							$CategoryDropdown.append('<option value="' + category + '">' + category + '</option>');
-							$CategoryDropdown.val(category);
+                                return false;
+                            }
+                        });
 
-							$BlockCategory.val(category);
-							swal.close();
-						}
+                        if (count == 0) {
 
-					}
-					else {
-						swal.showInputError(VjLocalized.CategoryRequired);
-						return false;
-					}
-				}
-			);
-		});
-	}
+                            $CategoryDropdown.append('<option value="' + category + '">' + category + '</option>');
+                            $CategoryDropdown.val(category);
 
-	var waitForChange = function (closed) {
+                            $BlockCategory.val(category);
+                            swal.close();
+                        }
 
-		if (closed) {
-			$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
-		} else {
-			setTimeout(function () {
-				waitForChange($(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').is(":hidden"));
-			}, 10);
-		}
-	};
+                    }
+                    else {
+                        swal.showInputError(VjLocalized.CategoryRequired);
+                        return false;
+                    }
+                }
+            );
+        });
+    }
 
-	//Add Custom Block
-	editor.Commands.add('custom-block', {
-		run: function (editor, sender, opts) {
+    var waitForChange = function (closed) {
 
-			$("#ModalContent").show();
+        if (closed) {
+            $(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
+        } else {
+            setTimeout(function () {
+                waitForChange($(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').is(":hidden"));
+            }, 10);
+        }
+    };
 
-			var Block = VjEditor.runCommand("export-component");
+    //Add Custom Block
+    editor.Commands.add('custom-block', {
+        run: function (editor, sender, opts) {
 
-			$BlockName.val('');
-			$BlockCategory.val('');
-			
+            $("#ModalContent").show();
 
-			$BlockCategory.hide();
-			$CategoryDropdown.parent().hide();
+            var Block = VjEditor.runCommand("export-component");
 
-			var categories = editor.BlockManager.getCategories();
-			categories.remove(['Basic', 'Apps', 'Design']);
+            $BlockName.val('');
+            $BlockCategory.val('');
 
-			if (categories.length > 0) {
 
-				$CategoryDropdown.parent().show();
+            $BlockCategory.hide();
+            $CategoryDropdown.parent().hide();
 
-				var select = document.getElementById("CategoryDropdown");
-				$(select).empty();
+            var categories = editor.BlockManager.getCategories();
+            categories.remove(['Basic', 'Apps', 'Design']);
 
-				select.innerHTML = '<option value="none" disabled>Select Category</option>';
+            if (categories.length > 0) {
 
-				$(categories.models).each(function (index, category) {
+                $CategoryDropdown.parent().show();
 
-					var option = document.createElement("option");
-					option.text = category.attributes.label;
-					option.value = category.attributes.id;
+                var select = document.getElementById("CategoryDropdown");
+                $(select).empty();
 
-					select.append(option);
+                select.innerHTML = '<option value="none" disabled>Select Category</option>';
 
-				});
+                $(categories.models).each(function (index, category) {
 
-				$(select).html($(select).find('option').sort(function (x, y) {
-					return $(x).text() > $(y).text() ? 1 : -1;
-				}));
+                    var option = document.createElement("option");
+                    option.text = category.attributes.label;
+                    option.value = category.attributes.id;
 
-				$CategoryDropdown.val('none');
-				AddCategory();
-			}
-			else
-				$BlockCategory.show();
+                    select.append(option);
 
-			$('.cbglobal > button:first').attr('class', 'btn btn-default');
-			$('.cbglobal > button:last').attr('class', 'btn btn-primary disabled');
+                });
 
-			//Update Button
-			saveButton.onclick = function (e) {
+                $(select).html($(select).find('option').sort(function (x, y) {
+                    return $(x).text() > $(y).text() ? 1 : -1;
+                }));
 
-				e.preventDefault();
+                $CategoryDropdown.val('none');
+                AddCategory();
+            }
+            else
+                $BlockCategory.show();
 
-				var blockLabel = $BlockName.val();
-				var blockCategory = $BlockCategory.val();
-				var blockContent = Block.html;
-				var blockCSS = Block.css;
+            $('.cbglobal > button:first').attr('class', 'btn btn-default');
+            $('.cbglobal > button:last').attr('class', 'btn btn-primary disabled');
 
-				if (blockLabel == "") {
-					swal({
-						title: "Name is required",
-						type: "warning",
-						closeOnCancel: true
-					});
-					return false;
-				}
+            //Update Button
+            saveButton.onclick = function (e) {
 
-				if (blockCategory == "") {
-					swal({
-						title: "Category is required",
-						type: "warning",
-						closeOnCancel: true
-					});
-					return false;
-				}
+                e.preventDefault();
 
-				var CustomBlock = {
-					Name: blockLabel,
-					Category: blockCategory,
-					Html: blockContent,
-					Css: blockCSS,
-					IsGlobal: $('.cbglobal > button').hasClass('btn-primary active')
+                var blockLabel = $BlockName.val();
+                var blockCategory = $BlockCategory.val();
+                var blockContent = Block.html;
+                var blockCSS = Block.css;
 
-				};
+                if (blockLabel == "") {
+                    swal({
+                        title: "Name is required",
+                        type: "warning",
+                        closeOnCancel: true
+                    });
+                    return false;
+                }
 
-				AddCustomBlock(editor, CustomBlock);
+                if (blockCategory == "") {
+                    swal({
+                        title: "Category is required",
+                        type: "warning",
+                        closeOnCancel: true
+                    });
+                    return false;
+                }
 
-				waitForChange($(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').is(":hidden"));
-			};
+                var CustomBlock = {
+                    Name: blockLabel,
+                    Category: blockCategory,
+                    Html: blockContent,
+                    Css: blockCSS,
+                    IsGlobal: $('.cbglobal > button').hasClass('btn-primary active')
 
-			$('.gjs-mdl-dialog .gjs-mdl-btn-close').click(function () {
-				$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
-			});
+                };
 
-			$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').css('max-width', 450);
-			editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
-		}
-	});
+                AddCustomBlock(editor, CustomBlock);
 
-	//Edit Custom Block
-	editor.Commands.add('edit-custom-block', {
+                waitForChange($(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').is(":hidden"));
+            };
 
-		run: function (editor, sender, block) {
+            $('.gjs-mdl-dialog .gjs-mdl-btn-close').click(function () {
+                $(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
+            });
 
-			$("#ModalContent").show();
+            $(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').css('max-width', 450);
+            editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
+        }
+    });
 
-			$BlockCategory.hide();
+    //Edit Custom Block
+    editor.Commands.add('edit-custom-block', {
 
-			global.BlockID = block.id;
+        run: function (editor, sender, block) {
 
-			var Block = editor.BlockManager.get(block.name);
+            $("#ModalContent").show();
 
-			$BlockName.val(Block.attributes.label);
+            $BlockCategory.hide();
 
-			var categories = editor.BlockManager.getCategories();
-			categories.remove(['Basic', 'Apps', 'Design']);
+            global.BlockID = block.id;
 
-			var select = document.getElementById("CategoryDropdown");
-			$(select).empty();
+            var Block = editor.BlockManager.get(block.name);
 
-			$(categories.models).each(function (index, category) {
+            $BlockName.val(Block.attributes.label);
 
-				var option = document.createElement("option");
-				option.text = category.attributes.label;
-				option.value = category.attributes.id;
+            var categories = editor.BlockManager.getCategories();
+            categories.remove(['Basic', 'Apps', 'Design']);
 
-				select.append(option);
+            var select = document.getElementById("CategoryDropdown");
+            $(select).empty();
 
-			});
+            $(categories.models).each(function (index, category) {
 
-			$(select).html($(select).find('option').sort(function (x, y) {
-				return $(x).text() > $(y).text() ? 1 : -1;
-			}));
+                var option = document.createElement("option");
+                option.text = category.attributes.label;
+                option.value = category.attributes.id;
 
-			if (Block.attributes.category.id != undefined) {
-				$BlockCategory.val(Block.attributes.category.id.toLowerCase());
-				$CategoryDropdown.val(Block.attributes.category.id.toLowerCase());
-			}
-			else {
-				$BlockCategory.val(Block.attributes.category.toLowerCase());
-				$CategoryDropdown.val(Block.attributes.category.toLowerCase());
-			}
+                select.append(option);
 
-			AddCategory();
+            });
 
-			//Need Improvement
-			var blockType = $(Block.attributes.content).attr('data-block-type')
+            $(select).html($(select).find('option').sort(function (x, y) {
+                return $(x).text() > $(y).text() ? 1 : -1;
+            }));
 
-			if (blockType != undefined) {
-				$('.cbglobal > button:first').attr('class', 'btn btn-primary active');
-				$('.cbglobal > button:last').attr('class', 'btn btn-default');
-			}
-			else {
-				$('.cbglobal > button:first').attr('class', 'btn btn-default');
-				$('.cbglobal > button:last').attr('class', 'btn btn-primary disabled');
-			}
+            if (Block.attributes.category.id != undefined) {
+                $BlockCategory.val(Block.attributes.category.id.toLowerCase());
+                $CategoryDropdown.val(Block.attributes.category.id.toLowerCase());
+            }
+            else {
+                $BlockCategory.val(Block.attributes.category.toLowerCase());
+                $CategoryDropdown.val(Block.attributes.category.toLowerCase());
+            }
 
-			saveButton.onclick = function (e, block) {
+            AddCategory();
 
-				e.preventDefault();
+            //Need Improvement
+            var blockType = $(Block.attributes.content).attr('data-block-type')
 
-				var blockLabel = $("#ModalContent").find("#input-name").val();
-				var blockCategory = $("#ModalContent").find("#input-category").val();
+            if (blockType != undefined) {
+                $('.cbglobal > button:first').attr('class', 'btn btn-primary active');
+                $('.cbglobal > button:last').attr('class', 'btn btn-default');
+            }
+            else {
+                $('.cbglobal > button:first').attr('class', 'btn btn-default');
+                $('.cbglobal > button:last').attr('class', 'btn btn-primary disabled');
+            }
 
-				if (blockLabel == "") {
-					swal({
-						title: "Name is required",
-						type: "warning",
-						closeOnCancel: true
-					});
-					return false;
-				}
+            saveButton.onclick = function (e, block) {
 
-				if (blockCategory == "") {
-					swal({
-						title: "Category is required",
-						type: "warning",
-						closeOnCancel: true
-					});
-					return false;
-				}
+                e.preventDefault();
 
-				var CustomBlock = {
-					Guid: BlockID,
-					Name: blockLabel,
-					Category: blockCategory,
-					IsGlobal: $('.cbglobal > button').hasClass('btn-primary active')
-				};
+                var blockLabel = $("#ModalContent").find("#input-name").val();
+                var blockCategory = $("#ModalContent").find("#input-category").val();
 
-				UpdateCustomBlock(editor, CustomBlock);
+                if (blockLabel == "") {
+                    swal({
+                        title: "Name is required",
+                        type: "warning",
+                        closeOnCancel: true
+                    });
+                    return false;
+                }
 
-				waitForChange($(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').is(":hidden"));
-					
-			};
+                if (blockCategory == "") {
+                    swal({
+                        title: "Category is required",
+                        type: "warning",
+                        closeOnCancel: true
+                    });
+                    return false;
+                }
 
-			$('.gjs-mdl-dialog .gjs-mdl-btn-close').click(function () {
-				$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
-			});
+                var CustomBlock = {
+                    Guid: BlockID,
+                    Name: blockLabel,
+                    Category: blockCategory,
+                    IsGlobal: $('.cbglobal > button').hasClass('btn-primary active')
+                };
 
-			$(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').css('max-width', 450);
-			editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
+                UpdateCustomBlock(editor, CustomBlock);
 
-			$('#ToggelBlockGlobal').addClass('disabled');
-			$('#ToggelBlockLocal').addClass('disabled');
+                waitForChange($(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').is(":hidden"));
 
-			$('#ToggelBlockGlobal').addClass('custom-block-disabled');
-			$('#ToggelBlockLocal').addClass('custom-block-disabled');
-		}
-	});
+            };
 
-	//Delete Custom Block
-	editor.Commands.add('delete-custom-block', {
-		run: function (editor, sender, block) {
-			swal({
-				title: VjLocalized.AreYouSure,
-				text: VjLocalized.AreYouSureText,
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonColor: "#DD6B55",
-				confirmButtonText: VjLocalized.Delete,
-				cancelButtonText: VjLocalized.Cancel,
-				closeOnConfirm: true,
-				closeOnCancel: true
-			},
+            $('.gjs-mdl-dialog .gjs-mdl-btn-close').click(function () {
+                $(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').removeAttr('style');
+            });
 
-				function (isConfirm) {
-					if (isConfirm) {
+            $(editor.Modal.getContentEl()).parents('.gjs-mdl-dialog').css('max-width', 450);
+            editor.Modal.setTitle(VjLocalized.CustomBlock).setContent(modalContent).open();
+
+            $('#ToggelBlockGlobal').addClass('disabled');
+            $('#ToggelBlockLocal').addClass('disabled');
+
+            $('#ToggelBlockGlobal').addClass('custom-block-disabled');
+            $('#ToggelBlockLocal').addClass('custom-block-disabled');
+        }
+    });
+
+    //Delete Custom Block
+    editor.Commands.add('delete-custom-block', {
+        run: function (editor, sender, block) {
+            swal({
+                title: VjLocalized.AreYouSure,
+                text: VjLocalized.AreYouSureText,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: VjLocalized.Delete,
+                cancelButtonText: VjLocalized.Cancel,
+                closeOnConfirm: true,
+                closeOnCancel: true
+            },
+
+                function (isConfirm) {
+                    if (isConfirm) {
                         DeleteCustomBlock(block);
-					}
-				});
-		}
-	});
+                    }
+                });
+        }
+    });
 
-	//Export Custom Block
-	editor.Commands.add('export-custom-block', {
-		run: function (editor, sender, block) {
-			var BlockIDExport = block.id;
-			swal({
-				title: VjLocalized.AreYouSure,
-				text: VjLocalized.ExportMessage + block.name,
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonColor: "#8CD4F5",
-				confirmButtonText: VjLocalized.Yes,
-				cancelButtonText: VjLocalized.Cancel,
-				closeOnConfirm: true,
-				closeOnCancel: true
-			},
-				function (isConfirm) {
-					if (isConfirm) {
-						ExportCustomBlock(BlockIDExport);
-					}
-				});
-		}
-	});
+    //Export Custom Block
+    editor.Commands.add('export-custom-block', {
+        run: function (editor, sender, block) {
+            var BlockIDExport = block.id;
+            swal({
+                title: VjLocalized.AreYouSure,
+                text: VjLocalized.ExportMessage + block.name,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#8CD4F5",
+                confirmButtonText: VjLocalized.Yes,
+                cancelButtonText: VjLocalized.Cancel,
+                closeOnConfirm: true,
+                closeOnCancel: true
+            },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        ExportCustomBlock(BlockIDExport);
+                    }
+                });
+        }
+    });
 
-	//global to local Custom Block
-	editor.Commands.add('custom-block-globaltolocal', {
-		run: function (editor, sender, block) {
-			swal({
-				title: VjLocalized.AreYouSure,
-				text: VjLocalized.GlobalBlockUnlink,
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonColor: "#3085d6",
-				confirmButtonText: VjLocalized.OK,
-				cancelButtonText: VjLocalized.Cancel,
-				closeOnConfirm: true,
-				closeOnCancel: true
-			},
+    //global to local Custom Block
+    editor.Commands.add('custom-block-globaltolocal', {
+        run: function (editor, sender, block) {
+            swal({
+                title: VjLocalized.AreYouSure,
+                text: VjLocalized.GlobalBlockUnlink,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: VjLocalized.OK,
+                cancelButtonText: VjLocalized.Cancel,
+                closeOnConfirm: true,
+                closeOnCancel: true
+            },
 
-				function (isConfirm) {
-					if (isConfirm) {
-						var model = VjEditor.getSelected();
-						var parentmodel = model.parent();
-						$(model.getEl()).find('.global-tools').remove();
-						var content = VjEditor.runCommand("export-component", {
-							component: model
-						});
-						if (content != undefined && content.html != undefined && content.html != "") {
-							model.replaceWith($(content.html).html());
-							$.each(getAllComponents(parentmodel), function (k, v) {
-								if (v.attributes.type == 'blockwrapper') {
-									if ($(v.getEl().innerHTML).attr('data-gjs-type') == 'blockwrapper')
-										v.components($(v.getEl().innerHTML).html());
-									else
-										v.components(v.getEl().innerHTML);
+                function (isConfirm) {
+                    if (isConfirm) {
+                        var model = VjEditor.getSelected();
+                        var parentmodel = model.parent();
+                        $(model.getEl()).find('.global-tools').remove();
+                        var content = VjEditor.runCommand("export-component", {
+                            component: model
+                        });
+                        if (content != undefined && content.html != undefined && content.html != "") {
+                            model.replaceWith($(content.html).html());
+                            $.each(getAllComponents(parentmodel), function (k, v) {
+                                if (v.attributes.type == 'blockwrapper') {
+                                    if ($(v.getEl().innerHTML).attr('data-gjs-type') == 'blockwrapper')
+                                        v.components($(v.getEl().innerHTML).html());
+                                    else
+                                        v.components(v.getEl().innerHTML);
 
-									if (v.attributes.attributes["data-block-type"].toLowerCase() == "logo") {
-										var style = v.attributes.attributes["data-style"];
-										if (style != undefined) {
-											$(v.getEl()).find('img').attr('style', style);
-											v.set('content', v.getEl().innerHTML);
-										}
-									}
-								}
-							});
-							if (content.css != undefined && content.css != "") {
-								VjEditor.addComponents('<style>' + content.css + '</style>');
-							}
-							VjEditor.runCommand("save");
-							window.parent.location.reload();
-						}
-					}
-				});
-		}
-	});
+                                    if (v.attributes.attributes["data-block-type"].toLowerCase() == "logo") {
+                                        var style = v.attributes.attributes["data-style"];
+                                        if (style != undefined) {
+                                            $(v.getEl()).find('img').attr('style', style);
+                                            v.set('content', v.getEl().innerHTML);
+                                        }
+                                    }
+                                }
+                            });
+                            if (content.css != undefined && content.css != "") {
+                                VjEditor.addComponents('<style>' + content.css + '</style>');
+                            }
+                            VjEditor.runCommand("save");
+                            window.parent.location.reload();
+                        }
+                    }
+                });
+        }
+    });
 });

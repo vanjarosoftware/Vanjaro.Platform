@@ -52,6 +52,13 @@
 				if (!model.get('toolbar')) {
 					var tb = [];
 
+					if (model.getStyle()["background-image"] != undefined) {
+						tb.push({
+							attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
+							command: 'custom-tui-image-editor',
+						});
+					}
+
 					tb.push({
 						attributes: { class: 'fa fa-arrow-up' },
 						command: function (t) {
@@ -71,14 +78,14 @@
 					if (model.get('copyable')) {
 						tb.push({
 							attributes: { class: 'fa fa-clone' },
-							command: 'vj-copy',
+							command: 'tlb-clone',
 						});
 					}
 
 					if (model.get('removable')) {
 						tb.push({
 							attributes: { class: 'fa fa-trash-o' },
-							command: 'vj-delete',
+							command: 'tlb-delete',
 						});
 					}
 
