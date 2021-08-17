@@ -2577,6 +2577,7 @@ span.notificationname {
     border-top: 1px solid #eee;
     border-bottom: 1px solid transparent;
     display: inline-flex;
+    position:relative;
 }
 
     .traitsmanager .preset-wrapper div.styles em {
@@ -2635,6 +2636,21 @@ span.notificationname {
     color: #fff;
     font-size: 16px;
     white-space: normal;
+}
+
+.traitsmanager .preset-wrapper .styles > span {
+    position: absolute;
+    bottom: 3px;
+    right: 0px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: normal;
+    font-style: normal;
+    color: #aaa;
+    text-shadow: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    word-spacing: normal;
 }
 
 .traitsmanager .preset-wrapper.blockwrapper label div {

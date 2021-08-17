@@ -2090,6 +2090,7 @@ export default (editor, config = {}) => {
 			$(trait.attributes.options).each(function (index, value) {
 
 				var div = document.createElement('div');
+				var span = document.createElement('span');
 				var input = document.createElement('input');
 				var label = document.createElement("label");
 				var icon = document.createElement("em");
@@ -2105,9 +2106,11 @@ export default (editor, config = {}) => {
 				label.setAttribute("for", value.id);
 				label.setAttribute("class", value.class);
 				label.innerHTML = trait.target.getEl().textContent;
+				span.innerHTML = value.DisplayName;
 
 				icon.setAttribute("class", "fas fa-check-circle");
 
+				div.appendChild(span);
 				div.appendChild(input);
 				div.appendChild(label);
 				div.appendChild(icon);
@@ -2173,6 +2176,20 @@ export default (editor, config = {}) => {
 			component.getTrait('styles').set({
 				'value': event.target.value
 			});
+
+			var capitalize = e => e.charAt(0).toUpperCase() + e.slice(1);
+			var selectedStyle = event.target.value;
+
+			var SelectedDisplayName = component.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
+
+			if (component.attributes.type == 'blockwrapper') {
+				component.set('custom-name', capitalize(component.attributes.name) + ' - ' + SelectedDisplayName);
+			}
+			else {
+				component.set('custom-name', capitalize(component.attributes.type) + ' - ' + SelectedDisplayName);
+			}
+
+
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);
