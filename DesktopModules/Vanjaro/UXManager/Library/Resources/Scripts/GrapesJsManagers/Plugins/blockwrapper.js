@@ -97,10 +97,10 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 							name: 'styles',
 							type: 'preset_radio',
 							options: [
-								{ id: '' + blockName + '-style-1', name: 'Style A', class: '' + blockName + '-style-1' },
-								{ id: '' + blockName + '-style-2', name: 'Style B', class: '' + blockName + '-style-2' },
+								{ id: '' + blockName + '-style-1', name: 'Style 1', class: '' + blockName + '-style-1', DisplayName: 'Style A' },
+								{ id: '' + blockName + '-style-2', name: 'Style 2', class: '' + blockName + '-style-2', DisplayName: 'Style B' },
 							],
-							default: 'Style A'
+							default: 'Style 1'
 						});
 					}
 				}
@@ -147,8 +147,21 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 
 				defaultType.view.prototype.render.apply(this, arguments);
 				IsVJEditorSaveCall = false;
-				var stylesValue = (this.model.getAttributes().styles == undefined || this.model.getAttributes().styles == "") ? "" : " - " + this.model.getAttributes().styles;
-				this.model.set('custom-name', this.model.attributes.attributes["data-block-display-name"] != undefined ? this.model.attributes.attributes["data-block-display-name"] : this.model.attributes.attributes["data-block-type"] + stylesValue);
+
+
+				var stylesValue;
+				if (!this.model.getTrait('styles'))
+					stylesValue = "";
+
+				else {
+					var selectedStyle = (this.model.getAttributes().styles == undefined) ? 'Style 1' : this.model.getAttributes().styles;
+					stylesValue = ' - ' + this.model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
+				}
+
+
+				this.model.set('custom-name', (this.model.attributes.attributes["data-block-display-name"] != undefined ? this.model.attributes.attributes["data-block-display-name"] : this.model.attributes.attributes["data-block-type"]) + stylesValue);
+
+
 				this.model.set('name', this.model.attributes.attributes["data-block-display-name"] != undefined ? this.model.attributes.attributes["data-block-display-name"] : this.model.attributes.attributes["data-block-type"]);
 				if (this.model.attributes != undefined && this.model.attributes.components != undefined && this.model.attributes.components.models[0] != undefined && this.model.attributes.components.models[0].attributes.content != '') {
 

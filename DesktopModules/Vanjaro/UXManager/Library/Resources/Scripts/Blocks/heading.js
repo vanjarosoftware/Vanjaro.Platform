@@ -23,11 +23,11 @@ export default (editor, config = {}) => {
 	domc.addType('heading', {
 		model: textModel.extend({
 			defaults: Object.assign({}, textModel.prototype.defaults, {
-				'custom-name': 'Heading - Style A',
+				'custom-name': 'Heading',
 				droppable: false,
 				tagName: 'h1',
-                classes: ['vj-heading', 'text-primary', 'head-style-1'],
-                text: true,
+				classes: ['vj-heading', 'text-primary', 'head-style-1'],
+				text: true,
 				traits: [
 					{
 						label: 'Importance',
@@ -62,14 +62,14 @@ export default (editor, config = {}) => {
 						name: "fontsize",
 						type: "custom_range",
 						cssproperties: [{ name: "font-size" }],
-                        units: [
-                            { name: 'px', min: 10, max: 100, step: 1, value: 40 },
-                            { name: '%', min: 10, max: 100, step: 1, value: 100 },
-                            { name: 'em', min: 0.5, max: 10, step: 0.1, value: 2 },
-                            { name: 'rem', min: 0.5, max: 10, step: 0.1, value: 2 },
-                            { name: 'vw', min: 0.5, max: 10, step: 0.1, value: 2 },
-                            { name: 'vh', min: 0.5, max: 10, step: 0.1, value: 3 },
-                        ],
+						units: [
+							{ name: 'px', min: 10, max: 100, step: 1, value: 40 },
+							{ name: '%', min: 10, max: 100, step: 1, value: 100 },
+							{ name: 'em', min: 0.5, max: 10, step: 0.1, value: 2 },
+							{ name: 'rem', min: 0.5, max: 10, step: 0.1, value: 2 },
+							{ name: 'vw', min: 0.5, max: 10, step: 0.1, value: 2 },
+							{ name: 'vh', min: 0.5, max: 10, step: 0.1, value: 3 },
+						],
 						unit: "px",
 						changeProp: 1,
 					}, {
@@ -97,18 +97,18 @@ export default (editor, config = {}) => {
 						name: 'styles',
 						type: 'preset_radio',
 						options: [
-							{ id: 'head-style-1', name: 'Style A', class: 'head-style-1' },
-							{ id: 'head-style-2', name: 'Style B', class: 'head-style-2' },
-							{ id: 'head-style-3', name: 'Style C', class: 'head-style-3' },
-							{ id: 'head-style-4', name: 'Style D', class: 'head-style-4' },
-							{ id: 'head-style-5', name: 'Style E', class: 'head-style-5' },
-							{ id: 'head-style-6', name: 'Style F', class: 'head-style-6' },
-							{ id: 'head-style-7', name: 'Style G', class: 'head-style-7' },
-							{ id: 'head-style-8', name: 'Style H', class: 'head-style-8' },
-							{ id: 'head-style-9', name: 'Style I', class: 'head-style-9' },
-							{ id: 'head-style-10', name: 'Style J', class: 'head-style-10' },
+							{ id: 'head-style-1', name: 'Style 1', class: 'head-style-1', DisplayName: 'Style A' },
+							{ id: 'head-style-2', name: 'Style 2', class: 'head-style-2', DisplayName: 'Style B' },
+							{ id: 'head-style-3', name: 'Style 3', class: 'head-style-3', DisplayName: 'Style C' },
+							{ id: 'head-style-4', name: 'Style 4', class: 'head-style-4', DisplayName: 'Style D' },
+							{ id: 'head-style-5', name: 'Style 5', class: 'head-style-5', DisplayName: 'Style E' },
+							{ id: 'head-style-6', name: 'Style 6', class: 'head-style-6', DisplayName: 'Style F' },
+							{ id: 'head-style-7', name: 'Style 7', class: 'head-style-7', DisplayName: 'Style G' },
+							{ id: 'head-style-8', name: 'Style 8', class: 'head-style-8', DisplayName: 'Style H' },
+							{ id: 'head-style-9', name: 'Style 9', class: 'head-style-9', DisplayName: 'Style I' },
+							{ id: 'head-style-10', name: 'Style 10', class: 'head-style-10', DisplayName: 'Style J' },
 						],
-						default: 'Style A',
+						default: 'Style 1',
 						changeProp: 1,
 					}
 				]
@@ -119,21 +119,33 @@ export default (editor, config = {}) => {
 			handleTypeChange() {
 				if (typeof this.attributes.importance != 'undefined' && this.attributes.importance != "") {
 					this.attributes.tagName = this.attributes.importance;
-                    this.view.reset();
-                    this.removeStyle("font-size");
-                    this.getTrait('fontsize').setTargetValue($(this.getEl()).css('font-size').replace(/[^-\d\.]/g, ''));
-                    this.getTrait('fontsize').view.render();
-                    VjEditor.runCommand("save");
+					this.view.reset();
+					this.removeStyle("font-size");
+					this.getTrait('fontsize').setTargetValue($(this.getEl()).css('font-size').replace(/[^-\d\.]/g, ''));
+					this.getTrait('fontsize').view.render();
+					VjEditor.runCommand("save");
 				}
 			},
 		},
 			{
 				isComponent(el) {
-                    if (el && el.tagName && el.classList && el.classList.contains('vj-heading')) {
+					if (el && el.tagName && el.classList && el.classList.contains('vj-heading')) {
 						return { type: 'heading' };
 					}
 				}
 			}),
-		view: textView
+		view: textView.extend({
+			onRender() {
+				var model = this.model;
+				var selectedStyle = (model.attributes.styles == undefined) ? 'Style 1' : model.attributes.styles;
+
+				var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
+
+				if (model.attributes['custom-name'].indexOf('Style') == -1)
+					model.set('custom-name', model.getName() + ' - ' + SelectedDisplayName);
+
+
+			}
+		}),
 	});
 }

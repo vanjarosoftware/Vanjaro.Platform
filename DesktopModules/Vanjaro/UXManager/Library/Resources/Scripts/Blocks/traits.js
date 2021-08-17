@@ -2106,8 +2106,8 @@ export default (editor, config = {}) => {
 				label.setAttribute("for", value.id);
 				label.setAttribute("class", value.class);
 				label.innerHTML = trait.target.getEl().textContent;
-				span.innerHTML = value.name;
-				
+				span.innerHTML = value.DisplayName;
+
 				icon.setAttribute("class", "fas fa-check-circle");
 
 				div.appendChild(span);
@@ -2178,16 +2178,19 @@ export default (editor, config = {}) => {
 			});
 
 			var capitalize = e => e.charAt(0).toUpperCase() + e.slice(1);
+			var selectedStyle = event.target.value;
+
+			var SelectedDisplayName = component.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
 
 			if (component.attributes.type == 'blockwrapper') {
-				VjEditor.getSelected().set('custom-name', capitalize(component.attributes.name) + ' - ' + event.target.value);
+				VjEditor.getSelected().set('custom-name', capitalize(component.attributes.name) + ' - ' + SelectedDisplayName);
 			}
 			else {
-				VjEditor.getSelected().set('custom-name', capitalize(component.attributes.type) + ' - ' + event.target.value);
-            }
-			
+				VjEditor.getSelected().set('custom-name', capitalize(component.attributes.type) + ' - ' + SelectedDisplayName);
+			}
 
-			
+
+
 			var model = component;
 			var trait = component.getTrait(event.target.name);
 			var selector = trait.attributes.selector;
