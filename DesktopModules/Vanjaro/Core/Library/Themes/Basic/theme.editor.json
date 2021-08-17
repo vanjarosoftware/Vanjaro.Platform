@@ -11741,11 +11741,11 @@
         },
         {
           "Guid": "bded6b29-283f-4620-b090-0e05be41abfb",
-          "Title": "My Account Color",
+          "Title": "Color",
           "DefaultValue": "$secondarycolor",
           "Suffix": "",
-          "CustomCSS": " .desktop_registerbox .dropdown-menu li span ,\n .mobile_registerbox .modal .modal-body a,\n  .registerlink-notification sup strong,\n .desktop_registerbox .registerlink-notification,\n .mobile_registerbox sup strong{\n    color: $registercolor ;\n}\n\n  .registerlink-notification svg path,\n  .registerlink-notification-icon svg path{\n  fill: $registercolor;\n}\n .desktop_registerbox .registerlink-notification span.badge,\n .mobile_registerbox .registerlink-notification span.badge{\n background-color: $registercolor;\n}",
-          "PreviewCSS": " .desktop_registerbox .dropdown-menu li span ,\n .mobile_registerbox .modal .modal-body a,\n  .registerlink-notification sup strong,\n .desktop_registerbox .registerlink-notification,\n .mobile_registerbox sup strong{\n    color: $registercolor ;\n}\n\n  .registerlink-notification svg path,\n .registerlink-notification-icon svg path{\n  fill: $registercolor;\n}\n .desktop_registerbox .registerlink-notification span.badge,\n .mobile_registerbox .registerlink-notification span.badge{\n background-color: $registercolor;\n}",
+          "CustomCSS": ".mobile_registerbox .modal .modal-body a.display-name,\n .registerlink-notification sup strong,\n.desktop_registerbox .registerlink-notification,\n.mobile_registerbox sup strong,\n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .loginuser{\n    color: $registercolor ;\n}\n\n .registerlink-notification svg path,\n .registerlink-notification-icon svg path{\n  fill: $registercolor;\n}\n.desktop_registerbox .registerlink-notification span.badge,\n.mobile_registerbox .registerlink-notification span.badge{\n background-color: $registercolor;\n}",
+          "PreviewCSS": ".mobile_registerbox .modal .modal-body a.display-name,\n .registerlink-notification sup strong,\n.desktop_registerbox .registerlink-notification,\n.mobile_registerbox sup strong,\n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .dropdown-toggle::after,\n.desktop_registerbox .loginuser{\n    color: $registercolor ;\n}\n\n .registerlink-notification svg path,\n .registerlink-notification-icon svg path{\n  fill: $registercolor;\n}\n.desktop_registerbox .registerlink-notification span.badge,\n.mobile_registerbox .registerlink-notification span.badge{\n background-color: $registercolor;\n}",
           "LessVariable": "$registercolor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -11755,22 +11755,53 @@
           "RangeMax": 100.0,
           "Increment": 1.0,
           "Guid": "7f6108d1-188d-4b15-acc4-080bc2a570be",
-          "Title": "My Account Font Size",
+          "Title": "Font Size",
           "DefaultValue": "14",
           "Suffix": "px",
-          "CustomCSS": " .desktop_registerbox .dropdown-menu li span,\n .mobile_registerbox .modal .modal-body .myaccount-items a{\n  font-size: $registerfontsizepx !important;\n}\n",
-          "PreviewCSS": " .desktop_registerbox .dropdown-menu li span,\n .mobile_registerbox .modal .modal-body .myaccount-items a{\n  font-size: $registerfontsizepx !important;\n}\n",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body .myaccount-items a, \n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n  font-size: $registerfontsizepx !important;\n}\n",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body .myaccount-items a ,\n .desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n  font-size: $registerfontsizepx !important;\n}\n",
           "LessVariable": "$registerfontsize",
           "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "67753486-1982-4517-86d1-83a10793a099",
+          "Title": "Font Weight",
+          "DefaultValue": "500",
+          "Suffix": "",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body .myaccount-items a, \n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    font-weight: $signupFweight  !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body .myaccount-items a, \n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    font-weight: $signupFweight !important;\n}",
+          "LessVariable": "$signupFweight",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
           "Guid": "15cdda6a-9955-4ec2-b452-2a64c37f6261",
-          "Title": "My Account Font Family",
+          "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": " .desktop_registerbox .dropdown-menu li span,\n .mobile_registerbox .modal .modal-body p{\n    font-family: $signupfontfamily !important;\n}",
-          "PreviewCSS": " .desktop_registerbox .dropdown-menu li span,\n .mobile_registerbox .modal .modal-body p{\n    font-family: $signupfontfamily !important;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p, \n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    font-family: $signupfontfamily !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p, \n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    font-family: $signupfontfamily !important;\n}",
           "LessVariable": "$signupfontfamily",
           "JavascriptVariable": "",
           "Type": "Fonts"
@@ -11785,33 +11816,69 @@
             }
           ],
           "Guid": "c9a91db8-f0ce-40b3-b3e1-bf80ce33289b",
-          "Title": "My Account Font Style",
+          "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": " .desktop_registerbox .dropdown-menu li span,\n .mobile_registerbox .modal .modal-body p{\n    font-style: $registerfontstyle !important;\n}",
-          "PreviewCSS": " .desktop_registerbox .dropdown-menu li span,\n .mobile_registerbox .modal .modal-body p{\n    font-style: $registerfontstyle !important;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p, \n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    font-style: $registerfontstyle !important;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body p, \n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    font-style: $registerfontstyle !important;\n}",
           "LessVariable": "$registerfontstyle",
           "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "ee6d8ce6-9f05-4eef-95f5-3b17437b7812",
+          "Title": "Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": " .desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body .myaccount-items a, \n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n      text-transform: $signuptexttransform ;\n  }\t",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-body .myaccount-items a, \n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    text-transform: $signuptexttransform;\n}",
+          "LessVariable": "$signuptexttransform",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
           "Guid": "77e9891e-28a3-4d56-823e-ce22150b9026",
-          "Title": "My Account Background Color",
+          "Title": "Dropdown Background Color",
           "DefaultValue": "#ffffff",
           "Suffix": "",
-          "CustomCSS": " .desktop_registerbox .dropdown-menu,\n .mobile_registerbox .modal .modal-content{\n  background-color: $profilebgColor;\n}",
-          "PreviewCSS": " .desktop_registerbox .dropdown-menu,\n .mobile_registerbox .modal .modal-content{\n  background-color: $profilebgColor;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu,\n.mobile_registerbox .modal .modal-content{\n  background-color: $profilebgColor;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu,\n.mobile_registerbox .modal .modal-content{\n  background-color: $profilebgColor;\n}",
           "LessVariable": "$profilebgColor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
         },
         {
+          "Guid": "55b21abb-d337-4c33-95ea-98e89437dbc8",
+          "Title": "Dropdown Color",
+          "DefaultValue": "$secondarycolor",
+          "Suffix": "",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu a, .desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-content .myaccount-items{\n  color: $profilelinkColor;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu a, .desktop_registerbox .dropdown-menu li span,\n.mobile_registerbox .modal .modal-content .myaccount-items{\n  color: $profilelinkColor;\n} ",
+          "LessVariable": "$profilelinkColor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
           "Guid": "3ba7b783-a6ee-4338-a038-8f8f9ddb85bd",
-          "Title": "My Account Border Color",
+          "Title": "Dropdown Border Color",
           "DefaultValue": "#00000026",
           "Suffix": "",
-          "CustomCSS": " .desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n  \n}\n\n .desktop_registerbox .dropdown-menu li + li,\n   .mobile_registerbox .myaccount-items + .myaccount-items{\n    border-top-color: $profilebrColor;\n}\n  .myaccount-items:last-child,\n   .mobile_registerbox .modal-header{\n  border-bottom-color: $profilebrColor;\n}\n\n  .mobile_registerbox .modal-body hr{\n background-color :  $profilebrColor;\n}",
-          "PreviewCSS": " .desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n\n}\n .desktop_registerbox .dropdown-menu li + li,\n   .mobile_registerbox .myaccount-items + .myaccount-items{\n    border-top-color: $profilebrColor;\n}\n  .myaccount-items:last-child,\n   .mobile_registerbox .modal-header{\n  border-bottom-color: $profilebrColor;\n}\n\n\n  .mobile_registerbox .modal-body hr{\n background-color :  $profilebrColor;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n  \n}\n\n.desktop_registerbox .dropdown-menu li + li,\n .mobile_registerbox .myaccount-items + .myaccount-items{\n    border-top-color: $profilebrColor;\n}\n.myaccount-items:last-child,\n .mobile_registerbox .modal-header{\n  border-bottom-color: $profilebrColor;\n}\n\n.mobile_registerbox .modal-body hr{\n background-color :  $profilebrColor;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-color: $profilebrColor;\n\n}\n.desktop_registerbox .dropdown-menu li + li,\n .mobile_registerbox .myaccount-items + .myaccount-items{\n    border-top-color: $profilebrColor;\n}\n.myaccount-items:last-child,\n .mobile_registerbox .modal-header{\n  border-bottom-color: $profilebrColor;\n}\n\n\n.mobile_registerbox .modal-body hr{\n background-color :  $profilebrColor;\n}",
           "LessVariable": "$profilebrColor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -11821,11 +11888,11 @@
           "RangeMax": 100.0,
           "Increment": 1.0,
           "Guid": "83e4408a-af9a-425f-8518-a09497091ac1",
-          "Title": "My Account Border Width",
+          "Title": "Dropdown Border Width",
           "DefaultValue": "1",
           "Suffix": "px",
-          "CustomCSS": " .desktop_registerbox .dropdown-menu{\n  border-width: $profiledDropdownbrWidthpx ;\n}\n\n .desktop_registerbox .dropdown-menu li + li,\n  .mobile_registerbox .myaccount-items + .myaccount-items{\n  border-top-width: $profiledDropdownbrWidthpx ;\n}\n .mobile_registerbox .myaccount-items:last-child,\n  .mobile_registerbox .modal-header {\n  border-bottom-width: $profiledDropdownbrWidthpx;\n}\n",
-          "PreviewCSS": " .desktop_registerbox .dropdown-menu{\n  border-width: $profiledDropdownbrWidthpx ;\n}\n\n .desktop_registerbox .dropdown-menu li + li,\n  .mobile_registerbox .myaccount-items + .myaccount-items{\n  border-top-width: $profiledDropdownbrWidthpx ;\n}\n .mobile_registerbox .myaccount-items:last-child,\n  .mobile_registerbox .modal-header {\n  border-bottom-width: $profiledDropdownbrWidthpx;\n}\n",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-width: $profiledDropdownbrWidthpx ;\n}\n\n.desktop_registerbox .dropdown-menu li + li,\n .mobile_registerbox .myaccount-items + .myaccount-items{\n  border-top-width: $profiledDropdownbrWidthpx ;\n}\n.mobile_registerbox .myaccount-items:last-child,\n .mobile_registerbox .modal-header {\n  border-bottom-width: $profiledDropdownbrWidthpx;\n}\n",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-width: $profiledDropdownbrWidthpx ;\n}\n\n.desktop_registerbox .dropdown-menu li + li,\n .mobile_registerbox .myaccount-items + .myaccount-items{\n  border-top-width: $profiledDropdownbrWidthpx ;\n}\n.mobile_registerbox .myaccount-items:last-child,\n .mobile_registerbox .modal-header {\n  border-bottom-width: $profiledDropdownbrWidthpx;\n}\n",
           "LessVariable": "$profiledDropdownbrWidth",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11834,12 +11901,26 @@
           "RangeMin": 0.0,
           "RangeMax": 100.0,
           "Increment": 1.0,
-          "Guid": "fe282829-31d4-4fb3-a508-cdaca3c11415",
-          "Title": "My Account Padding Top",
-          "DefaultValue": "0",
+          "Guid": "ce7abddc-82ba-43c0-9ee5-8bfe9bc47f61",
+          "Title": "Dropdown Border Radius",
+          "DefaultValue": "$siteBorderRadius",
           "Suffix": "px",
-          "CustomCSS": " .desktop_registerbox, .mobile_registerbox {\n  padding-top:$ProfilesignPtpx;\n}",
-          "PreviewCSS": " .desktop_registerbox, .mobile_registerbox {\n  padding-top:$ProfilesignPtpx;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu{\n  border-radius: unquote($profiledDropdownbrradius+'px');\n}\n",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu{\n  border-radius: $profiledDropdownbrradiuspx ;\n}\n",
+          "LessVariable": "$profiledDropdownbrradius",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "fe282829-31d4-4fb3-a508-cdaca3c11415",
+          "Title": "Dropdown Padding Top",
+          "DefaultValue": "10",
+          "Suffix": "px",
+          "CustomCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-top:$ProfilesignPtpx;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-top:$ProfilesignPtpx;\n}",
           "LessVariable": "$ProfilesignPt",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11849,11 +11930,11 @@
           "RangeMax": 100.0,
           "Increment": 1.0,
           "Guid": "fc56e5ba-95fc-415b-b385-25b2e209dd10",
-          "Title": "My Account Padding Bottom",
-          "DefaultValue": "0",
+          "Title": "Dropdown Padding Bottom",
+          "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": " .desktop_registerbox, .mobile_registerbox {\n  padding-bottom:$ProfilesignPbpx;\n}",
-          "PreviewCSS": " .desktop_registerbox, .mobile_registerbox {\n  padding-bottom:$ProfilesignPbpx;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-bottom:$ProfilesignPbpx;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-bottom:$ProfilesignPbpx;\n}",
           "LessVariable": "$ProfilesignPb",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11863,11 +11944,11 @@
           "RangeMax": 100.0,
           "Increment": 1.0,
           "Guid": "7218b1f8-e555-4d99-9434-74b28f6d36d6",
-          "Title": "My Account Padding Left",
-          "DefaultValue": "0",
+          "Title": "Dropdown Padding Left",
+          "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": " .desktop_registerbox, .mobile_registerbox {\n  padding-left:$ProfilesignPlpx;\n}",
-          "PreviewCSS": " .desktop_registerbox, .mobile_registerbox {\n  padding-left:$ProfilesignPlpx;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-left:$ProfilesignPlpx;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-left:$ProfilesignPlpx;\n}",
           "LessVariable": "$ProfilesignPl",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11877,22 +11958,22 @@
           "RangeMax": 100.0,
           "Increment": 1.0,
           "Guid": "98537a2a-a04d-4552-a878-a461358b7f63",
-          "Title": "My Account Padding Right",
-          "DefaultValue": "0",
+          "Title": "Dropdown Padding Right",
+          "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": " .desktop_registerbox, .mobile_registerbox {\n  padding-right:$ProfilesignPrpx;\n}",
-          "PreviewCSS": " .desktop_registerbox, .mobile_registerbox {\n  padding-right:$ProfilesignPrpx;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-right:$ProfilesignPrpx;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown .dropdown-menu li a, .mobile_registerbox .myaccount-items {\n  padding-right:$ProfilesignPrpx;\n}",
           "LessVariable": "$ProfilesignPr",
           "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
           "Guid": "820f36b5-811f-4b91-8b52-a5dec4941d72",
-          "Title": "My Account Background Hover Color",
+          "Title": "Dropdown Background Hover Color",
           "DefaultValue": "#efefef",
           "Suffix": "",
-          "CustomCSS": " .desktop_registerbox .dropdown-menu a:hover,\n .mobile_registerbox .myaccount-items:hover{\n  background-color:$profilebgHoveVolor;\n}",
-          "PreviewCSS": " .desktop_registerbox .dropdown-menu a:hover,\n .mobile_registerbox .myaccount-items:hover{\n  background-color:$profilebgHoveVolor;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu a:hover,\n.mobile_registerbox .myaccount-items:hover{\n  background-color:$profilebgHoveVolor;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu a:hover,\n.mobile_registerbox .myaccount-items:hover{\n  background-color:$profilebgHoveVolor;\n}",
           "LessVariable": "$profilebgHoveVolor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -11905,8 +11986,8 @@
           "Title": "Avatar Width",
           "DefaultValue": "25",
           "Suffix": "px",
-          "CustomCSS": " .desktop_registerbox img{\nwidth:$avatarwidthpx!important;\n}",
-          "PreviewCSS": " .desktop_registerbox img{\nwidth:$avatarwidthpx!important;\n}",
+          "CustomCSS": ".desktop_registerbox img{\nwidth:$avatarwidthpx!important;\n}",
+          "PreviewCSS": ".desktop_registerbox img{\nwidth:$avatarwidthpx!important;\n}",
           "LessVariable": "$avatarwidth",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11919,8 +12000,8 @@
           "Title": "Avatar Height",
           "DefaultValue": "25",
           "Suffix": "px",
-          "CustomCSS": " .desktop_registerbox img{\nheight:$avatarheightpx!important;\n}",
-          "PreviewCSS": " .desktop_registerbox img{\nheight:$avatarheightpx!important;\n}",
+          "CustomCSS": ".desktop_registerbox img{\nheight:$avatarheightpx!important;\n}",
+          "PreviewCSS": ".desktop_registerbox img{\nheight:$avatarheightpx!important;\n}",
           "LessVariable": "$avatarheight",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11933,8 +12014,8 @@
           "Title": "Avatar Border radius",
           "DefaultValue": "50",
           "Suffix": "%",
-          "CustomCSS": " .desktop_registerbox img{\nborder-radius:$avatarradius%!important;\n}",
-          "PreviewCSS": " .desktop_registerbox img{\nborder-radius:$avatarradius%!important;\n}",
+          "CustomCSS": ".desktop_registerbox img{\nborder-radius:$avatarradius%!important;\n}",
+          "PreviewCSS": ".desktop_registerbox img{\nborder-radius:$avatarradius%!important;\n}",
           "LessVariable": "$avatarradius",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11944,8 +12025,8 @@
           "Title": "Menu Icon Color",
           "DefaultValue": "$secondarycolor",
           "Suffix": "",
-          "CustomCSS": " .desktop_registerbox .dropdown-menu li svg path,\n .mobile_registerbox .modal .modal-body svg path {\n  fill: $myProfileDmenuIconClr;\n}",
-          "PreviewCSS": " .desktop_registerbox .dropdown-menu li svg path,\n .mobile_registerbox .modal .modal-body svg path {\n  fill: $myProfileDmenuIconClr;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu li svg path,\n.mobile_registerbox .modal .modal-body svg path {\n  fill: $myProfileDmenuIconClr;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu li svg path,\n.mobile_registerbox .modal .modal-body svg path {\n  fill: $myProfileDmenuIconClr;\n}",
           "LessVariable": "$myProfileDmenuIconClr",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -11958,8 +12039,8 @@
           "Title": "Menu Icon Height",
           "DefaultValue": "14",
           "Suffix": "px",
-          "CustomCSS": " .desktop_registerbox .dropdown-menu li svg,\n .mobile_registerbox .modal .modal-body svg{\n  height: $myProfileDmenuIconHeightpx;\n}",
-          "PreviewCSS": " .desktop_registerbox .dropdown-menu li svg,\n .mobile_registerbox .modal .modal-body svg {\n  height: $myProfileDmenuIconHeightpx;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu li svg,\n.mobile_registerbox .modal .modal-body svg{\n  height: $myProfileDmenuIconHeightpx;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu li svg,\n.mobile_registerbox .modal .modal-body svg {\n  height: $myProfileDmenuIconHeightpx;\n}",
           "LessVariable": "$myProfileDmenuIconHeight",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11972,8 +12053,8 @@
           "Title": "Menu Icon Width ",
           "DefaultValue": "14",
           "Suffix": "px",
-          "CustomCSS": " .desktop_registerbox .dropdown-menu li svg,\n .mobile_registerbox .modal .modal-body svg{\n  width: $myProfileDmenuIconWidthpx;\n}",
-          "PreviewCSS": " .desktop_registerbox .dropdown-menu li svg,\n .mobile_registerbox .modal .modal-body svg {\n  width: $myProfileDmenuIconWidthpx;\n}",
+          "CustomCSS": ".desktop_registerbox .dropdown-menu li svg,\n.mobile_registerbox .modal .modal-body svg{\n  width: $myProfileDmenuIconWidthpx;\n}",
+          "PreviewCSS": ".desktop_registerbox .dropdown-menu li svg,\n.mobile_registerbox .modal .modal-body svg {\n  width: $myProfileDmenuIconWidthpx;\n}",
           "LessVariable": "$myProfileDmenuIconWidth",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -11983,8 +12064,8 @@
           "Title": "User Icon Color",
           "DefaultValue": "#444444",
           "Suffix": "",
-          "CustomCSS": " .mobile_registerbox .mobile-registerbox-btn svg path,\n .loginuser svg path{\n  fill: $profileMobileIconClr;\n}",
-          "PreviewCSS": " .mobile_registerbox .mobile-registerbox-btn svg path,\n .loginuser svg path{\n  fill: $profileMobileIconClr;\n}",
+          "CustomCSS": ".mobile_registerbox .mobile-registerbox-btn svg path,\n.loginuser svg path{\n  fill: $profileMobileIconClr;\n}",
+          "PreviewCSS": ".mobile_registerbox .mobile-registerbox-btn svg path,\n.loginuser svg path{\n  fill: $profileMobileIconClr;\n}",
           "LessVariable": "$profileMobileIconClr",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -11997,8 +12078,8 @@
           "Title": "User Icon Height",
           "DefaultValue": "21",
           "Suffix": "px",
-          "CustomCSS": " .mobile_registerbox .mobile-registerbox-btn svg,\n .loginuser svg{\n    height: $userIconHeightpx;\n}",
-          "PreviewCSS": " .mobile_registerbox .mobile-registerbox-btn svg,\n .loginuser svg {\n    height: $userIconHeightpx;\n}",
+          "CustomCSS": ".mobile_registerbox .mobile-registerbox-btn svg,\n.loginuser svg{\n    height: $userIconHeightpx;\n}",
+          "PreviewCSS": ".mobile_registerbox .mobile-registerbox-btn svg,\n.loginuser svg {\n    height: $userIconHeightpx;\n}",
           "LessVariable": "$userIconHeight",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12011,74 +12092,19 @@
           "Title": "User Icon Width",
           "DefaultValue": "21",
           "Suffix": "px",
-          "CustomCSS": " .mobile_registerbox .mobile-registerbox-btn svg,\n .loginuser svg {\n    width: $userIconWidthpx;\n}",
-          "PreviewCSS": " .mobile_registerbox .mobile-registerbox-btn svg,\n .loginuser svg {\n    width: $userIconWidthpx;\n}",
+          "CustomCSS": ".mobile_registerbox .mobile-registerbox-btn svg,\n.loginuser svg {\n    width: $userIconWidthpx;\n}",
+          "PreviewCSS": ".mobile_registerbox .mobile-registerbox-btn svg,\n.loginuser svg {\n    width: $userIconWidthpx;\n}",
           "LessVariable": "$userIconWidth",
           "JavascriptVariable": "",
           "Type": "Slider"
-        },
-        {
-          "Guid": "03163755-b910-45e5-9ef7-c97972b6bc95",
-          "Title": "Username Color",
-          "DefaultValue": "$secondarycolor",
-          "Suffix": "",
-          "CustomCSS": " .desktop_registerbox .dropdown-toggle,\n .desktop_registerbox .dropdown-toggle::after,\n .desktop_registerbox .loginuser{\n  color: $userprofileaccountClr;\n}\n\n",
-          "PreviewCSS": " .desktop_registerbox .dropdown-toggle,\n .desktop_registerbox .dropdown-toggle::after,\n .desktop_registerbox .loginuser{\n  color: $userprofileaccountClr;\n}\n\n",
-          "LessVariable": "$userprofileaccountClr",
-          "JavascriptVariable": "",
-          "Type": "Color Picker"
-        },
-        {
-          "RangeMin": 0.0,
-          "RangeMax": 100.0,
-          "Increment": 1.0,
-          "Guid": "7beef59d-2d5c-449e-ba53-63b778c6230b",
-          "Title": "Username Font Size",
-          "DefaultValue": "14",
-          "Suffix": "px",
-          "CustomCSS": " .desktop_registerbox .dropdown-toggle,\n .desktop_registerbox .loginuser{\n  font-size: $userprofileFsizepx;\n}",
-          "PreviewCSS": " .desktop_registerbox .dropdown-toggle,\n .desktop_registerbox .loginuser{\n  font-size: $userprofileFsizepx;\n}",
-          "LessVariable": "$userprofileFsize",
-          "JavascriptVariable": "",
-          "Type": "Slider"
-        },
-        {
-          "Options": [
-            {
-              "normal": "normal"
-            },
-            {
-              "italic": "italic"
-            }
-          ],
-          "Guid": "abe0ee96-1a7f-4d05-8441-43bffbd053dc",
-          "Title": "Username Font Style",
-          "DefaultValue": "normal",
-          "Suffix": "",
-          "CustomCSS": " .desktop_registerbox .dropdown-toggle,\n .desktop_registerbox .loginuser{\n    font-style: $userprofileFstyle !important;\n}",
-          "PreviewCSS": " .desktop_registerbox .dropdown-toggle,\n .desktop_registerbox .loginuser{\n    font-style: $userprofileFstyle !important;\n}",
-          "LessVariable": "$userprofileFstyle",
-          "JavascriptVariable": "",
-          "Type": "Dropdown"
-        },
-        {
-          "Guid": "143f5a7c-239a-450f-b420-15203f300296",
-          "Title": "Username Font Family",
-          "DefaultValue": "Poppins, sans-serif",
-          "Suffix": "",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    font-family: $userProfileFf !important;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    font-family: $userProfileFf !important;\n}",
-          "LessVariable": "$userProfileFf",
-          "JavascriptVariable": "",
-          "Type": "Fonts"
         },
         {
           "Guid": "38dc73e4-6caf-444c-a5a4-aec01478f27b",
           "Title": "Username Bell Icon Color",
           "DefaultValue": "#c5c5c5",
           "Suffix": "",
-          "CustomCSS": " .desktop_registerbox .registerlink-notification-profile svg path{\n fill :  $usernamebellIconClr;\n}",
-          "PreviewCSS": " .desktop_registerbox .registerlink-notification-profile svg path{\n fill :  $usernamebellIconClr;\n}",
+          "CustomCSS": ".desktop_registerbox .registerlink-notification-profile svg path{\n fill :  $usernamebellIconClr;\n}",
+          "PreviewCSS": ".desktop_registerbox .registerlink-notification-profile svg path{\n fill :  $usernamebellIconClr;\n}",
           "LessVariable": "$usernamebellIconClr",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -12088,14 +12114,14 @@
           "Title": "Username Notification Count Color",
           "DefaultValue": "#444444",
           "Suffix": "",
-          "CustomCSS": " .desktop_registerbox .registerlink-notification-profile sup strong{\n  color: $notificationCountclr;\n}",
-          "PreviewCSS": " .desktop_registerbox .registerlink-notification-profile sup strong{\n  color: $notificationCountclr;\n}",
+          "CustomCSS": ".desktop_registerbox .registerlink-notification-profile sup strong{\n  color: $notificationCountclr;\n}",
+          "PreviewCSS": ".desktop_registerbox .registerlink-notification-profile sup strong{\n  color: $notificationCountclr;\n}",
           "LessVariable": "$notificationCountclr",
           "JavascriptVariable": "",
           "Type": "Color Picker"
         }
       ],
-      "Sass": ".registerlinkbox {\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}\n\n.registeruser:hover {\n\tcolor: #444;\n}\n.desktop_registerbox .dropdown-menu li {\n position:relative;\n}\n\n.desktop_registerbox .registerlink-notification,\n.mobile_registerbox .registerlink-notification{\n    display: flex !important;\n    cursor: pointer;\n    justify-content: space-between;\n    align-items: center;\n}\n\n.desktop_registerbox .dropdown-menu li svg,\n.mobile_registerbox .modal .modal-body svg {\n    margin-right: 5px;\n}\n.desktop_registerbox sup,\n.mobile_registerbox sup{\n      left: -3px;\n}\n\n.desktop_registerbox .registerlink-notification span.badge,\n.mobile_registerbox .registerlink-notification span.badge{\n    color: #ffff;\n    font-size: 12px !important;\n  \tfont-weight: bold;\n    margin: 0;\n    padding: 4px 8px;\n\n}\n\n.desktop_registerbox .registerlink-notification-profile .registerlink-notification-icon {\n    margin-right: 10px;\n}\n .desktop_registerbox sup, .mobile_registerbox sup{\n  top:-1.1em;\n}\n\n.mobile_registerbox .registerlink-notification span.badge{\n    color: #ffff;\n    font-size: 12px !important;\n  \tfont-weight: bold;\n    margin: 0;\n  \tpadding: 4px 8px;\n}\n\n    .registerlinkbox .vj-text{\n\tdisplay: inline-block;\n    text-align: unset;\n    color: unset !important;\n    margin-left:5px;\n}\n\n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .registerlink-notification-profile{\n    display: inline-block;\n  \tcursor: pointer;\n}\n\n.desktop_registerbox span {\n    margin: 0px;\n}\n\n.desktop_registerbox .dropdown-menu {\n    min-width: 235px;\n    padding: 0;\n    top: 100% !important;\n    right: 0 !important;\n    left: auto !important;\n    transform: none !important;\n}\n    .desktop_registerbox .dropdown-menu a {\n        display: block;\n        padding: 10px;\n        margin: 0;       \n        transition: all .15s ease-in-out;\n    }\n\n\n.desktop_registerbox .dropdown-menu li + li{\n  border-style:solid;\n  border-bottom:0px;\n  border-left:0px;\n  border-right:0px \n}\n\n.mobile_registerbox .myaccount-items {\n   display:block;\n}\n\n.mobile_registerbox .myaccount-items + .myaccount-items {\n    border-top-style:solid;  \n}\n.mobile_registerbox .myaccount-items:last-child{\n  border-bottom-style:solid;\n}\n\n.mobile_registerbox .myaccount-items {\n  padding: 10px;\n}\n.mobile_registerbox .modal-body {\n  padding: 1rem 0rem;\n}\n\n.mobile_registerbox .modal-dialog {\n    margin: 0;\n    max-width: 100% !important;\n    height: 100%  !important;\n}\n\n@media(min-width: 992px) {\n    .mobile_registerbox {\n        display: none;\n    }\n}\n@media(max-width: 1199px) {\n    .desktop_registerbox {\n        display: none;\n    }\n    .mobile_registerbox img {\n        border-radius: 50%;\n    }\n}"
+      "Sass": "/*My Account*/\n .desktop_registerbox .dropdown-menu {\noverflow:hidden;\n}\n\n\n.registerlinkbox {\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}\n\n.registeruser:hover {\n\tcolor: #444;\n}\n .desktop_registerbox .dropdown .dropdown-menu li:first-of-type a{ \nborder-bottom-left-radius:0 !important; \n border-bottom-right-radius:0 !important; \n } \n .desktop_registerbox .dropdown .dropdown-menu li:last-of-type a{ \nborder-top-left-radius:0 !important; \n border-top-right-radius:0 !important; \n } \n .desktop_registerbox .dropdown-menu li {\n position:relative;\n}\n\n.desktop_registerbox .registerlink-notification,\n.mobile_registerbox .registerlink-notification{\n    display: flex !important;\n    cursor: pointer;\n    justify-content: space-between;\n    align-items: center;\n}\n\n.desktop_registerbox .dropdown-menu li svg,\n.mobile_registerbox .modal .modal-body svg {\n    margin-right: 5px;\n}\n.desktop_registerbox sup,\n.mobile_registerbox sup{\n      left: -3px;\n}\n\n.desktop_registerbox .registerlink-notification span.badge,\n.mobile_registerbox .registerlink-notification span.badge{\n    color: #ffff;\n    font-size: 12px !important;\n  \tfont-weight: bold;\n    margin: 0;\n    padding: 4px 8px;\n\n}\n\n.desktop_registerbox .registerlink-notification-profile .registerlink-notification-icon {\n    margin-right: 10px;\n}\n .desktop_registerbox sup, .mobile_registerbox sup{\n  top:-1.1em;\n}\n\n.mobile_registerbox .registerlink-notification span.badge{\n    color: #ffff;\n    font-size: 12px !important;\n  \tfont-weight: bold;\n    margin: 0;\n  \tpadding: 4px 8px;\n}\n\n    .registerlinkbox .vj-text{\n\tdisplay: inline-block;\n    text-align: unset;\n    color: unset !important;\n    margin-left:5px;\n}\n\n.desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .registerlink-notification-profile{\n    display: inline-block;\n  \tcursor: pointer;\n}\n\n.desktop_registerbox span {\n    margin: 0px;\n}\n\n.desktop_registerbox .dropdown-menu {\n    min-width: 235px;\n    padding: 0;\n    top: 0 !important;\n    right: 0 !important;\n    left: auto !important;\n}\n    .desktop_registerbox .dropdown-menu a {\n        display: block;\n        margin: 0;       \n        transition: all .15s ease-in-out;\n    }\n\n\n.desktop_registerbox .dropdown-menu li + li{\n  border-style:solid;\n  border-bottom:0px;\n  border-left:0px;\n  border-right:0px \n}\n.mobile_registerbox .myaccount-items.display-name:first-child:hover{\n  background:none;\n}\n.mobile_registerbox .myaccount-items {\n   display:block;\n}\n\n.mobile_registerbox .myaccount-items + .myaccount-items {\n    border-top-style:solid;  \n}\n.mobile_registerbox .myaccount-items:last-child{\n  border-bottom-style:solid;\n}\n\n.mobile_registerbox .myaccount-items {\n  padding: 10px;\n}\n.mobile_registerbox .modal-body {\n  padding: 1rem 0rem;\n}\n\n.mobile_registerbox .modal-dialog {\n    margin: 0;\n    max-width: 100% !important;\n    height: 100%  !important;\n}\n\n@media(min-width: 1200px) {\n    .mobile_registerbox {\n        display: none;\n    }\n}\n@media(max-width: 1199px) {\n    .desktop_registerbox {\n        display: none;\n    }\n    .mobile_registerbox img {\n        border-radius: 50%;\n    }\n}"
     },
     {
       "Guid": "dd38080a-150f-4942-8cd6-db9c7200c315",
@@ -12118,16 +12144,16 @@
           "CustomCSS": "div.styles.register-link-style-2{\ndisplay:$mAtwoVisiblity !important;\n}\n",
           "PreviewCSS": "div.styles.register-link-style-2 {\ndisplay:$mAtwoVisiblity !important;\n}",
           "LessVariable": "$mAtwoVisiblity",
-          "JavascriptVariable": null,
+          "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Guid": "7716939b-0db7-499b-a657-d83f4638f504",
-          "Title": "My Account Color",
+          "Title": "Color",
           "DefaultValue": "$secondarycolor",
           "Suffix": "",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span ,\n.register-link-style-2 .mobile_registerbox .modal .modal-body a,\n.register-link-style-2  .registerlink-notification sup strong,\n.register-link-style-2 .desktop_registerbox .registerlink-notification,\n.register-link-style-2 .mobile_registerbox sup strong{\n    color: $mAtworegistercolor ;\n}\n\n.register-link-style-2  .registerlink-notification svg path,\n.register-link-style-2  .registerlink-notification-icon svg path{\n  fill: $mAtworegistercolor;\n}\n.register-link-style-2 .desktop_registerbox .registerlink-notification span.badge,\n.register-link-style-2 .mobile_registerbox .registerlink-notification span.badge{\n background-color: $mAtworegistercolor;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span ,\n.register-link-style-2 .mobile_registerbox .modal .modal-body a,\n.register-link-style-2  .registerlink-notification sup strong,\n.register-link-style-2 .desktop_registerbox .registerlink-notification,\n.register-link-style-2 .mobile_registerbox sup strong{\n    color: $mAtworegistercolor ;\n}\n\n.register-link-style-2  .registerlink-notification svg path,\n.register-link-style-2 .registerlink-notification-icon svg path{\n  fill: $mAtworegistercolor;\n}\n.register-link-style-2 .desktop_registerbox .registerlink-notification span.badge,\n.register-link-style-2 .mobile_registerbox .registerlink-notification span.badge{\n background-color: $mAtworegistercolor;\n}",
+          "CustomCSS": ".register-link-style-2 .mobile_registerbox .modal .modal-body a.display-name,\n .register-link-style-2 .registerlink-notification sup strong,\n.register-link-style-2 .desktop_registerbox .registerlink-notification,\n.register-link-style-2 .mobile_registerbox sup strong,\n.register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .dropdown-toggle::after,\n.register-link-style-2 .desktop_registerbox .loginuser{\n    color: $mAtworegistercolor ;\n}\n\n.register-link-style-2  .registerlink-notification svg path,\n.register-link-style-2  .registerlink-notification-icon svg path{\n  fill: $mAtworegistercolor;\n}\n.register-link-style-2 .desktop_registerbox .registerlink-notification span.badge,\n.register-link-style-2 .mobile_registerbox .registerlink-notification span.badge{\n background-color: $mAtworegistercolor;\n}",
+          "PreviewCSS": ".register-link-style-2 .mobile_registerbox .modal .modal-body a.display-name,\n .register-link-style-2 .registerlink-notification sup strong,\n.register-link-style-2 .desktop_registerbox .registerlink-notification,\n.register-link-style-2 .mobile_registerbox sup strong,\n.register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .dropdown-toggle::after,\n.register-link-style-2 .desktop_registerbox .loginuser{\n    color: $mAtworegistercolor ;\n}\n\n.register-link-style-2  .registerlink-notification svg path,\n.register-link-style-2 .registerlink-notification-icon svg path{\n  fill: $mAtworegistercolor;\n}\n.register-link-style-2 .desktop_registerbox .registerlink-notification span.badge,\n.register-link-style-2 .mobile_registerbox .registerlink-notification span.badge{\n background-color: $mAtworegistercolor;\n}",
           "LessVariable": "$mAtworegistercolor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
@@ -12137,25 +12163,81 @@
           "RangeMax": 100.0,
           "Increment": 1.0,
           "Guid": "55d82b04-e1f8-4523-b38b-e7068fbedea1",
-          "Title": "My Account Font Size",
+          "Title": "Font Size",
           "DefaultValue": "14",
           "Suffix": "px",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body .myaccount-items a{\n  font-size: $mAtworegisterfontsizepx !important;\n}\n",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body .myaccount-items a{\n  font-size: $mAtworegisterfontsizepx !important;\n}\n",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body .myaccount-items a, \n.register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n  font-size: $mAtworegisterfontsizepx !important;\n}\n",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body .myaccount-items a, \n.register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n  font-size: $mAtworegisterfontsizepx !important;\n}\n",
           "LessVariable": "$mAtworegisterfontsize",
           "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "ef46a66c-266e-47d8-8382-873fb90143a7",
+          "Title": "Font Weight",
+          "DefaultValue": "500",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n .register-link-style-2 .mobile_registerbox .modal .modal-body .myaccount-items a, \n.register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .loginuser{\n    font-weight: $mAtwosignupFweight  !important;\n}",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n .register-link-style-2 .mobile_registerbox .modal .modal-body .myaccount-items a, \n.register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .loginuser{\n    font-weight: $mAtwosignupFweight !important;\n}",
+          "LessVariable": "$mAtwosignupFweight",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
           "Guid": "c575a17a-8507-42a8-a8e5-e0b18698557d",
-          "Title": "My Account Font Family",
+          "Title": "Font Family",
           "DefaultValue": "Poppins, sans-serif",
           "Suffix": "",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body p{\n    font-family: $mAtwosignupfontfamily !important;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body p{\n    font-family: $mAtwosignupfontfamily !important;\n}",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body p, \n.register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .loginuser{\n    font-family: $mAtwosignupfontfamily !important;\n}",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body p, \n.register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .loginuser{\n    font-family: $mAtwosignupfontfamily !important;\n}",
           "LessVariable": "$mAtwosignupfontfamily",
           "JavascriptVariable": "",
           "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "26968235-e51e-41d6-91cb-f910bdf65d05",
+          "Title": "Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": " .register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body .myaccount-items a, \n.register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .loginuser{\n      text-transform: $mAtwosignuptexttransform ;\n  }\t",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body .myaccount-items a, \n.register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .loginuser{\n    text-transform: $mAtwosignuptexttransform;\n}",
+          "LessVariable": "$mAtwosignuptexttransform",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
         },
         {
           "Options": [
@@ -12167,18 +12249,18 @@
             }
           ],
           "Guid": "abdefd3b-4a30-4941-906b-26e16e236adc",
-          "Title": "My Account Font Style",
+          "Title": "Font Style",
           "DefaultValue": "normal",
           "Suffix": "",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body p{\n    font-style: $mAtworegisterfontstyle !important;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body p{\n    font-style: $mAtworegisterfontstyle !important;\n}",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body p, \n.register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .loginuser{\n    font-style: $mAtworegisterfontstyle !important;\n}",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu li span,\n.register-link-style-2 .mobile_registerbox .modal .modal-body p, \n.register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .loginuser{\n    font-style: $mAtworegisterfontstyle !important;\n}",
           "LessVariable": "$mAtworegisterfontstyle",
           "JavascriptVariable": "",
           "Type": "Dropdown"
         },
         {
           "Guid": "ccb4266c-f41a-48c0-a45d-3372ecb6fb3e",
-          "Title": "My Account Background Color",
+          "Title": "Dropdown Background Color",
           "DefaultValue": "#ffffff",
           "Suffix": "",
           "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu,\n.register-link-style-2 .mobile_registerbox .modal .modal-content{\n  background-color: $mAtwoprofilebgColor;\n}",
@@ -12188,8 +12270,19 @@
           "Type": "Color Picker"
         },
         {
+          "Guid": "6fc53f09-6057-471c-902e-0eceb058b73f",
+          "Title": "Dropdown Color",
+          "DefaultValue": "$secondarycolor",
+          "Suffix": "",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu a, \n .register-link-style-2 .desktop_registerbox .dropdown-menu li span, \n .register-link-style-2 .mobile_registerbox .modal .modal-content .myaccount-items{\n  color: $mAtwoprofilelinkColor;\n} ",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu a, \n .register-link-style-2 .desktop_registerbox .dropdown-menu li span, \n .register-link-style-2 .mobile_registerbox .modal .modal-content .myaccount-items{\n  color: $mAtwoprofilelinkColor;\n}",
+          "LessVariable": "$mAtwoprofilelinkColor",
+          "JavascriptVariable": "",
+          "Type": "Color Picker"
+        },
+        {
           "Guid": "d276799e-4869-4498-a41a-d002cbdea1e2",
-          "Title": "My Account Border Color",
+          "Title": "Dropdown Border Color",
           "DefaultValue": "#00000026",
           "Suffix": "",
           "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu{\n  border-color: $mAtwoprofilebrColor;\n  \n}\n\n.register-link-style-2 .desktop_registerbox .dropdown-menu li + li,\n.register-link-style-2   .mobile_registerbox .myaccount-items + .myaccount-items{\n    border-top-color: $mAtwoprofilebrColor;\n}\n.register-link-style-2  .myaccount-items:last-child,\n.register-link-style-2   .mobile_registerbox .modal-header{\n  border-bottom-color: $mAtwoprofilebrColor;\n}\n\n.register-link-style-2  .mobile_registerbox .modal-body hr{\n background-color :  $mAtwoprofilebrColor;\n}",
@@ -12203,7 +12296,7 @@
           "RangeMax": 100.0,
           "Increment": 1.0,
           "Guid": "8980cb4a-cde6-4666-aaec-2097de78a02d",
-          "Title": "My Account Border Width",
+          "Title": "Dropdown Border Width",
           "DefaultValue": "1",
           "Suffix": "px",
           "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu{\n  border-width: $mAtwoprofiledDropdownbrWidthpx ;\n}\n\n.register-link-style-2 .desktop_registerbox .dropdown-menu li + li,\n.register-link-style-2  .mobile_registerbox .myaccount-items + .myaccount-items{\n  border-top-width: $mAtwoprofiledDropdownbrWidthpx ;\n}\n.register-link-style-2 .mobile_registerbox .myaccount-items:last-child,\n.register-link-style-2  .mobile_registerbox .modal-header {\n  border-bottom-width: $mAtwoprofiledDropdownbrWidthpx;\n}\n",
@@ -12216,12 +12309,26 @@
           "RangeMin": 0.0,
           "RangeMax": 100.0,
           "Increment": 1.0,
-          "Guid": "94ce2be8-5579-4fbe-b669-cdcdfc17939a",
-          "Title": "My Account Padding Top",
-          "DefaultValue": "0",
+          "Guid": "d2b20062-63ca-4f30-898c-fc45b07a69c2",
+          "Title": "Dropdown Border Radius",
+          "DefaultValue": "$siteBorderRadius",
           "Suffix": "px",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox, .mobile_registerbox {\n  padding-top:$mAtwoProfilesignPtpx;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox, .mobile_registerbox {\n  padding-top:$mAtwoProfilesignPtpx;\n}",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu{\n  border-radius: unquote($mAtwoprofiledDropdownbrradius+'px');\n}\n\n ",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu{\n  border-radius: $mAtwoprofiledDropdownbrradiuspx ;\n}\n",
+          "LessVariable": "$mAtwoprofiledDropdownbrradius",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 100.0,
+          "Increment": 1.0,
+          "Guid": "94ce2be8-5579-4fbe-b669-cdcdfc17939a",
+          "Title": "Dropdown Padding Top",
+          "DefaultValue": "10",
+          "Suffix": "px",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-top:$mAtwoProfilesignPtpx;\n}",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-top:$mAtwoProfilesignPtpx;\n}",
           "LessVariable": "$mAtwoProfilesignPt",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12231,11 +12338,11 @@
           "RangeMax": 100.0,
           "Increment": 1.0,
           "Guid": "34b01ac7-6dd4-4b2c-9d4f-711676f39ca2",
-          "Title": "My Account Padding Bottom",
-          "DefaultValue": "0",
+          "Title": "Dropdown Padding Bottom",
+          "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox, .mobile_registerbox {\n  padding-bottom:$mAtwoProfilesignPbpx;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox, .mobile_registerbox {\n  padding-bottom:$mAtwoProfilesignPbpx;\n}",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-bottom:$mAtwoProfilesignPbpx;\n}",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-bottom:$mAtwoProfilesignPbpx;\n}",
           "LessVariable": "$mAtwoProfilesignPb",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12245,11 +12352,11 @@
           "RangeMax": 100.0,
           "Increment": 1.0,
           "Guid": "fb5c7eff-79f4-474d-b65c-8a2cc2ac5b24",
-          "Title": "My Account Padding Left",
-          "DefaultValue": "0",
+          "Title": "Dropdown Padding Left",
+          "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox, .mobile_registerbox {\n  padding-left:$mAtwoProfilesignPlpx;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox, .mobile_registerbox {\n  padding-left:$mAtwoProfilesignPlpx;\n}",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-left:$mAtwoProfilesignPlpx;\n}",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-left:$mAtwoProfilesignPlpx;\n}",
           "LessVariable": "$mAtwoProfilesignPl",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12259,18 +12366,18 @@
           "RangeMax": 100.0,
           "Increment": 1.0,
           "Guid": "11d1a835-3ee0-43f3-a094-ea4d643d1fa7",
-          "Title": "My Account Padding Right",
-          "DefaultValue": "0",
+          "Title": "Dropdown Padding Right",
+          "DefaultValue": "10",
           "Suffix": "px",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox, .mobile_registerbox {\n  padding-right:$mAtwoProfilesignPrpx;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox, .mobile_registerbox {\n  padding-right:$mAtwoProfilesignPrpx;\n}",
+          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-right:$mAtwoProfilesignPrpx;\n}",
+          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown .dropdown-menu li a,\n.register-link-style-2 .mobile_registerbox .myaccount-items{\n  padding-right:$mAtwoProfilesignPrpx;\n}",
           "LessVariable": "$mAtwoProfilesignPr",
           "JavascriptVariable": "",
           "Type": "Slider"
         },
         {
           "Guid": "6a16d269-92c7-4cc4-9a52-75e196d8d813",
-          "Title": "My Account Background Hover Color",
+          "Title": "Dropdown Background Hover Color",
           "DefaultValue": "#EFEFEF",
           "Suffix": "",
           "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-menu a:hover,\n.register-link-style-2 .mobile_registerbox .myaccount-items:hover{\n  background-color:$mAtwoprofilebgHoveVolor;\n}",
@@ -12398,61 +12505,6 @@
           "LessVariable": "$mAtwouserIconWidth",
           "JavascriptVariable": "",
           "Type": "Slider"
-        },
-        {
-          "Guid": "300c42e1-6cea-4c9d-98ba-badce2393911",
-          "Title": "Username Color",
-          "DefaultValue": "$secondarycolor",
-          "Suffix": "",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .dropdown-toggle::after,\n.register-link-style-2 .desktop_registerbox .loginuser{\n  color: $mAtwouserprofileaccountClr;\n}\n\n",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .dropdown-toggle::after,\n.register-link-style-2 .desktop_registerbox .loginuser{\n  color: $mAtwouserprofileaccountClr;\n}\n\n",
-          "LessVariable": "$mAtwouserprofileaccountClr",
-          "JavascriptVariable": "",
-          "Type": "Color Picker"
-        },
-        {
-          "RangeMin": 0.0,
-          "RangeMax": 100.0,
-          "Increment": 1.0,
-          "Guid": "4ae35e33-f8ba-48ca-a0e3-ac41192d9347",
-          "Title": "Username Font Size",
-          "DefaultValue": "14",
-          "Suffix": "px",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .loginuser{\n  font-size: $mAtwouserprofileFsizepx;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .loginuser{\n  font-size: $mAtwouserprofileFsizepx;\n}",
-          "LessVariable": "$mAtwouserprofileFsize",
-          "JavascriptVariable": "",
-          "Type": "Slider"
-        },
-        {
-          "Options": [
-            {
-              "normal": "normal"
-            },
-            {
-              "italic": "italic"
-            }
-          ],
-          "Guid": "cfe055a4-6ece-483a-94ff-5918fa0710c7",
-          "Title": "Username Font Style",
-          "DefaultValue": "normal",
-          "Suffix": "",
-          "CustomCSS": ".register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .loginuser{\n    font-style: $mAtwouserprofileFstyle !important;\n}",
-          "PreviewCSS": ".register-link-style-2 .desktop_registerbox .dropdown-toggle,\n.register-link-style-2 .desktop_registerbox .loginuser{\n    font-style: $mAtwouserprofileFstyle !important;\n}",
-          "LessVariable": "$mAtwouserprofileFstyle",
-          "JavascriptVariable": "",
-          "Type": "Dropdown"
-        },
-        {
-          "Guid": "eaa60952-5407-4613-84f1-bcac6eb2dc34",
-          "Title": "Username Font Family",
-          "DefaultValue": "Poppins, sans-serif",
-          "Suffix": "",
-          "CustomCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    font-family: $mAtwouserProfileFf !important;\n}",
-          "PreviewCSS": ".desktop_registerbox .dropdown-toggle,\n.desktop_registerbox .loginuser{\n    font-family: $mAtwouserProfileFf !important;\n}",
-          "LessVariable": "$mAtwouserProfileFf",
-          "JavascriptVariable": "",
-          "Type": "Fonts"
         },
         {
           "Guid": "975a53c5-be66-4101-9f63-83e35b7a918c",
