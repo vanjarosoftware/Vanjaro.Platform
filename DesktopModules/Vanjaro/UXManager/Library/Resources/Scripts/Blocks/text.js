@@ -209,16 +209,16 @@ export default (editor, config = {}) => {
 			}),
 		view: textView.extend({
 			onRender() {
+			     var model = this.model;
 
-				var model = this.model;
-				var selectedStyle = (model.attributes.styles == undefined) ? 'Style 1' : model.attributes.styles;
+				if (model.attributes['custom-name'].indexOf('Style') == -1) {
+					
+					var selectedStyle = (model.attributes.styles == undefined) ? 'Style 1' : model.attributes.styles;
 
-				var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
+					var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
 
-				if (model.attributes['custom-name'].indexOf('Style') == -1)
 					model.set('custom-name', model.getName() + ' - ' + SelectedDisplayName);
-
-
+				}
 			}
 		}),
 	});

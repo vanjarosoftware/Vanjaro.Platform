@@ -2183,10 +2183,10 @@ export default (editor, config = {}) => {
 			var SelectedDisplayName = component.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
 
 			if (component.attributes.type == 'blockwrapper') {
-				VjEditor.getSelected().set('custom-name', capitalize(component.attributes.name) + ' - ' + SelectedDisplayName);
+				component.set('custom-name', capitalize(component.attributes.name) + ' - ' + SelectedDisplayName);
 			}
 			else {
-				VjEditor.getSelected().set('custom-name', capitalize(component.attributes.type) + ' - ' + SelectedDisplayName);
+				component.set('custom-name', capitalize(component.attributes.type) + ' - ' + SelectedDisplayName);
 			}
 
 
