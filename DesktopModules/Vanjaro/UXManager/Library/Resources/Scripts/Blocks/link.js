@@ -36,7 +36,7 @@
 							{ id: 'center', name: 'center', image: 'align-center' },
 							{ id: 'right', name: 'right', image: 'align-right' },
 						],
-						default: "none",
+						default: "left",
 						changeProp: 1,
 					}, {
 						label: "Color",

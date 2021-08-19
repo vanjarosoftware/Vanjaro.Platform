@@ -2264,8 +2264,9 @@ span.notificationname {
 }
 
 .vj-link[data-empty="true"] {
-    display: inline-block;
+    position: relative;
     min-width: 150px;
+    min-height: 50px;
 }
 
 [data-empty="true"]:before {
