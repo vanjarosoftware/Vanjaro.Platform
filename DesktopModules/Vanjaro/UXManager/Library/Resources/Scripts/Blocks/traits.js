@@ -636,6 +636,13 @@ export default (editor, config = {}) => {
 		onEvent({ elInput, component, event }) {
 
 			var href = '';
+			var model = component;
+			var compType = component.attributes.type;
+
+			if (compType == 'carousel-image')
+				model = component.closestType('carousel-link');
+			else if (compType == 'image')
+				model = component.closestType('image-frame');
 
 			var val = $(elInput).find('.option-block input:checked').attr("data-type");
 
@@ -682,38 +689,38 @@ export default (editor, config = {}) => {
 
 				component.set({ href: href });
 
-				if (component.attributes.type == 'carousel-image' || component.attributes.type == 'icon' || component.attributes.type == 'image') {
-
-					var comp = component;
-
-					if (component.attributes.type == 'carousel-image' || component.attributes.type == 'image')
-						comp = component.parent().parent();
+				if (compType == 'carousel-image' || compType == 'icon' || compType == 'image') {
 
 					if (href == "") {
 
-						comp.set({ tagName: 'span' });
+						model.attributes.tagName = 'span';
+						model.view.reset();
 
-						const attr = comp.getAttributes();
+						const attr = model.getAttributes();
 						delete attr.href;
-						comp.setAttributes(attr);
+						model.setAttributes(attr);
 
-						if (component.attributes.type == 'icon')
+						//Droppable in link
+						if (compType == 'icon')
 							component.addClass('icon-link');
-						else if (component.attributes.type == 'image')
+						else if (compType == 'image')
 							component.addClass('image-link');
 					}
 					else {
 
-						comp.set({ tagName: 'a' });
-						comp.addAttributes({ href: href });
+						model.attributes.tagName = 'a';
+						model.view.reset();
 
-						if (component.attributes.type == 'icon')
+						model.addAttributes({ href: href });
+
+						//Not droppable in link
+						if (compType == 'icon')
 							component.removeClass('icon-link');
-						else if (component.attributes.type == 'image')
+						else if (compType == 'image')
 							component.removeClass('image-link');
 
 						if (val != "page")
-							comp.set({ 'pid': null });
+							model.set({ 'pid': null });
 					}
 				}
 				else
@@ -744,19 +751,18 @@ export default (editor, config = {}) => {
 				SetURL();
 			}
 			else if (event.target.name == "target") {
-				if (event.target.id == "yes") {
-					component.addAttributes({ 'target': '_blank', 'rel': 'noopener' });
-				}
+
+				if (event.target.id == "yes") 
+					model.addAttributes({ 'target': '_blank', 'rel': 'noopener' });
 				else {
-					const attr = component.getAttributes();
+					const attr = model.getAttributes();
 					delete attr.rel;
 					delete attr.target;
-					component.setAttributes(attr);
+					model.setAttributes(attr);
 				}
 			}
-			else {
+			else 
 				UXManager_Search();
-			}
 		}
 	});
 
