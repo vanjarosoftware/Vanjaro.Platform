@@ -247,9 +247,11 @@
 
 				var model = this.model;
 				if (event && (event.type == 'load' || event.type == 'drop')) {
-					if (typeof model.parent() != 'undefined' && model.parent().attributes.type != "picture-box" && model.parent().parent().attributes.type != 'blockwrapper') {
+					if (typeof model.closestType('image-box') == 'undefined' || typeof model.closestType('picture-box') == 'undefined' || typeof model.closestType('image-frame') == 'undefined') {
+						var style = model.getStyle();
 						setTimeout(function () {
-							model.replaceWith('<div class="image-box"><picture class="picture-box">' + model.getEl().outerHTML + '</picture></div>');
+							model.replaceWith('<div class="image-box"><span class="image-frame"><picture class="picture-box">' + model.getEl().outerHTML + '</picture></span></div>');
+							model.setStyle(style);
 						});
 					}
 				}
