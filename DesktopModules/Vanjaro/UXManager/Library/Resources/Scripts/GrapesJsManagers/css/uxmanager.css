@@ -2574,27 +2574,12 @@ span.notificationname {
 
 .traitsmanager .preset-wrapper div.styles {
     width: 278px;
-    padding: 6px 0;
+    padding: 10px 0px 6px 0;
     border-top: 1px solid #eee;
     border-bottom: 1px solid transparent;
     display: inline-flex;
-    position:relative;
+    position: relative;
 }
-
-    .traitsmanager .preset-wrapper div.styles em {
-        align-self: center;
-        visibility: hidden;
-        font-size: 16px;
-    }
-
-
-    .traitsmanager .preset-wrapper div.styles.active em {
-        align-self: flex-start;
-        visibility: visible;
-        color: #ccc;
-        text-shadow: none;
-        text-decoration: none;
-    }
 
 .traitsmanager .preset-wrapper.button div.styles.active {
     justify-content: space-between;
@@ -2639,10 +2624,9 @@ span.notificationname {
     white-space: normal;
 }
 
-.traitsmanager .preset-wrapper .styles > span {
+.traitsmanager .preset-wrapper .styles .component-style {
     position: absolute;
-    bottom: 3px;
-    right: 0px;
+    top: 4px;
     font-size: 10px;
     font-weight: 500;
     letter-spacing: normal;
@@ -2653,6 +2637,12 @@ span.notificationname {
     text-transform: capitalize;
     word-spacing: normal;
 }
+
+.traitsmanager .preset-wrapper .styles.active .component-style {
+    font-weight: bold !important;
+    color: #000 !important;
+}
+
 
 .traitsmanager .preset-wrapper.blockwrapper label div {
     pointer-events: none;
