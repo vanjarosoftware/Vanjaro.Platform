@@ -312,7 +312,21 @@ $(document).ready(function () {
             if (!vjEditorSettings.EditPage) {
 
                 if (vjEditorSettings.AppName && vjEditorSettings.AppTitle) {
-                    var markup = '<div class="app-header"><div class="app-title"><strong>Editing</strong>: ' + vjEditorSettings.AppTitle + '</div><div class="app-name">' + vjEditorSettings.AppName + '</div></div>';
+
+                    if (vjEditorSettings.AppLink != undefined) {
+
+                        if (vjEditorSettings.AppLink.onClick != undefined)
+                            applinkmarkup = "<div class=\"app-name\"><a href=\"javascript:void(0);\" onClick=\"" + vjEditorSettings.AppLink.onClick + "\"><span class=\"app-link\">" + vjEditorSettings.AppName + "</span></a></div>";
+
+                        if (vjEditorSettings.AppLink.OpenInNewWindow)
+                            applinkmarkup = "<div class=\"app-name\"><a href=\"" + vjEditorSettings.AppLink.OpenInNewWindow + "\"><span \"app-link\">" + vjEditorSettings.AppName + "</span></a></div>";
+
+                        tempMarkup = applinkmarkup;
+                    }
+                    else
+                        tempMarkup = '<div class="app-name">' + vjEditorSettings.AppName + '</div>';
+
+                    var markup = '<div class="app-header"><div class="app-title"><strong>Editing</strong>: ' + vjEditorSettings.AppTitle + '</div>' + tempMarkup + '</div>';
                     $('.vj-wrapper').prepend(markup);
                 }
             }
