@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Vanjaro.UXManager.Library.Entities.Menu;
+using Vanjaro.Core.Entities.Menu;
 
 namespace Vanjaro.Core.Entities
 {
