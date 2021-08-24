@@ -97,8 +97,8 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 							name: 'styles',
 							type: 'preset_radio',
 							options: [
-								{ id: '' + blockName + '-style-1', name: 'Style 1', class: '' + blockName + '-style-1', DisplayName: 'Style A' },
-								{ id: '' + blockName + '-style-2', name: 'Style 2', class: '' + blockName + '-style-2', DisplayName: 'Style B' },
+								{ id: '' + blockName + '-style-1', name: 'Style 1', class: '' + blockName + '-style-1', DisplayName: 'A' },
+								{ id: '' + blockName + '-style-2', name: 'Style 2', class: '' + blockName + '-style-2', DisplayName: 'B' },
 							],
 							default: 'Style 1'
 						});

@@ -80,16 +80,16 @@ export default (editor, config = {}) => {
 						name: 'styles',
 						type: 'preset_radio',
 						options: [
-							{ id: 'paragraph-style-1', name: 'Style 1', class: 'paragraph-style-1', DisplayName: 'Style A' },
-							{ id: 'paragraph-style-2', name: 'Style 2', class: 'paragraph-style-2', DisplayName: 'Style B' },
-							{ id: 'paragraph-style-3', name: 'Style 3', class: 'paragraph-style-3', DisplayName: 'Style C' },
-							{ id: 'paragraph-style-4', name: 'Style 4', class: 'paragraph-style-4', DisplayName: 'Style D' },
-							{ id: 'paragraph-style-5', name: 'Style 5', class: 'paragraph-style-5', DisplayName: 'Style E' },
-							{ id: 'paragraph-style-6', name: 'Style 6', class: 'paragraph-style-6', DisplayName: 'Style F' },
-							{ id: 'paragraph-style-7', name: 'Style 7', class: 'paragraph-style-7', DisplayName: 'Style G' },
-							{ id: 'paragraph-style-8', name: 'Style 8', class: 'paragraph-style-8', DisplayName: 'Style H' },
-							{ id: 'paragraph-style-9', name: 'Style 9', class: 'paragraph-style-9', DisplayName: 'Style I' },
-							{ id: 'paragraph-style-10', name: 'Style 10', class: 'paragraph-style-10', DisplayName: 'Style J' },
+							{ id: 'paragraph-style-1', name: 'Style 1', class: 'paragraph-style-1', DisplayName: 'A' },
+							{ id: 'paragraph-style-2', name: 'Style 2', class: 'paragraph-style-2', DisplayName: 'B' },
+							{ id: 'paragraph-style-3', name: 'Style 3', class: 'paragraph-style-3', DisplayName: 'C' },
+							{ id: 'paragraph-style-4', name: 'Style 4', class: 'paragraph-style-4', DisplayName: 'D' },
+							{ id: 'paragraph-style-5', name: 'Style 5', class: 'paragraph-style-5', DisplayName: 'E' },
+							{ id: 'paragraph-style-6', name: 'Style 6', class: 'paragraph-style-6', DisplayName: 'F' },
+							{ id: 'paragraph-style-7', name: 'Style 7', class: 'paragraph-style-7', DisplayName: 'G' },
+							{ id: 'paragraph-style-8', name: 'Style 8', class: 'paragraph-style-8', DisplayName: 'H' },
+							{ id: 'paragraph-style-9', name: 'Style 9', class: 'paragraph-style-9', DisplayName: 'I' },
+							{ id: 'paragraph-style-10', name: 'Style 10', class: 'paragraph-style-10', DisplayName: 'J' },
 						],
 						default: 'Style 1',
 						changeProp: 1,
@@ -110,15 +110,14 @@ export default (editor, config = {}) => {
 					this.model.removeClass(this.getClasses());
 			},
 			onRender() {
-				var model = this.model;				
-				if (model.attributes['custom-name'].indexOf('Style') == -1) {
-				
-					var selectedStyle = (model.attributes.styles == undefined) ? 'Style 1' : model.attributes.styles;
+				var model = this.model;
+				var selectedStyle = (model.attributes.styles == undefined) ? 'Style 1' : model.attributes.styles;
+				var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
 
-					var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
+				if (model.attributes['custom-name'].indexOf(' - ' + SelectedDisplayName) == -1) {
 
 					model.set('custom-name', model.getName() + ' - ' + SelectedDisplayName);
-                }
+				}
 			}
 		})
 	});
@@ -182,18 +181,18 @@ export default (editor, config = {}) => {
 						name: 'styles',
 						type: 'preset_radio',
 						options: [
-							{ id: 'paragraph-style-1', name: 'Style 1', class: 'paragraph-style-1', DisplayName: 'Style A' },
-							{ id: 'paragraph-style-2', name: 'Style 2', class: 'paragraph-style-2', DisplayName: 'Style B' },
-							{ id: 'paragraph-style-3', name: 'Style 3', class: 'paragraph-style-3', DisplayName: 'Style C' },
-							{ id: 'paragraph-style-4', name: 'Style 4', class: 'paragraph-style-4', DisplayName: 'Style D' },
-							{ id: 'paragraph-style-5', name: 'Style 5', class: 'paragraph-style-5', DisplayName: 'Style E' },
-							{ id: 'paragraph-style-6', name: 'Style 6', class: 'paragraph-style-6', DisplayName: 'Style F' },
-							{ id: 'paragraph-style-7', name: 'Style 7', class: 'paragraph-style-7', DisplayName: 'Style G' },
-							{ id: 'paragraph-style-8', name: 'Style 8', class: 'paragraph-style-8', DisplayName: 'Style H' },
-							{ id: 'paragraph-style-9', name: 'Style 9', class: 'paragraph-style-9', DisplayName: 'Style I' },
-							{ id: 'paragraph-style-10', name: 'Style 10', class: 'paragraph-style-10', DisplayName: 'Style J' },
+							{ id: 'paragraph-style-1', name: 'Style 1', class: 'paragraph-style-1', DisplayName: 'A' },
+							{ id: 'paragraph-style-2', name: 'Style 2', class: 'paragraph-style-2', DisplayName: 'B' },
+							{ id: 'paragraph-style-3', name: 'Style 3', class: 'paragraph-style-3', DisplayName: 'C' },
+							{ id: 'paragraph-style-4', name: 'Style 4', class: 'paragraph-style-4', DisplayName: 'D' },
+							{ id: 'paragraph-style-5', name: 'Style 5', class: 'paragraph-style-5', DisplayName: 'E' },
+							{ id: 'paragraph-style-6', name: 'Style 6', class: 'paragraph-style-6', DisplayName: 'F' },
+							{ id: 'paragraph-style-7', name: 'Style 7', class: 'paragraph-style-7', DisplayName: 'G' },
+							{ id: 'paragraph-style-8', name: 'Style 8', class: 'paragraph-style-8', DisplayName: 'H' },
+							{ id: 'paragraph-style-9', name: 'Style 9', class: 'paragraph-style-9', DisplayName: 'I' },
+							{ id: 'paragraph-style-10', name: 'Style 10', class: 'paragraph-style-10', DisplayName: 'J' },
 						],
-						default: 'Style 1',					
+						default: 'Style 1',
 					}
 				]
 			}),
@@ -207,17 +206,15 @@ export default (editor, config = {}) => {
 			}),
 		view: textView.extend({
 			onRender() {
-			     var model = this.model;
+				var model = this.model;
+				var selectedStyle = (model.getAttributes().styles == undefined) ? 'Style 1' : model.getAttributes().styles;
+				var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
 
-				if (model.attributes['custom-name'].indexOf('Style') == -1) {
-					
-					var selectedStyle = (model.attributes.styles == undefined) ? 'Style 1' : model.attributes.styles;
+				if (model.attributes['custom-name'].indexOf(' - ' + SelectedDisplayName) == -1) {
 
-					var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
-
-					model.set('custom-name', model.getName() + ' - ' + SelectedDisplayName);
+					model.set('custom-name', 'Text Inner - ' + SelectedDisplayName);
 				}
 			}
-		}),
+		})
 	});
 }
