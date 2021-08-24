@@ -3687,8 +3687,12 @@ body .gjs-selected {
     float: right;
 }
 
+.app-link {
+    color: #a4afb7;
+}
+
 .app-header + #vjEditor {
-    padding-top: 50px;
+    margin-top: 50px;
     max-width: 1320px;
     width: 100%;
     margin-right: auto;

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Vanjaro.Common.Utilities;
+using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Library.Entities.Interface;
 using Vanjaro.UXManager.Library.Entities.Menu;
 using static Vanjaro.UXManager.Library.Factories;

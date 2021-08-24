@@ -43,7 +43,7 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Managers
 
                     if (Task.Hierarchy.NotificationCount > 0)
                     {
-                        sb.Append("<li><a onclick=\"parent.OpenPopUp('',600,'right','" + Localization.GetString("ReviewContent", Components.Constants.LocalResourcesFile) + "','" + Task.Hierarchy.URL + "')\"><span class='notificationname'>" + Task.Hierarchy.NotificationName + "</span><span class='badge badge-error errorcount'>" + Task.Hierarchy.NotificationCount + "</span></a></li>");
+                        sb.Append("<li><a onclick=\"parent.OpenPopUp('',600,'right','" + Localization.GetString("Review", Components.Constants.LocalResourcesFile) + "','" + Task.Hierarchy.URL + "')\"><span class='notificationname'>" + Task.Hierarchy.NotificationName + "</span><span class='badge badge-error errorcount'>" + Task.Hierarchy.NotificationCount + "</span></a></li>");
                     }
                 }
             }
@@ -119,8 +119,8 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Managers
                         string[] markup = s.Split(':');
                         if (!string.IsNullOrEmpty(s) && markup.Length > 1)
                         {
-                            sb.Append("<div class=\"notification-details notification-" + markup[0].ToLower() + "\"><span class=\"heading " + markup[0].ToLower() + "\">" + markup[0] + ":</span>");
-                            sb.Append("<span>" + markup[1] + "</span></div>" + Environment.NewLine);
+                            sb.Append("<div class=\"notification-details\"><span class=\"heading\">" + markup[0] + ":</span>");
+                            sb.Append("<span class=\"description \">" + markup[1] + "</span></div>" + Environment.NewLine);
                         }
                     }
                     NotificationViewModel notificationViewModel = new NotificationViewModel

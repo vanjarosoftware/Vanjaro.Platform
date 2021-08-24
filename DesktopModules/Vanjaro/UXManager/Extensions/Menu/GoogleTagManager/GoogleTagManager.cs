@@ -12,6 +12,7 @@ using Vanjaro.Common.Entities.Apps;
 using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using DotNetNuke.Entities.Users;
 using Vanjaro.UXManager.Extensions.Menu.GoogleTagManager.Factories;
+using Vanjaro.Core.Entities.Menu;
 
 namespace Vanjaro.UXManager.Extensions.Menu.GoogleTagManager
 {
