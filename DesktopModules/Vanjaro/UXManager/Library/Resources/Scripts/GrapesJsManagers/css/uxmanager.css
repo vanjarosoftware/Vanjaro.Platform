@@ -2622,6 +2622,7 @@ span.notificationname {
     color: #fff;
     font-size: 16px;
     white-space: normal;
+    margin-top:12px;
 }
 
 .traitsmanager .preset-wrapper .styles .component-style {
