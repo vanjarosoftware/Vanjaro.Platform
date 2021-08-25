@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Vanjaro.Core.Entities.Menu;
 
 namespace Vanjaro.Core.Entities
 {
@@ -17,5 +18,6 @@ namespace Vanjaro.Core.Entities
         public int EntityID { get; set; }
         public string RevisionUrl { get; set; }
         public string RevisionGUID { get; set; }
+        public Dictionary<MenuAction, dynamic> AppLink { get; set; }
     }
 }

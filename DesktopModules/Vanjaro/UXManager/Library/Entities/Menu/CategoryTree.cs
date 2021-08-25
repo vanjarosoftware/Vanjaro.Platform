@@ -1,4 +1,6 @@
-﻿namespace Vanjaro.UXManager.Library.Entities.Menu
+﻿using Vanjaro.Core.Entities.Menu;
+
+namespace Vanjaro.UXManager.Library.Entities.Menu
 {
     public class CategoryTree
     {

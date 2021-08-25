@@ -76,6 +76,7 @@
     <Compile Include="Entities\Layout.cs" />
     <Compile Include="Entities\Menu\Block.cs" />
     <Compile Include="Entities\Menu\BlockResponse.cs" />
+    <Compile Include="Entities\Menu\MenuAction.cs" />
     <Compile Include="Entities\NotificationActionViewModel.cs" />
     <Compile Include="Entities\NotificationViewModel.cs" />
     <Compile Include="Entities\NotificationsViewModel.cs" />

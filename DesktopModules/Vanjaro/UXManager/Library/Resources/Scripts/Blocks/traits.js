@@ -758,7 +758,7 @@ export default (editor, config = {}) => {
 			}
 			else if (event.target.name == "target") {
 
-				if (event.target.id == "yes") 
+				if (event.target.id == "yes")
 					model.addAttributes({ 'target': '_blank', 'rel': 'noopener' });
 				else {
 					const attr = model.getAttributes();
@@ -767,7 +767,7 @@ export default (editor, config = {}) => {
 					model.setAttributes(attr);
 				}
 			}
-			else 
+			else
 				UXManager_Search();
 		}
 	});
@@ -2105,7 +2105,6 @@ export default (editor, config = {}) => {
 				var span = document.createElement('span');
 				var input = document.createElement('input');
 				var label = document.createElement("label");
-				var icon = document.createElement("em");
 
 				div.setAttribute("class", trait.attributes.name + " " + value.class);
 
@@ -2119,13 +2118,12 @@ export default (editor, config = {}) => {
 				label.setAttribute("class", value.class);
 				label.innerHTML = trait.target.getEl().textContent;
 				span.innerHTML = value.DisplayName;
+				span.setAttribute("class", "component-style");
 
-				icon.setAttribute("class", "fas fa-check-circle");
 
 				div.appendChild(span);
 				div.appendChild(input);
 				div.appendChild(label);
-				div.appendChild(icon);
 				el.appendChild(div);
 			});
 

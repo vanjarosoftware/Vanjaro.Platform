@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Library.Entities.Menu;
 
 namespace Vanjaro.UXManager.Library.Entities.Interface
