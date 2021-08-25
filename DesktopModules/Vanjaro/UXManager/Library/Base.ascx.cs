@@ -185,12 +185,8 @@ namespace Vanjaro.UXManager.Library
                 item.HasTabEditPermission = TabPermissionController.HasTabPermission("EDIT");
 
             item.EditPage = Core.Entities.Editor.Options.EditPage;
-
-            if (!string.IsNullOrEmpty(Core.Entities.Editor.Options.Blocks))
-                item.ShowBlocks = false;
-            else
-                item.ShowBlocks = true;
-
+            item.CustomBlocks = Core.Entities.Editor.Options.CustomBlocks;
+            item.Library = Core.Entities.Editor.Options.Library;
             item.ShowUXManager = string.IsNullOrEmpty(Core.Managers.CookieManager.GetValue("vj_InitUX")) ? false : Convert.ToBoolean(Core.Managers.CookieManager.GetValue("vj_InitUX"));
             return item;
         }
