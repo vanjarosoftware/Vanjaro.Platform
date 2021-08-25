@@ -424,15 +424,18 @@ $(document).ready(function () {
 
                             plugins.push('vjpreset');
 
-                            if (typeof vjEditorSettings.Blocks != 'undefined' && vjEditorSettings.Blocks != '')
-                                plugins = [vjEditorSettings.Blocks];
+                            if (vjEditorSettings.Blocks && typeof LoadBlocks != 'undefined') {
+                                LoadBlocks(grapesjs);
+                                plugins.push('customblocks');
+                            }
                             else {
+
+                                plugins.push('modulewrapper', 'blockwrapper', 'vjblocks', 'customcode');
+
                                 if (typeof LoadThemeBlocks != 'undefined') {
                                     LoadThemeBlocks(grapesjs);
-                                    plugins = ['modulewrapper', 'blockwrapper', 'vjpreset', 'ThemeBlocks', 'customcode'];
+                                    plugins.push('ThemeBlocks');
                                 }
-                                else
-                                    plugins = ['modulewrapper', 'blockwrapper', 'vjpreset', 'customcode'];
                             }
 
                             if (typeof LoadCustomCode != 'undefined')
