@@ -8,6 +8,7 @@ using Vanjaro.Common.Engines.UIEngine.AngularBootstrap;
 using Vanjaro.Common.Entities.Apps;
 using Vanjaro.Common.Utilities;
 using Vanjaro.Core.Entities;
+using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Library;
 using Vanjaro.UXManager.Library.Entities;
 using Vanjaro.UXManager.Library.Entities.Interface;

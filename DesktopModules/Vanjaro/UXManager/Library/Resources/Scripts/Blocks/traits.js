@@ -636,6 +636,13 @@ export default (editor, config = {}) => {
 		onEvent({ elInput, component, event }) {
 
 			var href = '';
+			var model = component;
+			var compType = component.attributes.type;
+
+			if (compType == 'carousel-image')
+				model = component.closestType('carousel-link');
+			else if (compType == 'image')
+				model = component.closestType('image-frame');
 
 			var val = $(elInput).find('.option-block input:checked').attr("data-type");
 
@@ -682,38 +689,44 @@ export default (editor, config = {}) => {
 
 				component.set({ href: href });
 
-				if (component.attributes.type == 'carousel-image' || component.attributes.type == 'icon' || component.attributes.type == 'image') {
-
-					var comp = component;
-
-					if (component.attributes.type == 'carousel-image' || component.attributes.type == 'image')
-						comp = component.parent().parent();
+				if (compType == 'carousel-image' || compType == 'icon' || compType == 'image') {
 
 					if (href == "") {
 
-						comp.set({ tagName: 'span' });
+						if (model.attributes.tagName != 'span') {
 
-						const attr = comp.getAttributes();
+							model.attributes.tagName = 'span';
+							model.view.reset();
+
+							//Droppable in link
+							if (compType == 'icon')
+								component.addClass('icon-link');
+							else if (compType == 'image')
+								component.addClass('image-link');
+						}
+
+						const attr = model.getAttributes();
 						delete attr.href;
-						comp.setAttributes(attr);
-
-						if (component.attributes.type == 'icon')
-							component.addClass('icon-link');
-						else if (component.attributes.type == 'image')
-							component.addClass('image-link');
+						model.setAttributes(attr);
 					}
 					else {
 
-						comp.set({ tagName: 'a' });
-						comp.addAttributes({ href: href });
+						if (model.attributes.tagName != 'a') {
 
-						if (component.attributes.type == 'icon')
-							component.removeClass('icon-link');
-						else if (component.attributes.type == 'image')
-							component.removeClass('image-link');
+							model.attributes.tagName = 'a';
+							model.view.reset();
+
+							//Not droppable in Link Group
+							if (compType == 'icon')
+								component.removeClass('icon-link');
+							else if (compType == 'image')
+								component.removeClass('image-link');
+						}
+
+						model.addAttributes({ href: href });
 
 						if (val != "page")
-							comp.set({ 'pid': null });
+							model.set({ 'pid': null });
 					}
 				}
 				else
@@ -744,19 +757,18 @@ export default (editor, config = {}) => {
 				SetURL();
 			}
 			else if (event.target.name == "target") {
-				if (event.target.id == "yes") {
-					component.addAttributes({ 'target': '_blank', 'rel': 'noopener' });
-				}
+
+				if (event.target.id == "yes")
+					model.addAttributes({ 'target': '_blank', 'rel': 'noopener' });
 				else {
-					const attr = component.getAttributes();
+					const attr = model.getAttributes();
 					delete attr.rel;
 					delete attr.target;
-					component.setAttributes(attr);
+					model.setAttributes(attr);
 				}
 			}
-			else {
+			else
 				UXManager_Search();
-			}
 		}
 	});
 
@@ -2090,9 +2102,9 @@ export default (editor, config = {}) => {
 			$(trait.attributes.options).each(function (index, value) {
 
 				var div = document.createElement('div');
+				var span = document.createElement('span');
 				var input = document.createElement('input');
 				var label = document.createElement("label");
-				var icon = document.createElement("em");
 
 				div.setAttribute("class", trait.attributes.name + " " + value.class);
 
@@ -2105,12 +2117,13 @@ export default (editor, config = {}) => {
 				label.setAttribute("for", value.id);
 				label.setAttribute("class", value.class);
 				label.innerHTML = trait.target.getEl().textContent;
+				span.innerHTML = value.DisplayName;
+				span.setAttribute("class", "component-style");
 
-				icon.setAttribute("class", "fas fa-check-circle");
 
+				div.appendChild(span);
 				div.appendChild(input);
 				div.appendChild(label);
-				div.appendChild(icon);
 				el.appendChild(div);
 			});
 
@@ -2173,6 +2186,20 @@ export default (editor, config = {}) => {
 			component.getTrait('styles').set({
 				'value': event.target.value
 			});
+
+			var capitalize = e => e.charAt(0).toUpperCase() + e.slice(1);
+			var selectedStyle = event.target.value;
+
+			var SelectedDisplayName = component.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
+
+			if (component.attributes.type == 'blockwrapper') {
+				component.set('custom-name', capitalize(component.attributes.name) + ' - ' + SelectedDisplayName);
+			}
+			else {
+				component.set('custom-name', capitalize(component.attributes.type) + ' - ' + SelectedDisplayName);
+			}
+
+
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);

@@ -527,6 +527,7 @@ Theme.css end
     width: 100%;
 }
 
+.vj-link,
 .vj-heading {
     display: block;
     text-align: left;

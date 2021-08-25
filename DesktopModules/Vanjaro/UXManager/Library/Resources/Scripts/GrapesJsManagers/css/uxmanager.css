@@ -2264,8 +2264,9 @@ span.notificationname {
 }
 
 .vj-link[data-empty="true"] {
-    display: inline-block;
+    position: relative;
     min-width: 150px;
+    min-height: 50px;
 }
 
 [data-empty="true"]:before {
@@ -2573,26 +2574,12 @@ span.notificationname {
 
 .traitsmanager .preset-wrapper div.styles {
     width: 278px;
-    padding: 6px 0;
+    padding: 10px 0px 6px 0;
     border-top: 1px solid #eee;
     border-bottom: 1px solid transparent;
     display: inline-flex;
+    position: relative;
 }
-
-    .traitsmanager .preset-wrapper div.styles em {
-        align-self: center;
-        visibility: hidden;
-        font-size: 16px;
-    }
-
-
-    .traitsmanager .preset-wrapper div.styles.active em {
-        align-self: flex-start;
-        visibility: visible;
-        color: #ccc;
-        text-shadow: none;
-        text-decoration: none;
-    }
 
 .traitsmanager .preset-wrapper.button div.styles.active {
     justify-content: space-between;
@@ -2635,7 +2622,28 @@ span.notificationname {
     color: #fff;
     font-size: 16px;
     white-space: normal;
+    margin-top:12px;
 }
+
+.traitsmanager .preset-wrapper .styles .component-style {
+    position: absolute;
+    top: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: normal;
+    font-style: normal;
+    color: #aaa;
+    text-shadow: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    word-spacing: normal;
+}
+
+.traitsmanager .preset-wrapper .styles.active .component-style {
+    font-weight: bold !important;
+    color: #000 !important;
+}
+
 
 .traitsmanager .preset-wrapper.blockwrapper label div {
     pointer-events: none;
@@ -3680,8 +3688,12 @@ body .gjs-selected {
     float: right;
 }
 
+.app-link {
+    color: #a4afb7;
+}
+
 .app-header + #vjEditor {
-    padding-top: 50px;
+    margin-top: 50px;
     max-width: 1320px;
     width: 100%;
     margin-right: auto;
