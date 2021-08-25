@@ -313,6 +313,9 @@ $(document).ready(function () {
 
             if (!vjEditorSettings.EditPage) {
 
+                var applinkmarkup = '';
+                var tempMarkup = '';
+
                 if (vjEditorSettings.AppName && vjEditorSettings.AppTitle) {
 
                     if (vjEditorSettings.AppLink != undefined) {
