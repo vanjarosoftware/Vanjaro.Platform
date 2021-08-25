@@ -17,5 +17,12 @@ namespace Vanjaro.Core.Entities
         public int EntityID { get; set; }
         public string RevisionUrl { get; set; }
         public string RevisionGUID { get; set; }
+        public bool Blocks { get; set; }
+        public bool Language { get; set; }
+        public bool CustomBlocks { get; set; }
+        public bool Library { get; set; }
+        public string PublishText { get; set; }
+        public string PublishLink { get; set; }
+        public string TemplateLibraryURL { get; set; }
     }
 }

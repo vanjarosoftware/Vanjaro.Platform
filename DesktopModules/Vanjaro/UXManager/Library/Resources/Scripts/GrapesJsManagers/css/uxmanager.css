@@ -2257,7 +2257,7 @@ span.notificationname {
     font-weight: bold;
 }
 
-[data-gjs-type="wrapper"] [data-gjs-type="grid"] [data-empty="true"] {
+[data-gjs-type="wrapper"] [data-empty="true"] {
     position: relative;
     padding: 0 !important;
     min-height: 50px !important;
