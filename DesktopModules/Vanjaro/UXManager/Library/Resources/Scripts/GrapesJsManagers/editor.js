@@ -422,12 +422,18 @@ $(document).ready(function () {
                             BuildBlockComponent(vjcomps);
                             vjcomps = FilterComponents(vjcomps);
 
-                            if (typeof LoadThemeBlocks != 'undefined') {
-                                LoadThemeBlocks(grapesjs);
-                                plugins = ['modulewrapper', 'blockwrapper', 'vjpreset', 'ThemeBlocks', 'customcode'];
+                            plugins.push('vjpreset');
+
+                            if (typeof vjEditorSettings.Blocks != 'undefined' && vjEditorSettings.Blocks != '')
+                                plugins = [vjEditorSettings.Blocks];
+                            else {
+                                if (typeof LoadThemeBlocks != 'undefined') {
+                                    LoadThemeBlocks(grapesjs);
+                                    plugins = ['modulewrapper', 'blockwrapper', 'vjpreset', 'ThemeBlocks', 'customcode'];
+                                }
+                                else
+                                    plugins = ['modulewrapper', 'blockwrapper', 'vjpreset', 'customcode'];
                             }
-                            else
-                                plugins = ['modulewrapper', 'blockwrapper', 'vjpreset', 'customcode'];
 
                             if (typeof LoadCustomCode != 'undefined')
                                 LoadCustomCode(grapesjs);
