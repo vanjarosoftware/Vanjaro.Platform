@@ -693,31 +693,37 @@ export default (editor, config = {}) => {
 
 					if (href == "") {
 
-						model.attributes.tagName = 'span';
-						model.view.reset();
+						if (model.attributes.tagName != 'span') {
+
+							model.attributes.tagName = 'span';
+							model.view.reset();
+
+							//Droppable in link
+							if (compType == 'icon')
+								component.addClass('icon-link');
+							else if (compType == 'image')
+								component.addClass('image-link');
+						}
 
 						const attr = model.getAttributes();
 						delete attr.href;
 						model.setAttributes(attr);
-
-						//Droppable in link
-						if (compType == 'icon')
-							component.addClass('icon-link');
-						else if (compType == 'image')
-							component.addClass('image-link');
 					}
 					else {
 
-						model.attributes.tagName = 'a';
-						model.view.reset();
+						if (model.attributes.tagName != 'a') {
+
+							model.attributes.tagName = 'a';
+							model.view.reset();
+
+							//Not droppable in Link Group
+							if (compType == 'icon')
+								component.removeClass('icon-link');
+							else if (compType == 'image')
+								component.removeClass('image-link');
+						}
 
 						model.addAttributes({ href: href });
-
-						//Not droppable in link
-						if (compType == 'icon')
-							component.removeClass('icon-link');
-						else if (compType == 'image')
-							component.removeClass('image-link');
 
 						if (val != "page")
 							model.set({ 'pid': null });
