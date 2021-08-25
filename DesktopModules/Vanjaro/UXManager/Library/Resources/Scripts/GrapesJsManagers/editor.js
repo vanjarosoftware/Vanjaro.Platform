@@ -273,6 +273,9 @@ $(document).ready(function () {
         setTimeout(function () {
             $(window.parent.document.body).find('#VJReviewComment').focus();
         }, 100);
+
+        if (vjEditorSettings.PublishLink != null && vjEditorSettings.PublishLink != '')
+            OpenPopUp(null, 900, 'right', VjLocalized.Setting, vjEditorSettings.PublishLink);
     });
 
     var VJAutoSaveTimeOutid;

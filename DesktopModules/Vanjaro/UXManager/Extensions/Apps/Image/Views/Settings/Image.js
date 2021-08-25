@@ -109,7 +109,12 @@
 
     $scope.GetURL = function (fileid) {
         window.parent.window.VJIsSaveCall = true;
-        common.webApi.post('Upload/GetUrl', 'fileid=' + fileid).then(function (data) {
+        var absolutelink = false;
+
+        if (window.parent.GetParameterByName('absolutelink', location.href) == "true")
+            absolutelink = true;
+
+        common.webApi.post('Upload/GetUrl', 'fileid=' + fileid + '&absolutelink=' + absolutelink.toString()).then(function (data) {
             if (data.data.Status == 'Success') {
                 var Link = data.data.Url;
 

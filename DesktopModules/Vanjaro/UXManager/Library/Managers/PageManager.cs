@@ -122,13 +122,16 @@ namespace Vanjaro.UXManager.Library
                 }
             }
 
-            public static string GetPageUrl(PortalSettings PortalSettings, int TabID)
+            public static string GetPageUrl(PortalSettings PortalSettings, int TabID, bool AbsolutelLink)
             {
                 TabInfo tab = TabController.Instance.GetTab(TabID, PortalSettings.PortalId, true);
                 if (tab != null)
                 {
                     string flaggedUrl = Globals.FriendlyUrl(tab, Globals.ApplicationURL(TabID), PortalSettings as IPortalSettings);
-                    return Globals.ResolveUrl(Regex.Replace(flaggedUrl, string.Format("{0}://{1}", HttpContext.Current.Request.Url.Scheme, Globals.GetDomainName(HttpContext.Current.Request, true)), "~", RegexOptions.IgnoreCase));
+                    if (AbsolutelLink)
+                        return flaggedUrl;
+                    else
+                        return Globals.ResolveUrl(Regex.Replace(flaggedUrl, string.Format("{0}://{1}", HttpContext.Current.Request.Url.Scheme, Globals.GetDomainName(HttpContext.Current.Request, true)), "~", RegexOptions.IgnoreCase));
                 }
                 return string.Empty;
             }
