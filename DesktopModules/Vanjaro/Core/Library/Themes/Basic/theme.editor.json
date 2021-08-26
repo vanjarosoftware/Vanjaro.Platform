@@ -9735,7 +9735,7 @@
         {
           "Guid": "4bc64ae4-4abf-4088-a582-a9a08c7e5139",
           "Title": "Nav link Background Color",
-          "DefaultValue": "#fff",
+          "DefaultValue": "transparent",
           "Suffix": "",
           "CustomCSS": ".DefaultMenu li .nav-link {\n  background-color: $navlinkbgcolor!important;\n}",
           "PreviewCSS": ".DefaultMenu li .nav-link {\n  background-color: $navlinkbgcolor!important;\n}",
@@ -10935,7 +10935,7 @@
         {
           "Guid": "93c8fdcb-6730-49ab-ab2f-2f32a49a61c5",
           "Title": "Nav link Background Color",
-          "DefaultValue": "#fff",
+          "DefaultValue": "transparent",
           "Suffix": "",
           "CustomCSS": ".menu-style-2 .DefaultMenu li .nav-link {\n  background-color: $s2navlinkbgcolor!important;\n}",
           "PreviewCSS": ".menu-style-2 .DefaultMenu li .nav-link {\n  background-color: $s2navlinkbgcolor!important;\n}",
