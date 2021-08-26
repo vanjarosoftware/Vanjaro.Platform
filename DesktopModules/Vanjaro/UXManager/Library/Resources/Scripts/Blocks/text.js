@@ -111,13 +111,17 @@ export default (editor, config = {}) => {
 			},
 			onRender() {
 				var model = this.model;
-				var selectedStyle = (model.attributes.styles == undefined) ? 'Style 1' : model.attributes.styles;
-				var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
+				if (model.getTrait('styles')) {
+					var selectedStyle = (model.attributes.styles == undefined) ? 'Style 1' : model.attributes.styles;
+					var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
 
-				if (model.attributes['custom-name'].indexOf(' - ' + SelectedDisplayName) == -1) {
+					if (model.attributes['custom-name'].indexOf(' - ' + SelectedDisplayName) == -1) {
 
-					model.set('custom-name', model.getName() + ' - ' + SelectedDisplayName);
-				}
+						model.set('custom-name', model.getName() + ' - ' + SelectedDisplayName);
+					}
+                }
+
+				
 			}
 		})
 	});
