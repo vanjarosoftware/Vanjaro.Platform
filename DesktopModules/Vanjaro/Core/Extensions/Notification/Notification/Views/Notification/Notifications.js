@@ -73,4 +73,8 @@
     $scope.to_trusted = function (html_code) {
         return $sce.trustAsHtml(html_code);
     }
+
+    Click_RedirectURL = function (url) {
+        parent.window.location.href = parent.window.location.protocol + url;
+    }
 });
