@@ -105,9 +105,14 @@ namespace Vanjaro.UXManager.Library
                         }
                     }
 
+                    try
+                    {
+                        string Fonts = JsonConvert.SerializeObject(Core.Managers.ThemeManager.GetDDLFonts("all"));
+                        WebForms.RegisterClientScriptBlock(Page, "VJThemeFonts", "var VJFonts=" + Fonts + ";", true);
+                    }
+                    catch (Exception) { }
+
                     WebForms.LinkCSS(Page, "UXManagerAppCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/StyleSheets/app.css"));
-
-
                     WebForms.LinkCSS(Page, "GrapesJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapes.min.css"));
                     WebForms.LinkCSS(Page, "GrapickJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapick.min.css"));
                     WebForms.LinkCSS(Page, "GrapesJsPanelCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/jsPanel/jspanel.min.css"));
