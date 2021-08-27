@@ -236,13 +236,8 @@
 				}
 			},
 			init() {
-
-				var model = this.model;
-
-				if (typeof model.parent() != 'undefined' && model.parent().attributes.type == "picture-box")
-					this.listenTo(model.parent().parent(), 'active', this.ShowModal); // listen for active event
+				this.listenTo(this.model.closestType('image-box'), 'active', this.ShowModal); // listen for active event
 			},
-
 			onRender() {
 
 				var model = this.model;
