@@ -475,14 +475,14 @@ $(document).ready(function () {
         $('#UXpagerender').show().siblings().remove();
     });
 
-    $('.DefaultMenu').find('.dropdown-toggle[href="javascript:void(0)"], .dropdown-submenu [href="javascript:void(0)"], .dropdown-toggle[href!="#"] svg, .dropdown-submenu a[href!="#"] svg').on('click', function (e) {
+    $('.DefaultMenu').find('span.dropdown-toggle, span.dropdown-item, .dropdown svg').on('click', function (e) {
 
         e.preventDefault();
 
-        if ($(window).width() > 991)
+        if ($(window).width() > 991 || ($(this).is('svg') && $(this).parent('span').length))
             return this;
 
-        $(this).parent().parent().toggleClass('resp-active');
+        $(this).parents('li').first().toggleClass('resp-active');
 
         return this;
     });
