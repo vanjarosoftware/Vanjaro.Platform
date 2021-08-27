@@ -127,6 +127,9 @@ $(document).ready(function () {
         });
     }
 
+    //Tooltip
+    $('[data-bs-toggle="tooltip"]').tooltip();
+
     $(".pubish-btn").click(function (e) {
         e.preventDefault();
 
@@ -313,6 +316,9 @@ $(document).ready(function () {
     global.GrapesjsInit = function () {
 
         if (isEditPage() && typeof vjEditorSettings != 'undefined') {
+
+            if (vjEditorSettings.PublishText != null && vjEditorSettings.PublishText != '')
+                $('#VJBtnPublish').text(vjEditorSettings.PublishText);
 
             if (!vjEditorSettings.EditPage) {
 
@@ -2070,12 +2076,12 @@ $(document).ready(function () {
                                         setTimeout(function () {
                                             $(model.getTrait("href").el).parents(".gjs-trt-trait__wrp").hide();
                                         });
-                                    else 
+                                    else
                                         setTimeout(function () {
                                             $(model.getTrait("href").el).parents(".gjs-trt-trait__wrp").show();
                                         });
                                 }
-                                
+
 
                                 VjEditor.SelectorManager.setState();
 
@@ -2112,196 +2118,208 @@ $(document).ready(function () {
                                     if (model.attributes.type == "icon")
                                         target = model.components().models[0];
 
-                                    if (sm.getProperty(Display, 'display').attributes.value == 'flex') {
-                                        $(sm.getProperty(Display, 'container').view.el).show();
-                                        $(sm.getProperty(Display, 'flex').view.el).show();
+                                    if (typeof sm.getSector(Display) != 'undefined') {
+
+                                        if (sm.getProperty(Display, 'display').attributes.value == 'flex') {
+                                            $(sm.getProperty(Display, 'container').view.el).show();
+                                            $(sm.getProperty(Display, 'flex').view.el).show();
+                                        }
+                                        else {
+                                            $(sm.getProperty(Display, 'container').view.el).hide();
+                                            $(sm.getProperty(Display, 'flex').view.el).hide();
+                                        }
                                     }
-                                    else {
-                                        $(sm.getProperty(Display, 'container').view.el).hide();
-                                        $(sm.getProperty(Display, 'flex').view.el).hide();
+
+                                    if (typeof sm.getSector(Size) != 'undefined') {
+
+                                        //Width
+                                        var width = target.getStyle()['width'];
+
+                                        if (typeof width == "undefined") {
+
+                                            $(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val('auto');
+                                            $(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('width')));
+                                        }
+                                        else
+                                            $(sm.getProperty(Size, 'width').view.$el.find('input')).val(parseInt(width));
+
+                                        if ($(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val() != "auto")
+                                            $(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear').show();
+                                        else
+                                            $(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear').hide();
+
+                                        //Height
+                                        var height = target.getStyle()['height'];
+
+                                        if (typeof height == "undefined") {
+
+                                            $(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val('auto');
+                                            $(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('height')));
+                                        }
+                                        else
+                                            $(sm.getProperty(Size, 'height').view.$el.find('input')).val(parseInt(height));
+
+
+                                        if ($(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val() != "auto")
+                                            $(sm.getProperty(Size, 'height').view.$el).find('.gjs-sm-clear').show();
+                                        else
+                                            $(sm.getProperty(Size, 'height').view.$el).find('.gjs-sm-clear').hide();
+
+                                        //Min Width
+                                        var minWidth = target.getStyle()['min-width'];
+
+                                        if (typeof minWidth == "undefined")
+                                            $(sm.getProperty(Size, 'min-width').view.$el.find('input')).val('auto');
+                                        else
+                                            $(sm.getProperty(Size, 'min-width').view.$el.find('input')).val(parseInt(minWidth));
+
+                                        if ($(sm.getProperty(Size, 'min-width').view.$el.find('input[type="text"]')).val() != "auto")
+                                            $(sm.getProperty(Size, 'min-width').view.$el).find('.gjs-sm-clear').show();
+                                        else
+                                            $(sm.getProperty(Size, 'min-width').view.$el).find('.gjs-sm-clear').hide();
+
+                                        //Max Width
+                                        var maxWidth = target.getStyle()['max-width'];
+
+                                        if (typeof maxWidth == "undefined")
+                                            $(sm.getProperty(Size, 'max-width').view.$el.find('input')).val('auto');
+                                        else
+                                            $(sm.getProperty(Size, 'max-width').view.$el.find('input')).val(parseInt(maxWidth));
+
+                                        if ($(sm.getProperty(Size, 'max-width').view.$el.find('input[type="text"]')).val() != "auto")
+                                            $(sm.getProperty(Size, 'max-width').view.$el).find('.gjs-sm-clear').show();
+                                        else
+                                            $(sm.getProperty(Size, 'max-width').view.$el).find('.gjs-sm-clear').hide();
+
+                                        //Min Height
+                                        var minHeight = target.getStyle()['min-height'];
+
+                                        if (typeof minHeight == "undefined")
+                                            $(sm.getProperty(Size, 'min-height').view.$el.find('input')).val('auto');
+                                        else
+                                            $(sm.getProperty(Size, 'min-height').view.$el.find('input')).val(parseInt(minHeight));
+
+                                        if ($(sm.getProperty(Size, 'min-height').view.$el.find('input[type="text"]')).val() != "auto")
+                                            $(sm.getProperty(Size, 'min-height').view.$el).find('.gjs-sm-clear').show();
+                                        else
+                                            $(sm.getProperty(Size, 'min-height').view.$el).find('.gjs-sm-clear').hide();
+
+                                        //Max Height
+                                        var maxHeight = target.getStyle()['max-height'];
+
+                                        if (typeof maxHeight == "undefined")
+                                            $(sm.getProperty(Size, 'max-height').view.$el.find('input')).val('auto');
+                                        else
+                                            $(sm.getProperty(Size, 'max-height').view.$el.find('input')).val(parseInt(maxHeight));
+
+                                        if ($(sm.getProperty(Size, 'max-height').view.$el.find('input[type="text"]')).val() != "auto")
+                                            $(sm.getProperty(Size, 'max-height').view.$el).find('.gjs-sm-clear').show();
+                                        else
+                                            $(sm.getProperty(Size, 'max-height').view.$el).find('.gjs-sm-clear').hide();
                                     }
-
-                                    //Width
-                                    var width = target.getStyle()['width'];
-
-                                    if (typeof width == "undefined") {
-
-                                        $(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val('auto');
-                                        $(sm.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('width')));
-                                    }
-                                    else
-                                        $(sm.getProperty(Size, 'width').view.$el.find('input')).val(parseInt(width));
-
-                                    if ($(sm.getProperty(Size, 'width').view.$el.find('input[type="text"]')).val() != "auto")
-                                        $(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear').show();
-                                    else
-                                        $(sm.getProperty(Size, 'width').view.$el).find('.gjs-sm-clear').hide();
-
-                                    //Height
-                                    var height = target.getStyle()['height'];
-
-                                    if (typeof height == "undefined") {
-
-                                        $(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val('auto');
-                                        $(sm.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt($(target.getEl()).css('height')));
-                                    }
-                                    else
-                                        $(sm.getProperty(Size, 'height').view.$el.find('input')).val(parseInt(height));
-
-
-                                    if ($(sm.getProperty(Size, 'height').view.$el.find('input[type="text"]')).val() != "auto")
-                                        $(sm.getProperty(Size, 'height').view.$el).find('.gjs-sm-clear').show();
-                                    else
-                                        $(sm.getProperty(Size, 'height').view.$el).find('.gjs-sm-clear').hide();
-
-                                    //Min Width
-                                    var minWidth = target.getStyle()['min-width'];
-
-                                    if (typeof minWidth == "undefined")
-                                        $(sm.getProperty(Size, 'min-width').view.$el.find('input')).val('auto');
-                                    else
-                                        $(sm.getProperty(Size, 'min-width').view.$el.find('input')).val(parseInt(minWidth));
-
-                                    if ($(sm.getProperty(Size, 'min-width').view.$el.find('input[type="text"]')).val() != "auto")
-                                        $(sm.getProperty(Size, 'min-width').view.$el).find('.gjs-sm-clear').show();
-                                    else
-                                        $(sm.getProperty(Size, 'min-width').view.$el).find('.gjs-sm-clear').hide();
-
-                                    //Max Width
-                                    var maxWidth = target.getStyle()['max-width'];
-
-                                    if (typeof maxWidth == "undefined")
-                                        $(sm.getProperty(Size, 'max-width').view.$el.find('input')).val('auto');
-                                    else
-                                        $(sm.getProperty(Size, 'max-width').view.$el.find('input')).val(parseInt(maxWidth));
-
-                                    if ($(sm.getProperty(Size, 'max-width').view.$el.find('input[type="text"]')).val() != "auto")
-                                        $(sm.getProperty(Size, 'max-width').view.$el).find('.gjs-sm-clear').show();
-                                    else
-                                        $(sm.getProperty(Size, 'max-width').view.$el).find('.gjs-sm-clear').hide();
-
-                                    //Min Height
-                                    var minHeight = target.getStyle()['min-height'];
-
-                                    if (typeof minHeight == "undefined")
-                                        $(sm.getProperty(Size, 'min-height').view.$el.find('input')).val('auto');
-                                    else
-                                        $(sm.getProperty(Size, 'min-height').view.$el.find('input')).val(parseInt(minHeight));
-
-                                    if ($(sm.getProperty(Size, 'min-height').view.$el.find('input[type="text"]')).val() != "auto")
-                                        $(sm.getProperty(Size, 'min-height').view.$el).find('.gjs-sm-clear').show();
-                                    else
-                                        $(sm.getProperty(Size, 'min-height').view.$el).find('.gjs-sm-clear').hide();
-
-                                    //Max Height
-                                    var maxHeight = target.getStyle()['max-height'];
-
-                                    if (typeof maxHeight == "undefined")
-                                        $(sm.getProperty(Size, 'max-height').view.$el.find('input')).val('auto');
-                                    else
-                                        $(sm.getProperty(Size, 'max-height').view.$el.find('input')).val(parseInt(maxHeight));
-
-                                    if ($(sm.getProperty(Size, 'max-height').view.$el.find('input[type="text"]')).val() != "auto")
-                                        $(sm.getProperty(Size, 'max-height').view.$el).find('.gjs-sm-clear').show();
-                                    else
-                                        $(sm.getProperty(Size, 'max-height').view.$el).find('.gjs-sm-clear').hide();
-
                                 });
 
                                 //Responsive
-                                sm.getProperty(Responsive, 'd-desktop-none').setValue("");
-                                sm.getProperty(Responsive, 'd-tablet-none').setValue("");
-                                sm.getProperty(Responsive, 'd-mobile-landscape-none').setValue("");
-                                sm.getProperty(Responsive, 'd-mobile-none').setValue("");
+                                if (typeof sm.getSector(Responsive) != 'undefined') {
+                                    sm.getProperty(Responsive, 'd-desktop-none').setValue("");
+                                    sm.getProperty(Responsive, 'd-tablet-none').setValue("");
+                                    sm.getProperty(Responsive, 'd-mobile-landscape-none').setValue("");
+                                    sm.getProperty(Responsive, 'd-mobile-none').setValue("");
+                                }
 
                                 //Filters
+                                if (typeof sm.getSector(Filters) != 'undefined') {
 
-                                if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('blur') != -1)
-                                    sm.getProperty(Filters, 'blur').view.setValue('true');
-                                else
-                                    sm.getProperty(Filters, 'blur').view.setValue('false');
+                                    if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('blur') != -1)
+                                        sm.getProperty(Filters, 'blur').view.setValue('true');
+                                    else
+                                        sm.getProperty(Filters, 'blur').view.setValue('false');
 
-                                if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('brightness') != -1)
-                                    sm.getProperty(Filters, 'brightness').view.setValue('true');
-                                else
-                                    sm.getProperty(Filters, 'brightness').view.setValue('false');
+                                    if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('brightness') != -1)
+                                        sm.getProperty(Filters, 'brightness').view.setValue('true');
+                                    else
+                                        sm.getProperty(Filters, 'brightness').view.setValue('false');
 
-                                if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('contrast') != -1)
-                                    sm.getProperty(Filters, 'contrast').view.setValue('true');
-                                else
-                                    sm.getProperty(Filters, 'contrast').view.setValue('false');
+                                    if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('contrast') != -1)
+                                        sm.getProperty(Filters, 'contrast').view.setValue('true');
+                                    else
+                                        sm.getProperty(Filters, 'contrast').view.setValue('false');
 
-                                if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('grayscale') != -1)
-                                    sm.getProperty(Filters, 'grayscale').view.setValue('true');
-                                else
-                                    sm.getProperty(Filters, 'grayscale').view.setValue('false');
+                                    if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('grayscale') != -1)
+                                        sm.getProperty(Filters, 'grayscale').view.setValue('true');
+                                    else
+                                        sm.getProperty(Filters, 'grayscale').view.setValue('false');
 
-                                if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('hue-rotate') != -1)
-                                    sm.getProperty(Filters, 'hue-rotate').view.setValue('true');
-                                else
-                                    sm.getProperty(Filters, 'hue-rotate').view.setValue('false');
+                                    if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('hue-rotate') != -1)
+                                        sm.getProperty(Filters, 'hue-rotate').view.setValue('true');
+                                    else
+                                        sm.getProperty(Filters, 'hue-rotate').view.setValue('false');
 
-                                if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('invert') != -1)
-                                    sm.getProperty(Filters, 'invert').view.setValue('true');
-                                else
-                                    sm.getProperty(Filters, 'invert').view.setValue('false');
+                                    if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('invert') != -1)
+                                        sm.getProperty(Filters, 'invert').view.setValue('true');
+                                    else
+                                        sm.getProperty(Filters, 'invert').view.setValue('false');
 
-                                if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('opacity') != -1)
-                                    sm.getProperty(Filters, 'opacity').view.setValue('true');
-                                else
-                                    sm.getProperty(Filters, 'opacity').view.setValue('false');
+                                    if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('opacity') != -1)
+                                        sm.getProperty(Filters, 'opacity').view.setValue('true');
+                                    else
+                                        sm.getProperty(Filters, 'opacity').view.setValue('false');
 
-                                if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('saturate') != -1)
-                                    sm.getProperty(Filters, 'saturate').view.setValue('true');
-                                else
-                                    sm.getProperty(Filters, 'saturate').view.setValue('false');
+                                    if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('saturate') != -1)
+                                        sm.getProperty(Filters, 'saturate').view.setValue('true');
+                                    else
+                                        sm.getProperty(Filters, 'saturate').view.setValue('false');
 
-                                if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('sepia') != -1)
-                                    sm.getProperty(Filters, 'sepia').view.setValue('true');
-                                else
-                                    sm.getProperty(Filters, 'sepia').view.setValue('false');
+                                    if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('sepia') != -1)
+                                        sm.getProperty(Filters, 'sepia').view.setValue('true');
+                                    else
+                                        sm.getProperty(Filters, 'sepia').view.setValue('false');
+                                }
 
                                 //Transform
 
-                                if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('rotateX') != -1)
-                                    sm.getProperty(Transform, 'rotateX').view.setValue('true');
-                                else
-                                    sm.getProperty(Transform, 'rotateX').view.setValue('false');
+                                if (typeof sm.getSector(Filters) != 'undefined') {
 
-                                if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('rotateY') != -1)
-                                    sm.getProperty(Transform, 'rotateY').view.setValue('true');
-                                else
-                                    sm.getProperty(Transform, 'rotateY').view.setValue('false');
+                                    if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('rotateX') != -1)
+                                        sm.getProperty(Transform, 'rotateX').view.setValue('true');
+                                    else
+                                        sm.getProperty(Transform, 'rotateX').view.setValue('false');
 
-                                if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('rotateZ') != -1)
-                                    sm.getProperty(Transform, 'rotateZ').view.setValue('true');
-                                else
-                                    sm.getProperty(Transform, 'rotateZ').view.setValue('false');
+                                    if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('rotateY') != -1)
+                                        sm.getProperty(Transform, 'rotateY').view.setValue('true');
+                                    else
+                                        sm.getProperty(Transform, 'rotateY').view.setValue('false');
 
-                                if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('scaleX') != -1)
-                                    sm.getProperty(Transform, 'scaleX').view.setValue('true');
-                                else
-                                    sm.getProperty(Transform, 'scaleX').view.setValue('false');
+                                    if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('rotateZ') != -1)
+                                        sm.getProperty(Transform, 'rotateZ').view.setValue('true');
+                                    else
+                                        sm.getProperty(Transform, 'rotateZ').view.setValue('false');
 
-                                if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('scaleY') != -1)
-                                    sm.getProperty(Transform, 'scaleY').view.setValue('true');
-                                else
-                                    sm.getProperty(Transform, 'scaleY').view.setValue('false');
+                                    if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('scaleX') != -1)
+                                        sm.getProperty(Transform, 'scaleX').view.setValue('true');
+                                    else
+                                        sm.getProperty(Transform, 'scaleX').view.setValue('false');
 
-                                if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('scaleZ') != -1)
-                                    sm.getProperty(Transform, 'scaleZ').view.setValue('true');
-                                else
-                                    sm.getProperty(Transform, 'scaleZ').view.setValue('false');
+                                    if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('scaleY') != -1)
+                                        sm.getProperty(Transform, 'scaleY').view.setValue('true');
+                                    else
+                                        sm.getProperty(Transform, 'scaleY').view.setValue('false');
 
-                                if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('skewX') != -1)
-                                    sm.getProperty(Transform, 'skewX').view.setValue('true');
-                                else
-                                    sm.getProperty(Transform, 'skewX').view.setValue('false');
+                                    if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('scaleZ') != -1)
+                                        sm.getProperty(Transform, 'scaleZ').view.setValue('true');
+                                    else
+                                        sm.getProperty(Transform, 'scaleZ').view.setValue('false');
 
-                                if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('skewY') != -1)
-                                    sm.getProperty(Transform, 'skewY').view.setValue('true');
-                                else
-                                    sm.getProperty(Transform, 'skewY').view.setValue('false');
+                                    if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('skewX') != -1)
+                                        sm.getProperty(Transform, 'skewX').view.setValue('true');
+                                    else
+                                        sm.getProperty(Transform, 'skewX').view.setValue('false');
+
+                                    if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('skewY') != -1)
+                                        sm.getProperty(Transform, 'skewY').view.setValue('true');
+                                    else
+                                        sm.getProperty(Transform, 'skewY').view.setValue('false');
+                                }
 
 
                                 $('.tlb-app-setting-panel').hide();
@@ -2334,40 +2352,45 @@ $(document).ready(function () {
                                     }, 300);
                                 }
 
-                                FilterBorderOptions(model, 'sm-border');
-                                $(VjEditor.StyleManager.getProperty(Border, 'border-position').view.$el.find('input')[0]).prop('checked', true);
-
-                                var flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
-
-                                if (model.attributes.type == 'grid') {
-
-                                    if (flexProperty == null) {
-
-                                        VjEditor.StyleManager.addProperty(Responsive, {
-                                            type: 'customradio',
-                                            name: 'Reverse Columns',
-                                            property: 'flex-direction',
-                                            defaults: 'row',
-                                            list: [{
-                                                value: 'row-reverse',
-                                                name: 'Yes',
-                                            }, {
-                                                value: 'row',
-                                                name: 'No',
-                                            }],
-                                            UpdateStyles: true,
-                                        });
-
-                                        flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
-                                    }
-
-                                    if (model.components().length) {
-                                        $(model.components().models[0].getEl()).addClass('gjs-dashed');
-                                    }
+                                if (typeof sm.getSector(Border) != 'undefined') {
+                                    FilterBorderOptions(model, 'sm-border');
+                                    $(VjEditor.StyleManager.getProperty(Border, 'border-position').view.$el.find('input')[0]).prop('checked', true);
                                 }
-                                else {
-                                    if (flexProperty != null)
-                                        VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
+
+                                if (typeof sm.getSector(Responsive) != 'undefined') {
+
+                                    var flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
+
+                                    if (model.attributes.type == 'grid') {
+
+                                        if (flexProperty == null) {
+
+                                            VjEditor.StyleManager.addProperty(Responsive, {
+                                                type: 'customradio',
+                                                name: 'Reverse Columns',
+                                                property: 'flex-direction',
+                                                defaults: 'row',
+                                                list: [{
+                                                    value: 'row-reverse',
+                                                    name: 'Yes',
+                                                }, {
+                                                    value: 'row',
+                                                    name: 'No',
+                                                }],
+                                                UpdateStyles: true,
+                                            });
+
+                                            flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
+                                        }
+
+                                        if (model.components().length) {
+                                            $(model.components().models[0].getEl()).addClass('gjs-dashed');
+                                        }
+                                    }
+                                    else {
+                                        if (flexProperty != null)
+                                            VjEditor.StyleManager.removeProperty(Responsive, 'flex-direction');
+                                    }
                                 }
 
                                 if (typeof model.attributes.text != 'undefined' && model.attributes.text) {
@@ -3103,23 +3126,6 @@ $(document).ready(function () {
                                 }
                             });
 
-                            //Tooltip
-                            $('[data-bs-toggle="tooltip"]').tooltip();
-
-                            $('.block-elements.blockItem').on("click", function (e) {
-                                var messagesrc = CurrentExtTabUrl + "&guid=" + $(this).attr('guid');
-
-                                $('#iframeHolder').find('iframe').attr('src', 'about:blank');
-                                setTimeout(function () {
-                                    $("#BlockManager").hide();
-                                    $("#StyleToolManager").hide();
-                                    $("#iframeHolder").fadeIn();
-                                }, 300);
-                                e.preventDefault();
-                                $(".About").css({ "pointer-events": "auto" });
-                                $('#iframeHolder').find('iframe').attr('src', messagesrc);
-                            });
-
                             $(VjEditor.Canvas.getDocument()).on("dblclick", "[data-gjs-type='wrapper']", function (e) {
                                 Stylemanager();
                             });
@@ -3272,8 +3278,12 @@ $(document).ready(function () {
             $(this).parent().addClass('active');
             ChangeBlockType();
         }
-        else if ($this.hasClass('librarytab'))
-            parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%', true, false, null, false);
+        else if ($this.hasClass('librarytab')) {
+            if (vjEditorSettings.TemplateLibraryURL != null && vjEditorSettings.TemplateLibraryURL != '')
+                parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, vjEditorSettings.TemplateLibraryURL, '100%', true, false, null, false);
+            else
+                parent.OpenPopUp(null, '100%', 'center', VjLocalized.TemplateLibrary, TemplateLibraryURL, '100%', true, false, null, false);
+        }
         else {
             $('.blockstab').removeClass('active');
             $(this).parent().addClass('active');
