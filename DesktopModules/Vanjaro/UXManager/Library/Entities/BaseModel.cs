@@ -15,5 +15,7 @@
         public object LanguageMarkUp { get; internal set; }
         public bool EditPage { get;  set; }
         public bool ShowUXManager { get; set; }
+        public bool CustomBlocks { get; set; }
+        public bool Library { get; set; }
     }
 }

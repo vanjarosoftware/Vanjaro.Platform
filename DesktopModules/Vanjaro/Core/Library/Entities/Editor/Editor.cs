@@ -1,4 +1,4 @@
-﻿using DotNetNuke.Entities.Portals;
+﻿ using DotNetNuke.Entities.Portals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +57,10 @@ namespace Vanjaro.Core.Entities
                 EditPage = true,
                 ModuleId = -1,
                 RevisionGUID = "e2f6ebcb-5d68-4d85-b180-058fb2d26178",
+                Blocks = false,
+                Language = true,
+                CustomBlocks = true,
+                Library = true,
             };
 
             return options;

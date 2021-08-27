@@ -10,7 +10,7 @@
 </div>
 <div ng-bind-html="PreviewImportResult | unsafe" style="width: 100%;margin-left: 3px;margin-top: 15px;">
 </div>
-<div style="float:right">
+<div class="text-end">
     <a class="btn btn-default" role="button" ng-show="PreviewImportResult!=''" ng-click="PreviewImport(true)" style="margin-top: 15px;">[LS:Save]</a>
     <a class="btn btn-default" role="button" ng-show="csv.result && PreviewImportResult==''" ng-click="PreviewImport(false)" style="margin-top: 15px;">[LS:PreviewImport]</a>
     <a class="btn btn-link" role="button" ng-click="CancelImport()" style="margin-top: 15px;">[LS:Cancel]</a>

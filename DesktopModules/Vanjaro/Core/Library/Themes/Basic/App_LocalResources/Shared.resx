@@ -271,7 +271,7 @@
     <value>Show More</value>
   </data>
   <data name="Data.Block.Cookie.cc_dismiss.Text" xml:space="preserve">
-    <value>ACCEPT</value>
+    <value>Accept</value>
   </data>
   <data name="Data.Block.Cookie.cc_link.Text" xml:space="preserve">
     <value>Learn more </value>

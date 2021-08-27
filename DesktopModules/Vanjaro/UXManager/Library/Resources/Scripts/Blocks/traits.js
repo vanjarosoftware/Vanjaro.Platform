@@ -653,10 +653,16 @@ export default (editor, config = {}) => {
 				case 'page':
 					var pid = $(elInput.querySelector('.page')).children("option:selected").attr('pid');
 					if (typeof pid != 'undefined' && pid != 0) {
-						var sf = $.ServicesFramework(-1);
-						$.ajax({
-							type: "GET",
-							url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Page/GetPageUrl?TabID=" + parseInt(pid),
+                        var sf = $.ServicesFramework(-1);
+
+                        var absolutelLink = false;
+
+                        if (this.model.attributes.absolutelink)
+                            absolutelLink = this.model.attributes.absolutelink;
+
+                        $.ajax({
+                            type: "GET",
+                            url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Page/GetPageUrl?TabID=" + parseInt(pid) + "&AbsolutelLink=" + absolutelLink,
 							headers: {
 								'ModuleId': parseInt(sf.getModuleId()),
 								'TabId': parseInt(sf.getTabId()),

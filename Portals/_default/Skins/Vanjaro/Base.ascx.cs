@@ -354,11 +354,11 @@ namespace Vanjaro.Skin
                 if (page != null && page.StateID.HasValue)
                     HasReviewPermission = WorkflowManager.HasReviewPermission(page.StateID.Value, PortalSettings.UserInfo);
 
-                if (TabPermissionController.HasTabPermission("EDIT") || (page != null && page.StateID.HasValue && HasReviewPermission))
-                {
+                if (PortalSettings.Current.UserInfo.UserID > 0)
                     FrameworkManager.Load(this, "jQuerySweetAlert");
+
+                if (TabPermissionController.HasTabPermission("EDIT") || (page != null && page.StateID.HasValue && HasReviewPermission))
                     FrameworkManager.Load(this, "Toastr");
-                }
 
                 if ((TabPermissionController.HasTabPermission("EDIT") || HasReviewPermission))
                     WebForms.RegisterClientScriptBlock(Page, "ReviewGlobalVariable", GetReviewGlobalVariable(PortalSettings, HasReviewPermission), true);
@@ -366,16 +366,6 @@ namespace Vanjaro.Skin
                 if (!TabPermissionController.HasTabPermission("EDIT") && HasReviewPermission)
                 {
                     FrameworkManager.Load(this, "FontAwesome");
-                }
-
-                if (TabPermissionController.HasTabPermission("EDIT"))
-                {
-                    try
-                    {
-                        string Fonts = JsonConvert.SerializeObject(Core.Managers.ThemeManager.GetDDLFonts("all"));
-                        WebForms.RegisterClientScriptBlock(Page, "VJThemeFonts", "var VJFonts=" + Fonts + ";", true);
-                    }
-                    catch (Exception) { }
                 }
 
                 HtmlDocument html = new HtmlDocument();
