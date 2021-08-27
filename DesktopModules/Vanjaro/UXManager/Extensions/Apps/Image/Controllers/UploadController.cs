@@ -12,6 +12,7 @@ using Vanjaro.Common.Components;
 using Vanjaro.Common.Data.Entities;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.Common.Factories;
+using System.Text.RegularExpressions;
 using Vanjaro.UXManager.Extensions.Apps.Image.Entities;
 using Vanjaro.UXManager.Extensions.Apps.Image.Factories;
 
@@ -59,7 +60,13 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
             {
                 IFileInfo file = FileManager.Instance.GetFile(fileid);
                 if (file != null)
-                    Result.Url = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, FileManager.Instance.GetUrl(file).Replace(file.FileName, GetEscapedFileName(file.FileName)));
+                {
+                    string fileUrl = FileManager.Instance.GetUrl(file);
+                    if (IsValidURL(fileUrl))
+                        Result.Url = fileUrl.Replace(file.FileName, GetEscapedFileName(file.FileName));
+                    else
+                        Result.Url = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, fileUrl.Replace(file.FileName, GetEscapedFileName(file.FileName)));
+                }
                 else
                     Result.Url = "";
                 Result.Status = "Success";
@@ -137,6 +144,11 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
             return fileName;
         }
 
+        private bool IsValidURL(string URL)
+        {
+            Regex Rgx = new Regex("^(http|https)://", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            return Rgx.IsMatch(URL);
+        }
         public override string AccessRoles()
         {
             return AppFactory.GetAccessRoles(UserInfo);
