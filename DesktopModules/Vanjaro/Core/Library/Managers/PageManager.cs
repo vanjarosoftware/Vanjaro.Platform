@@ -765,8 +765,12 @@ namespace Vanjaro.Core
 
             public static Pages GetLatestVersion(int TabID, bool IgnoreDraft, string Locale, bool GetDefaultLocale)
             {
+                return GetLatestVersion(TabID, IgnoreDraft, Locale, GetDefaultLocale, TabPermissionController.HasTabPermission("EDIT"));
+            }
+            public static Pages GetLatestVersion(int TabID, bool IgnoreDraft, string Locale, bool GetDefaultLocale,bool hasEdit)
+            {
                 UserInfo UserInfo = (PortalController.Instance.GetCurrentSettings() as PortalSettings).UserInfo;
-                bool HasTabEditPermission = TabPermissionController.HasTabPermission("EDIT") || WorkflowManager.HasReviewPermission(UserInfo);
+                bool HasTabEditPermission = hasEdit || WorkflowManager.HasReviewPermission(UserInfo);
                 List<Pages> pages = GetPages(TabID, HasTabEditPermission).Where(a => a.Locale == Locale).ToList();
                 Pages page = new Pages();
 
@@ -786,7 +790,7 @@ namespace Vanjaro.Core
 
                 if (page == null && !string.IsNullOrEmpty(Locale) && GetDefaultLocale)
                 {
-                    return GetLatestVersion(TabID, IgnoreDraft, null, false);
+                    return GetLatestVersion(TabID, IgnoreDraft, null, false, hasEdit);
                 }
                 return page;
             }

@@ -1,4 +1,5 @@
-﻿using DotNetNuke.Web.Api;
+﻿using DotNetNuke.Security.Permissions;
+using DotNetNuke.Web.Api;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -43,7 +44,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Controllers
         [HttpGet]
         public HttpResponseMessage Export(int PortalID, string Name)
         {
-            return SitesManager.Export(PortalID, Name);
+            return SitesManager.Export(PortalID, Name, TabPermissionController.HasTabPermission("EDIT"));
         }
 
         public override string AccessRoles()
