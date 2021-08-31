@@ -1,0 +1,2 @@
+UPDATE {databaseOwner}{objectQualifier}Assemblies set Version='1.1.1' where AssemblyName='Vanjaro.Common.dll'
+UPDATE {databaseOwner}{objectQualifier}Assemblies set Version='1.1.1' where AssemblyName='Vanjaro.URL.dll'
