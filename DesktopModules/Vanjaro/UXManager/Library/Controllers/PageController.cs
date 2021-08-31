@@ -60,9 +60,9 @@ namespace Vanjaro.UXManager.Library.Controllers
 
         [HttpGet]
         [DnnPageEditor]
-        public string GetPageUrl(int TabID)
+        public string GetPageUrl(int TabID, bool AbsolutelLink)
         {
-            string result = PageManager.GetPageUrl(PortalSettings, TabID);
+            string result = PageManager.GetPageUrl(PortalSettings, TabID, AbsolutelLink);
             if (string.IsNullOrEmpty(result))
                 result = "/";
             return result;

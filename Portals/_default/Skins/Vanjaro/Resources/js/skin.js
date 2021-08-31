@@ -163,7 +163,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     else
         modalclass += ' fullheight';
 
-    if (position == 'right')
+    if (width != '100%' && position == 'right')
         modalclass += ' modal-right'
 
     if (typeof ModuleId != 'undefined' && ModuleId != null)
@@ -323,7 +323,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
         $('body').find(".modal-backdrop").css('opacity', opacity);
 
     $(window.parent.document.body).find('[data-bs-dismiss="modal"]').on("click", function (e, reload) {
-        if ($(window.document.body).find('.uxmanager-modal').data('edit') == 'edit_module') {
+        if ($(window.document.body).find('.uxmanager-modal').data('edit') == 'edit_module' && ($(window.parent.document.body).find('.uxmanager-modal').length == 1 || (typeof reload != 'undefined' && reload))) {
             var mid = $(window.document.body).find('.uxmanager-modal').data('mid');
             if ($('.gjs-frame').contents().find('#dnn_vj_' + mid).length > 0) {
                 var framesrc = CurrentTabUrl;
@@ -475,14 +475,14 @@ $(document).ready(function () {
         $('#UXpagerender').show().siblings().remove();
     });
 
-    $('.DefaultMenu').find('.dropdown-toggle[href="javascript:void(0)"], .dropdown-submenu [href="javascript:void(0)"], .dropdown-toggle[href!="#"] svg, .dropdown-submenu a[href!="#"] svg').on('click', function (e) {
+    $('.DefaultMenu').find('span.dropdown-toggle, span.dropdown-item, .dropdown svg').on('click', function (e) {
 
         e.preventDefault();
 
-        if ($(window).width() > 991)
+        if ($(window).width() > 991 || ($(this).is('svg') && $(this).parent('span').length))
             return this;
 
-        $(this).parent().parent().toggleClass('resp-active');
+        $(this).parents('li').first().toggleClass('resp-active');
 
         return this;
     });

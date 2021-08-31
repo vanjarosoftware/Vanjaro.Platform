@@ -1,14 +1,18 @@
 ﻿using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Web.Api;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Components;
+using Vanjaro.Common.Data.Entities;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.Common.Factories;
+using System.Text.RegularExpressions;
 using Vanjaro.UXManager.Extensions.Apps.Image.Entities;
 using Vanjaro.UXManager.Extensions.Apps.Image.Factories;
 
@@ -44,6 +48,34 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
         public dynamic GetUrl(int fileid)
         {
             return BrowseUploadFactory.GetUrl(fileid);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public dynamic GetUrl(int fileid, string absolutelink)
+        {
+            dynamic Result = new ExpandoObject();
+
+            if (bool.Parse(absolutelink))
+            {
+                IFileInfo file = FileManager.Instance.GetFile(fileid);
+                if (file != null)
+                {
+                    string fileUrl = FileManager.Instance.GetUrl(file);
+                    if (IsValidURL(fileUrl))
+                        Result.Url = fileUrl.Replace(file.FileName, GetEscapedFileName(file.FileName));
+                    else
+                        Result.Url = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, fileUrl.Replace(file.FileName, GetEscapedFileName(file.FileName)));
+                }
+                else
+                    Result.Url = "";
+                Result.Status = "Success";
+                Result.Urls = new List<ImageUrl>();
+            }
+            else
+                Result = BrowseUploadFactory.GetUrl(fileid);
+
+            return Result;
         }
 
         [HttpPost]
@@ -102,6 +134,21 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
             }
         }
 
+        private string GetEscapedFileName(string fileName)
+        {
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                fileName = fileName.Replace(" ", "%20");
+            }
+
+            return fileName;
+        }
+
+        private bool IsValidURL(string URL)
+        {
+            Regex Rgx = new Regex("^(http|https)://", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            return Rgx.IsMatch(URL);
+        }
         public override string AccessRoles()
         {
             return AppFactory.GetAccessRoles(UserInfo);

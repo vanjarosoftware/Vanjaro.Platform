@@ -83,7 +83,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             }
             return actionResult;
         }
-        internal static HttpResponseMessage Export(int PortalID, string Name)
+        internal static HttpResponseMessage Export(int PortalID, string Name,bool hasEdit)
         {
             HttpResponseMessage Response = new HttpResponseMessage();
             string Theme = ThemeManager.CurrentTheme.Name;
@@ -130,7 +130,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 Assets.Add(exportTemplate.HomeScreenIcon, HomeScreenIcon);
             Dictionary<int, string> ExportedModulesContent = new Dictionary<int, string>();
             List<Pages.Entities.PagesTreeView> PagesTreeView = Pages.Managers.PagesManager.GetPagesTreeView(new PortalSettings(PortalID), null);
-            exportTemplate.Templates.AddRange(ConvertToLayouts(PortalID, Assets, ExportedModulesContent, ps, PagesTreeView));
+            exportTemplate.Templates.AddRange(ConvertToLayouts(PortalID, Assets, ExportedModulesContent, ps, PagesTreeView, hasEdit));
             string serializedExportTemplate = JsonConvert.SerializeObject(exportTemplate);
             if (!string.IsNullOrEmpty(serializedExportTemplate))
             {
@@ -253,7 +253,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             return Blocks;
         }
 
-        private static List<Layout> ConvertToLayouts(int PortalID, Dictionary<string, string> Assets, Dictionary<int, string> ExportedModulesContent, PortalSettings ps, List<PagesTreeView> PagesTreeView)
+        private static List<Layout> ConvertToLayouts(int PortalID, Dictionary<string, string> Assets, Dictionary<int, string> ExportedModulesContent, PortalSettings ps, List<PagesTreeView> PagesTreeView, bool hasEdit)
         {
             List<Layout> result = new List<Layout>();
             int ctr = 1;
@@ -263,7 +263,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 TabInfo tab = TabController.Instance.GetTab(page.Value, PortalID);
                 if (!CanExport(pageSettings, tab))
                     continue;
-                var version = PageManager.GetLatestVersion(page.Value, PageManager.GetCultureCode(ps));
+                var version = PageManager.GetLatestVersion(page.Value, false, PageManager.GetCultureCode(ps), true, hasEdit);
                 if (version == null)
                     version = new Core.Data.Entities.Pages();
                 Layout layout = new Layout
@@ -322,7 +322,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
                 layout.Style = PageManager.TokenizeTemplateLinks(PortalID, version.Style != null ? version.Style : string.Empty, false, Assets);
                 layout.StyleJSON = PageManager.TokenizeTemplateLinks(PortalID, version.StyleJSON != null ? version.StyleJSON : string.Empty, true, Assets);
                 layout.Type = pageSettings.PageType = pageSettings.PageType.ToLower() == "url" ? "URL" : (pageSettings.DisableLink && pageSettings.IncludeInMenu) ? "Folder" : "Standard";
-                layout.Children = ConvertToLayouts(PortalID, Assets, ExportedModulesContent, ps, page.children);
+                layout.Children = ConvertToLayouts(PortalID, Assets, ExportedModulesContent, ps, page.children, hasEdit);
                 layout.SortOrder = ctr;
                 ProcessPortableModules(PortalID, tab, ExportedModulesContent);
                 result.Add(layout);

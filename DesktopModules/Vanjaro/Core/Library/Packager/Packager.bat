@@ -538,6 +538,9 @@ xcopy /e /i "DNN Upgrade"\* UpgradeTemp_DNN\*  /Y >NUL
 
 ::Need to copy the Core DLL to Upgrade Package for Upgrade Page (Upgrade.aspx) to kick off
 copy ..\..\..\..\..\bin\Vanjaro.Core.dll UpgradeTemp_DNN\bin >NUL
+copy ..\..\..\..\..\bin\Vanjaro.URL.dll UpgradeTemp_DNN\bin >NUL
+copy ..\..\..\..\..\bin\Vanjaro.Common.dll UpgradeTemp_DNN\bin >NUL
+
 
 cd UpgradeTemp_DNN\
 

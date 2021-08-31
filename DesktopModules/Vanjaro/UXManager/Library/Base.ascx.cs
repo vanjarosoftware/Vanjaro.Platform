@@ -105,9 +105,14 @@ namespace Vanjaro.UXManager.Library
                         }
                     }
 
+                    try
+                    {
+                        string Fonts = JsonConvert.SerializeObject(Core.Managers.ThemeManager.GetDDLFonts("all"));
+                        WebForms.RegisterClientScriptBlock(Page, "VJThemeFonts", "var VJFonts=" + Fonts + ";", true);
+                    }
+                    catch (Exception) { }
+
                     WebForms.LinkCSS(Page, "UXManagerAppCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/StyleSheets/app.css"));
-
-
                     WebForms.LinkCSS(Page, "GrapesJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapes.min.css"));
                     WebForms.LinkCSS(Page, "GrapickJsCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/grapick.min.css"));
                     WebForms.LinkCSS(Page, "GrapesJsPanelCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/jsPanel/jspanel.min.css"));
@@ -118,7 +123,7 @@ namespace Vanjaro.UXManager.Library
 
                     LocalizeThemeJS();
 
-                    if (!string.IsNullOrEmpty(Core.Managers.ThemeManager.CurrentTheme.Assembly) && !string.IsNullOrEmpty(Core.Managers.ThemeManager.CurrentTheme.DesignScript))
+                    if (!string.IsNullOrEmpty(Core.Managers.ThemeManager.CurrentTheme.Assembly) && !string.IsNullOrEmpty(Core.Managers.ThemeManager.CurrentTheme.DesignScript) && !Core.Entities.Editor.Options.Blocks)
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "ThemeDesignScript", "<script type=\"text/javascript\" src=\"" + Page.ClientScript.GetWebResourceUrl(Type.GetType(Core.Managers.ThemeManager.CurrentTheme.Assembly), Core.Managers.ThemeManager.CurrentTheme.DesignScript) + "\"></script>", false);
 
                     LocalizeGrapeJS();
@@ -174,7 +179,7 @@ namespace Vanjaro.UXManager.Library
                 MenuMarkUp = MenuManager.RenderMenu(MenuManager.ParseMenuCategoryTree(null), null),
                 NotificationCount = Core.Managers.NotificationManager.RenderNotificationsCount(PortalSettings.PortalId),
                 ToolbarMarkUp = ToolbarManager.RenderMenu(),
-                LanguageMarkUp = LanguageManager.RenderLanguages(),
+                LanguageMarkUp = Core.Entities.Editor.Options.Language == true ? LanguageManager.RenderLanguages() : string.Empty,
                 HasShortcut = (ShortcutManager.GetShortcut().Where(x => x.Shortcut.Visibility).Count() > 0)
             };
             item.ShortcutMarkUp = item.HasShortcut ? ShortcutManager.RenderShortcut() : string.Empty;
@@ -185,6 +190,8 @@ namespace Vanjaro.UXManager.Library
                 item.HasTabEditPermission = TabPermissionController.HasTabPermission("EDIT");
 
             item.EditPage = Core.Entities.Editor.Options.EditPage;
+            item.CustomBlocks = Core.Entities.Editor.Options.CustomBlocks;
+            item.Library = Core.Entities.Editor.Options.Library;
             item.ShowUXManager = string.IsNullOrEmpty(Core.Managers.CookieManager.GetValue("vj_InitUX")) ? false : Convert.ToBoolean(Core.Managers.CookieManager.GetValue("vj_InitUX"));
             return item;
         }

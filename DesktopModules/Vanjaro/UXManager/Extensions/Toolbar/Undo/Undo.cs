@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Vanjaro.Common.Utilities;
+using Vanjaro.Core.Entities.Menu;
 using Vanjaro.UXManager.Library;
 using Vanjaro.UXManager.Library.Entities.Interface;
 using Vanjaro.UXManager.Library.Entities.Menu;

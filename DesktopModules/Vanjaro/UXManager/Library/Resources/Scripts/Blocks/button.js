@@ -86,6 +86,7 @@ export default (editor, config = {}) => {
                 }
             },
             defaults: Object.assign({}, textModel.prototype.defaults, {
+                'custom-name': 'Button',
                 droppable: '[data-gjs-type=icon-box], [data-gjs-type=icon]',
                 classes: ['btn', 'btn-primary', 'button-style-1'],
                 text: true,
@@ -187,16 +188,16 @@ export default (editor, config = {}) => {
                         name: 'styles',
                         type: 'preset_radio',
                         options: [
-                            { id: 'button-style-1', name: 'Style 1', class: 'button-style-1' },
-                            { id: 'button-style-2', name: 'Style 2', class: 'button-style-2' },
-                            { id: 'button-style-3', name: 'Style 3', class: 'button-style-3' },
-                            { id: 'button-style-4', name: 'Style 4', class: 'button-style-4' },
-                            { id: 'button-style-5', name: 'Style 5', class: 'button-style-5' },
-                            { id: 'button-style-6', name: 'Style 6', class: 'button-style-6' },
-                            { id: 'button-style-7', name: 'Style 7', class: 'button-style-7' },
-                            { id: 'button-style-8', name: 'Style 8', class: 'button-style-8' },
-                            { id: 'button-style-9', name: 'Style 9', class: 'button-style-9' },
-                            { id: 'button-style-10', name: 'Style 10', class: 'button-style-10' },
+                            { id: 'button-style-1', name: 'Style 1', class: 'button-style-1', DisplayName: 'A' },
+                            { id: 'button-style-2', name: 'Style 2', class: 'button-style-2', DisplayName: 'B' },
+                            { id: 'button-style-3', name: 'Style 3', class: 'button-style-3', DisplayName: 'C' },
+                            { id: 'button-style-4', name: 'Style 4', class: 'button-style-4', DisplayName: 'D' },
+                            { id: 'button-style-5', name: 'Style 5', class: 'button-style-5', DisplayName: 'E' },
+                            { id: 'button-style-6', name: 'Style 6', class: 'button-style-6', DisplayName: 'F' },
+                            { id: 'button-style-7', name: 'Style 7', class: 'button-style-7', DisplayName: 'G' },
+                            { id: 'button-style-8', name: 'Style 8', class: 'button-style-8', DisplayName: 'H' },
+                            { id: 'button-style-9', name: 'Style 9', class: 'button-style-9', DisplayName: 'I' },
+                            { id: 'button-style-10', name: 'Style 10', class: 'button-style-10', DisplayName: 'J' },
                         ],
                         default: 'Style 1',
                         changeProp: 1,
@@ -218,6 +219,17 @@ export default (editor, config = {}) => {
                 }
             }
         }),
-        view: textView
+        view: textView.extend({
+            onRender() {
+                var model = this.model;
+                var selectedStyle = (model.attributes.styles == undefined) ? 'Style 1' : model.attributes.styles;
+                var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
+
+                if (model.attributes['custom-name'].indexOf(' - ' + SelectedDisplayName) == -1) {
+
+                    model.set('custom-name', model.getName() + ' - ' + SelectedDisplayName);
+                }
+            }
+        }),
     });
 }

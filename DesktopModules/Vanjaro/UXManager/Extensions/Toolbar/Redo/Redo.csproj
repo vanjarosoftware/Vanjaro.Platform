@@ -58,6 +58,10 @@
       <Project>{82603eb3-cfec-4101-837a-7581d3300540}</Project>
       <Name>Vanjaro.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Core\Library\Vanjaro.Core.csproj">
+      <Project>{3ED0D4A5-E2DA-4DD9-AB64-9E0A2B6B4305}</Project>
+      <Name>Vanjaro.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Library\Vanjaro.UX.csproj">
       <Project>{203151E8-6239-447C-8BF3-41F864A35B23}</Project>
       <Name>Vanjaro.UX</Name>
@@ -96,7 +100,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Internal|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-	<OutputPath>..\..\..\..\..\..\bin\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\bin\</OutputPath>
     <DefineConstants>TRACE;INTERNAL</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>

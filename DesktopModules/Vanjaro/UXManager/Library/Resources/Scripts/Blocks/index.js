@@ -21,7 +21,138 @@ import map from './map';
 import imageGallery from './image-gallery';
 import carousel from './carousel';
 
-export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
+grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
+
+    let config = opts;
+
+    let defaults = {
+
+        tuiimageeditorOpts: {
+            config: {
+                includeUI: {
+                    menu: ['crop', 'flip', 'rotate', 'draw', 'text', 'mask', 'filter'],
+                },
+                cssMaxWidth: 560,
+                cssMaxHeight: 350,
+            },
+            icons: {
+                'menu.normalIcon.path': VjDefaultPath + '/svg/icon-d.svg',
+                'menu.activeIcon.path': VjDefaultPath + '/svg/icon-b.svg',
+                'menu.disabledIcon.path': VjDefaultPath + '/svg/icon-a.svg',
+                'menu.hoverIcon.path': VjDefaultPath + '/svg/icon-c.svg',
+                'submenu.normalIcon.path': VjDefaultPath + '/svg/icon-d.svg',
+                'submenu.activeIcon.path': VjDefaultPath + '/svg/icon-c.svg',
+            },
+            onApply: function (imageEditor, imageModel) {
+                if (!$('.optimizing-overlay').length)
+                    $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Optimizing Images</h1></div>');
+                var sf = $.ServicesFramework(-1);
+                var ImageData = {
+                    PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
+                    ImageByte: imageEditor.toDataURL()
+                };
+                $.ajax({
+                    type: "POST",
+                    url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Image") + "Image/Convert",
+                    data: ImageData,
+                    headers: {
+                        'ModuleId': parseInt(sf.getModuleId()),
+                        'TabId': parseInt(sf.getTabId()),
+                        'RequestVerificationToken': sf.getAntiForgeryValue()
+                    },
+                    success: function (response) {
+                        if (response != "failed") {
+                            imageModel.set('src', response.Url);
+                            var parentmodel = imageModel.parent();
+                            ChangeToWebp(parentmodel, response.Urls);
+                            $('.gjs-toolbar').hide();
+                            VjEditor.Modal.close();
+                        }
+                        $('.vj-wrapper').find('.optimizing-overlay').remove();
+                    }
+                });
+                event.preventDefault();
+            }
+        },
+    }
+
+    // Load defaults
+    for (let name in defaults) {
+        if (!(name in config))
+            config[name] = defaults[name];
+    }
+
+    const {
+        stylefilterOpts,
+        tuiimageeditorOpts,
+        touchOpts,
+    } = config;
+
+    // Load plugins
+    stylefilterOpts && pluginstylefilter(editor, stylefilterOpts);
+    tuiimageeditorOpts && plugintuiimageeditor(editor, tuiimageeditorOpts);
+    touchOpts && plugintouch(editor, touchOpts);
+
+    // Load Traits
+    loadTraits(editor, opts);
+
+    // Load Traits
+    loadStyles(editor, opts);
+
+    editor.Commands.add('save', ed => {
+        ed.store();
+    });
+
+    //Add Commands Switch Device 
+    editor.Commands.add('set-device-desktop', {
+        run: editor => editor.setDevice('Desktop')
+    });
+    editor.Commands.add('set-device-tablet', {
+        run: editor => editor.setDevice('Tablet')
+    });
+    editor.Commands.add('set-device-mobile-portrait', {
+        run: editor => editor.setDevice('Mobile Portrait')
+    });
+    editor.Commands.add('set-device-mobile-landscape', {
+        run: editor => editor.setDevice('Mobile Landscape')
+    });
+
+    //Implement Search
+    var inputVal;
+
+    editor.Commands.add('search-filter', {
+        run(editor, sender) {
+            var r = inputVal
+                , i = editor.BlockManager
+                , a = ChangeBlockType('search').filter(function (t) {
+
+                    if (r && r.length > 1) {
+
+                        if (t.get("id") != undefined && t.get("id").toLowerCase().indexOf(r.toLowerCase()) >= 0)
+                            return true;
+                        else if (t.get('category').id != undefined && t.get('category').id.toLowerCase().indexOf(r.toLowerCase()) >= 0)
+                            return true;
+                        else
+                            return false;
+                    }
+                    return !0
+                });
+            i.render(a)
+        }
+    });
+
+    $(".search-block input").keyup(function (e) {
+        inputVal = $(this).val();
+        editor.runCommand("search-filter");
+    });
+
+    $(".close-searchbtn").click(function () {
+        inputVal = $(this).val();
+        editor.runCommand("search-filter");
+    });
+});
+
+grapesjs.plugins.add('vjblocks', (editor, opts = {}) => {
 
     let config = opts;
 
@@ -161,75 +292,6 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
         // By setting this option to `false` will avoid loading the plugin
         stylefilterOpts: {},
 
-        tuiimageeditorOpts: {
-            config: {
-                includeUI: {
-                    menu: ['crop', 'flip', 'rotate', 'draw', 'text', 'mask', 'filter'],
-                },
-                cssMaxWidth: 560,
-                cssMaxHeight: 350,
-            },
-            icons: {
-                'menu.normalIcon.path': VjDefaultPath + '/svg/icon-d.svg',
-                'menu.activeIcon.path': VjDefaultPath + '/svg/icon-b.svg',
-                'menu.disabledIcon.path': VjDefaultPath + '/svg/icon-a.svg',
-                'menu.hoverIcon.path': VjDefaultPath + '/svg/icon-c.svg',
-                'submenu.normalIcon.path': VjDefaultPath + '/svg/icon-d.svg',
-                'submenu.activeIcon.path': VjDefaultPath + '/svg/icon-c.svg',
-            },
-
-            onApply: function (imageEditor, imageModel) {
-                if (!$('.optimizing-overlay').length)
-                    $('.vj-wrapper').prepend('<div class="optimizing-overlay"><h1><img class="centerloader" src="' + VjDefaultPath + 'loading.svg" />Optimizing Images</h1></div>');
-                var sf = $.ServicesFramework(-1);
-
-                if (imageModel.attributes.type == "section" || imageModel.attributes.type == "column" || imageModel.attributes.type == "divider" || imageModel.attributes.type == "heading" || imageModel.attributes.type == "text" || imageModel.attributes.type == "button" || imageModel.attributes.type == "list" || imageModel.attributes.type == "icon") {
-                    var imagefilename = imageModel.getStyle()["background-image"];
-                    var ImageData = {
-                        PreviousFileName: imagefilename.substring(imagefilename.lastIndexOf('/') + 1).split('?')[0],
-                        ImageByte: imageEditor.toDataURL()
-                    };
-                }
-                else {
-
-                    var ImageData = {
-                        PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
-                        ImageByte: imageEditor.toDataURL()
-                    };
-                }
-
-                $.ajax({
-                    type: "POST",
-                    url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Image") + "Image/Convert",
-                    data: ImageData,
-                    headers: {
-                        'ModuleId': parseInt(sf.getModuleId()),
-                        'TabId': parseInt(sf.getTabId()),
-                        'RequestVerificationToken': sf.getAntiForgeryValue()
-                    },
-                    success: function (response) {
-                        if (response != "failed") {
-                            imageModel.set('src', response.Url);
-                            var parentmodel = imageModel.parent();
-                            if (imageModel.attributes.type == "column" || imageModel.attributes.type == "divider" || imageModel.attributes.type == "heading" || imageModel.attributes.type == "text" || imageModel.attributes.type == "button" || imageModel.attributes.type == "list" || imageModel.attributes.type == "icon") {
-                                var backgroundstyle = imageModel.getStyle();
-                                backgroundstyle["background-image"] = 'url("' + response.Url + '")';
-                                imageModel.setStyle(backgroundstyle);
-                                ChangeToWebp(imageModel, response.Urls);
-                            }
-                            else {
-                                ChangeToWebp(parentmodel, response.Urls);
-                            }
-                            $('.gjs-toolbar').hide();
-                            VjEditor.Modal.close();
-                        }
-                        $('.vj-wrapper').find('.optimizing-overlay').remove();
-                    }
-                });
-                event.preventDefault();
-            }
-        },
-
         touchOpts: {},
 
         flexboxBlock: {},
@@ -251,20 +313,6 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
             config[name] = defaults[name];
     }
 
-    const {
-        stylegradientOpts,
-        stylefilterOpts,
-        tuiimageeditorOpts,
-        touchOpts,
-    } = config;
-
-    // Load plugins
-    //config && pluginstylegradient(editor, config);
-    stylefilterOpts && pluginstylefilter(editor, stylefilterOpts);
-
-    tuiimageeditorOpts && plugintuiimageeditor(editor, tuiimageeditorOpts);
-    touchOpts && plugintouch(editor, touchOpts);
-
     // Custom Blocks
     config && section(editor, config);
     config && grid(editor, config);
@@ -284,64 +332,6 @@ export default grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
     // Load Componenents
     loadComponents(editor, config);
-
-    // Load Traits
-    loadTraits(editor, config);
-
-    loadStyles(editor, config);
-
-
-    //Add Commands Switch Device 
-    editor.Commands.add('set-device-desktop', {
-        run: editor => editor.setDevice('Desktop')
-    });
-    editor.Commands.add('set-device-tablet', {
-        run: editor => editor.setDevice('Tablet')
-    });
-    editor.Commands.add('set-device-mobile-portrait', {
-        run: editor => editor.setDevice('Mobile Portrait')
-    });
-    editor.Commands.add('set-device-mobile-landscape', {
-        run: editor => editor.setDevice('Mobile Landscape')
-    });
-
-    editor.Commands.add('save', ed => {
-        ed.store();
-    });
-
-    //Implement Search
-    var inputVal;
-
-    editor.Commands.add('search-filter', {
-        run(editor, sender) {
-            var r = inputVal
-                , i = editor.BlockManager
-                , a = ChangeBlockType('search').filter(function (t) {
-
-                    if (r && r.length > 1) {
-
-                        if (t.get("id") != undefined && t.get("id").toLowerCase().indexOf(r.toLowerCase()) >= 0)
-                            return true;
-                        else if (t.get('category').id != undefined && t.get('category').id.toLowerCase().indexOf(r.toLowerCase()) >= 0)
-                            return true;
-                        else
-                            return false;
-                    }
-                    return !0
-                });
-            i.render(a)
-        }
-    });
-
-    $(".search-block input").keyup(function (e) {
-        inputVal = $(this).val();
-        editor.runCommand("search-filter");
-    });
-
-    $(".close-searchbtn").click(function () {
-        inputVal = $(this).val();
-        editor.runCommand("search-filter");
-    });
 
     var modalContent = document.getElementById('ModalContent');
     var saveButton = document.getElementById("btn-save");
