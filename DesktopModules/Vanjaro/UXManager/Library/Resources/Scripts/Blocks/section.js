@@ -41,13 +41,6 @@
 
 					var tb = [];
 
-					if (model.getStyle()["background-image"] != undefined) {
-						tb.push({
-							attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
-							command: 'custom-tui-image-editor',
-						});
-					}
-
 					if (GetBlockMenus().length > 0) {
 						tb.push({
 							attributes: { class: 'fa fa-bars', title: VjLocalized.Menu },

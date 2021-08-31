@@ -143,13 +143,6 @@ export default (editor, config = {}) => {
 				if (!model.get('toolbar')) {
 					var tb = [];
 
-					if (model.getStyle()["background-image"] != undefined) {
-						tb.push({
-							attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
-							command: 'custom-tui-image-editor',
-						});
-					}
-
 					tb.push({
 						attributes: { class: 'fa fa-plus', title: VjLocalized.AddColumn },
 						command: 'add-column',

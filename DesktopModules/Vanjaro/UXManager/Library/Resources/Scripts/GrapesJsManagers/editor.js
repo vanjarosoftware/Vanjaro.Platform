@@ -2065,6 +2065,15 @@ $(document).ready(function () {
                                     });
                                 }
 
+                                var tb = model.get('toolbar');
+                                if (model.getStyle()["background-image"] != undefined && tb[0].attributes.class != "fa fa-pencil") {
+                                    tb.unshift({
+                                        attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
+                                        command: 'custom-tui-image-editor',
+                                    });
+                                    VjEditor.getSelected().set('toolbar', tb);
+                                }
+
                                 $('.gjs-field-color-picker').on('show.spectrum', function () {
 
                                     var stylemanager = this.closest('.stylemanager');
