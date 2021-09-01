@@ -497,6 +497,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: -50, max: 200, step: 1 },
                                                     { name: '%', min: -100, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vw', min: -100, max: 100, step: 1 },
                                                     { name: 'vh', min: -100, max: 100, step: 1 }
                                                 ],
@@ -510,6 +512,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: -50, max: 200, step: 1 },
                                                     { name: '%', min: -100, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vw', min: -100, max: 100, step: 1 },
                                                     { name: 'vh', min: -100, max: 100, step: 1 }
                                                 ],
@@ -523,6 +527,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: -50, max: 200, step: 1 },
                                                     { name: '%', min: -100, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vw', min: -100, max: 100, step: 1 },
                                                     { name: 'vh', min: -100, max: 100, step: 1 }
                                                 ],
@@ -536,6 +542,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: -50, max: 200, step: 1 },
                                                     { name: '%', min: -100, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vw', min: -100, max: 100, step: 1 },
                                                     { name: 'vh', min: -100, max: 100, step: 1 }
                                                 ],
@@ -554,6 +562,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: 0, max: 200, step: 1 },
                                                     { name: '%', min: 0, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vw', min: 0, max: 100, step: 1 },
                                                     { name: 'vh', min: 0, max: 100, step: 1 }
                                                 ],
@@ -567,6 +577,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: 0, max: 200, step: 1 },
                                                     { name: '%', min: 0, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vw', min: 0, max: 100, step: 1 },
                                                     { name: 'vh', min: 0, max: 100, step: 1 }
                                                 ],
@@ -580,6 +592,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: 0, max: 200, step: 1 },
                                                     { name: '%', min: 0, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vw', min: 0, max: 100, step: 1 },
                                                     { name: 'vh', min: 0, max: 100, step: 1 }
                                                 ],
@@ -593,6 +607,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: 0, max: 200, step: 1 },
                                                     { name: '%', min: 0, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vw', min: 0, max: 100, step: 1 },
                                                     { name: 'vh', min: 0, max: 100, step: 1 }
                                                 ],
@@ -611,6 +627,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: 0, max: 1920, step: 1 },
                                                     { name: '%', min: 0, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vw', min: 0, max: 100, step: 1 },
                                                 ],
                                                 unit: 'px',
@@ -622,6 +640,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: 0, max: 1920, step: 1 },
                                                     { name: '%', min: 0, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vw', min: 0, max: 100, step: 1 },
                                                 ],
                                                 unit: 'px',
@@ -633,6 +653,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: 0, max: 1920, step: 1 },
                                                     { name: '%', min: 0, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vw', min: 0, max: 100, step: 1 },
                                                 ],
                                                 unit: 'px',
@@ -644,6 +666,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: 0, max: 1080, step: 1 },
                                                     { name: '%', min: 0, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vh', min: 0, max: 100, step: 1 },
                                                 ],
                                                 unit: 'px',
@@ -655,6 +679,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: 0, max: 1080, step: 1 },
                                                     { name: '%', min: 0, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vh', min: 0, max: 100, step: 1 },
                                                 ],
                                                 unit: 'px',
@@ -666,6 +692,8 @@ $(document).ready(function () {
                                                 units: [
                                                     { name: 'px', min: 0, max: 1080, step: 1 },
                                                     { name: '%', min: 0, max: 100, step: 1 },
+                                                    { name: 'rem', min: 0.5, max: 10, step: 0.1 },
+                                                    { name: 'em', min: 0.5, max: 10, step: 0.1 },
                                                     { name: 'vh', min: 0, max: 100, step: 1 },
                                                 ],
                                                 unit: 'px',
