@@ -76,7 +76,10 @@
 		}),
 		view: linkView.extend({
 			onRender() {
-				if (!this.model.components().length)
+
+				var model = this.model;
+
+				if (typeof model.getEl().classList != "undefined" && model.getEl().classList.contains('vj-link') && !model.components().length)
 					$(this.el).attr("data-empty", "true");
 			},
 			events: {
