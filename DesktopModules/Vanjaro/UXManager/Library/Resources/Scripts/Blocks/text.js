@@ -96,32 +96,35 @@ export default (editor, config = {}) => {
 					}
 				]
 			}),
-		},
-			{
-				isComponent(el) {
-					if (el && (el.classList && el.classList.contains('vj-text'))) {
-						return { type: 'text' };
-					}
+		}, {
+			isComponent(el) {
+				if (el && (el.classList && el.classList.contains('vj-text'))) {
+					return { type: 'text' };
 				}
-			}),
+			}
+		}),
 		view: textView.extend({
 			init() {
 				if (this.model.parent().attributes.type == 'text' || this.model.parent().attributes.type == 'heading' || this.model.parent().attributes.type == 'list-text')
 					this.model.removeClass(this.getClasses());
 			},
 			onRender() {
+
 				var model = this.model;
-				if (model.getTrait('styles')) {
-					var selectedStyle = (model.attributes.styles == undefined) ? 'Style 1' : model.attributes.styles;
-					var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
+				var trait = model.getTrait('styles');
 
-					if (model.attributes['custom-name'].indexOf(' - ' + SelectedDisplayName) == -1) {
+				if (trait) {
 
-						model.set('custom-name', model.getName() + ' - ' + SelectedDisplayName);
-					}
-                }
+					var Style = model.attributes.styles || 'Style 1';
+					var Option = trait.attributes.options.find(x => x.name === Style);
+					var DisplayName = "";
 
-				
+					if (typeof Option != "undefined")
+						DisplayName = Option.DisplayName;
+
+					if (model.attributes['custom-name'].indexOf(' - ' + DisplayName) == -1)
+						model.set('custom-name', model.getName() + ' - ' + DisplayName);
+				}
 			}
 		})
 	});
@@ -200,23 +203,30 @@ export default (editor, config = {}) => {
 					}
 				]
 			}),
-		},
-			{
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('text-inner')) {
-						return { type: 'text-inner' };
-					}
+		}, {
+			isComponent(el) {
+				if (el && el.classList && el.classList.contains('text-inner')) {
+					return { type: 'text-inner' };
 				}
-			}),
+			}
+		}),
 		view: textView.extend({
 			onRender() {
+
 				var model = this.model;
-				var selectedStyle = (model.getAttributes().styles == undefined) ? 'Style 1' : model.getAttributes().styles;
-				var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
+				var trait = model.getTrait('styles');
 
-				if (model.attributes['custom-name'].indexOf(' - ' + SelectedDisplayName) == -1) {
+				if (trait) {
 
-					model.set('custom-name', 'Text Inner - ' + SelectedDisplayName);
+					var Style = model.attributes.styles || 'Style 1';
+					var Option = trait.attributes.options.find(x => x.name === Style);
+					var DisplayName = "";
+
+					if (typeof Option != "undefined")
+						DisplayName = Option.DisplayName;
+
+					if (model.attributes['custom-name'].indexOf(' - ' + DisplayName) == -1)
+						model.set('custom-name', 'Text Inner - ' + DisplayName);
 				}
 			}
 		})
