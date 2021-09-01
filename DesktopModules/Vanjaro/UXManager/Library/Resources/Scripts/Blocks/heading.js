@@ -126,23 +126,30 @@ export default (editor, config = {}) => {
 					VjEditor.runCommand("save");
 				}
 			},
-		},
-			{
-				isComponent(el) {
-					if (el && el.tagName && el.classList && el.classList.contains('vj-heading')) {
-						return { type: 'heading' };
-					}
+		}, {
+			isComponent(el) {
+				if (el && el.tagName && el.classList && el.classList.contains('vj-heading')) {
+					return { type: 'heading' };
 				}
-			}),
+			}
+		}),
 		view: textView.extend({
 			onRender() {
+
 				var model = this.model;
-				var selectedStyle = (model.attributes.styles == undefined) ? 'Style 1' : model.attributes.styles;
-				var SelectedDisplayName = model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
+				var trait = model.getTrait('styles');
 
-				if (model.attributes['custom-name'].indexOf(' - ' + SelectedDisplayName) == -1) {
+				if (trait) {
 
-					model.set('custom-name', model.getName() + ' - ' + SelectedDisplayName);
+					var Style = model.attributes.styles || 'Style 1';
+					var Option = trait.attributes.options.find(x => x.name === Style);
+					var DisplayName = "";
+
+					if (typeof Option != "undefined")
+						DisplayName = Option.DisplayName;
+
+					if (model.attributes['custom-name'].indexOf(' - ' + DisplayName) == -1)
+						model.set('custom-name', model.getName() + ' - ' + DisplayName);
 				}
 			}
 		})

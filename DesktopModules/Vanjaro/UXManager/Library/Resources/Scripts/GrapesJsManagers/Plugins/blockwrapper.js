@@ -148,21 +148,21 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 				defaultType.view.prototype.render.apply(this, arguments);
 				IsVJEditorSaveCall = false;
 
+				var trait = this.model.getTrait('styles');
+				var DisplayName = "";
 
-				var stylesValue;
-				if (!this.model.getTrait('styles'))
-					stylesValue = "";
+				if (trait) {
 
-				else {
-					var selectedStyle = (this.model.getAttributes().styles == undefined) ? 'Style 1' : this.model.getAttributes().styles;
-					stylesValue = ' - ' + this.model.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
+					var Style = this.model.getAttributes().styles || 'Style 1';
+					var Option = trait.attributes.options.find(x => x.name === Style);
+					
+					if (typeof Option != "undefined")
+						DisplayName = ' - ' + Option.DisplayName;
 				}
 
-
-				this.model.set('custom-name', (this.model.attributes.attributes["data-block-display-name"] != undefined ? this.model.attributes.attributes["data-block-display-name"] : this.model.attributes.attributes["data-block-type"]) + stylesValue);
-
-
+				this.model.set('custom-name', (this.model.attributes.attributes["data-block-display-name"] != undefined ? this.model.attributes.attributes["data-block-display-name"] : this.model.attributes.attributes["data-block-type"]) + DisplayName);
 				this.model.set('name', this.model.attributes.attributes["data-block-display-name"] != undefined ? this.model.attributes.attributes["data-block-display-name"] : this.model.attributes.attributes["data-block-type"]);
+
 				if (this.model.attributes != undefined && this.model.attributes.components != undefined && this.model.attributes.components.models[0] != undefined && this.model.attributes.components.models[0].attributes.content != '') {
 
 					var compHtml = null;
