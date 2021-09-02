@@ -212,12 +212,8 @@ namespace Vanjaro.Core
                     }
                 }
 
-                if (File.Exists(BeforePath))
-                {
-                    sb.Append(File.ReadAllText(BeforePath));
-                }
-
                 List<string> Css = new List<string>();
+                List<string> CssVariable = new List<string>();
                 foreach (IThemeEditor category in GetCategories(CheckVisibilityPermission).OrderBy(o => o.ViewOrder).ToList())
                 {
                     List<ThemeEditorValue> themeEditorValues = GetThemeEditorValues(PortalID, category.Guid);
@@ -244,7 +240,7 @@ namespace Vanjaro.Core
 
                                     if (!string.IsNullOrEmpty(DefaultValue) && !string.IsNullOrEmpty(variable) && variable.StartsWith("$"))
                                     {
-                                        Css.Add(variable + ":" + DefaultValue + " !default;");
+                                        CssVariable.Add(variable + ":" + DefaultValue + " !default;");
                                     }
 
                                     if (!string.IsNullOrEmpty(DefaultValue) && !string.IsNullOrEmpty(css))
@@ -269,6 +265,25 @@ namespace Vanjaro.Core
                     }
                 }
 
+                if (CssVariable != null && CssVariable.Count > 0)
+                {
+                    CssVariable = CssVariable.Distinct().ToList();
+                    foreach (string str in CssVariable)
+                    {
+                        sb.Append(str);
+                    }
+                }
+
+                if (File.Exists(BeforePath))
+                {
+                    sb.Append(File.ReadAllText(BeforePath));
+                }
+
+                if (File.Exists(BootstrapPath))
+                {
+                    sb.Append(File.ReadAllText(BootstrapPath));
+                }
+
                 if (Css != null && Css.Count > 0)
                 {
                     Css = Css.Distinct().ToList();
@@ -276,11 +291,6 @@ namespace Vanjaro.Core
                     {
                         sb.Append(str);
                     }
-                }
-
-                if (File.Exists(BootstrapPath))
-                {
-                    sb.Append(File.ReadAllText(BootstrapPath));
                 }
 
                 if (File.Exists(AfterPath))
