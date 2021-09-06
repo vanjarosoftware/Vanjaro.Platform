@@ -296,9 +296,7 @@
     <Content Include="Install\Core.01.00.00.SqlDataProvider" />
     <Content Include="Install\Uninstall.Core.SqlDataProvider" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Themes\Basic\css\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Themes\Basic\Blocks\Breadcrumb\Templates\Default.cshtml" />
     <Content Include="Themes\Basic\Blocks\Language\Templates\Default.cshtml" />
@@ -549,7 +547,11 @@
     <PreBuildEvent>cd ..\DesktopModules\Vanjaro\Core\Library\Themes\Basic\scss\ &amp;&amp; npm install</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /e /i ..\DesktopModules\Vanjaro\Core\Library\Themes\* ..\Portals\_default\vThemes\*  /Y &gt;NUL</PostBuildEvent>
+    <PostBuildEvent>xcopy ..\DesktopModules\Vanjaro\Core\Library\Themes\Basic\scss\node_modules\bootstrap\dist\js\bootstrap.min.js ..\DesktopModules\Vanjaro\Common\Frameworks\Bootstrap\5.0.0\js\  /Y
+xcopy ..\DesktopModules\Vanjaro\Core\Library\Themes\Basic\scss\node_modules\bootstrap\dist\js\bootstrap.js ..\DesktopModules\Vanjaro\Common\Frameworks\Bootstrap\5.0.0\js\  /Y
+xcopy ..\DesktopModules\Vanjaro\Core\Library\Themes\Basic\scss\node_modules\bootstrap\dist\css\bootstrap.min.css ..\DesktopModules\Vanjaro\Common\Frameworks\Bootstrap\5.0.0\css\  /Y
+xcopy ..\DesktopModules\Vanjaro\Core\Library\Themes\Basic\scss\node_modules\bootstrap\dist\css\bootstrap.css ..\DesktopModules\Vanjaro\Common\Frameworks\Bootstrap\5.0.0\css\  /Y
+xcopy /e/i ..\DesktopModules\Vanjaro\Core\Library\Themes\* ..\Portals\_default\vThemes\*  /Y &gt;NUL</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
