@@ -547,8 +547,8 @@
     <PreBuildEvent>cd ..\DesktopModules\Vanjaro\Core\Library\Themes\Basic\scss\ &amp;&amp; npm install</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy ..\DesktopModules\Vanjaro\Core\Library\Themes\Basic\scss\node_modules\bootstrap\dist\js\bootstrap.min.js ..\DesktopModules\Vanjaro\Common\Frameworks\Bootstrap\5.0.0\js\  /Y
-xcopy ..\DesktopModules\Vanjaro\Core\Library\Themes\Basic\scss\node_modules\bootstrap\dist\js\bootstrap.js ..\DesktopModules\Vanjaro\Common\Frameworks\Bootstrap\5.0.0\js\  /Y
+    <PostBuildEvent>xcopy ..\DesktopModules\Vanjaro\Core\Library\Themes\Basic\scss\node_modules\bootstrap\dist\js\bootstrap.bundle.min.js ..\DesktopModules\Vanjaro\Common\Frameworks\Bootstrap\5.0.0\js\  /Y
+xcopy ..\DesktopModules\Vanjaro\Core\Library\Themes\Basic\scss\node_modules\bootstrap\dist\js\bootstrap.bundle.js ..\DesktopModules\Vanjaro\Common\Frameworks\Bootstrap\5.0.0\js\  /Y
 xcopy ..\DesktopModules\Vanjaro\Core\Library\Themes\Basic\scss\node_modules\bootstrap\dist\css\bootstrap.min.css ..\DesktopModules\Vanjaro\Common\Frameworks\Bootstrap\5.0.0\css\  /Y
 xcopy ..\DesktopModules\Vanjaro\Core\Library\Themes\Basic\scss\node_modules\bootstrap\dist\css\bootstrap.css ..\DesktopModules\Vanjaro\Common\Frameworks\Bootstrap\5.0.0\css\  /Y
 xcopy /e/i ..\DesktopModules\Vanjaro\Core\Library\Themes\* ..\Portals\_default\vThemes\*  /Y &gt;NUL</PostBuildEvent>
