@@ -563,7 +563,7 @@ h6.vj-heading {
     font-size: 16px;
 }
 
-.vj-image-gallery-item {
+img.vj-image-gallery-item {
     width: 128px;
     height: 128px;
     object-fit: cover;
