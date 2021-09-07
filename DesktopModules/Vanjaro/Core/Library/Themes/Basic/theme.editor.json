@@ -659,8 +659,8 @@
           "Title": "Color",
           "DefaultValue": "$darkcolor",
           "Suffix": "",
-          "CustomCSS": ".Vj-Register span,\n.Vj-Register label,\n.Vj-Register .registerterms  a{\n color:$signUpLablecolor !important;\n}\n.registerterms a:hover{\n color:lighten( $signUpLablecolor, 10% ) ;\n}",
-          "PreviewCSS": ".Vj-Register span,\n.Vj-Register label,\n.Vj-Register .registerterms a{\n color:$signUpLablecolor !important;\n}\n.registerterms a:hover{\n color:lighten( $signUpLablecolor, 10% ) ;\n}",
+          "CustomCSS": ".Vj-Register span,\n.Vj-Register label,\n.Vj-Register .registerterms  a{\n color:$signUpLablecolor ;\n}\n.registerterms a:hover{\n color:lighten( $signUpLablecolor, 10% ) ;\n}",
+          "PreviewCSS": ".Vj-Register span,\n.Vj-Register label,\n.Vj-Register .registerterms a{\n color:$signUpLablecolor ;\n}\n.registerterms a:hover{\n color:lighten( $signUpLablecolor, 10% ) ;\n}",
           "LessVariable": "$signUpLablecolor",
           "JavascriptVariable": "",
           "Type": "Color Picker"
