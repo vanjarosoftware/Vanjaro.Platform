@@ -200,7 +200,7 @@ namespace Vanjaro.Core
                 StringBuilder sb = new StringBuilder();
                 StringBuilder themeEditorJs = new StringBuilder();
                 string ThemeName = GetCurrent(PortalID).Name;
-                string BootstrapPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/node_modules/bootstrap/bootstrap.scss");
+                string BootstrapPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Bootstrap/bootstrap.scss");
                 string BeforePath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/Before.scss");
                 string AfterPath = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/" + ThemeName + "/scss/After.scss");
 
