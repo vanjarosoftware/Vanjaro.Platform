@@ -186,7 +186,7 @@ namespace Vanjaro.Common
                 case "Bootstrap":
                     {
                         WebForms.LinkCSS(Page, "VJ-" + Framework + "-CSS", Request(Framework, "css/bootstrap.min.css"));
-                        WebForms.RegisterClientScriptInclude(Page, "VJ-" + Framework + "-JS", Request(Framework, "js/bootstrap.min.js"), Composite, "DnnBodyProvider");
+                        WebForms.RegisterClientScriptInclude(Page, "VJ-" + Framework + "-JS", Request(Framework, "js/bootstrap.bundle.min.js"), Composite, "DnnBodyProvider");
                         break;
                     }
                 case "FontAwesome":
