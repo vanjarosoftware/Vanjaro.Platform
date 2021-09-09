@@ -653,16 +653,16 @@ export default (editor, config = {}) => {
 				case 'page':
 					var pid = $(elInput.querySelector('.page')).children("option:selected").attr('pid');
 					if (typeof pid != 'undefined' && pid != 0) {
-                        var sf = $.ServicesFramework(-1);
+						var sf = $.ServicesFramework(-1);
 
-                        var absolutelLink = false;
+						var absolutelLink = false;
 
-                        if (this.model.attributes.absolutelink)
-                            absolutelLink = this.model.attributes.absolutelink;
+						if (this.model.attributes.absolutelink)
+							absolutelLink = this.model.attributes.absolutelink;
 
-                        $.ajax({
-                            type: "GET",
-                            url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Page/GetPageUrl?TabID=" + parseInt(pid) + "&AbsolutelLink=" + absolutelLink,
+						$.ajax({
+							type: "GET",
+							url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Page/GetPageUrl?TabID=" + parseInt(pid) + "&AbsolutelLink=" + absolutelLink,
 							headers: {
 								'ModuleId': parseInt(sf.getModuleId()),
 								'TabId': parseInt(sf.getTabId()),
@@ -895,8 +895,20 @@ export default (editor, config = {}) => {
 						if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
 							model = component.closest(selector);
 					}
-					else if (component.find(selector).length)
-						model = component.find(selector);
+					else if (component.find(selector).length) {
+
+						var arr = [];
+
+						$(component.find(selector)).each(function (index, comp) {
+
+							var compID = comp.closestType(component.attributes.type).getId() || "";
+
+							if (compID == component.getId())
+								arr.push(comp);
+						});
+
+						model = arr;
+					}
 				}
 
 				$(model).each(function (index, item) {
@@ -1457,8 +1469,20 @@ export default (editor, config = {}) => {
 					if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
 						model = component.closest(selector);
 				}
-				else if (component.find(selector).length)
-					model = component.find(selector);
+				else if (component.find(selector).length) {
+
+					var arr = [];
+
+					$(component.find(selector)).each(function (index, comp) {
+
+						var compID = comp.closestType(component.attributes.type).getId() || "";
+
+						if (compID == component.getId())
+							arr.push(comp);
+					});
+
+					model = arr;
+				}
 			}
 
 			$(model).each(function (index, item) {
@@ -1525,8 +1549,20 @@ export default (editor, config = {}) => {
 				var model = trait.target;
 				var selector = trait.attributes.selector;
 
-				if (typeof selector != 'undefined')
-					model = trait.target.find(selector);
+				if (typeof selector != 'undefined') {
+
+					var arr = [];
+
+					$(trait.target.find(selector)).each(function (index, comp) {
+
+						var compID = comp.closestType(trait.target.attributes.type).getId() || "";
+
+						if (compID == trait.target.getId())
+							arr.push(comp);
+					});
+
+					model = arr;
+				}
 
 				$(model).each(function (index, item) {
 
@@ -1669,8 +1705,20 @@ export default (editor, config = {}) => {
 						if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
 							model = component.closest(selector);
 					}
-					else
-						model = component.find(selector);
+					else if (component.find(selector).length) {
+
+						var arr = [];
+
+						$(component.find(selector)).each(function (index, comp) {
+
+							var compID = comp.closestType(component.attributes.type).getId() || "";
+
+							if (compID == component.getId())
+								arr.push(comp);
+						});
+
+						model = arr;
+					}
 				}
 
 				$(model).each(function (index, item) {
@@ -1826,8 +1874,20 @@ export default (editor, config = {}) => {
 						if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
 							model = component.closest(selector);
 					}
-					else if (component.find(selector).length)
-						model = component.find(selector);
+					else if (component.find(selector).length) {
+
+						var arr = [];
+
+						$(component.find(selector)).each(function (index, comp) {
+
+							var compID = comp.closestType(component.attributes.type).getId() || "";
+
+							if (compID == component.getId())
+								arr.push(comp);
+						});
+
+						model = arr;
+					}
 				}
 
 				$(model).each(function (index, item) {
@@ -1886,8 +1946,27 @@ export default (editor, config = {}) => {
 			var trait = component.getTrait(event.target.name);
 			var selector = trait.attributes.selector;
 
-			if (typeof selector != 'undefined')
-				model = component.find(selector);
+			if (typeof selector != 'undefined') {
+
+				if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
+					if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
+						model = component.closest(selector);
+				}
+				else if (component.find(selector).length) {
+
+					var arr = [];
+
+					$(component.find(selector)).each(function (index, comp) {
+
+						var compID = comp.closestType(component.attributes.type).getId() || "";
+
+						if (compID == component.getId())
+							arr.push(comp);
+					});
+
+					model = arr;
+				}
+			}
 
 			$(model).each(function (index, item) {
 				UpdateStyles(elInput, item, event, component);
@@ -2020,8 +2099,27 @@ export default (editor, config = {}) => {
 			var trait = component.getTrait(event.target.name);
 			var selector = trait.attributes.selector;
 
-			if (typeof selector != 'undefined')
-				model = component.find(selector);
+			if (typeof selector != 'undefined') {
+
+				if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
+					if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
+						model = component.closest(selector);
+				}
+				else if (component.find(selector).length) {
+
+					var arr = [];
+
+					$(component.find(selector)).each(function (index, comp) {
+
+						var compID = comp.closestType(component.attributes.type).getId() || "";
+
+						if (compID == component.getId())
+							arr.push(comp);
+					});
+
+					model = arr;
+				}
+			}
 
 			$(model).each(function (index, item) {
 				if (item.attributes.type == 'videobox')
@@ -2211,8 +2309,27 @@ export default (editor, config = {}) => {
 			var trait = component.getTrait(event.target.name);
 			var selector = trait.attributes.selector;
 
-			if (typeof selector != 'undefined')
-				model = component.find(selector);
+			if (typeof selector != 'undefined') {
+
+				if (typeof component.parent() != 'undefined' && trait.attributes.closest) {
+					if (typeof component.closest(selector) != 'undefined' && component.closest(selector))
+						model = component.closest(selector);
+				}
+				else if (component.find(selector).length) {
+
+					var arr = [];
+
+					$(component.find(selector)).each(function (index, comp) {
+
+						var compID = comp.closestType(component.attributes.type).getId() || "";
+
+						if (compID == component.getId())
+							arr.push(comp);
+					});
+
+					model = arr;
+				}
+			}
 
 			$(model).each(function (index, item) {
 
