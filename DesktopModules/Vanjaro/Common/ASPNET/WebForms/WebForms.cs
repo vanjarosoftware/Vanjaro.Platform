@@ -21,12 +21,12 @@ namespace Vanjaro.Common.ASPNET
 
         public static void LinkCSS(Page Page, string ID, string URL, bool Composite)
         {
-            LinkCSS(Page, ID, URL, true, "DnnPageHeaderProvider");
+            LinkCSS(Page, ID, URL, Composite, "DnnPageHeaderProvider");
         }
 
         public static void LinkCSS(Page Page, string ID, string URL, bool Composite, string Provider)
         {
-            LinkCSS(Page, ID, URL, true, Provider, 101);
+            LinkCSS(Page, ID, URL, Composite, Provider, 101);
         }
 
         public static void LinkCSS(Page Page, string ID, string URL, bool Composite, string Provider, int Priority)
