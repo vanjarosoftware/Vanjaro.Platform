@@ -2577,7 +2577,6 @@ span.notificationname {
     padding: 10px 0px 6px 0;
     border-top: 1px solid #eee;
     border-bottom: 1px solid transparent;
-    display: inline-flex;
     position: relative;
 }
 

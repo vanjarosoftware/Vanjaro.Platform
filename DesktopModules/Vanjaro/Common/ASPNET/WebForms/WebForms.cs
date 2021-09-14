@@ -13,7 +13,6 @@ namespace Vanjaro.Common.ASPNET
     public class WebForms
     {
         private static int jsPriority = 101;
-        private static int cssPriority = 101;
 
         public static void LinkCSS(Page Page, string ID, string URL)
         {
@@ -22,10 +21,15 @@ namespace Vanjaro.Common.ASPNET
 
         public static void LinkCSS(Page Page, string ID, string URL, bool Composite)
         {
-            LinkCSS(Page, ID, URL, true, "DnnPageHeaderProvider");
+            LinkCSS(Page, ID, URL, Composite, "DnnPageHeaderProvider");
         }
 
         public static void LinkCSS(Page Page, string ID, string URL, bool Composite, string Provider)
+        {
+            LinkCSS(Page, ID, URL, Composite, Provider, 101);
+        }
+
+        public static void LinkCSS(Page Page, string ID, string URL, bool Composite, string Provider, int Priority)
         {
             if (Composite)
             {
@@ -42,9 +46,7 @@ namespace Vanjaro.Common.ASPNET
 
                 if (Uri.IsWellFormedUriString(relativeURL, UriKind.Relative) && !relativeURL.Contains('?'))
                 {
-                    ClientResourceManager.RegisterStyleSheet(Page, relativeURL, cssPriority, Provider);
-                    cssPriority++;
-
+                    ClientResourceManager.RegisterStyleSheet(Page, relativeURL, Priority, Provider);
                     return;
                 }
             }

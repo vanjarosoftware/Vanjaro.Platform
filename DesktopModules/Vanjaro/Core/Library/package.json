@@ -1,0 +1,11 @@
+{
+  "name": "bootstrap-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "5.1.0"
+  }
+}
