@@ -1833,7 +1833,7 @@ $(document).ready(function () {
                                         parentClone = blockwrapper.clone();
                                     }
                                     else if (model.target.getName != 'undefined') {
-                                        if (model.target.attributes.type == "button" || model.target.attributes.type == "icon" || model.target.attributes.type == "list" || model.target.attributes.type == "list-text") {
+                                        if (model.target.attributes.type == "row" || model.target.attributes.type == "button" || model.target.attributes.type == "icon" || model.target.attributes.type == "list" || model.target.attributes.type == "list-text") {
                                             parentRemove = model.parent;
                                             parentClone = model.parent.clone();
                                         }
