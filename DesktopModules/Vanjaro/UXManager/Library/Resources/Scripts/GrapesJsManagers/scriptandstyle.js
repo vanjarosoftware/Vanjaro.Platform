@@ -9,7 +9,7 @@ global.BindLinksAndScripts = function () {
     global.VjScript = '';
     global.VjStyle = '';
     $('link').each(function () {
-        if (typeof this.attributes.vj == 'undefined' && VjLinks.indexOf(this.href) == -1 && (typeof this.attributes.rel != 'undefined' && this.attributes.rel.value != 'SHORTCUT ICON')) {
+        if (this.href.toLowerCase().indexOf('/desktopmodules/vanjaro/uxmanager/library/resources/scripts') < 0 && this.href.toLowerCase().indexOf('/desktopmodules/vanjaro/common/frameworks/bootstrap') < 0 && this.href.toLowerCase().indexOf('/desktopmodules/vanjaro/common/frameworks/fontawesome') < 0 && this.href.toLowerCase().indexOf('/desktopmodules/vanjaro/uxmanager/library/resources/tui') < 0 && typeof this.attributes.vj == 'undefined' && VjLinks.indexOf(this.href) == -1 && (typeof this.attributes.rel != 'undefined' && this.attributes.rel.value != 'SHORTCUT ICON')) {
             VjLinks.push(this.href);
         }
     });
