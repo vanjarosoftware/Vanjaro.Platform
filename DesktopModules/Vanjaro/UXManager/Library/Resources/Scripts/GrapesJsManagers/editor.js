@@ -1,4 +1,4 @@
-﻿import grapesjs from 'grapesjs';
+import grapesjs from 'grapesjs';
 import { jsPanel } from 'jspanel4/es6module/jspanel.js';
 
 global.VjEditor = null;
@@ -2101,11 +2101,14 @@ $(document).ready(function () {
                                 }
 
                                 var tb = model.get('toolbar');
+
                                 if (model.getStyle()["background-image"] != undefined && tb[0].attributes.class != "fa fa-pencil") {
+
                                     tb.unshift({
                                         attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
                                         command: 'custom-tui-image-editor',
                                     });
+
                                     VjEditor.getSelected().set('toolbar', tb);
                                 }
 
@@ -2749,8 +2752,10 @@ $(document).ready(function () {
 
                             VjEditor.on('component:styleUpdate:background-image', (model, argument) => {
 
-                                var backgroundimage = model.getStyle()['background-image'];
-                                model.attributes.src = backgroundimage.replace('url(', '').replace(')', '').replace(/\"/gi, "").replace(/'/g, '');
+                                var backgroundImage = model.getStyle()['background-image'];
+
+                                if (typeof backgroundImage != "undefined")
+                                    model.set({ 'src': backgroundImage.replace('url(', '').replace(')', '').replace(/\"/gi, "").replace(/'/g, '') });
 
                             });
 
