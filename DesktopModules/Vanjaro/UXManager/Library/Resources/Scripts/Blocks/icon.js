@@ -78,7 +78,7 @@
 					if (model.get('removable')) {
 						tb.push({
 							attributes: { class: 'fa fa-trash-o' },
-							command: 'tlb-delete',
+							command: 'vj-delete',
 						});
 					}
 

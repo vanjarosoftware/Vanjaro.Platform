@@ -52,20 +52,19 @@ grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
                 var fileName = imageModel.getStyle()["background-image"];
 
+                var ImageData = {
+                    PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
+                    ImageByte: imageEditor.toDataURL()
+                };
+
                 if (imageModel.attributes.type != 'image' && fileName) {
 
-                    var ImageData = {
+                    ImageData = {
                         PreviousFileName: fileName.substring(fileName.lastIndexOf('/') + 1).split('?')[0],
                         ImageByte: imageEditor.toDataURL()
                     };
                 }
-                else {
-
-                    var ImageData = {
-                        PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
-                        ImageByte: imageEditor.toDataURL()
-                    };
-                }
+                
                 
                 $.ajax({
                     type: "POST",
