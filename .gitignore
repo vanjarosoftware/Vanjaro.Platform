@@ -19,9 +19,6 @@
 
 !favicon.ico
 
-/DesktopModules/Vanjaro/Core/Library/Themes/Basic/scss/Bootstrap
-/DesktopModules/Vanjaro/Common/Frameworks/Bootstrap/5.0.0
-
 /DesktopModules/Vanjaro/UXManager/Extensions/Apps/About/apps-about-resources.zip
 /DesktopModules/Vanjaro/UXManager/Extensions/Apps/Icon/apps-icon-resources.zip
 /DesktopModules/Vanjaro/UXManager/Extensions/Apps/Image/apps-image-resources.zip
@@ -466,3 +463,5 @@ healthchecksdb
 /DesktopModules/Vanjaro/UXManager/Extensions/Menu/Memberships/menu-memberships-resources.zip
 /DesktopModules/Vanjaro/Core/Library/Install/URL.01.00.05.SqlDataProvider
 /DesktopModules/Vanjaro/Core/Library/Install/Common.01.00.05.SqlDataProvider
+/DesktopModules/Vanjaro/Core/Library/Themes/Basic/scss/Bootstrap
+/DesktopModules/Vanjaro/Common/Frameworks/Bootstrap/5.0.0
