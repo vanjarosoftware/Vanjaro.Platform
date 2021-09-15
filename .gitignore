@@ -19,6 +19,9 @@
 
 !favicon.ico
 
+/DesktopModules/Vanjaro/Core/Library/Themes/Basic/scss/Bootstrap
+/DesktopModules/Vanjaro/Common/Frameworks/Bootstrap/5.0.0
+
 /DesktopModules/Vanjaro/UXManager/Extensions/Apps/About/apps-about-resources.zip
 /DesktopModules/Vanjaro/UXManager/Extensions/Apps/Icon/apps-icon-resources.zip
 /DesktopModules/Vanjaro/UXManager/Extensions/Apps/Image/apps-image-resources.zip
