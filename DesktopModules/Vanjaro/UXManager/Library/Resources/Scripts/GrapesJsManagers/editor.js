@@ -1,4 +1,4 @@
-﻿import grapesjs from 'grapesjs';
+import grapesjs from 'grapesjs';
 import { jsPanel } from 'jspanel4/es6module/jspanel.js';
 
 global.VjEditor = null;
@@ -1833,7 +1833,7 @@ $(document).ready(function () {
                                         parentClone = blockwrapper.clone();
                                     }
                                     else if (model.target.getName != 'undefined') {
-                                        if (model.target.attributes.type == "button" || model.target.attributes.type == "icon" || model.target.attributes.type == "list" || model.target.attributes.type == "list-text") {
+                                        if (model.target.attributes.type == "row" || model.target.attributes.type == "button" || model.target.attributes.type == "icon" || model.target.attributes.type == "list" || model.target.attributes.type == "list-text") {
                                             parentRemove = model.parent;
                                             parentClone = model.parent.clone();
                                         }
@@ -2126,6 +2126,18 @@ $(document).ready(function () {
                                         else if (v.command == 'vj-delete' || v.command == 'tlb-delete')
                                             v.attributes['title'] = VjLocalized.Delete;
                                     });
+                                }
+
+                                var tb = model.get('toolbar');
+
+                                if (model.getStyle()["background-image"] != undefined && tb[0].attributes.class != "fa fa-pencil") {
+
+                                    tb.unshift({
+                                        attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage },
+                                        command: 'custom-tui-image-editor',
+                                    });
+
+                                    VjEditor.getSelected().set('toolbar', tb);
                                 }
 
                                 $('.gjs-field-color-picker').on('show.spectrum', function () {
@@ -2763,6 +2775,15 @@ $(document).ready(function () {
                                 model.addStyle({ 'border-right-width': width });
 
                                 model.removeStyle('border-width');
+
+                            });
+
+                            VjEditor.on('component:styleUpdate:background-image', (model, argument) => {
+
+                                var backgroundImage = model.getStyle()['background-image'];
+
+                                if (typeof backgroundImage != "undefined")
+                                    model.set({ 'src': backgroundImage.replace('url(', '').replace(')', '').replace(/\"/gi, "").replace(/'/g, '') });
 
                             });
 
