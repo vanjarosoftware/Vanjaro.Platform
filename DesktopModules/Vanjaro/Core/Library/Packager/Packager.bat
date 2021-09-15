@@ -473,7 +473,7 @@ move Install\JavaScriptLibraryTEMP\jQuery_* Install\JavaScriptLibrary\ >NUL
 move Install\JavaScriptLibraryTEMP\jQueryMigrate_* Install\JavaScriptLibrary\ >NUL
 rmdir Install\JavaScriptLibraryTEMP /S/Q >NUL 2>&1
 
-del Install\Library\* /S/Q >NUL 2>&1
+::del Install\Library\* /S/Q >NUL 2>&1
 
 mkdir Install\ModuleTEMP >NUL
 move Install\Module\Newtonsoft* Install\ModuleTEMP\ >NUL
@@ -597,7 +597,7 @@ move Install\JavaScriptLibraryTEMP\jQuery_* Install\JavaScriptLibrary\ >NUL
 move Install\JavaScriptLibraryTEMP\jQueryMigrate_* Install\JavaScriptLibrary\ >NUL
 rmdir Install\JavaScriptLibraryTEMP /S/Q >NUL 2>&1
 
-del Install\Library\* /S/Q >NUL 2>&1
+::del Install\Library\* /S/Q >NUL 2>&1
 
 mkdir Install\ModuleTEMP >NUL
 move Install\Module\Newtonsoft* Install\ModuleTEMP\ >NUL
