@@ -77,6 +77,9 @@ namespace Vanjaro.Migrate.Components
 
                                 _Page.PreRender += delegate (object ss, EventArgs ee)
                                 {
+                                    if (HostController.Instance.GetSettings()["ControlPanel"].Value == "DesktopModules/admin/Dnn.PersonaBar/UserControls/PersonaBarContainer.ascx" && context.Request.QueryString["refresh"] == null)
+                                        HttpContext.Current.Response.Redirect(HttpContext.Current.Request.RawUrl + "&refresh=true"); //&refresh=true
+
                                     ApplyPersonaBarContainer();
                                 };
                             }
