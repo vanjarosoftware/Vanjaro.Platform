@@ -83,6 +83,10 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Vanjaro.UXManager.Extensions.Block.Login, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\www.vanjaro.local\Website\bin\Vanjaro.UXManager.Extensions.Block.Login.dll</HintPath>
+    </Reference>
     <Reference Include="Vanjaro.UXManager.Library">
       <HintPath>..\..\..\..\..\..\..\bin\Vanjaro.UXManager.Library.dll</HintPath>
     </Reference>

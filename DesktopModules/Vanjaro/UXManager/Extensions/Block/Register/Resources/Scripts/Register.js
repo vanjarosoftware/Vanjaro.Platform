@@ -46,10 +46,18 @@
                     else {
                         obj.html(registerText);
                         $('<div class="show-message alert alert-danger">' + response.Message + '</div>').insertAfter(Form.find('.Registerhead'));
-                        obj.removeClass('disabled');
+                        obj.removeClass('disabled');                        
+                    }
+
+                    if (response.Errors["ProfileUpdate"] != null && typeof response.Errors["ProfileUpdate"] != "undefined") {
+                        $(obj).closest('.Register').find('#registerbtn').html(registerText);
+                        $(obj).closest('.Register').find('#registerbtn').removeClass('disabled');
+                        if (response.Data != null && response.Data.UserExtensionURL != null) {
+                            parent.OpenPopUp(null, 800, 'right', null, response.Data.UserExtensionURL);
+                        }
                     }
                 },
-                error: function (Error) {
+                error: function (Error) {                    
                     console.log(Error);
                 }
             });
