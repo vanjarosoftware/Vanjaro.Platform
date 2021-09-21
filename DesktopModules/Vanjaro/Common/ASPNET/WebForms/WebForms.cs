@@ -65,7 +65,10 @@ namespace Vanjaro.Common.ASPNET
 
                 if (!string.IsNullOrEmpty(lit.Text))
                 {
-                    Page.Header.Controls.Add(lit);
+                    if (Priority == 0)
+                        Page.Header.Controls.AddAt(Priority, lit);
+                    else
+                        Page.Header.Controls.Add(lit);
                 }
             }
         }
