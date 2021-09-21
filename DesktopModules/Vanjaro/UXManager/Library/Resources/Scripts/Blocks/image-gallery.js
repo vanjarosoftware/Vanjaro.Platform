@@ -31,28 +31,28 @@
 	cmd.add('add-image', ed => {
 		var Selected = VjEditor.getSelected();
 
-        if (Selected.attributes.type == 'image-gallery') {
-            var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
-            var Img = `
+		if (Selected.attributes.type == 'image-gallery') {
+			var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
+			var Img = `
 				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
 					<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" style="width:` + Selected.components().models[0].getStyle().width + `; height:` + Selected.components().models[0].getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
 				</picture>
 			`;
-            Selected.components().add(Img);
+			Selected.components().add(Img);
 
-            VjEditor.select(Selected.components().last().find('img'));
-        }
-        else {
-            var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
-            var Img = `
+			VjEditor.select(Selected.components().last().find('img'));
+		}
+		else {
+			var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
+			var Img = `
 				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
 				<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" style="width:` + Selected.getStyle().width + `; height:` + Selected.getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
 				</picture>
 			`;
-            Selected.parent().parent().components().add(Img);
+			Selected.parent().parent().components().add(Img);
 
-            VjEditor.select(Selected.parent().parent().components().last().find('img'));
-        }
+			VjEditor.select(Selected.parent().parent().components().last().find('img'));
+		}
 
 		var target = VjEditor.getSelected();
 		window.document.vj_image_target = target;
@@ -71,10 +71,10 @@
 				if (!model.get('toolbar')) {
 					var tb = [];
 
-                    tb.push({
-                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddImage },
-                        command: 'add-image',
-                    });
+					tb.push({
+						attributes: { class: 'fa fa-plus', title: VjLocalized.AddImage },
+						command: 'add-image',
+					});
 
 					tb.push({
 						attributes: { class: 'fa fa-arrow-up' },
@@ -152,10 +152,10 @@
 				if (!model.get('toolbar')) {
 					var tb = [];
 
-                    tb.push({
-                        attributes: { class: 'fa fa-plus', title: VjLocalized.AddImage },
-                        command: 'add-image',
-                    });
+					tb.push({
+						attributes: { class: 'fa fa-plus', title: VjLocalized.AddImage },
+						command: 'add-image',
+					});
 
 					tb.push({
 						attributes: { class: 'fa fa-pencil' },
@@ -212,23 +212,30 @@
 					label: "Width",
 					name: "width",
 					type: "custom_range",
-                        cssproperties: [{ name: "width" }],
-                        units: [
-                            { name: 'px', min: 10, max: 1920, step: 1, value: 128 },
-                            { name: '%', min: 1, max: 100, step: 1, value: 100 },
-                        ],
+					cssproperties: [{ name: "width" }],
+					units: [
+						{ name: 'px', min: 10, max: 1920, step: 1, value: 128 },
+						{ name: '%', min: 1, max: 100, step: 1, value: 100 },
+					],
 					unit: "px",
 					changeProp: 1,
 				}, {
 					label: "Height",
 					name: "height",
 					type: "custom_range",
-                        cssproperties: [{ name: "height" }],
-                        units: [
-                            { name: 'px', min: 10, max: 1000, step: 1, value: 128 },
-                            { name: '%', min: 1, max: 100, step: 1, value: 100 },
-                        ],
-                        unit: "px",
+					cssproperties: [{ name: "height" }],
+					units: [
+						{ name: 'px', min: 10, max: 1000, step: 1, value: 128 },
+						{ name: '%', min: 1, max: 100, step: 1, value: 100 },
+					],
+					unit: "px",
+					changeProp: 1,
+				}, {
+					label: " ",
+					name: "href",
+					type: "href",
+					href: "",
+					"data_href_type": "url",
 					changeProp: 1,
 				}],
 				resizable: {
@@ -323,6 +330,7 @@
 			init() {
 				this.listenTo(this.model.parent(), 'active', this.ActivateModal); // listen for active event
 				this.listenTo(this.model, 'change:src', this.ChangeSrc);
+				this.listenTo(this.model, 'change:href', this.ChangeHref);
 			},
 			ActivateModal() {
 				var Selected = this.model.collection.first();
@@ -340,7 +348,20 @@
 			},
 			ChangeSrc() {
 				var src = this.model.attributes.src;
-				this.model.addAttributes({'data-src': src});
+				this.model.addAttributes({ 'data-src': src });
+			},
+			ChangeHref() {
+				var href = this.model.attributes.href;
+				if (href == "") {
+					var onclick = "typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);"
+					this.model.addAttributes({ onclick: onclick });
+				}
+				else {
+					const attr = this.model.getAttributes();
+					delete attr.onclick;
+					this.model.setAttributes(attr);
+				}
+
 			}
 		}),
 	});

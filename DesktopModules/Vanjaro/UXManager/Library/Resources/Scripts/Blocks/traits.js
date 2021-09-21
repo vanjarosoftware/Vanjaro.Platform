@@ -641,7 +641,7 @@ export default (editor, config = {}) => {
 
 			if (compType == 'carousel-image')
 				model = component.closestType('carousel-link');
-			else if (compType == 'image')
+			else if (compType == 'image' || compType == 'image-gallery-item')
 				model = component.closestType('image-frame');
 
 			var val = $(elInput).find('.option-block input:checked').attr("data-type");
@@ -695,7 +695,7 @@ export default (editor, config = {}) => {
 
 				component.set({ href: href });
 
-				if (compType == 'carousel-image' || compType == 'icon' || compType == 'image') {
+				if (compType == 'carousel-image' || compType == 'icon' || compType == 'image' || compType == 'image-gallery-item') {
 
 					if (href == "") {
 
