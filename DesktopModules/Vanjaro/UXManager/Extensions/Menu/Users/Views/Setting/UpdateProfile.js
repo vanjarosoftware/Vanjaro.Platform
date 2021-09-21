@@ -4,11 +4,13 @@
     $scope.ShowUser_profileTab = true;
     $scope.Show_UserName = false;
     $scope.Regions = [];
+    var formData = null;
     $scope.onInit = function () {
-        var formData = {
+        var Username = $('#username', window.parent.document).length > 0 ? $('#username', window.parent.document).val() : $('#email', window.parent.document).val();
+        formData = {
             userId: $scope.uid,
-            username: $('#UserId', window.parent.document).val(),
-            password: $('#Password', window.parent.document).val()
+            username: $('#UserId', window.parent.document).val() != null ? $('#UserId', window.parent.document).val() : Username,
+            password: $('#Password', window.parent.document).val() != null ? $('#Password', window.parent.document).val() : $('#password', window.parent.document).val()
         };
         common.webApi.post('updateprofile/getsettings', '', formData).then(function (data) {
             if (data.data != null && data.data.Data != null && data.data.IsSuccess) {
@@ -99,8 +101,8 @@
             "UserBasicDto": userdata,
             "ProfilePropertyDefinitionCollection": $scope.ui.data.ProfileProperties.Options,
             "UserCredential": {
-                "Username": $('#UserId', window.parent.document).val(),
-                "Password": $('#Password', window.parent.document).val()
+                "Username": formData.username,
+                "Password": formData.password
             }
         };
         $('.vj-ux-manager.user-info .col-md-9.left_border.uiengine-wrapper.scrollbar .vj-alert-message').find('.alert.alert-danger.summary').remove();

@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
+using Vanjaro.UXManager.Extensions.Block.Login.Entities;
 using Vanjaro.UXManager.Extensions.Block.Register.Entities;
 using Vanjaro.UXManager.Library.Common;
 using static Vanjaro.UXManager.Extensions.Block.Register.Managers;
@@ -60,6 +61,11 @@ namespace Vanjaro.UXManager.Extensions.Block.Register.Controllers
                         if (PortalSettings.UserRegistration != (int)Globals.PortalRegistrationType.NoRegistration)
                         {
                             actionResult = RegisterManager.CreateUser(RegisterDetails);
+                            if (!this.PortalSettings.Registration.RandomPassword)
+                            {
+                                dynamic eventArgs = Core.Managers.LoginManager.UserLogin(new UserLogin() { Email = RegisterDetails.Email, Password = RegisterDetails.Password, Username = RegisterDetails.UserName });
+                                actionResult = Login.Managers.LoginManager.UserAuthenticated(eventArgs);
+                            }
                         }
                         else
                         {
