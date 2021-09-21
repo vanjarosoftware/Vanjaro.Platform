@@ -2,7 +2,7 @@
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Framework;
 using DotNetNuke.Security.Permissions;
-using DotNetNuke.Services.Localization;
+using Localization = DotNetNuke.Services.Localization.Localization;
 using DotNetNuke.Services.Url.FriendlyUrl;
 using DotNetNuke.UI.ControlPanels;
 using Newtonsoft.Json;
@@ -25,6 +25,9 @@ using Vanjaro.UXManager.Library.Entities.Enum;
 using static Vanjaro.UXManager.Library.Managers;
 using System.Net;
 using Vanjaro.Common.Utilities;
+using DotNetNuke.UI.Skins.Controls;
+using DotNetNuke.Common;
+using DotNetNuke.Entities.Users;
 
 namespace Vanjaro.UXManager.Library
 {
@@ -46,7 +49,7 @@ namespace Vanjaro.UXManager.Library
             TemplateLibraryURL = "https://library.vanjaro.cloud/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower() + "/type/block";
             ExtensionStoreURL = "https://store.vanjaro.com";
 # else
-            TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower()+"/type/block";
+            TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower() + "/type/block";
             ExtensionStoreURL = "http://store.vanjaro.local/store";
 #endif
             ExtensionURL = ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/') + MenuManager.GetURL() + "mid=0&icp=true&guid=54caeff2-9fac-42ae-8594-40312867d56a#!/installpackage";
@@ -157,7 +160,7 @@ namespace Vanjaro.UXManager.Library
             else
                 WebForms.RegisterClientScriptBlock(Page, "MenuSettingsBlocks", "$(document).ready(function(){$('[href=\"#MenuSettings\"]').click();$('#mode-switcher').remove();setTimeout(function(){$('.gjs-cv-canvas__frames').css('pointer-events','none');}, 100); });", true);
 
-
+            VerifyUser();
         }
 
 
@@ -241,6 +244,57 @@ namespace Vanjaro.UXManager.Library
             else
             {
                 return false;
+            }
+        }
+        private void VerifyUser()
+        {
+            if (!string.IsNullOrEmpty(this.Request.QueryString["verificationcode"]) && this.PortalSettings.UserRegistration == (int)Globals.PortalRegistrationType.VerifiedRegistration)
+            {
+                if (this.Request.IsAuthenticated)
+                {
+                    this.Controls.Clear();
+                }
+
+                var verificationCode = this.Request.QueryString["verificationcode"];
+
+                try
+                {
+                    UserController.VerifyUser(verificationCode.Replace(".", "+").Replace("-", "/").Replace("_", "="));
+
+                    var redirectTabId = this.PortalSettings.Registration.RedirectAfterRegistration;
+
+                    if (this.Request.IsAuthenticated)
+                    {
+                        this.Response.Redirect(ServiceProvider.NavigationManager.NavigateURL(redirectTabId > 0 ? redirectTabId : this.PortalSettings.HomeTabId, string.Empty, "VerificationSuccess=true"), true);
+                    }
+                    else
+                    {
+                        if (redirectTabId > 0)
+                        {
+                            var redirectUrl = ServiceProvider.NavigationManager.NavigateURL(redirectTabId, string.Empty, "VerificationSuccess=true");
+                            redirectUrl = redirectUrl.Replace(Globals.AddHTTP(this.PortalSettings.PortalAlias.HTTPAlias), string.Empty);
+                            this.Response.Cookies.Add(new HttpCookie("returnurl", redirectUrl) { Path = !string.IsNullOrEmpty(Globals.ApplicationPath) ? Globals.ApplicationPath : "/" });
+                        }
+
+                        DotNetNuke.UI.Skins.Skin.AddPageMessage(Page, "", Localization.GetString("VerificationSuccess", this.LocalResourceFile), ModuleMessage.ModuleMessageType.GreenSuccess);
+                    }
+                }
+                catch (UserAlreadyVerifiedException)
+                {
+                    DotNetNuke.UI.Skins.Skin.AddPageMessage(Page, "", Localization.GetString("UserAlreadyVerified", this.LocalResourceFile), ModuleMessage.ModuleMessageType.YellowWarning);
+                }
+                catch (InvalidVerificationCodeException)
+                {
+                    DotNetNuke.UI.Skins.Skin.AddPageMessage(Page, "", Localization.GetString("InvalidVerificationCode", this.LocalResourceFile), ModuleMessage.ModuleMessageType.RedError);
+                }
+                catch (UserDoesNotExistException)
+                {
+                    DotNetNuke.UI.Skins.Skin.AddPageMessage(Page, "", Localization.GetString("UserDoesNotExist", this.LocalResourceFile), ModuleMessage.ModuleMessageType.RedError);
+                }
+                catch (Exception)
+                {
+                    DotNetNuke.UI.Skins.Skin.AddPageMessage(Page, "", Localization.GetString("InvalidVerificationCode", this.LocalResourceFile), ModuleMessage.ModuleMessageType.RedError);
+                }
             }
         }
     }
