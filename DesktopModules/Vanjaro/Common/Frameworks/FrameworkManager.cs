@@ -185,7 +185,7 @@ namespace Vanjaro.Common
                     }
                 case "Bootstrap":
                     {
-                        WebForms.LinkCSS(Page, "VJ-" + Framework + "-CSS", Request(Framework, "css/bootstrap.min.css"), Composite);
+                        WebForms.LinkCSS(Page, "VJ-" + Framework + "-CSS", Request(Framework, "css/bootstrap.min.css"), Composite, "DnnPageHeaderProvider", 0);
                         WebForms.RegisterClientScriptInclude(Page, "VJ-" + Framework + "-JS", Request(Framework, "js/bootstrap.bundle.min.js"), Composite, "DnnBodyProvider");
                         break;
                     }
