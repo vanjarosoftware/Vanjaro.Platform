@@ -499,7 +499,7 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
                             data.data += '?';
                         }
                         data.data += 'popUp=true&v=' + new Date().getTime();
-                        parent.OpenPopUp(null, "1200", "center", "View History", data + "#!/url/manage/" + ename + "/" + eid, "600", "", true, "");
+                        parent.OpenPopUp(null, "1200", "center", "View History", data.data + "#!/url/manage/" + ename + "/" + eid, "600", "", true, "");
                     }
                 })
             }
