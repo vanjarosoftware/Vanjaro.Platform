@@ -119,7 +119,7 @@ namespace Vanjaro.UXManager.Library
                     WebForms.RegisterClientScriptInclude(Page, "CustomCodeJs", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/Blocks/custom-code.js"), false);
                     WebForms.RegisterClientScriptInclude(Page, "GrapesJsJs", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/uxmanager.min.js"), false);
                     WebForms.LinkCSS(Page, "GrapesJspluginCss", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJsManagers/css/uxmanager.css"), true, "DnnBodyProvider");
-                    WebForms.LinkCSS(Page, "FontawesomeV4Css", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/fontawesome/v4.css"), false);
+                    WebForms.LinkCSS(Page, "FontawesomeV4Css", Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Scripts/GrapesJs/css/fontawesome/v4.css"));
 
                     LocalizeThemeJS();
 
@@ -129,7 +129,7 @@ namespace Vanjaro.UXManager.Library
                     LocalizeGrapeJS();
 
                     FrameworkManager.Load(this, "Bootstrap", false);
-                    FrameworkManager.Load(this, "FontAwesome", false);
+                    FrameworkManager.Load(this, "FontAwesome");
                 }
                 string NavigateURL = PageManager.GetCurrentTabUrl(PortalSettings);
                 string ClientScript = "var AppMenus=" + JsonConvert.SerializeObject(AppManager.GetAll(AppType.Module)) + "; var m2vPageTabUrl='" + NavigateURL + "'; var CurrentTabUrl ='" + NavigateURL + "'; var IsAdmin=" + PortalSettings.UserInfo.IsInRole("Administrators").ToString().ToLower() + ";var vjProductSKU='" + Vanjaro.Common.Components.Product.SKU + "';";
