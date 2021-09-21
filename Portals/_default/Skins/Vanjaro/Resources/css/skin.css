@@ -507,9 +507,9 @@ Theme.css end
     justify-content: flex-start;
 }
 
-.row [class^="col-"] {
-    text-align: left;
-}
+    .row [class^="col-"] {
+        text-align: left;
+    }
 
 .link,
 .icon-box,
@@ -778,4 +778,124 @@ ul.vj_authenticationtab {
 
 #dnn_ContentPane_SyncPanel {
     height: 100%;
+}
+
+/*dnn alert*/
+
+.dnnClear {
+    clear: both;
+}
+
+.dnnFormPopup, .dnnFormPopup > * {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.ui-widget-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+    z-index: 9999;
+}
+
+.dnnFormPopup {
+    position: absolute;
+    padding: 18px;
+    background: #fff;
+    -webkit-box-shadow: 0 0 25px 0 rgb(0 0 0 / 75%);
+    box-shadow: 0 0 25px 0 rgb(0 0 0 / 75%);
+    z-index: 100000;
+}
+
+    .dnnFormPopup .ui-dialog-titlebar {
+        position: relative;
+        padding: 0 0 18px 0;
+        border-bottom: 1px solid #ddd;
+        cursor: move;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .dnnFormPopup .dnnDialog {
+        padding: 10px;
+    }
+
+    .dnnFormPopup .ui-dialog-content, #iPopUp .ui-dialog-content {
+        position: relative;
+        border: 0;
+        padding: 0px;
+        overflow: auto;
+        background: #fff;
+        zoom: 1;
+    }
+
+    .dnnFormPopup .ui-dialog-buttonpane {
+        margin: .5em 0 0 0;
+        padding: .3em 1em 0em 0em;
+        overflow: hidden;
+        border-width: 1px 0 0 0;
+        background-image: none;
+        text-align: left;
+        border-top: 1px solid #ddd;
+    }
+
+        .dnnFormPopup .ui-dialog-buttonpane button {
+            margin: 0.5em 0.4em 0.5em 0em;
+            padding: 0.5em 1em;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+.dnnPrimaryAction {
+    display: inline-block;
+    padding: 9px 9px;
+    margin-bottom: 9px;
+    cursor: pointer;
+    min-width: 75px;
+    *overflow: visible;
+    border: 1px solid #c2c2c2;
+    background: #1f66be;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}
+
+    .dnnPrimaryAction:active, .dnnFormItem input[type="submit"]:active, a.dnnPrimaryAction:active {
+        border-color: #0D569E;
+        background: #1f66be;
+        background: -moz-linear-gradient(top, #1f66be 0%, #3085e0 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1f66be), color-stop(100%,#3085e0));
+        background: -webkit-linear-gradient(top, #1f66be 0%,#3085e0 100%);
+        background: linear-gradient(top, #1f66be 0%,#3085e0 100%);
+        -webkit-box-shadow: inset 0px 1px 5px 0px rgb(0 0 0 / 40%);
+        box-shadow: inset 0px 1px 5px 0px rgb(0 0 0 / 40%);
+        color: #fff;
+    }
+
+div.ui-dialog-titlebar > .ui-dialog-titlebar-close {
+    display: block;
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    height: 24px;
+    width: 24px;
+    margin: 0px;
+    overflow: hidden;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" width="15" height="15"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/></svg>');
+    background-position: 2px 2px;
+    border: 3px solid #fff;
+    text-indent: -9999em;
+    min-width: 0 !important;
+    background-repeat: no-repeat;
 }
