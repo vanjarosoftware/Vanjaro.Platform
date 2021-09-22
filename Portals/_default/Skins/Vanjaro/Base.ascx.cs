@@ -171,21 +171,19 @@ namespace Vanjaro.Skin
             string Host_Head = SettingManager.GetHostSetting("Vanjaro.Integration.GoogleTagManager.Host_Head", true);
             string Host_Body = SettingManager.GetHostSetting("Vanjaro.Integration.GoogleTagManager.Host_Body", true);
 
-            HtmlGenericControl HeadScript = new HtmlGenericControl("script");
-            HtmlGenericControl BodyScript = new HtmlGenericControl("script");
-            HeadScript.Attributes.Add("type", "text/javascript");
-            BodyScript.Attributes.Add("type", "text/javascript");
+            Literal HeadScript = new Literal();
+            Literal BodyScript = new Literal();
 
             if (!string.IsNullOrEmpty(Site_Head) || !string.IsNullOrEmpty(Site_Body))
             {
                 if (!string.IsNullOrEmpty(Site_Head))
                 {
-                    HeadScript.InnerHtml = Site_Head;
+                    HeadScript.Text = Site_Head;
                     Page.FindControl("Head").Controls.AddAt(0, HeadScript);
                 }
                 if (!string.IsNullOrEmpty(Site_Body))
                 {
-                    BodyScript.InnerHtml = Site_Body;
+                    BodyScript.Text = Site_Body;
                     Page.FindControl("Body").Controls.AddAt(0, BodyScript);
                 }
             }
@@ -193,12 +191,12 @@ namespace Vanjaro.Skin
             {
                 if (!string.IsNullOrEmpty(Host_Head))
                 {
-                    HeadScript.InnerHtml = Host_Head;
+                    HeadScript.Text = Host_Head;
                     Page.FindControl("Head").Controls.AddAt(0, HeadScript);
                 }
                 if (!string.IsNullOrEmpty(Host_Body))
                 {
-                    BodyScript.InnerHtml = Host_Body;
+                    BodyScript.Text = Host_Body;
                     Page.FindControl("Body").Controls.AddAt(0, BodyScript);
                 }
             }
