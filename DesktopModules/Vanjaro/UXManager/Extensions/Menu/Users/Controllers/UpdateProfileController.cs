@@ -95,6 +95,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                                 string ControlType = UserManager.GetControlType(d.DataType);
                                 if (ControlType == "Country" || ControlType == "Region" || ControlType == "List")
                                     d.PropertyValue = string.IsNullOrEmpty(d.PropertyValue) ? "-1" : d.PropertyValue;
+                                else if (ControlType == "TimeZone")
+                                    d.PropertyValue = string.IsNullOrEmpty(d.PropertyValue) ? PortalSettings.Current.TimeZone.Id : d.PropertyValue;
                                 List<ListEntryInfo> data = listController.GetListEntryInfoItems(d.PropertyName, "", PortalSettings.Current.PortalId).ToList();
                                 data.Insert(0, new ListEntryInfo { Text = Localization.GetString("NotSpecified", Components.Constants.LocalResourcesFile), Value = d.PropertyValue });
                                 profileProperties.Add(new Entities.ProfileProperties { ProfilePropertyDefinition = d, ListEntries = data });
