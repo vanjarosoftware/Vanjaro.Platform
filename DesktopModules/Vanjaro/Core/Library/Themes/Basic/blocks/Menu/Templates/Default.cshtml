@@ -18,6 +18,13 @@
                 if (node.First) { cssClasses.Add("first"); }
                 if (node.Last) { cssClasses.Add("last"); }
                 if (node.Selected) { cssClasses.Add("selected"); }
+                else
+                {
+                    foreach(var ChildNode in node.Children)
+                    {
+                        if(ChildNode.Selected) { cssClasses.Add("selected"); }
+                    }
+                }
                 if (node.Children != null && node.Children.Count > 0)
                 {
                     <li class="@String.Join(" ",cssClasses.ToArray()) nav-item dropdown">
