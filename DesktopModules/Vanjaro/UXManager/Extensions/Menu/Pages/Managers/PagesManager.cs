@@ -495,7 +495,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     PageSettings PageSettings = PagesController.Instance.GetPageSettings(TabID);
 
                     Permissions Permissions = WorkflowManager.GetWorkflowPermission(PortalController.Instance.GetPortal(portalSettings.PortalId), workflowID);
-                    PageSettings.Permissions.RolePermissions.Clear();
+                    
                     foreach (RolePermission RolePerm in Permissions.RolePermissions)
                     {
                         Dnn.PersonaBar.Library.DTO.RolePermission rolepermission = new Dnn.PersonaBar.Library.DTO.RolePermission
@@ -522,7 +522,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         PageSettings.Permissions.RolePermissions.Add(rolepermission);
                     }
 
-                    PageSettings.Permissions.UserPermissions.Clear();
                     foreach (UserPermission UserPerm in Permissions.UserPermissions)
                     {
                         Dnn.PersonaBar.Library.DTO.UserPermission userpermission = new Dnn.PersonaBar.Library.DTO.UserPermission
