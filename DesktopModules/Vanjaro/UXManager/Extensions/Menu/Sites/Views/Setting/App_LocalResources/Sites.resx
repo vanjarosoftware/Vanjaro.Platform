@@ -141,6 +141,9 @@
   <data name="Portals_Columns_Setting.Text" xml:space="preserve">
     <value> </value>
   </data>
+  <data name="Portals_Search.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="SiteGroup.Text" xml:space="preserve">
     <value>Site Group</value>
   </data>

@@ -47,7 +47,9 @@
     };
     $scope.Pipe_PortalsPagging = function (tableState) {
         $scope.PortalsTableState = tableState;
-        common.webApi.get('sites/getportals', 'pageSize=' + tableState.pagination.number + '&pageIndex=' + (tableState.pagination.start / tableState.pagination.number)).then(function (Response) {
+        var SearchKeys = $('.input-sm.form-control').val();
+
+        common.webApi.get('sites/getportals', 'pageSize=' + tableState.pagination.number + '&pageIndex=' + (tableState.pagination.start / tableState.pagination.number) + '&filter=' + SearchKeys).then(function (Response) {
             if (Response.data.IsSuccess) {
                 $scope.Portals = Response.data.Data.Items;
                 $scope.PortalsTableState.pagination.numberOfPages = Response.data.Data.NumberOfPages;
