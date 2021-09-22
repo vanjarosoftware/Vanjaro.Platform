@@ -30,9 +30,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetPortals(int pageSize, int pageIndex)
+        public ActionResult GetPortals(int pageSize, int pageIndex, string filter)
         {
-            return SitesManager.GetAllPortals(PortalSettings.PortalId, string.Empty, pageIndex, pageSize);
+            return SitesManager.GetAllPortals(PortalSettings.PortalId, filter, pageIndex, pageSize);
         }
 
         [HttpGet]
