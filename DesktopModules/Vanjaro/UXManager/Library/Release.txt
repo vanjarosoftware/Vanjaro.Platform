@@ -1,4 +1,4 @@
-<h3>Release Notes - Vanjaro.UXManager.Library 1.0.0</h3>
+<p>See <a href="https://github.com/vanjarosoftware/Vanjaro.Platform/releases" target="_blank">Release Log</a> for noteworthy changes</p>
 
 
 
