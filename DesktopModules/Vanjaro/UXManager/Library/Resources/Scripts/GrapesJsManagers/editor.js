@@ -2139,6 +2139,11 @@ $(document).ready(function () {
 
                                     VjEditor.getSelected().set('toolbar', tb);
                                 }
+                                else if (model.getStyle()["background-image"] == undefined && model.attributes.type != 'image' && tb.length > 0 && tb[0].attributes.class == "fa fa-pencil") {
+                                    tb.shift();
+
+                                    VjEditor.getSelected().set('toolbar', tb);
+                                }
 
                                 $('.gjs-field-color-picker').on('show.spectrum', function () {
 

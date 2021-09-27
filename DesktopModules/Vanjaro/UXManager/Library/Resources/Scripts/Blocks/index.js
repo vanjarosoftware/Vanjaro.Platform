@@ -52,15 +52,18 @@ grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
                 var fileName = imageModel.getStyle()["background-image"];
 
-                var ImageData = {
-                    PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
-                    ImageByte: imageEditor.toDataURL()
-                };
+                var ImageData;
 
-                if (imageModel.attributes.type != 'image' && fileName) {
+                if ((imageModel.attributes.type != 'image' || imageModel.attributes.type != 'image-gallery-item') && fileName) {
 
                     ImageData = {
                         PreviousFileName: fileName.substring(fileName.lastIndexOf('/') + 1).split('?')[0],
+                        ImageByte: imageEditor.toDataURL()
+                    };
+                }
+                else {
+                    ImageData = {
+                        PreviousFileName: imageModel._previousAttributes.attributes.src.substring(imageModel._previousAttributes.attributes.src.lastIndexOf('/') + 1).split('?')[0],
                         ImageByte: imageEditor.toDataURL()
                     };
                 }
@@ -78,8 +81,9 @@ grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
                     success: function (response) {
 
                         if (response != "failed") {
+                            imageModel.set('src', response.Url);
 
-                            if (imageModel.attributes.type != 'image') {
+                            if (imageModel.attributes.type != 'image' && imageModel.attributes.type != 'image-gallery-item') {
 
                                 var style = imageModel.getStyle();
                                 style["background-image"] = 'url("' + response.Url + '")';
@@ -91,7 +95,6 @@ grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
                                 ChangeToWebp(parentmodel, response.Urls);
                             }
 
-                            imageModel.set('src', response.Url);
                             $('.gjs-toolbar').hide();
                             VjEditor.Modal.close();
                         }
