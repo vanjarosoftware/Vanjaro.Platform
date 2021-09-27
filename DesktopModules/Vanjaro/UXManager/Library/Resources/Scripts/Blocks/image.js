@@ -241,17 +241,29 @@
 			onRender() {
 
 				var model = this.model;
+
 				if (event && (event.type == 'load' || event.type == 'drop')) {
-					if (typeof model.closestType('image-box') == 'undefined' || typeof model.closestType('picture-box') == 'undefined' || typeof model.closestType('image-frame') == 'undefined') {
-						var style = model.getStyle();
-						setTimeout(function () {
+
+					var style = model.getStyle();
+
+					setTimeout(function () {
+
+						if ($(model.getEl()).parents('.picture-box').length > 1 && model.closestType('image-box'))
+							model.closestType('image-box').replaceWith(model.getEl().outerHTML);
+
+						if (typeof model.closestType('image-box') == 'undefined' && typeof model.closestType('picture-box') == 'undefined') //Wrapping Image in Image-Box
 							model.replaceWith('<div class="image-box"><span class="image-frame"><picture class="picture-box">' + model.getEl().outerHTML + '</picture></span></div>');
-							model.setStyle(style);
-						});
-					}
+						else if (typeof model.closestType('image-frame') == 'undefined') { //Wrapping Picture-Box in Image-Frame
+							var HTML = model.closestType('picture-box').getEl().outerHTML;
+							model.closestType('picture-box').replaceWith('<span class="image-frame">' + HTML + '</span>');
+						}
+
+						model.setStyle(style);
+					});
 				}
 
 				var hasClass = this.model.getClasses().find(v => v == 'img-fluid')
+
 				if (typeof hasClass == 'undefined')
 					this.model.addClass('img-fluid');
 			},
