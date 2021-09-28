@@ -962,7 +962,10 @@ namespace Vanjaro.Skin
                 string BaseEditorFolder = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/editor");
                 string ThemeCss = HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.Current.PortalId + "/vThemes/" + ThemeName + "/Theme.css");
                 if (!File.Exists(ThemeCss))
+                {
                     ThemeManager.ProcessScss(PortalSettings.Current.PortalId, false);
+                    Response.Redirect(Request.RawUrl, true);
+                }
             }
             catch (Exception ex) { ExceptionManager.LogException(ex); }
         }
