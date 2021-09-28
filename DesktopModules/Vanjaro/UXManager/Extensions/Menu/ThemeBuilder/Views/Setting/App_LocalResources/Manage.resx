@@ -127,13 +127,13 @@
     <value>Delete</value>
   </data>
   <data name="DeleteFontText.Text" xml:space="preserve">
-    <value>You will be able to recover this anymore</value>
+    <value>You will not be able to recover this anymore.</value>
   </data>
   <data name="DeleteFontTitle.Text" xml:space="preserve">
     <value>Are you sure?</value>
   </data>
   <data name="DeleteText.Text" xml:space="preserve">
-    <value>You will be able to recover this anymore</value>
+    <value>You will not be able to recover this anymore.</value>
   </data>
   <data name="DeleteTitle.Text" xml:space="preserve">
     <value>Are you sure?</value>
