@@ -107,7 +107,7 @@ export default (editor, config = {}) => {
 
 			if (event.target.name == 'stylee')
 				btnEnd += mainComponent.getTrait("color").getInitValue();
-			else if (event.target.name == 'color' && mainComponent.getTrait("stylee").getInitValue() == 'outline')
+			else if (event.target.name == 'color' && typeof mainComponent.getTrait("stylee") != "undefined" && mainComponent.getTrait("stylee").getInitValue() == 'outline')
 				btnStart += 'outline-';
 
 			var colorOpts = mainComponent.getTrait('color').attributes.options;
