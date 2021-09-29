@@ -3694,10 +3694,11 @@ body .gjs-selected {
 
 .app-header + #vjEditor {
     margin-top: 50px;
-    max-width: 1320px;
-    width: 100%;
     margin-right: auto;
     margin-left: auto;
+    max-width: 1320px;
+    width: 100%;
+    height: calc(100% - 50px) !important;
 }
 
 
