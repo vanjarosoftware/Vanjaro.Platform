@@ -25,6 +25,7 @@ namespace Vanjaro.Core.Entities
         public string PublishText { get; set; }
         public string PublishLink { get; set; }
         public string TemplateLibraryURL { get; set; }
+        public bool InjectThemeCSS { get; set; }
         public Dictionary<MenuAction, dynamic> AppLink { get; set; }
     }
 }
