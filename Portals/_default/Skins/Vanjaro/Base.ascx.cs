@@ -144,7 +144,9 @@ namespace Vanjaro.Skin
                 if (page != null && page.StateID.HasValue)
                     HasReviewPermission = WorkflowManager.HasReviewPermission(page.StateID.Value, PortalSettings.UserInfo);
 
-                WebForms.LinkCSS(Page, "ThemeCSS", Page.ResolveUrl("~/Portals/" + PortalSettings.PortalId + "/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/Theme.css"), true, "DnnPageHeaderProvider", 0);
+                if (!PageManager.InjectEditor(PortalSettings) || (PageManager.InjectEditor(PortalSettings) && Core.Entities.Editor.Options.InjectThemeCSS))
+                    WebForms.LinkCSS(Page, "ThemeCSS", Page.ResolveUrl("~/Portals/" + PortalSettings.PortalId + "/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name + "/Theme.css"), true, "DnnPageHeaderProvider", 0);
+
                 WebForms.LinkCSS(Page, "SkinCSS", Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/css/skin.css"), true, "DnnPageHeaderProvider", 1);
 
                 //Skin js requried because using for openpopup update memeber Profile when user is registered user 
