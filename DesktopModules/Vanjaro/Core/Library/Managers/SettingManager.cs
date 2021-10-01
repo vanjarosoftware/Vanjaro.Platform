@@ -176,6 +176,24 @@ namespace Vanjaro.Core
                         HostController.Instance.Update(ClientResourceSettings.MinifyCssKey, "True");
                         HostController.Instance.Update(ClientResourceSettings.MinifyJsKey, "True");
                         break;
+                    case "01.02.00":
+                        {
+                            foreach (PortalInfo pinfo in PortalController.Instance.GetPortals())
+                            {
+                                ThemeEditorWrapper ThemeEditorWrapper = ThemeManager.GetThemeEditors(pinfo.PortalID, "be134fd2-3a3d-4460-8ee9-2953722a5ab2", false);
+                                if (ThemeEditorWrapper != null && ThemeEditorWrapper.Fonts != null)
+                                {
+                                    ThemeFont t = ThemeEditorWrapper.Fonts.Where(a => a.Name.ToLower() == "poppins").FirstOrDefault();
+                                    if (t == null)
+                                    {
+                                        t = GetDefaultFont().Where(a => a.Name.ToLower() == "poppins").FirstOrDefault();
+                                        if (t != null)
+                                            ThemeManager.UpdateFonts(pinfo.PortalID, "be134fd2-3a3d-4460-8ee9-2953722a5ab2", t, false);
+                                    }
+                                }
+                            }
+                        }
+                        break;
                 }
             }
 
