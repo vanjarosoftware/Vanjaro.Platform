@@ -9,18 +9,26 @@
 			attributes: { class: 'fas fa-images' },
 			content: `
             <div class="vj-image-gallery">
-				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
-					<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
-				</picture>
-				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
-					<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
-				</picture>
-				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
-					<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
-				</picture>
-				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
-					<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
-				</picture>
+				<span class="image-frame">
+					<picture class="picture-box">
+						<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
+					</picture>
+				</span>
+				<span class="image-frame">
+					<picture class="picture-box">
+						<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
+					</picture>
+				</span>
+				<span class="image-frame">
+					<picture class="picture-box">
+						<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
+					</picture>
+				</span>
+				<span class="image-frame">
+					<picture class="picture-box">
+						<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
+					</picture>
+				</span>
 			</div>`,
 			activate: 1
 		});
@@ -34,9 +42,11 @@
 		if (Selected.attributes.type == 'image-gallery') {
 			var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
 			var Img = `
-				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
-					<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" style="width:` + Selected.components().models[0].getStyle().width + `; height:` + Selected.components().models[0].getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
-				</picture>
+				<span class="image-frame">
+					<picture class="picture-box">
+						<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" style="width:` + Selected.components().models[0].getStyle().width + `; height:` + Selected.components().models[0].getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
+					</picture>
+				</span>
 			`;
 			Selected.components().add(Img);
 
@@ -45,13 +55,15 @@
 		else {
 			var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
 			var Img = `
-				<picture class="picture-box" data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false">
-				<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" style="width:` + Selected.getStyle().width + `; height:` + Selected.getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
-				</picture>
+				<span class="image-frame">
+					<picture class="picture-box">
+						<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" style="width:` + Selected.getStyle().width + `; height:` + Selected.getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
+					</picture>
+				</span>
 			`;
-			Selected.parent().parent().components().add(Img);
+			Selected.closestType('image-gallery').components().add(Img);
 
-			VjEditor.select(Selected.parent().parent().components().last().find('img'));
+			VjEditor.select(Selected.closestType('image-gallery').components().last().find('img'));
 		}
 
 		var target = VjEditor.getSelected();
