@@ -10,9 +10,14 @@ export default (editor, config = {}) => {
 		const selected = VjEditor.getSelected();
 		const selectedType = selected.attributes.type;
 
-        if (selected.parent() && selected.parent().attributes.type != 'wrapper' && (selectedType == 'row' || selectedType == 'button' || selectedType == 'icon' || selectedType == 'list' || selectedType == 'image-gallery-item')) {
+        if (selected.parent() && selected.parent().attributes.type != 'wrapper' && (selectedType == 'row' || selectedType == 'button' || selectedType == 'icon' || selectedType == 'list')) {
 			var parent = selected.parent().clone();
 			var mainparent = selected.parent().parent();
+			mainparent.append(parent);
+		}
+		else if (selectedType == 'image-gallery-item' && typeof selected.closestType('image-frame') != 'undefined') {
+			var parent = selected.closestType('image-frame').clone();
+			var mainparent = selected.closestType('image-frame').parent();
 			mainparent.append(parent);
 		}
 		else if (selectedType == 'image' && typeof selected.closestType('image-box') != 'undefined') {
@@ -35,8 +40,11 @@ export default (editor, config = {}) => {
 			const selectedType = selected.attributes.type;
 			const selectedParentType = selected.parent().attributes.type;
 
-            if ((selectedType == 'row' && selectedParentType == 'grid') || (selectedType == 'button' && selectedParentType == 'button-box') || (selectedType == 'icon' && selectedParentType == 'icon-box') || (selectedType == 'list' && selectedParentType == 'list-box') || (selectedType == "image-gallery-item" && selected.parent().attributes.tagName == "picture")) {
+            if ((selectedType == 'row' && selectedParentType == 'grid') || (selectedType == 'button' && selectedParentType == 'button-box') || (selectedType == 'icon' && selectedParentType == 'icon-box') || (selectedType == 'list' && selectedParentType == 'list-box')) {
 				selected.parent().remove();
+			}
+			else if (selectedType == 'image-gallery-item' && typeof selected.closestType('image-frame') != 'undefined') {
+				selected.closestType('image-frame').remove();
 			}
 			else if (selectedType == 'image' && typeof selected.closestType('image-box') != 'undefined') {
 				selected.closestType('image-box').remove();
