@@ -12620,8 +12620,8 @@
           "Title": "Border Radius",
           "DefaultValue": "$siteBorderRadius",
           "Suffix": "px",
-          "CustomCSS": ".vanjarosearchinput{\n border-radius:unquote($searchradius+'px');\n}\n",
-          "PreviewCSS": ".vanjarosearchinput{\n border-radius:$searchradiuspx;\n}\n",
+          "CustomCSS": ".vanjarosearchinput input.search_box{\n border-radius:unquote($searchradius+'px');\n}\n",
+          "PreviewCSS": ".vanjarosearchinput input.search_box{\n border-radius:$searchradiuspx;\n}\n",
           "LessVariable": "$searchradius",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12734,8 +12734,8 @@
           "Title": "Border Width",
           "DefaultValue": "1",
           "Suffix": "px",
-          "CustomCSS": ".vanjarosearchinput{\nborder-width:$searchBorderWidthpx;\n}\n",
-          "PreviewCSS": ".vanjarosearchinput{\nborder-width:$searchBorderWidthpx;\n}",
+          "CustomCSS": ".vanjarosearchinput input.search_box{\nborder-width:$searchBorderWidthpx;\n}\n",
+          "PreviewCSS": ".vanjarosearchinput input.search_box{\nborder-width:$searchBorderWidthpx;\n}",
           "LessVariable": "$searchBorderWidth",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12745,14 +12745,14 @@
           "Title": "Border Color",
           "DefaultValue": "#ccc",
           "Suffix": "",
-          "CustomCSS": ".vanjarosearchinput{\nborder-color:$searchBorderclr;\n}\n",
-          "PreviewCSS": ".vanjarosearchinput{\nborder-color:$searchBorderclr;\n}\n",
+          "CustomCSS": ".vanjarosearchinput input.search_box{\nborder-color:$searchBorderclr;\n}\n",
+          "PreviewCSS": ".vanjarosearchinput input.search_box{\nborder-color:$searchBorderclr;\n}\n",
           "LessVariable": "$searchBorderclr",
           "JavascriptVariable": "",
           "Type": "Color Picker"
         }
       ],
-      "Sass": "input.search_box {\npadding: 10px;\nwidth: 100%;\nmargin-bottom: 10px;\nborder:none;\n}\n.vanjarosearchinput {\n border-style:solid;\n overflow:hidden;\n}\n\ninput.search_box {\nmargin: 0;\nline-height: 20px;\npadding: 6px 8px;\n}\n\n.vanjarosearchinput {\nposition: relative;\n}\n\n.vanjarosearchinput .searchicon {\nposition: absolute;\nright: 0px;\ntop: 0;\npadding: 8px 6px;\nz-index: 9;\nheight: 100%;\ndisplay:flex;\nalign-items:center;\n}\n\n.vanjarosearchinput span.input-group-text {\nbackground: #fff;\n}\n\n.vanjarosearchinput .searchicon svg {\nvertical-align: top;\n}\n\n.vanjarosearchinput {\ndisplay: inline-block;\n}\n"
+      "Sass": "input.search_box {\npadding: 10px;\nwidth: 100%;\nmargin-bottom: 10px;\nborder:none;\n}\n.vanjarosearchinput input.search_box{\n border-style:solid;\n}\n\ninput.search_box {\nmargin: 0;\nline-height: 20px;\npadding: 6px 8px;\n}\n\n.vanjarosearchinput {\nposition: relative;\n}\n\n.vanjarosearchinput .searchicon {\nposition: absolute;\nright: 0px;\ntop: 0;\npadding: 8px 6px;\nz-index: 9;\nheight: 100%;\ndisplay:flex;\nalign-items:center;\n}\n\n.vanjarosearchinput span.input-group-text {\nbackground: #fff;\n}\n\n.vanjarosearchinput .searchicon svg {\nvertical-align: top;\n}\n\n.vanjarosearchinput {\ndisplay: inline-block;\n}\n"
     },
     {
       "Guid": "06e92d2b-d41f-4c09-a591-a4c2e98d855a",
@@ -12808,8 +12808,8 @@
           "Title": "Border Radius",
           "DefaultValue": "$siteBorderRadius",
           "Suffix": "px",
-          "CustomCSS": ".search-input-style-2 .vanjarosearchinput{\n border-radius:unquote($siTsearchradius+'px');\n}\n",
-          "PreviewCSS": ".search-input-style-2 .vanjarosearchinput{\n border-radius:$siTsearchradiuspx;\n}\n",
+          "CustomCSS": ".search-input-style-2 .vanjarosearchinput input.search_box{\n border-radius:unquote($siTsearchradius+'px');\n}\n",
+          "PreviewCSS": ".search-input-style-2 .vanjarosearchinput input.search_box{\n border-radius:$siTsearchradiuspx;\n}\n",
           "LessVariable": "$siTsearchradius",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12922,8 +12922,8 @@
           "Title": "Border Width",
           "DefaultValue": "1",
           "Suffix": "px",
-          "CustomCSS": ".search-input-style-2 .vanjarosearchinput{\nborder-width:$s2searchBorderWidthpx;\n}\n",
-          "PreviewCSS": ".search-input-style-2 .vanjarosearchinput{\nborder-width:$s2searchBorderWidthpx;\n}",
+          "CustomCSS": ".search-input-style-2 .vanjarosearchinput input.search_box{\nborder-width:$s2searchBorderWidthpx;\n}\n",
+          "PreviewCSS": ".search-input-style-2 .vanjarosearchinput input.search_box{\nborder-width:$s2searchBorderWidthpx;\n}",
           "LessVariable": "$s2searchBorderWidth",
           "JavascriptVariable": "",
           "Type": "Slider"
@@ -12933,8 +12933,8 @@
           "Title": "Border Color",
           "DefaultValue": "#ccc",
           "Suffix": "",
-          "CustomCSS": ".search-input-style-2 .vanjarosearchinput{\nborder-color:$s2searchBorderclr;\n}\n",
-          "PreviewCSS": ".search-input-style-2 .vanjarosearchinput{\nborder-color:$s2searchBorderclr;\n}\n",
+          "CustomCSS": ".search-input-style-2 .vanjarosearchinput input.search_box{\nborder-color:$s2searchBorderclr;\n}\n",
+          "PreviewCSS": ".search-input-style-2 .vanjarosearchinput input.search_box{\nborder-color:$s2searchBorderclr;\n}\n",
           "LessVariable": "$s2searchBorderclr",
           "JavascriptVariable": "",
           "Type": "Color Picker"
