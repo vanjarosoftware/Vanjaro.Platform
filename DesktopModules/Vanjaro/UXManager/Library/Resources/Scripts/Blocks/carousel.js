@@ -424,7 +424,6 @@
 					type: 'text',
 					name: 'alt',
 					label: 'Alt',
-					changeProp: 1,
 				}, {
 					type: 'text',
 					name: 'slidetitle',
