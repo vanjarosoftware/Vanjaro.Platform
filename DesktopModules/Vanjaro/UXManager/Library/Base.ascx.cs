@@ -131,6 +131,7 @@ namespace Vanjaro.UXManager.Library
 
                     LocalizeGrapeJS();
 
+                    WebForms.LinkCSS(Page, "VJ-Bootstrap-CSS", FrameworkManager.Request("Bootstrap", "css/bootstrap.min.css"), false, "DnnPageHeaderProvider", 0);
                     FrameworkManager.Load(this, "FontAwesome");
                 }
                 string NavigateURL = PageManager.GetCurrentTabUrl(PortalSettings);
