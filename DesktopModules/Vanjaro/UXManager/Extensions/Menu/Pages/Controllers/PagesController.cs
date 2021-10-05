@@ -512,7 +512,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages.Controllers
             {
                 try
                 {
-                    Managers.PagesManager.ApplyLayout(PortalSettings.PortalId, PageSettingLayout.PageLayout, ActionResult, false, true, true);
+                    Managers.PagesManager.ApplyLayout(PortalSettings.PortalId, PageSettingLayout.PageLayout, ActionResult, false, false, true);
                     ActionResult.RedirectURL = PortalSettings.Current.ActiveTab.FullUrl;
                 }
                 catch (Exception ex)
