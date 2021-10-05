@@ -426,12 +426,10 @@ $(document).ready(function () {
                             var vjcomps = eval(VJLandingPage.components);
                             var plugins = [];
 
-                            if (typeof vjcomps != undefined) {
-                                BuildAppComponent(vjcomps);
-                                BuildAppComponentFromHtml(vjcomps, VJLandingPage.html);
-                                BuildBlockComponent(vjcomps);
-                                vjcomps = FilterComponents(vjcomps);
-                            }
+                            BuildAppComponent(vjcomps);
+                            BuildAppComponentFromHtml(vjcomps, VJLandingPage.html);
+                            BuildBlockComponent(vjcomps);
+                            vjcomps = FilterComponents(vjcomps);
 
                             plugins.push('vjpreset');
 
