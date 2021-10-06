@@ -424,9 +424,15 @@ namespace Vanjaro.Core
                         RemoveGlobalBlockStyles(DeserializedStyleJSON, StyleIds, GlobalStyleKeyValuePairs);
                         BuildCustomBlocks(PortalSettings.PortalId, DeserializedContentJSON, DeserializedStyleJSON);
                         page.ContentJSON = AbsoluteToRelativeUrls(JsonConvert.SerializeObject(DeserializedContentJSON), aliases);
+                        
                         if (!string.IsNullOrEmpty(page.ContentJSON) && page.ContentJSON == "null")
                             page.ContentJSON = string.Empty;
-                        page.StyleJSON = JsonConvert.SerializeObject(DeserializedStyleJSON);
+
+                        page.StyleJSON = JsonConvert.SerializeObject(DeserializedStyleJSON);                       
+                        
+                        if (!string.IsNullOrEmpty(page.StyleJSON) && page.StyleJSON == "[]")
+                            page.StyleJSON = string.Empty;
+
                         page.Style = FilterCss(Css, StyleIds);
 
                         if (Data["IsPublished"] != null && Convert.ToBoolean(Data["IsPublished"].ToString()) && (pageVersion != null && pageVersion.IsPublished))
