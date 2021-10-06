@@ -1765,7 +1765,7 @@ $(document).ready(function () {
                                 else
                                     $('.gjs-cv-canvas__frames').removeClass('lockcanvas');
 
-                                if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true') && VJLandingPage.components == '') {
+                                if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true') && VJLandingPage.components == '' && VJLandingPage.html != '') {
                                     VjEditor.runCommand("save");
                                     parent.window.location.reload();
                                     //VjEditor.destroy();
