@@ -1765,13 +1765,14 @@ $(document).ready(function () {
                                 else
                                     $('.gjs-cv-canvas__frames').removeClass('lockcanvas');
 
-                                if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true') && (VJLandingPage.components == '' || VJLandingPage.components == '[]')) {
+                                if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true') && VJLandingPage.components == '') {
                                     VjEditor.runCommand("save");
-                                    VjEditor.destroy();
-                                    // Remove All Managers
-                                    $('#ContentBlocks, .styleManager, .traitsManager').empty();
-                                    VjLayerpanel.close();
-                                    VjInit();
+                                    parent.window.location.reload();
+                                    //VjEditor.destroy();
+                                    //// Remove All Managers
+                                    //$('#ContentBlocks, .styleManager, .traitsManager').empty();
+                                    //VjLayerpanel.close();
+                                    //VjInit();
                                 } else if (GetParameterByName('m2v', parent.window.location) != null && GetParameterByName('m2v', parent.window.location).startsWith('true')) {
                                     setTimeout(function () { $($(window.parent.document.body).find('#dnn_ContentPane')[0]).find('.optimizing-overlay').remove(); }, 1000);
                                 }

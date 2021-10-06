@@ -424,7 +424,15 @@ namespace Vanjaro.Core
                         RemoveGlobalBlockStyles(DeserializedStyleJSON, StyleIds, GlobalStyleKeyValuePairs);
                         BuildCustomBlocks(PortalSettings.PortalId, DeserializedContentJSON, DeserializedStyleJSON);
                         page.ContentJSON = AbsoluteToRelativeUrls(JsonConvert.SerializeObject(DeserializedContentJSON), aliases);
+
+                        if (!string.IsNullOrEmpty(page.ContentJSON) && (page.ContentJSON == "[]" || page.ContentJSON == "null"))
+                            page.ContentJSON = string.Empty;
+
                         page.StyleJSON = JsonConvert.SerializeObject(DeserializedStyleJSON);
+
+                        if (!string.IsNullOrEmpty(page.StyleJSON) && (page.StyleJSON == "[]" || page.StyleJSON == "null"))
+                            page.StyleJSON = string.Empty;
+
                         page.Style = FilterCss(Css, StyleIds);
 
                         if (Data["IsPublished"] != null && Convert.ToBoolean(Data["IsPublished"].ToString()) && (pageVersion != null && pageVersion.IsPublished))
@@ -767,7 +775,7 @@ namespace Vanjaro.Core
             {
                 return GetLatestVersion(TabID, IgnoreDraft, Locale, GetDefaultLocale, TabPermissionController.HasTabPermission("EDIT"));
             }
-            public static Pages GetLatestVersion(int TabID, bool IgnoreDraft, string Locale, bool GetDefaultLocale,bool hasEdit)
+            public static Pages GetLatestVersion(int TabID, bool IgnoreDraft, string Locale, bool GetDefaultLocale, bool hasEdit)
             {
                 UserInfo UserInfo = (PortalController.Instance.GetCurrentSettings() as PortalSettings).UserInfo;
                 bool HasTabEditPermission = hasEdit || WorkflowManager.HasReviewPermission(UserInfo);
@@ -1439,7 +1447,7 @@ namespace Vanjaro.Core
                     string FileExtension = newurl.Substring(newurl.LastIndexOf('.'));
                     string tempNewUrl = newurl;
                     int count = 1;
-                    Find:
+                Find:
                     if (Assets.ContainsKey(tempNewUrl) && Assets[tempNewUrl] != url)
                     {
                         tempNewUrl = newurl.Remove(newurl.Length - FileExtension.Length) + count + FileExtension;
