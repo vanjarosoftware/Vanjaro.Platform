@@ -1635,7 +1635,8 @@ namespace Vanjaro.Core
                             try
                             {
                                 if (string.IsNullOrEmpty(page.StyleJSON))
-                                    page.StyleJSON = "";
+                                    page.StyleJSON = "[]";
+
                                 var styleJSON = JsonConvert.DeserializeObject(page.StyleJSON);
                                 UpdateGlobalBlockJSON(contentJSON, styleJSON, Locale);
                                 page.ContentJSON = JsonConvert.SerializeObject(contentJSON);
