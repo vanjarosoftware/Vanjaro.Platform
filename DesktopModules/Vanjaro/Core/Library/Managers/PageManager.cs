@@ -58,6 +58,13 @@ namespace Vanjaro.Core
                 else
                     return false;
             }
+            public static bool InjectThemeCSS(PortalSettings PortalSettings)
+            {
+                if (InjectEditor(PortalSettings) && HttpContext.Current.Request.Cookies["vj_InitUX"] != null && HttpContext.Current.Request.Cookies["vj_InitUX"].Value == "true" && !Core.Entities.Editor.Options.InjectThemeCSS && string.IsNullOrEmpty(HttpContext.Current.Request.QueryString["ctl"]) && (string.IsNullOrEmpty(HttpContext.Current.Request.QueryString["icp"]) || Convert.ToBoolean(HttpContext.Current.Request.QueryString["icp"]) == false))
+                    return false;
+                else
+                    return true;
+            }
             public static string GetReviewToastMarkup(PortalSettings PortalSettings)
             {
                 string Markup = string.Empty;
