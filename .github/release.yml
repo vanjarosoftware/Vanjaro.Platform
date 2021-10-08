@@ -1,0 +1,19 @@
+# release.yml
+
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+  categories:
+    - title: Enhancements
+      labels:
+        - Enhancement
+    - title: Bug fixes
+      labels:
+        - Bug
+    - title: Dependencies
+      authors:
+       - dependabot
+    - title: Other Changes
+      labels:
+        - "*"
