@@ -11,6 +11,9 @@ changelog:
     - title: Bug fixes
       labels:
         - Bug
+    - title: Applies to DNN Extension Only
+      labels: 
+        - Applies-to:-Extension-Only
     - title: Dependencies
       authors:
        - dependabot
