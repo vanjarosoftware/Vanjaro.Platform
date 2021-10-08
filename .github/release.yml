@@ -3,7 +3,7 @@
 changelog:
   exclude:
     labels:
-      - ignore-for-release
+      - 'ignore for release'
   categories:
     - title: Enhancements
       labels:
