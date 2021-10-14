@@ -40,6 +40,9 @@
                 if (Response.data.IsSuccess) {
                     $scope.Click_Cancel();
                 }
+                else if (Response.data.Errors["SiteDomainError"] != 'undefined') {
+                    CommonSvc.SweetAlert.swal(Response.data.Errors["SiteDomainError"].Message);
+                }
             });
         }
     };

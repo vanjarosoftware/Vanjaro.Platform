@@ -135,6 +135,9 @@
   <data name="SearchKeywords.Text" xml:space="preserve">
     <value>site,sites,new site,manage sites,manage site</value>
   </data>
+  <data name="SiteDomainError.Text" xml:space="preserve">
+    <value>Invalid Domain</value>
+  </data>
   <data name="Sites.Text" xml:space="preserve">
     <value>Sites</value>
   </data>
