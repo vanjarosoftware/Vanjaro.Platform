@@ -136,7 +136,7 @@
     <value>site,sites,new site,manage sites,manage site</value>
   </data>
   <data name="SiteDomainError.Text" xml:space="preserve">
-    <value>Invalid Domain</value>
+    <value>Domain already in use by another site</value>
   </data>
   <data name="Sites.Text" xml:space="preserve">
     <value>Sites</value>
