@@ -407,7 +407,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
 
                 if (portalId < 0)
                 {
-                    actionResult.AddError("", errors[portalId]);
+                    actionResult.AddError("SiteDomainError", errors.FirstOrDefault());
                     return actionResult;
                 }
 
