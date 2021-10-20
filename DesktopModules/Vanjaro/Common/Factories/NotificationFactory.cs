@@ -15,7 +15,7 @@ using Vanjaro.Common.Data.Scripts;
 
 namespace Vanjaro.Common.Factories
 {
-    internal class NotificationFactory
+    public class NotificationFactory
     {
 
         internal static void QueueMail(int PortalID, int ModuleID, string Subject, string Content, string ToEmail, List<Data.Entities.Attachment> Attachments, string FromName, string FromEmail, string FromEmailPrefix, string ReplyEmail)
@@ -216,7 +216,7 @@ namespace Vanjaro.Common.Factories
         {
             SmtpServer smtp = new SmtpServer();
             CacheFactory.ClearCache();
-            string Server = string.Empty, Port = string.Empty, Authentication = string.Empty, Username = string.Empty, Password = string.Empty, SSL = string.Empty;
+            string Server = string.Empty, Port = "587", Authentication = string.Empty, Username = string.Empty, Password = string.Empty, SSL = string.Empty;
 
             if (IsGlobal)
             {
@@ -506,7 +506,7 @@ namespace Vanjaro.Common.Factories
                     mailQueue.FromEmail = FromEmailPrefix + mailQueue.FromEmail.Split('@')[1];
                 }
             }
-                       
+
 
             return mailQueue;
         }
