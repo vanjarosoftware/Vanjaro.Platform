@@ -252,7 +252,7 @@ $(document).ready(function () {
             }
         };
         var optImages = jQuery.grep(getAllComponents(), function (n, i) {
-            return (n.attributes.type == 'image' || n.attributes.type == 'image-gallery-item' || n.attributes.type == 'carousel-image') && (n.parent().attributes.type == 'picture-box') && (typeof n.parent().components().models[0] != 'undefined') && (typeof n.parent().components().models[1] != 'undefined');
+            return (n.attributes.optimize) && (n.parent().attributes.type == 'picture-box') && (typeof n.parent().components().models[0] != 'undefined') && (typeof n.parent().components().models[1] != 'undefined');
         });
 
         if (optImages != undefined && optImages.length > 0) {
