@@ -419,6 +419,7 @@
 				draggable: false,
 				droppable: false,
 				resizable: false,
+				optimize: true,
 				tagName: 'img',
 				traits: [{
 					type: 'text',

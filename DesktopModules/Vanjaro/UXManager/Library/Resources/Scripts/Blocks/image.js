@@ -170,6 +170,7 @@
 			},
 			defaults: Object.assign({}, imageModel.prototype.defaults, {
 				droppable: false,
+				optimize: true,
 				resizable: {
 					tc: 0,
 					cl: 0,
