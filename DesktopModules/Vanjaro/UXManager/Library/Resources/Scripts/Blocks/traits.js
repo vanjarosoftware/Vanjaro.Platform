@@ -2371,11 +2371,10 @@ export default (editor, config = {}) => {
 
 			const el = document.createElement('div');
 			el.classList.add("toggle-box");
-			el.id = trait.attributes.name;
 
 			el.innerHTML = `
-                <input type="checkbox" class="btn-check" name="${trait.attributes.name}" id="toggle-box">
-                <label for="toggle-box" class="toggle-option">${trait.attributes.label}
+                <input type="checkbox" class="btn-check" name="${trait.attributes.name}" id="${trait.attributes.name}">
+                <label for="${trait.attributes.name}" class="toggle-option">${trait.attributes.label}
                     <em class="fas fa-chevron-down float-end"></em>
                 </label> `;
 			return el;
