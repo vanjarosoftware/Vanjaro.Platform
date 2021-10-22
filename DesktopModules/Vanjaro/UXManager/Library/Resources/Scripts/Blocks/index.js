@@ -54,7 +54,7 @@ grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
                 var ImageData;
 
-                if ((imageModel.attributes.type != 'image' || imageModel.attributes.type != 'image-gallery-item') && fileName) {
+                if (!imageModel.attributes.source && fileName) {
 
                     ImageData = {
                         PreviousFileName: fileName.substring(fileName.lastIndexOf('/') + 1).split('?')[0],
@@ -83,7 +83,7 @@ grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
                         if (response != "failed") {
                             imageModel.set('src', response.Url);
 
-                            if (imageModel.attributes.type != 'image' && imageModel.attributes.type != 'image-gallery-item') {
+                            if (!imageModel.attributes.source) {
 
                                 var style = imageModel.getStyle();
                                 style["background-image"] = 'url("' + response.Url + '")';

@@ -376,7 +376,6 @@
 	const imageView = imageType.view;
 
 	dc.addType('carousel-image', {
-
 		model: imageModel.extend({
 			initToolbar() {
 				var model = this;
@@ -420,6 +419,7 @@
 				droppable: false,
 				resizable: false,
 				optimize: true,
+				source: true,
 				tagName: 'img',
 				traits: [{
 					type: 'text',
