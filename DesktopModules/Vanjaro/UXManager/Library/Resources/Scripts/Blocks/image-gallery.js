@@ -212,6 +212,7 @@
 				draggable: '.vj-image-gallery',
 				droppable: false,
 				optimize: true,
+				source: true,
 				tagName: 'img',
 				traits: [{
 					type: 'text',
