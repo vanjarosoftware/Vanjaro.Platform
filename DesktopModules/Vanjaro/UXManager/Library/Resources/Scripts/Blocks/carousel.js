@@ -419,6 +419,7 @@
 				droppable: false,
 				resizable: false,
 				optimize: true,
+				editor: true,
 				source: true,
 				tagName: 'img',
 				traits: [{

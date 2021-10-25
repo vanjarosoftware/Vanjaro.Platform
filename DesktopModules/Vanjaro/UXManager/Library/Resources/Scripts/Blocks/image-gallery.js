@@ -213,6 +213,7 @@
 				droppable: false,
 				optimize: true,
 				source: true,
+				editor: true,
 				tagName: 'img',
 				traits: [{
 					type: 'text',
