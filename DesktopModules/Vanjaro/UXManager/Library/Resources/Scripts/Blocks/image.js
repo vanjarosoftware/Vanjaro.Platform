@@ -172,6 +172,7 @@
 				droppable: false,
 				optimize: true,
 				source: true,
+				editor: true,
 				resizable: {
 					tc: 0,
 					cl: 0,
