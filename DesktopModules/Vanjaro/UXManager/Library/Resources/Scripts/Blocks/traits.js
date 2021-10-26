@@ -449,25 +449,10 @@ export default (editor, config = {}) => {
 			return el;
 		},
 		eventCapture: ['input'],
-		debounce: function (func, wait, immediate) {
-			var timeout;
-			return function () {
-				var context = this, args = arguments;
-				var later = function () {
-					timeout = null;
-					if (!immediate) func.apply(context, args);
-				};
-				var callNow = immediate && !timeout;
-				clearTimeout(timeout);
-				timeout = setTimeout(later, wait);
-				if (callNow) func.apply(context, args);
-			};
-		},
 		onEvent({ elInput, component, event }) {
 			if (event.type == 'change') {
-				var caption = elInput.querySelector('textarea').value;
-				component.addAttributes({ alt: caption });
-				component.getTrait('caption').setTargetValue(caption);
+				var value = elInput.querySelector('textarea').value;
+				component.getTrait(event.target.name).setTargetValue(value);
 			}
 		}
 	});
@@ -722,14 +707,20 @@ export default (editor, config = {}) => {
 				SetURL();
 			}
 			else if (event.target.name == "target") {
+
 				if (event.target.id == "yes") {
-					component.addAttributes({ 'target': '_blank', 'rel': 'noopener' });
+
+					model.addAttributes({ 'target': '_blank', 'rel': 'noopener' });
+					model.set({ 'target': 'yes' });
 				}
 				else {
-					const attr = component.getAttributes();
+
+					const attr = model.getAttributes();
 					delete attr.rel;
 					delete attr.target;
-					component.setAttributes(attr);
+					model.setAttributes(attr);
+
+					model.set({ 'target': 'no' });
 				}
 			}
 			else {
