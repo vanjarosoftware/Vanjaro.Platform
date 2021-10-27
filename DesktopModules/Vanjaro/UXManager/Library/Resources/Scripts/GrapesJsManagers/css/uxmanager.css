@@ -2682,6 +2682,16 @@ span.notificationname {
         .gjs-rte-active .fa-link:before {
             content: "\f127" !important;
         }
+
+.traitsmanager .toggle-box label em {
+    transition: all 0.4s ease;
+    transform: rotateZ(-90deg);
+}
+
+.traitsmanager .toggle-box input:checked ~ label em {
+    transform: rotateZ(0deg);
+}
+
 /*custom slider*/
 
 .custom-range-sliderInput {
