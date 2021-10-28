@@ -468,4 +468,7 @@
   <data name="AddImage.Text" xml:space="preserve">
     <value>Add Image</value>
   </data>
+  <data name="RevisionInfoMessage.Text" xml:space="preserve">
+    <value>Does not support revisions</value>
+  </data>
 </root>
