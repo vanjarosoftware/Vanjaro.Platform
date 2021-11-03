@@ -211,6 +211,9 @@
 				'custom-name': 'Gallery Item',
 				draggable: '.vj-image-gallery',
 				droppable: false,
+				optimize: true,
+				source: true,
+				editor: true,
 				tagName: 'img',
 				traits: [{
 					type: 'text',

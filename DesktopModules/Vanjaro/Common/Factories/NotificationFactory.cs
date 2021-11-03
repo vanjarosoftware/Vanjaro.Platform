@@ -15,7 +15,7 @@ using Vanjaro.Common.Data.Scripts;
 
 namespace Vanjaro.Common.Factories
 {
-    internal class NotificationFactory
+    public class NotificationFactory
     {
 
         internal static void QueueMail(int PortalID, int ModuleID, string Subject, string Content, string ToEmail, List<Data.Entities.Attachment> Attachments, string FromName, string FromEmail, string FromEmailPrefix, string ReplyEmail)
@@ -216,7 +216,7 @@ namespace Vanjaro.Common.Factories
         {
             SmtpServer smtp = new SmtpServer();
             CacheFactory.ClearCache();
-            string Server = string.Empty, Port = string.Empty, Authentication = string.Empty, Username = string.Empty, Password = string.Empty, SSL = string.Empty;
+            string Server = string.Empty, Port = "587", Authentication = string.Empty, Username = string.Empty, Password = string.Empty, SSL = string.Empty;
 
             if (IsGlobal)
             {
@@ -506,7 +506,7 @@ namespace Vanjaro.Common.Factories
                     mailQueue.FromEmail = FromEmailPrefix + mailQueue.FromEmail.Split('@')[1];
                 }
             }
-                       
+
 
             return mailQueue;
         }
@@ -527,12 +527,13 @@ namespace Vanjaro.Common.Factories
             table.Columns.Add("Status", typeof(string));
             table.Columns.Add("RetryDateTime", typeof(DateTime));
             table.Columns.Add("RetryAttempt", typeof(int));
+            table.Columns.Add("PortalID", typeof(int));
             foreach (MailQueue item in MailQueues)
             {
                 MailQueue mq = ProcessMailQueue(item.PortalID, item.ModuleID, item.Subject, item.Content, item.ToEmail, null, item.FromName, item.FromEmail, null, item.ReplyEmail);
                 if (mq != null)
                 {
-                    table.Rows.Add(0, mq.ToEmail, mq.Subject, mq.Content, mq.FromName, mq.FromEmail, mq.ReplyEmail, mq.SmtpUniqueId, mq.ModuleID, item.Attachment, mq.Status, mq.RetryDateTime, mq.RetryAttempt);
+                    table.Rows.Add(0, mq.ToEmail, mq.Subject, mq.Content, mq.FromName, mq.FromEmail, mq.ReplyEmail, mq.SmtpUniqueId, mq.ModuleID, item.Attachment, mq.Status, mq.RetryDateTime, mq.RetryAttempt, mq.PortalID);
                 }
             }
             return table;
