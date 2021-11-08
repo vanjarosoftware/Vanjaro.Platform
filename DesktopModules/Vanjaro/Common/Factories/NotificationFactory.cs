@@ -527,12 +527,13 @@ namespace Vanjaro.Common.Factories
             table.Columns.Add("Status", typeof(string));
             table.Columns.Add("RetryDateTime", typeof(DateTime));
             table.Columns.Add("RetryAttempt", typeof(int));
+            table.Columns.Add("PortalID", typeof(int));
             foreach (MailQueue item in MailQueues)
             {
                 MailQueue mq = ProcessMailQueue(item.PortalID, item.ModuleID, item.Subject, item.Content, item.ToEmail, null, item.FromName, item.FromEmail, null, item.ReplyEmail);
                 if (mq != null)
                 {
-                    table.Rows.Add(0, mq.ToEmail, mq.Subject, mq.Content, mq.FromName, mq.FromEmail, mq.ReplyEmail, mq.SmtpUniqueId, mq.ModuleID, item.Attachment, mq.Status, mq.RetryDateTime, mq.RetryAttempt);
+                    table.Rows.Add(0, mq.ToEmail, mq.Subject, mq.Content, mq.FromName, mq.FromEmail, mq.ReplyEmail, mq.SmtpUniqueId, mq.ModuleID, item.Attachment, mq.Status, mq.RetryDateTime, mq.RetryAttempt, mq.PortalID);
                 }
             }
             return table;

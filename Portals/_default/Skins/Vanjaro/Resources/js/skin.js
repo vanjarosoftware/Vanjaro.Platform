@@ -419,7 +419,7 @@ OpenImagePopup = function (img) {
 
 $(document).ready(function () {
 
-    $("#navbar-menu li.dropdown").hover(function () {
+    $(".navbar li.dropdown").hover(function () {
         if ($(window).width() < 767)
             return;
         var menuItem = $(this);
@@ -435,7 +435,7 @@ $(document).ready(function () {
             subMenu.css("margin-left", '2px');
     });
 
-    $("#navbar-menu li.dropdown-submenu").hover(function () {
+    $(".navbar li.dropdown-submenu").hover(function () {
         if ($(window).width() < 767)
             return;
         var subMenu = $(this).find("ul.dropdown-menu");
