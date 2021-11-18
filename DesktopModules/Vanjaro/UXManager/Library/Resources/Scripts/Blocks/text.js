@@ -134,7 +134,8 @@ export default (editor, config = {}) => {
 			defaults: Object.assign({}, textModel.prototype.defaults, {
 				droppable: false,
 				'custom-name': 'Text Inner',
-				classes: ['vj-text', 'text-dark'],
+                classes: ['vj-text', 'text-dark'],
+                text: true,
 				tagName: 'p',
 				traits: [
 					{
