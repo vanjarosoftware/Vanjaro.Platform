@@ -957,6 +957,442 @@
       "Sass": ""
     },
     {
+      "Guid": "1a06007e-63cd-4245-b9e7-d8710b181749",
+      "Category": "Link",
+      "Title": null,
+      "Controls": [
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "3314529b-58d3-4183-a982-211d3728c19a",
+      "Category": "Link",
+      "Title": "Normal",
+      "Controls": [
+        {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "11072dd2-6d3e-4379-8507-64025860f918",
+          "Title": "Font Weight",
+          "DefaultValue": "400",
+          "Suffix": "",
+          "CustomCSS": ".link {\n    font-weight: $linkNormalFontWeight;\n}",
+          "PreviewCSS": ".link {\n    font-weight: $linkNormalFontWeight;\n}",
+          "LessVariable": "$linkNormalFontWeight",
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "6f067509-d755-481c-b020-643cd4c53670",
+          "Title": "Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".link {\n    font-family: $linkNormalFontFamily;\n}",
+          "PreviewCSS": ".link {\n    font-family: $linkNormalFontFamily;\n}",
+          "LessVariable": "$linkNormalFontFamily",
+          "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "6cc379fb-37ff-4ae1-afd0-0daa38f0b80d",
+          "Title": "Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".link {\n    font-Style: $linkNormalFontStyle;\n}",
+          "PreviewCSS": ".link {\n    font-Style: $linkNormalFontStyle;\n}",
+          "LessVariable": "$linkNormalFontStyle",
+          "Type": "Dropdown"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "8a29209b-cf7d-4eab-9707-b86920eee2ca",
+          "Title": "Letter Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".link {\n    letter-spacing: $linkNormalLetterSpacingpx;\n}",
+          "PreviewCSS": ".link {\n    letter-spacing: $linkNormalLetterSpacingpx;\n}",
+          "LessVariable": "$linkNormalLetterSpacing",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "505ab166-3c48-4609-8ebb-e2ab1d05a1f4",
+          "Title": "Word Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".link {\n    word-spacing: $linkNormalWordSpacingpx;\n}",
+          "PreviewCSS": ".link {\n    word-spacing: $linkNormalWordSpacingpx;\n}",
+          "LessVariable": "$linkNormalWordSpacing",
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "07cfb379-41bc-4c05-98f3-f22e02812456",
+          "Title": "Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".link {\n    text-transform: $linkNormalTextTransform;\n}",
+          "PreviewCSS": ".link {\n    text-transform: $linkNormalTextTransform;\n}",
+          "LessVariable": "$linkNormalTextTransform",
+          "Type": "Dropdown"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
+          ],
+          "Guid": "e5026b2e-1d74-4925-951f-a00ef548f18f",
+          "Title": "Text Decoration",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".link {\n    text-decoration: $linkNormalTextDecoration;\n}",
+          "PreviewCSS": ".link {\n    text-decoration: $linkNormalTextDecoration;\n}",
+          "LessVariable": "$linkNormalTextDecoration",
+          "Type": "Dropdown"
+        }
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "a92c086c-356b-4c82-81fe-b075b441850a",
+      "Category": "Link",
+      "Title": "Hover",
+      "Controls": [
+
+        {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "8bd73e0f-3b61-4f91-bbbd-4d2ddaebc271",
+          "Title": "Font Weight",
+          "DefaultValue": "400",
+          "Suffix": "",
+          "CustomCSS": ".link:hover {\n    font-weight: $linkHoverFontWeight;\n}",
+          "PreviewCSS": ".link:hover {\n    font-weight: $linkHoverFontWeight;\n}",
+          "LessVariable": "$linkHoverFontWeight",
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "6b62069f-8703-460e-becc-8a5aad623cd5",
+          "Title": "Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".link:hover {\n    font-family: $linkHoverFontFamily;\n}",
+          "PreviewCSS": ".link:hover {\n    font-family: $linkHoverFontFamily;\n}",
+          "LessVariable": "$linkHoverFontFamily",
+          "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "5f599ec2-0012-4d8e-bec6-087b1adfe236",
+          "Title": "Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".link:hover {\n    font-style: $linkHoverFontStyle;\n}",
+          "PreviewCSS": ".link:hover {\n    font-style: $linkHoverFontStyle;\n}",
+          "LessVariable": "$linkHoverFontStyle",
+          "Type": "Dropdown"
+        },
+        {
+          "RangeMin": 0,
+          "RangeMax": 25,
+          "Increment": 5,
+          "Guid": "f6cf4fd9-2048-4811-9ab0-bffcce794c4d",
+          "Title": "Letter Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".link:hover {\n    letter-spacing: $linkHoverLetterSpacingpx;\n}",
+          "PreviewCSS": ".link:hover {\n    letter-spacing: $linkHoverLetterSpacingpx;\n}",
+          "LessVariable": "$linkHoverLetterSpacing",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0,
+          "RangeMax": 25,
+          "Increment": 1,
+          "Guid": "28b3c81b-7614-46ff-8aae-82374963c141",
+          "Title": "Word Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".link:hover {\n    word-spacing: $linkHoverWordSpacingpx;\n}",
+          "PreviewCSS": ".link:hover {\n    word-spacing: $linkHoverWordSpacingpx;\n}",
+          "LessVariable": "$linkHoverWordSpacing",
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "029ec7f7-e593-47af-a000-7a13d7b39b1b",
+          "Title": "Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".link:hover {\n    text-transform: $linkHoverTextTransform;\n}",
+          "PreviewCSS": ".link:hover {\n    text-transform: $linkHoverTextTransform;\n}",
+          "LessVariable": "$linkHoverTextTransform",
+          "Type": "Dropdown"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
+          ],
+          "Guid": "503b14f1-ab3c-4c97-bd5d-f7eba559e44c",
+          "Title": "Text Decoration",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".link:hover {\n    text-decoration: $linkHoverTextDecoration;\n}",
+          "PreviewCSS": ".link:hover {\n    text-decoration: $linkHoverTextDecoration;\n}",
+          "LessVariable": "$linkHoverTextDecoration",
+          "Type": "Dropdown"
+        }
+      ],
+      "Sass": ""
+    },
+    {
+      "Guid": "1f7fdedf-134f-4f50-b769-eab4bf65fb4f",
+      "Category": "Link",
+      "Title": "Active",
+      "Controls": [
+        {
+          "Options": [
+            {
+              "100": "Thin"
+            },
+            {
+              "300": "Light"
+            },
+            {
+              "400": "Normal"
+            },
+            {
+              "500": "Medium"
+            },
+            {
+              "700": "Bold"
+            },
+            {
+              "900": "Ultra Bold"
+            }
+          ],
+          "Guid": "a234fd3e-ebab-4382-b8f3-3ae082072743",
+          "Title": "Font Weight",
+          "DefaultValue": "400",
+          "Suffix": "",
+          "CustomCSS": ".link:active {\n    font-weight: $linkActiveFontWeight;\n}",
+          "PreviewCSS": ".link:active {\n    font-weight: $linkActiveFontWeight;\n}",
+          "LessVariable": "$linkActiveFontWeight",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Guid": "eea2ccfd-cf15-4d08-84fc-4257d4fc6597",
+          "Title": "Font Family",
+          "DefaultValue": "Poppins, sans-serif",
+          "Suffix": "",
+          "CustomCSS": ".link:active {\n    font-family: $linkActiveFontFamily;\n}",
+          "PreviewCSS": ".link:active {\n    font-family: $linkActiveFontFamily;\n}",
+          "LessVariable": "$linkActiveFontFamily",
+          "JavascriptVariable": null,
+          "Type": "Fonts"
+        },
+        {
+          "Options": [
+            {
+              "normal": "normal"
+            },
+            {
+              "italic": "italic"
+            }
+          ],
+          "Guid": "59025d4e-a28a-47bd-8e0a-40b63b6be040",
+          "Title": "Font Style",
+          "DefaultValue": "normal",
+          "Suffix": "",
+          "CustomCSS": ".link:active {\n    font-style: $linkActiveFontStyle;\n}",
+          "PreviewCSS": ".link:active {\n    font-style: $linkActiveFontStyle;\n}",
+          "LessVariable": "$linkActiveFontStyle",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "RangeMin": -2.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "0c9a9b4a-8c0f-4494-8d20-94304bd041d1",
+          "Title": "Letter Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".link:active {\n    letter-spacing: $linkActiveLetterSpacingpx;\n}",
+          "PreviewCSS": ".link:active {\n    letter-spacing: $linkActiveLetterSpacingpx;\n}",
+          "LessVariable": "$linkActiveLetterSpacing",
+          "JavascriptVariable": "",
+          "Type": "Slider"
+        },
+        {
+          "RangeMin": 0.0,
+          "RangeMax": 25.0,
+          "Increment": 1.0,
+          "Guid": "1b506843-2843-45ad-beaf-88f71efdfaa8",
+          "Title": "Word Spacing",
+          "DefaultValue": "0",
+          "Suffix": "px",
+          "CustomCSS": ".link:active {\n    word-spacing: $linkActiveWordSpacingpx;\n}",
+          "PreviewCSS": ".link:active {\n    word-spacing: $linkActiveWordSpacingpx;\n}",
+          "LessVariable": "$linkActiveWordSpacing",
+          "JavascriptVariable": null,
+          "Type": "Slider"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "uppercase": "uppercase"
+            },
+            {
+              "lowercase": "lowercase"
+            },
+            {
+              "capitalize": "capitalize"
+            }
+          ],
+          "Guid": "5e293264-7ff7-46fb-99ae-e9ff47f50d45",
+          "Title": "Text Transform",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".link:active {\n    text-transform: $linkActiveTextTransform;\n}",
+          "PreviewCSS": ".link:active {\n    text-transform: $linkActiveTextTransform;\n}",
+          "LessVariable": "$linkActiveTextTransform",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        },
+        {
+          "Options": [
+            {
+              "none": "none"
+            },
+            {
+              "underline": "underline"
+            },
+            {
+              "overline": "overline"
+            },
+            {
+              "line-through": "Strikethrough"
+            }
+          ],
+          "Guid": "0db6820a-cf60-46ec-9a47-15f269086e23",
+          "Title": "Text Decoration",
+          "DefaultValue": "none",
+          "Suffix": "",
+          "CustomCSS": ".link:active {\n    text-decoration: $linkActiveTextDecoration;\n}",
+          "PreviewCSS": ".link:active {\n    text-decoration: $linkActiveTextDecoration;\n}",
+          "LessVariable": "$linkActiveTextDecoration",
+          "JavascriptVariable": null,
+          "Type": "Dropdown"
+        }
+      ],
+      "Sass": ""
+    },
+    {
       "Guid": "39180ba7-76e2-4971-af30-84b08a7c1be8",
       "Category": "Search Result",
       "Title": "Heading",
