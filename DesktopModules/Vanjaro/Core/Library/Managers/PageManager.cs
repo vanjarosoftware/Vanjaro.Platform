@@ -884,7 +884,7 @@ namespace Vanjaro.Core
                         IEnumerable<HtmlNode> query = html.DocumentNode.Descendants("div");
                         foreach (HtmlNode item in query.ToList())
                         {
-                            if (item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "mid").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "fname").FirstOrDefault() != null)
+                            if (item.Attributes.Where(a => a.Name == "dmid").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "mid").FirstOrDefault() != null && !string.IsNullOrEmpty(item.Attributes.Where(a => a.Name == "mid").FirstOrDefault().Value) && item.Attributes.Where(a => a.Name == "fname").FirstOrDefault() != null)
                             {
                                 ModuleDefinitionInfo moduleDefinition = ModuleDefinitionController.GetModuleDefinitionByFriendlyName(item.Attributes.Where(a => a.Name == "fname").FirstOrDefault().Value);
                                 if (moduleDefinition != null)
