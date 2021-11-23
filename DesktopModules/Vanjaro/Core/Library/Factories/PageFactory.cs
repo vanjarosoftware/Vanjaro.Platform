@@ -144,7 +144,7 @@ namespace Vanjaro.Core
                         }
                         if (IsDelete && item.Value.ModuleTitle != Components.Constants.AccountLogin)
                         {
-                            if (string.IsNullOrEmpty(HttpContext.Current.Request.QueryString["m2v"]) && !HttpUtility.ParseQueryString(HttpContext.Current.Request.UrlReferrer.Query).AllKeys.Contains("skinsrc") && !HttpUtility.ParseQueryString(HttpContext.Current.Request.UrlReferrer.Query).AllKeys.Contains("m2v") && !HttpContext.Current.Request.UrlReferrer.AbsoluteUri.Contains("m2v/"))
+                            if (string.IsNullOrEmpty(HttpContext.Current.Request.QueryString["m2v"]) && HttpContext.Current.Request.UrlReferrer != null && !HttpUtility.ParseQueryString(HttpContext.Current.Request.UrlReferrer.Query).AllKeys.Contains("skinsrc") && !HttpUtility.ParseQueryString(HttpContext.Current.Request.UrlReferrer.Query).AllKeys.Contains("m2v") && !HttpContext.Current.Request.UrlReferrer.AbsoluteUri.Contains("m2v/"))
                             {
                                 DeleteModule(TabID, item.Key);
                             }
