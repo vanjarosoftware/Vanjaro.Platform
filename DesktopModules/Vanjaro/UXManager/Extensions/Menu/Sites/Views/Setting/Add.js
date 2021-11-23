@@ -40,6 +40,9 @@
                 if (Response.data.IsSuccess) {
                     $scope.Click_Cancel();
                 }
+                else {
+                    CommonSvc.SweetAlert.swal(Response.data.Message);
+                }
             });
         }
     };

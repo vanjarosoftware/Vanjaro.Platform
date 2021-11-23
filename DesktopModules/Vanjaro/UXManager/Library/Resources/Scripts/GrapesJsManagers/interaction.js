@@ -75,6 +75,7 @@ $(document).ready(function () {
         $('.ToolbarItem').prepend("<div class='ntoolbox'></div><ul class='more_icons'><li class='openbtn'><em class='fas fa-chevron-up' data-bs-toggle='tooltip' data-bs-placement='right'  title=\"" + VjLocalized.ShowHiddenIcons + "\"></em></li></ul>");
         $('.ntoolbox').prepend(toolbar);
         $('.ntoolbox  li:lt(5)').hide();
+        $('.ntoolbox').find('[data-bs-toggle="tooltip"]').tooltip();
     }
 
     $(".search-block input").keyup(function () {

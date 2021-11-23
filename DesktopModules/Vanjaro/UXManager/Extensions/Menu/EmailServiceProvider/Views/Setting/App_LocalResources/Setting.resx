@@ -130,7 +130,10 @@
     <value>Password</value>
   </data>
   <data name="Host_Server.Text" xml:space="preserve">
-    <value>Server and port</value>
+    <value>Server</value>
+  </data>
+  <data name="Host_Port.Text" xml:space="preserve">
+    <value>Port</value>
   </data>
   <data name="Host_Username.Text" xml:space="preserve">
     <value>Username</value>
@@ -172,7 +175,10 @@
     <value>Password</value>
   </data>
   <data name="Portal_Server.Text" xml:space="preserve">
-    <value>Server and port</value>
+    <value>Server</value>
+  </data>
+  <data name="Portal_Port.Text" xml:space="preserve">
+    <value>Port</value>
   </data>
   <data name="Portal_Username.Text" xml:space="preserve">
     <value>Username</value>

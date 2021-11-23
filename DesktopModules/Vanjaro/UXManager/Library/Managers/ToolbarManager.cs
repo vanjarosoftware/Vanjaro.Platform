@@ -46,7 +46,7 @@ namespace Vanjaro.UXManager.Library
 
                         if (name == "Revisions" && string.IsNullOrEmpty(Core.Entities.Editor.Options.RevisionGUID))
                         {
-                            sb.Append("<li guid=" + mItem.SettingGuid.ToString().ToLower() + "><span onclick=\"ShowNotification('Warning', '', 'error');\">" + icon + "</span>");
+                            sb.Append("<li guid=" + mItem.SettingGuid.ToString().ToLower() + "><span onclick=\"ShowNotification('" + Core.Entities.Editor.Options.AppName + "', '" + DotNetNuke.Services.Localization.Localization.GetString("RevisionInfoMessage", Components.Constants.LocalResourcesFile) + "', 'info');\">" + icon + "</span>");
                         }
                         else if (mItem.SettingGuid != Guid.Empty && mItem.ToolbarAction != null && mItem.ToolbarAction.ContainsKey(MenuAction.onClick))
                         {
