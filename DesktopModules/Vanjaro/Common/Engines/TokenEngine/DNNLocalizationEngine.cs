@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Vanjaro.Common.Utilities;
 
 namespace Vanjaro.Common.Engines.TokenEngine
@@ -23,12 +24,16 @@ namespace Vanjaro.Common.Engines.TokenEngine
             this.ShowMissingKeys = ShowMissingKeys;
         }
 
+        public string Parse(string Template)
+        {
+            return Parse(Template, Thread.CurrentThread.CurrentUICulture.ToString());
+        }
         /// <summary>
         /// Parses the given template for DNN Standard Tokens
         /// </summary>
         /// <param name="Template"></param>
         /// <returns></returns>
-        public string Parse(string Template)
+        public string Parse(string Template, string language)
         {
             if (!string.IsNullOrEmpty(Template))
             {
@@ -44,13 +49,13 @@ namespace Vanjaro.Common.Engines.TokenEngine
                     if (match.StartsWith("LS:") && !string.IsNullOrEmpty(SharedResourceFile))
                     {
                         string key = match.Replace("LS:", string.Empty);//.Split(',')[0];
-                        string localizedValue = Localization.Get(key, "Text", SharedResourceFile, ShowMissingKeys, Localization.SharedMissingPrefix);
+                        string localizedValue = Localization.Get(key, "Text", SharedResourceFile, ShowMissingKeys, Localization.SharedMissingPrefix, language);
                         Template = Template.Replace(token, localizedValue);
                     }
                     else if (match.StartsWith("L:") && !string.IsNullOrEmpty(LocalResourceFile))
                     {
                         string key = match.Replace("L:", string.Empty);//.Split(',')[0];
-                        string localizedValue = Localization.Get(key, "Text", LocalResourceFile, ShowMissingKeys, Localization.LocalMissingPrefix);
+                        string localizedValue = Localization.Get(key, "Text", LocalResourceFile, ShowMissingKeys, Localization.LocalMissingPrefix, language);
                         Template = Template.Replace(token, localizedValue);
                     }
 

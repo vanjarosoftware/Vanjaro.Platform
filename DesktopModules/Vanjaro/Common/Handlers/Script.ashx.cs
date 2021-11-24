@@ -18,7 +18,7 @@ namespace Vanjaro.Common.Handlers
     public class Script : IHttpHandler
     {
 
-        private string AppName = null;
+        private string AppName = null, culture = null;
         private Dictionary<string, object> appProperties;
         public void ProcessRequest(HttpContext context)
         {
@@ -30,6 +30,11 @@ namespace Vanjaro.Common.Handlers
             {
                 context.Response.StatusCode = 404;
             }
+
+            if (context.Request.QueryString["culture"] != null)
+                culture = context.Request.QueryString["culture"];
+            else
+                context.Response.StatusCode = 404;
 
             //Handle Angular Apps
             if (!string.IsNullOrEmpty(AppName))
@@ -63,7 +68,7 @@ namespace Vanjaro.Common.Handlers
 
         private string GetAngularAppScript(HttpContext context, string AppName, string FrameworkTemplatePath, string AppTemplatePath, string[] Dependencies, List<AngularView> Templates, bool ShowMissingKeys, string AppConfigJS, string AppJS)
         {
-            string CacheKey = AppName + "_ScriptHandler_" + AppTemplatePath;
+            string CacheKey = AppName + "_ScriptHandler_" + AppTemplatePath + "_" + culture;
             string CachedScript = Utilities.DataCache.GetItemFromCache<string>(CacheKey);
             if (CachedScript == null)
             {
@@ -87,7 +92,7 @@ namespace Vanjaro.Common.Handlers
                         string ResourcePath = file.TrimEnd(ResourceFile.ToCharArray());
                         ResourceFile = ResourcePath + DotNetNuke.Services.Localization.Localization.LocalResourceDirectory + "\\" + ResourceFile.Substring(0, ResourceFile.LastIndexOf(".js")) + ".resx";
 
-                        sb.Append(new DNNLocalizationEngine(ResourceFile, SharedResourceFile, ShowMissingKeys).Parse(File.ReadAllText(file) + Environment.NewLine));
+                        sb.Append(new DNNLocalizationEngine(ResourceFile, SharedResourceFile, ShowMissingKeys).Parse(File.ReadAllText(file) + Environment.NewLine, culture));
 
                     }
                     //Add individual js files
@@ -97,7 +102,7 @@ namespace Vanjaro.Common.Handlers
                         string ResourcePath = file.TrimEnd(ResourceFile.ToCharArray());
                         ResourceFile = ResourcePath + DotNetNuke.Services.Localization.Localization.LocalResourceDirectory + "\\" + ResourceFile.Substring(0, ResourceFile.LastIndexOf(".js")) + ".resx";
 
-                        sb.Append(new DNNLocalizationEngine(ResourceFile, SharedAppTemplateFile, ShowMissingKeys).Parse(File.ReadAllText(file) + Environment.NewLine));
+                        sb.Append(new DNNLocalizationEngine(ResourceFile, SharedAppTemplateFile, ShowMissingKeys).Parse(File.ReadAllText(file) + Environment.NewLine, culture));
 
                     }
                     sb.Append("})();");

@@ -26,7 +26,7 @@ namespace Vanjaro.Common.Foundation
             //Register App JS
             if (!IsPostBack)
             {
-                WebForms.RegisterStartupScriptInclude(Page, App.Name + "-AppJS", Page.ResolveUrl(ScriptHandler + "?appname=" + App.Name.ToLower() + "&portalid=" + PortalId.ToString() + "&moduleid=" + ModuleId.ToString()));
+                WebForms.RegisterStartupScriptInclude(Page, App.Name + "-AppJS", Page.ResolveUrl(ScriptHandler + "?appname=" + App.Name.ToLower() + "&portalid=" + PortalId.ToString() + "&moduleid=" + ModuleId.ToString() + "&culture=" + System.Threading.Thread.CurrentThread.CurrentUICulture.ToString()));
 
 
                 Dictionary<string, object> appProperties = new Dictionary<string, object>
