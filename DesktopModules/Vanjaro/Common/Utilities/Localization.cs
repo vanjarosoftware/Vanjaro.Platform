@@ -20,19 +20,20 @@ namespace Vanjaro.Common.Utilities
 
         public static string Get(string Key, string Suffix, string ResourceFile, bool ShowMissingKeys, string MissingPrefix)
         {
+            return Get(Key, Suffix, ResourceFile, ShowMissingKeys, SharedMissingPrefix, System.Threading.Thread.CurrentThread.CurrentUICulture.ToString());
+        }
+
+        public static string Get(string Key, string Suffix, string ResourceFile, bool ShowMissingKeys, string MissingPrefix, string language)
+        {
             try
             {
                 if (ResourceFile.IndexOf("DesktopModules") > -1)
-                {
                     ResourceFile = VirtualPathUtility.ToAbsolute("~/" + ResourceFile.Substring(ResourceFile.IndexOf("DesktopModules")));
-                }
                 else if (ResourceFile.IndexOf("Portals") > -1)
-                {
                     ResourceFile = VirtualPathUtility.ToAbsolute("~/" + ResourceFile.Substring(ResourceFile.IndexOf("Portals")));
-                }
             }
             catch { }
-            string value = DotNetNuke.Services.Localization.Localization.GetString(Key + "." + Suffix, ResourceFile);
+            string value = DotNetNuke.Services.Localization.Localization.GetString(Key + "." + Suffix, ResourceFile, language);
             if (ShowMissingKeys)
             {
                 if (string.IsNullOrEmpty(value))
