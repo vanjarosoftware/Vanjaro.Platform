@@ -511,6 +511,11 @@ div#MenuSettings .parent-menu-hide {
 .sidebar .block-manager .gjs-block-label img {
     width: 28px !important;
     height: 28px !important;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
 }
 
 .sidebar .block-manager .gjs-block-label .my-label-block {
