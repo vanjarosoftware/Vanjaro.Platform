@@ -2131,7 +2131,7 @@ $(document).ready(function () {
 
                                 var tb = model.get('toolbar');
 
-                                if (model.getStyle()["background-image"] != undefined && !$(tb.find(element => element.attributes.class == 'fa fa-pencil')).length) {
+                                if (model.getStyle()["background-image"] != undefined && model.getStyle()["background-image"].indexOf('url') != -1 && !$(tb.find(element => element.attributes.class == 'fa fa-pencil')).length) {
 
                                     tb.splice(0, 0, { attributes: { class: 'fa fa-pencil', title: VjLocalized.EditImage }, command: 'custom-tui-image-editor' });
 
