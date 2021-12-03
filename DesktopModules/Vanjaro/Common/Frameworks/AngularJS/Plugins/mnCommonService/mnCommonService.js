@@ -246,7 +246,11 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
                 });
             };
 
-
+            $scope.PreventSearchEnter = function () {
+                $('[st-search]').keypress(function (e) {
+                    if (e.which == 13) return false;
+                });
+            };
 
             $scope.Submit = function () {
                 var IsValid = true;
@@ -275,7 +279,7 @@ mnSvc.directive('uiengine', ['$compile', '$timeout', 'CommonSvc', '$routeParams'
 
             $compile($element.contents())($scope);
 
-            setTimeout(function () { if ($scope.onInit) $scope.onInit(); eval(data.data.script); }, 2);
+            setTimeout(function () { if ($scope.onInit) { $scope.onInit(); $scope.PreventSearchEnter(); } eval(data.data.script); }, 2);
 
             if ($.isFunction($element.find('[datepicker]').datepicker)) {
                 $element.find('[datepicker]').datepicker({
