@@ -29,6 +29,7 @@ namespace Vanjaro.Core
                 internal const string OAuthClients = Prefix + "OAuthClients";
                 internal const string IOAuthClient_Extension = Prefix + "IOAuthClient_Extension";
                 internal const string SectionPermission = Prefix + "SectionPermission";
+                internal const string IPortalDelete = Prefix + "IPortalDelete";
             }
 
             public static string GetCacheKey(object extensions)
