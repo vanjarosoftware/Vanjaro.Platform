@@ -32,6 +32,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Vanjaro.Core.Data.Entities;
 using Vanjaro.Core.Entities;
+using Vanjaro.Core.Entities.Interface;
 using Vanjaro.UXManager.Extensions.Menu.Pages.Entities;
 using Vanjaro.UXManager.Library.Common;
 using static Vanjaro.Core.Factories;
@@ -83,7 +84,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             }
             return actionResult;
         }
-        internal static HttpResponseMessage Export(int PortalID, string Name,bool hasEdit)
+        internal static HttpResponseMessage Export(int PortalID, string Name, bool hasEdit)
         {
             HttpResponseMessage Response = new HttpResponseMessage();
             string Theme = ThemeManager.CurrentTheme.Name;
@@ -578,6 +579,15 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Managers
             string portalSystemPath = GetAbsoluteServerPath() + "Portals\\" + portal.PortalID + "-System";
             if (Directory.Exists(portalSystemPath))
                 Directory.Delete(portalSystemPath, true);
+
+            List<IPortalDelete> IPortalDeleteAssemblies = SiteManager.GetIPortalDelete();
+            if (IPortalDeleteAssemblies != null && IPortalDeleteAssemblies.Count > 0)
+            {
+                foreach (IPortalDelete portalDelete in IPortalDeleteAssemblies)
+                {
+                    portalDelete.Delete(portal);
+                }
+            }
         }
         private static void DownloadTemplate(string SiteTemplateHash, string SiteTemplatePath, string path)
         {

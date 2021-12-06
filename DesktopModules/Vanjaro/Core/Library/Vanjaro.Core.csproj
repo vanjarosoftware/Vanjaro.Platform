@@ -72,6 +72,7 @@
     <Compile Include="Entities\Editor\EditorOptions.cs" />
     <Compile Include="Entities\ExportTemplate.cs" />
     <Compile Include="Entities\Interface\IBlock.cs" />
+    <Compile Include="Entities\Interface\IPortalDelete.cs" />
     <Compile Include="Entities\Interface\IThemeEditor.cs" />
     <Compile Include="Entities\Layout.cs" />
     <Compile Include="Entities\Menu\Block.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Managers\ExceptionManager.cs" />
     <Compile Include="Managers\SectionPermissionManager.cs" />
     <Compile Include="Managers\SignatureManager.cs" />
+    <Compile Include="Managers\SiteManager.cs" />
     <Compile Include="Packager\Vanjaro\Install\Upgrade.aspx.cs">
       <DependentUpon>Upgrade.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
