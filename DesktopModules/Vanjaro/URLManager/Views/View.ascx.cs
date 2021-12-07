@@ -31,7 +31,11 @@ namespace Vanjaro.URL.Views
         {
             get
             {
+#if DEBUG
                 return true;
+#else
+                return false;
+#endif
             }
         }
         public override string[] Dependencies
