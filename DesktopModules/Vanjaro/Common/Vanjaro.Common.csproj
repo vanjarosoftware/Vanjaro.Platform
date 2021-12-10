@@ -4624,8 +4624,8 @@
     <Content Include="Frameworks\JQuery\Plugins\Mark\8.9.1\js\jquery.mark.min.js" />
     <Content Include="Frameworks\JQuery\Plugins\Mark\8.9.1\js\mark.es6.js" />
     <Content Include="Frameworks\JQuery\Plugins\Mark\8.9.1\js\mark.es6.min.js" />
-    <Content Include="Frameworks\JQuery\Plugins\Moment\2.18.1\moment.js" />
-    <Content Include="Frameworks\JQuery\Plugins\Moment\2.18.1\moment.min.js" />
+    <Content Include="Frameworks\JQuery\Plugins\Moment\2.29.0\moment.js" />
+    <Content Include="Frameworks\JQuery\Plugins\Moment\2.29.0\moment.min.js" />
     <Content Include="Frameworks\JQuery\Plugins\Notify\notify.min.js" />
     <Content Include="Frameworks\JQuery\Plugins\Numeral\2.0.6\js\numeral.js" />
     <Content Include="Frameworks\JQuery\Plugins\Numeral\2.0.6\js\numeral.min.js" />
