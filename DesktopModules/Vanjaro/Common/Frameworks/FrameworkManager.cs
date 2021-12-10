@@ -30,7 +30,7 @@ namespace Vanjaro.Common
             {"ColorPicker","" },
             {"ValidationJS","1.14.0"},
             {"jQueryAutocomplete","1.0.7"},
-            {"jQueryMoment","2.18.1"},
+            {"jQueryMoment","2.29.0"},
             {"jQuerySweetAlert","1.1.3"},
             {"Mark","8.9.1"},
             {"Numeral","2.0.6"},
