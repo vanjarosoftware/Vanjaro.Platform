@@ -40,10 +40,11 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Managers
             {
                 foreach (INotificationTask Task in NotificationTask)
                 {
-
                     if (Task.Hierarchy.NotificationCount > 0)
                     {
-                        sb.Append("<li><a onclick=\"parent.OpenPopUp('',600,'right','" + Localization.GetString("Review", Components.Constants.LocalResourcesFile) + "','" + Task.Hierarchy.URL + "')\"><span class='notificationname'>" + Task.Hierarchy.NotificationName + "</span><span class='badge badge-error errorcount'>" + Task.Hierarchy.NotificationCount + "</span></a></li>");
+                        int Width = Task.Hierarchy.Width ?? 600;
+                        string Title = Task.Hierarchy.Title ?? Localization.GetString("Review", Components.Constants.LocalResourcesFile);
+                        sb.Append("<li><a onclick=\"parent.OpenPopUp(''," + Width + ",'right','" + Title + "','" + Task.Hierarchy.URL + "')\"><span class='notificationname'>" + Task.Hierarchy.NotificationName + "</span><span class='badge badge-error errorcount'>" + Task.Hierarchy.NotificationCount + "</span></a></li>");
                     }
                 }
             }
