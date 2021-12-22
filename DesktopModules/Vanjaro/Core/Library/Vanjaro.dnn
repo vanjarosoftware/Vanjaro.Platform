@@ -1200,7 +1200,7 @@
 				<attributes>
 					<businessControllerClass>Vanjaro.Core.Components.BusinessController, Vanjaro.Core</businessControllerClass>
 					<desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-					<upgradeVersionsList>01.00.00,01.00.01,01.00.02,01.00.05,01.01.00,01.02.01</upgradeVersionsList>
+					<upgradeVersionsList>01.00.00,01.00.01,01.00.02,01.00.05,01.01.00,01.02.00</upgradeVersionsList>
 				</attributes>
 			</eventMessage>
 		</package>
