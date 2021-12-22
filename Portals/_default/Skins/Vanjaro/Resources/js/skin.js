@@ -174,10 +174,8 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     else
         modalstyle += '"';
 
-    if (typeof closebtn != 'undefined' && !closebtn) {
-        $modal.find(".btn-close").hide();
+    if (typeof closebtn != 'undefined' && !closebtn)
         keyboard = false;
-    }
 
     var modal = `<div id="` + id + `"  class="uxmanager-modal modal fade ` + fullwidth + `" data-bs-backdrop="static" data-bs-keyboard="` + keyboard + `" tabindex="-1" ` + edit + ` role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
         <div class="modal-dialog` + modalclass + `"` + modalstyle + `>
@@ -209,6 +207,9 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
             $iframe.show();
         });
     }
+
+    if (typeof closebtn != 'undefined' && !closebtn)
+        $modal.find(".btn-close").hide();
 
     if (position == 'right' && showtogglebtn) {
 
