@@ -700,17 +700,24 @@ $(window).resize(function () {
 
 var vj_recaptcha_responsetoken = "";
 
-function validateCaptcha(el, action, callback, input) {
+function validateCaptcha(el, callback, input) {
     if (typeof grecaptcha !== "undefined") {
         var sitekey = $('#vjrecaptcha').data('sitekey');
-        grecaptcha.ready(function () {
-            grecaptcha.execute(sitekey, { action: action }).then(function (token) {
-                vj_recaptcha_responsetoken = token;
-                $(input).val(token);
+        var elementHFUniqueId = 'vCaptchaResponse';
+        var element = document.getElementById(elementHFUniqueId);
+        if (element !== null)
+            element.remove();
+        jQuery("<div id=\"" + elementHFUniqueId + "\" name=\"" + elementHFUniqueId + "\"></div>").insertBefore(el);
+        var googleRecaptchaId = grecaptcha.render(elementHFUniqueId, {
+            'sitekey': sitekey, size: 'invisible', badge: 'bottomright', 'callback': function (response) {
+                vj_recaptcha_responsetoken = response;
+                $(input).val(response);
                 callback(el);
-            });
+            }
         });
-    } else {
+        grecaptcha.execute(googleRecaptchaId);
+    }
+    else {
         callback(el);
     }
 }
