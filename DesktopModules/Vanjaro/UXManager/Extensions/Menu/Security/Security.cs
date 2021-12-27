@@ -56,7 +56,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security
         public string UIEngineAngularBootstrapPath => "~/DesktopModules/Vanjaro/UXManager/Extensions/Menu/" + ExtensionInfo.Name + "/Resources/UIEngine/AngularBootstrap";
 
         public string[] Dependencies => new string[] {
-                    Frameworks.jQueryUI.ToString(),
                     JavaScriptPlugins.ValidationJS.ToString(),
                     "Bootstrap"
                    };

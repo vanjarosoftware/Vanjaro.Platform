@@ -34,7 +34,6 @@ namespace Vanjaro.Core.Extensions.Workflow.Review
 
         public string[] Dependencies => new string[] {
                     JavaScriptPlugins.ValidationJS.ToString(),
-                    Frameworks.jQueryUI.ToString(),
                     AngularPlugins.Grid.ToString(),
                     AngularPlugins.AutoComplete.ToString(),
                     "Bootstrap"
