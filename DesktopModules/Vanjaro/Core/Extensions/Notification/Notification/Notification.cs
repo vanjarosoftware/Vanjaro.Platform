@@ -28,7 +28,6 @@ namespace Vanjaro.Core.Extensions.Notification.Notification
 
         public string[] Dependencies => new string[] {
                     JavaScriptPlugins.ValidationJS.ToString(),
-                    Frameworks.jQueryUI.ToString(),
                     AngularPlugins.Grid.ToString(),
                     AngularPlugins.AutoComplete.ToString(),
                     "Bootstrap"

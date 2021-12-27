@@ -247,24 +247,26 @@ namespace Vanjaro.Core
             }
             private static bool CheckPermissionsWithPermissionKey(int EntityID, string PermissionKey, string PermissionCode)
             {
-                PermissionController permissionController = new PermissionController();
-                ArrayList arrPermissions = permissionController.GetPermissionByCodeAndKey(PermissionCode, PermissionKey);
-                if (arrPermissions.Count > 0)
+                UserInfo userInfo = UserController.Instance.GetCurrentUserInfo();
+                string CacheKey = CacheFactory.GetCacheKey(CacheFactory.Keys.SectionPermission + "CheckPermissionsWithPermissionKey", EntityID, PermissionKey, PermissionCode, userInfo.UserID);
+                string result = CacheFactory.Get(CacheKey);
+                if (string.IsNullOrEmpty(result))
                 {
-                    PermissionInfo pInfo = arrPermissions[0] as PermissionInfo;
-                    if (pInfo != null)
+                    PermissionController permissionController = new PermissionController();
+                    ArrayList arrPermissions = permissionController.GetPermissionByCodeAndKey(PermissionCode, PermissionKey);
+                    if (arrPermissions.Count > 0)
                     {
-                        return CheckPermissions(EntityID, UserController.Instance.GetCurrentUserInfo());
+                        PermissionInfo pInfo = arrPermissions[0] as PermissionInfo;
+                        if (pInfo != null)
+                            result = CheckPermissions(EntityID, userInfo).ToString();
+                        else
+                            result = "false";
                     }
                     else
-                    {
-                        return false;
-                    }
+                        result = "false";
+                    CacheFactory.Set(CacheKey, result);
                 }
-                else
-                {
-                    return false;
-                }
+                return bool.Parse(result);
             }
             private static bool CheckPermissions(int EntityID, UserInfo userInfo)
             {

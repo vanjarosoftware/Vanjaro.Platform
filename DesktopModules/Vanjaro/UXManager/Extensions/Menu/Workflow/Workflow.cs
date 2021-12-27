@@ -51,7 +51,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Workflow
 
         public string[] Dependencies => new string[] {
                     JavaScriptPlugins.ValidationJS.ToString(),
-                    Frameworks.jQueryUI.ToString(),
                     AngularPlugins.Grid.ToString(),
                     AngularPlugins.AutoComplete.ToString(),
                     "Bootstrap"

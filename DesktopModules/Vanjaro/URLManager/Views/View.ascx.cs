@@ -43,7 +43,6 @@ namespace Vanjaro.URL.Views
             get
             {
                 return new string[] {
-                    Frameworks.jQueryUI.ToString(),
                     Frameworks.FontAwesome.ToString()
                 };
             }

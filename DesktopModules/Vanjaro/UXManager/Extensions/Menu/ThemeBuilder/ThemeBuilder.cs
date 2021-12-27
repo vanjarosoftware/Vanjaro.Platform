@@ -27,7 +27,6 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder
         public string UIEngineAngularBootstrapPath => "~/DesktopModules/Vanjaro/UXManager/Extensions/Menu/" + ThemeBuilderInfo.Name + "/Resources/UIEngine/AngularBootstrap";
 
         public string[] Dependencies => new string[] {
-                    Frameworks.jQueryUI.ToString(),
                     AngularPlugins.Grid.ToString(),
                     JavaScriptPlugins.ValidationJS.ToString(),
                     JavaScriptPlugins.CodeMirror.ToString(),
