@@ -66,7 +66,7 @@
                     </div>
                 }
                 <div class="registered text-@Model.Register.ButtonAlign">
-                    <a id="registerbtn" onclick="validateCaptcha(this, 'signup', function (el) { Register.User('Register') })" attr-localize-register-text="[LS:Data.Block.Register.RegisterText]" class="btn btn-primary @Model.Register.ButtonAlign">
+                    <a id="registerbtn" onclick="validateCaptcha(this, function (el) { Register.User('Register') })" attr-localize-register-text="[LS:Data.Block.Register.RegisterText]" class="btn btn-primary @Model.Register.ButtonAlign">
                         [LS:Data.Block.Register.RegisterText]
                     </a>
                 </div>

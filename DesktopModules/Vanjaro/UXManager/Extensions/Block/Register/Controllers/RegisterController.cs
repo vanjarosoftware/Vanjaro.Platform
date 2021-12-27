@@ -51,7 +51,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register.Controllers
         {
             ActionResult actionResult = new ActionResult();
 
-            if (Core.Services.Captcha.Validate("signup"))
+            if (Core.Services.Captcha.Validate())
             {
                 try
                 {
