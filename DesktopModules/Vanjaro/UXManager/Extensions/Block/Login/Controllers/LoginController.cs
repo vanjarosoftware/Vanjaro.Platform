@@ -53,7 +53,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
         {
             ActionResult actionResult = new ActionResult();
 
-            if (Core.Services.Captcha.Validate("login"))
+            if (Core.Services.Captcha.Validate())
             {
 
                 dynamic eventArgs = Core.Managers.LoginManager.UserLogin(userLogin);
@@ -85,7 +85,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Login.Controllers
         {
             ActionResult actionResult = new ActionResult();
 
-            if (Core.Services.Captcha.Validate("resetpassword"))
+            if (Core.Services.Captcha.Validate())
             {
                 actionResult = Managers.LoginManager.OnSendPasswordClick(Email);
             }
