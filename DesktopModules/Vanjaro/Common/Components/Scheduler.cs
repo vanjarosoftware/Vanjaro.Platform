@@ -85,7 +85,7 @@ namespace Vanjaro.Common.Components
                                     {
                                         NotificationFactory.SendMail(client, mail);
                                         mail.Delete();
-                                        NotificationFactory.Log(new MailQueue_Log { PortalID = mail.PortalID, Subject = mail.Subject, ToEmail = mail.ToEmail });
+                                        NotificationFactory.Log(new MailQueue_Log { PortalID = mail.PortalID, Subject = mail.Subject, ToEmail = mail.ToEmail, LogType = 1 });
                                     }
                                     catch (Exception ex)
                                     {

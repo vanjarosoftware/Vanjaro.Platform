@@ -6,7 +6,7 @@
 // 
 //     Connection String Name: `SiteSqlServer`
 //     Provider:               `System.Data.SqlClient`
-//     Connection String:      `Data Source=(local)\SQL2017;Initial Catalog=vanjaroplatform;User ID=sa;Password=20hybridSQL10`
+//     Connection String:      `Data Source=DESKTOP-3BFKHB8\MSSQLSERVER2017;Initial Catalog=dev_vanjaro_local;User ID=sa;Password=20hybridSQL10`
 //     Schema:                 ``
 //     Include Views:          `False`
 
@@ -20,19 +20,6 @@ namespace Vanjaro.Common.Data.Entities
 {
 	
 
-    
-	[TableName("VJ_Common_MailQueue_Log")]
-	[PrimaryKey("LogID")]
-	[ExplicitColumns]
-    public partial class MailQueue_Log : CommonLibraryRepo.Record<MailQueue_Log>  
-    {
-		[Column] public int LogID { get; set; }
-		[Column] public int PortalID { get; set; }
-		[Column] public DateTime CreatedOn { get; set; }
-		[Column] public string ToEmail { get; set; }
-		[Column] public string Subject { get; set; }
-		[Column] public string LogType { get; set; }
-	}
     
 	[TableName("VJ_Common_MailQueue")]
 	[PrimaryKey("MailQueueID")]
@@ -53,6 +40,19 @@ namespace Vanjaro.Common.Data.Entities
 		[Column] public string Status { get; set; }
 		[Column] public DateTime? RetryDateTime { get; set; }
 		[Column] public int RetryAttempt { get; set; }
+	}
+    
+	[TableName("VJ_Common_MailQueue_Log")]
+	[PrimaryKey("LogID")]
+	[ExplicitColumns]
+    public partial class MailQueue_Log : CommonLibraryRepo.Record<MailQueue_Log>  
+    {
+		[Column] public int LogID { get; set; }
+		[Column] public int PortalID { get; set; }
+		[Column] public DateTime CreatedOn { get; set; }
+		[Column] public string ToEmail { get; set; }
+		[Column] public string Subject { get; set; }
+		[Column] public int LogType { get; set; }
 	}
     
 	[TableName("VJ_Common_HTMLEditor")]
