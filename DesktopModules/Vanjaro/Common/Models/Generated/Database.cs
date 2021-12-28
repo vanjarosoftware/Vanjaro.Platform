@@ -11,79 +11,83 @@
 //     Include Views:          `False`
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using Vanjaro.Common.PetaPoco;
 
 namespace Vanjaro.Common.Data.Entities
 {
+	
 
-
-
-    [TableName("VJ_Common_MailQueue")]
-    [PrimaryKey("MailQueueID")]
-    [ExplicitColumns]
-    public partial class MailQueue : CommonLibraryRepo.Record<MailQueue>
+    
+	[TableName("VJ_Common_MailQueue_Log")]
+	[PrimaryKey("LogID")]
+	[ExplicitColumns]
+    public partial class MailQueue_Log : CommonLibraryRepo.Record<MailQueue_Log>  
     {
-        [Column] public int MailQueueID { get; set; }
-        [Column] public int PortalID { get; set; }
-        [Column] public string ToEmail { get; set; }
-        [Column] public string Subject { get; set; }
-        [Column] public string Content { get; set; }
-        [Column] public string FromName { get; set; }
-        [Column] public string FromEmail { get; set; }
-        [Column] public string ReplyEmail { get; set; }
-        [Column] public int? SmtpUniqueId { get; set; }
-        [Column] public int ModuleID { get; set; }
-        [Column] public string Attachment { get; set; }
-        [Column] public string Status { get; set; }
-        [Column] public DateTime? RetryDateTime { get; set; }
-        [Column] public int RetryAttempt { get; set; }
-    }
-
-    [TableName("VJ_Common_Setting")]
-    [PrimaryKey("SettingID")]
-    [ExplicitColumns]
-    public partial class Setting : CommonLibraryRepo.Record<Setting>
+		[Column] public int LogID { get; set; }
+		[Column] public int PortalID { get; set; }
+		[Column] public DateTime CreatedOn { get; set; }
+		[Column] public string ToEmail { get; set; }
+		[Column] public string Subject { get; set; }
+		[Column] public string LogType { get; set; }
+	}
+    
+	[TableName("VJ_Common_MailQueue")]
+	[PrimaryKey("MailQueueID")]
+	[ExplicitColumns]
+    public partial class MailQueue : CommonLibraryRepo.Record<MailQueue>  
     {
-        [Column] public int SettingID { get; set; }
-        [Column] public int ModuleID { get; set; }
-        [Column] public string Identifier { get; set; }
-        [Column] public string Name { get; set; }
-        [Column] public string Value { get; set; }
-    }
-
-    [TableName("VJ_Common_HTMLEditor")]
-    [PrimaryKey("ID")]
-    [ExplicitColumns]
-    public partial class HTMLEditor : CommonLibraryRepo.Record<HTMLEditor>
+		[Column] public int MailQueueID { get; set; }
+		[Column] public int PortalID { get; set; }
+		[Column] public string ToEmail { get; set; }
+		[Column] public string Subject { get; set; }
+		[Column] public string Content { get; set; }
+		[Column] public string FromName { get; set; }
+		[Column] public string FromEmail { get; set; }
+		[Column] public string ReplyEmail { get; set; }
+		[Column] public int? SmtpUniqueId { get; set; }
+		[Column] public int ModuleID { get; set; }
+		[Column] public string Attachment { get; set; }
+		[Column] public string Status { get; set; }
+		[Column] public DateTime? RetryDateTime { get; set; }
+		[Column] public int RetryAttempt { get; set; }
+	}
+    
+	[TableName("VJ_Common_HTMLEditor")]
+	[PrimaryKey("ID")]
+	[ExplicitColumns]
+    public partial class HTMLEditor : CommonLibraryRepo.Record<HTMLEditor>  
     {
-        [Column] public int ID { get; set; }
-        [Column] public string UID { get; set; }
-        [Column] public int ProfileID { get; set; }
-        [Column] public string Settings { get; set; }
-        [Column] public int? PortalID { get; set; }
-        [Column] public int? TabID { get; set; }
-    }
-
-    [TableName("VJ_Common_HTMLEditor_Profile")]
-    [PrimaryKey("ProfileID")]
-    [ExplicitColumns]
-    public partial class HTMLEditor_Profile : CommonLibraryRepo.Record<HTMLEditor_Profile>
+		[Column] public int ID { get; set; }
+		[Column] public string UID { get; set; }
+		[Column] public int ProfileID { get; set; }
+		[Column] public string Settings { get; set; }
+		[Column] public int? PortalID { get; set; }
+		[Column] public int? TabID { get; set; }
+	}
+    
+	[TableName("VJ_Common_HTMLEditor_Profile")]
+	[PrimaryKey("ProfileID")]
+	[ExplicitColumns]
+    public partial class HTMLEditor_Profile : CommonLibraryRepo.Record<HTMLEditor_Profile>  
     {
-        [Column] public int ProfileID { get; set; }
-        [Column] public int PortalID { get; set; }
-        [Column] public string Name { get; set; }
-        [Column] public string Value { get; set; }
-    }
-
-    [TableName("VJ_Common_MailQueue_Log")]
-    [PrimaryKey("LogID")]
-    [ExplicitColumns]
-    public partial class MailQueue_Log : CommonLibraryRepo.Record<MailQueue_Log>
+		[Column] public int ProfileID { get; set; }
+		[Column] public int PortalID { get; set; }
+		[Column] public string Name { get; set; }
+		[Column] public string Value { get; set; }
+	}
+    
+	[TableName("VJ_Common_Setting")]
+	[PrimaryKey("SettingID")]
+	[ExplicitColumns]
+    public partial class Setting : CommonLibraryRepo.Record<Setting>  
     {
-        [Column] public int LogID { get; set; }
-        [Column] public int PortalID { get; set; }
-        [Column] public DateTime CreatedOn { get; set; }
-        [Column] public string ToEmail { get; set; }
-        [Column] public string Subject { get; set; }
-    }
+		[Column] public int SettingID { get; set; }
+		[Column] public int ModuleID { get; set; }
+		[Column] public string Identifier { get; set; }
+		[Column] public string Name { get; set; }
+		[Column] public string Value { get; set; }
+	}
 }
