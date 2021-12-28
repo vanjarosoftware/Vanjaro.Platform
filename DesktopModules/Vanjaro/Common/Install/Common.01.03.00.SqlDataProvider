@@ -1,0 +1,7 @@
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='VJ_Common_MailQueue_Log' and COLUMN_NAME='LogType')
+BEGIN
+ALTER TABLE {databaseOwner}[VJ_Common_MailQueue_Log] ADD
+ [LogType] [int] NOT NULL
+ CONSTRAINT [DF_VJ_Common_MailQueue_Log_LogType] DEFAULT 1 WITH VALUES
+END
+GO
