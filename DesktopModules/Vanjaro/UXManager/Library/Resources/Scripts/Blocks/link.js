@@ -22,6 +22,7 @@
 			defaults: Object.assign({}, linkModel.prototype.defaults, {
 				droppable: '[data-gjs-type=section], [data-gjs-type=grid], [data-gjs-type=heading], [data-gjs-type=text], [data-gjs-type=icon-box], [data-gjs-type=list-box], [data-gjs-type=list], [data-gjs-type=spacer], [data-gjs-type=image-box], [data-gjs-type=divider], .image-link, .icon-link',
 				tagName: 'a',
+				'custom-name': 'Link Group',
 				attributes: { href: '#' },
 				text: true,
 				traits: [
