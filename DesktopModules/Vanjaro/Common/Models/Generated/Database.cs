@@ -6,7 +6,7 @@
 // 
 //     Connection String Name: `SiteSqlServer`
 //     Provider:               `System.Data.SqlClient`
-//     Connection String:      `Data Source=DESKTOP-3BFKHB8\MSSQLSERVER2017;Initial Catalog=dev_vanjaro_local;User ID=sa;Password=20hybridSQL10`
+//     Connection String:      `Data Source=(local)\SQL2017;Initial Catalog=vanjaroplatform;User ID=sa;Password=20hybridSQL10`
 //     Schema:                 ``
 //     Include Views:          `False`
 
