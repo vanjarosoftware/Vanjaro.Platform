@@ -18,7 +18,7 @@
                         delete attr.perm;
                         target.setAttributes(attr);
                     }
-                    else if (Response.data.Data > 0 && target.attributes.attributes.perm == undefined) {
+                    else if (Response.data.Data > 0 && (target.attributes.attributes.perm == undefined || (target.attributes.attributes.perm != undefined && target.attributes.attributes.perm != Response.data.Data))) {
                         target.addAttributes({ perm: Response.data.Data });
                         attrAdded = true;
                     }

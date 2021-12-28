@@ -57,7 +57,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Scheduler
         public string UIEngineAngularBootstrapPath => "~/DesktopModules/Vanjaro/UXManager/Extensions/Menu/" + ExtensionInfo.Name + "/Resources/UIEngine/AngularBootstrap";
 
         public string[] Dependencies => new string[] {
-                    Frameworks.jQueryUI.ToString(),
                     AngularPlugins.Grid.ToString(),
                     JavaScriptPlugins.ValidationJS.ToString(),
                     AngularPlugins.FileUpload.ToString(),

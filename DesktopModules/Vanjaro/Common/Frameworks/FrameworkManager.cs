@@ -339,7 +339,6 @@ namespace Vanjaro.Common
 
         public enum Frameworks
         {
-            jQueryUI = 0,
             FontAwesome = 1
         }
         public enum JavaScriptPlugins

@@ -8,6 +8,7 @@ using System.Web.Http;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.Core;
+using Vanjaro.Core.Data.Entities;
 using Vanjaro.UXManager.Library.Common;
 
 namespace Vanjaro.UXManager.Extensions.Apps.SectionSettings.Controllers
@@ -39,6 +40,10 @@ namespace Vanjaro.UXManager.Extensions.Apps.SectionSettings.Controllers
                 }
                 else
                 {
+                    BlockSection blockSection = Managers.SectionPermissionManager.GetBlockSection(EntityID);
+                    if (blockSection == null)
+                        EntityID = 0;
+
                     if (EntityID == 0 && !string.IsNullOrEmpty(Entity))
                         EntityID = Managers.SectionPermissionManager.AddBlockSection(PortalSettings.ActiveTab.TabID, Data.PermissionsInherit.Value);
                     else if (EntityID > 0)

@@ -27,16 +27,16 @@ namespace Vanjaro.Core.Services
                     Page page = HttpContext.Current.Handler as Page;
                     if (page != null)
                     {
-                        Common.ASPNET.WebForms.RegisterStartupScript(page, "vjrecaptcha", "<script type=\"text/javascript\" id=\"vjrecaptcha\" data-sitekey=" + GetSiteKey() + " src=\"https://www.google.com/recaptcha/api.js?render=" + GetSiteKey() + "\"></script>", false);
+                        Common.ASPNET.WebForms.RegisterStartupScript(page, "vjrecaptcha", "<script type=\"text/javascript\" id=\"vjrecaptcha\" data-sitekey=" + GetSiteKey() + " src=\"https://www.google.com/recaptcha/api.js?render=" + GetSiteKey() + "\"></script>", false);                      
                     }
                 }
             }
         }
-        public static bool Validate(string action, decimal minimumScore = 0.5m)
+        public static bool Validate()
         {
-            return Validate(action, null, minimumScore);
+            return Validate(null);
         }
-        public static bool Validate(string action, string token, decimal minimumScore = 0.5m)
+        public static bool Validate(string token)
         {
             if (IsEnabled())
             {
@@ -46,6 +46,9 @@ namespace Vanjaro.Core.Services
 
                     if (token == null)
                         token = HttpContext.Current.Request.Headers["vj-recaptcha"];
+
+                    if (string.IsNullOrEmpty(token))
+                        return false;
 
                     HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=" + GetSecretKey() + "&response=" + token);
                     try
@@ -59,11 +62,14 @@ namespace Vanjaro.Core.Services
 
                                 JavaScriptSerializer js = new JavaScriptSerializer();
                                 CaptchaResponse res = js.Deserialize<CaptchaResponse>(jsonResponse);
-                                if (HttpContext.Current.Request.Url.Host.ToLower() == res.hostname.ToLower() && action.ToLower() == res.action.ToLower() && minimumScore < res.score)
-                                    return res.success;
 
+                                return res.success;
                             }
                         }
+                    }
+                    catch (WebException webex)
+                    {
+                        ExceptionManager.LogException(webex);
                     }
                     catch (Exception ex)
                     {
