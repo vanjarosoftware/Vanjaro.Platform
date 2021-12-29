@@ -91,8 +91,6 @@ namespace Vanjaro.Common.Foundation
             //Request jQuery & UI Support
             JavaScript.RequestRegistration(CommonJs.jQuery);
 
-            WebForms.RegisterClientScriptInclude(Page, "DNNModal", Page.ResolveUrl("js/dnn.modalpopup.js"));
-
             //Load Angular JS
             FrameworkManager.Load(this, "AngularJS");
 

@@ -150,6 +150,13 @@ namespace Vanjaro.Common.ASPNET
 
         public static void RegisterClientScriptInclude(Page Page, string ID, string URL, bool Composite, string Provider, Execution execution = Execution.none)
         {
+            bool result = RegisterClientScriptInclude(Page, ID, URL, Composite, "DnnPageHeaderProvider", jsPriority, execution);
+            if (result)
+                jsPriority++;
+        }
+
+        public static bool RegisterClientScriptInclude(Page Page, string ID, string URL, bool Composite, string Provider, int Priority, Execution execution = Execution.none)
+        {
             if (Composite)
             {
                 string relativeURL = string.Empty;
@@ -176,14 +183,13 @@ namespace Vanjaro.Common.ASPNET
                             HtmlAttribute = "defer:defer";
                             break;
                     }
-                    var include = new DnnJsInclude { ForceProvider = Provider, Priority = jsPriority, FilePath = relativeURL, Name = string.Empty, Version = string.Empty, HtmlAttributesAsString = HtmlAttribute };
+                    var include = new DnnJsInclude { ForceProvider = Provider, Priority = Priority, FilePath = relativeURL, Name = string.Empty, Version = string.Empty, HtmlAttributesAsString = HtmlAttribute };
                     var loader = Page.FindControl("ClientResourceIncludes");
                     if (loader != null)
                     {
                         loader.Controls.Add(include);
                     }
-                    jsPriority++;
-                    return;
+                    return true;
                 }
             }
 
@@ -214,6 +220,7 @@ namespace Vanjaro.Common.ASPNET
                 };
                 Page.Header.Controls.Add(lit);
             }
+            return false;
         }
         public static void RegisterStartupScriptInclude(Page Page, string ID, string URL, Execution execution = Execution.none)
         {

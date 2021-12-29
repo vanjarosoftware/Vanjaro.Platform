@@ -153,8 +153,8 @@ namespace Vanjaro.Skin
                 //VjDefaultPath used in Skin.js for loading icon.
                 if (PageManager.InjectEditor(PortalSettings))
                     WebForms.RegisterClientScriptBlock(Page, "DefaultPath", "var VjThemePath='" + Page.ResolveUrl("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name) + "'; var VjDefaultPath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/") + "'; var VjSitePath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/") + "';", true);
-                ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/js/skin.js"), 2, "DnnFormBottomProvider");
-                WebForms.RegisterClientScriptInclude(Page, "VJ-Bootstrap-JS", FrameworkManager.Request("Bootstrap", "js/bootstrap.bundle.min.js"), true, "DnnBodyProvider");
+                WebForms.RegisterClientScriptInclude(Page, "VJ-Skin-JS", Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/js/skin.js"), true, "DnnFormBottomProvider", 2, WebForms.Execution.defer);
+                WebForms.RegisterClientScriptInclude(Page, "VJ-Bootstrap-JS", FrameworkManager.Request("Bootstrap", "js/bootstrap.bundle.min.js"), true, "DnnBodyProvider", WebForms.Execution.defer);
             }
             else
             {
@@ -239,7 +239,7 @@ namespace Vanjaro.Skin
             if (string.IsNullOrEmpty(Request.QueryString["mid"]) || (!string.IsNullOrEmpty(Request.QueryString["icp"]) && bool.Parse(Request.QueryString["icp"]) && (!string.IsNullOrEmpty(Request.QueryString["mid"]) && Request.QueryString["mid"] != "0")))
             {
                 if (File.Exists(HttpContext.Current.Server.MapPath("~/Portals/" + PortalSettings.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/theme.editor.js")))
-                    ClientResourceManager.RegisterScript(Page, Page.ResolveUrl("~/Portals/" + PortalSettings.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/theme.editor.js"));
+                    WebForms.RegisterClientScriptInclude(Page, "ThemeEditorJs", Page.ResolveUrl("~/Portals/" + PortalSettings.PortalId + "/vThemes/" + ThemeManager.CurrentTheme.Name + "/theme.editor.js"), WebForms.Execution.defer);
 
                 if (!string.IsNullOrEmpty(ThemeManager.CurrentTheme.Assembly) && !string.IsNullOrEmpty(ThemeManager.CurrentTheme.ClientScript))
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "ThemeClientScript", "<script type=\"text/javascript\" src=\"" + Page.ClientScript.GetWebResourceUrl(Type.GetType(ThemeManager.CurrentTheme.Assembly), ThemeManager.CurrentTheme.ClientScript) + "\"></script>", false);
@@ -701,7 +701,7 @@ namespace Vanjaro.Skin
                             {
                                 if (!string.IsNullOrEmpty(script))
                                 {
-                                    WebForms.RegisterClientScriptInclude(Page, script, Page.ResolveUrl(script));
+                                    WebForms.RegisterClientScriptInclude(Page, script, Page.ResolveUrl(script), WebForms.Execution.defer);
                                 }
                             }
                         }
