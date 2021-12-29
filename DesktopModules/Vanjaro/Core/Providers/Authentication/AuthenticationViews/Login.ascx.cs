@@ -36,7 +36,7 @@ namespace Vanjaro.Core.Providers.Authentication
                         {
                             if (!string.IsNullOrEmpty(script))
                             {
-                                WebForms.RegisterClientScriptInclude(Page, script, Page.ResolveUrl(script));
+                                WebForms.RegisterClientScriptInclude(Page, script, Page.ResolveUrl(script), WebForms.Execution.defer);
                             }
                         }
                     }
