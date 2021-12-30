@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using Vanjaro.Core.Entities;
 using Vanjaro.Core.Entities.Interface;
+using Vanjaro.Core.Entities.Menu;
 using static Vanjaro.Core.Factories;
 using static Vanjaro.Core.Managers;
 
@@ -44,7 +45,12 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Managers
                     {
                         int Width = Task.Hierarchy.Width ?? 600;
                         string Title = Task.Hierarchy.Title ?? Localization.GetString("Review", Components.Constants.LocalResourcesFile);
-                        sb.Append("<li><a onclick=\"parent.OpenPopUp(''," + Width + ",'right','" + Title + "','" + Task.Hierarchy.URL + "')\"><span class='notificationname'>" + Task.Hierarchy.NotificationName + "</span><span class='badge badge-error errorcount'>" + Task.Hierarchy.NotificationCount + "</span></a></li>");
+                        string Position = "right";
+                        if (Task.Hierarchy.Event == MenuAction.FullScreen)
+                            Position = "center";
+                        else if (Task.Hierarchy.Event == MenuAction.CenterOverlay)
+                            Position = "center";
+                        sb.Append("<li><a onclick=\"parent.OpenPopUp(''," + Width + ",'" + Position + "','" + Title + "','" + Task.Hierarchy.URL + "')\"><span class='notificationname'>" + Task.Hierarchy.NotificationName + "</span><span class='badge badge - error errorcount'>" + Task.Hierarchy.NotificationCount + "</span></a></li>");
                     }
                 }
             }
