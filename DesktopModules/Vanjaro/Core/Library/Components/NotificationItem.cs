@@ -1,4 +1,6 @@
 ﻿
+using Vanjaro.Core.Entities.Menu;
+
 namespace Vanjaro.Core.Components
 {
     public class NotificationItem
@@ -9,5 +11,6 @@ namespace Vanjaro.Core.Components
         public string Title { get; set; }
         public string URL { get; set; }
         public int? Width { get; set; }
+        public MenuAction Event { get; set; }
     }
 }
