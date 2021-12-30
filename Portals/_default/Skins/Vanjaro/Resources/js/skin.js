@@ -699,7 +699,7 @@ $(window).resize(function () {
 
 var vj_recaptcha_responsetoken = "";
 
-function validateCaptcha(el, callback, input) {
+validateCaptcha = function(el, callback, input) {
     if (typeof grecaptcha !== "undefined") {
         var sitekey = $('#vjrecaptcha').data('sitekey');
         var elementHFUniqueId = 'vCaptchaResponse';

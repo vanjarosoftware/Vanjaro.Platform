@@ -70,6 +70,7 @@
     <Content Include="Resources\css\edit.css" />
     <Content Include="Resources\js\skin.js" />
     <Content Include="Resources\css\skin.css" />
+    <Content Include="Resources\js\skin.min.js" />
     <Content Include="skin.doctype.xml" />
   </ItemGroup>
   <ItemGroup>

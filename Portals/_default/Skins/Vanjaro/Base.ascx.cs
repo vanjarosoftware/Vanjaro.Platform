@@ -153,7 +153,7 @@ namespace Vanjaro.Skin
                 //VjDefaultPath used in Skin.js for loading icon.
                 if (PageManager.InjectEditor(PortalSettings))
                     WebForms.RegisterClientScriptBlock(Page, "DefaultPath", "var VjThemePath='" + Page.ResolveUrl("~/Portals/_default/vThemes/" + Core.Managers.ThemeManager.CurrentTheme.Name) + "'; var VjDefaultPath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/") + "'; var VjSitePath='" + Page.ResolveUrl("~/DesktopModules/Vanjaro/") + "';", true);
-                WebForms.RegisterClientScriptInclude(Page, "VJ-Skin-JS", Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/js/skin.js"), true, "DnnFormBottomProvider", 2, WebForms.Execution.defer);
+                WebForms.RegisterClientScriptInclude(Page, "VJ-Skin-JS", Page.ResolveUrl("~/Portals/_default/Skins/Vanjaro/Resources/js/skin.min.js"), true, "DnnFormBottomProvider", 2, WebForms.Execution.defer);
                 WebForms.RegisterClientScriptInclude(Page, "VJ-Bootstrap-JS", FrameworkManager.Request("Bootstrap", "js/bootstrap.bundle.min.js"), true, "DnnBodyProvider", WebForms.Execution.defer);
             }
             else
