@@ -6,6 +6,7 @@ using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Api.Internal;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -65,6 +66,9 @@ namespace Vanjaro.UXManager.Extensions.Block.Register.Controllers
                             {
                                 dynamic eventArgs = Core.Managers.LoginManager.UserLogin(new UserLogin() { Email = RegisterDetails.Email, Password = RegisterDetails.Password, Username = RegisterDetails.UserName });
                                 actionResult = Login.Managers.LoginManager.UserAuthenticated(eventArgs);
+                                IDictionary<string, object> dynObjects = new ExpandoObject() as IDictionary<string, object>;
+                                dynObjects.Add("RedirectURL", RegisterManager.GetRedirectUrl());
+                                actionResult.Data = dynObjects;
                             }
                         }
                         else
