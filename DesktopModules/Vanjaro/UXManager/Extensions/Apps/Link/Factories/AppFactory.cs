@@ -33,7 +33,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Link.Factories
 
         internal static AppInformation GetAppInformation()
         {
-            return new AppInformation(LinkInfo.Name, LinkInfo.FriendlyName, LinkInfo.GUID, GetRuntimeVersion, "http://www.mandeeps.com/store", "http://www.mandeeps.com/Activation", 14, 7, new List<string> { "Domain", "Server" }, false);
+            return new AppInformation(LinkInfo.Name, LinkInfo.FriendlyName, LinkInfo.GUID, GetRuntimeVersion, "", "", 14, 7, new List<string> { "Domain", "Server" }, false);
         }
 
         internal static string GetRuntimeVersion
