@@ -131,7 +131,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.Factories
 
         public static AppInformation GetAppInformation()
         {
-            return new AppInformation(ThemeBuilderInfo.Name, ThemeBuilderInfo.FriendlyName, ThemeBuilderInfo.GUID, GetRuntimeVersion, "http://www.mandeeps.com/store", "http://www.mandeeps.com/Activation", 14, 7, new List<string> { "Domain", "Server" }, false);
+            return new AppInformation(ThemeBuilderInfo.Name, ThemeBuilderInfo.FriendlyName, ThemeBuilderInfo.GUID, GetRuntimeVersion, "", "", 14, 7, new List<string> { "Domain", "Server" }, false);
         }
 
         public AppInformation AppInformation => GetAppInformation();

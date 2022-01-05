@@ -39,7 +39,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Block.Icon.Factories
 
         internal static AppInformation GetAppInformation()
         {
-            return new AppInformation(AppInfo.Name, AppInfo.FriendlyName, AppInfo.GUID, GetRuntimeVersion, "http://www.mandeeps.com/store", "http://www.mandeeps.com/Activation", 14, 7, new List<string> { "Domain", "Server" }, false);
+            return new AppInformation(AppInfo.Name, AppInfo.FriendlyName, AppInfo.GUID, GetRuntimeVersion, "", "", 14, 7, new List<string> { "Domain", "Server" }, false);
         }
 
         internal static string GetRuntimeVersion

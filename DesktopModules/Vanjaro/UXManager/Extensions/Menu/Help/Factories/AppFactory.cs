@@ -80,7 +80,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Help.Factories
 
         public static AppInformation GetAppInformation()
         {
-            return new AppInformation(ExtensionInfo.Name, ExtensionInfo.FriendlyName, ExtensionInfo.GUID, GetRuntimeVersion, "http://www.mandeeps.com/store", "http://www.mandeeps.com/Activation", 14, 7, new List<string> { "Domain", "Server" }, false);
+            return new AppInformation(ExtensionInfo.Name, ExtensionInfo.FriendlyName, ExtensionInfo.GUID, GetRuntimeVersion, "", "", 14, 7, new List<string> { "Domain", "Server" }, false);
         }
 
         public AppInformation AppInformation => GetAppInformation();

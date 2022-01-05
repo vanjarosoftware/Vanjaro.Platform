@@ -39,7 +39,7 @@ namespace Vanjaro.UXManager.Extensions.Toolbar.Redo.Factories
 
         public static AppInformation GetAppInformation()
         {
-            return new AppInformation("Redo", "Redo", ExtensionInfo.GUID, GetRuntimeVersion, "http://www.mandeeps.com/store", "http://www.mandeeps.com/Activation", 14, 7, new List<string> { "Domain", "Server" }, false);
+            return new AppInformation("Redo", "Redo", ExtensionInfo.GUID, GetRuntimeVersion, "", "", 14, 7, new List<string> { "Domain", "Server" }, false);
         }
 
         public static string GetRuntimeVersion

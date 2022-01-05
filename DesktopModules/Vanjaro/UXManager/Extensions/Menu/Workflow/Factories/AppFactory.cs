@@ -34,7 +34,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Workflow.Factories
 
         internal static AppInformation GetAppInformation()
         {
-            return new AppInformation(WorkflowInfo.Name, WorkflowInfo.FriendlyName, WorkflowInfo.GUID, GetRuntimeVersion, "http://www.mandeeps.com/store", "http://www.mandeeps.com/Activation", 14, 7, new List<string> { "Domain", "Server" }, false);
+            return new AppInformation(WorkflowInfo.Name, WorkflowInfo.FriendlyName, WorkflowInfo.GUID, GetRuntimeVersion, "", "", 14, 7, new List<string> { "Domain", "Server" }, false);
         }
         internal static string GetRuntimeVersion
         {
