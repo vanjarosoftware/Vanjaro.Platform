@@ -212,6 +212,7 @@ a, a:hover, a:focus, a:active {
 
 .modal .modal-dialog:not(.modal-right).fullheight {
     height: calc(100% - 3.50rem);
+    max-width: calc(100% - 3.5rem) !important;
 }
 
 .modal .modal-dialog.modal-right {
@@ -228,7 +229,7 @@ a, a:hover, a:focus, a:active {
 }
 
 .uxmanager-modal .modal-dialog {
-    max-width: 100% !important;
+    max-width: calc(100% - 1rem) !important;
 }
 
 
