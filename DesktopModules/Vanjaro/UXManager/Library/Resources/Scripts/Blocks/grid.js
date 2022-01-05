@@ -485,22 +485,22 @@ export default (editor, config = {}) => {
 	<div class="container-fluid pt-3 pb-3">
 		<div class="row text-center">
 			<div class="col-sm-2">
-				<a onclick="SingleClick([{'size': '3'}, {'size': '9'}])" ondblclick="DoubleClick([{'size': '3'}, {'size': '9'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-3.9.png">
+				<a onclick="SingleClick([{'size': '3'}, {'size': '9'}])" ondblclick="DoubleClick([{'size': '3'}, {'size': '9'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-4.8.png">
+				    <h5>25% + 75%</h5>
+                </a>
+			</div>
+            <div class="col-sm-2">
+				<a onclick="SingleClick([{'size': '4'}, {'size': '8'}])" ondblclick="DoubleClick([{'size': '4'}, {'size': '8'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-3.9.png">
 				    <h5>33% + 67%</h5>
                 </a>    
 			</div>
 			<div class="col-sm-2">
-				<a onclick="SingleClick([{'size': '4'}, {'size': '8'}])" ondblclick="DoubleClick([{'size': '4'}, {'size': '8'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-4.8.png">
-				    <h5>25% + 75%</h5>
-                </a>
-			</div>
-			<div class="col-sm-2">
-				<a onclick="SingleClick([{'size': '9'}, {'size': '3'}])" ondblclick="DoubleClick([{'size': '9'}, {'size': '3'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-9.3.png">
+				<a onclick="SingleClick([{'size': '8'}, {'size': '4'}])" ondblclick="DoubleClick([{'size': '8'}, {'size': '4'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-9.3.png">
 				    <h5>67% + 33%</h5>
                 </a>
 			</div>
 			<div class="col-sm-2">
-				<a onclick="SingleClick([{'size': '8'}, {'size': '4'}])" ondblclick="DoubleClick([{'size': '8'}, {'size': '4'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-8.4.png">
+				<a onclick="SingleClick([{'size': '9'}, {'size': '3'}])" ondblclick="DoubleClick([{'size': '9'}, {'size': '3'}])"><img class="img-responsive" src="`+ VjDefaultPath + `col-8.4.png">
 				    <h5>75% + 25%</h5>
                 </a>
 			</div>
