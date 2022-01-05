@@ -1066,7 +1066,7 @@ div#MenuSettings .parent-menu-hide {
 
 /*Style Manager*/
 .uxmanager-modal .modal-dialog {
-    max-width: 100% !important;
+    max-width: calc(100% - 1rem) !important;
 }
 
 #layer-manager {
