@@ -7,7 +7,8 @@
             {
                 Username: $(EventTarget).closest('#ResetPassword').find('input.Username').val(),
                 Password: $(EventTarget).closest('#ResetPassword').find('input.newPassword').val(),
-                ConfirmPassword: $(EventTarget).closest('#ResetPassword').find('input.confirmPassword').val()
+                ConfirmPassword: $(EventTarget).closest('#ResetPassword').find('input.confirmPassword').val(),
+                ResetToken: parent.GetParameterByName("resettoken", location.href) ?? null
             };
             $(obj).closest('.ResetPassword').find('.show-message').remove();
             var resetText = $($(obj).closest('.ResetPassword').find('#btnChangePassword')).attr('attr-localize-resetPassword-text');
