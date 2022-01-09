@@ -921,4 +921,8 @@ div.ui-dialog-titlebar > .ui-dialog-titlebar-close {
         --bs-aspect-ratio: calc(9 / 16 * 100%);
         position: relative;
     }
+
+    .modal .modal-dialog:not(.modal-right).fullheight {
+        height: auto;
+    }
 }
