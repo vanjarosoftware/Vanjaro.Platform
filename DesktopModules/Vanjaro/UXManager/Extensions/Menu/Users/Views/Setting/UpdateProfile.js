@@ -42,6 +42,10 @@
                         else
                             value.ProfilePropertyDefinition.PropertyValue = false;
                     }
+                    if (value.ControlType == "Integer") {
+                        if (typeof value.ProfilePropertyDefinition.PropertyValue != 'undefined' && value.ProfilePropertyDefinition.PropertyValue != null)
+                            value.ProfilePropertyDefinition.PropertyValue = parseInt(value.ProfilePropertyDefinition.PropertyValue);
+                    }
                 });
                 $(window.parent.document.body).find(".Gravitar").css('display', 'block')
                 if (data.data.Message != null && data.data.Message != '')
