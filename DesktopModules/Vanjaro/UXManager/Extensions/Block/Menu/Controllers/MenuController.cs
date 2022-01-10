@@ -55,7 +55,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Menu.Controllers
 
         private static List<StringText> GetPages()
         {
-            return Library.Managers.PageManager.GetParentPages(PortalSettings.Current).Where(p => p.TabID != -1).Select(a => new StringText() { Value = a.TabID.ToString(), Text = a.TabName }).ToList();
+            return Library.Managers.PageManager.GetParentPages(PortalSettings.Current, true).Where(p => p.TabID != -1).Select(a => new StringText() { Value = a.TabID.ToString(), Text = a.TabName }).ToList();
         }
 
         private static List<StringText> GetTemplates()
