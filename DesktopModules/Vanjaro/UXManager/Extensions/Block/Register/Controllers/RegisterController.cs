@@ -66,9 +66,8 @@ namespace Vanjaro.UXManager.Extensions.Block.Register.Controllers
                             {
                                 dynamic eventArgs = Core.Managers.LoginManager.UserLogin(new UserLogin() { Email = RegisterDetails.Email, Password = RegisterDetails.Password, Username = RegisterDetails.UserName });
                                 actionResult = Login.Managers.LoginManager.UserAuthenticated(eventArgs);
-                                IDictionary<string, object> dynObjects = new ExpandoObject() as IDictionary<string, object>;
-                                dynObjects.Add("RedirectURL", RegisterManager.GetRedirectUrl());
-                                actionResult.Data = dynObjects;
+                                if (actionResult.IsSuccess)
+                                    actionResult.Data = new { RedirectURL = RegisterManager.GetRedirectUrl() };
                             }
                         }
                         else
