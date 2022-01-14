@@ -127,7 +127,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users
                 switch (property.DefaultVisibility)
                 {
                     case UserVisibilityMode.AllUsers:
-                        isVisible = true;
+                        isVisible = property.Visible;
                         // property is visible to everyone so do nothing
                         break;
                     case UserVisibilityMode.MembersOnly:
