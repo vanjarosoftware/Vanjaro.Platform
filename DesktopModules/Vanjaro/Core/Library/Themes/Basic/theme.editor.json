@@ -1243,7 +1243,7 @@
           "Type": "Dropdown"
         }
       ],
-      "Sass": ""
+      "Sass": "b a{\n font-weight: bolder !important; \n}"
     },
     {
       "Guid": "1f7fdedf-134f-4f50-b769-eab4bf65fb4f",
