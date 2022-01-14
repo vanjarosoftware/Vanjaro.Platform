@@ -385,7 +385,7 @@ cd ..\Core\Library\ >NUL
 
 
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_For_DNN_"%Version%"_Install.zip >NUL 2>&1
-del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_%1 _"%Version%"_Install.zip >NUL 2>&1
+del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_%1_"%Version%"_Install.zip >NUL 2>&1
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_%1_Extension_"%Version%"_Install.zip >NUL 2>&1
 del ..\..\..\..\DesktopModules\Vanjaro\Core\Library\Packager\Releases\Vanjaro_%1_"%Version%"_Upgrade.zip >NUL 2>&1
 
