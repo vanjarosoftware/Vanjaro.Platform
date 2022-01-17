@@ -3054,40 +3054,40 @@ $(document).ready(function () {
                                     $.each(getAllComponents(), function (k, v) {
                                         if (v.attributes.type == "globalblockwrapper" && $(v.getEl()).find('.fa-unlock').length <= 0) {
                                             try {
-                                                if (v.attributes != undefined)
-                                                    v.attributes.content = '';
-                                                var content = { html: '', css: '' };
-                                                $.each(v.attributes.components.models, function (mi, mv) {
-                                                    var mvcontent = VjEditor.runCommand("export-component", {
-                                                        component: mv
+                                                    if (v.attributes != undefined)
+                                                        v.attributes.content = '';
+                                                    var content = { html: '', css: '' };
+                                                    $.each(v.attributes.components.models, function (mi, mv) {
+                                                        var mvcontent = VjEditor.runCommand("export-component", {
+                                                            component: mv
+                                                        });
+                                                        if (mvcontent != undefined && mvcontent.html != undefined && mvcontent.html != "") {
+                                                            content.html += mvcontent.html;
+                                                            content.css += mvcontent.css;
+                                                        }
                                                     });
-                                                    if (mvcontent != undefined && mvcontent.html != undefined && mvcontent.html != "") {
-                                                        content.html += mvcontent.html;
-                                                        content.css += mvcontent.css;
-                                                    }
-                                                });
-                                                if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
-                                                    var item = {
-                                                        ccid: v.attributes.attributes['id'],
-                                                        guid: v.attributes.attributes['data-guid'],
-                                                        html: content.html,
-                                                        css: content.css,
-                                                    };
-                                                    globalblocks.push(item);
-                                                    if (v.attributes != undefined && v.attributes.attributes != undefined && v.attributes.attributes.published != undefined) {
-                                                        v.attributes.attributes.published = true;
+                                                    if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
+                                                        var item = {
+                                                            ccid: v.attributes.attributes['id'],
+                                                            guid: v.attributes.attributes['data-guid'],
+                                                            html: content.html,
+                                                            css: content.css,
+                                                        };
+                                                        globalblocks.push(item);
+                                                        if (v.attributes != undefined && v.attributes.attributes != undefined && v.attributes.attributes.published != undefined) {
+                                                            v.attributes.attributes.published = true;
+                                                        }
                                                     }
                                                 }
+                                                catch (err) { console.log(err); }
                                             }
-                                            catch (err) { console.log(err); }
-                                        }
                                     });
                                     Data.globalblocks = JSON.stringify(globalblocks);
-                                }
+                                 }
                             });
 
                             VjEditor.on('storage:error', (err) => {
-                                swal({ title: "Error", text: `${err}`, type: "error", });
+                                swal({ title: "Error", html: true, text: `${err}`, type: "error", });
                             });
 
                             VjEditor.on('storage:start:store', function (Data) {
