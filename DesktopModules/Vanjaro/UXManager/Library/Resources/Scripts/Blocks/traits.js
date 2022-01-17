@@ -655,7 +655,7 @@ export default (editor, config = {}) => {
 
 						$.ajax({
 							type: "GET",
-							url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Page/GetPageUrl?TabID=" + parseInt(pid) + "&AbsolutelLink=" + absolutelLink,
+							url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Page/GetPageUrl?TbID=" + parseInt(pid) + "&AbsolutelLink=" + absolutelLink,
 							headers: {
 								'ModuleId': parseInt(sf.getModuleId()),
 								'TabId': parseInt(sf.getTabId()),
