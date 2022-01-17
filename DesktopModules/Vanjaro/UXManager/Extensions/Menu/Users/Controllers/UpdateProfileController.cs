@@ -74,7 +74,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                             Settings.Add("UserDetails", new UIData { Name = "UserDetails", Options = UserManager.MapUserBasicDto(user, userDetails) });
                             Settings.Add("UserRoles", new UIData { Name = "UserRoles", Options = UsersController.Instance.GetUserRoles(user, keyword, out int totalRoles).Select(r => UserRoleDto.FromRoleInfo(ps, r)) });
                             Settings.Add("IsAdmin", new UIData { Name = "IsAdmin", Value = userInfo.IsInRole("Administrators").ToString() });
-                            Settings.Add("ProfilePropertiesByCategories", new UIData { Name = "ProfilePropertiesByCategories", Options = Managers.UserManager.GetLocalizedCategories(user.Profile.ProfileProperties, user, true).Select(x => new { x.Key, x.Value }) });
+                            Settings.Add("ProfilePropertiesByCategories", new UIData { Name = "ProfilePropertiesByCategories", Options = Managers.UserManager.GetLocalizedCategories(user.Profile.ProfileProperties, user).Select(x => new { x.Key, x.Value }) });
 
                             if (string.IsNullOrEmpty(user.Profile.PreferredLocale))
                             {
@@ -97,8 +97,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                                     d.PropertyValue = string.IsNullOrEmpty(d.PropertyValue) ? "-1" : d.PropertyValue;
                                 else if (ControlType == "TimeZone")
                                     d.PropertyValue = string.IsNullOrEmpty(d.PropertyValue) ? PortalSettings.Current.TimeZone.Id : d.PropertyValue;
+                                else if (ControlType == "Locale")
+                                    d.PropertyValue = string.IsNullOrEmpty(d.PropertyValue) ? PortalSettings.Current.CultureCode : d.PropertyValue;
                                 List<ListEntryInfo> data = listController.GetListEntryInfoItems(d.PropertyName, "", PortalSettings.Current.PortalId).ToList();
-                                data.Insert(0, new ListEntryInfo { Text = Localization.GetString("NotSpecified", Components.Constants.LocalResourcesFile), Value = d.PropertyValue });
+                                //Set NotSpecified default value -1 if property value present in the list
+                                string DefaultValue = data.Where(x => x.Value == d.PropertyValue).FirstOrDefault()?.Value != null ? "-1" : d.PropertyValue;
+                                data.Insert(0, new ListEntryInfo { Text = Localization.GetString("NotSpecified", Components.Constants.LocalResourcesFile), Value = DefaultValue });
                                 profileProperties.Add(new Entities.ProfileProperties { ProfilePropertyDefinition = d, ListEntries = data });
                             }
                             Settings.Add("ProfileProperties", new UIData { Name = "ProfileProperties", Options = profileProperties });

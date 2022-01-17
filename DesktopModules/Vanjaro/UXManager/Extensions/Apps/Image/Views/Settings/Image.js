@@ -25,6 +25,12 @@
             window.parent.VjEditor.runCommand("save");
         });
         $scope.BindFolderEvents();
+
+        if ($scope.ui.data.Folders.Value != undefined && $scope.ui.data.Folders.Value != null && parseInt($scope.ui.data.Folders.Value) > 0) {
+            setTimeout(function () {               
+                $('#folders' + $scope.ui.data.Folders.Value).trigger('click');
+            }, 200);
+        }
     };
 
     $scope.BindFolderEvents = function (fo) {

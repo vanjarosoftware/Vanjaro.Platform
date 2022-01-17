@@ -49,6 +49,10 @@
                 else
                     value.ProfilePropertyDefinition.PropertyValue = false;
             }
+            if (value.ControlType == "Integer") {
+                if (typeof value.ProfilePropertyDefinition.PropertyValue != 'undefined' && value.ProfilePropertyDefinition.PropertyValue != null)
+                    value.ProfilePropertyDefinition.PropertyValue = parseInt(value.ProfilePropertyDefinition.PropertyValue);
+            }
         });
         $('.Date .date_picker input').datepicker({
             autoclose: true,

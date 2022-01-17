@@ -1327,10 +1327,6 @@ div#MenuSettings .parent-menu-hide {
         .managetab div.uitab.active,
         .blockstabview div.uitab.active,
         .notification-set div.uitab.active {
-            background-image: -webkit-gradient(linear,left top,left bottom,from(#f3f3f3),to(#fff));
-            background-image: -webkit-linear-gradient(top,#f3f3f3,#fff);
-            background-image: -o-linear-gradient(top,#f3f3f3,#fff);
-            background-image: linear-gradient(180deg,#f3f3f3,#fff);
             border-bottom: 3px solid #0088cc;
         }
 

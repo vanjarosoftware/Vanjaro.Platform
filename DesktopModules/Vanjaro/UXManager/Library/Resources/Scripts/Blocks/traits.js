@@ -642,6 +642,7 @@ export default (editor, config = {}) => {
 			switch (val) {
 				case 'url':
 					href = elInput.querySelector('.url').value;
+					delete component.attributes.pid
 					break;
 				case 'page':
 					var pid = $(elInput.querySelector('.page')).children("option:selected").attr('pid');
@@ -677,9 +678,11 @@ export default (editor, config = {}) => {
 					var ID = elInput.querySelector('.email').value;
 					var Sub = elInput.querySelector('.subject').value;
 					href = `mailto:${ID}${Sub ? `?subject=${Sub}` : ''}`;
+					delete component.attributes.pid
 					break;
 				case 'phone':
 					var num = elInput.querySelector('.phone').value;
+					delete component.attributes.pid
 					href = `tel:${num}`;
 					break;
 			}

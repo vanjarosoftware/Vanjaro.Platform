@@ -12,7 +12,7 @@
 
     window.addEventListener('message', event => {
         if (typeof event.data != 'undefined' && event.data.action == "Help.Videos" && event.origin.includes($scope.ui.data.OriginURL.Value)) {
-            parent.parent.OpenPopUp(event, event.data.width, event.data.position, event.data.title, event.data.url);
+            parent.parent.OpenPopUp(event, event.data.width, event.data.position, event.data.title, event.data.url, '100%', false, false, -1, false, '', '', true, true);
         }
     });
 });

@@ -33,11 +33,12 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
             Dictionary<string, IUIData> Settings = new Dictionary<string, IUIData>();
             if (Identifier == "settings_image")
             {
+                string Picture_DefaultFolder = Core.Managers.SettingManager.GetValue(PortalID, 0, "security_settings", "Picture_DefaultFolder", null);
                 List<Common.Components.TreeView> folders = BrowseUploadFactory.GetFoldersTree(PortalID, "image");
                 Settings.Add("AllowedAttachmentFileExtensions", new UIData { Name = "AllowedAttachmentFileExtensions", Value = FileSetting.FileType });
                 Settings.Add("MaxFileSize", new UIData { Name = "MaxFileSize", Value = FileSetting.FileSize.ToString() });
                 Settings.Add("Files", new UIData { Name = "Files", Options = null });
-                Settings.Add("Folders", new UIData { Name = "Folders", Options = folders, Value = folders.Count > 0 ? folders.FirstOrDefault().Value.ToString() : "0", });
+                Settings.Add("Folders", new UIData { Name = "Folders", Options = folders, Value = !string.IsNullOrEmpty(Picture_DefaultFolder) && int.Parse(Picture_DefaultFolder) > 0 ? Picture_DefaultFolder : folders.FirstOrDefault().Value.ToString() });
             }
             List<ImageEntity> ImageProviders = ImageManager.GetImageProviders();
             Settings.Add("ImageProviders", new UIData { Name = "ImageProviders", Options = ImageProviders, OptionsText = "Text", OptionsValue = "Value", Value = ImageProviders.Count > 0 ? ImageProviders.FirstOrDefault().Value : "" });
@@ -141,7 +142,7 @@ namespace Vanjaro.UXManager.Extensions.Apps.Image.Controllers
                         {
                             int count = 1;
 
-                        Find:
+                            Find:
                             if (FileManager.Instance.FileExists(folderInfo, TempFileName))
                             {
                                 string FName = FileName.Remove(FileName.Length - FileExtension.Length);
