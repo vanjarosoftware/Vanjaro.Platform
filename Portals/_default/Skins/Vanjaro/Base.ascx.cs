@@ -135,6 +135,10 @@ namespace Vanjaro.Skin
         protected void Page_Load(object sender, EventArgs e)
         {
             JavaScript.RequestRegistration(CommonJs.jQuery, null, SpecificVersion.Latest);
+
+            if (TabPermissionController.HasTabPermission("EDIT") && PortalSettings.UserInfo.IsInRole("Administrators"))
+                JavaScript.RequestRegistration(CommonJs.jQueryUI);
+
             InjectThemeJS();
 
             PageManager.Init(Page, PortalSettings);
