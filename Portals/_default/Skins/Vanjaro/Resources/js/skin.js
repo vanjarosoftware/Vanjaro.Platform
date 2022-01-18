@@ -184,7 +184,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     if (typeof closebtn != 'undefined' && !closebtn)
         keyboard = false;
 
-    var modal = `<div id="` + id + `"  class="uxmanager-modal modal fade ` + fullwidth + `" data-bs-backdrop="static" data-bs-keyboard="` + keyboard + `" tabindex="-1" ` + edit + ` role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
+    var modal = `<div id="` + id + `"  class="uxmanager-modal modal fade ` + fullwidth + `" data-bs-focus="false" data-bs-backdrop="static" data-bs-keyboard="` + keyboard + `" tabindex="-1" ` + edit + ` role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
         <div class="modal-dialog` + modalclass + `"` + modalstyle + `>
             <div class="modal-content">
                 <div class="modal-header">
@@ -283,9 +283,6 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     }
 
     $modal.find('#defaultModalLabel').text(title);
-
-    $.fn.modal.Constructor.prototype._enforceFocus = function () { };
-
     $modal.modal();
 
     var $backdrop = $modal.prev('.modal-backdrop');
