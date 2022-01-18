@@ -642,6 +642,7 @@ export default (editor, config = {}) => {
 			switch (val) {
 				case 'url':
 					href = elInput.querySelector('.url').value;
+					delete component.attributes.pid
 					break;
 				case 'page':
 					var pid = $(elInput.querySelector('.page')).children("option:selected").attr('pid');
@@ -655,7 +656,7 @@ export default (editor, config = {}) => {
 
 						$.ajax({
 							type: "GET",
-							url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Page/GetPageUrl?TabID=" + parseInt(pid) + "&AbsolutelLink=" + absolutelLink,
+							url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Vanjaro") + "Page/GetPageUrl?TbID=" + parseInt(pid) + "&AbsolutelLink=" + absolutelLink,
 							headers: {
 								'ModuleId': parseInt(sf.getModuleId()),
 								'TabId': parseInt(sf.getTabId()),
@@ -677,9 +678,11 @@ export default (editor, config = {}) => {
 					var ID = elInput.querySelector('.email').value;
 					var Sub = elInput.querySelector('.subject').value;
 					href = `mailto:${ID}${Sub ? `?subject=${Sub}` : ''}`;
+					delete component.attributes.pid
 					break;
 				case 'phone':
 					var num = elInput.querySelector('.phone').value;
+					delete component.attributes.pid
 					href = `tel:${num}`;
 					break;
 			}

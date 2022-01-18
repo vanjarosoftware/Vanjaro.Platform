@@ -28,6 +28,7 @@ using Vanjaro.Common.Utilities;
 using DotNetNuke.UI.Skins.Controls;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Application;
 
 namespace Vanjaro.UXManager.Library
 {
@@ -47,10 +48,10 @@ namespace Vanjaro.UXManager.Library
         {
 #if RELEASE
             TemplateLibraryURL = "https://library.vanjaro.cloud/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower() + "/type/block";
-            ExtensionStoreURL = "https://store.vanjaro.com";
+            ExtensionStoreURL = "https://store.vanjaro.com?mode=platform&dnnver=" + Globals.FormatVersion(DotNetNukeContext.Current.Application.Version, true) + "&vjver=" + Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.');
 # else
             TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower() + "/type/block";
-            ExtensionStoreURL = "http://store.vanjaro.local/store";
+            ExtensionStoreURL = "http://store.vanjaro.local?mode=platform&dnnver=" + Globals.FormatVersion(DotNetNukeContext.Current.Application.Version, true) + "&vjver=" + Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.');
 #endif
             ExtensionURL = ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/') + MenuManager.GetURL() + "mid=0&icp=true&guid=54caeff2-9fac-42ae-8594-40312867d56a#!/installpackage";
 

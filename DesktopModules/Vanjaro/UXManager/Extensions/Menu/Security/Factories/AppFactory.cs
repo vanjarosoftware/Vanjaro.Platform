@@ -75,7 +75,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Security.Factories
 
         public static AppInformation GetAppInformation()
         {
-            return new AppInformation("Security", "Security", ExtensionInfo.GUID, GetRuntimeVersion, "http://www.mandeeps.com/store", "http://www.mandeeps.com/Activation", 14, 7, new List<string> { "Domain", "Server" }, false);
+            return new AppInformation("Security", "Security", ExtensionInfo.GUID, GetRuntimeVersion, "", "", 14, 7, new List<string> { "Domain", "Server" }, false);
         }
 
         public AppInformation AppInformation => GetAppInformation();

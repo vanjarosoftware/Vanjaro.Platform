@@ -123,7 +123,7 @@ RedirectPopup = function (iframe) {
     }
 };
 
-OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, removemodals, ModuleId, scrollbars, titleposition, opacity, closebtn) {
+OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, removemodals, ModuleId, scrollbars, titleposition, opacity, closebtn, video) {
 
     var id = 'vjModal' + (new Date()).getTime();
     var edit = '';
@@ -132,6 +132,8 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     var modalclass = '';
     var modalstyle = ' style="';
     var keyboard = true;
+    var videoStart = '';
+    var videoClose = '';
 
     if (typeof scrollbars != 'undefined') {
         if (scrollbars)
@@ -144,7 +146,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
         titleposition = '';
 
     if (typeof showtogglebtn == 'undefined')
-        showtogglebtn = false
+        showtogglebtn = false;
 
     if (width == "100%") {
 
@@ -158,13 +160,18 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
     else
         modalstyle += 'width:' + width + 'px;';
 
+    if (typeof video != 'undefined' && video) {
+        videoStart = '<div class="video-wrapper">';
+        videoClose = '</div>';
+    }
+
     if (typeof height != 'undefined' && height != null && height != '' && height != '100%')
         modalstyle += 'height:' + height + 'px;';
     else
         modalclass += ' fullheight';
 
     if (width != '100%' && position == 'right')
-        modalclass += ' modal-right'
+        modalclass += ' modal-right';
 
     if (typeof ModuleId != 'undefined' && ModuleId != null)
         edit = 'data-edit="edit_module" data-mid="' + ModuleId + '"';
@@ -185,8 +192,10 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body" id="UXRender">
+                    `+ videoStart +`
                     <img class="loader" alt="Loading" src="/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.svg" />
                     <iframe id="UXpagerender" scrolling="` + scrolling + `" onload="RedirectPopup(this);"></iframe>
+                    `+ videoClose +`
                 </div>
             </div>
         </div>
@@ -329,7 +338,7 @@ OpenPopUp = function (e, width, position, title, url, height, showtogglebtn, rem
                     framesrc = framesrc + "&mid=" + mid + "&icp=true";
                 $('.gjs-frame').contents().find('#dnn_vj_' + mid).html("<img class=\"centerloader moduleloader\" src='/DesktopModules/Vanjaro/UXManager/Library/Resources/Images/loading.svg'><iframe id=\"Appframe\" scrolling=\"no\" onload=\"window.parent.RenderApp(this);\" src='" + framesrc + "' style=\"width:100%;height:auto;\"></iframe>");
             }
-            else if (typeof reload == 'undefined' || reload)
+            else if ((typeof reload == 'undefined' || reload) && videoStart == '')
                 window.parent.location.reload();
         }
     });

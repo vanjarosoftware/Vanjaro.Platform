@@ -90,7 +90,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Domain.Factories
 
         public static AppInformation GetAppInformation()
         {
-            return new AppInformation("Domain", "Domain", ExtensionInfo.GUID, GetRuntimeVersion, "http://www.mandeeps.com/store", "http://www.mandeeps.com/Activation", 14, 7, new List<string> { "Domain", "Server" }, false);
+            return new AppInformation("Domain", "Domain", ExtensionInfo.GUID, GetRuntimeVersion, "", "", 14, 7, new List<string> { "Domain", "Server" }, false);
         }
 
         public AppInformation AppInformation => GetAppInformation();

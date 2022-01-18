@@ -52,6 +52,11 @@ grapesjs.plugins.add('vjpreset', (editor, opts = {}) => {
 
                 var fileName = imageModel.getStyle()["background-image"];
 
+                try {
+                    fileName = fileName.match(/(?:"[^"]*"|^[^"]*$)/)[0].replace(/"/g, "");
+                }
+                catch(err) { }
+
                 var ImageData;
 
                 if (!imageModel.attributes.source && fileName) {

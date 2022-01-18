@@ -1,6 +1,7 @@
 ﻿using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Api.Internal;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Web;
 using System.Web.Http;
 using Vanjaro.Core.Data.Entities;
@@ -17,7 +18,16 @@ namespace Vanjaro.UXManager.Library.Controllers
         [DnnPageEditor]
         public dynamic Save(dynamic Data)
         {
-            return Vanjaro.Core.Managers.PageManager.Update(this.PortalSettings, Data);
+            double dataLength = (HttpContext.Current.Request.ContentLength / 1024f) / 1024f;
+            if (dataLength < 2)
+                return Vanjaro.Core.Managers.PageManager.Update(this.PortalSettings, Data);
+            else
+            {
+                dynamic result = new ExpandoObject();
+                result.IsSuccess = false;
+                result.Message = "An error occurred(Code: 1001). Your changes were not saved.";
+                return result;
+            }
         }
 
         [HttpGet]
@@ -60,9 +70,9 @@ namespace Vanjaro.UXManager.Library.Controllers
 
         [HttpGet]
         [DnnPageEditor]
-        public string GetPageUrl(int TabID, bool AbsolutelLink)
+        public string GetPageUrl(int TbID, bool AbsolutelLink)
         {
-            string result = PageManager.GetPageUrl(PortalSettings, TabID, AbsolutelLink);
+            string result = PageManager.GetPageUrl(PortalSettings, TbID, AbsolutelLink);
             if (string.IsNullOrEmpty(result))
                 result = "/";
             return result;

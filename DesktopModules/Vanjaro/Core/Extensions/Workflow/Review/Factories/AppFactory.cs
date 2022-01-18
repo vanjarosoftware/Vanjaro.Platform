@@ -61,7 +61,7 @@ namespace Vanjaro.Core.Extensions.Workflow.Review.Factories
 
         internal static AppInformation GetAppInformation()
         {
-            return new AppInformation(ReviewInfo.Name, ReviewInfo.FriendlyName, ReviewInfo.GUID, GetRuntimeVersion, "http://www.mandeeps.com/store", "http://www.mandeeps.com/Activation", 14, 7, new List<string> { "Domain", "Server" }, false);
+            return new AppInformation(ReviewInfo.Name, ReviewInfo.FriendlyName, ReviewInfo.GUID, GetRuntimeVersion, "", "", 14, 7, new List<string> { "Domain", "Server" }, false);
         }
         internal static string GetRuntimeVersion
         {

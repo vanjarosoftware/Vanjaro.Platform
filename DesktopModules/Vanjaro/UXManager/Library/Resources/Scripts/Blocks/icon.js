@@ -248,8 +248,10 @@
 				this.listenTo(this, 'change:attributes:title', this.AddContent); // listen for active event
 			},
 			AddContent() {
-				if (this.findType('text').length > 0)
-					this.findType('text')[0].set('content', this.getAttributes().title);
+				if (this.findType('text').length > 0) {
+					this.findType('text')[0].components([]);
+					this.findType('text')[0].components().add(this.getAttributes().title);
+				}
 				else
 					this.append('<span class="visually-hidden">' + this.getAttributes().title + '</span>');
 			}

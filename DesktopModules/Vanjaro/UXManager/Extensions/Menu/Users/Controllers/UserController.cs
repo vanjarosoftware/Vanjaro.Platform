@@ -152,8 +152,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                                         d.PropertyValue = string.IsNullOrEmpty(d.PropertyValue) ? "-1" : d.PropertyValue;
                                     else if (ControlType == "TimeZone")
                                         d.PropertyValue = string.IsNullOrEmpty(d.PropertyValue) ? PortalSettings.Current.TimeZone.Id : d.PropertyValue;
+                                    else if (ControlType == "Locale")
+                                        d.PropertyValue = string.IsNullOrEmpty(d.PropertyValue) ? PortalSettings.Current.CultureCode : d.PropertyValue;
                                     List<ListEntryInfo> data = listController.GetListEntryInfoItems(d.PropertyName, "", PortalSettings.Current.PortalId).ToList();
-                                    data.Insert(0, new ListEntryInfo { Text = Localization.GetString("NotSpecified", Components.Constants.LocalResourcesFile), Value = d.PropertyValue });
+                                    //Set NotSpecified default value -1 if property value present in the list
+                                    string DefaultValue = data.Where(x => x.Value == d.PropertyValue).FirstOrDefault()?.Value != null ? "-1" : d.PropertyValue;
+                                    data.Insert(0, new ListEntryInfo { Text = Localization.GetString("NotSpecified", Components.Constants.LocalResourcesFile), Value = DefaultValue });
                                     profileProperties.Add(new Entities.ProfileProperties { ProfilePropertyDefinition = d, ListEntries = data });
                                 }
                             }
