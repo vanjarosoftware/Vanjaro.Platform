@@ -125,7 +125,7 @@
             }),
         }, {
                 isComponent(el) {
-                if (el && el.tagName && el.tagName.toLowerCase() == 'a' && (!el.classList || (el.classList && !el.classList.contains('vj-link')))) {
+                if (el && el.tagName && el.tagName.toLowerCase() == 'a' && (!el.classList || (el.classList && !el.classList.contains('vj-link') && !el.classList.contains('btn')))) {
                         return { type: 'link-text' };
                     }
                 }
