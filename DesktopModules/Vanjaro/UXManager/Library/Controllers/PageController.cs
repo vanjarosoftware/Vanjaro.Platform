@@ -19,7 +19,7 @@ namespace Vanjaro.UXManager.Library.Controllers
         public dynamic Save(dynamic Data)
         {
             double dataLength = (HttpContext.Current.Request.ContentLength / 1024f) / 1024f;
-            if (dataLength < 2)
+            if (dataLength < 5)
                 return Vanjaro.Core.Managers.PageManager.Update(this.PortalSettings, Data);
             else
             {
@@ -62,14 +62,14 @@ namespace Vanjaro.UXManager.Library.Controllers
         }
 
         [HttpGet]
-        [DnnPageEditor]
+        [Authorize]
         public List<PageItem> GetPages()
         {
             return PageManager.GetPages(PortalSettings.ActiveTab.PortalID);
         }
 
         [HttpGet]
-        [DnnPageEditor]
+        [Authorize]
         public string GetPageUrl(int TbID, bool AbsolutelLink)
         {
             string result = PageManager.GetPageUrl(PortalSettings, TbID, AbsolutelLink);

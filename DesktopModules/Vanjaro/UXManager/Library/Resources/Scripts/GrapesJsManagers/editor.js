@@ -1752,7 +1752,11 @@ $(document).ready(function () {
                                     }
                                 });
 
-                                LoadCustomBlocks();
+                                if (vjEditorSettings.EditPage)
+                                    LoadCustomBlocks();
+                                else
+                                    ChangeBlockType();
+
                                 VjEditor.UndoManager.start();
 
                                 if (VJIsPageDraft == "False")
