@@ -2606,7 +2606,7 @@ $(document).ready(function () {
 
                             VjEditor.on('rte:enable', (model, argument) => {
 
-                                if (model.model.attributes.type == 'button') {
+                                if (model.model.attributes.type == 'button-text') {
                                     const rte = editor.RichTextEditor;
                                     rte.actionbar.parentNode.hidden = true;
                                 }

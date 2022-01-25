@@ -41,12 +41,8 @@ export default (editor, config = {}) => {
         view: defaultView
     });
 
-    const textType = domc.getType('text');
-    const textModel = textType.model;
-    const textView = textType.view;
-
     domc.addType('button', {
-        model: textModel.extend({
+        model: defaultModel.extend({
             initToolbar() {
                 var model = this;
                 if (!model.get('toolbar')) {
@@ -85,7 +81,7 @@ export default (editor, config = {}) => {
                     model.set('toolbar', tb);
                 }
             },
-            defaults: Object.assign({}, textModel.prototype.defaults, {
+            defaults: Object.assign({}, defaultModel.prototype.defaults, {
                 'custom-name': 'Button',
                 droppable: '[data-gjs-type=icon-box], [data-gjs-type=icon]',
                 classes: ['btn', 'btn-primary', 'button-style-1'],
@@ -219,7 +215,7 @@ export default (editor, config = {}) => {
                 }
             }
         }),
-        view: textView.extend({
+        view: defaultView.extend({
             onRender() {
 
                 var model = this.model;
@@ -237,7 +233,50 @@ export default (editor, config = {}) => {
                     if (model.attributes['custom-name'].indexOf(' - ' + DisplayName) == -1)
                         model.set('custom-name', model.getName() + ' - ' + DisplayName);
                 }
+
+                setTimeout(function () {
+
+                    if (!model.find('.button-text').length) {
+
+                        var content = $(model.getEl()).text();
+
+                        model.attributes.components.models[0].set('content', '')
+                        model.attributes.components.models[0].view.render();
+
+                        model.append('<span class="button-text">' + content + '</span>');
+                    }
+                });
+            },
+            events: {
+                dblclick: function () {
+                    return false;
+                }
             }
         }),
+    });
+
+    const textType = domc.getType('text');
+    const textModel = textType.model;
+    const textView = textType.view;
+
+    domc.addType('button-text', {
+        model: textModel.extend({
+            defaults: Object.assign({}, textModel.prototype.defaults, {
+                copyable: false,
+                draggable: false,
+                droppable: false,
+                hoverable: false,
+                removable: false,
+                selectable: false,
+                stylable: false,
+            }),
+        }, {
+            isComponent(el) {
+                if (el && (el.classList && el.classList.contains('button-text'))) {
+                    return { type: 'button-text' };
+                }
+            }
+        }),
+        view: textView
     });
 }
