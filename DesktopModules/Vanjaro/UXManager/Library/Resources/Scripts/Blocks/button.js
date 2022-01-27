@@ -239,11 +239,7 @@ export default (editor, config = {}) => {
                     if (!model.find('.button-text').length) {
 
                         var content = $(model.getEl()).text();
-
-                        model.attributes.components.models[0].set('content', '')
-                        model.attributes.components.models[0].view.render();
-
-                        model.append('<span class="button-text">' + content + '</span>');
+                        model.attributes.components.models[0].replaceWith('<span class="button-text">' + content + '</span>');
                     }
                 });
             },
