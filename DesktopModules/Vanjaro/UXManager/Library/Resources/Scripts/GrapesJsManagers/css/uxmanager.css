@@ -3728,3 +3728,9 @@ body .gjs-selected {
 [data-gjs-type=wrapper] .btn {
     -webkit-user-select: inherit;
 }
+
+    [data-gjs-type=wrapper] .btn .button-text {
+        display: inline-block;
+        min-width: 10px;
+        min-height: 10px;
+    }
