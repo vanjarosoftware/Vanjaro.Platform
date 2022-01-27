@@ -21,7 +21,7 @@
             obj.addClass('disabled');
             $.ajax({
                 type: "POST",
-                url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Register") + "Register/Index",
+                url: window.location.origin + $.ServicesFramework(-1).getServiceRoot("Register") + "Register/Index" + window.location.search,
                 data: data,
                 headers: {
                     'ModuleId': parseInt(sf.getModuleId()),
