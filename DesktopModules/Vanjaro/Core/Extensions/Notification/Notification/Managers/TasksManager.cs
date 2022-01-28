@@ -79,8 +79,8 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Managers
                     }
                     catch { continue; }
                 }
-                NotificationTasks = ServiceInterfaceAssemblies;
-                CacheFactory.Set(CacheKey, ServiceInterfaceAssemblies);
+                NotificationTasks = ServiceInterfaceAssemblies.Where(x => x.Hierarchy != null).ToList();
+                CacheFactory.Set(CacheKey, NotificationTasks);
             }
             return NotificationTasks;
         }
