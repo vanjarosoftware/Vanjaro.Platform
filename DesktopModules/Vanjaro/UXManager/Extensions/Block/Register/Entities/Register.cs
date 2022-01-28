@@ -29,7 +29,7 @@ namespace Vanjaro.UXManager.Extensions.Block.Register.Entities
         {
             get
             {
-                if (PortalSettings.TermsTabId > 0)
+                if (PortalSettings.PrivacyTabId > 0)
                     return Globals.NavigateURL(PortalSettings.PrivacyTabId);
                 else
                     return ServiceProvider.NavigationManager.NavigateURL("Privacy");
