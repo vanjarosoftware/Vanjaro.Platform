@@ -60,10 +60,10 @@
                 }
                 @if (Model.Register.TermsPrivacy)
                 {
-                    <div class="registerterms form-group">
-                        <label class="visually-hidden" for="checktermcondition"></label>
-                        <input type="checkbox" id="checktermcondition" name="checktermcondition" class="checktermcondition termsofuse" cbrequired="true"><span>[LS:Data.Block.Login.RegisterTermsText] <a href="Terms" target="_blank">[LS:TermsofUse]</a> & <a href="Privacy" target="_blank">[LS:PrivacyPolicy]</a></span>
-                    </div>
+            <div class="registerterms form-group">
+                <label class="visually-hidden" for="checktermcondition"></label>
+                <input type="checkbox" id="checktermcondition" name="checktermcondition" class="checktermcondition termsofuse" cbrequired="true"><span>[LS:Data.Block.Login.RegisterTermsText] <a href="@Model.Register.TermsURL" target="_blank">[LS:TermsofUse]</a> & <a href="@Model.Register.PrivacyURL" target="_blank">[LS:PrivacyPolicy]</a></span>
+            </div>
                 }
                 <div class="registered text-@Model.Register.ButtonAlign">
                     <a id="registerbtn" onclick="validateCaptcha(this, function (el) { Register.User('Register') })" attr-localize-register-text="[LS:Data.Block.Register.RegisterText]" class="btn btn-primary @Model.Register.ButtonAlign">
