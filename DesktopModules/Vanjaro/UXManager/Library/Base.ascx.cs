@@ -35,7 +35,7 @@ namespace Vanjaro.UXManager.Library
     public partial class Base : ControlPanelBase
     {
         private string TemplateLibraryURL = string.Empty;
-        private string ExtensionStoreURL = string.Empty;
+        public string ExtensionStoreURL = string.Empty;
         private string ExtensionURL = string.Empty;
         private bool? m2v = null;
 
