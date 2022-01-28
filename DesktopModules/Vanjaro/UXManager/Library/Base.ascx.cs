@@ -35,7 +35,7 @@ namespace Vanjaro.UXManager.Library
     public partial class Base : ControlPanelBase
     {
         private string TemplateLibraryURL = string.Empty;
-        private string ExtensionStoreURL = string.Empty;
+        public string ExtensionStoreURL = string.Empty;
         private string ExtensionURL = string.Empty;
         private bool? m2v = null;
 
@@ -48,10 +48,10 @@ namespace Vanjaro.UXManager.Library
         {
 #if RELEASE
             TemplateLibraryURL = "https://library.vanjaro.cloud/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower() + "/type/block";
-            ExtensionStoreURL = "https://store.vanjaro.com?mode=platform&dnnver=" + Globals.FormatVersion(DotNetNukeContext.Current.Application.Version, true) + "&vjver=" + Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.');
+            ExtensionStoreURL = "https://store.vanjaro.com/install?mode=" + Vanjaro.Common.Components.Product.SKU + "&vjver=" + Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.');
 # else
             TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower() + "/type/block";
-            ExtensionStoreURL = "http://store.vanjaro.local?mode=platform&dnnver=" + Globals.FormatVersion(DotNetNukeContext.Current.Application.Version, true) + "&vjver=" + Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.');
+            ExtensionStoreURL = "http://store.vanjaro.local/install?mode=" + Vanjaro.Common.Components.Product.SKU + "&vjver=" + Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.');
 #endif
             ExtensionURL = ServiceProvider.NavigationManager.NavigateURL().ToLower().Replace(PortalSettings.Current.DefaultLanguage.ToLower(), PortalSettings.Current.CultureCode.ToLower()).TrimEnd('/') + MenuManager.GetURL() + "mid=0&icp=true&guid=54caeff2-9fac-42ae-8594-40312867d56a#!/installpackage";
 
