@@ -3390,7 +3390,7 @@ $(document).ready(function () {
         //Desktop
         if ($this.attr("id") == "Desktop") {
 
-            if (vjEditorSettings.EditPage) {
+            if (vjEditorSettings.ResponsiveStyling) {
                 $iframe.removeClass("fixed-height");
                 $iframe.contents().find("html").removeClass('responsive');
                 $iframe.contents().find("html").removeClass('mobile-responsive');
@@ -3404,7 +3404,7 @@ $(document).ready(function () {
         //Tablet Portrait
         else if ($this.attr("id") == "Tablet") {
 
-            if (vjEditorSettings.EditPage) {
+            if (vjEditorSettings.ResponsiveStyling) {
                 $iframe.removeClass("fixed-height mobile-landscape-height");
                 $iframe.contents().find("html").addClass('responsive');
                 $iframe.contents().find("[data-gjs-type='wrapper']").addClass("scrollbar");
@@ -3417,7 +3417,7 @@ $(document).ready(function () {
         //Mobile Portrait
         else if ($this.attr("id") == "Mobile") {
 
-            if (vjEditorSettings.EditPage) {
+            if (vjEditorSettings.ResponsiveStyling) {
                 $iframe.addClass("fixed-height");
                 $iframe.contents().find("html").addClass('responsive');
                 $iframe.contents().find("html").removeClass('mobile-responsive');
@@ -3432,7 +3432,7 @@ $(document).ready(function () {
         //MobileLandscape
         else if ($this.attr("id") == "MobileLandscape") {
 
-            if (vjEditorSettings.EditPage) {
+            if (vjEditorSettings.ResponsiveStyling) {
                 $iframe.removeClass("fixed-height");
                 $iframe.addClass("mobile-landscape-height");
                 $iframe.contents().find("html").addClass('mobile-responsive');
