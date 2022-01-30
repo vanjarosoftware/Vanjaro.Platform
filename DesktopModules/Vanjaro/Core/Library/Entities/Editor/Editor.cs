@@ -62,6 +62,7 @@ namespace Vanjaro.Core.Entities
                 CustomBlocks = true,
                 Library = true,
                 InjectThemeCSS = true,
+                ResponsiveStyling = true,
             };
 
             return options;
