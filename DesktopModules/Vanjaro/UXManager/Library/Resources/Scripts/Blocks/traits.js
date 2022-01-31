@@ -10,7 +10,7 @@ export default (editor, config = {}) => {
 		const selected = VjEditor.getSelected();
 		const selectedType = selected.attributes.type;
 
-        if (selected.parent() && selected.parent().attributes.type != 'wrapper' && (selectedType == 'row' || selectedType == 'button' || selectedType == 'icon' || selectedType == 'list')) {
+		if (selected.parent() && selected.parent().attributes.type != 'wrapper' && (selectedType == 'row' || selectedType == 'button' || selectedType == 'icon' || selectedType == 'list')) {
 			var parent = selected.parent().clone();
 			var mainparent = selected.parent().parent();
 			mainparent.append(parent);
@@ -40,7 +40,7 @@ export default (editor, config = {}) => {
 			const selectedType = selected.attributes.type;
 			const selectedParentType = selected.parent().attributes.type;
 
-            if ((selectedType == 'row' && selectedParentType == 'grid') || (selectedType == 'button' && selectedParentType == 'button-box') || (selectedType == 'icon' && selectedParentType == 'icon-box') || (selectedType == 'list' && selectedParentType == 'list-box')) {
+			if ((selectedType == 'row' && selectedParentType == 'grid') || (selectedType == 'button' && selectedParentType == 'button-box') || (selectedType == 'icon' && selectedParentType == 'icon-box') || (selectedType == 'list' && selectedParentType == 'list-box')) {
 				selected.parent().remove();
 			}
 			else if (selectedType == 'image-gallery-item' && typeof selected.closestType('image-frame') != 'undefined') {
@@ -2002,7 +2002,7 @@ export default (editor, config = {}) => {
 			imgDelete.addEventListener('click', ev => {
 				if ($(ev.target).parents(".uploader-wrapper").attr("id") == "backgroundimage") {
 
-					var comp = VjEditor.getSelected();
+					var comp = editor.getSelected();
 					comp.removeStyle("background-image");
 					comp.set({ 'thumbnail': '', 'src': '' });
 
@@ -2014,8 +2014,8 @@ export default (editor, config = {}) => {
 				}
 				else if ($(ev.target).parents(".uploader-wrapper").attr("id") == "backgroundvideo") {
 
-					var comp = VjEditor.getSelected();
-					comp.components().forEach(item => item.getAttributes()["data-bg-video"] == 'true' ? item.remove() : null);
+					var comp = editor.getSelected();
+					comp.components().forEach(item => (typeof item != 'undefined' && item.getAttributes()["data-bg-video"] == 'true') ? item.remove() : null);
 					comp.set({ 'thumbnail': '', 'src': '' });
 					$(comp.getTrait("backgroundvideo").el).removeAttr("style");
 				}
@@ -2286,23 +2286,16 @@ export default (editor, config = {}) => {
 			$(event.target).parents('.preset-wrapper').find('div.active').removeClass('active');
 			$(event.target).parent().addClass('active');
 
-			component.getTrait('styles').set({
-				'value': event.target.value
-			});
+			component.getTrait('styles').set({ 'value': event.target.value });
 
 			var capitalize = e => e.charAt(0).toUpperCase() + e.slice(1);
 			var selectedStyle = event.target.value;
-
 			var SelectedDisplayName = component.getTrait('styles').attributes.options.find(x => x.name === selectedStyle).DisplayName;
 
-			if (component.attributes.type == 'blockwrapper') {
+			if (component.attributes.type == 'blockwrapper')
 				component.set('custom-name', capitalize(component.attributes.name) + ' - ' + SelectedDisplayName);
-			}
-			else {
+			else
 				component.set('custom-name', capitalize(component.attributes.type) + ' - ' + SelectedDisplayName);
-			}
-
-
 
 			var model = component;
 			var trait = component.getTrait(event.target.name);
