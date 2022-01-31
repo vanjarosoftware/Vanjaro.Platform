@@ -9,7 +9,7 @@
 			attributes: { class: 'fa fa-youtube-play' },
 			content: `
 				<div class='video-box embed-container'>
-					<video controls src='`+ VjDefaultPath + `Flower.mp4'></video>
+					<video controls src='`+ VjDefaultPath + `Flower.mp4' data-gjs-clickable="false" data-gjs-selectable="false" data-gjs-hoverable="false" data-gjs-draggable="false" data-gjs-droppable="false" data-gjs-layerable="false"></video>
 				</div>	
 			`,
 			activate: 1
