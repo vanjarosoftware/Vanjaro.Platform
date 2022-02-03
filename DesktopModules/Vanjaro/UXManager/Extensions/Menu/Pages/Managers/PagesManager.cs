@@ -588,7 +588,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                     TabPermissionController.SaveTabPermissions(tabinfo);
                 }
             }
-            internal static void ApplyLayout(int PortalId, Layout layout, ActionResult ActionResult)
+            public static void ApplyLayout(int PortalId, Layout layout, ActionResult ActionResult)
             {
                 ApplyLayout(PortalId, layout, ActionResult, true);
             }
