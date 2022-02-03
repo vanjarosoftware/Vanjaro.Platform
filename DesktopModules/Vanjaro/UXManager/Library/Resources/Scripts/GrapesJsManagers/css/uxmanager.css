@@ -3734,18 +3734,3 @@ body .gjs-selected {
         min-width: 10px;
         min-height: 10px;
     }
-
-[data-gjs-type=wrapper] .vj-section > *:not(.bg-video) {
-    z-index: 2;
-    position: relative;
-}
-
-[data-gjs-type=wrapper] .vj-section .bg-video video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-}
