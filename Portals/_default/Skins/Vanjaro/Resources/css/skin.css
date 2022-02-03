@@ -201,11 +201,6 @@ video {
         height: auto !important;
     }
 
-.vj-section > *:not(.bg-video) {
-    z-index: 2;
-    position: relative;
-}
-
 a, a:hover, a:focus, a:active {
     text-decoration: none;
 }
