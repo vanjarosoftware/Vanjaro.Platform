@@ -183,11 +183,7 @@ video {
     height: auto;
 }
 
-.vj-section > * {
-    position: relative;
-}
-
-.vj-section .bg-video {
+.vj-section video.bg-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -196,10 +192,6 @@ video {
     left: 0;
     z-index: -1;
 }
-
-    .vj-section .bg-video video {
-        height: auto !important;
-    }
 
 a, a:hover, a:focus, a:active {
     text-decoration: none;
