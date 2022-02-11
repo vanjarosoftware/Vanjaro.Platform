@@ -52,8 +52,11 @@ namespace Vanjaro.Migrate.Components
                             string TabSkinSrc = p.ActiveTab.SkinSrc != null ? p.ActiveTab.SkinSrc.ToLower() : string.Empty;
                             string QuerySkinSrc = context.Request.QueryString["SkinSrc"] != null ? context.Request.QueryString["SkinSrc"].ToLower() : null;
 
+                            string DefaultAdminContainer = p.DefaultAdminContainer;
+                            string DefaultAdminSkin = p.DefaultAdminSkin;
+
                             if (!string.IsNullOrEmpty(TabSkinSrc) && TabSkinSrc != "[G]Skins/Vanjaro/Base.ascx".ToLower())
-                                ApplyPersonaBarContainer();
+                                ApplyPersonaBarContainer(p.PortalId, DefaultAdminContainer, DefaultAdminSkin);
 
                             if (TabSkinSrc == "[G]Skins/Vanjaro/Base.ascx".ToLower() || QuerySkinSrc == "[G]Skins/Vanjaro/Base".ToLower())
                             {
@@ -62,6 +65,8 @@ namespace Vanjaro.Migrate.Components
                                 string ControlPanel = HostController.Instance.GetSettings().ContainsKey("ControlPanel") ? HostController.Instance.GetSettings()["ControlPanel"].Value.ToLower() : null;
 
                                 HostController.Instance.GetSettings()["ControlPanel"].Value = "DesktopModules/Vanjaro/UXManager/Library/Base.ascx";
+                                PortalController.Instance.GetPortalSettings(p.PortalId)["DefaultAdminContainer"] = "[G]Containers/Vanjaro/Base.ascx";
+                                PortalController.Instance.GetPortalSettings(p.PortalId)["DefaultAdminSkin"] = "[G]Skins/Vanjaro/Base.ascx";
 
                                 bool HasDisableEditBarKey = false;
                                 try
@@ -80,7 +85,7 @@ namespace Vanjaro.Migrate.Components
                                     if (HostController.Instance.GetSettings()["ControlPanel"].Value == "DesktopModules/admin/Dnn.PersonaBar/UserControls/PersonaBarContainer.ascx" && context.Request.QueryString["refresh"] == null)
                                         HttpContext.Current.Response.Redirect(HttpContext.Current.Request.RawUrl + "&refresh=true"); //&refresh=true
 
-                                    ApplyPersonaBarContainer();
+                                    ApplyPersonaBarContainer(p.PortalId, DefaultAdminContainer, DefaultAdminSkin);
                                 };
                             }
                             else
@@ -101,9 +106,12 @@ namespace Vanjaro.Migrate.Components
             return context.Request.QueryString["popUp"] != null;
         }
 
-        private void ApplyPersonaBarContainer()
+        private void ApplyPersonaBarContainer(int PortalID, string DefaultAdminContainer, string DefaultAdminSkin)
         {
             HostController.Instance.GetSettings()["ControlPanel"].Value = "DesktopModules/admin/Dnn.PersonaBar/UserControls/PersonaBarContainer.ascx";
+            PortalController.Instance.GetPortalSettings(PortalID)["DefaultAdminContainer"] = DefaultAdminContainer;
+            PortalController.Instance.GetPortalSettings(PortalID)["DefaultAdminSkin"] = DefaultAdminSkin;
+
             if (HostController.Instance.GetBoolean("DisableEditBar"))
                 HostController.Instance.GetSettings()["DisableEditBar"].Value = "False";
 
