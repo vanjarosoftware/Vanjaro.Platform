@@ -27,7 +27,7 @@ namespace Vanjaro.Installer
 
         private void Main_Load(object sender, EventArgs e)
         {
-            this.FormClosing += Main_FormClosing; 
+            this.FormClosing += Main_FormClosing;
 
             LoadForm();
 
@@ -76,7 +76,7 @@ namespace Vanjaro.Installer
                 cbUpgradeVersion.DisplayMember = "Name";
                 cbUpgradeVersion.ValueMember = "Id";
             }
-            catch 
+            catch
             {
                 MessageBox.Show("Unable to fetch latest Vanjaro Releases. Make sure you're connected to internet and restart application.", "Network Offline",MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -131,7 +131,7 @@ namespace Vanjaro.Installer
 
         private bool UpdateConfig()
         {
-            try 
+            try
             {
                 var doc = XDocument.Load(SiteDirectory + "\\Website\\web.config");
                 doc.Root.Element("connectionStrings").Element("add").Attribute("connectionString").Value = GetConnectionString(DatabaseName);
@@ -200,7 +200,7 @@ namespace Vanjaro.Installer
 
         private void PackageInstall_ExtractProgress(object sender, ExtractProgressEventArgs e)
         {
-            
+
             if (e.EventType == ZipProgressEventType.Extracting_BeforeExtractEntry)
             {
                 pbCreateSite.Value = e.EntriesExtracted;
@@ -222,10 +222,10 @@ namespace Vanjaro.Installer
         {
             string dbQuery = "USE master" + Environment.NewLine + "CREATE DATABASE [" + DatabaseName + "]";
 
-            string dbPermission = "USE master" + Environment.NewLine + 
-                "exec sp_grantlogin '" + SiteAppIdentity + "'" + Environment.NewLine + 
-                "USE [" + DatabaseName + "]" + Environment.NewLine + 
-                "exec sp_grantdbaccess '" + SiteAppIdentity + "','" + SiteName + "'" + Environment.NewLine + 
+            string dbPermission = "USE master" + Environment.NewLine +
+                "exec sp_grantlogin '" + SiteAppIdentity + "'" + Environment.NewLine +
+                "USE [" + DatabaseName + "]" + Environment.NewLine +
+                "exec sp_grantdbaccess '" + SiteAppIdentity + "','" + SiteName + "'" + Environment.NewLine +
                 "exec sp_addrolemember 'db_owner','" + SiteName + "'";
 
             SqlConnection con = new SqlConnection(GetConnectionString("master"));
@@ -295,7 +295,7 @@ namespace Vanjaro.Installer
 
             if (dbServer.IndexOf(@"\") > -1)
                 return  @"NT Service\MSSQL$" + dbServer.Substring(dbServer.LastIndexOf(@"\") + 1).ToUpper();
-            
+
             return @"NT Service\MSSQLSERVER";
         }
 
@@ -308,8 +308,8 @@ namespace Vanjaro.Installer
 
                 var dir = new DirectoryInfo(folderPath);
                 var dirAccessControl = dir.GetAccessControl();
-                
-                dirAccessControl.ModifyAccessRule(AccessControlModification.Set, accessRule1, out bool modified);                               
+
+                dirAccessControl.ModifyAccessRule(AccessControlModification.Set, accessRule1, out bool modified);
                 dirAccessControl.ModifyAccessRule(AccessControlModification.Add, accessRule2, out modified);
 
                 dir.SetAccessControl(dirAccessControl);
@@ -460,7 +460,8 @@ namespace Vanjaro.Installer
             var ReleaseDir = Directory.GetCurrentDirectory() + @"\Releases\";
             Release rel = cbVersion.SelectedItem as Release;
             var asset = rel.Assets.Where(r => r.Name.ToLower().Contains("platform") && r.Name.ToLower().Contains(ReleaseType.ToLower()) && r.Name.ToLower().Contains(Architecture)).FirstOrDefault();
-            
+            if (asset == null)
+                asset = rel.Assets.Where(r => r.Name.ToLower().Contains("platform") && r.Name.ToLower().Contains(ReleaseType.ToLower())).FirstOrDefault();
             return ReleaseDir + asset.Name;
         }
         private bool ReleaseExists(string ReleaseType, string Architecture = null)
@@ -497,6 +498,9 @@ namespace Vanjaro.Installer
             var ReleaseDir = Directory.GetCurrentDirectory() + @"\Releases\";
             Release rel = cbVersion.SelectedItem as Release;
             var asset = rel.Assets.Where(r => r.Name.ToLower().Contains("platform") && r.Name.ToLower().Contains(ReleaseType.ToLower()) && r.Name.ToLower().Contains(Architecture)).FirstOrDefault();
+
+            if (asset == null)
+                asset = rel.Assets.Where(r => r.Name.ToLower().Contains("platform") && r.Name.ToLower().Contains(ReleaseType.ToLower())).FirstOrDefault();
 
             if (asset != null)
             {
@@ -684,7 +688,7 @@ namespace Vanjaro.Installer
                             version = vanjaroCore.ProductMajorPart + "." + vanjaroCore.ProductMinorPart + "." + vanjaroCore.ProductBuildPart;
                     }
                     catch { }
-                    
+
                     if (version != null)
                     {
                         var app = server.ApplicationPools.Where(a => a.Name == site.Name).SingleOrDefault();
@@ -778,7 +782,7 @@ namespace Vanjaro.Installer
 
         private string RemoveSite(string siteName)
         {
-            
+
             string removeDir = null;
             try
             {
@@ -800,7 +804,7 @@ namespace Vanjaro.Installer
                 {
                     var app = server.ApplicationPools.Where(a => a.Name == siteName).SingleOrDefault();
                     var site = server.Sites.Where(s => s.Name == siteName).SingleOrDefault();
-                    
+
                     if (app != null)
                         server.ApplicationPools.Remove(app);
 
@@ -828,7 +832,7 @@ namespace Vanjaro.Installer
                 if (dnsEntries.Contains(dnsEntry))
                 {
                     dnsEntries = dnsEntries.Replace(dnsEntry, string.Empty);
-                    File.WriteAllText(filePath,dnsEntries);                    
+                    File.WriteAllText(filePath,dnsEntries);
                 }
 
             }
