@@ -157,6 +157,7 @@
             if ($(Control).attr('isrequired') == 'true') {
                 if ($(Control).find('option:selected').val() == '') {
                     $(Control).css("border", "2px solid red");
+                    $(Control).css("outline", "none");
                     Result = false;
                     $(Control).focus();
                 }
