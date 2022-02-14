@@ -21,6 +21,8 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                     return UserController.GetData(Identifier, UIEngineInfo, UserInfo, Parameters);
                 case AppFactory.Identifier.setting_updateprofile:
                     return UpdateProfileController.GetData(Identifier, UIEngineInfo, UserInfo, Parameters);
+                case AppFactory.Identifier.setting_import:
+                    return ImportController.GetData(Identifier, UIEngineInfo, UserInfo, Parameters);
                 default:
                     break;
             }
