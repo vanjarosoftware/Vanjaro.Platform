@@ -2,8 +2,10 @@
     <ng-csv-import content="csv.content" accept="csv.accept='.csv'" header="csv.header='true'" header-visible="csv.headerVisible" separator="csv.separator=','" separator-visible="csv.separatorVisible" result="csv.result" encoding="csv.encoding='ISO-8859-1'" encoding-visible="csv.encodingVisible"></ng-csv-import>
 </div>
 <div ng-show="csv.result && PreviewImportResult==''">
-    <div><a class="btn btn-default" role="button" style="float: right;" ng-click="MapFields()">[LS:MapFields]</a></div>
-    <div><a class="btn btn-default" role="button" style="float: right;margin-right:5px;" ng-click="SaveMapping()">[LS:SaveMapping]</a></div>
+    <div style="float: right; font-weight: 900; font-size: 15px; color: #5e5e5e !important; ">
+        <a role="button" style="padding:2px;" title="[LS:MapFields]" ng-click="MapFields()"><span style="margin-right: 10px;" class="fa fa-sitemap button-icon"></span></a>
+        <a role="button" style="padding: 2px; margin-right:5px;" title="[LS:SaveMapping]" ng-click="SaveMapping()"><span class="fa fa-save button-icon"></span></a>
+    </div>
     <br />
 </div>
 <div class="block row ng-scope preview-import" ng-bind-html="GetFields() | unsafe" ng-show="csv.result && PreviewImportResult==''" style="width: 100%;margin-left: 3px;margin-top: 15px;">

@@ -75,6 +75,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users
                     AngularPlugins.InlineEditor.ToString(),
                     JavaScriptPlugins.BootstrapDatepicker.ToString(),
                     AngularPlugins.CKEditor.ToString(),
+                    AngularPlugins.CSVImport.ToString(),
                     "Bootstrap"
                 };
 

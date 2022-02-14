@@ -127,12 +127,26 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Factories
             };
 
             Views.Add(updateprofile);
+
+            AngularView import = new AngularView
+            {
+                AccessRoles = "user",
+                UrlPaths = new List<string> {
+                  "import"
+                },
+                TemplatePath = "setting/import.html",
+                Identifier = Identifier.setting_import.ToString(),
+                Defaults = new Dictionary<string, string> { }
+            };
+
+            Views.Add(import);
+
             return Views;
         }
 
         public static string GetAccessRoles(UserInfo UserInfo)
         {
-            List<string> AccessRoles = new List<string>();
+            List<string> AccessRoles = new List<string>();  
             if (UserInfo.UserID > 0)
             {
                 AccessRoles.Add("user");
@@ -176,7 +190,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Factories
         }
         public enum Identifier
         {
-            setting_setting, setting_adduser, setting_users, setting_changepassword, setting_updateprofile
+            setting_setting, setting_adduser, setting_users, setting_changepassword, setting_updateprofile, setting_import
         }
     }
 }

@@ -3,7 +3,7 @@
         <uilayout name="Heading">
             <uitemplate>
                 <div class="row">
-                    <div class="col-6 extback pr-none">
+                    <div class="col-5 extback pr-none">
                         <a ng-click="Click_Back()" title="[L:Back]" class="ux-backbtn">
                             <span class="extbackicon">
                                 <em class="fas fa-chevron-left"></em>
@@ -11,7 +11,7 @@
                             <span class="extname">{{HeaderText}}</span>
                         </a>
                     </div>
-                    <div class="col-6 pl-none" access-roles="admin">
+                    <div class="col-7 pl-none" access-roles="admin">
                         <a href="#" title="[L:AddUser]" onclick="parent.OpenPopUp(event, 450,'right', '[L:AddUser]', '#!/adduser')" class="ux-btn ux-btn-hover float-end adduser" mn-ng-hide="Show_RecycleBin">
                             <em class="fas fa-plus"></em>
                         </a>
@@ -33,6 +33,9 @@
                         <a class="ux-btn ux-btn-hover float-end" mn-ng-click="Open_MemberProfile()" title="[L:MemberProfileSettings]" mn-ng-show="!Show_RecycleBin">
                             <em class="fas fa-user-tag"></em>
                         </a>
+                        <a class="ux-btn ux-btn-hover float-end" onclick="parent.OpenPopUp(event, 900,'right', '[LS:ImportUsers]', '#!/import')" title="[LS:ImportUsers]" mn-ng-show="!Show_RecycleBin">
+                            <em class="fas fa-download"></em>
+                        </a>
                         <a class='ux-btn ux-btn-hover float-end btn-del-users' mn-ng-hide="Show_RecycleBin || !ui.data.DeletedUsers.Value" ng-click="Show_RecycleBin =!(Show_RecycleBin);HeaderText='[L:RecycleBin]'" title="[L:Deleted]">
                             <em class='fas fa-trash' data-bs-toggle="tooltip" data-bs-placement="bottom" title="[L:Deleted]"></em>
                             <sup class='deletedUserCount' id="deletedUser">{{ui.data.DeletedUsers.Value}}</sup>
@@ -41,7 +44,7 @@
                 </div>
             </uitemplate>
         </uilayout>
-        <uilayout name="default" attr-ng-hide="Show_RecycleBin">            
+        <uilayout name="default" attr-ng-hide="Show_RecycleBin">
             <uielement name="AllUsers" control="grid" paged="true" search="true" label="false" pagesize="15" attr-pagesize="15" attr-class="table-responsive table-grid usertable" attr-st-pipe="Pipe_AllUserPagging">
                 <column name="UserName" width="18" attr-style="padding:0;">
                     <uitemplate>
@@ -75,7 +78,7 @@
                                 <a mn-ng-if="!row.authorized && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_UpdateAuthorizeStatus(row)" class="dropdown-item box-icon"><em class="fas fa-user"></em><span>[L:AuthorizeUser]</span></a>
                                 <a mn-ng-if="!row.isDeleted && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_SoftDelete(row)" class="dropdown-item box-icon"><em class="fas fa-trash"></em><span>[L:Delete]</span></a>
                                 <a mn-ng-if="row.isDeleted && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_HardDelete(row)" class="dropdown-item box-icon"><em class="fas fa-times"></em><span>[L:Remove]</span></a>
-                                <a mn-ng-if="row.isDeleted && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_Restore(row)" class="dropdown-item box-icon"><em class="fas fa-redo"></em><span>[L:RestoreUser]</span></a>                                
+                                <a mn-ng-if="row.isDeleted && ui.data.CurrentUserId.Value != row.userId" mn-ng-click="Click_Restore(row)" class="dropdown-item box-icon"><em class="fas fa-redo"></em><span>[L:RestoreUser]</span></a>
                                 <a mn-ng-if="ui.data.CurrentUserId.Value != row.userId && row.isLocked" access-roles="admin" mn-ng-click="Click_UnlockUser(row)" class="dropdown-item box-icon"><em class="fas fa-unlock-alt"></em><span>[L:UnlockUser]</span></a>
                                 <hr class="m-none" mn-ng-if="ui.data.CurrentUserId.Value != row.userId" access-roles="host">
                                 <a mn-ng-if="!row.isSuperUser && ui.data.CurrentUserId.Value != row.userId" access-roles="host" mn-ng-click="Click_UpdateSuperUserStatus(row)" class="dropdown-item box-icon"><em class="far fa-star"></em><span>[L:MakeSuperUser]</span></a>

@@ -51,11 +51,16 @@
     <Compile Include="Components\Constants.cs" />
     <Compile Include="Components\Controller.cs" />
     <Compile Include="Controllers\ImpersonationController.cs" />
+    <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UpdateProfileController.cs" />
     <Compile Include="Entities\FileSetting.cs" />
+    <Compile Include="Entities\Import\ImportField.cs" />
+    <Compile Include="Entities\Import\Job.cs" />
     <Compile Include="Entities\ProfileProperties.cs" />
     <Compile Include="Entities\UserBasicInfo.cs" />
+    <Compile Include="Factories\ImportFactory.cs" />
+    <Compile Include="Managers\ImportManager.cs" />
     <Compile Include="Managers\LoginManager.cs" />
     <Compile Include="Managers\RegisteredManager.cs" />
     <Compile Include="Controllers\ServiceRouteMapper.cs" />
@@ -77,6 +82,8 @@
     <Content Include="Views\Setting\AddUser.html" />
     <Content Include="Views\Setting\AddUser.js" />
     <Content Include="Views\Setting\changePassword.html" />
+    <Content Include="Views\Setting\Import.html" />
+    <Content Include="Views\Setting\Import.js" />
     <Content Include="Views\Setting\UpdateProfile.html" />
     <Content Include="Views\Setting\UpdateProfile.js" />
     <Content Include="Views\Setting\Setting.html" />
@@ -141,7 +148,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Setting\App_LocalResources\AddUser.resx" />
-    <Content Include="Views\App_LocalResources\Shared.resx" />
+    <Content Include="Views\App_LocalResources\Shared.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Setting\App_LocalResources\Users.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +182,9 @@
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Setting\App_LocalResources\Import.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

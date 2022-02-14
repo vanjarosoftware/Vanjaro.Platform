@@ -1,0 +1,67 @@
+﻿<div ng-controller="setting_import" class="vj-ux-manager import-user">
+    <uiengine provider="AngularBootstrap" identifier="setting_import" class="uiengine-wrapper importuser scrollbar">
+        <uilayout name="default" attr-id="ImportCsv" attr-ng-show="!SpecifyImportOptions && !Show_ImportError">
+            <uielement attr-class="ImportFile" name="ImportUser" control="import" label="false"></uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="SpecifyImportOptions && !Show_ImportError">
+            <uielement name="CheckDisplayName" attr-class="toggle_right CheckDisplayName" control="toggle" ngmodel="ui.data.ImportOption.Options.GenerateDisplayName" ng-disabled="true"></uielement>
+            <uielement name="GenerateDisplayName" control="dropdownlist" label="false" attr-ng-show="ui.data.ImportOption.Options.GenerateDisplayName"></uielement>
+            <uielement name="CheckUserName" control="toggle" attr-class="toggle_right CheckUserName" container-attr-ng-hide="ui.data.UseEmailAsUserName.Value" ngmodel="ui.data.ImportOption.Options.GenerateUsername" disabled></uielement>
+            <uielement name="GenerateUserName" control="dropdownlist" label="false" container-attr-ng-show="ui.data.ImportOption.Options.GenerateUsername && !ui.data.UseEmailAsUserName.Value"></uielement>
+            <uielement name="GeneratePassword" control="checkboxtoggle" attr-class="toggle_right GeneratePassword" ngmodel="ui.data.ImportOption.Options.GeneratePassword" disabled></uielement>
+            <uielement name="ChangePassword" control="checkboxtoggle" attr-class="toggle_right" ngmodel="ui.data.ImportOption.Options.ForceChangePassword"></uielement>
+            <uitemplate>
+                <div class="text-end fixed-footer">
+                    <button class="btn btn-primary mx-2" role="button" mn-ng-disabled="isDisabled" mn-ng-click="PreviewImportData(true)"> <span>[L:Import]</span></button>
+                    <!--<a class="btn btn-default" role="button" ng-click="Click_Cancel()"><span>[L:Cancel]</span></a>-->
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="Show_ImportError">
+            <uielement name="ImportError" ngoptions="ImportError" control="grid" label="true" search="false" paged="true" pagesize="10" attr-pagesize="10"  attr-class="table-responsive table-grid">
+                <column name="DisplayName" width="10" attr-style="padding:0;">
+                    <uitemplate>
+                        <span>{{row.DisplayName}}</span>
+                    </uitemplate>
+                </column>
+                <column name="Email" width="15">
+                    <uitemplate>
+                        <span>{{row.Email}}</span>
+                    </uitemplate>
+                </column>
+                <column name="Username" width="15">
+                    <uitemplate>
+                        <span>{{row.Username}}</span>
+                    </uitemplate>
+                </column>
+                <column name="Password" width="10">
+                    <uitemplate>
+                        <span>{{row.Password!=null && row.Password!='' ? row.Password : '-'}}</span>
+                    </uitemplate>
+                </column>                
+                <column name="Error" width="25">
+                    <uitemplate>
+                        <span class="text-danger">{{row.Error}}</span>
+                    </uitemplate>
+                </column>
+            </uielement>
+        </uilayout>
+        <uilayout name="default" attr-ng-show="!SpecifyImportOptions">
+            <uitemplate>
+                <div class="text-end fixed-footer">
+                    <a class="btn btn-primary mx-2" role="button" href="" ng-click="PreviewImportData(false)" ng-show="ShowStep2"><span>[L:Preview]</span></a>
+                    <a class="btn btn-primary mx-2" role="button" href="" ng-click="Click_Next3()" ng-show="ShowStep3"><span>[L:Next]</span></a>
+                    <button class="btn btn-primary mx-2" mn-ng-click="PreviewImportData(false)" mn-ng-disabled="isDisabled" mn-ng-show="ImportSecurityAction"> <span>[L:Import]</span></button>
+
+                    <button class="btn btn-primary mx-2" mn-ng-click="exportToCsv();" onclick="return false;" mn-ng-disabled="Disabled_exportToCsv" mn-ng-show="Show_ImportError"><span>[L:Download]</span></button>
+                    <!--<a class="btn btn-default" role="button" ng-click="Click_Cancel()"><span>[L:Cancel]</span></a>-->
+                </div>
+            </uitemplate>
+        </uilayout>
+        <uilayout name="default">
+            <uitemplate>
+                <div mn-ng-bind-html="Click_Hide()"></div>
+            </uitemplate>
+        </uilayout>
+    </uiengine>
+</div>

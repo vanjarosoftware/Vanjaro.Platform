@@ -297,4 +297,22 @@
   <data name="CustomEditorOptions.Text" xml:space="preserve">
     <value>Custom Editor Options</value>
   </data>
+  <data name="CancelImport.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="MapFields.Text" xml:space="preserve">
+    <value>Map Fields</value>
+  </data>
+  <data name="PreviewImport.Text" xml:space="preserve">
+    <value>Preview Data</value>
+  </data>
+  <data name="SaveMapping.Text" xml:space="preserve">
+    <value>Save Mapping</value>
+  </data>
+  <data name="MaximumUsersImportLimit.Text" xml:space="preserve">
+    <value>Maximum of '+$scope.ui.data.MaximumUsersImportLimit.Value+' new accounts can be imported at a time.</value>
+  </data>
+  <data name="ImportUsers.Text" xml:space="preserve">
+    <value>Import Users</value>
+  </data>
 </root>

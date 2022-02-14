@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ImportAction.Text" xml:space="preserve">
+    <value>Import Action</value>
+  </data>
+  <data name="ImportType.Text" xml:space="preserve">
+    <value>Import Type</value>
+  </data>
+  <data name="UploadFile.Text" xml:space="preserve">
+    <value>Upload File</value>
+  </data>
+  <data name="BasicInformation.Text" xml:space="preserve">
+    <value>Basic Information</value>
+  </data>
+  <data name="Biography.Text" xml:space="preserve">
+    <value>Biography</value>
+  </data>
+  <data name="Cell.Text" xml:space="preserve">
+    <value>Cell</value>
+  </data>
+  <data name="City.Text" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Country.Text" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="DisplayName.Text" xml:space="preserve">
+    <value>Display Name</value>
+  </data>
+  <data name="Email.Text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Facebook.Text" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="Fax.Text" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="FirstName.Text" xml:space="preserve">
+    <value>FirstName</value>
+  </data>
+  <data name="IM.Text" xml:space="preserve">
+    <value>IM</value>
+  </data>
+  <data name="LastName.Text" xml:space="preserve">
+    <value>LastName</value>
+  </data>
+  <data name="LinkedIn.Text" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="Locale.Text" xml:space="preserve">
+    <value>PreferredLocale</value>
+  </data>
+  <data name="MiddleName.Text" xml:space="preserve">
+    <value>MiddleName</value>
+  </data>
+  <data name="Password.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Photo.Text" xml:space="preserve">
+    <value>Photo</value>
+  </data>
+  <data name="PostalCode.Text" xml:space="preserve">
+    <value>PostalCode</value>
+  </data>
+  <data name="PreferredTimeZone.Text" xml:space="preserve">
+    <value>PreferredTimeZone</value>
+  </data>
+  <data name="Prefix.Text" xml:space="preserve">
+    <value>Prefix</value>
+  </data>
+  <data name="Profile.Text" xml:space="preserve">
+    <value>Profile Properties</value>
+  </data>
+  <data name="Region.Text" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="RoleName.Text" xml:space="preserve">
+    <value>Role Name</value>
+  </data>
+  <data name="Security.Text" xml:space="preserve">
+    <value>Security Roles</value>
+  </data>
+  <data name="Skype.Text" xml:space="preserve">
+    <value>Skype</value>
+  </data>
+  <data name="Street.Text" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="Telephone.Text" xml:space="preserve">
+    <value>Telephone</value>
+  </data>
+  <data name="TimeZone.Text" xml:space="preserve">
+    <value>TimeZone</value>
+  </data>
+  <data name="Twitter.Text" xml:space="preserve">
+    <value>Twitter</value>
+  </data>
+  <data name="Unit.Text" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="UserName.Text" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Website.Text" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="ChangePassword.OFF" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="ChangePassword.ON" xml:space="preserve">
+    <value>YES</value>
+  </data>
+  <data name="ChangePassword.Text" xml:space="preserve">
+    <value>Force User to Change Password on Next Login</value>
+  </data>
+  <data name="CheckDisplayName.OFF" xml:space="preserve">
+    <value>Disable</value>
+  </data>
+  <data name="CheckDisplayName.ON" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="CheckDisplayName.Text" xml:space="preserve">
+    <value>Automatically generate display name if needed</value>
+  </data>
+  <data name="CheckUserName.OFF" xml:space="preserve">
+    <value>Disable</value>
+  </data>
+  <data name="CheckUserName.ON" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="CheckUserName.Text" xml:space="preserve">
+    <value>Automatically generate username if needed</value>
+  </data>
+  <data name="DeleteUsers.OFF" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="DeleteUsers.ON" xml:space="preserve">
+    <value>YES</value>
+  </data>
+  <data name="GeneratePassword.OFF" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="GeneratePassword.ON" xml:space="preserve">
+    <value>YES</value>
+  </data>
+  <data name="GeneratePassword.Text" xml:space="preserve">
+    <value>Automatically generate password if needed</value>
+  </data>
+  <data name="Import.Text" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="SqlQuery.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TypeImport.Text" xml:space="preserve">
+    <value>Type : Import</value>
+  </data>
+  <data name="JobsList_Columns_Email.Text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="JobsList_Search.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SecurityRoles.Text" xml:space="preserve">
+    <value>Security Roles</value>
+  </data>
+  <data name="UserAccount.Text" xml:space="preserve">
+    <value>Import Action</value>
+  </data>
+  <data name="Preview.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Emailaddress.Text" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="Firstinitialandlastname.Text" xml:space="preserve">
+    <value>First initial and lastname</value>
+  </data>
+  <data name="Firstnameandlastinitial.Text" xml:space="preserve">
+    <value>Firstname and last initial</value>
+  </data>
+  <data name="Firstnameandlastname.Text" xml:space="preserve">
+    <value>Firstname and lastname</value>
+  </data>
+  <data name="Lastinitialandfirstname.Text" xml:space="preserve">
+    <value>Last initial and firstname</value>
+  </data>
+  <data name="Lastnameandfirstinitial.Text" xml:space="preserve">
+    <value>Lastname and first initial</value>
+  </data>
+  <data name="Lastnameandfirstname.Text" xml:space="preserve">
+    <value>Lastname and firstname</value>
+  </data>
+  <data name="Update.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="ImportWizard.Text" xml:space="preserve">
+    <value>Import Wizard</value>
+  </data>
+  <data name="CreateSecurityRoles.Text" xml:space="preserve">
+    <value>Create Security Roles</value>
+  </data>
+  <data name="CreateUpdateUsers.Text" xml:space="preserve">
+    <value>Create &amp; Update Users</value>
+  </data>
+  <data name="CreateUsers.Text" xml:space="preserve">
+    <value>Create Users</value>
+  </data>
+  <data name="UserAccounts.Text" xml:space="preserve">
+    <value>User Accounts</value>
+  </data>
+  <data name="ImportError.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="ImportError_Columns_DisplayName.Text" xml:space="preserve">
+    <value>DisplayName</value>
+  </data>
+  <data name="ImportError_Columns_Email.Text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ImportError_Columns_Error.Text" xml:space="preserve">
+    <value>Error Message</value>
+  </data>
+  <data name="ImportError_Columns_Password.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ImportError_Columns_Profile_PreferredTimeZone.Text" xml:space="preserve">
+    <value>PreferredTimeZone</value>
+  </data>
+  <data name="ImportError_Columns_SecurityRoles.Text" xml:space="preserve">
+    <value>SecurityRoles</value>
+  </data>
+  <data name="ImportError_Columns_Username.Text" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Download.Text" xml:space="preserve">
+    <value>Download</value>
+  </data>
+</root>
