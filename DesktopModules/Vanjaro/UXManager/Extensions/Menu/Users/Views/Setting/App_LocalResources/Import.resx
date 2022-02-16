@@ -232,19 +232,19 @@
     <value>Force User to Change Password on Next Login</value>
   </data>
   <data name="CheckDisplayName.OFF" xml:space="preserve">
-    <value>Disable</value>
+    <value>NO</value>
   </data>
   <data name="CheckDisplayName.ON" xml:space="preserve">
-    <value>Enable</value>
+    <value>YES</value>
   </data>
   <data name="CheckDisplayName.Text" xml:space="preserve">
     <value>Automatically generate display name if needed</value>
   </data>
   <data name="CheckUserName.OFF" xml:space="preserve">
-    <value>Disable</value>
+    <value>NO</value>
   </data>
   <data name="CheckUserName.ON" xml:space="preserve">
-    <value>Enable</value>
+    <value>YES</value>
   </data>
   <data name="CheckUserName.Text" xml:space="preserve">
     <value>Automatically generate username if needed</value>
