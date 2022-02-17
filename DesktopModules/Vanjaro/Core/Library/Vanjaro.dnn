@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="6.0">
 	<packages>
-		<package name="Vanjaro" type="Library" version="01.03.00">
+		<package name="Vanjaro" type="Library" version="01.03.01">
 			<friendlyName>Vanjaro</friendlyName>
 			<description>Vanjaro is a .Net Digital Experience Platform (DXP) built on DNN. It's also available as an Extension for DNN.</description>
 			<dependencies>
@@ -68,7 +68,7 @@
 						<script type="UnInstall">
 							<path>Install</path>
 							<name>Uninstall.Core.SqlDataProvider</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</script>
 					</scripts>
 				</component>
@@ -98,7 +98,7 @@
 						<script type="UnInstall">
 							<path>Install</path>
 							<name>Uninstall.Common.SqlDataProvider</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</script>
 					</scripts>
 				</component>
@@ -118,7 +118,7 @@
 						<script type="UnInstall">
 							<path>Install</path>
 							<name>Uninstall.URL.SqlDataProvider</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</script>
 					</scripts>
 				</component>
@@ -133,7 +133,7 @@
 						<script type="UnInstall">
 							<path>Install</path>
 							<name>Uninstall.Migrate.SqlDataProvider</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</script>
 					</scripts>
 				</component>
@@ -151,12 +151,12 @@
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.Core.Providers.Mail.VanjaroMailProvider.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.Core.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
@@ -166,317 +166,317 @@
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Library.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.Common.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.URL.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.About.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.SectionSettings.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.Icon.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.Image.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.Link.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.ModuleSettings.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.Video.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.BlockLanguage.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.BreadCrumb.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.Custom.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.Login.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.Logo.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.Menu.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.Profile.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.Register.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.RegisterLink.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.SearchInput.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Block.SearchResult.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Azure.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.EmailServiceProvider.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.GoogleAnalytics.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.GoogleReCaptcha.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.GoogleTagManager.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Pixabay.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.YouTube.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Assets.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.CustomCSS.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Domain.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Extensions.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Help.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Languages.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.LogoAndTitle.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Logs.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.LogsSettings.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Pages.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Roles.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Scheduler.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Security.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.SEO.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.SiteGroups.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Sites.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.SQLConsole.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Theme.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Users.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Workflow.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Toolbar.DeviceMode.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Privacy.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Toolbar.Fullscreen.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Toolbar.Language.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Toolbar.Navigator.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Toolbar.PageSetting.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Toolbar.Preview.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Toolbar.Redo.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Toolbar.Undo.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Toolbar.VersionManagement.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Toolbar.ViewLayout.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.Migrate.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.Core.Extensions.Notification.Notification.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.Core.Extensions.Workflow.Review.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
@@ -485,12 +485,12 @@
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.Skin.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.Container.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
@@ -505,12 +505,12 @@
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.MemberProfile.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 						<assembly>
 							<path>bin</path>
 							<name>Vanjaro.UXManager.Extensions.Menu.Memberships.dll</name>
-							<version>01.03.00</version>
+							<version>01.03.01</version>
 						</assembly>
 					</assemblies>
 				</component>
