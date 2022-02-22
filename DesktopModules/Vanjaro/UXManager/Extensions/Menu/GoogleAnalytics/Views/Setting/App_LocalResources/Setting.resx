@@ -126,4 +126,7 @@
   <data name="MeasurementID.Text" xml:space="preserve">
     <value>Measurement ID</value>
   </data>
+  <data name="TrackingID.Text" xml:space="preserve">
+    <value>Tracking ID</value>
+  </data>
 </root>
