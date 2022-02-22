@@ -6,7 +6,10 @@
     };
 
     $scope.Click_Update = function () {
-        Data = { MeasurementID: $scope.ui.data.MeasurementID.Value };
+        Data = {
+            MeasurementID: $scope.ui.data.MeasurementID.Value,
+            TrackingID: $scope.ui.data.TrackingID.Value
+        };
         common.webApi.post('Setting/save', '', Data).then(function (Response) {
             $scope.Click_Cancel();
         });
