@@ -219,6 +219,14 @@ namespace Vanjaro.Skin
                 GoogleAnalyticsScript.Text = "<script async src=\"https://www.googletagmanager.com/gtag/js?id=" + MeasurementID + "\"></script><script>window.dataLayer = window.dataLayer || [];  function gtag() { dataLayer.push(arguments); } gtag('js', new Date());gtag('config', '" + MeasurementID + "');</script>";
                 Page.Header.Controls.AddAt(0, GoogleAnalyticsScript);
             }
+
+            string TrackingID = SettingManager.GetPortalSetting("Vanjaro.Integration.GoogleAnalytics.TrackingID", true);
+            if (!string.IsNullOrEmpty(TrackingID))
+            {
+                Literal UniversalAnalyticsScript = new Literal();
+                UniversalAnalyticsScript.Text = "<script async src=\"https://www.googletagmanager.com/gtag/js?id=" + TrackingID + "\"></script><script>window.dataLayer = window.dataLayer || [];  function gtag() { dataLayer.push(arguments); } gtag('js', new Date());gtag('config', '" + TrackingID + "');</script>";
+                Page.Header.Controls.AddAt(0, UniversalAnalyticsScript);
+            }
         }
 
         private void AccessDenied()
