@@ -84,5 +84,10 @@ namespace Vanjaro.Common.Manager
         {
             NotificationFactory.TestSmtp(smtp, ToEmail, FriendlyName, FromEmail, FromName, ReplyTo, ref SuccessfulMessage, ref ExceptionsMessage);
         }
+
+        public static SmtpServer GetSMTP(bool IsGlobal, int PortalId)
+        {
+            return NotificationFactory.GetSMTP(IsGlobal, PortalId);
+        }
     }
 }
