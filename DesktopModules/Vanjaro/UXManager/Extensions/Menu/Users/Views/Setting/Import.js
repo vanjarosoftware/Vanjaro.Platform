@@ -124,6 +124,7 @@
                 }
                 if (dImport.length > $scope.ui.data.MaximumUsersImportLimit.Value) {
                     window.parent.swal('[LS:MaximumUsersImportLimit]');
+                    $scope.isDisabled = false;
                 } else {
                     common.webApi.post('import/importdata', '', data).then(function (data) {
                         if (data.data != null && data.data.IsSuccess) {
@@ -144,6 +145,7 @@
                             else if (data.data != null && data.data.Message != null) {
                                 window.parent.swal(data.data.Message);
                             }
+                            $scope.isDisabled = false;
                         }
                     })
                 }
