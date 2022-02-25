@@ -89,13 +89,15 @@ namespace Vanjaro.Skin
                 //string MigrateOverridePageNoBtn = DNNLocalization.Localization.GetString("MigrateOverridePageNoBtn", LocalResourcesFile) ?? "No";
                 string MigrateToastTitle = DNNLocalization.Localization.GetString("MigrateToastTitle", LocalResourcesFile) ?? "Migrate Page";
 
+                Markup.Append("$(document).ready(function(){");
                 Markup.Append("var MigratePageMarkup=$('<div>');  MigratePageMarkup.addClass('MigratedPage-Confirmbox');");
 
                 Markup.Append("var PublishBtn = $('<button>'); PublishBtn.text('" + MigratePublishBtn + "');");
                 Markup.Append("PublishBtn.addClass('btn btn-success pubish-btn btn-sm');");
+                Markup.Append("PublishBtn.click(function(){ $('.MigratedPage-Confirmbox .pubish-btn').attr('disabled','disabled'); $('#VJBtnPublish').click(); });");
 
                 Markup.Append("var OverridePageYesBtn = $('<button>'); OverridePageYesBtn.text('" + MigrateOverridePageYesBtn + "');");
-                Markup.Append("OverridePageYesBtn.addClass(' reimportbtn btn btn-danger btn-sm') ; OverridePageYesBtn.click(function(){");
+                Markup.Append("OverridePageYesBtn.addClass('reimportbtn btn btn-danger btn-sm') ; OverridePageYesBtn.click(function(){");
                 Markup.Append("swal({ title: '" + DNNLocalization.Localization.GetString("ReImportContent_Title", LocalResourcesFile) + "',text: '" + DNNLocalization.Localization.GetString("ReImportContent_Text", LocalResourcesFile) + "',type: 'warning', showCancelButton: true, confirmButtonColor: '#DD6B55', confirmButtonText: '" + DNNLocalization.Localization.GetString("ReImportContent_Button", LocalResourcesFile) + "',cancelButtonText: '" + DNNLocalization.Localization.GetString("ReImportContent_CancelButton", LocalResourcesFile) + "',closeOnConfirm: true,closeOnCancel: true},function(isConfirm) { if(isConfirm){");
                 Markup.Append(" var sf = $.ServicesFramework(-1);");
                 Markup.Append("$.ajax({ type: \"GET\",url:$.ServicesFramework(-1).getServiceRoot(\"Vanjaro\") + \"Page/Delete\" + \"?m2v=true\",");
@@ -110,7 +112,8 @@ namespace Vanjaro.Skin
                 Markup.Append("MigratePageMarkup.append(PublishBtn);");
                 Markup.Append("MigratePageMarkup.append(OverridePageYesBtn);");
                 Markup.Append("window.parent.ShowNotification('" + MigrateToastTitle + "',MigratePageMarkup, 'info', '', false,false);");
-                Markup.Append("$('.MigratedPage-Confirmbox').parents('.toast-info').addClass('migrate-toast')");
+                Markup.Append("$('.MigratedPage-Confirmbox').parents('.toast-info').addClass('migrate-toast');");
+                Markup.Append("});");
 
                 return Markup.ToString();
             }
@@ -118,7 +121,7 @@ namespace Vanjaro.Skin
             internal static string GetMigratePageCSS(Page page)
             {
                 StringBuilder Markup = new StringBuilder();
-                Markup.Append("#toast-container .toastr.migrate-toast{width: 260px;padding: 15px 15px 15px 30px;} #toast-container .toastr.migrate-toast:before {content: none;} .toast-message .pubish-btn, .toast-message .reimportbtn{width: 90px !important;}");
+                Markup.Append("#toast-container .toastr.migrate-toast{width: 280px;padding: 15px 15px 24px 50px;} #toast-container .toastr.migrate-toast:before {content: none;} .toast-message .pubish-btn, .toast-message .reimportbtn{width: 90px !important;}");
                 return Markup.ToString();
             }
 
