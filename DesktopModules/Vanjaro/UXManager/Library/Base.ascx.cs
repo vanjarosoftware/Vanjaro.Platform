@@ -48,7 +48,7 @@ namespace Vanjaro.UXManager.Library
         {
 #if RELEASE
             TemplateLibraryURL = "https://library.vanjaro.cloud/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower() + "/type/block";
-            ExtensionStoreURL = "https://store.vanjaro.com/install?mode=" + Vanjaro.Common.Components.Product.SKU + "&vjver=" + Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.');
+            ExtensionStoreURL = "https://store.vanjaro.cloud/install?mode=" + Vanjaro.Common.Components.Product.SKU + "&vjver=" + Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.');
 # else
             TemplateLibraryURL = "http://library.vanjaro.local/templates/tid/" + Core.Managers.ThemeManager.CurrentTheme.GUID.ToLower() + "/type/block";
             ExtensionStoreURL = "http://store.vanjaro.local/install?mode=" + Vanjaro.Common.Components.Product.SKU + "&vjver=" + Core.Managers.SettingManager.GetVersion().TrimEnd('0').TrimEnd('.');
