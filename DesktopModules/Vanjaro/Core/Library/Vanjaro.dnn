@@ -65,6 +65,11 @@
 							<name>Core.01.02.00.SqlDataProvider</name>
 							<version>01.02.00</version>
 						</script>
+            <script type="Install">
+              <path>Install</path>
+              <name>Core.01.03.01.SqlDataProvider</name>
+              <version>01.03.01</version>
+            </script>
 						<script type="UnInstall">
 							<path>Install</path>
 							<name>Uninstall.Core.SqlDataProvider</name>
@@ -1205,7 +1210,7 @@
 				<attributes>
 					<businessControllerClass>Vanjaro.Core.Components.BusinessController, Vanjaro.Core</businessControllerClass>
 					<desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-					<upgradeVersionsList>01.00.00,01.00.01,01.00.02,01.00.05,01.01.00,01.02.00</upgradeVersionsList>
+					<upgradeVersionsList>01.00.00,01.00.01,01.00.02,01.00.05,01.01.00,01.02.00,01.03.01</upgradeVersionsList>
 				</attributes>
 			</eventMessage>
 		</package>
