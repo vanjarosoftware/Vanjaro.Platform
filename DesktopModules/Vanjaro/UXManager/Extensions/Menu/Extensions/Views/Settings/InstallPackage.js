@@ -23,6 +23,7 @@
         });
         if (val) {
             $scope.DisableFinish = true;
+            $('#Finish').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Installing...');
             common.webApi.get('InstallPackage/install').then(function (Response) {
                 if (Response.data.Data.length === 0) {
                     window.parent.ShowNotification('[L:Products]','[L:InstalledSuccessfully]', 'success');
