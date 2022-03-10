@@ -75,7 +75,8 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
                 {
                     NotificationManager.Dismiss(Notification.NotificationID, this.UserInfo.UserID);
                 }
-                response.TotalNotifications = TotalNotifications;
+                response.NotifyCount = NotificationManager.RenderNotificationsCount(PortalSettings.PortalId);
+                response.NotificationsCount = NotificationsController.Instance.CountNotifications(this.UserInfo.UserID, PortalSettings.PortalId);
                 response.IsSuccess = true;
                 CacheFactory.Clear(CacheFactory.Keys.NotificationTask + "PortalID" + PortalSettings.PortalId);
             }
