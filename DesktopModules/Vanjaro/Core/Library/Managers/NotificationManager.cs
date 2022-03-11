@@ -1,4 +1,7 @@
-﻿using DotNetNuke.Services.Social.Messaging.Internal;
+﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Portals;
+using DotNetNuke.Services.Cache;
+using DotNetNuke.Services.Social.Messaging.Internal;
 using DotNetNuke.Services.Social.Notifications;
 using System;
 using System.Collections.Generic;
@@ -23,6 +26,11 @@ namespace Vanjaro.Core
                 if (recipient != null)
                 {
                     NotificationsController.Instance.DeleteNotificationRecipient(NotificationId, UserID);
+
+                    #region Clear Notification count cache
+                    var cacheKey = string.Format(DataCache.UserNotificationsCountCacheKey, PortalSettings.Current.PortalId, UserID);
+                    CachingProvider.Instance().Clear("Prefix", cacheKey);
+                    #endregion
                 }
             }
             #endregion

@@ -35,9 +35,13 @@
         };
         common.webApi.post('Notification/Dismiss', '', postData).then(function (data) {
             if (data.data.IsSuccess) {
-                $("#VJnotifycount", parent.document).text(parseInt($("#VJnotifycount", parent.document).text()) - 1);
-                $('#Notification .Messagetab a>span', window.document).html(parseInt($('#Notification .Messagetab a>span', window.document).html()) - 1);
-                $('.registerlink-notification > sup > strong', parent.document).text(parseInt($('#Notification .Messagetab a>span', window.document).html()) - 1);
+                $("#VJnotifycount", parent.document).text(data.data.NotifyCount);
+                $('#Notification .Messagetab a>span', window.document).html(data.data.NotificationsCount);
+
+                $(parent.document).find('.gjs-frame').contents().find('.registerlink-notification-profile sup strong').text(data.data.NotifyCount);
+
+                $(parent.document).find('.registerlink-notification span').text(data.data.NotifyCount);
+                $(parent.document).find('.registerlink-notification-profile sup strong').text(data.data.NotifyCount);
                 $scope.Pipe_NotificationsPages($scope.NotificationsPagestableState);
             }
         });
@@ -58,9 +62,14 @@
                 if (isConfirm) {
                     common.webApi.post('Notification/DismissAll', '',).then(function (data) {
                         if (data.data.IsSuccess) {
-                            $("#VJnotifycount", parent.document).text(parseInt($("#VJnotifycount", parent.document).text()) - data.data.TotalNotifications);
-                            $('#Notification .Messagetab a>span', window.document).html(parseInt($('#Notification .Messagetab a>span', window.document).html()) - data.data.TotalNotifications);
-                            $('.registerlink-notification > sup > strong', parent.document).text(parseInt($('#Notification .Messagetab a>span', window.document).html()) - data.data.TotalNotifications);
+                            $("#VJnotifycount", parent.document).text(data.data.NotifyCount);
+                            $('#Notification .Messagetab a>span', window.document).html(data.data.NotificationsCount);
+
+                            $(parent.document).find('.gjs-frame').contents().find('.registerlink-notification-profile sup strong').text(data.data.NotifyCount);
+
+                            $(parent.document).find('.registerlink-notification span').text(data.data.NotifyCount);
+                            $(parent.document).find('.registerlink-notification-profile sup strong').text(data.data.NotifyCount);
+
                             $scope.Pipe_NotificationsPages($scope.NotificationsPagestableState);
                         }
                     });
