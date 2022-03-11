@@ -194,6 +194,11 @@ namespace Vanjaro.Core
                             }
                         }
                         break;
+                    case "01.03.01":
+                        {
+                            HostController.Instance.Update("HostTitle", "Vanjaro");
+                        }
+                        break;
                 }
             }
 
