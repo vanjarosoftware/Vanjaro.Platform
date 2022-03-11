@@ -37,11 +37,14 @@
             if (data.data.IsSuccess) {
                 $("#VJnotifycount", parent.document).text(data.data.NotifyCount);
                 $('#Notification .Messagetab a>span', window.document).html(data.data.NotificationsCount);
-
+                //Set notification count (My Account) block in edit mode 
                 $(parent.document).find('.gjs-frame').contents().find('.registerlink-notification-profile sup strong').text(data.data.NotifyCount);
 
-                $(parent.document).find('.registerlink-notification span').text(data.data.NotifyCount);
+                $(parent.document).find('.registerlink-notification span.badge').text(data.data.NotifyCount);
                 $(parent.document).find('.registerlink-notification-profile sup strong').text(data.data.NotifyCount);
+                //Set notification count in Mobile mode 
+                $(parent.document).find('.mobile-registerbox-btn sup strong').text(data.data.NotifyCount);
+
                 $scope.Pipe_NotificationsPages($scope.NotificationsPagestableState);
             }
         });
@@ -64,11 +67,13 @@
                         if (data.data.IsSuccess) {
                             $("#VJnotifycount", parent.document).text(data.data.NotifyCount);
                             $('#Notification .Messagetab a>span', window.document).html(data.data.NotificationsCount);
-
+                            //Set notification count (My Account) block in edit mode 
                             $(parent.document).find('.gjs-frame').contents().find('.registerlink-notification-profile sup strong').text(data.data.NotifyCount);
 
-                            $(parent.document).find('.registerlink-notification span').text(data.data.NotifyCount);
+                            $(parent.document).find('.registerlink-notification span.badge').text(data.data.NotifyCount);
                             $(parent.document).find('.registerlink-notification-profile sup strong').text(data.data.NotifyCount);
+                            //Set notification count in Mobile mode 
+                            $(parent.document).find('.mobile-registerbox-btn sup strong').text(data.data.NotifyCount);
 
                             $scope.Pipe_NotificationsPages($scope.NotificationsPagestableState);
                         }
