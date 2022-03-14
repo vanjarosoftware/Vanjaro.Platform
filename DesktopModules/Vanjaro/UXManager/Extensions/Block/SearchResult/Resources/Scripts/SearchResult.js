@@ -36,7 +36,7 @@
                         });
 
                         if (attr == findcurrentElement) {
-                            $(obj).closest('div[data-block-global]').find('.searchresultsmarkup').append($(v.Markup).find('.searchresultsmarkup .conatiner.searchbox'));
+                            $(obj).closest('div[data-block-global]').find('.searchresultsmarkup').append($(v.Markup).find('.searchresultsmarkup .container.searchbox'));
                             $(obj).closest('div[data-block-global]').find('.searchresultsmarkup').attr('attr-searchresult-pageindex', PageIndex);
                             if (!Boolean.parse($(v.Markup).find('.searchresultsmarkup').attr('attr-searchresult-more')))
                                 $(obj).closest('div[data-block-global]').find(".Searchresultpage #showMore").hide();
