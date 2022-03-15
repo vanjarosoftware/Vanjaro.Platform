@@ -628,11 +628,22 @@ namespace Vanjaro.Skin
                 if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value == "Language" && item.Attributes.Where(a => a.Name == "id").FirstOrDefault() != null && string.IsNullOrEmpty(item.InnerHtml))
                     AttributesToRemove.Add(item.Attributes.Where(a => a.Name == "id").FirstOrDefault());
 
-                foreach (var Attribute in item.Attributes)
+                if (item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault() != null && item.Attributes.Where(a => a.Name == "data-block-type").FirstOrDefault().Value == "Search Result")
                 {
+                    foreach (var Attribute in item.Attributes)
+                    {
+                        if (!Attribute.Name.StartsWith("data-block-global") && !Attribute.Name.StartsWith("data-block-guid"))
+                            AttributesToRemove.Add(Attribute);
+                    }
+                }
+                else
+                {
+                    foreach (var Attribute in item.Attributes)
+                    {
 
-                    if (Attribute.Name.StartsWith("data-block-"))
-                        AttributesToRemove.Add(Attribute);
+                        if (Attribute.Name.StartsWith("data-block-"))
+                            AttributesToRemove.Add(Attribute);
+                    }
                 }
                 foreach (var Attribute in AttributesToRemove)
                     item.Attributes.Remove(Attribute);
