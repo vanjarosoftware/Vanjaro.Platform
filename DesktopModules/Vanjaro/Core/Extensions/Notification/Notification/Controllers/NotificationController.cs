@@ -49,10 +49,10 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
             try
             {
                 NotificationManager.Dismiss(postData.NotificationId, this.UserInfo.UserID);
+                CacheFactory.Clear(CacheFactory.Keys.NotificationTask + "PortalID" + PortalSettings.PortalId);
                 response.NotifyCount = Core.Managers.NotificationManager.RenderNotificationsCount(PortalSettings.PortalId);
                 response.NotificationsCount = NotificationsController.Instance.CountNotifications(this.UserInfo.UserID, PortalSettings.PortalId);
                 response.IsSuccess = true;
-                CacheFactory.Clear(CacheFactory.Keys.NotificationTask + "PortalID" + PortalSettings.PortalId);
             }
             catch (Exception exc)
             {
@@ -75,10 +75,10 @@ namespace Vanjaro.Core.Extensions.Notification.Notification.Controllers
                 {
                     NotificationManager.Dismiss(Notification.NotificationID, this.UserInfo.UserID);
                 }
+                CacheFactory.Clear(CacheFactory.Keys.NotificationTask + "PortalID" + PortalSettings.PortalId);
                 response.NotifyCount = NotificationManager.RenderNotificationsCount(PortalSettings.PortalId);
                 response.NotificationsCount = NotificationsController.Instance.CountNotifications(this.UserInfo.UserID, PortalSettings.PortalId);
                 response.IsSuccess = true;
-                CacheFactory.Clear(CacheFactory.Keys.NotificationTask + "PortalID" + PortalSettings.PortalId);
             }
             catch (Exception exc)
             {
