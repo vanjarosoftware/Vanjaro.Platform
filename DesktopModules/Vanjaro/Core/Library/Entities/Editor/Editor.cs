@@ -43,7 +43,10 @@ namespace Vanjaro.Core.Entities
             string url = "/api/vanjaro/";
             if (HttpContext.Current != null)
             {
-                var alias = PortalAliasController.Instance.GetPortalAliasesByPortalId(PortalSettings.Current.PortalId).OrderByDescending(a => a.IsPrimary).FirstOrDefault();
+                var alias = PortalAliasController.Instance.GetPortalAliasesByPortalId(PortalSettings.Current.PortalId).Where(x => x.CultureCode == PortalSettings.Current.CultureCode && x.IsPrimary).OrderByDescending(a => a.IsPrimary).FirstOrDefault();
+                if (alias == null)
+                    alias = PortalAliasController.Instance.GetPortalAliasesByPortalId(PortalSettings.Current.PortalId).OrderByDescending(a => a.IsPrimary).FirstOrDefault();
+
                 var httpAlias = DotNetNuke.Common.Globals.AddHTTP(alias.HTTPAlias);
                 var originalUrl = HttpContext.Current.Items["UrlRewrite:OriginalUrl"];
                 httpAlias = DotNetNuke.Common.Globals.AddPort(httpAlias, originalUrl?.ToString().ToLowerInvariant() ?? httpAlias);
