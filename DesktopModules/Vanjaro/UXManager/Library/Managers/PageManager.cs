@@ -332,7 +332,7 @@ namespace Vanjaro.UXManager.Library
                 {
                     URL += "&TabId=" + TabID;
 
-                    if (LocaleController.Instance.GetLocales(pS.PortalId).Count() > 1)
+                    if (LocaleController.Instance.GetLocales(pS.PortalId).Count() > 1 && !string.IsNullOrEmpty(Language))
                         URL += "&language=" + Language;
                 }
                 URL += QueryParameters;
