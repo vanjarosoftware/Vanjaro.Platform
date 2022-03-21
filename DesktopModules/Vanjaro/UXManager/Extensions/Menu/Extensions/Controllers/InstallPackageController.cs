@@ -43,15 +43,6 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Controllers
             ActionResult actionResult = new ActionResult();
             List<InstallResultDto> installResults = Managers.InstallPackageManager.InstallPackage(PortalSettings, UserInfo, HttpContext.Current.Server.MapPath("\\DesktopModules\\Vanjaro\\Temp\\Install\\"));
             actionResult.Data = installResults;
-            if (installResults != null && installResults.Count > 0)
-            {
-                foreach (InstallResultDto InstallResultDto in installResults)
-                {
-                    PackageInfo packageInfo = PackageController.Instance.GetExtensionPackage(Null.NullInteger, (p) => p.PackageID == InstallResultDto.NewPackageId);
-                    if (packageInfo != null && packageInfo.PackageType.ToLower() == "module")
-                        ThemeManager.DeletePortalThemeCss();
-                }
-            }
             DataCache.ClearCache();
             actionResult.IsSuccess = true;
             return actionResult;

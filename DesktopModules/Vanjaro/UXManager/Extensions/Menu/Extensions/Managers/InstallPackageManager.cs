@@ -110,6 +110,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Extensions.Managers
                         InstallResultDto installResult = InstallController.Instance.InstallPackage(portalSettings, userInfo, null, item.Key, stream);
                         if (!installResult.Success)
                             installResults.Add(installResult);
+                        else
+                        {
+                            PackageInfo packageInfo = PackageController.Instance.GetExtensionPackage(Null.NullInteger, (p) => p.PackageID == installResult.NewPackageId);
+                            if (packageInfo != null && packageInfo.PackageType.ToLower() == "module")
+                                ThemeManager.DeletePortalThemeCss();
+                        }
                     }
                     catch (Exception ex)
                     {
