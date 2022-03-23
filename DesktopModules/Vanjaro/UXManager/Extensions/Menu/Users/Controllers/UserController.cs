@@ -124,7 +124,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                             Dictionary<string, string> additionalParameters = new Dictionary<string, string>();
                             additionalParameters.Add("icp=", "true");
                             additionalParameters.Add("guid=", ExtensionInfo.GUID.ToLower());
-                            Settings.Add("BrowseUrl", new UIData { Name = "BrowseUrl", Value = Common.Utilities.Utils.BrowseUrl(0, true, null, additionalParameters, true) });
+                            Settings.Add("BrowseUrl", new UIData { Name = "BrowseUrl", Value = Common.Utilities.Utils.BrowseUrl(0, true, "", additionalParameters) });
                             Settings.Add("AllowedAttachmentFileExtensions", new UIData { Name = "AllowedAttachmentFileExtensions", Value = FileSetting.FileType });
                             Settings.Add("MaxFileSize", new UIData { Name = "MaxFileSize", Value = FileSetting.FileSize.ToString() });
                             Settings.Add("UserDetails", new UIData { Name = "UserDetails", Options = UserManager.MapUserBasicDto(user, userDetails) });
