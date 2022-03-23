@@ -115,7 +115,7 @@ namespace Vanjaro.Common.Utilities
             return BrowseUrl(ModuleId, InculdePopup, Key, null);
         }
 
-        public static string BrowseUrl(int ModuleId, bool InculdePopup, string Key = "", Dictionary<string, string> additionalParameters = null)
+        public static string BrowseUrl(int ModuleId, bool InculdePopup, string Key = "", Dictionary<string, string> additionalParameters = null, bool IsIgnorePopSkin = false)
         {
 
             if (additionalParameters == null)
@@ -149,8 +149,10 @@ namespace Vanjaro.Common.Utilities
                 }
                 else
                 {
-                    result += "popUp=true&hidecommandbar=true&SkinSrc=[G]Skins/_default/popUpSkin";
+                    result += "popUp=true&hidecommandbar=true";
                 }
+                if(!IsIgnorePopSkin)
+                    result+= "&SkinSrc=[G]Skins/_default/popUpSkin";
             }
             result = result.TrimEnd('?', '&');
 

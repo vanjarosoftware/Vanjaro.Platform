@@ -141,6 +141,18 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Factories
 
             Views.Add(import);
 
+            Views.Add(
+                new AngularView
+                {
+                    Identifier = Identifier.common_controls_url.ToString(),
+                    IsCommon = true,
+                    UrlPaths = new List<string>() { "common/controls/url/:uid" },
+                    TemplatePath = "common/controls/url.html",
+                    AccessRoles = "user",
+                    Defaults = new Dictionary<string, string>()
+                }
+            );
+
             return Views;
         }
 
@@ -190,7 +202,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Factories
         }
         public enum Identifier
         {
-            setting_setting, setting_adduser, setting_users, setting_changepassword, setting_updateprofile, setting_import
+            setting_setting, setting_adduser, setting_users, setting_changepassword, setting_updateprofile, setting_import, common_controls_url
         }
     }
 }
