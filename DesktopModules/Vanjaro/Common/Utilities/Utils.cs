@@ -149,7 +149,7 @@ namespace Vanjaro.Common.Utilities
                 }
                 else
                 {
-                    result += "popUp=true&hidecommandbar=true&SkinSrc=[G]Skins/_default/popUpSkin";
+                    result += "popUp=true&hidecommandbar=true&SkinSrc=[g]skins/vanjaro/base";
                 }
             }
             result = result.TrimEnd('?', '&');
