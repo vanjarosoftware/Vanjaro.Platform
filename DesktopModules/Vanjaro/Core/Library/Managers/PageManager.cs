@@ -420,15 +420,14 @@ namespace Vanjaro.Core
                         Dictionary<string, List<string>> StyleIds = new Dictionary<string, List<string>>();
                         Dictionary<string, dynamic> GlobalKeyValuePairs = new Dictionary<string, dynamic>();
                         Dictionary<string, dynamic> GlobalStyleKeyValuePairs = new Dictionary<string, dynamic>();
-                        try { var globalblocks = Data["gjs-globalblocks"]; }
-                        catch { Data["gjs-globalblocks"] = ""; }
+                        MapPostData(Data, GlobalKeyValuePairs, GlobalStyleKeyValuePairs);
                         var DeserializedGlobalBlocksJSON = Data["gjs-globalblocks"] != null ? JsonConvert.DeserializeObject(Data["gjs-globalblocks"].ToString()) : string.Empty;
                         var DeserializedContentJSON = JsonConvert.DeserializeObject(Data["gjs-components"].ToString());
                         var DeserializedStyleJSON = JsonConvert.DeserializeObject(Data["gjs-styles"].ToString());
-                        GetAllIds(DeserializedContentJSON, Ids);
-                        FilterStyle(DeserializedStyleJSON, Ids);
-                        RemoveGlobalBlockComponents(DeserializedContentJSON, StyleIds, GlobalKeyValuePairs, DeserializedGlobalBlocksJSON);
-                        RemoveGlobalBlockStyles(DeserializedStyleJSON, StyleIds, GlobalStyleKeyValuePairs);
+                        //GetAllIds(DeserializedContentJSON, Ids);
+                        //FilterStyle(DeserializedStyleJSON, Ids);
+                        //RemoveGlobalBlockComponents(DeserializedContentJSON, StyleIds, GlobalKeyValuePairs, DeserializedGlobalBlocksJSON);
+                        //RemoveGlobalBlockStyles(DeserializedStyleJSON, StyleIds, GlobalStyleKeyValuePairs);
                         BuildCustomBlocks(PortalSettings.PortalId, DeserializedContentJSON, DeserializedStyleJSON);
                         page.ContentJSON = AbsoluteToRelativeUrls(JsonConvert.SerializeObject(DeserializedContentJSON), aliases);
 
@@ -587,6 +586,24 @@ namespace Vanjaro.Core
                     }
                 }
                 return css;
+            }
+
+            private static void MapPostData(dynamic Data, Dictionary<string, dynamic> GlobalKeyValuePairs, Dictionary<string, dynamic> GlobalStyleKeyValuePairs)
+            {
+                try { var globalblocks = Data["gjs-globalblocks"]; }
+                catch { Data["gjs-globalblocks"] = ""; }
+                try
+                {
+                    foreach (dynamic con in JsonConvert.DeserializeObject(Data["gjs-globalkeyvaluepairs"].ToString()))
+                        GlobalKeyValuePairs.Add(con.guid.Value, con.value);
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    foreach (dynamic con in JsonConvert.DeserializeObject(Data["gjs-globalstylekeyvaluepairs"].ToString()))
+                        GlobalStyleKeyValuePairs.Add(con.Key.Value, con.Value);
+                }
+                catch (Exception ex) { }
             }
 
             private static void UpdateGlobalBlocks(PortalSettings portalSettings, Dictionary<string, dynamic> globalKeyValuePairs, Dictionary<string, dynamic> globalStyleKeyValuePairs, dynamic blocksJSON, IEnumerable<string> aliases, bool IsPublished)

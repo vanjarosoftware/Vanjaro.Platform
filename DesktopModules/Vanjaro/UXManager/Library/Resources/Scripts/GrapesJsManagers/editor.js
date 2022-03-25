@@ -3058,36 +3058,37 @@ $(document).ready(function () {
                                     $.each(getAllComponents(), function (k, v) {
                                         if (v.attributes.type == "globalblockwrapper" && $(v.getEl()).find('.fa-unlock').length <= 0) {
                                             try {
-                                                    if (v.attributes != undefined)
-                                                        v.attributes.content = '';
-                                                    var content = { html: '', css: '' };
-                                                    $.each(v.attributes.components.models, function (mi, mv) {
-                                                        var mvcontent = VjEditor.runCommand("export-component", {
-                                                            component: mv
-                                                        });
-                                                        if (mvcontent != undefined && mvcontent.html != undefined && mvcontent.html != "") {
-                                                            content.html += mvcontent.html;
-                                                            content.css += mvcontent.css;
-                                                        }
+                                                if (v.attributes != undefined)
+                                                    v.attributes.content = '';
+                                                var content = { html: '', css: '' };
+                                                $.each(v.attributes.components.models, function (mi, mv) {
+                                                    var mvcontent = VjEditor.runCommand("export-component", {
+                                                        component: mv
                                                     });
-                                                    if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
-                                                        var item = {
-                                                            ccid: v.attributes.attributes['id'],
-                                                            guid: v.attributes.attributes['data-guid'],
-                                                            html: content.html,
-                                                            css: content.css,
-                                                        };
-                                                        globalblocks.push(item);
-                                                        if (v.attributes != undefined && v.attributes.attributes != undefined && v.attributes.attributes.published != undefined) {
-                                                            v.attributes.attributes.published = true;
-                                                        }
+                                                    if (mvcontent != undefined && mvcontent.html != undefined && mvcontent.html != "") {
+                                                        content.html += mvcontent.html;
+                                                        content.css += mvcontent.css;
+                                                    }
+                                                });
+                                                if (content != undefined && content.html != undefined && content.html != "" && $(content.html)[0].innerHTML != "") {
+                                                    var item = {
+                                                        ccid: v.attributes.attributes['id'],
+                                                        guid: v.attributes.attributes['data-guid'],
+                                                        html: content.html,
+                                                        css: content.css,
+                                                    };
+                                                    globalblocks.push(item);
+                                                    if (v.attributes != undefined && v.attributes.attributes != undefined && v.attributes.attributes.published != undefined) {
+                                                        v.attributes.attributes.published = true;
                                                     }
                                                 }
-                                                catch (err) { console.log(err); }
                                             }
+                                            catch (err) { console.log(err); }
+                                        }
                                     });
                                     Data.globalblocks = JSON.stringify(globalblocks);
-                                 }
+                                    Data = VjCleanData(Data);
+                                }
                             });
 
                             VjEditor.on('storage:error', (err) => {
@@ -3211,6 +3212,223 @@ $(document).ready(function () {
         $("#iframeHolder, #StyleToolManager, .Menupanel-top, #About, #Shortcuts").hide();
         $(".panel-top, #BlockManager, .block-set, #ContentBlocks").show();
     };
+
+    //start data cleanup
+    var VjCleanData = function (Data) {
+        var Css = Data.css;
+        var Content = Data.html;
+        var Components = JSON.parse(Data.components);
+        var Styles = JSON.parse(Data.styles);
+        var Globalblocks = Data.globalblocks != undefined ? JSON.parse(Data.globalblocks) : '';
+        var Ids = [];
+        VjGetAllIds(Components, Ids);
+        Styles = VjFilterStyle(Styles, Ids);
+        var StyleIds = [];
+        var GlobalKeyValuePairs = [];
+        var GlobalStyleKeyValuePairs = [];
+        VjRemoveGlobalBlockComponents(Components, StyleIds, GlobalKeyValuePairs, Globalblocks);
+        VjRemoveGlobalBlockStyles(Styles, StyleIds, GlobalStyleKeyValuePairs);
+        Content = VjRemoveGlobalBlockContent(Content);
+        Css = VjFilterCss(Css, StyleIds);
+
+        Data.css = Css;
+        Data.html = Content;
+        Data.components = JSON.stringify(Components);
+        Data.styles = JSON.stringify(Styles);
+        Data.globalblocks = JSON.stringify(Globalblocks);
+        Data.globalkeyvaluepairs = JSON.stringify(GlobalKeyValuePairs);
+        Data.globalstylekeyvaluepairs = GlobalKeyValuePairs.length > 0 ? JSON.stringify(GlobalStyleKeyValuePairs) : '';
+        return Data;
+    };
+    var VjGetAllIds = function (contentJSON, ids) {
+        if (contentJSON != undefined) {
+            $.each(contentJSON, function (i, v) {
+                if (v.attributes != null && v.attributes["id"] != undefined)
+                    ids.push(v.attributes["id"]);
+                if (v.components != undefined)
+                    VjGetAllIds(v.components, ids);
+            });
+        }
+    };
+    var VjFilterStyle = function (styleJSON, ids) {
+        if (styleJSON != undefined) {
+            var itemsToRemove = [];
+            $.each(styleJSON, function (i, v) {
+                let selectorIds = [];
+                if (v.selectors != undefined) {
+                    $.each(v.selectors, function (ii, vv) {
+                        if (vv.name != undefined)
+                            selectorIds.push(vv.name);
+                        else {
+                            try { selectorIds.push(vv.replace(/#/gi, "").replace(/\./gi, "")); } catch { }
+                        }
+                    });
+                }
+                let del = true;
+                $.each(selectorIds, function (ii, vv) {
+                    if (ids.indexOf(vv) >= 0) {
+                        del = false;
+                        return false;
+                    }
+                });
+                if (del)
+                    itemsToRemove.push(v);
+            });
+            $.each(itemsToRemove, function (i, v) {
+                const index = styleJSON.indexOf(v);
+                if (index > -1) {
+                    styleJSON.splice(index, 1);
+                }
+            });
+        }
+        return styleJSON;
+    };
+    var VjRemoveGlobalBlockComponents = function (contentJSON, StyleIds, GlobalKeyValuePairs, DeserializedGlobalBlocksJSON) {
+        if (contentJSON != null) {
+            $.each(contentJSON, function (i, con) {
+                if (con.type != undefined && (con.type == "module" || con.type == "blockwrapper")) {
+                    con.content = "";
+                }
+                else if (con.type != undefined && con.type == "globalblockwrapper") {
+                    if (con.attributes != undefined && con.attributes["data-guid"] != undefined && VjGetGlobalIndex(GlobalKeyValuePairs, con.attributes["data-guid"]) < 0) {
+                        let ccid = '';
+                        if (con.attributes["id"] != undefined)
+                            ccid = con.attributes["id"];
+                        if (VjIsGlobalBlockUnlocked(ccid, con.attributes["data-guid"], DeserializedGlobalBlocksJSON))
+                            GlobalKeyValuePairs.push({ guid: con.attributes["data-guid"], value: con.components });
+                        VjExtractStyleIds(con.attributes["data-guid"], con.components, StyleIds);
+                        delete con.components;
+                    }
+                }
+                else if (con.components != undefined) {
+                    VjRemoveGlobalBlockComponents(con.components, StyleIds, GlobalKeyValuePairs, DeserializedGlobalBlocksJSON);
+                }
+            });
+        }
+    };
+    var VjIsGlobalBlockUnlocked = function (ccid, guid, blocksJSON) {
+        var result = false;
+        if (blocksJSON != undefined && blocksJSON.length > 0) {
+            $.each(blocksJSON, function (i, con) {
+                if (con.guid != undefined && con.guid == guid) {
+                    if (ccid != undefined && ccid.length > 0 && con.ccid != undefined) {
+                        if (con.ccid == ccid) {
+                            result = true;
+                            return false;
+                        }
+                    }
+                    else {
+                        result = true;
+                        return false;
+                    }
+                }
+            });
+        }
+        return result;
+    };
+    var VjExtractStyleIds = function (guid, components, styleIds) {
+        if (components != undefined) {
+            $.each(components, function (i, con) {
+                if (con.attributes != undefined && con.attributes["id"] != undefined) {
+                    var styleIndex = VjGetGlobalIndex(styleIds, guid);
+                    if (styleIndex >= 0) {
+                        let existing = styleIds[styleIndex];
+                        existing.value.push(con.attributes["id"]);
+                        styleIds[styleIndex] = existing;
+                    }
+                    else {
+                        let obj = [];
+                        obj.push(con.attributes["id"]);
+                        styleIds.push({ guid: guid, value: obj });
+                    }
+                }
+                if (con.components != null) {
+                    VjExtractStyleIds(guid, con.components, styleIds);
+                }
+            });
+        }
+    };
+    var VjRemoveGlobalBlockStyles = function (contentJSON, StyleIds, GlobalStyleKeyValuePairs) {
+        if (contentJSON != null) {
+            var itemsToRemove = [];
+            $.each(contentJSON, function (i, con) {
+                if (con.selectors != undefined) {
+                    $.each(con.selectors, function (i, cons) {
+                        var breaked = false;
+                        $.each(StyleIds, function (is, style) {
+                            try {
+                                if (cons != undefined && (cons.name != undefined && style.value.indexOf(cons.name) >= 0) || style.value.indexOf(cons.replace(/#/gi, "").replace(/\./gi, "")) >= 0) {
+                                    var styleIndex = VjGetGlobalStyleIndex(itemsToRemove, style.guid);
+                                    if (styleIndex >= 0) {
+                                        var existing = itemsToRemove[styleIndex];
+                                        existing.Value.push(con);
+                                        itemsToRemove[styleIndex] = existing;
+                                    }
+                                    else {
+                                        var obj = [];
+                                        obj.push(con);
+                                        itemsToRemove.push({ Key: style.guid, Value: obj });
+                                    }
+                                    breaked = true;
+                                    return false;
+                                }
+                            }
+                            catch (err) { }
+                        });
+                        if (breaked)
+                            return false;
+                    });
+                }
+            });
+            $.each(itemsToRemove, function (i, item) {
+                $.each(item.Value, function (ii, con) {
+                    const index = contentJSON.indexOf(con);
+                    if (index > -1) {
+                        contentJSON.splice(index, 1);
+                    }
+                });
+                GlobalStyleKeyValuePairs.push({ Key: item.Key, Value: item.Value });
+            });
+        }
+    };
+    var VjGetGlobalIndex = function (contentJSON, guid) {
+        var index = -1;
+        $.each(contentJSON, function (i, item) {
+            if (item.guid == guid) {
+                index = i;
+                return false;
+            }
+        });
+        return index;
+    };
+    var VjGetGlobalStyleIndex = function (contentJSON, guid) {
+        var index = -1;
+        $.each(contentJSON, function (i, item) {
+            if (item.Key == guid) {
+                index = i;
+                return false;
+            }
+        });
+        return index;
+    };
+    var VjRemoveGlobalBlockContent = function (Content) {
+        var markup = $('<div>' + Content + '</div>');
+        markup.find('[data-block-type="global"]').html('');
+        Content = markup.html();
+        return Content;
+    };
+    var VjFilterCss = function (Css, StyleIds) {
+        if (StyleIds.length > 0) {
+            $.each(StyleIds, function (i, item) {
+                $.each(item.value, function (ii, style) {
+                    var regexp = new RegExp("(#" + style + "*\s*{[^}]*})|(#" + style + ":[^{]*\s*{[^}]*})", 'ig');
+                    Css = Css.replace(regexp, '');
+                });
+            });
+        }
+        return Css;
+    };
+    //end data cleanup
 
     var GrapesjsDestroy = function () {
         if (VjEditor) {
