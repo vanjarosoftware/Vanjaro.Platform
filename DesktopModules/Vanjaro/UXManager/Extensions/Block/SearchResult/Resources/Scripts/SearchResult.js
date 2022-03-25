@@ -11,7 +11,7 @@
             if (v.name == "data-block-guid") {
                 mappedAttr[v.name] = v.value;
             }
-            if (v.name != 'data-block-pageindex' && v.name != 'id')
+            if (v.name == 'data-block-global' || v.name == 'data-block-guid')
                 attr += '[' + v.name + '=' + v.value + ']';
         });
 
@@ -27,16 +27,16 @@
                 'RequestVerificationToken': sf.getAntiForgeryValue()
             },
             success: function (response) {
-                if (response != null) {                   
+                if (response != null) {
                     $.each(response, function (k, v) {
                         var findcurrentElement = '';
                         $.each($(v.Markup)[0].attributes, function (key, value) {
-                            if (value.name != 'data-block-pageindex' && value.name != 'id')
+                            if (value.name == 'data-block-global' || value.name == 'data-block-guid')
                                 findcurrentElement += '[' + value.name + '=' + value.value + ']';
                         });
 
                         if (attr == findcurrentElement) {
-                            $(obj).closest('div[data-block-global]').find('.searchresultsmarkup').append($(v.Markup).find('.searchresultsmarkup .conatiner.searchbox'));
+                            $(obj).closest('div[data-block-global]').find('.searchresultsmarkup').append($(v.Markup).find('.searchresultsmarkup .container.searchbox'));
                             $(obj).closest('div[data-block-global]').find('.searchresultsmarkup').attr('attr-searchresult-pageindex', PageIndex);
                             if (!Boolean.parse($(v.Markup).find('.searchresultsmarkup').attr('attr-searchresult-more')))
                                 $(obj).closest('div[data-block-global]').find(".Searchresultpage #showMore").hide();

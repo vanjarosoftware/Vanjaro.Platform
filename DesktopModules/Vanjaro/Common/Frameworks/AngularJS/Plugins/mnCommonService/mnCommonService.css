@@ -9,6 +9,7 @@ uiengine {
 .validationGroup label.error {
     font-size: 12px;
     color: red;
+    width: 100%
 }
 
 .control-background {
@@ -255,6 +256,7 @@ a.btn.btn-primary.button-left {
             margin-right: 5px;
             width: 5px;
         }
+
 .browseurl .uploaddefault .l_folder span.arrowicon {
     margin-right: 0px;
 }
@@ -267,10 +269,11 @@ a.btn.btn-primary.button-left {
     background-color: transparent !important;
     border-color: transparent !important;
 }
-    .uploaddefault .l_folder .pagedir span.arrowicon {
-        position: relative;
-        right: 10px;
-    }
+
+.uploaddefault .l_folder .pagedir span.arrowicon {
+    position: relative;
+    right: 10px;
+}
 
 .uploaddefault span.fas.fa-folder {
     font-size: 10px;
@@ -961,8 +964,8 @@ a.page-link.active {
     background: #eee;
 }
 
-ul.pagination{
-    justify-content:center;
+ul.pagination {
+    justify-content: center;
 }
 
 .pagination a.page-link.active,
@@ -1065,3 +1068,122 @@ ul.nav.nav-tabs {
     -o-transition: background-color .2s linear,width .2s ease-in-out;
     transition: background-color .2s linear,width .2s ease-in-out;
 }
+
+/*Common Css*/
+
+.accordion-item {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}
+
+.accordion-header {
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: rgba(0,0,0,.03);
+}
+
+.accordion-button .fa-caret-right, .accordion-button .fa-caret-down {
+    transform: rotate( 0deg );
+    transition: .5s transform ease-in-out;
+    font-size: 20px;
+}
+
+.accordion-button[aria-expanded="true"] .fa-caret-right {
+    transform: rotate( 90deg );
+    transition: .5s transform ease-in-out;
+}
+
+.accordion-button.collapsed .fa-caret-down {
+    transform: rotate( -90deg );
+    transition: .5s transform ease-in-out;
+}
+
+.accordion-header .accordion-button {
+    font-size: 16px;
+    color: #333;
+    line-height: 20px;
+    padding: 10px 15px 7px;
+    border-bottom: 1px solid transparent;
+    background-color: transparent;
+    display: inline-block;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    text-decoration: none !important;
+}
+
+.accordion-item {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}
+
+    .accordion-item + .accordion-item {
+        margin-top: 5px;
+    }
+
+.dropdown .dropdown-menu a {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    cursor: pointer;
+}
+
+.dropdown-menu .dropdown-item, .box-icon {
+    display: block;
+    font-size: 12px;
+    padding: 5px 10px 5px 5px;
+    cursor: pointer;
+}
+
+.dropdown .dropdown-menu .dropdown-item.active {
+    font-weight: bold !important;
+}
+
+.dropdown .dropdown-menu a.dropdown-item:active,
+.dropdown .dropdown-menu a.dropdown-item.active:hover,
+.dropdown .dropdown-menu a.dropdown-item:active em {
+    color: #16181b !important;
+    background: #ececec;
+}
+
+.dropdown.dropbtn .dropdownmenu:hover {
+    background: #eee;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.text-end.fixed-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    padding: 15px;
+    z-index: 999;
+    display: block;
+    border-top: 1px solid #ccc;
+}
+
+.box-icon em {
+    width: 25px;
+    padding: 5px;
+    text-align: center;
+    color: #76838c;
+    font-size: 12px;
+    border-radius: 2px;
+    margin-right: 10px;
+}
+
+.toggle_right {
+    display: flex;
+    align-items: center;
+}
+
+    .toggle_right div {
+        margin-left: auto;
+    }
+
+    .toggle_right br {
+        display: none;
+    }

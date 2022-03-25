@@ -487,7 +487,7 @@ namespace Vanjaro.Common.Factories
         {
             string result = "";
             IFileInfo file = null;
-            if (HttpContext.Current != null && ActiveModule != null && !string.IsNullOrEmpty(fileurl))
+            if (HttpContext.Current != null && !string.IsNullOrEmpty(fileurl))
             {
                 if (fileurl.StartsWith("pages"))
                 {
@@ -631,13 +631,13 @@ namespace Vanjaro.Common.Factories
                                 }
                                 else
                                 {
-                                    file = FileManager.Instance.GetFile(ActiveModule.PortalID, fileurl.Replace(PortalSettings.HomeDirectory, ""));
+                                    file = FileManager.Instance.GetFile(PortalSettings.PortalId, fileurl.Replace(PortalSettings.HomeDirectory, ""));
                                 }
 
                                 if (file != null)
                                 {
                                     string str = string.Format("fileID={0}", file.FileId);
-                                    result = DotNetNuke.Common.Globals.LinkClick(str, ActiveModule.TabID, Null.NullInteger);
+                                    result = DotNetNuke.Common.Globals.LinkClick(str, PortalSettings.ActiveTab.TabID, Null.NullInteger);
                                 }
                             }
                             break;
@@ -649,13 +649,13 @@ namespace Vanjaro.Common.Factories
                                 }
                                 else
                                 {
-                                    file = FileManager.Instance.GetFile(ActiveModule.PortalID, fileurl.Replace(PortalSettings.HomeDirectory, ""));
+                                    file = FileManager.Instance.GetFile(PortalSettings.PortalId, fileurl.Replace(PortalSettings.HomeDirectory, ""));
                                 }
 
                                 if (file != null)
                                 {
                                     string str = string.Format("fileID={0}", file.FileId);
-                                    result = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, DotNetNuke.Common.Globals.LinkClick(str, ActiveModule.TabID, Null.NullInteger));
+                                    result = string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority, DotNetNuke.Common.Globals.LinkClick(str, PortalSettings.ActiveTab.TabID, Null.NullInteger));
                                 }
                             }
                             break;
