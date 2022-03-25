@@ -209,15 +209,7 @@ $(document).ready(function () {
                                 $(imgEl).parents('[data-gjs-type="link"]').css('width', '100%');
 
                             var imgWidth;
-
-                            if (image.attributes.type == 'image-gallery-item' || image.attributes.type == 'carousel-image')
-                                imgWidth = $(imgEl).parents('.picture-box').width();
-                            else {
-
-                                $(imgEl).parents('.image-box').css('width', '100%');
-                                imgWidth = $(imgEl).parents('.image-box').width();
-                                $(imgEl).parents('.image-box').css('width', '');
-                            }
+                            imgWidth = $(imgEl).parents('.picture-box').width();
 
                             if (imgWidth && imgWidth > 0) {
                                 var calcWidth = Math.round((imgWidth / size) * 100);
