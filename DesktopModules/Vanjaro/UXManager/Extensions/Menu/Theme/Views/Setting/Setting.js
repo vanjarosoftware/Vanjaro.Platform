@@ -2,6 +2,11 @@
 
     var common = CommonSvc.getData($scope);
 
+    $scope.onInit = function () {
+        if ($scope.ui.data.Theme.Options.length === 1)
+            $scope.Open_ThemeBuilder();
+    };
+
     $scope.ChangeTheme = function (Theme) {
 
         window.parent.swal({
@@ -25,7 +30,8 @@
 
     $scope.Open_ThemeBuilder = function () {
 
-        event.stopImmediatePropagation();
+        if (event !== undefined)
+            event.stopImmediatePropagation();
 
         var url = $scope.ui.data.ThemeBuilderUrl.Value;
         if (url.indexOf("?") == -1)
