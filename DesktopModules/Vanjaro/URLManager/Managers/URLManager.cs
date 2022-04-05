@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DotNetNuke.Entities.Tabs;
 
 namespace Vanjaro.URL.Managers
 {
@@ -137,6 +138,11 @@ namespace Vanjaro.URL.Managers
         public static int GetSlugTabID(string[] urlParms, ref string Slug, int TabID, PortalInfo Pi)
         {
             return URLFactory.GetSlugTabID(urlParms, ref Slug, TabID, Pi);
+        }
+
+        public static string GetFriendlyURL(PortalSettings PortalSettings, TabInfo tabInfo, int ModuleID, string QueryParameter)
+        {
+            return URLFactory.GetFriendlyURL(PortalSettings, tabInfo, ModuleID, QueryParameter);
         }
 
         public static string GetFriendlyURL(PortalSettings pS, URLEntity urlEntity)
