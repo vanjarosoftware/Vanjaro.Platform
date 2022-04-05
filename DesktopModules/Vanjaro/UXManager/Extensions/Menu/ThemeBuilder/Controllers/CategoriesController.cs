@@ -1,8 +1,11 @@
 ﻿using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using Vanjaro.Common.ASPNET.WebAPI;
 using Vanjaro.Common.Engines.UIEngine;
 using Vanjaro.Common.Utilities;
@@ -33,7 +36,16 @@ namespace Vanjaro.UXManager.Extensions.Apps.ThemeBuilder.Controllers
             else
                 ThemeUrl = ServiceProvider.NavigationManager.NavigateURL() + MenuManager.GetURL() + "mid=0&icp=true&guid=5fa3e7fb-bdcb-4b4b-9620-f6318fe95cc5";
             Settings.Add("ThemeUrl", new UIData { Name = "ThemeUrl", Value = ThemeUrl });
+            Settings.Add("ThemesCount", new UIData { Name = "ThemesCount", Value = GetThemesCount().ToString() });
+            
             return Settings.Values.ToList();
+        }
+
+        private static int GetThemesCount()
+        {
+            string strRoot = HttpContext.Current.Server.MapPath("~/Portals/_default/vThemes/");
+            string[] arrThemes = Directory.GetDirectories(strRoot);
+            return arrThemes.Length;
         }
 
         public override string AccessRoles()

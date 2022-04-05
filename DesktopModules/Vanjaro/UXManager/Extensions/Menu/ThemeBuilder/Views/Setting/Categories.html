@@ -2,7 +2,7 @@
     <uiengine provider="AngularBootstrap" identifier="setting_categories" layout="category">
         <uilayout name="Heading">
             <uitemplate>
-                <div class="row">
+                <div class="row" mn-ng-if="ui.data.ThemesCount.Value>1">
                     <div class="col-12 extback pr-none">
                         <a ng-click="BackTo_Theme()" class="ux-backbtn">
                             <span class="extbackicon">

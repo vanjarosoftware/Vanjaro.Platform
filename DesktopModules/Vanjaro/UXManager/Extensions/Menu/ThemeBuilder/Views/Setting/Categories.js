@@ -2,6 +2,10 @@
 
     var common = CommonSvc.getData($scope);
 
+    $scope.onInit = function () {
+        $scope.ui.data.ThemesCount.Value = parseInt($scope.ui.data.ThemesCount.Value);
+    };
+
     $scope.OpenSettings = function (option) {
         event.preventDefault();
         var url = window.location.href.split('#')[0];
