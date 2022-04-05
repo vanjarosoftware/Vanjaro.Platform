@@ -68,6 +68,17 @@ namespace Vanjaro.URL.Factories
 
             return null;
         }
+        public static string GetFriendlyURL(PortalSettings PortalSettings, TabInfo tabInfo, int ModuleID, string QueryParameter)
+        {
+            string URL = "~/Default.aspx";
+            URL += "?TabId=" + tabInfo.TabID;
+            if (!string.IsNullOrEmpty(PortalSettings.CultureCode))
+                URL += "&language=" + PortalSettings.CultureCode;
+            if (!string.IsNullOrEmpty(QueryParameter))
+                URL += "&" + QueryParameter;
+            return FriendlyUrlProvider.Instance().FriendlyUrl(tabInfo, URL);
+        }
+        
         /// <summary>
         /// Returns the first matched slug in the Slugs Array
         /// </summary>
