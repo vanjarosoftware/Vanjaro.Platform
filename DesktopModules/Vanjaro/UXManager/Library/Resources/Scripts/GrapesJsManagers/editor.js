@@ -1625,6 +1625,14 @@ $(document).ready(function () {
                             const rte = VjEditor.RichTextEditor;
                             rte.remove('link');
 
+                            const isValidAnchor = rte => {
+                                const anchor = rte.selection().anchorNode;
+                                const parentNode = anchor && anchor.parentNode;
+                                return (
+                                    (parentNode && parentNode.nodeName == 'A')
+                                );
+                            };
+
                             VjEditor.RichTextEditor.add('link', {
                                 icon: '<i class="fa fa-link"/>',
                                 attributes: { title: 'Link' },
@@ -1656,14 +1664,6 @@ $(document).ready(function () {
                                     }
                                 },
                             });
-
-                            const isValidAnchor = rte => {
-                                const anchor = rte.selection().anchorNode;
-                                const parentNode = anchor && anchor.parentNode;
-                                return (
-                                    (parentNode && parentNode.nodeName == 'A')
-                                );
-                            };
 
                             const isValidSpan = rte => {
                                 const anchor = rte.selection().anchorNode;
@@ -2162,7 +2162,7 @@ $(document).ready(function () {
                                     if (model.attributes.type == "icon")
                                         target = model.components().models[0];
 
-                                    if (typeof sm.getSector(Display) != 'undefined') {
+                                    if (sm.getSector(Display)) {
 
                                         if (sm.getProperty(Display, 'display').attributes.value == 'flex') {
                                             $(sm.getProperty(Display, 'container').view.el).show();
@@ -2174,7 +2174,7 @@ $(document).ready(function () {
                                         }
                                     }
 
-                                    if (typeof sm.getSector(Size) != 'undefined') {
+                                    if (sm.getSector(Size)) {
 
                                         //Width
                                         var width = target.getStyle()['width'];
@@ -2264,7 +2264,7 @@ $(document).ready(function () {
                                 });
 
                                 //Responsive
-                                if (typeof sm.getSector(Responsive) != 'undefined') {
+                                if (sm.getSector(Responsive)) {
                                     sm.getProperty(Responsive, 'd-desktop-none').setValue("");
                                     sm.getProperty(Responsive, 'd-tablet-none').setValue("");
                                     sm.getProperty(Responsive, 'd-mobile-landscape-none').setValue("");
@@ -2272,7 +2272,7 @@ $(document).ready(function () {
                                 }
 
                                 //Filters
-                                if (typeof sm.getSector(Filters) != 'undefined') {
+                                if (sm.getSector(Filters)) {
 
                                     if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('blur') != -1)
                                         sm.getProperty(Filters, 'blur').view.setValue('true');
@@ -2322,7 +2322,7 @@ $(document).ready(function () {
 
                                 //Transform
 
-                                if (typeof sm.getSector(Filters) != 'undefined') {
+                                if (sm.getSector(Filters)) {
 
                                     if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('rotateX') != -1)
                                         sm.getProperty(Transform, 'rotateX').view.setValue('true');
@@ -2396,12 +2396,12 @@ $(document).ready(function () {
                                     }, 300);
                                 }
 
-                                if (typeof sm.getSector(Border) != 'undefined') {
+                                if (sm.getSector(Border)) {
                                     FilterBorderOptions(model, 'sm-border');
                                     $(VjEditor.StyleManager.getProperty(Border, 'border-position').view.$el.find('input')[0]).prop('checked', true);
                                 }
 
-                                if (typeof sm.getSector(Responsive) != 'undefined') {
+                                if (sm.getSector(Responsive)) {
 
                                     var flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
 
@@ -2577,7 +2577,7 @@ $(document).ready(function () {
                                         }],
                                     }, { at: 0 })
                                 }
-                                else if (typeof VjEditor.StyleManager.getSector(Text) != 'undefined')
+                                else if (VjEditor.StyleManager.getSector(Text))
                                     VjEditor.StyleManager.removeSector(Text);
 
                                 $('.gjs-sm-sector').on('click', function () {

@@ -22,6 +22,44 @@
 
 	domc.addType('spacer', {
 		model: defaultModel.extend({
+			initToolbar() {
+				var model = this;
+				if (!model.get('toolbar')) {
+					var tb = [];
+
+					tb.push({
+						attributes: { class: 'fa fa-arrow-up' },
+						command: function (t) {
+							return t.runCommand("core:component-exit", {
+								force: 1
+							})
+						}
+					});
+
+					if (model.get('draggable')) {
+						tb.push({
+							attributes: { class: 'fa fa-arrows' },
+							command: 'tlb-move',
+						});
+					}
+
+					if (model.get('copyable')) {
+						tb.push({
+							attributes: { class: 'fa fa-clone' },
+							command: 'tlb-clone',
+						});
+					}
+
+					if (model.get('removable')) {
+						tb.push({
+							attributes: { class: 'fa fa-trash-o' },
+							command: 'tlb-delete',
+						});
+					}
+
+					model.set('toolbar', tb);
+				}
+			},
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				droppable: false,
 				classes: ['spacer'],
