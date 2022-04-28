@@ -1121,7 +1121,7 @@ $(document).ready(function () {
                                             name: 'Display',
                                             property: 'display',
                                             defaults: 'none',
-                                            list: [{
+                                            options: [{
                                                 value: 'none',
                                                 name: 'none',
                                             }, {
@@ -1504,7 +1504,7 @@ $(document).ready(function () {
                                                 name: 'Clear',
                                                 property: 'clear',
                                                 defaults: 'none',
-                                                list: [{
+                                                options: [{
                                                     value: 'none',
                                                     name: 'none',
                                                 }, {
@@ -1516,7 +1516,7 @@ $(document).ready(function () {
                                                 name: 'Overflow Horizontal',
                                                 property: 'overflow-x',
                                                 defaults: 'visible',
-                                                list: [{
+                                                options: [{
                                                     value: 'visible',
                                                     name: 'visible',
                                                 }, {
@@ -1534,7 +1534,7 @@ $(document).ready(function () {
                                                 name: 'Overflow Vertical',
                                                 property: 'overflow-y',
                                                 defaults: 'visible',
-                                                list: [{
+                                                options: [{
                                                     value: 'visible',
                                                     name: 'visible',
                                                 }, {
@@ -2448,7 +2448,7 @@ $(document).ready(function () {
                                             name: 'Text decoration',
                                             property: 'text-decoration',
                                             defaults: 'none',
-                                            list: [{
+                                            options: [{
                                                 value: 'none',
                                                 name: 'None',
                                             }, {
@@ -2466,7 +2466,7 @@ $(document).ready(function () {
                                             name: 'Font style',
                                             property: 'font-style',
                                             defaults: 'normal',
-                                            list: [{
+                                            options: [{
                                                 value: 'normal',
                                                 name: 'Normal',
                                             }, {
@@ -2536,7 +2536,7 @@ $(document).ready(function () {
                                             type: 'radio',
                                             name: 'Font Weight',
                                             property: 'font-weight',
-                                            list: [{
+                                            options: [{
                                                 value: '100',
                                                 name: 'Thin',
                                             }, {
@@ -2561,7 +2561,7 @@ $(document).ready(function () {
                                             name: 'Text transform',
                                             property: 'text-transform',
                                             defaults: 'none',
-                                            list: [{
+                                            options: [{
                                                 value: 'none',
                                                 name: 'None',
                                             }, {
@@ -2582,7 +2582,7 @@ $(document).ready(function () {
 
                                 $('.gjs-sm-sector').on('click', function () {
                                     var $this = $(this);
-                                    var sectorName = $this.attr('id').replace("gjs-sm-", "");
+                                    var sectorName = $this.attr('class').split(/\s+/)[1].replace("gjs-sm-sector__", "");
                                     if ($this.find('.gjs-sm-properties').is(':visible')) {
                                         $.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
                                             model.set('open', false);
@@ -3503,7 +3503,7 @@ $(document).ready(function () {
             $('.stylemanager').show();
             $('.stylemanager .gjs-sm-sector').click(function () {
                 var $this = $(this);
-                var sectorName = $this.attr('id').replace("gjs-sm-", "");
+                var sectorName = $this.attr('class').split(' ')[1].replace("gjs-sm-sector__", "");
                 if ($this.find('.gjs-sm-properties').is(':visible')) {
                     $.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
                         model.set('open', false);
