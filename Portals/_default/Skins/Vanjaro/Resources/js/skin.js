@@ -424,6 +424,11 @@ OpenImagePopup = function (img) {
 
 $(document).ready(function () {
 
+    $(".vj-image-gallery-item").on("click", function (e) {
+        if (!$(this).parents('a').length && typeof $(this).attr('onclick') == 'undefined')
+            OpenImagePopup(this);
+    });
+
     $(".navbar li.dropdown").hover(function () {
         if ($(window).width() < 767)
             return;
