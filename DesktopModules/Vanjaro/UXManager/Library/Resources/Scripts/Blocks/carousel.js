@@ -252,6 +252,7 @@
 				if (!comps.length) {
 
 					var modelId = this.model.getId();
+					this.model.setId(modelId);
 
 					comps.add(`
 						<ol class="carousel-indicators">
