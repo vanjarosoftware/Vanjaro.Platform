@@ -228,15 +228,19 @@
 
 			ChangeProvider() {
 
+				let traits;
+
 				if (this.attributes.provider == "yt") {
 					this.components().models[0].replaceWith('<iframe class="frame-box" src="https://www.youtube.com/embed/"></iframe>');
-					this.loadTraits(this.getYoutubeTraits());
+					traits = this.getYoutubeTraits();
+					this.set({ traits });
 					this.components().models[0].set({ 'rel': 0, 'logo': 0 });
 					this.set({ 'src': 'https://www.youtube.com/embed/' });
 				}
 				else {
 					this.components().models[0].replaceWith('<video src="' + VjDefaultPath + 'Flower.mp4"></video>');
-					this.loadTraits(this.getSourceTraits());
+					traits = this.getSourceTraits();
+					this.set({ traits });
 					this.set({ 'src': '' + VjDefaultPath + 'Flower.mp4' });
 					this.getTrait('controls').setTargetValue('controlstrue');
 				}
