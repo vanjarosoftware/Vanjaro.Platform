@@ -2137,7 +2137,7 @@ $(document).ready(function () {
 
                                     $(tb).each(function (index, item) {
 
-                                        if (item.attributes.class == "fa fa-pencil")
+                                        if (item.attributes && item.attributes.class == "fa fa-pencil")
                                             tb.splice(index, 1);
                                     });
 
@@ -2986,7 +2986,7 @@ $(document).ready(function () {
                             VjEditor.Commands.add('open-assets', {
                                 run(editor, sender) {
                                     var event = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {};
-                                    var target = event.target || editor.getSelected();
+                                    var target = event.target;
                                     window.document.vj_image_target = target;
                                     var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505";
                                     OpenPopUp(null, 900, 'right', VjLocalized.Image, url);
