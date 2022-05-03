@@ -2081,8 +2081,8 @@ $(document).ready(function () {
                                 else if (model.attributes.type == 'indicator') {
                                     var slider = model.closest('[data-gjs-type="carousel"]');
                                     VjEditor.select(slider);
-                                    var index = parseInt(model.getAttributes()['data-slide-to']);
-                                    $('.gjs-frame').contents().find('#' + slider.getId()).carousel('dispose').carousel({ interval: false }).carousel(index);
+                                    var index = parseInt(model.getAttributes()['data-bs-slide-to']);
+                                    $('.gjs-frame').contents().find('#' + slider.getId()).carousel(index);
                                     return;
                                 }
                                 else if (model.attributes.type == 'column') {
