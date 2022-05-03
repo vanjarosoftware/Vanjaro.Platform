@@ -498,6 +498,7 @@ Theme.css end
     position: relative;
     padding-top: 50px;
     padding-bottom: 50px;
+    min-height: 100px;
 }
 
 .row {

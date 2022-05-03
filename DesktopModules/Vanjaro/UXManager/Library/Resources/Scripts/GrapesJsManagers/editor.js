@@ -1121,7 +1121,7 @@ $(document).ready(function () {
                                             name: 'Display',
                                             property: 'display',
                                             defaults: 'none',
-                                            list: [{
+                                            options: [{
                                                 value: 'none',
                                                 name: 'none',
                                             }, {
@@ -1504,7 +1504,7 @@ $(document).ready(function () {
                                                 name: 'Clear',
                                                 property: 'clear',
                                                 defaults: 'none',
-                                                list: [{
+                                                options: [{
                                                     value: 'none',
                                                     name: 'none',
                                                 }, {
@@ -1516,7 +1516,7 @@ $(document).ready(function () {
                                                 name: 'Overflow Horizontal',
                                                 property: 'overflow-x',
                                                 defaults: 'visible',
-                                                list: [{
+                                                options: [{
                                                     value: 'visible',
                                                     name: 'visible',
                                                 }, {
@@ -1534,7 +1534,7 @@ $(document).ready(function () {
                                                 name: 'Overflow Vertical',
                                                 property: 'overflow-y',
                                                 defaults: 'visible',
-                                                list: [{
+                                                options: [{
                                                     value: 'visible',
                                                     name: 'visible',
                                                 }, {
@@ -1625,6 +1625,14 @@ $(document).ready(function () {
                             const rte = VjEditor.RichTextEditor;
                             rte.remove('link');
 
+                            const isValidAnchor = rte => {
+                                const anchor = rte.selection().anchorNode;
+                                const parentNode = anchor && anchor.parentNode;
+                                return (
+                                    (parentNode && parentNode.nodeName == 'A')
+                                );
+                            };
+
                             VjEditor.RichTextEditor.add('link', {
                                 icon: '<i class="fa fa-link"/>',
                                 attributes: { title: 'Link' },
@@ -1656,14 +1664,6 @@ $(document).ready(function () {
                                     }
                                 },
                             });
-
-                            const isValidAnchor = rte => {
-                                const anchor = rte.selection().anchorNode;
-                                const parentNode = anchor && anchor.parentNode;
-                                return (
-                                    (parentNode && parentNode.nodeName == 'A')
-                                );
-                            };
 
                             const isValidSpan = rte => {
                                 const anchor = rte.selection().anchorNode;
@@ -2137,7 +2137,7 @@ $(document).ready(function () {
 
                                     $(tb).each(function (index, item) {
 
-                                        if (item.attributes.class == "fa fa-pencil")
+                                        if (item.attributes && item.attributes.class == "fa fa-pencil")
                                             tb.splice(index, 1);
                                     });
 
@@ -2162,7 +2162,7 @@ $(document).ready(function () {
                                     if (model.attributes.type == "icon")
                                         target = model.components().models[0];
 
-                                    if (typeof sm.getSector(Display) != 'undefined') {
+                                    if (sm.getSector(Display)) {
 
                                         if (sm.getProperty(Display, 'display').attributes.value == 'flex') {
                                             $(sm.getProperty(Display, 'container').view.el).show();
@@ -2174,7 +2174,7 @@ $(document).ready(function () {
                                         }
                                     }
 
-                                    if (typeof sm.getSector(Size) != 'undefined') {
+                                    if (sm.getSector(Size)) {
 
                                         //Width
                                         var width = target.getStyle()['width'];
@@ -2264,7 +2264,7 @@ $(document).ready(function () {
                                 });
 
                                 //Responsive
-                                if (typeof sm.getSector(Responsive) != 'undefined') {
+                                if (sm.getSector(Responsive)) {
                                     sm.getProperty(Responsive, 'd-desktop-none').setValue("");
                                     sm.getProperty(Responsive, 'd-tablet-none').setValue("");
                                     sm.getProperty(Responsive, 'd-mobile-landscape-none').setValue("");
@@ -2272,7 +2272,7 @@ $(document).ready(function () {
                                 }
 
                                 //Filters
-                                if (typeof sm.getSector(Filters) != 'undefined') {
+                                if (sm.getSector(Filters)) {
 
                                     if (typeof model.getStyle()['filter'] != "undefined" && model.getStyle()['filter'].indexOf('blur') != -1)
                                         sm.getProperty(Filters, 'blur').view.setValue('true');
@@ -2322,7 +2322,7 @@ $(document).ready(function () {
 
                                 //Transform
 
-                                if (typeof sm.getSector(Filters) != 'undefined') {
+                                if (sm.getSector(Filters)) {
 
                                     if (typeof model.getStyle()['transform'] != "undefined" && model.getStyle()['transform'].indexOf('rotateX') != -1)
                                         sm.getProperty(Transform, 'rotateX').view.setValue('true');
@@ -2396,12 +2396,12 @@ $(document).ready(function () {
                                     }, 300);
                                 }
 
-                                if (typeof sm.getSector(Border) != 'undefined') {
+                                if (sm.getSector(Border)) {
                                     FilterBorderOptions(model, 'sm-border');
                                     $(VjEditor.StyleManager.getProperty(Border, 'border-position').view.$el.find('input')[0]).prop('checked', true);
                                 }
 
-                                if (typeof sm.getSector(Responsive) != 'undefined') {
+                                if (sm.getSector(Responsive)) {
 
                                     var flexProperty = VjEditor.StyleManager.getProperty(Responsive, 'flex-direction');
 
@@ -2448,7 +2448,7 @@ $(document).ready(function () {
                                             name: 'Text decoration',
                                             property: 'text-decoration',
                                             defaults: 'none',
-                                            list: [{
+                                            options: [{
                                                 value: 'none',
                                                 name: 'None',
                                             }, {
@@ -2466,7 +2466,7 @@ $(document).ready(function () {
                                             name: 'Font style',
                                             property: 'font-style',
                                             defaults: 'normal',
-                                            list: [{
+                                            options: [{
                                                 value: 'normal',
                                                 name: 'Normal',
                                             }, {
@@ -2536,7 +2536,7 @@ $(document).ready(function () {
                                             type: 'radio',
                                             name: 'Font Weight',
                                             property: 'font-weight',
-                                            list: [{
+                                            options: [{
                                                 value: '100',
                                                 name: 'Thin',
                                             }, {
@@ -2561,7 +2561,7 @@ $(document).ready(function () {
                                             name: 'Text transform',
                                             property: 'text-transform',
                                             defaults: 'none',
-                                            list: [{
+                                            options: [{
                                                 value: 'none',
                                                 name: 'None',
                                             }, {
@@ -2577,12 +2577,12 @@ $(document).ready(function () {
                                         }],
                                     }, { at: 0 })
                                 }
-                                else if (typeof VjEditor.StyleManager.getSector(Text) != 'undefined')
+                                else if (VjEditor.StyleManager.getSector(Text))
                                     VjEditor.StyleManager.removeSector(Text);
 
                                 $('.gjs-sm-sector').on('click', function () {
                                     var $this = $(this);
-                                    var sectorName = $this.attr('id').replace("gjs-sm-", "");
+                                    var sectorName = $this.attr('class').split(/\s+/)[1].replace("gjs-sm-sector__", "");
                                     if ($this.find('.gjs-sm-properties').is(':visible')) {
                                         $.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
                                             model.set('open', false);
@@ -2986,7 +2986,7 @@ $(document).ready(function () {
                             VjEditor.Commands.add('open-assets', {
                                 run(editor, sender) {
                                     var event = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {};
-                                    var target = event.target || editor.getSelected();
+                                    var target = event.target;
                                     window.document.vj_image_target = target;
                                     var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505";
                                     OpenPopUp(null, 900, 'right', VjLocalized.Image, url);
@@ -3503,7 +3503,7 @@ $(document).ready(function () {
             $('.stylemanager').show();
             $('.stylemanager .gjs-sm-sector').click(function () {
                 var $this = $(this);
-                var sectorName = $this.attr('id').replace("gjs-sm-", "");
+                var sectorName = $this.attr('class').split(' ')[1].replace("gjs-sm-sector__", "");
                 if ($this.find('.gjs-sm-properties').is(':visible')) {
                     $.each(VjEditor.StyleManager.getSectors().models, function (index, model) {
                         model.set('open', false);

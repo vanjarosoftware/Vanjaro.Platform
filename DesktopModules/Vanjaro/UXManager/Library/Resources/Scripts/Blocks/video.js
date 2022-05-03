@@ -45,6 +45,44 @@
 
 	domc.addType('videobox', {
 		model: defaultModel.extend({
+			initToolbar() {
+				var model = this;
+				if (!model.get('toolbar')) {
+					var tb = [];
+
+					tb.push({
+						attributes: { class: 'fa fa-arrow-up' },
+						command: function (t) {
+							return t.runCommand("core:component-exit", {
+								force: 1
+							})
+						}
+					});
+
+					if (model.get('draggable')) {
+						tb.push({
+							attributes: { class: 'fa fa-arrows' },
+							command: 'tlb-move',
+						});
+					}
+
+					if (model.get('copyable')) {
+						tb.push({
+							attributes: { class: 'fa fa-clone' },
+							command: 'tlb-clone',
+						});
+					}
+
+					if (model.get('removable')) {
+						tb.push({
+							attributes: { class: 'fa fa-trash-o' },
+							command: 'tlb-delete',
+						});
+					}
+
+					model.set('toolbar', tb);
+				}
+			},
 			defaults: Object.assign({}, defaultModel.prototype.defaults, {
 				'custom-name': 'Video',
 				droppable: false,
@@ -190,15 +228,19 @@
 
 			ChangeProvider() {
 
+				let traits;
+
 				if (this.attributes.provider == "yt") {
 					this.components().models[0].replaceWith('<iframe class="frame-box" src="https://www.youtube.com/embed/"></iframe>');
-					this.loadTraits(this.getYoutubeTraits());
+					traits = this.getYoutubeTraits();
+					this.set({ traits });
 					this.components().models[0].set({ 'rel': 0, 'logo': 0 });
 					this.set({ 'src': 'https://www.youtube.com/embed/' });
 				}
 				else {
 					this.components().models[0].replaceWith('<video src="' + VjDefaultPath + 'Flower.mp4"></video>');
-					this.loadTraits(this.getSourceTraits());
+					traits = this.getSourceTraits();
+					this.set({ traits });
 					this.set({ 'src': '' + VjDefaultPath + 'Flower.mp4' });
 					this.getTrait('controls').setTargetValue('controlstrue');
 				}
