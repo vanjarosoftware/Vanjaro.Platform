@@ -1682,7 +1682,7 @@ $(document).ready(function () {
                                 },
                                 result: function (rte) {
                                     var e = rte.selection().anchorNode;
-                                    if (e.parentNode.tagName.toLowerCase() == "span") {
+                                    if (e.parentNode.tagName.toLowerCase() == "span" && (e.parentNode.classList && e.parentNode.classList.contains('text-inner'))) {
                                         rte.selection().anchorNode.parentElement.outerHTML = rte.selection().anchorNode.parentElement.innerHTML;
                                         VjEditor.getSelected().view.disableEditing();
                                     }
