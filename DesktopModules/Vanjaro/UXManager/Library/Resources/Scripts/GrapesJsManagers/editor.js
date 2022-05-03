@@ -1773,15 +1773,6 @@ $(document).ready(function () {
                                     setTimeout(function () { $($(window.parent.document.body).find('#dnn_ContentPane')[0]).find('.optimizing-overlay').remove(); }, 1000);
                                 }
 
-                                $('.gjs-frame').contents().find("[data-gjs-type='wrapper']").scroll(function () {
-                                    var $tools = $('#gjs-cv-tools')
-                                    $tools.hide();
-                                    clearTimeout($.data(this, 'scrollTimer'));
-                                    $.data(this, 'scrollTimer', setTimeout(function () {
-                                        $tools.show();
-                                    }, 250));
-                                });
-
                                 if (vjEditorSettings.EditPage && typeof getCookie("vj_UXLoad") != 'undefined' && getCookie("vj_UXLoad") != null && getCookie("vj_UXLoad") != '') {
 
 
