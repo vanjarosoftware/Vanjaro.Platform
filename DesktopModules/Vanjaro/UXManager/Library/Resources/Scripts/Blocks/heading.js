@@ -166,7 +166,7 @@ export default (editor, config = {}) => {
 			},
 		}, {
 			isComponent(el) {
-				if (el && el.tagName && el.classList && el.classList.contains('vj-heading')) {
+				if (el && (el.tagName && (el.tagName.toLowerCase() == 'h1' || el.tagName.toLowerCase() == 'h2' || el.tagName.toLowerCase() == 'h3' || el.tagName.toLowerCase() == 'h4' || el.tagName.toLowerCase() == 'h5' || el.tagName.toLowerCase() == 'h6')) || (el.classList && el.classList.contains('vj-heading'))) {
 					return { type: 'heading' };
 				}
 			}
