@@ -1690,8 +1690,12 @@ $(document).ready(function () {
                                         rte.insertHTML(`<span class="text-inner">${rte.selection()}</span>`);
                                         var rtetext = `${rte.selection()}`;
                                         var selected = VjEditor.getSelected();
+
+                                        if (selected.attributes.type == 'list-item')
+                                            selected = selected.findType('list-text')[0];
+
                                         selected.view.syncContent();
-                                        VjEditor.getSelected().view.disableEditing();
+                                        selected.view.disableEditing();
                                         $.each(selected.components().models, function (k, v) {
                                             if (v.attributes.content == rtetext) {
                                                 VjEditor.select(v);
