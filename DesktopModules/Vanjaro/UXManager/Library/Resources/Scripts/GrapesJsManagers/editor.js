@@ -1682,7 +1682,7 @@ $(document).ready(function () {
                                 },
                                 result: function (rte) {
                                     var e = rte.selection().anchorNode;
-                                    if (e.parentNode.tagName.toLowerCase() == "span") {
+                                    if (e.parentNode.tagName.toLowerCase() == "span" && (e.parentNode.classList && e.parentNode.classList.contains('text-inner'))) {
                                         rte.selection().anchorNode.parentElement.outerHTML = rte.selection().anchorNode.parentElement.innerHTML;
                                         VjEditor.getSelected().view.disableEditing();
                                     }
@@ -1690,8 +1690,12 @@ $(document).ready(function () {
                                         rte.insertHTML(`<span class="text-inner">${rte.selection()}</span>`);
                                         var rtetext = `${rte.selection()}`;
                                         var selected = VjEditor.getSelected();
+
+                                        if (selected.attributes.type == 'list-item')
+                                            selected = selected.findType('list-text')[0];
+
                                         selected.view.syncContent();
-                                        VjEditor.getSelected().view.disableEditing();
+                                        selected.view.disableEditing();
                                         $.each(selected.components().models, function (k, v) {
                                             if (v.attributes.content == rtetext) {
                                                 VjEditor.select(v);
