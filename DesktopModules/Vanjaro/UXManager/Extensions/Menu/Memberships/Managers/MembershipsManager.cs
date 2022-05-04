@@ -153,8 +153,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Memberships
                 {
                     new KeyValuePair<string, int>(Localization.GetString("None", Components.Constants.LocalResourcesFile), 0),
                     new KeyValuePair<string, int>(Localization.GetString("Private", Components.Constants.LocalResourcesFile), 1),
-                    new KeyValuePair<string, int>(Localization.GetString("Public", Components.Constants.LocalResourcesFile), 2),
-                    new KeyValuePair<string, int>(Localization.GetString("Verified", Components.Constants.LocalResourcesFile), 3)
+                    new KeyValuePair<string, int>(Localization.GetString("Public", Components.Constants.LocalResourcesFile), 2)
                 };
                 return userRegistrationOptions;
             }

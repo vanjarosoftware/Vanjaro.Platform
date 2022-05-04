@@ -11,7 +11,8 @@
                 'Password': Form.find('input.password').val(),
                 'ConfirmPassword': Form.find('input.password').val(),
                 'DisplayName': Form.find('input.displayname').val(),
-                'Email': Form.find('input.email').val()
+                'Email': Form.find('input.email').val(),
+                'VerificationCode': Form.find('input.verificationcode').val()
             };
             var registerText = obj.attr('attr-localize-register-text');
             if ($.trim(registerText) == "" || registerText == null)
@@ -30,7 +31,14 @@
                 },
                 success: function (response) {
                     if (response.IsSuccess) {
-                        if (response.Data != null && response.Data.RedirectURL != null) {
+                        if (response.Data != null && response.Data.RedirectURL == undefined && response.Data.ShowVerificationCode != undefined) {
+                            $('<div class="show-message alert alert-success">' + response.Message + '</div>').insertAfter(Form.find('.Registerhead'));
+                            $('.dvverificationcode').show();
+                            $('.dvregisterfrm').hide();
+                            obj.removeClass('disabled');
+                            obj.html(registerText);
+                        }
+                        else if (response.Data != null && response.Data.RedirectURL != null) {
                             window.location.href = response.Data.RedirectURL;
                         }
                         else if (response.Message != null && response.Message != "") {
@@ -46,7 +54,7 @@
                     else {
                         obj.html(registerText);
                         $('<div class="show-message alert alert-danger">' + response.Message + '</div>').insertAfter(Form.find('.Registerhead'));
-                        obj.removeClass('disabled');                        
+                        obj.removeClass('disabled');
                     }
 
                     if (response.Errors["ProfileUpdate"] != null && typeof response.Errors["ProfileUpdate"] != "undefined") {
@@ -57,7 +65,7 @@
                         }
                     }
                 },
-                error: function (Error) {                    
+                error: function (Error) {
                     console.log(Error);
                 }
             });

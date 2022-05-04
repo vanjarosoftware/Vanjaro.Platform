@@ -92,6 +92,22 @@ namespace Vanjaro.Core
 
                 return eventArgs;
             }
+
+            public static bool IsInvalidEmail(string email)
+            {
+                return Components.Constants.DisposableEmailProviderDomains.Any(s => email.Contains(s));
+            }
+
+            public static bool SendVerificationCode(PortalSettings PortalSettings, string Email)
+            {
+                return LoginFactory.SendVerificationCode(PortalSettings, Email);
+            }
+
+            public static bool ValidateVerificationCode(int PortalID, string Email, string VerificationCode, out string VerificationMessage)
+            {
+                return LoginFactory.ValidateVerificationCode(PortalID, Email, VerificationCode, out VerificationMessage);
+            }
+
             public static void AddUpdateLoginModule(int TabID, int PortalId)
             {
                 try
