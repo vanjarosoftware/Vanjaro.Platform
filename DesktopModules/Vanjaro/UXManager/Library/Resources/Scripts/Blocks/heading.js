@@ -22,6 +22,44 @@ export default (editor, config = {}) => {
 
 	domc.addType('heading', {
 		model: textModel.extend({
+			initToolbar() {
+				var model = this;
+				if (!model.get('toolbar')) {
+					var tb = [];
+
+					tb.push({
+						attributes: { class: 'fa fa-arrow-up' },
+						command: function (t) {
+							return t.runCommand("core:component-exit", {
+								force: 1
+							})
+						}
+					});
+
+					if (model.get('draggable')) {
+						tb.push({
+							attributes: { class: 'fa fa-arrows' },
+							command: 'tlb-move',
+						});
+					}
+
+					if (model.get('copyable')) {
+						tb.push({
+							attributes: { class: 'fa fa-clone' },
+							command: 'tlb-clone',
+						});
+					}
+
+					if (model.get('removable')) {
+						tb.push({
+							attributes: { class: 'fa fa-trash-o' },
+							command: 'tlb-delete',
+						});
+					}
+
+					model.set('toolbar', tb);
+				}
+			},
 			defaults: Object.assign({}, textModel.prototype.defaults, {
 				'custom-name': 'Heading',
 				droppable: false,
@@ -128,7 +166,7 @@ export default (editor, config = {}) => {
 			},
 		}, {
 			isComponent(el) {
-				if (el && el.tagName && el.classList && el.classList.contains('vj-heading')) {
+				if (el && (el.tagName && (el.tagName.toLowerCase() == 'h1' || el.tagName.toLowerCase() == 'h2' || el.tagName.toLowerCase() == 'h3' || el.tagName.toLowerCase() == 'h4' || el.tagName.toLowerCase() == 'h5' || el.tagName.toLowerCase() == 'h6')) || (el.classList && el.classList.contains('vj-heading'))) {
 					return { type: 'heading' };
 				}
 			}

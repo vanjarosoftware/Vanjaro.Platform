@@ -246,12 +246,13 @@
 		}),
 		view: defaultView.extend({
 			init() {
-
+	
 				const comps = this.model.components();
 
 				if (!comps.length) {
 
 					var modelId = this.model.getId();
+					this.model.setId(modelId);
 
 					comps.add(`
 						<ol class="carousel-indicators">
@@ -293,6 +294,9 @@
 					`);
 				}
 			},
+			onRender() {
+				$(this.el).attr('data-bs-interval', false);
+			}
 		}),
 	});
 
@@ -330,7 +334,7 @@
 				highlightable: false,
 				copyable: false,
 				resizable: false,
-				selectable: true,
+				selectable: false,
 				editable: false,
 				hoverable: false,
 				traits: []
@@ -739,12 +743,12 @@
             </div>`
 			);
 
-			$('.gjs-frame').contents().find('#' + Selected.getId()).carousel('dispose').carousel({ interval: false }).carousel(slideInner.components().models.length - 1);
-
 			var Indicators = Selected.components().models.find(m => m.attributes.type == 'indicators');
 
 			if (typeof Indicators != 'undefined')
-				Indicators.components().add('<li data-bs-target="#' + Selected.getId() + '" data-bs-slide-to="' + Indicators.components().length + '"></li>');
+				Indicators.components().add('<li data-bs-target="#' + Selected.getId() + '" data-bs-slide-to="' + Indicators.components().length + '" class="carousel-indicator"></li>');
+
+			$('.gjs-frame').contents().find('#' + Selected.getId()).carousel('dispose').carousel(slideInner.components().models.length - 1);
 
 			$.each(getAllComponents(slideInner.components().last()), function (i, n) {
 				if (n.attributes.type == 'carousel-image') {
@@ -779,7 +783,7 @@
 			const target = this.target;
 			var slider = target.closest('[data-gjs-type="carousel"]') || target.parent().closest('[data-gjs-type="carousel"]');
 
-			$('.gjs-frame').contents().find('#' + slider.getId()).carousel('dispose').carousel({ interval: false }).carousel(opts.slideIndex);
+			$('.gjs-frame').contents().find('#' + slider.getId()).carousel('dispose').carousel(opts.slideIndex);
 
 			setTimeout(function () {
 				$.each(getAllComponents(opts.slide), function (i, n) {
@@ -787,7 +791,7 @@
 						VjEditor.select(n);
 					}
 				});
-			}, 500);
+			}, 1000);
 		}
 	});
 
@@ -853,12 +857,12 @@
 			this.target = opts.slider || editor.getSelected();
 			const target = this.target;
 
-			$('.gjs-frame').contents().find('#' + target.getId()).carousel('dispose').carousel({ interval: false }).carousel('prev');
+			$('.gjs-frame').contents().find('#' + target.getId()).carousel('prev');
 
 			setTimeout(function () {
 				var image = target.closest('[data-gjs-type="carousel"]').find('.carousel-item.active img');
 				editor.select(image);
-			}, 100);
+			}, 1000);
 		}
 	});
 
@@ -869,12 +873,12 @@
 			this.target = opts.slider || editor.getSelected();
 			const target = this.target;
 
-			$('.gjs-frame').contents().find('#' + target.getId()).carousel('dispose').carousel({ interval: false }).carousel('next');
+			$('.gjs-frame').contents().find('#' + target.getId()).carousel('next');
 
 			setTimeout(function () {
 				var image = target.closest('[data-gjs-type="carousel"]').find('.carousel-item.active img');
 				editor.select(image);
-			}, 100);
+			}, 1000);
 		}
 	});
 }

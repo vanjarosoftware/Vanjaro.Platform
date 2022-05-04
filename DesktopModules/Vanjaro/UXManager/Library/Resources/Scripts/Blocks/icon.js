@@ -98,9 +98,8 @@
 					onMove: function (e) {
 						var SelectedCol = VjEditor.getSelected();
 						var width = SelectedCol.getStyle().width;
-						var height = SelectedCol.getStyle().height;
 						SelectedCol.addStyle({ 'line-height': width });
-						SelectedCol.components().models[0].addStyle({ 'width': width, 'height': height });
+						SelectedCol.components().models[0].addStyle({ 'width': width, 'height': width });
 						SelectedCol.removeStyle('width');
 						SelectedCol.removeStyle('height');
 					},
@@ -290,6 +289,7 @@
 				draggable: false,
 				droppable: false,
 				layerable: false,
+				resizable: false,
 				selectable: false,
 				hoverable: false,
 				traits: []
@@ -299,6 +299,33 @@
 				isComponent(el) {
 					if (el.tagName === 'svg' || el.tagName === 'path') {
 						return { type: 'svg' };
+					}
+				}
+			}),
+		view: svgView
+	});
+
+	domc.addType('svg-in', {
+		model: svgModel.extend({
+			defaults: Object.assign({}, svgModel.prototype.defaults, {
+				removable: false,
+				draggable: false,
+				droppable: false,
+				layerable: false,
+				badgable: false,
+				stylable: false,
+				highlightable: false,
+				copyable: false,
+				resizable: false,
+				selectable: false,
+				editable: false,
+				hoverable: false,
+			}),
+		},
+			{
+				isComponent(el) {
+					if (el.tagName === 'path') {
+						return { type: 'svg-in' };
 					}
 				}
 			}),

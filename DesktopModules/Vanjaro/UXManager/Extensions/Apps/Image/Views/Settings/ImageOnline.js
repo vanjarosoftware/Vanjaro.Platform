@@ -80,14 +80,12 @@
 
             var svPath = '';
             var target = window.parent.document.vj_image_target;
-            if (target != undefined) {
-                if (typeof target.attributes.type != 'undefined') {
-                    svPath = target.attributes["src"];
-                }
-                else {
-                    var background = window.parent.VjEditor.StyleManager.getProperty('background_&_shadow', 'background');
-                    svPath = background.getCurrentLayer().attributes.properties.models.find(m => m.id == 'background-image').attributes.value;
-                }
+            if (typeof target != 'undefined') {
+                svPath = target.attributes["src"];
+            }
+            else {
+                var background = window.parent.VjEditor.StyleManager.getProperty('background_&_shadow', 'background');
+                svPath = background.getSelectedLayer().prop.attributes.properties.models.find(m => m.id == 'background-image-sub').attributes.value;
             }
             common.webApi.post('Image/Save', 'path=' + svPath + '&id=' + $scope.PictureId).then(function (data) {
                 if (data.data != "failed") {
@@ -123,60 +121,59 @@
             window.parent.window.VJIsSaveCall = true;
         var target = window.parent.document.vj_image_target;
         var url = null;
-        if (target != undefined) {
-            if (typeof URL.fullHDURL != 'undefined') {
-                url = URL.fullHDURL;
-                $scope.PictureId = URL.id;
-            }
-            else if (typeof URL.largeImageURL != 'undefined') {
-                url = URL.largeImageURL;
-                $scope.PictureId = URL.id;
-            }
-            else {
-                if (typeof (URL) == "object")
-                    url = URL.Url
-                else
-                    url = URL;
-            }
 
-            //checked background image has not changed
-            if (typeof target.attributes.type != 'undefined') {
+        if (typeof URL.fullHDURL != 'undefined') {
+            url = URL.fullHDURL;
+            $scope.PictureId = URL.id;
+        }
+        else if (typeof URL.largeImageURL != 'undefined') {
+            url = URL.largeImageURL;
+            $scope.PictureId = URL.id;
+        }
+        else {
+            if (typeof (URL) == "object")
+                url = URL.Url
+            else
+                url = URL;
+        }
 
-                $(target.parent().components().models).each(function (index, component) {
-                    if (component.getName() == "Source")
-                        component.remove();
-                });
-                target.set('src', url);
+        //checked background image has not changed
+        if (typeof target != 'undefined') {
 
-                if (save != undefined && save == true) {
+            $(target.parent().components().models).each(function (index, component) {
+                if (component.getName() == "Source")
+                    component.remove();
+            });
+            target.set('src', url);
 
-                    if (URL.Urls.length) {
+            if (save != undefined && save == true) {
 
-                        if (target.attributes.optimize)
-                            parent.ChangeToWebp(target.parent(), URL.Urls);
-                        else
-                            target.set('src', URL.Urls.find(v => v.Type == 'webp').Url);
-                    }
-                    else {
-                        target.removeStyle('max-width');
-                        $(target.parent().components().models).each(function (index, component) {
-                            if (component.getName() == "Source")
-                                component.remove();
-                        });
-                    }
+                if (URL.Urls.length) {
 
-                    window.parent.VjEditor.runCommand("save");
+                    if (target.attributes.optimize)
+                        parent.ChangeToWebp(target.parent(), URL.Urls);
+                    else
+                        target.set('src', URL.Urls.find(v => v.Type == 'webp').Url);
                 }
+                else {
+                    target.removeStyle('max-width');
+                    $(target.parent().components().models).each(function (index, component) {
+                        if (component.getName() == "Source")
+                            component.remove();
+                    });
+                }
+
+                window.parent.VjEditor.runCommand("save");
             }
-            else {
+        }
+        else {
 
-                var background = window.parent.VjEditor.StyleManager.getProperty('background_&_shadow', 'background');
+            var background = window.parent.VjEditor.StyleManager.getProperty('background_&_shadow', 'background');
 
-                if (save != undefined && save && URL.Urls.length)
-                    url = URL.Urls.find(v => v.Type == 'webp').Url;
+            if (save != undefined && save && URL.Urls.length)
+                url = URL.Urls.find(v => v.Type == 'webp').Url;
 
-                background.getCurrentLayer().attributes.properties.models.find(m => m.id == 'background-image').setValue(url);
-            }
+            background.getSelectedLayer().prop.attributes.properties.models.find(m => m.id == 'background-image-sub').setValue(url);
         }
         if (save == undefined)
             $(window.parent.document.body).find('[data-bs-dismiss="modal"]').removeAttr('data-bs-dismiss');

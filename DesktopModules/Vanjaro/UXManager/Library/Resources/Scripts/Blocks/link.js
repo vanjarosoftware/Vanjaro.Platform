@@ -18,7 +18,45 @@
 	const linkView = linkType.view;
 
 	domc.addType('link', {
-		model: linkModel.extend({
+        model: linkModel.extend({
+			initToolbar() {
+				var model = this;
+				if (!model.get('toolbar')) {
+					var tb = [];
+
+					tb.push({
+						attributes: { class: 'fa fa-arrow-up' },
+						command: function (t) {
+							return t.runCommand("core:component-exit", {
+								force: 1
+							})
+						}
+					});
+
+					if (model.get('draggable')) {
+						tb.push({
+							attributes: { class: 'fa fa-arrows' },
+							command: 'tlb-move',
+						});
+					}
+
+					if (model.get('copyable')) {
+						tb.push({
+							attributes: { class: 'fa fa-clone' },
+							command: 'tlb-clone',
+						});
+					}
+
+					if (model.get('removable')) {
+						tb.push({
+							attributes: { class: 'fa fa-trash-o' },
+							command: 'tlb-delete',
+						});
+					}
+
+					model.set('toolbar', tb);
+				}
+			},
 			defaults: Object.assign({}, linkModel.prototype.defaults, {
 				droppable: '[data-gjs-type=section], [data-gjs-type=grid], [data-gjs-type=heading], [data-gjs-type=text], [data-gjs-type=icon-box], [data-gjs-type=list-box], [data-gjs-type=list], [data-gjs-type=spacer], [data-gjs-type=image-box], [data-gjs-type=divider], .image-link, .icon-link',
 				tagName: 'a',

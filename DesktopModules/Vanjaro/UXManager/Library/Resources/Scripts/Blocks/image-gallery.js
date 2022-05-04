@@ -11,22 +11,22 @@
             <div class="vj-image-gallery">
 				<span class="image-frame">
 					<picture class="picture-box">
-						<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
+						<img loading="lazy" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
 					</picture>
 				</span>
 				<span class="image-frame">
 					<picture class="picture-box">
-						<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
+						<img loading="lazy" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
 					</picture>
 				</span>
 				<span class="image-frame">
 					<picture class="picture-box">
-						<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
+						<img loading="lazy" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
 					</picture>
 				</span>
 				<span class="image-frame">
 					<picture class="picture-box">
-						<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
+						<img loading="lazy" class="img-thumbnail vj-image-gallery-item" src="`+ VjDefaultPath + `image.png"/>
 					</picture>
 				</span>
 			</div>`,
@@ -44,7 +44,7 @@
 			var Img = `
 				<span class="image-frame">
 					<picture class="picture-box">
-						<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" style="width:` + Selected.components().models[0].getStyle().width + `; height:` + Selected.components().models[0].getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
+						<img loading="lazy" style="width:` + Selected.components().models[0].getStyle().width + `; height:` + Selected.components().models[0].getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
 					</picture>
 				</span>
 			`;
@@ -57,7 +57,7 @@
 			var Img = `
 				<span class="image-frame">
 					<picture class="picture-box">
-						<img loading="lazy" onclick="typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);" style="width:` + Selected.getStyle().width + `; height:` + Selected.getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
+						<img loading="lazy" style="width:` + Selected.getStyle().width + `; height:` + Selected.getStyle().height + `" class="img-thumbnail vj-image-gallery-item" src="` + VjDefaultPath + `image.png"/>
 					</picture>
 				</span>
 			`;
@@ -367,16 +367,11 @@
 			},
 			ChangeHref() {
 				var href = this.model.attributes.href;
-				if (href == "") {
-					var onclick = "typeof OpenImagePopup != 'undefined' && OpenImagePopup(this);"
-					this.model.addAttributes({ onclick: onclick });
-				}
-				else {
+				if (href != "") {
 					const attr = this.model.getAttributes();
 					delete attr.onclick;
 					this.model.setAttributes(attr);
 				}
-
 			}
 		}),
 	});

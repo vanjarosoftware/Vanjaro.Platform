@@ -126,46 +126,43 @@
 
                 var target = window.parent.document.vj_image_target;
 
-                if (target != undefined) {
+                var url = Link;
 
-                    var url = Link;
+                //checked background image has not changed
+                if (typeof target != 'undefined') {
 
-                    //checked background image has not changed
-                    if (typeof target.attributes.type != 'undefined') {
+                    if (target.attributes.optimize) {
 
-                        if (target.attributes.optimize) {
+                        target.set('src', url);
 
-                            target.set('src', url);
+                        if ($scope.targetParent == undefined)
+                            $scope.targetParent = target.parent();
 
-                            if ($scope.targetParent == undefined)
-                                $scope.targetParent = target.parent();
-
-                            if (data.data.Urls.length)
-                                parent.ChangeToWebp($scope.targetParent, data.data.Urls);
-                            else {
-                                target.removeStyle('max-width');
-                                $($scope.targetParent.components().models).each(function (index, component) {
-                                    if (component.getName() == "Source")
-                                        component.remove();
-                                });
-                            }
-                        }
+                        if (data.data.Urls.length)
+                            parent.ChangeToWebp($scope.targetParent, data.data.Urls);
                         else {
-
-                            if (data.data.Urls.length)
-                                url = data.data.Urls.find(v => v.Type == 'webp').Url;
-
-                            target.set('src', url);
+                            target.removeStyle('max-width');
+                            $($scope.targetParent.components().models).each(function (index, component) {
+                                if (component.getName() == "Source")
+                                    component.remove();
+                            });
                         }
                     }
                     else {
-                        var background = window.parent.VjEditor.StyleManager.getProperty('background_&_shadow', 'background');
 
                         if (data.data.Urls.length)
                             url = data.data.Urls.find(v => v.Type == 'webp').Url;
 
-                        background.getCurrentLayer().attributes.properties.models.find(m => m.id == 'background-image').setValue(url);
+                        target.set('src', url);
                     }
+                }
+                else {
+                    var background = window.parent.VjEditor.StyleManager.getProperty('background_&_shadow', 'background');
+
+                    if (data.data.Urls.length)
+                        url = data.data.Urls.find(v => v.Type == 'webp').Url;
+
+                    background.getSelectedLayer().prop.attributes.properties.models.find(m => m.id == 'background-image-sub').setValue(url);
                 }
             }
             else {
