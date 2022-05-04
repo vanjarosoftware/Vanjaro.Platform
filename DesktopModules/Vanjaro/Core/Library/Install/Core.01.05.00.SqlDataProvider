@@ -1,0 +1,15 @@
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[VJ_Core_EmailVerification]') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}[VJ_Core_EmailVerification](
+	[Email] [nvarchar](256) NOT NULL,
+	[PortalID] [int] NOT NULL,
+	[OTP] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL
+CONSTRAINT [PK_VJ_Core_EmailVerification_1] PRIMARY KEY CLUSTERED 
+(
+[Email] ASC,
+[PortalID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO

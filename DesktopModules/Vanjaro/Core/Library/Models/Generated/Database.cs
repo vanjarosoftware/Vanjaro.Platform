@@ -224,4 +224,15 @@ namespace Vanjaro.Core.Data.Entities
         [Column] public int? UpdatedBy { get; set; }
         [Column] public DateTime? UpdatedOn { get; set; }
     }
+
+    [TableName("VJ_Core_EmailVerification")]
+    [PrimaryKey("Email,PortalID")]
+    [ExplicitColumns]
+    public partial class EmailVerification : VanjaroRepo.Record<EmailVerification>
+    {
+        [Column] public string Email { get; set; }
+        [Column] public int PortalID { get; set; }
+        [Column] public int OTP { get; set; }
+        [Column] public DateTime CreatedOn { get; set; }
+    }
 }
