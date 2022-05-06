@@ -19,7 +19,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Memberships
     public static partial class Managers
     {
         public class MembershipsManager
-        {                       
+        {
             #region Get Login Settings
             public static dynamic GetBasicLoginSettings(PortalSettings portalSettings)
             {
@@ -111,7 +111,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Memberships
                 {
                     Settings = new
                     {
-                        UserRegistration = portalSettings.UserRegistration.ToString(),
+                        UserRegistration = GetUserRegistration(portalSettings),
                         EnableRegisterNotification = PortalController.GetPortalSettingAsBoolean("EnableRegisterNotification", portalSettings.PortalId, true),
                         UseAuthenticationProviders = PortalController.GetPortalSettingAsBoolean("Registration_UseAuthProviders", portalSettings.PortalId, false),
                         ExcludedTerms = PortalController.GetPortalSetting("Registration_ExcludeTerms", portalSettings.PortalId, string.Empty),
@@ -147,13 +147,15 @@ namespace Vanjaro.UXManager.Extensions.Menu.Memberships
 
                 return Results;
             }
+
             internal static List<KeyValuePair<string, int>> GetUserRegistrationOptions()
             {
                 List<KeyValuePair<string, int>> userRegistrationOptions = new List<KeyValuePair<string, int>>
                 {
                     new KeyValuePair<string, int>(Localization.GetString("None", Components.Constants.LocalResourcesFile), 0),
                     new KeyValuePair<string, int>(Localization.GetString("Private", Components.Constants.LocalResourcesFile), 1),
-                    new KeyValuePair<string, int>(Localization.GetString("Public", Components.Constants.LocalResourcesFile), 2)
+                    new KeyValuePair<string, int>(Localization.GetString("Public", Components.Constants.LocalResourcesFile), 2),
+                    new KeyValuePair<string, int>(Localization.GetString("Verified", Components.Constants.LocalResourcesFile), 3)
                 };
                 return userRegistrationOptions;
             }
@@ -195,6 +197,16 @@ namespace Vanjaro.UXManager.Extensions.Menu.Memberships
                     TabInfo tab = TabController.Instance.GetTab(tabId, PortalId);
                     return tab != null ? tab.TabPath : "";
                 }
+            }
+            private static string GetUserRegistration(PortalSettings portalSettings)
+            {
+                string EmailVerification = SettingManager.GetValue(portalSettings.PortalId, 0, "setting_registration", "EmailVerification", null);
+                if (portalSettings.UserRegistration == 2 && !string.IsNullOrEmpty(EmailVerification) && EmailVerification == "1")
+                {
+                    return "3";
+                }
+                else
+                    return portalSettings.UserRegistration.ToString();
             }
             #endregion
             #endregion            

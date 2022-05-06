@@ -286,9 +286,9 @@
     <value>My Profile</value>
   </data>
   <data name="Data.Block.Register.VerificationCode.Text" xml:space="preserve">
-    <value>Email Verification Code</value>
+    <value>Enter Verification Code</value>
   </data>
   <data name="Data.Block.Register.VerificationCodePlaceholderText.Text" xml:space="preserve">
-    <value>Email Verification Code</value>
+    <value>Enter Verification Code</value>
   </data>
 </root>
