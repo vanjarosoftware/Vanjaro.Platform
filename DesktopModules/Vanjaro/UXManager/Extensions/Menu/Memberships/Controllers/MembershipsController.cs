@@ -116,6 +116,13 @@ namespace Vanjaro.UXManager.Extensions.Menu.Memberships.Controllers
                 string setting = request.RegistrationFields;
                 PortalInfo portalInfo = PortalController.Instance.GetPortal(portalSettings.PortalId);
                 portalInfo.UserRegistration = Convert.ToInt32(request.UserRegistration);
+                if (portalInfo.UserRegistration == 3)
+                {
+                    portalInfo.UserRegistration = 2;
+                    SettingManager.UpdateValue(portalSettings.PortalId, 0, "setting_registration", "EmailVerification", "1");
+                }
+                else
+                    SettingManager.UpdateValue(portalSettings.PortalId, 0, "setting_registration", "EmailVerification", "0");
                 PortalController.Instance.UpdatePortalInfo(portalInfo);
                 PortalController.UpdatePortalSetting(portalSettings.PortalId, "Registration_RegistrationFields", setting);
                 PortalController.UpdatePortalSetting(portalSettings.PortalId, "Registration_RegistrationFormType", request.RegistrationFormType.ToString(), false);

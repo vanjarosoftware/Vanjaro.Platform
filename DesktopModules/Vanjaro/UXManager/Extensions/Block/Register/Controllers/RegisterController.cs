@@ -66,8 +66,9 @@ namespace Vanjaro.UXManager.Extensions.Block.Register.Controllers
                     if (RegisterManager.Validate())
                     {
                         if (PortalSettings.UserRegistration != (int)Globals.PortalRegistrationType.NoRegistration)
-                        {                            
-                            bool verifyemail = PortalSettings.UserRegistration == 2 ? true : false;
+                        {
+                            string EmailVerification = Core.Managers.SettingManager.GetValue(PortalSettings.PortalId, 0, "setting_registration", "EmailVerification", null);
+                            bool verifyemail = (PortalSettings.UserRegistration == 2 && !string.IsNullOrEmpty(EmailVerification) && EmailVerification == "1") ? true : false;
                             string VerificationMessage = null;
                             if (!verifyemail || (verifyemail && !string.IsNullOrEmpty(RegisterDetails.VerificationCode) && Core.Managers.LoginManager.ValidateVerificationCode(PortalSettings.PortalId, RegisterDetails.Email, RegisterDetails.VerificationCode, out VerificationMessage)))
                             {

@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.Entities.Portals;
+using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Tokens;
 using System;
 using System.Linq;
@@ -90,6 +91,7 @@ namespace Vanjaro.Core
                             client = NotificationFactory.Connect(SmtpServer.Server, SmtpServer.Port, SmtpServer.Authentication, SmtpServer.Username, SmtpServer.Password, SmtpServer.SSL);
                             if (client != null)
                             {
+                                UserInfo userInfo = UserController.Instance.GetUserById(PortalSettings.PortalId, PortalSettings.AdministratorId);
                                 string Content = DotNetNuke.Services.Localization.Localization.GetString("EmailVerification", Components.Constants.LocalResourcesFile);
                                 MailQueue mail = new MailQueue
                                 {
@@ -101,9 +103,9 @@ namespace Vanjaro.Core
                                     Status = "Queue",
                                     RetryAttempt = 0,
                                     RetryDateTime = DateTime.UtcNow,
-                                    FromName = PortalSettings.UserInfo.DisplayName,
-                                    FromEmail = PortalSettings.UserInfo.Email,
-                                    ReplyEmail = PortalSettings.UserInfo.Email,
+                                    FromName = userInfo.DisplayName,
+                                    FromEmail = userInfo.Email,
+                                    ReplyEmail = userInfo.Email,
                                     ToEmail = Email,
                                     Attachment = ""
                                 };
