@@ -2154,37 +2154,6 @@ $(document).ready(function () {
 
 									var target = model;
 
-									sm.getSectors().models.forEach(function (item, index) {
-
-										item.attributes.properties.models.forEach(function (element, index) {
-
-											var property = element.attributes.property;
-
-											if (typeof target.getStyle()[property] == "undefined") {
-
-												if (element.attributes.type == 'customrange' && $(target.getEl()).css(property) != "auto") {
-
-													let computedValue = parseInt($(target.getEl()).css(property));
-
-													let name = item.attributes.name.replace(/ /g, ''),
-														sectorName = VjLocalized[name].replace(/ /g, '_').toLowerCase();
-
-													$(sm.getProperty(sectorName, property).view.$el.find('input[type="text"]')).val(computedValue);
-													$(sm.getProperty(sectorName, property).view.$el.find('input[type="range"]')).val(computedValue);
-												}
-												else if (element.attributes.type == 'customradio' || element.attributes.type == 'radio') {
-
-													let computedValue = $(target.getEl()).css(property);
-
-													let name = item.attributes.name.replace(/ /g, ''),
-														sectorName = VjLocalized[name].replace(/ /g, '_').toLowerCase();
-
-													$(sm.getProperty(sectorName, property).view.$el.find('input[value="' + computedValue + '"]')).prop('checked', true);
-												}
-											}
-										});
-									});
-
 									if (model.attributes.type == "icon")
 										target = model.components().models[0];
 
