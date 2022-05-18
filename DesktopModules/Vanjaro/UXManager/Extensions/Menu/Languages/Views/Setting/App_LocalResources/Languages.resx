@@ -138,6 +138,9 @@
   <data name="Languages_Columns_Setting.Text" xml:space="preserve">
     <value> </value>
   </data>
+  <data name="Languages_Search.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="NewLanguages.Text" xml:space="preserve">
     <value>Add New Languages</value>
   </data>
