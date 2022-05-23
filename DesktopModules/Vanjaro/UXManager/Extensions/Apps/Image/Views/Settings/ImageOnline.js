@@ -138,7 +138,7 @@
         }
 
         //checked background image has not changed
-        if (typeof target != 'undefined') {
+        if (typeof target != 'undefined' && typeof target.attributes.type != 'undefined') {
 
             $(target.parent().components().models).each(function (index, component) {
                 if (component.getName() == "Source")
@@ -173,7 +173,8 @@
             if (save != undefined && save && URL.Urls.length)
                 url = URL.Urls.find(v => v.Type == 'webp').Url;
 
-            background.getSelectedLayer().prop.attributes.properties.models.find(m => m.id == 'background-image-sub').setValue(url);
+            background.getCurrentLayer().attributes.properties.models.find(m => m.id == 'background-image').setValue(url);
+            //background.getSelectedLayer().prop.attributes.properties.models.find(m => m.id == 'background-image-sub').setValue(url);
         }
         if (save == undefined)
             $(window.parent.document.body).find('[data-bs-dismiss="modal"]').removeAttr('data-bs-dismiss');
