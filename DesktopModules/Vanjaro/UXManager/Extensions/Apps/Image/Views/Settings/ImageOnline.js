@@ -85,7 +85,8 @@
             }
             else {
                 var background = window.parent.VjEditor.StyleManager.getProperty('background_&_shadow', 'background');
-                svPath = background.getSelectedLayer().prop.attributes.properties.models.find(m => m.id == 'background-image-sub').attributes.value;
+                svPath = background.getCurrentLayer().attributes.properties.models.find(m => m.id == 'background-image').attributes.value;
+                //svPath = background.getSelectedLayer().prop.attributes.properties.models.find(m => m.id == 'background-image-sub').attributes.value;
             }
             common.webApi.post('Image/Save', 'path=' + svPath + '&id=' + $scope.PictureId).then(function (data) {
                 if (data.data != "failed") {
