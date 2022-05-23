@@ -80,7 +80,7 @@
 
             var svPath = '';
             var target = window.parent.document.vj_image_target;
-            if (typeof target != 'undefined') {
+            if (typeof target != 'undefined' && typeof target.attributes.type != 'undefined') {
                 svPath = target.attributes["src"];
             }
             else {
