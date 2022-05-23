@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using System.Text;
 using Vanjaro.Common.Data.Entities;
+using Vanjaro.Common.Data.Scripts;
 using Vanjaro.Common.Factories;
 
 namespace Vanjaro.Common.Components
@@ -27,7 +28,9 @@ namespace Vanjaro.Common.Components
             {
                 lock (VanjaroCommonLock)
                 {
-                    ProcessMailQueue();//Run Every 2 Minute            
+                    ProcessMailQueue();//Run Every 2 Minute 
+
+                    DeleteVerificationCodes();
 
                     if (SchedulerLog.Count > 0)
                     {
@@ -188,7 +191,12 @@ namespace Vanjaro.Common.Components
 
         }
 
-
-
+        private void DeleteVerificationCodes()
+        {
+            using (CommonLibraryRepo db = new CommonLibraryRepo())
+            {
+                db.Execute("delete from " + CommonScript.TablePrefix + "VJ_Core_EmailVerification where CreatedOn<@0", DateTime.UtcNow.AddMinutes(-5));
+            }
+        }
     }
 }

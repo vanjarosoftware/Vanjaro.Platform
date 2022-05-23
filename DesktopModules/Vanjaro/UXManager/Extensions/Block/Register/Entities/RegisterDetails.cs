@@ -15,8 +15,7 @@
         public bool Notify { get; set; }
         public string ConfirmPassword { get; set; }
         public string DisplayName { get; set; }
-
         public bool IsSuperUser { get; set; }
-
+        public string VerificationCode { get; set; }
     }
 }

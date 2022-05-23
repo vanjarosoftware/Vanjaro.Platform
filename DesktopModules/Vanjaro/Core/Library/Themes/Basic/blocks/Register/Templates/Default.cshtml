@@ -6,7 +6,7 @@
         <div class="">
             <div class="Vj-Register Register" id="Register">
                 <h4 class="Registerhead">[LS:Data.Block.Login.RegisterText]</h4>
-                <div>
+                <div class="dvregisterfrm">
                     @if (Model.Register.ShowLabel)
                     {
                         <label class="registerlabel" for="displayname">[LS:Data.Block.Register.DisplayNameText]</label>
@@ -19,7 +19,7 @@
                 </div>
                 @if (!Model.RegistrationSettings.UseEmailAsUserName)
                 {
-                    <div>
+                    <div class="dvregisterfrm">
                         @if (Model.Register.ShowLabel)
                         {
                             <label class="registerlabel" for="username">[LS:Data.Block.Register.UsernameText]</label>
@@ -31,7 +31,7 @@
                         <input type="text" placeholder="[LS:Data.Block.Register.UsernamePlaceholderText]" name="username" class="username" id="username" required>
                     </div>
                 }
-                <div>
+                <div class="dvregisterfrm">
                     @if (Model.Register.ShowLabel)
                     {
                         <label class="registerlabel" for="email">[LS:Data.Block.Register.EmailAddressText]</label>
@@ -46,7 +46,7 @@
                 </div>
                 @if (!Model.RegistrationSettings.RandomPassword)
                 {
-                    <div>
+                    <div class="dvregisterfrm">
                         @if (Model.Register.ShowLabel)
                         {
                             <label class="registerlabel" for="password">[LS:Data.Block.Register.PasswordText]</label>
@@ -58,12 +58,23 @@
                         <input type="password" placeholder="[LS:Data.Block.Register.PasswordPlaceholderText]" name="password" class="password" id="password" required>
                     </div>
                 }
+                <div class="dvverificationcode" style="display:none;">
+                    @if (Model.Register.ShowLabel)
+                    {
+                        <label class="registerlabel" for="verificationcode">[LS:Data.Block.Register.VerificationCode]</label>
+                    }
+                    else
+                    {
+                        <label class="registerlabel visually-hidden" for="verificationcode">[LS:Data.Block.Register.VerificationCode]</label>
+                    }
+                    <input type="number" placeholder="[LS:Data.Block.Register.VerificationCodePlaceholderText]" name="verificationcode" class="verificationcode" id="verificationcode" required>
+                </div>
                 @if (Model.Register.TermsPrivacy)
                 {
-            <div class="registerterms form-group">
-                <label class="visually-hidden" for="checktermcondition"></label>
-                <input type="checkbox" id="checktermcondition" name="checktermcondition" class="checktermcondition termsofuse" cbrequired="true"><span>[LS:Data.Block.Login.RegisterTermsText] <a href="@Model.Register.TermsURL" target="_blank">[LS:TermsofUse]</a> & <a href="@Model.Register.PrivacyURL" target="_blank">[LS:PrivacyPolicy]</a></span>
-            </div>
+                    <div class="registerterms form-group dvregisterfrm">
+                        <label class="visually-hidden" for="checktermcondition"></label>
+                        <input type="checkbox" id="checktermcondition" name="checktermcondition" class="checktermcondition termsofuse" cbrequired="true"><span>[LS:Data.Block.Login.RegisterTermsText] <a href="@Model.Register.TermsURL" target="_blank">[LS:TermsofUse]</a> & <a href="@Model.Register.PrivacyURL" target="_blank">[LS:PrivacyPolicy]</a></span>
+                    </div>
                 }
                 <div class="registered text-@Model.Register.ButtonAlign">
                     <a id="registerbtn" onclick="validateCaptcha(this, function (el) { Register.User('Register') })" attr-localize-register-text="[LS:Data.Block.Register.RegisterText]" class="btn btn-primary @Model.Register.ButtonAlign">
