@@ -129,7 +129,7 @@
                 var url = Link;
 
                 //checked background image has not changed
-                if (typeof target != 'undefined') {
+                if(typeof target != 'undefined' && typeof target.attributes.type != 'undefined') {
 
                     if (target.attributes.optimize) {
 
@@ -162,7 +162,8 @@
                     if (data.data.Urls.length)
                         url = data.data.Urls.find(v => v.Type == 'webp').Url;
 
-                    background.getSelectedLayer().prop.attributes.properties.models.find(m => m.id == 'background-image-sub').setValue(url);
+                    background.getCurrentLayer().attributes.properties.models.find(m => m.id == 'background-image').setValue(url);
+                    //background.getSelectedLayer().prop.attributes.properties.models.find(m => m.id == 'background-image-sub').setValue(url);
                 }
             }
             else {
