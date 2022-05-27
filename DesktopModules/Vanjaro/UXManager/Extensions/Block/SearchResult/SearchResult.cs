@@ -94,6 +94,9 @@ namespace Vanjaro.UXManager.Extensions.Block.SearchResult
                 string Keyword = HttpContext.Current.Request.QueryString["Search"];
                 if (!string.IsNullOrEmpty(Keyword))
                 {
+
+                    EventManager.TriggerEvent(Core.Entities.Events.VanjaroEventArgs.Search_Result, Keyword);
+
                     PortalSettings ps = PortalController.Instance.GetCurrentSettings() as PortalSettings;
                     if (Attributes.ContainsKey("data-block-pageindex"))
                     {

@@ -70,6 +70,8 @@
     <Compile Include="Entities\CustomBlock.cs" />
     <Compile Include="Entities\Editor\Editor.cs" />
     <Compile Include="Entities\Editor\EditorOptions.cs" />
+    <Compile Include="Entities\Events\IVanjaroEvent.cs" />
+    <Compile Include="Entities\Events\VanjaroEventArgs.cs" />
     <Compile Include="Entities\ExportTemplate.cs" />
     <Compile Include="Entities\Interface\IBlock.cs" />
     <Compile Include="Entities\Interface\IPortalDelete.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="Factories\WorkflowFactory.cs" />
     <Compile Include="Managers\AnalyticsManager.cs" />
     <Compile Include="Managers\CookieManager.cs" />
+    <Compile Include="Managers\EventManager.cs" />
     <Compile Include="Managers\ExceptionManager.cs" />
     <Compile Include="Managers\SectionPermissionManager.cs" />
     <Compile Include="Managers\SignatureManager.cs" />
