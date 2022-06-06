@@ -127,6 +127,9 @@ namespace Vanjaro.UXManager.Library
                 TabInfo tab = TabController.Instance.GetTab(TabID, PortalSettings.PortalId, true);
                 if (tab != null)
                 {
+                    if(tab.DisableLink && tab.TabSettings != null && tab.TabSettings.ContainsKey("AnchorID") && !string.IsNullOrEmpty(tab.TabSettings["AnchorID"]?.ToString()))
+                        return TabController.Instance.GetTab(Convert.ToInt32(tab.TabSettings["AnchorPageID"]), PortalSettings.Current.PortalId).FullUrl + "#" + tab.TabSettings["AnchorID"];
+
                     string flaggedUrl = Globals.FriendlyUrl(tab, Globals.ApplicationURL(TabID), PortalSettings as IPortalSettings);
                     if (AbsolutelLink)
                         return flaggedUrl;
