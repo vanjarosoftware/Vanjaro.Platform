@@ -637,7 +637,7 @@ $(window).resize(function () {
                         if (action.Url.indexOf('javascript:') == -1)
                             htmlString += "<a onclick='OpenPopUp(null, \"" + width + "\", \"right\", \"" + action.Title + "\", \"" + action.Url + "\", \"\", \"\", \"\", " + action.ModuleId + ");'>" + action.Title + "</a>";
                         else
-                            htmlString += "<a onclick='" + action.Url + "'>" + action.Title + "</a>";
+                            htmlString += "<a onclick=\"" + action.Url.replace(/"/g, "'") + "\">" + action.Title + "</a>";
                     }
                     else
                         htmlString += "<a href=\"" + action.Url + "\" target='_blank'>" + action.Title + "</a>";
