@@ -925,7 +925,7 @@ namespace Vanjaro.Skin
             {
                 return true;
             }
-            else if (!string.IsNullOrEmpty(Request.QueryString["icp"]) && Convert.ToBoolean(Request.QueryString["icp"]) == true && !string.IsNullOrEmpty(Request.QueryString["pv"]) && Convert.ToBoolean(Request.QueryString["pv"]) == true)
+            else if (!string.IsNullOrEmpty(Request.QueryString["icp"]) && Convert.ToBoolean(Request.QueryString["icp"]) == true && !string.IsNullOrEmpty(Request.QueryString["pv"]) && Convert.ToString(Request.QueryString["pv"]) == "yes")
             {
                 HtmlGenericControl body = (HtmlGenericControl)this.Page.FindControl("Body");
                 body.Attributes.Add("class", "preview");
@@ -1135,7 +1135,7 @@ namespace Vanjaro.Skin
                         }
                         else
                         {
-                            if (!(!string.IsNullOrEmpty(Request.QueryString["pv"]) && Request.QueryString["pv"] == "true"))
+                            if (!(!string.IsNullOrEmpty(Request.QueryString["pv"]) && Convert.ToString(Request.QueryString["pv"]) == "yes"))
                             {
                                 WebForms.RegisterStartupScript(Page, "MigratePage", "<script type=\"text/javascript\" vanjarocore=\"true\">" + MigrateManager.GetMigratePageToastMarkup(Page) + "</script> <style type=\"text/css\">" + MigrateManager.GetMigratePageCSS(Page) + "</style>", false);
                             }
