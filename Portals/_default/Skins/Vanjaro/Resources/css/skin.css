@@ -399,19 +399,19 @@ div.actionMenu ul {
 /*Menu Alignment*/
 
 div[alignment="left"] nav .collapse .navbar-nav,
-div[alignment="left"] nav.navbar.navbar-expand-xl {
+div[alignment="left"] nav.navbar.navbar-expand-lg {
     justify-content: flex-start;
     display: inline-flex;
 }
 
 div[alignment="center"] nav .collapse .navbar-nav,
-div[alignment="center"] nav.navbar.navbar-expand-xl {
+div[alignment="center"] nav.navbar.navbar-expand-lg {
     justify-content: center;
     display: inline-flex;
 }
 
 div[alignment="right"] nav .collapse .navbar-nav,
-div[alignment="right"] nav.navbar.navbar-expand-xl {
+div[alignment="right"] nav.navbar.navbar-expand-lg {
     justify-content: flex-end;
     display: inline-flex;
 }
