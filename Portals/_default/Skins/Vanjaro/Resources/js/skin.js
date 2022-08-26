@@ -521,7 +521,7 @@ InitHamburgerMenu = function ($this) {
     }
     else {
         var thismenu = $this;
-        var menuid = thismenu.attr("data-target");
+        var menuid = thismenu.attr("data-bs-target");
         var posoff = $this.parent();
         setTimeout(function () {
             $(menuid).appendTo(posoff);
@@ -537,7 +537,7 @@ $(window).resize(function () {
             if (!thislength) {
                 var thismenu = $(this);
                 $(thismenu).trigger("click");
-                var menuid = thismenu.attr("data-target");
+                var menuid = thismenu.attr("data-bs-target");
                 var posoff = $(this).parent();
                 $(menuid).appendTo(posoff);
                 $(menuid).css("top", "auto");
