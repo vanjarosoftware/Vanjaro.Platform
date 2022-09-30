@@ -126,7 +126,7 @@
             <uielement name="HardDeleteDelay" ngmodel="ui.data.GetPrivacy.Options.Settings.DataConsentDelay" attr-class="harddeletedelay" container-attr-ng-show="ui.data.UserDelete.Value == 2" control="textbox"></uielement>
             <uitemplate>
                 <div>
-                    <select class="form-control" ng-model="ui.data.HardDelete.Value" mn-ng-show="ui.data.UserDelete.Value == 2">
+                    <select class="form-control" mn-ng-model="ui.data.HardDelete.Value" mn-ng-show="ui.data.UserDelete.Value == 2">
                         <option value="{{option.Key}}" mn-ng-selected="{{option.Key==ui.data.HardDelete.Value}}" mn-ng-repeat="option in ui.data.HardDelete.Options">{{option.Value}}</option>
                     </select>
                 </div>
