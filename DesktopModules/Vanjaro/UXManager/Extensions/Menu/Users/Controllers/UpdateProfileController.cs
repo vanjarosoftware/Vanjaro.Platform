@@ -90,8 +90,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
 
                             List<Entities.ProfileProperties> profileProperties = new List<Entities.ProfileProperties>();
                             ListController listController = new ListController();
-                            foreach (ProfilePropertyDefinition d in user.Profile.ProfileProperties)
+                            foreach (ProfilePropertyDefinition de in user.Profile.ProfileProperties)
                             {
+                                ProfilePropertyDefinitions d = new ProfilePropertyDefinitions(de);
+
                                 string ControlType = UserManager.GetControlType(d.DataType);
                                 if (ControlType == "Country" || ControlType == "Region" || ControlType == "List")
                                     d.PropertyValue = string.IsNullOrEmpty(d.PropertyValue) ? "-1" : d.PropertyValue;
