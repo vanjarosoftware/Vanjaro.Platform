@@ -9,7 +9,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Entities
 {
     public class ProfileProperties
     {
-        public ProfilePropertyDefinition ProfilePropertyDefinition { get; set; }
+        public dynamic ProfilePropertyDefinition { get; set; }
         public IEnumerable<ListEntryInfo> ListEntries { get; set; }
         private string _ControlType;
 
