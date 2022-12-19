@@ -57,7 +57,7 @@
     <Compile Include="Entities\FileSetting.cs" />
     <Compile Include="Entities\Import\ImportField.cs" />
     <Compile Include="Entities\Import\Job.cs" />
-    <Compile Include="Entities\ProfilePropertyDefinitions.cs" />
+    <Compile Include="Entities\CopyofProfilePropertyDefinition.cs" />
     <Compile Include="Entities\ProfileProperties.cs" />
     <Compile Include="Entities\UserBasicInfo.cs" />
     <Compile Include="Factories\ImportFactory.cs" />
