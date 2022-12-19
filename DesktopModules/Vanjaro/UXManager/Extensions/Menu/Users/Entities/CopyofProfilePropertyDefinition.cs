@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DotNetNuke.Entities.Profile;
+using System.Xml.Serialization;
 
 namespace Vanjaro.UXManager.Extensions.Menu.Users.Entities
 {
-	public class ProfilePropertyDefinitions
+	public class CopyofProfilePropertyDefinition
 	{
 		public bool Visible { get; set; }
 		public int ViewOrder { get; set; }
@@ -28,8 +29,17 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Entities
 		public int DataType { get; set; }
 		public ProfileVisibility ProfileVisibility { get; set; }
 		public UserVisibilityMode Visibility { get; set; }
-		public ProfilePropertyDefinitions(ProfilePropertyDefinition ProfilePropertyDefinition)
+		public CopyofProfilePropertyDefinition()
 		{
+		}
+		public CopyofProfilePropertyDefinition(ProfilePropertyDefinition ProfilePropertyDefinition)
+		{
+			CopyFromDNNProfile(ProfilePropertyDefinition);
+		}
+		public CopyofProfilePropertyDefinition CopyFromDNNProfile(ProfilePropertyDefinition ProfilePropertyDefinition)
+		{
+			CopyofProfilePropertyDefinition CopyofProfilePropertyDefinition = new CopyofProfilePropertyDefinition();
+
 			Visible = ProfilePropertyDefinition.Visible;
 			ViewOrder = ProfilePropertyDefinition.ViewOrder;
 			ValidationExpression = ProfilePropertyDefinition.ValidationExpression;
@@ -48,6 +58,32 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Entities
 			DataType = ProfilePropertyDefinition.DataType;
 			ProfileVisibility = ProfilePropertyDefinition.ProfileVisibility;
 			Visibility = ProfilePropertyDefinition.Visibility;
+
+			return CopyofProfilePropertyDefinition;
+		}
+		public ProfilePropertyDefinition CopyToDNNProfile()
+		{
+			ProfilePropertyDefinition ProfilePropertyDefinition = new ProfilePropertyDefinition();
+
+			ProfilePropertyDefinition.Visible = Visible;
+			ProfilePropertyDefinition.ViewOrder = ViewOrder;
+			ProfilePropertyDefinition.ValidationExpression = ValidationExpression;
+			ProfilePropertyDefinition.Required = Required;
+			ProfilePropertyDefinition.ReadOnly = ReadOnly;
+			ProfilePropertyDefinition.PropertyName = PropertyName;
+			ProfilePropertyDefinition.PropertyValue = PropertyValue;
+			ProfilePropertyDefinition.PropertyDefinitionId = PropertyDefinitionId;
+			ProfilePropertyDefinition.PropertyCategory = PropertyCategory;
+			ProfilePropertyDefinition.PortalId = PortalId;
+			ProfilePropertyDefinition.ModuleDefId = ModuleDefId;
+			ProfilePropertyDefinition.Length = Length;
+			ProfilePropertyDefinition.DefaultVisibility = DefaultVisibility;
+			ProfilePropertyDefinition.DefaultValue = DefaultValue;
+			ProfilePropertyDefinition.DataType = DataType;
+			ProfilePropertyDefinition.ProfileVisibility = ProfileVisibility;
+			ProfilePropertyDefinition.Visibility = Visibility;
+
+			return ProfilePropertyDefinition;
 		}
 	}
 }

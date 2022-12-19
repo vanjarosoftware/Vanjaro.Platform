@@ -146,10 +146,12 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
 
                             List<Entities.ProfileProperties> profileProperties = new List<Entities.ProfileProperties>();
                             ListController listController = new ListController();
-                            foreach (ProfilePropertyDefinition d in user.Profile.ProfileProperties)
+                            foreach (ProfilePropertyDefinition de in user.Profile.ProfileProperties)
                             {
-                                if (Managers.UserManager.CheckAccessLevel(d, user))
+                                if (Managers.UserManager.CheckAccessLevel(de, user))
                                 {
+                                    CopyofProfilePropertyDefinition d = new CopyofProfilePropertyDefinition(de);
+
                                     string ControlType = UserManager.GetControlType(d.DataType);
                                     if (ControlType == "Country" || ControlType == "Region" || ControlType == "List")
                                         d.PropertyValue = string.IsNullOrEmpty(d.PropertyValue) ? "-1" : d.PropertyValue;

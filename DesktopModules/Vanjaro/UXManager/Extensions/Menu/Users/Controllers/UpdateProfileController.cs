@@ -92,7 +92,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                             ListController listController = new ListController();
                             foreach (ProfilePropertyDefinition de in user.Profile.ProfileProperties)
                             {
-                                ProfilePropertyDefinitions d = new ProfilePropertyDefinitions(de);
+                                CopyofProfilePropertyDefinition d = new CopyofProfilePropertyDefinition(de);
 
                                 string ControlType = UserManager.GetControlType(d.DataType);
                                 if (ControlType == "Country" || ControlType == "Region" || ControlType == "List")
