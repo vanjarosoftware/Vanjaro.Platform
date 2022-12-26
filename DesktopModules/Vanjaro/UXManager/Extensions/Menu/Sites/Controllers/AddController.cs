@@ -33,9 +33,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Sites.Controllers
         public ActionResult Create(dynamic Data)
         {
             ActionResult actionResult = new ActionResult();
-            string SiteAlias = Data.PortalRequest.SiteAlias.Value;
+            string SiteAlias = Data.PortalRequest.SiteAlias.Value.ToLower();
             Regex regex = new Regex("(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]");
-            if (!string.IsNullOrEmpty(SiteAlias) && regex.Match(Data.PortalRequest.SiteAlias.Value).Value != SiteAlias.Replace("http://", "").Replace("https://", "").TrimEnd('/'))
+            if (!string.IsNullOrEmpty(SiteAlias) && regex.Match(SiteAlias).Value != SiteAlias.Replace("http://", "").Replace("https://", "").TrimEnd('/'))
                 actionResult.AddError("SiteDomainError", Localization.GetString("SiteDomainError", Components.Constants.LocalResourcesFile));
 
             if (actionResult.IsSuccess)
