@@ -74,7 +74,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                             Settings.Add("UserDetails", new UIData { Name = "UserDetails", Options = UserManager.MapUserBasicDto(user, userDetails) });
                             Settings.Add("UserRoles", new UIData { Name = "UserRoles", Options = UsersController.Instance.GetUserRoles(user, keyword, out int totalRoles).Select(r => UserRoleDto.FromRoleInfo(ps, r)) });
                             Settings.Add("IsAdmin", new UIData { Name = "IsAdmin", Value = userInfo.IsInRole("Administrators").ToString() });
-                            Settings.Add("ProfilePropertiesByCategories", new UIData { Name = "ProfilePropertiesByCategories", Options = Managers.UserManager.GetLocalizedCategories(user.Profile.ProfileProperties, user).Select(x => new { x.Key, x.Value }) });
+                            Settings.Add("ProfilePropertiesByCategories", new UIData { Name = "ProfilePropertiesByCategories", Options = Managers.UserManager.GetLocalizedCategories(user.Profile.ProfileProperties, user, true).Select(x => new { x.Key, x.Value }) });
 
                             if (string.IsNullOrEmpty(user.Profile.PreferredLocale))
                             {
