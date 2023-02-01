@@ -156,7 +156,10 @@ namespace Vanjaro.UXManager.Extensions.Block.Login
                     ShowRegister = Convert.ToBoolean(Attributes["data-block-showregister"])
                 };
 
-                login.RegisterUrl = Globals.RegisterURL(HttpUtility.UrlEncode(ServiceProvider.NavigationManager.NavigateURL()), Null.NullString);
+                if ((PortalController.Instance.GetCurrentSettings() as PortalSettings).Registration.RedirectAfterRegistration == -1)
+                    login.RegisterUrl = Globals.RegisterURL(HttpUtility.UrlEncode(ServiceProvider.NavigationManager.NavigateURL()), Null.NullString);
+                else
+                    login.RegisterUrl = Globals.RegisterURL(null, null);
 
                 IDictionary<string, object> Objects = new System.Dynamic.ExpandoObject() as IDictionary<string, object>;
                 Objects.Add("Login", login);
