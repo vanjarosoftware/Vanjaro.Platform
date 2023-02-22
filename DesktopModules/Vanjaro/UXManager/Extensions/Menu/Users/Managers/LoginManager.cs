@@ -33,10 +33,10 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users
             public static string GetRedirectUrl(bool checkSettings = true)
             {
                 string redirectUrl = "";
-                int redirectAfterLogin = PortalSettings.Current.Registration.RedirectAfterLogin;
-                if (checkSettings && redirectAfterLogin > 0) //redirect to after login page
+                int redirectAfterRegistration = PortalSettings.Current.Registration.RedirectAfterRegistration;
+                if (checkSettings && redirectAfterRegistration > 0) //redirect to after registration page
                 {
-                    redirectUrl = ServiceProvider.NavigationManager.NavigateURL(redirectAfterLogin);
+                    redirectUrl = ServiceProvider.NavigationManager.NavigateURL(redirectAfterRegistration);
                 }
                 else
                 {
