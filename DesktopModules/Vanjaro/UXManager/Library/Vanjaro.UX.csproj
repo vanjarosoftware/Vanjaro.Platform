@@ -179,7 +179,6 @@
     <Content Include="Resources\Images\thumbnail-video.jpg" />
     <Content Include="Resources\extension.html" />
     <Content Include="Resources\placeholder.html" />
-    <Content Include="Resources\node_modules\.bin\webpack.config.js" />
     <Content Include="Resources\Scripts\Blocks\carousel.js" />
     <Content Include="Resources\Scripts\Blocks\map.js" />
     <Content Include="Resources\Scripts\Blocks\heading.js" />
@@ -334,6 +333,7 @@
   <ItemGroup>
     <Content Include="web.config" />
     <Content Include="Resources\Scripts\uxmanager.min.js.map" />
+    <Content Include="Resources\webpack.config.js" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -378,7 +378,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PreBuildEvent>cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\ &amp;&amp; npm install &amp;&amp; cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\node_modules\.bin\ &amp;&amp; webpack</PreBuildEvent>
+    <PreBuildEvent>cd ..\DesktopModules\Vanjaro\UXManager\Library\Resources\ &amp;&amp; npm run build</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>if not $(ConfigurationName) == Debug start ..\DesktopModules\Vanjaro\Core\Library\Packager\Packager.bat Platform</PostBuildEvent>

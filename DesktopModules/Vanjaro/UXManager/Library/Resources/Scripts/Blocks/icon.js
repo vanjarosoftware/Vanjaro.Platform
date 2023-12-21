@@ -21,32 +21,30 @@
 
 	let domc = editor.DomComponents;
 	const defaultType = domc.getType('default');
-	const defaultModel = defaultType.model;
 	const defaultView = defaultType.view;
 
 	domc.addType('icon-box', {
-		model: defaultModel.extend({
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+		model: {
+			defaults: {
 				'custom-name': 'Icon Box',
 				droppable: false,
 				selectable: false,
 				highlightable: false,
 				hoverable: false,
 				traits: []
-			}),
+			},
 		},
-			{
 				isComponent(el) {
 					if (el && el.classList && el.classList.contains('icon-box')) {
 						return { type: 'icon-box' };
 					}
 				}
-			}),
+		,
 		view: defaultView
 	});
 
 	domc.addType('icon', {
-		model: defaultModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -85,7 +83,7 @@
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				droppable: false,
 				editable: false,
 				resizable: {
@@ -242,7 +240,7 @@
 						"data_href_type": "url",
 					}
 				]
-			}),
+			},
 			init() {
 				this.listenTo(this, 'change:attributes:title', this.AddContent); // listen for active event
 			},
@@ -254,14 +252,14 @@
 				else
 					this.append('<span class="visually-hidden">' + this.getAttributes().title + '</span>');
 			}
-		}, {
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('vj-icon')) {
 					return { type: 'icon' };
 				}
 			}
-		}),
-		view: defaultView.extend({
+		,
+		view: {
 			events: {
 				dblclick: function () {
 					this.ShowIcons();
@@ -276,16 +274,15 @@
 				var url = CurrentExtTabUrl + "&guid=85682CD1-D5FD-4611-B252-3BC1972545A0#!/setting";
 				OpenPopUp(null, 700, 'right', 'Select Icon', url, '', true);
 			}
-		}),
+		},
 	});
 
 	const svgType = domc.getType('svg');
-	const svgModel = svgType.model;
 	const svgView = svgType.view;
 
 	domc.addType('svg', {
-		model: svgModel.extend({
-			defaults: Object.assign({}, svgModel.prototype.defaults, {
+		model: {
+			defaults: {
 				draggable: false,
 				droppable: false,
 				layerable: false,
@@ -293,21 +290,20 @@
 				selectable: false,
 				hoverable: false,
 				traits: []
-			}),
+			},
 		},
-			{
 				isComponent(el) {
 					if (el.tagName === 'svg' || el.tagName === 'path') {
 						return { type: 'svg' };
 					}
 				}
-			}),
+		,
 		view: svgView
 	});
 
 	domc.addType('svg-in', {
-		model: svgModel.extend({
-			defaults: Object.assign({}, svgModel.prototype.defaults, {
+		model: {
+			defaults: {
 				removable: false,
 				draggable: false,
 				droppable: false,
@@ -320,15 +316,14 @@
 				selectable: false,
 				editable: false,
 				hoverable: false,
-			}),
+			},
 		},
-			{
 				isComponent(el) {
 					if (el.tagName === 'path') {
 						return { type: 'svg-in' };
 					}
 				}
-			}),
+		,
 		view: svgView
 	});
 }

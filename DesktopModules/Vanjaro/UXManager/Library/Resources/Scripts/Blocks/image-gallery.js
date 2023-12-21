@@ -73,11 +73,10 @@
 
 	let domc = editor.DomComponents;
 	const defaultType = domc.getType('default');
-	const defaultModel = defaultType.model;
 	const defaultView = defaultType.view;
 
 	domc.addType('image-gallery', {
-		model: defaultModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -121,7 +120,7 @@
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				'custom-name': 'Image Gallery',
 				droppable: '.vj-image-gallery-item',
 				tagName: 'div',
@@ -141,15 +140,14 @@
 						changeProp: 1,
 					},
 				]
-			}),
+			},
 		},
-			{
 				isComponent(el) {
 					if (el && el.classList && el.classList.contains('vj-image-gallery')) {
 						return { type: 'image-gallery' };
 					}
 				}
-			}),
+		,
 		view: defaultView
 	});
 
@@ -158,7 +156,7 @@
 	const imageView = imageType.view;
 
 	domc.addType('image-gallery-item', {
-		model: imageModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -207,7 +205,8 @@
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, imageModel.prototype.defaults, {
+			defaults: {
+				type: 'image',
 				'custom-name': 'Gallery Item',
 				draggable: '.vj-image-gallery',
 				droppable: false,
@@ -252,7 +251,7 @@
 					href: "",
 					"data_href_type": "url",
 					changeProp: 1,
-				}],
+					}],
 				resizable: {
 					tc: 0,
 					cl: 0,
@@ -327,25 +326,25 @@
 						});
 					}
 				}
-			}),
+			},
 		},
-			{
 				isComponent(el) {
 					if (el && el.classList && el.classList.contains('vj-image-gallery-item')) {
 						return { type: 'image-gallery-item' };
 					}
 				}
-			}),
-		view: imageView.extend({
+		,
+		view: {
 			events: {
 				dblclick: function () {
 					this.ShowModal()
 				},
 			},
 			init() {
-				this.listenTo(this.model.parent(), 'active', this.ActivateModal); // listen for active event
+				this.listenTo(this.model.parent(), 'active', this.ActivateModal);
 				this.listenTo(this.model, 'change:src', this.ChangeSrc);
 				this.listenTo(this.model, 'change:href', this.ChangeHref);
+				this.model.set('src', this.model.getAttributes()['data-src']);
 			},
 			ActivateModal() {
 				var Selected = this.model.collection.first();
@@ -373,6 +372,6 @@
 					this.model.setAttributes(attr);
 				}
 			}
-		}),
+		},
 	});
 }

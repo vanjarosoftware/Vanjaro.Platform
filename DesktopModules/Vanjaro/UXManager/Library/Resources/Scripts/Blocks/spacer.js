@@ -17,11 +17,10 @@
 
 	let domc = editor.DomComponents;
 	const defaultType = domc.getType('default');
-	const defaultModel = defaultType.model;
 	const defaultView = defaultType.view;
 
 	domc.addType('spacer', {
-		model: defaultModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -60,7 +59,7 @@
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				droppable: false,
 				classes: ['spacer'],
 				resizable: {
@@ -104,15 +103,14 @@
 						changeProp: 1,
 					}
 				]
-			})
+			}
 		},
-			{
 				isComponent(el) {
 					if (el && el.classList && el.classList.contains('spacer')) {
 						return { type: 'spacer' };
 					}
 				}
-			}),
+		,
 		view: defaultView
 	});
 }

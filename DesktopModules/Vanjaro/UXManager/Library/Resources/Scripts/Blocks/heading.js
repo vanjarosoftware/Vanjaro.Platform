@@ -17,11 +17,10 @@ export default (editor, config = {}) => {
 
 	let domc = editor.DomComponents;
 	const textType = domc.getType('text');
-	const textModel = textType.model;
 	const textView = textType.view;
 
 	domc.addType('heading', {
-		model: textModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -60,12 +59,13 @@ export default (editor, config = {}) => {
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, textModel.prototype.defaults, {
+			defaults: {
 				'custom-name': 'Heading',
 				droppable: false,
 				tagName: 'h1',
 				classes: ['vj-heading', 'text-primary', 'head-style-1'],
 				text: true,
+				editable: true,
 				traits: [
 					{
 						label: 'Importance',
@@ -150,7 +150,7 @@ export default (editor, config = {}) => {
 						changeProp: 1,
 					}
 				]
-			}),
+			},
 			init() {
 				this.listenTo(this, 'change:importance', this.handleTypeChange);
 			},
@@ -164,13 +164,13 @@ export default (editor, config = {}) => {
 					VjEditor.runCommand("save");
 				}
 			},
-		}, {
+		},
 			isComponent(el) {
 				if (el && (el.tagName && (el.tagName.toLowerCase() == 'h1' || el.tagName.toLowerCase() == 'h2' || el.tagName.toLowerCase() == 'h3' || el.tagName.toLowerCase() == 'h4' || el.tagName.toLowerCase() == 'h5' || el.tagName.toLowerCase() == 'h6')) || (el.classList && el.classList.contains('vj-heading'))) {
 					return { type: 'heading' };
 				}
 			}
-		}),
+		,
 		view: textView.extend({
 			onRender() {
 

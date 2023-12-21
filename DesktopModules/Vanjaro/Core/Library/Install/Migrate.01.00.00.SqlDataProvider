@@ -1,5 +1,5 @@
-IF Not EXISTS (select * from {databaseOwner}[PersonaBarMenu] Where Identifier='Vanjaro' and ModuleName='Vanjaro')
+IF Not EXISTS (select * from {databaseOwner}[{objectQualifier}PersonaBarMenu] Where Identifier='Vanjaro' and ModuleName='Vanjaro')
 BEGIN
-INSERT INTO {databaseOwner}[PersonaBarMenu]([Identifier],[ModuleName],[FolderName],[Controller],[ResourceKey],[Path],[Link],[CssClass],[ParentId],[Order],[AllowHost],[Enabled],[CreatedByUserId],[CreatedOnDate],[LastModifiedByUserId],[LastModifiedOnDate],[IconFile])VALUES('Vanjaro','Vanjaro',NULL,'','Vanjaro','Vanjaro',NULL,NULL,2,1000,1,1,-1,GETDATE(),-1,GETDATE(),NULL)
+INSERT INTO {databaseOwner}[{objectQualifier}PersonaBarMenu]([Identifier],[ModuleName],[FolderName],[Controller],[ResourceKey],[Path],[Link],[CssClass],[ParentId],[Order],[AllowHost],[Enabled],[CreatedByUserId],[CreatedOnDate],[LastModifiedByUserId],[LastModifiedOnDate],[IconFile])VALUES('Vanjaro','Vanjaro',NULL,'','Vanjaro','Vanjaro',NULL,NULL,2,1000,1,1,-1,GETDATE(),-1,GETDATE(),NULL)
 End
 GO

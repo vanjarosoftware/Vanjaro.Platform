@@ -22,27 +22,27 @@ export default (editor, config = {}) => {
     const defaultView = defaultType.view;
 
     domc.addType('button-box', {
-        model: defaultModel.extend({
-            defaults: Object.assign({}, defaultModel.prototype.defaults, {
+        model: {
+            defaults: {
                 'custom-name': 'Button Box',
                 droppable: false,
                 selectable: false,
                 highlightable: false,
                 hoverable: false,
                 traits: []
-            }),
-        }, {
-            isComponent(el) {
-                if (el && el.classList && el.classList.contains('button-box')) {
-                    return { type: 'button-box' };
-                }
+            },
+        },
+        isComponent(el) {
+            if (el && el.classList && el.classList.contains('button-box')) {
+                return { type: 'button-box' };
             }
-        }),
+        }
+        ,
         view: defaultView
     });
 
     domc.addType('button', {
-        model: defaultModel.extend({
+        model: {
             initToolbar() {
                 var model = this;
                 if (!model.get('toolbar')) {
@@ -81,7 +81,7 @@ export default (editor, config = {}) => {
                     model.set('toolbar', tb);
                 }
             },
-            defaults: Object.assign({}, defaultModel.prototype.defaults, {
+            defaults: {
                 'custom-name': 'Button',
                 droppable: '[data-gjs-type=icon-box], [data-gjs-type=icon]',
                 classes: ['btn', 'btn-primary', 'button-style-1'],
@@ -199,7 +199,7 @@ export default (editor, config = {}) => {
                         changeProp: 1,
                     }
                 ]
-            }),
+            },
             init() {
                 this.listenTo(this, 'change:size', this.handleSizeChange);
             },
@@ -208,14 +208,14 @@ export default (editor, config = {}) => {
                 this.getTrait('fontsize').setTargetValue($(this.getEl()).css('font-size').replace(/[^-\d\.]/g, ''));
                 this.getTrait('fontsize').view.render();
             },
-        }, {
-            isComponent(el) {
-                if (el && el.classList && el.classList.contains('btn')) {
-                    return { type: 'button' };
-                }
+        },
+        isComponent(el) {
+            if (el && el.classList && el.classList.contains('btn')) {
+                return { type: 'button' };
             }
-        }),
-        view: defaultView.extend({
+        }
+        ,
+        view: {
             onRender() {
 
                 var model = this.model;
@@ -248,16 +248,15 @@ export default (editor, config = {}) => {
                     return false;
                 }
             }
-        }),
+        },
     });
 
     const textType = domc.getType('text');
-    const textModel = textType.model;
     const textView = textType.view;
 
     domc.addType('button-text', {
-        model: textModel.extend({
-            defaults: Object.assign({}, textModel.prototype.defaults, {
+        model: {
+            defaults: {
                 copyable: false,
                 draggable: false,
                 droppable: false,
@@ -265,14 +264,14 @@ export default (editor, config = {}) => {
                 removable: false,
                 selectable: false,
                 stylable: false,
-            }),
-        }, {
-            isComponent(el) {
-                if (el && (el.classList && el.classList.contains('button-text'))) {
-                    return { type: 'button-text' };
-                }
+            },
+        },
+        isComponent(el) {
+            if (el && (el.classList && el.classList.contains('button-text'))) {
+                return { type: 'button-text' };
             }
-        }),
+        }
+        ,
         view: textView
     });
 }

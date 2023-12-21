@@ -25,6 +25,11 @@ export default (editor, config = {}) => {
 			var mainparent = selected.closestType('image-box').parent();
 			mainparent.append(parent);
 		}
+		else {
+			var clone = selected.clone();
+			var parent = selected.parent();
+			parent.append(clone);
+		} 
 
 		VjEditor.select();
 		VjEditor.select(selected);

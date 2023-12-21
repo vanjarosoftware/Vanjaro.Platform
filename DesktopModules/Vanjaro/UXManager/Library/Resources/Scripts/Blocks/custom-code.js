@@ -65,7 +65,7 @@ LoadCustomCode = function (grapesjs) {
 
         domComps.addType(typeCustomCode, {
 
-            model: defaultModel.extend({
+            model: {
                 initToolbar() {
                     var model = this;
                     if (!model.get('toolbar')) {
@@ -138,14 +138,14 @@ LoadCustomCode = function (grapesjs) {
                 onCustomCodeChange() {
                     this.set('content', this.get(keyCustomCode));
                 },
-            }, {
+            },
                     /**
                      * The component can be used only if requested explicitly via `type` property
                      */
                     isComponent() {
                         return false;
                     }
-                }),
+                ,
 
             view: defaultType.view.extend({
                 events: {

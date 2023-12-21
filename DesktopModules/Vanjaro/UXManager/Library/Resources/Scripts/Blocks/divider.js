@@ -15,11 +15,10 @@ export default (editor, config = {}) => {
 
 	let domc = editor.DomComponents;
 	const defaultType = domc.getType('default');
-	const defaultModel = defaultType.model;
 	const defaultView = defaultType.view;
 
 	domc.addType('divider', {
-		model: defaultModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -58,7 +57,7 @@ export default (editor, config = {}) => {
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				droppable: false,
 				classes: ['vj-divider', 'border-primary'],
 				traits: [
@@ -130,14 +129,13 @@ export default (editor, config = {}) => {
 						changeProp: 1,
 					}
 				]
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('vj-divider')) {
 					return { type: 'divider' };
 				}
 			},
-		}),
 		view: defaultView
 	});
 }

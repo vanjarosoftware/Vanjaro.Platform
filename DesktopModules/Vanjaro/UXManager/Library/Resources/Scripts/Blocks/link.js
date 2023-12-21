@@ -14,11 +14,10 @@
 
 	let domc = editor.DomComponents;
 	const linkType = domc.getType('link');
-	const linkModel = linkType.model;
 	const linkView = linkType.view;
 
 	domc.addType('link', {
-        model: linkModel.extend({
+        model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -57,7 +56,7 @@
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, linkModel.prototype.defaults, {
+			defaults: {
 				droppable: '[data-gjs-type=section], [data-gjs-type=grid], [data-gjs-type=heading], [data-gjs-type=text], [data-gjs-type=icon-box], [data-gjs-type=list-box], [data-gjs-type=list], [data-gjs-type=spacer], [data-gjs-type=image-box], [data-gjs-type=divider], .image-link, .icon-link',
 				tagName: 'a',
 				'custom-name': 'Link Group',
@@ -86,15 +85,15 @@
 						changeProp: 1,
 					}
 				]
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
                 if (el && el.tagName && el.tagName.toLowerCase() == 'a' && el.classList && el.classList.contains('vj-link')) {
 					return { type: 'link' };
 				}
 			}
-		}),
-		view: linkView.extend({
+		,
+		view: {
 			onRender() {
 
 				var model = this.model;
@@ -107,11 +106,11 @@
                     return false;
                 }
             }
-		}),
+		},
     });
 
     domc.addType('link-text', {
-		model: linkModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -150,7 +149,7 @@
 					model.set('toolbar', tb);
 				}
 			},
-            defaults: Object.assign({}, linkModel.prototype.defaults, {
+            defaults: {
                 droppable: false,
                 tagName: 'a',
                 'custom-name': 'Link',
@@ -198,14 +197,14 @@
                         changeProp: 1,
                     }
                 ]
-            }),
-        }, {
+            },
+        },
                 isComponent(el) {
                 if (el && el.tagName && el.tagName.toLowerCase() == 'a' && (!el.classList || (el.classList && !el.classList.contains('vj-link') && !el.classList.contains('btn')))) {
                         return { type: 'link-text' };
                     }
                 }
-            }),
+        ,
         view: linkView
     });
 }

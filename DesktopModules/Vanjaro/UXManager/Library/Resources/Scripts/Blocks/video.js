@@ -19,12 +19,11 @@
 	let domc = editor.DomComponents;
 
 	const defaultType = domc.getType('default');
-	const defaultModel = defaultType.model;
 	const defaultView = defaultType.view;
 
 	domc.addType('iframe', {
-		model: defaultModel.extend({
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+		model: {
+			defaults: {
 				droppable: false,
 				draggable: false,
 				hoverable: false,
@@ -32,19 +31,19 @@
 				clickable: false,
 				layerable: false,
 				traits: [],
-			})
-		}, {
+			}
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('frame-box')) {
 					return { type: 'iframe' };
 				}
 			}
-		}),
+		,
 		view: defaultView
 	});
 
 	domc.addType('videobox', {
-		model: defaultModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -83,7 +82,7 @@
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				'custom-name': 'Video',
 				droppable: false,
 				resizable: {
@@ -100,7 +99,7 @@
 				},
 				attributes: { allowfullscreen: 'allowfullscreen' },
 				traits: [],
-			}),
+			},
 			init() {
 				var traits = [];
 				var prov = this.attributes.provider;
@@ -307,14 +306,14 @@
 					
 				}
 			}
-		}, {
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('video-box')) {
 					return { type: 'videobox' };
 				}
 			}
-		}),
-		view: defaultView.extend({
+		,
+		view: {
 			events: {
 				dblclick: function () {
 					this.ShowVideos();
@@ -329,7 +328,6 @@
 				var url = CurrentExtTabUrl + "&guid=a7a5e633-a33a-4792-8149-bc15b9433505";
 				OpenPopUp(null, 900, 'right', VjLocalized.Video, url, '', true);
 			},
-
-		})
+		}
 	});
 }

@@ -133,7 +133,8 @@
 
                     if (target.attributes.optimize) {
 
-                        target.set('src', url);
+                        //target.set('src', url);
+                        target.addAttributes({ 'src': url });
 
                         if ($scope.targetParent == undefined)
                             $scope.targetParent = target.parent();

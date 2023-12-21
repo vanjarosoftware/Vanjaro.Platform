@@ -423,7 +423,7 @@ namespace Vanjaro.Core
                         MapPostData(Data, GlobalKeyValuePairs, GlobalStyleKeyValuePairs);
                         var DeserializedGlobalBlocksJSON = Data["gjs-globalblocks"] != null ? JsonConvert.DeserializeObject(Data["gjs-globalblocks"].ToString()) : string.Empty;
                         var DeserializedContentJSON = JsonConvert.DeserializeObject(Data["gjs-components"].ToString());
-                        var DeserializedStyleJSON = JsonConvert.DeserializeObject(Data["gjs-styles"].ToString());
+                        var DeserializedStyleJSON = JsonConvert.DeserializeObject(Data["styles"].ToString());
                         //GetAllIds(DeserializedContentJSON, Ids);
                         //FilterStyle(DeserializedStyleJSON, Ids);
                         //RemoveGlobalBlockComponents(DeserializedContentJSON, StyleIds, GlobalKeyValuePairs, DeserializedGlobalBlocksJSON);

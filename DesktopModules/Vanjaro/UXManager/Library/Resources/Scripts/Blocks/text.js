@@ -16,11 +16,10 @@ export default (editor, config = {}) => {
 
 	let domc = editor.DomComponents;
 	const textType = domc.getType('text');
-	const textModel = textType.model;
 	const textView = textType.view;
 
 	domc.addType('text', {
-		model: textModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -59,7 +58,7 @@ export default (editor, config = {}) => {
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, textModel.prototype.defaults, {
+			defaults: {
 				'custom-name': 'Text',
 				droppable: false,
 				classes: ['vj-text', 'text-dark', 'paragraph-style-1'],
@@ -133,15 +132,15 @@ export default (editor, config = {}) => {
 						changeProp: 1,
 					}
 				]
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && (el.classList && el.classList.contains('vj-text'))) {
 					return { type: 'text' };
 				}
 			}
-		}),
-		view: textView.extend({
+		,
+		view: {
 			init() {
 				if (this.model.parent().attributes.type == 'text' || this.model.parent().attributes.type == 'heading' || this.model.parent().attributes.type == 'list-text')
 					this.model.removeClass(this.getClasses());
@@ -164,11 +163,11 @@ export default (editor, config = {}) => {
 						model.set('custom-name', model.getName() + ' - ' + DisplayName);
 				}
 			}
-		})
+		}
 	});
 
 	domc.addType('text-inner', {
-		model: textModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -207,7 +206,7 @@ export default (editor, config = {}) => {
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, textModel.prototype.defaults, {
+			defaults: {
 				droppable: false,
 				'custom-name': 'Text Inner',
                 classes: ['vj-text', 'text-dark'],
@@ -279,15 +278,15 @@ export default (editor, config = {}) => {
 						default: 'Style 1',
 					}
 				]
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('text-inner')) {
 					return { type: 'text-inner' };
 				}
 			}
-		}),
-		view: textView.extend({
+		,
+		view: {
 			onRender() {
 
 				var model = this.model;
@@ -306,6 +305,6 @@ export default (editor, config = {}) => {
 						model.set('custom-name', 'Text Inner - ' + DisplayName);
 				}
 			}
-		})
+		}
 	});
 }
