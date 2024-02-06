@@ -12,7 +12,7 @@ module.exports = [
         }
     },
     {
-        mode: 'development',
+        mode: 'production',
         performance: {
             maxEntrypointSize: 9999999,
             maxAssetSize: 9999999
