@@ -1363,6 +1363,7 @@ div.uitab.notificationtab a {
 
 [data-gjs-type="wrapper"] {
     height: 100%;
+    min-height: inherit !important;
 }
 
     [data-gjs-type="wrapper"] .container,
