@@ -11,7 +11,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 
 	comps.addType('blockwrapper', {
 		extendFn: ['initToolbar'],
-		model: defaultModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -49,7 +49,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults:  {
 				name: '',
 				traits: [],
 				removable: true,
@@ -63,7 +63,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 				layerable: true,
 				selectable: true,
 				hoverable: true
-			}),
+			},
 			init() {
 
 				//Trait
@@ -135,13 +135,13 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 					}, 1000);
 				}
 			},
-		}, {
+		},
 			isComponent: function (el) {
 				if (el.tagName == 'div' || el.tagName == 'DIV' && (el.attributes["data-block-type"] != undefined)) {
 					return { type: 'blockwrapper' };
 				}
 			}
-		}),
+		,
 		view: defaultView.extend({
 			render: function () {
 
@@ -227,7 +227,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 	});
 
 	comps.addType('globalblockwrapper', {
-		model: defaultModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -277,7 +277,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				name: '',
 				droppable: IsAdmin,
 				highlightable: IsAdmin,
@@ -287,8 +287,8 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 				layerable: IsAdmin,
 				selectable: true,
 				hoverable: IsAdmin
-			}),
-		}, {
+			}
+		},
 			isComponent: function (el) {
 				if (el.tagName == 'div' || el.tagName == 'DIV' && (el.attributes["data-block-type"] != undefined && el.attributes["data-block-type"].value.toLowerCase() == 'global')) {
 					return {
@@ -296,7 +296,7 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 					};
 				}
 			}
-		}),
+		,
 		view: defaultType.view.extend({
 			render: function () {
 				defaultType.view.prototype.render.apply(this, arguments);

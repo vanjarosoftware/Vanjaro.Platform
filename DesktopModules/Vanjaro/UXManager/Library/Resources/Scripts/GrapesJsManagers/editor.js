@@ -10,6 +10,9 @@ global.GrapesjsInit;
 global.CurrentExtTabUrl = '';
 global.IsVJEditorSaveCall = true;
 global.IsVJCBRendered = false;
+global.IsPublished = false;
+global.m2v = false;
+global.Comment = '';
 
 $(window).load(function () {
 	if ($(window).width() < 1260 || typeof vjEditorSettings == 'undefined') {
@@ -143,7 +146,7 @@ $(document).ready(function () {
 					},
 					function (inputValue) {
 						if ($('#VJReviewComment', parent.document).val() != '') {
-							editor.StorageManager.getStorages().remote.attributes.params.Comment = $('#VJReviewComment', parent.document).val();
+							Comment = $('#VJReviewComment', parent.document).val();
 							RunSaveCommand();
 							$('#VJBtnPublish').addClass('disabled');
 							$('.gjs-cv-canvas__frames').addClass('lockcanvas');
@@ -1589,30 +1592,16 @@ $(document).ready(function () {
 									autosave: false,
 									autoload: false,
 									stepsBeforeSave: 1,
-									urlStore: vjEditorSettings.UpdateContentUrl,
-									onComplete(jqXHR, status) {
-										if (jqXHR.IsSuccess) {
-											if (typeof jqXHR.ShowNotification != 'undefined' && jqXHR.ShowNotification)
-												ShowNotification('', VjLocalized.PagePublished, 'success');
-										}
-										else if (jqXHR.Message != undefined && jqXHR.Message != '')
-											ShowNotification('', jqXHR.Message, 'error');
-
-										if (jqXHR.SaveContentNotification != undefined && jqXHR.SaveContentNotification != '') {
-											eval(jqXHR.SaveContentNotification);
+									options: {
+										remote: {
+											urlStore: vjEditorSettings.UpdateContentUrl,
+											headers: {
+												'ModuleId': parseInt(vjEditorSettings.ModuleId),
+												'TabId': parseInt(sf.getTabId()),
+												'RequestVerificationToken': sf.getAntiForgeryValue()
+											},
 										}
 									},
-									params: {
-										EntityID: vjEditorSettings.EntityID,
-										IsPublished: false,
-										m2v: false,
-										Comment: ""
-									},
-									headers: {
-										'ModuleId': parseInt(vjEditorSettings.ModuleId),
-										'TabId': parseInt(sf.getTabId()),
-										'RequestVerificationToken': sf.getAntiForgeryValue()
-									}
 								}
 							});
 
@@ -1707,7 +1696,7 @@ $(document).ready(function () {
 							});
 
 							// Fixed editor is not defined with absolute mode
-							window.editor = VjEditor;
+							window.VjEditor = VjEditor;
 
 							VjEditor.on('load', function () {
 								try { $.ServicesFramework(-1); }
@@ -1903,7 +1892,7 @@ $(document).ready(function () {
 							//Adding TabModules
 							VjEditor.on('block:drag:stop', function (model, bmodel) {
 
-								if (typeof model != "undefined") {
+								if (model != null && typeof model != "undefined") {
 
 									if ($(model.getEl()).parents('[data-gjs-type="globalblockwrapper"]').length && model.attributes.type == 'globalblockwrapper') {
 										model.remove();
@@ -3039,7 +3028,62 @@ $(document).ready(function () {
 								}
 							});
 
+							VjEditor.on('storage:store', (data, res) => {
+
+								if (res.IsSuccess) {
+									if (typeof res.ShowNotification != 'undefined' && res.ShowNotification)
+										ShowNotification('', VjLocalized.PagePublished, 'success');
+								}
+								else if (res.Message != undefined && res.Message != '')
+									ShowNotification('', res.Message, 'error');
+
+								if (res.SaveContentNotification != undefined && res.SaveContentNotification != '') {
+									eval(res.SaveContentNotification);
+								}
+
+								VJIsSaveCall = false;
+
+								if (res != '' && res.PageReviewSettings != undefined && res.PageReviewSettings) {
+									VJIsContentApproval = res.PageReviewSettings.IsContentApproval ? "True" : "False";
+									VJNextStateName = res.PageReviewSettings.NextStateName;
+									VJIsPageDraft = res.PageReviewSettings.IsPageDraft ? "True" : "False";;
+									VJIsLocked = res.PageReviewSettings.IsLocked ? "True" : "False";;
+									VJIsModeratorEditPermission = res.PageReviewSettings.IsModeratorEditPermission;
+
+									if (VJIsPageDraft == "True")
+										$('#VJBtnPublish').removeClass('disabled');
+									else
+										$('#VJBtnPublish').addClass('disabled');
+
+									if (VJIsPageDraft == "False" || VJIsLocked == "True")
+										$('#VJBtnPublish').addClass('disabled');
+
+									if (VJIsContentApproval == "True" && VJIsLocked == "True")
+										$('.gjs-cv-canvas__frames').addClass('lockcanvas');
+									else
+										$('.gjs-cv-canvas__frames').removeClass('lockcanvas');
+
+									if (res.PageReviewSettings.IsContentApproval)
+										eval(res.ReviewToastMarkup);
+
+									$("#VJnotifycount", parent.document).text(res.NotifyCount);
+								}
+
+								if (res != null && res != '' && res.RedirectAfterm2v != null && typeof res.RedirectAfterm2v != "undefined")
+									window.location.href = res.RedirectAfterm2v;
+								if (IsVJCBRendered)
+									window.parent.location.reload();
+							})
+
 							VjEditor.on('storage:start:store', function (Data) {
+
+								Data['gjs-html'] = VjEditor.getHtml();
+								Data['gjs-css'] = VjEditor.getCss();
+								Data['gjs-components'] = JSON.stringify(VjEditor.getComponents());
+								Data.m2v = m2v;
+								Data.IsPublished = IsPublished;
+								Data.Comment = Comment;
+
 								if (Data != undefined && Data != '') {
 									var globalblocks = [];
 									$.each(getAllComponents(), function (k, v) {
@@ -3073,7 +3117,7 @@ $(document).ready(function () {
 											catch (err) { console.log(err); }
 										}
 									});
-									Data.globalblocks = JSON.stringify(globalblocks);
+									Data['gjs-globalblocks'] = JSON.stringify(globalblocks);
 									Data = VjCleanData(Data);
 								}
 							});
@@ -3088,38 +3132,7 @@ $(document).ready(function () {
 
 							VjEditor.on('storage:end:store', function (Data) {
 
-								VJIsSaveCall = false;
-
-								if (Data != '' && Data.PageReviewSettings != undefined && Data.PageReviewSettings) {
-									VJIsContentApproval = Data.PageReviewSettings.IsContentApproval ? "True" : "False";
-									VJNextStateName = Data.PageReviewSettings.NextStateName;
-									VJIsPageDraft = Data.PageReviewSettings.IsPageDraft ? "True" : "False";;
-									VJIsLocked = Data.PageReviewSettings.IsLocked ? "True" : "False";;
-									VJIsModeratorEditPermission = Data.PageReviewSettings.IsModeratorEditPermission;
-
-									if (VJIsPageDraft == "True")
-										$('#VJBtnPublish').removeClass('disabled');
-									else
-										$('#VJBtnPublish').addClass('disabled');
-
-									if (VJIsPageDraft == "False" || VJIsLocked == "True")
-										$('#VJBtnPublish').addClass('disabled');
-
-									if (VJIsContentApproval == "True" && VJIsLocked == "True")
-										$('.gjs-cv-canvas__frames').addClass('lockcanvas');
-									else
-										$('.gjs-cv-canvas__frames').removeClass('lockcanvas');
-
-									if (Data.PageReviewSettings.IsContentApproval)
-										eval(Data.ReviewToastMarkup);
-									$("#VJnotifycount", parent.document).text(Data.NotifyCount);
-
-								}
-
-								if (Data != null && Data != '' && Data.RedirectAfterm2v != null && typeof Data.RedirectAfterm2v != "undefined")
-									window.location.href = Data.RedirectAfterm2v;
-								if (IsVJCBRendered)
-									window.parent.location.reload();
+								
 							});
 
 							var iframeBody = VjEditor.Canvas.getBody();
@@ -3202,11 +3215,11 @@ $(document).ready(function () {
 
 	//start data cleanup
 	var VjCleanData = function (Data) {
-		var Css = Data.css;
-		var Content = Data.html;
-		var Components = JSON.parse(Data.components);
-		var Styles = JSON.parse(Data.styles);
-		var Globalblocks = Data.globalblocks != undefined ? JSON.parse(Data.globalblocks) : '';
+		var Css = Data['gjs-css'];
+		var Content = Data['gjs-html'];
+		var Components = JSON.parse(Data['gjs-components']);
+		var Styles = Data.styles;
+		var Globalblocks = Data['gjs-globalblocks'] != undefined ? JSON.parse(Data['gjs-globalblocks']) : '';
 		var Ids = [];
 		VjGetAllIds(Components, Ids);
 		Styles = VjFilterStyle(Styles, Ids);
@@ -3218,13 +3231,13 @@ $(document).ready(function () {
 		Content = VjRemoveGlobalBlockContent(Content);
 		Css = VjFilterCss(Css, StyleIds);
 
-		Data.css = Css;
-		Data.html = Content;
-		Data.components = JSON.stringify(Components);
+		Data['gjs-css'] = Css;
+		Data['gjs-html'] = Content;
+		Data['gjs-components'] = JSON.stringify(Components);
 		Data.styles = JSON.stringify(Styles);
-		Data.globalblocks = JSON.stringify(Globalblocks);
-		Data.globalkeyvaluepairs = JSON.stringify(GlobalKeyValuePairs);
-		Data.globalstylekeyvaluepairs = GlobalKeyValuePairs.length > 0 ? JSON.stringify(GlobalStyleKeyValuePairs) : '';
+		Data['gjs-globalblocks'] = JSON.stringify(Globalblocks);
+		Data['gjs-globalkeyvaluepairs'] = JSON.stringify(GlobalKeyValuePairs);
+		Data['gjs-globalstylekeyvaluepairs'] = GlobalKeyValuePairs.length > 0 ? JSON.stringify(GlobalStyleKeyValuePairs) : '';
 		return Data;
 	};
 	var VjGetAllIds = function (contentJSON, ids) {
@@ -3782,15 +3795,15 @@ global.ChangeBlockType = function (query) {
 };
 
 function RunSaveCommand() {
-	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = true;
+	IsPublished = true;
 	if (GetParameterByName('m2v', parent.window.location) != null)
-		editor.StorageManager.getStorages().remote.attributes.params.m2v = true;
+		m2v = true;
 	IsVJEditorSaveCall = true;
-	editor.runCommand("save");
-	editor.StorageManager.getStorages().remote.attributes.params.IsPublished = false;
+	VjEditor.runCommand("save");
+	IsPublished = false;
 	$('#VJBtnPublish').addClass('disabled');
 	$($('.panelheader .blockItem')[1]).click();
-	editor.StorageManager.getStorages().remote.attributes.params.Comment = "";
+	Comment = "";
 	$('#VJReviewComment', parent.document).val('');
 };
 
@@ -3895,9 +3908,9 @@ global.ConfirmReviewChange = function (FirstStateName) {
 				$('.gjs-cv-canvas__frames').removeClass('lockcanvas');
 				VJIsLocked = 'False';
 				$('.toast-close-button').click();
-				editor.StorageManager.getStorages().remote.attributes.params.IsPublished = false;
-				editor.StorageManager.getStorages().remote.attributes.params.Comment = '';
-				editor.runCommand("save");
+				IsPublished = false;
+				Comment = '';
+				VjEditor.runCommand("save");
 				$('#VJBtnPublish').removeClass('disabled');
 			}
 		});

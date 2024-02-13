@@ -18,11 +18,10 @@
 
     var domComps = editor.DomComponents;
     var dType = domComps.getType('map');
-    var dModel = dType.model;
     var dView = dType.view;
 
     domComps.addType('map', {
-        model: dModel.extend({
+        model: {
             initToolbar() {
                 var model = this;
                 if (!model.get('toolbar')) {
@@ -61,8 +60,8 @@
                     model.set('toolbar', tb);
                 }
             },
-        }),
-        view: dView.extend({
+        },
+        view: {
             events: {
                 click: function () {
                     setTimeout(function () {
@@ -79,6 +78,6 @@
                     }, 500);
                 }
             }
-        })
+        }
     });
 }

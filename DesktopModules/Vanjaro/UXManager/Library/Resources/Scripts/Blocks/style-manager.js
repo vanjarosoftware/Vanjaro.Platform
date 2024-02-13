@@ -101,7 +101,7 @@
 		clear() {
 
 			var model = this.model;
-			var selected = VjEditor.getSelected();
+			var selected = editor.getSelected();
 			var property = model.attributes.property;
 			var defaultValue = model.getDefaultValue();
 
@@ -145,8 +145,7 @@
 						borderWidth = "border-width"
 				}
 
-				VjEditor.StyleManager.getProperty(Border, borderWidth).setValue(0);
-
+				editor.StyleManager.getProperty(Border, borderWidth).setValue(0);
 			}
 		}
 	});
@@ -198,7 +197,7 @@
 				var unit = this.el.querySelector('select').value;
 				var propertyName = this.model.attributes.cssproperty;
 				var property = this.model.attributes.property;
-				var Selected = VjEditor.getSelected();
+				var Selected = editor.getSelected();
 
 				var inputRange = this.el.querySelector('.sm-slider-wrapper .sm-range');
 				var inputNumber = this.el.querySelector('.sm-slider-wrapper .sm-number');
@@ -240,7 +239,7 @@
 			setValue(value) {
 				var model = this.model;
 				var val = model.getDefaultValue();
-				var Selected = VjEditor.getSelected();
+				var Selected = editor.getSelected();
 
 				if (typeof Selected != "undefined" && typeof Selected.attributes[model.attributes.property] != "undefined")
 					val = Selected.attributes[this.model.attributes.property];
@@ -257,7 +256,7 @@
 			clear(ev) {
 
 				var model = this.model;
-				var Selected = VjEditor.getSelected();
+				var Selected = editor.getSelected();
 				var style = Selected.getStyle();
 
 				model.setValue(model.getDefaultValue());
@@ -401,10 +400,10 @@
 			if (selected.attributes.type == "icon") {
 
 				if (property == "width")
-					VjEditor.StyleManager.getProperty(Size, 'height').setValue(val + unit);
+					editor.StyleManager.getProperty(Size, 'height').setValue(val + unit);
 
 				else if (property == "height")
-					VjEditor.StyleManager.getProperty(Size, 'width').setValue(val + unit);
+					editor.StyleManager.getProperty(Size, 'width').setValue(val + unit);
 			}
 		},
 		setValue(value) {
@@ -470,7 +469,7 @@
 					LoadAttr(model, unit);
 			}
 
-			var selected = VjEditor.getSelected();
+			var selected = editor.getSelected();
 
 			if (selected.attributes.type == "icon" && (property == "width" || property == "min-width" || property == "max-width" || property == "height" || property == "min-height" || property == "max-height"))
 				selected = selected.components().models[0];
@@ -490,15 +489,15 @@
 					if (property == "width") {
 
 						selected.removeStyle('height');
-						VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input').val(value);
-						$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('height')));
+						editor.StyleManager.getProperty(Size, 'height').view.$el.find('input').val(value);
+						$(editor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('height')));
 					}
 
 					else if (property == "height") {
 
 						selected.removeStyle('width');
-						VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input').val(value);
-						$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('width')));
+						editor.StyleManager.getProperty(Size, 'width').view.$el.find('input').val(value);
+						$(editor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('width')));
 					}
 				}
 			}
@@ -537,14 +536,14 @@
 						borderStyle = "border-style"
 				}
 
-				VjEditor.StyleManager.getProperty(Border, borderStyle).setValue('none');
-				VjEditor.StyleManager.getProperty(Border, borderStyle).view.$el.find('input').prop('checked', false);
+				editor.StyleManager.getProperty(Border, borderStyle).setValue('none');
+				editor.StyleManager.getProperty(Border, borderStyle).view.$el.find('input').prop('checked', false);
 
 			}
 			else if (property == "width" && value == "auto")
-				$(VjEditor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('width')));
+				$(editor.StyleManager.getProperty(Size, 'width').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('width')));
 			else if (property == "height" && value == "auto")
-				$(VjEditor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('height')));
+				$(editor.StyleManager.getProperty(Size, 'height').view.$el.find('input[type="range"]')).val(parseInt(selected.view.$el.css('height')));
 		}
 	});
 

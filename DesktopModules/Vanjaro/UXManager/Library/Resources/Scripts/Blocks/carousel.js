@@ -19,12 +19,11 @@
 
 	let dc = editor.DomComponents;
 	const defaultType = dc.getType('default');
-	const defaultModel = defaultType.model;
 	const defaultView = defaultType.view;
 
 	dc.addType('carousel', {
 
-		model: defaultModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -86,7 +85,7 @@
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				name: 'Carousel',
 				traits: [
 					{
@@ -145,7 +144,7 @@
 						changeProp: 1,
 					},
 				],
-			}),
+			},
 			init() {
 				this.listenTo(this, 'change:controls', this.ChangeControl);
 				this.listenTo(this, 'change:indicators', this.ChangeIndicators);
@@ -237,14 +236,14 @@
 				markup += '</ol>';
 				comps.add(markup);
 			},
-		}, {
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('carousel')) {
 					return { type: 'carousel' };
 				}
 			},
-		}),
-		view: defaultView.extend({
+		
+		view: {
 			init() {
 	
 				const comps = this.model.components();
@@ -258,7 +257,7 @@
 						<ol class="carousel-indicators">
                             <li data-bs-target="#`+ modelId + `" data-bs-slide-to="0" class="carousel-indicator active"></li>
                             <li data-bs-target="#`+ modelId + `" data-bs-slide-to="1" class="carousel-indicator"></li>
-                            <li data-bs-target="#`+ modelId + `" data-bs-slide-to="2" class="carousel-indicator"></li>
+                             <li data-bs-target="#`+ modelId + `" data-bs-slide-to="2" class="carousel-indicator"></li>
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
@@ -295,36 +294,34 @@
 				}
 			},
 			onRender() {
-				$(this.el).attr('data-bs-interval', false);
+				//$(this.el).attr('data-bs-interval', false);
 			}
-		}),
+		},
 	});
 
 	dc.addType('carousel-inner', {
 
-		model: defaultModel.extend({
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+		model: {
+			defaults: {
 				name: 'Carousel Inner',
 				draggable: false,
 				droppable: '[data-gjs-type=carousel-item]',
 				selectable: false,
 				hoverable: false,
 				highlightable: false,
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('carousel-inner')) return { type: 'carousel-inner' };
-			},
-		}),
-
+		},
 		view: defaultView
 	});
 
 	dc.addType('carousel-item', {
 
-		model: defaultModel.extend({
+		model: {
 
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				name: 'Carousel Item',
 				removable: false,
 				draggable: ".carousel-inner",
@@ -338,19 +335,18 @@
 				editable: false,
 				hoverable: false,
 				traits: []
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('carousel-item')) return { type: 'carousel-item' };
 			},
-		}),
 
 		view: defaultView
 	});
 
 	dc.addType('carousel-link', {
-		model: defaultModel.extend({
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+		model: {
+			defaults: {
 				name: 'Carousel Link',
 				removable: false,
 				draggable: false,
@@ -363,15 +359,14 @@
 				selectable: false,
 				editable: false,
 				hoverable: false,
-			}),
+			},
 		},
-			{
 				isComponent(el) {
 					if (el && el.classList && el.classList.contains('carousel-link')) {
 						return { type: 'carousel-link' };
 					}
 				}
-			}),
+			,
 		view: defaultView
 	});
 
@@ -380,7 +375,7 @@
 	const imageView = imageType.view;
 
 	dc.addType('carousel-image', {
-		model: imageModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -417,7 +412,7 @@
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, imageModel.prototype.defaults, {
+			defaults:  {
 				'custom-name': 'Carousel Image',
 				draggable: false,
 				droppable: false,
@@ -447,7 +442,7 @@
 					href: "",
 					"data_href_type": "url",
 				}]
-			}),
+			},
 			init() {
 				this.listenTo(this, 'change:slidetitle', this.ChangeTitle);
 				this.listenTo(this, 'change:caption', this.ChangeCaption);
@@ -502,14 +497,13 @@
 					this.parent().parent().addAttributes({ target: '_self' });
 			}
 		},
-			{
-				isComponent(el) {
-					if (el && el.classList && el.classList.contains('vj-slide-image')) {
-						return { type: 'carousel-image' };
-					}
-				}
-			}),
-		view: imageView.extend({
+		isComponent(el) {
+			if (el && el.classList && el.classList.contains('vj-slide-image')) {
+				return { type: 'carousel-image' };
+			}
+		}
+		,
+		view: {
 			events: {
 				dblclick: function () {
 					this.ShowModal()
@@ -517,6 +511,7 @@
 			},
 			init() {
 				this.listenTo(this.model.parent(), 'active', this.ActivateModal); // listen for active event
+				this.model.set('src', this.model.getAttributes().src);
 			},
 			ActivateModal() {
 				var Selected = this.model.collection.first();
@@ -532,12 +527,12 @@
 				var url = CurrentExtTabUrl + "&guid=a7a5e632-a73a-4792-8049-bc15a9435505#!/setting";
 				OpenPopUp(null, 900, 'right', 'Image', url, '', true);
 			},
-		}),
+		},
 	});
 
 	dc.addType('carousel-caption', {
-		model: defaultModel.extend({
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+		model: {
+			defaults: {
 				name: 'Caption',
 				removable: false,
 				draggable: false,
@@ -552,19 +547,18 @@
 				editable: false,
 				hoverable: false,
 				propagate: ['removable', 'draggable', 'droppable', 'badgable', 'stylable', 'highlightable', 'copyable', 'resizable', 'editable', 'layerable', 'hoverable'],
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('carousel-caption')) return { type: 'carousel-caption' };
-			},
-		}),
-
+			}
+		,
 		view: defaultType.view
 	});
 
 	dc.addType('carousel-heading', {
-		model: defaultModel.extend({
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+		model: {
+			defaults: {
 				name: 'Title',
 				removable: false,
 				draggable: false,
@@ -578,19 +572,18 @@
 				selectable: false,
 				editable: false,
 				hoverable: false,
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('carousel-heading')) return { type: 'carousel-heading' };
 			},
-		}),
 
 		view: defaultType.view
 	});
 
 	dc.addType('carousel-text', {
-		model: defaultModel.extend({
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+		model: {
+			defaults: {
 				name: 'Caption',
 				removable: false,
 				draggable: false,
@@ -604,20 +597,19 @@
 				selectable: false,
 				editable: false,
 				hoverable: false,
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('carousel-text')) return { type: 'carousel-text' };
 			},
-		}),
 
 		view: defaultType.view
 	});
 
 	dc.addType('next', {
 
-		model: defaultModel.extend({
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+		model: {
+			defaults: {
 				name: 'Nav Next',
 				removable: false,
 				draggable: false,
@@ -632,20 +624,19 @@
 				editable: false,
 				hoverable: false,
 				propagate: ['removable', 'draggable', 'droppable', 'badgable', 'stylable', 'highlightable', 'copyable', 'resizable', 'editable', 'layerable', 'selectable', 'hoverable'],
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('carousel-control-next')) return { type: 'next' };
 			},
-		}),
 
 		view: defaultType.view
 	});
 
 	dc.addType('prev', {
 
-		model: defaultModel.extend({
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+		model: {
+			defaults: {
 				name: 'Nav Prev',
 				removable: false,
 				draggable: false,
@@ -660,20 +651,19 @@
 				editable: false,
 				hoverable: false,
 				propagate: ['removable', 'draggable', 'droppable', 'badgable', 'stylable', 'highlightable', 'copyable', 'resizable', 'editable', 'layerable', 'selectable', 'hoverable'],
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('carousel-control-prev')) return { type: 'prev' };
 			},
-		}),
 
 		view: defaultType.view
 	});
 
 	dc.addType('indicators', {
 
-		model: defaultModel.extend({
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+		model: {
+			defaults: {
 				name: 'Indicators',
 				removable: false,
 				draggable: false,
@@ -687,20 +677,19 @@
 				selectable: false,
 				editable: false,
 				hoverable: false,
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('carousel-indicators')) return { type: 'indicators' };
-			},
-		}),
+		},
 
 		view: defaultType.view
 	});
 
 	dc.addType('indicator', {
 
-		model: defaultModel.extend({
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+		model: {
+			defaults: {
 				name: 'Indicator',
 				removable: false,
 				draggable: false,
@@ -714,12 +703,11 @@
 				selectable: true,
 				editable: false,
 				hoverable: false,
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('carousel-indicator')) return { type: 'indicator' };
 			},
-		}),
 
 		view: defaultType.view
 	});

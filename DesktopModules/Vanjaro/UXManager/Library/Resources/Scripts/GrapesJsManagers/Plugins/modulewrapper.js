@@ -13,7 +13,7 @@ export default grapesjs.plugins.add('modulewrapper', (editor, opts = {}) => {
 
     comps.addType('modulewrapper', {
         extendFn: ['initToolbar'],
-        model: defaultModel.extend({
+        model: {
             initToolbar(reinit) {
                 var model = this;
                 if (!model.get('toolbar') || reinit) {
@@ -65,7 +65,7 @@ export default grapesjs.plugins.add('modulewrapper', (editor, opts = {}) => {
                     model.set('toolbar', tb);
                 }
             },
-            defaults: Object.assign({}, defaultModel.prototype.defaults, {
+            defaults: {
                 name: '',
                 traits: [],
                 removable: true,
@@ -80,20 +80,20 @@ export default grapesjs.plugins.add('modulewrapper', (editor, opts = {}) => {
                 layerable: true,
                 selectable: true,
                 hoverable: true
-            })
+            }
         },
-            {
+            
                 isComponent: function (el) {
                     if (el.tagName == 'div' || el.tagName == 'DIV' && (el.attributes.dmid != undefined)) {
                         return { type: 'modulewrapper' };
                     }
                 }
-            })
+            
     });
 
     comps.addType('module', {
-        model: defaultModel.extend({
-            defaults: Object.assign({}, defaultModel.prototype.defaults, {
+        model: {
+            defaults: {
                 removable: false,
                 draggable: false,
                 droppable: false,
@@ -107,16 +107,16 @@ export default grapesjs.plugins.add('modulewrapper', (editor, opts = {}) => {
                 selectable: false,
                 hoverable: false,
                 propagate: ['removable', 'draggable', 'droppable', 'badgable', 'stylable', 'highlightable', 'copyable', 'resizable', 'editable', 'layerable', 'selectable', 'hoverable']
-            })
+            }
         },
-            {
+            
                 isComponent: function (el) {
                     if (el != undefined && el.attributes != undefined && el.attributes.vjmod != undefined && el.attributes.vjmod.value == 'true') {
                         return { type: 'module' };
                     }
                 }
-            }),
-        view: defaultType.view.extend({
+           ,
+        view: {
             render: function () {
                 defaultType.view.prototype.render.apply(this, arguments);
                 this.model.attributes.components.models = [];
@@ -138,6 +138,6 @@ export default grapesjs.plugins.add('modulewrapper', (editor, opts = {}) => {
                 catch (err) {  }
                 return this;
             }
-        })
+        }
     });
 });

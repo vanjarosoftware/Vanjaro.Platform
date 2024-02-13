@@ -64,7 +64,6 @@ export default (editor, config = {}) => {
 
 	let dc = editor.DomComponents;
 	const defaultType = dc.getType('default');
-	const defaultModel = defaultType.model;
 	const defaultView = defaultType.view;
 	global.arrway = [];
 
@@ -115,7 +114,7 @@ export default (editor, config = {}) => {
 	};
 
 	dc.addType('row', {
-        model: defaultModel.extend({
+        model: {
             initToolbar() {
                 var model = this;
                 if (!model.get('toolbar')) {
@@ -154,7 +153,7 @@ export default (editor, config = {}) => {
                     model.set('toolbar', tb);
                 }
             },
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				'custom-name': 'Row',
 				tagName: 'div',
 				draggable: true,
@@ -164,19 +163,19 @@ export default (editor, config = {}) => {
 				hoverable: false,
                 highlightable: false,
                 traits: []
-			})
-		}, {
+			}
+		},
 			isComponent(el) {
 				if (el && el.tagName && el.tagName.toLowerCase() == 'div' && el.classList && el.classList.contains('row')) {
 					return { type: 'row' };
 				}
-			}
-		}),
+		},
+
 		view: defaultView
 	});
 
 	dc.addType('column', {
-		model: defaultModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -206,7 +205,7 @@ export default (editor, config = {}) => {
 					if (model.get('copyable')) {
 						tb.push({
 							attributes: { class: 'fa fa-clone' },
-							command: 'tlb-clone',
+							command: 'vj-copy',
 						});
 					}
 
@@ -220,7 +219,7 @@ export default (editor, config = {}) => {
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				//unstylable: ['width'],
 				draggable: '.row',
 				selectable: true,
@@ -306,7 +305,7 @@ export default (editor, config = {}) => {
 						changeProp: 1,
 					},
 				]
-			}),
+			},
 			init() {
 				this.listenTo(this, 'change:data-pane', this.ChangeControl);
 			},
@@ -317,7 +316,7 @@ export default (editor, config = {}) => {
 				if (!this.components().length)
 					$(this.getEl()).attr("data-empty", "true");
 			}
-		}, {
+		},
 			isComponent(el) {
 				let match = false;
 				if (el && el.tagName && el.tagName.toLowerCase() == 'div') {
@@ -329,17 +328,17 @@ export default (editor, config = {}) => {
 				}
 				if (match) return { type: 'column' };
 			}
-		}),
-		view: defaultView.extend({
+		,
+		view: {
 			onRender() {
 				if (!this.model.components().length)
 					$(this.el).attr("data-empty", "true");
 			}
-		})
+		}
 	});
 
 	dc.addType('grid', {
-		model: defaultModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -402,7 +401,7 @@ export default (editor, config = {}) => {
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				'custom-name': 'Grid',
 				tagName: 'div',
 				copyable: true,
@@ -436,15 +435,15 @@ export default (editor, config = {}) => {
 					changeProp: 1,
 				},
 				]
-			})
-		}, {
-			isComponent(el) {
-				if (el && el.tagName && el.tagName.toLowerCase() == 'div' && el.classList && (el.classList.contains('container') || el.classList.contains('container-fluid')) && (el.firstElementChild != null && el.firstElementChild.classList.contains('row'))) {
-					return { type: 'grid' };
-				}
 			}
-		}),
-		view: defaultView.extend({
+		},
+		isComponent(el) {
+			if (el && el.tagName && el.tagName.toLowerCase() == 'div' && el.classList && (el.classList.contains('container') || el.classList.contains('container-fluid')) && (el.firstElementChild != null && el.firstElementChild.classList.contains('row'))) {
+				return { type: 'grid' };
+			}
+		}
+		,
+		view: {
 			init() {
 				this.listenTo(this.model, 'active', this.ShowGrid);
 			},
@@ -521,7 +520,7 @@ export default (editor, config = {}) => {
 				if (!$modalbody.find('.select-layout').length)
 					$modalbody.append($html);
 			},
-		})
+		}
 	});
 }
 

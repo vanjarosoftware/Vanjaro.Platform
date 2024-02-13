@@ -39,32 +39,30 @@ export default (editor, config = {}) => {
 
 	let domc = editor.DomComponents;
 	const defaultType = domc.getType('default');
-	const defaultModel = defaultType.model;
 	const defaultView = defaultType.view;
 
 	domc.addType('list-box', {
-		model: defaultModel.extend({
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+		model: {
+			defaults: {
 				'custom-name': 'List Box',
 				droppable: false,
 				selectable: false,
 				highlightable: false,
 				hoverable: false,
 				traits: []
-			}),
+			},
 		},
-			{
 				isComponent(el) {
 					if (el && el.classList && el.classList.contains('list-box')) {
 						return { type: 'list-box' };
 					}
 				}
-			}),
+		,
 		view: defaultView
 	});
 
 	domc.addType('list', {
-		model: defaultModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -108,7 +106,7 @@ export default (editor, config = {}) => {
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				droppable: '.list-item, .list-text',
 				text: true,
 				traits: [{
@@ -208,7 +206,7 @@ export default (editor, config = {}) => {
 					default: 'primary',
 					changeProp: 1,
 				}]
-			}),
+			},
 			init() {
 				this.listenTo(this, 'change:list_type', this.handleTypeChange);
 			},
@@ -219,18 +217,18 @@ export default (editor, config = {}) => {
 					VjEditor.runCommand("save");
 				}
 			}
-		}, {
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('list')) {
 					return { type: 'list' };
 				}
 			}
-		}),
+		,
 		view: defaultView
 	});
 
 	domc.addType('list-item', {
-		model: defaultModel.extend({
+		model: {
 			initToolbar() {
 				var model = this;
 				if (!model.get('toolbar')) {
@@ -260,7 +258,7 @@ export default (editor, config = {}) => {
 					if (model.get('copyable')) {
 						tb.push({
 							attributes: { class: 'fa fa-clone' },
-							command: 'tlb-clone',
+							command: 'vj-copy',
 						});
 					}
 
@@ -274,7 +272,7 @@ export default (editor, config = {}) => {
 					model.set('toolbar', tb);
 				}
 			},
-			defaults: Object.assign({}, defaultModel.prototype.defaults, {
+			defaults: {
 				'custom-name': 'List Item',
 				draggable: '.list',
 				droppable: true,
@@ -282,24 +280,23 @@ export default (editor, config = {}) => {
 				classes: ['list-item'],
 				tagName: 'li',
 				traits: []
-			}),
-		}, {
+			},
+		},
 			isComponent(el) {
 				if (el && el.classList && el.classList.contains('list-item')) {
 					return { type: 'list-item' };
 				}
 			}
-		}),
+		,
 		view: defaultView
 	});
 
 	const textType = domc.getType('text');
-	const textModel = textType.model;
 	const textView = textType.view;
 
 	domc.addType('list-text', {
-		model: textModel.extend({
-			defaults: Object.assign({}, textModel.prototype.defaults, {
+		model: {
+			defaults: {
 				'custom-name': 'List Text',
 				draggable: '.list',
 				droppable: false,
@@ -307,15 +304,14 @@ export default (editor, config = {}) => {
 				selectable: false,
 				hoverable: false,
 				traits: [],
-			}),
+			},
 		},
-			{
 				isComponent(el) {
 					if (el && el.classList && el.classList.contains('list-text')) {
 						return { type: 'list-text' };
 					}
 				}
-			}),
+		,
 		view: textView
 	});
 }
