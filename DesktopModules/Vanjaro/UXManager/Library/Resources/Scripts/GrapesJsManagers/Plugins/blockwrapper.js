@@ -10,7 +10,6 @@ export default grapesjs.plugins.add('blockwrapper', (editor, opts = {}) => {
 	var defaultView = defaultType.view;
 
 	comps.addType('blockwrapper', {
-		extendFn: ['initToolbar'],
 		model: {
 			initToolbar() {
 				var model = this;

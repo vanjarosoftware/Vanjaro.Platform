@@ -264,6 +264,8 @@ export default (editor, config = {}) => {
                 removable: false,
                 selectable: false,
                 stylable: false,
+                editable: true,
+                text: true,
             },
         },
         isComponent(el) {
