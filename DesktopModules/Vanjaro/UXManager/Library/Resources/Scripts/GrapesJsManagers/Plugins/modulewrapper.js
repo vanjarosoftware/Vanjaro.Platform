@@ -12,7 +12,6 @@ export default grapesjs.plugins.add('modulewrapper', (editor, opts = {}) => {
     var defaultView = defaultType.view;
 
     comps.addType('modulewrapper', {
-        extendFn: ['initToolbar'],
         model: {
             initToolbar(reinit) {
                 var model = this;
