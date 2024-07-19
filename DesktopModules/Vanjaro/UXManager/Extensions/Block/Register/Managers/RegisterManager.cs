@@ -352,8 +352,12 @@ namespace Vanjaro.UXManager.Extensions.Block.Register
                             }
                             break;
                         case (int)Globals.PortalRegistrationType.PublicRegistration:
-                            Mail.SendMail(newUser, MessageType.UserRegistrationPublic, PortalController.Instance.GetCurrentSettings() as PortalSettings);
-                            UserController.UserLogin(PortalSettings.Current.PortalId, newUser.Username, newUser.Membership.Password, "", PortalSettings.Current.PortalName, "", ref loginStatus, false);
+                            {
+                                string EmailVerification = Core.Managers.SettingManager.GetValue(PortalSettings.Current.PortalId, 0, "setting_registration", "EmailVerification", null);
+                                if (EmailVerification != "1")
+                                    Mail.SendMail(newUser, MessageType.UserRegistrationPublic, PortalController.Instance.GetCurrentSettings() as PortalSettings);
+                                UserController.UserLogin(PortalSettings.Current.PortalId, newUser.Username, newUser.Membership.Password, "", PortalSettings.Current.PortalName, "", ref loginStatus, false);
+                            }
                             break;
                         case (int)Globals.PortalRegistrationType.VerifiedRegistration:
                             Mail.SendMail(newUser, MessageType.UserRegistrationVerified, PortalController.Instance.GetCurrentSettings() as PortalSettings);
