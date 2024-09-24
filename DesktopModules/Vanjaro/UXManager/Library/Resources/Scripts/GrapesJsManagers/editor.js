@@ -3237,7 +3237,7 @@ $(document).ready(function () {
 		Data.styles = JSON.stringify(Styles);
 		Data['gjs-globalblocks'] = JSON.stringify(Globalblocks);
 		Data['gjs-globalkeyvaluepairs'] = JSON.stringify(GlobalKeyValuePairs);
-		Data['gjs-globalstylekeyvaluepairs'] = GlobalKeyValuePairs.length > 0 ? JSON.stringify(GlobalStyleKeyValuePairs) : '';
+		Data['gjs-globalstylekeyvaluepairs'] = GlobalStyleKeyValuePairs.length > 0 ? JSON.stringify(GlobalStyleKeyValuePairs) : '';
 		return Data;
 	};
 	var VjGetAllIds = function (contentJSON, ids) {

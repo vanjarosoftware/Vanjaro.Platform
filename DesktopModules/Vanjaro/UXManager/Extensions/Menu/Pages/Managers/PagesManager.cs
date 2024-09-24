@@ -337,7 +337,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                                 ["gjs-css"] = PageManager.DeTokenizeLinks(layout.Style.ToString(), portalInfo.PortalID),
                                 ["gjs-html"] = PageManager.DeTokenizeLinks(layout.Content.ToString(), portalInfo.PortalID),
                                 ["gjs-components"] = PageManager.DeTokenizeLinks(layout.ContentJSON.ToString(), portalInfo.PortalID),
-                                ["gjs-styles"] = PageManager.DeTokenizeLinks(layout.StyleJSON.ToString(), portalInfo.PortalID)
+                                ["styles"] = PageManager.DeTokenizeLinks(layout.StyleJSON.ToString(), portalInfo.PortalID)
                             };
                             PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                             PageManager.Update(portalSettings, LayoutData);
@@ -614,7 +614,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                         LayoutData["gjs-components"] = string.Empty;
                     }
 
-                    LayoutData["gjs-styles"] = Core.Managers.PageManager.DeTokenizeLinks(layout.StyleJSON.ToString(), PortalId);
+                    LayoutData["styles"] = Core.Managers.PageManager.DeTokenizeLinks(layout.StyleJSON.ToString(), PortalId);
                     PortalSettings.Current.ActiveTab.TabID = ActionResult.Data.NewTabId;
                     SettingManager.ProcessBlocks(PortalSettings.Current, null, layout.Blocks, null);
                     Core.Managers.PageManager.Update(PortalSettings.Current, LayoutData);
@@ -815,7 +815,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                                 ["gjs-css"] = latestVersion.Style.ToString(),
                                 ["gjs-html"] = latestVersion.Content.ToString(),
                                 ["gjs-components"] = latestVersion.ContentJSON.ToString(),
-                                ["gjs-styles"] = latestVersion.StyleJSON.ToString()
+                                ["styles"] = latestVersion.StyleJSON.ToString()
                             };
                             portalSettings.ActiveTab.TabID = Response.Data.NewTabId;
                             HtmlDocument html = new HtmlDocument();
@@ -1455,7 +1455,7 @@ namespace Vanjaro.UXManager.Extensions.Menu.Pages
                             ["gjs-css"] = page.Style,
                             ["gjs-html"] = Content,
                             ["gjs-components"] = page.ContentJSON,
-                            ["gjs-styles"] = page.StyleJSON
+                            ["styles"] = page.StyleJSON
                         };
                         PortalSettings.Current.ActiveTab.TabID = page.TabID;
                         Core.Managers.PageManager.Update(PortalSettings.Current, LayoutData);

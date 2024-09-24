@@ -529,7 +529,7 @@ namespace Vanjaro.Core
                         ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.Style.ToString(), pinfo.PortalID),
                         ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.Content.ToString(), pinfo.PortalID),
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.ContentJSON.ToString(), pinfo.PortalID),
-                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.StyleJSON.ToString(), pinfo.PortalID)
+                        ["styles"] = Managers.PageManager.DeTokenizeLinks(Signinlayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
                     PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
@@ -578,7 +578,7 @@ namespace Vanjaro.Core
                         ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.Style.ToString(), pinfo.PortalID),
                         ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.Content.ToString(), pinfo.PortalID),
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.ContentJSON.ToString(), pinfo.PortalID),
-                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.StyleJSON.ToString(), pinfo.PortalID)
+                        ["styles"] = Managers.PageManager.DeTokenizeLinks(Signuplayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
                     PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
@@ -622,7 +622,7 @@ namespace Vanjaro.Core
                         ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.Style.ToString(), pinfo.PortalID),
                         ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.Content.ToString(), pinfo.PortalID),
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.ContentJSON.ToString(), pinfo.PortalID),
-                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.StyleJSON.ToString(), pinfo.PortalID)
+                        ["styles"] = Managers.PageManager.DeTokenizeLinks(NotFoundPagelayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
                     PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
@@ -667,7 +667,7 @@ namespace Vanjaro.Core
                         ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.Style.ToString(), pinfo.PortalID),
                         ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.Content.ToString(), pinfo.PortalID),
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.ContentJSON.ToString(), pinfo.PortalID),
-                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.StyleJSON.ToString(), pinfo.PortalID)
+                        ["styles"] = Managers.PageManager.DeTokenizeLinks(Profilelayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
                     PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
@@ -710,7 +710,7 @@ namespace Vanjaro.Core
                         ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.Style.ToString(), pinfo.PortalID),
                         ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.Content.ToString(), pinfo.PortalID),
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.ContentJSON.ToString(), pinfo.PortalID),
-                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.StyleJSON.ToString(), pinfo.PortalID)
+                        ["styles"] = Managers.PageManager.DeTokenizeLinks(SearchResultlayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
                     PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
@@ -753,7 +753,7 @@ namespace Vanjaro.Core
                         ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Termslayout.Style.ToString(), pinfo.PortalID),
                         ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Termslayout.Content.ToString(), pinfo.PortalID),
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Termslayout.ContentJSON.ToString(), pinfo.PortalID),
-                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Termslayout.StyleJSON.ToString(), pinfo.PortalID)
+                        ["styles"] = Managers.PageManager.DeTokenizeLinks(Termslayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
                     PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
@@ -795,7 +795,7 @@ namespace Vanjaro.Core
                         ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.Style.ToString(), pinfo.PortalID),
                         ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.Content.ToString(), pinfo.PortalID),
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.ContentJSON.ToString(), pinfo.PortalID),
-                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.StyleJSON.ToString(), pinfo.PortalID)
+                        ["styles"] = Managers.PageManager.DeTokenizeLinks(Privacylayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
                     PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
@@ -836,7 +836,7 @@ namespace Vanjaro.Core
                         ["gjs-css"] = Managers.PageManager.DeTokenizeLinks(homelayout.Style.ToString(), pinfo.PortalID),
                         ["gjs-html"] = Managers.PageManager.DeTokenizeLinks(homelayout.Content.ToString(), pinfo.PortalID),
                         ["gjs-components"] = Managers.PageManager.DeTokenizeLinks(homelayout.ContentJSON.ToString(), pinfo.PortalID),
-                        ["gjs-styles"] = Managers.PageManager.DeTokenizeLinks(homelayout.StyleJSON.ToString(), pinfo.PortalID)
+                        ["styles"] = Managers.PageManager.DeTokenizeLinks(homelayout.StyleJSON.ToString(), pinfo.PortalID)
                     };
                     PageManager.AddModules(portalSettings, LayoutData, uInfo, portableModulesPath);
                     Core.Managers.PageManager.Update(portalSettings, LayoutData);
