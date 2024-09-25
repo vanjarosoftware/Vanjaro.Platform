@@ -716,7 +716,7 @@ namespace Vanjaro.Core
                 if (tab != null)
                 {
                     result.Add("gjs-css", tab.Style);
-                    result.Add("gjs-styles", tab.StyleJSON);
+                    result.Add("styles", tab.StyleJSON);
                     result.Add("gjs-html", tab.Content);
                     result.Add("gjs-component", tab.ContentJSON);
                 }
