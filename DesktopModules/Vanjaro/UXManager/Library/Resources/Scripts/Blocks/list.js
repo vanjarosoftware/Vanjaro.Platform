@@ -303,6 +303,7 @@ export default (editor, config = {}) => {
 				layerable: false,
 				selectable: false,
 				hoverable: false,
+				editable: true,
 				traits: [],
 			},
 		},
