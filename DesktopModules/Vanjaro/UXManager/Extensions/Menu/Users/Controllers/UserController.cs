@@ -94,7 +94,9 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
                         userFilters.Remove(userFilters.FirstOrDefault(x => x.Value == Convert.ToInt32(UserFilters.SuperUsers)));
                         userFilters.Insert(userFilters.Count, itemSuperUsers);
 
-                        RecyclebinController.Instance.GetDeletedUsers(out int TotalRecords);
+                        GetUsersContract usersContract = new GetUsersContract { Filter = UserFilters.Deleted };
+                        UsersController.Instance.GetUsers(usersContract, false, out int TotalRecords);
+
                         //IEnumerable<UserItem> deletedusers = from t in users select UserManager.ConvertToUserItem(t);
                         string MemberProfileUrl = string.Empty;
                         if (Library.Managers.MenuManager.GetURL().ToLower().Contains("guid=fa7ca744-1677-40ef-86b2-ca409c5c6ed3"))
@@ -499,20 +501,28 @@ namespace Vanjaro.UXManager.Extensions.Menu.Users.Controllers
         {
             ActionResult actionResult = new ActionResult();
             List<Entities.UserItem> userItems = new List<Entities.UserItem>();
-            List<UserInfo> users = RecyclebinController.Instance.GetDeletedUsers(out int totalRecords, pageIndex, pageSize);
+
+            GetUsersContract usersContract = new GetUsersContract { Filter = UserFilters.Deleted };
+            IEnumerable<UserBasicDto> users = UsersController.Instance.GetUsers(usersContract, false, out int totalRecords);
+
             if (users != null && actionResult.IsSuccess)
             {
                 if (!string.IsNullOrEmpty(searchText))
                 {
                     userItems = (from t in users
-                                 where t.Username.Contains(searchText) || t.DisplayName.Contains(searchText) || t.Email.Contains(searchText)
-                                 select UserManager.ConvertToUserItem(t)).ToList();
+                                 where t.Username.Contains(searchText) || t.Displayname.Contains(searchText) || t.Email.Contains(searchText)
+                                 let userInfo = DotNetNuke.Entities.Users.UserController.GetUserById(PortalSettings.Current.PortalId, t.UserId)
+                                 where userInfo != null
+                                 select UserManager.ConvertToUserItem(userInfo)).ToList();
                     totalRecords = userItems.Count();
 
                 }
                 else
                 {
-                    userItems = (from t in users select UserManager.ConvertToUserItem(t)).ToList();
+                    userItems = (from t in users
+                                 let userInfo = DotNetNuke.Entities.Users.UserController.GetUserById(PortalSettings.Current.PortalId, t.UserId)
+                                 where userInfo != null
+                                 select UserManager.ConvertToUserItem(userInfo)).ToList();
                 }
 
                 var response = new
