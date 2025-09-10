@@ -3083,6 +3083,7 @@ $(document).ready(function () {
 								Data.m2v = m2v;
 								Data.IsPublished = IsPublished;
 								Data.Comment = Comment;
+								Data.EntityID = vjEditorSettings.EntityID;
 
 								if (Data != undefined && Data != '') {
 									var globalblocks = [];
